@@ -24,12 +24,12 @@
     Public DIO_IN_21 As Boolean
     Public DIO_IN_22 As Boolean
     Public DIO_IN_23 As Boolean
-    'Public DIO_IN_24 As Boolean
-    'Public DIO_IN_25 As Boolean
-    'Public DIO_IN_26 As Boolean
-    'Public DIO_IN_27 As Boolean
-    'Public DIO_IN_28 As Boolean
-    'Public DIO_IN_29 As Boolean
+    Public DIO_IN_24 As Boolean
+    Public DIO_IN_25 As Boolean
+    Public DIO_IN_26 As Boolean
+    Public DIO_IN_27 As Boolean
+    Public DIO_IN_28 As Boolean
+    Public DIO_IN_29 As Boolean
     'Public DIO_IN_30 As Boolean
     'Public DIO_IN_31 As Boolean
     'Public DIO_IN_32 As Boolean
@@ -108,12 +108,12 @@
     Public DIO_OUT_39 As Boolean
     Public DIO_OUT_40 As Boolean
     Public DIO_OUT_41 As Boolean
-    Public DIO_OUT_42 As Boolean
-    Public DIO_OUT_43 As Boolean
-    Public DIO_OUT_44 As Boolean
-    Public DIO_OUT_45 As Boolean
-    Public DIO_OUT_46 As Boolean
-    Public DIO_OUT_47 As Boolean
+    'Public DIO_OUT_42 As Boolean
+    'Public DIO_OUT_43 As Boolean
+    'Public DIO_OUT_44 As Boolean
+    'Public DIO_OUT_45 As Boolean
+    'Public DIO_OUT_46 As Boolean
+    'Public DIO_OUT_47 As Boolean
     'Public DIO_OUT_48 As Boolean
     'Public DIO_OUT_49 As Boolean
     'Public DIO_OUT_50 As Boolean
@@ -144,10 +144,10 @@
     Public AIO_IN_9 As Decimal = CDec("0.0")
     Public AIO_IN_10 As Decimal = CDec("0.0")
     Public AIO_IN_11 As Decimal = CDec("0.0")
-    'Public AIO_IN_12 As Decimal = CDec("0.0")
-    'Public AIO_IN_13 As Decimal = CDec("0.0")
-    'Public AIO_IN_14 As Decimal = CDec("0.0")
-    'Public AIO_IN_15 As Decimal = CDec("0.0")
+    Public AIO_IN_12 As Decimal = CDec("0.0")
+    Public AIO_IN_13 As Decimal = CDec("0.0")
+    Public AIO_IN_14 As Decimal = CDec("0.0")
+    Public AIO_IN_15 As Decimal = CDec("0.0")
     'Public AIO_IN_16 As Decimal = CDec("0.0")
     'Public AIO_IN_17 As Decimal = CDec("0.0")
     'Public AIO_IN_18 As Decimal = CDec("0.0")
@@ -172,10 +172,10 @@
     Public AIO_OUT_3 As Decimal = CDec("0.0")
     Public AIO_OUT_4 As Decimal = CDec("0.0")
     Public AIO_OUT_5 As Decimal = CDec("0.0")
-    Public AIO_OUT_6 As Decimal = CDec("0.0")
-    Public AIO_OUT_7 As Decimal = CDec("0.0")
-    Public AIO_OUT_8 As Decimal = CDec("0.0")
-    Public AIO_OUT_9 As Decimal = CDec("0.0")
+    'Public AIO_OUT_6 As Decimal = CDec("0.0")
+    'Public AIO_OUT_7 As Decimal = CDec("0.0")
+    'Public AIO_OUT_8 As Decimal = CDec("0.0")
+    'Public AIO_OUT_9 As Decimal = CDec("0.0")
     'Public AIO_OUT_10 As Decimal = CDec("0.0")
     'Public AIO_OUT_11 As Decimal = CDec("0.0")
     'Public AIO_OUT_12 As Decimal = CDec("0.0")

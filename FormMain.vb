@@ -43,6 +43,9 @@ Public Class FormMain
         ' Load Ini file
         IniFileInitialize.ReadConfig()
 
+        ' Load Retained Memory
+        RetainedMemory.RetainedMemory.LoadAndApply()
+
         ' Load Version
         lbl_Version.Text = PublicVariables.AppVersion
 
@@ -87,6 +90,10 @@ Public Class FormMain
             chart_MainLiveGraph.Series(0).MarkerStyle = MarkerStyle.None
         End If
 
+        'PLC Impicit Cyclic Messaging via Ethernet IP
+        'EEIPInitialise()
+
+        'PLCTimer.Enabled = True
         'Disable buttons contents
         txtbx_WorkOrderNumber.Enabled = True
         txtbx_LotID.Enabled = True
@@ -111,7 +118,6 @@ Public Class FormMain
         txtbx_SerialNumber.Enabled = False
         btn_OprKeyInDtConfirm.Enabled = False
         txtbx_Operatorlotid.Enabled = False
-        PLCCOnnect()
 
 
 
@@ -149,7 +155,27 @@ Public Class FormMain
             e.Cancel = True
             PublicVariables.IsExitPromptShown = False
         End If
+        PLCTimer.Enabled = False
+        EEIPClose()
     End Sub
+
+
+
+    Private Sub PLCTimer_Tick(sender As Object, e As EventArgs) Handles PLCTimer.Tick
+        ' If DateTime.Now.Ticks > OmronEEIP.LastReceivedImplicitMessage.Ticks + (1000 * 10000) Then
+        ' EEIPreconnect()
+        'End If
+        Form1.txtbx_DM370.Text = ReadStringEEIP(10, 10)
+        If ReadDMBoolean(0, 2) = True Then
+            Form1.lbl_DM350_2.BackColor = Color.Green
+        Else
+            Form1.lbl_DM350_2.BackColor = Color.Red
+        End If
+    End Sub
+
+
+
+
 #End Region
 
 #Region "Main Menu Buttons"
@@ -877,6 +903,13 @@ Public Class FormMain
 
         ' Clear Selection
         dgvClearSelection(dgv_ProdDetail)
+
+        ' Prompt When No Result Returns
+        If containSearch = True Then
+            If Not dgv_ProdDetail.RowCount > 0 Then
+                MsgBox("Search Result Returned Empty.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
+            End If
+        End If
     End Sub
 
     ' Format Cell Color Based On Cell Content
@@ -915,14 +948,28 @@ Public Class FormMain
         ' Convert Visible DataGridView Columns To DataTable
         Dim dt As DataTable = Await Task.Run(Function() GetVisibleColumnsDataTable(dgv_ProdDetail))     'GetVisibleColumnsDataTable(dgv_ProdDetail)
 
+        ' Get Path
+        'Dim dtGetPath As DataTable = Await Task.Run(Function() SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={8}"))
+        Dim ExportPath As String = PublicVariables.CSVPathToProductionDetails 'dtGetPath(0)("retained_value")
+
         ' Export With Return
-        Dim ReturnValue As Boolean = ExportDataTableToCsv(dt, "output.csv", ";")
+        Dim ReturnValue As String = ExportDataTableToCsv(dt, ExportPath & $"ProductionDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv", PublicVariables.CSVDelimiterProductionDetails)
 
         ' Check Return State
-        If ReturnValue = True Then
+        If ReturnValue = "True" Then
             MsgBox("CSV File Exported Successfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Export - Success")
-        Else
-            MsgBox("Unable To Export CSV File, Please Try Again.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Failed To Export")
+        ElseIf ReturnValue = "Missing" Then
+            MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
+        ElseIf ReturnValue = "False" Then
+            MsgBox("Unable To Export CSV File, Please Try Again.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Failed")
+        End If
+    End Sub
+
+    ' Check DateTimePicker Selection
+    Private Sub dtpicker_ProdDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpicker_StartDate.ValueChanged, dtpicker_EndDate.ValueChanged
+        ' Validation Check To Ensure Start Date IsNot > End Date
+        If dtpicker_StartDate.Value > dtpicker_EndDate.Value Then
+            dtpicker_EndDate.Value = dtpicker_StartDate.Value
         End If
     End Sub
 #End Region
@@ -992,7 +1039,7 @@ Public Class FormMain
         Next
 
         'IO Status [Digital Input]
-        For i As Integer = 0 To 23
+        For i As Integer = 0 To 29
             ' Assign Defaults
             dgv_DigitalInput.Rows.Add(i + 1, $"Digital Input-{i + 1}", $"DIO_IN_{i}", False)
 
@@ -1012,7 +1059,7 @@ Public Class FormMain
         Next
 
         'IO Status [Digital Output]
-        For i As Integer = 0 To 47
+        For i As Integer = 0 To 41
             ' Assign Defaults
             dgv_DigitalOutput.Rows.Add(i + 1, $"Digital Output-{i + 1}", $"DIO_OUT_{i}", False)
 
@@ -1032,7 +1079,7 @@ Public Class FormMain
         Next
 
         'IO Status [Analog Input]
-        For i As Integer = 0 To 11
+        For i As Integer = 0 To 15
             ' Assign Defaults
             dgv_AnalogInput.Rows.Add(i + 1, $"Analog Input-{i + 1}", $"AIO_IN_{i}", "0.0")
 
@@ -1052,7 +1099,7 @@ Public Class FormMain
         Next
 
         'IO Status [Analog Output]
-        For i As Integer = 0 To 9
+        For i As Integer = 0 To 5
             ' Assign Defaults
             dgv_AnalogOutput.Rows.Add(i + 1, $"Analog Output-{i + 1}", $"AIO_OUT_{i}", "0.0")
 
@@ -1350,9 +1397,15 @@ Public Class FormMain
 
     ' Reset Search & Filter Fields
     Private Sub AlarmHistoryFieldReset()
+        ' Reset DateTimePicker
         For Each dtpicker As DateTimePicker In {dtpicker_AlarmEndDate}
             dtpicker.Value = DateTime.Now
         Next
+
+        ' Reset ComboBox
+        If cmbx_AlarmCode.Items.Count > 0 Then
+            cmbx_AlarmCode.SelectedIndex = 0
+        End If
     End Sub
 
     ' Button Clicked Event [Reset] [Search] [Export]
@@ -1486,6 +1539,13 @@ Public Class FormMain
 
         ' Clear Selection
         dgvClearSelection(dgv_AlarmHistory)
+
+        ' Prompt When No Result Returns
+        If containSearch = True Then
+            If Not dgv_AlarmHistory.RowCount > 0 Then
+                MsgBox("Search Result Returned Empty.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
+            End If
+        End If
     End Sub
 
     ' Remove DataGridView Selection When Not In Focus
@@ -1504,17 +1564,30 @@ Public Class FormMain
         ' Convert Visible DataGridView Columns To DataTable
         Dim dt As DataTable = Await Task.Run(Function() GetVisibleColumnsDataTable(dgv_AlarmHistory))   'GetVisibleColumnsDataTable(dgv_AlarmHistory)
 
+        ' Get Path
+        'Dim dtGetPath As DataTable = Await Task.Run(Function() SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={9}"))
+        Dim ExportPath As String = PublicVariables.CSVPathToAlarmHistory 'dtGetPath(0)("retained_value")
+
         ' Export With Return
-        Dim ReturnValue As Boolean = ExportDataTableToCsv(dt, "output.csv", ";")
+        Dim ReturnValue As String = ExportDataTableToCsv(dt, ExportPath & $"AlarmHistory_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv", PublicVariables.CSVDelimiterAlarmHistory)
 
         ' Check Return State
-        If ReturnValue = True Then
+        If ReturnValue = "True" Then
             MsgBox("CSV File Exported Successfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Export - Success")
-        Else
-            MsgBox("Unable To Export CSV File, Please Try Again.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Failed To Export")
+        ElseIf ReturnValue = "Missing" Then
+            MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
+        ElseIf ReturnValue = "False" Then
+            MsgBox("Unable To Export CSV File, Please Try Again.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Failed")
         End If
     End Sub
 
+    ' Check DateTimePicker Selection
+    Private Sub dtpicker_AlarmDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpicker_AlarmStartDate.ValueChanged, dtpicker_AlarmEndDate.ValueChanged
+        ' Validation Check To Ensure Start Date IsNot > End Date
+        If dtpicker_AlarmStartDate.Value > dtpicker_AlarmEndDate.Value Then
+            dtpicker_AlarmEndDate.Value = dtpicker_AlarmStartDate.Value
+        End If
+    End Sub
 
 #End Region
 
@@ -1990,6 +2063,9 @@ Public Class FormMain
         Dim dtfilter As DataTable = SQL.ReadRecords($"SELECT PartTable.filter_type_id, FilterType.filter_type, PartTable.jig_type_id, JigType.jig_description From PartTable
 INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.part_id='{PartID}' INNER JOIN JigType ON PartTable.jig_type_id = JigType.id")
         txtbx_TitleFilterType.Text = dtfilter.Rows(0)("filter_type")
+
+        LoadrecipeParameters(RecipeID)
+
         FormCalibration.ShowDialog()
     End Sub
 
@@ -2000,17 +2076,118 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         End If
     End Sub
 
+    Private Sub lbl_OperationMode_Click(sender As Object, e As EventArgs) Handles lbl_OperationMode.Click
+        Form1.Show()
+    End Sub
+
+    Private Sub dtpicker_StartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpicker_StartDate.ValueChanged
+
+    End Sub
 
 
 
 
 #End Region
 
-    Private Sub PLC_Tick(sender As Object, e As EventArgs) Handles PLC.Tick
-        If PLCConnection.O_T_IOData(0) = 2 Then
-            lbl_PassProdQty.BackColor = Color.Green
+#Region "Load Recipe Data to PLC"
+
+    Public Sub LoadrecipeParameters(Recipe As String)
+
+        Dim dtrecipe As DataTable = SQL.ReadRecords($"SELECT * From RecipeTable WHERE recipe_id ='{Recipe}'")
+
+        If dtrecipe.Rows.Count > 0 Then
+            WriteFloatEEIP(30, CType(dtrecipe.Rows(0)("verification_tolerance"), Double))
+
+            WriteFloatEEIP(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
+            WriteFloatEEIP(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
+            WriteFloatEEIP(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
+
+            WriteFloatEEIP(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
+            WriteFloatEEIP(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
+            WriteFloatEEIP(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
+
+            WriteFloatEEIP(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
+            WriteFloatEEIP(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
+
+            WriteFloatEEIP(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
+            WriteFloatEEIP(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
+            WriteFloatEEIP(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
+
+            WriteFloatEEIP(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
+
+            WriteFloatEEIP(56, CType(dtrecipe.Rows(0)("drain2_back_pressure"), Double))
+
+            WriteFloatEEIP(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
+
+
+            If dtrecipe.Rows(0)("firstflush_circuit") = "Enable" Then
+                WriteIntEEIP(60, 1)
+            Else
+                WriteIntEEIP(60, 0)
+            End If
+            WriteIntEEIP(62, CType(dtrecipe.Rows(0)("firstflush_fill_time"), Integer))
+            WriteIntEEIP(64, CType(dtrecipe.Rows(0)("firstflush_bleed_time"), Integer))
+            WriteIntEEIP(66, CType(dtrecipe.Rows(0)("firstflush_stabilize_time"), Integer))
+            WriteIntEEIP(68, CType(dtrecipe.Rows(0)("firstflush_time"), Integer))
+
+            If dtrecipe.Rows(0)("firstdp_circuit") = "Enable" Then
+                WriteIntEEIP(70, 1)
+            Else
+                WriteIntEEIP(70, 0)
+            End If
+
+            If dtrecipe.Rows(0)("seconddp_circuit") = "Enable" Then
+                WriteIntEEIP(72, 1)
+            Else
+                WriteIntEEIP(72, 0)
+            End If
+            WriteIntEEIP(74, CType(dtrecipe.Rows(0)("dp_fill_time"), Integer))
+            WriteIntEEIP(76, CType(dtrecipe.Rows(0)("dp_bleed_time"), Integer))
+            WriteIntEEIP(78, CType(dtrecipe.Rows(0)("dp_stabilize_time"), Integer))
+            WriteIntEEIP(80, CType(dtrecipe.Rows(0)("dp_test_time"), Integer))
+            WriteIntEEIP(82, CType(dtrecipe.Rows(0)("dp_testpoints"), Integer))
+
+            If dtrecipe.Rows(0)("secondflush_circuit") = "Enable" Then
+                WriteIntEEIP(84, 1)
+            Else
+                WriteIntEEIP(84, 0)
+            End If
+            WriteIntEEIP(86, CType(dtrecipe.Rows(0)("secondflush_fill_time"), Integer))
+            WriteIntEEIP(88, CType(dtrecipe.Rows(0)("secondflush_bleed_time"), Integer))
+
+            WriteIntEEIP(90, CType(dtrecipe.Rows(0)("secondflush_stabilize_time"), Integer))
+            WriteIntEEIP(92, CType(dtrecipe.Rows(0)("secondflush_time"), Integer))
+
+
+            If dtrecipe.Rows(0)("drain1_circuit") = "Enable" Then
+                WriteIntEEIP(94, 1)
+            Else
+                WriteIntEEIP(94, 0)
+            End If
+            WriteIntEEIP(96, CType(dtrecipe.Rows(0)("drain1_time"), Integer))
+
+            If dtrecipe.Rows(0)("drain2_circuit") = "Enable" Then
+                WriteIntEEIP(98, 1)
+            Else
+                WriteIntEEIP(98, 0)
+            End If
+            WriteIntEEIP(100, CType(dtrecipe.Rows(0)("drain2_time"), Integer))
+
+
+            If dtrecipe.Rows(0)("drain3_circuit") = "Enable" Then
+                WriteIntEEIP(102, 1)
+            Else
+                WriteIntEEIP(102, 0)
+            End If
+            WriteIntEEIP(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
+
         End If
+
+
     End Sub
+
+
+#End Region
 
 End Class
 

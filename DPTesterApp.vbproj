@@ -84,8 +84,12 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EEIP">
-      <HintPath>..\DPTesterApp 20231030 VJ - test\EEIP.dll</HintPath>
+    <Reference Include="EEIP, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EEIP.dll</HintPath>
+    </Reference>
+    <Reference Include="PoohPlcLink">
+      <HintPath>C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\DPTesterApp 20231102 VJ\bin\Debug\PoohPlcLink.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -164,11 +168,11 @@
     <Compile Include="FormSetting.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModuleEEIPOmron.vb" />
     <Compile Include="ModuleIni.vb" />
     <Compile Include="ModuleLogin.vb" />
     <Compile Include="ModuleMain.vb" />
     <Compile Include="ModuleMemory.vb" />
+    <Compile Include="ModuleOmron.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -249,6 +253,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pixel Automation-icon.ico" />

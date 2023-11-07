@@ -1,8 +1,17 @@
 ﻿Imports System.Globalization
 Imports System.IO
-Imports System.IO.Ports
 
 Public Class FormSetting
+    ' Define IsLoginTableLoaded
+    Dim IsLoginTableLoaded As Boolean = False
+
+    ' Define Button Value Properties
+    Dim btnScannerBypassValueTrue As String = "OFF"
+    Dim btnScannerBypassValueFalse As String = "ON"
+
+    Dim btnAutoDeleteEnabledValueTrue As String = "OFF"
+    Dim btnAutoDeleteEnabledValueFalse As String = "ON"
+
     Private Sub FormSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Always Maximize
         Me.WindowState = FormWindowState.Maximized
@@ -20,6 +29,7 @@ Public Class FormSetting
 
         ' DoubleBuffer DataGridView
         Dim dgvArr() As DataGridView = {
+            DataGridView1,
             dgv_MessageLog,
             dgv_DispUserCategory,
             dgv_PermUserCategory
@@ -27,6 +37,9 @@ Public Class FormSetting
         For Each dgv As DataGridView In dgvArr
             DoubleBuffer.DoubleBuffered(dgv, True)
         Next
+
+        ' Hide dgv_LoginTable
+        DataGridView1.Visible = False
 
         ' Clear TabPages
         For Each tabpg As TabPage In tabctrl_Settings.TabPages
@@ -41,17 +54,16 @@ Public Class FormSetting
             tabctrl_Settings.TabPages.Add(tabpg_BuyOff)
 
             ' Check IsUserDeveloper
-            tabctrl_Settings.TabPages.Add(tabpg_Developer)
-            'LoadDeveloper()
+            'tabctrl_Settings.TabPages.Add(tabpg_Developer)
             If PublicVariables.LoggedInIsDeveloper = True Then
-                'tabctrl_Settings.TabPages.Add(tabpg_Developer)
-                'LoadDeveloper()
+                tabctrl_Settings.TabPages.Add(tabpg_Developer)
             End If
         End If
 
-        ' Show First TabPage
+        ' Show First TabPage & Load Settings
         If tabctrl_Settings.TabCount > 0 Then
             tabctrl_Settings.SelectedIndex = 0
+            LoadSettings()
         End If
     End Sub
 
@@ -61,6 +73,12 @@ Public Class FormSetting
 
         ' Display Form Control
         panel_FormControl.Visible = True
+
+        ' Show dgv_LoginTable
+        If IsLoginTableLoaded = True Then
+            DataGridView1.Visible = True
+            DataGridView1.ClearSelection()
+        End If
     End Sub
 
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
@@ -68,15 +86,20 @@ Public Class FormSetting
     End Sub
 
     Private Sub tabctrl_Settings_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_Settings.SelectedIndexChanged
-
+        ' Settings Tab
         If tabctrl_Settings.SelectedTab Is tabpg_Settings Then
             LoadSettings()
         End If
 
+        ' Tool Counter Tab
+
+
+        ' Buy Off / Dry Run Tab
         If tabctrl_Settings.SelectedTab Is tabpg_BuyOff Then
             LoadBuyoff()
         End If
 
+        ' Developer Tab
         If tabctrl_Settings.SelectedTab Is tabpg_Developer Then
             LoadDeveloper()
         End If
@@ -84,59 +107,308 @@ Public Class FormSetting
 
 #Region "Main Settings"
     Private Sub LoadSettings()
-        With cmbx_ScannerType
-            If .Items.Count > 0 Then
-                .SelectedIndex = 0
+        ' Scanner Settings
+        If True Then
+            ' Scanner Type
+            If PublicVariables.ScannerType = "USB Scanner" Then
+                With cmbx_ScannerType
+                    If .Items.Count > 1 Then
+                        .SelectedIndex = 1
+                    End If
+                End With
+            Else
+                With cmbx_ScannerType
+                    If .Items.Count > 0 Then
+                        .SelectedIndex = 0
+                    End If
+                End With
             End If
-        End With
 
-        Dim dt As DataTable = SQL.ReadRecords("SELECT id, retained_value FROM [0_RetainedMemory]")
-        For Each row As DataRow In dt.Rows
-            If row.Item("id") = 8 Then
-                TextBox2.Text = row.Item("retained_value")
+            ' Scanner Bypass
+            If PublicVariables.ScannerBypass = True Then
+                SetButtonState(Button8, PublicVariables.ScannerBypass, btnScannerBypassValueTrue)
+            Else
+                SetButtonState(Button8, PublicVariables.ScannerBypass, btnScannerBypassValueFalse)
             End If
-            If row.Item("id") = 9 Then
-                TextBox3.Text = row.Item("retained_value")
+        End If
+
+        ' Auto Delete Settings
+        If True Then
+            ' Auto Delete Enabled
+            If PublicVariables.AutoDeleteEnabled Then
+                SetButtonState(Button9, PublicVariables.AutoDeleteEnabled, btnAutoDeleteEnabledValueTrue)
+            Else
+                SetButtonState(Button9, PublicVariables.AutoDeleteEnabled, btnAutoDeleteEnabledValueFalse)
             End If
-            If row.Item("id") = 10 Then
-                TextBox4.Text = row.Item("retained_value")
+
+            If PublicVariables.AutoDeleteDayAfter > 0 Then
+                TextBox6.Text = PublicVariables.AutoDeleteDayAfter
+            Else
+                TextBox6.Text = 365
             End If
-            If row.Item("id") = 11 Then
-                TextBox5.Text = row.Item("retained_value")
-            End If
-        Next
+        End If
+
+        ' CSV Settings
+        If True Then
+            TextBox2.Text = PublicVariables.CSVPathToProductionDetails
+            TextBox3.Text = PublicVariables.CSVPathToAlarmHistory
+            TextBox4.Text = PublicVariables.CSVPathToRecipeDetails
+            TextBox5.Text = PublicVariables.CSVPathToResultSummary
+            TextBox7.Text = PublicVariables.CSVDelimiterProductionDetails
+            TextBox8.Text = PublicVariables.CSVDelimiterAlarmHistory
+            TextBox9.Text = PublicVariables.CSVDelimiterRecipeDetails
+            TextBox10.Text = PublicVariables.CSVDelimiterResultSummary
+        End If
+
+        ' Login Table
+        If IsLoginTableLoaded = False Then
+            LoadLoginTable()
+        End If
     End Sub
 
-    Private Sub chkbx_ScannerBypass_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_ScannerBypass.CheckedChanged
-        ' Declare CheckBox Checked Changed
-        Dim chkbxCheckedChanged As CheckBox = DirectCast(sender, CheckBox)
+    Private Sub btn_ScannerBypass_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        ' Declare Button Clicked
+        Dim btnClicked As Button = DirectCast(sender, Button)
 
-        ' CheckBox CheckState Changed
-        If chkbxCheckedChanged.Checked = False Then
-            chkbxCheckedChanged.Text = "ON"
-            RetainedMemory.Update(3, "ScannerBypass", "1")
+        ' Define Button State
+        Dim btnState As Boolean = False
+
+        If btnClicked.Text = btnScannerBypassValueFalse Then
+            btnState = True
         Else
-            chkbxCheckedChanged.Text = "OFF"
-            RetainedMemory.Update(3, "ScannerBypass", "0")
+            btnState = False
         End If
+
+        ' Execute Action
+        If btnState = False Then
+            SetButtonState(btnClicked, btnState, btnScannerBypassValueFalse)
+            PublicVariables.ScannerBypass = btnState
+            RetainedMemory.Update(3, "ScannerBypass", "0")
+        Else
+            SetButtonState(btnClicked, btnState, btnScannerBypassValueTrue)
+            PublicVariables.ScannerBypass = btnState
+            RetainedMemory.Update(3, "ScannerBypass", "1")
+        End If
+
+        ' Clear Selection
+        lbl_Title.Select()
     End Sub
 
     Private Sub cmbx_ScannerType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_ScannerType.SelectedIndexChanged
         If cmbx_ScannerType.Items.Count > 0 Then
             If cmbx_ScannerType.SelectedIndex = 0 Then
+                PublicVariables.ScannerType = CStr(cmbx_ScannerType.SelectedItem)
                 RetainedMemory.Update(2, "ScannerType", CStr(cmbx_ScannerType.SelectedItem))
             End If
             If cmbx_ScannerType.SelectedIndex = 1 Then
+                PublicVariables.ScannerType = CStr(cmbx_ScannerType.SelectedItem)
                 RetainedMemory.Update(2, "ScannerType", CStr(cmbx_ScannerType.SelectedItem))
             End If
         End If
     End Sub
 
+    Private Sub btn_AutoDeleteEnabled_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        ' Declare Button Clicked
+        Dim btnClicked As Button = DirectCast(sender, Button)
+
+        ' Define Button State
+        Dim btnState As Boolean = False
+
+        If btnClicked.Text = btnAutoDeleteEnabledValueFalse Then
+            btnState = True
+        Else
+            btnState = False
+        End If
+
+        ' Execute Action
+        If btnState = False Then
+            SetButtonState(btnClicked, btnState, btnAutoDeleteEnabledValueFalse)
+            PublicVariables.AutoDeleteEnabled = btnState
+            RetainedMemory.Update(6, "AutoDeleteEnabled", "0")
+        Else
+            SetButtonState(btnClicked, btnState, btnAutoDeleteEnabledValueTrue)
+            PublicVariables.AutoDeleteEnabled = btnState
+            RetainedMemory.Update(6, "AutoDeleteEnabled", "1")
+        End If
+
+        ' Clear Selection
+        lbl_Title.Select()
+    End Sub
+
+    Private Async Sub LoadLoginTable()
+        ' Prevent UI Thread Freezing
+        Await Task.Delay(20)
+
+        ' Define SQL String
+        Dim sqlString As String = $"
+        SELECT TOP {PublicVariables.UserLoginHistoryTopCount} 
+            row_number() OVER (ORDER BY date_created DESC) AS no, 
+            id, 
+            user_name, 
+            user_category, 
+            date_created 
+        FROM UserLogin 
+        ORDER BY date_created DESC
+        "
+
+        ' Populate Datatable From SQL Query
+        Dim dtLoginTable As DataTable = Await Task.Run(Function() SQL.ReadRecords(sqlString))
+
+        ' Bind To DataGridView DataSource
+        DataGridView1.DataSource = dtLoginTable
+
+        ' Prevent UI Thread Freezing
+        Await Task.Delay(80)
+
+        With DataGridView1
+            ' Set DataGridView Properties
+            .BackgroundColor = SystemColors.Window
+            .RowHeadersVisible = False
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            .ShowCellToolTips = False
+            .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+
+            ' Hide Unnecessary Columns
+            .Columns("id").Visible = False
+
+            ' Rename Columns
+            .Columns("no").HeaderCell.Value = "No."
+            .Columns("user_name").HeaderCell.Value = "Username"
+            .Columns("user_category").HeaderCell.Value = "User Category"
+            .Columns("date_created").HeaderCell.Value = "Timestamp"
+
+            ' Set Column Properties
+            .Columns("no").Width = 80
+            .Columns("user_name").Width = 160
+            .Columns("user_category").Width = 130
+
+            '.Columns("no").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            '.Columns("user_name").AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            '.Columns("user_category").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            '.Columns("date_created").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+            With .Columns("date_created")
+                .DefaultCellStyle.Format = "dd-MMM-yyyy HH:mm:ss"
+                .Width = 140
+            End With
+
+            ' Clear Selection
+            FormMain.dgvClearSelection(DataGridView1)
+        End With
+
+        ' Set IsLoginTableLoaded State To True
+        IsLoginTableLoaded = True
+        DataGridView1.Visible = True
+    End Sub
+#End Region
+
+#Region "Tool Counter"
+
+    Private Sub btn_ResetValves_Click(sender As Object, e As EventArgs) Handles _
+        btn_ResetValve1.Click, btn_ResetValve2.Click, btn_ResetValve3.Click, btn_ResetValve4.Click, btn_ResetValve5.Click, btn_ResetValve6.Click,
+        btn_ResetValve7.Click, btn_ResetValve8.Click, btn_ResetValve9.Click, btn_ResetValve10.Click, btn_ResetValve11.Click, btn_ResetValve12.Click,
+        btn_ResetValve13.Click, btn_ResetValve14.Click, btn_ResetValve15.Click, btn_ResetValve16.Click, btn_ResetValve17.Click, btn_ResetValve18.Click,
+        btn_ResetValve19.Click ', btn_ResetValve20.Click, btn_ResetValve21.Click
+
+        ' Declare Button Clicked
+        Dim btnClicked As Button = DirectCast(sender, Button)
+
+        ' Define Button Array
+        Dim btnArray As Button() = {
+            btn_ResetValve1, btn_ResetValve2, btn_ResetValve3, btn_ResetValve4, btn_ResetValve5, btn_ResetValve6, btn_ResetValve7, btn_ResetValve8,
+            btn_ResetValve9, btn_ResetValve10, btn_ResetValve11, btn_ResetValve12, btn_ResetValve13, btn_ResetValve14, btn_ResetValve15, btn_ResetValve16,
+            btn_ResetValve17, btn_ResetValve18, btn_ResetValve19', btn_ResetValve20, btn_ResetValve21
+        }
+
+        ' Define Label Array
+        Dim lblArray As Label() = {
+            lbl_Valve1, lbl_Valve2, lbl_Valve3, lbl_Valve4, lbl_Valve5, lbl_Valve6, lbl_Valve7, lbl_Valve8, lbl_Valve9, lbl_Valve10, lbl_Valve11,
+            lbl_Valve12, lbl_Valve13, lbl_Valve14, lbl_Valve15, lbl_Valve16, lbl_Valve17, lbl_Valve18, lbl_Valve19', lbl_Valve20, lbl_Valve21
+        }
+
+        For i As Integer = 0 To btnArray.Length - 1
+            If btnClicked Is btnArray(i) Then
+                If MsgBox($"Are you sure to Reset Tool Counter for [Valve-{i + 1}]?", MsgBoxStyle.Question Or MsgBoxStyle.YesNoCancel, "Question") = MsgBoxResult.Yes Then
+                    MsgBox("?reset")
+                End If
+            End If
+        Next
+    End Sub
+
 #End Region
 
 #Region "Buyoff Run"
-    Private Sub LoadBuyoff()
+    'Private WithEvents bindingSource As New BindingSource()
 
+    Private Sub LoadBuyoff()
+        'dgv_MessageLog.DataSource = bindingSource
+        LoadMessageLog()
+    End Sub
+
+    Private Async Sub LoadMessageLog()
+        ' Get StartTime From Label [lbl_StartTime.Text]
+        Dim StartTime As DateTime = DateTime.Now
+
+        If timer_Buyoff.Enabled = True Then
+            StartTime = DateTime.ParseExact(lbl_StartTime.Text, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)
+        End If
+
+        ' Special Filter
+        Dim FilterStr As String = ""
+
+        ' Check Buyoff State
+        If timer_Buyoff.Enabled = False Then
+            FilterStr = "WHERE 1 = 0"
+        Else
+            FilterStr = $"WHERE MessageLog.trigger_time >= {StartTime.ToString("yyyy-MM-ddTHH:mm:ss")}" ' YYYY-MM-DDTHH:mm:ss
+        End If
+
+        ' Define SQL String
+        Dim sqlString As String = $"
+        SELECT row_number() OVER (ORDER BY MessageLog.trigger_time DESC) AS no,
+            MessageLog.id, 
+            MessageLog.user_name, 
+            MessageLog.trigger_time, 
+            MessageLog.event_log 
+        FROM MessageLog 
+        {FilterStr} 
+        ORDER BY MessageLog.trigger_time DESC
+        "
+
+        ' Populate Datatable From SQL Query
+        Dim dtMessageLog As DataTable = Await Task.Run(Function() SQL.ReadRecords(sqlString))   'SQL.ReadRecords(sqlString)
+
+        ' Bind To DataGridView DataSource
+        dgv_MessageLog.DataSource = dtMessageLog
+
+        With dgv_MessageLog
+            ' Set DataGridView Properties
+            .BackgroundColor = SystemColors.Window
+            .RowHeadersVisible = False
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            .ShowCellToolTips = False
+            .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+
+            ' Hide Unnecessary Columns
+            .Columns("id").Visible = False
+
+            ' Rename Columns
+            .Columns("no").HeaderCell.Value = "No."
+            .Columns("user_name").HeaderCell.Value = "Username"
+            .Columns("trigger_time").HeaderCell.Value = "Trigger Time"
+            .Columns("event_log").HeaderCell.Value = "Event Logged"
+
+            ' Set Column Properties
+            .Columns("user_name").Width = 200
+            With .Columns("trigger_time")
+                .DefaultCellStyle.Format = "dd-MMM-yyyy HH:mm:ss"
+                .Width = 140
+            End With
+            .Columns("event_log").Width = 1224
+        End With
+
+        ' Clear Selection
+        FormMain.dgvClearSelection(dgv_MessageLog)
     End Sub
 
     Private Sub chkbx_Buyoff_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_DryRun.CheckedChanged, chkbx_BuyOffRun.CheckedChanged
@@ -925,7 +1197,7 @@ Public Class FormSetting
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        If MsgBox($"Are you sure you want to Update Folder PATH?", MsgBoxStyle.Question Or MsgBoxStyle.YesNoCancel, "Question") = MsgBoxResult.Yes Then
+        If MsgBox($"Update CSV Folder PATH & Delimiter?", MsgBoxStyle.Question Or MsgBoxStyle.YesNoCancel, "Question") = MsgBoxResult.Yes Then
             Dim directoryExists As Boolean = True
             Dim directoryInvalid As String = ""
             Dim txtbxInvalid As New TextBox
@@ -934,7 +1206,12 @@ Public Class FormSetting
                 TextBox2,
                 TextBox3,
                 TextBox4,
-                TextBox5
+                TextBox5,
+                         _
+                TextBox7,
+                TextBox8,
+                TextBox9,
+                TextBox10
             }
 
             For Each txtbx As TextBox In txtbxArr
@@ -948,6 +1225,7 @@ Public Class FormSetting
 
             If directoryExists = True Then
                 For Each txtbx As TextBox In txtbxArr
+                    ' CSV Paths
                     If txtbx Is TextBox2 Then '8
                         RetainedMemory.Update(8, "CSVPathToProductionDetails", txtbx.Text)
                     End If
@@ -959,6 +1237,20 @@ Public Class FormSetting
                     End If
                     If txtbx Is TextBox5 Then '11
                         RetainedMemory.Update(11, "CSVPathToResultSummary", txtbx.Text)
+                    End If
+
+                    ' CSV Delimiters
+                    If txtbx Is TextBox7 Then '16
+                        RetainedMemory.Update(16, "CSVDelimiterProductionDetails", txtbx.Text)
+                    End If
+                    If txtbx Is TextBox8 Then '17
+                        RetainedMemory.Update(17, "CSVDelimiterAlarmHistory", txtbx.Text)
+                    End If
+                    If txtbx Is TextBox9 Then '18
+                        RetainedMemory.Update(18, "CSVDelimiterRecipeDetails", txtbx.Text)
+                    End If
+                    If txtbx Is TextBox10 Then '19
+                        RetainedMemory.Update(19, "CSVDelimiterResultSummary", txtbx.Text)
                     End If
                 Next
             Else

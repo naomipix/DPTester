@@ -968,9 +968,10 @@ Partial Class FormResultGraph
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1904, 1001)
         Me.Controls.Add(Me.panel_FormControl)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximumSize = New System.Drawing.Size(1920, 1040)
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(1918, 1030)
         Me.Name = "FormResultGraph"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Result Graph"
