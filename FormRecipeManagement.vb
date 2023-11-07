@@ -313,6 +313,8 @@ Public Class FormRecipeManagement
                 Return MsgBox("Special Characters Found, Duplication Failed ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 51
                 Return MsgBox("Failed to Load Duplicate Recipe for Edit ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            Case 52
+                Return MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
             Case Else
                 Exit Select
         End Select
@@ -4934,14 +4936,21 @@ Public Class FormRecipeManagement
     Private Sub btn_RcpDetailExport_Click(sender As Object, e As EventArgs) Handles btn_RcpDetailExport.Click
         ' Convert Visible DataGridView Columns To DataTable
         Dim dt As DataTable = GetVisibleColumnsDataTable(dgv_RecipeDetails)    'GetVisibleColumnsDataTable(dgv_recipedetails)
-        Dim Filepath As String = $"{Recipeexportpath}RecipeDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmm")}.csv"
+        'Dim Filepath As String = $"{Recipeexportpath}RecipeDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmm")}.csv"
+
+        ' Get Path
+        'Dim dtGetPath As DataTable = SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={10}")
+        Dim Filepath As String = $"{PublicVariables.CSVPathToRecipeDetails}RecipeDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
+
         ' Export With Return
-        Dim ReturnValue As Boolean = ExportDataTableToCsv(dt, Filepath, ";")
+        Dim ReturnValue As String = ExportDataTableToCsv(dt, Filepath, PublicVariables.CSVDelimiterResultSummary)
 
         ' Check Return State
-        If ReturnValue = True Then
+        If ReturnValue = "True" Then
             RecipeMessage(41)
-        Else
+        ElseIf ReturnValue = "Missing" Then
+            RecipeMessage(52)
+        ElseIf ReturnValue = "False" Then
             RecipeMessage(42)
         End If
     End Sub

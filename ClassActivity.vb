@@ -98,13 +98,13 @@
                         Case 41
                             AIO_OUT_5 = CDec(dtActivityIO(i)("value"))
                         Case 42
-                            AIO_OUT_6 = CDec(dtActivityIO(i)("value"))
+                            'AIO_OUT_6 = CDec(dtActivityIO(i)("value"))
                         Case 43
-                            AIO_OUT_7 = CDec(dtActivityIO(i)("value"))
+                            'AIO_OUT_7 = CDec(dtActivityIO(i)("value"))
                         Case 44
-                            AIO_OUT_8 = CDec(dtActivityIO(i)("value"))
+                            'AIO_OUT_8 = CDec(dtActivityIO(i)("value"))
                         Case 45
-                            AIO_OUT_9 = CDec(dtActivityIO(i)("value"))
+                            'AIO_OUT_9 = CDec(dtActivityIO(i)("value"))
                         Case 46
                             'AIO_OUT_10 = CDec(dtActivityIO(i)("value"))
                         Case 47
@@ -125,8 +125,8 @@
                 Dim D_In() As Boolean = {
                 DIO_IN_0, DIO_IN_1, DIO_IN_2, DIO_IN_3, DIO_IN_4, DIO_IN_5, DIO_IN_6, DIO_IN_7,
                 DIO_IN_8, DIO_IN_9, DIO_IN_10, DIO_IN_11, DIO_IN_12, DIO_IN_13, DIO_IN_14, DIO_IN_15,
-                DIO_IN_16, DIO_IN_17, DIO_IN_18, DIO_IN_19, DIO_IN_20, DIO_IN_21, DIO_IN_22, DIO_IN_23 _ ',
-                                                                                                       _ ' DIO_IN_24, DIO_IN_25, DIO_IN_26, DIO_IN_27, DIO_IN_28, DIO_IN_29, DIO_IN_30, DIO_IN_31 
+                DIO_IN_16, DIO_IN_17, DIO_IN_18, DIO_IN_19, DIO_IN_20, DIO_IN_21, DIO_IN_22, DIO_IN_23,
+                DIO_IN_24, DIO_IN_25, DIO_IN_26, DIO_IN_27, DIO_IN_28, DIO_IN_29 ', DIO_IN_30, DIO_IN_31
                 }
 
                 Dim D_Out() As Boolean = {
@@ -135,17 +135,16 @@
                     DIO_OUT_16, DIO_OUT_17, DIO_OUT_18, DIO_OUT_19, DIO_OUT_20, DIO_OUT_21, DIO_OUT_22, DIO_OUT_23,
                     DIO_OUT_24, DIO_OUT_25, DIO_OUT_26, DIO_OUT_27, DIO_OUT_28, DIO_OUT_29, DIO_OUT_30, DIO_OUT_31,
                     DIO_OUT_32, DIO_OUT_33, DIO_OUT_34, DIO_OUT_35, DIO_OUT_36, DIO_OUT_37, DIO_OUT_38, DIO_OUT_39,
-                    DIO_OUT_40, DIO_OUT_41, DIO_OUT_42, DIO_OUT_43, DIO_OUT_44, DIO_OUT_45, DIO_OUT_46, DIO_OUT_47
+                    DIO_OUT_40, DIO_OUT_41 ', DIO_OUT_42, DIO_OUT_43, DIO_OUT_44, DIO_OUT_45, DIO_OUT_46, DIO_OUT_47
                 }
 
                 Dim A_In() As Decimal = {
                     AIO_IN_0, AIO_IN_1, AIO_IN_2, AIO_IN_3, AIO_IN_4, AIO_IN_5, AIO_IN_6, AIO_IN_7,
-                    AIO_IN_8, AIO_IN_9, AIO_IN_10, AIO_IN_11 _ 'AIO_IN_12, AIO_IN_13, AIO_IN_14, AIO_IN_15
+                    AIO_IN_8, AIO_IN_9, AIO_IN_10, AIO_IN_11, AIO_IN_12, AIO_IN_13, AIO_IN_14, AIO_IN_15
                 }
 
                 Dim A_Out() As Decimal = {
-                    AIO_OUT_0, AIO_OUT_1, AIO_OUT_2, AIO_OUT_3, AIO_OUT_4, AIO_OUT_5, AIO_OUT_6, AIO_OUT_7,
-                    AIO_OUT_8, AIO_OUT_9', AIO_OUT_10, AIO_OUT_11, AIO_OUT_12, AIO_OUT_13, AIO_OUT_14, AIO_OUT_15
+                    AIO_OUT_0, AIO_OUT_1, AIO_OUT_2, AIO_OUT_3, AIO_OUT_4, AIO_OUT_5', AIO_OUT_6, AIO_OUT_7, AIO_OUT_8, AIO_OUT_9, AIO_OUT_10, AIO_OUT_11, AIO_OUT_12, AIO_OUT_13, AIO_OUT_14, AIO_OUT_15
                 }
 
                 For i As Integer = 0 To 11

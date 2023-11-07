@@ -6,14 +6,39 @@ Module PublicVariables
     ' Version
     Public AppVersion As String = "Ver. " & "1.0.0.1"
 
-    ' Operation Mode
+    ' Retained Memory - Operation Mode
     Public OperationMode As String = ""
 
-    ' CSV Output Path
+    ' Retained Memory - Scanner Settings
+    Public ScannerType As String = ""
+    Public ScannerBypass As Boolean = False
+
+    ' Retained Memory - Dryrun/Buyoff Settings
+    Public DryRunEnabled As Boolean = False
+    Public BuyOffEnabled As Boolean = False
+
+    ' Retained Memory - Auto Delete Settings
+    Public AutoDeleteEnabled As Boolean = False
+    Public AutoDeleteDayAfter As Integer = 365
+
+    ' Retained Memory - CSV Settings
     Public CSVPathToProductionDetails As String = ""
     Public CSVPathToAlarmHistory As String = ""
     Public CSVPathToRecipeDetails As String = ""
     Public CSVPathToResultSummary As String = ""
+    Public CSVDelimiterProductionDetails As String = ""
+    Public CSVDelimiterAlarmHistory As String = ""
+    Public CSVDelimiterRecipeDetails As String = ""
+    Public CSVDelimiterResultSummary As String = ""
+
+    ' Retained Memory - Lot Details
+    'Public LotStarted As Boolean = ""
+    'Public LotIDNumber As String = ""
+    'Public RecipeType As String = ""
+    'Public RecipeID As String = ""
+
+    ' Retained Memory - User Login Table Settings
+    Public UserLoginHistoryTopCount As Integer = 100
 
     ' Ini - Database
     Public Server1 As String = ""
@@ -253,21 +278,47 @@ Module SQL
 End Module
 
 Module CsvExportModule
-    Function ExportDataTableToCsv(dataTable As DataTable, filePath As String, Optional delimiter As String = ",") As Boolean
-        Dim ReturnState As Boolean = False
-        Try
-            Using writer As New StreamWriter(filePath)
-                ' Write header row
-                writer.WriteLine(String.Join(delimiter, dataTable.Columns.Cast(Of DataColumn).Select(Function(column) column.ColumnName)))
+    'Function ExportDataTableToCsv(dataTable As DataTable, filePath As String, Optional delimiter As String = ",") As Boolean
+    '    Dim ReturnState As Boolean = False
+    '    Try
+    '        Using writer As New StreamWriter(filePath)
+    '            ' Write header row
+    '            writer.WriteLine(String.Join(delimiter, dataTable.Columns.Cast(Of DataColumn).Select(Function(column) column.ColumnName)))
 
-                ' Write data rows
-                For Each row As DataRow In dataTable.Rows
-                    writer.WriteLine(String.Join(delimiter, row.ItemArray.Select(Function(item) item.ToString())))
-                Next
-            End Using
-            ReturnState = True
+    '            ' Write data rows
+    '            For Each row As DataRow In dataTable.Rows
+    '                writer.WriteLine(String.Join(delimiter, row.ItemArray.Select(Function(item) item.ToString())))
+    '            Next
+    '        End Using
+    '        ReturnState = True
+    '    Catch ex As Exception
+    '        ReturnState = False
+    '    End Try
+
+    '    Return ReturnState
+    'End Function
+
+    Function ExportDataTableToCsv(dataTable As DataTable, filePath As String, Optional delimiter As String = ",") As String
+        Dim ReturnState As String = ""
+        Try
+            Dim directoryPath As String = Path.GetDirectoryName(filePath)
+
+            If Not String.IsNullOrEmpty(directoryPath) AndAlso Directory.Exists(directoryPath) Then
+                Using writer As New StreamWriter(filePath)
+                    ' Write header row
+                    writer.WriteLine(String.Join(delimiter, dataTable.Columns.Cast(Of DataColumn).Select(Function(column) column.ColumnName)))
+
+                    ' Write data rows
+                    For Each row As DataRow In dataTable.Rows
+                        writer.WriteLine(String.Join(delimiter, row.ItemArray.Select(Function(item) item.ToString())))
+                    Next
+                    ReturnState = "True"
+                End Using
+            Else
+                ReturnState = "Missing"
+            End If
         Catch ex As Exception
-            ReturnState = False
+            ReturnState = "False"
         End Try
 
         Return ReturnState
@@ -308,8 +359,13 @@ Namespace RetainedMemory
         'Public RecipeType As String = ""
         'Public RecipeID As String = ""
 
-        Public Function LoadAndApply()
-            Dim dt As DataTable = SQL.ReadRecords("SELECT id, description, retained_value FROM 0_RetainedMemory")
+        Public Sub LoadAndApply()
+            Dim dt As New DataTable
+            Try
+                dt = SQL.ReadRecords("SELECT id, description, retained_value FROM [0_RetainedMemory]")
+            Catch ex As Exception
+                MsgBox(ex.Message & ex.StackTrace)
+            End Try
 
             If dt.Rows.Count > 0 Then
                 For i As Integer = 0 To dt.Rows.Count - 1
@@ -320,90 +376,127 @@ Namespace RetainedMemory
 
                     ' Scanner Type
                     If dt(i)("id") = 2 Then
-                        If FormSetting.cmbx_ScannerType.FindStringExact(dt(i)("retained_value")) >= 0 Then
-                            FormSetting.cmbx_ScannerType.SelectedIndex = FormSetting.cmbx_ScannerType.FindStringExact(dt(i)("retained_value"))
-                        End If
+                        PublicVariables.ScannerType = dt(i)("retained_value")
                     End If
 
                     ' Scanner Bypass
                     If dt(i)("id") = 3 Then
                         If dt(i)("retained_value") = 1 Then
-                            FormSetting.chkbx_ScannerBypass.Checked = True
+                            PublicVariables.ScannerBypass = True
                         Else
-                            FormSetting.chkbx_ScannerBypass.Checked = False
+                            PublicVariables.ScannerBypass = False
                         End If
                     End If
 
                     ' Dry Run Enabled
                     If dt(i)("id") = 4 Then
                         If dt(i)("retained_value") = 1 Then
-                            FormSetting.chkbx_DryRun.Checked = True
+                            PublicVariables.DryRunEnabled = True
                         Else
-                            FormSetting.chkbx_DryRun.Checked = False
+                            PublicVariables.DryRunEnabled = False
                         End If
                     End If
 
                     ' Buy Off Enabled
                     If dt(i)("id") = 5 Then
                         If dt(i)("retained_value") = 1 Then
-                            FormSetting.chkbx_BuyOffRun.Checked = True
+                            PublicVariables.BuyOffEnabled = True
                         Else
-                            FormSetting.chkbx_BuyOffRun.Checked = False
+                            PublicVariables.BuyOffEnabled = False
                         End If
                     End If
 
                     ' Auto Delete Enabled
                     If dt(i)("id") = 6 Then
-
+                        If dt(i)("retained_value") = 1 Then
+                            PublicVariables.AutoDeleteEnabled = True
+                        Else
+                            PublicVariables.AutoDeleteEnabled = False
+                        End If
                     End If
 
                     ' Auto Delete Day After
                     If dt(i)("id") = 7 Then
-
+                        If Not Integer.TryParse(dt(i)("retained_value"), PublicVariables.AutoDeleteDayAfter) Then
+                            PublicVariables.AutoDeleteDayAfter = 365
+                        End If
                     End If
 
                     ' CSV Path To Production Details
                     If dt(i)("id") = 8 Then
-                        CSVPathToProductionDetails = dt(i)("retained_value")
+                        PublicVariables.CSVPathToProductionDetails = dt(i)("retained_value")
                     End If
 
                     ' CSV Path To Alarm History
                     If dt(i)("id") = 9 Then
-                        CSVPathToAlarmHistory = dt(i)("retained_value")
+                        PublicVariables.CSVPathToAlarmHistory = dt(i)("retained_value")
                     End If
 
                     ' CSV Path To Recipe Details
                     If dt(i)("id") = 10 Then
-                        CSVPathToRecipeDetails = dt(i)("retained_value")
+                        PublicVariables.CSVPathToRecipeDetails = dt(i)("retained_value")
                     End If
 
                     ' CSV Path To Result Summary
                     If dt(i)("id") = 11 Then
-                        CSVPathToResultSummary = dt(i)("retained_value")
+                        PublicVariables.CSVPathToResultSummary = dt(i)("retained_value")
                     End If
 
                     ' Lot Started
-                    If dt(i)("id") = 11 Then
+                    If dt(i)("id") = 12 Then
 
                     End If
 
                     ' Lot ID Number
-                    If dt(i)("id") = 11 Then
+                    If dt(i)("id") = 13 Then
 
                     End If
 
                     ' Recipe Type
-                    If dt(i)("id") = 11 Then
+                    If dt(i)("id") = 14 Then
 
                     End If
 
                     ' Recipe ID
-                    If dt(i)("id") = 11 Then
+                    If dt(i)("id") = 15 Then
 
+                    End If
+
+                    ' CSV Path To Production Details
+                    If dt(i)("id") = 16 Then
+                        PublicVariables.CSVDelimiterProductionDetails = dt(i)("retained_value")
+                    End If
+
+                    ' CSV Path To Alarm History
+                    If dt(i)("id") = 17 Then
+                        PublicVariables.CSVDelimiterAlarmHistory = dt(i)("retained_value")
+                    End If
+
+                    ' CSV Path To Recipe Details
+                    If dt(i)("id") = 18 Then
+                        PublicVariables.CSVDelimiterRecipeDetails = dt(i)("retained_value")
+                    End If
+
+                    ' CSV Path To Result Summary
+                    If dt(i)("id") = 19 Then
+                        PublicVariables.CSVDelimiterResultSummary = dt(i)("retained_value")
+                    End If
+
+                    ' CSV Path To Result Summary
+                    If dt(i)("id") = 20 Then
+                        If Not Integer.TryParse(dt(i)("retained_value"), PublicVariables.UserLoginHistoryTopCount) Then
+                            PublicVariables.UserLoginHistoryTopCount = 100
+                        End If
+
+                        ' Reset To Default of 100 if value returned 0
+                        If PublicVariables.UserLoginHistoryTopCount = 0 Then
+                            PublicVariables.UserLoginHistoryTopCount = 100
+                            RetainedMemory.Update(20, "UserLoginHistoryTopCount", "100")
+                        End If
                     End If
                 Next
             End If
-        End Function
+        End Sub
 
         ' RetainedMemory.Update(1, "Description", "12345")
         Public Function Update(MemId As Integer, MemDesc As String, MemValue As String)
@@ -481,4 +574,20 @@ Module DataGridViewDragScroll
         End If
     End Sub
 
+End Module
+
+Module CustomButtonModule
+    Public Sub SetButtonState(GetButton As Button, ButtonState As Boolean, ButtonValue As String)
+        If ButtonState = True Then
+            With GetButton
+                .BackColor = Color.FromArgb(0, 192, 0)
+                .Text = ButtonValue
+            End With
+        Else
+            With GetButton
+                .BackColor = Color.FromArgb(25, 130, 246)
+                .Text = ButtonValue
+            End With
+        End If
+    End Sub
 End Module

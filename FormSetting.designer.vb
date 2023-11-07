@@ -24,7 +24,8 @@ Partial Class FormSetting
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSetting))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -38,32 +39,53 @@ Partial Class FormSetting
         Me.tabctrl_Settings = New System.Windows.Forms.TabControl()
         Me.tabpg_Settings = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.panel_UserLoginBlank = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.panel_Scanner = New System.Windows.Forms.Panel()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.TextBox10 = New System.Windows.Forms.TextBox()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.Button7 = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.panel_JigType = New System.Windows.Forms.Panel()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.btn_JigTypeConfirm = New System.Windows.Forms.Button()
         Me.txtbx_JigType = New System.Windows.Forms.TextBox()
         Me.dsp_JigType = New System.Windows.Forms.Label()
-        Me.dsp_JigTypeCreation = New System.Windows.Forms.Label()
-        Me.panel_Scanner = New System.Windows.Forms.Panel()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.cmbx_ScannerType = New System.Windows.Forms.ComboBox()
-        Me.chkbx_ScannerBypass = New System.Windows.Forms.CheckBox()
         Me.dsp_ScannerBypass = New System.Windows.Forms.Label()
         Me.txtbx_ScannerRawData = New System.Windows.Forms.TextBox()
-        Me.dsp_ScannerType = New System.Windows.Forms.Label()
         Me.dsp_ScannerRawData = New System.Windows.Forms.Label()
+        Me.dsp_ScannerType = New System.Windows.Forms.Label()
         Me.dsp_Scanner = New System.Windows.Forms.Label()
         Me.tabpg_ToolCounter = New System.Windows.Forms.TabPage()
         Me.panel_ToolCounter = New System.Windows.Forms.Panel()
@@ -195,8 +217,14 @@ Partial Class FormSetting
         Me.tabctrl_Settings.SuspendLayout()
         Me.tabpg_Settings.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.panel_JigType.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel3.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
         Me.panel_Scanner.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.tabpg_ToolCounter.SuspendLayout()
         Me.panel_ToolCounter.SuspendLayout()
         Me.tabpg_BuyOff.SuspendLayout()
@@ -342,7 +370,7 @@ Partial Class FormSetting
         '
         Me.tabpg_Settings.BackColor = System.Drawing.Color.LightGray
         Me.tabpg_Settings.Controls.Add(Me.Panel2)
-        Me.tabpg_Settings.Controls.Add(Me.panel_JigType)
+        Me.tabpg_Settings.Controls.Add(Me.Panel3)
         Me.tabpg_Settings.Controls.Add(Me.panel_Scanner)
         Me.tabpg_Settings.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_Settings.Name = "tabpg_Settings"
@@ -354,181 +382,382 @@ Partial Class FormSetting
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel2.Controls.Add(Me.Button7)
-        Me.Panel2.Controls.Add(Me.Button5)
-        Me.Panel2.Controls.Add(Me.Button6)
-        Me.Panel2.Controls.Add(Me.Button4)
-        Me.Panel2.Controls.Add(Me.Button3)
-        Me.Panel2.Controls.Add(Me.TextBox5)
-        Me.Panel2.Controls.Add(Me.TextBox3)
-        Me.Panel2.Controls.Add(Me.Label10)
-        Me.Panel2.Controls.Add(Me.Label8)
-        Me.Panel2.Controls.Add(Me.TextBox4)
-        Me.Panel2.Controls.Add(Me.TextBox2)
-        Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Location = New System.Drawing.Point(564, 3)
+        Me.Panel2.Controls.Add(Me.DataGridView1)
+        Me.Panel2.Controls.Add(Me.Label31)
+        Me.Panel2.Controls.Add(Me.panel_UserLoginBlank)
+        Me.Panel2.Location = New System.Drawing.Point(1313, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(556, 447)
-        Me.Panel2.TabIndex = 1
+        Me.Panel2.Size = New System.Drawing.Size(556, 761)
+        Me.Panel2.TabIndex = 2
         '
-        'Button7
+        'DataGridView1
         '
-        Me.Button7.Location = New System.Drawing.Point(441, 274)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(80, 30)
-        Me.Button7.TabIndex = 107
-        Me.Button7.Text = "Select"
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DataGridView1.Location = New System.Drawing.Point(3, 58)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.Size = New System.Drawing.Size(548, 694)
+        Me.DataGridView1.TabIndex = 104
+        Me.DataGridView1.TabStop = False
         '
-        'Button5
+        'Label31
         '
-        Me.Button5.Location = New System.Drawing.Point(441, 152)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(80, 30)
-        Me.Button5.TabIndex = 107
-        Me.Button5.Text = "Select"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Label31.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label31.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label31.Location = New System.Drawing.Point(0, 0)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(554, 50)
+        Me.Label31.TabIndex = 102
+        Me.Label31.Text = "User Login History"
+        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Button6
+        'panel_UserLoginBlank
         '
-        Me.Button6.Location = New System.Drawing.Point(441, 213)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(80, 30)
-        Me.Button6.TabIndex = 107
-        Me.Button6.Text = "Select"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.panel_UserLoginBlank.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_UserLoginBlank.Location = New System.Drawing.Point(3, 58)
+        Me.panel_UserLoginBlank.Name = "panel_UserLoginBlank"
+        Me.panel_UserLoginBlank.Size = New System.Drawing.Size(548, 694)
+        Me.panel_UserLoginBlank.TabIndex = 105
         '
-        'Button4
+        'Panel3
         '
-        Me.Button4.Location = New System.Drawing.Point(441, 91)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(80, 30)
-        Me.Button4.TabIndex = 107
-        Me.Button4.Text = "Select"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Panel3.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.TabControl1)
+        Me.Panel3.Controls.Add(Me.Label13)
+        Me.Panel3.Location = New System.Drawing.Point(561, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(750, 761)
+        Me.Panel3.TabIndex = 1
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Location = New System.Drawing.Point(5, 58)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(740, 698)
+        Me.TabControl1.TabIndex = 103
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Location = New System.Drawing.Point(4, 26)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(732, 668)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "TabPage1"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Location = New System.Drawing.Point(4, 26)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(732, 668)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Label13
+        '
+        Me.Label13.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(0, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(748, 50)
+        Me.Label13.TabIndex = 102
+        Me.Label13.Text = "Additional Settings"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'panel_Scanner
+        '
+        Me.panel_Scanner.BackColor = System.Drawing.SystemColors.Control
+        Me.panel_Scanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_Scanner.Controls.Add(Me.GroupBox6)
+        Me.panel_Scanner.Controls.Add(Me.GroupBox5)
+        Me.panel_Scanner.Controls.Add(Me.GroupBox3)
+        Me.panel_Scanner.Controls.Add(Me.GroupBox2)
+        Me.panel_Scanner.Controls.Add(Me.dsp_Scanner)
+        Me.panel_Scanner.Location = New System.Drawing.Point(3, 3)
+        Me.panel_Scanner.Name = "panel_Scanner"
+        Me.panel_Scanner.Size = New System.Drawing.Size(556, 761)
+        Me.panel_Scanner.TabIndex = 1
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.TextBox10)
+        Me.GroupBox6.Controls.Add(Me.Button3)
+        Me.GroupBox6.Controls.Add(Me.TextBox7)
+        Me.GroupBox6.Controls.Add(Me.TextBox9)
+        Me.GroupBox6.Controls.Add(Me.Button7)
+        Me.GroupBox6.Controls.Add(Me.Label7)
+        Me.GroupBox6.Controls.Add(Me.TextBox2)
+        Me.GroupBox6.Controls.Add(Me.TextBox8)
+        Me.GroupBox6.Controls.Add(Me.Button5)
+        Me.GroupBox6.Controls.Add(Me.Label11)
+        Me.GroupBox6.Controls.Add(Me.Label6)
+        Me.GroupBox6.Controls.Add(Me.Label14)
+        Me.GroupBox6.Controls.Add(Me.Button6)
+        Me.GroupBox6.Controls.Add(Me.Label15)
+        Me.GroupBox6.Controls.Add(Me.Label9)
+        Me.GroupBox6.Controls.Add(Me.Button4)
+        Me.GroupBox6.Controls.Add(Me.TextBox4)
+        Me.GroupBox6.Controls.Add(Me.Label8)
+        Me.GroupBox6.Controls.Add(Me.TextBox5)
+        Me.GroupBox6.Controls.Add(Me.Label10)
+        Me.GroupBox6.Controls.Add(Me.TextBox3)
+        Me.GroupBox6.Location = New System.Drawing.Point(16, 436)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(520, 305)
+        Me.GroupBox6.TabIndex = 108
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "CSV Settings"
+        '
+        'TextBox10
+        '
+        Me.TextBox10.BackColor = System.Drawing.SystemColors.Info
+        Me.TextBox10.Location = New System.Drawing.Point(422, 205)
+        Me.TextBox10.MaxLength = 3
+        Me.TextBox10.Name = "TextBox10"
+        Me.TextBox10.Size = New System.Drawing.Size(80, 25)
+        Me.TextBox10.TabIndex = 108
         '
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button3.ForeColor = System.Drawing.SystemColors.Window
-        Me.Button3.Location = New System.Drawing.Point(203, 377)
+        Me.Button3.Location = New System.Drawing.Point(180, 248)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(150, 50)
+        Me.Button3.Size = New System.Drawing.Size(160, 45)
         Me.Button3.TabIndex = 106
         Me.Button3.Text = "Apply Changes"
         Me.Button3.UseVisualStyleBackColor = False
         '
-        'TextBox5
+        'TextBox7
         '
-        Me.TextBox5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(35, 275)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(400, 29)
-        Me.TextBox5.TabIndex = 105
+        Me.TextBox7.BackColor = System.Drawing.SystemColors.Info
+        Me.TextBox7.Location = New System.Drawing.Point(422, 46)
+        Me.TextBox7.MaxLength = 3
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(80, 25)
+        Me.TextBox7.TabIndex = 108
         '
-        'TextBox3
+        'TextBox9
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(35, 153)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(400, 29)
-        Me.TextBox3.TabIndex = 105
+        Me.TextBox9.BackColor = System.Drawing.SystemColors.Info
+        Me.TextBox9.Location = New System.Drawing.Point(422, 152)
+        Me.TextBox9.MaxLength = 3
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(80, 25)
+        Me.TextBox9.TabIndex = 108
         '
-        'Label10
+        'Button7
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(31, 251)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(132, 21)
-        Me.Label10.TabIndex = 104
-        Me.Label10.Text = "Result Summary :"
-        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button7.Location = New System.Drawing.Point(323, 205)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(80, 26)
+        Me.Button7.TabIndex = 107
+        Me.Button7.Text = "Select"
+        Me.Button7.UseVisualStyleBackColor = True
         '
-        'Label8
+        'Label7
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(31, 129)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(113, 21)
-        Me.Label8.TabIndex = 104
-        Me.Label8.Text = "Alarm History :"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(35, 214)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(400, 29)
-        Me.TextBox4.TabIndex = 105
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(419, 26)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(67, 17)
+        Me.Label7.TabIndex = 104
+        Me.Label7.Text = "Delimiter :"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'TextBox2
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(35, 92)
+        Me.TextBox2.BackColor = System.Drawing.SystemColors.Info
+        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(17, 46)
+        Me.TextBox2.MaxLength = 256
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(400, 29)
+        Me.TextBox2.Size = New System.Drawing.Size(300, 25)
         Me.TextBox2.TabIndex = 105
         '
-        'Label9
+        'TextBox8
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(31, 190)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(159, 21)
-        Me.Label9.TabIndex = 104
-        Me.Label9.Text = "Recipe Management :"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.TextBox8.BackColor = System.Drawing.SystemColors.Info
+        Me.TextBox8.Location = New System.Drawing.Point(422, 99)
+        Me.TextBox8.MaxLength = 3
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(80, 25)
+        Me.TextBox8.TabIndex = 108
+        '
+        'Button5
+        '
+        Me.Button5.Location = New System.Drawing.Point(323, 99)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(80, 26)
+        Me.Button5.TabIndex = 107
+        Me.Button5.Text = "Select"
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(419, 79)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(67, 17)
+        Me.Label11.TabIndex = 104
+        Me.Label11.Text = "Delimiter :"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(31, 68)
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(15, 26)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(144, 21)
+        Me.Label6.Size = New System.Drawing.Size(121, 17)
         Me.Label6.TabIndex = 104
         Me.Label6.Text = "Production Details :"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label7
+        'Label14
         '
-        Me.Label7.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(0, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(554, 50)
-        Me.Label7.TabIndex = 102
-        Me.Label7.Text = "CSV File Export Directory"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label14.AutoSize = True
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(419, 132)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(67, 17)
+        Me.Label14.TabIndex = 104
+        Me.Label14.Text = "Delimiter :"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'panel_JigType
+        'Button6
         '
-        Me.panel_JigType.BackColor = System.Drawing.SystemColors.Control
-        Me.panel_JigType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panel_JigType.Controls.Add(Me.btn_JigTypeConfirm)
-        Me.panel_JigType.Controls.Add(Me.txtbx_JigType)
-        Me.panel_JigType.Controls.Add(Me.dsp_JigType)
-        Me.panel_JigType.Controls.Add(Me.dsp_JigTypeCreation)
-        Me.panel_JigType.Location = New System.Drawing.Point(3, 250)
-        Me.panel_JigType.Name = "panel_JigType"
-        Me.panel_JigType.Size = New System.Drawing.Size(556, 200)
-        Me.panel_JigType.TabIndex = 1
+        Me.Button6.Location = New System.Drawing.Point(323, 152)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(80, 26)
+        Me.Button6.TabIndex = 107
+        Me.Button6.Text = "Select"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(419, 185)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(67, 17)
+        Me.Label15.TabIndex = 104
+        Me.Label15.Text = "Delimiter :"
+        Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(16, 132)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(135, 17)
+        Me.Label9.TabIndex = 104
+        Me.Label9.Text = "Recipe Management :"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(323, 46)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(80, 26)
+        Me.Button4.TabIndex = 107
+        Me.Button4.Text = "Select"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'TextBox4
+        '
+        Me.TextBox4.BackColor = System.Drawing.SystemColors.Info
+        Me.TextBox4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox4.Location = New System.Drawing.Point(19, 152)
+        Me.TextBox4.MaxLength = 256
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(300, 25)
+        Me.TextBox4.TabIndex = 105
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(15, 79)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(94, 17)
+        Me.Label8.TabIndex = 104
+        Me.Label8.Text = "Alarm History :"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TextBox5
+        '
+        Me.TextBox5.BackColor = System.Drawing.SystemColors.Info
+        Me.TextBox5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox5.Location = New System.Drawing.Point(19, 205)
+        Me.TextBox5.MaxLength = 256
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(300, 25)
+        Me.TextBox5.TabIndex = 105
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(16, 185)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(108, 17)
+        Me.Label10.TabIndex = 104
+        Me.Label10.Text = "Result Summary :"
+        Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TextBox3
+        '
+        Me.TextBox3.BackColor = System.Drawing.SystemColors.Info
+        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox3.Location = New System.Drawing.Point(18, 99)
+        Me.TextBox3.MaxLength = 256
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(300, 25)
+        Me.TextBox3.TabIndex = 105
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.btn_JigTypeConfirm)
+        Me.GroupBox5.Controls.Add(Me.txtbx_JigType)
+        Me.GroupBox5.Controls.Add(Me.dsp_JigType)
+        Me.GroupBox5.Location = New System.Drawing.Point(16, 58)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(250, 140)
+        Me.GroupBox5.TabIndex = 108
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Jig Type Settings"
         '
         'btn_JigTypeConfirm
         '
         Me.btn_JigTypeConfirm.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.btn_JigTypeConfirm.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_JigTypeConfirm.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_JigTypeConfirm.Location = New System.Drawing.Point(213, 130)
+        Me.btn_JigTypeConfirm.Location = New System.Drawing.Point(60, 84)
         Me.btn_JigTypeConfirm.Name = "btn_JigTypeConfirm"
-        Me.btn_JigTypeConfirm.Size = New System.Drawing.Size(130, 50)
+        Me.btn_JigTypeConfirm.Size = New System.Drawing.Size(130, 40)
         Me.btn_JigTypeConfirm.TabIndex = 105
         Me.btn_JigTypeConfirm.Text = "Create"
         Me.btn_JigTypeConfirm.UseVisualStyleBackColor = False
@@ -536,115 +765,162 @@ Partial Class FormSetting
         'txtbx_JigType
         '
         Me.txtbx_JigType.BackColor = System.Drawing.SystemColors.Info
-        Me.txtbx_JigType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_JigType.Location = New System.Drawing.Point(188, 65)
+        Me.txtbx_JigType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_JigType.Location = New System.Drawing.Point(17, 46)
         Me.txtbx_JigType.MaxLength = 30
         Me.txtbx_JigType.Name = "txtbx_JigType"
-        Me.txtbx_JigType.Size = New System.Drawing.Size(250, 29)
+        Me.txtbx_JigType.Size = New System.Drawing.Size(218, 25)
         Me.txtbx_JigType.TabIndex = 2
         '
         'dsp_JigType
         '
-        Me.dsp_JigType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_JigType.Location = New System.Drawing.Point(57, 66)
+        Me.dsp_JigType.AutoSize = True
+        Me.dsp_JigType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_JigType.Location = New System.Drawing.Point(14, 26)
         Me.dsp_JigType.Name = "dsp_JigType"
-        Me.dsp_JigType.Size = New System.Drawing.Size(125, 25)
+        Me.dsp_JigType.Size = New System.Drawing.Size(62, 17)
         Me.dsp_JigType.TabIndex = 104
         Me.dsp_JigType.Text = "Jig Type :"
         Me.dsp_JigType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'dsp_JigTypeCreation
+        'GroupBox3
         '
-        Me.dsp_JigTypeCreation.Dock = System.Windows.Forms.DockStyle.Top
-        Me.dsp_JigTypeCreation.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_JigTypeCreation.Location = New System.Drawing.Point(0, 0)
-        Me.dsp_JigTypeCreation.Name = "dsp_JigTypeCreation"
-        Me.dsp_JigTypeCreation.Size = New System.Drawing.Size(554, 50)
-        Me.dsp_JigTypeCreation.TabIndex = 102
-        Me.dsp_JigTypeCreation.Text = "Jig Type Creation"
-        Me.dsp_JigTypeCreation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.GroupBox3.Controls.Add(Me.Button9)
+        Me.GroupBox3.Controls.Add(Me.Label12)
+        Me.GroupBox3.Controls.Add(Me.TextBox6)
+        Me.GroupBox3.Controls.Add(Me.Label16)
+        Me.GroupBox3.Location = New System.Drawing.Point(286, 294)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(250, 126)
+        Me.GroupBox3.TabIndex = 108
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Historical Auto Delete"
         '
-        'panel_Scanner
+        'Button9
         '
-        Me.panel_Scanner.BackColor = System.Drawing.SystemColors.Control
-        Me.panel_Scanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panel_Scanner.Controls.Add(Me.cmbx_ScannerType)
-        Me.panel_Scanner.Controls.Add(Me.chkbx_ScannerBypass)
-        Me.panel_Scanner.Controls.Add(Me.dsp_ScannerBypass)
-        Me.panel_Scanner.Controls.Add(Me.txtbx_ScannerRawData)
-        Me.panel_Scanner.Controls.Add(Me.dsp_ScannerType)
-        Me.panel_Scanner.Controls.Add(Me.dsp_ScannerRawData)
-        Me.panel_Scanner.Controls.Add(Me.dsp_Scanner)
-        Me.panel_Scanner.Location = New System.Drawing.Point(3, 3)
-        Me.panel_Scanner.Name = "panel_Scanner"
-        Me.panel_Scanner.Size = New System.Drawing.Size(556, 241)
-        Me.panel_Scanner.TabIndex = 1
+        Me.Button9.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.Button9.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button9.Location = New System.Drawing.Point(142, 28)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(90, 40)
+        Me.Button9.TabIndex = 110
+        Me.Button9.Text = "ON"
+        Me.Button9.UseVisualStyleBackColor = False
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(18, 39)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(83, 17)
+        Me.Label12.TabIndex = 104
+        Me.Label12.Text = "Auto Delete :"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TextBox6
+        '
+        Me.TextBox6.BackColor = System.Drawing.SystemColors.Info
+        Me.TextBox6.Location = New System.Drawing.Point(142, 78)
+        Me.TextBox6.MaxLength = 3
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(90, 25)
+        Me.TextBox6.TabIndex = 105
+        Me.TextBox6.Text = "365"
+        Me.TextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(18, 81)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(118, 17)
+        Me.Label16.TabIndex = 109
+        Me.Label16.Text = "Delete After (Day) :"
+        Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Button8)
+        Me.GroupBox2.Controls.Add(Me.cmbx_ScannerType)
+        Me.GroupBox2.Controls.Add(Me.dsp_ScannerBypass)
+        Me.GroupBox2.Controls.Add(Me.txtbx_ScannerRawData)
+        Me.GroupBox2.Controls.Add(Me.dsp_ScannerRawData)
+        Me.GroupBox2.Controls.Add(Me.dsp_ScannerType)
+        Me.GroupBox2.Location = New System.Drawing.Point(286, 58)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(250, 225)
+        Me.GroupBox2.TabIndex = 108
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Scanner Settings"
+        '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button8.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.Button8.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button8.Location = New System.Drawing.Point(17, 46)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(215, 40)
+        Me.Button8.TabIndex = 109
+        Me.Button8.Text = "ON"
+        Me.Button8.UseVisualStyleBackColor = False
         '
         'cmbx_ScannerType
         '
         Me.cmbx_ScannerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbx_ScannerType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbx_ScannerType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_ScannerType.FormattingEnabled = True
         Me.cmbx_ScannerType.Items.AddRange(New Object() {"RS232 Scanner", "USB Scanner"})
-        Me.cmbx_ScannerType.Location = New System.Drawing.Point(188, 120)
+        Me.cmbx_ScannerType.Location = New System.Drawing.Point(17, 119)
         Me.cmbx_ScannerType.Name = "cmbx_ScannerType"
-        Me.cmbx_ScannerType.Size = New System.Drawing.Size(250, 29)
+        Me.cmbx_ScannerType.Size = New System.Drawing.Size(215, 25)
         Me.cmbx_ScannerType.TabIndex = 106
-        '
-        'chkbx_ScannerBypass
-        '
-        Me.chkbx_ScannerBypass.Appearance = System.Windows.Forms.Appearance.Button
-        Me.chkbx_ScannerBypass.BackColor = System.Drawing.SystemColors.Window
-        Me.chkbx_ScannerBypass.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.chkbx_ScannerBypass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.chkbx_ScannerBypass.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkbx_ScannerBypass.Location = New System.Drawing.Point(188, 172)
-        Me.chkbx_ScannerBypass.Name = "chkbx_ScannerBypass"
-        Me.chkbx_ScannerBypass.Size = New System.Drawing.Size(250, 30)
-        Me.chkbx_ScannerBypass.TabIndex = 107
-        Me.chkbx_ScannerBypass.Text = "ON"
-        Me.chkbx_ScannerBypass.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.chkbx_ScannerBypass.UseVisualStyleBackColor = False
         '
         'dsp_ScannerBypass
         '
-        Me.dsp_ScannerBypass.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ScannerBypass.Location = New System.Drawing.Point(57, 165)
+        Me.dsp_ScannerBypass.AutoSize = True
+        Me.dsp_ScannerBypass.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_ScannerBypass.Location = New System.Drawing.Point(14, 26)
         Me.dsp_ScannerBypass.Name = "dsp_ScannerBypass"
-        Me.dsp_ScannerBypass.Size = New System.Drawing.Size(125, 45)
+        Me.dsp_ScannerBypass.Size = New System.Drawing.Size(105, 17)
         Me.dsp_ScannerBypass.TabIndex = 104
-        Me.dsp_ScannerBypass.Text = "Scanner" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Bypass :"
+        Me.dsp_ScannerBypass.Text = "Scanner Bypass :"
         Me.dsp_ScannerBypass.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtbx_ScannerRawData
         '
         Me.txtbx_ScannerRawData.BackColor = System.Drawing.SystemColors.Control
-        Me.txtbx_ScannerRawData.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ScannerRawData.Location = New System.Drawing.Point(188, 65)
+        Me.txtbx_ScannerRawData.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_ScannerRawData.Location = New System.Drawing.Point(17, 177)
         Me.txtbx_ScannerRawData.Name = "txtbx_ScannerRawData"
         Me.txtbx_ScannerRawData.ReadOnly = True
-        Me.txtbx_ScannerRawData.Size = New System.Drawing.Size(250, 29)
+        Me.txtbx_ScannerRawData.Size = New System.Drawing.Size(215, 25)
         Me.txtbx_ScannerRawData.TabIndex = 2
-        '
-        'dsp_ScannerType
-        '
-        Me.dsp_ScannerType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ScannerType.Location = New System.Drawing.Point(57, 111)
-        Me.dsp_ScannerType.Name = "dsp_ScannerType"
-        Me.dsp_ScannerType.Size = New System.Drawing.Size(125, 45)
-        Me.dsp_ScannerType.TabIndex = 104
-        Me.dsp_ScannerType.Text = "Scanner" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Type :"
-        Me.dsp_ScannerType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_ScannerRawData
         '
-        Me.dsp_ScannerRawData.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ScannerRawData.Location = New System.Drawing.Point(57, 66)
+        Me.dsp_ScannerRawData.AutoSize = True
+        Me.dsp_ScannerRawData.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_ScannerRawData.Location = New System.Drawing.Point(14, 157)
         Me.dsp_ScannerRawData.Name = "dsp_ScannerRawData"
-        Me.dsp_ScannerRawData.Size = New System.Drawing.Size(125, 25)
+        Me.dsp_ScannerRawData.Size = New System.Drawing.Size(70, 17)
         Me.dsp_ScannerRawData.TabIndex = 104
         Me.dsp_ScannerRawData.Text = "Raw Data :"
         Me.dsp_ScannerRawData.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_ScannerType
+        '
+        Me.dsp_ScannerType.AutoSize = True
+        Me.dsp_ScannerType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_ScannerType.Location = New System.Drawing.Point(14, 99)
+        Me.dsp_ScannerType.Name = "dsp_ScannerType"
+        Me.dsp_ScannerType.Size = New System.Drawing.Size(92, 17)
+        Me.dsp_ScannerType.TabIndex = 104
+        Me.dsp_ScannerType.Text = "Scanner Type :"
+        Me.dsp_ScannerType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_Scanner
         '
@@ -654,7 +930,7 @@ Partial Class FormSetting
         Me.dsp_Scanner.Name = "dsp_Scanner"
         Me.dsp_Scanner.Size = New System.Drawing.Size(554, 50)
         Me.dsp_Scanner.TabIndex = 102
-        Me.dsp_Scanner.Text = "Scanner"
+        Me.dsp_Scanner.Text = "General Settings"
         Me.dsp_Scanner.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tabpg_ToolCounter
@@ -1574,19 +1850,19 @@ Partial Class FormSetting
         Me.dgv_MessageLog.AllowUserToAddRows = False
         Me.dgv_MessageLog.AllowUserToDeleteRows = False
         Me.dgv_MessageLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgv_MessageLog.Location = New System.Drawing.Point(86, 148)
         Me.dgv_MessageLog.Name = "dgv_MessageLog"
         Me.dgv_MessageLog.ReadOnly = True
-        Me.dgv_MessageLog.Size = New System.Drawing.Size(1700, 550)
+        Me.dgv_MessageLog.Size = New System.Drawing.Size(1700, 247)
         Me.dgv_MessageLog.TabIndex = 111
         Me.dgv_MessageLog.TabStop = False
         '
@@ -2152,9 +2428,10 @@ Partial Class FormSetting
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1904, 1001)
         Me.Controls.Add(Me.panel_FormControl)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximumSize = New System.Drawing.Size(1920, 1040)
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(1918, 1030)
         Me.Name = "FormSetting"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Settings"
@@ -2165,11 +2442,18 @@ Partial Class FormSetting
         Me.tabctrl_Settings.ResumeLayout(False)
         Me.tabpg_Settings.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
-        Me.panel_JigType.ResumeLayout(False)
-        Me.panel_JigType.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel3.ResumeLayout(False)
+        Me.TabControl1.ResumeLayout(False)
         Me.panel_Scanner.ResumeLayout(False)
-        Me.panel_Scanner.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.tabpg_ToolCounter.ResumeLayout(False)
         Me.panel_ToolCounter.ResumeLayout(False)
         Me.tabpg_BuyOff.ResumeLayout(False)
@@ -2211,15 +2495,12 @@ Partial Class FormSetting
     Friend WithEvents tabpg_ToolCounter As TabPage
     Friend WithEvents tabpg_BuyOff As TabPage
     Friend WithEvents tabpg_Developer As TabPage
-    Friend WithEvents panel_JigType As Panel
     Friend WithEvents dsp_JigType As Label
-    Friend WithEvents dsp_JigTypeCreation As Label
     Friend WithEvents panel_Scanner As Panel
     Friend WithEvents txtbx_ScannerRawData As TextBox
     Friend WithEvents dsp_ScannerType As Label
     Friend WithEvents dsp_ScannerRawData As Label
     Friend WithEvents dsp_Scanner As Label
-    Friend WithEvents chkbx_ScannerBypass As CheckBox
     Friend WithEvents txtbx_JigType As TextBox
     Friend WithEvents btn_JigTypeConfirm As Button
     Friend WithEvents dsp_ScannerBypass As Label
@@ -2342,9 +2623,7 @@ Partial Class FormSetting
     Friend WithEvents timer_Buyoff As Timer
     Friend WithEvents Label5 As Label
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Panel2 As Panel
     Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Button5 As Button
     Friend WithEvents Button4 As Button
@@ -2357,4 +2636,30 @@ Partial Class FormSetting
     Friend WithEvents Label9 As Label
     Friend WithEvents Button7 As Button
     Friend WithEvents Button6 As Button
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Label13 As Label
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents TextBox9 As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents Button8 As Button
+    Friend WithEvents Button9 As Button
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label31 As Label
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents panel_UserLoginBlank As Panel
 End Class

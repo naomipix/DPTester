@@ -1,5 +1,5 @@
 ﻿Public Class FormMessageLog
-    Dim PlaceHolderText As String = " User Category / Message"
+    Dim PlaceHolderText As String = " User Category / Event Logged"
 
     Private Sub FormMessageLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Always Maximize
@@ -9,7 +9,7 @@
         lbl_Version.Text = PublicVariables.AppVersion
 
         ' Load Form Title
-        Me.Text = PublicVariables.ProgramTitle & " - " & "Message Log"
+        Me.Text = PublicVariables.ProgramTitle & " - " & "Event Log"
         lbl_Title.Text = PublicVariables.ProgramTitle
 
         ' Load User Details

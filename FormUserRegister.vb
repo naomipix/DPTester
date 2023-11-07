@@ -47,7 +47,12 @@ Public Class FormUserRegister
         comboSource.Add("0", "-Not Selected-")
 
         ' Get User Category Table
-        Dim dtUserCategory As DataTable = SQL.ReadRecords("SELECT id, description FROM UserCategory")
+        Dim dtUserCategory As New DataTable
+        If LoginUserCategoryName = "DEVELOPER" Or LoginUserCategoryName = "Administrator" Then
+            dtUserCategory = SQL.ReadRecords("SELECT id, description FROM UserCategory")
+        Else
+            dtUserCategory = SQL.ReadRecords("SELECT id, description FROM UserCategory WHERE NOT description='Administrator'")
+        End If
 
         ' Insert Available Record Into Dictionary
         If dtUserCategory.Rows.Count > 0 Then
@@ -83,7 +88,8 @@ Public Class FormUserRegister
             ' Get User Category Table
             Dim CurrentUserID As Integer = PublicVariables.LoginUserID
             Dim UserCategoryID As Integer = DirectCast(cmbx_DelCateory.SelectedItem, KeyValuePair(Of String, String)).Key
-            Dim dtUserCategory As DataTable = SQL.ReadRecords($"SELECT id, user_name FROM UserAccount WHERE user_category_id='{UserCategoryID}' AND NOT id={CurrentUserID}")
+
+            Dim dtUserCategory As DataTable = SQL.ReadRecords($"SELECT id, user_name FROM UserAccount WHERE user_category_id='{UserCategoryID}' AND NOT id='{CurrentUserID}'")
 
             ' Insert Available Record Into Dictionary
             If dtUserCategory.Rows.Count > 0 Then
@@ -490,8 +496,38 @@ Public Class FormUserRegister
         End If
     End Sub
 
-    Private Sub tab_UserReg_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tab_UserReg.SelectedIndexChanged
+    Private Sub txtbox_RegUserName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbox_RegUserName.KeyPress
+        ' Check if the pressed key is a control key (Ctrl, Alt, Shift, etc.)
+        If Char.IsControl(e.KeyChar) Then
+            ' Allow specific control functions (Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+Z, Backspace)
+            If e.KeyChar = ChrW(1) Or e.KeyChar = ChrW(3) Or e.KeyChar = ChrW(22) Or e.KeyChar = ChrW(26) Or e.KeyChar = ChrW(8) Then
 
+                e.Handled = False ' Allow the key press
+            Else
+                e.Handled = True ' Ignore other control keys
+            End If
+        Else
+            ' Allow only alphabetic characters
+            If Not Char.IsLetter(e.KeyChar) Then
+                e.Handled = True ' Ignore non-alphabetic characters
+            End If
+        End If
+    End Sub
+
+    Private Sub txtbox_RegUserName_TextChanged(sender As Object, e As EventArgs) Handles txtbox_RegUserName.TextChanged
+        Dim preCleanCount As Integer = txtbox_RegUserName.TextLength
+        Dim cleanedText As String = ""
+
+        For Each c As Char In txtbox_RegUserName.Text
+            If Char.IsLetter(c) Then
+                cleanedText += c
+            End If
+        Next
+
+        Dim selectionStart As Integer = txtbox_RegUserName.SelectionStart
+        Dim selectionOffset As Integer = preCleanCount - selectionStart
+        txtbox_RegUserName.Text = cleanedText
+        txtbox_RegUserName.SelectionStart = Math.Min(selectionStart, txtbox_RegUserName.TextLength - selectionOffset)
     End Sub
 
 

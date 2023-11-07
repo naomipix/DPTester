@@ -236,7 +236,8 @@ Public Class FormResultSummary
                 Return MsgBox("Data not found in Product Result Table for Particular Serial Number", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 8
                 Return MsgBox("Data not found in Product Result Table for Particular Lot ID", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
-
+            Case 9
+                Return MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
             Case Else
                 Exit Select
         End Select
@@ -398,18 +399,24 @@ Public Class FormResultSummary
             ResultMessage(5)
         Else
             Dim dt As DataTable = GetVisibleColumnsDataTable(dgv_Resultsummary)    'GetVisibleColumnsDataTable(dgv_recipedetails)
-            Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
+            'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
+
+            ' Get Path
+            'Dim dtGetPath As DataTable = SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={11}")
+            Dim Filepath As String = $"{PublicVariables.CSVPathToResultSummary}ResultSummary_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
+
             ' Export With Return
-            Dim ReturnValue As Boolean = ExportDataTableToCsv(dt, Filepath, ";")
+            Dim ReturnValue As Boolean = ExportDataTableToCsv(dt, Filepath, PublicVariables.CSVDelimiterResultSummary)
 
             ' Check Return State
-            If ReturnValue = True Then
+            If ReturnValue = "True" Then
                 ResultMessage(4)
-            Else
+            ElseIf ReturnValue = "Missing" Then
+                ResultMessage(9)
+            ElseIf ReturnValue = "False" Then
                 ResultMessage(5)
             End If
         End If
-
     End Sub
 #End Region
 

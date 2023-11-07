@@ -23,7 +23,7 @@ Partial Class FormMessageLog
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMessageLog))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -36,6 +36,9 @@ Partial Class FormMessageLog
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
         Me.panel_MessageLog = New System.Windows.Forms.Panel()
+        Me.dgv_MessageLog = New System.Windows.Forms.DataGridView()
+        Me.btn_Search = New System.Windows.Forms.Button()
+        Me.btn_Reset = New System.Windows.Forms.Button()
         Me.grpbx_Filter = New System.Windows.Forms.GroupBox()
         Me.txtbx_Search = New System.Windows.Forms.TextBox()
         Me.dtpicker_EndDate = New System.Windows.Forms.DateTimePicker()
@@ -46,15 +49,12 @@ Partial Class FormMessageLog
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btn_Search = New System.Windows.Forms.Button()
-        Me.btn_Reset = New System.Windows.Forms.Button()
-        Me.dgv_MessageLog = New System.Windows.Forms.DataGridView()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
         Me.panel_MessageLog.SuspendLayout()
-        Me.grpbx_Filter.SuspendLayout()
         CType(Me.dgv_MessageLog, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpbx_Filter.SuspendLayout()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -193,6 +193,47 @@ Partial Class FormMessageLog
         Me.panel_MessageLog.Size = New System.Drawing.Size(1880, 808)
         Me.panel_MessageLog.TabIndex = 104
         '
+        'dgv_MessageLog
+        '
+        Me.dgv_MessageLog.AllowUserToAddRows = False
+        Me.dgv_MessageLog.AllowUserToDeleteRows = False
+        Me.dgv_MessageLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle1
+        Me.dgv_MessageLog.Location = New System.Drawing.Point(3, 89)
+        Me.dgv_MessageLog.Name = "dgv_MessageLog"
+        Me.dgv_MessageLog.ReadOnly = True
+        Me.dgv_MessageLog.Size = New System.Drawing.Size(1874, 716)
+        Me.dgv_MessageLog.TabIndex = 32
+        Me.dgv_MessageLog.TabStop = False
+        '
+        'btn_Search
+        '
+        Me.btn_Search.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Search.Location = New System.Drawing.Point(948, 24)
+        Me.btn_Search.Name = "btn_Search"
+        Me.btn_Search.Size = New System.Drawing.Size(100, 45)
+        Me.btn_Search.TabIndex = 31
+        Me.btn_Search.Text = "Search"
+        Me.btn_Search.UseVisualStyleBackColor = True
+        '
+        'btn_Reset
+        '
+        Me.btn_Reset.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Reset.Location = New System.Drawing.Point(832, 24)
+        Me.btn_Reset.Name = "btn_Reset"
+        Me.btn_Reset.Size = New System.Drawing.Size(100, 45)
+        Me.btn_Reset.TabIndex = 30
+        Me.btn_Reset.Text = "Reset"
+        Me.btn_Reset.UseVisualStyleBackColor = True
+        '
         'grpbx_Filter
         '
         Me.grpbx_Filter.Controls.Add(Me.txtbx_Search)
@@ -300,49 +341,8 @@ Partial Class FormMessageLog
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(1904, 46)
         Me.Label1.TabIndex = 101
-        Me.Label1.Text = "Message Log"
+        Me.Label1.Text = "Event Log"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'btn_Search
-        '
-        Me.btn_Search.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Search.Location = New System.Drawing.Point(948, 24)
-        Me.btn_Search.Name = "btn_Search"
-        Me.btn_Search.Size = New System.Drawing.Size(100, 45)
-        Me.btn_Search.TabIndex = 31
-        Me.btn_Search.Text = "Search"
-        Me.btn_Search.UseVisualStyleBackColor = True
-        '
-        'btn_Reset
-        '
-        Me.btn_Reset.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Reset.Location = New System.Drawing.Point(832, 24)
-        Me.btn_Reset.Name = "btn_Reset"
-        Me.btn_Reset.Size = New System.Drawing.Size(100, 45)
-        Me.btn_Reset.TabIndex = 30
-        Me.btn_Reset.Text = "Reset"
-        Me.btn_Reset.UseVisualStyleBackColor = True
-        '
-        'dgv_MessageLog
-        '
-        Me.dgv_MessageLog.AllowUserToAddRows = False
-        Me.dgv_MessageLog.AllowUserToDeleteRows = False
-        Me.dgv_MessageLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgv_MessageLog.Location = New System.Drawing.Point(3, 89)
-        Me.dgv_MessageLog.Name = "dgv_MessageLog"
-        Me.dgv_MessageLog.ReadOnly = True
-        Me.dgv_MessageLog.Size = New System.Drawing.Size(1874, 716)
-        Me.dgv_MessageLog.TabIndex = 32
-        Me.dgv_MessageLog.TabStop = False
         '
         'FormMessageLog
         '
@@ -350,21 +350,22 @@ Partial Class FormMessageLog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1904, 1001)
         Me.Controls.Add(Me.panel_FormControl)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximumSize = New System.Drawing.Size(1920, 1040)
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(1918, 1030)
         Me.Name = "FormMessageLog"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Recipe Management"
+        Me.Text = "Event Log"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_UserCategory.ResumeLayout(False)
         Me.panel_UserCategory.PerformLayout()
         Me.panel_FormControl.ResumeLayout(False)
         Me.panel_MessageLog.ResumeLayout(False)
+        CType(Me.dgv_MessageLog, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpbx_Filter.ResumeLayout(False)
         Me.grpbx_Filter.PerformLayout()
-        CType(Me.dgv_MessageLog, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
