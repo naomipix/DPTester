@@ -496,6 +496,7 @@ Partial Class FormMain
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
         Me.PLC = New System.Windows.Forms.Timer(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.panel_FormControl.SuspendLayout()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
@@ -574,6 +575,7 @@ Partial Class FormMain
         '
         'panel_FormControl
         '
+        Me.panel_FormControl.Controls.Add(Me.Button1)
         Me.panel_FormControl.Controls.Add(Me.picbx_Icon)
         Me.panel_FormControl.Controls.Add(Me.dsp_MessageLog)
         Me.panel_FormControl.Controls.Add(Me.dsp_Setting)
@@ -5809,6 +5811,15 @@ Partial Class FormMain
         '
         Me.PLC.Interval = 500
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(445, 93)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(106, 36)
+        Me.Button1.TabIndex = 103
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -6343,4 +6354,5 @@ Partial Class FormMain
     Friend WithEvents Label1 As Label
     Friend WithEvents txtbx_Operatorlotid As TextBox
     Friend WithEvents PLC As Timer
+    Friend WithEvents Button1 As Button
 End Class
