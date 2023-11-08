@@ -91,9 +91,9 @@ Public Class FormMain
         End If
 
         'PLC Impicit Cyclic Messaging via Ethernet IP
-        'EEIPInitialise()
+        IMEIPInitialise()
 
-        'PLCTimer.Enabled = True
+        PLCTimer.Enabled = True
         'Disable buttons contents
         txtbx_WorkOrderNumber.Enabled = True
         txtbx_LotID.Enabled = True
@@ -145,8 +145,8 @@ Public Class FormMain
         Dim t2 As Task = LoadStatus()
 
         ' Start Activity [TESTING] 
-        Dim test1 As Task = ClassActivity.GetActivityIO()
-        Dim test2 As Task = ClassActivity.UpdateActivityIO()
+        'Dim test1 As Task = ClassActivity.GetActivityIO()
+        'Dim test2 As Task = ClassActivity.UpdateActivityIO()
     End Sub
 
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -156,21 +156,27 @@ Public Class FormMain
             PublicVariables.IsExitPromptShown = False
         End If
         PLCTimer.Enabled = False
-        EEIPClose()
+        IMEIPClose()
     End Sub
 
 
 
     Private Sub PLCTimer_Tick(sender As Object, e As EventArgs) Handles PLCTimer.Tick
-        ' If DateTime.Now.Ticks > OmronEEIP.LastReceivedImplicitMessage.Ticks + (1000 * 10000) Then
-        ' EEIPreconnect()
-        'End If
-        Form1.txtbx_DM370.Text = ReadStringEEIP(10, 10)
-        If ReadDMBoolean(0, 2) = True Then
+        If DateTime.Now.Ticks > OmronEEIP.LastReceivedImplicitMessage.Ticks + (1000 * 10000) Then
+            IMEIPreconnect()
+        End If
+        Form1.txtbx_DM370.Text = IMEIPReadString(10, 10)
+        If IMEIPReadBoolean(0, 2) = True Then
             Form1.lbl_DM350_2.BackColor = Color.Green
         Else
             Form1.lbl_DM350_2.BackColor = Color.Red
         End If
+        FetchPLC_DIn(0)
+        FetchPLC_DOut(10)
+        FetchPLC_Ain(20)
+        FetchPLC_AOut(60)
+
+        EXEIPFetch = OmronEEIP.AssemblyObject.getInstance(111)
     End Sub
 
 
@@ -978,6 +984,7 @@ Public Class FormMain
     Private Async Function LoadStatus() As Task
         Try
             Await InitializeIOStatus()
+
         Catch ex As Exception
             MsgBox(ex.Message & ex.StackTrace)
         End Try
@@ -2096,95 +2103,97 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         Dim dtrecipe As DataTable = SQL.ReadRecords($"SELECT * From RecipeTable WHERE recipe_id ='{Recipe}'")
 
         If dtrecipe.Rows.Count > 0 Then
-            WriteFloatEEIP(30, CType(dtrecipe.Rows(0)("verification_tolerance"), Double))
+            IMEIPWriteFloat(30, CType(dtrecipe.Rows(0)("verification_tolerance"), Double))
 
-            WriteFloatEEIP(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
-            WriteFloatEEIP(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
-            WriteFloatEEIP(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
+            IMEIPWriteFloat(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
+            IMEIPWriteFloat(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
+            IMEIPWriteFloat(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
 
-            WriteFloatEEIP(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
-            WriteFloatEEIP(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
-            WriteFloatEEIP(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
+            IMEIPWriteFloat(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
+            IMEIPWriteFloat(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
+            IMEIPWriteFloat(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
 
-            WriteFloatEEIP(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
-            WriteFloatEEIP(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
+            IMEIPWriteFloat(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
+            IMEIPWriteFloat(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
 
-            WriteFloatEEIP(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
-            WriteFloatEEIP(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
-            WriteFloatEEIP(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
+            IMEIPWriteFloat(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
+            IMEIPWriteFloat(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
+            IMEIPWriteFloat(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
 
-            WriteFloatEEIP(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
+            IMEIPWriteFloat(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
 
-            WriteFloatEEIP(56, CType(dtrecipe.Rows(0)("drain2_back_pressure"), Double))
+            IMEIPWriteFloat(56, CType(dtrecipe.Rows(0)("drain2_back_pressure"), Double))
 
-            WriteFloatEEIP(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
+            IMEIPWriteFloat(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
 
 
             If dtrecipe.Rows(0)("firstflush_circuit") = "Enable" Then
-                WriteIntEEIP(60, 1)
+                IMEIPWriteInt(60, 1)
             Else
-                WriteIntEEIP(60, 0)
+                IMEIPWriteInt(60, 0)
             End If
-            WriteIntEEIP(62, CType(dtrecipe.Rows(0)("firstflush_fill_time"), Integer))
-            WriteIntEEIP(64, CType(dtrecipe.Rows(0)("firstflush_bleed_time"), Integer))
-            WriteIntEEIP(66, CType(dtrecipe.Rows(0)("firstflush_stabilize_time"), Integer))
-            WriteIntEEIP(68, CType(dtrecipe.Rows(0)("firstflush_time"), Integer))
+            IMEIPWriteInt(62, CType(dtrecipe.Rows(0)("firstflush_fill_time"), Integer))
+            IMEIPWriteInt(64, CType(dtrecipe.Rows(0)("firstflush_bleed_time"), Integer))
+            IMEIPWriteInt(66, CType(dtrecipe.Rows(0)("firstflush_stabilize_time"), Integer))
+            IMEIPWriteInt(68, CType(dtrecipe.Rows(0)("firstflush_time"), Integer))
 
             If dtrecipe.Rows(0)("firstdp_circuit") = "Enable" Then
-                WriteIntEEIP(70, 1)
+                IMEIPWriteInt(70, 1)
             Else
-                WriteIntEEIP(70, 0)
+                IMEIPWriteInt(70, 0)
             End If
 
             If dtrecipe.Rows(0)("seconddp_circuit") = "Enable" Then
-                WriteIntEEIP(72, 1)
+                IMEIPWriteInt(72, 1)
             Else
-                WriteIntEEIP(72, 0)
+                IMEIPWriteInt(72, 0)
             End If
-            WriteIntEEIP(74, CType(dtrecipe.Rows(0)("dp_fill_time"), Integer))
-            WriteIntEEIP(76, CType(dtrecipe.Rows(0)("dp_bleed_time"), Integer))
-            WriteIntEEIP(78, CType(dtrecipe.Rows(0)("dp_stabilize_time"), Integer))
-            WriteIntEEIP(80, CType(dtrecipe.Rows(0)("dp_test_time"), Integer))
-            WriteIntEEIP(82, CType(dtrecipe.Rows(0)("dp_testpoints"), Integer))
+            IMEIPWriteInt(74, CType(dtrecipe.Rows(0)("dp_fill_time"), Integer))
+            IMEIPWriteInt(76, CType(dtrecipe.Rows(0)("dp_bleed_time"), Integer))
+            IMEIPWriteInt(78, CType(dtrecipe.Rows(0)("dp_stabilize_time"), Integer))
+            IMEIPWriteInt(80, CType(dtrecipe.Rows(0)("dp_test_time"), Integer))
+            IMEIPWriteInt(82, CType(dtrecipe.Rows(0)("dp_testpoints"), Integer))
 
             If dtrecipe.Rows(0)("secondflush_circuit") = "Enable" Then
-                WriteIntEEIP(84, 1)
+                IMEIPWriteInt(84, 1)
             Else
-                WriteIntEEIP(84, 0)
+                IMEIPWriteInt(84, 0)
             End If
-            WriteIntEEIP(86, CType(dtrecipe.Rows(0)("secondflush_fill_time"), Integer))
-            WriteIntEEIP(88, CType(dtrecipe.Rows(0)("secondflush_bleed_time"), Integer))
+            IMEIPWriteInt(86, CType(dtrecipe.Rows(0)("secondflush_fill_time"), Integer))
+            IMEIPWriteInt(88, CType(dtrecipe.Rows(0)("secondflush_bleed_time"), Integer))
 
-            WriteIntEEIP(90, CType(dtrecipe.Rows(0)("secondflush_stabilize_time"), Integer))
-            WriteIntEEIP(92, CType(dtrecipe.Rows(0)("secondflush_time"), Integer))
+            IMEIPWriteInt(90, CType(dtrecipe.Rows(0)("secondflush_stabilize_time"), Integer))
+            IMEIPWriteInt(92, CType(dtrecipe.Rows(0)("secondflush_time"), Integer))
 
 
             If dtrecipe.Rows(0)("drain1_circuit") = "Enable" Then
-                WriteIntEEIP(94, 1)
+                IMEIPWriteInt(94, 1)
             Else
-                WriteIntEEIP(94, 0)
+                IMEIPWriteInt(94, 0)
             End If
-            WriteIntEEIP(96, CType(dtrecipe.Rows(0)("drain1_time"), Integer))
+            IMEIPWriteInt(96, CType(dtrecipe.Rows(0)("drain1_time"), Integer))
 
             If dtrecipe.Rows(0)("drain2_circuit") = "Enable" Then
-                WriteIntEEIP(98, 1)
+                IMEIPWriteInt(98, 1)
             Else
-                WriteIntEEIP(98, 0)
+                IMEIPWriteInt(98, 0)
             End If
-            WriteIntEEIP(100, CType(dtrecipe.Rows(0)("drain2_time"), Integer))
+            IMEIPWriteInt(100, CType(dtrecipe.Rows(0)("drain2_time"), Integer))
 
 
             If dtrecipe.Rows(0)("drain3_circuit") = "Enable" Then
-                WriteIntEEIP(102, 1)
+                IMEIPWriteInt(102, 1)
             Else
-                WriteIntEEIP(102, 0)
+                IMEIPWriteInt(102, 0)
             End If
-            WriteIntEEIP(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
+            IMEIPWriteInt(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
 
         End If
 
 
     End Sub
+
+
 
 
 #End Region

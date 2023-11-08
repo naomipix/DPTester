@@ -59,7 +59,7 @@ Public Class Form1
 
 
     Private Sub Form1_Closed(sender As Object, e As EventArgs) Handles Me.Closed
-        EEIPClose()
+        'IMEIPClose()
         Timer1.Enabled = False
     End Sub
 
@@ -74,7 +74,7 @@ Public Class Form1
 
     Private Sub btn_EEIPread_Click(sender As Object, e As EventArgs) Handles btn_EEIPread.Click
 
-        Dim dm300() As Boolean = ReadDMBooleanArr(0)
+        Dim dm300() As Boolean = IMEIPReadBooleanArr(0)
 
         If dm300(CType(txtbx_EEIPout.Text, Integer)) = True Then
             lbl_EEIP_out.BackColor = Color.Green
@@ -82,7 +82,7 @@ Public Class Form1
             lbl_EEIP_out.BackColor = SystemColors.Control
         End If
 
-        If ReadDMBoolean(0, 4) = True Then
+        If IMEIPReadBoolean(0, 4) = True Then
             lbl_EEIP_in.BackColor = Color.Green
         Else
             lbl_EEIP_in.BackColor = SystemColors.Control
@@ -92,40 +92,40 @@ Public Class Form1
     End Sub
 
     Private Sub btn_EEIPStrread_Click(sender As Object, e As EventArgs) Handles btn_EEIPStrread.Click
-        txtbx_EEIPstrin.Text = ReadStringEEIP(4, 10)
+        txtbx_EEIPstrin.Text = IMEIPReadString(4, 10)
     End Sub
 
 
     Private Sub btn_EEIPstrWrite_Click(sender As Object, e As EventArgs) Handles btn_EEIPstrWrite.Click
-        WriteStringEEIP(4, txtbx_EEIPstrout.Text, 10)
+        IMEIPWriteString(4, txtbx_EEIPstrout.Text, 10)
 
     End Sub
 
     Private Sub btn_EEIPFloatwrite_Click(sender As Object, e As EventArgs) Handles btn_EEIPFloatwrite.Click
-        WriteFloatEEIP(2, CType(txtbx_Floatwrite.Text, Decimal))
-        txtbx_Floatread.Text = ReadFloatEEIP(2).ToString
+        IMEIPWriteFloat(2, CType(txtbx_Floatwrite.Text, Decimal))
+        txtbx_Floatread.Text = IMEIPReadFloat(2).ToString
     End Sub
 
     Private Sub btn_EEIPIntWrite_Click(sender As Object, e As EventArgs) Handles btn_EEIPIntWrite.Click
-        txtbx_EEIPIntRead.Text = ReadIntEEIP(9).ToString
-        WriteIntEEIP(9, CType(txtbx_EEIPIntWrite.Text, Integer))
-        txtbx_DintRead.Text = ReadDIntEEIP(15).ToString
-        WriteDIntEEIP(10, CType(txtbx_DintWrite.Text, Int32))
+        txtbx_EEIPIntRead.Text = IMEIPReadInt(9).ToString
+        IMEIPWriteInt(9, CType(txtbx_EEIPIntWrite.Text, Integer))
+        txtbx_DintRead.Text = IMEIPReadDInt(15).ToString
+        IMEIPWriteDInt(10, CType(txtbx_DintWrite.Text, Int32))
 
     End Sub
 
 
 
     Private Sub btn_DM300_on_Click(sender As Object, e As EventArgs) Handles btn_DM300_on.Click
-        WriteDMBoolean(0, 1, True)
-        WriteDMBoolean(0, 6, True)
+        IMEIPWriteBoolean(0, 1, True)
+        IMEIPWriteBoolean(0, 6, True)
 
     End Sub
 
     Private Sub btn_DM300_off_Click(sender As Object, e As EventArgs) Handles btn_DM300_off.Click
-        WriteDMBoolean(0, 1, False)
-        WriteDMBoolean(0, 2, True)
-        If ReadDMBoolean(0, 2) = True Then
+        IMEIPWriteBoolean(0, 1, False)
+        IMEIPWriteBoolean(0, 2, True)
+        If IMEIPReadBoolean(0, 2) = True Then
             lbl_DM350_2.BackColor = Color.Green
         Else
             lbl_DM350_2.BackColor = Color.Red

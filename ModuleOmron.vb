@@ -4,6 +4,17 @@ Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
     Public OmronPLC As New PoohFinsETN
     Public OmronEEIP As New EEIPClient
+    Public DIn(9)() As Boolean
+    Public DOut(9)() As Boolean
+    Public AIn(20) As Decimal
+    Public AOut(10) As Decimal
+    Public Alarm(9)() As Boolean
+    Public Warning(9)() As Boolean
+    Public EXEIPFetch As Byte()
+    Public EXEIPPut(498) As Byte
+
+
+#Region "FINS protocol"
     Public Sub FINSInitialise()
         OmronPLC.PLC_IPAddress = "192.168.0.1"
         OmronPLC.PLC_NodeNo = "1"
@@ -181,6 +192,11 @@ Module ModuleOmron
     End Function
 
 
+
+#End Region
+
+
+#Region "General Conversions"
     Public Function BinToHex(BinNum As String) As String
         Dim BinLen As Integer, i As Integer
         Dim HexNum As Object, strHexNum As String
@@ -256,6 +272,8 @@ Module ModuleOmron
     End Function
 
 
+#End Region
+
     '
     '
     '
@@ -264,15 +282,15 @@ Module ModuleOmron
     '
     '
     '
-#Region "EEIP Module Data Conversion"
+#Region "EEIP Module Data Conversion-Implicit Messaging"
     'For EEIP Module Data
 
-    Public Sub EEIPInitialise()
+    Public Sub IMEIPInitialise()
         Try
             OmronEEIP.RegisterSession("192.168.0.1", 44818)
 
             OmronEEIP.O_T_InstanceID = &H64             ' //Instance ID Of the Output Assembly
-            OmronEEIP.O_T_Length = 216              '// The Method "Detect_O_T_Length" detect the Length Using an UCMM Message
+            OmronEEIP.O_T_Length = 212              '// The Method "Detect_O_T_Length" detect the Length Using an UCMM Message
             OmronEEIP.O_T_RealTimeFormat = EEIP.RealTimeFormat.Header32Bit  '//Header Format
             OmronEEIP.O_T_OwnerRedundant = False
             OmronEEIP.O_T_Priority = EEIP.Priority.Scheduled
@@ -282,7 +300,7 @@ Module ModuleOmron
 
             '//Parameters from Target -> Originator
             OmronEEIP.T_O_InstanceID = &H65
-            OmronEEIP.T_O_Length = 240
+            OmronEEIP.T_O_Length = 200
             OmronEEIP.T_O_RealTimeFormat = EEIP.RealTimeFormat.Modeless
             OmronEEIP.T_O_OwnerRedundant = False
             OmronEEIP.T_O_Priority = EEIP.Priority.Scheduled
@@ -298,7 +316,7 @@ Module ModuleOmron
 
     End Sub
 
-    Public Sub EEIPClose()
+    Public Sub IMEIPClose()
         Try
             OmronEEIP.ForwardClose()
             OmronEEIP.UnRegisterSession()
@@ -307,11 +325,11 @@ Module ModuleOmron
         End Try
     End Sub
 
-    Public Sub EEIPreconnect()
+    Public Sub IMEIPreconnect()
         Try
             OmronEEIP.ForwardClose()
             OmronEEIP.UnRegisterSession()
-            EEIPInitialise()
+            IMEIPInitialise()
 
         Catch ex As Exception
             MsgBox(ex.Message & ex.StackTrace)
@@ -320,7 +338,9 @@ Module ModuleOmron
 
 
 
-    Public Function ReadDMBoolean(offset As Integer, bit As Integer) As Boolean
+    Public Function IMEIPReadBoolean(offset As Integer, bit As Integer) As Boolean
+
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim Value(1) As Byte
         Dim result As Boolean
         Value(0) = OmronEEIP.T_O_IOData(offset * 2)
@@ -329,6 +349,10 @@ Module ModuleOmron
             For i As Integer = 0 To bit
                 result = Value(0) Mod 2
                 Value(0) = Value(0) / 2
+                If result = True And Value(0) > 2 Then
+                    Value(0) -= 1
+                End If
+
             Next
             Return result
         Else
@@ -336,31 +360,54 @@ Module ModuleOmron
             For i As Integer = 0 To bit
                 result = Value(1) Mod 2
                 Value(1) = Value(1) / 2
+                If result = True And Value(1) > 2 Then
+                    Value(1) -= 1
+                End If
             Next
             Return result
         End If
         Return 0
     End Function
 
-    Public Function ReadDMBooleanArr(Offset As Integer) As Boolean()
+    Public Function IMEIPReadBooleanArr(Offset As Integer) As Boolean()
+        '16 BIT WORD TO BOOLEAN(16)
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim Value(1) As Byte
         Dim result(15) As Boolean
+        Dim Binary As New Text.StringBuilder
         Value(0) = OmronEEIP.T_O_IOData(Offset * 2)
         Value(1) = OmronEEIP.T_O_IOData((Offset * 2) + 1)
+        Binary.Append(DecToBin(Value(1)))
+        Binary.Append(DecToBin(Value(0)))
 
-        For i As Integer = 0 To 15
-            If i < 8 Then
-                result(i) = Value(0) Mod 2
-                Value(0) = Value(0) / 2
+        For i As Integer = 0 To Binary.ToString.Length - 1
+            If Binary.ToString.Substring(Binary.ToString.Length - 1 - i, 1) = "1" Then
+                result(i) = True
             Else
-                result(i) = Value(1) Mod 2
-                Value(1) = Value(1) / 2
+                result(i) = False
             End If
+
+            'For i As Integer = 0 To 15
+            '    If i < 8 Then
+            '        result(i) = Value(0) Mod 2
+            '        Value(0) = (Value(0) / 2)
+            '        If result(i) = True And Value(0) > 2 Then
+            '            Value(0) -= 1
+            '        End If
+
+            '    Else
+            '        result(i) = Value(1) Mod 2
+            '        Value(1) = (Value(1) / 2)
+            '        If result(i) = True And Value(1) > 2 Then
+            '            Value(1) -= 1
+            '        End If
+            '    End If
         Next
         Return result
     End Function
 
-    Public Function WriteDMBoolean(Offset As Integer, bit As Integer, state As Boolean) As Boolean
+    Public Function IMEIPWriteBoolean(Offset As Integer, bit As Integer, state As Boolean) As Boolean
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim Value(1) As Byte
         Dim result As Integer
         Dim newVal As Byte()
@@ -386,7 +433,8 @@ Module ModuleOmron
 
 
 
-    Public Function ReadStringEEIP(offset As Integer, length As Integer) As String
+    Public Function IMEIPReadString(offset As Integer, length As Integer) As String
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim text As New Text.StringBuilder
         Dim value(length - 1) As Byte
         For i As Integer = 0 To length - 1
@@ -397,8 +445,8 @@ Module ModuleOmron
     End Function
 
 
-    Public Function WriteStringEEIP(offset As Integer, str As String, length As Integer) As Boolean
-
+    Public Function IMEIPWriteString(offset As Integer, str As String, length As Integer) As Boolean
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim value(length - 1) As Byte
         For i As Integer = 0 To str.Length - 1
             value(i) = Convert.ToByte(str.Chars(i))
@@ -410,7 +458,8 @@ Module ModuleOmron
     End Function
 
 
-    Public Function WriteFloatEEIP(offset As Integer, real As Double) As Boolean
+    Public Function IMEIPWriteFloat(offset As Integer, real As Double) As Boolean
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim sign_value As Integer
         Dim fraction As Decimal
         Dim Absreal As Double = Math.Abs(real)
@@ -499,7 +548,8 @@ Module ModuleOmron
         Return True
     End Function
 
-    Public Function ReadFloatEEIP(offset As Integer) As Decimal
+    Public Function IMEIPReadFloat(offset As Integer) As Decimal
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim hexchar As New Text.StringBuilder
         Dim firstpart As String
         Dim secondpart As String
@@ -534,15 +584,17 @@ Module ModuleOmron
         Return (Math.Round(DecimalBoolStringtoDecimal(boolstring.ToString), 2)).ToString
     End Function
 
-    Public Function WriteIntEEIP(offset As Integer, Value As Integer) As Boolean
+    Public Function IMEIPWriteInt(offset As Integer, Value As Integer) As Boolean
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim Val As Byte() = BitConverter.GetBytes(Value)
 
         OmronEEIP.O_T_IOData(offset * 2) = Val(0)
         OmronEEIP.O_T_IOData((offset * 2) + 1) = Val(1)
-
+        Return True
     End Function
 
-    Public Function ReadIntEEIP(offset As Integer) As Integer
+    Public Function IMEIPReadInt(offset As Integer) As Integer
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim Val(1) As Byte
         Val(0) = OmronEEIP.T_O_IOData(offset * 2)
         Val(1) = OmronEEIP.T_O_IOData((offset * 2) + 1)
@@ -552,15 +604,19 @@ Module ModuleOmron
     End Function
 
 
-    Public Function WriteDIntEEIP(offset As Integer, Value As Int32) As Boolean
+
+    Public Function IMEIPWriteDInt(offset As Integer, Value As Int32) As Boolean
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim Val As Byte() = BitConverter.GetBytes(Value)
 
         For i As Integer = 0 To 3
             OmronEEIP.O_T_IOData((offset * 2) + i) = Val(i)
         Next
+        Return True
     End Function
 
-    Public Function ReadDIntEEIP(offset As Integer) As Int32
+    Public Function IMEIPReadDInt(offset As Integer) As Int32
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim Val(3) As Byte
 
         For i As Integer = 0 To 3
@@ -575,6 +631,398 @@ Module ModuleOmron
 
 
 #End Region
+
+
+#Region "EEIP Module Data Conversion-Explicit Messaging"
+    'For EEIP Module Data
+
+    Public Sub EXEIPInitialise()
+        Try
+            OmronEEIP.RegisterSession("192.168.0.1", 44818)
+        Catch ex As Exception
+            MsgBox(ex.Message & ex.StackTrace)
+        End Try
+
+    End Sub
+
+    Public Sub EXEIPClose()
+        Try
+
+            OmronEEIP.UnRegisterSession()
+        Catch ex As Exception
+            MsgBox(ex.Message & ex.StackTrace)
+        End Try
+    End Sub
+
+    Public Sub EXEIPreconnect()
+        Try
+
+            OmronEEIP.UnRegisterSession()
+            EXEIPInitialise()
+
+        Catch ex As Exception
+            MsgBox(ex.Message & ex.StackTrace)
+        End Try
+    End Sub
+
+
+
+    Public Function EXEIPReadBoolean(offset As Integer, bit As Integer) As Boolean
+
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+        Dim Value(1) As Byte
+        Dim result As Boolean
+        Value(0) = EXEIPFetch(offset * 2)
+        Value(1) = EXEIPFetch((offset * 2) + 1)
+        If bit < 8 Then
+            For i As Integer = 0 To bit
+                result = Value(0) Mod 2
+                Value(0) = Value(0) / 2
+            Next
+            Return result
+        Else
+            bit = bit - 8
+            For i As Integer = 0 To bit
+                result = Value(1) Mod 2
+                Value(1) = Value(1) / 2
+            Next
+            Return result
+        End If
+        Return 0
+    End Function
+
+    Public Function EXEIPReadBooleanArr(Offset As Integer) As Boolean()
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+        Dim Value(1) As Byte
+        Dim result(15) As Boolean
+        Value(0) = EXEIPFetch(Offset * 2)
+        Value(1) = EXEIPFetch((Offset * 2) + 1)
+
+        For i As Integer = 0 To 15
+            If i < 8 Then
+                result(i) = Value(0) Mod 2
+                Value(0) = Value(0) / 2
+            Else
+                result(i) = Value(1) Mod 2
+                Value(1) = Value(1) / 2
+            End If
+        Next
+        Return result
+    End Function
+
+    Public Function EXEIPWriteBoolean(Offset As Integer, bit As Integer, state As Boolean) As Boolean
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+        Dim Value(1) As Byte
+        Dim result As Integer
+        Dim newVal As Byte()
+
+
+        Value(0) = EXEIPPut(Offset * 2)
+        Value(1) = EXEIPPut((Offset * 2) + 1)
+        result = BitConverter.ToInt16(Value, 0)
+
+        If state = True Then
+            result = result + (2 ^ bit)
+        Else
+            result = result - (2 ^ bit)
+        End If
+
+        newVal = BitConverter.GetBytes(result)
+
+        EXEIPPut(Offset * 2) = newVal(0)
+        EXEIPPut((Offset * 2) + 1) = newVal(1)
+
+        Return True
+    End Function
+
+
+
+    Public Function EXEIPReadString(offset As Integer, length As Integer) As String
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+        Dim text As New Text.StringBuilder
+        Dim value(length - 1) As Byte
+        For i As Integer = 0 To length - 1
+            value(i) = EXEIPFetch((offset * 2) + i)
+            text.Append(Convert.ToChar(value(i)))
+        Next
+        Return text.ToString
+    End Function
+
+
+    Public Function EXEIPWriteString(offset As Integer, str As String, length As Integer) As Boolean
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+
+        Dim value(length - 1) As Byte
+        For i As Integer = 0 To str.Length - 1
+            value(i) = Convert.ToByte(str.Chars(i))
+        Next
+        For j As Integer = 0 To length - 1
+            EXEIPPut((offset * 2) + j) = value(j)
+        Next
+        Return True
+    End Function
+
+
+    Public Function EXEIPWriteFloat(offset As Integer, real As Double) As Boolean
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+        Dim sign_value As Integer
+        Dim fraction As Decimal
+        Dim Absreal As Double = Math.Abs(real)
+        Dim j As Integer = 0
+        Dim exponent As Integer = 0
+        Dim fractionpart As New Text.StringBuilder
+        Dim fractionfinal As String = ""
+        Dim Binarypart As New Text.StringBuilder
+        Dim hexpart As New Text.StringBuilder
+        Dim hexstr As String
+        Dim val(3) As Byte
+
+        ' Need to convert the decimal value into IEEE 754 form "0 10001000 10000000100101100000000"  bit 0 indicate sign, bit 1-8 indicate exponent, bit 9-31 indicate Mantessia
+        'Finding the Sign Bit and add to binary text
+        If real >= 0 Then
+            sign_value = 0
+            Binarypart.Append("0")
+        Else
+            sign_value = 1
+            Binarypart.Append("1")
+        End If
+
+        'To find the exponent divide the number starting with 2 till we get value greater than 1 and less than 2
+        If Absreal > 2 Then
+            While Absreal > 2
+                Absreal = Absreal / 2
+                exponent = exponent + 1
+            End While
+
+        Else
+            While Absreal < 1
+                Absreal = Absreal * 2
+                exponent = exponent - 1
+            End While
+        End If
+        ' To Convert Signed exponent into unsigned bin
+        If exponent >= -127 And exponent <= 127 Then
+            exponent = 127 + exponent
+        End If
+        'Add binary of exponent to the binary text
+        Binarypart.Append(DecToBin(exponent, 8))
+
+        'Find the Value of Mantessa Part
+        If Absreal > 1 Then
+            fraction = Absreal - 1
+        Else
+            fraction = Absreal
+        End If
+
+        If fraction < 1 Then
+            While fraction <> 0.0 And j < 23
+                fraction = fraction * 2
+                If fraction >= 1 Then
+                    fractionpart.Append("1")
+                    fraction = fraction - 1
+                Else
+                    fractionpart.Append("0")
+                End If
+                j = j + 1
+            End While
+        End If
+        'If the Mantessa part length is less than 23, add zero to the right
+        If (fractionpart.ToString).Length <= 23 Then
+            fractionfinal = fractionpart.ToString.PadRight(23, "0"c)
+        End If
+
+        ' Add binary mantessa to binary text
+        Binarypart.Append(fractionfinal)
+
+        If Binarypart.ToString.Length = 32 Then
+            hexpart.Append(BinToHex(Binarypart.ToString))
+        End If
+        hexpart.Insert(0, hexpart.ToString.Substring(4, 4))
+        hexstr = hexpart.ToString.Remove(8, 4)
+
+        For k As Integer = 0 To 3
+            val(k) = HextoDec(hexstr.Substring(k * 2, 2))
+        Next
+        For l As Integer = 0 To 3
+            If l Mod 2 = 0 Then
+                EXEIPPut((offset * 2) + l) = val(l + 1)
+            Else
+                EXEIPPut((offset * 2) + l) = val(l - 1)
+            End If
+        Next
+        Return True
+    End Function
+
+    Public Function EXEIPReadFloat(offset As Integer) As Decimal
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+        Dim hexchar As New Text.StringBuilder
+        Dim firstpart As String
+        Dim secondpart As String
+        Dim modhex As String
+        Dim boolstring As New Text.StringBuilder
+        Dim hextoint(7) As Integer
+        Dim Value(3) As Byte
+
+        For i As Integer = 0 To 3
+            If i Mod 2 = 0 Then
+                Value(i) = EXEIPFetch((offset * 2) + i + 1)
+            Else
+                Value(i) = EXEIPFetch((offset * 2) + i - 1)
+            End If
+            hexchar.Append(Value(i).ToString("X2"))
+        Next
+
+        'The String has to be 2 words, we need to swap the words before processing
+        firstpart = hexchar.ToString.Substring(0, 4)
+        secondpart = hexchar.ToString.Substring(4, 4)
+        modhex = String.Concat(secondpart, firstpart)
+
+        'Convert the hex char into Decimal equivalent
+        For i As Integer = 0 To modhex.Length - 1
+            hextoint(i) = Convert.ToInt32(modhex.Substring(i, 1), 16)
+        Next
+
+        'Convert the Decimal equivalent into Boolean String
+        For j As Integer = 0 To hexchar.Length - 1
+            boolstring.Append(Convert.ToString(hextoint(j), 2).PadLeft(4, "0"c))
+        Next
+        Return (Math.Round(DecimalBoolStringtoDecimal(boolstring.ToString), 2)).ToString
+    End Function
+
+    Public Function EXEIPWriteInt(offset As Integer, Value As Integer) As Boolean
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+        Dim Val As Byte() = BitConverter.GetBytes(Value)
+
+        EXEIPPut(offset * 2) = Val(0)
+        EXEIPPut((offset * 2) + 1) = Val(1)
+        Return True
+    End Function
+
+    Public Function EXEIPReadInt(offset As Integer) As Integer
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+        Dim Val(1) As Byte
+        Val(0) = EXEIPFetch(offset * 2)
+        Val(1) = EXEIPFetch((offset * 2) + 1)
+
+        Return BitConverter.ToInt16(Val, 0)
+
+    End Function
+
+
+    Public Function EXEIPWriteDInt(offset As Integer, Value As Int32) As Boolean
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+        Dim Val As Byte() = BitConverter.GetBytes(Value)
+
+        For i As Integer = 0 To 3
+            EXEIPPut((offset * 2) + i) = Val(i)
+        Next
+        Return True
+    End Function
+
+    Public Function EXEIPReadDInt(offset As Integer) As Int32
+        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
+        Dim Val(3) As Byte
+
+        For i As Integer = 0 To 3
+            Val(i) = EXEIPFetch((offset * 2) + i)
+        Next
+        Return BitConverter.ToInt32(Val, 0)
+    End Function
+
+
+
+
+
+
+#End Region
+
+
+
+
+#Region "IO Status Fetch"
+    Public Function FetchPLC_DIn(start As Integer) As Boolean
+
+        For i As Integer = 0 To DIn.Length - 1
+            DIn(i) = IMEIPReadBooleanArr(start + i)
+        Next
+
+        For i As Integer = 0 To 13
+            FormMain.dgv_DigitalInput.Rows(i).Cells("value").Value = DIn(0)(i)
+        Next
+
+        For i As Integer = 14 To 29
+            FormMain.dgv_DigitalInput.Rows(i).Cells("value").Value = DIn(1)(i - 14)
+        Next
+
+
+        Return True
+    End Function
+
+    Public Function FetchPLC_DOut(start As Integer) As Boolean
+
+        For i As Integer = 0 To DOut.Length - 1
+            DOut(i) = IMEIPReadBooleanArr(start + i)
+        Next
+        For i As Integer = 0 To 9
+            FormMain.dgv_DigitalOutput.Rows(i).Cells("value").Value = DOut(0)(i)
+        Next
+
+        For i As Integer = 10 To 25
+            FormMain.dgv_DigitalOutput.Rows(i).Cells("value").Value = DOut(1)(i - 10)
+        Next
+
+        For i As Integer = 26 To 41
+            FormMain.dgv_DigitalOutput.Rows(i).Cells("value").Value = DOut(2)(i - 26)
+        Next
+
+        Return True
+    End Function
+
+    Public Function FetchPLC_Ain(start As Integer) As Boolean
+
+        For i As Integer = 0 To AIn.Length - 1
+            AIn(i) = IMEIPReadFloat(start + i)
+        Next
+
+        Return True
+    End Function
+
+    Public Function FetchPLC_AOut(start As Integer) As Boolean
+
+        For i As Integer = 0 To AOut.Length - 1
+            AOut(i) = IMEIPReadFloat(start + i)
+        Next
+
+        Return True
+    End Function
+
+
+
+
+
+#End Region
+
+
+#Region "Alarm and Warnings Fetch"
+    Public Function FetchAlarm(start As Integer) As Boolean
+
+        For i As Integer = 0 To Alarm.Length - 1
+            Alarm(i) = IMEIPReadBooleanArr(start + i)
+        Next
+
+        Return True
+    End Function
+
+    Public Function FetchWarning(start As Integer) As Boolean
+
+        For i As Integer = 0 To Warning.Length - 1
+            Warning(i) = IMEIPReadBooleanArr(start + i)
+        Next
+
+        Return True
+    End Function
+#End Region
+
 
 End Module
 
