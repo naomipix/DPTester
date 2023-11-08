@@ -1,10 +1,16 @@
 ﻿Imports System.Data.SqlClient
 Imports System.IO
+Imports System.Net.NetworkInformation
 Imports System.Reflection
+Imports System.Security.Cryptography
+Imports System.Text
 
 Module PublicVariables
     ' Version
     Public AppVersion As String = "Ver. " & "1.0.0.1"
+
+    ' License Status
+    Public LicenseType As String = ""
 
     ' Retained Memory - Operation Mode
     Public OperationMode As String = ""
@@ -591,3 +597,343 @@ Module CustomButtonModule
         End If
     End Sub
 End Module
+
+Namespace LicensingModule
+    Module LicensingModule
+        ' File Names
+        Dim LicFileName As String = "PixelLicense.key"
+        Dim LicTrialFileName As String = "pxdptst"
+        Dim LicReqFileName As String = "PixelLicenseRequest.txt"
+
+        ' MessageBox Messages
+        Dim LicMsgPathError As String = "PATH Error. Application Will Now Exit."
+        Dim LicMsgGenError As String = "Unable To Generate License Request File."
+        Dim LicMsgGenerateLRF As String = "Generate License Request File?"
+        Dim LicMsgActivateTrial As String = "Activate 30-Day Trial License?"
+        Dim LicMsgGenerateLRFSuccess As String = "Generate Success."
+        Dim LicMsgDeclined As String = "Application Will Now Exit."
+        Dim LicMsgTrialExpired As String = "Trial License Expired!"
+        Dim LicMsgTrialExpiring As String = "Trial License Expiring In "
+        Dim LicMsgTrialRemain As String = "Trial Remaining: "
+
+        ' License Encryption Keys
+        Dim ENC_key As String = "706978656C6175746F6D6174696F6E20"  ' [pixelautomation ]
+        Dim ENC_IV As String = "706978656C202020"                   ' [pixel   ]
+
+        ' TEMP Path
+        Dim tempPath As String = Environment.GetEnvironmentVariable("TEMP")
+
+        ' File Path
+        Dim PathToLicenseFolder As String = $"{Application.StartupPath()}\License"
+        Dim PathToLicenseFile As String = $"{Application.StartupPath()}\License\{LicFileName}"
+        Dim PathToTrialFile As String = $"{tempPath}\{LicTrialFileName}"
+        Dim PathToLicReqFile As String = $"{Application.StartupPath()}\License\{LicReqFileName}"
+
+        ' Trial License
+        Dim dtTrialExpiring As New DateTime
+        Dim DayCountGiven As Integer = 30
+        Dim DayLeftTemp As Integer = 0
+        Public WithEvents trialTimer As New Timer()
+
+        Private Sub trialTimer_Tick(sender As Object, e As EventArgs) Handles trialTimer.Tick
+            ' Code to execute on each tick of the timer
+            Dim DayRemaining As Integer = (dtTrialExpiring - DateTime.Now).TotalDays
+            Dim vStr As String = ""
+
+            If DayRemaining < 0 Then
+                DayRemaining = 0
+            ElseIf DayRemaining > 1 Then
+                vStr = "s"
+            End If
+
+            With FormMain.dsp_LicenseStatus
+                .Text = $"{LicMsgTrialRemain}{DayRemaining} Day{vStr}"
+                .BackColor = SystemColors.Info
+                .Visible = True
+            End With
+
+            If DayLeftTemp <> DayRemaining Then
+                MsgBox($"{LicMsgTrialExpiring}{DayRemaining} Day{vStr}", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                Application.Exit()
+            End If
+
+            If DayRemaining <= 0 Then
+                MsgBox(LicMsgTrialExpired, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                Application.Exit()
+            End If
+        End Sub
+
+        Public Sub trialTimerStart()
+            dtTrialExpiring = DateTime.Now.AddDays(DayCountGiven)
+            DayLeftTemp = (dtTrialExpiring - DateTime.Now).TotalDays
+            trialTimer.Enabled = True
+        End Sub
+
+        Public Function CheckLic() As String
+            Dim PathExist As Boolean = False
+            Dim LicExist As Boolean = False
+            Dim LicValid As Boolean = False
+            Dim TrialExist As Boolean = False
+            Dim TrialValid As Boolean = False
+            Dim TrialExpired As Boolean = False
+
+            ' Check Path Exists
+            If Directory.Exists(PathToLicenseFolder) Then
+                PathExist = True
+            End If
+
+            ' Check License Exists
+            If File.Exists(PathToLicenseFile) Then
+                LicExist = True
+            End If
+
+            ' Check Trial License Exists
+            If File.Exists(PathToTrialFile) Then
+                TrialExist = True
+            End If
+
+            ' Generate Path
+            If PathExist = False Then
+                PathExist = CreateLicPath()
+            End If
+
+            ' Recheck Path
+            If PathExist Then
+                ' Check License Validity
+                If LicExist = True Then
+                    Try
+                        ' Read From Text File
+                        Using reader As New StreamReader(PathToLicenseFile)
+                            ' Read First Line
+                            Dim line As String = reader.ReadLine()
+
+                            ' Decrypt Line
+                            Dim lineDecrypted As String = LicDecrypt(line.Trim)
+
+                            ' Parse To Array
+                            Dim delimiter As Char = ";"c
+                            Dim stringArray() As String = lineDecrypted.Split(delimiter)
+
+                            ' Get Addresses
+                            Dim addrList As New List(Of String)
+                            For Each addr As NetworkInterface In NetworkInterface.GetAllNetworkInterfaces()
+                                addrList.Add(addr.GetPhysicalAddress.ToString)
+                            Next
+
+                            ' Match License Info
+                            Dim LicensedString As String = "LICENSEDBYPIXELAUTOMATION"
+                            For i As Integer = 0 To stringArray.Length - 1
+                                If stringArray(i).Length = 12 + LicensedString.Length Then
+                                    If stringArray(i).Substring(12) = LicensedString Then
+                                        Dim CheckAddr As String = stringArray(i).Substring(0, 12)
+
+                                        For Each item In addrList
+                                            If item = CheckAddr Then
+                                                LicValid = True
+                                                DeleteLicTrial()
+                                                Return "LICENSED"
+                                            End If
+                                        Next
+                                    End If
+                                End If
+                            Next
+                        End Using
+                    Catch ex As Exception
+                    End Try
+                End If
+
+                ' Continue On Invalid License
+                If LicValid = False Then
+                    If TrialExist = True Then
+                        ' Read From Text File
+                        Try
+                            Using reader As New StreamReader(PathToTrialFile)
+                                ' Read First Line
+                                Dim line As String = reader.ReadLine()
+
+                                ' Decrypt Line
+                                Dim lineDecrypted As String = LicDecrypt(line.Trim)
+
+                                ' Parse To DateTime & Added Defined DayCountGiven
+                                dtTrialExpiring = DateTime.ParseExact(lineDecrypted, "yyyyMMdd", Nothing).AddDays(DayCountGiven)
+                            End Using
+                        Catch ex As Exception
+                        End Try
+
+                        ' Check Trial Activation Expiry
+                        If Not DateTime.Now > dtTrialExpiring Then
+                            TrialValid = True
+                            trialTimerStart()
+                            Return "TRIAL"
+                        Else
+                            TrialExpired = True
+                        End If
+                    End If
+
+                    ' Prompt To Ask For Generate License Request File / Trial License
+                    If TrialValid = False Then
+                        If MsgBox(LicMsgGenerateLRF, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNoCancel, "Information") = MsgBoxResult.Yes Then
+                            If CreateLicReqFile() = True Then
+                                MsgBox(LicMsgGenerateLRFSuccess, MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
+                                Process.Start("explorer.exe", PathToLicenseFolder)
+                                If TrialExpired = False Then
+                                    If MsgBox(LicMsgActivateTrial, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNoCancel, "Information") = MsgBoxResult.Yes Then
+                                        If CreateLicTrial() = True Then
+                                            TrialValid = True
+                                            trialTimerStart()
+                                            Return "TRIAL"
+                                        End If
+                                    Else
+                                        MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                                        Application.Exit()
+                                    End If
+                                Else
+                                    MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                                    Application.Exit()
+                                End If
+                            Else
+                                MsgBox(LicMsgGenError, MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "License - License Request File Error")
+                                MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                                Application.Exit()
+                            End If
+                        Else
+                            MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                            Application.Exit()
+                        End If
+                    End If
+                End If
+            Else
+                MsgBox(LicMsgPathError, MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "License - Application PATH Error")
+                Application.Exit()
+            End If
+
+            ' Prevent Bypass
+            If TrialValid = False And LicValid = False Then
+                MsgBox("lic info missing", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, "Information")
+                Application.Exit()
+            End If
+
+            Return "END"
+        End Function
+
+        Public Function CreateLicPath()
+            ' Create Path
+            Directory.CreateDirectory(PathToLicenseFolder)
+
+            ' Return Path State
+            Return Directory.Exists(PathToLicenseFolder)
+        End Function
+
+        Public Function CreateLicReqFile()
+            Try
+                ' Get Addresses
+                Dim addrList As New List(Of String)
+                For Each addr As NetworkInterface In NetworkInterface.GetAllNetworkInterfaces()
+                    If addr.GetPhysicalAddress.ToString.Length = 12 Then
+                        addrList.Add(addr.GetPhysicalAddress.ToString)
+                    End If
+                Next
+
+                ' Generate License Request String
+                Dim LicReqStr As String = ""
+                For i As Integer = 0 To addrList.Count
+                    ' Get Top 3 Results Only
+                    If i > 2 Then
+                        Exit For
+                    End If
+
+                    ' Concatenate License Request String
+                    If i = 0 Then
+                        LicReqStr += addrList(i)
+                    Else
+                        LicReqStr += $";{addrList(i)}"
+                    End If
+                Next
+
+                ' Encrypt String 
+                Dim LicReqStrEnc As String = LicEncrypt(LicReqStr.Trim)
+
+                ' Write Into File
+                Using writer As New StreamWriter(PathToLicReqFile)
+                    writer.WriteLine(LicReqStrEnc)
+                End Using
+
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+        End Function
+
+        Public Function CreateLicTrial()
+            ' Create & Write Text File
+            Try
+                Using writer As New StreamWriter(PathToTrialFile)
+                    ' Get Formatted Curent DateTime
+                    Dim FormatDate As String = DateTime.Now.ToString("yyyyMMdd")
+
+                    ' Encrypt Line
+                    Dim strEncrypted As String = LicEncrypt(FormatDate.Trim)
+
+                    ' Write Into File
+                    writer.WriteLine(strEncrypted)
+                End Using
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
+        End Function
+
+        Public Sub DeleteLicTrial()
+            ' Delete Text File
+            File.Delete(PathToTrialFile)
+        End Sub
+
+        Public Function LicDecrypt(str As String) As String
+            Try
+                Dim aesAlg As New AesCryptoServiceProvider()
+                aesAlg.KeySize = 256
+                aesAlg.BlockSize = 128
+                aesAlg.Key = Encoding.UTF8.GetBytes(ENC_key)
+                aesAlg.IV = Encoding.UTF8.GetBytes(ENC_IV)
+
+                Dim decryptor As ICryptoTransform = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV)
+                Dim cipherTextBytes As Byte() = Convert.FromBase64String(str)
+                Dim msDecrypt As New MemoryStream(cipherTextBytes)
+
+                Using csDecrypt As New CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read)
+                    Using srDecrypt As New StreamReader(csDecrypt)
+                        Return srDecrypt.ReadToEnd()
+                    End Using
+                End Using
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Function
+
+        Public Function LicEncrypt(str As String) As String
+            Try
+                Dim aesAlg As New AesCryptoServiceProvider()
+                aesAlg.KeySize = 256
+                aesAlg.BlockSize = 128
+                aesAlg.Key = Encoding.UTF8.GetBytes(ENC_key)
+                aesAlg.IV = Encoding.UTF8.GetBytes(ENC_IV)
+
+                Dim encryptor As ICryptoTransform = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV)
+                Dim msEncrypt As New MemoryStream()
+
+                Using csEncrypt As New CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write)
+                    Using swEncrypt As New StreamWriter(csEncrypt)
+                        swEncrypt.Write(str)
+                    End Using
+                End Using
+
+                Dim encryptedBytes As Byte() = msEncrypt.ToArray()
+                Return Convert.ToBase64String(encryptedBytes)
+            Catch ex As Exception
+                Return Nothing
+            End Try
+        End Function
+    End Module
+End Namespace

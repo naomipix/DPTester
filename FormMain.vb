@@ -1,4 +1,6 @@
 ﻿Imports System.ComponentModel
+Imports System.Net.NetworkInformation
+Imports System.Runtime.InteropServices
 Imports System.Threading
 Imports System.Windows.Forms.DataVisualization.Charting
 
@@ -131,7 +133,17 @@ Public Class FormMain
         panel_FormControl.Visible = True
 
         ' Check License
-
+        Dim CheckLicense = True
+        If CheckLicense = True Then
+            PublicVariables.LicenseType = LicensingModule.LicensingModule.CheckLic()
+            If PublicVariables.LicenseType = "LICENSED" Then
+                With dsp_LicenseStatus
+                    .Text = "License Activated"
+                    .BackColor = Color.FromArgb(192, 255, 192)
+                    .Visible = True
+                End With
+            End If
+        End If
 
         ' Start LoginCheck Timer (In Seconds)
         If PublicVariables.LoginPrompt = True Then
@@ -145,8 +157,8 @@ Public Class FormMain
         Dim t2 As Task = LoadStatus()
 
         ' Start Activity [TESTING] 
-        Dim test1 As Task = ClassActivity.GetActivityIO()
-        Dim test2 As Task = ClassActivity.UpdateActivityIO()
+        'Dim test1 As Task = ClassActivity.GetActivityIO()
+        'Dim test2 As Task = ClassActivity.UpdateActivityIO()
     End Sub
 
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
