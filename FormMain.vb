@@ -133,25 +133,17 @@ Public Class FormMain
         panel_FormControl.Visible = True
 
         ' Check License
-        'Dim mergestr As String = ""
-        'Dim count As Integer = 0
-        'For Each addr As NetworkInterface In NetworkInterface.GetAllNetworkInterfaces()
-        '    'addrList.Add(addr.GetPhysicalAddress.ToString)
-        '    'MsgBox(addr.GetPhysicalAddress.ToString)
-        '    'MsgBox(LicensingModule.LicensingModule.LicEncrypt(addr.GetPhysicalAddress.ToString & "LICENSEDBYPIXELAUTOMATION|"))
-        '    count += 1
-        '    mergestr += addr.GetPhysicalAddress.ToString & "LICENSEDBYPIXELAUTOMATION;"
-
-        '    If count = 3 Then
-        '        Exit For
-        '    End If
-        'Next
-        'MsgBox(mergestr.Substring(0, mergestr.Length - 1))
-        'txtbx_WorkOrderNumber.Text = LicensingModule.LicensingModule.LicEncrypt(mergestr.Substring(0, mergestr.Length - 1))
-        Dim smth As String = LicensingModule.LicensingModule.CheckLic()
-        MsgBox(smth)
-        ' Dim encrypted As String = LicensingModule.LicensingModule.LicEncrypt(teststr)
-        ' Dim decrypted As String = LicensingModule.LicensingModule.LicDecrypt(encrypted)
+        Dim CheckLicense = True
+        If CheckLicense = True Then
+            PublicVariables.LicenseType = LicensingModule.LicensingModule.CheckLic()
+            If PublicVariables.LicenseType = "LICENSED" Then
+                With dsp_LicenseStatus
+                    .Text = "License Activated"
+                    .BackColor = Color.FromArgb(192, 255, 192)
+                    .Visible = True
+                End With
+            End If
+        End If
 
         ' Start LoginCheck Timer (In Seconds)
         If PublicVariables.LoginPrompt = True Then
@@ -165,8 +157,8 @@ Public Class FormMain
         Dim t2 As Task = LoadStatus()
 
         ' Start Activity [TESTING] 
-        Dim test1 As Task = ClassActivity.GetActivityIO()
-        Dim test2 As Task = ClassActivity.UpdateActivityIO()
+        'Dim test1 As Task = ClassActivity.GetActivityIO()
+        'Dim test2 As Task = ClassActivity.UpdateActivityIO()
     End Sub
 
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
