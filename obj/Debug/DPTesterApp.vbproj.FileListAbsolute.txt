@@ -677,3 +677,30 @@ C:\Users\HP\OneDrive - TL\px\0 - source\DPTesterApp 20231106 R5\obj\Debug\DPTest
 C:\Users\HP\OneDrive - TL\px\0 - source\DPTesterApp 20231106 R5\obj\Debug\DPTesterApp.exe
 C:\Users\HP\OneDrive - TL\px\0 - source\DPTesterApp 20231106 R5\obj\Debug\DPTesterApp.xml
 C:\Users\HP\OneDrive - TL\px\0 - source\DPTesterApp 20231106 R5\obj\Debug\DPTesterApp.pdb
+C:\Users\HP\Documents\GitHub\DPTester\bin\Debug\DPTesterApp.exe.config
+C:\Users\HP\Documents\GitHub\DPTester\bin\Debug\DPTesterApp.exe.manifest
+C:\Users\HP\Documents\GitHub\DPTester\bin\Debug\DPTesterApp.application
+C:\Users\HP\Documents\GitHub\DPTester\bin\Debug\DPTesterApp.exe
+C:\Users\HP\Documents\GitHub\DPTester\bin\Debug\DPTesterApp.pdb
+C:\Users\HP\Documents\GitHub\DPTester\bin\Debug\DPTesterApp.xml
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.vbproj.AssemblyReference.cache
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.vbproj.SuggestedBindingRedirects.cache
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.Form1.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormCalibration.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormMain.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormMessageLog.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormRecipeManagement.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormResultGraph.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormResultSummary.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormSetting.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.Resources.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormUserLogin.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormUserRegister.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.vbproj.GenerateResource.cache
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.vbproj.CoreCompileInputs.cache
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.exe.manifest
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.application
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.vbproj.CopyComplete
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.exe
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.xml
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.pdb

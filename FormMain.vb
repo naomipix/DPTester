@@ -1,4 +1,6 @@
 ﻿Imports System.ComponentModel
+Imports System.Net.NetworkInformation
+Imports System.Runtime.InteropServices
 Imports System.Threading
 Imports System.Windows.Forms.DataVisualization.Charting
 
@@ -131,7 +133,25 @@ Public Class FormMain
         panel_FormControl.Visible = True
 
         ' Check License
+        'Dim mergestr As String = ""
+        'Dim count As Integer = 0
+        'For Each addr As NetworkInterface In NetworkInterface.GetAllNetworkInterfaces()
+        '    'addrList.Add(addr.GetPhysicalAddress.ToString)
+        '    'MsgBox(addr.GetPhysicalAddress.ToString)
+        '    'MsgBox(LicensingModule.LicensingModule.LicEncrypt(addr.GetPhysicalAddress.ToString & "LICENSEDBYPIXELAUTOMATION|"))
+        '    count += 1
+        '    mergestr += addr.GetPhysicalAddress.ToString & "LICENSEDBYPIXELAUTOMATION;"
 
+        '    If count = 3 Then
+        '        Exit For
+        '    End If
+        'Next
+        'MsgBox(mergestr.Substring(0, mergestr.Length - 1))
+        'txtbx_WorkOrderNumber.Text = LicensingModule.LicensingModule.LicEncrypt(mergestr.Substring(0, mergestr.Length - 1))
+        Dim smth As String = LicensingModule.LicensingModule.CheckLic()
+        MsgBox(smth)
+        ' Dim encrypted As String = LicensingModule.LicensingModule.LicEncrypt(teststr)
+        ' Dim decrypted As String = LicensingModule.LicensingModule.LicDecrypt(encrypted)
 
         ' Start LoginCheck Timer (In Seconds)
         If PublicVariables.LoginPrompt = True Then
