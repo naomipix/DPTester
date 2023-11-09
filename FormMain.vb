@@ -152,6 +152,11 @@ Public Class FormMain
             End If
         End If
 
+        ' SQL Auto Backup
+        If PublicVariables.AutoBackupSQLEnabled = True Then
+            SQLSetAutoBackupMode(PublicVariables.AutoBackupSQLEnabled)
+        End If
+
         ' Initialize Tables
         Dim t1 As Task = LoadProductionDetails()
         Dim t2 As Task = LoadStatus()
