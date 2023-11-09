@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Globalization
 Imports System.IO
 Imports System.Net.NetworkInformation
 Imports System.Reflection
@@ -301,7 +302,7 @@ Module SQL
         End If
     End Sub
 
-    Public Sub SQLAutoBackup()
+    Public Function SQLAutoBackup() As String
         Dim connection As New SqlConnection(ConnectionString)
         Dim command As New SqlCommand()
 
@@ -309,6 +310,8 @@ Module SQL
         Directory.CreateDirectory(backupPath)
 
         Dim backupFileName As String = $"{connection.Database}_{DateTime.Now.ToString("yyyyMMdd_hhmmss")}.bak"
+
+        Dim ReturnedValue As String = ""
 
         Try
             connection.Open()
@@ -321,12 +324,18 @@ Module SQL
                 LastSQLAutoBackup = DateTime.Now
                 'MessageBox.Show("Backup successful.", "Success")
             End If
+
+            RetainedMemory.Update(24, "AutoBackupSQLPerformedDate", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffK", CultureInfo.InvariantCulture))
+            ReturnedValue = $"{backupPath}\{backupFileName}"
         Catch ex As Exception
             'MessageBox.Show("Error during backup: " & ex.Message, "Error")
+            ReturnedValue = ""
         Finally
             connection.Close()
         End Try
-    End Sub
+
+        Return ReturnedValue
+    End Function
 
     Private Sub SQLAutoBackupTimer_Tick(sender As Object, e As EventArgs) Handles SQLAutoBackupTimer.Tick
         If Not DateTime.Now.Date = LastSQLAutoBackup.Date Then
@@ -522,22 +531,22 @@ Namespace RetainedMemory
 
                     End If
 
-                    ' CSV Path To Production Details
+                    ' CSV Production Details Delimiter
                     If dt(i)("id") = 16 Then
                         PublicVariables.CSVDelimiterProductionDetails = dt(i)("retained_value")
                     End If
 
-                    ' CSV Path To Alarm History
+                    ' CSV Alarm History Delimiter
                     If dt(i)("id") = 17 Then
                         PublicVariables.CSVDelimiterAlarmHistory = dt(i)("retained_value")
                     End If
 
-                    ' CSV Path To Recipe Details
+                    ' CSV Recipe Details Delimiter
                     If dt(i)("id") = 18 Then
                         PublicVariables.CSVDelimiterRecipeDetails = dt(i)("retained_value")
                     End If
 
-                    ' CSV Path To Result Summary
+                    ' CSV Result Summary Delimiter
                     If dt(i)("id") = 19 Then
                         PublicVariables.CSVDelimiterResultSummary = dt(i)("retained_value")
                     End If
@@ -579,7 +588,7 @@ Namespace RetainedMemory
 
                     ' Set Auto Backup SQL Path
                     If dt(i)("id") = 23 Then
-                        PublicVariables.CSVDelimiterResultSummary = dt(i)("retained_value")
+                        PublicVariables.AutoBackupSQLPath = dt(i)("retained_value")
                     End If
                 Next
             End If
@@ -664,15 +673,32 @@ Module DataGridViewDragScroll
 End Module
 
 Module CustomButtonModule
-    Public Sub SetButtonState(GetButton As Button, ButtonState As Boolean, ButtonValue As String)
+    Public Sub SetButtonState(GetButton As Button, ButtonState As Boolean, ButtonValue As String, Optional IsMomentary As Boolean = False)
+        Dim ColorAsTrue As Color = Color.FromArgb(0, 192, 0)
+        Dim ColorAsFalse As Color = Color.FromArgb(25, 130, 246)
+
+        Dim ColorAsMomentaryTrueToDarken As Decimal = 0.8
+        Dim ColorAsMomentaryFalseToDarken As Decimal = 0.8
+
+        Dim ColorAsMomentaryTrue As Color = Color.FromArgb(CInt(ColorAsTrue.R * ColorAsMomentaryTrueToDarken), CInt(ColorAsTrue.G * ColorAsMomentaryTrueToDarken), CInt(ColorAsTrue.B * ColorAsMomentaryTrueToDarken))
+        Dim ColorAsMomentaryFalse As Color = Color.FromArgb(CInt(ColorAsFalse.R * ColorAsMomentaryFalseToDarken), CInt(ColorAsFalse.G * ColorAsMomentaryFalseToDarken), CInt(ColorAsFalse.B * ColorAsMomentaryFalseToDarken))
+
         If ButtonState = True Then
             With GetButton
-                .BackColor = Color.FromArgb(0, 192, 0)
+                If IsMomentary = True Then
+                    .BackColor = ColorAsMomentaryTrue
+                Else
+                    .BackColor = ColorAsTrue
+                End If
                 .Text = ButtonValue
             End With
         Else
             With GetButton
-                .BackColor = Color.FromArgb(25, 130, 246)
+                If IsMomentary = True Then
+                    .BackColor = ColorAsMomentaryFalse
+                Else
+                    .BackColor = ColorAsFalse
+                End If
                 .Text = ButtonValue
             End With
         End If
