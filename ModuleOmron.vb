@@ -6,8 +6,8 @@ Module ModuleOmron
     Public OmronEEIP As New EEIPClient
     Public DIn(9)() As Boolean
     Public DOut(9)() As Boolean
-    Public AIn(20) As Decimal
-    Public AOut(10) As Decimal
+    Public AIn(19) As Decimal
+    Public AOut(9) As Decimal
     Public Alarm(9)() As Boolean
     Public Warning(9)() As Boolean
     Public EXEIPFetch As Byte()
@@ -342,31 +342,14 @@ Module ModuleOmron
 
         'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim Value(1) As Byte
-        Dim result As Boolean
+        Dim result(15) As Boolean
         Value(0) = OmronEEIP.T_O_IOData(offset * 2)
         Value(1) = OmronEEIP.T_O_IOData((offset * 2) + 1)
-        If bit < 8 Then
-            For i As Integer = 0 To bit
-                result = Value(0) Mod 2
-                Value(0) = Value(0) / 2
-                If result = True And Value(0) > 2 Then
-                    Value(0) -= 1
-                End If
-
-            Next
-            Return result
-        Else
-            bit = bit - 8
-            For i As Integer = 0 To bit
-                result = Value(1) Mod 2
-                Value(1) = Value(1) / 2
-                If result = True And Value(1) > 2 Then
-                    Value(1) -= 1
-                End If
-            Next
-            Return result
-        End If
-        Return 0
+        For i As Integer = 0 To 7
+            result(i) = ((Value(0) And 2 ^ i) / 2 ^ i)
+            result(i + 8) = ((Value(1) And 2 ^ i) / 2 ^ i)
+        Next
+        Return result(bit)
     End Function
 
     Public Function IMEIPReadBooleanArr(Offset As Integer) As Boolean()
@@ -377,31 +360,10 @@ Module ModuleOmron
         Dim Binary As New Text.StringBuilder
         Value(0) = OmronEEIP.T_O_IOData(Offset * 2)
         Value(1) = OmronEEIP.T_O_IOData((Offset * 2) + 1)
-        Binary.Append(DecToBin(Value(1)))
-        Binary.Append(DecToBin(Value(0)))
 
-        For i As Integer = 0 To Binary.ToString.Length - 1
-            If Binary.ToString.Substring(Binary.ToString.Length - 1 - i, 1) = "1" Then
-                result(i) = True
-            Else
-                result(i) = False
-            End If
-
-            'For i As Integer = 0 To 15
-            '    If i < 8 Then
-            '        result(i) = Value(0) Mod 2
-            '        Value(0) = (Value(0) / 2)
-            '        If result(i) = True And Value(0) > 2 Then
-            '            Value(0) -= 1
-            '        End If
-
-            '    Else
-            '        result(i) = Value(1) Mod 2
-            '        Value(1) = (Value(1) / 2)
-            '        If result(i) = True And Value(1) > 2 Then
-            '            Value(1) -= 1
-            '        End If
-            '    End If
+        For i As Integer = 0 To 7
+            result(i) = ((Value(0) And 2 ^ i) / 2 ^ i)
+            result(i + 8) = ((Value(1) And 2 ^ i) / 2 ^ i)
         Next
         Return result
     End Function
@@ -981,18 +943,22 @@ Module ModuleOmron
     Public Function FetchPLC_Ain(start As Integer) As Boolean
 
         For i As Integer = 0 To AIn.Length - 1
-            AIn(i) = IMEIPReadFloat(start + i)
+            AIn(i) = IMEIPReadFloat(start + (i * 2))
         Next
-
+        For i As Integer = 0 To 15
+            FormMain.dgv_AnalogInput.Rows(i).Cells("value").Value = AIn(i)
+        Next
         Return True
     End Function
 
     Public Function FetchPLC_AOut(start As Integer) As Boolean
 
         For i As Integer = 0 To AOut.Length - 1
-            AOut(i) = IMEIPReadFloat(start + i)
+            AOut(i) = IMEIPReadFloat(start + (i * 2))
         Next
-
+        For i As Integer = 0 To 5
+            FormMain.dgv_AnalogOutput.Rows(i).Cells("value").Value = AOut(i)
+        Next
         Return True
     End Function
 

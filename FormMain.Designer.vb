@@ -280,9 +280,7 @@ Partial Class FormMain
         Me.tabctrl_SubManualCtrl = New System.Windows.Forms.TabControl()
         Me.tabpg_ManualControlValve = New System.Windows.Forms.TabPage()
         Me.panel_ValveControl = New System.Windows.Forms.Panel()
-        Me.chkbx_Valve21 = New System.Windows.Forms.CheckBox()
         Me.chkbx_Valve11 = New System.Windows.Forms.CheckBox()
-        Me.chkbx_Valve20 = New System.Windows.Forms.CheckBox()
         Me.chkbx_Valve10 = New System.Windows.Forms.CheckBox()
         Me.chkbx_Valve18 = New System.Windows.Forms.CheckBox()
         Me.chkbx_Valve8 = New System.Windows.Forms.CheckBox()
@@ -291,11 +289,9 @@ Partial Class FormMain
         Me.chkbx_Valve14 = New System.Windows.Forms.CheckBox()
         Me.chkbx_Valve4 = New System.Windows.Forms.CheckBox()
         Me.chkbx_Valve12 = New System.Windows.Forms.CheckBox()
-        Me.dsp_Valve21 = New System.Windows.Forms.Label()
         Me.chkbx_Valve2 = New System.Windows.Forms.CheckBox()
         Me.chkbx_Valve19 = New System.Windows.Forms.CheckBox()
         Me.dsp_Valve11 = New System.Windows.Forms.Label()
-        Me.dsp_Valve20 = New System.Windows.Forms.Label()
         Me.chkbx_Valve9 = New System.Windows.Forms.CheckBox()
         Me.chkbx_Valve17 = New System.Windows.Forms.CheckBox()
         Me.dsp_Valve10 = New System.Windows.Forms.Label()
@@ -322,27 +318,25 @@ Partial Class FormMain
         Me.dsp_Valve3 = New System.Windows.Forms.Label()
         Me.dsp_Valve2 = New System.Windows.Forms.Label()
         Me.dsp_Valve1 = New System.Windows.Forms.Label()
-        Me.Label165 = New System.Windows.Forms.Label()
-        Me.Label164 = New System.Windows.Forms.Label()
-        Me.Label163 = New System.Windows.Forms.Label()
-        Me.Label162 = New System.Windows.Forms.Label()
-        Me.Label161 = New System.Windows.Forms.Label()
-        Me.Label160 = New System.Windows.Forms.Label()
-        Me.Label159 = New System.Windows.Forms.Label()
-        Me.Label158 = New System.Windows.Forms.Label()
-        Me.Label157 = New System.Windows.Forms.Label()
-        Me.Label156 = New System.Windows.Forms.Label()
-        Me.Label155 = New System.Windows.Forms.Label()
-        Me.Label154 = New System.Windows.Forms.Label()
-        Me.Label153 = New System.Windows.Forms.Label()
-        Me.Label152 = New System.Windows.Forms.Label()
-        Me.Label151 = New System.Windows.Forms.Label()
-        Me.Label150 = New System.Windows.Forms.Label()
-        Me.Label149 = New System.Windows.Forms.Label()
-        Me.Label148 = New System.Windows.Forms.Label()
-        Me.Label147 = New System.Windows.Forms.Label()
-        Me.Label146 = New System.Windows.Forms.Label()
-        Me.Label145 = New System.Windows.Forms.Label()
+        Me.lbl_Valve19 = New System.Windows.Forms.Label()
+        Me.lbl_Valve18 = New System.Windows.Forms.Label()
+        Me.lbl_Valve17 = New System.Windows.Forms.Label()
+        Me.lbl_Valve16 = New System.Windows.Forms.Label()
+        Me.lbl_Valve15 = New System.Windows.Forms.Label()
+        Me.lbl_Valve14 = New System.Windows.Forms.Label()
+        Me.lbl_Valve13 = New System.Windows.Forms.Label()
+        Me.lbl_Valve12 = New System.Windows.Forms.Label()
+        Me.lbl_Valve11 = New System.Windows.Forms.Label()
+        Me.lbl_Valve10 = New System.Windows.Forms.Label()
+        Me.lbl_Valve9 = New System.Windows.Forms.Label()
+        Me.lbl_Valve8 = New System.Windows.Forms.Label()
+        Me.lbl_Valve7 = New System.Windows.Forms.Label()
+        Me.lbl_Valve6 = New System.Windows.Forms.Label()
+        Me.lbl_Valve5 = New System.Windows.Forms.Label()
+        Me.lbl_Valve4 = New System.Windows.Forms.Label()
+        Me.lbl_Valve3 = New System.Windows.Forms.Label()
+        Me.lbl_Valve2 = New System.Windows.Forms.Label()
+        Me.lbl_Valve1 = New System.Windows.Forms.Label()
         Me.tabpg_ManualControlPump = New System.Windows.Forms.TabPage()
         Me.panel_PumpControl = New System.Windows.Forms.Panel()
         Me.panel_SubPumpCtrl = New System.Windows.Forms.Panel()
@@ -3162,27 +3156,25 @@ Partial Class FormMain
         '
         Me.tabpg_ManualControlValve.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.tabpg_ManualControlValve.Controls.Add(Me.panel_ValveControl)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label165)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label164)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label163)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label162)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label161)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label160)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label159)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label158)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label157)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label156)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label155)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label154)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label153)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label152)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label151)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label150)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label149)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label148)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label147)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label146)
-        Me.tabpg_ManualControlValve.Controls.Add(Me.Label145)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve19)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve18)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve17)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve16)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve15)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve14)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve13)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve12)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve11)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve10)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve9)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve8)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve7)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve6)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve5)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve4)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve3)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve2)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.lbl_Valve1)
         Me.tabpg_ManualControlValve.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_ManualControlValve.Name = "tabpg_ManualControlValve"
         Me.tabpg_ManualControlValve.Size = New System.Drawing.Size(1818, 583)
@@ -3191,9 +3183,7 @@ Partial Class FormMain
         '
         'panel_ValveControl
         '
-        Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve21)
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve11)
-        Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve20)
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve10)
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve18)
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve8)
@@ -3202,11 +3192,9 @@ Partial Class FormMain
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve14)
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve4)
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve12)
-        Me.panel_ValveControl.Controls.Add(Me.dsp_Valve21)
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve2)
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve19)
         Me.panel_ValveControl.Controls.Add(Me.dsp_Valve11)
-        Me.panel_ValveControl.Controls.Add(Me.dsp_Valve20)
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve9)
         Me.panel_ValveControl.Controls.Add(Me.chkbx_Valve17)
         Me.panel_ValveControl.Controls.Add(Me.dsp_Valve10)
@@ -3239,20 +3227,6 @@ Partial Class FormMain
         Me.panel_ValveControl.Size = New System.Drawing.Size(682, 583)
         Me.panel_ValveControl.TabIndex = 2
         '
-        'chkbx_Valve21
-        '
-        Me.chkbx_Valve21.Appearance = System.Windows.Forms.Appearance.Button
-        Me.chkbx_Valve21.BackColor = System.Drawing.SystemColors.Control
-        Me.chkbx_Valve21.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.chkbx_Valve21.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.chkbx_Valve21.Location = New System.Drawing.Point(474, 453)
-        Me.chkbx_Valve21.Name = "chkbx_Valve21"
-        Me.chkbx_Valve21.Size = New System.Drawing.Size(80, 30)
-        Me.chkbx_Valve21.TabIndex = 41
-        Me.chkbx_Valve21.Text = "Open"
-        Me.chkbx_Valve21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.chkbx_Valve21.UseVisualStyleBackColor = False
-        '
         'chkbx_Valve11
         '
         Me.chkbx_Valve11.Appearance = System.Windows.Forms.Appearance.Button
@@ -3266,20 +3240,6 @@ Partial Class FormMain
         Me.chkbx_Valve11.Text = "Open"
         Me.chkbx_Valve11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.chkbx_Valve11.UseVisualStyleBackColor = False
-        '
-        'chkbx_Valve20
-        '
-        Me.chkbx_Valve20.Appearance = System.Windows.Forms.Appearance.Button
-        Me.chkbx_Valve20.BackColor = System.Drawing.SystemColors.Control
-        Me.chkbx_Valve20.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.chkbx_Valve20.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.chkbx_Valve20.Location = New System.Drawing.Point(474, 407)
-        Me.chkbx_Valve20.Name = "chkbx_Valve20"
-        Me.chkbx_Valve20.Size = New System.Drawing.Size(80, 30)
-        Me.chkbx_Valve20.TabIndex = 40
-        Me.chkbx_Valve20.Text = "Open"
-        Me.chkbx_Valve20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.chkbx_Valve20.UseVisualStyleBackColor = False
         '
         'chkbx_Valve10
         '
@@ -3393,16 +3353,6 @@ Partial Class FormMain
         Me.chkbx_Valve12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.chkbx_Valve12.UseVisualStyleBackColor = False
         '
-        'dsp_Valve21
-        '
-        Me.dsp_Valve21.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Valve21.Location = New System.Drawing.Point(383, 460)
-        Me.dsp_Valve21.Name = "dsp_Valve21"
-        Me.dsp_Valve21.Size = New System.Drawing.Size(85, 17)
-        Me.dsp_Valve21.TabIndex = 9
-        Me.dsp_Valve21.Text = "Valve-21 :"
-        Me.dsp_Valve21.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'chkbx_Valve2
         '
         Me.chkbx_Valve2.Appearance = System.Windows.Forms.Appearance.Button
@@ -3440,16 +3390,6 @@ Partial Class FormMain
         Me.dsp_Valve11.TabIndex = 9
         Me.dsp_Valve11.Text = "Valve-11 :"
         Me.dsp_Valve11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'dsp_Valve20
-        '
-        Me.dsp_Valve20.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Valve20.Location = New System.Drawing.Point(383, 414)
-        Me.dsp_Valve20.Name = "dsp_Valve20"
-        Me.dsp_Valve20.Size = New System.Drawing.Size(85, 17)
-        Me.dsp_Valve20.TabIndex = 9
-        Me.dsp_Valve20.Text = "Valve-20 :"
-        Me.dsp_Valve20.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'chkbx_Valve9
         '
@@ -3743,257 +3683,233 @@ Partial Class FormMain
         Me.dsp_Valve1.Text = "Valve-1 :"
         Me.dsp_Valve1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Label165
+        'lbl_Valve19
         '
-        Me.Label165.BackColor = System.Drawing.SystemColors.Window
-        Me.Label165.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label165.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label165.Location = New System.Drawing.Point(706, 521)
-        Me.Label165.Name = "Label165"
-        Me.Label165.Size = New System.Drawing.Size(28, 25)
-        Me.Label165.TabIndex = 9
-        Me.Label165.Text = "21"
-        Me.Label165.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve19.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve19.Location = New System.Drawing.Point(706, 471)
+        Me.lbl_Valve19.Name = "lbl_Valve19"
+        Me.lbl_Valve19.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve19.TabIndex = 9
+        Me.lbl_Valve19.Text = "19"
+        Me.lbl_Valve19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label164
+        'lbl_Valve18
         '
-        Me.Label164.BackColor = System.Drawing.SystemColors.Window
-        Me.Label164.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label164.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label164.Location = New System.Drawing.Point(706, 496)
-        Me.Label164.Name = "Label164"
-        Me.Label164.Size = New System.Drawing.Size(28, 25)
-        Me.Label164.TabIndex = 9
-        Me.Label164.Text = "20"
-        Me.Label164.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve18.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve18.Location = New System.Drawing.Point(706, 446)
+        Me.lbl_Valve18.Name = "lbl_Valve18"
+        Me.lbl_Valve18.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve18.TabIndex = 9
+        Me.lbl_Valve18.Text = "18"
+        Me.lbl_Valve18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label163
+        'lbl_Valve17
         '
-        Me.Label163.BackColor = System.Drawing.SystemColors.Window
-        Me.Label163.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label163.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label163.Location = New System.Drawing.Point(706, 471)
-        Me.Label163.Name = "Label163"
-        Me.Label163.Size = New System.Drawing.Size(28, 25)
-        Me.Label163.TabIndex = 9
-        Me.Label163.Text = "19"
-        Me.Label163.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve17.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve17.Location = New System.Drawing.Point(706, 421)
+        Me.lbl_Valve17.Name = "lbl_Valve17"
+        Me.lbl_Valve17.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve17.TabIndex = 9
+        Me.lbl_Valve17.Text = "17"
+        Me.lbl_Valve17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label162
+        'lbl_Valve16
         '
-        Me.Label162.BackColor = System.Drawing.SystemColors.Window
-        Me.Label162.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label162.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label162.Location = New System.Drawing.Point(706, 446)
-        Me.Label162.Name = "Label162"
-        Me.Label162.Size = New System.Drawing.Size(28, 25)
-        Me.Label162.TabIndex = 9
-        Me.Label162.Text = "18"
-        Me.Label162.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve16.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve16.Location = New System.Drawing.Point(706, 396)
+        Me.lbl_Valve16.Name = "lbl_Valve16"
+        Me.lbl_Valve16.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve16.TabIndex = 9
+        Me.lbl_Valve16.Text = "16"
+        Me.lbl_Valve16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label161
+        'lbl_Valve15
         '
-        Me.Label161.BackColor = System.Drawing.SystemColors.Window
-        Me.Label161.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label161.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label161.Location = New System.Drawing.Point(706, 421)
-        Me.Label161.Name = "Label161"
-        Me.Label161.Size = New System.Drawing.Size(28, 25)
-        Me.Label161.TabIndex = 9
-        Me.Label161.Text = "17"
-        Me.Label161.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve15.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve15.Location = New System.Drawing.Point(706, 371)
+        Me.lbl_Valve15.Name = "lbl_Valve15"
+        Me.lbl_Valve15.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve15.TabIndex = 9
+        Me.lbl_Valve15.Text = "15"
+        Me.lbl_Valve15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label160
+        'lbl_Valve14
         '
-        Me.Label160.BackColor = System.Drawing.SystemColors.Window
-        Me.Label160.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label160.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label160.Location = New System.Drawing.Point(706, 396)
-        Me.Label160.Name = "Label160"
-        Me.Label160.Size = New System.Drawing.Size(28, 25)
-        Me.Label160.TabIndex = 9
-        Me.Label160.Text = "16"
-        Me.Label160.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve14.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve14.Location = New System.Drawing.Point(706, 346)
+        Me.lbl_Valve14.Name = "lbl_Valve14"
+        Me.lbl_Valve14.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve14.TabIndex = 9
+        Me.lbl_Valve14.Text = "14"
+        Me.lbl_Valve14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label159
+        'lbl_Valve13
         '
-        Me.Label159.BackColor = System.Drawing.SystemColors.Window
-        Me.Label159.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label159.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label159.Location = New System.Drawing.Point(706, 371)
-        Me.Label159.Name = "Label159"
-        Me.Label159.Size = New System.Drawing.Size(28, 25)
-        Me.Label159.TabIndex = 9
-        Me.Label159.Text = "15"
-        Me.Label159.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve13.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve13.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve13.Location = New System.Drawing.Point(706, 321)
+        Me.lbl_Valve13.Name = "lbl_Valve13"
+        Me.lbl_Valve13.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve13.TabIndex = 9
+        Me.lbl_Valve13.Text = "13"
+        Me.lbl_Valve13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label158
+        'lbl_Valve12
         '
-        Me.Label158.BackColor = System.Drawing.SystemColors.Window
-        Me.Label158.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label158.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label158.Location = New System.Drawing.Point(706, 346)
-        Me.Label158.Name = "Label158"
-        Me.Label158.Size = New System.Drawing.Size(28, 25)
-        Me.Label158.TabIndex = 9
-        Me.Label158.Text = "14"
-        Me.Label158.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve12.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve12.Location = New System.Drawing.Point(706, 296)
+        Me.lbl_Valve12.Name = "lbl_Valve12"
+        Me.lbl_Valve12.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve12.TabIndex = 9
+        Me.lbl_Valve12.Text = "12"
+        Me.lbl_Valve12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label157
+        'lbl_Valve11
         '
-        Me.Label157.BackColor = System.Drawing.SystemColors.Window
-        Me.Label157.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label157.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label157.Location = New System.Drawing.Point(706, 321)
-        Me.Label157.Name = "Label157"
-        Me.Label157.Size = New System.Drawing.Size(28, 25)
-        Me.Label157.TabIndex = 9
-        Me.Label157.Text = "13"
-        Me.Label157.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve11.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve11.Location = New System.Drawing.Point(706, 271)
+        Me.lbl_Valve11.Name = "lbl_Valve11"
+        Me.lbl_Valve11.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve11.TabIndex = 9
+        Me.lbl_Valve11.Text = "11"
+        Me.lbl_Valve11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label156
+        'lbl_Valve10
         '
-        Me.Label156.BackColor = System.Drawing.SystemColors.Window
-        Me.Label156.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label156.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label156.Location = New System.Drawing.Point(706, 296)
-        Me.Label156.Name = "Label156"
-        Me.Label156.Size = New System.Drawing.Size(28, 25)
-        Me.Label156.TabIndex = 9
-        Me.Label156.Text = "12"
-        Me.Label156.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve10.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve10.Location = New System.Drawing.Point(706, 246)
+        Me.lbl_Valve10.Name = "lbl_Valve10"
+        Me.lbl_Valve10.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve10.TabIndex = 9
+        Me.lbl_Valve10.Text = "10"
+        Me.lbl_Valve10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label155
+        'lbl_Valve9
         '
-        Me.Label155.BackColor = System.Drawing.SystemColors.Window
-        Me.Label155.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label155.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label155.Location = New System.Drawing.Point(706, 271)
-        Me.Label155.Name = "Label155"
-        Me.Label155.Size = New System.Drawing.Size(28, 25)
-        Me.Label155.TabIndex = 9
-        Me.Label155.Text = "11"
-        Me.Label155.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve9.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve9.Location = New System.Drawing.Point(706, 221)
+        Me.lbl_Valve9.Name = "lbl_Valve9"
+        Me.lbl_Valve9.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve9.TabIndex = 9
+        Me.lbl_Valve9.Text = "9"
+        Me.lbl_Valve9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label154
+        'lbl_Valve8
         '
-        Me.Label154.BackColor = System.Drawing.SystemColors.Window
-        Me.Label154.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label154.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label154.Location = New System.Drawing.Point(706, 246)
-        Me.Label154.Name = "Label154"
-        Me.Label154.Size = New System.Drawing.Size(28, 25)
-        Me.Label154.TabIndex = 9
-        Me.Label154.Text = "10"
-        Me.Label154.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve8.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve8.Location = New System.Drawing.Point(706, 196)
+        Me.lbl_Valve8.Name = "lbl_Valve8"
+        Me.lbl_Valve8.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve8.TabIndex = 9
+        Me.lbl_Valve8.Text = "8"
+        Me.lbl_Valve8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label153
+        'lbl_Valve7
         '
-        Me.Label153.BackColor = System.Drawing.SystemColors.Window
-        Me.Label153.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label153.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label153.Location = New System.Drawing.Point(706, 221)
-        Me.Label153.Name = "Label153"
-        Me.Label153.Size = New System.Drawing.Size(28, 25)
-        Me.Label153.TabIndex = 9
-        Me.Label153.Text = "9"
-        Me.Label153.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve7.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve7.Location = New System.Drawing.Point(706, 171)
+        Me.lbl_Valve7.Name = "lbl_Valve7"
+        Me.lbl_Valve7.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve7.TabIndex = 9
+        Me.lbl_Valve7.Text = "7"
+        Me.lbl_Valve7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label152
+        'lbl_Valve6
         '
-        Me.Label152.BackColor = System.Drawing.SystemColors.Window
-        Me.Label152.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label152.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label152.Location = New System.Drawing.Point(706, 196)
-        Me.Label152.Name = "Label152"
-        Me.Label152.Size = New System.Drawing.Size(28, 25)
-        Me.Label152.TabIndex = 9
-        Me.Label152.Text = "8"
-        Me.Label152.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve6.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve6.Location = New System.Drawing.Point(706, 146)
+        Me.lbl_Valve6.Name = "lbl_Valve6"
+        Me.lbl_Valve6.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve6.TabIndex = 9
+        Me.lbl_Valve6.Text = "6"
+        Me.lbl_Valve6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label151
+        'lbl_Valve5
         '
-        Me.Label151.BackColor = System.Drawing.SystemColors.Window
-        Me.Label151.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label151.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label151.Location = New System.Drawing.Point(706, 171)
-        Me.Label151.Name = "Label151"
-        Me.Label151.Size = New System.Drawing.Size(28, 25)
-        Me.Label151.TabIndex = 9
-        Me.Label151.Text = "7"
-        Me.Label151.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve5.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve5.Location = New System.Drawing.Point(706, 121)
+        Me.lbl_Valve5.Name = "lbl_Valve5"
+        Me.lbl_Valve5.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve5.TabIndex = 9
+        Me.lbl_Valve5.Text = "5"
+        Me.lbl_Valve5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label150
+        'lbl_Valve4
         '
-        Me.Label150.BackColor = System.Drawing.SystemColors.Window
-        Me.Label150.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label150.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label150.Location = New System.Drawing.Point(706, 146)
-        Me.Label150.Name = "Label150"
-        Me.Label150.Size = New System.Drawing.Size(28, 25)
-        Me.Label150.TabIndex = 9
-        Me.Label150.Text = "6"
-        Me.Label150.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve4.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve4.Location = New System.Drawing.Point(706, 96)
+        Me.lbl_Valve4.Name = "lbl_Valve4"
+        Me.lbl_Valve4.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve4.TabIndex = 9
+        Me.lbl_Valve4.Text = "4"
+        Me.lbl_Valve4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label149
+        'lbl_Valve3
         '
-        Me.Label149.BackColor = System.Drawing.SystemColors.Window
-        Me.Label149.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label149.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label149.Location = New System.Drawing.Point(706, 121)
-        Me.Label149.Name = "Label149"
-        Me.Label149.Size = New System.Drawing.Size(28, 25)
-        Me.Label149.TabIndex = 9
-        Me.Label149.Text = "5"
-        Me.Label149.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve3.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve3.Location = New System.Drawing.Point(706, 71)
+        Me.lbl_Valve3.Name = "lbl_Valve3"
+        Me.lbl_Valve3.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve3.TabIndex = 9
+        Me.lbl_Valve3.Text = "3"
+        Me.lbl_Valve3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label148
+        'lbl_Valve2
         '
-        Me.Label148.BackColor = System.Drawing.SystemColors.Window
-        Me.Label148.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label148.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label148.Location = New System.Drawing.Point(706, 96)
-        Me.Label148.Name = "Label148"
-        Me.Label148.Size = New System.Drawing.Size(28, 25)
-        Me.Label148.TabIndex = 9
-        Me.Label148.Text = "4"
-        Me.Label148.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve2.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve2.Location = New System.Drawing.Point(706, 46)
+        Me.lbl_Valve2.Name = "lbl_Valve2"
+        Me.lbl_Valve2.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve2.TabIndex = 9
+        Me.lbl_Valve2.Text = "2"
+        Me.lbl_Valve2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label147
+        'lbl_Valve1
         '
-        Me.Label147.BackColor = System.Drawing.SystemColors.Window
-        Me.Label147.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label147.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label147.Location = New System.Drawing.Point(706, 71)
-        Me.Label147.Name = "Label147"
-        Me.Label147.Size = New System.Drawing.Size(28, 25)
-        Me.Label147.TabIndex = 9
-        Me.Label147.Text = "3"
-        Me.Label147.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label146
-        '
-        Me.Label146.BackColor = System.Drawing.SystemColors.Window
-        Me.Label146.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label146.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label146.Location = New System.Drawing.Point(706, 46)
-        Me.Label146.Name = "Label146"
-        Me.Label146.Size = New System.Drawing.Size(28, 25)
-        Me.Label146.TabIndex = 9
-        Me.Label146.Text = "2"
-        Me.Label146.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label145
-        '
-        Me.Label145.BackColor = System.Drawing.SystemColors.Window
-        Me.Label145.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label145.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label145.Location = New System.Drawing.Point(706, 21)
-        Me.Label145.Name = "Label145"
-        Me.Label145.Size = New System.Drawing.Size(28, 25)
-        Me.Label145.TabIndex = 9
-        Me.Label145.Text = "1"
-        Me.Label145.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve1.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_Valve1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Valve1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve1.Location = New System.Drawing.Point(706, 21)
+        Me.lbl_Valve1.Name = "lbl_Valve1"
+        Me.lbl_Valve1.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_Valve1.TabIndex = 9
+        Me.lbl_Valve1.Text = "1"
+        Me.lbl_Valve1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tabpg_ManualControlPump
         '
@@ -6097,9 +6013,7 @@ Partial Class FormMain
     Friend WithEvents tabctrl_SubManualCtrl As TabControl
     Friend WithEvents tabpg_ManualControlValve As TabPage
     Friend WithEvents panel_ValveControl As Panel
-    Friend WithEvents chkbx_Valve21 As CheckBox
     Friend WithEvents chkbx_Valve11 As CheckBox
-    Friend WithEvents chkbx_Valve20 As CheckBox
     Friend WithEvents chkbx_Valve10 As CheckBox
     Friend WithEvents chkbx_Valve18 As CheckBox
     Friend WithEvents chkbx_Valve8 As CheckBox
@@ -6108,11 +6022,9 @@ Partial Class FormMain
     Friend WithEvents chkbx_Valve14 As CheckBox
     Friend WithEvents chkbx_Valve4 As CheckBox
     Friend WithEvents chkbx_Valve12 As CheckBox
-    Friend WithEvents dsp_Valve21 As Label
     Friend WithEvents chkbx_Valve2 As CheckBox
     Friend WithEvents chkbx_Valve19 As CheckBox
     Friend WithEvents dsp_Valve11 As Label
-    Friend WithEvents dsp_Valve20 As Label
     Friend WithEvents chkbx_Valve9 As CheckBox
     Friend WithEvents chkbx_Valve17 As CheckBox
     Friend WithEvents dsp_Valve10 As Label
@@ -6139,27 +6051,25 @@ Partial Class FormMain
     Friend WithEvents dsp_Valve3 As Label
     Friend WithEvents dsp_Valve2 As Label
     Friend WithEvents dsp_Valve1 As Label
-    Friend WithEvents Label165 As Label
-    Friend WithEvents Label164 As Label
-    Friend WithEvents Label163 As Label
-    Friend WithEvents Label162 As Label
-    Friend WithEvents Label161 As Label
-    Friend WithEvents Label160 As Label
-    Friend WithEvents Label159 As Label
-    Friend WithEvents Label158 As Label
-    Friend WithEvents Label157 As Label
-    Friend WithEvents Label156 As Label
-    Friend WithEvents Label155 As Label
-    Friend WithEvents Label154 As Label
-    Friend WithEvents Label153 As Label
-    Friend WithEvents Label152 As Label
-    Friend WithEvents Label151 As Label
-    Friend WithEvents Label150 As Label
-    Friend WithEvents Label149 As Label
-    Friend WithEvents Label148 As Label
-    Friend WithEvents Label147 As Label
-    Friend WithEvents Label146 As Label
-    Friend WithEvents Label145 As Label
+    Friend WithEvents lbl_Valve19 As Label
+    Friend WithEvents lbl_Valve18 As Label
+    Friend WithEvents lbl_Valve17 As Label
+    Friend WithEvents lbl_Valve16 As Label
+    Friend WithEvents lbl_Valve15 As Label
+    Friend WithEvents lbl_Valve14 As Label
+    Friend WithEvents lbl_Valve13 As Label
+    Friend WithEvents lbl_Valve12 As Label
+    Friend WithEvents lbl_Valve11 As Label
+    Friend WithEvents lbl_Valve10 As Label
+    Friend WithEvents lbl_Valve9 As Label
+    Friend WithEvents lbl_Valve8 As Label
+    Friend WithEvents lbl_Valve7 As Label
+    Friend WithEvents lbl_Valve6 As Label
+    Friend WithEvents lbl_Valve5 As Label
+    Friend WithEvents lbl_Valve4 As Label
+    Friend WithEvents lbl_Valve3 As Label
+    Friend WithEvents lbl_Valve2 As Label
+    Friend WithEvents lbl_Valve1 As Label
     Friend WithEvents tabpg_ManualControlPump As TabPage
     Friend WithEvents panel_PumpControl As Panel
     Friend WithEvents panel_SubPumpCtrl As Panel

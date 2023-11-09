@@ -1187,7 +1187,7 @@ Public Class FormMain
         chkbx_Valve2.CheckedChanged, chkbx_Valve3.CheckedChanged, chkbx_Valve4.CheckedChanged, chkbx_Valve5.CheckedChanged, chkbx_Valve6.CheckedChanged,
         chkbx_Valve7.CheckedChanged, chkbx_Valve8.CheckedChanged, chkbx_Valve9.CheckedChanged, chkbx_Valve10.CheckedChanged, chkbx_Valve11.CheckedChanged,
         chkbx_Valve12.CheckedChanged, chkbx_Valve13.CheckedChanged, chkbx_Valve14.CheckedChanged, chkbx_Valve15.CheckedChanged, chkbx_Valve16.CheckedChanged,
-        chkbx_Valve17.CheckedChanged, chkbx_Valve18.CheckedChanged, chkbx_Valve19.CheckedChanged, chkbx_Valve20.CheckedChanged, chkbx_Valve21.CheckedChanged
+        chkbx_Valve17.CheckedChanged, chkbx_Valve18.CheckedChanged, chkbx_Valve19.CheckedChanged
 
         ' Declare CheckBox Checked Changed
         Dim chkbxCheckedChanged As CheckBox = DirectCast(sender, CheckBox)
@@ -1196,7 +1196,7 @@ Public Class FormMain
         Dim chkbx_ValveCtrlArr As CheckBox() = {
             chkbx_Valve1, chkbx_Valve2, chkbx_Valve3, chkbx_Valve4, chkbx_Valve5, chkbx_Valve6, chkbx_Valve7, chkbx_Valve8,
             chkbx_Valve9, chkbx_Valve10, chkbx_Valve11, chkbx_Valve12, chkbx_Valve13, chkbx_Valve14, chkbx_Valve15, chkbx_Valve16,
-            chkbx_Valve17, chkbx_Valve18, chkbx_Valve19, chkbx_Valve20, chkbx_Valve21
+            chkbx_Valve17, chkbx_Valve18, chkbx_Valve19
         }
 
         ' CheckBox CheckState Changed
