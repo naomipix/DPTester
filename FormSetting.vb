@@ -300,6 +300,101 @@ Public Class FormSetting
         IsLoginTableLoaded = True
         DataGridView1.Visible = True
     End Sub
+
+    Private Sub btn_PathSelection_Click(sender As Object, e As EventArgs) Handles Button4.Click, Button5.Click, Button6.Click, Button7.Click
+        ' Declare Button Click
+        Dim btnClick As Button = DirectCast(sender, Button)
+
+        ' Define FolderBrowserDialog
+        Dim folderBrowser As New FolderBrowserDialog()
+
+        ' Show Dialog
+        If folderBrowser.ShowDialog() = DialogResult.OK Then
+            Dim folderPath As String = folderBrowser.SelectedPath
+
+            ' Ensure PATH ends with "\"
+            If Not folderPath.EndsWith("\") Then
+                folderPath = Path.Combine(folderPath, "")
+            End If
+
+            ' Show In TextBox
+            If btnClick Is Button4 Then
+                TextBox2.Text = folderPath
+            End If
+            If btnClick Is Button5 Then
+                TextBox3.Text = folderPath
+            End If
+            If btnClick Is Button6 Then
+                TextBox4.Text = folderPath
+            End If
+            If btnClick Is Button7 Then
+                TextBox5.Text = folderPath
+            End If
+        End If
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        If MsgBox($"Update CSV Folder PATH & Delimiter?", MsgBoxStyle.Question Or MsgBoxStyle.YesNoCancel, "Question") = MsgBoxResult.Yes Then
+            Dim directoryExists As Boolean = True
+            Dim directoryInvalid As String = ""
+            Dim txtbxInvalid As New TextBox
+
+            Dim txtbxArr As TextBox() = {
+                TextBox2,
+                TextBox3,
+                TextBox4,
+                TextBox5,
+                         _
+                TextBox7,
+                TextBox8,
+                TextBox9,
+                TextBox10
+            }
+
+            For Each txtbx As TextBox In txtbxArr
+                If Not Directory.Exists(txtbx.Text) Then
+                    directoryExists = False
+                    directoryInvalid = txtbx.Text
+                    txtbxInvalid = txtbx
+                    Exit For
+                End If
+            Next
+
+            If directoryExists = True Then
+                For Each txtbx As TextBox In txtbxArr
+                    ' CSV Paths
+                    If txtbx Is TextBox2 Then '8
+                        RetainedMemory.Update(8, "CSVPathToProductionDetails", txtbx.Text)
+                    End If
+                    If txtbx Is TextBox3 Then '9
+                        RetainedMemory.Update(9, "CSVPathToAlarmHistory", txtbx.Text)
+                    End If
+                    If txtbx Is TextBox4 Then '10
+                        RetainedMemory.Update(10, "CSVPathToRecipeDetails", txtbx.Text)
+                    End If
+                    If txtbx Is TextBox5 Then '11
+                        RetainedMemory.Update(11, "CSVPathToResultSummary", txtbx.Text)
+                    End If
+
+                    ' CSV Delimiters
+                    If txtbx Is TextBox7 Then '16
+                        RetainedMemory.Update(16, "CSVDelimiterProductionDetails", txtbx.Text)
+                    End If
+                    If txtbx Is TextBox8 Then '17
+                        RetainedMemory.Update(17, "CSVDelimiterAlarmHistory", txtbx.Text)
+                    End If
+                    If txtbx Is TextBox9 Then '18
+                        RetainedMemory.Update(18, "CSVDelimiterRecipeDetails", txtbx.Text)
+                    End If
+                    If txtbx Is TextBox10 Then '19
+                        RetainedMemory.Update(19, "CSVDelimiterResultSummary", txtbx.Text)
+                    End If
+                Next
+            Else
+                MsgBox($"Invalid Path ""{directoryInvalid}""", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            End If
+        End If
+    End Sub
 #End Region
 
 #Region "Tool Counter"
@@ -1164,99 +1259,8 @@ Public Class FormSetting
         End If
     End Sub
 
-    Private Sub btn_PathSelection_Click(sender As Object, e As EventArgs) Handles Button4.Click, Button5.Click, Button6.Click, Button7.Click
-        ' Declare Button Click
-        Dim btnClick As Button = DirectCast(sender, Button)
-
-        ' Define FolderBrowserDialog
-        Dim folderBrowser As New FolderBrowserDialog()
-
-        ' Show Dialog
-        If folderBrowser.ShowDialog() = DialogResult.OK Then
-            Dim folderPath As String = folderBrowser.SelectedPath
-
-            ' Ensure PATH ends with "\"
-            If Not folderPath.EndsWith("\") Then
-                folderPath = Path.Combine(folderPath, "")
-            End If
-
-            ' Show In TextBox
-            If btnClick Is Button4 Then
-                TextBox2.Text = folderPath
-            End If
-            If btnClick Is Button5 Then
-                TextBox3.Text = folderPath
-            End If
-            If btnClick Is Button6 Then
-                TextBox4.Text = folderPath
-            End If
-            If btnClick Is Button7 Then
-                TextBox5.Text = folderPath
-            End If
-        End If
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        If MsgBox($"Update CSV Folder PATH & Delimiter?", MsgBoxStyle.Question Or MsgBoxStyle.YesNoCancel, "Question") = MsgBoxResult.Yes Then
-            Dim directoryExists As Boolean = True
-            Dim directoryInvalid As String = ""
-            Dim txtbxInvalid As New TextBox
-
-            Dim txtbxArr As TextBox() = {
-                TextBox2,
-                TextBox3,
-                TextBox4,
-                TextBox5,
-                         _
-                TextBox7,
-                TextBox8,
-                TextBox9,
-                TextBox10
-            }
-
-            For Each txtbx As TextBox In txtbxArr
-                If Not Directory.Exists(txtbx.Text) Then
-                    directoryExists = False
-                    directoryInvalid = txtbx.Text
-                    txtbxInvalid = txtbx
-                    Exit For
-                End If
-            Next
-
-            If directoryExists = True Then
-                For Each txtbx As TextBox In txtbxArr
-                    ' CSV Paths
-                    If txtbx Is TextBox2 Then '8
-                        RetainedMemory.Update(8, "CSVPathToProductionDetails", txtbx.Text)
-                    End If
-                    If txtbx Is TextBox3 Then '9
-                        RetainedMemory.Update(9, "CSVPathToAlarmHistory", txtbx.Text)
-                    End If
-                    If txtbx Is TextBox4 Then '10
-                        RetainedMemory.Update(10, "CSVPathToRecipeDetails", txtbx.Text)
-                    End If
-                    If txtbx Is TextBox5 Then '11
-                        RetainedMemory.Update(11, "CSVPathToResultSummary", txtbx.Text)
-                    End If
-
-                    ' CSV Delimiters
-                    If txtbx Is TextBox7 Then '16
-                        RetainedMemory.Update(16, "CSVDelimiterProductionDetails", txtbx.Text)
-                    End If
-                    If txtbx Is TextBox8 Then '17
-                        RetainedMemory.Update(17, "CSVDelimiterAlarmHistory", txtbx.Text)
-                    End If
-                    If txtbx Is TextBox9 Then '18
-                        RetainedMemory.Update(18, "CSVDelimiterRecipeDetails", txtbx.Text)
-                    End If
-                    If txtbx Is TextBox10 Then '19
-                        RetainedMemory.Update(19, "CSVDelimiterResultSummary", txtbx.Text)
-                    End If
-                Next
-            Else
-                MsgBox($"Invalid Path ""{directoryInvalid}""", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
-            End If
-        End If
+    Private Sub btn_ForceBackup_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        SQL.SQLAutoBackup()
     End Sub
 
 #End Region

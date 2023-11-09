@@ -12,6 +12,9 @@ Module PublicVariables
     ' License Status
     Public LicenseType As String = ""
 
+    ' Backup Status
+    Public LastSQLAutoBackup As DateTime
+
     ' Retained Memory - Operation Mode
     Public OperationMode As String = ""
 
@@ -45,6 +48,11 @@ Module PublicVariables
 
     ' Retained Memory - User Login Table Settings
     Public UserLoginHistoryTopCount As Integer = 100
+
+    ' Retained Memory - SQL Auto Backup Settings
+    Public AutoBackupSQLEnabled As Boolean = False
+    Public AutoBackupSQLAtHour As Integer = 0
+    Public AutoBackupSQLPath As String = ""
 
     ' Ini - Database
     Public Server1 As String = ""
@@ -151,6 +159,8 @@ Module SQL
 
     '' Example of deleting a record
     'SQL.DeleteRecord("Users", "Name = 'John Doe'")
+
+    Public WithEvents SQLAutoBackupTimer As New Timer()
 
     Public Function InsertRecord(tableName As String, parameters As Dictionary(Of String, Object)) As Integer
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
@@ -281,6 +291,50 @@ Module SQL
 
         Return ReturnValue
     End Function
+
+    Public Sub SQLSetAutoBackupMode(BackupEnabled As Boolean)
+        SQLAutoBackupTimer.Interval = 30000
+        If BackupEnabled = True Then
+            SQLAutoBackupTimer.Enabled = BackupEnabled
+        Else
+            SQLAutoBackupTimer.Enabled = BackupEnabled
+        End If
+    End Sub
+
+    Public Sub SQLAutoBackup()
+        Dim connection As New SqlConnection(ConnectionString)
+        Dim command As New SqlCommand()
+
+        Dim backupPath As String = PublicVariables.AutoBackupSQLPath.Substring(0, PublicVariables.AutoBackupSQLPath.Length - 1)
+        Directory.CreateDirectory(backupPath)
+
+        Dim backupFileName As String = $"{connection.Database}_{DateTime.Now.ToString("yyyyMMdd_hhmmss")}.bak"
+
+        Try
+            connection.Open()
+            command.Connection = connection
+            command.CommandText = $"BACKUP DATABASE {connection.Database} TO DISK='{backupPath}\{backupFileName}'"
+
+            command.ExecuteNonQuery()
+
+            If True Then
+                LastSQLAutoBackup = DateTime.Now
+                'MessageBox.Show("Backup successful.", "Success")
+            End If
+        Catch ex As Exception
+            'MessageBox.Show("Error during backup: " & ex.Message, "Error")
+        Finally
+            connection.Close()
+        End Try
+    End Sub
+
+    Private Sub SQLAutoBackupTimer_Tick(sender As Object, e As EventArgs) Handles SQLAutoBackupTimer.Tick
+        If Not DateTime.Now.Date = LastSQLAutoBackup.Date Then
+            If DateTime.Now.Hour = AutoBackupSQLAtHour Then
+                SQLAutoBackup()
+            End If
+        End If
+    End Sub
 End Module
 
 Module CsvExportModule
@@ -488,7 +542,7 @@ Namespace RetainedMemory
                         PublicVariables.CSVDelimiterResultSummary = dt(i)("retained_value")
                     End If
 
-                    ' CSV Path To Result Summary
+                    ' Quantity Of Row Displayed For User Login History Table
                     If dt(i)("id") = 20 Then
                         If Not Integer.TryParse(dt(i)("retained_value"), PublicVariables.UserLoginHistoryTopCount) Then
                             PublicVariables.UserLoginHistoryTopCount = 100
@@ -497,8 +551,35 @@ Namespace RetainedMemory
                         ' Reset To Default of 100 if value returned 0
                         If PublicVariables.UserLoginHistoryTopCount = 0 Then
                             PublicVariables.UserLoginHistoryTopCount = 100
-                            RetainedMemory.Update(20, "UserLoginHistoryTopCount", "100")
+                            RetainedMemory.Update(dt(i)("id"), "UserLoginHistoryTopCount", "100")
                         End If
+                    End If
+
+                    ' Set Auto Backup SQL State
+                    If dt(i)("id") = 21 Then
+                        If dt(i)("retained_value") = 1 Then
+                            PublicVariables.AutoBackupSQLEnabled = True
+                        Else
+                            PublicVariables.AutoBackupSQLEnabled = False
+                        End If
+                    End If
+
+                    ' Set Auto Backup SQL At Specific Hour
+                    If dt(i)("id") = 22 Then
+                        If Not Integer.TryParse(dt(i)("retained_value"), PublicVariables.AutoBackupSQLAtHour) Then
+                            PublicVariables.AutoBackupSQLAtHour = 0
+                        End If
+
+                        ' Reset To Default of 0 if value returned > 23
+                        If PublicVariables.AutoBackupSQLAtHour > 23 Then
+                            PublicVariables.AutoBackupSQLAtHour = 0
+                            RetainedMemory.Update(dt(i)("id"), "AutoBackupSQLAtHour", "0")
+                        End If
+                    End If
+
+                    ' Set Auto Backup SQL Path
+                    If dt(i)("id") = 23 Then
+                        PublicVariables.CSVDelimiterResultSummary = dt(i)("retained_value")
                     End If
                 Next
             End If

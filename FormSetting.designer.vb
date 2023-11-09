@@ -24,8 +24,8 @@ Partial Class FormSetting
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSetting))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -71,9 +71,14 @@ Partial Class FormSetting
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.btn_JigTypeConfirm = New System.Windows.Forms.Button()
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.txtbx_JigType = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.dsp_JigType = New System.Windows.Forms.Label()
+        Me.Button10 = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -212,6 +217,7 @@ Partial Class FormSetting
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.timer_Buyoff = New System.Windows.Forms.Timer(Me.components)
+        Me.Label19 = New System.Windows.Forms.Label()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabctrl_Settings.SuspendLayout()
@@ -395,15 +401,15 @@ Partial Class FormSetting
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridView1.Location = New System.Drawing.Point(3, 58)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
@@ -740,48 +746,110 @@ Partial Class FormSetting
         '
         'GroupBox5
         '
-        Me.GroupBox5.Controls.Add(Me.btn_JigTypeConfirm)
+        Me.GroupBox5.Controls.Add(Me.Label19)
+        Me.GroupBox5.Controls.Add(Me.Button12)
+        Me.GroupBox5.Controls.Add(Me.Button11)
+        Me.GroupBox5.Controls.Add(Me.ComboBox2)
         Me.GroupBox5.Controls.Add(Me.txtbx_JigType)
+        Me.GroupBox5.Controls.Add(Me.Label17)
+        Me.GroupBox5.Controls.Add(Me.Label18)
         Me.GroupBox5.Controls.Add(Me.dsp_JigType)
-        Me.GroupBox5.Location = New System.Drawing.Point(16, 58)
+        Me.GroupBox5.Controls.Add(Me.Button10)
+        Me.GroupBox5.Location = New System.Drawing.Point(16, 294)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(250, 140)
+        Me.GroupBox5.Size = New System.Drawing.Size(520, 136)
         Me.GroupBox5.TabIndex = 108
         Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Jig Type Settings"
+        Me.GroupBox5.Text = "SQL Auto Backup"
         '
-        'btn_JigTypeConfirm
+        'Button12
         '
-        Me.btn_JigTypeConfirm.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.btn_JigTypeConfirm.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_JigTypeConfirm.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_JigTypeConfirm.Location = New System.Drawing.Point(60, 84)
-        Me.btn_JigTypeConfirm.Name = "btn_JigTypeConfirm"
-        Me.btn_JigTypeConfirm.Size = New System.Drawing.Size(130, 40)
-        Me.btn_JigTypeConfirm.TabIndex = 105
-        Me.btn_JigTypeConfirm.Text = "Create"
-        Me.btn_JigTypeConfirm.UseVisualStyleBackColor = False
+        Me.Button12.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button12.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.Button12.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button12.Location = New System.Drawing.Point(362, 82)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(140, 40)
+        Me.Button12.TabIndex = 110
+        Me.Button12.Text = "Force Backup"
+        Me.Button12.UseVisualStyleBackColor = False
+        '
+        'Button11
+        '
+        Me.Button11.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button11.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.Button11.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button11.Location = New System.Drawing.Point(19, 64)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(140, 40)
+        Me.Button11.TabIndex = 110
+        Me.Button11.Text = "ON"
+        Me.Button11.UseVisualStyleBackColor = False
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.IntegralHeight = False
+        Me.ComboBox2.Items.AddRange(New Object() {"00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"})
+        Me.ComboBox2.Location = New System.Drawing.Point(180, 97)
+        Me.ComboBox2.MaxDropDownItems = 10
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(60, 25)
+        Me.ComboBox2.TabIndex = 106
         '
         'txtbx_JigType
         '
         Me.txtbx_JigType.BackColor = System.Drawing.SystemColors.Info
         Me.txtbx_JigType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_JigType.Location = New System.Drawing.Point(17, 46)
+        Me.txtbx_JigType.Location = New System.Drawing.Point(180, 46)
         Me.txtbx_JigType.MaxLength = 30
         Me.txtbx_JigType.Name = "txtbx_JigType"
-        Me.txtbx_JigType.Size = New System.Drawing.Size(218, 25)
+        Me.txtbx_JigType.Size = New System.Drawing.Size(231, 25)
         Me.txtbx_JigType.TabIndex = 2
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(14, 44)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(138, 17)
+        Me.Label17.TabIndex = 104
+        Me.Label17.Text = "Auto Backup Enabled :"
+        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(177, 26)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(81, 17)
+        Me.Label18.TabIndex = 104
+        Me.Label18.Text = "Backup Path:"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_JigType
         '
         Me.dsp_JigType.AutoSize = True
         Me.dsp_JigType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_JigType.Location = New System.Drawing.Point(14, 26)
+        Me.dsp_JigType.Location = New System.Drawing.Point(177, 77)
         Me.dsp_JigType.Name = "dsp_JigType"
-        Me.dsp_JigType.Size = New System.Drawing.Size(62, 17)
+        Me.dsp_JigType.Size = New System.Drawing.Size(126, 17)
         Me.dsp_JigType.TabIndex = 104
-        Me.dsp_JigType.Text = "Jig Type :"
+        Me.dsp_JigType.Text = "Backup At (24-hour):"
         Me.dsp_JigType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(422, 46)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(80, 26)
+        Me.Button10.TabIndex = 107
+        Me.Button10.Text = "Select"
+        Me.Button10.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
@@ -789,7 +857,7 @@ Partial Class FormSetting
         Me.GroupBox3.Controls.Add(Me.Label12)
         Me.GroupBox3.Controls.Add(Me.TextBox6)
         Me.GroupBox3.Controls.Add(Me.Label16)
-        Me.GroupBox3.Location = New System.Drawing.Point(286, 294)
+        Me.GroupBox3.Location = New System.Drawing.Point(286, 58)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(250, 126)
         Me.GroupBox3.TabIndex = 108
@@ -849,7 +917,7 @@ Partial Class FormSetting
         Me.GroupBox2.Controls.Add(Me.txtbx_ScannerRawData)
         Me.GroupBox2.Controls.Add(Me.dsp_ScannerRawData)
         Me.GroupBox2.Controls.Add(Me.dsp_ScannerType)
-        Me.GroupBox2.Location = New System.Drawing.Point(286, 58)
+        Me.GroupBox2.Location = New System.Drawing.Point(16, 58)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(250, 225)
         Me.GroupBox2.TabIndex = 108
@@ -1850,15 +1918,15 @@ Partial Class FormSetting
         Me.dgv_MessageLog.AllowUserToAddRows = False
         Me.dgv_MessageLog.AllowUserToDeleteRows = False
         Me.dgv_MessageLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgv_MessageLog.Location = New System.Drawing.Point(86, 148)
         Me.dgv_MessageLog.Name = "dgv_MessageLog"
         Me.dgv_MessageLog.ReadOnly = True
@@ -2422,6 +2490,15 @@ Partial Class FormSetting
         'timer_Buyoff
         '
         '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(241, 100)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(29, 17)
+        Me.Label19.TabIndex = 111
+        Me.Label19.Text = ": 00"
+        '
         'FormSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2502,7 +2579,6 @@ Partial Class FormSetting
     Friend WithEvents dsp_ScannerRawData As Label
     Friend WithEvents dsp_Scanner As Label
     Friend WithEvents txtbx_JigType As TextBox
-    Friend WithEvents btn_JigTypeConfirm As Button
     Friend WithEvents dsp_ScannerBypass As Label
     Friend WithEvents cmbx_ScannerType As ComboBox
     Friend WithEvents dsp_Valve21 As Label
@@ -2662,4 +2738,11 @@ Partial Class FormSetting
     Friend WithEvents Label31 As Label
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents panel_UserLoginBlank As Panel
+    Friend WithEvents Button11 As Button
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Button10 As Button
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Button12 As Button
+    Friend WithEvents Label19 As Label
 End Class
