@@ -423,6 +423,8 @@ Public Class FormSetting
                     If txtbx Is TextBox10 Then '19
                         RetainedMemory.Update(19, "CSVDelimiterResultSummary", txtbx.Text)
                     End If
+
+                    MsgBox("Changes Updated Sucessfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
                 Next
             Else
                 MsgBox($"Invalid Path ""{directoryInvalid}""", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
@@ -482,6 +484,8 @@ Public Class FormSetting
 
                 PublicVariables.AutoBackupSQLAtHour = CInt(CStr(ComboBox2.SelectedItem))
                 RetainedMemory.Update(22, "AutoBackupSQLAtHour", CStr(ComboBox2.SelectedItem))
+
+                MsgBox("Changes Updated Sucessfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
             Else
                 MsgBox($"Invalid Path ""{txtbx_BackupPath.Text}""", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             End If
