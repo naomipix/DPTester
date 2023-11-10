@@ -68,6 +68,7 @@ Partial Class FormMain
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
+        Me.dsp_LicenseStatus = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.dsp_MessageLog = New System.Windows.Forms.Label()
         Me.dsp_Setting = New System.Windows.Forms.Label()
@@ -568,6 +569,7 @@ Partial Class FormMain
         '
         'panel_FormControl
         '
+        Me.panel_FormControl.Controls.Add(Me.dsp_LicenseStatus)
         Me.panel_FormControl.Controls.Add(Me.picbx_Icon)
         Me.panel_FormControl.Controls.Add(Me.dsp_MessageLog)
         Me.panel_FormControl.Controls.Add(Me.dsp_Setting)
@@ -600,6 +602,20 @@ Partial Class FormMain
         Me.panel_FormControl.Size = New System.Drawing.Size(1904, 1001)
         Me.panel_FormControl.TabIndex = 1
         Me.panel_FormControl.Visible = False
+        '
+        'dsp_LicenseStatus
+        '
+        Me.dsp_LicenseStatus.BackColor = System.Drawing.SystemColors.Control
+        Me.dsp_LicenseStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.dsp_LicenseStatus.Cursor = System.Windows.Forms.Cursors.Default
+        Me.dsp_LicenseStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_LicenseStatus.Location = New System.Drawing.Point(1732, 245)
+        Me.dsp_LicenseStatus.Name = "dsp_LicenseStatus"
+        Me.dsp_LicenseStatus.Size = New System.Drawing.Size(160, 23)
+        Me.dsp_LicenseStatus.TabIndex = 103
+        Me.dsp_LicenseStatus.Text = "License Status"
+        Me.dsp_LicenseStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.dsp_LicenseStatus.Visible = False
         '
         'picbx_Icon
         '
@@ -5463,7 +5479,7 @@ Partial Class FormMain
         Me.panel_PLCHeartBeat.Controls.Add(Me.dsp_B1)
         Me.panel_PLCHeartBeat.Controls.Add(Me.dsp_B0)
         Me.panel_PLCHeartBeat.Controls.Add(Me.dsp_PLCHeartBeat)
-        Me.panel_PLCHeartBeat.Location = New System.Drawing.Point(1732, 194)
+        Me.panel_PLCHeartBeat.Location = New System.Drawing.Point(1732, 187)
         Me.panel_PLCHeartBeat.Name = "panel_PLCHeartBeat"
         Me.panel_PLCHeartBeat.Size = New System.Drawing.Size(160, 50)
         Me.panel_PLCHeartBeat.TabIndex = 57
@@ -6252,4 +6268,5 @@ Partial Class FormMain
     Friend WithEvents Label1 As Label
     Friend WithEvents txtbx_Operatorlotid As TextBox
     Friend WithEvents PLCTimer As Timer
+    Friend WithEvents dsp_LicenseStatus As Label
 End Class
