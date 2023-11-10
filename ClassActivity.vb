@@ -11,104 +11,104 @@
                 For i As Integer = 0 To dtActivityIO.Rows.Count - 1
                     Select Case i
                         Case 0
-                            DIO_IN_0 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_0 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 1
-                            DIO_IN_1 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_1 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 2
-                            DIO_IN_2 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_2 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 3
-                            DIO_IN_3 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_3 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 4
-                            DIO_IN_4 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_4 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 5
-                            DIO_IN_5 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_5 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 6
-                            DIO_IN_6 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_6 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 7
-                            DIO_IN_7 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_7 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 8
-                            DIO_IN_8 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_8 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 9
-                            DIO_IN_9 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_9 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 10
-                            DIO_IN_10 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_10 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 11
-                            DIO_IN_11 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DI_11 = If(dtActivityIO(i)("value") = 1, True, False)
 
                         Case 12
-                            DIO_OUT_0 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_0 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 13
-                            DIO_OUT_1 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_1 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 14
-                            DIO_OUT_2 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_2 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 15
-                            DIO_OUT_3 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_3 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 16
-                            DIO_OUT_4 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_4 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 17
-                            DIO_OUT_5 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_5 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 18
-                            DIO_OUT_6 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_6 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 19
-                            DIO_OUT_7 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_7 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 20
-                            DIO_OUT_8 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_8 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 21
-                            DIO_OUT_9 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_9 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 22
-                            DIO_OUT_10 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_10 = If(dtActivityIO(i)("value") = 1, True, False)
                         Case 23
-                            DIO_OUT_11 = If(dtActivityIO(i)("value") = 1, True, False)
+                            DO_11 = If(dtActivityIO(i)("value") = 1, True, False)
 
                         Case 24
-                            AIO_IN_0 = CDec(dtActivityIO(i)("value"))
+                            AI_0 = CDec(dtActivityIO(i)("value"))
                         Case 25
-                            AIO_IN_1 = CDec(dtActivityIO(i)("value"))
+                            AI_1 = CDec(dtActivityIO(i)("value"))
                         Case 26
-                            AIO_IN_2 = CDec(dtActivityIO(i)("value"))
+                            AI_2 = CDec(dtActivityIO(i)("value"))
                         Case 27
-                            AIO_IN_3 = CDec(dtActivityIO(i)("value"))
+                            AI_3 = CDec(dtActivityIO(i)("value"))
                         Case 28
-                            AIO_IN_4 = CDec(dtActivityIO(i)("value"))
+                            AI_4 = CDec(dtActivityIO(i)("value"))
                         Case 29
-                            AIO_IN_5 = CDec(dtActivityIO(i)("value"))
+                            AI_5 = CDec(dtActivityIO(i)("value"))
                         Case 30
-                            AIO_IN_6 = CDec(dtActivityIO(i)("value"))
+                            AI_6 = CDec(dtActivityIO(i)("value"))
                         Case 31
-                            AIO_IN_7 = CDec(dtActivityIO(i)("value"))
+                            AI_7 = CDec(dtActivityIO(i)("value"))
                         Case 32
-                            AIO_IN_8 = CDec(dtActivityIO(i)("value"))
+                            AI_8 = CDec(dtActivityIO(i)("value"))
                         Case 33
-                            AIO_IN_9 = CDec(dtActivityIO(i)("value"))
+                            AI_9 = CDec(dtActivityIO(i)("value"))
                         Case 34
-                            AIO_IN_10 = CDec(dtActivityIO(i)("value"))
+                            AI_10 = CDec(dtActivityIO(i)("value"))
                         Case 35
-                            AIO_IN_11 = CDec(dtActivityIO(i)("value"))
+                            AI_11 = CDec(dtActivityIO(i)("value"))
 
                         Case 36
-                            AIO_OUT_0 = CDec(dtActivityIO(i)("value"))
+                            AO_0 = CDec(dtActivityIO(i)("value"))
                         Case 37
-                            AIO_OUT_1 = CDec(dtActivityIO(i)("value"))
+                            AO_1 = CDec(dtActivityIO(i)("value"))
                         Case 38
-                            AIO_OUT_2 = CDec(dtActivityIO(i)("value"))
+                            AO_2 = CDec(dtActivityIO(i)("value"))
                         Case 39
-                            AIO_OUT_3 = CDec(dtActivityIO(i)("value"))
+                            AO_3 = CDec(dtActivityIO(i)("value"))
                         Case 40
-                            AIO_OUT_4 = CDec(dtActivityIO(i)("value"))
+                            AO_4 = CDec(dtActivityIO(i)("value"))
                         Case 41
-                            AIO_OUT_5 = CDec(dtActivityIO(i)("value"))
+                            AO_5 = CDec(dtActivityIO(i)("value"))
                         Case 42
-                            'AIO_OUT_6 = CDec(dtActivityIO(i)("value"))
+                            'AO_6 = CDec(dtActivityIO(i)("value"))
                         Case 43
-                            'AIO_OUT_7 = CDec(dtActivityIO(i)("value"))
+                            'AO_7 = CDec(dtActivityIO(i)("value"))
                         Case 44
-                            'AIO_OUT_8 = CDec(dtActivityIO(i)("value"))
+                            'AO_8 = CDec(dtActivityIO(i)("value"))
                         Case 45
-                            'AIO_OUT_9 = CDec(dtActivityIO(i)("value"))
+                            'AO_9 = CDec(dtActivityIO(i)("value"))
                         Case 46
-                            'AIO_OUT_10 = CDec(dtActivityIO(i)("value"))
+                            'AO_10 = CDec(dtActivityIO(i)("value"))
                         Case 47
-                            'AIO_OUT_11 = CDec(dtActivityIO(i)("value"))
+                            'AO_11 = CDec(dtActivityIO(i)("value"))
                     End Select
                 Next
             Catch ex As Exception
@@ -123,28 +123,28 @@
 
             Try
                 Dim D_In() As Boolean = {
-                DIO_IN_0, DIO_IN_1, DIO_IN_2, DIO_IN_3, DIO_IN_4, DIO_IN_5, DIO_IN_6, DIO_IN_7,
-                DIO_IN_8, DIO_IN_9, DIO_IN_10, DIO_IN_11, DIO_IN_12, DIO_IN_13, DIO_IN_14, DIO_IN_15,
-                DIO_IN_16, DIO_IN_17, DIO_IN_18, DIO_IN_19, DIO_IN_20, DIO_IN_21, DIO_IN_22, DIO_IN_23,
-                DIO_IN_24, DIO_IN_25, DIO_IN_26, DIO_IN_27, DIO_IN_28, DIO_IN_29 ', DIO_IN_30, DIO_IN_31
+                DI_0, DI_1, DI_2, DI_3, DI_4, DI_5, DI_6, DI_7,
+                DI_8, DI_9, DI_10, DI_11, DI_12, DI_13, DI_14, DI_15,
+                DI_16, DI_17, DI_18, DI_19, DI_20, DI_21, DI_22, DI_23,
+                DI_24, DI_25, DI_26, DI_27, DI_28, DI_29 ', DI_30, DI_31
                 }
 
                 Dim D_Out() As Boolean = {
-                    DIO_OUT_0, DIO_OUT_1, DIO_OUT_2, DIO_OUT_3, DIO_OUT_4, DIO_OUT_5, DIO_OUT_6, DIO_OUT_7,
-                    DIO_OUT_8, DIO_OUT_9, DIO_OUT_10, DIO_OUT_11, DIO_OUT_12, DIO_OUT_13, DIO_OUT_14, DIO_OUT_15,
-                    DIO_OUT_16, DIO_OUT_17, DIO_OUT_18, DIO_OUT_19, DIO_OUT_20, DIO_OUT_21, DIO_OUT_22, DIO_OUT_23,
-                    DIO_OUT_24, DIO_OUT_25, DIO_OUT_26, DIO_OUT_27, DIO_OUT_28, DIO_OUT_29, DIO_OUT_30, DIO_OUT_31,
-                    DIO_OUT_32, DIO_OUT_33, DIO_OUT_34, DIO_OUT_35, DIO_OUT_36, DIO_OUT_37, DIO_OUT_38, DIO_OUT_39,
-                    DIO_OUT_40, DIO_OUT_41 ', DIO_OUT_42, DIO_OUT_43, DIO_OUT_44, DIO_OUT_45, DIO_OUT_46, DIO_OUT_47
+                    DO_0, DO_1, DO_2, DO_3, DO_4, DO_5, DO_6, DO_7,
+                    DO_8, DO_9, DO_10, DO_11, DO_12, DO_13, DO_14, DO_15,
+                    DO_16, DO_17, DO_18, DO_19, DO_20, DO_21, DO_22, DO_23,
+                    DO_24, DO_25, DO_26, DO_27, DO_28, DO_29, DO_30, DO_31,
+                    DO_32, DO_33, DO_34, DO_35, DO_36, DO_37, DO_38, DO_39,
+                    DO_40, DO_41 ', DO_42, DO_43, DO_44, DO_45, DO_46, DO_47
                 }
 
                 Dim A_In() As Decimal = {
-                    AIO_IN_0, AIO_IN_1, AIO_IN_2, AIO_IN_3, AIO_IN_4, AIO_IN_5, AIO_IN_6, AIO_IN_7,
-                    AIO_IN_8, AIO_IN_9, AIO_IN_10, AIO_IN_11, AIO_IN_12, AIO_IN_13, AIO_IN_14, AIO_IN_15
+                    AI_0, AI_1, AI_2, AI_3, AI_4, AI_5, AI_6, AI_7,
+                    AI_8, AI_9, AI_10, AI_11, AI_12, AI_13, AI_14, AI_15
                 }
 
                 Dim A_Out() As Decimal = {
-                    AIO_OUT_0, AIO_OUT_1, AIO_OUT_2, AIO_OUT_3, AIO_OUT_4, AIO_OUT_5', AIO_OUT_6, AIO_OUT_7, AIO_OUT_8, AIO_OUT_9, AIO_OUT_10, AIO_OUT_11, AIO_OUT_12, AIO_OUT_13, AIO_OUT_14, AIO_OUT_15
+                    AO_0, AO_1, AO_2, AO_3, AO_4, AO_5', AO_6, AO_7, AO_8, AO_9, AO_10, AO_11, AO_12, AO_13, AO_14, AO_15
                 }
 
                 For i As Integer = 0 To 11

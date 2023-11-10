@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Globalization
 Imports System.IO
 Imports System.Net.NetworkInformation
 Imports System.Reflection
@@ -11,6 +12,9 @@ Module PublicVariables
 
     ' License Status
     Public LicenseType As String = ""
+
+    ' Backup Status
+    Public LastSQLAutoBackup As DateTime
 
     ' Retained Memory - Operation Mode
     Public OperationMode As String = ""
@@ -45,6 +49,11 @@ Module PublicVariables
 
     ' Retained Memory - User Login Table Settings
     Public UserLoginHistoryTopCount As Integer = 100
+
+    ' Retained Memory - SQL Auto Backup Settings
+    Public AutoBackupSQLEnabled As Boolean = False
+    Public AutoBackupSQLAtHour As Integer = 0
+    Public AutoBackupSQLPath As String = ""
 
     ' Ini - Database
     Public Server1 As String = ""
@@ -151,6 +160,8 @@ Module SQL
 
     '' Example of deleting a record
     'SQL.DeleteRecord("Users", "Name = 'John Doe'")
+
+    Public WithEvents SQLAutoBackupTimer As New Timer()
 
     Public Function InsertRecord(tableName As String, parameters As Dictionary(Of String, Object)) As Integer
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
@@ -281,6 +292,58 @@ Module SQL
 
         Return ReturnValue
     End Function
+
+    Public Sub SQLSetAutoBackupMode(BackupEnabled As Boolean)
+        SQLAutoBackupTimer.Interval = 30000
+        If BackupEnabled = True Then
+            SQLAutoBackupTimer.Enabled = BackupEnabled
+        Else
+            SQLAutoBackupTimer.Enabled = BackupEnabled
+        End If
+    End Sub
+
+    Public Function SQLAutoBackup() As String
+        Dim connection As New SqlConnection(ConnectionString)
+        Dim command As New SqlCommand()
+
+        Dim backupPath As String = PublicVariables.AutoBackupSQLPath.Substring(0, PublicVariables.AutoBackupSQLPath.Length - 1)
+        Directory.CreateDirectory(backupPath)
+
+        Dim backupFileName As String = $"{connection.Database}_{DateTime.Now.ToString("yyyyMMdd_hhmmss")}.bak"
+
+        Dim ReturnedValue As String = ""
+
+        Try
+            connection.Open()
+            command.Connection = connection
+            command.CommandText = $"BACKUP DATABASE {connection.Database} TO DISK='{backupPath}\{backupFileName}'"
+
+            command.ExecuteNonQuery()
+
+            If True Then
+                LastSQLAutoBackup = DateTime.Now
+                'MessageBox.Show("Backup successful.", "Success")
+            End If
+
+            RetainedMemory.Update(24, "AutoBackupSQLPerformedDate", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffK", CultureInfo.InvariantCulture))
+            ReturnedValue = $"{backupPath}\{backupFileName}"
+        Catch ex As Exception
+            'MessageBox.Show("Error during backup: " & ex.Message, "Error")
+            ReturnedValue = ""
+        Finally
+            connection.Close()
+        End Try
+
+        Return ReturnedValue
+    End Function
+
+    Private Sub SQLAutoBackupTimer_Tick(sender As Object, e As EventArgs) Handles SQLAutoBackupTimer.Tick
+        If Not DateTime.Now.Date = LastSQLAutoBackup.Date Then
+            If DateTime.Now.Hour = AutoBackupSQLAtHour Then
+                SQLAutoBackup()
+            End If
+        End If
+    End Sub
 End Module
 
 Module CsvExportModule
@@ -468,27 +531,27 @@ Namespace RetainedMemory
 
                     End If
 
-                    ' CSV Path To Production Details
+                    ' CSV Production Details Delimiter
                     If dt(i)("id") = 16 Then
                         PublicVariables.CSVDelimiterProductionDetails = dt(i)("retained_value")
                     End If
 
-                    ' CSV Path To Alarm History
+                    ' CSV Alarm History Delimiter
                     If dt(i)("id") = 17 Then
                         PublicVariables.CSVDelimiterAlarmHistory = dt(i)("retained_value")
                     End If
 
-                    ' CSV Path To Recipe Details
+                    ' CSV Recipe Details Delimiter
                     If dt(i)("id") = 18 Then
                         PublicVariables.CSVDelimiterRecipeDetails = dt(i)("retained_value")
                     End If
 
-                    ' CSV Path To Result Summary
+                    ' CSV Result Summary Delimiter
                     If dt(i)("id") = 19 Then
                         PublicVariables.CSVDelimiterResultSummary = dt(i)("retained_value")
                     End If
 
-                    ' CSV Path To Result Summary
+                    ' Quantity Of Row Displayed For User Login History Table
                     If dt(i)("id") = 20 Then
                         If Not Integer.TryParse(dt(i)("retained_value"), PublicVariables.UserLoginHistoryTopCount) Then
                             PublicVariables.UserLoginHistoryTopCount = 100
@@ -497,8 +560,35 @@ Namespace RetainedMemory
                         ' Reset To Default of 100 if value returned 0
                         If PublicVariables.UserLoginHistoryTopCount = 0 Then
                             PublicVariables.UserLoginHistoryTopCount = 100
-                            RetainedMemory.Update(20, "UserLoginHistoryTopCount", "100")
+                            RetainedMemory.Update(dt(i)("id"), "UserLoginHistoryTopCount", "100")
                         End If
+                    End If
+
+                    ' Set Auto Backup SQL State
+                    If dt(i)("id") = 21 Then
+                        If dt(i)("retained_value") = 1 Then
+                            PublicVariables.AutoBackupSQLEnabled = True
+                        Else
+                            PublicVariables.AutoBackupSQLEnabled = False
+                        End If
+                    End If
+
+                    ' Set Auto Backup SQL At Specific Hour
+                    If dt(i)("id") = 22 Then
+                        If Not Integer.TryParse(dt(i)("retained_value"), PublicVariables.AutoBackupSQLAtHour) Then
+                            PublicVariables.AutoBackupSQLAtHour = 0
+                        End If
+
+                        ' Reset To Default of 0 if value returned > 23
+                        If PublicVariables.AutoBackupSQLAtHour > 23 Then
+                            PublicVariables.AutoBackupSQLAtHour = 0
+                            RetainedMemory.Update(dt(i)("id"), "AutoBackupSQLAtHour", "0")
+                        End If
+                    End If
+
+                    ' Set Auto Backup SQL Path
+                    If dt(i)("id") = 23 Then
+                        PublicVariables.AutoBackupSQLPath = dt(i)("retained_value")
                     End If
                 Next
             End If
@@ -583,15 +673,32 @@ Module DataGridViewDragScroll
 End Module
 
 Module CustomButtonModule
-    Public Sub SetButtonState(GetButton As Button, ButtonState As Boolean, ButtonValue As String)
+    Public Sub SetButtonState(GetButton As Button, ButtonState As Boolean, ButtonValue As String, Optional IsMomentary As Boolean = False)
+        Dim ColorAsTrue As Color = Color.FromArgb(0, 192, 0)
+        Dim ColorAsFalse As Color = Color.FromArgb(25, 130, 246)
+
+        Dim ColorAsMomentaryTrueToDarken As Decimal = 0.8
+        Dim ColorAsMomentaryFalseToDarken As Decimal = 0.8
+
+        Dim ColorAsMomentaryTrue As Color = Color.FromArgb(CInt(ColorAsTrue.R * ColorAsMomentaryTrueToDarken), CInt(ColorAsTrue.G * ColorAsMomentaryTrueToDarken), CInt(ColorAsTrue.B * ColorAsMomentaryTrueToDarken))
+        Dim ColorAsMomentaryFalse As Color = Color.FromArgb(CInt(ColorAsFalse.R * ColorAsMomentaryFalseToDarken), CInt(ColorAsFalse.G * ColorAsMomentaryFalseToDarken), CInt(ColorAsFalse.B * ColorAsMomentaryFalseToDarken))
+
         If ButtonState = True Then
             With GetButton
-                .BackColor = Color.FromArgb(0, 192, 0)
+                If IsMomentary = True Then
+                    .BackColor = ColorAsMomentaryTrue
+                Else
+                    .BackColor = ColorAsTrue
+                End If
                 .Text = ButtonValue
             End With
         Else
             With GetButton
-                .BackColor = Color.FromArgb(25, 130, 246)
+                If IsMomentary = True Then
+                    .BackColor = ColorAsMomentaryFalse
+                Else
+                    .BackColor = ColorAsFalse
+                End If
                 .Text = ButtonValue
             End With
         End If
