@@ -14,6 +14,9 @@ Module FormMainModule
     Public LotAttempt As Integer
     Public dtRecipeID As DataTable
 
+
+
+
     Public Sub ControlState(i As Integer)
         Select Case i
             Case 0  ' Logged Out
@@ -36,6 +39,10 @@ End Module
 
 Public Class FormMain
 #Region "Form Properties [ Load | Shown | Closing ]"
+
+    Public btn_ValveCtrlArr(18) As Button
+    Public Lbl_ValvestatusArr(18) As Label
+
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Start Clock Timer
         TimerModule.clockTimer.Start()
@@ -90,8 +97,27 @@ Public Class FormMain
             chart_MainLiveGraph.Series(0).MarkerStyle = MarkerStyle.None
         End If
 
+
+
+        ' Define CheckBox Array
+        btn_ValveCtrlArr = {
+            btn_Valve1, btn_Valve2, btn_Valve3, btn_Valve4, btn_Valve5, btn_Valve6, btn_Valve7, btn_Valve8, btn_Valve9, btn_Valve10, btn_Valve11, btn_Valve12,
+        btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
+        }
+
+        'Define Label Array
+        Lbl_ValvestatusArr = {lbl_Valve1, lbl_Valve2, lbl_Valve3, lbl_Valve4, lbl_Valve5, lbl_Valve6, lbl_Valve7, lbl_Valve8, lbl_Valve9, lbl_Valve10,
+            lbl_Valve11, lbl_Valve12, lbl_Valve13, lbl_Valve14, lbl_Valve15, lbl_Valve16, lbl_Valve17, lbl_Valve18, lbl_Valve19
+        }
+
+
         'PLC Impicit Cyclic Messaging via Ethernet IP
         IMEIPInitialise()
+
+
+        Get_PCManualctrl(3)
+
+
 
         PLCTimer.Enabled = True
         'Disable buttons contents
@@ -118,6 +144,7 @@ Public Class FormMain
         txtbx_SerialNumber.Enabled = False
         btn_OprKeyInDtConfirm.Enabled = False
         txtbx_Operatorlotid.Enabled = False
+
 
 
 
@@ -175,11 +202,53 @@ Public Class FormMain
         FetchPLC_DOut(10)
         FetchPLC_Ain(20)
         FetchPLC_AOut(60)
+        EXEIPFetchManualCtrl = OmronEEIP.AssemblyObject.getInstance(100)
+        EXEIPFetchPLCStatus = OmronEEIP.AssemblyObject.getInstance(111)
 
-        EXEIPFetch = OmronEEIP.AssemblyObject.getInstance(111)
+        If EXEIPReadBoolean(EXEIPFetchPLCStatus, 0, 0) = False Then
+            lbl_B0.BackColor = SystemColors.Control
+        Else
+            lbl_B0.BackColor = Color.LimeGreen
+        End If
+
+        For i As Integer = 0 To 15
+
+            If DOut(1)(i) = False Then
+                SetButtonState(btn_ValveCtrlArr(i), False, "Close")
+                Lbl_ValvestatusArr(i).BackColor = SystemColors.Window
+
+            Else
+                SetButtonState(btn_ValveCtrlArr(i), True, "Open")
+                Lbl_ValvestatusArr(i).BackColor = Color.LimeGreen
+
+            End If
+
+        Next
+
+        For i As Integer = 0 To 2
+
+            If DOut(2)(i) = False Then
+                SetButtonState(btn_ValveCtrlArr(i + 16), False, "Close")
+                Lbl_ValvestatusArr(i + 16).BackColor = SystemColors.Window
+
+            Else
+                SetButtonState(btn_ValveCtrlArr(i + 16), True, "Open")
+                Lbl_ValvestatusArr(i + 16).BackColor = Color.LimeGreen
+
+            End If
+
+        Next
+
     End Sub
 
-
+    Private Sub lbl_B0_BackColorChanged(sender As Object, e As EventArgs) Handles lbl_B0.BackColorChanged
+        If lbl_B0.BackColor = SystemColors.Control Then
+            IMEIPWriteBoolean(0, 0, True)
+            lbl_B1.BackColor = Color.LimeGreen
+        Else
+            lbl_B1.BackColor = SystemColors.Control
+        End If
+    End Sub
 
 
 #End Region
@@ -1183,79 +1252,47 @@ Public Class FormMain
 
 #Region "Manual Control"
     ' Valve Control
-    Private Sub chkbx_ValveCtrl_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_Valve1.CheckedChanged,
-        chkbx_Valve2.CheckedChanged, chkbx_Valve3.CheckedChanged, chkbx_Valve4.CheckedChanged, chkbx_Valve5.CheckedChanged, chkbx_Valve6.CheckedChanged,
-        chkbx_Valve7.CheckedChanged, chkbx_Valve8.CheckedChanged, chkbx_Valve9.CheckedChanged, chkbx_Valve10.CheckedChanged, chkbx_Valve11.CheckedChanged,
-        chkbx_Valve12.CheckedChanged, chkbx_Valve13.CheckedChanged, chkbx_Valve14.CheckedChanged, chkbx_Valve15.CheckedChanged, chkbx_Valve16.CheckedChanged,
-        chkbx_Valve17.CheckedChanged, chkbx_Valve18.CheckedChanged, chkbx_Valve19.CheckedChanged
 
-        ' Declare CheckBox Checked Changed
-        Dim chkbxCheckedChanged As CheckBox = DirectCast(sender, CheckBox)
 
-        ' Define CheckBox Array
-        Dim chkbx_ValveCtrlArr As CheckBox() = {
-            chkbx_Valve1, chkbx_Valve2, chkbx_Valve3, chkbx_Valve4, chkbx_Valve5, chkbx_Valve6, chkbx_Valve7, chkbx_Valve8,
-            chkbx_Valve9, chkbx_Valve10, chkbx_Valve11, chkbx_Valve12, chkbx_Valve13, chkbx_Valve14, chkbx_Valve15, chkbx_Valve16,
-            chkbx_Valve17, chkbx_Valve18, chkbx_Valve19
-        }
 
-        ' CheckBox CheckState Changed
-        If chkbxCheckedChanged.Checked = False Then
-            chkbxCheckedChanged.Text = "Open"
-        Else
-            chkbxCheckedChanged.Text = "Close"
-        End If
+    Private Sub btn_ValveCtrl_Click(sender As Object, e As EventArgs) Handles btn_Valve1.Click, btn_Valve2.Click, btn_Valve3.Click, btn_Valve4.Click, btn_Valve5.Click,
+        btn_Valve6.Click, btn_Valve7.Click, btn_Valve8.Click, btn_Valve9.Click, btn_Valve10.Click, btn_Valve11.Click, btn_Valve12.Click,
+        btn_Valve13.Click, btn_Valve14.Click, btn_Valve15.Click, btn_Valve16.Click, btn_Valve17.Click, btn_Valve18.Click, btn_Valve19.Click
 
-        ' Assign IO
-        For i As Integer = 0 To chkbx_ValveCtrlArr.Length - 1
-            Select Case i
-                Case 0
+        Dim btn_Valve As Button = DirectCast(sender, Button)
 
-                Case 1
-
-                Case 2
-
-                Case 3
-
-                Case 4
-
-                Case 5
-
-                Case 6
-
-                Case 7
-
-                Case 8
-
-                Case 9
-
-                Case 10
-
-                Case 11
-
-                Case 12
-
-                Case 13
-
-                Case 14
-
-                Case 15
-
-                Case 16
-
-                Case 17
-
-                Case 18
-
-                Case 19
-
-                Case 20
-
-                Case 21
-
-            End Select
+        For i As Integer = 0 To 15
+            If btn_Valve Is btn_ValveCtrlArr(i) Then
+                If btn_Valve.BackColor = Color.FromArgb(0, 192, 0) Then
+                    ManualCtrl(0)(i) = False
+                Else
+                    ManualCtrl(0)(i) = True
+                End If
+            End If
         Next
+
+        For i As Integer = 0 To 2
+            If btn_Valve Is btn_ValveCtrlArr(i + 16) Then
+                If btn_ValveCtrlArr(i + 16).BackColor = Color.FromArgb(0, 192, 0) Then
+                    ManualCtrl(1)(i) = False
+                Else
+                    ManualCtrl(1)(i) = True
+                End If
+            End If
+        Next
+
+
+        Put_PCManualctrl(3)
+
+
+
     End Sub
+
+
+
+
+
+
 
     ' Pump & Tank Control
     Private Sub chkbx_PumpCtrl_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_ModeSelection.CheckedChanged, chkbx_PumpCtrlState.CheckedChanged
@@ -2192,6 +2229,12 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
 
     End Sub
+
+
+
+
+
+
 
 
 
