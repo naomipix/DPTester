@@ -1,4 +1,6 @@
 ﻿Imports System.ComponentModel
+Imports System.Net.NetworkInformation
+Imports System.Runtime.InteropServices
 Imports System.Threading
 Imports System.Windows.Forms.DataVisualization.Charting
 
@@ -158,13 +160,28 @@ Public Class FormMain
         panel_FormControl.Visible = True
 
         ' Check License
-
+        Dim CheckLicense = True
+        If CheckLicense = True Then
+            PublicVariables.LicenseType = LicensingModule.LicensingModule.CheckLic()
+            If PublicVariables.LicenseType = "LICENSED" Then
+                With dsp_LicenseStatus
+                    .Text = "License Activated"
+                    .BackColor = Color.FromArgb(192, 255, 192)
+                    .Visible = True
+                End With
+            End If
+        End If
 
         ' Start LoginCheck Timer (In Seconds)
         If PublicVariables.LoginPrompt = True Then
             If PublicVariables.LoginPromptInterval > 0 Then
                 StartLoginTimerCheck(PublicVariables.LoginPromptInterval)
             End If
+        End If
+
+        ' SQL Auto Backup
+        If PublicVariables.AutoBackupSQLEnabled = True Then
+            SQLSetAutoBackupMode(PublicVariables.AutoBackupSQLEnabled)
         End If
 
         ' Initialize Tables
