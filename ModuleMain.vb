@@ -709,7 +709,7 @@ End Module
 Namespace LicensingModule
     Module LicensingModule
         ' File Names
-        Dim LicFileName As String = "PixelLicense.key"
+        Dim LicFileName As String = "Pixel License.key"
         Dim LicTrialFileName As String = "pxdptst"
         Dim LicReqFileName As String = "PixelLicenseRequest.txt"
 
