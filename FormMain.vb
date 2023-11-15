@@ -3,6 +3,7 @@ Imports System.Net.NetworkInformation
 Imports System.Runtime.InteropServices
 Imports System.Threading
 Imports System.Windows.Forms.DataVisualization.Charting
+Imports PoohPlcLink
 
 Module FormMainModule
     Public Workorder As String
@@ -15,6 +16,9 @@ Module FormMainModule
     Public LotEndTime As String
     Public LotAttempt As Integer
     Public dtRecipeID As DataTable
+
+
+
 
     Public Sub ControlState(i As Integer)
         Select Case i
@@ -38,6 +42,10 @@ End Module
 
 Public Class FormMain
 #Region "Form Properties [ Load | Shown | Closing ]"
+
+    Public btn_ValveCtrlArr(18) As Button
+    Public Lbl_ValvestatusArr(18) As Label
+
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Start Clock Timer
         TimerModule.clockTimer.Start()
@@ -92,10 +100,31 @@ Public Class FormMain
             chart_MainLiveGraph.Series(0).MarkerStyle = MarkerStyle.None
         End If
 
-        'PLC Impicit Cyclic Messaging via Ethernet IP
-        IMEIPInitialise()
 
-        PLCTimer.Enabled = True
+
+        ' Define CheckBox Array
+        btn_ValveCtrlArr = {
+            btn_Valve1, btn_Valve2, btn_Valve3, btn_Valve4, btn_Valve5, btn_Valve6, btn_Valve7, btn_Valve8, btn_Valve9, btn_Valve10, btn_Valve11, btn_Valve12,
+        btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
+        }
+
+        'Define Label Array
+        Lbl_ValvestatusArr = {lbl_Valve1, lbl_Valve2, lbl_Valve3, lbl_Valve4, lbl_Valve5, lbl_Valve6, lbl_Valve7, lbl_Valve8, lbl_Valve9, lbl_Valve10,
+            lbl_Valve11, lbl_Valve12, lbl_Valve13, lbl_Valve14, lbl_Valve15, lbl_Valve16, lbl_Valve17, lbl_Valve18, lbl_Valve19
+        }
+
+
+        'PLC Impicit Cyclic Messaging via Ethernet IP
+        FINSInitialise()
+
+        ' Initialize Tables
+        Dim t1 As Task = LoadProductionDetails()
+        Dim t2 As Task = LoadStatus()
+        'Get_PCManualctrl(3)
+        'InitaliseManualCtrl(3)
+
+
+
         'Disable buttons contents
         txtbx_WorkOrderNumber.Enabled = True
         txtbx_LotID.Enabled = True
@@ -123,6 +152,7 @@ Public Class FormMain
 
 
 
+
     End Sub
 
     Private Sub FormMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -133,7 +163,7 @@ Public Class FormMain
         panel_FormControl.Visible = True
 
         ' Check License
-        Dim CheckLicense = True
+        Dim CheckLicense = False
         If CheckLicense = True Then
             PublicVariables.LicenseType = LicensingModule.LicensingModule.CheckLic()
             If PublicVariables.LicenseType = "LICENSED" Then
@@ -157,9 +187,9 @@ Public Class FormMain
             SQLSetAutoBackupMode(PublicVariables.AutoBackupSQLEnabled)
         End If
 
-        ' Initialize Tables
-        Dim t1 As Task = LoadProductionDetails()
-        Dim t2 As Task = LoadStatus()
+
+
+
 
         ' Start Activity [TESTING] 
         'Dim test1 As Task = ClassActivity.GetActivityIO()
@@ -172,31 +202,23 @@ Public Class FormMain
             e.Cancel = True
             PublicVariables.IsExitPromptShown = False
         End If
-        PLCTimer.Enabled = False
-        IMEIPClose()
+        PLCtimer.Enabled = False
+
     End Sub
 
 
 
-    Private Sub PLCTimer_Tick(sender As Object, e As EventArgs) Handles PLCTimer.Tick
-        If DateTime.Now.Ticks > OmronEEIP.LastReceivedImplicitMessage.Ticks + (1000 * 10000) Then
-            IMEIPreconnect()
-        End If
-        Form1.txtbx_DM370.Text = IMEIPReadString(10, 10)
-        If IMEIPReadBoolean(0, 2) = True Then
-            Form1.lbl_DM350_2.BackColor = Color.Green
+
+
+    Private Sub lbl_B0_BackColorChanged(sender As Object, e As EventArgs) Handles lbl_B0.BackColorChanged
+        If lbl_B0.BackColor = SystemColors.Control Then
+
+            OmronPLC.WriteMemoryBit(PoohFinsETN.MemoryTypes.DM, 0, 0, True)
+            lbl_B1.BackColor = Color.LimeGreen
         Else
-            Form1.lbl_DM350_2.BackColor = Color.Red
+            lbl_B1.BackColor = SystemColors.Control
         End If
-        FetchPLC_DIn(0)
-        FetchPLC_DOut(10)
-        FetchPLC_Ain(20)
-        FetchPLC_AOut(60)
-
-        EXEIPFetch = OmronEEIP.AssemblyObject.getInstance(111)
     End Sub
-
-
 
 
 #End Region
@@ -1200,79 +1222,48 @@ Public Class FormMain
 
 #Region "Manual Control"
     ' Valve Control
-    Private Sub chkbx_ValveCtrl_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_Valve1.CheckedChanged,
-        chkbx_Valve2.CheckedChanged, chkbx_Valve3.CheckedChanged, chkbx_Valve4.CheckedChanged, chkbx_Valve5.CheckedChanged, chkbx_Valve6.CheckedChanged,
-        chkbx_Valve7.CheckedChanged, chkbx_Valve8.CheckedChanged, chkbx_Valve9.CheckedChanged, chkbx_Valve10.CheckedChanged, chkbx_Valve11.CheckedChanged,
-        chkbx_Valve12.CheckedChanged, chkbx_Valve13.CheckedChanged, chkbx_Valve14.CheckedChanged, chkbx_Valve15.CheckedChanged, chkbx_Valve16.CheckedChanged,
-        chkbx_Valve17.CheckedChanged, chkbx_Valve18.CheckedChanged, chkbx_Valve19.CheckedChanged
 
-        ' Declare CheckBox Checked Changed
-        Dim chkbxCheckedChanged As CheckBox = DirectCast(sender, CheckBox)
 
-        ' Define CheckBox Array
-        Dim chkbx_ValveCtrlArr As CheckBox() = {
-            chkbx_Valve1, chkbx_Valve2, chkbx_Valve3, chkbx_Valve4, chkbx_Valve5, chkbx_Valve6, chkbx_Valve7, chkbx_Valve8,
-            chkbx_Valve9, chkbx_Valve10, chkbx_Valve11, chkbx_Valve12, chkbx_Valve13, chkbx_Valve14, chkbx_Valve15, chkbx_Valve16,
-            chkbx_Valve17, chkbx_Valve18, chkbx_Valve19
-        }
 
-        ' CheckBox CheckState Changed
-        If chkbxCheckedChanged.Checked = False Then
-            chkbxCheckedChanged.Text = "Open"
-        Else
-            chkbxCheckedChanged.Text = "Close"
-        End If
+    Private Sub btn_ValveCtrl_Click(sender As Object, e As EventArgs) Handles btn_Valve1.Click, btn_Valve2.Click, btn_Valve3.Click, btn_Valve4.Click, btn_Valve5.Click,
+        btn_Valve6.Click, btn_Valve7.Click, btn_Valve8.Click, btn_Valve9.Click, btn_Valve10.Click, btn_Valve11.Click, btn_Valve12.Click,
+        btn_Valve13.Click, btn_Valve14.Click, btn_Valve15.Click, btn_Valve16.Click, btn_Valve17.Click, btn_Valve18.Click, btn_Valve19.Click
 
-        ' Assign IO
-        For i As Integer = 0 To chkbx_ValveCtrlArr.Length - 1
-            Select Case i
-                Case 0
+        Dim btn_Valve As Button = DirectCast(sender, Button)
 
-                Case 1
-
-                Case 2
-
-                Case 3
-
-                Case 4
-
-                Case 5
-
-                Case 6
-
-                Case 7
-
-                Case 8
-
-                Case 9
-
-                Case 10
-
-                Case 11
-
-                Case 12
-
-                Case 13
-
-                Case 14
-
-                Case 15
-
-                Case 16
-
-                Case 17
-
-                Case 18
-
-                Case 19
-
-                Case 20
-
-                Case 21
-
-            End Select
+        For i As Integer = 0 To 15
+            If btn_Valve Is btn_ValveCtrlArr(i) Then
+                If btn_Valve.BackColor = Color.FromArgb(0, 192, 0) Then
+                    ManualCtrl(0)(i) = False
+                Else
+                    ManualCtrl(0)(i) = True
+                End If
+            End If
         Next
+        Put_PCManualctrl(3)
+        FINSWrite(3, 1)
+        For i As Integer = 0 To 2
+            If btn_Valve Is btn_ValveCtrlArr(i + 16) Then
+                If btn_ValveCtrlArr(i + 16).BackColor = Color.FromArgb(0, 192, 0) Then
+                    ManualCtrl(1)(i) = False
+                Else
+                    ManualCtrl(1)(i) = True
+                End If
+            End If
+        Next
+        Put_PCManualctrl(3)
+        FINSWrite(4, 1)
+        'Put_PCManualctrl(3)
+
+
+
     End Sub
+
+
+
+
+
+
 
     ' Pump & Tank Control
     Private Sub chkbx_PumpCtrl_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_ModeSelection.CheckedChanged, chkbx_PumpCtrlState.CheckedChanged
@@ -2113,98 +2104,102 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
 #End Region
 
+
 #Region "Load Recipe Data to PLC"
 
     Public Sub LoadrecipeParameters(Recipe As String)
+        'RealtoPLC(OmronPLC, PoohFinsETN.MemoryTypes.DM, 201, CType(txtbx_DM201.Text, Decimal))
+        'OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 0, 1)
+        'OmronPLC.WriteMemoryWord(PoohFinsETN.MemoryTypes.DM, 200, CType(txtbx_DM200.Text, Integer), PoohFinsETN.DataTypes.SignBIN)
 
         Dim dtrecipe As DataTable = SQL.ReadRecords($"SELECT * From RecipeTable WHERE recipe_id ='{Recipe}'")
 
         If dtrecipe.Rows.Count > 0 Then
-            IMEIPWriteFloat(30, CType(dtrecipe.Rows(0)("verification_tolerance"), Double))
+            Float2int(30, CType(dtrecipe.Rows(0)("verification_tolerance"), Double))
 
-            IMEIPWriteFloat(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
-            IMEIPWriteFloat(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
-            IMEIPWriteFloat(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
+            Float2int(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
+            Float2int(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
+            Float2int(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
 
-            IMEIPWriteFloat(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
-            IMEIPWriteFloat(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
-            IMEIPWriteFloat(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
+            Float2int(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
+            Float2int(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
+            Float2int(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
 
-            IMEIPWriteFloat(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
-            IMEIPWriteFloat(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
+            Float2int(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
+            Float2int(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
 
-            IMEIPWriteFloat(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
-            IMEIPWriteFloat(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
-            IMEIPWriteFloat(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
+            Float2int(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
+            Float2int(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
+            Float2int(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
 
-            IMEIPWriteFloat(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
+            Float2int(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
 
-            IMEIPWriteFloat(56, CType(dtrecipe.Rows(0)("drain2_back_pressure"), Double))
+            Float2int(56, CType(dtrecipe.Rows(0)("drain2_back_pressure"), Double))
 
-            IMEIPWriteFloat(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
+            Float2int(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
 
 
             If dtrecipe.Rows(0)("firstflush_circuit") = "Enable" Then
-                IMEIPWriteInt(60, 1)
+                DInt2int(60, 1)
             Else
-                IMEIPWriteInt(60, 0)
+                DInt2int(60, 0)
             End If
-            IMEIPWriteInt(62, CType(dtrecipe.Rows(0)("firstflush_fill_time"), Integer))
-            IMEIPWriteInt(64, CType(dtrecipe.Rows(0)("firstflush_bleed_time"), Integer))
-            IMEIPWriteInt(66, CType(dtrecipe.Rows(0)("firstflush_stabilize_time"), Integer))
-            IMEIPWriteInt(68, CType(dtrecipe.Rows(0)("firstflush_time"), Integer))
+            DInt2int(62, CType(dtrecipe.Rows(0)("firstflush_fill_time"), Integer))
+            DInt2int(64, CType(dtrecipe.Rows(0)("firstflush_bleed_time"), Integer))
+            DInt2int(66, CType(dtrecipe.Rows(0)("firstflush_stabilize_time"), Integer))
+            DInt2int(68, CType(dtrecipe.Rows(0)("firstflush_time"), Integer))
 
             If dtrecipe.Rows(0)("firstdp_circuit") = "Enable" Then
-                IMEIPWriteInt(70, 1)
+                DInt2int(70, 1)
             Else
-                IMEIPWriteInt(70, 0)
+                DInt2int(70, 0)
             End If
 
             If dtrecipe.Rows(0)("seconddp_circuit") = "Enable" Then
-                IMEIPWriteInt(72, 1)
+                DInt2int(72, 1)
             Else
-                IMEIPWriteInt(72, 0)
+                DInt2int(72, 0)
             End If
-            IMEIPWriteInt(74, CType(dtrecipe.Rows(0)("dp_fill_time"), Integer))
-            IMEIPWriteInt(76, CType(dtrecipe.Rows(0)("dp_bleed_time"), Integer))
-            IMEIPWriteInt(78, CType(dtrecipe.Rows(0)("dp_stabilize_time"), Integer))
-            IMEIPWriteInt(80, CType(dtrecipe.Rows(0)("dp_test_time"), Integer))
-            IMEIPWriteInt(82, CType(dtrecipe.Rows(0)("dp_testpoints"), Integer))
+            DInt2int(74, CType(dtrecipe.Rows(0)("dp_fill_time"), Integer))
+            DInt2int(76, CType(dtrecipe.Rows(0)("dp_bleed_time"), Integer))
+            DInt2int(78, CType(dtrecipe.Rows(0)("dp_stabilize_time"), Integer))
+            DInt2int(80, CType(dtrecipe.Rows(0)("dp_test_time"), Integer))
+            DInt2int(82, CType(dtrecipe.Rows(0)("dp_testpoints"), Integer))
 
             If dtrecipe.Rows(0)("secondflush_circuit") = "Enable" Then
-                IMEIPWriteInt(84, 1)
+                DInt2int(84, 1)
             Else
-                IMEIPWriteInt(84, 0)
+                DInt2int(84, 0)
             End If
-            IMEIPWriteInt(86, CType(dtrecipe.Rows(0)("secondflush_fill_time"), Integer))
-            IMEIPWriteInt(88, CType(dtrecipe.Rows(0)("secondflush_bleed_time"), Integer))
+            DInt2int(86, CType(dtrecipe.Rows(0)("secondflush_fill_time"), Integer))
+            DInt2int(88, CType(dtrecipe.Rows(0)("secondflush_bleed_time"), Integer))
 
-            IMEIPWriteInt(90, CType(dtrecipe.Rows(0)("secondflush_stabilize_time"), Integer))
-            IMEIPWriteInt(92, CType(dtrecipe.Rows(0)("secondflush_time"), Integer))
+            DInt2int(90, CType(dtrecipe.Rows(0)("secondflush_stabilize_time"), Integer))
+            DInt2int(92, CType(dtrecipe.Rows(0)("secondflush_time"), Integer))
 
 
             If dtrecipe.Rows(0)("drain1_circuit") = "Enable" Then
-                IMEIPWriteInt(94, 1)
+                DInt2int(94, 1)
             Else
-                IMEIPWriteInt(94, 0)
+                DInt2int(94, 0)
             End If
-            IMEIPWriteInt(96, CType(dtrecipe.Rows(0)("drain1_time"), Integer))
+            DInt2int(96, CType(dtrecipe.Rows(0)("drain1_time"), Integer))
 
             If dtrecipe.Rows(0)("drain2_circuit") = "Enable" Then
-                IMEIPWriteInt(98, 1)
+                DInt2int(98, 1)
             Else
-                IMEIPWriteInt(98, 0)
+                DInt2int(98, 0)
             End If
-            IMEIPWriteInt(100, CType(dtrecipe.Rows(0)("drain2_time"), Integer))
+            DInt2int(100, CType(dtrecipe.Rows(0)("drain2_time"), Integer))
 
 
             If dtrecipe.Rows(0)("drain3_circuit") = "Enable" Then
-                IMEIPWriteInt(102, 1)
+                DInt2int(102, 1)
             Else
-                IMEIPWriteInt(102, 0)
+                DInt2int(102, 0)
             End If
-            IMEIPWriteInt(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
-
+            DInt2int(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
+            FINSWrite(30, 76)
         End If
 
 
@@ -2213,7 +2208,17 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
 
 
+
+
+
+
+
 #End Region
+
+
+
+
+
 
 End Class
 
