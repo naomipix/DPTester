@@ -163,7 +163,7 @@ Public Class FormMain
         panel_FormControl.Visible = True
 
         ' Check License
-        Dim CheckLicense = False
+        Dim CheckLicense = True
         If CheckLicense = True Then
             PublicVariables.LicenseType = LicensingModule.LicensingModule.CheckLic()
             If PublicVariables.LicenseType = "LICENSED" Then
