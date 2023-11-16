@@ -5,6 +5,7 @@ Imports System.Net.NetworkInformation
 Imports System.Reflection
 Imports System.Security.Cryptography
 Imports System.Text
+Imports System.Xml.Schema
 
 Module PublicVariables
     ' Version
@@ -708,7 +709,7 @@ End Module
 Namespace LicensingModule
     Module LicensingModule
         ' File Names
-        Dim LicFileName As String = "PixelLicense.key"
+        Dim LicFileName As String = "Pixel License.key"
         Dim LicTrialFileName As String = "pxdptst"
         Dim LicReqFileName As String = "PixelLicenseRequest.txt"
 
@@ -820,7 +821,7 @@ Namespace LicensingModule
                             Dim lineDecrypted As String = LicDecrypt(line.Trim)
 
                             ' Parse To Array
-                            Dim delimiter As Char = ";"c
+                            Dim delimiter As Char = "_"c
                             Dim stringArray() As String = lineDecrypted.Split(delimiter)
 
                             ' Get Addresses
@@ -830,22 +831,17 @@ Namespace LicensingModule
                             Next
 
                             ' Match License Info
-                            Dim LicensedString As String = "LICENSEDBYPIXELAUTOMATION"
-                            For i As Integer = 0 To stringArray.Length - 1
-                                If stringArray(i).Length = 12 + LicensedString.Length Then
-                                    If stringArray(i).Substring(12) = LicensedString Then
-                                        Dim CheckAddr As String = stringArray(i).Substring(0, 12)
-
-                                        For Each item In addrList
-                                            If item = CheckAddr Then
-                                                LicValid = True
-                                                DeleteLicTrial()
-                                                Return "LICENSED"
-                                            End If
-                                        Next
-                                    End If
+                            If stringArray.Length = 2 Then
+                                If stringArray(1) = "PropertyOfPixelAutomation" Then
+                                    For Each item In addrList
+                                        If item = stringArray(0) Then
+                                            LicValid = True
+                                            DeleteLicTrial()
+                                            Return "LICENSED"
+                                        End If
+                                    Next
                                 End If
-                            Next
+                            End If
                         End Using
                     Catch ex As Exception
                     End Try
@@ -946,8 +942,8 @@ Namespace LicensingModule
                 ' Generate License Request String
                 Dim LicReqStr As String = ""
                 For i As Integer = 0 To addrList.Count
-                    ' Get Top 3 Results Only
-                    If i > 2 Then
+                    ' Get Top 1 Results Only
+                    If i > 0 Then
                         Exit For
                     End If
 
@@ -960,11 +956,12 @@ Namespace LicensingModule
                 Next
 
                 ' Encrypt String 
-                Dim LicReqStrEnc As String = LicEncrypt(LicReqStr.Trim)
+                'Dim LicReqStrEnc As String = LicEncrypt(LicReqStr.Trim)
 
                 ' Write Into File
                 Using writer As New StreamWriter(PathToLicReqFile)
-                    writer.WriteLine(LicReqStrEnc)
+                    'writer.WriteLine(LicReqStrEnc)
+                    writer.WriteLine(LicReqStr.Trim)
                 End Using
 
                 Return True
@@ -997,50 +994,65 @@ Namespace LicensingModule
             File.Delete(PathToTrialFile)
         End Sub
 
-        Public Function LicDecrypt(str As String) As String
-            Try
-                Dim aesAlg As New AesCryptoServiceProvider()
-                aesAlg.KeySize = 256
-                aesAlg.BlockSize = 128
-                aesAlg.Key = Encoding.UTF8.GetBytes(ENC_key)
-                aesAlg.IV = Encoding.UTF8.GetBytes(ENC_IV)
+        Public Function LicEncrypt(ByVal plainText As String) As String
+            Dim strPassword As String = "yourPassPhrase"
+            Dim s As String = "mySaltValue"
+            Dim strHashName As String = "SHA1"
+            Dim iterations As Integer = 2
+            Dim s2 As String = "@1B2c3D4e5F6g7H8"
+            Dim num As Integer = 256
 
-                Dim decryptor As ICryptoTransform = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV)
-                Dim cipherTextBytes As Byte() = Convert.FromBase64String(str)
-                Dim msDecrypt As New MemoryStream(cipherTextBytes)
+            Dim bytes As Byte() = Encoding.ASCII.GetBytes(s2)
+            Dim bytes2 As Byte() = Encoding.ASCII.GetBytes(s)
+            Dim bytes3 As Byte() = Encoding.UTF8.GetBytes(plainText)
 
-                Using csDecrypt As New CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read)
-                    Using srDecrypt As New StreamReader(csDecrypt)
-                        Return srDecrypt.ReadToEnd()
-                    End Using
-                End Using
-            Catch ex As Exception
-                Return Nothing
-            End Try
+            Dim bytes4 As Byte() = New PasswordDeriveBytes(strPassword, bytes2, strHashName, iterations).GetBytes(num / 8)
+
+            Dim transform As ICryptoTransform = New RijndaelManaged With {
+                .Mode = CipherMode.CBC
+            }.CreateEncryptor(bytes4, bytes)
+
+            Dim memoryStream As New MemoryStream()
+            Dim cryptoStream As New CryptoStream(memoryStream, transform, CryptoStreamMode.Write)
+
+            cryptoStream.Write(bytes3, 0, bytes3.Length)
+            cryptoStream.FlushFinalBlock()
+
+            Dim inArray As Byte() = memoryStream.ToArray()
+
+            memoryStream.Close()
+            cryptoStream.Close()
+
+            Return Convert.ToBase64String(inArray)
         End Function
 
-        Public Function LicEncrypt(str As String) As String
-            Try
-                Dim aesAlg As New AesCryptoServiceProvider()
-                aesAlg.KeySize = 256
-                aesAlg.BlockSize = 128
-                aesAlg.Key = Encoding.UTF8.GetBytes(ENC_key)
-                aesAlg.IV = Encoding.UTF8.GetBytes(ENC_IV)
+        Public Function LicDecrypt(ByVal cipherText As String) As String
+            Dim strPassword As String = "yourPassPhrase"
+            Dim s As String = "mySaltValue"
+            Dim strHashName As String = "SHA1"
+            Dim iterations As Integer = 2
+            Dim s2 As String = "@1B2c3D4e5F6g7H8"
+            Dim num As Integer = 256
 
-                Dim encryptor As ICryptoTransform = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV)
-                Dim msEncrypt As New MemoryStream()
+            Dim bytes As Byte() = Encoding.ASCII.GetBytes(s2)
+            Dim bytes2 As Byte() = Encoding.ASCII.GetBytes(s)
+            Dim array As Byte() = Convert.FromBase64String(cipherText)
+            Dim bytes3 As Byte() = New PasswordDeriveBytes(strPassword, bytes2, strHashName, iterations).GetBytes(num / 8)
 
-                Using csEncrypt As New CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write)
-                    Using swEncrypt As New StreamWriter(csEncrypt)
-                        swEncrypt.Write(str)
-                    End Using
-                End Using
+            Dim transform As ICryptoTransform = New RijndaelManaged With {
+                .Mode = CipherMode.CBC
+            }.CreateDecryptor(bytes3, bytes)
 
-                Dim encryptedBytes As Byte() = msEncrypt.ToArray()
-                Return Convert.ToBase64String(encryptedBytes)
-            Catch ex As Exception
-                Return Nothing
-            End Try
+            Dim memoryStream As New MemoryStream(array)
+            Dim cryptoStream As New CryptoStream(memoryStream, transform, CryptoStreamMode.Read)
+
+            Dim array2(array.Length - 1) As Byte
+            Dim count As Integer = cryptoStream.Read(array2, 0, array2.Length)
+
+            memoryStream.Close()
+            cryptoStream.Close()
+
+            Return Encoding.UTF8.GetString(array2, 0, count)
         End Function
     End Module
 End Namespace
