@@ -447,6 +447,7 @@ Partial Class FormSetting
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(750, 761)
         Me.Panel3.TabIndex = 1
+        Me.Panel3.Visible = False
         '
         'TabControl1
         '

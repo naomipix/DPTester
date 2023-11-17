@@ -247,19 +247,53 @@ Public Class FormSetting
             btnState = False
         End If
 
+        ' Define Warning Messages
+        Dim MsgBoxWarnStr1 As String = $"Are you sure you want to enable the Auto-Delete feature? This will result in the permanent removal of records older than {PublicVariables.AutoDeleteDayAfter} days from the database.{vbCrLf}** Only Production History will be removed."
+        Dim MsgBoxWarnStr2 As String = $"The auto-delete will execute in 60 seconds."
+
         ' Execute Action
         If btnState = False Then
             SetButtonState(btnClicked, btnState, btnAutoDeleteEnabledValueFalse)
             PublicVariables.AutoDeleteEnabled = btnState
+            SQLSetAutoDeleteMode(btnState)
             RetainedMemory.Update(6, "AutoDeleteEnabled", "0")
         Else
-            SetButtonState(btnClicked, btnState, btnAutoDeleteEnabledValueTrue)
-            PublicVariables.AutoDeleteEnabled = btnState
-            RetainedMemory.Update(6, "AutoDeleteEnabled", "1")
+            If MsgBox(MsgBoxWarnStr1, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                SetButtonState(btnClicked, btnState, btnAutoDeleteEnabledValueTrue)
+                PublicVariables.AutoDeleteEnabled = btnState
+                RetainedMemory.Update(6, "AutoDeleteEnabled", "1")
+                MsgBox(MsgBoxWarnStr2, MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
+                SQLSetAutoDeleteMode(btnState)
+            End If
         End If
 
         ' Clear Selection
         lbl_Title.Select()
+    End Sub
+
+    Private Sub txtbx_AutoDeleteDayAfter_Validating(sender As Object, e As EventArgs) Handles TextBox6.Validating
+        Dim txtbx As TextBox = TextBox6
+
+        If txtbx.Text.Trim.Length < 1 Then
+            txtbx.Text = PublicVariables.AutoDeleteDayAfter
+        End If
+
+        If Integer.TryParse(txtbx.Text.Trim, Nothing) = False Then
+            txtbx.Text = PublicVariables.AutoDeleteDayAfter
+        End If
+    End Sub
+
+    Private Sub txtbx_AutoDeleteDayAfter_KeyDown(sender As Object, e As KeyEventArgs) Handles TextBox6.KeyDown
+        If e.KeyCode = Keys.Enter Or e.KeyCode = Keys.Escape Then
+            Me.ActiveControl = Nothing
+        End If
+    End Sub
+
+    Private Sub txtbx_AutoDeleteDayAfter_Validated(sender As Object, e As EventArgs) Handles TextBox6.Validated
+        Dim DayInStr As String = TextBox6.Text.Trim
+
+        PublicVariables.AutoDeleteDayAfter = DayInStr
+        RetainedMemory.Update(7, "AutoDeleteDayAfter", DayInStr)
     End Sub
 
     Private Async Sub LoadLoginTable()
@@ -449,10 +483,12 @@ Public Class FormSetting
         If btnState = False Then
             SetButtonState(btnClicked, btnState, btnSQLAutoBackupEnabledValueFalse)
             PublicVariables.AutoBackupSQLEnabled = btnState
+            SQLSetAutoBackupMode(btnState)
             RetainedMemory.Update(21, "AutoBackupSQLEnabled", "0")
         Else
             SetButtonState(btnClicked, btnState, btnSQLAutoBackupEnabledValueTrue)
             PublicVariables.AutoBackupSQLEnabled = btnState
+            SQLSetAutoBackupMode(btnState)
             RetainedMemory.Update(21, "AutoBackupSQLEnabled", "1")
         End If
 

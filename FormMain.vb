@@ -187,6 +187,11 @@ Public Class FormMain
             SQLSetAutoBackupMode(PublicVariables.AutoBackupSQLEnabled)
         End If
 
+        ' SQL Auto Delete
+        If PublicVariables.AutoDeleteEnabled = True Then
+            SQLSetAutoDeleteMode(PublicVariables.AutoDeleteEnabled)
+        End If
+
 
 
 

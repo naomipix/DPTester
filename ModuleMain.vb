@@ -14,8 +14,9 @@ Module PublicVariables
     ' License Status
     Public LicenseType As String = ""
 
-    ' Backup Status
+    ' SQL Auto Backup / Delete Status
     Public LastSQLAutoBackup As DateTime
+    Public LastSQLAutoDelete As DateTime
 
     ' Retained Memory - Operation Mode
     Public OperationMode As String = ""
@@ -163,6 +164,7 @@ Module SQL
     'SQL.DeleteRecord("Users", "Name = 'John Doe'")
 
     Public WithEvents SQLAutoBackupTimer As New Timer()
+    Public WithEvents SQLAutoDeleteTimer As New Timer()
 
     Public Function InsertRecord(tableName As String, parameters As Dictionary(Of String, Object)) As Integer
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
@@ -278,18 +280,13 @@ Module SQL
         Return ReturnValue
     End Function
 
-    Public Function DeleteRecord(tableName As String, condition As String, Optional customString As Boolean = False) As Integer
+    Public Function DeleteRecord(tableName As String, condition As String) As Integer
         Dim ReturnValue As Integer = 0
 
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
         connection.Open()
 
-        Dim query As String
-        If customString = False Then
-            query = $"DELETE FROM {tableName} WHERE {condition}"
-        Else
-            query = condition
-        End If
+        Dim query As String = $"DELETE FROM {tableName} WHERE {condition}"
         Dim command As New SqlCommand(query, connection)
 
         ReturnValue = command.ExecuteNonQuery()
@@ -347,6 +344,37 @@ Module SQL
         If Not DateTime.Now.Date = LastSQLAutoBackup.Date Then
             If DateTime.Now.Hour = AutoBackupSQLAtHour Then
                 SQLAutoBackup()
+            End If
+        End If
+    End Sub
+
+
+    Public Sub SQLSetAutoDeleteMode(AutoDeleteEnabled As Boolean)
+        SQLAutoDeleteTimer.Interval = 60000
+        If AutoDeleteEnabled = True Then
+            SQLAutoDeleteTimer.Enabled = AutoDeleteEnabled
+        Else
+            SQLAutoDeleteTimer.Enabled = AutoDeleteEnabled
+        End If
+    End Sub
+
+    Public Function SQLAutoDelete() As String
+        Dim dtPastSetDayCount As DataTable = SQL.ReadRecords($"SELECT id FROM ProductionDetail WHERE timestamp < DATEADD(DAY, -{PublicVariables.AutoDeleteDayAfter}, GETDATE())")
+
+        For Each row As DataRow In dtPastSetDayCount.Rows
+            SQL.DeleteRecord("ProductionDetail", $"id='{row.Item("id")}'")
+            SQL.DeleteRecord("ProductResult", $"serial_usage_id='{row.Item("id")}'")
+        Next
+
+        LastSQLAutoDelete = DateTime.Now
+
+        Return True 'ReturnedValue
+    End Function
+
+    Private Sub SQLAutoDeleteTimer_Tick(sender As Object, e As EventArgs) Handles SQLAutoDeleteTimer.Tick
+        If Not DateTime.Now.Date = LastSQLAutoDelete.Date Then
+            If DateTime.Now.Hour = 0 Then
+                SQLAutoDelete()
             End If
         End If
     End Sub
