@@ -278,13 +278,18 @@ Module SQL
         Return ReturnValue
     End Function
 
-    Public Function DeleteRecord(tableName As String, condition As String) As Integer
+    Public Function DeleteRecord(tableName As String, condition As String, Optional customString As Boolean = False) As Integer
         Dim ReturnValue As Integer = 0
 
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
         connection.Open()
 
-        Dim query As String = $"DELETE FROM {tableName} WHERE {condition}"
+        Dim query As String
+        If customString = False Then
+            query = $"DELETE FROM {tableName} WHERE {condition}"
+        Else
+            query = condition
+        End If
         Dim command As New SqlCommand(query, connection)
 
         ReturnValue = command.ExecuteNonQuery()
