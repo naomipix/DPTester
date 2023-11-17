@@ -710,7 +710,7 @@ Namespace LicensingModule
     Module LicensingModule
         ' File Names
         Dim LicFileName As String = "Pixel License.key"
-        Dim LicTrialFileName As String = "pxdptst"
+        Dim LicTrialFileName As String = "pxtrlic.tmp"
         Dim LicReqFileName As String = "PixelLicenseRequest.txt"
 
         ' MessageBox Messages
@@ -725,11 +725,12 @@ Namespace LicensingModule
         Dim LicMsgTrialRemain As String = "Trial Remaining: "
 
         ' License Encryption Keys
-        Dim ENC_key As String = "706978656C6175746F6D6174696F6E20"  ' [pixelautomation ]
-        Dim ENC_IV As String = "706978656C202020"                   ' [pixel   ]
+        'Dim ENC_key As String = "706978656C6175746F6D6174696F6E20"  ' [pixelautomation ]
+        'Dim ENC_IV As String = "706978656C202020"                   ' [pixel   ]
 
         ' TEMP Path
-        Dim tempPath As String = Environment.GetEnvironmentVariable("TEMP")
+        'Dim tempPath As String = Environment.GetEnvironmentVariable("TEMP")
+        Dim tempPath As String = Environment.GetEnvironmentVariable("LOCALAPPDATA")
 
         ' File Path
         Dim PathToLicenseFolder As String = $"{Application.StartupPath()}\License"
@@ -877,12 +878,20 @@ Namespace LicensingModule
 
                     ' Prompt To Ask For Generate License Request File / Trial License
                     If TrialValid = False Then
-                        If MsgBox(LicMsgGenerateLRF, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNoCancel, "Information") = MsgBoxResult.Yes Then
+                        If TrialExpired = True Then
+                            If Not MsgBox($"{LicMsgTrialExpired} Continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Information") = MsgBoxResult.Yes Then
+                                MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                                Application.Exit()
+                                Return Nothing
+                            End If
+                        End If
+
+                        If MsgBox(LicMsgGenerateLRF, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Information") = MsgBoxResult.Yes Then
                             If CreateLicReqFile() = True Then
                                 MsgBox(LicMsgGenerateLRFSuccess, MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
                                 Process.Start("explorer.exe", PathToLicenseFolder)
                                 If TrialExpired = False Then
-                                    If MsgBox(LicMsgActivateTrial, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNoCancel, "Information") = MsgBoxResult.Yes Then
+                                    If MsgBox(LicMsgActivateTrial, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Information") = MsgBoxResult.Yes Then
                                         If CreateLicTrial() = True Then
                                             TrialValid = True
                                             trialTimerStart()
