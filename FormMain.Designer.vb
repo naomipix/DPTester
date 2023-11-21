@@ -93,9 +93,55 @@ Partial Class FormMain
         Me.btn_Debug1 = New System.Windows.Forms.Button()
         Me.chart_MainLiveGraph = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.tabpg_MainOverview = New System.Windows.Forms.TabPage()
+        Me.lbl_OverviewValve17 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve18 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve14 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve13 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve16 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve15 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve19 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve12 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve10 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve11 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve9 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve8 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve7 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve6 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve5 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve4 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve3 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve2 = New System.Windows.Forms.Label()
+        Me.lbl_OverviewValve1 = New System.Windows.Forms.Label()
+        Me.picbx_MainOverview = New System.Windows.Forms.PictureBox()
         Me.tabpg_MainProdZone = New System.Windows.Forms.TabPage()
+        Me.lbl_Flowmtr = New System.Windows.Forms.Label()
+        Me.dsp_Flowmtr = New System.Windows.Forms.Label()
+        Me.lbl_OutletPress = New System.Windows.Forms.Label()
+        Me.dsp_OutletPress = New System.Windows.Forms.Label()
+        Me.lbl_InletPress = New System.Windows.Forms.Label()
+        Me.dsp_InletPress = New System.Windows.Forms.Label()
+        Me.lbl_Temp = New System.Windows.Forms.Label()
+        Me.dsp_Temp = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.picbx_MainProductZone = New System.Windows.Forms.PictureBox()
         Me.tabpg_MainPumpZone = New System.Windows.Forms.TabPage()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.lbl_OverviewPumpWarning = New System.Windows.Forms.Label()
+        Me.lbl_OverviewPumpError = New System.Windows.Forms.Label()
+        Me.lbl_OverviewPumpState = New System.Windows.Forms.Label()
+        Me.dsp_OverviewPumpWarning = New System.Windows.Forms.Label()
+        Me.dsp_OverviewPumpError = New System.Windows.Forms.Label()
+        Me.dsp_OverviewPumpState = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lbl_TankProSensor = New System.Windows.Forms.Label()
+        Me.lbl_TankPreSensor = New System.Windows.Forms.Label()
+        Me.lbl_TankNomSensor = New System.Windows.Forms.Label()
+        Me.lbl_TankOvfSensor = New System.Windows.Forms.Label()
+        Me.dsp_TankProSensor = New System.Windows.Forms.Label()
+        Me.dsp_TankPreSensor = New System.Windows.Forms.Label()
+        Me.dsp_TankNomSensor = New System.Windows.Forms.Label()
+        Me.dsp_TankOvfSensor = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.picbx_MainPumpZone = New System.Windows.Forms.PictureBox()
         Me.panel_MainRightDockBtm = New System.Windows.Forms.Panel()
         Me.panel_GroupUID = New System.Windows.Forms.Panel()
@@ -278,6 +324,10 @@ Partial Class FormMain
         Me.tabpg_ManualCtrl = New System.Windows.Forms.TabPage()
         Me.tabctrl_SubManualCtrl = New System.Windows.Forms.TabControl()
         Me.tabpg_ManualControlValve = New System.Windows.Forms.TabPage()
+        Me.panel_TankControlPreview = New System.Windows.Forms.Panel()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.panel_ValveControl = New System.Windows.Forms.Panel()
         Me.btn_Valve19 = New System.Windows.Forms.Button()
         Me.btn_Valve18 = New System.Windows.Forms.Button()
@@ -336,15 +386,6 @@ Partial Class FormMain
         Me.dsp_ReqLPM = New System.Windows.Forms.Label()
         Me.dsp_PumpCtrl = New System.Windows.Forms.Label()
         Me.tabpg_ManualControlTank = New System.Windows.Forms.TabPage()
-        Me.Label238 = New System.Windows.Forms.Label()
-        Me.Label239 = New System.Windows.Forms.Label()
-        Me.Label240 = New System.Windows.Forms.Label()
-        Me.Label241 = New System.Windows.Forms.Label()
-        Me.Label242 = New System.Windows.Forms.Label()
-        Me.Label243 = New System.Windows.Forms.Label()
-        Me.Label244 = New System.Windows.Forms.Label()
-        Me.Label245 = New System.Windows.Forms.Label()
-        Me.Label246 = New System.Windows.Forms.Label()
         Me.panel_TankControl = New System.Windows.Forms.Panel()
         Me.panel_SubTankControl = New System.Windows.Forms.Panel()
         Me.chkbx_TankFill = New System.Windows.Forms.CheckBox()
@@ -369,6 +410,27 @@ Partial Class FormMain
         Me.txtbx_N2PurgeCurrent = New System.Windows.Forms.TextBox()
         Me.txtbx_BackPressCurrent = New System.Windows.Forms.TextBox()
         Me.tabpg_ManualControlDrain = New System.Windows.Forms.TabPage()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.Label50 = New System.Windows.Forms.Label()
+        Me.Label51 = New System.Windows.Forms.Label()
+        Me.Label52 = New System.Windows.Forms.Label()
+        Me.Label53 = New System.Windows.Forms.Label()
+        Me.Label54 = New System.Windows.Forms.Label()
+        Me.Label55 = New System.Windows.Forms.Label()
+        Me.Label56 = New System.Windows.Forms.Label()
+        Me.Label57 = New System.Windows.Forms.Label()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.panel_ManualDrain = New System.Windows.Forms.Panel()
         Me.panel_SubManualDrain = New System.Windows.Forms.Panel()
         Me.chkbx_N2PurgeCircuit3 = New System.Windows.Forms.CheckBox()
@@ -379,6 +441,15 @@ Partial Class FormMain
         Me.dsp_N2PurgeCircuit1 = New System.Windows.Forms.Label()
         Me.dsp_ManualDrain = New System.Windows.Forms.Label()
         Me.tabpg_ManualControlMaintenance = New System.Windows.Forms.TabPage()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
         Me.panel_Maintenance = New System.Windows.Forms.Panel()
         Me.panel_SubMaintenance = New System.Windows.Forms.Panel()
         Me.chkbx_EmptyTank = New System.Windows.Forms.CheckBox()
@@ -436,86 +507,10 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve17 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve18 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve14 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve13 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve16 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve15 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve19 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve12 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve10 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve11 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve9 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve8 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve7 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve6 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve5 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve4 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve3 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve2 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve1 = New System.Windows.Forms.Label()
-        Me.picbx_MainOverview = New System.Windows.Forms.PictureBox()
-        Me.lbl_Flowmtr = New System.Windows.Forms.Label()
-        Me.dsp_Flowmtr = New System.Windows.Forms.Label()
-        Me.lbl_OutletPress = New System.Windows.Forms.Label()
-        Me.dsp_OutletPress = New System.Windows.Forms.Label()
-        Me.lbl_InletPress = New System.Windows.Forms.Label()
-        Me.dsp_InletPress = New System.Windows.Forms.Label()
-        Me.lbl_Temp = New System.Windows.Forms.Label()
-        Me.dsp_Temp = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.lbl_OverviewPumpWarning = New System.Windows.Forms.Label()
-        Me.lbl_OverviewPumpError = New System.Windows.Forms.Label()
-        Me.lbl_OverviewPumpState = New System.Windows.Forms.Label()
-        Me.dsp_OverviewPumpWarning = New System.Windows.Forms.Label()
-        Me.dsp_OverviewPumpError = New System.Windows.Forms.Label()
-        Me.dsp_OverviewPumpState = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.lbl_TankProSensor = New System.Windows.Forms.Label()
-        Me.lbl_TankPreSensor = New System.Windows.Forms.Label()
-        Me.lbl_TankNomSensor = New System.Windows.Forms.Label()
-        Me.lbl_TankOvfSensor = New System.Windows.Forms.Label()
-        Me.dsp_TankProSensor = New System.Windows.Forms.Label()
-        Me.dsp_TankPreSensor = New System.Windows.Forms.Label()
-        Me.dsp_TankNomSensor = New System.Windows.Forms.Label()
-        Me.dsp_TankOvfSensor = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.panel_TankControlPreview = New System.Windows.Forms.Panel()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Label40 = New System.Windows.Forms.Label()
-        Me.Label41 = New System.Windows.Forms.Label()
-        Me.Label42 = New System.Windows.Forms.Label()
-        Me.Label43 = New System.Windows.Forms.Label()
-        Me.Label44 = New System.Windows.Forms.Label()
-        Me.Label45 = New System.Windows.Forms.Label()
-        Me.Label46 = New System.Windows.Forms.Label()
-        Me.Label47 = New System.Windows.Forms.Label()
-        Me.Label48 = New System.Windows.Forms.Label()
-        Me.Label49 = New System.Windows.Forms.Label()
-        Me.Label50 = New System.Windows.Forms.Label()
-        Me.Label51 = New System.Windows.Forms.Label()
-        Me.Label52 = New System.Windows.Forms.Label()
-        Me.Label53 = New System.Windows.Forms.Label()
-        Me.Label54 = New System.Windows.Forms.Label()
-        Me.Label55 = New System.Windows.Forms.Label()
-        Me.Label56 = New System.Windows.Forms.Label()
-        Me.Label57 = New System.Windows.Forms.Label()
-        Me.Label58 = New System.Windows.Forms.Label()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label32 = New System.Windows.Forms.Label()
-        Me.Label34 = New System.Windows.Forms.Label()
-        Me.Label36 = New System.Windows.Forms.Label()
-        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.panel_FormControl.SuspendLayout()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
@@ -526,9 +521,14 @@ Partial Class FormMain
         Me.tabpg_MainLiveGraph.SuspendLayout()
         CType(Me.chart_MainLiveGraph, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabpg_MainOverview.SuspendLayout()
+        CType(Me.picbx_MainOverview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabpg_MainProdZone.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picbx_MainProductZone, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabpg_MainPumpZone.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_MainRightDockBtm.SuspendLayout()
         Me.panel_GroupUID.SuspendLayout()
@@ -563,6 +563,8 @@ Partial Class FormMain
         Me.tabpg_ManualCtrl.SuspendLayout()
         Me.tabctrl_SubManualCtrl.SuspendLayout()
         Me.tabpg_ManualControlValve.SuspendLayout()
+        Me.panel_TankControlPreview.SuspendLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_ValveControl.SuspendLayout()
         Me.tabpg_ManualControlPump.SuspendLayout()
         Me.panel_PumpControl.SuspendLayout()
@@ -576,9 +578,13 @@ Partial Class FormMain
         Me.panel_RegulatorControl.SuspendLayout()
         Me.panel_SubRegulatorControl.SuspendLayout()
         Me.tabpg_ManualControlDrain.SuspendLayout()
+        Me.Panel5.SuspendLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_ManualDrain.SuspendLayout()
         Me.panel_SubManualDrain.SuspendLayout()
         Me.tabpg_ManualControlMaintenance.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_Maintenance.SuspendLayout()
         Me.panel_SubMaintenance.SuspendLayout()
         Me.tabpg_Alarm.SuspendLayout()
@@ -589,17 +595,8 @@ Partial Class FormMain
         CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_PLCHeartBeat.SuspendLayout()
         Me.panel_SelectLoadRecipe.SuspendLayout()
-        CType(Me.picbx_MainOverview, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel3.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.panel_TankControlPreview.SuspendLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel5.SuspendLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel4.SuspendLayout()
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel6.SuspendLayout()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'panel_FormControl
@@ -1068,6 +1065,244 @@ Partial Class FormMain
         Me.tabpg_MainOverview.Text = "Overview"
         Me.tabpg_MainOverview.UseVisualStyleBackColor = True
         '
+        'lbl_OverviewValve17
+        '
+        Me.lbl_OverviewValve17.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve17.Location = New System.Drawing.Point(860, 244)
+        Me.lbl_OverviewValve17.Name = "lbl_OverviewValve17"
+        Me.lbl_OverviewValve17.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve17.TabIndex = 47
+        Me.lbl_OverviewValve17.Text = "17"
+        Me.lbl_OverviewValve17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve18
+        '
+        Me.lbl_OverviewValve18.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve18.Location = New System.Drawing.Point(882, 175)
+        Me.lbl_OverviewValve18.Name = "lbl_OverviewValve18"
+        Me.lbl_OverviewValve18.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve18.TabIndex = 46
+        Me.lbl_OverviewValve18.Text = "18"
+        Me.lbl_OverviewValve18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve14
+        '
+        Me.lbl_OverviewValve14.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve14.Location = New System.Drawing.Point(839, 175)
+        Me.lbl_OverviewValve14.Name = "lbl_OverviewValve14"
+        Me.lbl_OverviewValve14.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve14.TabIndex = 45
+        Me.lbl_OverviewValve14.Text = "14"
+        Me.lbl_OverviewValve14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve13
+        '
+        Me.lbl_OverviewValve13.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve13.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve13.Location = New System.Drawing.Point(788, 175)
+        Me.lbl_OverviewValve13.Name = "lbl_OverviewValve13"
+        Me.lbl_OverviewValve13.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve13.TabIndex = 44
+        Me.lbl_OverviewValve13.Text = "13"
+        Me.lbl_OverviewValve13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve16
+        '
+        Me.lbl_OverviewValve16.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve16.Location = New System.Drawing.Point(815, 309)
+        Me.lbl_OverviewValve16.Name = "lbl_OverviewValve16"
+        Me.lbl_OverviewValve16.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve16.TabIndex = 43
+        Me.lbl_OverviewValve16.Text = "16"
+        Me.lbl_OverviewValve16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve15
+        '
+        Me.lbl_OverviewValve15.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve15.Location = New System.Drawing.Point(751, 309)
+        Me.lbl_OverviewValve15.Name = "lbl_OverviewValve15"
+        Me.lbl_OverviewValve15.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve15.TabIndex = 42
+        Me.lbl_OverviewValve15.Text = "15"
+        Me.lbl_OverviewValve15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve19
+        '
+        Me.lbl_OverviewValve19.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve19.Location = New System.Drawing.Point(335, 263)
+        Me.lbl_OverviewValve19.Name = "lbl_OverviewValve19"
+        Me.lbl_OverviewValve19.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve19.TabIndex = 41
+        Me.lbl_OverviewValve19.Text = "19"
+        Me.lbl_OverviewValve19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve12
+        '
+        Me.lbl_OverviewValve12.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve12.Location = New System.Drawing.Point(645, 370)
+        Me.lbl_OverviewValve12.Name = "lbl_OverviewValve12"
+        Me.lbl_OverviewValve12.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve12.TabIndex = 40
+        Me.lbl_OverviewValve12.Text = "12"
+        Me.lbl_OverviewValve12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve10
+        '
+        Me.lbl_OverviewValve10.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve10.Location = New System.Drawing.Point(483, 98)
+        Me.lbl_OverviewValve10.Name = "lbl_OverviewValve10"
+        Me.lbl_OverviewValve10.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve10.TabIndex = 39
+        Me.lbl_OverviewValve10.Text = "10"
+        Me.lbl_OverviewValve10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve11
+        '
+        Me.lbl_OverviewValve11.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve11.Location = New System.Drawing.Point(528, 244)
+        Me.lbl_OverviewValve11.Name = "lbl_OverviewValve11"
+        Me.lbl_OverviewValve11.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve11.TabIndex = 38
+        Me.lbl_OverviewValve11.Text = "11"
+        Me.lbl_OverviewValve11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve9
+        '
+        Me.lbl_OverviewValve9.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve9.Location = New System.Drawing.Point(528, 304)
+        Me.lbl_OverviewValve9.Name = "lbl_OverviewValve9"
+        Me.lbl_OverviewValve9.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve9.TabIndex = 37
+        Me.lbl_OverviewValve9.Text = "9"
+        Me.lbl_OverviewValve9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve8
+        '
+        Me.lbl_OverviewValve8.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve8.Location = New System.Drawing.Point(459, 400)
+        Me.lbl_OverviewValve8.Name = "lbl_OverviewValve8"
+        Me.lbl_OverviewValve8.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve8.TabIndex = 36
+        Me.lbl_OverviewValve8.Text = "8"
+        Me.lbl_OverviewValve8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve7
+        '
+        Me.lbl_OverviewValve7.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve7.Location = New System.Drawing.Point(413, 400)
+        Me.lbl_OverviewValve7.Name = "lbl_OverviewValve7"
+        Me.lbl_OverviewValve7.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve7.TabIndex = 35
+        Me.lbl_OverviewValve7.Text = "7"
+        Me.lbl_OverviewValve7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve6
+        '
+        Me.lbl_OverviewValve6.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve6.Location = New System.Drawing.Point(432, 98)
+        Me.lbl_OverviewValve6.Name = "lbl_OverviewValve6"
+        Me.lbl_OverviewValve6.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve6.TabIndex = 34
+        Me.lbl_OverviewValve6.Text = "6"
+        Me.lbl_OverviewValve6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve5
+        '
+        Me.lbl_OverviewValve5.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve5.Location = New System.Drawing.Point(281, 259)
+        Me.lbl_OverviewValve5.Name = "lbl_OverviewValve5"
+        Me.lbl_OverviewValve5.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve5.TabIndex = 33
+        Me.lbl_OverviewValve5.Text = "5"
+        Me.lbl_OverviewValve5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve4
+        '
+        Me.lbl_OverviewValve4.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve4.Location = New System.Drawing.Point(214, 163)
+        Me.lbl_OverviewValve4.Name = "lbl_OverviewValve4"
+        Me.lbl_OverviewValve4.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve4.TabIndex = 32
+        Me.lbl_OverviewValve4.Text = "4"
+        Me.lbl_OverviewValve4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve3
+        '
+        Me.lbl_OverviewValve3.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve3.Location = New System.Drawing.Point(173, 240)
+        Me.lbl_OverviewValve3.Name = "lbl_OverviewValve3"
+        Me.lbl_OverviewValve3.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve3.TabIndex = 31
+        Me.lbl_OverviewValve3.Text = "3"
+        Me.lbl_OverviewValve3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve2
+        '
+        Me.lbl_OverviewValve2.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve2.Location = New System.Drawing.Point(126, 240)
+        Me.lbl_OverviewValve2.Name = "lbl_OverviewValve2"
+        Me.lbl_OverviewValve2.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve2.TabIndex = 30
+        Me.lbl_OverviewValve2.Text = "2"
+        Me.lbl_OverviewValve2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewValve1
+        '
+        Me.lbl_OverviewValve1.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_OverviewValve1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewValve1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewValve1.Location = New System.Drawing.Point(79, 240)
+        Me.lbl_OverviewValve1.Name = "lbl_OverviewValve1"
+        Me.lbl_OverviewValve1.Size = New System.Drawing.Size(28, 25)
+        Me.lbl_OverviewValve1.TabIndex = 29
+        Me.lbl_OverviewValve1.Text = "1"
+        Me.lbl_OverviewValve1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'picbx_MainOverview
+        '
+        Me.picbx_MainOverview.Image = CType(resources.GetObject("picbx_MainOverview.Image"), System.Drawing.Image)
+        Me.picbx_MainOverview.Location = New System.Drawing.Point(0, 0)
+        Me.picbx_MainOverview.Name = "picbx_MainOverview"
+        Me.picbx_MainOverview.Size = New System.Drawing.Size(929, 528)
+        Me.picbx_MainOverview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picbx_MainOverview.TabIndex = 28
+        Me.picbx_MainOverview.TabStop = False
+        '
         'tabpg_MainProdZone
         '
         Me.tabpg_MainProdZone.Controls.Add(Me.lbl_Flowmtr)
@@ -1086,6 +1321,108 @@ Partial Class FormMain
         Me.tabpg_MainProdZone.TabIndex = 2
         Me.tabpg_MainProdZone.Text = "Product Zone"
         Me.tabpg_MainProdZone.UseVisualStyleBackColor = True
+        '
+        'lbl_Flowmtr
+        '
+        Me.lbl_Flowmtr.BackColor = System.Drawing.SystemColors.Info
+        Me.lbl_Flowmtr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Flowmtr.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Flowmtr.Location = New System.Drawing.Point(606, 323)
+        Me.lbl_Flowmtr.Name = "lbl_Flowmtr"
+        Me.lbl_Flowmtr.Size = New System.Drawing.Size(110, 25)
+        Me.lbl_Flowmtr.TabIndex = 20
+        Me.lbl_Flowmtr.Text = "25.2"
+        Me.lbl_Flowmtr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_Flowmtr
+        '
+        Me.dsp_Flowmtr.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_Flowmtr.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_Flowmtr.Location = New System.Drawing.Point(606, 280)
+        Me.dsp_Flowmtr.Name = "dsp_Flowmtr"
+        Me.dsp_Flowmtr.Size = New System.Drawing.Size(110, 45)
+        Me.dsp_Flowmtr.TabIndex = 23
+        Me.dsp_Flowmtr.Text = "Flowmeter" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min)"
+        Me.dsp_Flowmtr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OutletPress
+        '
+        Me.lbl_OutletPress.BackColor = System.Drawing.SystemColors.Info
+        Me.lbl_OutletPress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OutletPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OutletPress.Location = New System.Drawing.Point(480, 115)
+        Me.lbl_OutletPress.Name = "lbl_OutletPress"
+        Me.lbl_OutletPress.Size = New System.Drawing.Size(110, 25)
+        Me.lbl_OutletPress.TabIndex = 21
+        Me.lbl_OutletPress.Text = "25.2"
+        Me.lbl_OutletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_OutletPress
+        '
+        Me.dsp_OutletPress.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_OutletPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_OutletPress.Location = New System.Drawing.Point(480, 72)
+        Me.dsp_OutletPress.Name = "dsp_OutletPress"
+        Me.dsp_OutletPress.Size = New System.Drawing.Size(110, 45)
+        Me.dsp_OutletPress.TabIndex = 24
+        Me.dsp_OutletPress.Text = "Outlet Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
+        Me.dsp_OutletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_InletPress
+        '
+        Me.lbl_InletPress.BackColor = System.Drawing.SystemColors.Info
+        Me.lbl_InletPress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_InletPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_InletPress.Location = New System.Drawing.Point(311, 116)
+        Me.lbl_InletPress.Name = "lbl_InletPress"
+        Me.lbl_InletPress.Size = New System.Drawing.Size(110, 25)
+        Me.lbl_InletPress.TabIndex = 22
+        Me.lbl_InletPress.Text = "25.2"
+        Me.lbl_InletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_InletPress
+        '
+        Me.dsp_InletPress.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_InletPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_InletPress.Location = New System.Drawing.Point(311, 73)
+        Me.dsp_InletPress.Name = "dsp_InletPress"
+        Me.dsp_InletPress.Size = New System.Drawing.Size(110, 45)
+        Me.dsp_InletPress.TabIndex = 25
+        Me.dsp_InletPress.Text = "Inlet Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
+        Me.dsp_InletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_Temp
+        '
+        Me.lbl_Temp.BackColor = System.Drawing.SystemColors.Info
+        Me.lbl_Temp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Temp.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Temp.Location = New System.Drawing.Point(273, 196)
+        Me.lbl_Temp.Name = "lbl_Temp"
+        Me.lbl_Temp.Size = New System.Drawing.Size(110, 25)
+        Me.lbl_Temp.TabIndex = 18
+        Me.lbl_Temp.Text = "300.0"
+        Me.lbl_Temp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_Temp
+        '
+        Me.dsp_Temp.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_Temp.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_Temp.Location = New System.Drawing.Point(273, 151)
+        Me.dsp_Temp.Name = "dsp_Temp"
+        Me.dsp_Temp.Size = New System.Drawing.Size(110, 45)
+        Me.dsp_Temp.TabIndex = 19
+        Me.dsp_Temp.Text = "Temperature" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(K)"
+        Me.dsp_Temp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(929, 528)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 17
+        Me.PictureBox1.TabStop = False
         '
         'picbx_MainProductZone
         '
@@ -1108,6 +1445,207 @@ Partial Class FormMain
         Me.tabpg_MainPumpZone.TabIndex = 3
         Me.tabpg_MainPumpZone.Text = "Pump Zone"
         Me.tabpg_MainPumpZone.UseVisualStyleBackColor = True
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.SystemColors.Window
+        Me.Panel3.Controls.Add(Me.lbl_OverviewPumpWarning)
+        Me.Panel3.Controls.Add(Me.lbl_OverviewPumpError)
+        Me.Panel3.Controls.Add(Me.lbl_OverviewPumpState)
+        Me.Panel3.Controls.Add(Me.dsp_OverviewPumpWarning)
+        Me.Panel3.Controls.Add(Me.dsp_OverviewPumpError)
+        Me.Panel3.Controls.Add(Me.dsp_OverviewPumpState)
+        Me.Panel3.Location = New System.Drawing.Point(214, 303)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(168, 120)
+        Me.Panel3.TabIndex = 21
+        '
+        'lbl_OverviewPumpWarning
+        '
+        Me.lbl_OverviewPumpWarning.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_OverviewPumpWarning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewPumpWarning.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewPumpWarning.Location = New System.Drawing.Point(142, 77)
+        Me.lbl_OverviewPumpWarning.Name = "lbl_OverviewPumpWarning"
+        Me.lbl_OverviewPumpWarning.Size = New System.Drawing.Size(17, 17)
+        Me.lbl_OverviewPumpWarning.TabIndex = 16
+        Me.lbl_OverviewPumpWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewPumpError
+        '
+        Me.lbl_OverviewPumpError.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_OverviewPumpError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewPumpError.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewPumpError.Location = New System.Drawing.Point(142, 51)
+        Me.lbl_OverviewPumpError.Name = "lbl_OverviewPumpError"
+        Me.lbl_OverviewPumpError.Size = New System.Drawing.Size(17, 17)
+        Me.lbl_OverviewPumpError.TabIndex = 15
+        Me.lbl_OverviewPumpError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OverviewPumpState
+        '
+        Me.lbl_OverviewPumpState.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_OverviewPumpState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_OverviewPumpState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OverviewPumpState.Location = New System.Drawing.Point(142, 25)
+        Me.lbl_OverviewPumpState.Name = "lbl_OverviewPumpState"
+        Me.lbl_OverviewPumpState.Size = New System.Drawing.Size(17, 17)
+        Me.lbl_OverviewPumpState.TabIndex = 14
+        Me.lbl_OverviewPumpState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_OverviewPumpWarning
+        '
+        Me.dsp_OverviewPumpWarning.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_OverviewPumpWarning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.dsp_OverviewPumpWarning.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_OverviewPumpWarning.Location = New System.Drawing.Point(16, 73)
+        Me.dsp_OverviewPumpWarning.Name = "dsp_OverviewPumpWarning"
+        Me.dsp_OverviewPumpWarning.Size = New System.Drawing.Size(120, 25)
+        Me.dsp_OverviewPumpWarning.TabIndex = 13
+        Me.dsp_OverviewPumpWarning.Text = "Pump Warning"
+        Me.dsp_OverviewPumpWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_OverviewPumpError
+        '
+        Me.dsp_OverviewPumpError.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_OverviewPumpError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.dsp_OverviewPumpError.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_OverviewPumpError.Location = New System.Drawing.Point(16, 47)
+        Me.dsp_OverviewPumpError.Name = "dsp_OverviewPumpError"
+        Me.dsp_OverviewPumpError.Size = New System.Drawing.Size(120, 25)
+        Me.dsp_OverviewPumpError.TabIndex = 13
+        Me.dsp_OverviewPumpError.Text = "Pump Error"
+        Me.dsp_OverviewPumpError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_OverviewPumpState
+        '
+        Me.dsp_OverviewPumpState.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_OverviewPumpState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.dsp_OverviewPumpState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_OverviewPumpState.Location = New System.Drawing.Point(16, 21)
+        Me.dsp_OverviewPumpState.Name = "dsp_OverviewPumpState"
+        Me.dsp_OverviewPumpState.Size = New System.Drawing.Size(120, 25)
+        Me.dsp_OverviewPumpState.TabIndex = 13
+        Me.dsp_OverviewPumpState.Text = "Pump State"
+        Me.dsp_OverviewPumpState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.SystemColors.Window
+        Me.Panel2.Controls.Add(Me.lbl_TankProSensor)
+        Me.Panel2.Controls.Add(Me.lbl_TankPreSensor)
+        Me.Panel2.Controls.Add(Me.lbl_TankNomSensor)
+        Me.Panel2.Controls.Add(Me.lbl_TankOvfSensor)
+        Me.Panel2.Controls.Add(Me.dsp_TankProSensor)
+        Me.Panel2.Controls.Add(Me.dsp_TankPreSensor)
+        Me.Panel2.Controls.Add(Me.dsp_TankNomSensor)
+        Me.Panel2.Controls.Add(Me.dsp_TankOvfSensor)
+        Me.Panel2.Location = New System.Drawing.Point(81, 84)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(265, 145)
+        Me.Panel2.TabIndex = 20
+        '
+        'lbl_TankProSensor
+        '
+        Me.lbl_TankProSensor.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_TankProSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_TankProSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_TankProSensor.Location = New System.Drawing.Point(241, 107)
+        Me.lbl_TankProSensor.Name = "lbl_TankProSensor"
+        Me.lbl_TankProSensor.Size = New System.Drawing.Size(17, 17)
+        Me.lbl_TankProSensor.TabIndex = 17
+        Me.lbl_TankProSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_TankPreSensor
+        '
+        Me.lbl_TankPreSensor.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_TankPreSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_TankPreSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_TankPreSensor.Location = New System.Drawing.Point(241, 81)
+        Me.lbl_TankPreSensor.Name = "lbl_TankPreSensor"
+        Me.lbl_TankPreSensor.Size = New System.Drawing.Size(17, 17)
+        Me.lbl_TankPreSensor.TabIndex = 16
+        Me.lbl_TankPreSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_TankNomSensor
+        '
+        Me.lbl_TankNomSensor.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_TankNomSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_TankNomSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_TankNomSensor.Location = New System.Drawing.Point(241, 55)
+        Me.lbl_TankNomSensor.Name = "lbl_TankNomSensor"
+        Me.lbl_TankNomSensor.Size = New System.Drawing.Size(17, 17)
+        Me.lbl_TankNomSensor.TabIndex = 15
+        Me.lbl_TankNomSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_TankOvfSensor
+        '
+        Me.lbl_TankOvfSensor.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_TankOvfSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_TankOvfSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_TankOvfSensor.Location = New System.Drawing.Point(241, 29)
+        Me.lbl_TankOvfSensor.Name = "lbl_TankOvfSensor"
+        Me.lbl_TankOvfSensor.Size = New System.Drawing.Size(17, 17)
+        Me.lbl_TankOvfSensor.TabIndex = 14
+        Me.lbl_TankOvfSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_TankProSensor
+        '
+        Me.dsp_TankProSensor.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_TankProSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.dsp_TankProSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_TankProSensor.Location = New System.Drawing.Point(65, 103)
+        Me.dsp_TankProSensor.Name = "dsp_TankProSensor"
+        Me.dsp_TankProSensor.Size = New System.Drawing.Size(170, 25)
+        Me.dsp_TankProSensor.TabIndex = 13
+        Me.dsp_TankProSensor.Text = "Tank P.Protect Sensor"
+        Me.dsp_TankProSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_TankPreSensor
+        '
+        Me.dsp_TankPreSensor.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_TankPreSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.dsp_TankPreSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_TankPreSensor.Location = New System.Drawing.Point(65, 77)
+        Me.dsp_TankPreSensor.Name = "dsp_TankPreSensor"
+        Me.dsp_TankPreSensor.Size = New System.Drawing.Size(170, 25)
+        Me.dsp_TankPreSensor.TabIndex = 13
+        Me.dsp_TankPreSensor.Text = "Tank Precondition Sensor"
+        Me.dsp_TankPreSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_TankNomSensor
+        '
+        Me.dsp_TankNomSensor.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_TankNomSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.dsp_TankNomSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_TankNomSensor.Location = New System.Drawing.Point(65, 51)
+        Me.dsp_TankNomSensor.Name = "dsp_TankNomSensor"
+        Me.dsp_TankNomSensor.Size = New System.Drawing.Size(170, 25)
+        Me.dsp_TankNomSensor.TabIndex = 13
+        Me.dsp_TankNomSensor.Text = "Tank Nominal Sensor"
+        Me.dsp_TankNomSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_TankOvfSensor
+        '
+        Me.dsp_TankOvfSensor.BackColor = System.Drawing.SystemColors.Window
+        Me.dsp_TankOvfSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.dsp_TankOvfSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_TankOvfSensor.Location = New System.Drawing.Point(65, 25)
+        Me.dsp_TankOvfSensor.Name = "dsp_TankOvfSensor"
+        Me.dsp_TankOvfSensor.Size = New System.Drawing.Size(170, 25)
+        Me.dsp_TankOvfSensor.TabIndex = 13
+        Me.dsp_TankOvfSensor.Text = "Tank Overflow Sensor"
+        Me.dsp_TankOvfSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(929, 528)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 19
+        Me.PictureBox2.TabStop = False
         '
         'picbx_MainPumpZone
         '
@@ -3235,6 +3773,52 @@ Partial Class FormMain
         Me.tabpg_ManualControlValve.TabIndex = 6
         Me.tabpg_ManualControlValve.Text = "Valve Control"
         '
+        'panel_TankControlPreview
+        '
+        Me.panel_TankControlPreview.BackColor = System.Drawing.SystemColors.Window
+        Me.panel_TankControlPreview.Controls.Add(Me.Label9)
+        Me.panel_TankControlPreview.Controls.Add(Me.Label11)
+        Me.panel_TankControlPreview.Controls.Add(Me.PictureBox3)
+        Me.panel_TankControlPreview.Dock = System.Windows.Forms.DockStyle.Right
+        Me.panel_TankControlPreview.Location = New System.Drawing.Point(682, 0)
+        Me.panel_TankControlPreview.Name = "panel_TankControlPreview"
+        Me.panel_TankControlPreview.Size = New System.Drawing.Size(1136, 583)
+        Me.panel_TankControlPreview.TabIndex = 13
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.SystemColors.Window
+        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(296, 185)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(28, 25)
+        Me.Label9.TabIndex = 9
+        Me.Label9.Text = "4"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label11
+        '
+        Me.Label11.BackColor = System.Drawing.SystemColors.Window
+        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(371, 288)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(28, 25)
+        Me.Label11.TabIndex = 9
+        Me.Label11.Text = "5"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
+        Me.PictureBox3.Location = New System.Drawing.Point(6, 3)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(1124, 577)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox3.TabIndex = 10
+        Me.PictureBox3.TabStop = False
+        '
         'panel_ValveControl
         '
         Me.panel_ValveControl.Controls.Add(Me.btn_Valve19)
@@ -3874,15 +4458,7 @@ Partial Class FormMain
         'tabpg_ManualControlTank
         '
         Me.tabpg_ManualControlTank.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.tabpg_ManualControlTank.Controls.Add(Me.Label238)
-        Me.tabpg_ManualControlTank.Controls.Add(Me.Label239)
-        Me.tabpg_ManualControlTank.Controls.Add(Me.Label240)
-        Me.tabpg_ManualControlTank.Controls.Add(Me.Label241)
-        Me.tabpg_ManualControlTank.Controls.Add(Me.Label242)
-        Me.tabpg_ManualControlTank.Controls.Add(Me.Label243)
-        Me.tabpg_ManualControlTank.Controls.Add(Me.Label244)
-        Me.tabpg_ManualControlTank.Controls.Add(Me.Label245)
-        Me.tabpg_ManualControlTank.Controls.Add(Me.Label246)
+        Me.tabpg_ManualControlTank.Controls.Add(Me.Panel6)
         Me.tabpg_ManualControlTank.Controls.Add(Me.panel_TankControl)
         Me.tabpg_ManualControlTank.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabpg_ManualControlTank.Location = New System.Drawing.Point(4, 44)
@@ -3890,114 +4466,6 @@ Partial Class FormMain
         Me.tabpg_ManualControlTank.Size = New System.Drawing.Size(1818, 583)
         Me.tabpg_ManualControlTank.TabIndex = 2
         Me.tabpg_ManualControlTank.Text = "Tank Controls"
-        '
-        'Label238
-        '
-        Me.Label238.BackColor = System.Drawing.SystemColors.Window
-        Me.Label238.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label238.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label238.Location = New System.Drawing.Point(706, 221)
-        Me.Label238.Name = "Label238"
-        Me.Label238.Size = New System.Drawing.Size(28, 25)
-        Me.Label238.TabIndex = 10
-        Me.Label238.Text = "14"
-        Me.Label238.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label239
-        '
-        Me.Label239.BackColor = System.Drawing.SystemColors.Window
-        Me.Label239.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label239.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label239.Location = New System.Drawing.Point(706, 196)
-        Me.Label239.Name = "Label239"
-        Me.Label239.Size = New System.Drawing.Size(28, 25)
-        Me.Label239.TabIndex = 11
-        Me.Label239.Text = "8"
-        Me.Label239.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label240
-        '
-        Me.Label240.BackColor = System.Drawing.SystemColors.Window
-        Me.Label240.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label240.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label240.Location = New System.Drawing.Point(706, 171)
-        Me.Label240.Name = "Label240"
-        Me.Label240.Size = New System.Drawing.Size(28, 25)
-        Me.Label240.TabIndex = 12
-        Me.Label240.Text = "7"
-        Me.Label240.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label241
-        '
-        Me.Label241.BackColor = System.Drawing.SystemColors.Window
-        Me.Label241.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label241.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label241.Location = New System.Drawing.Point(706, 146)
-        Me.Label241.Name = "Label241"
-        Me.Label241.Size = New System.Drawing.Size(28, 25)
-        Me.Label241.TabIndex = 13
-        Me.Label241.Text = "6"
-        Me.Label241.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label242
-        '
-        Me.Label242.BackColor = System.Drawing.SystemColors.Window
-        Me.Label242.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label242.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label242.Location = New System.Drawing.Point(706, 121)
-        Me.Label242.Name = "Label242"
-        Me.Label242.Size = New System.Drawing.Size(28, 25)
-        Me.Label242.TabIndex = 14
-        Me.Label242.Text = "5"
-        Me.Label242.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label243
-        '
-        Me.Label243.BackColor = System.Drawing.SystemColors.Window
-        Me.Label243.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label243.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label243.Location = New System.Drawing.Point(706, 96)
-        Me.Label243.Name = "Label243"
-        Me.Label243.Size = New System.Drawing.Size(28, 25)
-        Me.Label243.TabIndex = 15
-        Me.Label243.Text = "4"
-        Me.Label243.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label244
-        '
-        Me.Label244.BackColor = System.Drawing.SystemColors.Window
-        Me.Label244.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label244.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label244.Location = New System.Drawing.Point(706, 71)
-        Me.Label244.Name = "Label244"
-        Me.Label244.Size = New System.Drawing.Size(28, 25)
-        Me.Label244.TabIndex = 16
-        Me.Label244.Text = "3"
-        Me.Label244.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label245
-        '
-        Me.Label245.BackColor = System.Drawing.SystemColors.Window
-        Me.Label245.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label245.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label245.Location = New System.Drawing.Point(706, 46)
-        Me.Label245.Name = "Label245"
-        Me.Label245.Size = New System.Drawing.Size(28, 25)
-        Me.Label245.TabIndex = 17
-        Me.Label245.Text = "2"
-        Me.Label245.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label246
-        '
-        Me.Label246.BackColor = System.Drawing.SystemColors.Window
-        Me.Label246.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label246.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label246.Location = New System.Drawing.Point(706, 21)
-        Me.Label246.Name = "Label246"
-        Me.Label246.Size = New System.Drawing.Size(28, 25)
-        Me.Label246.TabIndex = 18
-        Me.Label246.Text = "1"
-        Me.Label246.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'panel_TankControl
         '
@@ -4252,6 +4720,273 @@ Partial Class FormMain
         Me.tabpg_ManualControlDrain.TabIndex = 4
         Me.tabpg_ManualControlDrain.Text = "Manual Drain"
         '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.SystemColors.Window
+        Me.Panel5.Controls.Add(Me.Label40)
+        Me.Panel5.Controls.Add(Me.Label41)
+        Me.Panel5.Controls.Add(Me.Label42)
+        Me.Panel5.Controls.Add(Me.Label43)
+        Me.Panel5.Controls.Add(Me.Label44)
+        Me.Panel5.Controls.Add(Me.Label45)
+        Me.Panel5.Controls.Add(Me.Label46)
+        Me.Panel5.Controls.Add(Me.Label47)
+        Me.Panel5.Controls.Add(Me.Label48)
+        Me.Panel5.Controls.Add(Me.Label49)
+        Me.Panel5.Controls.Add(Me.Label50)
+        Me.Panel5.Controls.Add(Me.Label51)
+        Me.Panel5.Controls.Add(Me.Label52)
+        Me.Panel5.Controls.Add(Me.Label53)
+        Me.Panel5.Controls.Add(Me.Label54)
+        Me.Panel5.Controls.Add(Me.Label55)
+        Me.Panel5.Controls.Add(Me.Label56)
+        Me.Panel5.Controls.Add(Me.Label57)
+        Me.Panel5.Controls.Add(Me.Label58)
+        Me.Panel5.Controls.Add(Me.PictureBox4)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel5.Location = New System.Drawing.Point(682, 0)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(1136, 583)
+        Me.Panel5.TabIndex = 13
+        '
+        'Label40
+        '
+        Me.Label40.BackColor = System.Drawing.SystemColors.Window
+        Me.Label40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label40.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label40.Location = New System.Drawing.Point(425, 292)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(28, 25)
+        Me.Label40.TabIndex = 9
+        Me.Label40.Text = "19"
+        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label41
+        '
+        Me.Label41.BackColor = System.Drawing.SystemColors.Window
+        Me.Label41.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label41.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label41.Location = New System.Drawing.Point(150, 266)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(28, 25)
+        Me.Label41.TabIndex = 9
+        Me.Label41.Text = "1"
+        Me.Label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label42
+        '
+        Me.Label42.BackColor = System.Drawing.SystemColors.Window
+        Me.Label42.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label42.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label42.Location = New System.Drawing.Point(1022, 196)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(28, 25)
+        Me.Label42.TabIndex = 9
+        Me.Label42.Text = "18"
+        Me.Label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label43
+        '
+        Me.Label43.BackColor = System.Drawing.SystemColors.Window
+        Me.Label43.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label43.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label43.Location = New System.Drawing.Point(202, 266)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(28, 25)
+        Me.Label43.TabIndex = 9
+        Me.Label43.Text = "2"
+        Me.Label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label44
+        '
+        Me.Label44.BackColor = System.Drawing.SystemColors.Window
+        Me.Label44.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label44.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label44.Location = New System.Drawing.Point(998, 271)
+        Me.Label44.Name = "Label44"
+        Me.Label44.Size = New System.Drawing.Size(28, 25)
+        Me.Label44.TabIndex = 9
+        Me.Label44.Text = "17"
+        Me.Label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label45
+        '
+        Me.Label45.BackColor = System.Drawing.SystemColors.Window
+        Me.Label45.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label45.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label45.Location = New System.Drawing.Point(249, 266)
+        Me.Label45.Name = "Label45"
+        Me.Label45.Size = New System.Drawing.Size(28, 25)
+        Me.Label45.TabIndex = 9
+        Me.Label45.Text = "3"
+        Me.Label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label46
+        '
+        Me.Label46.BackColor = System.Drawing.SystemColors.Window
+        Me.Label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label46.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label46.Location = New System.Drawing.Point(950, 343)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(28, 25)
+        Me.Label46.TabIndex = 9
+        Me.Label46.Text = "16"
+        Me.Label46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label47
+        '
+        Me.Label47.BackColor = System.Drawing.SystemColors.Window
+        Me.Label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label47.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label47.Location = New System.Drawing.Point(296, 185)
+        Me.Label47.Name = "Label47"
+        Me.Label47.Size = New System.Drawing.Size(28, 25)
+        Me.Label47.TabIndex = 9
+        Me.Label47.Text = "4"
+        Me.Label47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label48
+        '
+        Me.Label48.BackColor = System.Drawing.SystemColors.Window
+        Me.Label48.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label48.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label48.Location = New System.Drawing.Point(884, 343)
+        Me.Label48.Name = "Label48"
+        Me.Label48.Size = New System.Drawing.Size(28, 25)
+        Me.Label48.TabIndex = 9
+        Me.Label48.Text = "15"
+        Me.Label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label49
+        '
+        Me.Label49.BackColor = System.Drawing.SystemColors.Window
+        Me.Label49.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label49.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label49.Location = New System.Drawing.Point(371, 288)
+        Me.Label49.Name = "Label49"
+        Me.Label49.Size = New System.Drawing.Size(28, 25)
+        Me.Label49.TabIndex = 9
+        Me.Label49.Text = "5"
+        Me.Label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label50
+        '
+        Me.Label50.BackColor = System.Drawing.SystemColors.Window
+        Me.Label50.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label50.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label50.Location = New System.Drawing.Point(975, 196)
+        Me.Label50.Name = "Label50"
+        Me.Label50.Size = New System.Drawing.Size(28, 25)
+        Me.Label50.TabIndex = 9
+        Me.Label50.Text = "14"
+        Me.Label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label51
+        '
+        Me.Label51.BackColor = System.Drawing.SystemColors.Window
+        Me.Label51.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label51.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label51.Location = New System.Drawing.Point(536, 112)
+        Me.Label51.Name = "Label51"
+        Me.Label51.Size = New System.Drawing.Size(28, 25)
+        Me.Label51.TabIndex = 9
+        Me.Label51.Text = "6"
+        Me.Label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label52
+        '
+        Me.Label52.BackColor = System.Drawing.SystemColors.Window
+        Me.Label52.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label52.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label52.Location = New System.Drawing.Point(920, 196)
+        Me.Label52.Name = "Label52"
+        Me.Label52.Size = New System.Drawing.Size(28, 25)
+        Me.Label52.TabIndex = 9
+        Me.Label52.Text = "13"
+        Me.Label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label53
+        '
+        Me.Label53.BackColor = System.Drawing.SystemColors.Window
+        Me.Label53.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label53.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label53.Location = New System.Drawing.Point(516, 442)
+        Me.Label53.Name = "Label53"
+        Me.Label53.Size = New System.Drawing.Size(28, 25)
+        Me.Label53.TabIndex = 9
+        Me.Label53.Text = "7"
+        Me.Label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label54
+        '
+        Me.Label54.BackColor = System.Drawing.SystemColors.Window
+        Me.Label54.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label54.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label54.Location = New System.Drawing.Point(766, 411)
+        Me.Label54.Name = "Label54"
+        Me.Label54.Size = New System.Drawing.Size(28, 25)
+        Me.Label54.TabIndex = 9
+        Me.Label54.Text = "12"
+        Me.Label54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label55
+        '
+        Me.Label55.BackColor = System.Drawing.SystemColors.Window
+        Me.Label55.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label55.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label55.Location = New System.Drawing.Point(561, 442)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(28, 25)
+        Me.Label55.TabIndex = 9
+        Me.Label55.Text = "8"
+        Me.Label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label56
+        '
+        Me.Label56.BackColor = System.Drawing.SystemColors.Window
+        Me.Label56.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label56.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label56.Location = New System.Drawing.Point(587, 112)
+        Me.Label56.Name = "Label56"
+        Me.Label56.Size = New System.Drawing.Size(28, 25)
+        Me.Label56.TabIndex = 9
+        Me.Label56.Text = "11"
+        Me.Label56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label57
+        '
+        Me.Label57.BackColor = System.Drawing.SystemColors.Window
+        Me.Label57.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label57.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label57.Location = New System.Drawing.Point(636, 336)
+        Me.Label57.Name = "Label57"
+        Me.Label57.Size = New System.Drawing.Size(28, 25)
+        Me.Label57.TabIndex = 9
+        Me.Label57.Text = "9"
+        Me.Label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label58
+        '
+        Me.Label58.BackColor = System.Drawing.SystemColors.Window
+        Me.Label58.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label58.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label58.Location = New System.Drawing.Point(635, 271)
+        Me.Label58.Name = "Label58"
+        Me.Label58.Size = New System.Drawing.Size(28, 25)
+        Me.Label58.TabIndex = 9
+        Me.Label58.Text = "10"
+        Me.Label58.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
+        Me.PictureBox4.Location = New System.Drawing.Point(6, 3)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(1124, 577)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox4.TabIndex = 10
+        Me.PictureBox4.TabStop = False
+        '
         'panel_ManualDrain
         '
         Me.panel_ManualDrain.Controls.Add(Me.panel_SubManualDrain)
@@ -4370,6 +5105,117 @@ Partial Class FormMain
         Me.tabpg_ManualControlMaintenance.Size = New System.Drawing.Size(1818, 583)
         Me.tabpg_ManualControlMaintenance.TabIndex = 5
         Me.tabpg_ManualControlMaintenance.Text = "Maintenance"
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.SystemColors.Window
+        Me.Panel4.Controls.Add(Me.Label22)
+        Me.Panel4.Controls.Add(Me.Label24)
+        Me.Panel4.Controls.Add(Me.Label26)
+        Me.Panel4.Controls.Add(Me.Label30)
+        Me.Panel4.Controls.Add(Me.Label32)
+        Me.Panel4.Controls.Add(Me.Label34)
+        Me.Panel4.Controls.Add(Me.Label36)
+        Me.Panel4.Controls.Add(Me.PictureBox5)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel4.Location = New System.Drawing.Point(682, 0)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(1136, 583)
+        Me.Panel4.TabIndex = 13
+        '
+        'Label22
+        '
+        Me.Label22.BackColor = System.Drawing.SystemColors.Window
+        Me.Label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label22.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(150, 266)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(28, 25)
+        Me.Label22.TabIndex = 9
+        Me.Label22.Text = "1"
+        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label24
+        '
+        Me.Label24.BackColor = System.Drawing.SystemColors.Window
+        Me.Label24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(202, 266)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(28, 25)
+        Me.Label24.TabIndex = 9
+        Me.Label24.Text = "2"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label26
+        '
+        Me.Label26.BackColor = System.Drawing.SystemColors.Window
+        Me.Label26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label26.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.Location = New System.Drawing.Point(249, 266)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(28, 25)
+        Me.Label26.TabIndex = 9
+        Me.Label26.Text = "3"
+        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label30
+        '
+        Me.Label30.BackColor = System.Drawing.SystemColors.Window
+        Me.Label30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label30.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.Location = New System.Drawing.Point(371, 288)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(28, 25)
+        Me.Label30.TabIndex = 9
+        Me.Label30.Text = "5"
+        Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label32
+        '
+        Me.Label32.BackColor = System.Drawing.SystemColors.Window
+        Me.Label32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label32.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label32.Location = New System.Drawing.Point(536, 112)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(28, 25)
+        Me.Label32.TabIndex = 9
+        Me.Label32.Text = "6"
+        Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label34
+        '
+        Me.Label34.BackColor = System.Drawing.SystemColors.Window
+        Me.Label34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label34.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label34.Location = New System.Drawing.Point(516, 442)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(28, 25)
+        Me.Label34.TabIndex = 9
+        Me.Label34.Text = "7"
+        Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label36
+        '
+        Me.Label36.BackColor = System.Drawing.SystemColors.Window
+        Me.Label36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label36.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label36.Location = New System.Drawing.Point(561, 442)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(28, 25)
+        Me.Label36.TabIndex = 9
+        Me.Label36.Text = "8"
+        Me.Label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox5
+        '
+        Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
+        Me.PictureBox5.Location = New System.Drawing.Point(6, 3)
+        Me.PictureBox5.Name = "PictureBox5"
+        Me.PictureBox5.Size = New System.Drawing.Size(1124, 577)
+        Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox5.TabIndex = 10
+        Me.PictureBox5.TabStop = False
         '
         'panel_Maintenance
         '
@@ -5063,970 +5909,51 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'lbl_OverviewValve17
-        '
-        Me.lbl_OverviewValve17.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve17.Location = New System.Drawing.Point(860, 244)
-        Me.lbl_OverviewValve17.Name = "lbl_OverviewValve17"
-        Me.lbl_OverviewValve17.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve17.TabIndex = 47
-        Me.lbl_OverviewValve17.Text = "17"
-        Me.lbl_OverviewValve17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve18
-        '
-        Me.lbl_OverviewValve18.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve18.Location = New System.Drawing.Point(882, 175)
-        Me.lbl_OverviewValve18.Name = "lbl_OverviewValve18"
-        Me.lbl_OverviewValve18.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve18.TabIndex = 46
-        Me.lbl_OverviewValve18.Text = "18"
-        Me.lbl_OverviewValve18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve14
-        '
-        Me.lbl_OverviewValve14.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve14.Location = New System.Drawing.Point(839, 175)
-        Me.lbl_OverviewValve14.Name = "lbl_OverviewValve14"
-        Me.lbl_OverviewValve14.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve14.TabIndex = 45
-        Me.lbl_OverviewValve14.Text = "14"
-        Me.lbl_OverviewValve14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve13
-        '
-        Me.lbl_OverviewValve13.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve13.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve13.Location = New System.Drawing.Point(788, 175)
-        Me.lbl_OverviewValve13.Name = "lbl_OverviewValve13"
-        Me.lbl_OverviewValve13.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve13.TabIndex = 44
-        Me.lbl_OverviewValve13.Text = "13"
-        Me.lbl_OverviewValve13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve16
-        '
-        Me.lbl_OverviewValve16.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve16.Location = New System.Drawing.Point(815, 309)
-        Me.lbl_OverviewValve16.Name = "lbl_OverviewValve16"
-        Me.lbl_OverviewValve16.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve16.TabIndex = 43
-        Me.lbl_OverviewValve16.Text = "16"
-        Me.lbl_OverviewValve16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve15
-        '
-        Me.lbl_OverviewValve15.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve15.Location = New System.Drawing.Point(751, 309)
-        Me.lbl_OverviewValve15.Name = "lbl_OverviewValve15"
-        Me.lbl_OverviewValve15.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve15.TabIndex = 42
-        Me.lbl_OverviewValve15.Text = "15"
-        Me.lbl_OverviewValve15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve19
-        '
-        Me.lbl_OverviewValve19.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve19.Location = New System.Drawing.Point(335, 263)
-        Me.lbl_OverviewValve19.Name = "lbl_OverviewValve19"
-        Me.lbl_OverviewValve19.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve19.TabIndex = 41
-        Me.lbl_OverviewValve19.Text = "19"
-        Me.lbl_OverviewValve19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve12
-        '
-        Me.lbl_OverviewValve12.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve12.Location = New System.Drawing.Point(645, 370)
-        Me.lbl_OverviewValve12.Name = "lbl_OverviewValve12"
-        Me.lbl_OverviewValve12.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve12.TabIndex = 40
-        Me.lbl_OverviewValve12.Text = "12"
-        Me.lbl_OverviewValve12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve10
-        '
-        Me.lbl_OverviewValve10.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve10.Location = New System.Drawing.Point(483, 98)
-        Me.lbl_OverviewValve10.Name = "lbl_OverviewValve10"
-        Me.lbl_OverviewValve10.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve10.TabIndex = 39
-        Me.lbl_OverviewValve10.Text = "10"
-        Me.lbl_OverviewValve10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve11
-        '
-        Me.lbl_OverviewValve11.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve11.Location = New System.Drawing.Point(528, 244)
-        Me.lbl_OverviewValve11.Name = "lbl_OverviewValve11"
-        Me.lbl_OverviewValve11.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve11.TabIndex = 38
-        Me.lbl_OverviewValve11.Text = "11"
-        Me.lbl_OverviewValve11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve9
-        '
-        Me.lbl_OverviewValve9.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve9.Location = New System.Drawing.Point(528, 304)
-        Me.lbl_OverviewValve9.Name = "lbl_OverviewValve9"
-        Me.lbl_OverviewValve9.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve9.TabIndex = 37
-        Me.lbl_OverviewValve9.Text = "9"
-        Me.lbl_OverviewValve9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve8
-        '
-        Me.lbl_OverviewValve8.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve8.Location = New System.Drawing.Point(459, 400)
-        Me.lbl_OverviewValve8.Name = "lbl_OverviewValve8"
-        Me.lbl_OverviewValve8.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve8.TabIndex = 36
-        Me.lbl_OverviewValve8.Text = "8"
-        Me.lbl_OverviewValve8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve7
-        '
-        Me.lbl_OverviewValve7.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve7.Location = New System.Drawing.Point(413, 400)
-        Me.lbl_OverviewValve7.Name = "lbl_OverviewValve7"
-        Me.lbl_OverviewValve7.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve7.TabIndex = 35
-        Me.lbl_OverviewValve7.Text = "7"
-        Me.lbl_OverviewValve7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve6
-        '
-        Me.lbl_OverviewValve6.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve6.Location = New System.Drawing.Point(432, 98)
-        Me.lbl_OverviewValve6.Name = "lbl_OverviewValve6"
-        Me.lbl_OverviewValve6.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve6.TabIndex = 34
-        Me.lbl_OverviewValve6.Text = "6"
-        Me.lbl_OverviewValve6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve5
-        '
-        Me.lbl_OverviewValve5.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve5.Location = New System.Drawing.Point(281, 259)
-        Me.lbl_OverviewValve5.Name = "lbl_OverviewValve5"
-        Me.lbl_OverviewValve5.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve5.TabIndex = 33
-        Me.lbl_OverviewValve5.Text = "5"
-        Me.lbl_OverviewValve5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve4
-        '
-        Me.lbl_OverviewValve4.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve4.Location = New System.Drawing.Point(214, 163)
-        Me.lbl_OverviewValve4.Name = "lbl_OverviewValve4"
-        Me.lbl_OverviewValve4.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve4.TabIndex = 32
-        Me.lbl_OverviewValve4.Text = "4"
-        Me.lbl_OverviewValve4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve3
-        '
-        Me.lbl_OverviewValve3.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve3.Location = New System.Drawing.Point(173, 240)
-        Me.lbl_OverviewValve3.Name = "lbl_OverviewValve3"
-        Me.lbl_OverviewValve3.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve3.TabIndex = 31
-        Me.lbl_OverviewValve3.Text = "3"
-        Me.lbl_OverviewValve3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve2
-        '
-        Me.lbl_OverviewValve2.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve2.Location = New System.Drawing.Point(126, 240)
-        Me.lbl_OverviewValve2.Name = "lbl_OverviewValve2"
-        Me.lbl_OverviewValve2.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve2.TabIndex = 30
-        Me.lbl_OverviewValve2.Text = "2"
-        Me.lbl_OverviewValve2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve1
-        '
-        Me.lbl_OverviewValve1.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve1.Location = New System.Drawing.Point(79, 240)
-        Me.lbl_OverviewValve1.Name = "lbl_OverviewValve1"
-        Me.lbl_OverviewValve1.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve1.TabIndex = 29
-        Me.lbl_OverviewValve1.Text = "1"
-        Me.lbl_OverviewValve1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'picbx_MainOverview
-        '
-        Me.picbx_MainOverview.Image = CType(resources.GetObject("picbx_MainOverview.Image"), System.Drawing.Image)
-        Me.picbx_MainOverview.Location = New System.Drawing.Point(0, 0)
-        Me.picbx_MainOverview.Name = "picbx_MainOverview"
-        Me.picbx_MainOverview.Size = New System.Drawing.Size(929, 528)
-        Me.picbx_MainOverview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picbx_MainOverview.TabIndex = 28
-        Me.picbx_MainOverview.TabStop = False
-        '
-        'lbl_Flowmtr
-        '
-        Me.lbl_Flowmtr.BackColor = System.Drawing.SystemColors.Info
-        Me.lbl_Flowmtr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Flowmtr.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Flowmtr.Location = New System.Drawing.Point(606, 323)
-        Me.lbl_Flowmtr.Name = "lbl_Flowmtr"
-        Me.lbl_Flowmtr.Size = New System.Drawing.Size(110, 25)
-        Me.lbl_Flowmtr.TabIndex = 20
-        Me.lbl_Flowmtr.Text = "25.2"
-        Me.lbl_Flowmtr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_Flowmtr
-        '
-        Me.dsp_Flowmtr.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_Flowmtr.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Flowmtr.Location = New System.Drawing.Point(606, 280)
-        Me.dsp_Flowmtr.Name = "dsp_Flowmtr"
-        Me.dsp_Flowmtr.Size = New System.Drawing.Size(110, 45)
-        Me.dsp_Flowmtr.TabIndex = 23
-        Me.dsp_Flowmtr.Text = "Flowmeter" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min)"
-        Me.dsp_Flowmtr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OutletPress
-        '
-        Me.lbl_OutletPress.BackColor = System.Drawing.SystemColors.Info
-        Me.lbl_OutletPress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OutletPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OutletPress.Location = New System.Drawing.Point(480, 115)
-        Me.lbl_OutletPress.Name = "lbl_OutletPress"
-        Me.lbl_OutletPress.Size = New System.Drawing.Size(110, 25)
-        Me.lbl_OutletPress.TabIndex = 21
-        Me.lbl_OutletPress.Text = "25.2"
-        Me.lbl_OutletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_OutletPress
-        '
-        Me.dsp_OutletPress.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_OutletPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_OutletPress.Location = New System.Drawing.Point(480, 72)
-        Me.dsp_OutletPress.Name = "dsp_OutletPress"
-        Me.dsp_OutletPress.Size = New System.Drawing.Size(110, 45)
-        Me.dsp_OutletPress.TabIndex = 24
-        Me.dsp_OutletPress.Text = "Outlet Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
-        Me.dsp_OutletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_InletPress
-        '
-        Me.lbl_InletPress.BackColor = System.Drawing.SystemColors.Info
-        Me.lbl_InletPress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_InletPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_InletPress.Location = New System.Drawing.Point(311, 116)
-        Me.lbl_InletPress.Name = "lbl_InletPress"
-        Me.lbl_InletPress.Size = New System.Drawing.Size(110, 25)
-        Me.lbl_InletPress.TabIndex = 22
-        Me.lbl_InletPress.Text = "25.2"
-        Me.lbl_InletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_InletPress
-        '
-        Me.dsp_InletPress.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_InletPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_InletPress.Location = New System.Drawing.Point(311, 73)
-        Me.dsp_InletPress.Name = "dsp_InletPress"
-        Me.dsp_InletPress.Size = New System.Drawing.Size(110, 45)
-        Me.dsp_InletPress.TabIndex = 25
-        Me.dsp_InletPress.Text = "Inlet Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
-        Me.dsp_InletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Temp
-        '
-        Me.lbl_Temp.BackColor = System.Drawing.SystemColors.Info
-        Me.lbl_Temp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Temp.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Temp.Location = New System.Drawing.Point(273, 196)
-        Me.lbl_Temp.Name = "lbl_Temp"
-        Me.lbl_Temp.Size = New System.Drawing.Size(110, 25)
-        Me.lbl_Temp.TabIndex = 18
-        Me.lbl_Temp.Text = "300.0"
-        Me.lbl_Temp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_Temp
-        '
-        Me.dsp_Temp.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_Temp.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Temp.Location = New System.Drawing.Point(273, 151)
-        Me.dsp_Temp.Name = "dsp_Temp"
-        Me.dsp_Temp.Size = New System.Drawing.Size(110, 45)
-        Me.dsp_Temp.TabIndex = 19
-        Me.dsp_Temp.Text = "Temperature" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(K)"
-        Me.dsp_Temp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(929, 528)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 17
-        Me.PictureBox1.TabStop = False
-        '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.SystemColors.Window
-        Me.Panel3.Controls.Add(Me.lbl_OverviewPumpWarning)
-        Me.Panel3.Controls.Add(Me.lbl_OverviewPumpError)
-        Me.Panel3.Controls.Add(Me.lbl_OverviewPumpState)
-        Me.Panel3.Controls.Add(Me.dsp_OverviewPumpWarning)
-        Me.Panel3.Controls.Add(Me.dsp_OverviewPumpError)
-        Me.Panel3.Controls.Add(Me.dsp_OverviewPumpState)
-        Me.Panel3.Location = New System.Drawing.Point(214, 303)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(168, 120)
-        Me.Panel3.TabIndex = 21
-        '
-        'lbl_OverviewPumpWarning
-        '
-        Me.lbl_OverviewPumpWarning.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbl_OverviewPumpWarning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewPumpWarning.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewPumpWarning.Location = New System.Drawing.Point(142, 77)
-        Me.lbl_OverviewPumpWarning.Name = "lbl_OverviewPumpWarning"
-        Me.lbl_OverviewPumpWarning.Size = New System.Drawing.Size(17, 17)
-        Me.lbl_OverviewPumpWarning.TabIndex = 16
-        Me.lbl_OverviewPumpWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewPumpError
-        '
-        Me.lbl_OverviewPumpError.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbl_OverviewPumpError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewPumpError.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewPumpError.Location = New System.Drawing.Point(142, 51)
-        Me.lbl_OverviewPumpError.Name = "lbl_OverviewPumpError"
-        Me.lbl_OverviewPumpError.Size = New System.Drawing.Size(17, 17)
-        Me.lbl_OverviewPumpError.TabIndex = 15
-        Me.lbl_OverviewPumpError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewPumpState
-        '
-        Me.lbl_OverviewPumpState.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbl_OverviewPumpState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewPumpState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewPumpState.Location = New System.Drawing.Point(142, 25)
-        Me.lbl_OverviewPumpState.Name = "lbl_OverviewPumpState"
-        Me.lbl_OverviewPumpState.Size = New System.Drawing.Size(17, 17)
-        Me.lbl_OverviewPumpState.TabIndex = 14
-        Me.lbl_OverviewPumpState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_OverviewPumpWarning
-        '
-        Me.dsp_OverviewPumpWarning.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_OverviewPumpWarning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.dsp_OverviewPumpWarning.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_OverviewPumpWarning.Location = New System.Drawing.Point(16, 73)
-        Me.dsp_OverviewPumpWarning.Name = "dsp_OverviewPumpWarning"
-        Me.dsp_OverviewPumpWarning.Size = New System.Drawing.Size(120, 25)
-        Me.dsp_OverviewPumpWarning.TabIndex = 13
-        Me.dsp_OverviewPumpWarning.Text = "Pump Warning"
-        Me.dsp_OverviewPumpWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_OverviewPumpError
-        '
-        Me.dsp_OverviewPumpError.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_OverviewPumpError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.dsp_OverviewPumpError.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_OverviewPumpError.Location = New System.Drawing.Point(16, 47)
-        Me.dsp_OverviewPumpError.Name = "dsp_OverviewPumpError"
-        Me.dsp_OverviewPumpError.Size = New System.Drawing.Size(120, 25)
-        Me.dsp_OverviewPumpError.TabIndex = 13
-        Me.dsp_OverviewPumpError.Text = "Pump Error"
-        Me.dsp_OverviewPumpError.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_OverviewPumpState
-        '
-        Me.dsp_OverviewPumpState.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_OverviewPumpState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.dsp_OverviewPumpState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_OverviewPumpState.Location = New System.Drawing.Point(16, 21)
-        Me.dsp_OverviewPumpState.Name = "dsp_OverviewPumpState"
-        Me.dsp_OverviewPumpState.Size = New System.Drawing.Size(120, 25)
-        Me.dsp_OverviewPumpState.TabIndex = 13
-        Me.dsp_OverviewPumpState.Text = "Pump State"
-        Me.dsp_OverviewPumpState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.Window
-        Me.Panel2.Controls.Add(Me.lbl_TankProSensor)
-        Me.Panel2.Controls.Add(Me.lbl_TankPreSensor)
-        Me.Panel2.Controls.Add(Me.lbl_TankNomSensor)
-        Me.Panel2.Controls.Add(Me.lbl_TankOvfSensor)
-        Me.Panel2.Controls.Add(Me.dsp_TankProSensor)
-        Me.Panel2.Controls.Add(Me.dsp_TankPreSensor)
-        Me.Panel2.Controls.Add(Me.dsp_TankNomSensor)
-        Me.Panel2.Controls.Add(Me.dsp_TankOvfSensor)
-        Me.Panel2.Location = New System.Drawing.Point(81, 84)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(265, 145)
-        Me.Panel2.TabIndex = 20
-        '
-        'lbl_TankProSensor
-        '
-        Me.lbl_TankProSensor.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbl_TankProSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_TankProSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TankProSensor.Location = New System.Drawing.Point(241, 107)
-        Me.lbl_TankProSensor.Name = "lbl_TankProSensor"
-        Me.lbl_TankProSensor.Size = New System.Drawing.Size(17, 17)
-        Me.lbl_TankProSensor.TabIndex = 17
-        Me.lbl_TankProSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_TankPreSensor
-        '
-        Me.lbl_TankPreSensor.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbl_TankPreSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_TankPreSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TankPreSensor.Location = New System.Drawing.Point(241, 81)
-        Me.lbl_TankPreSensor.Name = "lbl_TankPreSensor"
-        Me.lbl_TankPreSensor.Size = New System.Drawing.Size(17, 17)
-        Me.lbl_TankPreSensor.TabIndex = 16
-        Me.lbl_TankPreSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_TankNomSensor
-        '
-        Me.lbl_TankNomSensor.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbl_TankNomSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_TankNomSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TankNomSensor.Location = New System.Drawing.Point(241, 55)
-        Me.lbl_TankNomSensor.Name = "lbl_TankNomSensor"
-        Me.lbl_TankNomSensor.Size = New System.Drawing.Size(17, 17)
-        Me.lbl_TankNomSensor.TabIndex = 15
-        Me.lbl_TankNomSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_TankOvfSensor
-        '
-        Me.lbl_TankOvfSensor.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbl_TankOvfSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_TankOvfSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TankOvfSensor.Location = New System.Drawing.Point(241, 29)
-        Me.lbl_TankOvfSensor.Name = "lbl_TankOvfSensor"
-        Me.lbl_TankOvfSensor.Size = New System.Drawing.Size(17, 17)
-        Me.lbl_TankOvfSensor.TabIndex = 14
-        Me.lbl_TankOvfSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_TankProSensor
-        '
-        Me.dsp_TankProSensor.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_TankProSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.dsp_TankProSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_TankProSensor.Location = New System.Drawing.Point(65, 103)
-        Me.dsp_TankProSensor.Name = "dsp_TankProSensor"
-        Me.dsp_TankProSensor.Size = New System.Drawing.Size(170, 25)
-        Me.dsp_TankProSensor.TabIndex = 13
-        Me.dsp_TankProSensor.Text = "Tank P.Protect Sensor"
-        Me.dsp_TankProSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_TankPreSensor
-        '
-        Me.dsp_TankPreSensor.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_TankPreSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.dsp_TankPreSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_TankPreSensor.Location = New System.Drawing.Point(65, 77)
-        Me.dsp_TankPreSensor.Name = "dsp_TankPreSensor"
-        Me.dsp_TankPreSensor.Size = New System.Drawing.Size(170, 25)
-        Me.dsp_TankPreSensor.TabIndex = 13
-        Me.dsp_TankPreSensor.Text = "Tank Precondition Sensor"
-        Me.dsp_TankPreSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_TankNomSensor
-        '
-        Me.dsp_TankNomSensor.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_TankNomSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.dsp_TankNomSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_TankNomSensor.Location = New System.Drawing.Point(65, 51)
-        Me.dsp_TankNomSensor.Name = "dsp_TankNomSensor"
-        Me.dsp_TankNomSensor.Size = New System.Drawing.Size(170, 25)
-        Me.dsp_TankNomSensor.TabIndex = 13
-        Me.dsp_TankNomSensor.Text = "Tank Nominal Sensor"
-        Me.dsp_TankNomSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_TankOvfSensor
-        '
-        Me.dsp_TankOvfSensor.BackColor = System.Drawing.SystemColors.Window
-        Me.dsp_TankOvfSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.dsp_TankOvfSensor.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_TankOvfSensor.Location = New System.Drawing.Point(65, 25)
-        Me.dsp_TankOvfSensor.Name = "dsp_TankOvfSensor"
-        Me.dsp_TankOvfSensor.Size = New System.Drawing.Size(170, 25)
-        Me.dsp_TankOvfSensor.TabIndex = 13
-        Me.dsp_TankOvfSensor.Text = "Tank Overflow Sensor"
-        Me.dsp_TankOvfSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(929, 528)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 19
-        Me.PictureBox2.TabStop = False
-        '
-        'panel_TankControlPreview
-        '
-        Me.panel_TankControlPreview.BackColor = System.Drawing.SystemColors.Window
-        Me.panel_TankControlPreview.Controls.Add(Me.Label9)
-        Me.panel_TankControlPreview.Controls.Add(Me.Label11)
-        Me.panel_TankControlPreview.Controls.Add(Me.PictureBox3)
-        Me.panel_TankControlPreview.Dock = System.Windows.Forms.DockStyle.Right
-        Me.panel_TankControlPreview.Location = New System.Drawing.Point(682, 0)
-        Me.panel_TankControlPreview.Name = "panel_TankControlPreview"
-        Me.panel_TankControlPreview.Size = New System.Drawing.Size(1136, 583)
-        Me.panel_TankControlPreview.TabIndex = 13
-        '
-        'Label9
-        '
-        Me.Label9.BackColor = System.Drawing.SystemColors.Window
-        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(296, 185)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(28, 25)
-        Me.Label9.TabIndex = 9
-        Me.Label9.Text = "4"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label11
-        '
-        Me.Label11.BackColor = System.Drawing.SystemColors.Window
-        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(371, 288)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(28, 25)
-        Me.Label11.TabIndex = 9
-        Me.Label11.Text = "5"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'PictureBox3
-        '
-        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
-        Me.PictureBox3.Location = New System.Drawing.Point(6, 3)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(1124, 577)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox3.TabIndex = 10
-        Me.PictureBox3.TabStop = False
-        '
-        'Panel5
-        '
-        Me.Panel5.BackColor = System.Drawing.SystemColors.Window
-        Me.Panel5.Controls.Add(Me.Label40)
-        Me.Panel5.Controls.Add(Me.Label41)
-        Me.Panel5.Controls.Add(Me.Label42)
-        Me.Panel5.Controls.Add(Me.Label43)
-        Me.Panel5.Controls.Add(Me.Label44)
-        Me.Panel5.Controls.Add(Me.Label45)
-        Me.Panel5.Controls.Add(Me.Label46)
-        Me.Panel5.Controls.Add(Me.Label47)
-        Me.Panel5.Controls.Add(Me.Label48)
-        Me.Panel5.Controls.Add(Me.Label49)
-        Me.Panel5.Controls.Add(Me.Label50)
-        Me.Panel5.Controls.Add(Me.Label51)
-        Me.Panel5.Controls.Add(Me.Label52)
-        Me.Panel5.Controls.Add(Me.Label53)
-        Me.Panel5.Controls.Add(Me.Label54)
-        Me.Panel5.Controls.Add(Me.Label55)
-        Me.Panel5.Controls.Add(Me.Label56)
-        Me.Panel5.Controls.Add(Me.Label57)
-        Me.Panel5.Controls.Add(Me.Label58)
-        Me.Panel5.Controls.Add(Me.PictureBox4)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel5.Location = New System.Drawing.Point(682, 0)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(1136, 583)
-        Me.Panel5.TabIndex = 13
-        '
-        'Label40
-        '
-        Me.Label40.BackColor = System.Drawing.SystemColors.Window
-        Me.Label40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label40.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label40.Location = New System.Drawing.Point(425, 292)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(28, 25)
-        Me.Label40.TabIndex = 9
-        Me.Label40.Text = "19"
-        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label41
-        '
-        Me.Label41.BackColor = System.Drawing.SystemColors.Window
-        Me.Label41.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label41.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label41.Location = New System.Drawing.Point(150, 266)
-        Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(28, 25)
-        Me.Label41.TabIndex = 9
-        Me.Label41.Text = "1"
-        Me.Label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label42
-        '
-        Me.Label42.BackColor = System.Drawing.SystemColors.Window
-        Me.Label42.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label42.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label42.Location = New System.Drawing.Point(1022, 196)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(28, 25)
-        Me.Label42.TabIndex = 9
-        Me.Label42.Text = "18"
-        Me.Label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label43
-        '
-        Me.Label43.BackColor = System.Drawing.SystemColors.Window
-        Me.Label43.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label43.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label43.Location = New System.Drawing.Point(202, 266)
-        Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(28, 25)
-        Me.Label43.TabIndex = 9
-        Me.Label43.Text = "2"
-        Me.Label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label44
-        '
-        Me.Label44.BackColor = System.Drawing.SystemColors.Window
-        Me.Label44.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label44.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label44.Location = New System.Drawing.Point(998, 271)
-        Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(28, 25)
-        Me.Label44.TabIndex = 9
-        Me.Label44.Text = "17"
-        Me.Label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label45
-        '
-        Me.Label45.BackColor = System.Drawing.SystemColors.Window
-        Me.Label45.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label45.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.Location = New System.Drawing.Point(249, 266)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(28, 25)
-        Me.Label45.TabIndex = 9
-        Me.Label45.Text = "3"
-        Me.Label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label46
-        '
-        Me.Label46.BackColor = System.Drawing.SystemColors.Window
-        Me.Label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label46.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label46.Location = New System.Drawing.Point(950, 343)
-        Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(28, 25)
-        Me.Label46.TabIndex = 9
-        Me.Label46.Text = "16"
-        Me.Label46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label47
-        '
-        Me.Label47.BackColor = System.Drawing.SystemColors.Window
-        Me.Label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label47.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label47.Location = New System.Drawing.Point(296, 185)
-        Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(28, 25)
-        Me.Label47.TabIndex = 9
-        Me.Label47.Text = "4"
-        Me.Label47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label48
-        '
-        Me.Label48.BackColor = System.Drawing.SystemColors.Window
-        Me.Label48.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label48.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label48.Location = New System.Drawing.Point(884, 343)
-        Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(28, 25)
-        Me.Label48.TabIndex = 9
-        Me.Label48.Text = "15"
-        Me.Label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label49
-        '
-        Me.Label49.BackColor = System.Drawing.SystemColors.Window
-        Me.Label49.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label49.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label49.Location = New System.Drawing.Point(371, 288)
-        Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(28, 25)
-        Me.Label49.TabIndex = 9
-        Me.Label49.Text = "5"
-        Me.Label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label50
-        '
-        Me.Label50.BackColor = System.Drawing.SystemColors.Window
-        Me.Label50.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label50.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label50.Location = New System.Drawing.Point(975, 196)
-        Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(28, 25)
-        Me.Label50.TabIndex = 9
-        Me.Label50.Text = "14"
-        Me.Label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label51
-        '
-        Me.Label51.BackColor = System.Drawing.SystemColors.Window
-        Me.Label51.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label51.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label51.Location = New System.Drawing.Point(536, 112)
-        Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(28, 25)
-        Me.Label51.TabIndex = 9
-        Me.Label51.Text = "6"
-        Me.Label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label52
-        '
-        Me.Label52.BackColor = System.Drawing.SystemColors.Window
-        Me.Label52.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label52.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label52.Location = New System.Drawing.Point(920, 196)
-        Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(28, 25)
-        Me.Label52.TabIndex = 9
-        Me.Label52.Text = "13"
-        Me.Label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label53
-        '
-        Me.Label53.BackColor = System.Drawing.SystemColors.Window
-        Me.Label53.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label53.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label53.Location = New System.Drawing.Point(516, 442)
-        Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(28, 25)
-        Me.Label53.TabIndex = 9
-        Me.Label53.Text = "7"
-        Me.Label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label54
-        '
-        Me.Label54.BackColor = System.Drawing.SystemColors.Window
-        Me.Label54.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label54.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label54.Location = New System.Drawing.Point(766, 411)
-        Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(28, 25)
-        Me.Label54.TabIndex = 9
-        Me.Label54.Text = "12"
-        Me.Label54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label55
-        '
-        Me.Label55.BackColor = System.Drawing.SystemColors.Window
-        Me.Label55.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label55.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label55.Location = New System.Drawing.Point(561, 442)
-        Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(28, 25)
-        Me.Label55.TabIndex = 9
-        Me.Label55.Text = "8"
-        Me.Label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label56
-        '
-        Me.Label56.BackColor = System.Drawing.SystemColors.Window
-        Me.Label56.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label56.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label56.Location = New System.Drawing.Point(587, 112)
-        Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(28, 25)
-        Me.Label56.TabIndex = 9
-        Me.Label56.Text = "11"
-        Me.Label56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label57
-        '
-        Me.Label57.BackColor = System.Drawing.SystemColors.Window
-        Me.Label57.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label57.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label57.Location = New System.Drawing.Point(636, 336)
-        Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(28, 25)
-        Me.Label57.TabIndex = 9
-        Me.Label57.Text = "9"
-        Me.Label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label58
-        '
-        Me.Label58.BackColor = System.Drawing.SystemColors.Window
-        Me.Label58.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label58.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label58.Location = New System.Drawing.Point(635, 271)
-        Me.Label58.Name = "Label58"
-        Me.Label58.Size = New System.Drawing.Size(28, 25)
-        Me.Label58.TabIndex = 9
-        Me.Label58.Text = "10"
-        Me.Label58.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
-        Me.PictureBox4.Location = New System.Drawing.Point(6, 3)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(1124, 577)
-        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox4.TabIndex = 10
-        Me.PictureBox4.TabStop = False
-        '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.SystemColors.Window
-        Me.Panel4.Controls.Add(Me.Label22)
-        Me.Panel4.Controls.Add(Me.Label24)
-        Me.Panel4.Controls.Add(Me.Label26)
-        Me.Panel4.Controls.Add(Me.Label30)
-        Me.Panel4.Controls.Add(Me.Label32)
-        Me.Panel4.Controls.Add(Me.Label34)
-        Me.Panel4.Controls.Add(Me.Label36)
-        Me.Panel4.Controls.Add(Me.PictureBox5)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel4.Location = New System.Drawing.Point(682, 0)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1136, 583)
-        Me.Panel4.TabIndex = 13
-        '
-        'Label22
-        '
-        Me.Label22.BackColor = System.Drawing.SystemColors.Window
-        Me.Label22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label22.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(150, 266)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(28, 25)
-        Me.Label22.TabIndex = 9
-        Me.Label22.Text = "1"
-        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label24
-        '
-        Me.Label24.BackColor = System.Drawing.SystemColors.Window
-        Me.Label24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(202, 266)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(28, 25)
-        Me.Label24.TabIndex = 9
-        Me.Label24.Text = "2"
-        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label26
-        '
-        Me.Label26.BackColor = System.Drawing.SystemColors.Window
-        Me.Label26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label26.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(249, 266)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(28, 25)
-        Me.Label26.TabIndex = 9
-        Me.Label26.Text = "3"
-        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label30
-        '
-        Me.Label30.BackColor = System.Drawing.SystemColors.Window
-        Me.Label30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label30.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(371, 288)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(28, 25)
-        Me.Label30.TabIndex = 9
-        Me.Label30.Text = "5"
-        Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label32
-        '
-        Me.Label32.BackColor = System.Drawing.SystemColors.Window
-        Me.Label32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label32.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label32.Location = New System.Drawing.Point(536, 112)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(28, 25)
-        Me.Label32.TabIndex = 9
-        Me.Label32.Text = "6"
-        Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label34
-        '
-        Me.Label34.BackColor = System.Drawing.SystemColors.Window
-        Me.Label34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label34.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.Location = New System.Drawing.Point(516, 442)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(28, 25)
-        Me.Label34.TabIndex = 9
-        Me.Label34.Text = "7"
-        Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label36
-        '
-        Me.Label36.BackColor = System.Drawing.SystemColors.Window
-        Me.Label36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label36.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label36.Location = New System.Drawing.Point(561, 442)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(28, 25)
-        Me.Label36.TabIndex = 9
-        Me.Label36.Text = "8"
-        Me.Label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'PictureBox5
-        '
-        Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
-        Me.PictureBox5.Location = New System.Drawing.Point(6, 3)
-        Me.PictureBox5.Name = "PictureBox5"
-        Me.PictureBox5.Size = New System.Drawing.Size(1124, 577)
-        Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox5.TabIndex = 10
-        Me.PictureBox5.TabStop = False
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.SystemColors.Window
+        Me.Panel6.Controls.Add(Me.Label2)
+        Me.Panel6.Controls.Add(Me.Label3)
+        Me.Panel6.Controls.Add(Me.PictureBox6)
+        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel6.Location = New System.Drawing.Point(682, 0)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(1136, 583)
+        Me.Panel6.TabIndex = 13
+        '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.SystemColors.Window
+        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(296, 185)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(28, 25)
+        Me.Label2.TabIndex = 9
+        Me.Label2.Text = "4"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label3
+        '
+        Me.Label3.BackColor = System.Drawing.SystemColors.Window
+        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(371, 288)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(28, 25)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "5"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox6
+        '
+        Me.PictureBox6.Image = CType(resources.GetObject("PictureBox6.Image"), System.Drawing.Image)
+        Me.PictureBox6.Location = New System.Drawing.Point(6, 3)
+        Me.PictureBox6.Name = "PictureBox6"
+        Me.PictureBox6.Size = New System.Drawing.Size(1124, 577)
+        Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox6.TabIndex = 10
+        Me.PictureBox6.TabStop = False
         '
         'FormMain
         '
@@ -6052,9 +5979,14 @@ Partial Class FormMain
         Me.tabpg_MainLiveGraph.ResumeLayout(False)
         CType(Me.chart_MainLiveGraph, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_MainOverview.ResumeLayout(False)
+        CType(Me.picbx_MainOverview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_MainProdZone.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picbx_MainProductZone, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_MainPumpZone.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_MainRightDockBtm.ResumeLayout(False)
         Me.panel_GroupUID.ResumeLayout(False)
@@ -6096,6 +6028,8 @@ Partial Class FormMain
         Me.tabpg_ManualCtrl.ResumeLayout(False)
         Me.tabctrl_SubManualCtrl.ResumeLayout(False)
         Me.tabpg_ManualControlValve.ResumeLayout(False)
+        Me.panel_TankControlPreview.ResumeLayout(False)
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_ValveControl.ResumeLayout(False)
         Me.tabpg_ManualControlPump.ResumeLayout(False)
         Me.panel_PumpControl.ResumeLayout(False)
@@ -6113,9 +6047,13 @@ Partial Class FormMain
         Me.panel_SubRegulatorControl.ResumeLayout(False)
         Me.panel_SubRegulatorControl.PerformLayout()
         Me.tabpg_ManualControlDrain.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_ManualDrain.ResumeLayout(False)
         Me.panel_SubManualDrain.ResumeLayout(False)
         Me.tabpg_ManualControlMaintenance.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_Maintenance.ResumeLayout(False)
         Me.panel_SubMaintenance.ResumeLayout(False)
         Me.tabpg_Alarm.ResumeLayout(False)
@@ -6128,17 +6066,8 @@ Partial Class FormMain
         Me.panel_PLCHeartBeat.ResumeLayout(False)
         Me.panel_SelectLoadRecipe.ResumeLayout(False)
         Me.panel_SelectLoadRecipe.PerformLayout()
-        CType(Me.picbx_MainOverview, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.panel_TankControlPreview.ResumeLayout(False)
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel5.ResumeLayout(False)
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel4.ResumeLayout(False)
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel6.ResumeLayout(False)
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -6363,15 +6292,6 @@ Partial Class FormMain
     Friend WithEvents dsp_ReqLPM As Label
     Friend WithEvents dsp_PumpCtrl As Label
     Friend WithEvents tabpg_ManualControlTank As TabPage
-    Friend WithEvents Label238 As Label
-    Friend WithEvents Label239 As Label
-    Friend WithEvents Label240 As Label
-    Friend WithEvents Label241 As Label
-    Friend WithEvents Label242 As Label
-    Friend WithEvents Label243 As Label
-    Friend WithEvents Label244 As Label
-    Friend WithEvents Label245 As Label
-    Friend WithEvents Label246 As Label
     Friend WithEvents panel_TankControl As Panel
     Friend WithEvents panel_SubTankControl As Panel
     Friend WithEvents chkbx_TankFill As CheckBox
@@ -6594,4 +6514,8 @@ Partial Class FormMain
     Friend WithEvents Label34 As Label
     Friend WithEvents Label36 As Label
     Friend WithEvents PictureBox5 As PictureBox
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents PictureBox6 As PictureBox
 End Class
