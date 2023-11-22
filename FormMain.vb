@@ -1245,8 +1245,8 @@ Public Class FormMain
                 End If
             End If
         Next
-        Put_PCManualctrl(3)
-        FINSWrite(3, 1)
+        'Put_PCManualctrl()
+        'FINSWrite(3, 1)
         For i As Integer = 0 To 2
             If btn_Valve Is btn_ValveCtrlArr(i + 16) Then
                 If btn_ValveCtrlArr(i + 16).BackColor = Color.FromArgb(0, 192, 0) Then
@@ -1256,13 +1256,15 @@ Public Class FormMain
                 End If
             End If
         Next
-        Put_PCManualctrl(3)
-        FINSWrite(4, 1)
+        'Put_PCManualctrl()
+        'FINSWrite(4, 1)
         'Put_PCManualctrl(3)
 
 
 
+
     End Sub
+
 
 
 
@@ -1271,30 +1273,43 @@ Public Class FormMain
 
 
     ' Pump & Tank Control
-    Private Sub chkbx_PumpCtrl_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_ModeSelection.CheckedChanged, chkbx_PumpCtrlState.CheckedChanged
-        ' Declare CheckBox Checked Changed
-        Dim chkbxCheckedChanged As CheckBox = DirectCast(sender, CheckBox)
 
-        ' Pump Mode Selection
-        If chkbxCheckedChanged Is chkbx_ModeSelection Then
-            ' CheckBox CheckState Changed
-            If chkbx_ModeSelection.Checked = False Then
-                chkbx_ModeSelection.Text = "Speed"
+    Private Sub btn_PumpCtrl_Click(sender As Object, e As EventArgs) Handles btn_PumpMode.Click, btn_PumpEnable.Click, btn_PumpReset.Click
+        Dim btn_Pump As Button = DirectCast(sender, Button)
+        If btn_Pump Is btn_PumpMode Then
+            If btn_PumpMode.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(4) = False
             Else
-                chkbx_ModeSelection.Text = "Process"
+                ManualCtrl(1)(4) = True
             End If
         End If
 
-        ' Pump State
-        If chkbxCheckedChanged Is chkbx_PumpCtrlState Then
-            ' CheckBox CheckState Changed
-            If chkbx_PumpCtrlState.Checked = False Then
-                chkbx_PumpCtrlState.Text = "ON"
+        If btn_Pump Is btn_PumpReset Then
+            If btn_PumpReset.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(3) = False
             Else
-                chkbx_PumpCtrlState.Text = "OFF"
+                ManualCtrl(1)(3) = True
             End If
         End If
+
+        If btn_Pump Is btn_PumpEnable Then
+            If btn_PumpEnable.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(5) = False
+            Else
+                ManualCtrl(1)(5) = True
+            End If
+        End If
+
     End Sub
+
+    Private Sub btn_UpdateRPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateRPM.Click
+        Float2int(120, CType(txtbx_NewRPM.Text, Decimal))
+    End Sub
+
+    Private Sub btn_UpdateLPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateLPM.Click
+        Float2int(122, CType(txtbx_NewLPM.Text, Decimal))
+    End Sub
+
 
     Private Sub chkbx_TankCtrl_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_TankFill.CheckedChanged, chkbx_TankDrain.CheckedChanged
         ' Declare CheckBox Checked Changed
