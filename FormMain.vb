@@ -1310,49 +1310,129 @@ Public Class FormMain
         Float2int(122, CType(txtbx_NewLPM.Text, Decimal))
     End Sub
 
+    'Tank Controls
 
-    Private Sub chkbx_TankCtrl_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_TankFill.CheckedChanged, chkbx_TankDrain.CheckedChanged
-        ' Declare CheckBox Checked Changed
-        Dim chkbxCheckedChanged As CheckBox = DirectCast(sender, CheckBox)
 
-        ' CheckBox CheckState Changed
-        If chkbxCheckedChanged.Checked = False Then
-            chkbxCheckedChanged.Text = "ON"
-        Else
-            chkbxCheckedChanged.Text = "OFF"
+
+
+    Private Sub btn_tankCtrl_Click(sender As Object, e As EventArgs) Handles btn_TankFill.Click, btn_TankDrain.Click
+        Dim btn_tank As Button = DirectCast(sender, Button)
+        If btn_tank Is btn_TankFill Then
+            If btn_TankFill.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(6) = False
+            Else
+                ManualCtrl(1)(6) = True
+            End If
         End If
+
+        If btn_tank Is btn_TankDrain Then
+            If btn_TankDrain.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(7) = False
+            Else
+                ManualCtrl(1)(7) = True
+            End If
+        End If
+
+
     End Sub
+
 
     ' Regulator Controls
+    Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_BckPressureUpdate.Click
+        Float2int(124, CType(txtbx_BackPressRequired.Text, Decimal))
+    End Sub
 
+    Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_N2PressureUpdate.Click
+        Float2int(126, CType(txtbx_N2PurgeRequired.Text, Decimal))
+    End Sub
 
     ' Manual Drain
-    Private Sub chkbx_ManualDrain_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_N2PurgeCircuit1.CheckedChanged, chkbx_N2PurgeCircuit2.CheckedChanged, chkbx_N2PurgeCircuit3.CheckedChanged
-        ' Declare CheckBox Checked Changed
-        Dim chkbxCheckedChanged As CheckBox = DirectCast(sender, CheckBox)
 
-        ' CheckBox CheckState Changed
-        If chkbxCheckedChanged.Checked = False Then
-            chkbxCheckedChanged.Text = "ON"
-        Else
-            chkbxCheckedChanged.Text = "OFF"
+
+    Private Sub btn_ManualDrainCtrl_Click(sender As Object, e As EventArgs) Handles btn_MCN2Purge1.Click, btn_MCN2Purge2.Click, btn_MCN2Purge3.Click
+        Dim btn_ManualDrain As Button = DirectCast(sender, Button)
+        If btn_ManualDrain Is btn_MCN2Purge1 Then
+            If btn_MCN2Purge1.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(8) = False
+            Else
+                ManualCtrl(1)(8) = True
+            End If
         End If
+
+        If btn_ManualDrain Is btn_MCN2Purge2 Then
+            If btn_MCN2Purge2.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(9) = False
+            Else
+                ManualCtrl(1)(9) = True
+            End If
+        End If
+
+        If btn_ManualDrain Is btn_MCN2Purge3 Then
+            If btn_MCN2Purge3.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(10) = False
+            Else
+                ManualCtrl(1)(10) = True
+            End If
+        End If
+
     End Sub
+
+
+
+
+
+
 
     ' Maintenance
-    Private Sub chkbx_Maintenance_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_InFiltrDrain.CheckedChanged, chkbx_InFiltrVent.CheckedChanged,
-        chkbx_PumpFiltrDrain.CheckedChanged, chkbx_PumpFiltrVent.CheckedChanged, chkbx_EmptyTank.CheckedChanged
 
-        ' Declare CheckBox Checked Changed
-        Dim chkbxCheckedChanged As CheckBox = DirectCast(sender, CheckBox)
+    Private Sub btn_MaintenanceCtrl_Click(sender As Object, e As EventArgs) Handles btn_InFiltrDrain.Click, btn_InFiltrVent.Click, btn_PumpFiltrDrain.Click, btn_PumpFiltrVent.Click, btn_EmptyTank.Click
+        Dim btn_Maintenance As Button = DirectCast(sender, Button)
 
-        ' CheckBox CheckState Changed
-        If chkbxCheckedChanged.Checked = False Then
-            chkbxCheckedChanged.Text = "ON"
-        Else
-            chkbxCheckedChanged.Text = "OFF"
+        If btn_Maintenance Is btn_InFiltrDrain Then
+            If btn_InFiltrDrain.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(11) = False
+            Else
+                ManualCtrl(1)(11) = True
+            End If
+        End If
+
+        If btn_Maintenance Is btn_InFiltrVent Then
+            If btn_InFiltrVent.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(12) = False
+            Else
+                ManualCtrl(1)(12) = True
+            End If
+        End If
+
+        If btn_Maintenance Is btn_PumpFiltrDrain Then
+            If btn_PumpFiltrDrain.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(13) = False
+            Else
+                ManualCtrl(1)(13) = True
+            End If
+        End If
+
+        If btn_Maintenance Is btn_PumpFiltrVent Then
+            If btn_PumpFiltrVent.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(14) = False
+            Else
+                ManualCtrl(1)(14) = True
+            End If
+        End If
+
+        If btn_Maintenance Is btn_EmptyTank Then
+            If btn_EmptyTank.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(1)(15) = False
+            Else
+                ManualCtrl(1)(15) = True
+            End If
         End If
     End Sub
+
+
+
+
+
 #End Region
 
 #Region "Alarm"
@@ -2224,6 +2304,14 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
 
     End Sub
+
+
+
+
+
+
+
+
 
 
 

@@ -1307,10 +1307,13 @@ Module ModuleOmron
         FetchPLC_Ain(120)
         FetchPLC_AOut(160)
 
+        'Spiltting the Input into Boolean Array for Processing
         Dim PLCstatus(3)() As Boolean
         For i As Integer = 0 To 2
             PLCstatus(i) = Int2BoolArr(FINSinput(i))
         Next
+
+        'Manual valve Control Button Color change on Output on
         For i As Integer = 0 To 15
 
             If DOut(1)(i) = False Then
@@ -1339,6 +1342,18 @@ Module ModuleOmron
 
         Next
 
+        'PLC - PC HeartBeat indication label backcolor control 
+        If PLCstatus(0)(0) = True Then
+            PCStatus(0)(0) = False
+            FormMain.lbl_B0.BackColor = Color.LimeGreen
+            FormMain.lbl_B1.BackColor = SystemColors.Control
+        Else
+            PCStatus(0)(0) = True
+            FormMain.lbl_B0.BackColor = SystemColors.Control
+            FormMain.lbl_B1.BackColor = Color.LimeGreen
+        End If
+
+        'Manual Pump Control Button Color change on Output on
 
         If DOut(2)(3) = False Then
             SetButtonState(FormMain.btn_PumpReset, False, "OFF")
@@ -1362,23 +1377,150 @@ Module ModuleOmron
             ManualCtrl(1)(3) = False
         End If
 
-        If PLCstatus(0)(0) = True Then
-            PCStatus(0)(0) = False
-            FormMain.lbl_B0.BackColor = Color.LimeGreen
-            FormMain.lbl_B1.BackColor = SystemColors.Control
+        'Manual Pump Control label based on controller feedback
+        If DIn(1)(7) = True Then
+            FormMain.lbl_MCPumpState.BackColor = Color.LimeGreen
         Else
-            PCStatus(0)(0) = True
-            FormMain.lbl_B0.BackColor = SystemColors.Control
-            FormMain.lbl_B1.BackColor = Color.LimeGreen
+            FormMain.lbl_MCPumpState.BackColor = SystemColors.Window
         End If
 
-        FormMain.txtbx_ReqRPM.Text = Int2Float(FINSOutput, 120).ToString
-        FormMain.txtbx_ReqLPM.Text = Int2Float(FINSOutput, 122).ToString
+        If DIn(1)(8) = True Then
+            FormMain.lbl_MCPumpError.BackColor = SystemColors.Window
+        Else
+            FormMain.lbl_MCPumpError.BackColor = Color.Red
+        End If
+
+        If DIn(1)(9) = True Then
+            FormMain.lbl_MCPumpWarning.BackColor = SystemColors.Window
+        Else
+            FormMain.lbl_MCPumpWarning.BackColor = Color.Red
+        End If
+
+
+
+        ' Current Value update in the Pump control label  field
+        FormMain.lbl_ReqRPM.Text = Int2Float(FINSOutput, 120).ToString
+        FormMain.lbl_ReqLPM.Text = Int2Float(FINSOutput, 122).ToString
+
+        'Manual Tank Control Button Color change on Output on
+
+        If DOut(1)(3) = False Then
+            SetButtonState(FormMain.btn_TankFill, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_TankFill, True, "ON")
+        End If
+
+        If DOut(1)(4) = False Then
+            SetButtonState(FormMain.btn_TankDrain, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_TankDrain, True, "ON")
+        End If
 
 
 
 
 
+        'Manual Tank Level Label Color Change based on sensor
+        If DIn(1)(2) = True Then
+            FormMain.lbl_TankOverflow.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_TankOverflow.BackColor = SystemColors.Window
+        End If
+
+        If DIn(1)(3) = True Then
+            FormMain.lbl_TankNominal.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_TankNominal.BackColor = SystemColors.Window
+        End If
+
+        If DIn(1)(4) = True Then
+            FormMain.lbl_TankPrecondition.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_TankPrecondition.BackColor = SystemColors.Window
+        End If
+
+        If DIn(1)(5) = True Then
+            FormMain.lbl_TankPumpProtect.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_TankPumpProtect.BackColor = SystemColors.Window
+        End If
+
+        'Manual Tank Valve Label Color Change based on output
+        If DOut(1)(3) = True Then
+            FormMain.lbl_TankValve4.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_TankValve4.BackColor = SystemColors.Window
+        End If
+
+        If DOut(1)(4) = True Then
+            FormMain.lbl_TankValve5.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_TankValve5.BackColor = SystemColors.Window
+        End If
+
+        ' Current Value update in the Pressure regulator control label  field
+        FormMain.lbl_BackPressCurrent.Text = Int2Float(FINSOutput, 124).ToString
+        FormMain.lbl_N2PurgeCurrent.Text = Int2Float(FINSOutput, 126).ToString
+
+        FormMain.txtbx_BackPressActual.Text = AIn(1).ToString
+        FormMain.txtbx_N2PurgeActual.Text = AIn(0).ToString
+
+        'Manual Drain Label Color Change based on PLC status
+        If PLCstatus(2)(0) = False Then
+            SetButtonState(FormMain.btn_MCN2Purge1, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_MCN2Purge1, True, "ON")
+        End If
+
+        If PLCstatus(2)(1) = False Then
+            SetButtonState(FormMain.btn_MCN2Purge2, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_MCN2Purge2, True, "ON")
+        End If
+
+        If PLCstatus(2)(2) = False Then
+            SetButtonState(FormMain.btn_MCN2Purge3, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_MCN2Purge3, True, "ON")
+        End If
+
+
+
+        'Maintenance Label Color Change based on PLC status
+        If PLCstatus(2)(3) = False Then
+            SetButtonState(FormMain.btn_InFiltrDrain, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_InFiltrDrain, True, "ON")
+        End If
+
+        If PLCstatus(2)(4) = False Then
+            SetButtonState(FormMain.btn_InFiltrVent, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_InFiltrVent, True, "ON")
+        End If
+
+        If PLCstatus(2)(5) = False Then
+            SetButtonState(FormMain.btn_PumpFiltrDrain, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_PumpFiltrDrain, True, "ON")
+        End If
+
+        If PLCstatus(2)(6) = False Then
+            SetButtonState(FormMain.btn_PumpFiltrVent, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_PumpFiltrVent, True, "ON")
+        End If
+
+        If PLCstatus(2)(7) = False Then
+            SetButtonState(FormMain.btn_EmptyTank, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_EmptyTank, True, "ON")
+        End If
+
+
+
+
+        'Write the PLC Output
         Put_PCManualctrl()
         FINSWrite(0, 200)
 
