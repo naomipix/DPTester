@@ -1,5 +1,7 @@
 ﻿Imports PoohPlcLink
 Imports EEIP
+Imports System.Text
+
 Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
     Public OmronPLC As New PoohFinsETN
@@ -17,24 +19,33 @@ Module ModuleOmron
     Public FINSinput() As Integer
     Public FINSOutput(199) As Integer
     Public WithEvents PLCtimer As New Timer()
+    Public WithEvents PCtimer As New Timer()
+    Public PCStatus(2)() As Boolean
 
 #Region "FINS protocol"
     Public Sub FINSInitialise()
-        OmronPLC.PLC_IPAddress = "192.168.0.1"
-        OmronPLC.PLC_NodeNo = "1"
-        OmronPLC.PLC_NetNo = "0"
-        OmronPLC.PLC_UDPPort = "9600"
-        OmronPLC.PC_NodeNo = "2"
-        OmronPLC.PC_NetNo = "0"
-        OmronPLC.TimeOutMSec = "1000"
+        Try
+            OmronPLC.PLC_IPAddress = "192.168.0.1"
+            OmronPLC.PLC_NodeNo = "1"
+            OmronPLC.PLC_NetNo = "0"
+            OmronPLC.PLC_UDPPort = "9600"
+            OmronPLC.PC_NodeNo = "2"
+            OmronPLC.PC_NetNo = "0"
+            OmronPLC.TimeOutMSec = "1000"
 
-        FINSOutput = OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 0, 200, PoohFinsETN.DataTypes.UnSignBIN)
-        For i As Integer = 0 To 5
-            ManualCtrl(i) = Int2BoolArr(FINSOutput(3 + i))
-        Next
-        PLCtimer.Interval = 100
-        PLCtimer.Enabled = True
+            FINSOutput = OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 0, 200, PoohFinsETN.DataTypes.UnSignBIN)
+            For i As Integer = 0 To 5
+                ManualCtrl(i) = Int2BoolArr(FINSOutput(3 + i))
+            Next
+            For i As Integer = 0 To 2
+                PCStatus(i) = Int2BoolArr(FINSOutput(i))
+            Next
+            PLCtimer.Interval = 200
+            PLCtimer.Enabled = True
 
+        Catch ex As Exception
+            MsgBox("Cannot able to communicate with PLC, Connection failed")
+        End Try
     End Sub
 
 
@@ -264,27 +275,39 @@ Module ModuleOmron
         End If
 
         'To find the exponent divide the number starting with 2 till we get value greater than 1 and less than 2
-        If Absreal > 2 Then
-            While Absreal > 2
-                Absreal = Absreal / 2
+        If Absreal >= 2 Then
+            While Absreal >= 2
                 exponent = exponent + 1
+                Absreal = Absreal / 2
             End While
 
         Else
-            While Absreal < 1
-                Absreal = Absreal * 2
-                exponent = exponent - 1
-            End While
-        End If
+            If Absreal < 2 And Absreal >= 1 Then
+                Absreal = Absreal
+                exponent = 0
+            End If
+            If Absreal <> 0 Then
+                While Absreal < 1
+                    Absreal = Absreal * 2
+                    exponent = exponent - 1
+                End While
+            End If
+
+            If Absreal = 0 Then
+                    Absreal = 0
+                    exponent = 0
+                End If
+            End If
         ' To Convert Signed exponent into unsigned bin
-        If exponent >= -127 And exponent <= 127 Then
+        If exponent >= -127 And exponent <= 127 And Absreal <> 0 Then
             exponent = 127 + exponent
+
         End If
         'Add binary of exponent to the binary text
         Binarypart.Append(DecToBin(exponent, 8))
 
         'Find the Value of Mantessa Part
-        If Absreal > 1 Then
+        If Absreal >= 1 Then
             fraction = Absreal - 1
         Else
             fraction = Absreal
@@ -301,6 +324,7 @@ Module ModuleOmron
                 End If
                 j = j + 1
             End While
+
         End If
         'If the Mantessa part length is less than 23, add zero to the right
         If (fractionpart.ToString).Length <= 23 Then
@@ -313,24 +337,25 @@ Module ModuleOmron
         If Binarypart.ToString.Length = 32 Then
             hexpart.Append(BinToHex(Binarypart.ToString))
         End If
-        hexpart.Insert(0, hexpart.ToString.Substring(4, 4))
-        hexstr = hexpart.ToString.Remove(8, 4)
+        If hexpart.ToString.Length = 8 Then
+            hexpart.Insert(0, hexpart.ToString.Substring(4, 4))
+            hexstr = hexpart.ToString.Remove(8, 4)
+
+        Else
+            hexpart.Insert(0, "0000")
+            hexstr = hexpart.ToString
+        End If
+
 
         For k As Integer = 0 To 1
             val(k) = HextoDec(hexstr.Substring(k * 4, 4))
             FINSOutput(offset + k) = val(k)
         Next
-        'For l As Integer = 0 To 3
-        '    If l Mod 2 = 0 Then
-        '        OmronEEIP.O_T_IOData((offset * 2) + l) = val(l + 1)
-        '    Else
-        '        OmronEEIP.O_T_IOData((offset * 2) + l) = val(l - 1)
-        '    End If
-        'Next
+
         Return True
     End Function
 
-    Public Function Int2Float(offset As Integer) As Decimal
+    Public Function Int2Float(Intarr As Integer(), offset As Integer) As Decimal
         'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim hexchar As New Text.StringBuilder
         Dim modhex As String
@@ -339,8 +364,8 @@ Module ModuleOmron
         Dim Value0(1) As Byte
         Dim Value1(1) As Byte
 
-        Value0 = BitConverter.GetBytes(FINSinput(offset))
-        Value1 = BitConverter.GetBytes(CInt(FINSinput(offset + 1)))
+        Value0 = BitConverter.GetBytes(Intarr(offset))
+        Value1 = BitConverter.GetBytes(CInt(Intarr(offset + 1)))
 
         hexchar.Append(Value1(1).ToString("X2"))
         hexchar.Append(Value1(0).ToString("X2"))
@@ -461,6 +486,24 @@ Module ModuleOmron
         Next
         Return text.ToString
     End Function
+
+    Public Function Fillzerobefore(str As String, len As Integer) As String
+        'String Text = strInput;
+        '    While (Text.Length < len)
+        '    {
+        '        Text = "0" + Text;
+        '    }
+
+        '    Return Text;
+
+        Dim text As String = str
+        While (text.Length < len)
+            text = "0" + text
+        End While
+        Return text
+    End Function
+
+
 
 
 #End Region
@@ -1142,7 +1185,7 @@ Module ModuleOmron
 
         For i As Integer = 0 To AIn.Length - 1
 
-            AIn(i) = Int2Float(start + (i * 2))
+            AIn(i) = Int2Float(FINSinput, start + (i * 2))
         Next
         For i As Integer = 0 To 15
             FormMain.dgv_AnalogInput.Rows(i).Cells("value").Value = AIn(i)
@@ -1153,7 +1196,7 @@ Module ModuleOmron
     Public Function FetchPLC_AOut(start As Integer) As Boolean
 
         For i As Integer = 0 To AOut.Length - 1
-            AOut(i) = Int2Float(start + (i * 2))
+            AOut(i) = Int2Float(FINSinput, start + (i * 2))
         Next
         For i As Integer = 0 To 5
             FormMain.dgv_AnalogOutput.Rows(i).Cells("value").Value = AOut(i)
@@ -1192,10 +1235,13 @@ Module ModuleOmron
 
 #Region "Put PC Manual Control"
 
-    Public Function Put_PCManualctrl(offset As Integer) As Boolean
+    Public Function Put_PCManualctrl() As Boolean
 
         For i As Integer = 0 To 5
-            FINSOutput(offset + i) = Boolarr2int(ManualCtrl(i))
+            FINSOutput(3 + i) = Boolarr2int(ManualCtrl(i))
+        Next
+        For i As Integer = 0 To 2
+            FINSOutput(i) = Boolarr2int(PCStatus(i))
         Next
         Return True
     End Function
@@ -1205,28 +1251,66 @@ Module ModuleOmron
 
 
 
-    Public Function FINSRead() As Boolean
-        FINSinput = OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 500, 300, PoohFinsETN.DataTypes.UnSignBIN)
+    Public Function FINSInputRead() As Boolean
+        Try
+            'FINSOutput = OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 0, 200, PoohFinsETN.DataTypes.UnSignBIN)
+            FINSinput = OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 500, 300, PoohFinsETN.DataTypes.UnSignBIN)
+        Catch ex As Exception
+            MsgBox("Cannot able to communicate with PLC, Connection failed")
+        End Try
+
         Return True
     End Function
 
+    Public Function FINSOutputRead() As Boolean
+        Try
+            FINSOutput = OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 0, 200, PoohFinsETN.DataTypes.UnSignBIN)
+            For i As Integer = 0 To 5
+                ManualCtrl(i) = Int2BoolArr(FINSOutput(3 + i))
+            Next
+            For i As Integer = 0 To 2
+                PCStatus(i) = Int2BoolArr(FINSOutput(i))
+            Next
+        Catch ex As Exception
+            MsgBox("Cannot able to communicate with PLC, Connection failed")
+        End Try
+
+        Return True
+    End Function
+
+
     Public Function FINSWrite(offset As Integer, size As Integer) As Boolean
-        PLCtimer.Enabled = False
-        For i As Integer = 0 To size - 1
-            OmronPLC.WriteMemoryWord(PoohFinsETN.MemoryTypes.DM, offset + i, FINSOutput(offset + i), PoohFinsETN.DataTypes.UnSignBIN)
-        Next
-        PLCtimer.Enabled = True
-            Return True
+        Try
+            Dim text As New StringBuilder
+            PLCtimer.Enabled = False
+
+            For i As Integer = 0 To size - 1
+                text.Append(Fillzerobefore(Conversion.Hex(FINSOutput(offset + i)), 4))
+                'OmronPLC.WriteMemoryWord(PoohFinsETN.MemoryTypes.DM, offset + i, FINSOutput(offset + i), PoohFinsETN.DataTypes.UnSignBIN)
+            Next
+            OmronPLC.WriteMemory(PoohFinsETN.MemoryTypes.DM, 0, text.ToString)
+            FINSOutputRead()
+            PLCtimer.Enabled = True
+        Catch ex As Exception
+            MsgBox("Cannot able to communicate with PLC, Connection failed")
+        End Try
+
+        Return True
     End Function
 
     Private Sub PLCTimer_Ticks(sender As Object, e As EventArgs) Handles PLCtimer.Tick
-        FINSRead()
+        FINSInputRead()
+
+
         FetchPLC_DIn(100)
         FetchPLC_DOut(110)
         FetchPLC_Ain(120)
         FetchPLC_AOut(160)
 
-
+        Dim PLCstatus(3)() As Boolean
+        For i As Integer = 0 To 2
+            PLCstatus(i) = Int2BoolArr(FINSinput(i))
+        Next
         For i As Integer = 0 To 15
 
             If DOut(1)(i) = False Then
@@ -1255,6 +1339,48 @@ Module ModuleOmron
 
         Next
 
+
+        If DOut(2)(3) = False Then
+            SetButtonState(FormMain.btn_PumpReset, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_PumpReset, True, "ON")
+        End If
+
+        If DOut(2)(4) = False Then
+            SetButtonState(FormMain.btn_PumpMode, False, "Speed")
+        Else
+            SetButtonState(FormMain.btn_PumpMode, True, "Process")
+        End If
+
+        If DOut(2)(5) = False Then
+            SetButtonState(FormMain.btn_PumpEnable, False, "OFF")
+        Else
+            SetButtonState(FormMain.btn_PumpEnable, True, "ON")
+        End If
+
+        If ManualCtrl(1)(3) = True And FormMain.btn_PumpReset.Text = "ON" Then
+            ManualCtrl(1)(3) = False
+        End If
+
+        If PLCstatus(0)(0) = True Then
+            PCStatus(0)(0) = False
+            FormMain.lbl_B0.BackColor = Color.LimeGreen
+            FormMain.lbl_B1.BackColor = SystemColors.Control
+        Else
+            PCStatus(0)(0) = True
+            FormMain.lbl_B0.BackColor = SystemColors.Control
+            FormMain.lbl_B1.BackColor = Color.LimeGreen
+        End If
+
+        FormMain.txtbx_ReqRPM.Text = Int2Float(FINSOutput, 120).ToString
+        FormMain.txtbx_ReqLPM.Text = Int2Float(FINSOutput, 122).ToString
+
+
+
+
+
+        Put_PCManualctrl()
+        FINSWrite(0, 200)
 
     End Sub
 
