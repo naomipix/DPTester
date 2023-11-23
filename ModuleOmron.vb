@@ -20,6 +20,7 @@ Module ModuleOmron
     Public FINSOutput(199) As Integer
     Public WithEvents PLCtimer As New Timer()
     Public WithEvents PCtimer As New Timer()
+    Public WithEvents Circuittimer As New Timer()
     Public PCStatus(2)() As Boolean
 
 #Region "FINS protocol"
@@ -1319,10 +1320,11 @@ Module ModuleOmron
             If DOut(1)(i) = False Then
                 SetButtonState(FormMain.btn_ValveCtrlArr(i), False, "Close")
                 FormMain.Lbl_ValvestatusArr(i).BackColor = SystemColors.Window
-
+                FormMain.Lbl_ValvestatusArr(i).ForeColor = SystemColors.ControlText
             Else
                 SetButtonState(FormMain.btn_ValveCtrlArr(i), True, "Open")
                 FormMain.Lbl_ValvestatusArr(i).BackColor = Color.LimeGreen
+                FormMain.Lbl_ValvestatusArr(i).ForeColor = SystemColors.Window
 
             End If
 
@@ -1333,11 +1335,11 @@ Module ModuleOmron
             If DOut(2)(i) = False Then
                 SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), False, "Close")
                 FormMain.Lbl_ValvestatusArr(i + 16).BackColor = SystemColors.Window
-
+                FormMain.Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.ControlText
             Else
                 SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), True, "Open")
                 FormMain.Lbl_ValvestatusArr(i + 16).BackColor = Color.LimeGreen
-
+                FormMain.Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.Window
             End If
 
         Next
@@ -1347,10 +1349,12 @@ Module ModuleOmron
             PCStatus(0)(0) = False
             FormMain.lbl_B0.BackColor = Color.LimeGreen
             FormMain.lbl_B1.BackColor = SystemColors.Control
+            'FormMain.pb_Valve1Path1.BackColor = SystemColors.Control
         Else
             PCStatus(0)(0) = True
             FormMain.lbl_B0.BackColor = SystemColors.Control
             FormMain.lbl_B1.BackColor = Color.LimeGreen
+            'FormMain.pb_Valve1Path1.BackColor = Color.FromArgb(25, 130, 246)
         End If
 
         'Manual Pump Control Button Color change on Output on
@@ -1518,6 +1522,35 @@ Module ModuleOmron
         End If
 
 
+        'Manual valve Control Button Color change on Output on
+        For i As Integer = 0 To 15
+
+            If DOut(1)(i) = False Then
+
+                ModuleCircuitModel.Lbl_ValvestatusArr(i).BackColor = SystemColors.Window
+                ModuleCircuitModel.Lbl_ValvestatusArr(i).ForeColor = SystemColors.ControlText
+            Else
+
+                ModuleCircuitModel.Lbl_ValvestatusArr(i).BackColor = Color.LimeGreen
+                ModuleCircuitModel.Lbl_ValvestatusArr(i).ForeColor = SystemColors.Window
+
+            End If
+
+        Next
+
+        For i As Integer = 0 To 2
+
+            If DOut(2)(i) = False Then
+
+                ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).BackColor = SystemColors.Window
+                ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.ControlText
+            Else
+
+                ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).BackColor = Color.LimeGreen
+                ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.Window
+            End If
+
+        Next
 
 
         'Write the PLC Output
@@ -1527,6 +1560,192 @@ Module ModuleOmron
     End Sub
 
 
+    ' Circuit Control logic
+    Private Sub CircuitTimer_Ticks(sender As Object, e As EventArgs) Handles Circuittimer.Tick
+
+        'For i As Integer = 0 To 15
+        '    For j As Integer = 0 To FormMain.pb_MCVCircuitArr(i + 1).Length - 1
+
+        '        If DOut(1)(i) = True Then
+        '            If FormMain.pb_MCVCircuitArr(i + 1)(j).BackColor = SystemColors.Window Then
+        '                FormMain.pb_MCVCircuitArr(i + 1)(j).BackColor = Color.FromArgb(25, 130, 246)
+        '            Else
+        '                FormMain.pb_MCVCircuitArr(i + 1)(j).BackColor = SystemColors.Window
+        '            End If
+        '        Else
+        '            FormMain.pb_MCVCircuitArr(i + 1)(j).BackColor = SystemColors.Window
+        '        End If
+        '    Next
+        'Next
+
+        'For i As Integer = 16 To 18
+        '    For j As Integer = 0 To FormMain.pb_MCVCircuitArr(i + 1).Length - 1
+
+        '        If DOut(2)(i - 16) = True Then
+        '            If FormMain.pb_MCVCircuitArr(i + 1)(j).BackColor = SystemColors.Window Then
+        '                FormMain.pb_MCVCircuitArr(i + 1)(j).BackColor = Color.FromArgb(25, 130, 246)
+        '            Else
+        '                FormMain.pb_MCVCircuitArr(i + 1)(j).BackColor = SystemColors.Window
+        '            End If
+        '        Else
+        '            FormMain.pb_MCVCircuitArr(i + 1)(j).BackColor = SystemColors.Window
+        '        End If
+        '    Next
+        'Next
+
+        'If DOut(1)(0) = True Or DOut(1)(1) = True Or DOut(1)(2) = True Or DOut(1)(4) = True Or DOut(1)(6) = True Or DOut(1)(7) = True Then
+        '    For i As Integer = 0 To 1
+        '        If FormMain.pb_MCVCircuitArr(0)(i + 5).BackColor = SystemColors.Window Then
+        '            FormMain.pb_MCVCircuitArr(0)(i + 5).BackColor = Color.FromArgb(25, 130, 246)
+        '        Else
+        '            FormMain.pb_MCVCircuitArr(0)(i + 5).BackColor = SystemColors.Window
+        '        End If
+        '    Next
+        'Else
+        '    For i As Integer = 0 To 1
+        '        FormMain.pb_MCVCircuitArr(0)(i + 5).BackColor = SystemColors.Window
+        '    Next
+
+        'End If
+
+        'If DOut(1)(11) = True Or DOut(1)(14) = True Or DOut(1)(15) = True Or DOut(2)(0) = True Then
+        '    For i As Integer = 0 To 1
+        '        If FormMain.pb_MCVCircuitArr(0)(i + 7).BackColor = SystemColors.Window Then
+        '            FormMain.pb_MCVCircuitArr(0)(i + 7).BackColor = Color.FromArgb(25, 130, 246)
+        '        Else
+        '            FormMain.pb_MCVCircuitArr(0)(i + 7).BackColor = SystemColors.Window
+        '        End If
+        '    Next
+        'Else
+        '    For i As Integer = 0 To 1
+        '        FormMain.pb_MCVCircuitArr(0)(i + 7).BackColor = SystemColors.Window
+        '    Next
+        'End If
+
+        'If DOut(1)(3) = True Then
+
+        '    If FormMain.pb_MCVCircuitArr(0)(0).BackColor = SystemColors.Window Then
+        '        FormMain.pb_MCVCircuitArr(0)(0).BackColor = Color.FromArgb(25, 130, 246)
+        '    Else
+        '        FormMain.pb_MCVCircuitArr(0)(0).BackColor = SystemColors.Window
+        '    End If
+        'Else
+        '    FormMain.pb_MCVCircuitArr(0)(0).BackColor = SystemColors.Window
+        'End If
+
+        'If DOut(1)(10) = True Or DOut(2)(1) = True Then
+        '    For i As Integer = 0 To 3
+        '        If FormMain.pb_MCVCircuitArr(0)(i + 1).BackColor = SystemColors.Window Then
+        '            FormMain.pb_MCVCircuitArr(0)(i + 1).BackColor = Color.FromArgb(25, 130, 246)
+        '        Else
+        '            FormMain.pb_MCVCircuitArr(0)(i + 1).BackColor = SystemColors.Window
+        '        End If
+        '    Next
+        'Else
+        '    For i As Integer = 0 To 3
+        '        FormMain.pb_MCVCircuitArr(0)(i + 1).BackColor = SystemColors.Window
+        '    Next
+        'End If
+
+
+        ' Form Circuit Model controls
+        For i As Integer = 0 To 15
+            For j As Integer = 0 To ModuleCircuitModel.pb_MCVCircuitArr(i + 1).Length - 1
+
+                If DOut(1)(i) = True Then
+                    ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).Visible = True
+                    If ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent Then
+                        ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).BackColor = Color.FromArgb(25, 130, 246)
+                    Else
+                        ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
+                    End If
+                Else
+                    ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).Visible = False
+                    ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
+                End If
+            Next
+        Next
+
+        For i As Integer = 16 To 18
+            For j As Integer = 0 To ModuleCircuitModel.pb_MCVCircuitArr(i + 1).Length - 1
+
+                If DOut(2)(i - 16) = True Then
+                    ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).Visible = True
+                    If ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent Then
+                        ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).BackColor = Color.FromArgb(25, 130, 246)
+                    Else
+                        ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
+                    End If
+                Else
+                    ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).Visible = False
+                    ModuleCircuitModel.pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
+                End If
+            Next
+        Next
+
+        If DOut(1)(0) = True Or DOut(1)(1) = True Or DOut(1)(2) = True Or DOut(1)(4) = True Or DOut(1)(6) = True Or DOut(1)(7) = True Then
+            For i As Integer = 0 To 1
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 5).Visible = True
+                If ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 5).BackColor = Color.Transparent Then
+                    ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 5).BackColor = Color.FromArgb(25, 130, 246)
+                Else
+                    ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 5).BackColor = Color.Transparent
+                End If
+            Next
+        Else
+            For i As Integer = 0 To 1
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 5).Visible = False
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 5).BackColor = Color.Transparent
+            Next
+
+        End If
+
+        If DOut(1)(11) = True Or DOut(1)(14) = True Or DOut(1)(15) = True Or DOut(2)(0) = True Then
+            For i As Integer = 0 To 1
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 7).Visible = True
+                If ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 7).BackColor = Color.Transparent Then
+                    ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 7).BackColor = Color.FromArgb(25, 130, 246)
+                Else
+                    ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 7).BackColor = Color.Transparent
+                End If
+            Next
+        Else
+            For i As Integer = 0 To 1
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 7).Visible = False
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 7).BackColor = Color.Transparent
+            Next
+        End If
+
+        If DOut(1)(3) = True Then
+            ModuleCircuitModel.pb_MCVCircuitArr(0)(0).Visible = True
+            If ModuleCircuitModel.pb_MCVCircuitArr(0)(0).BackColor = Color.Transparent Then
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(0).BackColor = Color.FromArgb(25, 130, 246)
+            Else
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(0).BackColor = Color.Transparent
+            End If
+        Else
+            ModuleCircuitModel.pb_MCVCircuitArr(0)(0).Visible = False
+            ModuleCircuitModel.pb_MCVCircuitArr(0)(0).BackColor = Color.Transparent
+        End If
+
+        If DOut(1)(10) = True Or DOut(2)(1) = True Then
+            For i As Integer = 0 To 3
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 1).Visible = True
+                If ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 1).BackColor = Color.Transparent Then
+                    ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 1).BackColor = Color.FromArgb(25, 130, 246)
+                Else
+                    ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 1).BackColor = Color.Transparent
+                End If
+            Next
+        Else
+            For i As Integer = 0 To 3
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 1).Visible = False
+                ModuleCircuitModel.pb_MCVCircuitArr(0)(i + 1).BackColor = Color.Transparent
+            Next
+        End If
+
+
+    End Sub
 
 
 

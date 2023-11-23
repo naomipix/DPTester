@@ -731,3 +731,5 @@ C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.vbproj.CopyComplete
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.exe
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.xml
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.pdb
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\obj\Debug\DPTesterApp.FormCircuitModel1.resources
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\obj\Debug\DPTesterApp.FormCircuitModel2.resources
