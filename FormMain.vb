@@ -45,7 +45,7 @@ Public Class FormMain
 
     Public btn_ValveCtrlArr(18) As Button
     Public Lbl_ValvestatusArr(18) As Label
-
+    Public pb_MCVCircuitArr(19)() As PictureBox
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Start Clock Timer
         TimerModule.clockTimer.Start()
@@ -113,10 +113,49 @@ Public Class FormMain
             lbl_Valve11, lbl_Valve12, lbl_Valve13, lbl_Valve14, lbl_Valve15, lbl_Valve16, lbl_Valve17, lbl_Valve18, lbl_Valve19
         }
 
+        'Define Label Array
+        'pb_MCVCircuitArr(0) = {pb_MCDIWIncome, pb_MCN2Income1, pb_MCN2Income2, pb_MCN2Income3, pb_MCN2Income4, pb_MCVFilterDrain1, pb_MCVFilterDrain2, pb_MCVProdDrain1, pb_MCVProdDrain2}
+        'pb_MCVCircuitArr(1) = {pb_MCValve1bx1, pb_MCValve1bx2, pb_MCValve1bx3, pb_MCValve1bx4}
+        'pb_MCVCircuitArr(2) = {pb_MCValve2bx1, pb_MCValve2bx2}
+        'pb_MCVCircuitArr(3) = {pb_MCValve3bx1, pb_MCValve3bx2}
+        'pb_MCVCircuitArr(4) = {pb_MCValve4bx1, pb_MCValve4bx2, pb_MCValve4bx3, pb_MCValve4bx4}
+        'pb_MCVCircuitArr(5) = {pb_MCValve5bx1, pb_MCValve5bx2}
+        'pb_MCVCircuitArr(6) = {pb_MCValve6bx1, pb_MCValve6bx2, pb_MCValve6bx3, pb_MCValve6bx4}
+        'pb_MCVCircuitArr(7) = {pb_MCValve7bx1}
+        'pb_MCVCircuitArr(8) = {pb_MCValve8bx1}
+        'pb_MCVCircuitArr(9) = {pb_MCValve9bx1, pb_MCValve9bx2}
+        'pb_MCVCircuitArr(10) = {pb_MCValve10bx1, pb_MCValve10bx2, pb_MCValve10bx3}
+        'pb_MCVCircuitArr(11) = {pb_MCValve11bx1, pb_MCValve11bx2}
+        'pb_MCVCircuitArr(12) = {pb_MCValve12bx1, pb_MCValve12bx2}
+        'pb_MCVCircuitArr(13) = {pb_MCValve13bx1, pb_MCValve13bx2}
+        'pb_MCVCircuitArr(14) = {pb_MCValve14bx1, pb_MCValve14bx2}
+        'pb_MCVCircuitArr(15) = {pb_MCValve15bx1, pb_MCValve15bx2}
+        'pb_MCVCircuitArr(16) = {pb_MCValve16bx1}
+        'pb_MCVCircuitArr(17) = {pb_MCValve17bx1, pb_MCValve17bx2, pb_MCValve17bx3, pb_MCValve17bx4}
+        'pb_MCVCircuitArr(18) = {pb_MCValve18bx1, pb_MCValve18bx2, pb_MCValve18bx3}
+        'pb_MCVCircuitArr(19) = {pb_MCValve19bx1, pb_MCValve19bx2, pb_MCValve19bx3}
 
+        'For i As Integer = 0 To 19
+        '    For j As Integer = 0 To pb_MCVCircuitArr(i).Length - 1
+        '        pb_MCVCircuitArr(i)(j).Visible = False
+        '    Next
+        'Next
+
+
+        'panel_MCMaintenance = panel_TankControlPreview
+        'panel_MCMaintenance.Controls.Add(panel_TankControlPreview)
+        While Panel4.Controls.Count > 0
+            Panel4.Controls(0).Dispose()
+        End While
+
+        ModuleCircuitModel.InitialiseCircuit()
         'PLC Impicit Cyclic Messaging via Ethernet IP
         FINSInitialise()
 
+
+        FormCircuitModel1.TopLevel = False
+        Panel4.Controls.Add(FormCircuitModel1)
+        FormCircuitModel1.Show()
         ' Initialize Tables
         Dim t1 As Task = LoadProductionDetails()
         Dim t2 As Task = LoadStatus()
@@ -1338,11 +1377,11 @@ Public Class FormMain
 
 
     ' Regulator Controls
-    Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_BckPressureUpdate.Click
+    Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs)
         Float2int(124, CType(txtbx_BackPressRequired.Text, Decimal))
     End Sub
 
-    Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_N2PressureUpdate.Click
+    Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs)
         Float2int(126, CType(txtbx_N2PurgeRequired.Text, Decimal))
     End Sub
 
@@ -2307,26 +2346,34 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
 
 
+#End Region
 
 
-
-
-
-
-
-
-
-
-
+#Region "Mimic Panel (Circuit Path)"
+    Private Sub btn_MVCShowcircuit_Click(sender As Object, e As EventArgs) Handles btn_MVCShowcircuit.Click
+        If btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+            For i As Integer = 0 To 19
+                For j As Integer = 0 To pb_MCVCircuitArr(i).Length - 1
+                    pb_MCVCircuitArr(i)(j).Visible = True
+                Next
+            Next
+            Circuittimer.Interval = 100
+            Circuittimer.Enabled = True
+            SetButtonState(btn_MVCShowcircuit, True, "Hide Circuit Path")
+        Else
+            For i As Integer = 0 To 19
+                For j As Integer = 0 To pb_MCVCircuitArr(i).Length - 1
+                    pb_MCVCircuitArr(i)(j).Visible = False
+                Next
+            Next
+            Circuittimer.Enabled = False
+            SetButtonState(btn_MVCShowcircuit, False, "Show Circuit Path")
+        End If
+    End Sub
 
 
 
 #End Region
-
-
-
-
-
 
 End Class
 

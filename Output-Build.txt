@@ -1,0 +1,7 @@
+﻿Build started...
+1>------ Build started: Project: DPTesterApp, Configuration: Debug Any CPU ------
+1>C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\ModuleMain.vb(1051,36): warning BC40000: 'Public Overrides Function GetBytes(cb As Integer) As Byte()' is obsolete: 'Rfc2898DeriveBytes replaces PasswordDeriveBytes for deriving key material from a password and is preferred in new applications.'.
+1>C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\ModuleMain.vb(1082,36): warning BC40000: 'Public Overrides Function GetBytes(cb As Integer) As Byte()' is obsolete: 'Rfc2898DeriveBytes replaces PasswordDeriveBytes for deriving key material from a password and is preferred in new applications.'.
+1>  DPTesterApp -> C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\DPTesterApp.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
+========== Build started at 2:15 pm and took 01.325 seconds ==========
