@@ -1300,8 +1300,9 @@ Module ModuleOmron
     End Function
 
     Private Sub PLCTimer_Ticks(sender As Object, e As EventArgs) Handles PLCtimer.Tick
-        FINSInputRead()
 
+
+        FINSInputRead()
 
         FetchPLC_DIn(100)
         FetchPLC_DOut(110)
@@ -1314,53 +1315,9 @@ Module ModuleOmron
             PLCstatus(i) = Int2BoolArr(FINSinput(i))
         Next
 
-        'Manual valve Control Button Color change on Output on
-        For i As Integer = 0 To 15
-
-            If DOut(1)(i) = False Then
-                SetButtonState(FormMain.btn_ValveCtrlArr(i), False, "Close")
-
-                For j As Integer = 0 To pb_MCVCircuitArr(i + 1).Length - 1
-                    pb_MCVCircuitArr(i + 1)(j).Visible = False
-                    pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
-                    pb_MCVCircuitArr(i + 1)(j).SendToBack()
-                Next
-                For j As Integer = 0 To pb_MCVCircuitPathArr(i + 1).Length - 1
-                    'pb_MCVCircuitArr(i + 1)(j).Visible = False
-                    pb_MCVCircuitPathArr(i + 1)(j).BackColor = Color.Transparent
-                    pb_MCVCircuitPathArr(i + 1)(j).SendToBack()
-
-                Next
-            Else
-                SetButtonState(FormMain.btn_ValveCtrlArr(i), True, "Open")
 
 
-            End If
-
-        Next
-
-        For i As Integer = 0 To 2
-
-            If DOut(2)(i) = False Then
-                SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), False, "Close")
-
-                For j As Integer = 0 To pb_MCVCircuitArr(i + 17).Length - 1
-                    pb_MCVCircuitArr(i + 17)(j).Visible = False
-                    pb_MCVCircuitArr(i + 17)(j).BackColor = Color.Transparent
-                    pb_MCVCircuitArr(i + 17)(j).SendToBack()
-                Next
-                For j As Integer = 0 To pb_MCVCircuitPathArr(i + 17).Length - 1
-                    'pb_MCVCircuitArr(i + 1)(j).Visible = False
-                    pb_MCVCircuitPathArr(i + 17)(j).BackColor = Color.Transparent
-                    pb_MCVCircuitPathArr(i + 17)(j).SendToBack()
-
-                Next
-            Else
-                SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), True, "Open")
-
-            End If
-
-        Next
+#Region "PLC-PC Heartbeat handshake"
 
         'PLC - PC HeartBeat indication label backcolor control 
         If PLCstatus(0)(0) = True Then
@@ -1375,6 +1332,102 @@ Module ModuleOmron
             'FormMain.pb_Valve1Path1.BackColor = Color.FromArgb(25, 130, 246)
         End If
 
+#End Region
+
+
+#Region "Pump and tank status update on all page in main form"
+        'Manual Pump Control label based on controller feedback
+        If DIn(1)(7) = True Then
+            FormMain.lbl_MCPumpState.BackColor = Color.LimeGreen
+            FormMain.lbl_PZonePumpState.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_MCPumpState.BackColor = SystemColors.Window
+            FormMain.lbl_PZonePumpState.BackColor = SystemColors.Window
+        End If
+
+        If DIn(1)(8) = True Then
+            FormMain.lbl_MCPumpError.BackColor = SystemColors.Window
+            FormMain.lbl_PZonePumpError.BackColor = SystemColors.Window
+        Else
+            FormMain.lbl_MCPumpError.BackColor = Color.Red
+            FormMain.lbl_PZonePumpError.BackColor = Color.Red
+        End If
+
+        If DIn(1)(9) = True Then
+            FormMain.lbl_MCPumpWarning.BackColor = SystemColors.Window
+            FormMain.lbl_PZonePumpWarning.BackColor = SystemColors.Window
+        Else
+            FormMain.lbl_MCPumpWarning.BackColor = Color.Red
+            FormMain.lbl_PZonePumpWarning.BackColor = Color.Red
+        End If
+
+        'Manual Tank Level Label Color Change based on sensor
+        If DIn(1)(2) = True Then
+            FormMain.lbl_TankOverflow.BackColor = Color.LimeGreen
+            FormMain.lbl_PZoneTankOverflow.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_TankOverflow.BackColor = SystemColors.Window
+            FormMain.lbl_PZoneTankOverflow.BackColor = SystemColors.Window
+        End If
+
+        If DIn(1)(3) = True Then
+            FormMain.lbl_TankNominal.BackColor = Color.LimeGreen
+            FormMain.lbl_PZoneTankNominal.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_TankNominal.BackColor = SystemColors.Window
+            FormMain.lbl_PZoneTankNominal.BackColor = SystemColors.Window
+        End If
+
+        If DIn(1)(4) = True Then
+            FormMain.lbl_TankPrecondition.BackColor = Color.LimeGreen
+            FormMain.lbl_PZoneTankPrecondition.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_TankPrecondition.BackColor = SystemColors.Window
+            FormMain.lbl_PZoneTankPrecondition.BackColor = SystemColors.Window
+        End If
+
+        If DIn(1)(5) = True Then
+            FormMain.lbl_TankPumpProtect.BackColor = Color.LimeGreen
+            FormMain.lbl_PZoneTankPumpProtect.BackColor = Color.LimeGreen
+        Else
+            FormMain.lbl_TankPumpProtect.BackColor = SystemColors.Window
+            FormMain.lbl_PZoneTankPumpProtect.BackColor = SystemColors.Window
+        End If
+
+        FormMain.txtbx_BackPressActual.Text = AIn(1).ToString
+
+        FormMain.lbl_InletPress.Text = AIn(9).ToString
+        FormMain.lbl_OutletPress.Text = AIn(10).ToString
+        FormMain.lbl_Flowmtr.Text = AIn(12).ToString
+        FormMain.lbl_Temp.Text = AIn(13).ToString
+
+
+#End Region
+
+
+#Region "Manual Control-Valve Screen Button state update"
+        'Manual valve Control Button Color change on Output on
+        For i As Integer = 0 To 15
+
+            If DOut(1)(i) = False Then
+                SetButtonState(FormMain.btn_ValveCtrlArr(i), False, "Close")
+            Else
+                SetButtonState(FormMain.btn_ValveCtrlArr(i), True, "Open")
+            End If
+        Next
+
+        For i As Integer = 0 To 2
+            If DOut(2)(i) = False Then
+                SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), False, "Close")
+            Else
+                SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), True, "Open")
+            End If
+        Next
+
+#End Region
+
+
+#Region "Manual Control- Pump Control page Button"
         'Manual Pump Control Button Color change on Output on
 
         If DOut(2)(3) = False Then
@@ -1399,26 +1452,24 @@ Module ModuleOmron
             ManualCtrl(1)(3) = False
         End If
 
-        'Manual Pump Control label based on controller feedback
-        If DIn(1)(7) = True Then
-            FormMain.lbl_MCPumpState.BackColor = Color.LimeGreen
+#End Region
+
+
+#Region "Manual Control- Tank Control page Button"
+
+        'Manual Tank Valve Label Color Change based on output
+        If DOut(1)(3) = True Then
+            FormMain.lbl_TankValve4.BackColor = Color.LimeGreen
+
         Else
-            FormMain.lbl_MCPumpState.BackColor = SystemColors.Window
+            FormMain.lbl_TankValve4.BackColor = SystemColors.Window
         End If
 
-        If DIn(1)(8) = True Then
-            FormMain.lbl_MCPumpError.BackColor = SystemColors.Window
+        If DOut(1)(4) = True Then
+            FormMain.lbl_TankValve5.BackColor = Color.LimeGreen
         Else
-            FormMain.lbl_MCPumpError.BackColor = Color.Red
+            FormMain.lbl_TankValve5.BackColor = SystemColors.Window
         End If
-
-        If DIn(1)(9) = True Then
-            FormMain.lbl_MCPumpWarning.BackColor = SystemColors.Window
-        Else
-            FormMain.lbl_MCPumpWarning.BackColor = Color.Red
-        End If
-
-
 
         ' Current Value update in the Pump control label  field
         FormMain.lbl_ReqRPM.Text = Int2Float(FINSOutput, 120).ToString
@@ -1438,51 +1489,16 @@ Module ModuleOmron
             SetButtonState(FormMain.btn_TankDrain, True, "ON")
         End If
 
+#End Region
 
 
-
-
-        'Manual Tank Level Label Color Change based on sensor
-        If DIn(1)(2) = True Then
-            FormMain.lbl_TankOverflow.BackColor = Color.LimeGreen
-        Else
-            FormMain.lbl_TankOverflow.BackColor = SystemColors.Window
-        End If
-
-        If DIn(1)(3) = True Then
-            FormMain.lbl_TankNominal.BackColor = Color.LimeGreen
-        Else
-            FormMain.lbl_TankNominal.BackColor = SystemColors.Window
-        End If
-
-        If DIn(1)(4) = True Then
-            FormMain.lbl_TankPrecondition.BackColor = Color.LimeGreen
-        Else
-            FormMain.lbl_TankPrecondition.BackColor = SystemColors.Window
-        End If
-
-        If DIn(1)(5) = True Then
-            FormMain.lbl_TankPumpProtect.BackColor = Color.LimeGreen
-        Else
-            FormMain.lbl_TankPumpProtect.BackColor = SystemColors.Window
-        End If
-
-        'Manual Tank Valve Label Color Change based on output
-        If DOut(1)(3) = True Then
-            FormMain.lbl_TankValve4.BackColor = Color.LimeGreen
-        Else
-            FormMain.lbl_TankValve4.BackColor = SystemColors.Window
-        End If
-
-        If DOut(1)(4) = True Then
-            FormMain.lbl_TankValve5.BackColor = Color.LimeGreen
-        Else
-            FormMain.lbl_TankValve5.BackColor = SystemColors.Window
-        End If
+#Region "Manual Control - Manual Drain page Button"
 
         ' Current Value update in the Pressure regulator control label  field
         FormMain.lbl_BackPressCurrent.Text = Int2Float(FINSOutput, 124).ToString
         FormMain.lbl_N2PurgeCurrent.Text = Int2Float(FINSOutput, 126).ToString
+
+
 
 
 
@@ -1504,9 +1520,10 @@ Module ModuleOmron
         Else
             SetButtonState(FormMain.btn_MCN2Purge3, True, "ON")
         End If
+#End Region
 
 
-
+#Region "Manual Control - Maintenance page Button"
         'Maintenance Label Color Change based on PLC status
         If PLCstatus(2)(3) = False Then
             SetButtonState(FormMain.btn_InFiltrDrain, False, "OFF")
@@ -1538,7 +1555,10 @@ Module ModuleOmron
             SetButtonState(FormMain.btn_EmptyTank, True, "ON")
         End If
 
+#End Region
 
+
+#Region "Mimic Panel Circuit Model 1"
         'Manual valve Control Button Color change on Output on
         For i As Integer = 0 To 15
 
@@ -1591,6 +1611,44 @@ Module ModuleOmron
         FormCircuitModel1.lbl_OutletPress.Text = AIn(10).ToString
         FormCircuitModel1.lbl_Flowmtr.Text = AIn(12).ToString
         FormCircuitModel1.lbl_Temp.Text = AIn(13).ToString
+
+        'Circuit path and valve signal remove
+        For i As Integer = 0 To 15
+
+            If DOut(1)(i) = False Then
+                For j As Integer = 0 To pb_MCVCircuitArr(i + 1).Length - 1
+                    pb_MCVCircuitArr(i + 1)(j).Visible = False
+                    pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
+                    pb_MCVCircuitArr(i + 1)(j).SendToBack()
+                Next
+                For j As Integer = 0 To pb_MCVCircuitPathArr(i + 1).Length - 1
+                    'pb_MCVCircuitArr(i + 1)(j).Visible = False
+                    pb_MCVCircuitPathArr(i + 1)(j).BackColor = Color.Transparent
+                    pb_MCVCircuitPathArr(i + 1)(j).SendToBack()
+                Next
+
+            End If
+        Next
+
+        For i As Integer = 0 To 2
+
+            If DOut(2)(i) = False Then
+                For j As Integer = 0 To pb_MCVCircuitArr(i + 17).Length - 1
+                    pb_MCVCircuitArr(i + 17)(j).Visible = False
+                    pb_MCVCircuitArr(i + 17)(j).BackColor = Color.Transparent
+                    pb_MCVCircuitArr(i + 17)(j).SendToBack()
+                Next
+                For j As Integer = 0 To pb_MCVCircuitPathArr(i + 17).Length - 1
+                    'pb_MCVCircuitArr(i + 1)(j).Visible = False
+                    pb_MCVCircuitPathArr(i + 17)(j).BackColor = Color.Transparent
+                    pb_MCVCircuitPathArr(i + 17)(j).SendToBack()
+
+                Next
+            End If
+        Next
+
+
+#End Region
 
 
         'Write the PLC Output

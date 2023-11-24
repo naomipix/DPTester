@@ -4,6 +4,8 @@
     Public Lbl_ValvestatusArr(18) As Label
     Public WithEvents Circuittimer As New Timer()
     Public Circuitcall(19) As Integer
+    Public Arrowbgcolor As Color
+    Public Circuitbgcolor As Color
     Public Sub InitialiseCircuit()
         'Define Label Array
         Lbl_ValvestatusArr = {FormCircuitModel1.lbl_Valve1, FormCircuitModel1.lbl_Valve2, FormCircuitModel1.lbl_Valve3, FormCircuitModel1.lbl_Valve4, FormCircuitModel1.lbl_Valve5, FormCircuitModel1.lbl_Valve6, FormCircuitModel1.lbl_Valve7, FormCircuitModel1.lbl_Valve8, FormCircuitModel1.lbl_Valve9, FormCircuitModel1.lbl_Valve10,
