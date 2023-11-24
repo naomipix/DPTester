@@ -44,8 +44,8 @@ Public Class FormMain
 #Region "Form Properties [ Load | Shown | Closing ]"
 
     Public btn_ValveCtrlArr(18) As Button
-    Public Lbl_ValvestatusArr(18) As Label
-    Public pb_MCVCircuitArr(19)() As PictureBox
+
+
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Start Clock Timer
         TimerModule.clockTimer.Start()
@@ -108,54 +108,31 @@ Public Class FormMain
         btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
         }
 
-        'Define Label Array
-        Lbl_ValvestatusArr = {lbl_Valve1, lbl_Valve2, lbl_Valve3, lbl_Valve4, lbl_Valve5, lbl_Valve6, lbl_Valve7, lbl_Valve8, lbl_Valve9, lbl_Valve10,
-            lbl_Valve11, lbl_Valve12, lbl_Valve13, lbl_Valve14, lbl_Valve15, lbl_Valve16, lbl_Valve17, lbl_Valve18, lbl_Valve19
-        }
-
-        'Define Label Array
-        'pb_MCVCircuitArr(0) = {pb_MCDIWIncome, pb_MCN2Income1, pb_MCN2Income2, pb_MCN2Income3, pb_MCN2Income4, pb_MCVFilterDrain1, pb_MCVFilterDrain2, pb_MCVProdDrain1, pb_MCVProdDrain2}
-        'pb_MCVCircuitArr(1) = {pb_MCValve1bx1, pb_MCValve1bx2, pb_MCValve1bx3, pb_MCValve1bx4}
-        'pb_MCVCircuitArr(2) = {pb_MCValve2bx1, pb_MCValve2bx2}
-        'pb_MCVCircuitArr(3) = {pb_MCValve3bx1, pb_MCValve3bx2}
-        'pb_MCVCircuitArr(4) = {pb_MCValve4bx1, pb_MCValve4bx2, pb_MCValve4bx3, pb_MCValve4bx4}
-        'pb_MCVCircuitArr(5) = {pb_MCValve5bx1, pb_MCValve5bx2}
-        'pb_MCVCircuitArr(6) = {pb_MCValve6bx1, pb_MCValve6bx2, pb_MCValve6bx3, pb_MCValve6bx4}
-        'pb_MCVCircuitArr(7) = {pb_MCValve7bx1}
-        'pb_MCVCircuitArr(8) = {pb_MCValve8bx1}
-        'pb_MCVCircuitArr(9) = {pb_MCValve9bx1, pb_MCValve9bx2}
-        'pb_MCVCircuitArr(10) = {pb_MCValve10bx1, pb_MCValve10bx2, pb_MCValve10bx3}
-        'pb_MCVCircuitArr(11) = {pb_MCValve11bx1, pb_MCValve11bx2}
-        'pb_MCVCircuitArr(12) = {pb_MCValve12bx1, pb_MCValve12bx2}
-        'pb_MCVCircuitArr(13) = {pb_MCValve13bx1, pb_MCValve13bx2}
-        'pb_MCVCircuitArr(14) = {pb_MCValve14bx1, pb_MCValve14bx2}
-        'pb_MCVCircuitArr(15) = {pb_MCValve15bx1, pb_MCValve15bx2}
-        'pb_MCVCircuitArr(16) = {pb_MCValve16bx1}
-        'pb_MCVCircuitArr(17) = {pb_MCValve17bx1, pb_MCValve17bx2, pb_MCValve17bx3, pb_MCValve17bx4}
-        'pb_MCVCircuitArr(18) = {pb_MCValve18bx1, pb_MCValve18bx2, pb_MCValve18bx3}
-        'pb_MCVCircuitArr(19) = {pb_MCValve19bx1, pb_MCValve19bx2, pb_MCValve19bx3}
-
-        'For i As Integer = 0 To 19
-        '    For j As Integer = 0 To pb_MCVCircuitArr(i).Length - 1
-        '        pb_MCVCircuitArr(i)(j).Visible = False
-        '    Next
-        'Next
-
-
-        'panel_MCMaintenance = panel_TankControlPreview
-        'panel_MCMaintenance.Controls.Add(panel_TankControlPreview)
-        While Panel4.Controls.Count > 0
-            Panel4.Controls(0).Dispose()
-        End While
 
         ModuleCircuitModel.InitialiseCircuit()
         'PLC Impicit Cyclic Messaging via Ethernet IP
         FINSInitialise()
 
-
+        'Circuit Form display on Panels
         FormCircuitModel1.TopLevel = False
-        Panel4.Controls.Add(FormCircuitModel1)
+
+        While panel_ManualValve_Circuit.Controls.Count > 0
+            panel_ManualValve_Circuit.Controls(0).Dispose()
+        End While
+
+        panel_ManualValve_Circuit.Controls.Add(FormCircuitModel1)
+
+        'While Panel_Overview.Controls.Count > 0
+        '    Panel_Overview.Controls(0).Dispose()
+        'End While
+
+        'Panel_Overview.Controls.Add(FormCircuitModel1)
         FormCircuitModel1.Show()
+
+
+
+
+
         ' Initialize Tables
         Dim t1 As Task = LoadProductionDetails()
         Dim t2 As Task = LoadStatus()
@@ -254,15 +231,7 @@ Public Class FormMain
 
 
 
-    Private Sub lbl_B0_BackColorChanged(sender As Object, e As EventArgs) Handles lbl_B0.BackColorChanged
-        If lbl_B0.BackColor = SystemColors.Control Then
 
-            OmronPLC.WriteMemoryBit(PoohFinsETN.MemoryTypes.DM, 0, 0, True)
-            lbl_B1.BackColor = Color.LimeGreen
-        Else
-            lbl_B1.BackColor = SystemColors.Control
-        End If
-    End Sub
 
 
 #End Region
@@ -578,6 +547,16 @@ Public Class FormMain
         Else
             dsp_GraphSelection.Visible = False
             cmbx_GraphSelection.Visible = False
+        End If
+
+        If tabctrl_SubMain.SelectedIndex = 1 Then
+
+            While Panel_Overview.Controls.Count > 0
+                Panel_Overview.Controls(0).Dispose()
+            End While
+            FormCircuitModel1.TopLevel = False
+            Panel_Overview.Controls.Add(FormCircuitModel1)
+            FormCircuitModel1.Show()
         End If
     End Sub
 
@@ -2346,31 +2325,47 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
 
 
+
+
+
+
+
 #End Region
 
 
 #Region "Mimic Panel (Circuit Path)"
-    Private Sub btn_MVCShowcircuit_Click(sender As Object, e As EventArgs) Handles btn_MVCShowcircuit.Click
-        If btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-            For i As Integer = 0 To 19
-                For j As Integer = 0 To pb_MCVCircuitArr(i).Length - 1
-                    pb_MCVCircuitArr(i)(j).Visible = True
-                Next
-            Next
-            Circuittimer.Interval = 100
-            Circuittimer.Enabled = True
-            SetButtonState(btn_MVCShowcircuit, True, "Hide Circuit Path")
-        Else
-            For i As Integer = 0 To 19
-                For j As Integer = 0 To pb_MCVCircuitArr(i).Length - 1
-                    pb_MCVCircuitArr(i)(j).Visible = False
-                Next
-            Next
-            Circuittimer.Enabled = False
-            SetButtonState(btn_MVCShowcircuit, False, "Show Circuit Path")
+
+    Private Sub tabctrl_SubManualCtrl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_SubManualCtrl.SelectedIndexChanged
+        If tabctrl_SubManualCtrl.SelectedIndex = 0 Then
+            FormCircuitModel1.TopLevel = False
+            While panel_ManualValve_Circuit.Controls.Count > 0
+                panel_ManualValve_Circuit.Controls(0).Dispose()
+            End While
+
+            panel_ManualValve_Circuit.Controls.Add(FormCircuitModel1)
+            FormCircuitModel1.Show()
+        End If
+
+        If tabctrl_SubManualCtrl.SelectedIndex = 3 Then
+            FormCircuitModel1.TopLevel = False
+            While Panel_ManualDrain_Circuit.Controls.Count > 0
+                Panel_ManualDrain_Circuit.Controls(0).Dispose()
+            End While
+
+            Panel_ManualDrain_Circuit.Controls.Add(FormCircuitModel1)
+            FormCircuitModel1.Show()
+        End If
+
+        If tabctrl_SubManualCtrl.SelectedIndex = 4 Then
+            FormCircuitModel1.TopLevel = False
+            While Panel_Mainten_Circuit.Controls.Count > 0
+                Panel_Mainten_Circuit.Controls(0).Dispose()
+            End While
+
+            Panel_Mainten_Circuit.Controls.Add(FormCircuitModel1)
+            FormCircuitModel1.Show()
         End If
     End Sub
-
 
 
 #End Region

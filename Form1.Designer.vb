@@ -25,8 +25,21 @@ Partial Class Form1
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lbl_DM350_2 = New System.Windows.Forms.Label()
+        Me.btn_DM300_off = New System.Windows.Forms.Button()
+        Me.btn_DM300_on = New System.Windows.Forms.Button()
+        Me.txtbx_DintRead = New System.Windows.Forms.TextBox()
+        Me.txtbx_DintWrite = New System.Windows.Forms.TextBox()
+        Me.txtbx_EEIPIntRead = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.btn_EEIPIntWrite = New System.Windows.Forms.Button()
+        Me.txtbx_EEIPIntWrite = New System.Windows.Forms.TextBox()
+        Me.txtbx_Floatread = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.txtbx_DM370 = New System.Windows.Forms.TextBox()
+        Me.btn_EEIPFloatwrite = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtbx_Floatwrite = New System.Windows.Forms.TextBox()
         Me.btn_EEIPstrWrite = New System.Windows.Forms.Button()
         Me.txtbx_EEIPstrout = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -103,28 +116,22 @@ Partial Class Form1
         Me.dsp_ResultSummary = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.btn_EEIPFloatwrite = New System.Windows.Forms.Button()
-        Me.txtbx_Floatwrite = New System.Windows.Forms.TextBox()
-        Me.txtbx_Floatread = New System.Windows.Forms.TextBox()
-        Me.txtbx_EEIPIntRead = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.btn_EEIPIntWrite = New System.Windows.Forms.Button()
-        Me.txtbx_EEIPIntWrite = New System.Windows.Forms.TextBox()
-        Me.txtbx_DintRead = New System.Windows.Forms.TextBox()
-        Me.txtbx_DintWrite = New System.Windows.Forms.TextBox()
-        Me.btn_DM300_on = New System.Windows.Forms.Button()
-        Me.btn_DM300_off = New System.Windows.Forms.Button()
-        Me.lbl_DM350_2 = New System.Windows.Forms.Label()
+        Me.panel_MainRightDockBtm = New System.Windows.Forms.Panel()
+        Me.panel_GroupUID = New System.Windows.Forms.Panel()
+        Me.dsp_UID = New System.Windows.Forms.Label()
+        Me.lbl_UID = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_PLCHeartBeat.SuspendLayout()
         Me.panel_SelectLoadRecipe.SuspendLayout()
         Me.panel_UserCategory.SuspendLayout()
+        Me.panel_MainRightDockBtm.SuspendLayout()
+        Me.panel_GroupUID.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.panel_MainRightDockBtm)
         Me.Panel1.Controls.Add(Me.lbl_DM350_2)
         Me.Panel1.Controls.Add(Me.btn_DM300_off)
         Me.Panel1.Controls.Add(Me.btn_DM300_on)
@@ -202,6 +209,103 @@ Partial Class Form1
         Me.Panel1.Size = New System.Drawing.Size(1904, 1001)
         Me.Panel1.TabIndex = 0
         '
+        'lbl_DM350_2
+        '
+        Me.lbl_DM350_2.AutoSize = True
+        Me.lbl_DM350_2.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_DM350_2.Location = New System.Drawing.Point(141, 768)
+        Me.lbl_DM350_2.Name = "lbl_DM350_2"
+        Me.lbl_DM350_2.Size = New System.Drawing.Size(164, 30)
+        Me.lbl_DM350_2.TabIndex = 105
+        Me.lbl_DM350_2.Text = "DM350.2 Status"
+        '
+        'btn_DM300_off
+        '
+        Me.btn_DM300_off.Location = New System.Drawing.Point(238, 824)
+        Me.btn_DM300_off.Name = "btn_DM300_off"
+        Me.btn_DM300_off.Size = New System.Drawing.Size(158, 89)
+        Me.btn_DM300_off.TabIndex = 104
+        Me.btn_DM300_off.Text = "EEIP DM300.1 Off"
+        Me.btn_DM300_off.UseVisualStyleBackColor = True
+        '
+        'btn_DM300_on
+        '
+        Me.btn_DM300_on.Location = New System.Drawing.Point(36, 824)
+        Me.btn_DM300_on.Name = "btn_DM300_on"
+        Me.btn_DM300_on.Size = New System.Drawing.Size(158, 89)
+        Me.btn_DM300_on.TabIndex = 103
+        Me.btn_DM300_on.Text = "EEIP DM300.1 ON"
+        Me.btn_DM300_on.UseVisualStyleBackColor = True
+        '
+        'txtbx_DintRead
+        '
+        Me.txtbx_DintRead.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_DintRead.Location = New System.Drawing.Point(840, 885)
+        Me.txtbx_DintRead.Name = "txtbx_DintRead"
+        Me.txtbx_DintRead.Size = New System.Drawing.Size(235, 35)
+        Me.txtbx_DintRead.TabIndex = 102
+        '
+        'txtbx_DintWrite
+        '
+        Me.txtbx_DintWrite.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_DintWrite.Location = New System.Drawing.Point(840, 834)
+        Me.txtbx_DintWrite.Name = "txtbx_DintWrite"
+        Me.txtbx_DintWrite.Size = New System.Drawing.Size(235, 35)
+        Me.txtbx_DintWrite.TabIndex = 101
+        '
+        'txtbx_EEIPIntRead
+        '
+        Me.txtbx_EEIPIntRead.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_EEIPIntRead.Location = New System.Drawing.Point(685, 768)
+        Me.txtbx_EEIPIntRead.Name = "txtbx_EEIPIntRead"
+        Me.txtbx_EEIPIntRead.Size = New System.Drawing.Size(235, 35)
+        Me.txtbx_EEIPIntRead.TabIndex = 100
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.Location = New System.Drawing.Point(504, 722)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(139, 30)
+        Me.Label13.TabIndex = 99
+        Me.Label13.Text = "EEIP Int write"
+        '
+        'btn_EEIPIntWrite
+        '
+        Me.btn_EEIPIntWrite.Location = New System.Drawing.Point(655, 834)
+        Me.btn_EEIPIntWrite.Name = "btn_EEIPIntWrite"
+        Me.btn_EEIPIntWrite.Size = New System.Drawing.Size(158, 89)
+        Me.btn_EEIPIntWrite.TabIndex = 98
+        Me.btn_EEIPIntWrite.Text = "Write Int EEIP"
+        Me.btn_EEIPIntWrite.UseVisualStyleBackColor = True
+        '
+        'txtbx_EEIPIntWrite
+        '
+        Me.txtbx_EEIPIntWrite.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_EEIPIntWrite.Location = New System.Drawing.Point(685, 717)
+        Me.txtbx_EEIPIntWrite.Name = "txtbx_EEIPIntWrite"
+        Me.txtbx_EEIPIntWrite.Size = New System.Drawing.Size(235, 35)
+        Me.txtbx_EEIPIntWrite.TabIndex = 97
+        '
+        'txtbx_Floatread
+        '
+        Me.txtbx_Floatread.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_Floatread.Location = New System.Drawing.Point(1155, 763)
+        Me.txtbx_Floatread.Name = "txtbx_Floatread"
+        Me.txtbx_Floatread.Size = New System.Drawing.Size(235, 35)
+        Me.txtbx_Floatread.TabIndex = 96
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(974, 717)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(161, 30)
+        Me.Label12.TabIndex = 95
+        Me.Label12.Text = "EEIP Float write"
+        '
         'txtbx_DM370
         '
         Me.txtbx_DM370.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -209,6 +313,15 @@ Partial Class Form1
         Me.txtbx_DM370.Name = "txtbx_DM370"
         Me.txtbx_DM370.Size = New System.Drawing.Size(235, 35)
         Me.txtbx_DM370.TabIndex = 93
+        '
+        'btn_EEIPFloatwrite
+        '
+        Me.btn_EEIPFloatwrite.Location = New System.Drawing.Point(1125, 829)
+        Me.btn_EEIPFloatwrite.Name = "btn_EEIPFloatwrite"
+        Me.btn_EEIPFloatwrite.Size = New System.Drawing.Size(158, 89)
+        Me.btn_EEIPFloatwrite.TabIndex = 94
+        Me.btn_EEIPFloatwrite.Text = "Write FLoat EEIP"
+        Me.btn_EEIPFloatwrite.UseVisualStyleBackColor = True
         '
         'Label11
         '
@@ -219,6 +332,14 @@ Partial Class Form1
         Me.Label11.Size = New System.Drawing.Size(169, 30)
         Me.Label11.TabIndex = 92
         Me.Label11.Text = "EEIP String write"
+        '
+        'txtbx_Floatwrite
+        '
+        Me.txtbx_Floatwrite.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_Floatwrite.Location = New System.Drawing.Point(1155, 712)
+        Me.txtbx_Floatwrite.Name = "txtbx_Floatwrite"
+        Me.txtbx_Floatwrite.Size = New System.Drawing.Size(235, 35)
+        Me.txtbx_Floatwrite.TabIndex = 93
         '
         'btn_EEIPstrWrite
         '
@@ -983,119 +1104,43 @@ Partial Class Form1
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label12
+        'panel_MainRightDockBtm
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(974, 717)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(161, 30)
-        Me.Label12.TabIndex = 95
-        Me.Label12.Text = "EEIP Float write"
+        Me.panel_MainRightDockBtm.Controls.Add(Me.panel_GroupUID)
+        Me.panel_MainRightDockBtm.Location = New System.Drawing.Point(50, 926)
+        Me.panel_MainRightDockBtm.Name = "panel_MainRightDockBtm"
+        Me.panel_MainRightDockBtm.Size = New System.Drawing.Size(936, 60)
+        Me.panel_MainRightDockBtm.TabIndex = 5
         '
-        'btn_EEIPFloatwrite
+        'panel_GroupUID
         '
-        Me.btn_EEIPFloatwrite.Location = New System.Drawing.Point(1125, 829)
-        Me.btn_EEIPFloatwrite.Name = "btn_EEIPFloatwrite"
-        Me.btn_EEIPFloatwrite.Size = New System.Drawing.Size(158, 89)
-        Me.btn_EEIPFloatwrite.TabIndex = 94
-        Me.btn_EEIPFloatwrite.Text = "Write FLoat EEIP"
-        Me.btn_EEIPFloatwrite.UseVisualStyleBackColor = True
+        Me.panel_GroupUID.Controls.Add(Me.dsp_UID)
+        Me.panel_GroupUID.Controls.Add(Me.lbl_UID)
+        Me.panel_GroupUID.Location = New System.Drawing.Point(228, 16)
+        Me.panel_GroupUID.Name = "panel_GroupUID"
+        Me.panel_GroupUID.Size = New System.Drawing.Size(480, 40)
+        Me.panel_GroupUID.TabIndex = 10
         '
-        'txtbx_Floatwrite
+        'dsp_UID
         '
-        Me.txtbx_Floatwrite.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_Floatwrite.Location = New System.Drawing.Point(1155, 712)
-        Me.txtbx_Floatwrite.Name = "txtbx_Floatwrite"
-        Me.txtbx_Floatwrite.Size = New System.Drawing.Size(235, 35)
-        Me.txtbx_Floatwrite.TabIndex = 93
+        Me.dsp_UID.AutoSize = True
+        Me.dsp_UID.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_UID.Location = New System.Drawing.Point(9, 4)
+        Me.dsp_UID.Name = "dsp_UID"
+        Me.dsp_UID.Size = New System.Drawing.Size(59, 30)
+        Me.dsp_UID.TabIndex = 10
+        Me.dsp_UID.Text = "UID :"
         '
-        'txtbx_Floatread
+        'lbl_UID
         '
-        Me.txtbx_Floatread.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_Floatread.Location = New System.Drawing.Point(1155, 763)
-        Me.txtbx_Floatread.Name = "txtbx_Floatread"
-        Me.txtbx_Floatread.Size = New System.Drawing.Size(235, 35)
-        Me.txtbx_Floatread.TabIndex = 96
-        '
-        'txtbx_EEIPIntRead
-        '
-        Me.txtbx_EEIPIntRead.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_EEIPIntRead.Location = New System.Drawing.Point(685, 768)
-        Me.txtbx_EEIPIntRead.Name = "txtbx_EEIPIntRead"
-        Me.txtbx_EEIPIntRead.Size = New System.Drawing.Size(235, 35)
-        Me.txtbx_EEIPIntRead.TabIndex = 100
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(504, 722)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(139, 30)
-        Me.Label13.TabIndex = 99
-        Me.Label13.Text = "EEIP Int write"
-        '
-        'btn_EEIPIntWrite
-        '
-        Me.btn_EEIPIntWrite.Location = New System.Drawing.Point(655, 834)
-        Me.btn_EEIPIntWrite.Name = "btn_EEIPIntWrite"
-        Me.btn_EEIPIntWrite.Size = New System.Drawing.Size(158, 89)
-        Me.btn_EEIPIntWrite.TabIndex = 98
-        Me.btn_EEIPIntWrite.Text = "Write Int EEIP"
-        Me.btn_EEIPIntWrite.UseVisualStyleBackColor = True
-        '
-        'txtbx_EEIPIntWrite
-        '
-        Me.txtbx_EEIPIntWrite.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_EEIPIntWrite.Location = New System.Drawing.Point(685, 717)
-        Me.txtbx_EEIPIntWrite.Name = "txtbx_EEIPIntWrite"
-        Me.txtbx_EEIPIntWrite.Size = New System.Drawing.Size(235, 35)
-        Me.txtbx_EEIPIntWrite.TabIndex = 97
-        '
-        'txtbx_DintRead
-        '
-        Me.txtbx_DintRead.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_DintRead.Location = New System.Drawing.Point(840, 885)
-        Me.txtbx_DintRead.Name = "txtbx_DintRead"
-        Me.txtbx_DintRead.Size = New System.Drawing.Size(235, 35)
-        Me.txtbx_DintRead.TabIndex = 102
-        '
-        'txtbx_DintWrite
-        '
-        Me.txtbx_DintWrite.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_DintWrite.Location = New System.Drawing.Point(840, 834)
-        Me.txtbx_DintWrite.Name = "txtbx_DintWrite"
-        Me.txtbx_DintWrite.Size = New System.Drawing.Size(235, 35)
-        Me.txtbx_DintWrite.TabIndex = 101
-        '
-        'btn_DM300_on
-        '
-        Me.btn_DM300_on.Location = New System.Drawing.Point(36, 824)
-        Me.btn_DM300_on.Name = "btn_DM300_on"
-        Me.btn_DM300_on.Size = New System.Drawing.Size(158, 89)
-        Me.btn_DM300_on.TabIndex = 103
-        Me.btn_DM300_on.Text = "EEIP DM300.1 ON"
-        Me.btn_DM300_on.UseVisualStyleBackColor = True
-        '
-        'btn_DM300_off
-        '
-        Me.btn_DM300_off.Location = New System.Drawing.Point(238, 824)
-        Me.btn_DM300_off.Name = "btn_DM300_off"
-        Me.btn_DM300_off.Size = New System.Drawing.Size(158, 89)
-        Me.btn_DM300_off.TabIndex = 104
-        Me.btn_DM300_off.Text = "EEIP DM300.1 Off"
-        Me.btn_DM300_off.UseVisualStyleBackColor = True
-        '
-        'lbl_DM350_2
-        '
-        Me.lbl_DM350_2.AutoSize = True
-        Me.lbl_DM350_2.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_DM350_2.Location = New System.Drawing.Point(141, 768)
-        Me.lbl_DM350_2.Name = "lbl_DM350_2"
-        Me.lbl_DM350_2.Size = New System.Drawing.Size(164, 30)
-        Me.lbl_DM350_2.TabIndex = 105
-        Me.lbl_DM350_2.Text = "DM350.2 Status"
+        Me.lbl_UID.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_UID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_UID.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_UID.Location = New System.Drawing.Point(74, 2)
+        Me.lbl_UID.Name = "lbl_UID"
+        Me.lbl_UID.Size = New System.Drawing.Size(400, 35)
+        Me.lbl_UID.TabIndex = 9
+        Me.lbl_UID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Form1
         '
@@ -1119,6 +1164,9 @@ Partial Class Form1
         Me.panel_SelectLoadRecipe.PerformLayout()
         Me.panel_UserCategory.ResumeLayout(False)
         Me.panel_UserCategory.PerformLayout()
+        Me.panel_MainRightDockBtm.ResumeLayout(False)
+        Me.panel_GroupUID.ResumeLayout(False)
+        Me.panel_GroupUID.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1215,4 +1263,8 @@ Partial Class Form1
     Friend WithEvents lbl_DM350_2 As Label
     Friend WithEvents btn_DM300_off As Button
     Friend WithEvents btn_DM300_on As Button
+    Friend WithEvents panel_MainRightDockBtm As Panel
+    Friend WithEvents panel_GroupUID As Panel
+    Friend WithEvents dsp_UID As Label
+    Friend WithEvents lbl_UID As Label
 End Class

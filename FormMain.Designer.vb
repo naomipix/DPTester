@@ -22,52 +22,53 @@ Partial Class FormMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim DataPoint121 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 1.0R)
-        Dim DataPoint122 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 3.0R)
-        Dim DataPoint123 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 7.0R)
-        Dim DataPoint124 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint125 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint126 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint127 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint128 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint129 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint130 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint131 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint132 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint133 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint134 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint135 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint136 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint137 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint138 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint139 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint140 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint141 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint142 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint143 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint144 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint145 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint146 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint147 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint148 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint149 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint150 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim Title5 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
-        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle45 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
+        Dim ChartArea8 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend8 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataPoint211 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 1.0R)
+        Dim DataPoint212 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 3.0R)
+        Dim DataPoint213 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 7.0R)
+        Dim DataPoint214 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint215 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint216 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint217 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint218 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint219 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint220 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint221 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint222 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint223 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint224 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint225 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint226 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint227 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint228 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint229 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint230 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint231 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint232 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint233 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint234 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint235 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint236 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint237 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint238 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint239 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint240 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim Title8 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim DataGridViewCellStyle64 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle65 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle66 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle67 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle68 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle69 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle70 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle71 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle72 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
         Me.dsp_LicenseStatus = New System.Windows.Forms.Label()
+        Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.dsp_MessageLog = New System.Windows.Forms.Label()
         Me.dsp_Setting = New System.Windows.Forms.Label()
         Me.dsp_Calibration = New System.Windows.Forms.Label()
@@ -92,25 +93,7 @@ Partial Class FormMain
         Me.btn_Debug1 = New System.Windows.Forms.Button()
         Me.chart_MainLiveGraph = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.tabpg_MainOverview = New System.Windows.Forms.TabPage()
-        Me.lbl_OverviewValve17 = New System.Windows.Forms.Label()
         Me.lbl_OverviewValve18 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve14 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve13 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve16 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve15 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve19 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve12 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve10 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve11 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve9 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve8 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve7 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve6 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve5 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve4 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve3 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve2 = New System.Windows.Forms.Label()
-        Me.lbl_OverviewValve1 = New System.Windows.Forms.Label()
         Me.tabpg_MainProdZone = New System.Windows.Forms.TabPage()
         Me.lbl_Flowmtr = New System.Windows.Forms.Label()
         Me.dsp_Flowmtr = New System.Windows.Forms.Label()
@@ -120,6 +103,8 @@ Partial Class FormMain
         Me.dsp_InletPress = New System.Windows.Forms.Label()
         Me.lbl_Temp = New System.Windows.Forms.Label()
         Me.dsp_Temp = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.picbx_MainProductZone = New System.Windows.Forms.PictureBox()
         Me.tabpg_MainPumpZone = New System.Windows.Forms.TabPage()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.lbl_OverviewPumpWarning = New System.Windows.Forms.Label()
@@ -137,10 +122,8 @@ Partial Class FormMain
         Me.dsp_TankPreSensor = New System.Windows.Forms.Label()
         Me.dsp_TankNomSensor = New System.Windows.Forms.Label()
         Me.dsp_TankOvfSensor = New System.Windows.Forms.Label()
-        Me.panel_MainRightDockBtm = New System.Windows.Forms.Panel()
-        Me.panel_GroupUID = New System.Windows.Forms.Panel()
-        Me.dsp_UID = New System.Windows.Forms.Label()
-        Me.lbl_UID = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.picbx_MainPumpZone = New System.Windows.Forms.PictureBox()
         Me.lbl_StepwiseMessage = New System.Windows.Forms.Label()
         Me.panel_MainLeft = New System.Windows.Forms.Panel()
         Me.panel_OprKeyInDt = New System.Windows.Forms.Panel()
@@ -318,27 +301,7 @@ Partial Class FormMain
         Me.tabpg_ManualCtrl = New System.Windows.Forms.TabPage()
         Me.tabctrl_SubManualCtrl = New System.Windows.Forms.TabControl()
         Me.tabpg_ManualControlValve = New System.Windows.Forms.TabPage()
-        Me.panel_TankControlPreview = New System.Windows.Forms.Panel()
-        Me.btn_MVCShowcircuit = New System.Windows.Forms.Button()
-        Me.lbl_Valve19 = New System.Windows.Forms.Label()
-        Me.lbl_Valve1 = New System.Windows.Forms.Label()
-        Me.lbl_Valve18 = New System.Windows.Forms.Label()
-        Me.lbl_Valve2 = New System.Windows.Forms.Label()
-        Me.lbl_Valve17 = New System.Windows.Forms.Label()
-        Me.lbl_Valve3 = New System.Windows.Forms.Label()
-        Me.lbl_Valve16 = New System.Windows.Forms.Label()
-        Me.lbl_Valve4 = New System.Windows.Forms.Label()
-        Me.lbl_Valve15 = New System.Windows.Forms.Label()
-        Me.lbl_Valve5 = New System.Windows.Forms.Label()
-        Me.lbl_Valve14 = New System.Windows.Forms.Label()
-        Me.lbl_Valve6 = New System.Windows.Forms.Label()
-        Me.lbl_Valve13 = New System.Windows.Forms.Label()
-        Me.lbl_Valve7 = New System.Windows.Forms.Label()
-        Me.lbl_Valve12 = New System.Windows.Forms.Label()
-        Me.lbl_Valve8 = New System.Windows.Forms.Label()
-        Me.lbl_Valve11 = New System.Windows.Forms.Label()
-        Me.lbl_Valve9 = New System.Windows.Forms.Label()
-        Me.lbl_Valve10 = New System.Windows.Forms.Label()
+        Me.panel_ManualValve_Circuit = New System.Windows.Forms.Panel()
         Me.panel_ValveControl = New System.Windows.Forms.Panel()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.Label25 = New System.Windows.Forms.Label()
@@ -411,6 +374,7 @@ Partial Class FormMain
         Me.dsp_ProcessModeCtrl = New System.Windows.Forms.Label()
         Me.dsp_NewLPM = New System.Windows.Forms.Label()
         Me.dsp_PumpCtrl = New System.Windows.Forms.Label()
+        Me.PictureBox7 = New System.Windows.Forms.PictureBox()
         Me.tabpg_ManualControlTank = New System.Windows.Forms.TabPage()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
@@ -424,6 +388,7 @@ Partial Class FormMain
         Me.Label12 = New System.Windows.Forms.Label()
         Me.lbl_TankValve4 = New System.Windows.Forms.Label()
         Me.lbl_TankValve5 = New System.Windows.Forms.Label()
+        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.panel_TankControl = New System.Windows.Forms.Panel()
         Me.panel_SubTankControl = New System.Windows.Forms.Panel()
         Me.btn_TankDrain = New System.Windows.Forms.Button()
@@ -432,30 +397,7 @@ Partial Class FormMain
         Me.dsp_TankFill = New System.Windows.Forms.Label()
         Me.dsp_TankCtrl = New System.Windows.Forms.Label()
         Me.tabpg_ManualControlDrain = New System.Windows.Forms.TabPage()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.txtbx_N2PurgeActual = New System.Windows.Forms.TextBox()
-        Me.txtbx_BackPressActual = New System.Windows.Forms.TextBox()
-        Me.Label40 = New System.Windows.Forms.Label()
-        Me.lbl_MDrainValve1 = New System.Windows.Forms.Label()
-        Me.Label42 = New System.Windows.Forms.Label()
-        Me.Label43 = New System.Windows.Forms.Label()
-        Me.Label44 = New System.Windows.Forms.Label()
-        Me.Label45 = New System.Windows.Forms.Label()
-        Me.Label46 = New System.Windows.Forms.Label()
-        Me.Label47 = New System.Windows.Forms.Label()
-        Me.Label48 = New System.Windows.Forms.Label()
-        Me.Label49 = New System.Windows.Forms.Label()
-        Me.Label50 = New System.Windows.Forms.Label()
-        Me.Label51 = New System.Windows.Forms.Label()
-        Me.Label52 = New System.Windows.Forms.Label()
-        Me.Label53 = New System.Windows.Forms.Label()
-        Me.Label54 = New System.Windows.Forms.Label()
-        Me.Label55 = New System.Windows.Forms.Label()
-        Me.Label56 = New System.Windows.Forms.Label()
-        Me.Label57 = New System.Windows.Forms.Label()
-        Me.Label58 = New System.Windows.Forms.Label()
+        Me.Panel_ManualDrain_Circuit = New System.Windows.Forms.Panel()
         Me.panel_ManualDrain = New System.Windows.Forms.Panel()
         Me.panel_SubRegulatorControl = New System.Windows.Forms.Panel()
         Me.btn_BckPressureUpdate = New System.Windows.Forms.Button()
@@ -478,6 +420,7 @@ Partial Class FormMain
         Me.dsp_N2PurgeCircuit1 = New System.Windows.Forms.Label()
         Me.dsp_ManualDrain = New System.Windows.Forms.Label()
         Me.tabpg_ManualControlMaintenance = New System.Windows.Forms.TabPage()
+        Me.Panel_Mainten_Circuit = New System.Windows.Forms.Panel()
         Me.panel_Maintenance = New System.Windows.Forms.Panel()
         Me.panel_SubMaintenance = New System.Windows.Forms.Panel()
         Me.btn_EmptyTank = New System.Windows.Forms.Button()
@@ -525,17 +468,6 @@ Partial Class FormMain
         Me.dsp_ProductFamily = New System.Windows.Forms.Label()
         Me.dsp_ProductSKU = New System.Windows.Forms.Label()
         Me.dsp_RecipeID = New System.Windows.Forms.Label()
-        Me.lbl_Title = New System.Windows.Forms.Label()
-        Me.lbl_OperationMode = New System.Windows.Forms.Label()
-        Me.picbx_Icon = New System.Windows.Forms.PictureBox()
-        Me.picbx_MainOverview = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.picbx_MainProductZone = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.picbx_MainPumpZone = New System.Windows.Forms.PictureBox()
-        Me.PictureBox7 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.btn_Calibration = New System.Windows.Forms.Button()
         Me.btn_ResultGraph = New System.Windows.Forms.Button()
         Me.btn_ResultSummary = New System.Windows.Forms.Button()
@@ -544,205 +476,89 @@ Partial Class FormMain
         Me.btn_UserRegistration = New System.Windows.Forms.Button()
         Me.btn_MessageLog = New System.Windows.Forms.Button()
         Me.btn_LogInOut = New System.Windows.Forms.Button()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve1bx3 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve2bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve3bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve3bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve2bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve1bx4 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve5bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCVFilterDrain2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve5bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve7bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve8bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve19bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve19bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve19bx3 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve9bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve9bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve10bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve10bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve10bx3 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve13bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve13bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve15bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve15bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve16bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve17bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve17bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve17bx3 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve14bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve14bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve17bx4 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCVProdDrain1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCVProdDrain2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve6bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve6bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve6bx4 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve6bx3 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve4bx3 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve1bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve4bx4 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve4bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve4bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCDIWIncome = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve1bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCN2Income1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCN2Income2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCN2Income3 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve11bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve18bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCN2Income4 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve18bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve18bx3 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve11bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve12bx1 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCValve12bx2 = New System.Windows.Forms.PictureBox()
-        Me.pb_MCVFilterDrain1 = New System.Windows.Forms.PictureBox()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.panel_FormControl.SuspendLayout
-        Me.panel_UserCategory.SuspendLayout
-        Me.tabctrl_MainCtrl.SuspendLayout
-        Me.tabpg_Main.SuspendLayout
-        Me.panel_MainRight.SuspendLayout
-        Me.tabctrl_SubMain.SuspendLayout
-        Me.tabpg_MainLiveGraph.SuspendLayout
-        CType(Me.chart_MainLiveGraph, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tabpg_MainOverview.SuspendLayout
-        Me.tabpg_MainProdZone.SuspendLayout
-        Me.tabpg_MainPumpZone.SuspendLayout
-        Me.Panel3.SuspendLayout
-        Me.Panel2.SuspendLayout
-        Me.panel_MainRightDockBtm.SuspendLayout
-        Me.panel_GroupUID.SuspendLayout
-        Me.panel_MainLeft.SuspendLayout
-        Me.panel_OprKeyInDt.SuspendLayout
-        Me.panel_ProductionDetails.SuspendLayout
-        Me.panel_DPTestResult.SuspendLayout
-        Me.Panel1.SuspendLayout
-        Me.panel_CalibrateStatus.SuspendLayout
-        Me.panel_WrkOrdScnDt.SuspendLayout
-        Me.tabpg_ProdDetail.SuspendLayout
-        Me.grpbx_SearchFilter.SuspendLayout
-        CType(Me.dgv_ProdDetail, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tabpg_Status.SuspendLayout
-        Me.tabctrl_SubStatus.SuspendLayout
-        Me.tabpg_StatusIO.SuspendLayout
-        CType(Me.dgv_AnalogOutput, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.dgv_DigitalOutput, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.dgv_AnalogInput, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.dgv_DigitalInput, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tabpg_StatusDevice.SuspendLayout
-        Me.panel_GenCondStatus.SuspendLayout
-        Me.panel_PumpProtectLvSenStatus.SuspendLayout
-        Me.panel_NomLvSenStatus.SuspendLayout
-        Me.panel_PreLvSenStatus.SuspendLayout
-        Me.panel_OvfLvSenStatus.SuspendLayout
-        Me.panel_TankStatus.SuspendLayout
-        Me.panel_FlwTempCtrlIO.SuspendLayout
-        Me.panel_PumpIORight.SuspendLayout
-        Me.panel_PumpStatus.SuspendLayout
-        Me.panel_PumpIOLeft.SuspendLayout
-        Me.tabpg_ManualCtrl.SuspendLayout
-        Me.tabctrl_SubManualCtrl.SuspendLayout
-        Me.tabpg_ManualControlValve.SuspendLayout
-        Me.panel_TankControlPreview.SuspendLayout
-        Me.panel_ValveControl.SuspendLayout
-        Me.Panel9.SuspendLayout
-        Me.tabpg_ManualControlPump.SuspendLayout
-        Me.Panel8.SuspendLayout
-        Me.panel_PumpControl.SuspendLayout
-        Me.panel_SubPumpCtrl.SuspendLayout
-        Me.panel_SpeedModeControl.SuspendLayout
-        Me.panel_ProcessModeCtrl.SuspendLayout
-        Me.tabpg_ManualControlTank.SuspendLayout
-        Me.Panel6.SuspendLayout
-        Me.Panel7.SuspendLayout
-        Me.panel_TankControl.SuspendLayout
-        Me.panel_SubTankControl.SuspendLayout
-        Me.tabpg_ManualControlDrain.SuspendLayout
-        Me.Panel5.SuspendLayout
-        Me.panel_ManualDrain.SuspendLayout
-        Me.panel_SubRegulatorControl.SuspendLayout
-        Me.panel_SubManualDrain.SuspendLayout
-        Me.tabpg_ManualControlMaintenance.SuspendLayout
-        Me.panel_Maintenance.SuspendLayout
-        Me.panel_SubMaintenance.SuspendLayout
-        Me.tabpg_Alarm.SuspendLayout
-        Me.tabctrl_SubAlarm.SuspendLayout
-        Me.tabpg_AlarmCurrent.SuspendLayout
-        CType(Me.dgv_CurrentAlarm, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tabpg_AlarmHistory.SuspendLayout
-        CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.panel_PLCHeartBeat.SuspendLayout
-        Me.panel_SelectLoadRecipe.SuspendLayout
-        CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picbx_MainOverview, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picbx_MainProductZone, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve1bx3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve2bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve3bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve3bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve2bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve1bx4, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve5bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCVFilterDrain2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve5bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve7bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve8bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve19bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve19bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve19bx3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve9bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve9bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve10bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve10bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve10bx3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve13bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve13bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve15bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve15bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve16bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve17bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve17bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve17bx3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve14bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve14bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve17bx4, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCVProdDrain1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCVProdDrain2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve6bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve6bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve6bx4, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve6bx3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve4bx3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve1bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve4bx4, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve4bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve4bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCDIWIncome, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve1bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCN2Income1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCN2Income2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCN2Income3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve11bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve18bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCN2Income4, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve18bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve18bx3, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve11bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve12bx1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCValve12bx2, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.pb_MCVFilterDrain1, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        Me.lbl_Title = New System.Windows.Forms.Label()
+        Me.lbl_OperationMode = New System.Windows.Forms.Label()
+        Me.Panel_Overview = New System.Windows.Forms.Panel()
+        Me.panel_FormControl.SuspendLayout()
+        CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panel_UserCategory.SuspendLayout()
+        Me.tabctrl_MainCtrl.SuspendLayout()
+        Me.tabpg_Main.SuspendLayout()
+        Me.panel_MainRight.SuspendLayout()
+        Me.tabctrl_SubMain.SuspendLayout()
+        Me.tabpg_MainLiveGraph.SuspendLayout()
+        CType(Me.chart_MainLiveGraph, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpg_MainOverview.SuspendLayout()
+        Me.tabpg_MainProdZone.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picbx_MainProductZone, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpg_MainPumpZone.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panel_MainLeft.SuspendLayout()
+        Me.panel_OprKeyInDt.SuspendLayout()
+        Me.panel_ProductionDetails.SuspendLayout()
+        Me.panel_DPTestResult.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.panel_CalibrateStatus.SuspendLayout()
+        Me.panel_WrkOrdScnDt.SuspendLayout()
+        Me.tabpg_ProdDetail.SuspendLayout()
+        Me.grpbx_SearchFilter.SuspendLayout()
+        CType(Me.dgv_ProdDetail, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpg_Status.SuspendLayout()
+        Me.tabctrl_SubStatus.SuspendLayout()
+        Me.tabpg_StatusIO.SuspendLayout()
+        CType(Me.dgv_AnalogOutput, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgv_DigitalOutput, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgv_AnalogInput, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgv_DigitalInput, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpg_StatusDevice.SuspendLayout()
+        Me.panel_GenCondStatus.SuspendLayout()
+        Me.panel_PumpProtectLvSenStatus.SuspendLayout()
+        Me.panel_NomLvSenStatus.SuspendLayout()
+        Me.panel_PreLvSenStatus.SuspendLayout()
+        Me.panel_OvfLvSenStatus.SuspendLayout()
+        Me.panel_TankStatus.SuspendLayout()
+        Me.panel_FlwTempCtrlIO.SuspendLayout()
+        Me.panel_PumpIORight.SuspendLayout()
+        Me.panel_PumpStatus.SuspendLayout()
+        Me.panel_PumpIOLeft.SuspendLayout()
+        Me.tabpg_ManualCtrl.SuspendLayout()
+        Me.tabctrl_SubManualCtrl.SuspendLayout()
+        Me.tabpg_ManualControlValve.SuspendLayout()
+        Me.panel_ValveControl.SuspendLayout()
+        Me.Panel9.SuspendLayout()
+        Me.tabpg_ManualControlPump.SuspendLayout()
+        Me.Panel8.SuspendLayout()
+        Me.panel_PumpControl.SuspendLayout()
+        Me.panel_SubPumpCtrl.SuspendLayout()
+        Me.panel_SpeedModeControl.SuspendLayout()
+        Me.panel_ProcessModeCtrl.SuspendLayout()
+        CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpg_ManualControlTank.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        Me.Panel7.SuspendLayout()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panel_TankControl.SuspendLayout()
+        Me.panel_SubTankControl.SuspendLayout()
+        Me.tabpg_ManualControlDrain.SuspendLayout()
+        Me.panel_ManualDrain.SuspendLayout()
+        Me.panel_SubRegulatorControl.SuspendLayout()
+        Me.panel_SubManualDrain.SuspendLayout()
+        Me.tabpg_ManualControlMaintenance.SuspendLayout()
+        Me.panel_Maintenance.SuspendLayout()
+        Me.panel_SubMaintenance.SuspendLayout()
+        Me.tabpg_Alarm.SuspendLayout()
+        Me.tabctrl_SubAlarm.SuspendLayout()
+        Me.tabpg_AlarmCurrent.SuspendLayout()
+        CType(Me.dgv_CurrentAlarm, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpg_AlarmHistory.SuspendLayout()
+        CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.panel_PLCHeartBeat.SuspendLayout()
+        Me.panel_SelectLoadRecipe.SuspendLayout()
+        Me.SuspendLayout()
         '
         'panel_FormControl
         '
@@ -793,6 +609,16 @@ Partial Class FormMain
         Me.dsp_LicenseStatus.Text = "License Status"
         Me.dsp_LicenseStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.dsp_LicenseStatus.Visible = False
+        '
+        'picbx_Icon
+        '
+        Me.picbx_Icon.Image = CType(resources.GetObject("picbx_Icon.Image"), System.Drawing.Image)
+        Me.picbx_Icon.Location = New System.Drawing.Point(1792, 57)
+        Me.picbx_Icon.Name = "picbx_Icon"
+        Me.picbx_Icon.Size = New System.Drawing.Size(100, 100)
+        Me.picbx_Icon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picbx_Icon.TabIndex = 37
+        Me.picbx_Icon.TabStop = False
         '
         'dsp_MessageLog
         '
@@ -970,7 +796,6 @@ Partial Class FormMain
         Me.panel_MainRight.Controls.Add(Me.cmbx_GraphSelection)
         Me.panel_MainRight.Controls.Add(Me.dsp_GraphSelection)
         Me.panel_MainRight.Controls.Add(Me.tabctrl_SubMain)
-        Me.panel_MainRight.Controls.Add(Me.panel_MainRightDockBtm)
         Me.panel_MainRight.Controls.Add(Me.lbl_StepwiseMessage)
         Me.panel_MainRight.Dock = System.Windows.Forms.DockStyle.Right
         Me.panel_MainRight.Location = New System.Drawing.Point(933, 3)
@@ -1042,175 +867,145 @@ Partial Class FormMain
         '
         Me.chart_MainLiveGraph.BackColor = System.Drawing.Color.LightSkyBlue
         Me.chart_MainLiveGraph.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter
-        ChartArea5.AxisX.IsLabelAutoFit = False
-        ChartArea5.AxisX.LabelStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea5.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
-        ChartArea5.AxisX.MinorGrid.Enabled = True
-        ChartArea5.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightSkyBlue
-        ChartArea5.AxisX.Title = "Time (s)"
-        ChartArea5.AxisX.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea5.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
-        ChartArea5.AxisY.Title = "Inlet/Outlet Pressure (kPa)"
-        ChartArea5.AxisY.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea5.AxisY2.MajorGrid.LineColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
-        ChartArea5.AxisY2.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold)
-        ChartArea5.Name = "ChartArea1"
-        Me.chart_MainLiveGraph.ChartAreas.Add(ChartArea5)
-        Legend5.Alignment = System.Drawing.StringAlignment.Center
-        Legend5.DockedToChartArea = "ChartArea1"
-        Legend5.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom
-        Legend5.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row
-        Legend5.Name = "Legend1"
-        Me.chart_MainLiveGraph.Legends.Add(Legend5)
+        ChartArea8.AxisX.IsLabelAutoFit = False
+        ChartArea8.AxisX.LabelStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea8.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
+        ChartArea8.AxisX.MinorGrid.Enabled = True
+        ChartArea8.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightSkyBlue
+        ChartArea8.AxisX.Title = "Time (s)"
+        ChartArea8.AxisX.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea8.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
+        ChartArea8.AxisY.Title = "Inlet/Outlet Pressure (kPa)"
+        ChartArea8.AxisY.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea8.AxisY2.MajorGrid.LineColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        ChartArea8.AxisY2.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold)
+        ChartArea8.Name = "ChartArea1"
+        Me.chart_MainLiveGraph.ChartAreas.Add(ChartArea8)
+        Legend8.Alignment = System.Drawing.StringAlignment.Center
+        Legend8.DockedToChartArea = "ChartArea1"
+        Legend8.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom
+        Legend8.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row
+        Legend8.Name = "Legend1"
+        Me.chart_MainLiveGraph.Legends.Add(Legend8)
         Me.chart_MainLiveGraph.Location = New System.Drawing.Point(0, 0)
         Me.chart_MainLiveGraph.Name = "chart_MainLiveGraph"
-        Series5.BorderWidth = 2
-        Series5.ChartArea = "ChartArea1"
-        Series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series5.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Series5.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Series5.Legend = "Legend1"
-        Series5.Name = "Series1"
-        DataPoint121.MarkerSize = 5
-        DataPoint121.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint122.MarkerSize = 5
-        DataPoint122.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint123.MarkerSize = 5
-        DataPoint123.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint124.MarkerSize = 5
-        DataPoint124.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint125.MarkerSize = 5
-        DataPoint125.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint126.MarkerSize = 5
-        DataPoint126.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint127.MarkerSize = 5
-        DataPoint127.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint128.MarkerSize = 5
-        DataPoint128.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint129.MarkerSize = 5
-        DataPoint129.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint130.MarkerSize = 5
-        DataPoint130.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint131.MarkerSize = 5
-        DataPoint131.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint132.MarkerSize = 5
-        DataPoint132.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint133.MarkerSize = 5
-        DataPoint133.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint134.MarkerSize = 5
-        DataPoint134.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint135.MarkerSize = 5
-        DataPoint135.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint136.MarkerSize = 5
-        DataPoint136.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint137.MarkerSize = 5
-        DataPoint137.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint138.MarkerSize = 5
-        DataPoint138.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint139.MarkerSize = 5
-        DataPoint139.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint140.MarkerSize = 5
-        DataPoint140.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint141.MarkerSize = 5
-        DataPoint141.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint142.MarkerSize = 5
-        DataPoint142.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint143.MarkerSize = 5
-        DataPoint143.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint144.MarkerSize = 5
-        DataPoint144.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint145.MarkerSize = 5
-        DataPoint145.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint146.MarkerSize = 5
-        DataPoint146.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint147.MarkerSize = 5
-        DataPoint147.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint148.MarkerSize = 5
-        DataPoint148.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint149.MarkerSize = 5
-        DataPoint149.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint150.MarkerSize = 5
-        DataPoint150.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        Series5.Points.Add(DataPoint121)
-        Series5.Points.Add(DataPoint122)
-        Series5.Points.Add(DataPoint123)
-        Series5.Points.Add(DataPoint124)
-        Series5.Points.Add(DataPoint125)
-        Series5.Points.Add(DataPoint126)
-        Series5.Points.Add(DataPoint127)
-        Series5.Points.Add(DataPoint128)
-        Series5.Points.Add(DataPoint129)
-        Series5.Points.Add(DataPoint130)
-        Series5.Points.Add(DataPoint131)
-        Series5.Points.Add(DataPoint132)
-        Series5.Points.Add(DataPoint133)
-        Series5.Points.Add(DataPoint134)
-        Series5.Points.Add(DataPoint135)
-        Series5.Points.Add(DataPoint136)
-        Series5.Points.Add(DataPoint137)
-        Series5.Points.Add(DataPoint138)
-        Series5.Points.Add(DataPoint139)
-        Series5.Points.Add(DataPoint140)
-        Series5.Points.Add(DataPoint141)
-        Series5.Points.Add(DataPoint142)
-        Series5.Points.Add(DataPoint143)
-        Series5.Points.Add(DataPoint144)
-        Series5.Points.Add(DataPoint145)
-        Series5.Points.Add(DataPoint146)
-        Series5.Points.Add(DataPoint147)
-        Series5.Points.Add(DataPoint148)
-        Series5.Points.Add(DataPoint149)
-        Series5.Points.Add(DataPoint150)
-        Me.chart_MainLiveGraph.Series.Add(Series5)
+        Series8.BorderWidth = 2
+        Series8.ChartArea = "ChartArea1"
+        Series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series8.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Series8.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Series8.Legend = "Legend1"
+        Series8.Name = "Series1"
+        DataPoint211.MarkerSize = 5
+        DataPoint211.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint212.MarkerSize = 5
+        DataPoint212.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint213.MarkerSize = 5
+        DataPoint213.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint214.MarkerSize = 5
+        DataPoint214.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint215.MarkerSize = 5
+        DataPoint215.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint216.MarkerSize = 5
+        DataPoint216.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint217.MarkerSize = 5
+        DataPoint217.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint218.MarkerSize = 5
+        DataPoint218.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint219.MarkerSize = 5
+        DataPoint219.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint220.MarkerSize = 5
+        DataPoint220.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint221.MarkerSize = 5
+        DataPoint221.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint222.MarkerSize = 5
+        DataPoint222.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint223.MarkerSize = 5
+        DataPoint223.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint224.MarkerSize = 5
+        DataPoint224.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint225.MarkerSize = 5
+        DataPoint225.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint226.MarkerSize = 5
+        DataPoint226.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint227.MarkerSize = 5
+        DataPoint227.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint228.MarkerSize = 5
+        DataPoint228.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint229.MarkerSize = 5
+        DataPoint229.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint230.MarkerSize = 5
+        DataPoint230.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint231.MarkerSize = 5
+        DataPoint231.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint232.MarkerSize = 5
+        DataPoint232.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint233.MarkerSize = 5
+        DataPoint233.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint234.MarkerSize = 5
+        DataPoint234.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint235.MarkerSize = 5
+        DataPoint235.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint236.MarkerSize = 5
+        DataPoint236.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint237.MarkerSize = 5
+        DataPoint237.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint238.MarkerSize = 5
+        DataPoint238.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint239.MarkerSize = 5
+        DataPoint239.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint240.MarkerSize = 5
+        DataPoint240.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        Series8.Points.Add(DataPoint211)
+        Series8.Points.Add(DataPoint212)
+        Series8.Points.Add(DataPoint213)
+        Series8.Points.Add(DataPoint214)
+        Series8.Points.Add(DataPoint215)
+        Series8.Points.Add(DataPoint216)
+        Series8.Points.Add(DataPoint217)
+        Series8.Points.Add(DataPoint218)
+        Series8.Points.Add(DataPoint219)
+        Series8.Points.Add(DataPoint220)
+        Series8.Points.Add(DataPoint221)
+        Series8.Points.Add(DataPoint222)
+        Series8.Points.Add(DataPoint223)
+        Series8.Points.Add(DataPoint224)
+        Series8.Points.Add(DataPoint225)
+        Series8.Points.Add(DataPoint226)
+        Series8.Points.Add(DataPoint227)
+        Series8.Points.Add(DataPoint228)
+        Series8.Points.Add(DataPoint229)
+        Series8.Points.Add(DataPoint230)
+        Series8.Points.Add(DataPoint231)
+        Series8.Points.Add(DataPoint232)
+        Series8.Points.Add(DataPoint233)
+        Series8.Points.Add(DataPoint234)
+        Series8.Points.Add(DataPoint235)
+        Series8.Points.Add(DataPoint236)
+        Series8.Points.Add(DataPoint237)
+        Series8.Points.Add(DataPoint238)
+        Series8.Points.Add(DataPoint239)
+        Series8.Points.Add(DataPoint240)
+        Me.chart_MainLiveGraph.Series.Add(Series8)
         Me.chart_MainLiveGraph.Size = New System.Drawing.Size(929, 528)
         Me.chart_MainLiveGraph.TabIndex = 0
         Me.chart_MainLiveGraph.Text = "Chart1"
-        Title5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Title5.Name = "Title1"
-        Title5.Text = "Recipe Details"
-        Me.chart_MainLiveGraph.Titles.Add(Title5)
+        Title8.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Title8.Name = "Title1"
+        Title8.Text = "Recipe Details"
+        Me.chart_MainLiveGraph.Titles.Add(Title8)
         '
         'tabpg_MainOverview
         '
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve17)
+        Me.tabpg_MainOverview.Controls.Add(Me.Panel_Overview)
         Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve18)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve14)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve13)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve16)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve15)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve19)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve12)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve10)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve11)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve9)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve8)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve7)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve6)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve5)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve4)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve3)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve2)
-        Me.tabpg_MainOverview.Controls.Add(Me.lbl_OverviewValve1)
-        Me.tabpg_MainOverview.Controls.Add(Me.picbx_MainOverview)
         Me.tabpg_MainOverview.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_MainOverview.Name = "tabpg_MainOverview"
         Me.tabpg_MainOverview.Padding = New System.Windows.Forms.Padding(3)
-        Me.tabpg_MainOverview.Size = New System.Drawing.Size(929, 528)
+        Me.tabpg_MainOverview.Size = New System.Drawing.Size(929, 575)
         Me.tabpg_MainOverview.TabIndex = 1
         Me.tabpg_MainOverview.Text = "Overview"
         Me.tabpg_MainOverview.UseVisualStyleBackColor = True
-        '
-        'lbl_OverviewValve17
-        '
-        Me.lbl_OverviewValve17.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve17.Location = New System.Drawing.Point(860, 244)
-        Me.lbl_OverviewValve17.Name = "lbl_OverviewValve17"
-        Me.lbl_OverviewValve17.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve17.TabIndex = 47
-        Me.lbl_OverviewValve17.Text = "17"
-        Me.lbl_OverviewValve17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_OverviewValve18
         '
@@ -1223,210 +1018,6 @@ Partial Class FormMain
         Me.lbl_OverviewValve18.TabIndex = 46
         Me.lbl_OverviewValve18.Text = "18"
         Me.lbl_OverviewValve18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve14
-        '
-        Me.lbl_OverviewValve14.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve14.Location = New System.Drawing.Point(839, 175)
-        Me.lbl_OverviewValve14.Name = "lbl_OverviewValve14"
-        Me.lbl_OverviewValve14.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve14.TabIndex = 45
-        Me.lbl_OverviewValve14.Text = "14"
-        Me.lbl_OverviewValve14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve13
-        '
-        Me.lbl_OverviewValve13.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve13.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve13.Location = New System.Drawing.Point(788, 175)
-        Me.lbl_OverviewValve13.Name = "lbl_OverviewValve13"
-        Me.lbl_OverviewValve13.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve13.TabIndex = 44
-        Me.lbl_OverviewValve13.Text = "13"
-        Me.lbl_OverviewValve13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve16
-        '
-        Me.lbl_OverviewValve16.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve16.Location = New System.Drawing.Point(815, 309)
-        Me.lbl_OverviewValve16.Name = "lbl_OverviewValve16"
-        Me.lbl_OverviewValve16.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve16.TabIndex = 43
-        Me.lbl_OverviewValve16.Text = "16"
-        Me.lbl_OverviewValve16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve15
-        '
-        Me.lbl_OverviewValve15.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve15.Location = New System.Drawing.Point(751, 309)
-        Me.lbl_OverviewValve15.Name = "lbl_OverviewValve15"
-        Me.lbl_OverviewValve15.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve15.TabIndex = 42
-        Me.lbl_OverviewValve15.Text = "15"
-        Me.lbl_OverviewValve15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve19
-        '
-        Me.lbl_OverviewValve19.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve19.Location = New System.Drawing.Point(335, 263)
-        Me.lbl_OverviewValve19.Name = "lbl_OverviewValve19"
-        Me.lbl_OverviewValve19.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve19.TabIndex = 41
-        Me.lbl_OverviewValve19.Text = "19"
-        Me.lbl_OverviewValve19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve12
-        '
-        Me.lbl_OverviewValve12.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve12.Location = New System.Drawing.Point(645, 370)
-        Me.lbl_OverviewValve12.Name = "lbl_OverviewValve12"
-        Me.lbl_OverviewValve12.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve12.TabIndex = 40
-        Me.lbl_OverviewValve12.Text = "12"
-        Me.lbl_OverviewValve12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve10
-        '
-        Me.lbl_OverviewValve10.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve10.Location = New System.Drawing.Point(483, 98)
-        Me.lbl_OverviewValve10.Name = "lbl_OverviewValve10"
-        Me.lbl_OverviewValve10.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve10.TabIndex = 39
-        Me.lbl_OverviewValve10.Text = "10"
-        Me.lbl_OverviewValve10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve11
-        '
-        Me.lbl_OverviewValve11.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve11.Location = New System.Drawing.Point(528, 244)
-        Me.lbl_OverviewValve11.Name = "lbl_OverviewValve11"
-        Me.lbl_OverviewValve11.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve11.TabIndex = 38
-        Me.lbl_OverviewValve11.Text = "11"
-        Me.lbl_OverviewValve11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve9
-        '
-        Me.lbl_OverviewValve9.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve9.Location = New System.Drawing.Point(528, 304)
-        Me.lbl_OverviewValve9.Name = "lbl_OverviewValve9"
-        Me.lbl_OverviewValve9.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve9.TabIndex = 37
-        Me.lbl_OverviewValve9.Text = "9"
-        Me.lbl_OverviewValve9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve8
-        '
-        Me.lbl_OverviewValve8.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve8.Location = New System.Drawing.Point(459, 400)
-        Me.lbl_OverviewValve8.Name = "lbl_OverviewValve8"
-        Me.lbl_OverviewValve8.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve8.TabIndex = 36
-        Me.lbl_OverviewValve8.Text = "8"
-        Me.lbl_OverviewValve8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve7
-        '
-        Me.lbl_OverviewValve7.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve7.Location = New System.Drawing.Point(413, 400)
-        Me.lbl_OverviewValve7.Name = "lbl_OverviewValve7"
-        Me.lbl_OverviewValve7.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve7.TabIndex = 35
-        Me.lbl_OverviewValve7.Text = "7"
-        Me.lbl_OverviewValve7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve6
-        '
-        Me.lbl_OverviewValve6.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve6.Location = New System.Drawing.Point(432, 98)
-        Me.lbl_OverviewValve6.Name = "lbl_OverviewValve6"
-        Me.lbl_OverviewValve6.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve6.TabIndex = 34
-        Me.lbl_OverviewValve6.Text = "6"
-        Me.lbl_OverviewValve6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve5
-        '
-        Me.lbl_OverviewValve5.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve5.Location = New System.Drawing.Point(281, 259)
-        Me.lbl_OverviewValve5.Name = "lbl_OverviewValve5"
-        Me.lbl_OverviewValve5.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve5.TabIndex = 33
-        Me.lbl_OverviewValve5.Text = "5"
-        Me.lbl_OverviewValve5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve4
-        '
-        Me.lbl_OverviewValve4.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve4.Location = New System.Drawing.Point(214, 163)
-        Me.lbl_OverviewValve4.Name = "lbl_OverviewValve4"
-        Me.lbl_OverviewValve4.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve4.TabIndex = 32
-        Me.lbl_OverviewValve4.Text = "4"
-        Me.lbl_OverviewValve4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve3
-        '
-        Me.lbl_OverviewValve3.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve3.Location = New System.Drawing.Point(173, 240)
-        Me.lbl_OverviewValve3.Name = "lbl_OverviewValve3"
-        Me.lbl_OverviewValve3.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve3.TabIndex = 31
-        Me.lbl_OverviewValve3.Text = "3"
-        Me.lbl_OverviewValve3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve2
-        '
-        Me.lbl_OverviewValve2.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve2.Location = New System.Drawing.Point(126, 240)
-        Me.lbl_OverviewValve2.Name = "lbl_OverviewValve2"
-        Me.lbl_OverviewValve2.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve2.TabIndex = 30
-        Me.lbl_OverviewValve2.Text = "2"
-        Me.lbl_OverviewValve2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OverviewValve1
-        '
-        Me.lbl_OverviewValve1.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_OverviewValve1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_OverviewValve1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OverviewValve1.Location = New System.Drawing.Point(79, 240)
-        Me.lbl_OverviewValve1.Name = "lbl_OverviewValve1"
-        Me.lbl_OverviewValve1.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_OverviewValve1.TabIndex = 29
-        Me.lbl_OverviewValve1.Text = "1"
-        Me.lbl_OverviewValve1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tabpg_MainProdZone
         '
@@ -1538,6 +1129,25 @@ Partial Class FormMain
         Me.dsp_Temp.TabIndex = 19
         Me.dsp_Temp.Text = "Temperature" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(K)"
         Me.dsp_Temp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(929, 528)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 17
+        Me.PictureBox1.TabStop = False
+        '
+        'picbx_MainProductZone
+        '
+        Me.picbx_MainProductZone.Location = New System.Drawing.Point(0, 0)
+        Me.picbx_MainProductZone.Name = "picbx_MainProductZone"
+        Me.picbx_MainProductZone.Size = New System.Drawing.Size(929, 528)
+        Me.picbx_MainProductZone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picbx_MainProductZone.TabIndex = 5
+        Me.picbx_MainProductZone.TabStop = False
         '
         'tabpg_MainPumpZone
         '
@@ -1743,44 +1353,24 @@ Partial Class FormMain
         Me.dsp_TankOvfSensor.Text = "Tank Overflow Sensor"
         Me.dsp_TankOvfSensor.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'panel_MainRightDockBtm
+        'PictureBox2
         '
-        Me.panel_MainRightDockBtm.Controls.Add(Me.panel_GroupUID)
-        Me.panel_MainRightDockBtm.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.panel_MainRightDockBtm.Location = New System.Drawing.Point(0, 611)
-        Me.panel_MainRightDockBtm.Name = "panel_MainRightDockBtm"
-        Me.panel_MainRightDockBtm.Size = New System.Drawing.Size(936, 60)
-        Me.panel_MainRightDockBtm.TabIndex = 4
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(929, 528)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 19
+        Me.PictureBox2.TabStop = False
         '
-        'panel_GroupUID
+        'picbx_MainPumpZone
         '
-        Me.panel_GroupUID.Controls.Add(Me.dsp_UID)
-        Me.panel_GroupUID.Controls.Add(Me.lbl_UID)
-        Me.panel_GroupUID.Location = New System.Drawing.Point(228, 16)
-        Me.panel_GroupUID.Name = "panel_GroupUID"
-        Me.panel_GroupUID.Size = New System.Drawing.Size(480, 40)
-        Me.panel_GroupUID.TabIndex = 10
-        '
-        'dsp_UID
-        '
-        Me.dsp_UID.AutoSize = True
-        Me.dsp_UID.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_UID.Location = New System.Drawing.Point(9, 4)
-        Me.dsp_UID.Name = "dsp_UID"
-        Me.dsp_UID.Size = New System.Drawing.Size(59, 30)
-        Me.dsp_UID.TabIndex = 10
-        Me.dsp_UID.Text = "UID :"
-        '
-        'lbl_UID
-        '
-        Me.lbl_UID.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_UID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_UID.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_UID.Location = New System.Drawing.Point(74, 2)
-        Me.lbl_UID.Name = "lbl_UID"
-        Me.lbl_UID.Size = New System.Drawing.Size(400, 35)
-        Me.lbl_UID.TabIndex = 9
-        Me.lbl_UID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.picbx_MainPumpZone.Location = New System.Drawing.Point(0, 0)
+        Me.picbx_MainPumpZone.Name = "picbx_MainPumpZone"
+        Me.picbx_MainPumpZone.Size = New System.Drawing.Size(929, 528)
+        Me.picbx_MainPumpZone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.picbx_MainPumpZone.TabIndex = 5
+        Me.picbx_MainPumpZone.TabStop = False
         '
         'lbl_StepwiseMessage
         '
@@ -2591,15 +2181,15 @@ Partial Class FormMain
         Me.dgv_ProdDetail.AllowUserToAddRows = False
         Me.dgv_ProdDetail.AllowUserToDeleteRows = False
         Me.dgv_ProdDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle37.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle37.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle37.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle37.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle37.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle37.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle37.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_ProdDetail.DefaultCellStyle = DataGridViewCellStyle37
+        DataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle64.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle64.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle64.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle64.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle64.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle64.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle64.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_ProdDetail.DefaultCellStyle = DataGridViewCellStyle64
         Me.dgv_ProdDetail.Location = New System.Drawing.Point(3, 92)
         Me.dgv_ProdDetail.Name = "dgv_ProdDetail"
         Me.dgv_ProdDetail.ReadOnly = True
@@ -2655,15 +2245,15 @@ Partial Class FormMain
         Me.dgv_AnalogOutput.AllowUserToDeleteRows = False
         Me.dgv_AnalogOutput.AllowUserToResizeColumns = False
         Me.dgv_AnalogOutput.AllowUserToResizeRows = False
-        DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle38.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle38.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle38.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle38.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_AnalogOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle38
+        DataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle65.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle65.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle65.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle65.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle65.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle65.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle65.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_AnalogOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle65
         Me.dgv_AnalogOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_AnalogOutput.Location = New System.Drawing.Point(1383, 56)
         Me.dgv_AnalogOutput.Name = "dgv_AnalogOutput"
@@ -2678,15 +2268,15 @@ Partial Class FormMain
         Me.dgv_DigitalOutput.AllowUserToDeleteRows = False
         Me.dgv_DigitalOutput.AllowUserToResizeColumns = False
         Me.dgv_DigitalOutput.AllowUserToResizeRows = False
-        DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle39.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle39.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle39.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle39.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle39.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle39.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_DigitalOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle39
+        DataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle66.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle66.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle66.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle66.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle66.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle66.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle66.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_DigitalOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle66
         Me.dgv_DigitalOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_DigitalOutput.Location = New System.Drawing.Point(471, 56)
         Me.dgv_DigitalOutput.Name = "dgv_DigitalOutput"
@@ -2701,15 +2291,15 @@ Partial Class FormMain
         Me.dgv_AnalogInput.AllowUserToDeleteRows = False
         Me.dgv_AnalogInput.AllowUserToResizeColumns = False
         Me.dgv_AnalogInput.AllowUserToResizeRows = False
-        DataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle40.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle40.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle40.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle40.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle40.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle40.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_AnalogInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle40
+        DataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle67.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle67.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle67.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle67.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle67.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle67.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle67.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_AnalogInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle67
         Me.dgv_AnalogInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_AnalogInput.Location = New System.Drawing.Point(927, 56)
         Me.dgv_AnalogInput.Name = "dgv_AnalogInput"
@@ -2724,15 +2314,15 @@ Partial Class FormMain
         Me.dgv_DigitalInput.AllowUserToDeleteRows = False
         Me.dgv_DigitalInput.AllowUserToResizeColumns = False
         Me.dgv_DigitalInput.AllowUserToResizeRows = False
-        DataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle41.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle41.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle41.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle41.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle41.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle41.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle41.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_DigitalInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle41
+        DataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle68.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle68.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle68.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle68.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle68.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle68.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle68.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_DigitalInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle68
         Me.dgv_DigitalInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_DigitalInput.Location = New System.Drawing.Point(15, 56)
         Me.dgv_DigitalInput.Name = "dgv_DigitalInput"
@@ -3851,7 +3441,7 @@ Partial Class FormMain
         'tabpg_ManualControlValve
         '
         Me.tabpg_ManualControlValve.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.tabpg_ManualControlValve.Controls.Add(Me.panel_TankControlPreview)
+        Me.tabpg_ManualControlValve.Controls.Add(Me.panel_ManualValve_Circuit)
         Me.tabpg_ManualControlValve.Controls.Add(Me.panel_ValveControl)
         Me.tabpg_ManualControlValve.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_ManualControlValve.Name = "tabpg_ManualControlValve"
@@ -3859,328 +3449,16 @@ Partial Class FormMain
         Me.tabpg_ManualControlValve.TabIndex = 6
         Me.tabpg_ManualControlValve.Text = "Valve Control"
         '
-        'panel_TankControlPreview
+        'panel_ManualValve_Circuit
         '
-        Me.panel_TankControlPreview.BackColor = System.Drawing.SystemColors.Window
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCVFilterDrain1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve12bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve12bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve11bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve18bx3)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve18bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCN2Income4)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve18bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve11bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCN2Income3)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCN2Income2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCN2Income1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve1bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCDIWIncome)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve4bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve4bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve4bx4)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve4bx3)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve1bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve6bx3)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve6bx4)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve6bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve6bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCVProdDrain2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCVProdDrain1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve17bx4)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve14bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve14bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve17bx3)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve17bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve17bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve16bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve15bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve15bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve13bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve13bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve10bx3)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve10bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve10bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve9bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve9bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve19bx3)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve19bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve19bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve8bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve7bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve5bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCVFilterDrain2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve5bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve3bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve2bx2)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve1bx4)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve3bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve2bx1)
-        Me.panel_TankControlPreview.Controls.Add(Me.pb_MCValve1bx3)
-        Me.panel_TankControlPreview.Controls.Add(Me.btn_MVCShowcircuit)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve19)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve1)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve18)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve2)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve17)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve3)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve16)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve4)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve15)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve5)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve14)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve6)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve13)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve7)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve12)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve8)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve11)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve9)
-        Me.panel_TankControlPreview.Controls.Add(Me.lbl_Valve10)
-        Me.panel_TankControlPreview.Controls.Add(Me.PictureBox3)
-        Me.panel_TankControlPreview.Location = New System.Drawing.Point(682, 0)
-        Me.panel_TankControlPreview.Name = "panel_TankControlPreview"
-        Me.panel_TankControlPreview.Size = New System.Drawing.Size(1136, 583)
-        Me.panel_TankControlPreview.TabIndex = 13
-        '
-        'btn_MVCShowcircuit
-        '
-        Me.btn_MVCShowcircuit.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.btn_MVCShowcircuit.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_MVCShowcircuit.Location = New System.Drawing.Point(949, 10)
-        Me.btn_MVCShowcircuit.Name = "btn_MVCShowcircuit"
-        Me.btn_MVCShowcircuit.Size = New System.Drawing.Size(152, 34)
-        Me.btn_MVCShowcircuit.TabIndex = 30
-        Me.btn_MVCShowcircuit.Text = "Show Circuit Path"
-        Me.btn_MVCShowcircuit.UseVisualStyleBackColor = False
-        '
-        'lbl_Valve19
-        '
-        Me.lbl_Valve19.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve19.Location = New System.Drawing.Point(424, 292)
-        Me.lbl_Valve19.Name = "lbl_Valve19"
-        Me.lbl_Valve19.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve19.TabIndex = 11
-        Me.lbl_Valve19.Text = "19"
-        Me.lbl_Valve19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve1
-        '
-        Me.lbl_Valve1.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve1.Location = New System.Drawing.Point(149, 266)
-        Me.lbl_Valve1.Name = "lbl_Valve1"
-        Me.lbl_Valve1.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve1.TabIndex = 27
-        Me.lbl_Valve1.Text = "1"
-        Me.lbl_Valve1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve18
-        '
-        Me.lbl_Valve18.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve18.Location = New System.Drawing.Point(1021, 196)
-        Me.lbl_Valve18.Name = "lbl_Valve18"
-        Me.lbl_Valve18.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve18.TabIndex = 26
-        Me.lbl_Valve18.Text = "18"
-        Me.lbl_Valve18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve2
-        '
-        Me.lbl_Valve2.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve2.Location = New System.Drawing.Point(201, 266)
-        Me.lbl_Valve2.Name = "lbl_Valve2"
-        Me.lbl_Valve2.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve2.TabIndex = 25
-        Me.lbl_Valve2.Text = "2"
-        Me.lbl_Valve2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve17
-        '
-        Me.lbl_Valve17.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve17.Location = New System.Drawing.Point(1007, 279)
-        Me.lbl_Valve17.Name = "lbl_Valve17"
-        Me.lbl_Valve17.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve17.TabIndex = 24
-        Me.lbl_Valve17.Text = "17"
-        Me.lbl_Valve17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve3
-        '
-        Me.lbl_Valve3.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve3.Location = New System.Drawing.Point(248, 266)
-        Me.lbl_Valve3.Name = "lbl_Valve3"
-        Me.lbl_Valve3.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve3.TabIndex = 23
-        Me.lbl_Valve3.Text = "3"
-        Me.lbl_Valve3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve16
-        '
-        Me.lbl_Valve16.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve16.Location = New System.Drawing.Point(949, 343)
-        Me.lbl_Valve16.Name = "lbl_Valve16"
-        Me.lbl_Valve16.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve16.TabIndex = 22
-        Me.lbl_Valve16.Text = "16"
-        Me.lbl_Valve16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve4
-        '
-        Me.lbl_Valve4.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve4.Location = New System.Drawing.Point(295, 185)
-        Me.lbl_Valve4.Name = "lbl_Valve4"
-        Me.lbl_Valve4.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve4.TabIndex = 21
-        Me.lbl_Valve4.Text = "4"
-        Me.lbl_Valve4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve15
-        '
-        Me.lbl_Valve15.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve15.Location = New System.Drawing.Point(883, 343)
-        Me.lbl_Valve15.Name = "lbl_Valve15"
-        Me.lbl_Valve15.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve15.TabIndex = 28
-        Me.lbl_Valve15.Text = "15"
-        Me.lbl_Valve15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve5
-        '
-        Me.lbl_Valve5.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve5.Location = New System.Drawing.Point(370, 288)
-        Me.lbl_Valve5.Name = "lbl_Valve5"
-        Me.lbl_Valve5.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve5.TabIndex = 20
-        Me.lbl_Valve5.Text = "5"
-        Me.lbl_Valve5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve14
-        '
-        Me.lbl_Valve14.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve14.Location = New System.Drawing.Point(974, 196)
-        Me.lbl_Valve14.Name = "lbl_Valve14"
-        Me.lbl_Valve14.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve14.TabIndex = 18
-        Me.lbl_Valve14.Text = "14"
-        Me.lbl_Valve14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve6
-        '
-        Me.lbl_Valve6.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve6.Location = New System.Drawing.Point(535, 112)
-        Me.lbl_Valve6.Name = "lbl_Valve6"
-        Me.lbl_Valve6.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve6.TabIndex = 17
-        Me.lbl_Valve6.Text = "6"
-        Me.lbl_Valve6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve13
-        '
-        Me.lbl_Valve13.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve13.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve13.Location = New System.Drawing.Point(919, 196)
-        Me.lbl_Valve13.Name = "lbl_Valve13"
-        Me.lbl_Valve13.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve13.TabIndex = 16
-        Me.lbl_Valve13.Text = "13"
-        Me.lbl_Valve13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve7
-        '
-        Me.lbl_Valve7.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve7.Location = New System.Drawing.Point(515, 442)
-        Me.lbl_Valve7.Name = "lbl_Valve7"
-        Me.lbl_Valve7.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve7.TabIndex = 15
-        Me.lbl_Valve7.Text = "7"
-        Me.lbl_Valve7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve12
-        '
-        Me.lbl_Valve12.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve12.Location = New System.Drawing.Point(765, 411)
-        Me.lbl_Valve12.Name = "lbl_Valve12"
-        Me.lbl_Valve12.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve12.TabIndex = 14
-        Me.lbl_Valve12.Text = "12"
-        Me.lbl_Valve12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve8
-        '
-        Me.lbl_Valve8.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve8.Location = New System.Drawing.Point(560, 442)
-        Me.lbl_Valve8.Name = "lbl_Valve8"
-        Me.lbl_Valve8.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve8.TabIndex = 13
-        Me.lbl_Valve8.Text = "8"
-        Me.lbl_Valve8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve11
-        '
-        Me.lbl_Valve11.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve11.Location = New System.Drawing.Point(586, 112)
-        Me.lbl_Valve11.Name = "lbl_Valve11"
-        Me.lbl_Valve11.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve11.TabIndex = 12
-        Me.lbl_Valve11.Text = "11"
-        Me.lbl_Valve11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve9
-        '
-        Me.lbl_Valve9.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve9.Location = New System.Drawing.Point(635, 336)
-        Me.lbl_Valve9.Name = "lbl_Valve9"
-        Me.lbl_Valve9.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve9.TabIndex = 19
-        Me.lbl_Valve9.Text = "9"
-        Me.lbl_Valve9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_Valve10
-        '
-        Me.lbl_Valve10.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_Valve10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Valve10.Location = New System.Drawing.Point(634, 271)
-        Me.lbl_Valve10.Name = "lbl_Valve10"
-        Me.lbl_Valve10.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_Valve10.TabIndex = 29
-        Me.lbl_Valve10.Text = "10"
-        Me.lbl_Valve10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.panel_ManualValve_Circuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.panel_ManualValve_Circuit.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.panel_ManualValve_Circuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_ManualValve_Circuit.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.panel_ManualValve_Circuit.Location = New System.Drawing.Point(682, 0)
+        Me.panel_ManualValve_Circuit.Name = "panel_ManualValve_Circuit"
+        Me.panel_ManualValve_Circuit.Size = New System.Drawing.Size(1136, 583)
+        Me.panel_ManualValve_Circuit.TabIndex = 13
         '
         'panel_ValveControl
         '
@@ -4985,6 +4263,18 @@ Partial Class FormMain
         Me.dsp_PumpCtrl.Text = "Pump Control"
         Me.dsp_PumpCtrl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'PictureBox7
+        '
+        Me.PictureBox7.BackColor = System.Drawing.Color.White
+        Me.PictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.PictureBox7.Image = CType(resources.GetObject("PictureBox7.Image"), System.Drawing.Image)
+        Me.PictureBox7.Location = New System.Drawing.Point(688, 3)
+        Me.PictureBox7.Name = "PictureBox7"
+        Me.PictureBox7.Size = New System.Drawing.Size(1124, 577)
+        Me.PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox7.TabIndex = 11
+        Me.PictureBox7.TabStop = False
+        '
         'tabpg_ManualControlTank
         '
         Me.tabpg_ManualControlTank.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
@@ -5142,6 +4432,17 @@ Partial Class FormMain
         Me.lbl_TankValve5.Text = "5"
         Me.lbl_TankValve5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'PictureBox6
+        '
+        Me.PictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.PictureBox6.Image = CType(resources.GetObject("PictureBox6.Image"), System.Drawing.Image)
+        Me.PictureBox6.Location = New System.Drawing.Point(6, 3)
+        Me.PictureBox6.Name = "PictureBox6"
+        Me.PictureBox6.Size = New System.Drawing.Size(1124, 577)
+        Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox6.TabIndex = 10
+        Me.PictureBox6.TabStop = False
+        '
         'panel_TankControl
         '
         Me.panel_TankControl.Controls.Add(Me.panel_SubTankControl)
@@ -5220,7 +4521,7 @@ Partial Class FormMain
         'tabpg_ManualControlDrain
         '
         Me.tabpg_ManualControlDrain.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.tabpg_ManualControlDrain.Controls.Add(Me.Panel5)
+        Me.tabpg_ManualControlDrain.Controls.Add(Me.Panel_ManualDrain_Circuit)
         Me.tabpg_ManualControlDrain.Controls.Add(Me.panel_ManualDrain)
         Me.tabpg_ManualControlDrain.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabpg_ManualControlDrain.Location = New System.Drawing.Point(4, 44)
@@ -5229,308 +4530,16 @@ Partial Class FormMain
         Me.tabpg_ManualControlDrain.TabIndex = 4
         Me.tabpg_ManualControlDrain.Text = "Manual Drain"
         '
-        'Panel5
+        'Panel_ManualDrain_Circuit
         '
-        Me.Panel5.BackColor = System.Drawing.SystemColors.Window
-        Me.Panel5.Controls.Add(Me.Label3)
-        Me.Panel5.Controls.Add(Me.Label2)
-        Me.Panel5.Controls.Add(Me.txtbx_N2PurgeActual)
-        Me.Panel5.Controls.Add(Me.txtbx_BackPressActual)
-        Me.Panel5.Controls.Add(Me.Label40)
-        Me.Panel5.Controls.Add(Me.lbl_MDrainValve1)
-        Me.Panel5.Controls.Add(Me.Label42)
-        Me.Panel5.Controls.Add(Me.Label43)
-        Me.Panel5.Controls.Add(Me.Label44)
-        Me.Panel5.Controls.Add(Me.Label45)
-        Me.Panel5.Controls.Add(Me.Label46)
-        Me.Panel5.Controls.Add(Me.Label47)
-        Me.Panel5.Controls.Add(Me.Label48)
-        Me.Panel5.Controls.Add(Me.Label49)
-        Me.Panel5.Controls.Add(Me.Label50)
-        Me.Panel5.Controls.Add(Me.Label51)
-        Me.Panel5.Controls.Add(Me.Label52)
-        Me.Panel5.Controls.Add(Me.Label53)
-        Me.Panel5.Controls.Add(Me.Label54)
-        Me.Panel5.Controls.Add(Me.Label55)
-        Me.Panel5.Controls.Add(Me.Label56)
-        Me.Panel5.Controls.Add(Me.Label57)
-        Me.Panel5.Controls.Add(Me.Label58)
-        Me.Panel5.Controls.Add(Me.PictureBox4)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel5.Location = New System.Drawing.Point(682, 0)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(1136, 583)
-        Me.Panel5.TabIndex = 13
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(1023, 357)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(97, 34)
-        Me.Label3.TabIndex = 30
-        Me.Label3.Text = "Back Pressure " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Regulator (kPa)"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(124, 5)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(156, 17)
-        Me.Label2.TabIndex = 29
-        Me.Label2.Text = "N2 Purge Regulator (kPa)"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtbx_N2PurgeActual
-        '
-        Me.txtbx_N2PurgeActual.BackColor = System.Drawing.SystemColors.Info
-        Me.txtbx_N2PurgeActual.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_N2PurgeActual.Location = New System.Drawing.Point(1026, 394)
-        Me.txtbx_N2PurgeActual.Name = "txtbx_N2PurgeActual"
-        Me.txtbx_N2PurgeActual.ReadOnly = True
-        Me.txtbx_N2PurgeActual.Size = New System.Drawing.Size(80, 25)
-        Me.txtbx_N2PurgeActual.TabIndex = 28
-        '
-        'txtbx_BackPressActual
-        '
-        Me.txtbx_BackPressActual.BackColor = System.Drawing.SystemColors.Info
-        Me.txtbx_BackPressActual.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_BackPressActual.Location = New System.Drawing.Point(162, 23)
-        Me.txtbx_BackPressActual.Name = "txtbx_BackPressActual"
-        Me.txtbx_BackPressActual.ReadOnly = True
-        Me.txtbx_BackPressActual.Size = New System.Drawing.Size(80, 25)
-        Me.txtbx_BackPressActual.TabIndex = 27
-        '
-        'Label40
-        '
-        Me.Label40.BackColor = System.Drawing.SystemColors.Window
-        Me.Label40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label40.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label40.Location = New System.Drawing.Point(425, 292)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(28, 25)
-        Me.Label40.TabIndex = 9
-        Me.Label40.Text = "19"
-        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_MDrainValve1
-        '
-        Me.lbl_MDrainValve1.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_MDrainValve1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_MDrainValve1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_MDrainValve1.Location = New System.Drawing.Point(150, 266)
-        Me.lbl_MDrainValve1.Name = "lbl_MDrainValve1"
-        Me.lbl_MDrainValve1.Size = New System.Drawing.Size(28, 25)
-        Me.lbl_MDrainValve1.TabIndex = 9
-        Me.lbl_MDrainValve1.Text = "1"
-        Me.lbl_MDrainValve1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label42
-        '
-        Me.Label42.BackColor = System.Drawing.SystemColors.Window
-        Me.Label42.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label42.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label42.Location = New System.Drawing.Point(1022, 196)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(28, 25)
-        Me.Label42.TabIndex = 9
-        Me.Label42.Text = "18"
-        Me.Label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label43
-        '
-        Me.Label43.BackColor = System.Drawing.SystemColors.Window
-        Me.Label43.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label43.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label43.Location = New System.Drawing.Point(202, 266)
-        Me.Label43.Name = "Label43"
-        Me.Label43.Size = New System.Drawing.Size(28, 25)
-        Me.Label43.TabIndex = 9
-        Me.Label43.Text = "2"
-        Me.Label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label44
-        '
-        Me.Label44.BackColor = System.Drawing.SystemColors.Window
-        Me.Label44.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label44.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label44.Location = New System.Drawing.Point(998, 271)
-        Me.Label44.Name = "Label44"
-        Me.Label44.Size = New System.Drawing.Size(28, 25)
-        Me.Label44.TabIndex = 9
-        Me.Label44.Text = "17"
-        Me.Label44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label45
-        '
-        Me.Label45.BackColor = System.Drawing.SystemColors.Window
-        Me.Label45.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label45.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label45.Location = New System.Drawing.Point(249, 266)
-        Me.Label45.Name = "Label45"
-        Me.Label45.Size = New System.Drawing.Size(28, 25)
-        Me.Label45.TabIndex = 9
-        Me.Label45.Text = "3"
-        Me.Label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label46
-        '
-        Me.Label46.BackColor = System.Drawing.SystemColors.Window
-        Me.Label46.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label46.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label46.Location = New System.Drawing.Point(950, 343)
-        Me.Label46.Name = "Label46"
-        Me.Label46.Size = New System.Drawing.Size(28, 25)
-        Me.Label46.TabIndex = 9
-        Me.Label46.Text = "16"
-        Me.Label46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label47
-        '
-        Me.Label47.BackColor = System.Drawing.SystemColors.Window
-        Me.Label47.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label47.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label47.Location = New System.Drawing.Point(296, 185)
-        Me.Label47.Name = "Label47"
-        Me.Label47.Size = New System.Drawing.Size(28, 25)
-        Me.Label47.TabIndex = 9
-        Me.Label47.Text = "4"
-        Me.Label47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label48
-        '
-        Me.Label48.BackColor = System.Drawing.SystemColors.Window
-        Me.Label48.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label48.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label48.Location = New System.Drawing.Point(884, 343)
-        Me.Label48.Name = "Label48"
-        Me.Label48.Size = New System.Drawing.Size(28, 25)
-        Me.Label48.TabIndex = 9
-        Me.Label48.Text = "15"
-        Me.Label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label49
-        '
-        Me.Label49.BackColor = System.Drawing.SystemColors.Window
-        Me.Label49.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label49.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label49.Location = New System.Drawing.Point(371, 288)
-        Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(28, 25)
-        Me.Label49.TabIndex = 9
-        Me.Label49.Text = "5"
-        Me.Label49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label50
-        '
-        Me.Label50.BackColor = System.Drawing.SystemColors.Window
-        Me.Label50.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label50.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label50.Location = New System.Drawing.Point(975, 196)
-        Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(28, 25)
-        Me.Label50.TabIndex = 9
-        Me.Label50.Text = "14"
-        Me.Label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label51
-        '
-        Me.Label51.BackColor = System.Drawing.SystemColors.Window
-        Me.Label51.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label51.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label51.Location = New System.Drawing.Point(536, 112)
-        Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(28, 25)
-        Me.Label51.TabIndex = 9
-        Me.Label51.Text = "6"
-        Me.Label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label52
-        '
-        Me.Label52.BackColor = System.Drawing.SystemColors.Window
-        Me.Label52.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label52.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label52.Location = New System.Drawing.Point(920, 196)
-        Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(28, 25)
-        Me.Label52.TabIndex = 9
-        Me.Label52.Text = "13"
-        Me.Label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label53
-        '
-        Me.Label53.BackColor = System.Drawing.SystemColors.Window
-        Me.Label53.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label53.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label53.Location = New System.Drawing.Point(516, 442)
-        Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(28, 25)
-        Me.Label53.TabIndex = 9
-        Me.Label53.Text = "7"
-        Me.Label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label54
-        '
-        Me.Label54.BackColor = System.Drawing.SystemColors.Window
-        Me.Label54.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label54.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label54.Location = New System.Drawing.Point(766, 411)
-        Me.Label54.Name = "Label54"
-        Me.Label54.Size = New System.Drawing.Size(28, 25)
-        Me.Label54.TabIndex = 9
-        Me.Label54.Text = "12"
-        Me.Label54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label55
-        '
-        Me.Label55.BackColor = System.Drawing.SystemColors.Window
-        Me.Label55.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label55.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label55.Location = New System.Drawing.Point(561, 442)
-        Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(28, 25)
-        Me.Label55.TabIndex = 9
-        Me.Label55.Text = "8"
-        Me.Label55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label56
-        '
-        Me.Label56.BackColor = System.Drawing.SystemColors.Window
-        Me.Label56.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label56.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label56.Location = New System.Drawing.Point(587, 112)
-        Me.Label56.Name = "Label56"
-        Me.Label56.Size = New System.Drawing.Size(28, 25)
-        Me.Label56.TabIndex = 9
-        Me.Label56.Text = "11"
-        Me.Label56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label57
-        '
-        Me.Label57.BackColor = System.Drawing.SystemColors.Window
-        Me.Label57.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label57.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label57.Location = New System.Drawing.Point(636, 336)
-        Me.Label57.Name = "Label57"
-        Me.Label57.Size = New System.Drawing.Size(28, 25)
-        Me.Label57.TabIndex = 9
-        Me.Label57.Text = "9"
-        Me.Label57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label58
-        '
-        Me.Label58.BackColor = System.Drawing.SystemColors.Window
-        Me.Label58.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label58.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label58.Location = New System.Drawing.Point(635, 271)
-        Me.Label58.Name = "Label58"
-        Me.Label58.Size = New System.Drawing.Size(28, 25)
-        Me.Label58.TabIndex = 9
-        Me.Label58.Text = "10"
-        Me.Label58.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Panel_ManualDrain_Circuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.Panel_ManualDrain_Circuit.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Panel_ManualDrain_Circuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel_ManualDrain_Circuit.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel_ManualDrain_Circuit.Location = New System.Drawing.Point(682, 0)
+        Me.Panel_ManualDrain_Circuit.Name = "Panel_ManualDrain_Circuit"
+        Me.Panel_ManualDrain_Circuit.Size = New System.Drawing.Size(1136, 583)
+        Me.Panel_ManualDrain_Circuit.TabIndex = 13
         '
         'panel_ManualDrain
         '
@@ -5758,7 +4767,7 @@ Partial Class FormMain
         'tabpg_ManualControlMaintenance
         '
         Me.tabpg_ManualControlMaintenance.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.tabpg_ManualControlMaintenance.Controls.Add(Me.Panel4)
+        Me.tabpg_ManualControlMaintenance.Controls.Add(Me.Panel_Mainten_Circuit)
         Me.tabpg_ManualControlMaintenance.Controls.Add(Me.panel_Maintenance)
         Me.tabpg_ManualControlMaintenance.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabpg_ManualControlMaintenance.Location = New System.Drawing.Point(4, 44)
@@ -5766,6 +4775,17 @@ Partial Class FormMain
         Me.tabpg_ManualControlMaintenance.Size = New System.Drawing.Size(1818, 583)
         Me.tabpg_ManualControlMaintenance.TabIndex = 5
         Me.tabpg_ManualControlMaintenance.Text = "Maintenance"
+        '
+        'Panel_Mainten_Circuit
+        '
+        Me.Panel_Mainten_Circuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.Panel_Mainten_Circuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel_Mainten_Circuit.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel_Mainten_Circuit.Location = New System.Drawing.Point(682, 0)
+        Me.Panel_Mainten_Circuit.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel_Mainten_Circuit.Name = "Panel_Mainten_Circuit"
+        Me.Panel_Mainten_Circuit.Size = New System.Drawing.Size(1136, 583)
+        Me.Panel_Mainten_Circuit.TabIndex = 2
         '
         'panel_Maintenance
         '
@@ -5953,37 +4973,37 @@ Partial Class FormMain
         Me.dgv_CurrentAlarm.AllowUserToResizeColumns = False
         Me.dgv_CurrentAlarm.AllowUserToResizeRows = False
         Me.dgv_CurrentAlarm.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
-        DataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle42.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle42.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle42.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle42.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle42.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle42.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle42.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_CurrentAlarm.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle42
+        DataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle69.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle69.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle69.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle69.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle69.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle69.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle69.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_CurrentAlarm.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle69
         Me.dgv_CurrentAlarm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_CurrentAlarm.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.serial_number, Me.trigger_time, Me.description, Me.alarm_code})
-        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle43.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle43.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle43.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle43.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_CurrentAlarm.DefaultCellStyle = DataGridViewCellStyle43
+        DataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle70.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle70.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle70.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle70.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle70.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle70.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle70.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_CurrentAlarm.DefaultCellStyle = DataGridViewCellStyle70
         Me.dgv_CurrentAlarm.Location = New System.Drawing.Point(106, 25)
         Me.dgv_CurrentAlarm.Name = "dgv_CurrentAlarm"
         Me.dgv_CurrentAlarm.ReadOnly = True
-        DataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle44.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle44.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle44.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle44.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle44.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle44.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_CurrentAlarm.RowHeadersDefaultCellStyle = DataGridViewCellStyle44
+        DataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle71.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle71.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle71.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle71.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle71.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle71.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_CurrentAlarm.RowHeadersDefaultCellStyle = DataGridViewCellStyle71
         Me.dgv_CurrentAlarm.RowHeadersVisible = False
         Me.dgv_CurrentAlarm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv_CurrentAlarm.Size = New System.Drawing.Size(1606, 537)
@@ -6071,15 +5091,15 @@ Partial Class FormMain
         Me.dgv_AlarmHistory.AllowUserToAddRows = False
         Me.dgv_AlarmHistory.AllowUserToDeleteRows = False
         Me.dgv_AlarmHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle45.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle45.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle45.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle45.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle45.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle45.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_AlarmHistory.DefaultCellStyle = DataGridViewCellStyle45
+        DataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle72.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle72.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle72.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle72.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle72.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle72.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle72.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_AlarmHistory.DefaultCellStyle = DataGridViewCellStyle72
         Me.dgv_AlarmHistory.Location = New System.Drawing.Point(106, 92)
         Me.dgv_AlarmHistory.Name = "dgv_AlarmHistory"
         Me.dgv_AlarmHistory.ReadOnly = True
@@ -6324,121 +5344,6 @@ Partial Class FormMain
         Me.dsp_RecipeID.TabIndex = 8
         Me.dsp_RecipeID.Text = "Recipe ID :"
         '
-        'lbl_Title
-        '
-        Me.lbl_Title.Dock = System.Windows.Forms.DockStyle.Top
-        Me.lbl_Title.Font = New System.Drawing.Font("Segoe UI Semibold", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Title.Location = New System.Drawing.Point(0, 40)
-        Me.lbl_Title.Name = "lbl_Title"
-        Me.lbl_Title.Size = New System.Drawing.Size(1904, 50)
-        Me.lbl_Title.TabIndex = 0
-        Me.lbl_Title.Text = "DP Tester"
-        Me.lbl_Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_OperationMode
-        '
-        Me.lbl_OperationMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lbl_OperationMode.Dock = System.Windows.Forms.DockStyle.Top
-        Me.lbl_OperationMode.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OperationMode.ForeColor = System.Drawing.SystemColors.Window
-        Me.lbl_OperationMode.Location = New System.Drawing.Point(0, 0)
-        Me.lbl_OperationMode.Name = "lbl_OperationMode"
-        Me.lbl_OperationMode.Size = New System.Drawing.Size(1904, 40)
-        Me.lbl_OperationMode.TabIndex = 34
-        Me.lbl_OperationMode.Text = "Auto Mode"
-        Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'picbx_Icon
-        '
-        Me.picbx_Icon.Image = CType(resources.GetObject("picbx_Icon.Image"), System.Drawing.Image)
-        Me.picbx_Icon.Location = New System.Drawing.Point(1792, 57)
-        Me.picbx_Icon.Name = "picbx_Icon"
-        Me.picbx_Icon.Size = New System.Drawing.Size(100, 100)
-        Me.picbx_Icon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picbx_Icon.TabIndex = 37
-        Me.picbx_Icon.TabStop = False
-        '
-        'picbx_MainOverview
-        '
-        Me.picbx_MainOverview.Image = CType(resources.GetObject("picbx_MainOverview.Image"), System.Drawing.Image)
-        Me.picbx_MainOverview.Location = New System.Drawing.Point(0, 0)
-        Me.picbx_MainOverview.Name = "picbx_MainOverview"
-        Me.picbx_MainOverview.Size = New System.Drawing.Size(929, 528)
-        Me.picbx_MainOverview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picbx_MainOverview.TabIndex = 28
-        Me.picbx_MainOverview.TabStop = False
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(929, 528)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 17
-        Me.PictureBox1.TabStop = False
-        '
-        'picbx_MainProductZone
-        '
-        Me.picbx_MainProductZone.Location = New System.Drawing.Point(0, 0)
-        Me.picbx_MainProductZone.Name = "picbx_MainProductZone"
-        Me.picbx_MainProductZone.Size = New System.Drawing.Size(929, 528)
-        Me.picbx_MainProductZone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picbx_MainProductZone.TabIndex = 5
-        Me.picbx_MainProductZone.TabStop = False
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(929, 528)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 19
-        Me.PictureBox2.TabStop = False
-        '
-        'picbx_MainPumpZone
-        '
-        Me.picbx_MainPumpZone.Location = New System.Drawing.Point(0, 0)
-        Me.picbx_MainPumpZone.Name = "picbx_MainPumpZone"
-        Me.picbx_MainPumpZone.Size = New System.Drawing.Size(929, 528)
-        Me.picbx_MainPumpZone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.picbx_MainPumpZone.TabIndex = 5
-        Me.picbx_MainPumpZone.TabStop = False
-        '
-        'PictureBox7
-        '
-        Me.PictureBox7.BackColor = System.Drawing.Color.White
-        Me.PictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.PictureBox7.Image = CType(resources.GetObject("PictureBox7.Image"), System.Drawing.Image)
-        Me.PictureBox7.Location = New System.Drawing.Point(688, 3)
-        Me.PictureBox7.Name = "PictureBox7"
-        Me.PictureBox7.Size = New System.Drawing.Size(1124, 577)
-        Me.PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox7.TabIndex = 11
-        Me.PictureBox7.TabStop = False
-        '
-        'PictureBox6
-        '
-        Me.PictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.PictureBox6.Image = CType(resources.GetObject("PictureBox6.Image"), System.Drawing.Image)
-        Me.PictureBox6.Location = New System.Drawing.Point(6, 3)
-        Me.PictureBox6.Name = "PictureBox6"
-        Me.PictureBox6.Size = New System.Drawing.Size(1124, 577)
-        Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox6.TabIndex = 10
-        Me.PictureBox6.TabStop = False
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
-        Me.PictureBox4.Location = New System.Drawing.Point(6, 3)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(1124, 577)
-        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox4.TabIndex = 10
-        Me.PictureBox4.TabStop = False
-        '
         'btn_Calibration
         '
         Me.btn_Calibration.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
@@ -6535,577 +5440,39 @@ Partial Class FormMain
         Me.btn_LogInOut.TabIndex = 6
         Me.btn_LogInOut.UseVisualStyleBackColor = False
         '
-        'PictureBox3
-        '
-        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
-        Me.PictureBox3.Location = New System.Drawing.Point(6, 3)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(1124, 577)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.PictureBox3.TabIndex = 10
-        Me.PictureBox3.TabStop = False
-        '
-        'pb_MCValve1bx3
-        '
-        Me.pb_MCValve1bx3.Image = CType(resources.GetObject("pb_MCValve1bx3.Image"), System.Drawing.Image)
-        Me.pb_MCValve1bx3.Location = New System.Drawing.Point(161, 294)
-        Me.pb_MCValve1bx3.Name = "pb_MCValve1bx3"
-        Me.pb_MCValve1bx3.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve1bx3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve1bx3.TabIndex = 31
-        Me.pb_MCValve1bx3.TabStop = False
-        '
-        'pb_MCValve2bx1
-        '
-        Me.pb_MCValve2bx1.Image = CType(resources.GetObject("pb_MCValve2bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve2bx1.Location = New System.Drawing.Point(208, 294)
-        Me.pb_MCValve2bx1.Name = "pb_MCValve2bx1"
-        Me.pb_MCValve2bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve2bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve2bx1.TabIndex = 32
-        Me.pb_MCValve2bx1.TabStop = False
-        '
-        'pb_MCValve3bx1
-        '
-        Me.pb_MCValve3bx1.Image = CType(resources.GetObject("pb_MCValve3bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve3bx1.Location = New System.Drawing.Point(246, 294)
-        Me.pb_MCValve3bx1.Name = "pb_MCValve3bx1"
-        Me.pb_MCValve3bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve3bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve3bx1.TabIndex = 33
-        Me.pb_MCValve3bx1.TabStop = False
-        '
-        'pb_MCValve3bx2
-        '
-        Me.pb_MCValve3bx2.Image = CType(resources.GetObject("pb_MCValve3bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve3bx2.Location = New System.Drawing.Point(246, 442)
-        Me.pb_MCValve3bx2.Name = "pb_MCValve3bx2"
-        Me.pb_MCValve3bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve3bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve3bx2.TabIndex = 36
-        Me.pb_MCValve3bx2.TabStop = False
-        '
-        'pb_MCValve2bx2
-        '
-        Me.pb_MCValve2bx2.Image = CType(resources.GetObject("pb_MCValve2bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve2bx2.Location = New System.Drawing.Point(208, 442)
-        Me.pb_MCValve2bx2.Name = "pb_MCValve2bx2"
-        Me.pb_MCValve2bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve2bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve2bx2.TabIndex = 35
-        Me.pb_MCValve2bx2.TabStop = False
-        '
-        'pb_MCValve1bx4
-        '
-        Me.pb_MCValve1bx4.BackColor = System.Drawing.SystemColors.Window
-        Me.pb_MCValve1bx4.Image = CType(resources.GetObject("pb_MCValve1bx4.Image"), System.Drawing.Image)
-        Me.pb_MCValve1bx4.Location = New System.Drawing.Point(161, 442)
-        Me.pb_MCValve1bx4.Name = "pb_MCValve1bx4"
-        Me.pb_MCValve1bx4.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve1bx4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve1bx4.TabIndex = 34
-        Me.pb_MCValve1bx4.TabStop = False
-        '
-        'pb_MCValve5bx2
-        '
-        Me.pb_MCValve5bx2.Image = CType(resources.GetObject("pb_MCValve5bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve5bx2.Location = New System.Drawing.Point(384, 442)
-        Me.pb_MCValve5bx2.Name = "pb_MCValve5bx2"
-        Me.pb_MCValve5bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve5bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve5bx2.TabIndex = 37
-        Me.pb_MCValve5bx2.TabStop = False
-        '
-        'pb_MCVFilterDrain2
-        '
-        Me.pb_MCVFilterDrain2.Image = CType(resources.GetObject("pb_MCVFilterDrain2.Image"), System.Drawing.Image)
-        Me.pb_MCVFilterDrain2.Location = New System.Drawing.Point(693, 468)
-        Me.pb_MCVFilterDrain2.Name = "pb_MCVFilterDrain2"
-        Me.pb_MCVFilterDrain2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCVFilterDrain2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCVFilterDrain2.TabIndex = 40
-        Me.pb_MCVFilterDrain2.TabStop = False
-        '
-        'pb_MCValve5bx1
-        '
-        Me.pb_MCValve5bx1.Image = CType(resources.GetObject("pb_MCValve5bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve5bx1.Location = New System.Drawing.Point(384, 320)
-        Me.pb_MCValve5bx1.Name = "pb_MCValve5bx1"
-        Me.pb_MCValve5bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve5bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve5bx1.TabIndex = 41
-        Me.pb_MCValve5bx1.TabStop = False
-        '
-        'pb_MCValve7bx1
-        '
-        Me.pb_MCValve7bx1.Image = CType(resources.GetObject("pb_MCValve7bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve7bx1.Location = New System.Drawing.Point(527, 405)
-        Me.pb_MCValve7bx1.Name = "pb_MCValve7bx1"
-        Me.pb_MCValve7bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve7bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve7bx1.TabIndex = 42
-        Me.pb_MCValve7bx1.TabStop = False
-        '
-        'pb_MCValve8bx1
-        '
-        Me.pb_MCValve8bx1.Image = CType(resources.GetObject("pb_MCValve8bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve8bx1.Location = New System.Drawing.Point(560, 405)
-        Me.pb_MCValve8bx1.Name = "pb_MCValve8bx1"
-        Me.pb_MCValve8bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve8bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve8bx1.TabIndex = 43
-        Me.pb_MCValve8bx1.TabStop = False
-        '
-        'pb_MCValve19bx1
-        '
-        Me.pb_MCValve19bx1.Image = CType(resources.GetObject("pb_MCValve19bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve19bx1.Location = New System.Drawing.Point(420, 319)
-        Me.pb_MCValve19bx1.Name = "pb_MCValve19bx1"
-        Me.pb_MCValve19bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve19bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve19bx1.TabIndex = 44
-        Me.pb_MCValve19bx1.TabStop = False
-        '
-        'pb_MCValve19bx2
-        '
-        Me.pb_MCValve19bx2.Image = CType(resources.GetObject("pb_MCValve19bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve19bx2.Location = New System.Drawing.Point(455, 369)
-        Me.pb_MCValve19bx2.Name = "pb_MCValve19bx2"
-        Me.pb_MCValve19bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve19bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve19bx2.TabIndex = 45
-        Me.pb_MCValve19bx2.TabStop = False
-        '
-        'pb_MCValve19bx3
-        '
-        Me.pb_MCValve19bx3.Image = CType(resources.GetObject("pb_MCValve19bx3.Image"), System.Drawing.Image)
-        Me.pb_MCValve19bx3.Location = New System.Drawing.Point(501, 369)
-        Me.pb_MCValve19bx3.Name = "pb_MCValve19bx3"
-        Me.pb_MCValve19bx3.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve19bx3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve19bx3.TabIndex = 46
-        Me.pb_MCValve19bx3.TabStop = False
-        '
-        'pb_MCValve9bx1
-        '
-        Me.pb_MCValve9bx1.Image = CType(resources.GetObject("pb_MCValve9bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve9bx1.Location = New System.Drawing.Point(571, 369)
-        Me.pb_MCValve9bx1.Name = "pb_MCValve9bx1"
-        Me.pb_MCValve9bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve9bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve9bx1.TabIndex = 47
-        Me.pb_MCValve9bx1.TabStop = False
-        '
-        'pb_MCValve9bx2
-        '
-        Me.pb_MCValve9bx2.Image = CType(resources.GetObject("pb_MCValve9bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve9bx2.Location = New System.Drawing.Point(622, 369)
-        Me.pb_MCValve9bx2.Name = "pb_MCValve9bx2"
-        Me.pb_MCValve9bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve9bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve9bx2.TabIndex = 48
-        Me.pb_MCValve9bx2.TabStop = False
-        '
-        'pb_MCValve10bx1
-        '
-        Me.pb_MCValve10bx1.Image = CType(resources.GetObject("pb_MCValve10bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve10bx1.Location = New System.Drawing.Point(622, 226)
-        Me.pb_MCValve10bx1.Name = "pb_MCValve10bx1"
-        Me.pb_MCValve10bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve10bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve10bx1.TabIndex = 49
-        Me.pb_MCValve10bx1.TabStop = False
-        '
-        'pb_MCValve10bx2
-        '
-        Me.pb_MCValve10bx2.Image = CType(resources.GetObject("pb_MCValve10bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve10bx2.Location = New System.Drawing.Point(622, 161)
-        Me.pb_MCValve10bx2.Name = "pb_MCValve10bx2"
-        Me.pb_MCValve10bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve10bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve10bx2.TabIndex = 50
-        Me.pb_MCValve10bx2.TabStop = False
-        '
-        'pb_MCValve10bx3
-        '
-        Me.pb_MCValve10bx3.Image = CType(resources.GetObject("pb_MCValve10bx3.Image"), System.Drawing.Image)
-        Me.pb_MCValve10bx3.Location = New System.Drawing.Point(683, 129)
-        Me.pb_MCValve10bx3.Name = "pb_MCValve10bx3"
-        Me.pb_MCValve10bx3.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve10bx3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve10bx3.TabIndex = 51
-        Me.pb_MCValve10bx3.TabStop = False
-        '
-        'pb_MCValve13bx1
-        '
-        Me.pb_MCValve13bx1.Image = CType(resources.GetObject("pb_MCValve13bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve13bx1.Location = New System.Drawing.Point(836, 129)
-        Me.pb_MCValve13bx1.Name = "pb_MCValve13bx1"
-        Me.pb_MCValve13bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve13bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve13bx1.TabIndex = 52
-        Me.pb_MCValve13bx1.TabStop = False
-        '
-        'pb_MCValve13bx2
-        '
-        Me.pb_MCValve13bx2.Image = CType(resources.GetObject("pb_MCValve13bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve13bx2.Location = New System.Drawing.Point(903, 160)
-        Me.pb_MCValve13bx2.Name = "pb_MCValve13bx2"
-        Me.pb_MCValve13bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve13bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve13bx2.TabIndex = 53
-        Me.pb_MCValve13bx2.TabStop = False
-        '
-        'pb_MCValve15bx1
-        '
-        Me.pb_MCValve15bx1.Image = CType(resources.GetObject("pb_MCValve15bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve15bx1.Location = New System.Drawing.Point(883, 226)
-        Me.pb_MCValve15bx1.Name = "pb_MCValve15bx1"
-        Me.pb_MCValve15bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve15bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve15bx1.TabIndex = 54
-        Me.pb_MCValve15bx1.TabStop = False
-        '
-        'pb_MCValve15bx2
-        '
-        Me.pb_MCValve15bx2.Image = CType(resources.GetObject("pb_MCValve15bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve15bx2.Location = New System.Drawing.Point(893, 310)
-        Me.pb_MCValve15bx2.Name = "pb_MCValve15bx2"
-        Me.pb_MCValve15bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve15bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve15bx2.TabIndex = 55
-        Me.pb_MCValve15bx2.TabStop = False
-        '
-        'pb_MCValve16bx1
-        '
-        Me.pb_MCValve16bx1.Image = CType(resources.GetObject("pb_MCValve16bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve16bx1.Location = New System.Drawing.Point(938, 310)
-        Me.pb_MCValve16bx1.Name = "pb_MCValve16bx1"
-        Me.pb_MCValve16bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve16bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve16bx1.TabIndex = 56
-        Me.pb_MCValve16bx1.TabStop = False
-        '
-        'pb_MCValve17bx1
-        '
-        Me.pb_MCValve17bx1.Image = CType(resources.GetObject("pb_MCValve17bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve17bx1.Location = New System.Drawing.Point(986, 250)
-        Me.pb_MCValve17bx1.Name = "pb_MCValve17bx1"
-        Me.pb_MCValve17bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve17bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve17bx1.TabIndex = 57
-        Me.pb_MCValve17bx1.TabStop = False
-        '
-        'pb_MCValve17bx2
-        '
-        Me.pb_MCValve17bx2.Image = CType(resources.GetObject("pb_MCValve17bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve17bx2.Location = New System.Drawing.Point(986, 305)
-        Me.pb_MCValve17bx2.Name = "pb_MCValve17bx2"
-        Me.pb_MCValve17bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve17bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve17bx2.TabIndex = 58
-        Me.pb_MCValve17bx2.TabStop = False
-        '
-        'pb_MCValve17bx3
-        '
-        Me.pb_MCValve17bx3.Image = CType(resources.GetObject("pb_MCValve17bx3.Image"), System.Drawing.Image)
-        Me.pb_MCValve17bx3.Location = New System.Drawing.Point(986, 359)
-        Me.pb_MCValve17bx3.Name = "pb_MCValve17bx3"
-        Me.pb_MCValve17bx3.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve17bx3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve17bx3.TabIndex = 59
-        Me.pb_MCValve17bx3.TabStop = False
-        '
-        'pb_MCValve14bx2
-        '
-        Me.pb_MCValve14bx2.Image = CType(resources.GetObject("pb_MCValve14bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve14bx2.Location = New System.Drawing.Point(960, 96)
-        Me.pb_MCValve14bx2.Name = "pb_MCValve14bx2"
-        Me.pb_MCValve14bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve14bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve14bx2.TabIndex = 60
-        Me.pb_MCValve14bx2.TabStop = False
-        '
-        'pb_MCValve14bx1
-        '
-        Me.pb_MCValve14bx1.Image = CType(resources.GetObject("pb_MCValve14bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve14bx1.Location = New System.Drawing.Point(893, 96)
-        Me.pb_MCValve14bx1.Name = "pb_MCValve14bx1"
-        Me.pb_MCValve14bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve14bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve14bx1.TabIndex = 61
-        Me.pb_MCValve14bx1.TabStop = False
-        '
-        'pb_MCValve17bx4
-        '
-        Me.pb_MCValve17bx4.Image = CType(resources.GetObject("pb_MCValve17bx4.Image"), System.Drawing.Image)
-        Me.pb_MCValve17bx4.Location = New System.Drawing.Point(986, 425)
-        Me.pb_MCValve17bx4.Name = "pb_MCValve17bx4"
-        Me.pb_MCValve17bx4.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve17bx4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve17bx4.TabIndex = 62
-        Me.pb_MCValve17bx4.TabStop = False
-        '
-        'pb_MCVProdDrain1
-        '
-        Me.pb_MCVProdDrain1.Image = CType(resources.GetObject("pb_MCVProdDrain1.Image"), System.Drawing.Image)
-        Me.pb_MCVProdDrain1.Location = New System.Drawing.Point(938, 426)
-        Me.pb_MCVProdDrain1.Name = "pb_MCVProdDrain1"
-        Me.pb_MCVProdDrain1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCVProdDrain1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCVProdDrain1.TabIndex = 63
-        Me.pb_MCVProdDrain1.TabStop = False
-        '
-        'pb_MCVProdDrain2
-        '
-        Me.pb_MCVProdDrain2.Image = CType(resources.GetObject("pb_MCVProdDrain2.Image"), System.Drawing.Image)
-        Me.pb_MCVProdDrain2.Location = New System.Drawing.Point(937, 468)
-        Me.pb_MCVProdDrain2.Name = "pb_MCVProdDrain2"
-        Me.pb_MCVProdDrain2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCVProdDrain2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCVProdDrain2.TabIndex = 65
-        Me.pb_MCVProdDrain2.TabStop = False
-        '
-        'pb_MCValve6bx1
-        '
-        Me.pb_MCValve6bx1.Image = CType(resources.GetObject("pb_MCValve6bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve6bx1.Location = New System.Drawing.Point(545, 261)
-        Me.pb_MCValve6bx1.Name = "pb_MCValve6bx1"
-        Me.pb_MCValve6bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve6bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve6bx1.TabIndex = 66
-        Me.pb_MCValve6bx1.TabStop = False
-        '
-        'pb_MCValve6bx2
-        '
-        Me.pb_MCValve6bx2.Image = CType(resources.GetObject("pb_MCValve6bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve6bx2.Location = New System.Drawing.Point(545, 140)
-        Me.pb_MCValve6bx2.Name = "pb_MCValve6bx2"
-        Me.pb_MCValve6bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve6bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve6bx2.TabIndex = 67
-        Me.pb_MCValve6bx2.TabStop = False
-        '
-        'pb_MCValve6bx4
-        '
-        Me.pb_MCValve6bx4.Image = CType(resources.GetObject("pb_MCValve6bx4.Image"), System.Drawing.Image)
-        Me.pb_MCValve6bx4.Location = New System.Drawing.Point(442, 87)
-        Me.pb_MCValve6bx4.Name = "pb_MCValve6bx4"
-        Me.pb_MCValve6bx4.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve6bx4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve6bx4.TabIndex = 68
-        Me.pb_MCValve6bx4.TabStop = False
-        '
-        'pb_MCValve6bx3
-        '
-        Me.pb_MCValve6bx3.Image = CType(resources.GetObject("pb_MCValve6bx3.Image"), System.Drawing.Image)
-        Me.pb_MCValve6bx3.Location = New System.Drawing.Point(545, 71)
-        Me.pb_MCValve6bx3.Name = "pb_MCValve6bx3"
-        Me.pb_MCValve6bx3.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve6bx3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve6bx3.TabIndex = 69
-        Me.pb_MCValve6bx3.TabStop = False
-        '
-        'pb_MCValve4bx3
-        '
-        Me.pb_MCValve4bx3.Image = CType(resources.GetObject("pb_MCValve4bx3.Image"), System.Drawing.Image)
-        Me.pb_MCValve4bx3.Location = New System.Drawing.Point(332, 71)
-        Me.pb_MCValve4bx3.Name = "pb_MCValve4bx3"
-        Me.pb_MCValve4bx3.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve4bx3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve4bx3.TabIndex = 71
-        Me.pb_MCValve4bx3.TabStop = False
-        '
-        'pb_MCValve1bx1
-        '
-        Me.pb_MCValve1bx1.Image = CType(resources.GetObject("pb_MCValve1bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve1bx1.Location = New System.Drawing.Point(229, 87)
-        Me.pb_MCValve1bx1.Name = "pb_MCValve1bx1"
-        Me.pb_MCValve1bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve1bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve1bx1.TabIndex = 70
-        Me.pb_MCValve1bx1.TabStop = False
-        '
-        'pb_MCValve4bx4
-        '
-        Me.pb_MCValve4bx4.Image = CType(resources.GetObject("pb_MCValve4bx4.Image"), System.Drawing.Image)
-        Me.pb_MCValve4bx4.Location = New System.Drawing.Point(386, 87)
-        Me.pb_MCValve4bx4.Name = "pb_MCValve4bx4"
-        Me.pb_MCValve4bx4.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve4bx4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve4bx4.TabIndex = 72
-        Me.pb_MCValve4bx4.TabStop = False
-        '
-        'pb_MCValve4bx2
-        '
-        Me.pb_MCValve4bx2.Image = CType(resources.GetObject("pb_MCValve4bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve4bx2.Location = New System.Drawing.Point(332, 191)
-        Me.pb_MCValve4bx2.Name = "pb_MCValve4bx2"
-        Me.pb_MCValve4bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve4bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve4bx2.TabIndex = 73
-        Me.pb_MCValve4bx2.TabStop = False
-        '
-        'pb_MCValve4bx1
-        '
-        Me.pb_MCValve4bx1.Image = CType(resources.GetObject("pb_MCValve4bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve4bx1.Location = New System.Drawing.Point(259, 196)
-        Me.pb_MCValve4bx1.Name = "pb_MCValve4bx1"
-        Me.pb_MCValve4bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve4bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve4bx1.TabIndex = 74
-        Me.pb_MCValve4bx1.TabStop = False
-        '
-        'pb_MCDIWIncome
-        '
-        Me.pb_MCDIWIncome.Image = CType(resources.GetObject("pb_MCDIWIncome.Image"), System.Drawing.Image)
-        Me.pb_MCDIWIncome.Location = New System.Drawing.Point(183, 196)
-        Me.pb_MCDIWIncome.Name = "pb_MCDIWIncome"
-        Me.pb_MCDIWIncome.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCDIWIncome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCDIWIncome.TabIndex = 75
-        Me.pb_MCDIWIncome.TabStop = False
-        '
-        'pb_MCValve1bx2
-        '
-        Me.pb_MCValve1bx2.Image = CType(resources.GetObject("pb_MCValve1bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve1bx2.Location = New System.Drawing.Point(161, 87)
-        Me.pb_MCValve1bx2.Name = "pb_MCValve1bx2"
-        Me.pb_MCValve1bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve1bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve1bx2.TabIndex = 76
-        Me.pb_MCValve1bx2.TabStop = False
-        '
-        'pb_MCN2Income1
-        '
-        Me.pb_MCN2Income1.Image = CType(resources.GetObject("pb_MCN2Income1.Image"), System.Drawing.Image)
-        Me.pb_MCN2Income1.Location = New System.Drawing.Point(149, 41)
-        Me.pb_MCN2Income1.Name = "pb_MCN2Income1"
-        Me.pb_MCN2Income1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCN2Income1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCN2Income1.TabIndex = 77
-        Me.pb_MCN2Income1.TabStop = False
-        '
-        'pb_MCN2Income2
-        '
-        Me.pb_MCN2Income2.Image = CType(resources.GetObject("pb_MCN2Income2.Image"), System.Drawing.Image)
-        Me.pb_MCN2Income2.Location = New System.Drawing.Point(219, 41)
-        Me.pb_MCN2Income2.Name = "pb_MCN2Income2"
-        Me.pb_MCN2Income2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCN2Income2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCN2Income2.TabIndex = 78
-        Me.pb_MCN2Income2.TabStop = False
-        '
-        'pb_MCN2Income3
-        '
-        Me.pb_MCN2Income3.Image = CType(resources.GetObject("pb_MCN2Income3.Image"), System.Drawing.Image)
-        Me.pb_MCN2Income3.Location = New System.Drawing.Point(276, 41)
-        Me.pb_MCN2Income3.Name = "pb_MCN2Income3"
-        Me.pb_MCN2Income3.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCN2Income3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCN2Income3.TabIndex = 79
-        Me.pb_MCN2Income3.TabStop = False
-        '
-        'pb_MCValve11bx1
-        '
-        Me.pb_MCValve11bx1.Image = CType(resources.GetObject("pb_MCValve11bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve11bx1.Location = New System.Drawing.Point(578, 67)
-        Me.pb_MCValve11bx1.Name = "pb_MCValve11bx1"
-        Me.pb_MCValve11bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve11bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve11bx1.TabIndex = 80
-        Me.pb_MCValve11bx1.TabStop = False
-        '
-        'pb_MCValve18bx1
-        '
-        Me.pb_MCValve18bx1.Image = CType(resources.GetObject("pb_MCValve18bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve18bx1.Location = New System.Drawing.Point(614, 41)
-        Me.pb_MCValve18bx1.Name = "pb_MCValve18bx1"
-        Me.pb_MCValve18bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve18bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve18bx1.TabIndex = 81
-        Me.pb_MCValve18bx1.TabStop = False
-        '
-        'pb_MCN2Income4
-        '
-        Me.pb_MCN2Income4.Image = CType(resources.GetObject("pb_MCN2Income4.Image"), System.Drawing.Image)
-        Me.pb_MCN2Income4.Location = New System.Drawing.Point(410, 41)
-        Me.pb_MCN2Income4.Name = "pb_MCN2Income4"
-        Me.pb_MCN2Income4.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCN2Income4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCN2Income4.TabIndex = 82
-        Me.pb_MCN2Income4.TabStop = False
-        '
-        'pb_MCValve18bx2
-        '
-        Me.pb_MCValve18bx2.Image = CType(resources.GetObject("pb_MCValve18bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve18bx2.Location = New System.Drawing.Point(1005, 50)
-        Me.pb_MCValve18bx2.Name = "pb_MCValve18bx2"
-        Me.pb_MCValve18bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve18bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve18bx2.TabIndex = 83
-        Me.pb_MCValve18bx2.TabStop = False
-        '
-        'pb_MCValve18bx3
-        '
-        Me.pb_MCValve18bx3.Image = CType(resources.GetObject("pb_MCValve18bx3.Image"), System.Drawing.Image)
-        Me.pb_MCValve18bx3.Location = New System.Drawing.Point(1013, 160)
-        Me.pb_MCValve18bx3.Name = "pb_MCValve18bx3"
-        Me.pb_MCValve18bx3.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve18bx3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve18bx3.TabIndex = 84
-        Me.pb_MCValve18bx3.TabStop = False
-        '
-        'pb_MCValve11bx2
-        '
-        Me.pb_MCValve11bx2.Image = CType(resources.GetObject("pb_MCValve11bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve11bx2.Location = New System.Drawing.Point(578, 294)
-        Me.pb_MCValve11bx2.Name = "pb_MCValve11bx2"
-        Me.pb_MCValve11bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve11bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve11bx2.TabIndex = 85
-        Me.pb_MCValve11bx2.TabStop = False
-        '
-        'pb_MCValve12bx1
-        '
-        Me.pb_MCValve12bx1.Image = CType(resources.GetObject("pb_MCValve12bx1.Image"), System.Drawing.Image)
-        Me.pb_MCValve12bx1.Location = New System.Drawing.Point(705, 305)
-        Me.pb_MCValve12bx1.Name = "pb_MCValve12bx1"
-        Me.pb_MCValve12bx1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve12bx1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve12bx1.TabIndex = 86
-        Me.pb_MCValve12bx1.TabStop = False
-        '
-        'pb_MCValve12bx2
-        '
-        Me.pb_MCValve12bx2.Image = CType(resources.GetObject("pb_MCValve12bx2.Image"), System.Drawing.Image)
-        Me.pb_MCValve12bx2.Location = New System.Drawing.Point(707, 416)
-        Me.pb_MCValve12bx2.Name = "pb_MCValve12bx2"
-        Me.pb_MCValve12bx2.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCValve12bx2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCValve12bx2.TabIndex = 87
-        Me.pb_MCValve12bx2.TabStop = False
-        '
-        'pb_MCVFilterDrain1
-        '
-        Me.pb_MCVFilterDrain1.Image = CType(resources.GetObject("pb_MCVFilterDrain1.Image"), System.Drawing.Image)
-        Me.pb_MCVFilterDrain1.Location = New System.Drawing.Point(601, 468)
-        Me.pb_MCVFilterDrain1.Name = "pb_MCVFilterDrain1"
-        Me.pb_MCVFilterDrain1.Size = New System.Drawing.Size(30, 30)
-        Me.pb_MCVFilterDrain1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pb_MCVFilterDrain1.TabIndex = 89
-        Me.pb_MCVFilterDrain1.TabStop = False
-        '
-        'Panel4
-        '
-        Me.Panel4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(682, 0)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(0)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1136, 583)
-        Me.Panel4.TabIndex = 2
+        'lbl_Title
+        '
+        Me.lbl_Title.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lbl_Title.Font = New System.Drawing.Font("Segoe UI Semibold", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Title.Location = New System.Drawing.Point(0, 40)
+        Me.lbl_Title.Name = "lbl_Title"
+        Me.lbl_Title.Size = New System.Drawing.Size(1904, 50)
+        Me.lbl_Title.TabIndex = 0
+        Me.lbl_Title.Text = "DP Tester"
+        Me.lbl_Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_OperationMode
+        '
+        Me.lbl_OperationMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lbl_OperationMode.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lbl_OperationMode.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_OperationMode.ForeColor = System.Drawing.SystemColors.Window
+        Me.lbl_OperationMode.Location = New System.Drawing.Point(0, 0)
+        Me.lbl_OperationMode.Name = "lbl_OperationMode"
+        Me.lbl_OperationMode.Size = New System.Drawing.Size(1904, 40)
+        Me.lbl_OperationMode.TabIndex = 34
+        Me.lbl_OperationMode.Text = "Auto Mode"
+        Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel_Overview
+        '
+        Me.Panel_Overview.AutoScroll = True
+        Me.Panel_Overview.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.Panel_Overview.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel_Overview.Location = New System.Drawing.Point(3, 3)
+        Me.Panel_Overview.Name = "Panel_Overview"
+        Me.Panel_Overview.Size = New System.Drawing.Size(923, 569)
+        Me.Panel_Overview.TabIndex = 48
         '
         'FormMain
         '
@@ -7121,45 +5488,47 @@ Partial Class FormMain
         Me.Text = "Smart Test DP Tester"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.panel_FormControl.ResumeLayout(False)
+        CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_UserCategory.ResumeLayout(False)
-        Me.panel_UserCategory.PerformLayout
+        Me.panel_UserCategory.PerformLayout()
         Me.tabctrl_MainCtrl.ResumeLayout(False)
         Me.tabpg_Main.ResumeLayout(False)
         Me.panel_MainRight.ResumeLayout(False)
         Me.tabctrl_SubMain.ResumeLayout(False)
         Me.tabpg_MainLiveGraph.ResumeLayout(False)
-        CType(Me.chart_MainLiveGraph, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.chart_MainLiveGraph, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_MainOverview.ResumeLayout(False)
         Me.tabpg_MainProdZone.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picbx_MainProductZone, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_MainPumpZone.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        Me.panel_MainRightDockBtm.ResumeLayout(False)
-        Me.panel_GroupUID.ResumeLayout(False)
-        Me.panel_GroupUID.PerformLayout
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_MainLeft.ResumeLayout(False)
         Me.panel_OprKeyInDt.ResumeLayout(False)
-        Me.panel_OprKeyInDt.PerformLayout
+        Me.panel_OprKeyInDt.PerformLayout()
         Me.panel_ProductionDetails.ResumeLayout(False)
-        Me.panel_ProductionDetails.PerformLayout
+        Me.panel_ProductionDetails.PerformLayout()
         Me.panel_DPTestResult.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout
+        Me.Panel1.PerformLayout()
         Me.panel_CalibrateStatus.ResumeLayout(False)
-        Me.panel_CalibrateStatus.PerformLayout
+        Me.panel_CalibrateStatus.PerformLayout()
         Me.panel_WrkOrdScnDt.ResumeLayout(False)
-        Me.panel_WrkOrdScnDt.PerformLayout
+        Me.panel_WrkOrdScnDt.PerformLayout()
         Me.tabpg_ProdDetail.ResumeLayout(False)
         Me.grpbx_SearchFilter.ResumeLayout(False)
-        Me.grpbx_SearchFilter.PerformLayout
-        CType(Me.dgv_ProdDetail, System.ComponentModel.ISupportInitialize).EndInit
+        Me.grpbx_SearchFilter.PerformLayout()
+        CType(Me.dgv_ProdDetail, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_Status.ResumeLayout(False)
         Me.tabctrl_SubStatus.ResumeLayout(False)
         Me.tabpg_StatusIO.ResumeLayout(False)
-        CType(Me.dgv_AnalogOutput, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.dgv_DigitalOutput, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.dgv_AnalogInput, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.dgv_DigitalInput, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dgv_AnalogOutput, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgv_DigitalOutput, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgv_AnalogInput, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgv_DigitalInput, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_StatusDevice.ResumeLayout(False)
         Me.panel_GenCondStatus.ResumeLayout(False)
         Me.panel_PumpProtectLvSenStatus.ResumeLayout(False)
@@ -7174,7 +5543,6 @@ Partial Class FormMain
         Me.tabpg_ManualCtrl.ResumeLayout(False)
         Me.tabctrl_SubManualCtrl.ResumeLayout(False)
         Me.tabpg_ManualControlValve.ResumeLayout(False)
-        Me.panel_TankControlPreview.ResumeLayout(False)
         Me.panel_ValveControl.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
         Me.tabpg_ManualControlPump.ResumeLayout(False)
@@ -7182,20 +5550,20 @@ Partial Class FormMain
         Me.panel_PumpControl.ResumeLayout(False)
         Me.panel_SubPumpCtrl.ResumeLayout(False)
         Me.panel_SpeedModeControl.ResumeLayout(False)
-        Me.panel_SpeedModeControl.PerformLayout
+        Me.panel_SpeedModeControl.PerformLayout()
         Me.panel_ProcessModeCtrl.ResumeLayout(False)
-        Me.panel_ProcessModeCtrl.PerformLayout
+        Me.panel_ProcessModeCtrl.PerformLayout()
+        CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_ManualControlTank.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_TankControl.ResumeLayout(False)
         Me.panel_SubTankControl.ResumeLayout(False)
         Me.tabpg_ManualControlDrain.ResumeLayout(False)
-        Me.Panel5.ResumeLayout(False)
-        Me.Panel5.PerformLayout
         Me.panel_ManualDrain.ResumeLayout(False)
         Me.panel_SubRegulatorControl.ResumeLayout(False)
-        Me.panel_SubRegulatorControl.PerformLayout
+        Me.panel_SubRegulatorControl.PerformLayout()
         Me.panel_SubManualDrain.ResumeLayout(False)
         Me.tabpg_ManualControlMaintenance.ResumeLayout(False)
         Me.panel_Maintenance.ResumeLayout(False)
@@ -7203,78 +5571,13 @@ Partial Class FormMain
         Me.tabpg_Alarm.ResumeLayout(False)
         Me.tabctrl_SubAlarm.ResumeLayout(False)
         Me.tabpg_AlarmCurrent.ResumeLayout(False)
-        CType(Me.dgv_CurrentAlarm, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dgv_CurrentAlarm, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_AlarmHistory.ResumeLayout(False)
-        Me.tabpg_AlarmHistory.PerformLayout
-        CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabpg_AlarmHistory.PerformLayout()
+        CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_PLCHeartBeat.ResumeLayout(False)
         Me.panel_SelectLoadRecipe.ResumeLayout(False)
-        Me.panel_SelectLoadRecipe.PerformLayout
-        CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picbx_MainOverview, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picbx_MainProductZone, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve1bx3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve2bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve3bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve3bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve2bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve1bx4, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve5bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCVFilterDrain2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve5bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve7bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve8bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve19bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve19bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve19bx3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve9bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve9bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve10bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve10bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve10bx3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve13bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve13bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve15bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve15bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve16bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve17bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve17bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve17bx3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve14bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve14bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve17bx4, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCVProdDrain1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCVProdDrain2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve6bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve6bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve6bx4, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve6bx3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve4bx3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve1bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve4bx4, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve4bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve4bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCDIWIncome, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve1bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCN2Income1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCN2Income2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCN2Income3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve11bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve18bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCN2Income4, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve18bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve18bx3, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve11bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve12bx1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCValve12bx2, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.pb_MCVFilterDrain1, System.ComponentModel.ISupportInitialize).EndInit
+        Me.panel_SelectLoadRecipe.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -7291,10 +5594,6 @@ Partial Class FormMain
     Friend WithEvents picbx_MainProductZone As PictureBox
     Friend WithEvents tabpg_MainPumpZone As TabPage
     Friend WithEvents picbx_MainPumpZone As PictureBox
-    Friend WithEvents panel_MainRightDockBtm As Panel
-    Friend WithEvents panel_GroupUID As Panel
-    Friend WithEvents dsp_UID As Label
-    Friend WithEvents lbl_UID As Label
     Friend WithEvents lbl_StepwiseMessage As Label
     Friend WithEvents panel_MainLeft As Panel
     Friend WithEvents panel_OprKeyInDt As Panel
@@ -7599,26 +5898,7 @@ Partial Class FormMain
     Friend WithEvents btn_Valve5 As Button
     Friend WithEvents btn_Valve4 As Button
     Friend WithEvents btn_Valve3 As Button
-    Friend WithEvents lbl_OverviewValve17 As Label
     Friend WithEvents lbl_OverviewValve18 As Label
-    Friend WithEvents lbl_OverviewValve14 As Label
-    Friend WithEvents lbl_OverviewValve13 As Label
-    Friend WithEvents lbl_OverviewValve16 As Label
-    Friend WithEvents lbl_OverviewValve15 As Label
-    Friend WithEvents lbl_OverviewValve19 As Label
-    Friend WithEvents lbl_OverviewValve12 As Label
-    Friend WithEvents lbl_OverviewValve10 As Label
-    Friend WithEvents lbl_OverviewValve11 As Label
-    Friend WithEvents lbl_OverviewValve9 As Label
-    Friend WithEvents lbl_OverviewValve8 As Label
-    Friend WithEvents lbl_OverviewValve7 As Label
-    Friend WithEvents lbl_OverviewValve6 As Label
-    Friend WithEvents lbl_OverviewValve5 As Label
-    Friend WithEvents lbl_OverviewValve4 As Label
-    Friend WithEvents lbl_OverviewValve3 As Label
-    Friend WithEvents lbl_OverviewValve2 As Label
-    Friend WithEvents lbl_OverviewValve1 As Label
-    Friend WithEvents picbx_MainOverview As PictureBox
     Friend WithEvents lbl_Flowmtr As Label
     Friend WithEvents dsp_Flowmtr As Label
     Friend WithEvents lbl_OutletPress As Label
@@ -7645,51 +5925,12 @@ Partial Class FormMain
     Friend WithEvents dsp_TankNomSensor As Label
     Friend WithEvents dsp_TankOvfSensor As Label
     Friend WithEvents PictureBox2 As PictureBox
-    Friend WithEvents panel_TankControlPreview As Panel
-    Friend WithEvents Panel5 As Panel
-    Friend WithEvents Label40 As Label
-    Friend WithEvents lbl_MDrainValve1 As Label
-    Friend WithEvents Label42 As Label
-    Friend WithEvents Label43 As Label
-    Friend WithEvents Label44 As Label
-    Friend WithEvents Label45 As Label
-    Friend WithEvents Label46 As Label
-    Friend WithEvents Label47 As Label
-    Friend WithEvents Label48 As Label
-    Friend WithEvents Label49 As Label
-    Friend WithEvents Label50 As Label
-    Friend WithEvents Label51 As Label
-    Friend WithEvents Label52 As Label
-    Friend WithEvents Label53 As Label
-    Friend WithEvents Label54 As Label
-    Friend WithEvents Label55 As Label
-    Friend WithEvents Label56 As Label
-    Friend WithEvents Label57 As Label
-    Friend WithEvents Label58 As Label
-    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents panel_ManualValve_Circuit As Panel
+    Friend WithEvents Panel_ManualDrain_Circuit As Panel
     Friend WithEvents Panel6 As Panel
     Friend WithEvents lbl_TankValve4 As Label
     Friend WithEvents lbl_TankValve5 As Label
     Friend WithEvents PictureBox6 As PictureBox
-    Friend WithEvents lbl_Valve19 As Label
-    Friend WithEvents lbl_Valve1 As Label
-    Friend WithEvents lbl_Valve18 As Label
-    Friend WithEvents lbl_Valve2 As Label
-    Friend WithEvents lbl_Valve17 As Label
-    Friend WithEvents lbl_Valve3 As Label
-    Friend WithEvents lbl_Valve16 As Label
-    Friend WithEvents lbl_Valve4 As Label
-    Friend WithEvents lbl_Valve15 As Label
-    Friend WithEvents lbl_Valve5 As Label
-    Friend WithEvents lbl_Valve14 As Label
-    Friend WithEvents lbl_Valve6 As Label
-    Friend WithEvents lbl_Valve13 As Label
-    Friend WithEvents lbl_Valve7 As Label
-    Friend WithEvents lbl_Valve12 As Label
-    Friend WithEvents lbl_Valve8 As Label
-    Friend WithEvents lbl_Valve11 As Label
-    Friend WithEvents lbl_Valve9 As Label
-    Friend WithEvents lbl_Valve10 As Label
     Friend WithEvents panel_SubPumpCtrl As Panel
     Friend WithEvents btn_PumpReset As Button
     Friend WithEvents Label4 As Label
@@ -7739,10 +5980,6 @@ Partial Class FormMain
     Friend WithEvents btn_PumpFiltrDrain As Button
     Friend WithEvents btn_InFiltrVent As Button
     Friend WithEvents btn_InFiltrDrain As Button
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents txtbx_N2PurgeActual As TextBox
-    Friend WithEvents txtbx_BackPressActual As TextBox
     Friend WithEvents panel_SubRegulatorControl As Panel
     Friend WithEvents btn_BckPressureUpdate As Button
     Friend WithEvents btn_N2PressureUpdate As Button
@@ -7757,62 +5994,6 @@ Partial Class FormMain
     Friend WithEvents dsp_ElecRegCtrl As Label
     Friend WithEvents Panel9 As Panel
     Friend WithEvents Label25 As Label
-    Friend WithEvents btn_MVCShowcircuit As Button
-    Friend WithEvents PictureBox3 As PictureBox
-    Friend WithEvents pb_MCVFilterDrain2 As PictureBox
-    Friend WithEvents pb_MCValve5bx2 As PictureBox
-    Friend WithEvents pb_MCValve3bx2 As PictureBox
-    Friend WithEvents pb_MCValve2bx2 As PictureBox
-    Friend WithEvents pb_MCValve1bx4 As PictureBox
-    Friend WithEvents pb_MCValve3bx1 As PictureBox
-    Friend WithEvents pb_MCValve2bx1 As PictureBox
-    Friend WithEvents pb_MCValve1bx3 As PictureBox
-    Friend WithEvents pb_MCValve9bx1 As PictureBox
-    Friend WithEvents pb_MCValve19bx3 As PictureBox
-    Friend WithEvents pb_MCValve19bx2 As PictureBox
-    Friend WithEvents pb_MCValve19bx1 As PictureBox
-    Friend WithEvents pb_MCValve8bx1 As PictureBox
-    Friend WithEvents pb_MCValve7bx1 As PictureBox
-    Friend WithEvents pb_MCValve5bx1 As PictureBox
-    Friend WithEvents pb_MCValve17bx3 As PictureBox
-    Friend WithEvents pb_MCValve17bx2 As PictureBox
-    Friend WithEvents pb_MCValve17bx1 As PictureBox
-    Friend WithEvents pb_MCValve16bx1 As PictureBox
-    Friend WithEvents pb_MCValve15bx2 As PictureBox
-    Friend WithEvents pb_MCValve15bx1 As PictureBox
-    Friend WithEvents pb_MCValve13bx2 As PictureBox
-    Friend WithEvents pb_MCValve13bx1 As PictureBox
-    Friend WithEvents pb_MCValve10bx3 As PictureBox
-    Friend WithEvents pb_MCValve10bx2 As PictureBox
-    Friend WithEvents pb_MCValve10bx1 As PictureBox
-    Friend WithEvents pb_MCValve9bx2 As PictureBox
-    Friend WithEvents pb_MCDIWIncome As PictureBox
-    Friend WithEvents pb_MCValve4bx1 As PictureBox
-    Friend WithEvents pb_MCValve4bx2 As PictureBox
-    Friend WithEvents pb_MCValve4bx4 As PictureBox
-    Friend WithEvents pb_MCValve4bx3 As PictureBox
-    Friend WithEvents pb_MCValve1bx1 As PictureBox
-    Friend WithEvents pb_MCValve6bx3 As PictureBox
-    Friend WithEvents pb_MCValve6bx4 As PictureBox
-    Friend WithEvents pb_MCValve6bx2 As PictureBox
-    Friend WithEvents pb_MCValve6bx1 As PictureBox
-    Friend WithEvents pb_MCVProdDrain2 As PictureBox
-    Friend WithEvents pb_MCVProdDrain1 As PictureBox
-    Friend WithEvents pb_MCValve17bx4 As PictureBox
-    Friend WithEvents pb_MCValve14bx1 As PictureBox
-    Friend WithEvents pb_MCValve14bx2 As PictureBox
-    Friend WithEvents pb_MCValve12bx2 As PictureBox
-    Friend WithEvents pb_MCValve12bx1 As PictureBox
-    Friend WithEvents pb_MCValve11bx2 As PictureBox
-    Friend WithEvents pb_MCValve18bx3 As PictureBox
-    Friend WithEvents pb_MCValve18bx2 As PictureBox
-    Friend WithEvents pb_MCN2Income4 As PictureBox
-    Friend WithEvents pb_MCValve18bx1 As PictureBox
-    Friend WithEvents pb_MCValve11bx1 As PictureBox
-    Friend WithEvents pb_MCN2Income3 As PictureBox
-    Friend WithEvents pb_MCN2Income2 As PictureBox
-    Friend WithEvents pb_MCN2Income1 As PictureBox
-    Friend WithEvents pb_MCValve1bx2 As PictureBox
-    Friend WithEvents pb_MCVFilterDrain1 As PictureBox
-    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Panel_Mainten_Circuit As Panel
+    Friend WithEvents Panel_Overview As Panel
 End Class
