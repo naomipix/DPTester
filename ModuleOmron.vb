@@ -1,6 +1,9 @@
 ﻿Imports PoohPlcLink
 Imports EEIP
 Imports System.Text
+Imports System.ComponentModel
+Imports System.Runtime.InteropServices.ComTypes
+Imports System.Diagnostics.Eventing.Reader
 
 Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
@@ -20,8 +23,11 @@ Module ModuleOmron
     Public FINSOutput(199) As Integer
     Public WithEvents PLCtimer As New Timer()
     Public WithEvents PCtimer As New Timer()
-
+    Dim PLCstatus(2)() As Boolean
     Public PCStatus(2)() As Boolean
+    Public dtAlarm As New DataTable
+    Public Currentalarm As New Dictionary(Of Integer, Object)
+
 
 #Region "FINS protocol"
     Public Sub FINSInitialise()
@@ -43,6 +49,10 @@ Module ModuleOmron
             Next
             PLCtimer.Interval = 200
             PLCtimer.Enabled = True
+            PCtimer.Interval = 1000
+            dtAlarm = SQL.ReadRecords("select id,code,description from AlarmTable")
+
+
 
         Catch ex As Exception
             MsgBox("Cannot able to communicate with PLC, Connection failed")
@@ -295,10 +305,10 @@ Module ModuleOmron
             End If
 
             If Absreal = 0 Then
-                    Absreal = 0
-                    exponent = 0
-                End If
+                Absreal = 0
+                exponent = 0
             End If
+        End If
         ' To Convert Signed exponent into unsigned bin
         If exponent >= -127 And exponent <= 127 And Absreal <> 0 Then
             exponent = 127 + exponent
@@ -1214,10 +1224,65 @@ Module ModuleOmron
 
 #Region "Alarm and Warnings Fetch"
     Public Function FetchAlarm(start As Integer) As Boolean
+        Dim serialno As Integer = 0
+        Dim alarmdescription As New StringBuilder
+        Dim alarmid As Integer
+        Dim alarmcode As String
 
         For i As Integer = 0 To Alarm.Length - 1
             Alarm(i) = Int2BoolArr(FINSinput(start + i))
         Next
+
+        For i As Integer = 0 To Alarm.Length - 1
+            For j As Integer = 0 To 15
+                If Alarm(i)(j) = True Then
+
+                    alarmid = dtAlarm.Rows((i * 16) + j).Item("id")
+                    alarmcode = dtAlarm.Rows((i * 16) + j).Item("code")
+                    alarmdescription.Append(dtAlarm.Rows((i * 16) + j).Item("code"))
+                    alarmdescription.Append(" ")
+                    alarmdescription.Append(dtAlarm.Rows((i * 16) + j).Item("description"))
+
+                    If Not Currentalarm.ContainsKey(alarmid) Then
+                        Dim alarmmessage As DataRow = Mainalarm.NewRow()
+                        Dim alarmhistory As New Dictionary(Of String, Object) From {
+                {"trigger_time", FormMain.lbl_DateTimeClock.Text},
+                {"alarm_code", alarmcode}
+                }
+                        SQL.InsertRecord("AlarmHistory", alarmhistory)
+                        Currentalarm.Add(alarmid, alarmdescription.ToString)
+                        'FormMain.dgv_CurrentAlarm.Rows.Add(Currentalarm.Count, FormMain.lbl_DateTimeClock.Text, dtAlarm.Rows((i * 16) + j).Item("description"), alarmcode)
+                        alarmmessage.Item("id") = alarmid
+                        alarmmessage.Item("S.No") = Currentalarm.Count
+                        alarmmessage.Item("Trigger Time") = FormMain.lbl_DateTimeClock.Text
+                        alarmmessage.Item("Description") = dtAlarm.Rows((i * 16) + j).Item("description")
+                        alarmmessage.Item("Alarm Code") = alarmcode
+                        Mainalarm.Rows.Add(alarmmessage)
+                    End If
+                Else
+                    If Alarm(i)(j) = False And Currentalarm.ContainsKey(dtAlarm.Rows((i * 16) + j).Item("id")) Then
+
+                        If Currentalarm.Remove(dtAlarm.Rows((i * 16) + j).Item("id")) Then
+                            Dim rows As DataRow()
+                            Dim findrow As Integer
+                            Dim reset As New Dictionary(Of String, Object) From {
+                {"reset_time", FormMain.lbl_DateTimeClock.Text}}
+                            'Dim Condition As String = $"lot_id ='{LotID}' AND lot_attempt = '{LotAttempt}'"
+                            rows = Mainalarm.Select($"id = '{dtAlarm.Rows((i * 16) + j).Item("id")}'")
+                            SQL.UpdateRecord("AlarmHistory", reset, $"reset_time IS NULL AND alarm_code='{dtAlarm.Rows((i * 16) + j).Item("code")}'")
+                            If rows.Length > 0 Then
+                                For k As Integer = 0 To rows.Length - 1
+                                    findrow = Mainalarm.Rows.IndexOf(rows(k))
+                                    Mainalarm.Rows.RemoveAt(findrow)
+                                Next
+                            End If
+
+                        End If
+                    End If
+                End If
+            Next
+        Next
+
 
         Return True
     End Function
@@ -1308,9 +1373,9 @@ Module ModuleOmron
         FetchPLC_DOut(110)
         FetchPLC_Ain(120)
         FetchPLC_AOut(160)
-
+        FetchAlarm(200)
         'Spiltting the Input into Boolean Array for Processing
-        Dim PLCstatus(3)() As Boolean
+
         For i As Integer = 0 To 2
             PLCstatus(i) = Int2BoolArr(FINSinput(i))
         Next
@@ -1448,9 +1513,9 @@ Module ModuleOmron
             SetButtonState(FormMain.btn_PumpEnable, True, "ON")
         End If
 
-        If ManualCtrl(1)(3) = True And FormMain.btn_PumpReset.Text = "ON" Then
-            ManualCtrl(1)(3) = False
-        End If
+        'If ManualCtrl(3)(3) = True And FormMain.btn_PumpReset.Text = "ON" Then
+        '    ManualCtrl(3)(3) = False
+        'End If
 
 #End Region
 
@@ -1651,16 +1716,63 @@ Module ModuleOmron
 #End Region
 
 
+        'Recipe Selection
+        If FormMain.txtbx_TitleRecipeID.Text.Length > 3 Then
+            FINSOutput(20) = 1
+        Else
+            FINSOutput(20) = 0
+        End If
+
+
+
+
+
         'Write the PLC Output
         Put_PCManualctrl()
         FINSWrite(0, 200)
-
+        LabelStatusupdate()
     End Sub
 
 
+    Private Sub PCTimer_Ticks(sender As Object, e As EventArgs) Handles PCtimer.Tick
+        For i As Integer = 0 To 15
+            If ManualCtrl(2)(i) = True And FormMain.btn_ValveCtrlArr(i).Text = "Close" Then
+                ManualCtrl(2)(i) = False
+            End If
+        Next
+        For i As Integer = 0 To 2
+            If ManualCtrl(3)(i) = True And FormMain.btn_ValveCtrlArr(i + 16).Text = "Close" Then
+                ManualCtrl(3)(i) = False
+            End If
+        Next
+        PCtimer.Stop()
+    End Sub
 
 
+    Public Sub LabelStatusupdate()
+        If PLCstatus(0)(4) = False And PLCstatus(0)(14) = False Then
+            If PLCstatus(0)(1) = True Then
+                FormMain.lbl_OperationMode.Text = "Auto Cycle Running"
+                FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+            End If
+            If PLCstatus(0)(2) = True Then
+                FormMain.lbl_OperationMode.Text = "Manual Mode"
+                FormMain.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+            End If
 
+            If PLCstatus(0)(3) = True And PLCstatus(0)(2) = False Then
+                FormMain.lbl_OperationMode.Text = "Auto Mode"
+                FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+            End If
+
+            If PLCstatus(0)(1) = False And PLCstatus(0)(2) = False And PLCstatus(0)(3) = False Then
+                FormMain.lbl_OperationMode.Text = "No Status"
+                FormMain.lbl_OperationMode.BackColor = Color.Gray
+            End If
+
+        End If
+
+    End Sub
 
 
 End Module

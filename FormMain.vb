@@ -16,7 +16,7 @@ Module FormMainModule
     Public LotEndTime As String
     Public LotAttempt As Integer
     Public dtRecipeID As DataTable
-
+    Public Mainalarm As New DataTable
 
 
 
@@ -129,9 +129,20 @@ Public Class FormMain
         'Panel_Overview.Controls.Add(FormCircuitModel1)
         FormCircuitModel1.Show()
 
+        'Top Status Bar
+        lbl_OperationMode.Text = "No Status"
+        lbl_OperationMode.BackColor = Color.Gray
 
+        'Current Alarm Table
+        With Mainalarm
+            .Columns.Add("id")
+            .Columns.Add("S.No")
+            .Columns.Add("Trigger Time")
+            .Columns.Add("Description")
+            .Columns.Add("Alarm Code")
 
-
+            LoadCurrentalarmtable()
+        End With
 
         ' Initialize Tables
         Dim t1 As Task = LoadProductionDetails()
@@ -1257,9 +1268,9 @@ Public Class FormMain
         For i As Integer = 0 To 15
             If btn_Valve Is btn_ValveCtrlArr(i) Then
                 If btn_Valve.BackColor = Color.FromArgb(0, 192, 0) Then
-                    ManualCtrl(0)(i) = False
+                    ManualCtrl(2)(i) = False
                 Else
-                    ManualCtrl(0)(i) = True
+                    ManualCtrl(2)(i) = True
                 End If
             End If
         Next
@@ -1268,9 +1279,9 @@ Public Class FormMain
         For i As Integer = 0 To 2
             If btn_Valve Is btn_ValveCtrlArr(i + 16) Then
                 If btn_ValveCtrlArr(i + 16).BackColor = Color.FromArgb(0, 192, 0) Then
-                    ManualCtrl(1)(i) = False
+                    ManualCtrl(3)(i) = False
                 Else
-                    ManualCtrl(1)(i) = True
+                    ManualCtrl(3)(i) = True
                 End If
             End If
         Next
@@ -1278,7 +1289,7 @@ Public Class FormMain
         'FINSWrite(4, 1)
         'Put_PCManualctrl(3)
 
-
+        PCtimer.Start()
 
 
     End Sub
@@ -1296,25 +1307,25 @@ Public Class FormMain
         Dim btn_Pump As Button = DirectCast(sender, Button)
         If btn_Pump Is btn_PumpMode Then
             If btn_PumpMode.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(4) = False
+                ManualCtrl(3)(4) = False
             Else
-                ManualCtrl(1)(4) = True
+                ManualCtrl(3)(4) = True
             End If
         End If
 
         If btn_Pump Is btn_PumpReset Then
             If btn_PumpReset.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(3) = False
+                ManualCtrl(3)(3) = False
             Else
-                ManualCtrl(1)(3) = True
+                ManualCtrl(3)(3) = True
             End If
         End If
 
         If btn_Pump Is btn_PumpEnable Then
             If btn_PumpEnable.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(5) = False
+                ManualCtrl(3)(5) = False
             Else
-                ManualCtrl(1)(5) = True
+                ManualCtrl(3)(5) = True
             End If
         End If
 
@@ -1337,17 +1348,17 @@ Public Class FormMain
         Dim btn_tank As Button = DirectCast(sender, Button)
         If btn_tank Is btn_TankFill Then
             If btn_TankFill.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(6) = False
+                ManualCtrl(3)(6) = False
             Else
-                ManualCtrl(1)(6) = True
+                ManualCtrl(3)(6) = True
             End If
         End If
 
         If btn_tank Is btn_TankDrain Then
             If btn_TankDrain.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(7) = False
+                ManualCtrl(3)(7) = False
             Else
-                ManualCtrl(1)(7) = True
+                ManualCtrl(3)(7) = True
             End If
         End If
 
@@ -1371,25 +1382,25 @@ Public Class FormMain
         Dim btn_ManualDrain As Button = DirectCast(sender, Button)
         If btn_ManualDrain Is btn_MCN2Purge1 Then
             If btn_MCN2Purge1.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(8) = False
+                ManualCtrl(3)(8) = False
             Else
-                ManualCtrl(1)(8) = True
+                ManualCtrl(3)(8) = True
             End If
         End If
 
         If btn_ManualDrain Is btn_MCN2Purge2 Then
             If btn_MCN2Purge2.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(9) = False
+                ManualCtrl(3)(9) = False
             Else
-                ManualCtrl(1)(9) = True
+                ManualCtrl(3)(9) = True
             End If
         End If
 
         If btn_ManualDrain Is btn_MCN2Purge3 Then
             If btn_MCN2Purge3.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(10) = False
+                ManualCtrl(3)(10) = False
             Else
-                ManualCtrl(1)(10) = True
+                ManualCtrl(3)(10) = True
             End If
         End If
 
@@ -1408,41 +1419,41 @@ Public Class FormMain
 
         If btn_Maintenance Is btn_InFiltrDrain Then
             If btn_InFiltrDrain.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(11) = False
+                ManualCtrl(3)(11) = False
             Else
-                ManualCtrl(1)(11) = True
+                ManualCtrl(3)(11) = True
             End If
         End If
 
         If btn_Maintenance Is btn_InFiltrVent Then
             If btn_InFiltrVent.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(12) = False
+                ManualCtrl(3)(12) = False
             Else
-                ManualCtrl(1)(12) = True
+                ManualCtrl(3)(12) = True
             End If
         End If
 
         If btn_Maintenance Is btn_PumpFiltrDrain Then
             If btn_PumpFiltrDrain.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(13) = False
+                ManualCtrl(3)(13) = False
             Else
-                ManualCtrl(1)(13) = True
+                ManualCtrl(3)(13) = True
             End If
         End If
 
         If btn_Maintenance Is btn_PumpFiltrVent Then
             If btn_PumpFiltrVent.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(14) = False
+                ManualCtrl(3)(14) = False
             Else
-                ManualCtrl(1)(14) = True
+                ManualCtrl(3)(14) = True
             End If
         End If
 
         If btn_Maintenance Is btn_EmptyTank Then
             If btn_EmptyTank.BackColor = Color.FromArgb(0, 192, 0) Then
-                ManualCtrl(1)(15) = False
+                ManualCtrl(3)(15) = False
             Else
-                ManualCtrl(1)(15) = True
+                ManualCtrl(3)(15) = True
             End If
         End If
     End Sub
@@ -1456,13 +1467,15 @@ Public Class FormMain
 #Region "Alarm"
     ' Initialize Alarm History Tab
     Private Async Function LoadAlarm() As Task
-        '[Current Alarm]
-
-
-        '[Alarm History]
-        'LoadAlarmHistoryFilterList()
-
         Try
+            '[Current Alarm]
+            'dgvClearSelection(dgv_CurrentAlarm)
+            'dgv_CurrentAlarm.DataSource = mainalarm
+
+            '[Alarm History]
+            'LoadAlarmHistoryFilterList()
+
+
             Await LoadAlarmHistoryFilterList()
         Catch ex As Exception
             MsgBox(ex.Message & ex.StackTrace)
@@ -1484,6 +1497,33 @@ Public Class FormMain
     End Sub
 
 #Region "Current Alarm"
+
+    Private Sub LoadCurrentalarmtable()
+        dgvClearSelection(dgv_CurrentAlarm)
+        dgv_CurrentAlarm.DataSource = Mainalarm
+        With dgv_CurrentAlarm
+
+            .Columns("id").Visible = False
+
+            .Columns("S.No").Width = 100
+            .Columns("Trigger Time").Width = 250
+            .Columns("Description").Width = 1000
+            .Columns("Alarm Code").Width = 250
+
+            .Columns("S.No").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            .Columns("Trigger Time").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            .Columns("Description").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+            .Columns("Alarm Code").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+            .Columns("S.No").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("Trigger Time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("Description").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("Alarm Code").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+
+        End With
+
+    End Sub
 
 #End Region
 
@@ -2226,9 +2266,6 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 #Region "Load Recipe Data to PLC"
 
     Public Sub LoadrecipeParameters(Recipe As String)
-        'RealtoPLC(OmronPLC, PoohFinsETN.MemoryTypes.DM, 201, CType(txtbx_DM201.Text, Decimal))
-        'OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 0, 1)
-        'OmronPLC.WriteMemoryWord(PoohFinsETN.MemoryTypes.DM, 200, CType(txtbx_DM200.Text, Integer), PoohFinsETN.DataTypes.SignBIN)
 
         Dim dtrecipe As DataTable = SQL.ReadRecords($"SELECT * From RecipeTable WHERE recipe_id ='{Recipe}'")
 
@@ -2317,7 +2354,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                 DInt2int(102, 0)
             End If
             DInt2int(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
-            FINSWrite(30, 76)
+
         End If
 
 
