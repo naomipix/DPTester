@@ -808,7 +808,6 @@ Namespace LicensingModule
         End Sub
 
         Public Sub trialTimerStart()
-            dtTrialExpiring = DateTime.Now.AddDays(DayCountGiven)
             DayLeftTemp = (dtTrialExpiring - DateTime.Now).TotalDays
             trialTimer.Enabled = True
         End Sub
