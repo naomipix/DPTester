@@ -140,10 +140,9 @@ Public Class FormMain
             .Columns.Add("Trigger Time")
             .Columns.Add("Description")
             .Columns.Add("Alarm Code")
-
-            LoadCurrentalarmtable()
         End With
 
+        LoadCurrentalarmtable()
         ' Initialize Tables
         Dim t1 As Task = LoadProductionDetails()
         Dim t2 As Task = LoadStatus()
@@ -531,7 +530,7 @@ Public Class FormMain
         If tabctrl_MainCtrl.SelectedTab Is tabpg_Alarm Then
             ' Focus First Tab Page
             tabctrl_SubAlarm.SelectedTab = tabpg_AlarmCurrent
-
+            LoadCurrentalarmtable()
             ' Initialize Current Alarm
 
 
@@ -1488,7 +1487,7 @@ Public Class FormMain
     ' Perform Action According To TabSelected
     Private Sub tabctrl_SubAlarm_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_SubAlarm.SelectedIndexChanged
         If tabctrl_SubAlarm.SelectedTab Is tabpg_AlarmCurrent Then
-
+            LoadCurrentalarmtable()
         End If
 
         If tabctrl_SubAlarm.SelectedTab Is tabpg_AlarmHistory Then

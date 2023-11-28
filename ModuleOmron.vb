@@ -23,11 +23,12 @@ Module ModuleOmron
     Public FINSOutput(199) As Integer
     Public WithEvents PLCtimer As New Timer()
     Public WithEvents PCtimer As New Timer()
+    Public WithEvents Alarmtimer As New Timer()
     Dim PLCstatus(2)() As Boolean
     Public PCStatus(2)() As Boolean
     Public dtAlarm As New DataTable
     Public Currentalarm As New Dictionary(Of Integer, Object)
-
+    Public startindex As Integer = 0
 
 #Region "FINS protocol"
     Public Sub FINSInitialise()
@@ -51,8 +52,8 @@ Module ModuleOmron
             PLCtimer.Enabled = True
             PCtimer.Interval = 1000
             dtAlarm = SQL.ReadRecords("select id,code,description from AlarmTable")
-
-
+            Alarmtimer.Interval = 2000
+            Currentalarm.Add(0, "Machine in Alarm Condition")
 
         Catch ex As Exception
             MsgBox("Cannot able to communicate with PLC, Connection failed")
@@ -1235,6 +1236,7 @@ Module ModuleOmron
 
         For i As Integer = 0 To Alarm.Length - 1
             For j As Integer = 0 To 15
+                alarmdescription.Clear()
                 If Alarm(i)(j) = True Then
 
                     alarmid = dtAlarm.Rows((i * 16) + j).Item("id")
@@ -1251,7 +1253,7 @@ Module ModuleOmron
                 }
                         SQL.InsertRecord("AlarmHistory", alarmhistory)
                         Currentalarm.Add(alarmid, alarmdescription.ToString)
-                        'FormMain.dgv_CurrentAlarm.Rows.Add(Currentalarm.Count, FormMain.lbl_DateTimeClock.Text, dtAlarm.Rows((i * 16) + j).Item("description"), alarmcode)
+
                         alarmmessage.Item("id") = alarmid
                         alarmmessage.Item("S.No") = Currentalarm.Count
                         alarmmessage.Item("Trigger Time") = FormMain.lbl_DateTimeClock.Text
@@ -1751,6 +1753,12 @@ Module ModuleOmron
 
     Public Sub LabelStatusupdate()
         If PLCstatus(0)(4) = False And PLCstatus(0)(14) = False Then
+
+            If Alarmtimer.Enabled = True Then
+                Alarmtimer.Enabled = False
+                startindex = 0
+            End If
+
             If PLCstatus(0)(1) = True Then
                 FormMain.lbl_OperationMode.Text = "Auto Cycle Running"
                 FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
@@ -1769,11 +1777,33 @@ Module ModuleOmron
                 FormMain.lbl_OperationMode.Text = "No Status"
                 FormMain.lbl_OperationMode.BackColor = Color.Gray
             End If
+        Else
+            If PLCstatus(0)(4) = True Or PLCstatus(0)(14) = True Then
+
+                'FormMain.lbl_OperationMode.BackColor = Color.Red
+                'FormMain.lbl_OperationMode.Text = "Machine in Alarm Condition"
+                If Alarmtimer.Enabled = False Then
+                    startindex = Currentalarm.Count
+                    Alarmtimer.Enabled = True
+                End If
+            End If
 
         End If
 
     End Sub
 
+    Private Sub AlarmTimer_Ticks(sender As Object, e As EventArgs) Handles Alarmtimer.Tick
+        Dim Value As KeyValuePair(Of Integer, Object)
+        FormMain.lbl_OperationMode.BackColor = Color.Red
+        Value = Currentalarm.ElementAt(startindex - 1)
+        FormMain.lbl_OperationMode.Text = Value.Value.ToString
+        If Not startindex <= 1 Then
+            startindex -= 1
+        Else
+            startindex = Currentalarm.Count
+        End If
+
+    End Sub
 
 End Module
 
