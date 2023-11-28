@@ -24,6 +24,7 @@ Module ModuleOmron
     Public WithEvents PLCtimer As New Timer()
     Public WithEvents PCtimer As New Timer()
     Public WithEvents Alarmtimer As New Timer()
+    Public WithEvents Calseqtimer As New Timer()
     Dim PLCstatus(2)() As Boolean
     Public PCStatus(2)() As Boolean
     Public dtAlarm As New DataTable
@@ -54,7 +55,7 @@ Module ModuleOmron
             dtAlarm = SQL.ReadRecords("select id,code,description from AlarmTable")
             Alarmtimer.Interval = 2000
             Currentalarm.Add(0, "Machine in Alarm Condition")
-
+            Calseqtimer.Interval = 2000
         Catch ex As Exception
             MsgBox("Cannot able to communicate with PLC, Connection failed")
         End Try
@@ -1318,7 +1319,7 @@ Module ModuleOmron
 
 
 
-
+#Region "PLC Read and Write"
     Public Function FINSInputRead() As Boolean
         Try
             'FINSOutput = OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 0, 200, PoohFinsETN.DataTypes.UnSignBIN)
@@ -1365,6 +1366,11 @@ Module ModuleOmron
 
         Return True
     End Function
+
+
+#End Region
+
+
 
     Private Sub PLCTimer_Ticks(sender As Object, e As EventArgs) Handles PLCtimer.Tick
 
@@ -1718,6 +1724,8 @@ Module ModuleOmron
 #End Region
 
 
+#Region "Recipe Selection Confirmation"
+
         'Recipe Selection
         If FormMain.txtbx_TitleRecipeID.Text.Length > 3 Then
             FINSOutput(20) = 1
@@ -1725,9 +1733,24 @@ Module ModuleOmron
             FINSOutput(20) = 0
         End If
 
+#End Region
 
 
+#Region "Calibration and verification"
 
+        If PLCstatus(1)(2) = True Then
+            SetButtonState(FormCalibration.btn_Calibrate, True, "Calibrate")
+        Else
+            SetButtonState(FormCalibration.btn_Calibrate, False, "Calibrate")
+        End If
+
+        If PLCstatus(1)(3) = True Then
+            SetButtonState(FormCalibration.btn_Verify, True, "Verify")
+        Else
+            SetButtonState(FormCalibration.btn_Verify, False, "Verify")
+        End If
+
+#End Region
 
         'Write the PLC Output
         Put_PCManualctrl()
@@ -1747,9 +1770,12 @@ Module ModuleOmron
                 ManualCtrl(3)(i) = False
             End If
         Next
+
         PCtimer.Stop()
     End Sub
 
+
+#Region "Top Label Status Update"
 
     Public Sub LabelStatusupdate()
         If PLCstatus(0)(4) = False And PLCstatus(0)(14) = False Then
@@ -1762,20 +1788,68 @@ Module ModuleOmron
             If PLCstatus(0)(1) = True Then
                 FormMain.lbl_OperationMode.Text = "Auto Cycle Running"
                 FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormCalibration.lbl_OperationMode.Text = "Auto Cycle Running"
+                FormCalibration.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormMessageLog.lbl_OperationMode.Text = "Auto Cycle Running"
+                FormMessageLog.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormRecipeManagement.lbl_OperationMode.Text = "Auto Cycle Running"
+                FormRecipeManagement.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormResultGraph.lbl_OperationMode.Text = "Auto Cycle Running"
+                FormResultGraph.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormResultSummary.lbl_OperationMode.Text = "Auto Cycle Running"
+                FormResultSummary.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormSetting.lbl_OperationMode.Text = "Auto Cycle Running"
+                FormSetting.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
             End If
             If PLCstatus(0)(2) = True Then
                 FormMain.lbl_OperationMode.Text = "Manual Mode"
                 FormMain.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+                FormCalibration.lbl_OperationMode.Text = "Manual Mode"
+                FormCalibration.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+                FormMessageLog.lbl_OperationMode.Text = "Manual Mode"
+                FormMessageLog.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+                FormRecipeManagement.lbl_OperationMode.Text = "Manual Mode"
+                FormRecipeManagement.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+                FormResultGraph.lbl_OperationMode.Text = "Manual Mode"
+                FormResultGraph.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+                FormResultSummary.lbl_OperationMode.Text = "Manual Mode"
+                FormResultSummary.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+                FormSetting.lbl_OperationMode.Text = "Manual Mode"
+                FormSetting.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
             End If
 
-            If PLCstatus(0)(3) = True And PLCstatus(0)(2) = False Then
+            If PLCstatus(0)(1) = False And PLCstatus(0)(3) = True And PLCstatus(0)(2) = False Then
                 FormMain.lbl_OperationMode.Text = "Auto Mode"
                 FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormCalibration.lbl_OperationMode.Text = "Auto Mode"
+                FormCalibration.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormMessageLog.lbl_OperationMode.Text = "Auto Mode"
+                FormMessageLog.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormRecipeManagement.lbl_OperationMode.Text = "Auto Mode"
+                FormRecipeManagement.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormResultGraph.lbl_OperationMode.Text = "Auto Mode"
+                FormResultGraph.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormResultSummary.lbl_OperationMode.Text = "Auto Mode"
+                FormResultSummary.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+                FormSetting.lbl_OperationMode.Text = "Auto Mode"
+                FormSetting.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
             End If
 
             If PLCstatus(0)(1) = False And PLCstatus(0)(2) = False And PLCstatus(0)(3) = False Then
                 FormMain.lbl_OperationMode.Text = "No Status"
                 FormMain.lbl_OperationMode.BackColor = Color.Gray
+                FormCalibration.lbl_OperationMode.Text = "No Status"
+                FormCalibration.lbl_OperationMode.BackColor = Color.Gray
+                FormMessageLog.lbl_OperationMode.Text = "No Status"
+                FormMessageLog.lbl_OperationMode.BackColor = Color.Gray
+                FormRecipeManagement.lbl_OperationMode.Text = "No Status"
+                FormRecipeManagement.lbl_OperationMode.BackColor = Color.Gray
+                FormResultGraph.lbl_OperationMode.Text = "No Status"
+                FormResultGraph.lbl_OperationMode.BackColor = Color.Gray
+                FormResultSummary.lbl_OperationMode.Text = "No Status"
+                FormResultSummary.lbl_OperationMode.BackColor = Color.Gray
+                FormSetting.lbl_OperationMode.Text = "No Status"
+                FormSetting.lbl_OperationMode.BackColor = Color.Gray
             End If
         Else
             If PLCstatus(0)(4) = True Or PLCstatus(0)(14) = True Then
@@ -1794,9 +1868,24 @@ Module ModuleOmron
 
     Private Sub AlarmTimer_Ticks(sender As Object, e As EventArgs) Handles Alarmtimer.Tick
         Dim Value As KeyValuePair(Of Integer, Object)
-        FormMain.lbl_OperationMode.BackColor = Color.Red
+
         Value = Currentalarm.ElementAt(startindex - 1)
+
         FormMain.lbl_OperationMode.Text = Value.Value.ToString
+        FormMain.lbl_OperationMode.BackColor = Color.Red
+        FormCalibration.lbl_OperationMode.Text = Value.Value.ToString
+        FormCalibration.lbl_OperationMode.BackColor = Color.Red
+        FormMessageLog.lbl_OperationMode.Text = Value.Value.ToString
+        FormMessageLog.lbl_OperationMode.BackColor = Color.Red
+        FormRecipeManagement.lbl_OperationMode.Text = Value.Value.ToString
+        FormRecipeManagement.lbl_OperationMode.BackColor = Color.Red
+        FormResultGraph.lbl_OperationMode.Text = Value.Value.ToString
+        FormResultGraph.lbl_OperationMode.BackColor = Color.Red
+        FormResultSummary.lbl_OperationMode.Text = Value.Value.ToString
+        FormResultSummary.lbl_OperationMode.BackColor = Color.Red
+        FormSetting.lbl_OperationMode.Text = Value.Value.ToString
+        FormSetting.lbl_OperationMode.BackColor = Color.Red
+
         If Not startindex <= 1 Then
             startindex -= 1
         Else
@@ -1804,6 +1893,22 @@ Module ModuleOmron
         End If
 
     End Sub
+
+
+#End Region
+
+
+    Private Sub CalSeqTimer_Ticks(sender As Object, e As EventArgs) Handles Calseqtimer.Tick
+        If PCStatus(1)(2) = True And FormCalibration.btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246) Then
+            PCStatus(1)(2) = False
+        End If
+
+        If PCStatus(1)(3) = True And FormCalibration.btn_Verify.BackColor = Color.FromArgb(25, 130, 246) Then
+            PCStatus(1)(3) = False
+        End If
+    End Sub
+
+
 
 End Module
 
