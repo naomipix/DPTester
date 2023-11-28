@@ -136,6 +136,8 @@ dp_back_pressure,dp_stabilize_time,dp_test_time,dp_testpoints,verification_toler
 
     Private Sub btn_Discard_Click(sender As Object, e As EventArgs) Handles btn_Discard.Click
         If FormMain.MainMessage(11) = DialogResult.Yes Then
+            PCStatus(1)(2) = False
+            PCStatus(1)(3) = False
             txtbx_CalLotID.Text = Nothing
             txtbx_RecipeID.Text = Nothing
             txtbx_OperatorID.Text = Nothing
@@ -160,33 +162,41 @@ dp_back_pressure,dp_stabilize_time,dp_test_time,dp_testpoints,verification_toler
             txtbx_VerStatus.Text = Nothing
             txtbx_VerStatus.BackColor = SystemColors.Window
             txtbx_CalResult.BackColor = SystemColors.Window
+            SetButtonState(btn_Calibrate, False, "Calibrate")
+            SetButtonState(btn_Verify, False, "Verify")
             Me.Close()
         End If
     End Sub
 
     Private Sub btn_Calibrate_Click(sender As Object, e As EventArgs) Handles btn_Calibrate.Click
         If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" Then
-            dtCalibration = New DataTable()
-            dgv_CalibrationResult.DataSource = Nothing
-            CreateTable("Calibration")
-            btn_Verify.Enabled = False
+            If btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246) Then
+
+                'SetButtonState(btn_Calibrate, True, "Calibrate")
+                PCStatus(1)(2) = True
+                dtCalibration = New DataTable()
+                dgv_CalibrationResult.DataSource = Nothing
+                CreateTable("Calibration")
+                btn_Verify.Enabled = False
 
 
-            With dgv_CalibrationResult
-                .BackgroundColor = SystemColors.Window
+                With dgv_CalibrationResult
+                    .BackgroundColor = SystemColors.Window
 
 
 
-            End With
-            Cal_samplingtime = 0
-            Cal_inletpressure = 0
-            Cal_outletpressure = 0
-            Cal_avginlet = 0
-            Cal_avgoutlet = 0
-            Cal_offset = 0
-            tmr_Calibration.Interval = 1000
-            tmr_Calibration.Enabled = True
+                End With
+                Cal_samplingtime = 0
+                Cal_inletpressure = 0
+                Cal_outletpressure = 0
+                Cal_avginlet = 0
+                Cal_avgoutlet = 0
+                Cal_offset = 0
+                tmr_Calibration.Interval = 1000
+                tmr_Calibration.Enabled = True
+            End If
         Else
+                SetButtonState(btn_Calibrate, False, "Calibrate")
             MsgBox($"No Valid data available to start the Test")
         End If
 
@@ -194,139 +204,155 @@ dp_back_pressure,dp_stabilize_time,dp_test_time,dp_testpoints,verification_toler
     End Sub
 
     Private Sub tmr_Calibration_Tick(sender As Object, e As EventArgs) Handles tmr_Calibration.Tick
-        Cal_samplingtime += 1
-        Cal_inletpressure += 1.5
-        Cal_outletpressure += 1
-        Cal_dp = Cal_inletpressure - Cal_outletpressure
-        dtCalibration.Rows.Add(Cal_samplingtime, Cal_temperature, Cal_flowrate, Cal_inletpressure, Cal_outletpressure, Cal_dp)
-        With dgv_CalibrationResult
-            .BackgroundColor = SystemColors.Window
+        If Not btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246) Then
+            Cal_samplingtime += 1
+            Cal_inletpressure += 1.5
+            Cal_outletpressure += 1
+            Cal_dp = Cal_inletpressure - Cal_outletpressure
+            dtCalibration.Rows.Add(Cal_samplingtime, Cal_temperature, Cal_flowrate, Cal_inletpressure, Cal_outletpressure, Cal_dp)
+            With dgv_CalibrationResult
+                .BackgroundColor = SystemColors.Window
 
-            dgv_CalibrationResult.DataSource = dtCalibration
-            'Set Column Width
-            .Columns(0).Width = 80
-            .Columns(1).Width = 80
-            .Columns(2).Width = 80
-            .Columns(3).Width = 100
-            .Columns(4).Width = 100
-            .Columns(5).Width = 100
+                dgv_CalibrationResult.DataSource = dtCalibration
+                'Set Column Width
+                .Columns(0).Width = 80
+                .Columns(1).Width = 80
+                .Columns(2).Width = 80
+                .Columns(3).Width = 100
+                .Columns(4).Width = 100
+                .Columns(5).Width = 100
 
-            'Header Cell Alignment
-            .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                'Header Cell Alignment
+                .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-            'Header Cell Font Bold
-            .Columns(0).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-            .Columns(1).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-            .Columns(2).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-            .Columns(3).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-            .Columns(4).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-            .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                'Header Cell Font Bold
+                .Columns(0).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(1).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(2).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(3).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(4).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
 
-        End With
-        If Cal_samplingtime = CalCycletime Then
+            End With
+            If Cal_samplingtime = CalCycletime Then
 
-            For i = Dpteststart To dptestend - 1
-                Cal_avginlet = Cal_avginlet + dtCalibration.Rows(i)("Inlet Pressure (kPa)")
-                Cal_avgoutlet = Cal_avgoutlet + dtCalibration.Rows(i)("Outlet Pressure (kPa)")
-            Next
-            Cal_avginlet = Cal_avginlet / Cal_dptestpoints
-            Cal_avgoutlet = Cal_avgoutlet / Cal_dptestpoints
-            Cal_offset = Cal_avginlet - Cal_avgoutlet
+                For i = Dpteststart To dptestend - 1
+                    Cal_avginlet = Cal_avginlet + dtCalibration.Rows(i)("Inlet Pressure (kPa)")
+                    Cal_avgoutlet = Cal_avgoutlet + dtCalibration.Rows(i)("Outlet Pressure (kPa)")
+                Next
+                Cal_avginlet = Cal_avginlet / Cal_dptestpoints
+                Cal_avgoutlet = Cal_avgoutlet / Cal_dptestpoints
+                Cal_offset = Cal_avginlet - Cal_avgoutlet
 
-            txtbx_CalInletPressure.Text = CType(Cal_avginlet, String)
-            txtbx_CalOutletPressure.Text = CType(Cal_avgoutlet, String)
-            txtbx_CalOffset.Text = CType(Cal_offset, String)
-            btn_Verify.Enabled = True
-            tmr_Calibration.Enabled = False
+                txtbx_CalInletPressure.Text = CType(Cal_avginlet, String)
+                txtbx_CalOutletPressure.Text = CType(Cal_avgoutlet, String)
+                txtbx_CalOffset.Text = CType(Cal_offset, String)
+                btn_Verify.Enabled = True
+                tmr_Calibration.Enabled = False
+            End If
+        Else
+            PCStatus(1)(2) = False
         End If
+
 
     End Sub
 
     Private Sub btn_Verify_Click(sender As Object, e As EventArgs) Handles btn_Verify.Click
         If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" Then
-            btn_Calibrate.Enabled = False
-            dtVerification = New DataTable()
+            If btn_Verify.BackColor = Color.FromArgb(25, 130, 246) Then
+                'SetButtonState(btn_Verify, True, "Verify")
+                PCStatus(1)(3) = True
+                btn_Calibrate.Enabled = False
+                dtVerification = New DataTable()
 
-            dgv_VerificationResult.DataSource = Nothing
-            CreateTable("Verification")
-            With dgv_CalibrationResult
-                .BackgroundColor = SystemColors.Window
+                dgv_VerificationResult.DataSource = Nothing
+                CreateTable("Verification")
+                With dgv_CalibrationResult
+                    .BackgroundColor = SystemColors.Window
 
-            End With
-            Ver_samplingtime = 0
-            Ver_inletpressure = 0
-            Ver_outletpressure = 0
-            Ver_avgdp = 0
-            Ver_avginlet = 0
-            Ver_avgoutlet = 0
+                End With
+                Ver_samplingtime = 0
+                Ver_inletpressure = 0
+                Ver_outletpressure = 0
+                Ver_avgdp = 0
+                Ver_avginlet = 0
+                Ver_avgoutlet = 0
 
-            tmr_Verification.Interval = 1000
-            tmr_Verification.Enabled = True
+                tmr_Verification.Interval = 1000
+                tmr_Verification.Enabled = True
+            End If
         Else
+                SetButtonState(btn_Verify, False, "Verify")
             MsgBox($"No Valid data available to start the Test")
         End If
 
     End Sub
 
     Private Sub tmr_Verification_Tick(sender As Object, e As EventArgs) Handles tmr_Verification.Tick
-        Ver_samplingtime += 1
-        Ver_inletpressure += 1.5
-        Ver_outletpressure += 1
-        Ver_dp = Ver_inletpressure - Ver_outletpressure
-        dtVerification.Rows.Add(Ver_samplingtime, Ver_temperature, Ver_flowrate, Ver_inletpressure, Ver_outletpressure, Ver_dp)
-        With dgv_VerificationResult
-            .BackgroundColor = SystemColors.Window
+
+        If Not btn_Verify.BackColor = Color.FromArgb(25, 130, 246) Then
+            Ver_samplingtime += 1
+            Ver_inletpressure += 1.5
+            Ver_outletpressure += 1
+            Ver_dp = Ver_inletpressure - Ver_outletpressure
+            dtVerification.Rows.Add(Ver_samplingtime, Ver_temperature, Ver_flowrate, Ver_inletpressure, Ver_outletpressure, Ver_dp)
+            With dgv_VerificationResult
+                .BackgroundColor = SystemColors.Window
 
 
 
-            dgv_VerificationResult.DataSource = dtVerification
-            'Set Column Width
-            .Columns(0).Width = 80
-            .Columns(1).Width = 80
-            .Columns(2).Width = 80
-            .Columns(3).Width = 100
-            .Columns(4).Width = 100
-            .Columns(5).Width = 100
+                dgv_VerificationResult.DataSource = dtVerification
+                'Set Column Width
+                .Columns(0).Width = 80
+                .Columns(1).Width = 80
+                .Columns(2).Width = 80
+                .Columns(3).Width = 100
+                .Columns(4).Width = 100
+                .Columns(5).Width = 100
 
-            'Header Cell Alignment
-            .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                'Header Cell Alignment
+                .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(1).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(2).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-            'Header Cell Font Bold
-            .Columns(0).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-            .Columns(1).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-            .Columns(2).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-            .Columns(3).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-            .Columns(4).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-            .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                'Header Cell Font Bold
+                .Columns(0).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(1).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(2).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(3).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(4).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
 
-        End With
-        If Ver_samplingtime = CalCycletime Then
+            End With
+            If Ver_samplingtime = CalCycletime Then
 
-            For i = Dpteststart To dptestend - 1
-                Ver_avginlet = Ver_avginlet + dtCalibration.Rows(i)("Inlet Pressure (kPa)")
-                Ver_avgoutlet = Ver_avgoutlet + dtCalibration.Rows(i)("Outlet Pressure (kPa)")
-            Next
-            Ver_avginlet = Ver_avginlet / Cal_dptestpoints
-            Ver_avgoutlet = Ver_avgoutlet / Cal_dptestpoints
-            Ver_avgdp = Ver_avginlet - Ver_avgoutlet
+                For i = Dpteststart To dptestend - 1
+                    Ver_avginlet = Ver_avginlet + dtCalibration.Rows(i)("Inlet Pressure (kPa)")
+                    Ver_avgoutlet = Ver_avgoutlet + dtCalibration.Rows(i)("Outlet Pressure (kPa)")
+                Next
+                Ver_avginlet = Ver_avginlet / Cal_dptestpoints
+                Ver_avgoutlet = Ver_avgoutlet / Cal_dptestpoints
+                Ver_avgdp = Ver_avginlet - Ver_avgoutlet
 
-            txtbx_VerInletPressure.Text = CType(Ver_avginlet, String)
-            txtbx_VerOutletPressure.Text = CType(Ver_avgoutlet, String)
-            txtbx_VerDP.Text = CType(Ver_avgdp, String)
-            txtbx_VerStatus.Text = "Completed"
-            txtbx_VerStatus.BackColor = Color.FromArgb(192, 255, 192)
-            tmr_Verification.Enabled = False
+                txtbx_VerInletPressure.Text = CType(Ver_avginlet, String)
+                txtbx_VerOutletPressure.Text = CType(Ver_avgoutlet, String)
+                txtbx_VerDP.Text = CType(Ver_avgdp, String)
+                txtbx_VerStatus.Text = "Completed"
+                txtbx_VerStatus.BackColor = Color.FromArgb(192, 255, 192)
+                tmr_Verification.Enabled = False
+            End If
+        Else
+            PCStatus(1)(3) = False
         End If
+
     End Sub
 
     Private Sub txtbx_VerDP_TextChanged(sender As Object, e As EventArgs) Handles txtbx_VerDP.TextChanged
