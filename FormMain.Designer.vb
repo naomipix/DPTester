@@ -1771,7 +1771,6 @@ Partial Class FormMain
         Me.lbl_BlankDP.Name = "lbl_BlankDP"
         Me.lbl_BlankDP.Size = New System.Drawing.Size(125, 30)
         Me.lbl_BlankDP.TabIndex = 1
-        Me.lbl_BlankDP.Text = "2.5"
         Me.lbl_BlankDP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dsp_CalibrationStatus
