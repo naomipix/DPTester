@@ -296,7 +296,12 @@ Public Class FormResultSummary
 
             If dtproductiondetail.Rows.Count > 0 Then
                 For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
-                    resultsummary(i) = dtproductiondetail.Rows(0).Item(i)
+                    If Not dtproductiondetail.Rows(0).IsNull(i) Then
+                        resultsummary(i) = dtproductiondetail.Rows(0).Item(i)
+                    Else
+                        resultsummary(i) = String.Empty
+                    End If
+
                 Next
 
                 dt_Resultsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{resultsummary(0)}'ORDER BY ProductResult.sampling_time ASC")
@@ -351,6 +356,7 @@ Public Class FormResultSummary
 
 
         If Oncontinue = True Then
+
             txtbx_ResultTimestamp.Text = resultsummary(5)
             txtbx_ResultTemperature.Text = resultsummary(6)
             txtbx_ResultFlowrate.Text = resultsummary(7)
@@ -373,8 +379,6 @@ Public Class FormResultSummary
             txtbx_ResultConfirmation.Text = resultsummary(79)
 
         End If
-
-
 
 
         If Oncontinue = True Then

@@ -4,6 +4,7 @@ Imports System.Text
 Imports System.ComponentModel
 Imports System.Runtime.InteropServices.ComTypes
 Imports System.Diagnostics.Eventing.Reader
+Imports System.Security.Cryptography
 
 Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
@@ -25,6 +26,7 @@ Module ModuleOmron
     Public WithEvents PCtimer As New Timer()
     Public WithEvents Alarmtimer As New Timer()
     Public WithEvents Calseqtimer As New Timer()
+    Public WithEvents Resultcapturetimer As New Timer()
     Public PLCstatus(2)() As Boolean
     Public PCStatus(2)() As Boolean
     Public dtAlarm As New DataTable
@@ -33,7 +35,39 @@ Module ModuleOmron
     Public Cal_MessageNo As Integer = 0
     Public dtCalibrationmsg As New DataTable
     Public CalrecordValue As Boolean
-
+    Public Main_MessageNo As Integer = 0
+    Public dtMainmsg As New DataTable
+    Public MainrecordValue As Boolean
+    Public MainCycletime As Integer = 0
+    Public MainDptestpoints As Integer
+    Public result_samplingtime As Integer
+    Public result_temperature As Decimal
+    Public result_flowrate As Decimal
+    Public result_inletpressure As Decimal
+    Public result_outletpressure As Decimal
+    Public result_dp As Decimal
+    Public result_avginlet1 As Decimal
+    Public result_avgoutlet1 As Decimal
+    Public result_avgdp1 As Decimal
+    Public result_avginlet2 As Decimal
+    Public result_avgoutlet2 As Decimal
+    Public result_avgdp2 As Decimal
+    Public result_finalinlet As Decimal
+    Public result_finaloutlet As Decimal
+    Public result_finaldp As Decimal
+    Public result_avgtemperature1 As Decimal
+    Public result_avgflowrate1 As Decimal
+    Public result_avgtemperature2 As Decimal
+    Public result_avgflowrate2 As Decimal
+    Public result_finaltemperature As Decimal
+    Public result_finalflowrate As Decimal
+    Public dtrecipetable As DataTable
+    Public MainDptest1start As Integer
+    Public MainDptest1end As Integer
+    Public MainDptest2start As Integer
+    Public MainDptest2end As Integer
+    Public dtserialrecord As New DataTable
+    Public Viscosity As Double
 #Region "FINS protocol"
     Public Sub FINSInitialise()
         Try
@@ -57,9 +91,11 @@ Module ModuleOmron
             PCtimer.Interval = 1000
             dtAlarm = SQL.ReadRecords("select id,code,description from AlarmTable")
             dtCalibrationmsg = SQL.ReadRecords("select * from CalibrationMessage")
+            dtMainmsg = SQL.ReadRecords("select * from ProcessMessage")
             Alarmtimer.Interval = 2000
             Currentalarm.Add(0, "Machine in Alarm Condition")
             Calseqtimer.Interval = 2000
+            Resultcapturetimer.Interval = 1000
         Catch ex As Exception
             MsgBox("Cannot able to communicate with PLC, Connection failed")
         End Try
@@ -1761,17 +1797,19 @@ Module ModuleOmron
 
         End If
 
-        If FINSinput(21) > 0 Then
+        If FINSinput(21) = 0 Then
+            FormCalibration.btn_Verify.Enabled = True
+            FormCalibration.btn_Calibrate.Enabled = True
+        Else
             FormCalibration.btn_Verify.Enabled = False
             FormCalibration.btn_Calibrate.Enabled = False
         End If
 
-        If FINSinput(21) = 300 Or FINSinput(21) = 320 Or FINSinput(21) = 350 Or FINSinput(21) = 370 Or FINSinput(21) = 600 Or FINSinput(21) = 620 Or FINSinput(21) = 650 Or FINSinput(21) = 670 Or FINSinput(21) = 800 Or FINSinput(21) = 820 Or FINSinput(21) = 850 Or FINSinput(21) = 870 Or FINSinput(21) = 1000 Or FINSinput(21) = 1020 Or FINSinput(21) = 1050 Or FINSinput(21) = 1070 Or FINSinput(21) = 1160 Or FINSinput(21) = 1360 Or FINSinput(21) = 1560 Then
+        If FINSinput(21) = 300 Or FINSinput(21) = 320 Or FINSinput(21) = 350 Or FINSinput(21) = 370 Or FINSinput(21) = 600 Or FINSinput(21) = 620 Or FINSinput(21) = 650 Or FINSinput(21) = 670 Or FINSinput(21) = 800 Or FINSinput(21) = 820 Or FINSinput(21) = 850 Or FINSinput(21) = 870 Or FINSinput(21) = 1000 Or FINSinput(21) = 1020 Or FINSinput(21) = 1050 Or FINSinput(21) = 1070 Or FINSinput(21) = 1160 Or FINSinput(21) = 1360 Or FINSinput(21) = 1560 Or FINSinput(21) = 1700 Then
             CalrecordValue = True
         Else
             CalrecordValue = False
         End If
-#End Region
 
         If FINSinput(21) <> Cal_MessageNo Then
             Cal_MessageNo = FINSinput(21)
@@ -1789,6 +1827,7 @@ Module ModuleOmron
 
 
         If PLCstatus(1)(2) = False And PLCstatus(1)(3) = False Then
+
             PCStatus(1)(7) = False
             PCStatus(1)(4) = False
             PCStatus(1)(5) = False
@@ -1799,6 +1838,50 @@ Module ModuleOmron
             PCStatus(1)(6) = False
         End If
 
+
+#End Region
+
+
+
+
+#Region "Main Sequence"
+
+        If FINSinput(20) > 10 Or PLCstatus(1)(10) = True Then
+            PCStatus(1)(10) = False
+            FormMain.btn_OprKeyInDtConfirm.Enabled = False
+            FormMain.txtbx_SerialNumber.Enabled = False
+        End If
+        If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
+            FormMain.btn_OprKeyInDtConfirm.Enabled = True
+            FormMain.txtbx_SerialNumber.Enabled = True
+        End If
+
+        If PLCstatus(1)(10) = False Then
+
+            PCStatus(1)(11) = False
+
+        End If
+
+        If PLCstatus(0)(1) = False Then
+            PCStatus(1)(12) = False
+            PCStatus(1)(13) = False
+            PCStatus(1)(14) = False
+        End If
+
+        If FINSinput(20) <> Main_MessageNo Then
+            Main_MessageNo = FINSinput(20)
+            MainMessage(Main_MessageNo)
+        End If
+
+        If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Or FINSinput(20) = 1700 Then
+            MainrecordValue = True
+        Else
+            MainrecordValue = False
+        End If
+
+        FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
+        FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
+#End Region
 
 
         'Write the PLC Output
@@ -1945,6 +2028,11 @@ Module ModuleOmron
 
 
 #End Region
+
+
+
+
+#Region "Check Jig OK"
     Public Function CheckJigType(id As Integer) As Integer
         Select Case id
             Case 0
@@ -2010,6 +2098,11 @@ Module ModuleOmron
         End Select
     End Function
 
+#End Region
+
+
+
+
     Private Sub CalSeqTimer_Ticks(sender As Object, e As EventArgs) Handles Calseqtimer.Tick
         If (PCStatus(1)(2) = True And FormCalibration.btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246)) Or PLCstatus(0)(4) = True Then
             PCStatus(1)(2) = False
@@ -2045,6 +2138,241 @@ Module ModuleOmron
         FormCalibration.lbl_CalibrationMsg.Text = msg(0).Item("calibration_message").ToString
 
     End Sub
+
+
+    Private Sub ResultCapture_Ticks(sender As Object, e As EventArgs) Handles Resultcapturetimer.Tick
+        Dim serialusageid As Integer
+
+        If MainrecordValue = True Then
+            Dim newrw As DataRow = dtresult.NewRow
+
+            serialusageid = dtserialrecord.Rows(0)("id")
+            result_samplingtime += 1
+            result_inletpressure = AIn(9)
+            result_outletpressure = AIn(10)
+            result_flowrate = AIn(12)
+            result_temperature = AIn(13)
+            result_dp = result_inletpressure - result_outletpressure
+            newrw(0) = serialusageid
+            newrw(1) = result_samplingtime
+            newrw(2) = result_temperature
+            newrw(3) = result_flowrate
+            newrw(4) = result_inletpressure
+            newrw(5) = result_outletpressure
+            newrw(6) = result_dp
+            dtresult.Rows.Add(newrw)
+        Else
+            PCStatus(1)(10) = False
+        End If
+        MainCycletime = FormCalibration.CalCycletime
+        MainDptest1start = FormCalibration.Dptest1start
+        MainDptest1end = FormCalibration.dptest1end
+        MainDptest2start = FormCalibration.Dptest2start
+        MainDptest2end = FormCalibration.dptest2end
+        MainDptestpoints = FormCalibration.Cal_dptestpoints
+
+        FormMain.lbl_EstCycleTime.Text = MainCycletime.ToString
+        FormMain.lbl_runcycletime.Text = result_samplingtime.ToString
+
+        If result_samplingtime = MainCycletime Then
+            Calculatefinalresult()
+            PCStatus(1)(11) = True
+            'Resultcapturetimer.Enabled = False
+        End If
+    End Sub
+
+
+
+    Public Sub Calculatefinalresult()
+        Resultcapturetimer.Enabled = False
+        Dim A As Double = 0.01257187
+        Dim B As Double = -0.005806436
+        Dim C As Double = 0.001130911
+        Dim D As Double = 0.000005723952
+        Dim T2 As Double
+        Dim exp As Double
+        If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
+            For i = MainDptest1start To MainDptest1end - 1
+                result_avginlet1 = result_avginlet1 + dtresult.Rows(i)("Inlet Pressure (kPa)")
+                result_avgoutlet1 = result_avgoutlet1 + dtresult.Rows(i)("Outlet Pressure (kPa)")
+                result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
+                result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (K)")
+            Next
+            result_avginlet1 = result_avginlet1 / MainDptestpoints
+            result_avgoutlet1 = result_avgoutlet1 / MainDptestpoints
+            result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
+            result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
+            result_avgdp1 = result_avginlet1 - result_avgoutlet1
+
+            For i = MainDptest2start To MainDptest2end - 1
+                result_avginlet2 = result_avginlet2 + dtresult.Rows(i)("Inlet Pressure (kPa)")
+                result_avgoutlet2 = result_avgoutlet2 + dtresult.Rows(i)("Outlet Pressure (kPa)")
+                result_avgflowrate2 = result_avgflowrate2 + dtresult.Rows(i)("Flowrate (l/min)")
+                result_avgtemperature2 = result_avgtemperature2 + dtresult.Rows(i)("Temperature (K)")
+            Next
+            result_avginlet2 = result_avginlet2 / MainDptestpoints
+            result_avgoutlet2 = result_avgoutlet2 / MainDptestpoints
+            result_avgflowrate2 = result_avgflowrate2 / MainDptestpoints
+            result_avgtemperature2 = result_avgtemperature2 / MainDptestpoints
+            result_avgdp2 = result_avginlet2 - result_avgoutlet2
+
+
+            result_finalinlet = ((result_avginlet1 + result_avginlet2) / 2)
+            result_finaloutlet = ((result_avgoutlet1 + result_avgoutlet2) / 2)
+
+            result_finalflowrate = ((result_avgflowrate1 + result_avgflowrate2) / 2)
+            result_finaltemperature = ((result_avgtemperature1 + result_avgtemperature2) / 2)
+
+            T2 = result_finaltemperature * result_finaltemperature
+            exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
+            Viscosity = A * exp
+            result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - FormCalibration.Cal_finaloffset
+
+        End If
+
+        If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And Not dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
+            For i = MainDptest1start To MainDptest1end - 1
+                result_avginlet1 = result_avginlet1 + dtresult.Rows(i)("Inlet Pressure (kPa)")
+                result_avgoutlet1 = result_avgoutlet1 + dtresult.Rows(i)("Outlet Pressure (kPa)")
+                result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
+                result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (K)")
+            Next
+
+            result_avginlet1 = result_avginlet1 / MainDptestpoints
+            result_avgoutlet1 = result_avgoutlet1 / MainDptestpoints
+            result_avgdp1 = result_avginlet1 - result_avgoutlet1
+            result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
+            result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
+
+            result_finalinlet = result_avginlet1
+            result_finaloutlet = result_avgoutlet1
+
+            result_finalflowrate = result_avgflowrate1
+            result_finaltemperature = result_avgtemperature1
+
+            T2 = result_finaltemperature * result_finaltemperature
+            exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
+            Viscosity = A * exp
+            result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - FormCalibration.Cal_finaloffset
+
+        End If
+        FormMain.lbl_DiffPressAct.Text = CType(result_finaldp, String)
+
+        If result_finaldp >= dtrecipetable.Rows(0)("dp_lowerlimit") And result_finaldp <= dtrecipetable.Rows(0)("dp_upperlimit") Then
+            FormMain.lbl_DPTestResult.Text = "PASS"
+            FormMain.lbl_DPTestResult.BackColor = Color.LimeGreen
+            FormMain.lbl_DPTestResult.ForeColor = SystemColors.Window
+            PCStatus(1)(13) = True
+            PCStatus(1)(14) = False
+        Else
+            FormMain.lbl_DPTestResult.Text = "FAIL"
+            FormMain.lbl_DPTestResult.BackColor = Color.Red
+            FormMain.lbl_DPTestResult.ForeColor = SystemColors.Window
+            PCStatus(1)(14) = True
+            PCStatus(1)(13) = False
+        End If
+
+        If dtresult.Rows.Count > 0 Then
+            For i As Integer = 0 To dtresult.Rows.Count - 1
+                Dim resultparameter As New Dictionary(Of String, Object) From {
+                    {"serial_usage_id", dtresult.Rows(i)("Serial Usage id")},
+                    {"sampling_time", dtresult.Rows(i)("Sampling Time (s)")},
+                    {"temperature", dtresult.Rows(i)("Temperature (K)")},
+                    {"flowrate", dtresult.Rows(i)("Flowrate (l/min)")},
+                    {"inlet_pressure", dtresult.Rows(i)("Inlet Pressure (kPa)")},
+                    {"outlet_pressure", dtresult.Rows(i)("Outlet Pressure (kPa)")},
+                    {"calculated_dp_pressure", dtresult.Rows(i)("Differential Pressure (kPa)")}
+                }
+                SQL.InsertRecord("ProductResult", resultparameter)
+            Next
+        End If
+
+
+
+
+        Dim Updateparameter As New Dictionary(Of String, Object) From {
+                            {"temperature", Math.Round(result_finaltemperature, 1)},
+                            {"flowrate", Math.Round(result_finalflowrate, 1)},
+                            {"inlet_pressure", Math.Round(result_finalinlet, 1)},
+                            {"outlet_pressure", Math.Round(result_finaloutlet, 1)},
+                            {"viscosity", Math.Round(Viscosity, 3).ToString},
+                            {"diff_pressure", Math.Round(result_finaldp, 1)},
+                            {"cycle_time", MainCycletime},
+                            {"result", FormMain.lbl_DPTestResult.Text.ToLower}
+                        }
+        Dim Condition As String = $"id = '{dtserialrecord.Rows(0)("id")}'"
+
+        If SQL.UpdateRecord("ProductionDetail", Updateparameter, Condition) = 1 Then
+            If MsgBox($" Test Sequence Completed ", MsgBoxStyle.OkOnly, "Calibration Result") = DialogResult.OK Then
+                PCStatus(1)(12) = True
+
+            End If
+        Else
+            MsgBox($" Query to Save Production Detail was not Successful", MsgBoxStyle.OkOnly, "Error")
+        End If
+
+
+
+
+    End Sub
+
+
+
+
+    Public Sub MainMessage(MsgNumber As Integer)
+        Dim msg As DataRow() = dtMainmsg.Select($"step_id ='{MsgNumber}'")
+        Select Case msg(0).Item("code").ToString
+            Case "W"
+                FormMain.lbl_StepwiseMessage.BackColor = Color.Yellow
+                FormMain.lbl_StepwiseMessage.ForeColor = SystemColors.ControlText
+            Case "M"
+                FormMain.lbl_StepwiseMessage.BackColor = Color.LimeGreen
+                FormMain.lbl_StepwiseMessage.ForeColor = SystemColors.Window
+            Case "A"
+                FormMain.lbl_StepwiseMessage.BackColor = Color.Red
+                FormMain.lbl_StepwiseMessage.ForeColor = SystemColors.Window
+            Case Else
+                Exit Select
+        End Select
+
+        FormMain.lbl_StepwiseMessage.Text = msg(0).Item("process_message").ToString
+
+    End Sub
+
+
+
+    Public Sub CreateTable(str As String)
+
+        If str = "Calibration" Then
+            FormCalibration.dtCalibration.Columns.Add("Sampling Time (s)")
+            FormCalibration.dtCalibration.Columns.Add("Temperature (K)")
+            FormCalibration.dtCalibration.Columns.Add("Flowrate (l/min)")
+            FormCalibration.dtCalibration.Columns.Add("Inlet Pressure (kPa)")
+            FormCalibration.dtCalibration.Columns.Add("Outlet Pressure (kPa)")
+            FormCalibration.dtCalibration.Columns.Add("Differential Pressure (kPa)")
+        End If
+
+        If str = "Verification" Then
+            FormCalibration.dtVerification.Columns.Add("Sampling Time (s)")
+            FormCalibration.dtVerification.Columns.Add("Temperature (K)")
+            FormCalibration.dtVerification.Columns.Add("Flowrate (l/min)")
+            FormCalibration.dtVerification.Columns.Add("Inlet Pressure (kPa)")
+            FormCalibration.dtVerification.Columns.Add("Outlet Pressure (kPa)")
+            FormCalibration.dtVerification.Columns.Add("Differential Pressure (kPa)")
+        End If
+
+        If str = "Production_Result" Then
+
+            dtresult.Columns.Add("Serial Usage id")
+            dtresult.Columns.Add("Sampling Time (s)")
+            dtresult.Columns.Add("Temperature (K)")
+            dtresult.Columns.Add("Flowrate (l/min)")
+            dtresult.Columns.Add("Inlet Pressure (kPa)")
+            dtresult.Columns.Add("Outlet Pressure (kPa)")
+            dtresult.Columns.Add("Differential Pressure (kPa)")
+        End If
+    End Sub
+
 
 End Module
 

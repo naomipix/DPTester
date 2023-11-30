@@ -299,7 +299,12 @@ Public Class FormResultGraph
                 checkbx_GraphOutletPressure.Checked = True
 
                 For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
-                    resultsummary(i) = dtproductiondetail.Rows(0).Item(i)
+                    If Not dtproductiondetail.Rows(0).IsNull(i) Then
+                        resultsummary(i) = dtproductiondetail.Rows(0).Item(i)
+                    Else
+                        resultsummary(i) = String.Empty
+                    End If
+
                 Next
 
                 dt_Graphsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{resultsummary(0)}'ORDER BY ProductResult.sampling_time ASC")

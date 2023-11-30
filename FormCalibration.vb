@@ -51,28 +51,9 @@
     Public Drain1cycletime As Integer
     Public Drain2cycletime As Integer
     Public Drain3cycletime As Integer
-    Public dtrecipetable As DataTable
 
-    Public Sub CreateTable(str As String)
 
-        If str = "Calibration" Then
-            dtCalibration.Columns.Add("Sampling Time (s)")
-            dtCalibration.Columns.Add("Temperature (K)")
-            dtCalibration.Columns.Add("Flowrate (l/min)")
-            dtCalibration.Columns.Add("Inlet Pressure (kPa)")
-            dtCalibration.Columns.Add("Outlet Pressure (kPa)")
-            dtCalibration.Columns.Add("Differential Pressure (kPa)")
-        End If
 
-        If str = "Verification" Then
-            dtVerification.Columns.Add("Sampling Time (s)")
-            dtVerification.Columns.Add("Temperature (K)")
-            dtVerification.Columns.Add("Flowrate (l/min)")
-            dtVerification.Columns.Add("Inlet Pressure (kPa)")
-            dtVerification.Columns.Add("Outlet Pressure (kPa)")
-            dtVerification.Columns.Add("Differential Pressure (kPa)")
-        End If
-    End Sub
     Private Sub FormCalibration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Always Maximize
         Me.WindowState = FormWindowState.Maximized
@@ -99,8 +80,8 @@
 
         btn_Calibrate.Enabled = True
         btn_Verify.Enabled = True
-        tmr_Calibration.Enabled = False
-        tmr_Verification.Enabled = False
+        'tmr_Calibration.Enabled = False
+        'tmr_Verification.Enabled = False
 
 
         dtrecipetable = SQL.ReadRecords($"SELECT * FROM RecipeTable Where recipe_id ='{txtbx_RecipeID.Text}'")
@@ -183,8 +164,8 @@
     End Sub
 
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
-        tmr_Calibration.Enabled = False
-        tmr_Verification.Enabled = False
+        'tmr_Calibration.Enabled = False
+        ' tmr_Verification.Enabled = False
         Me.Close()
     End Sub
 
@@ -482,8 +463,8 @@
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                             {"recipe_id", txtbx_RecipeID.Text},
                             {"calibration_time", lbl_DateTimeClock.Text},
-                            {"cal_inlet_pressure", Cal_inletpressure.ToString},
-                            {"cal_outlet_pressure", Cal_outletpressure.ToString},
+                            {"cal_inlet_pressure", Cal_finalInlet.ToString},
+                            {"cal_outlet_pressure", Cal_finalOutlet.ToString},
                             {"cal_diff_pressure", Cal_finaloffset.ToString},
                              {"verify_inlet_pressure", Ver_finalinlet.ToString},
                             {"verify_outlet_pressure", Ver_finaloutlet.ToString},
