@@ -441,6 +441,10 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lbl_EstCycleTime = New System.Windows.Forms.Label()
+        Me.lbl_runcycletime = New System.Windows.Forms.Label()
         Me.panel_FormControl.SuspendLayout()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
@@ -749,6 +753,10 @@ Partial Class FormMain
         '
         'panel_MainRight
         '
+        Me.panel_MainRight.Controls.Add(Me.lbl_runcycletime)
+        Me.panel_MainRight.Controls.Add(Me.lbl_EstCycleTime)
+        Me.panel_MainRight.Controls.Add(Me.Label5)
+        Me.panel_MainRight.Controls.Add(Me.Label2)
         Me.panel_MainRight.Controls.Add(Me.cmbx_GraphSelection)
         Me.panel_MainRight.Controls.Add(Me.dsp_GraphSelection)
         Me.panel_MainRight.Controls.Add(Me.tabctrl_SubMain)
@@ -1358,12 +1366,12 @@ Partial Class FormMain
         '
         Me.lbl_StepwiseMessage.BackColor = System.Drawing.Color.Yellow
         Me.lbl_StepwiseMessage.Dock = System.Windows.Forms.DockStyle.Top
-        Me.lbl_StepwiseMessage.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_StepwiseMessage.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_StepwiseMessage.Location = New System.Drawing.Point(0, 0)
         Me.lbl_StepwiseMessage.Name = "lbl_StepwiseMessage"
         Me.lbl_StepwiseMessage.Size = New System.Drawing.Size(936, 40)
         Me.lbl_StepwiseMessage.TabIndex = 2
-        Me.lbl_StepwiseMessage.Text = "Stepwise message"
+        Me.lbl_StepwiseMessage.Text = "Waiting For PC Acknowledgement"
         Me.lbl_StepwiseMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'panel_MainLeft
@@ -1478,7 +1486,7 @@ Partial Class FormMain
         Me.lbl_PassProdQty.Name = "lbl_PassProdQty"
         Me.lbl_PassProdQty.Size = New System.Drawing.Size(125, 30)
         Me.lbl_PassProdQty.TabIndex = 9
-        Me.lbl_PassProdQty.Text = "100"
+        Me.lbl_PassProdQty.Text = "0"
         Me.lbl_PassProdQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_FailProdQty
@@ -1490,7 +1498,7 @@ Partial Class FormMain
         Me.lbl_FailProdQty.Name = "lbl_FailProdQty"
         Me.lbl_FailProdQty.Size = New System.Drawing.Size(125, 30)
         Me.lbl_FailProdQty.TabIndex = 9
-        Me.lbl_FailProdQty.Text = "2"
+        Me.lbl_FailProdQty.Text = "0"
         Me.lbl_FailProdQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dsp_ProductionDetails
@@ -1513,7 +1521,7 @@ Partial Class FormMain
         Me.lbl_TotalProdQty.Name = "lbl_TotalProdQty"
         Me.lbl_TotalProdQty.Size = New System.Drawing.Size(125, 30)
         Me.lbl_TotalProdQty.TabIndex = 10
-        Me.lbl_TotalProdQty.Text = "102"
+        Me.lbl_TotalProdQty.Text = "0"
         Me.lbl_TotalProdQty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dsp_TotalProdQty
@@ -1565,14 +1573,14 @@ Partial Class FormMain
         '
         'lbl_DPTestResult
         '
-        Me.lbl_DPTestResult.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_DPTestResult.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.lbl_DPTestResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_DPTestResult.Font = New System.Drawing.Font("Segoe UI Semibold", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_DPTestResult.Location = New System.Drawing.Point(211, 136)
         Me.lbl_DPTestResult.Name = "lbl_DPTestResult"
         Me.lbl_DPTestResult.Size = New System.Drawing.Size(200, 51)
         Me.lbl_DPTestResult.TabIndex = 1
-        Me.lbl_DPTestResult.Text = "PASS"
+        Me.lbl_DPTestResult.Text = "-"
         Me.lbl_DPTestResult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_DiffPressMax
@@ -1752,14 +1760,14 @@ Partial Class FormMain
         '
         'lbl_CalibrationStatus
         '
-        Me.lbl_CalibrationStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_CalibrationStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.lbl_CalibrationStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_CalibrationStatus.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_CalibrationStatus.Location = New System.Drawing.Point(240, 24)
         Me.lbl_CalibrationStatus.Name = "lbl_CalibrationStatus"
         Me.lbl_CalibrationStatus.Size = New System.Drawing.Size(125, 30)
         Me.lbl_CalibrationStatus.TabIndex = 1
-        Me.lbl_CalibrationStatus.Text = "Completed"
+        Me.lbl_CalibrationStatus.Text = "-"
         Me.lbl_CalibrationStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_BlankDP
@@ -5014,6 +5022,40 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label2
+        '
+        Me.Label2.Location = New System.Drawing.Point(42, 634)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(134, 25)
+        Me.Label2.TabIndex = 13
+        Me.Label2.Text = "Estimated Cycle Time:"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label5
+        '
+        Me.Label5.Location = New System.Drawing.Point(572, 634)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(134, 25)
+        Me.Label5.TabIndex = 14
+        Me.Label5.Text = "Running Cycle Time:"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_EstCycleTime
+        '
+        Me.lbl_EstCycleTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_EstCycleTime.Location = New System.Drawing.Point(194, 634)
+        Me.lbl_EstCycleTime.Name = "lbl_EstCycleTime"
+        Me.lbl_EstCycleTime.Size = New System.Drawing.Size(100, 25)
+        Me.lbl_EstCycleTime.TabIndex = 15
+        '
+        'lbl_runcycletime
+        '
+        Me.lbl_runcycletime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_runcycletime.Location = New System.Drawing.Point(712, 634)
+        Me.lbl_runcycletime.Name = "lbl_runcycletime"
+        Me.lbl_runcycletime.Size = New System.Drawing.Size(100, 25)
+        Me.lbl_runcycletime.TabIndex = 16
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5493,4 +5535,8 @@ Partial Class FormMain
     Friend WithEvents Panel10 As Panel
     Friend WithEvents Label3 As Label
     Friend WithEvents txtbx_BackPressActual As TextBox
+    Friend WithEvents lbl_runcycletime As Label
+    Friend WithEvents lbl_EstCycleTime As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label2 As Label
 End Class

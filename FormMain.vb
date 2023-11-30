@@ -18,9 +18,10 @@ Module FormMainModule
     Public LotAttempt As Integer
     Public dtRecipeID As DataTable
     Public Mainalarm As New DataTable
-
-
-
+    Public Lotusageid As Integer
+    Public SerialUid As String
+    Public SerialAttempt As Integer
+    Public dtresult As New DataTable
     Public Sub ControlState(i As Integer)
         Select Case i
             Case 0  ' Logged Out
@@ -176,8 +177,10 @@ Public Class FormMain
         txtbx_SerialNumber.Enabled = False
         btn_OprKeyInDtConfirm.Enabled = False
         txtbx_Operatorlotid.Enabled = False
-
-
+        lbl_DiffPressAct.Text = Nothing
+        lbl_DiffPressMin.Text = Nothing
+        lbl_DiffPressMax.Text = Nothing
+        lbl_DPTestResult.Text = Nothing
 
 
     End Sub
@@ -1812,7 +1815,7 @@ Public Class FormMain
         PartID = FormRecipeManagement.Formatstring(txtbx_PartID.Text)
         ConfirmationID = FormRecipeManagement.Formatstring(txtbx_ConfirmationID.Text)
         Quantity = FormRecipeManagement.Formatstring(txtbx_Quantity.Text)
-
+        PCStatus(0)(10) = False
         'Empty box check
         If OnContinue = True Then
             If Workorder.Length = 0 Then
@@ -2076,6 +2079,7 @@ Public Class FormMain
 
     Private Sub btn_WrkOrdScnDtEndLot_Click(sender As Object, e As EventArgs) Handles btn_WrkOrdScnDtEndLot.Click
         Dim OnContinue As Boolean = True
+        PCStatus(0)(10) = True
         If OnContinue = True Then
             LotEndTime = lbl_DateTimeClock.Text
 
@@ -2104,14 +2108,25 @@ Public Class FormMain
             txtbx_Quantity.Enabled = True
             btn_WrkOrdScnDtConfirm.Enabled = True
             btn_WrkOrdScnDtEndLot.Enabled = False
+            txtbx_SerialNumber.Enabled = False
+
             txtbx_WorkOrderNumber.Text = Nothing
             txtbx_LotID.Text = Nothing
             txtbx_PartID.Text = Nothing
             txtbx_ConfirmationID.Text = Nothing
             txtbx_Quantity.Text = Nothing
+            txtbx_SerialNumber.Text = Nothing
             txtbx_TitleRecipeID.Text = Nothing
             txtbx_TitlePartID.Text = Nothing
             txtbx_TitleFilterType.Text = Nothing
+            lbl_CalibrationStatus.Text = Nothing
+            lbl_BlankDP.Text = Nothing
+            lbl_DiffPressAct.Text = Nothing
+            lbl_DiffPressMin.Text = Nothing
+            lbl_DiffPressMax.Text = Nothing
+            lbl_DPTestResult.Text = Nothing
+
+
             JigType = 0
             btn_RecipeSelectionConfirm.Enabled = False
             txtbx_Operatorlotid.Text = Nothing
@@ -2253,6 +2268,8 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         txtbx_TitleFilterType.Text = dtfilter.Rows(0)("filter_type")
         JigType = dtfilter.Rows(0)("jig_type_id")
 
+
+
         LoadrecipeParameters(RecipeID)
 
         FormCalibration.ShowDialog()
@@ -2298,6 +2315,10 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
             Float2int(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
             Float2int(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
+
+            lbl_DiffPressMin.Text = dtrecipe.Rows(0)("dp_lowerlimit").ToString
+            lbl_DiffPressMax.Text = dtrecipe.Rows(0)("dp_upperlimit").ToString
+
 
             Float2int(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
             Float2int(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
@@ -2386,6 +2407,62 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 #End Region
 
 
+
+#Region "Operator Key in Serial Number"
+
+    Private Sub btn_OprKeyInDtConfirm_Click(sender As Object, e As EventArgs) Handles btn_OprKeyInDtConfirm.Click
+        If txtbx_SerialNumber.TextLength = 3 Then
+            lbl_DPTestResult.Text = Nothing
+            lbl_DPTestResult.BackColor = Color.Gray
+            lbl_DiffPressAct.Text = Nothing
+
+            Dim Oncontinue As Boolean = True
+            SerialUid = LotID + "-" + txtbx_SerialNumber.Text
+            Dim dtlotrecord As DataTable = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id = '{LotID}'AND lot_attempt ='{LotAttempt}'")
+            Dim dtproduct As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail WHERE serial_uid = '{SerialUid}'")
+
+            If dtproduct.Rows.Count > 0 Then
+                SerialAttempt = dtproduct.Rows(dtproduct.Rows.Count - 1)("serial_attempt") + 1
+            Else
+                SerialAttempt = 1
+            End If
+
+
+            If dtlotrecord.Rows.Count <= 0 Then
+                Oncontinue = False
+            Else
+                Oncontinue = True
+            End If
+
+
+            If Oncontinue = True Then
+                Lotusageid = dtlotrecord.Rows(0)("id")
+                Dim Productionparameter As New Dictionary(Of String, Object) From {
+                    {"serial_uid", SerialUid},
+                        {"serial_number", txtbx_SerialNumber.Text},
+                        {"serial_attempt", SerialAttempt},
+                        {"lot_usage_id", Lotusageid},
+                        {"timestamp", lbl_DateTimeClock.Text}
+                    }
+                If SQL.InsertRecord("ProductionDetail", Productionparameter) = 1 Then
+
+                    txtbx_SerialNumber.Enabled = False
+                    Startresultrecord()
+                    PCStatus(1)(10) = True
+                    'btn_OprKeyInDtConfirm.Enabled = False
+                Else
+                    MainMessage(4, "Insert Production details")
+                    Oncontinue = False
+                End If
+            End If
+
+        Else
+            MsgBox($"Serial Number length mismatch, Please Input Serial Number Correctly!", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Warning")
+        End If
+    End Sub
+
+#End Region
+
 #Region "Mimic Panel (Circuit Path)"
 
     Private Sub tabctrl_SubManualCtrl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_SubManualCtrl.SelectedIndexChanged
@@ -2421,7 +2498,46 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
     End Sub
 
 
+
+
 #End Region
+
+    Public Sub Startresultrecord()
+        dtresult = New DataTable()
+        CreateTable("Production_Result")
+        dtserialrecord = SQL.ReadRecords($"SELECT * FROM ProductionDetail WHERE serial_uid='{SerialUid}' AND serial_attempt='{SerialAttempt}'")
+        If dtserialrecord.Rows.Count > 0 Then
+            MainCycletime = 0
+            MainDptestpoints = 0
+            result_samplingtime = 0
+            result_temperature = 0.0
+            result_flowrate = 0.0
+            result_inletpressure = 0.0
+            result_outletpressure = 0.0
+            result_dp = 0.0
+            result_avginlet1 = 0.0
+            result_avgoutlet1 = 0.0
+            result_avgdp1 = 0.0
+            result_avginlet2 = 0.0
+            result_avgoutlet2 = 0.0
+            result_avgdp2 = 0.0
+            result_finaldp = 0.0
+            result_finalinlet = 0.0
+            result_finaloutlet = 0.0
+            result_avgtemperature1 = 0.0
+            result_avgflowrate1 = 0.0
+            result_avgtemperature2 = 0.0
+            result_avgflowrate2 = 0.0
+            result_finaltemperature = 0.0
+            result_finalflowrate = 0.0
+            MainDptest1start = 0
+            MainDptest1end = 0
+            MainDptest2start = 0
+            MainDptest2end = 0
+            Resultcapturetimer.Enabled = True
+        End If
+
+    End Sub
 
 End Class
 
