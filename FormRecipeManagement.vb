@@ -115,7 +115,7 @@ Public Class FormRecipeManagement
     Private min_d_flush1flowtol As Decimal = 0.2
     Private min_d_flush1pressure As Decimal = 5.0
     Private min_i_flush1stabilize As Integer = 5
-    Private min_i_flush1time As Integer = 60
+    Private min_i_flush1time As Integer = 1
 
 
     Private min_i_dptestfilltime As Integer = 5
@@ -124,7 +124,7 @@ Public Class FormRecipeManagement
     Private min_d_dptestflowtol As Decimal = 0.2
     Private min_d_dptestpressure As Decimal = 5.0
     Private min_i_dpteststabilize As Integer = 5
-    Private min_i_dptesttime As Integer = 60
+    Private min_i_dptesttime As Integer = 1
     Private min_d_dptestlowlimit As Decimal
     Private min_d_dptestuplimit As Decimal
     Private min_i_dptestpoints As Integer
@@ -137,18 +137,18 @@ Public Class FormRecipeManagement
     Private min_d_flush2flowtol As Decimal = 0.2
     Private min_d_flush2pressure As Decimal = 5.0
     Private min_i_flush2stabilize As Integer = 5
-    Private min_i_flush2time As Integer = 60
+    Private min_i_flush2time As Integer = 1
 
 
 
     Private min_d_drain1pressure As Decimal = 5.0
-    Private min_i_drain1time As Integer = 60
+    Private min_i_drain1time As Integer = 1
 
     Private min_d_drain2pressure As Decimal = 5.0
-    Private min_i_drain2time As Integer = 60
+    Private min_i_drain2time As Integer = 1
 
     Private min_d_drain3pressure As Decimal = 5.0
-    Private min_i_drain3time As Integer = 60
+    Private min_i_drain3time As Integer = 1
 
 
 

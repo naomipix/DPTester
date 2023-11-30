@@ -25,11 +25,14 @@ Module ModuleOmron
     Public WithEvents PCtimer As New Timer()
     Public WithEvents Alarmtimer As New Timer()
     Public WithEvents Calseqtimer As New Timer()
-    Dim PLCstatus(2)() As Boolean
+    Public PLCstatus(2)() As Boolean
     Public PCStatus(2)() As Boolean
     Public dtAlarm As New DataTable
     Public Currentalarm As New Dictionary(Of Integer, Object)
     Public startindex As Integer = 0
+    Public Cal_MessageNo As Integer = 0
+    Public dtCalibrationmsg As New DataTable
+    Public CalrecordValue As Boolean
 
 #Region "FINS protocol"
     Public Sub FINSInitialise()
@@ -53,6 +56,7 @@ Module ModuleOmron
             PLCtimer.Enabled = True
             PCtimer.Interval = 1000
             dtAlarm = SQL.ReadRecords("select id,code,description from AlarmTable")
+            dtCalibrationmsg = SQL.ReadRecords("select * from CalibrationMessage")
             Alarmtimer.Interval = 2000
             Currentalarm.Add(0, "Machine in Alarm Condition")
             Calseqtimer.Interval = 2000
@@ -1729,9 +1733,12 @@ Module ModuleOmron
         'Recipe Selection
         If FormMain.txtbx_TitleRecipeID.Text.Length > 3 Then
             FINSOutput(20) = 1
+            FINSOutput(21) = CheckJigType(JigType)
         Else
             FINSOutput(20) = 0
+            FINSOutput(21) = 0
         End If
+
 
 #End Region
 
@@ -1740,17 +1747,59 @@ Module ModuleOmron
 
         If PLCstatus(1)(2) = True Then
             SetButtonState(FormCalibration.btn_Calibrate, True, "Calibrate")
+
         Else
             SetButtonState(FormCalibration.btn_Calibrate, False, "Calibrate")
+
         End If
 
         If PLCstatus(1)(3) = True Then
             SetButtonState(FormCalibration.btn_Verify, True, "Verify")
+
         Else
             SetButtonState(FormCalibration.btn_Verify, False, "Verify")
+
         End If
 
+        If FINSinput(21) > 0 Then
+            FormCalibration.btn_Verify.Enabled = False
+            FormCalibration.btn_Calibrate.Enabled = False
+        End If
+
+        If FINSinput(21) = 300 Or FINSinput(21) = 320 Or FINSinput(21) = 350 Or FINSinput(21) = 370 Or FINSinput(21) = 600 Or FINSinput(21) = 620 Or FINSinput(21) = 650 Or FINSinput(21) = 670 Or FINSinput(21) = 800 Or FINSinput(21) = 820 Or FINSinput(21) = 850 Or FINSinput(21) = 870 Or FINSinput(21) = 1000 Or FINSinput(21) = 1020 Or FINSinput(21) = 1050 Or FINSinput(21) = 1070 Or FINSinput(21) = 1160 Or FINSinput(21) = 1360 Or FINSinput(21) = 1560 Then
+            CalrecordValue = True
+        Else
+            CalrecordValue = False
+        End If
 #End Region
+
+        If FINSinput(21) <> Cal_MessageNo Then
+            Cal_MessageNo = FINSinput(21)
+            CalibrationMessage(Cal_MessageNo)
+            If FINSinput(21) = 20 Then
+                If MsgBox($"Kindly Check and Acknowledge, Whether the Blank Product has been Connected properly? ", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNoCancel, "Warning") = MsgBoxResult.Yes Then
+                    PCStatus(1)(7) = True
+                Else
+                    Cal_MessageNo = 0
+                End If
+            End If
+
+
+        End If
+
+
+        If PLCstatus(1)(2) = False And PLCstatus(1)(3) = False Then
+            PCStatus(1)(7) = False
+            PCStatus(1)(4) = False
+            PCStatus(1)(5) = False
+        End If
+
+        If FormCalibration.btn_Calibrate.Enabled = True Or FormCalibration.btn_Verify.Enabled = True Then
+            PCStatus(1)(8) = False
+            PCStatus(1)(6) = False
+        End If
+
+
 
         'Write the PLC Output
         Put_PCManualctrl()
@@ -1896,19 +1945,106 @@ Module ModuleOmron
 
 
 #End Region
+    Public Function CheckJigType(id As Integer) As Integer
+        Select Case id
+            Case 0
+                If DIn(0)(7) = False And DIn(0)(8) = False And DIn(0)(9) = False Then
+                    Return 1
+                Else
+                    Return 0
+                End If
+                Exit Select
+            Case 1
+                If DIn(0)(7) = False And DIn(0)(8) = False And DIn(0)(9) = True Then
+                    Return 1
+                Else
+                    Return 0
+                End If
+                Exit Select
+            Case 2
+                If DIn(0)(7) = False And DIn(0)(8) = True And DIn(0)(9) = False Then
+                    Return 1
+                Else
+                    Return 0
+                End If
+                Exit Select
+            Case 3
+                If DIn(0)(7) = False And DIn(0)(8) = True And DIn(0)(9) = True Then
+                    Return 1
+                Else
+                    Return 0
+                End If
+                Exit Select
+            Case 4
+                If DIn(0)(7) = True And DIn(0)(8) = False And DIn(0)(9) = False Then
+                    Return 1
+                Else
+                    Return 0
+                End If
+                Exit Select
+            Case 5
+                If DIn(0)(7) = True And DIn(0)(8) = False And DIn(0)(9) = True Then
+                    Return 1
+                Else
+                    Return 0
+                End If
+                Exit Select
+            Case 6
+                If DIn(0)(7) = True And DIn(0)(8) = True And DIn(0)(9) = False Then
+                    Return 1
+                Else
+                    Return 0
+                End If
+                Exit Select
+            Case 7
+                If DIn(0)(7) = True And DIn(0)(8) = True And DIn(0)(9) = True Then
+                    Return 1
+                Else
+                    Return 0
+                End If
+                Exit Select
+            Case Else
+                Return 0
 
+
+        End Select
+    End Function
 
     Private Sub CalSeqTimer_Ticks(sender As Object, e As EventArgs) Handles Calseqtimer.Tick
-        If PCStatus(1)(2) = True And FormCalibration.btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246) Then
+        If (PCStatus(1)(2) = True And FormCalibration.btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246)) Or PLCstatus(0)(4) = True Then
             PCStatus(1)(2) = False
+            FormCalibration.btn_Calibrate.Enabled = True
+            FormCalibration.btn_Verify.Enabled = True
+            PCStatus(1)(7) = False
         End If
 
-        If PCStatus(1)(3) = True And FormCalibration.btn_Verify.BackColor = Color.FromArgb(25, 130, 246) Then
+        If (PCStatus(1)(3) = True And FormCalibration.btn_Verify.BackColor = Color.FromArgb(25, 130, 246)) Or PLCstatus(0)(4) = True Then
             PCStatus(1)(3) = False
+            FormCalibration.btn_Calibrate.Enabled = True
+            FormCalibration.btn_Verify.Enabled = True
+            PCStatus(1)(7) = False
         End If
     End Sub
 
+    Public Sub CalibrationMessage(MsgNumber As Integer)
+        Dim msg As DataRow() = dtCalibrationmsg.Select($"step_id ='{MsgNumber}'")
+        Select Case msg(0).Item("code").ToString
+            Case "W"
+                FormCalibration.lbl_CalibrationMsg.BackColor = Color.Yellow
+                FormCalibration.lbl_CalibrationMsg.ForeColor = SystemColors.ControlText
+            Case "M"
+                FormCalibration.lbl_CalibrationMsg.BackColor = Color.LimeGreen
+                FormCalibration.lbl_CalibrationMsg.ForeColor = SystemColors.Window
+            Case "A"
+                FormCalibration.lbl_CalibrationMsg.BackColor = Color.Red
+                FormCalibration.lbl_CalibrationMsg.ForeColor = SystemColors.Window
+            Case Else
+                Exit Select
+        End Select
 
+        FormCalibration.lbl_CalibrationMsg.Text = msg(0).Item("calibration_message").ToString
+
+    End Sub
 
 End Module
 

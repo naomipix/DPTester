@@ -12,6 +12,7 @@ Module FormMainModule
     Public ConfirmationID As String
     Public Quantity As String
     Public RecipeID As String
+    Public JigType As Integer
     Public LotStartTime As String
     Public LotEndTime As String
     Public LotAttempt As Integer
@@ -2111,6 +2112,7 @@ Public Class FormMain
             txtbx_TitleRecipeID.Text = Nothing
             txtbx_TitlePartID.Text = Nothing
             txtbx_TitleFilterType.Text = Nothing
+            JigType = 0
             btn_RecipeSelectionConfirm.Enabled = False
             txtbx_Operatorlotid.Text = Nothing
             If cmbx_RecipeType.SelectedIndex > 0 Then
@@ -2151,15 +2153,29 @@ Public Class FormMain
             FormCalibration.Ver_flowrate = 0
             FormCalibration.Ver_dp = 0
             FormCalibration.vertol = 0
-            FormCalibration.Dpteststart = 0
-            FormCalibration.dptestend = 0
+            FormCalibration.Dptest1start = 0
+            FormCalibration.dptest1end = 0
+            FormCalibration.Dptest2start = 0
+            FormCalibration.dptest2end = 0
             FormCalibration.Cal_dptestpoints = 0
-            FormCalibration.Cal_avginlet = 0
-            FormCalibration.Cal_avgoutlet = 0
-            FormCalibration.Cal_offset = 0
-            FormCalibration.Ver_avginlet = 0
-            FormCalibration.Ver_avgoutlet = 0
-            FormCalibration.Ver_avgdp = 0
+            FormCalibration.Cal_avginlet1 = 0
+            FormCalibration.Cal_avgoutlet1 = 0
+            FormCalibration.Cal_offset1 = 0
+            FormCalibration.Ver_avginlet1 = 0
+            FormCalibration.Ver_avgoutlet1 = 0
+            FormCalibration.Ver_avgdp1 = 0
+            FormCalibration.Cal_avginlet2 = 0
+            FormCalibration.Cal_avgoutlet2 = 0
+            FormCalibration.Cal_offset2 = 0
+            FormCalibration.Ver_avginlet2 = 0
+            FormCalibration.Ver_avgoutlet2 = 0
+            FormCalibration.Ver_avgdp2 = 0
+            FormCalibration.Cal_finalInlet = 0
+            FormCalibration.Cal_finalOutlet = 0
+            FormCalibration.Cal_finaloffset = 0
+            FormCalibration.Ver_finalinlet = 0
+            FormCalibration.Ver_finaloutlet = 0
+            FormCalibration.Ver_finaldp = 0
 
             FormCalibration.txtbx_CalInletPressure.Text = Nothing
             FormCalibration.txtbx_CalOutletPressure.Text = Nothing
@@ -2235,6 +2251,7 @@ Public Class FormMain
         Dim dtfilter As DataTable = SQL.ReadRecords($"SELECT PartTable.filter_type_id, FilterType.filter_type, PartTable.jig_type_id, JigType.jig_description From PartTable
 INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.part_id='{PartID}' INNER JOIN JigType ON PartTable.jig_type_id = JigType.id")
         txtbx_TitleFilterType.Text = dtfilter.Rows(0)("filter_type")
+        JigType = dtfilter.Rows(0)("jig_type_id")
 
         LoadrecipeParameters(RecipeID)
 
