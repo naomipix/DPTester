@@ -271,6 +271,10 @@ Public Class FormUserLogin
             FormMain.lbl_Username.Text = PublicVariables.LoginUserName
             FormMain.lbl_Category.Text = PublicVariables.LoginUserCategoryName
             FormMainModule.ControlState(1)
+
+            ' Login Event
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Login/Out] User ({PublicVariables.LoginUserName}/{PublicVariables.LoginUserCategoryName}) Logged In")
+
             Me.Close()
         End If
 

@@ -4948,6 +4948,7 @@ Public Class FormRecipeManagement
         ' Check Return State
         If ReturnValue = "True" Then
             RecipeMessage(41)
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] CSV Export Success ""{Filepath}""")
         ElseIf ReturnValue = "Missing" Then
             RecipeMessage(52)
         ElseIf ReturnValue = "False" Then

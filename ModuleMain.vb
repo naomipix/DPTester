@@ -326,6 +326,7 @@ Module SQL
             If True Then
                 LastSQLAutoBackup = DateTime.Now
                 'MessageBox.Show("Backup successful.", "Success")
+                EventLog.EventLogger.Log("-", "[Application] Local Database Backup Success")
             End If
 
             RetainedMemory.Update(24, "AutoBackupSQLPerformedDate", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffK", CultureInfo.InvariantCulture))
@@ -778,37 +779,41 @@ Namespace LicensingModule
         Public WithEvents trialTimer As New Timer()
 
         Private Sub trialTimer_Tick(sender As Object, e As EventArgs) Handles trialTimer.Tick
-            ' Code to execute on each tick of the timer
-            Dim DayRemaining As Integer = (dtTrialExpiring - DateTime.Now).TotalDays
-            Dim vStr As String = ""
+            ' Code to execute on each tick of the timer @ 12.00am
+            If DateTime.Now.Hour = 0 Then
+                Dim DayRemaining As Integer = (dtTrialExpiring - DateTime.Now).TotalDays
+                Dim vStr As String = ""
 
-            If DayRemaining < 0 Then
-                DayRemaining = 0
-            ElseIf DayRemaining > 1 Then
-                vStr = "s"
-            End If
+                If DayRemaining < 0 Then
+                    DayRemaining = 0
+                ElseIf DayRemaining > 1 Then
+                    vStr = "s"
+                End If
 
-            With FormMain.dsp_LicenseStatus
-                .Text = $"{LicMsgTrialRemain}{DayRemaining} Day{vStr}"
-                .BackColor = SystemColors.Info
-                .Visible = True
-            End With
+                With FormMain.dsp_LicenseStatus
+                    .Text = $"{LicMsgTrialRemain}{DayRemaining} Day{vStr}"
+                    .BackColor = SystemColors.Info
+                    .Visible = True
+                End With
 
-            If DayLeftTemp <> DayRemaining Then
-                MsgBox($"{LicMsgTrialExpiring}{DayRemaining} Day{vStr}", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
-                MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
-                Application.Exit()
-            End If
+                If DayLeftTemp <> DayRemaining Then
+                    MsgBox($"{LicMsgTrialExpiring}{DayRemaining} Day{vStr}", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                    MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                    Application.Exit()
+                End If
 
-            If DayRemaining <= 0 Then
-                MsgBox(LicMsgTrialExpired, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
-                MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
-                Application.Exit()
+                If DayRemaining <= 0 Then
+                    MsgBox(LicMsgTrialExpired, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                    MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                    Application.Exit()
+                End If
             End If
         End Sub
 
         Public Sub trialTimerStart()
             DayLeftTemp = (dtTrialExpiring - DateTime.Now).TotalDays
+            EventLog.EventLogger.Log("-", $"[License] Trial License Remaining Day Count: {DayLeftTemp}")
+            trialTimer.Interval = 30000
             trialTimer.Enabled = True
         End Sub
 
@@ -828,6 +833,8 @@ Namespace LicensingModule
             ' Check License Exists
             If File.Exists(PathToLicenseFile) Then
                 LicExist = True
+            Else
+                EventLog.EventLogger.Log("-", "[License] License Not Found")
             End If
 
             ' Check Trial License Exists
@@ -883,6 +890,9 @@ Namespace LicensingModule
                 ' Continue On Invalid License
                 If LicValid = False Then
                     If TrialExist = True Then
+                        ' Event Log
+                        EventLog.EventLogger.Log("-", "[License] Trial License Found")
+
                         ' Read From Text File
                         Try
                             Using reader As New StreamReader(PathToTrialFile)
@@ -920,6 +930,7 @@ Namespace LicensingModule
 
                         If MsgBox(LicMsgGenerateLRF, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Information") = MsgBoxResult.Yes Then
                             If CreateLicReqFile() = True Then
+                                EventLog.EventLogger.Log("-", "[License] License Request File Generated")
                                 MsgBox(LicMsgGenerateLRFSuccess, MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
                                 Process.Start("explorer.exe", PathToLicenseFolder)
                                 If TrialExpired = False Then
@@ -1095,5 +1106,29 @@ Namespace LicensingModule
 
             Return Encoding.UTF8.GetString(array2, 0, count)
         End Function
+    End Module
+End Namespace
+
+Namespace EventLog ' EventLog.EventLogger.Log( ,)
+    Module EventLogger
+        Public Sub Log(user As String, eventmsg As String)
+            ' Refresh Event Log Table
+            If FormMessageLog.IsSearchState = False Then
+                For Each form In My.Application.OpenForms
+                    If form Is FormMessageLog Then
+                        If form.visible = True Then
+                            form.LoadMessageLogTable(False, Nothing, Nothing, Nothing)
+                        End If
+                    End If
+                Next
+            End If
+
+            ' Log To SQL
+            Dim parameters As New Dictionary(Of String, Object) From {
+                {"user_name", user},
+                {"event_log", eventmsg}
+            }
+            SQL.InsertRecord("MessageLog", parameters)
+        End Sub
     End Module
 End Namespace

@@ -111,25 +111,25 @@ Public Class FormMain
         }
 
 
-        ModuleCircuitModel.InitialiseCircuit()
-        'PLC Impicit Cyclic Messaging via Ethernet IP
-        FINSInitialise()
+        'ModuleCircuitModel.InitialiseCircuit()
+        ''PLC Impicit Cyclic Messaging via Ethernet IP
+        'FINSInitialise()
 
-        'Circuit Form display on Panels
-        FormCircuitModel1.TopLevel = False
+        ''Circuit Form display on Panels
+        'FormCircuitModel1.TopLevel = False
 
-        While panel_ManualValve_Circuit.Controls.Count > 0
-            panel_ManualValve_Circuit.Controls(0).Dispose()
-        End While
-
-        panel_ManualValve_Circuit.Controls.Add(FormCircuitModel1)
-
-        'While Panel_Overview.Controls.Count > 0
-        '    Panel_Overview.Controls(0).Dispose()
+        'While panel_ManualValve_Circuit.Controls.Count > 0
+        '    panel_ManualValve_Circuit.Controls(0).Dispose()
         'End While
 
-        'Panel_Overview.Controls.Add(FormCircuitModel1)
-        FormCircuitModel1.Show()
+        'panel_ManualValve_Circuit.Controls.Add(FormCircuitModel1)
+
+        ''While Panel_Overview.Controls.Count > 0
+        ''    Panel_Overview.Controls(0).Dispose()
+        ''End While
+
+        ''Panel_Overview.Controls.Add(FormCircuitModel1)
+        'FormCircuitModel1.Show()
 
         'Top Status Bar
         lbl_OperationMode.Text = "No Status"
@@ -202,6 +202,10 @@ Public Class FormMain
                     .BackColor = Color.FromArgb(192, 255, 192)
                     .Visible = True
                 End With
+                EventLog.EventLogger.Log("-", "[License] License Activated")
+            End If
+            If PublicVariables.LicenseType = "TRIAL" Then
+                EventLog.EventLogger.Log("-", "[License] Trial License Activated")
             End If
         End If
 
@@ -222,7 +226,8 @@ Public Class FormMain
             SQLSetAutoDeleteMode(PublicVariables.AutoDeleteEnabled)
         End If
 
-
+        ' Application Launch Success
+        EventLog.EventLogger.Log("-", "[Application] Application Launch")
 
 
 
@@ -236,6 +241,13 @@ Public Class FormMain
         If Not MsgBox("Are you sure you want to Exit?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo Or MsgBoxStyle.DefaultButton2, "Exit Application") = MsgBoxResult.Yes Then
             e.Cancel = True
             PublicVariables.IsExitPromptShown = False
+        End If
+
+        ' Continue Event
+        If PublicVariables.LoggedIn = True Then
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Application] Application Exited By User")
+        Else
+            EventLog.EventLogger.Log("-", "[Application] Application Exited By User")
         End If
         PLCtimer.Enabled = False
 
@@ -264,6 +276,10 @@ Public Class FormMain
                 FormUserLogin.ShowDialog()
             Else
                 If MsgBox("Are you sure you want to Logout?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo Or MsgBoxStyle.DefaultButton2, "Logout") = MsgBoxResult.Yes Then
+                    ' Logout Event
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Login/Out] User ({PublicVariables.LoginUserName}/{PublicVariables.LoginUserCategoryName}) Logged Out")
+
+                    ' Logout User
                     LoginModule.ClearLoginValues()
                     FormMainModule.ControlState(0)
                     lbl_Username.Text = "-"
@@ -1040,6 +1056,7 @@ Public Class FormMain
         ' Check Return State
         If ReturnValue = "True" Then
             MsgBox("CSV File Exported Successfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Export - Success")
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Production Details] CSV Export Success ""{ExportPath}ProductionDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv""")
         ElseIf ReturnValue = "Missing" Then
             MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
         ElseIf ReturnValue = "False" Then
@@ -1272,8 +1289,10 @@ Public Class FormMain
             If btn_Valve Is btn_ValveCtrlArr(i) Then
                 If btn_Valve.BackColor = Color.FromArgb(0, 192, 0) Then
                     ManualCtrl(2)(i) = False
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Valve Control - Valve-{i + 1} (Close)")
                 Else
                     ManualCtrl(2)(i) = True
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Valve Control - Valve-{i + 1} (Open)")
                 End If
             End If
         Next
@@ -1283,8 +1302,10 @@ Public Class FormMain
             If btn_Valve Is btn_ValveCtrlArr(i + 16) Then
                 If btn_ValveCtrlArr(i + 16).BackColor = Color.FromArgb(0, 192, 0) Then
                     ManualCtrl(3)(i) = False
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Valve Control - Valve-{i + 17} (Close)")
                 Else
                     ManualCtrl(3)(i) = True
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Valve Control - Valve-{i + 17} (Open)")
                 End If
             End If
         Next
@@ -1750,6 +1771,7 @@ Public Class FormMain
         ' Check Return State
         If ReturnValue = "True" Then
             MsgBox("CSV File Exported Successfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Export - Success")
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Alarm History] CSV Export Success ""{ExportPath}AlarmHistory_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv""")
         ElseIf ReturnValue = "Missing" Then
             MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
         ElseIf ReturnValue = "False" Then

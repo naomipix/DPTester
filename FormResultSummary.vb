@@ -415,6 +415,7 @@ Public Class FormResultSummary
             ' Check Return State
             If ReturnValue = "True" Then
                 ResultMessage(4)
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Individual Result Summary] CSV Export Success ""{Filepath}""")
             ElseIf ReturnValue = "Missing" Then
                 ResultMessage(9)
             ElseIf ReturnValue = "False" Then
