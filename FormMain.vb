@@ -109,25 +109,25 @@ Public Class FormMain
         }
 
 
-        ModuleCircuitModel.InitialiseCircuit()
-        'PLC Impicit Cyclic Messaging via Ethernet IP
-        FINSInitialise()
+        'ModuleCircuitModel.InitialiseCircuit()
+        ''PLC Impicit Cyclic Messaging via Ethernet IP
+        'FINSInitialise()
 
-        'Circuit Form display on Panels
-        FormCircuitModel1.TopLevel = False
+        ''Circuit Form display on Panels
+        'FormCircuitModel1.TopLevel = False
 
-        While panel_ManualValve_Circuit.Controls.Count > 0
-            panel_ManualValve_Circuit.Controls(0).Dispose()
-        End While
-
-        panel_ManualValve_Circuit.Controls.Add(FormCircuitModel1)
-
-        'While Panel_Overview.Controls.Count > 0
-        '    Panel_Overview.Controls(0).Dispose()
+        'While panel_ManualValve_Circuit.Controls.Count > 0
+        '    panel_ManualValve_Circuit.Controls(0).Dispose()
         'End While
 
-        'Panel_Overview.Controls.Add(FormCircuitModel1)
-        FormCircuitModel1.Show()
+        'panel_ManualValve_Circuit.Controls.Add(FormCircuitModel1)
+
+        ''While Panel_Overview.Controls.Count > 0
+        ''    Panel_Overview.Controls(0).Dispose()
+        ''End While
+
+        ''Panel_Overview.Controls.Add(FormCircuitModel1)
+        'FormCircuitModel1.Show()
 
         'Top Status Bar
         lbl_OperationMode.Text = "No Status"
@@ -314,27 +314,29 @@ Public Class FormMain
     Private cts As New CancellationTokenSource()
     Dim PlotStarted As Boolean = False
     Private Async Sub btn_Debug1_Click(sender As Object, e As EventArgs) Handles btn_Debug1.Click
-        Dim ListOfDec() As Decimal = {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            31.1, 31.8, 32.4, 31.5, 32.7, 31.2, 32.1, 32.9, 31.3, 31.9,
-            31.6, 32.2, 32.6, 31.7, 32.3, 31.4, 32.0, 31.0, 32.8, 33.0,
-            32.5, 31.8, 31.1, 32.4, 32.9, 31.2, 32.7, 31.5, 32.1, 31.3,
-            32.2, 32.3, 31.9, 31.6, 32.6, 31.4, 32.0, 32.5, 31.7, 32.8,
-            33.0, 31.0, 31.1, 32.4, 32.9, 32.7, 31.2, 32.1, 31.3, 31.8,
-            31.9, 32.2, 31.5, 31.6, 32.3, 32.6, 31.4, 32.5, 32.0, 31.7,
-            32.8, 33.0, 31.0, 31.1, 32.4, 32.9, 31.2, 32.7, 32.1, 31.3,
-            32.2, 31.5, 31.8, 32.6, 31.9, 32.3, 31.6, 31.4, 32.5, 32.0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-        }
+        'Dim ListOfDec() As Decimal = {
+        '    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        '    31.1, 31.8, 32.4, 31.5, 32.7, 31.2, 32.1, 32.9, 31.3, 31.9,
+        '    31.6, 32.2, 32.6, 31.7, 32.3, 31.4, 32.0, 31.0, 32.8, 33.0,
+        '    32.5, 31.8, 31.1, 32.4, 32.9, 31.2, 32.7, 31.5, 32.1, 31.3,
+        '    32.2, 32.3, 31.9, 31.6, 32.6, 31.4, 32.0, 32.5, 31.7, 32.8,
+        '    33.0, 31.0, 31.1, 32.4, 32.9, 32.7, 31.2, 32.1, 31.3, 31.8,
+        '    31.9, 32.2, 31.5, 31.6, 32.3, 32.6, 31.4, 32.5, 32.0, 31.7,
+        '    32.8, 33.0, 31.0, 31.1, 32.4, 32.9, 31.2, 32.7, 32.1, 31.3,
+        '    32.2, 31.5, 31.8, 32.6, 31.9, 32.3, 31.6, 31.4, 32.5, 32.0,
+        '    0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        '}
 
-        cts.Cancel()
-        cts = New CancellationTokenSource() ' Create a new CancellationTokenSource
-        PlotStarted = True
-        Try
-            Await TestDummyGraph(ListOfDec, cts.Token)
-        Catch ex As Exception
-            MsgBox(ex.Message & ex.StackTrace)
-        End Try
+        'cts.Cancel()
+        'cts = New CancellationTokenSource() ' Create a new CancellationTokenSource
+        'PlotStarted = True
+        'Try
+        '    Await TestDummyGraph(ListOfDec, cts.Token)
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & ex.StackTrace)
+        'End Try
+
+        LiveGraph.LiveGraph.StartRun(20)
     End Sub
 
     Dim dt As New DataTable
