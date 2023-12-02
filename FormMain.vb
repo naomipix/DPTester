@@ -202,6 +202,10 @@ Public Class FormMain
                     .BackColor = Color.FromArgb(192, 255, 192)
                     .Visible = True
                 End With
+                EventLog.EventLogger.Log("-", "[License] License Activated")
+            End If
+            If PublicVariables.LicenseType = "TRIAL" Then
+                EventLog.EventLogger.Log("-", "[License] Trial License Activated")
             End If
         End If
 
@@ -222,7 +226,8 @@ Public Class FormMain
             SQLSetAutoDeleteMode(PublicVariables.AutoDeleteEnabled)
         End If
 
-
+        ' Application Launch Success
+        EventLog.EventLogger.Log("-", "[Application] Application Launch")
 
 
 
@@ -236,6 +241,13 @@ Public Class FormMain
         If Not MsgBox("Are you sure you want to Exit?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo Or MsgBoxStyle.DefaultButton2, "Exit Application") = MsgBoxResult.Yes Then
             e.Cancel = True
             PublicVariables.IsExitPromptShown = False
+        End If
+
+        ' Continue Event
+        If PublicVariables.LoggedIn = True Then
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Application] Application Exited By User")
+        Else
+            EventLog.EventLogger.Log("-", "[Application] Application Exited By User")
         End If
         PLCtimer.Enabled = False
 
@@ -264,6 +276,10 @@ Public Class FormMain
                 FormUserLogin.ShowDialog()
             Else
                 If MsgBox("Are you sure you want to Logout?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo Or MsgBoxStyle.DefaultButton2, "Logout") = MsgBoxResult.Yes Then
+                    ' Logout Event
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Login/Out] User ({PublicVariables.LoginUserName}/{PublicVariables.LoginUserCategoryName}) Logged Out")
+
+                    ' Logout User
                     LoginModule.ClearLoginValues()
                     FormMainModule.ControlState(0)
                     lbl_Username.Text = "-"
@@ -1040,6 +1056,7 @@ Public Class FormMain
         ' Check Return State
         If ReturnValue = "True" Then
             MsgBox("CSV File Exported Successfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Export - Success")
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Production Details] CSV Export Success ""{ExportPath}ProductionDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv""")
         ElseIf ReturnValue = "Missing" Then
             MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
         ElseIf ReturnValue = "False" Then
@@ -1272,8 +1289,10 @@ Public Class FormMain
             If btn_Valve Is btn_ValveCtrlArr(i) Then
                 If btn_Valve.BackColor = Color.FromArgb(0, 192, 0) Then
                     ManualCtrl(2)(i) = False
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Valve Control - Valve-{i + 1} (Close)")
                 Else
                     ManualCtrl(2)(i) = True
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Valve Control - Valve-{i + 1} (Open)")
                 End If
             End If
         Next
@@ -1283,8 +1302,10 @@ Public Class FormMain
             If btn_Valve Is btn_ValveCtrlArr(i + 16) Then
                 If btn_ValveCtrlArr(i + 16).BackColor = Color.FromArgb(0, 192, 0) Then
                     ManualCtrl(3)(i) = False
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Valve Control - Valve-{i + 17} (Close)")
                 Else
                     ManualCtrl(3)(i) = True
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Valve Control - Valve-{i + 17} (Open)")
                 End If
             End If
         Next
@@ -1311,35 +1332,45 @@ Public Class FormMain
         If btn_Pump Is btn_PumpMode Then
             If btn_PumpMode.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(4) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Mode Selection (Speed)")
             Else
                 ManualCtrl(3)(4) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Mode Selection (Process)")
             End If
         End If
 
         If btn_Pump Is btn_PumpReset Then
             If btn_PumpReset.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(3) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Pump Reset (OFF)")
             Else
                 ManualCtrl(3)(3) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Pump Reset (ON)")
             End If
         End If
 
         If btn_Pump Is btn_PumpEnable Then
             If btn_PumpEnable.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(5) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Pump Enable (OFF)")
             Else
                 ManualCtrl(3)(5) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Pump Enable (ON)")
             End If
         End If
 
     End Sub
 
     Private Sub btn_UpdateRPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateRPM.Click
+        Dim RPMTemp As String = lbl_ReqRPM.Text
         Float2int(120, CType(txtbx_NewRPM.Text, Decimal))
+        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Pump Speed (RPM) set to {txtbx_NewRPM.Text} from {RPMTemp}")
     End Sub
 
     Private Sub btn_UpdateLPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateLPM.Click
+        Dim LPMTemp As String = lbl_ReqLPM.Text
         Float2int(122, CType(txtbx_NewLPM.Text, Decimal))
+        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Flowrate (LPM) set to {txtbx_NewLPM.Text} from {LPMTemp}")
     End Sub
 
     'Tank Controls
@@ -1352,16 +1383,20 @@ Public Class FormMain
         If btn_tank Is btn_TankFill Then
             If btn_TankFill.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(6) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Tank Control - Tank Fill (OFF)")
             Else
                 ManualCtrl(3)(6) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Tank Control - Tank Fill (ON)")
             End If
         End If
 
         If btn_tank Is btn_TankDrain Then
             If btn_TankDrain.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(7) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Tank Control - Tank Drain (OFF)")
             Else
                 ManualCtrl(3)(7) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Tank Control - Tank Drain (ON)")
             End If
         End If
 
@@ -1370,12 +1405,16 @@ Public Class FormMain
 
 
     ' Regulator Controls
-    Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs)
+    Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_BckPressureUpdate.Click
+        Dim BackPressTemp As String = lbl_BackPressCurrent.Text
         Float2int(124, CType(txtbx_BackPressRequired.Text, Decimal))
+        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of Back Pressure Regulator (kPa) set to {txtbx_BackPressRequired.Text} from {BackPressTemp}")
     End Sub
 
-    Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs)
+    Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_N2PressureUpdate.Click
+        Dim N2PurgeTemp As String = lbl_N2PurgeCurrent.Text
         Float2int(126, CType(txtbx_N2PurgeRequired.Text, Decimal))
+        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of N2 Purge Regulator (kPa) set to {txtbx_N2PurgeRequired.Text} from {N2PurgeTemp}")
     End Sub
 
     ' Manual Drain
@@ -1386,24 +1425,30 @@ Public Class FormMain
         If btn_ManualDrain Is btn_MCN2Purge1 Then
             If btn_MCN2Purge1.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(8) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-1 (OFF)")
             Else
                 ManualCtrl(3)(8) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-1 (ON)")
             End If
         End If
 
         If btn_ManualDrain Is btn_MCN2Purge2 Then
             If btn_MCN2Purge2.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(9) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-2 (OFF)")
             Else
                 ManualCtrl(3)(9) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-2 (ON)")
             End If
         End If
 
         If btn_ManualDrain Is btn_MCN2Purge3 Then
             If btn_MCN2Purge3.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(10) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-3 (OFF)")
             Else
                 ManualCtrl(3)(10) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-3 (ON)")
             End If
         End If
 
@@ -1423,40 +1468,50 @@ Public Class FormMain
         If btn_Maintenance Is btn_InFiltrDrain Then
             If btn_InFiltrDrain.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(11) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Incoming Filter Drain (OFF)")
             Else
                 ManualCtrl(3)(11) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Incoming Filter Drain (ON)")
             End If
         End If
 
         If btn_Maintenance Is btn_InFiltrVent Then
             If btn_InFiltrVent.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(12) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Incoming Filter Vent (OFF)")
             Else
                 ManualCtrl(3)(12) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Incoming Filter Vent (ON)")
             End If
         End If
 
         If btn_Maintenance Is btn_PumpFiltrDrain Then
             If btn_PumpFiltrDrain.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(13) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Pump Filter Drain (OFF)")
             Else
                 ManualCtrl(3)(13) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Pump Filter Drain (ON)")
             End If
         End If
 
         If btn_Maintenance Is btn_PumpFiltrVent Then
             If btn_PumpFiltrVent.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(14) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Pump Filter Vent (OFF)")
             Else
                 ManualCtrl(3)(14) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Pump Filter Vent (ON)")
             End If
         End If
 
         If btn_Maintenance Is btn_EmptyTank Then
             If btn_EmptyTank.BackColor = Color.FromArgb(0, 192, 0) Then
                 ManualCtrl(3)(15) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Empty Tank (OFF)")
             Else
                 ManualCtrl(3)(15) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Empty Tank (ON)")
             End If
         End If
     End Sub
@@ -1750,6 +1805,7 @@ Public Class FormMain
         ' Check Return State
         If ReturnValue = "True" Then
             MsgBox("CSV File Exported Successfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Export - Success")
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Alarm History] CSV Export Success ""{ExportPath}AlarmHistory_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv""")
         ElseIf ReturnValue = "Missing" Then
             MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
         ElseIf ReturnValue = "False" Then

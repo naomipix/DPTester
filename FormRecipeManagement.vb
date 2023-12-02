@@ -3,6 +3,7 @@ Imports System.Data.SqlTypes
 Imports System.IO.Ports
 Imports System.Runtime.Remoting.Messaging
 Imports System.Security.Cryptography
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 
 Public Class FormRecipeManagement
 
@@ -200,6 +201,7 @@ Public Class FormRecipeManagement
 
     'Decalre Recipe parameters for collecting Edit recipe
     Dim recipeparameter(50) As String
+    Dim recipeparametertemp(50) As String ' For Event Logging
 
 
 #End Region
@@ -990,8 +992,11 @@ Public Class FormRecipeManagement
 #Region "Part ID Creation"
     Private Sub btnPartIDCreate_Click(sender As Object, e As EventArgs) Handles btnPartIDCreate.Click
         ' Declare Parameters
-        Dim FilterTypeID As Integer = cmbx_PartCreateFilterType.SelectedIndex
-        Dim JigTypeID As Integer = cmbx_PartCreateJigType.SelectedIndex
+        Dim cmbxFilterType As ComboBox = cmbx_PartCreateFilterType
+        Dim cmbxJigType As ComboBox = cmbx_PartCreateJigType
+
+        Dim FilterTypeID As Integer = cmbxFilterType.SelectedIndex
+        Dim JigTypeID As Integer = cmbxJigType.SelectedIndex
         Dim PartID As String = Formatstring(txtbx_PartCreatePartID.Text)
         Dim onContinue As Boolean = True
 
@@ -1044,7 +1049,13 @@ Public Class FormRecipeManagement
                 }
                 If SQL.InsertRecord("PartTable", partParameter) = 1 Then
                     RecipeMessage(9)
-                    cmbx_PartCreateFilterType.SelectedIndex = 0
+
+                    ' Event Log
+                    Dim FilterTypeValue As String = DirectCast(cmbxFilterType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim JigTypeValue As String = DirectCast(cmbxJigType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Part ID Creation - Part ID ({FilterTypeValue}/{JigTypeValue}/{PartID}) Created")
+
+                    cmbxFilterType.SelectedIndex = 0
                 Else
                     RecipeMessage(11)
                     onContinue = False
@@ -2654,6 +2665,14 @@ Public Class FormRecipeManagement
                     }
                 If SQL.InsertRecord("RecipeTable", recipeparameter) = 1 Then
                     RecipeMessage(10)
+
+                    ' Event Log
+                    Dim FilterTypeValue As String = DirectCast(cmbx_RcpCreateFilterType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim PartIDValue As String = DirectCast(cmbx_RcpCreatePartID.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim RecipeTypeValue As String = DirectCast(cmbx_RcpCreateType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim RecipeIDValue As String = txtbx_RcpCreateRecipeID.Text
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Creation - Recipe ID ({FilterTypeValue}/{PartIDValue}/{RecipeTypeValue}/{RecipeIDValue}) Created")
+
                     cmbx_RcpCreateFilterType.SelectedIndex = 0
                     LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
                     GetRecipeID()
@@ -2816,6 +2835,13 @@ Public Class FormRecipeManagement
                         }
                 If SQL.InsertRecord("RecipeTable", recipeparameter) = 1 Then
                     RecipeMessage(47)
+
+                    ' Event Log
+                    Dim RecipeIDPrev As String = DirectCast(cmbx_RcpDupSelRecipe.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim RecipeTypeValue As String = DirectCast(Cmbx_RcpDupNewType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim RecipeIDValue As String = txtbx_RcpDupNewRecipeID.Text
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Duplication - Recipe ID ({RecipeTypeValue}/{RecipeIDValue}) Created With Parameters From Recipe ID ({RecipeIDPrev})")
+
                     cmbx_RcpDupSelRecipe.SelectedIndex = 0
                     LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
                     GetRecipeID()
@@ -2889,6 +2915,12 @@ Public Class FormRecipeManagement
 
                     If SQL.DeleteRecord("PartTable", condition) = 1 Then
                         RecipeMessage(25)
+
+                        ' Event Log
+                        Dim FilterTypeValue As String = DirectCast(cmbx_PartDeleteFilterType.SelectedItem, KeyValuePair(Of String, String)).Value
+                        Dim PartIDValue As String = DirectCast(cmbx_PartDeletePartID.SelectedItem, KeyValuePair(Of String, String)).Value
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Part ID Deletion - Part ID ({FilterTypeValue}/{PartIDValue}) Deleted")
+
                         cmbx_PartDeleteFilterType.SelectedIndex = 0
                     Else
                         RecipeMessage(26)
@@ -2950,6 +2982,13 @@ Public Class FormRecipeManagement
 
                 If SQL.DeleteRecord("RecipeTable", condition) = 1 Then
                     RecipeMessage(28)
+
+                    ' Event Log
+                    Dim FilterTypeValue As String = DirectCast(cmbx_RcpCreateFilterType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim PartIDValue As String = DirectCast(cmbx_RcpCreatePartID.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim RecipeIDValue As String = txtbx_RcpCreateRecipeID.Text
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Deletion - Recipe ID ({FilterTypeValue}/{PartIDValue}/{RecipeIDValue}) Deleted")
+
                     cmbx_RcpDeleteFilterType.SelectedIndex = 0
                     LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
                     GetRecipeID()
@@ -4530,6 +4569,9 @@ Public Class FormRecipeManagement
                 If RecipeMessage(36, RecipeID) = DialogResult.Yes Then
                     If SQL.UpdateRecord("RecipeTable", Updateparameter, Condition) = 1 Then
                         RecipeMessage(37)
+
+                        RcpEditEventLogger(Updateparameter)
+
                         cmbx_RcpEditFilterType.SelectedIndex = 0
                         LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
                     Else
@@ -4545,7 +4587,220 @@ Public Class FormRecipeManagement
 
     End Sub
 
+    Private Sub RcpEditEventLogger(dic As Dictionary(Of String, Object))
+        Dim VerificationTolerance As Decimal = recipeparametertemp(8)
 
+        Dim Flush1Fill As Integer = recipeparametertemp(10)
+        Dim Flush1Bleed As Integer = recipeparametertemp(11)
+        Dim Flush1Flow As Decimal = recipeparametertemp(12)
+        Dim Flush1FlowTol As Decimal = recipeparametertemp(13)
+        Dim Flush1BPress As Decimal = recipeparametertemp(14)
+        Dim Flush1Stabilize As Integer = recipeparametertemp(15)
+        Dim Flush1Time As Integer = recipeparametertemp(16)
+
+        Dim DPFill As Integer = recipeparametertemp(18)
+        Dim DPBleed As Integer = recipeparametertemp(19)
+        Dim DPFlow As Decimal = recipeparametertemp(20)
+        Dim DPFlowTol As Decimal = recipeparametertemp(21)
+        Dim DPBPress As Decimal = recipeparametertemp(22)
+        Dim DPStabilize As Integer = recipeparametertemp(23)
+        Dim DPTime As Integer = recipeparametertemp(24)
+        Dim DPLL As Decimal = recipeparametertemp(25)
+        Dim DPUL As Decimal = recipeparametertemp(26)
+        Dim DPTestPoints As Integer = recipeparametertemp(27)
+
+        Dim Flush2Fill As Integer = recipeparametertemp(30)
+        Dim Flush2Bleed As Integer = recipeparametertemp(31)
+        Dim Flush2Flow As Decimal = recipeparametertemp(32)
+        Dim Flush2FlowTol As Decimal = recipeparametertemp(33)
+        Dim Flush2BPress As Decimal = recipeparametertemp(34)
+        Dim Flush2Stabilize As Integer = recipeparametertemp(35)
+        Dim Flush2Time As Integer = recipeparametertemp(36)
+
+        Dim Drain1Press As Decimal = recipeparametertemp(38)
+        Dim Drain1Time As Integer = recipeparametertemp(39)
+
+        Dim Drain2Press As Decimal = recipeparametertemp(41)
+        Dim Drain2Time As Integer = recipeparametertemp(42)
+
+        Dim Drain3Press As Decimal = recipeparametertemp(44)
+        Dim Drain3Time As Integer = recipeparametertemp(45)
+
+        Dim Flush1Enable As String = recipeparametertemp(9)
+        Dim DP1Enable As String = recipeparametertemp(17)
+        Dim DP2Enable As String = recipeparametertemp(28)
+        Dim Flush2Enable As String = recipeparametertemp(29)
+        Dim Drain1Enable As String = recipeparametertemp(37)
+        Dim Drain2Enable As String = recipeparametertemp(40)
+        Dim Drain3Enable As String = recipeparametertemp(43)
+
+        If Not d_vertol = VerificationTolerance Then
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters - Verification Tolerance (kPa) (+/-) Parameter Changed, from {VerificationTolerance} to {d_vertol}")
+        End If
+
+        If str_flush1enable = "Enable" Then
+            If Not str_flush1enable = Flush1Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Flush-1 Enable (True)")
+            End If
+            If Not i_flush1filltime = Flush1Fill Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Flush-1 Fill Time (s) Parameter Changed, from {Flush1Fill} to {i_flush1filltime}")
+            End If
+            If Not i_flush1bleedtime = Flush1Bleed Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Flush-1 Air Bleed Time (s) Parameter Changed, from {Flush1Bleed} to {i_flush1bleedtime}")
+            End If
+            If Not d_flush1flow = Flush1Flow Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Flowrate (l/min) Parameter Changed, from {Flush1Flow} to {d_flush1flow}")
+            End If
+            If Not d_flush1flowtol = Flush1FlowTol Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Flowrate Tolerance (l/min) (+/-) Parameter Changed, from {Flush1FlowTol} to {d_flush1flowtol}")
+            End If
+            If Not d_flush1pressure = Flush1BPress Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Back Pressure (kPa) Parameter Changed, from {Flush1BPress} to {d_flush1pressure}")
+            End If
+            If Not i_flush1stabilize = Flush1Stabilize Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Flush-1 Stabilize Time (s) Parameter Changed, from {Flush1Stabilize} to {i_flush1stabilize}")
+            End If
+            If Not i_flush1time = Flush1Time Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Flush-1 Time (s) Parameter Changed, from {Flush1Time} to {i_flush1time}")
+            End If
+        Else
+            If Not str_flush1enable = Flush1Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Flush-1 Enable (False)")
+            End If
+        End If
+
+        If str_dptest1enable = "Enable" Then
+            If Not str_dptest1enable = DP1Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP Test-1 Enable (True)")
+            End If
+        Else
+            If Not str_dptest1enable = DP1Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP Test-1 Enable (False)")
+            End If
+        End If
+
+        If str_dptest2enable = "Enable" Then
+            If Not str_dptest2enable = DP2Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP Test-2 Enable (True)")
+            End If
+        Else
+            If Not str_dptest2enable = DP2Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP Test-2 Enable (False)")
+            End If
+        End If
+
+        If str_dptest1enable = "Enable" Or str_dptest2enable = "Enable" Then
+            If Not i_dptestfilltime = DPFill Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP-Test Fill Time (s) Parameter Changed, from {DPFill} to {i_dptestfilltime}")
+            End If
+            If Not i_dptestbleedtime = DPBleed Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP-Test Air Bleed Time (s) Parameter Changed, from {DPBleed} to {i_dptestbleedtime}")
+            End If
+            If Not d_dptestflow = DPFlow Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - Flowrate (l/min) Parameter Changed, from {DPFlow} to {d_dptestflow}")
+            End If
+            If Not d_dptestflowtol = DPFlowTol Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - Flowrate Tolerance (l/min) (+/-) Parameter Changed, from {DPFlowTol} to {d_dptestflowtol}")
+            End If
+            If Not d_dptestpressure = DPBPress Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - Back Pressure (kPa) Parameter Changed, from {DPBPress} to {d_dptestpressure}")
+            End If
+            If Not i_dpteststabilize = DPStabilize Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP Stabilize Time (s) Parameter Changed, from {DPStabilize} to {i_dpteststabilize}")
+            End If
+            If Not i_dptesttime = DPTime Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP Time (s) Parameter Changed, from {DPTime} to {i_dptesttime}")
+            End If
+            If Not d_dptestlowlimit = DPLL Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP Lower Limit (kPa) Parameter Changed, from {DPLL} to {d_dptestlowlimit}")
+            End If
+            If Not d_dptestuplimit = DPUL Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP Upper Limit (kPa) Parameter Changed, from {DPUL} to {d_dptestuplimit}")
+            End If
+            If Not i_dptestpoints = DPTestPoints Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - Number of Test Points Parameter Changed, from {DPTestPoints} to {i_dptestpoints}")
+            End If
+        End If
+
+        If str_flush2enable = "Enable" Then
+            If Not str_flush2enable = Flush2Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Flush-2 Enable (True)")
+            End If
+            If Not i_flush2filltime = Flush2Fill Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Flush-2 Fill Time (s) Parameter Changed, from {Flush2Fill} to {i_flush2filltime}")
+            End If
+            If Not i_flush2bleedtime = Flush2Bleed Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Flush-2 Air Bleed Time (s) Parameter Changed, from {Flush2Bleed} to {i_flush2bleedtime}")
+            End If
+            If Not d_flush2flow = Flush2Flow Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Flowrate (l/min) Parameter Changed, from {Flush2Flow} to {d_flush2flow}")
+            End If
+            If Not d_flush2flowtol = Flush2FlowTol Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Flowrate Tolerance (l/min) (+/-) Parameter Changed, from {Flush2FlowTol} to {d_flush2flowtol}")
+            End If
+            If Not d_flush2pressure = Flush2BPress Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Back Pressure (kPa) Parameter Changed, from {Flush2BPress} to {d_flush2pressure}")
+            End If
+            If Not i_flush2stabilize = Flush2Stabilize Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Flush-2 Stabilize Time (s) Parameter Changed, from {Flush2Stabilize} to {i_flush2stabilize}")
+            End If
+            If Not i_flush2time = Flush2Time Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Flush-2 Time (s) Parameter Changed, from {Flush2Time} to {i_flush2time}")
+            End If
+        Else
+            If Not str_flush2enable = Flush2Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Flush-2 Enable (False)")
+            End If
+        End If
+
+        If str_drain1enable = "Enable" Then
+            If Not str_drain1enable = Drain1Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-1) - Drain-1 Enable (True)")
+            End If
+            If Not d_drain1pressure = Drain1Press Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-1) - Drain-1 N2 Purge Pressure (kPa) Parameter Changed, from {Drain1Press} to {d_drain1pressure}")
+            End If
+            If Not i_drain1time = Drain1Time Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-1) - Drain-1 Time Parameter Changed, from {Drain1Time} to {i_drain1time}")
+            End If
+        Else
+            If Not str_drain1enable = Drain1Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-1) - Drain-1 Enable (False)")
+            End If
+        End If
+
+        If str_drain2enable = "Enable" Then
+            If Not str_drain2enable = Drain2Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-2) - Drain-2 Enable (True)")
+            End If
+            If Not d_drain2pressure = Drain2Press Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-2) - Drain-2 N2 Purge Pressure (kPa) Parameter Changed, from {Drain2Press} to {d_drain2pressure}")
+            End If
+            If Not i_drain2time = Drain2Time Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-2) - Drain-2 Time Parameter Changed, from {Drain2Time} to {i_drain2time}")
+            End If
+        Else
+            If Not str_drain2enable = Drain2Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-2) - Drain-2 Enable (False)")
+            End If
+        End If
+
+        If str_drain3enable = "Enable" Then
+            If Not str_drain3enable = Drain3Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-3) - Drain-3 Enable (True)")
+            End If
+            If Not d_drain3pressure = Drain3Press Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-3) - Drain-3 N2 Purge Pressure (kPa) Parameter Changed, from {Drain3Press} to {d_drain3pressure}")
+            End If
+            If Not i_drain3time = Drain3Time Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-3) - Drain-3 Time Parameter Changed, from {Drain3Time} to {i_drain3time}")
+            End If
+        Else
+            If Not str_drain3enable = Drain3Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-3) - Drain-3 Enable (False)")
+            End If
+        End If
+    End Sub
 
 
 
@@ -4948,6 +5203,7 @@ Public Class FormRecipeManagement
         ' Check Return State
         If ReturnValue = "True" Then
             RecipeMessage(41)
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] CSV Export Success ""{Filepath}""")
         ElseIf ReturnValue = "Missing" Then
             RecipeMessage(52)
         ElseIf ReturnValue = "False" Then

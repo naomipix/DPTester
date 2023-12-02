@@ -153,6 +153,7 @@ Public Class FormUserRegister
             Case "Success"
                 LoginMessage.RegistrationPrompt(5, RegUserName.Trim, RegUserCategoryName)
                 Initialize()
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[User Registration] User Registration - User ({RegUserName}/{RegUserCategoryName}) Registered")
         End Select
     End Sub
 
@@ -176,6 +177,7 @@ Public Class FormUserRegister
             Case "Success"
                 LoginMessage.RegistrationPrompt(6, UserName, UserCategoryName)
                 Initialize()
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[User Registration] User Deletion - User ({UserName}/{UserCategoryName}) Deleted")
             Case "RecordFound"
                 LoginMessage.RegistrationPrompt(11, 0, 0)
         End Select

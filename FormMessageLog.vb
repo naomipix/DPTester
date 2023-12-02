@@ -1,5 +1,6 @@
 ﻿Public Class FormMessageLog
     Dim PlaceHolderText As String = " User Category / Event Logged"
+    Public IsSearchState As Boolean = False
 
     Private Sub FormMessageLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Always Maximize
@@ -25,6 +26,7 @@
         Next
 
         ' Initialize Defaults
+        IsSearchState = False
         With txtbx_Search
             .Text = PlaceHolderText
             .ForeColor = Color.Gray
@@ -205,5 +207,8 @@
     Private Sub SearchMessageLog()
         ' Load Table With Filters
         LoadMessageLogTable(True, txtbx_Search.Text, dtpicker_StartDate.Value, dtpicker_EndDate.Value)
+
+        ' Set Search State
+        IsSearchState = True
     End Sub
 End Class

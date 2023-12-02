@@ -211,10 +211,12 @@ Public Class FormSetting
             SetButtonState(btnClicked, btnState, btnScannerBypassValueFalse)
             PublicVariables.ScannerBypass = btnState
             RetainedMemory.Update(3, "ScannerBypass", "0")
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Settings] Scanner Settings - Scanner Bypass (OFF)")
         Else
             SetButtonState(btnClicked, btnState, btnScannerBypassValueTrue)
             PublicVariables.ScannerBypass = btnState
             RetainedMemory.Update(3, "ScannerBypass", "1")
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Settings] Scanner Settings - Scanner Bypass (ON)")
         End If
 
         ' Clear Selection
@@ -226,10 +228,12 @@ Public Class FormSetting
             If cmbx_ScannerType.SelectedIndex = 0 Then
                 PublicVariables.ScannerType = CStr(cmbx_ScannerType.SelectedItem)
                 RetainedMemory.Update(2, "ScannerType", CStr(cmbx_ScannerType.SelectedItem))
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Scanner Settings - Scanner Type ({CStr(cmbx_ScannerType.SelectedItem)})")
             End If
             If cmbx_ScannerType.SelectedIndex = 1 Then
                 PublicVariables.ScannerType = CStr(cmbx_ScannerType.SelectedItem)
                 RetainedMemory.Update(2, "ScannerType", CStr(cmbx_ScannerType.SelectedItem))
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Scanner Settings - Scanner Type ({CStr(cmbx_ScannerType.SelectedItem)})")
             End If
         End If
     End Sub
@@ -257,6 +261,7 @@ Public Class FormSetting
             PublicVariables.AutoDeleteEnabled = btnState
             SQLSetAutoDeleteMode(btnState)
             RetainedMemory.Update(6, "AutoDeleteEnabled", "0")
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Historical Auto Delete - Auto Delete (OFF)")
         Else
             If MsgBox(MsgBoxWarnStr1, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
                 SetButtonState(btnClicked, btnState, btnAutoDeleteEnabledValueTrue)
@@ -264,6 +269,7 @@ Public Class FormSetting
                 RetainedMemory.Update(6, "AutoDeleteEnabled", "1")
                 MsgBox(MsgBoxWarnStr2, MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
                 SQLSetAutoDeleteMode(btnState)
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Historical Auto Delete - Auto Delete (ON)")
             End If
         End If
 
@@ -291,9 +297,11 @@ Public Class FormSetting
 
     Private Sub txtbx_AutoDeleteDayAfter_Validated(sender As Object, e As EventArgs) Handles TextBox6.Validated
         Dim DayInStr As String = TextBox6.Text.Trim
+        Dim DayInStrOld As String = PublicVariables.AutoDeleteDayAfter
 
         PublicVariables.AutoDeleteDayAfter = DayInStr
         RetainedMemory.Update(7, "AutoDeleteDayAfter", DayInStr)
+        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Historical Auto Delete - Delete After (Day) set to {DayInStr} from {DayInStrOld}")
     End Sub
 
     Private Async Sub LoadLoginTable()
@@ -432,30 +440,46 @@ Public Class FormSetting
                 For Each txtbx As TextBox In txtbxArr
                     ' CSV Paths
                     If txtbx Is TextBox2 Then '8
+                        Dim tempValue As String = PublicVariables.CSVPathToProductionDetails
                         RetainedMemory.Update(8, "CSVPathToProductionDetails", txtbx.Text)
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] CSV Settings - Production Details PATH set to {txtbx.Text} from {tempValue}")
                     End If
                     If txtbx Is TextBox3 Then '9
+                        Dim tempValue As String = PublicVariables.CSVPathToAlarmHistory
                         RetainedMemory.Update(9, "CSVPathToAlarmHistory", txtbx.Text)
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] CSV Settings - Alarm History PATH set to {txtbx.Text} from {tempValue}")
                     End If
                     If txtbx Is TextBox4 Then '10
+                        Dim tempValue As String = PublicVariables.CSVPathToRecipeDetails
                         RetainedMemory.Update(10, "CSVPathToRecipeDetails", txtbx.Text)
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] CSV Settings - Recipe Details PATH set to {txtbx.Text} from {tempValue}")
                     End If
                     If txtbx Is TextBox5 Then '11
+                        Dim tempValue As String = PublicVariables.CSVPathToResultSummary
                         RetainedMemory.Update(11, "CSVPathToResultSummary", txtbx.Text)
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] CSV Settings - Result Summary PATH set to {txtbx.Text} from {tempValue}")
                     End If
 
                     ' CSV Delimiters
                     If txtbx Is TextBox7 Then '16
+                        Dim tempValue As String = PublicVariables.CSVDelimiterProductionDetails
                         RetainedMemory.Update(16, "CSVDelimiterProductionDetails", txtbx.Text)
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] CSV Settings - Production Details Delimiter set to {txtbx.Text} from {tempValue}")
                     End If
                     If txtbx Is TextBox8 Then '17
+                        Dim tempValue As String = PublicVariables.CSVDelimiterAlarmHistory
                         RetainedMemory.Update(17, "CSVDelimiterAlarmHistory", txtbx.Text)
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] CSV Settings - Alarm History Delimiter set to {txtbx.Text} from {tempValue}")
                     End If
                     If txtbx Is TextBox9 Then '18
+                        Dim tempValue As String = PublicVariables.CSVDelimiterRecipeDetails
                         RetainedMemory.Update(18, "CSVDelimiterRecipeDetails", txtbx.Text)
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] CSV Settings - Recipe Details Delimiter set to {txtbx.Text} from {tempValue}")
                     End If
                     If txtbx Is TextBox10 Then '19
+                        Dim tempValue As String = PublicVariables.CSVDelimiterResultSummary
                         RetainedMemory.Update(19, "CSVDelimiterResultSummary", txtbx.Text)
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] CSV Settings - Result Summary Delimiter set to {txtbx.Text} from {tempValue}")
                     End If
 
                     MsgBox("Changes Updated Sucessfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
@@ -697,6 +721,13 @@ Public Class FormSetting
 
                     ' Start Timer
                     timer_Buyoff.Start()
+
+                    ' Event Log
+                    If chkbx_DryRun.Checked = True Then
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Dry-Run Started")
+                    Else
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Buy-Off Run Started")
+                    End If
                 End If
             Else
                 ' Set CheckBoxes To Unchecked
@@ -720,6 +751,13 @@ Public Class FormSetting
 
                 ' End Timer
                 timer_Buyoff.Stop()
+
+                ' Event Log
+                If chkbx_DryRun.Checked = True Then
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Dry-Run Stopped | Duration : {lbl_Duration.Text} | Cycles : {lbl_CycleCount.Text}")
+                Else
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Buy-Off Run Stopped | Duration : {lbl_Duration.Text} | Cycles : {lbl_CycleCount.Text}")
+                End If
             End If
         End If
     End Sub
