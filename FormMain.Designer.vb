@@ -86,10 +86,6 @@ Partial Class FormMain
         Me.tabctrl_MainCtrl = New System.Windows.Forms.TabControl()
         Me.tabpg_Main = New System.Windows.Forms.TabPage()
         Me.panel_MainRight = New System.Windows.Forms.Panel()
-        Me.lbl_runcycletime = New System.Windows.Forms.Label()
-        Me.lbl_EstCycleTime = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.cmbx_GraphSelection = New System.Windows.Forms.ComboBox()
         Me.dsp_GraphSelection = New System.Windows.Forms.Label()
         Me.tabctrl_SubMain = New System.Windows.Forms.TabControl()
@@ -445,6 +441,10 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lbl_EstCycleTime = New System.Windows.Forms.Label()
+        Me.lbl_runcycletime = New System.Windows.Forms.Label()
         Me.panel_FormControl.SuspendLayout()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
@@ -766,40 +766,6 @@ Partial Class FormMain
         Me.panel_MainRight.Name = "panel_MainRight"
         Me.panel_MainRight.Size = New System.Drawing.Size(936, 671)
         Me.panel_MainRight.TabIndex = 0
-        '
-        'lbl_runcycletime
-        '
-        Me.lbl_runcycletime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_runcycletime.Location = New System.Drawing.Point(712, 634)
-        Me.lbl_runcycletime.Name = "lbl_runcycletime"
-        Me.lbl_runcycletime.Size = New System.Drawing.Size(100, 25)
-        Me.lbl_runcycletime.TabIndex = 16
-        '
-        'lbl_EstCycleTime
-        '
-        Me.lbl_EstCycleTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_EstCycleTime.Location = New System.Drawing.Point(194, 634)
-        Me.lbl_EstCycleTime.Name = "lbl_EstCycleTime"
-        Me.lbl_EstCycleTime.Size = New System.Drawing.Size(100, 25)
-        Me.lbl_EstCycleTime.TabIndex = 15
-        '
-        'Label5
-        '
-        Me.Label5.Location = New System.Drawing.Point(572, 634)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(134, 25)
-        Me.Label5.TabIndex = 14
-        Me.Label5.Text = "Running Cycle Time:"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label2
-        '
-        Me.Label2.Location = New System.Drawing.Point(42, 634)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(134, 25)
-        Me.Label2.TabIndex = 13
-        Me.Label2.Text = "Estimated Cycle Time:"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'cmbx_GraphSelection
         '
@@ -5055,6 +5021,40 @@ Partial Class FormMain
         Me.lbl_OperationMode.TabIndex = 34
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label2
+        '
+        Me.Label2.Location = New System.Drawing.Point(42, 634)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(134, 25)
+        Me.Label2.TabIndex = 13
+        Me.Label2.Text = "Estimated Cycle Time:"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label5
+        '
+        Me.Label5.Location = New System.Drawing.Point(572, 634)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(134, 25)
+        Me.Label5.TabIndex = 14
+        Me.Label5.Text = "Running Cycle Time:"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_EstCycleTime
+        '
+        Me.lbl_EstCycleTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_EstCycleTime.Location = New System.Drawing.Point(194, 634)
+        Me.lbl_EstCycleTime.Name = "lbl_EstCycleTime"
+        Me.lbl_EstCycleTime.Size = New System.Drawing.Size(100, 25)
+        Me.lbl_EstCycleTime.TabIndex = 15
+        '
+        'lbl_runcycletime
+        '
+        Me.lbl_runcycletime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_runcycletime.Location = New System.Drawing.Point(712, 634)
+        Me.lbl_runcycletime.Name = "lbl_runcycletime"
+        Me.lbl_runcycletime.Size = New System.Drawing.Size(100, 25)
+        Me.lbl_runcycletime.TabIndex = 16
         '
         'FormMain
         '
