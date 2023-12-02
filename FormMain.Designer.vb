@@ -217,13 +217,12 @@ Partial Class FormMain
         Me.tabpg_StatusDevice = New System.Windows.Forms.TabPage()
         Me.dsp_GenCondStatus = New System.Windows.Forms.Label()
         Me.dsp_FlwTempCtrlIO = New System.Windows.Forms.Label()
-        Me.dsp_TankStatus = New System.Windows.Forms.Label()
         Me.dsp_PumpStatus = New System.Windows.Forms.Label()
         Me.dsp_PumpIO = New System.Windows.Forms.Label()
         Me.panel_GenCondStatus = New System.Windows.Forms.Panel()
         Me.lbl_RecipeSelectionOK = New System.Windows.Forms.Label()
         Me.dsp_NoAlarm = New System.Windows.Forms.Label()
-        Me.lbl_NoAlarm = New System.Windows.Forms.Label()
+        Me.lbl_Alarm = New System.Windows.Forms.Label()
         Me.dsp_AutoRunning = New System.Windows.Forms.Label()
         Me.lbl_ScannerBypass = New System.Windows.Forms.Label()
         Me.lbl_SafetyConOK = New System.Windows.Forms.Label()
@@ -233,36 +232,20 @@ Partial Class FormMain
         Me.dsp_ScannerBypass = New System.Windows.Forms.Label()
         Me.dsp_SafetyConOK = New System.Windows.Forms.Label()
         Me.dsp_AutoSeqComplete = New System.Windows.Forms.Label()
-        Me.panel_TankStatus = New System.Windows.Forms.Panel()
-        Me.lbl_TankDrainValve = New System.Windows.Forms.Label()
-        Me.dsp_TankFilling = New System.Windows.Forms.Label()
-        Me.lbl_TankFillValve = New System.Windows.Forms.Label()
-        Me.dsp_TankFillValve = New System.Windows.Forms.Label()
-        Me.lbl_TankDraining = New System.Windows.Forms.Label()
-        Me.lbl_TankFilling = New System.Windows.Forms.Label()
-        Me.dsp_TankDrainValve = New System.Windows.Forms.Label()
-        Me.dsp_TankDraining = New System.Windows.Forms.Label()
         Me.panel_FlwTempCtrlIO = New System.Windows.Forms.Panel()
         Me.lbl_FlwAlarm = New System.Windows.Forms.Label()
         Me.dsp_FlwAlarm = New System.Windows.Forms.Label()
         Me.dsp_TempALM1 = New System.Windows.Forms.Label()
         Me.lbl_TempALM1 = New System.Windows.Forms.Label()
-        Me.panel_PumpIORight = New System.Windows.Forms.Panel()
-        Me.lbl_PumpEnable = New System.Windows.Forms.Label()
-        Me.dsp_PumpReset = New System.Windows.Forms.Label()
-        Me.dsp_PumpEnable = New System.Windows.Forms.Label()
-        Me.lbl_PumpReset = New System.Windows.Forms.Label()
-        Me.lbl_PumpMode = New System.Windows.Forms.Label()
-        Me.dsp_PumpMode = New System.Windows.Forms.Label()
         Me.panel_PumpStatus = New System.Windows.Forms.Panel()
         Me.lbl_PumpSetReference = New System.Windows.Forms.Label()
         Me.dsp_PumpFilterDrain = New System.Windows.Forms.Label()
         Me.dsp_PumpFilterVent = New System.Windows.Forms.Label()
-        Me.lbl_PumpFilterDrain = New System.Windows.Forms.Label()
+        Me.lbl_Tankhealthy = New System.Windows.Forms.Label()
         Me.dsp_PumpPressure = New System.Windows.Forms.Label()
         Me.dsp_PumpSetReference = New System.Windows.Forms.Label()
         Me.lbl_PumpPressure = New System.Windows.Forms.Label()
-        Me.lbl_PumpFilterVent = New System.Windows.Forms.Label()
+        Me.lbl_TankAutofill = New System.Windows.Forms.Label()
         Me.panel_PumpIOLeft = New System.Windows.Forms.Panel()
         Me.lbl_PumpWarning = New System.Windows.Forms.Label()
         Me.dsp_PumpWarning = New System.Windows.Forms.Label()
@@ -445,6 +428,8 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
+        Me.lbl_JigSelect_ok = New System.Windows.Forms.Label()
+        Me.dsp_JigSelect_ok = New System.Windows.Forms.Label()
         Me.panel_FormControl.SuspendLayout()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
@@ -481,9 +466,7 @@ Partial Class FormMain
         CType(Me.dgv_DigitalInput, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabpg_StatusDevice.SuspendLayout()
         Me.panel_GenCondStatus.SuspendLayout()
-        Me.panel_TankStatus.SuspendLayout()
         Me.panel_FlwTempCtrlIO.SuspendLayout()
-        Me.panel_PumpIORight.SuspendLayout()
         Me.panel_PumpStatus.SuspendLayout()
         Me.panel_PumpIOLeft.SuspendLayout()
         Me.tabpg_ManualCtrl.SuspendLayout()
@@ -2399,13 +2382,10 @@ Partial Class FormMain
         Me.tabpg_StatusDevice.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.tabpg_StatusDevice.Controls.Add(Me.dsp_GenCondStatus)
         Me.tabpg_StatusDevice.Controls.Add(Me.dsp_FlwTempCtrlIO)
-        Me.tabpg_StatusDevice.Controls.Add(Me.dsp_TankStatus)
         Me.tabpg_StatusDevice.Controls.Add(Me.dsp_PumpStatus)
         Me.tabpg_StatusDevice.Controls.Add(Me.dsp_PumpIO)
         Me.tabpg_StatusDevice.Controls.Add(Me.panel_GenCondStatus)
-        Me.tabpg_StatusDevice.Controls.Add(Me.panel_TankStatus)
         Me.tabpg_StatusDevice.Controls.Add(Me.panel_FlwTempCtrlIO)
-        Me.tabpg_StatusDevice.Controls.Add(Me.panel_PumpIORight)
         Me.tabpg_StatusDevice.Controls.Add(Me.panel_PumpStatus)
         Me.tabpg_StatusDevice.Controls.Add(Me.panel_PumpIOLeft)
         Me.tabpg_StatusDevice.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2436,16 +2416,6 @@ Partial Class FormMain
         Me.dsp_FlwTempCtrlIO.Text = "Flowmeter and Temperature Controller IO"
         Me.dsp_FlwTempCtrlIO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'dsp_TankStatus
-        '
-        Me.dsp_TankStatus.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_TankStatus.Location = New System.Drawing.Point(480, 281)
-        Me.dsp_TankStatus.Name = "dsp_TankStatus"
-        Me.dsp_TankStatus.Size = New System.Drawing.Size(343, 35)
-        Me.dsp_TankStatus.TabIndex = 9
-        Me.dsp_TankStatus.Text = "Tank Status"
-        Me.dsp_TankStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'dsp_PumpStatus
         '
         Me.dsp_PumpStatus.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2453,7 +2423,7 @@ Partial Class FormMain
         Me.dsp_PumpStatus.Name = "dsp_PumpStatus"
         Me.dsp_PumpStatus.Size = New System.Drawing.Size(343, 35)
         Me.dsp_PumpStatus.TabIndex = 9
-        Me.dsp_PumpStatus.Text = "Pump Status"
+        Me.dsp_PumpStatus.Text = "Tank Status"
         Me.dsp_PumpStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dsp_PumpIO
@@ -2469,9 +2439,11 @@ Partial Class FormMain
         'panel_GenCondStatus
         '
         Me.panel_GenCondStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_GenCondStatus.Controls.Add(Me.lbl_JigSelect_ok)
+        Me.panel_GenCondStatus.Controls.Add(Me.dsp_JigSelect_ok)
         Me.panel_GenCondStatus.Controls.Add(Me.lbl_RecipeSelectionOK)
         Me.panel_GenCondStatus.Controls.Add(Me.dsp_NoAlarm)
-        Me.panel_GenCondStatus.Controls.Add(Me.lbl_NoAlarm)
+        Me.panel_GenCondStatus.Controls.Add(Me.lbl_Alarm)
         Me.panel_GenCondStatus.Controls.Add(Me.dsp_AutoRunning)
         Me.panel_GenCondStatus.Controls.Add(Me.lbl_ScannerBypass)
         Me.panel_GenCondStatus.Controls.Add(Me.lbl_SafetyConOK)
@@ -2483,7 +2455,7 @@ Partial Class FormMain
         Me.panel_GenCondStatus.Controls.Add(Me.dsp_AutoSeqComplete)
         Me.panel_GenCondStatus.Location = New System.Drawing.Point(1436, 59)
         Me.panel_GenCondStatus.Name = "panel_GenCondStatus"
-        Me.panel_GenCondStatus.Size = New System.Drawing.Size(250, 391)
+        Me.panel_GenCondStatus.Size = New System.Drawing.Size(250, 453)
         Me.panel_GenCondStatus.TabIndex = 1
         '
         'lbl_RecipeSelectionOK
@@ -2505,20 +2477,20 @@ Partial Class FormMain
         Me.dsp_NoAlarm.Name = "dsp_NoAlarm"
         Me.dsp_NoAlarm.Size = New System.Drawing.Size(125, 35)
         Me.dsp_NoAlarm.TabIndex = 11
-        Me.dsp_NoAlarm.Text = "No Alarm in Machine :"
+        Me.dsp_NoAlarm.Text = "Alarm in Machine :"
         Me.dsp_NoAlarm.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'lbl_NoAlarm
+        'lbl_Alarm
         '
-        Me.lbl_NoAlarm.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_NoAlarm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_NoAlarm.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_NoAlarm.Location = New System.Drawing.Point(161, 144)
-        Me.lbl_NoAlarm.Name = "lbl_NoAlarm"
-        Me.lbl_NoAlarm.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_NoAlarm.TabIndex = 10
-        Me.lbl_NoAlarm.Text = "OFF"
-        Me.lbl_NoAlarm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Alarm.BackColor = System.Drawing.SystemColors.Control
+        Me.lbl_Alarm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Alarm.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Alarm.Location = New System.Drawing.Point(161, 144)
+        Me.lbl_Alarm.Name = "lbl_Alarm"
+        Me.lbl_Alarm.Size = New System.Drawing.Size(60, 25)
+        Me.lbl_Alarm.TabIndex = 10
+        Me.lbl_Alarm.Text = "OFF"
+        Me.lbl_Alarm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dsp_AutoRunning
         '
@@ -2556,7 +2528,7 @@ Partial Class FormMain
         '
         'lbl_AutoRunning
         '
-        Me.lbl_AutoRunning.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_AutoRunning.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_AutoRunning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_AutoRunning.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_AutoRunning.Location = New System.Drawing.Point(161, 35)
@@ -2618,110 +2590,6 @@ Partial Class FormMain
         Me.dsp_AutoSeqComplete.Text = "Auto Sequence Completed :"
         Me.dsp_AutoSeqComplete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'panel_TankStatus
-        '
-        Me.panel_TankStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panel_TankStatus.Controls.Add(Me.lbl_TankDrainValve)
-        Me.panel_TankStatus.Controls.Add(Me.dsp_TankFilling)
-        Me.panel_TankStatus.Controls.Add(Me.lbl_TankFillValve)
-        Me.panel_TankStatus.Controls.Add(Me.dsp_TankFillValve)
-        Me.panel_TankStatus.Controls.Add(Me.lbl_TankDraining)
-        Me.panel_TankStatus.Controls.Add(Me.lbl_TankFilling)
-        Me.panel_TankStatus.Controls.Add(Me.dsp_TankDrainValve)
-        Me.panel_TankStatus.Controls.Add(Me.dsp_TankDraining)
-        Me.panel_TankStatus.Location = New System.Drawing.Point(483, 319)
-        Me.panel_TankStatus.Name = "panel_TankStatus"
-        Me.panel_TankStatus.Size = New System.Drawing.Size(340, 211)
-        Me.panel_TankStatus.TabIndex = 1
-        '
-        'lbl_TankDrainValve
-        '
-        Me.lbl_TankDrainValve.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_TankDrainValve.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_TankDrainValve.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TankDrainValve.Location = New System.Drawing.Point(198, 167)
-        Me.lbl_TankDrainValve.Name = "lbl_TankDrainValve"
-        Me.lbl_TankDrainValve.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_TankDrainValve.TabIndex = 10
-        Me.lbl_TankDrainValve.Text = "OFF"
-        Me.lbl_TankDrainValve.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_TankFilling
-        '
-        Me.dsp_TankFilling.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_TankFilling.Location = New System.Drawing.Point(42, 14)
-        Me.dsp_TankFilling.Name = "dsp_TankFilling"
-        Me.dsp_TankFilling.Size = New System.Drawing.Size(150, 35)
-        Me.dsp_TankFilling.TabIndex = 11
-        Me.dsp_TankFilling.Text = "Tank Filling :"
-        Me.dsp_TankFilling.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lbl_TankFillValve
-        '
-        Me.lbl_TankFillValve.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_TankFillValve.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_TankFillValve.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TankFillValve.Location = New System.Drawing.Point(198, 69)
-        Me.lbl_TankFillValve.Name = "lbl_TankFillValve"
-        Me.lbl_TankFillValve.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_TankFillValve.TabIndex = 10
-        Me.lbl_TankFillValve.Text = "OFF"
-        Me.lbl_TankFillValve.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_TankFillValve
-        '
-        Me.dsp_TankFillValve.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_TankFillValve.Location = New System.Drawing.Point(42, 64)
-        Me.dsp_TankFillValve.Name = "dsp_TankFillValve"
-        Me.dsp_TankFillValve.Size = New System.Drawing.Size(150, 35)
-        Me.dsp_TankFillValve.TabIndex = 11
-        Me.dsp_TankFillValve.Text = "Tank Fill Valve :"
-        Me.dsp_TankFillValve.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lbl_TankDraining
-        '
-        Me.lbl_TankDraining.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_TankDraining.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_TankDraining.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TankDraining.Location = New System.Drawing.Point(198, 118)
-        Me.lbl_TankDraining.Name = "lbl_TankDraining"
-        Me.lbl_TankDraining.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_TankDraining.TabIndex = 10
-        Me.lbl_TankDraining.Text = "OFF"
-        Me.lbl_TankDraining.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_TankFilling
-        '
-        Me.lbl_TankFilling.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_TankFilling.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_TankFilling.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TankFilling.Location = New System.Drawing.Point(198, 19)
-        Me.lbl_TankFilling.Name = "lbl_TankFilling"
-        Me.lbl_TankFilling.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_TankFilling.TabIndex = 10
-        Me.lbl_TankFilling.Text = "OFF"
-        Me.lbl_TankFilling.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_TankDrainValve
-        '
-        Me.dsp_TankDrainValve.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_TankDrainValve.Location = New System.Drawing.Point(42, 162)
-        Me.dsp_TankDrainValve.Name = "dsp_TankDrainValve"
-        Me.dsp_TankDrainValve.Size = New System.Drawing.Size(150, 35)
-        Me.dsp_TankDrainValve.TabIndex = 11
-        Me.dsp_TankDrainValve.Text = "Tank Drain Valve :"
-        Me.dsp_TankDrainValve.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'dsp_TankDraining
-        '
-        Me.dsp_TankDraining.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_TankDraining.Location = New System.Drawing.Point(42, 113)
-        Me.dsp_TankDraining.Name = "dsp_TankDraining"
-        Me.dsp_TankDraining.Size = New System.Drawing.Size(150, 35)
-        Me.dsp_TankDraining.TabIndex = 11
-        Me.dsp_TankDraining.Text = "Tank Draining :"
-        Me.dsp_TankDraining.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'panel_FlwTempCtrlIO
         '
         Me.panel_FlwTempCtrlIO.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -2736,7 +2604,7 @@ Partial Class FormMain
         '
         'lbl_FlwAlarm
         '
-        Me.lbl_FlwAlarm.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_FlwAlarm.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_FlwAlarm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_FlwAlarm.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_FlwAlarm.Location = New System.Drawing.Point(198, 35)
@@ -2765,6 +2633,7 @@ Partial Class FormMain
         Me.dsp_TempALM1.TabIndex = 11
         Me.dsp_TempALM1.Text = "Temperature Contr." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Alarm :"
         Me.dsp_TempALM1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_TempALM1.Visible = False
         '
         'lbl_TempALM1
         '
@@ -2777,86 +2646,7 @@ Partial Class FormMain
         Me.lbl_TempALM1.TabIndex = 10
         Me.lbl_TempALM1.Text = "OFF"
         Me.lbl_TempALM1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'panel_PumpIORight
-        '
-        Me.panel_PumpIORight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panel_PumpIORight.Controls.Add(Me.lbl_PumpEnable)
-        Me.panel_PumpIORight.Controls.Add(Me.dsp_PumpReset)
-        Me.panel_PumpIORight.Controls.Add(Me.dsp_PumpEnable)
-        Me.panel_PumpIORight.Controls.Add(Me.lbl_PumpReset)
-        Me.panel_PumpIORight.Controls.Add(Me.lbl_PumpMode)
-        Me.panel_PumpIORight.Controls.Add(Me.dsp_PumpMode)
-        Me.panel_PumpIORight.Location = New System.Drawing.Point(306, 59)
-        Me.panel_PumpIORight.Name = "panel_PumpIORight"
-        Me.panel_PumpIORight.Size = New System.Drawing.Size(171, 211)
-        Me.panel_PumpIORight.TabIndex = 1
-        '
-        'lbl_PumpEnable
-        '
-        Me.lbl_PumpEnable.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbl_PumpEnable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_PumpEnable.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpEnable.Location = New System.Drawing.Point(87, 144)
-        Me.lbl_PumpEnable.Name = "lbl_PumpEnable"
-        Me.lbl_PumpEnable.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_PumpEnable.TabIndex = 10
-        Me.lbl_PumpEnable.Text = "ON"
-        Me.lbl_PumpEnable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_PumpReset
-        '
-        Me.dsp_PumpReset.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpReset.Location = New System.Drawing.Point(11, 30)
-        Me.dsp_PumpReset.Name = "dsp_PumpReset"
-        Me.dsp_PumpReset.Size = New System.Drawing.Size(70, 35)
-        Me.dsp_PumpReset.TabIndex = 11
-        Me.dsp_PumpReset.Text = "Pump Reset :"
-        Me.dsp_PumpReset.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'dsp_PumpEnable
-        '
-        Me.dsp_PumpEnable.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpEnable.Location = New System.Drawing.Point(11, 139)
-        Me.dsp_PumpEnable.Name = "dsp_PumpEnable"
-        Me.dsp_PumpEnable.Size = New System.Drawing.Size(70, 35)
-        Me.dsp_PumpEnable.TabIndex = 11
-        Me.dsp_PumpEnable.Text = "Pump Enable :"
-        Me.dsp_PumpEnable.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lbl_PumpReset
-        '
-        Me.lbl_PumpReset.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_PumpReset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_PumpReset.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpReset.Location = New System.Drawing.Point(87, 35)
-        Me.lbl_PumpReset.Name = "lbl_PumpReset"
-        Me.lbl_PumpReset.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_PumpReset.TabIndex = 10
-        Me.lbl_PumpReset.Text = "OFF"
-        Me.lbl_PumpReset.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_PumpMode
-        '
-        Me.lbl_PumpMode.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbl_PumpMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_PumpMode.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpMode.Location = New System.Drawing.Point(87, 90)
-        Me.lbl_PumpMode.Name = "lbl_PumpMode"
-        Me.lbl_PumpMode.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_PumpMode.TabIndex = 10
-        Me.lbl_PumpMode.Text = "ON"
-        Me.lbl_PumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_PumpMode
-        '
-        Me.dsp_PumpMode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpMode.Location = New System.Drawing.Point(11, 85)
-        Me.dsp_PumpMode.Name = "dsp_PumpMode"
-        Me.dsp_PumpMode.Size = New System.Drawing.Size(70, 35)
-        Me.dsp_PumpMode.TabIndex = 11
-        Me.dsp_PumpMode.Text = "Pump Mode :"
-        Me.dsp_PumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lbl_TempALM1.Visible = False
         '
         'panel_PumpStatus
         '
@@ -2864,11 +2654,11 @@ Partial Class FormMain
         Me.panel_PumpStatus.Controls.Add(Me.lbl_PumpSetReference)
         Me.panel_PumpStatus.Controls.Add(Me.dsp_PumpFilterDrain)
         Me.panel_PumpStatus.Controls.Add(Me.dsp_PumpFilterVent)
-        Me.panel_PumpStatus.Controls.Add(Me.lbl_PumpFilterDrain)
+        Me.panel_PumpStatus.Controls.Add(Me.lbl_Tankhealthy)
         Me.panel_PumpStatus.Controls.Add(Me.dsp_PumpPressure)
         Me.panel_PumpStatus.Controls.Add(Me.dsp_PumpSetReference)
         Me.panel_PumpStatus.Controls.Add(Me.lbl_PumpPressure)
-        Me.panel_PumpStatus.Controls.Add(Me.lbl_PumpFilterVent)
+        Me.panel_PumpStatus.Controls.Add(Me.lbl_TankAutofill)
         Me.panel_PumpStatus.Location = New System.Drawing.Point(137, 319)
         Me.panel_PumpStatus.Name = "panel_PumpStatus"
         Me.panel_PumpStatus.Size = New System.Drawing.Size(340, 211)
@@ -2879,7 +2669,7 @@ Partial Class FormMain
         Me.lbl_PumpSetReference.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_PumpSetReference.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_PumpSetReference.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpSetReference.Location = New System.Drawing.Point(210, 167)
+        Me.lbl_PumpSetReference.Location = New System.Drawing.Point(200, 167)
         Me.lbl_PumpSetReference.Name = "lbl_PumpSetReference"
         Me.lbl_PumpSetReference.Size = New System.Drawing.Size(60, 25)
         Me.lbl_PumpSetReference.TabIndex = 10
@@ -2889,39 +2679,39 @@ Partial Class FormMain
         'dsp_PumpFilterDrain
         '
         Me.dsp_PumpFilterDrain.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpFilterDrain.Location = New System.Drawing.Point(54, 14)
+        Me.dsp_PumpFilterDrain.Location = New System.Drawing.Point(26, 14)
         Me.dsp_PumpFilterDrain.Name = "dsp_PumpFilterDrain"
         Me.dsp_PumpFilterDrain.Size = New System.Drawing.Size(150, 35)
         Me.dsp_PumpFilterDrain.TabIndex = 11
-        Me.dsp_PumpFilterDrain.Text = "Pump Filter Drain :"
+        Me.dsp_PumpFilterDrain.Text = "Tank Healthy"
         Me.dsp_PumpFilterDrain.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_PumpFilterVent
         '
         Me.dsp_PumpFilterVent.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpFilterVent.Location = New System.Drawing.Point(54, 64)
+        Me.dsp_PumpFilterVent.Location = New System.Drawing.Point(26, 64)
         Me.dsp_PumpFilterVent.Name = "dsp_PumpFilterVent"
         Me.dsp_PumpFilterVent.Size = New System.Drawing.Size(150, 35)
         Me.dsp_PumpFilterVent.TabIndex = 11
-        Me.dsp_PumpFilterVent.Text = "Pump Filter Vent :"
+        Me.dsp_PumpFilterVent.Text = "Tank Auto Filling"
         Me.dsp_PumpFilterVent.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'lbl_PumpFilterDrain
+        'lbl_Tankhealthy
         '
-        Me.lbl_PumpFilterDrain.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_PumpFilterDrain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_PumpFilterDrain.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpFilterDrain.Location = New System.Drawing.Point(210, 19)
-        Me.lbl_PumpFilterDrain.Name = "lbl_PumpFilterDrain"
-        Me.lbl_PumpFilterDrain.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_PumpFilterDrain.TabIndex = 10
-        Me.lbl_PumpFilterDrain.Text = "OFF"
-        Me.lbl_PumpFilterDrain.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Tankhealthy.BackColor = System.Drawing.SystemColors.Control
+        Me.lbl_Tankhealthy.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_Tankhealthy.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Tankhealthy.Location = New System.Drawing.Point(200, 19)
+        Me.lbl_Tankhealthy.Name = "lbl_Tankhealthy"
+        Me.lbl_Tankhealthy.Size = New System.Drawing.Size(60, 25)
+        Me.lbl_Tankhealthy.TabIndex = 10
+        Me.lbl_Tankhealthy.Text = "OFF"
+        Me.lbl_Tankhealthy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dsp_PumpPressure
         '
         Me.dsp_PumpPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpPressure.Location = New System.Drawing.Point(54, 113)
+        Me.dsp_PumpPressure.Location = New System.Drawing.Point(26, 113)
         Me.dsp_PumpPressure.Name = "dsp_PumpPressure"
         Me.dsp_PumpPressure.Size = New System.Drawing.Size(150, 35)
         Me.dsp_PumpPressure.TabIndex = 11
@@ -2931,7 +2721,7 @@ Partial Class FormMain
         'dsp_PumpSetReference
         '
         Me.dsp_PumpSetReference.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpSetReference.Location = New System.Drawing.Point(54, 162)
+        Me.dsp_PumpSetReference.Location = New System.Drawing.Point(26, 162)
         Me.dsp_PumpSetReference.Name = "dsp_PumpSetReference"
         Me.dsp_PumpSetReference.Size = New System.Drawing.Size(150, 35)
         Me.dsp_PumpSetReference.TabIndex = 11
@@ -2943,24 +2733,24 @@ Partial Class FormMain
         Me.lbl_PumpPressure.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_PumpPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_PumpPressure.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpPressure.Location = New System.Drawing.Point(210, 118)
+        Me.lbl_PumpPressure.Location = New System.Drawing.Point(200, 118)
         Me.lbl_PumpPressure.Name = "lbl_PumpPressure"
         Me.lbl_PumpPressure.Size = New System.Drawing.Size(60, 25)
         Me.lbl_PumpPressure.TabIndex = 10
         Me.lbl_PumpPressure.Text = "22.11"
         Me.lbl_PumpPressure.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'lbl_PumpFilterVent
+        'lbl_TankAutofill
         '
-        Me.lbl_PumpFilterVent.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_PumpFilterVent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_PumpFilterVent.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpFilterVent.Location = New System.Drawing.Point(210, 69)
-        Me.lbl_PumpFilterVent.Name = "lbl_PumpFilterVent"
-        Me.lbl_PumpFilterVent.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_PumpFilterVent.TabIndex = 10
-        Me.lbl_PumpFilterVent.Text = "OFF"
-        Me.lbl_PumpFilterVent.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_TankAutofill.BackColor = System.Drawing.SystemColors.Control
+        Me.lbl_TankAutofill.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_TankAutofill.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_TankAutofill.Location = New System.Drawing.Point(200, 69)
+        Me.lbl_TankAutofill.Name = "lbl_TankAutofill"
+        Me.lbl_TankAutofill.Size = New System.Drawing.Size(60, 25)
+        Me.lbl_TankAutofill.TabIndex = 10
+        Me.lbl_TankAutofill.Text = "OFF"
+        Me.lbl_TankAutofill.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'panel_PumpIOLeft
         '
@@ -2973,7 +2763,7 @@ Partial Class FormMain
         Me.panel_PumpIOLeft.Controls.Add(Me.dsp_PumpState)
         Me.panel_PumpIOLeft.Location = New System.Drawing.Point(137, 59)
         Me.panel_PumpIOLeft.Name = "panel_PumpIOLeft"
-        Me.panel_PumpIOLeft.Size = New System.Drawing.Size(171, 211)
+        Me.panel_PumpIOLeft.Size = New System.Drawing.Size(340, 211)
         Me.panel_PumpIOLeft.TabIndex = 1
         '
         'lbl_PumpWarning
@@ -2981,7 +2771,7 @@ Partial Class FormMain
         Me.lbl_PumpWarning.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_PumpWarning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_PumpWarning.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpWarning.Location = New System.Drawing.Point(87, 144)
+        Me.lbl_PumpWarning.Location = New System.Drawing.Point(200, 144)
         Me.lbl_PumpWarning.Name = "lbl_PumpWarning"
         Me.lbl_PumpWarning.Size = New System.Drawing.Size(60, 25)
         Me.lbl_PumpWarning.TabIndex = 10
@@ -2991,9 +2781,9 @@ Partial Class FormMain
         'dsp_PumpWarning
         '
         Me.dsp_PumpWarning.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpWarning.Location = New System.Drawing.Point(11, 139)
+        Me.dsp_PumpWarning.Location = New System.Drawing.Point(26, 139)
         Me.dsp_PumpWarning.Name = "dsp_PumpWarning"
-        Me.dsp_PumpWarning.Size = New System.Drawing.Size(70, 35)
+        Me.dsp_PumpWarning.Size = New System.Drawing.Size(150, 35)
         Me.dsp_PumpWarning.TabIndex = 11
         Me.dsp_PumpWarning.Text = "Pump Warning :"
         Me.dsp_PumpWarning.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -3003,7 +2793,7 @@ Partial Class FormMain
         Me.lbl_PumpError.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_PumpError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_PumpError.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpError.Location = New System.Drawing.Point(87, 90)
+        Me.lbl_PumpError.Location = New System.Drawing.Point(200, 90)
         Me.lbl_PumpError.Name = "lbl_PumpError"
         Me.lbl_PumpError.Size = New System.Drawing.Size(60, 25)
         Me.lbl_PumpError.TabIndex = 10
@@ -3013,19 +2803,19 @@ Partial Class FormMain
         'dsp_PumpError
         '
         Me.dsp_PumpError.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpError.Location = New System.Drawing.Point(11, 85)
+        Me.dsp_PumpError.Location = New System.Drawing.Point(26, 85)
         Me.dsp_PumpError.Name = "dsp_PumpError"
-        Me.dsp_PumpError.Size = New System.Drawing.Size(70, 35)
+        Me.dsp_PumpError.Size = New System.Drawing.Size(150, 35)
         Me.dsp_PumpError.TabIndex = 11
         Me.dsp_PumpError.Text = "Pump Error :"
         Me.dsp_PumpError.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lbl_PumpState
         '
-        Me.lbl_PumpState.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_PumpState.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_PumpState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_PumpState.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpState.Location = New System.Drawing.Point(87, 35)
+        Me.lbl_PumpState.Location = New System.Drawing.Point(200, 35)
         Me.lbl_PumpState.Name = "lbl_PumpState"
         Me.lbl_PumpState.Size = New System.Drawing.Size(60, 25)
         Me.lbl_PumpState.TabIndex = 10
@@ -3035,9 +2825,9 @@ Partial Class FormMain
         'dsp_PumpState
         '
         Me.dsp_PumpState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpState.Location = New System.Drawing.Point(11, 30)
+        Me.dsp_PumpState.Location = New System.Drawing.Point(26, 30)
         Me.dsp_PumpState.Name = "dsp_PumpState"
-        Me.dsp_PumpState.Size = New System.Drawing.Size(70, 35)
+        Me.dsp_PumpState.Size = New System.Drawing.Size(150, 35)
         Me.dsp_PumpState.TabIndex = 11
         Me.dsp_PumpState.Text = "Pump State :"
         Me.dsp_PumpState.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -5056,6 +4846,28 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lbl_JigSelect_ok
+        '
+        Me.lbl_JigSelect_ok.BackColor = System.Drawing.SystemColors.Control
+        Me.lbl_JigSelect_ok.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_JigSelect_ok.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_JigSelect_ok.Location = New System.Drawing.Point(161, 358)
+        Me.lbl_JigSelect_ok.Name = "lbl_JigSelect_ok"
+        Me.lbl_JigSelect_ok.Size = New System.Drawing.Size(60, 25)
+        Me.lbl_JigSelect_ok.TabIndex = 12
+        Me.lbl_JigSelect_ok.Text = "OFF"
+        Me.lbl_JigSelect_ok.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_JigSelect_ok
+        '
+        Me.dsp_JigSelect_ok.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_JigSelect_ok.Location = New System.Drawing.Point(30, 353)
+        Me.dsp_JigSelect_ok.Name = "dsp_JigSelect_ok"
+        Me.dsp_JigSelect_ok.Size = New System.Drawing.Size(125, 35)
+        Me.dsp_JigSelect_ok.TabIndex = 13
+        Me.dsp_JigSelect_ok.Text = "Jig Selection" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "OK :"
+        Me.dsp_JigSelect_ok.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5113,9 +4925,7 @@ Partial Class FormMain
         CType(Me.dgv_DigitalInput, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_StatusDevice.ResumeLayout(False)
         Me.panel_GenCondStatus.ResumeLayout(False)
-        Me.panel_TankStatus.ResumeLayout(False)
         Me.panel_FlwTempCtrlIO.ResumeLayout(False)
-        Me.panel_PumpIORight.ResumeLayout(False)
         Me.panel_PumpStatus.ResumeLayout(False)
         Me.panel_PumpIOLeft.ResumeLayout(False)
         Me.tabpg_ManualCtrl.ResumeLayout(False)
@@ -5246,13 +5056,12 @@ Partial Class FormMain
     Friend WithEvents tabpg_StatusDevice As TabPage
     Friend WithEvents dsp_GenCondStatus As Label
     Friend WithEvents dsp_FlwTempCtrlIO As Label
-    Friend WithEvents dsp_TankStatus As Label
     Friend WithEvents dsp_PumpStatus As Label
     Friend WithEvents dsp_PumpIO As Label
     Friend WithEvents panel_GenCondStatus As Panel
     Friend WithEvents lbl_RecipeSelectionOK As Label
     Friend WithEvents dsp_NoAlarm As Label
-    Friend WithEvents lbl_NoAlarm As Label
+    Friend WithEvents lbl_Alarm As Label
     Friend WithEvents dsp_AutoRunning As Label
     Friend WithEvents lbl_ScannerBypass As Label
     Friend WithEvents lbl_SafetyConOK As Label
@@ -5262,36 +5071,20 @@ Partial Class FormMain
     Friend WithEvents dsp_ScannerBypass As Label
     Friend WithEvents dsp_SafetyConOK As Label
     Friend WithEvents dsp_AutoSeqComplete As Label
-    Friend WithEvents panel_TankStatus As Panel
-    Friend WithEvents lbl_TankDrainValve As Label
-    Friend WithEvents dsp_TankFilling As Label
-    Friend WithEvents lbl_TankFillValve As Label
-    Friend WithEvents dsp_TankFillValve As Label
-    Friend WithEvents lbl_TankDraining As Label
-    Friend WithEvents lbl_TankFilling As Label
-    Friend WithEvents dsp_TankDrainValve As Label
-    Friend WithEvents dsp_TankDraining As Label
     Friend WithEvents panel_FlwTempCtrlIO As Panel
     Friend WithEvents lbl_FlwAlarm As Label
     Friend WithEvents dsp_FlwAlarm As Label
     Friend WithEvents dsp_TempALM1 As Label
     Friend WithEvents lbl_TempALM1 As Label
-    Friend WithEvents panel_PumpIORight As Panel
-    Friend WithEvents lbl_PumpEnable As Label
-    Friend WithEvents dsp_PumpReset As Label
-    Friend WithEvents dsp_PumpEnable As Label
-    Friend WithEvents lbl_PumpReset As Label
-    Friend WithEvents lbl_PumpMode As Label
-    Friend WithEvents dsp_PumpMode As Label
     Friend WithEvents panel_PumpStatus As Panel
     Friend WithEvents lbl_PumpSetReference As Label
     Friend WithEvents dsp_PumpFilterDrain As Label
     Friend WithEvents dsp_PumpFilterVent As Label
-    Friend WithEvents lbl_PumpFilterDrain As Label
+    Friend WithEvents lbl_Tankhealthy As Label
     Friend WithEvents dsp_PumpPressure As Label
     Friend WithEvents dsp_PumpSetReference As Label
     Friend WithEvents lbl_PumpPressure As Label
-    Friend WithEvents lbl_PumpFilterVent As Label
+    Friend WithEvents lbl_TankAutofill As Label
     Friend WithEvents panel_PumpIOLeft As Panel
     Friend WithEvents lbl_PumpWarning As Label
     Friend WithEvents dsp_PumpWarning As Label
@@ -5539,4 +5332,6 @@ Partial Class FormMain
     Friend WithEvents lbl_EstCycleTime As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents lbl_JigSelect_ok As Label
+    Friend WithEvents dsp_JigSelect_ok As Label
 End Class

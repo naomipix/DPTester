@@ -15,6 +15,9 @@ Public Class FormSetting
     Dim btnSQLAutoBackupEnabledValueTrue As String = "OFF"
     Dim btnSQLAutoBackupEnabledValueFalse As String = "ON"
 
+    ' Define Label Array
+    Public lblArray(18) As Label
+
     Private Sub FormSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Always Maximize
         Me.WindowState = FormWindowState.Maximized
@@ -572,20 +575,24 @@ Public Class FormSetting
             btn_ResetValve17, btn_ResetValve18, btn_ResetValve19', btn_ResetValve20, btn_ResetValve21
         }
 
-        ' Define Label Array
-        Dim lblArray As Label() = {
-            lbl_Valve1, lbl_Valve2, lbl_Valve3, lbl_Valve4, lbl_Valve5, lbl_Valve6, lbl_Valve7, lbl_Valve8, lbl_Valve9, lbl_Valve10, lbl_Valve11,
-            lbl_Valve12, lbl_Valve13, lbl_Valve14, lbl_Valve15, lbl_Valve16, lbl_Valve17, lbl_Valve18, lbl_Valve19', lbl_Valve20, lbl_Valve21
-        }
+
 
         For i As Integer = 0 To btnArray.Length - 1
             If btnClicked Is btnArray(i) Then
                 If MsgBox($"Are you sure to Reset Tool Counter for [Valve-{i + 1}]?", MsgBoxStyle.Question Or MsgBoxStyle.YesNoCancel, "Question") = MsgBoxResult.Yes Then
-                    MsgBox("?reset")
+                    If i < 16 Then
+                        ToolCounterreset(0)(i) = True
+                    Else
+                        ToolCounterreset(1)(i - 16) = True
+                    End If
+                    MsgBox($"[Valve-{i + 1}] Tool Counter Resetted", MsgBoxStyle.OkOnly, "Information")
                 End If
             End If
         Next
     End Sub
+
+
+
 
 #End Region
 
@@ -1430,5 +1437,16 @@ Public Class FormSetting
         End If
     End Sub
 
+
+
 #End Region
+
+
+
+
+
+
+
+
+
 End Class

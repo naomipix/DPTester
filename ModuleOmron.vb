@@ -14,8 +14,8 @@ Module ModuleOmron
     Public DOut(9)() As Boolean 'Consists of DM610-DM619
     Public AIn(19) As Decimal 'Consists of DM620-DM659
     Public AOut(9) As Decimal 'Consists of DM660-DM679
-    Public Alarm(9)() As Boolean 'Consists of DM700-DM709
-    Public Warning(9)() As Boolean 'Consists of DM710-DM719
+    Public Alarm(19)() As Boolean 'Consists of DM700-DM709
+    'Public Warning(9)() As Boolean 'Consists of DM710-DM719
     'Public EXEIPFetchManualCtrl(212) As Byte ' Consists of DM3 to DM8
     'Public EXEIPFetchPLCStatus(200) As Byte ' Consists of DM500 to DM599
     'Public EXEIPPut(498) As Byte
@@ -28,10 +28,12 @@ Module ModuleOmron
     Public WithEvents Calseqtimer As New Timer()
     Public WithEvents Resultcapturetimer As New Timer()
     Public PLCstatus(2)() As Boolean
+    Public ToolCounterreset(1)() As Boolean
     Public PCStatus(2)() As Boolean
     Public dtAlarm As New DataTable
     Public Currentalarm As New Dictionary(Of Integer, Object)
     Public startindex As Integer = 0
+    Public Currentindex As Integer = 0
     Public Cal_MessageNo As Integer = 0
     Public dtCalibrationmsg As New DataTable
     Public CalrecordValue As Boolean
@@ -85,6 +87,11 @@ Module ModuleOmron
             Next
             For i As Integer = 0 To 2
                 PCStatus(i) = Int2BoolArr(FINSOutput(i))
+
+            Next
+            For i As Integer = 0 To 1
+                ToolCounterreset(i) = Int2BoolArr(FINSOutput(i))
+
             Next
             PLCtimer.Interval = 200
             PLCtimer.Enabled = True
@@ -93,7 +100,7 @@ Module ModuleOmron
             dtCalibrationmsg = SQL.ReadRecords("select * from CalibrationMessage")
             dtMainmsg = SQL.ReadRecords("select * from ProcessMessage")
             Alarmtimer.Interval = 2000
-            Currentalarm.Add(0, "Machine in Alarm Condition")
+
             Calseqtimer.Interval = 2000
             Resultcapturetimer.Interval = 1000
         Catch ex As Exception
@@ -1296,7 +1303,7 @@ Module ModuleOmron
                         Currentalarm.Add(alarmid, alarmdescription.ToString)
 
                         alarmmessage.Item("id") = alarmid
-                        alarmmessage.Item("S.No") = Currentalarm.Count
+                        alarmmessage.Item("S.No") = Mainalarm.Rows.Count + 1
                         alarmmessage.Item("Trigger Time") = FormMain.lbl_DateTimeClock.Text
                         alarmmessage.Item("Description") = dtAlarm.Rows((i * 16) + j).Item("description")
                         alarmmessage.Item("Alarm Code") = alarmcode
@@ -1304,7 +1311,8 @@ Module ModuleOmron
                     End If
                 Else
                     If Alarm(i)(j) = False And Currentalarm.ContainsKey(dtAlarm.Rows((i * 16) + j).Item("id")) Then
-
+                        Alarmtimer.Enabled = False
+                        Currentindex = 0
                         If Currentalarm.Remove(dtAlarm.Rows((i * 16) + j).Item("id")) Then
                             Dim rows As DataRow()
                             Dim findrow As Integer
@@ -1321,23 +1329,18 @@ Module ModuleOmron
                             End If
 
                         End If
+
+                        Alarmtimer.Enabled = True
                     End If
                 End If
             Next
         Next
-
-
-        Return True
-    End Function
-
-    Public Function FetchWarning(start As Integer) As Boolean
-
-        For i As Integer = 0 To Warning.Length - 1
-            Warning(i) = Int2BoolArr(FINSinput(start + i))
-        Next
+        startindex = Currentalarm.Count - 1
 
         Return True
     End Function
+
+
 #End Region
 
 
@@ -1422,10 +1425,12 @@ Module ModuleOmron
         FetchPLC_Ain(120)
         FetchPLC_AOut(160)
         FetchAlarm(200)
+
         'Spiltting the Input into Boolean Array for Processing
 
         For i As Integer = 0 To 2
             PLCstatus(i) = Int2BoolArr(FINSinput(i))
+
         Next
 
 
@@ -1453,34 +1458,54 @@ Module ModuleOmron
         If DIn(1)(7) = True Then
             FormMain.lbl_MCPumpState.BackColor = Color.LimeGreen
             FormMain.lbl_PZonePumpState.BackColor = Color.LimeGreen
+            FormMain.lbl_PumpState.BackColor = Color.LimeGreen
+            FormMain.lbl_PumpState.ForeColor = SystemColors.Window
+            FormMain.lbl_PumpState.Text = "ON"
         Else
             FormMain.lbl_MCPumpState.BackColor = SystemColors.Window
             FormMain.lbl_PZonePumpState.BackColor = SystemColors.Window
+            FormMain.lbl_PumpState.BackColor = SystemColors.Window
+            FormMain.lbl_PumpState.ForeColor = SystemColors.ControlText
+            FormMain.lbl_PumpState.Text = "OFF"
         End If
 
         If DIn(1)(8) = True Then
             FormMain.lbl_MCPumpError.BackColor = SystemColors.Window
             FormMain.lbl_PZonePumpError.BackColor = SystemColors.Window
+            FormMain.lbl_PumpError.BackColor = SystemColors.Window
+            FormMain.lbl_PumpError.ForeColor = SystemColors.ControlText
+            FormMain.lbl_PumpError.Text = "ON"
         Else
             FormMain.lbl_MCPumpError.BackColor = Color.Red
             FormMain.lbl_PZonePumpError.BackColor = Color.Red
+            FormMain.lbl_PumpError.BackColor = Color.Red
+            FormMain.lbl_PumpError.ForeColor = SystemColors.Window
+            FormMain.lbl_PumpError.Text = "OFF"
         End If
 
         If DIn(1)(9) = True Then
             FormMain.lbl_MCPumpWarning.BackColor = SystemColors.Window
             FormMain.lbl_PZonePumpWarning.BackColor = SystemColors.Window
+            FormMain.lbl_PumpWarning.BackColor = SystemColors.Window
+            FormMain.lbl_PumpWarning.ForeColor = SystemColors.ControlText
+            FormMain.lbl_PumpWarning.Text = "ON"
         Else
             FormMain.lbl_MCPumpWarning.BackColor = Color.Red
             FormMain.lbl_PZonePumpWarning.BackColor = Color.Red
+            FormMain.lbl_PumpWarning.BackColor = Color.Red
+            FormMain.lbl_PumpWarning.ForeColor = SystemColors.Window
+            FormMain.lbl_PumpWarning.Text = "OFF"
         End If
 
         'Manual Tank Level Label Color Change based on sensor
         If DIn(1)(2) = True Then
             FormMain.lbl_TankOverflow.BackColor = Color.LimeGreen
             FormMain.lbl_PZoneTankOverflow.BackColor = Color.LimeGreen
+
         Else
             FormMain.lbl_TankOverflow.BackColor = SystemColors.Window
             FormMain.lbl_PZoneTankOverflow.BackColor = SystemColors.Window
+
         End If
 
         If DIn(1)(3) = True Then
@@ -1513,6 +1538,9 @@ Module ModuleOmron
         FormMain.lbl_OutletPress.Text = AIn(10).ToString
         FormMain.lbl_Flowmtr.Text = AIn(12).ToString
         FormMain.lbl_Temp.Text = AIn(13).ToString
+
+
+
 
 
 #End Region
@@ -1672,94 +1700,106 @@ Module ModuleOmron
 
 
 #Region "Mimic Panel Circuit Model 1"
-        'Manual valve Control Button Color change on Output on
-        For i As Integer = 0 To 15
+        Circuittimer.Interval = 100
+        Circuittimer.Enabled = True
+        'MimicPanel()
 
-            If DOut(1)(i) = False Then
+#End Region
 
-                ModuleCircuitModel.Lbl_ValvestatusArr(i).BackColor = SystemColors.Window
-                ModuleCircuitModel.Lbl_ValvestatusArr(i).ForeColor = SystemColors.ControlText
-            Else
 
-                ModuleCircuitModel.Lbl_ValvestatusArr(i).BackColor = Color.LimeGreen
-                ModuleCircuitModel.Lbl_ValvestatusArr(i).ForeColor = SystemColors.Window
-
-            End If
-
-        Next
-
-        For i As Integer = 0 To 2
-
-            If DOut(2)(i) = False Then
-
-                ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).BackColor = SystemColors.Window
-                ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.ControlText
-            Else
-
-                ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).BackColor = Color.LimeGreen
-                ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.Window
-            End If
-
-        Next
-
-        If FormCircuitModel1.btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-            For i As Integer = 0 To 18
-                Circuitcall(i) = 0
-                For j As Integer = 0 To pb_MCVCircuitArr(i + 1).Length - 1
-                    pb_MCVCircuitArr(i + 1)(j).Visible = False
-                    pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
-                    pb_MCVCircuitArr(i + 1)(j).SendToBack()
-                Next
-                For j As Integer = 0 To pb_MCVCircuitPathArr(i + 1).Length - 1
-                    'pb_MCVCircuitArr(i + 1)(j).Visible = False
-                    pb_MCVCircuitPathArr(i + 1)(j).BackColor = Color.Transparent
-                    pb_MCVCircuitPathArr(i + 1)(j).SendToBack()
-
-                Next
-            Next
+#Region "Device status screen status update"
+        'Device status screen status update
+        If PLCstatus(1)(0) = True Then
+            FormMain.lbl_Tankhealthy.BackColor = Color.LimeGreen
+            FormMain.lbl_Tankhealthy.ForeColor = SystemColors.Window
+            FormMain.lbl_Tankhealthy.Text = "ON"
+        Else
+            FormMain.lbl_Tankhealthy.BackColor = SystemColors.Window
+            FormMain.lbl_Tankhealthy.ForeColor = SystemColors.ControlText
+            FormMain.lbl_Tankhealthy.Text = "OFF"
         End If
-        FormCircuitModel1.txtbx_BackPressActual.Text = AIn(1).ToString
-        FormCircuitModel1.txtbx_N2PurgeActual.Text = AIn(0).ToString
-        FormCircuitModel1.lbl_InletPress.Text = AIn(9).ToString
-        FormCircuitModel1.lbl_OutletPress.Text = AIn(10).ToString
-        FormCircuitModel1.lbl_Flowmtr.Text = AIn(12).ToString
-        FormCircuitModel1.lbl_Temp.Text = AIn(13).ToString
 
-        'Circuit path and valve signal remove
-        For i As Integer = 0 To 15
+        If PLCstatus(1)(1) = True Then
+            FormMain.lbl_TankAutofill.BackColor = Color.LimeGreen
+            FormMain.lbl_TankAutofill.ForeColor = SystemColors.Window
+            FormMain.lbl_TankAutofill.Text = "ON"
+        Else
+            FormMain.lbl_TankAutofill.BackColor = SystemColors.Window
+            FormMain.lbl_TankAutofill.ForeColor = SystemColors.ControlText
+            FormMain.lbl_TankAutofill.Text = "OFF"
+        End If
 
-            If DOut(1)(i) = False Then
-                For j As Integer = 0 To pb_MCVCircuitArr(i + 1).Length - 1
-                    pb_MCVCircuitArr(i + 1)(j).Visible = False
-                    pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
-                    pb_MCVCircuitArr(i + 1)(j).SendToBack()
-                Next
-                For j As Integer = 0 To pb_MCVCircuitPathArr(i + 1).Length - 1
-                    'pb_MCVCircuitArr(i + 1)(j).Visible = False
-                    pb_MCVCircuitPathArr(i + 1)(j).BackColor = Color.Transparent
-                    pb_MCVCircuitPathArr(i + 1)(j).SendToBack()
-                Next
+        If DIn(1)(11) = True Then
+            FormMain.lbl_FlwAlarm.BackColor = Color.Red
+            FormMain.lbl_FlwAlarm.ForeColor = SystemColors.Window
+            FormMain.lbl_FlwAlarm.Text = "ON"
+        Else
+            FormMain.lbl_FlwAlarm.BackColor = SystemColors.Window
+            FormMain.lbl_FlwAlarm.ForeColor = SystemColors.ControlText
+            FormMain.lbl_FlwAlarm.Text = "OFF"
+        End If
 
-            End If
-        Next
 
-        For i As Integer = 0 To 2
+        If PLCstatus(0)(1) = True Then
+            FormMain.lbl_AutoRunning.BackColor = Color.LimeGreen
+            FormMain.lbl_AutoRunning.ForeColor = SystemColors.Window
+            FormMain.lbl_AutoRunning.Text = "ON"
+        Else
+            FormMain.lbl_AutoRunning.BackColor = SystemColors.Window
+            FormMain.lbl_AutoRunning.ForeColor = SystemColors.ControlText
+            FormMain.lbl_AutoRunning.Text = "OFF"
+        End If
 
-            If DOut(2)(i) = False Then
-                For j As Integer = 0 To pb_MCVCircuitArr(i + 17).Length - 1
-                    pb_MCVCircuitArr(i + 17)(j).Visible = False
-                    pb_MCVCircuitArr(i + 17)(j).BackColor = Color.Transparent
-                    pb_MCVCircuitArr(i + 17)(j).SendToBack()
-                Next
-                For j As Integer = 0 To pb_MCVCircuitPathArr(i + 17).Length - 1
-                    'pb_MCVCircuitArr(i + 1)(j).Visible = False
-                    pb_MCVCircuitPathArr(i + 17)(j).BackColor = Color.Transparent
-                    pb_MCVCircuitPathArr(i + 17)(j).SendToBack()
+        If PLCstatus(1)(11) = True Then
+            FormMain.lbl_AutoSeqComplete.BackColor = Color.LimeGreen
+            FormMain.lbl_AutoSeqComplete.ForeColor = SystemColors.Window
+            FormMain.lbl_AutoSeqComplete.Text = "ON"
+        Else
+            FormMain.lbl_AutoSeqComplete.BackColor = SystemColors.Window
+            FormMain.lbl_AutoSeqComplete.ForeColor = SystemColors.ControlText
+            FormMain.lbl_AutoSeqComplete.Text = "OFF"
+        End If
 
-                Next
-            End If
-        Next
+        If PLCstatus(0)(4) = True Then
+            FormMain.lbl_Alarm.BackColor = Color.Red
+            FormMain.lbl_Alarm.ForeColor = SystemColors.Window
+            FormMain.lbl_Alarm.Text = "ON"
+        Else
+            FormMain.lbl_Alarm.BackColor = SystemColors.Window
+            FormMain.lbl_Alarm.ForeColor = SystemColors.ControlText
+            FormMain.lbl_Alarm.Text = "OFF"
+        End If
 
+        If DIn(0)(4) = True Then
+            FormMain.lbl_SafetyConOK.BackColor = Color.LimeGreen
+            FormMain.lbl_SafetyConOK.ForeColor = SystemColors.Window
+            FormMain.lbl_SafetyConOK.Text = "ON"
+        Else
+            FormMain.lbl_SafetyConOK.BackColor = Color.Red
+            FormMain.lbl_SafetyConOK.ForeColor = SystemColors.ControlText
+            FormMain.lbl_SafetyConOK.Text = "OFF"
+        End If
+
+        If PLCstatus(1)(12) = True Then
+            FormMain.lbl_RecipeSelectionOK.BackColor = Color.LimeGreen
+            FormMain.lbl_RecipeSelectionOK.ForeColor = SystemColors.Window
+            FormMain.lbl_RecipeSelectionOK.Text = "ON"
+        Else
+            FormMain.lbl_RecipeSelectionOK.BackColor = SystemColors.Window
+            FormMain.lbl_RecipeSelectionOK.ForeColor = SystemColors.ControlText
+            FormMain.lbl_RecipeSelectionOK.Text = "OFF"
+        End If
+
+
+        If PLCstatus(1)(13) = True Then
+            FormMain.lbl_JigSelect_ok.BackColor = Color.LimeGreen
+            FormMain.lbl_JigSelect_ok.ForeColor = SystemColors.Window
+            FormMain.lbl_JigSelect_ok.Text = "ON"
+        Else
+            FormMain.lbl_JigSelect_ok.BackColor = SystemColors.Window
+            FormMain.lbl_JigSelect_ok.ForeColor = SystemColors.ControlText
+            FormMain.lbl_JigSelect_ok.Text = "OFF"
+        End If
 
 #End Region
 
@@ -1884,10 +1924,52 @@ Module ModuleOmron
 #End Region
 
 
+#Region "Tool Counter"
+        FormSetting.lblArray = {
+            FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
+            FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
+        }
+
+        For i As Integer = 0 To FormSetting.lblArray.Length - 1
+
+            FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
+
+        Next
+
+
+
+        FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
+        FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
+
+        If FINSOutput(10) > 0 Then
+            For i As Integer = 0 To 15
+                If FINSinput(50 + i * 2) = 0 Then
+                    ToolCounterreset(0)(i) = False
+                End If
+
+            Next
+        End If
+
+        If FINSOutput(11) > 0 Then
+            For i As Integer = 0 To 15
+                If FINSinput(80 + i * 2) = 0 Then
+                    ToolCounterreset(0)(i) = False
+                End If
+
+            Next
+        End If
+
+
+#End Region
+
+
+
+
         'Write the PLC Output
         Put_PCManualctrl()
         FINSWrite(0, 200)
         LabelStatusupdate()
+
     End Sub
 
 
@@ -1910,6 +1992,7 @@ Module ModuleOmron
 #Region "Top Label Status Update"
 
     Public Sub LabelStatusupdate()
+        'To Update the Status of the Header Bar in all Forms
         If PLCstatus(0)(4) = False And PLCstatus(0)(14) = False Then
 
             If Alarmtimer.Enabled = True Then
@@ -1920,76 +2003,170 @@ Module ModuleOmron
             If PLCstatus(0)(1) = True Then
                 FormMain.lbl_OperationMode.Text = "Auto Cycle Running"
                 FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormCalibration.lbl_OperationMode.Text = "Auto Cycle Running"
                 FormCalibration.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormMessageLog.lbl_OperationMode.Text = "Auto Cycle Running"
                 FormMessageLog.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormRecipeManagement.lbl_OperationMode.Text = "Auto Cycle Running"
                 FormRecipeManagement.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormResultGraph.lbl_OperationMode.Text = "Auto Cycle Running"
                 FormResultGraph.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormResultSummary.lbl_OperationMode.Text = "Auto Cycle Running"
                 FormResultSummary.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormSetting.lbl_OperationMode.Text = "Auto Cycle Running"
                 FormSetting.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
+                FormMain.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormCalibration.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormMessageLog.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormRecipeManagement.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormResultGraph.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormResultSummary.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
+
             End If
             If PLCstatus(0)(2) = True Then
                 FormMain.lbl_OperationMode.Text = "Manual Mode"
                 FormMain.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+
                 FormCalibration.lbl_OperationMode.Text = "Manual Mode"
                 FormCalibration.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+
                 FormMessageLog.lbl_OperationMode.Text = "Manual Mode"
                 FormMessageLog.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+
                 FormRecipeManagement.lbl_OperationMode.Text = "Manual Mode"
                 FormRecipeManagement.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+
                 FormResultGraph.lbl_OperationMode.Text = "Manual Mode"
                 FormResultGraph.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+
                 FormResultSummary.lbl_OperationMode.Text = "Manual Mode"
                 FormResultSummary.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+
                 FormSetting.lbl_OperationMode.Text = "Manual Mode"
                 FormSetting.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
+
+                FormMain.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormCalibration.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormMessageLog.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormRecipeManagement.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormResultGraph.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormResultSummary.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
+
             End If
 
             If PLCstatus(0)(1) = False And PLCstatus(0)(3) = True And PLCstatus(0)(2) = False Then
                 FormMain.lbl_OperationMode.Text = "Auto Mode"
                 FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormCalibration.lbl_OperationMode.Text = "Auto Mode"
                 FormCalibration.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormMessageLog.lbl_OperationMode.Text = "Auto Mode"
                 FormMessageLog.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormRecipeManagement.lbl_OperationMode.Text = "Auto Mode"
                 FormRecipeManagement.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormResultGraph.lbl_OperationMode.Text = "Auto Mode"
                 FormResultGraph.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormResultSummary.lbl_OperationMode.Text = "Auto Mode"
                 FormResultSummary.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
                 FormSetting.lbl_OperationMode.Text = "Auto Mode"
                 FormSetting.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
+
+                FormMain.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormCalibration.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormMessageLog.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormRecipeManagement.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormResultGraph.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormResultSummary.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
+
             End If
 
             If PLCstatus(0)(1) = False And PLCstatus(0)(2) = False And PLCstatus(0)(3) = False Then
                 FormMain.lbl_OperationMode.Text = "No Status"
                 FormMain.lbl_OperationMode.BackColor = Color.Gray
+
                 FormCalibration.lbl_OperationMode.Text = "No Status"
                 FormCalibration.lbl_OperationMode.BackColor = Color.Gray
+
                 FormMessageLog.lbl_OperationMode.Text = "No Status"
                 FormMessageLog.lbl_OperationMode.BackColor = Color.Gray
+
                 FormRecipeManagement.lbl_OperationMode.Text = "No Status"
                 FormRecipeManagement.lbl_OperationMode.BackColor = Color.Gray
+
                 FormResultGraph.lbl_OperationMode.Text = "No Status"
                 FormResultGraph.lbl_OperationMode.BackColor = Color.Gray
+
                 FormResultSummary.lbl_OperationMode.Text = "No Status"
                 FormResultSummary.lbl_OperationMode.BackColor = Color.Gray
+
                 FormSetting.lbl_OperationMode.Text = "No Status"
                 FormSetting.lbl_OperationMode.BackColor = Color.Gray
+
+                FormMain.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormCalibration.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormMessageLog.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormRecipeManagement.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormResultGraph.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormResultSummary.lbl_OperationMode.ForeColor = SystemColors.Window
+
+                FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
             End If
         Else
             If PLCstatus(0)(4) = True Or PLCstatus(0)(14) = True Then
 
+                If PLCstatus(0)(4) = True Then
+                    Currentalarm.Remove(0)
+                    If Not Currentalarm.ContainsKey(0) Then
+                        Currentalarm.Add(0, "Machine in Alarm Condition")
+                    End If
+                Else
+                    Currentalarm.Remove(0)
+                    Currentalarm.Add(0, "Machine in Warning Condition")
+                End If
+
                 'FormMain.lbl_OperationMode.BackColor = Color.Red
                 'FormMain.lbl_OperationMode.Text = "Machine in Alarm Condition"
+
                 If Alarmtimer.Enabled = False Then
-                    startindex = Currentalarm.Count
+
                     Alarmtimer.Enabled = True
                 End If
             End If
@@ -2000,29 +2177,58 @@ Module ModuleOmron
 
     Private Sub AlarmTimer_Ticks(sender As Object, e As EventArgs) Handles Alarmtimer.Tick
         Dim Value As KeyValuePair(Of Integer, Object)
+        Dim bgcolor As Color
+        Dim frcolor As Color
 
-        Value = Currentalarm.ElementAt(startindex - 1)
+
+        Value = Currentalarm.ElementAt(startindex - Currentindex)
+
+        If Value.Value.ToString.Substring(0, 3) = "ALM" Or Value.Value.ToString.Contains("Alarm") Then
+            bgcolor = Color.Red
+            frcolor = SystemColors.Window
+        End If
+        If Value.Value.ToString.Substring(0, 3) = "WAR" Or Value.Value.ToString.Contains("Warning") Then
+            bgcolor = Color.Yellow
+            frcolor = SystemColors.ControlText
+        End If
 
         FormMain.lbl_OperationMode.Text = Value.Value.ToString
-        FormMain.lbl_OperationMode.BackColor = Color.Red
-        FormCalibration.lbl_OperationMode.Text = Value.Value.ToString
-        FormCalibration.lbl_OperationMode.BackColor = Color.Red
-        FormMessageLog.lbl_OperationMode.Text = Value.Value.ToString
-        FormMessageLog.lbl_OperationMode.BackColor = Color.Red
-        FormRecipeManagement.lbl_OperationMode.Text = Value.Value.ToString
-        FormRecipeManagement.lbl_OperationMode.BackColor = Color.Red
-        FormResultGraph.lbl_OperationMode.Text = Value.Value.ToString
-        FormResultGraph.lbl_OperationMode.BackColor = Color.Red
-        FormResultSummary.lbl_OperationMode.Text = Value.Value.ToString
-        FormResultSummary.lbl_OperationMode.BackColor = Color.Red
-        FormSetting.lbl_OperationMode.Text = Value.Value.ToString
-        FormSetting.lbl_OperationMode.BackColor = Color.Red
+        FormMain.lbl_OperationMode.BackColor = bgcolor
+        FormMain.lbl_OperationMode.ForeColor = frcolor
 
-        If Not startindex <= 1 Then
-            startindex -= 1
+        FormCalibration.lbl_OperationMode.Text = Value.Value.ToString
+        FormCalibration.lbl_OperationMode.BackColor = bgcolor
+        FormCalibration.lbl_OperationMode.ForeColor = frcolor
+
+        FormMessageLog.lbl_OperationMode.Text = Value.Value.ToString
+        FormMessageLog.lbl_OperationMode.BackColor = bgcolor
+        FormMessageLog.lbl_OperationMode.ForeColor = frcolor
+
+        FormRecipeManagement.lbl_OperationMode.Text = Value.Value.ToString
+        FormRecipeManagement.lbl_OperationMode.BackColor = bgcolor
+        FormRecipeManagement.lbl_OperationMode.ForeColor = frcolor
+
+        FormResultGraph.lbl_OperationMode.Text = Value.Value.ToString
+        FormResultGraph.lbl_OperationMode.BackColor = bgcolor
+        FormResultGraph.lbl_OperationMode.ForeColor = frcolor
+
+        FormResultSummary.lbl_OperationMode.Text = Value.Value.ToString
+        FormResultSummary.lbl_OperationMode.BackColor = bgcolor
+        FormResultSummary.lbl_OperationMode.ForeColor = frcolor
+
+        FormSetting.lbl_OperationMode.Text = Value.Value.ToString
+        FormSetting.lbl_OperationMode.BackColor = bgcolor
+        FormSetting.lbl_OperationMode.ForeColor = frcolor
+
+
+
+
+        If Currentindex >= startindex Then
+            Currentindex = 0
         Else
-            startindex = Currentalarm.Count
+            Currentindex = Currentindex + 1
         End If
+
 
     End Sub
 
@@ -2102,7 +2308,7 @@ Module ModuleOmron
 
 
 
-
+#Region "Calibration sequence timer and Message"
     Private Sub CalSeqTimer_Ticks(sender As Object, e As EventArgs) Handles Calseqtimer.Tick
         If (PCStatus(1)(2) = True And FormCalibration.btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246)) Or PLCstatus(0)(4) = True Then
             PCStatus(1)(2) = False
@@ -2139,7 +2345,10 @@ Module ModuleOmron
 
     End Sub
 
+#End Region
 
+
+#Region "Main Sequence - Result capture, calculate and Message"
     Private Sub ResultCapture_Ticks(sender As Object, e As EventArgs) Handles Resultcapturetimer.Tick
         Dim serialusageid As Integer
 
@@ -2341,6 +2550,8 @@ Module ModuleOmron
     End Sub
 
 
+#End Region
+
 
     Public Sub CreateTable(str As String)
 
@@ -2373,6 +2584,100 @@ Module ModuleOmron
             dtresult.Columns.Add("Differential Pressure (kPa)")
         End If
     End Sub
+
+
+
+    Private Sub MimicPanel()
+        'Manual valve Control Button Color change on Output on
+        'For i As Integer = 0 To 15
+
+        '    If DOut(1)(i) = False Then
+
+        '        ModuleCircuitModel.Lbl_ValvestatusArr(i).BackColor = SystemColors.Window
+        '        ModuleCircuitModel.Lbl_ValvestatusArr(i).ForeColor = SystemColors.ControlText
+        '    Else
+
+        '        ModuleCircuitModel.Lbl_ValvestatusArr(i).BackColor = Color.LimeGreen
+        '        ModuleCircuitModel.Lbl_ValvestatusArr(i).ForeColor = SystemColors.Window
+
+        '    End If
+
+        'Next
+
+        'For i As Integer = 0 To 2
+
+        '    If DOut(2)(i) = False Then
+
+        '        ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).BackColor = SystemColors.Window
+        '        ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.ControlText
+        '    Else
+
+        '        ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).BackColor = Color.LimeGreen
+        '        ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.Window
+        '    End If
+
+        'Next
+
+        'If FormCircuitModel1.btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+        '    For i As Integer = 0 To 18
+        '        Circuitcall(i) = 0
+        '        For j As Integer = 0 To pb_MCVCircuitArr(i + 1).Length - 1
+        '            pb_MCVCircuitArr(i + 1)(j).Visible = False
+        '            pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
+        '            pb_MCVCircuitArr(i + 1)(j).SendToBack()
+        '        Next
+        '        For j As Integer = 0 To pb_MCVCircuitPathArr(i + 1).Length - 1
+        '            pb_MCVCircuitArr(i + 1)(j).Visible = False
+        '            pb_MCVCircuitPathArr(i + 1)(j).BackColor = Color.Transparent
+        '            pb_MCVCircuitPathArr(i + 1)(j).SendToBack()
+
+        '        Next
+        '    Next
+        'End If
+        'FormCircuitModel1.txtbx_BackPressActual.Text = AIn(1).ToString
+        'FormCircuitModel1.txtbx_N2PurgeActual.Text = AIn(0).ToString
+        'FormCircuitModel1.lbl_InletPress.Text = AIn(9).ToString
+        'FormCircuitModel1.lbl_OutletPress.Text = AIn(10).ToString
+        'FormCircuitModel1.lbl_Flowmtr.Text = AIn(12).ToString
+        'FormCircuitModel1.lbl_Temp.Text = AIn(13).ToString
+
+        'Circuit path and valve signal remove
+        'For i As Integer = 0 To 15
+
+        '    If DOut(1)(i) = False Then
+        '        For j As Integer = 0 To pb_MCVCircuitArr(i + 1).Length - 1
+        '            pb_MCVCircuitArr(i + 1)(j).Visible = False
+        '            pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
+        '            pb_MCVCircuitArr(i + 1)(j).SendToBack()
+        '        Next
+        '        For j As Integer = 0 To pb_MCVCircuitPathArr(i + 1).Length - 1
+        '            pb_MCVCircuitArr(i + 1)(j).Visible = False
+        '            pb_MCVCircuitPathArr(i + 1)(j).BackColor = Color.Transparent
+        '            pb_MCVCircuitPathArr(i + 1)(j).SendToBack()
+        '        Next
+
+        '    End If
+        'Next
+
+        'For i As Integer = 0 To 2
+
+        '    If DOut(2)(i) = False Then
+        '        For j As Integer = 0 To pb_MCVCircuitArr(i + 17).Length - 1
+        '            pb_MCVCircuitArr(i + 17)(j).Visible = False
+        '            pb_MCVCircuitArr(i + 17)(j).BackColor = Color.Transparent
+        '            pb_MCVCircuitArr(i + 17)(j).SendToBack()
+        '        Next
+        '        For j As Integer = 0 To pb_MCVCircuitPathArr(i + 17).Length - 1
+        '            pb_MCVCircuitArr(i + 1)(j).Visible = False
+        '            pb_MCVCircuitPathArr(i + 17)(j).BackColor = Color.Transparent
+        '            pb_MCVCircuitPathArr(i + 17)(j).SendToBack()
+
+        '        Next
+        '    End If
+        'Next
+
+    End Sub
+
 
 
 End Module

@@ -43,14 +43,22 @@
     </dependentAssembly>
   </dependency>
   <dependency>
+<<<<<<< HEAD
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DPTesterApp.exe" size="25498072">
+=======
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DPTesterApp.exe" size="25897432">
+>>>>>>> Vijay-PLC_PC_Interface_20231128
       <assemblyIdentity name="DPTesterApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+<<<<<<< HEAD
         <dsig:DigestValue>DdiBlQoHS8xAH7MLr7MjqVjtTo9xiuKZTMoln2bhCJY=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>QC5pcg+5zATc4hY9ZeDD8vaEhuifZL7ZczTCdAAv51M=</dsig:DigestValue>
+>>>>>>> Vijay-PLC_PC_Interface_20231128
       </hash>
     </dependentAssembly>
   </dependency>

@@ -111,25 +111,20 @@ Public Class FormMain
         }
 
 
+
         ModuleCircuitModel.InitialiseCircuit()
         'PLC Impicit Cyclic Messaging via Ethernet IP
         FINSInitialise()
 
-        'Circuit Form display on Panels
-        FormCircuitModel1.TopLevel = False
-
+        FormCircuitModel2.TopLevel = False
         While panel_ManualValve_Circuit.Controls.Count > 0
             panel_ManualValve_Circuit.Controls(0).Dispose()
         End While
 
-        panel_ManualValve_Circuit.Controls.Add(FormCircuitModel1)
+        panel_ManualValve_Circuit.Controls.Add(FormCircuitModel2)
+        FormCircuitModel2.Show()
+        CircuitShown(0) = True
 
-        'While Panel_Overview.Controls.Count > 0
-        '    Panel_Overview.Controls(0).Dispose()
-        'End While
-
-        'Panel_Overview.Controls.Add(FormCircuitModel1)
-        FormCircuitModel1.Show()
 
         'Top Status Bar
         lbl_OperationMode.Text = "No Status"
@@ -562,6 +557,16 @@ Public Class FormMain
         If tabctrl_MainCtrl.SelectedTab Is tabpg_ManualCtrl Then
             ' Focus First Tab Page
             tabctrl_SubManualCtrl.SelectedTab = tabpg_ManualControlValve
+            If Not CircuitShown(0) = True Then
+                FormCircuitModel2.TopLevel = False
+                While panel_ManualValve_Circuit.Controls.Count > 0
+                    panel_ManualValve_Circuit.Controls(0).Dispose()
+                End While
+
+                panel_ManualValve_Circuit.Controls.Add(FormCircuitModel2)
+                FormCircuitModel2.Show()
+                CircuitShown(0) = True
+            End If
 
         End If
 
@@ -598,13 +603,20 @@ Public Class FormMain
         End If
 
         If tabctrl_SubMain.SelectedIndex = 1 Then
+            If Not CircuitShown(3) = True Then
+                FormCircuitModel2.TopLevel = False
+                While Panel_Overview.Controls.Count > 0
+                    Panel_Overview.Controls(0).Dispose()
+                End While
 
-            While Panel_Overview.Controls.Count > 0
-                Panel_Overview.Controls(0).Dispose()
-            End While
-            FormCircuitModel1.TopLevel = False
-            Panel_Overview.Controls.Add(FormCircuitModel1)
-            FormCircuitModel1.Show()
+                Panel_Overview.Controls.Add(FormCircuitModel2)
+                FormCircuitModel2.Show()
+                CircuitShown(3) = True
+                CircuitShown(0) = False
+                CircuitShown(1) = False
+                CircuitShown(2) = False
+            End If
+
         End If
     End Sub
 
@@ -1424,13 +1436,19 @@ Public Class FormMain
 
     ' Regulator Controls
     Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_BckPressureUpdate.Click
+<<<<<<< HEAD
         Dim BackPressTemp As String = lbl_BackPressCurrent.Text
+=======
+>>>>>>> Vijay-PLC_PC_Interface_20231128
         Float2int(124, CType(txtbx_BackPressRequired.Text, Decimal))
         EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of Back Pressure Regulator (kPa) set to {txtbx_BackPressRequired.Text} from {BackPressTemp}")
     End Sub
 
     Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_N2PressureUpdate.Click
+<<<<<<< HEAD
         Dim N2PurgeTemp As String = lbl_N2PurgeCurrent.Text
+=======
+>>>>>>> Vijay-PLC_PC_Interface_20231128
         Float2int(126, CType(txtbx_N2PurgeRequired.Text, Decimal))
         EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of N2 Purge Regulator (kPa) set to {txtbx_N2PurgeRequired.Text} from {N2PurgeTemp}")
     End Sub
@@ -2541,33 +2559,55 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
     Private Sub tabctrl_SubManualCtrl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_SubManualCtrl.SelectedIndexChanged
         If tabctrl_SubManualCtrl.SelectedIndex = 0 Then
-            FormCircuitModel1.TopLevel = False
-            While panel_ManualValve_Circuit.Controls.Count > 0
-                panel_ManualValve_Circuit.Controls(0).Dispose()
-            End While
 
-            panel_ManualValve_Circuit.Controls.Add(FormCircuitModel1)
-            FormCircuitModel1.Show()
+            If Not CircuitShown(0) = True Then
+                FormCircuitModel2.TopLevel = False
+                While panel_ManualValve_Circuit.Controls.Count > 0
+                    panel_ManualValve_Circuit.Controls(0).Dispose()
+                End While
+
+                panel_ManualValve_Circuit.Controls.Add(FormCircuitModel2)
+                FormCircuitModel2.Show()
+                CircuitShown(0) = True
+                CircuitShown(1) = False
+                CircuitShown(2) = False
+                CircuitShown(3) = False
+            End If
+
         End If
 
         If tabctrl_SubManualCtrl.SelectedIndex = 3 Then
-            FormCircuitModel1.TopLevel = False
-            While Panel_ManualDrain_Circuit.Controls.Count > 0
-                Panel_ManualDrain_Circuit.Controls(0).Dispose()
-            End While
+            If Not CircuitShown(1) = True Then
+                FormCircuitModel2.TopLevel = False
+                While Panel_ManualDrain_Circuit.Controls.Count > 0
+                    Panel_ManualDrain_Circuit.Controls(0).Dispose()
+                End While
 
-            Panel_ManualDrain_Circuit.Controls.Add(FormCircuitModel1)
-            FormCircuitModel1.Show()
+                Panel_ManualDrain_Circuit.Controls.Add(FormCircuitModel2)
+                FormCircuitModel2.Show()
+                CircuitShown(1) = True
+                CircuitShown(0) = False
+                CircuitShown(2) = False
+                CircuitShown(3) = False
+            End If
+
         End If
 
         If tabctrl_SubManualCtrl.SelectedIndex = 4 Then
-            FormCircuitModel1.TopLevel = False
-            While Panel_Mainten_Circuit.Controls.Count > 0
-                Panel_Mainten_Circuit.Controls(0).Dispose()
-            End While
+            If Not CircuitShown(2) = True Then
+                FormCircuitModel2.TopLevel = False
+                While Panel_Mainten_Circuit.Controls.Count > 0
+                    Panel_Mainten_Circuit.Controls(0).Dispose()
+                End While
 
-            Panel_Mainten_Circuit.Controls.Add(FormCircuitModel1)
-            FormCircuitModel1.Show()
+                Panel_Mainten_Circuit.Controls.Add(FormCircuitModel2)
+                FormCircuitModel2.Show()
+                CircuitShown(2) = True
+                CircuitShown(3) = False
+                CircuitShown(0) = False
+                CircuitShown(1) = False
+            End If
+
         End If
     End Sub
 
@@ -2613,6 +2653,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         End If
 
     End Sub
+
 
 End Class
 
