@@ -3,6 +3,7 @@ Imports System.Data.SqlTypes
 Imports System.IO.Ports
 Imports System.Runtime.Remoting.Messaging
 Imports System.Security.Cryptography
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 
 Public Class FormRecipeManagement
 
@@ -990,8 +991,11 @@ Public Class FormRecipeManagement
 #Region "Part ID Creation"
     Private Sub btnPartIDCreate_Click(sender As Object, e As EventArgs) Handles btnPartIDCreate.Click
         ' Declare Parameters
-        Dim FilterTypeID As Integer = cmbx_PartCreateFilterType.SelectedIndex
-        Dim JigTypeID As Integer = cmbx_PartCreateJigType.SelectedIndex
+        Dim cmbxFilterType As ComboBox = cmbx_PartCreateFilterType
+        Dim cmbxJigType As ComboBox = cmbx_PartCreateJigType
+
+        Dim FilterTypeID As Integer = cmbxFilterType.SelectedIndex
+        Dim JigTypeID As Integer = cmbxJigType.SelectedIndex
         Dim PartID As String = Formatstring(txtbx_PartCreatePartID.Text)
         Dim onContinue As Boolean = True
 
@@ -1044,7 +1048,13 @@ Public Class FormRecipeManagement
                 }
                 If SQL.InsertRecord("PartTable", partParameter) = 1 Then
                     RecipeMessage(9)
-                    cmbx_PartCreateFilterType.SelectedIndex = 0
+
+                    ' Event Log
+                    Dim FilterTypeValue As String = DirectCast(cmbxFilterType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim JigTypeValue As String = DirectCast(cmbxJigType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Part ID Creation - Part ID ({FilterTypeValue}/{JigTypeValue}/{PartID}) Created")
+
+                    cmbxFilterType.SelectedIndex = 0
                 Else
                     RecipeMessage(11)
                     onContinue = False
@@ -2654,6 +2664,14 @@ Public Class FormRecipeManagement
                     }
                 If SQL.InsertRecord("RecipeTable", recipeparameter) = 1 Then
                     RecipeMessage(10)
+
+                    ' Event Log
+                    Dim FilterTypeValue As String = DirectCast(cmbx_RcpCreateFilterType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim PartIDValue As String = DirectCast(cmbx_RcpCreatePartID.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim RecipeTypeValue As String = DirectCast(cmbx_RcpCreateType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim RecipeIDValue As String = txtbx_RcpCreateRecipeID.Text
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Creation - Recipe ID ({FilterTypeValue}/{PartIDValue}/{RecipeTypeValue}/{RecipeIDValue}) Created")
+
                     cmbx_RcpCreateFilterType.SelectedIndex = 0
                     LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
                     GetRecipeID()
@@ -2816,6 +2834,13 @@ Public Class FormRecipeManagement
                         }
                 If SQL.InsertRecord("RecipeTable", recipeparameter) = 1 Then
                     RecipeMessage(47)
+
+                    ' Event Log
+                    Dim RecipeIDPrev As String = DirectCast(cmbx_RcpDupSelRecipe.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim RecipeTypeValue As String = DirectCast(Cmbx_RcpDupNewType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim RecipeIDValue As String = txtbx_RcpDupNewRecipeID.Text
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Duplication - Recipe ID ({RecipeTypeValue}/{RecipeIDValue}) Created With Parameters From Recipe ID ({RecipeIDPrev})")
+
                     cmbx_RcpDupSelRecipe.SelectedIndex = 0
                     LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
                     GetRecipeID()
@@ -2889,6 +2914,12 @@ Public Class FormRecipeManagement
 
                     If SQL.DeleteRecord("PartTable", condition) = 1 Then
                         RecipeMessage(25)
+
+                        ' Event Log
+                        Dim FilterTypeValue As String = DirectCast(cmbx_PartDeleteFilterType.SelectedItem, KeyValuePair(Of String, String)).Value
+                        Dim PartIDValue As String = DirectCast(cmbx_PartDeletePartID.SelectedItem, KeyValuePair(Of String, String)).Value
+                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Part ID Deletion - Part ID ({FilterTypeValue}/{PartIDValue}) Deleted")
+
                         cmbx_PartDeleteFilterType.SelectedIndex = 0
                     Else
                         RecipeMessage(26)
@@ -2950,6 +2981,13 @@ Public Class FormRecipeManagement
 
                 If SQL.DeleteRecord("RecipeTable", condition) = 1 Then
                     RecipeMessage(28)
+
+                    ' Event Log
+                    Dim FilterTypeValue As String = DirectCast(cmbx_RcpCreateFilterType.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim PartIDValue As String = DirectCast(cmbx_RcpCreatePartID.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim RecipeIDValue As String = txtbx_RcpCreateRecipeID.Text
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Deletion - Recipe ID ({FilterTypeValue}/{PartIDValue}/{RecipeIDValue}) Deleted")
+
                     cmbx_RcpDeleteFilterType.SelectedIndex = 0
                     LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
                     GetRecipeID()
