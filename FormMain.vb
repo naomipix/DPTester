@@ -111,25 +111,25 @@ Public Class FormMain
         }
 
 
-        'ModuleCircuitModel.InitialiseCircuit()
-        ''PLC Impicit Cyclic Messaging via Ethernet IP
-        'FINSInitialise()
+        ModuleCircuitModel.InitialiseCircuit()
+        'PLC Impicit Cyclic Messaging via Ethernet IP
+        FINSInitialise()
 
-        ''Circuit Form display on Panels
-        'FormCircuitModel1.TopLevel = False
+        'Circuit Form display on Panels
+        FormCircuitModel1.TopLevel = False
 
-        'While panel_ManualValve_Circuit.Controls.Count > 0
-        '    panel_ManualValve_Circuit.Controls(0).Dispose()
+        While panel_ManualValve_Circuit.Controls.Count > 0
+            panel_ManualValve_Circuit.Controls(0).Dispose()
+        End While
+
+        panel_ManualValve_Circuit.Controls.Add(FormCircuitModel1)
+
+        'While Panel_Overview.Controls.Count > 0
+        '    Panel_Overview.Controls(0).Dispose()
         'End While
 
-        'panel_ManualValve_Circuit.Controls.Add(FormCircuitModel1)
-
-        ''While Panel_Overview.Controls.Count > 0
-        ''    Panel_Overview.Controls(0).Dispose()
-        ''End While
-
-        ''Panel_Overview.Controls.Add(FormCircuitModel1)
-        'FormCircuitModel1.Show()
+        'Panel_Overview.Controls.Add(FormCircuitModel1)
+        FormCircuitModel1.Show()
 
         'Top Status Bar
         lbl_OperationMode.Text = "No Status"
