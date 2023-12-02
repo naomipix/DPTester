@@ -5,6 +5,7 @@ Imports System.Net.NetworkInformation
 Imports System.Reflection
 Imports System.Security.Cryptography
 Imports System.Text
+Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Xml.Schema
 
 Module PublicVariables
@@ -1134,6 +1135,179 @@ Namespace EventLog ' EventLog.EventLogger.Log( ,)
                 {"event_log", eventmsg}
             }
             SQL.InsertRecord("MessageLog", parameters)
+        End Sub
+    End Module
+End Namespace
+
+Namespace LiveGraph
+    Module LiveGraph
+        ' Declare Controls
+        Dim chartLiveGraph As Chart = FormMain.chart_MainLiveGraph
+        Dim cmbxSelection As ComboBox = FormMain.cmbx_GraphSelection
+
+        ' Plotting Timer
+        Public WithEvents graphPlottingTimer As New Timer()
+
+        ' Declare Parameter
+        'Dim TickRateInMilliseconds As Integer = 50
+        Dim dtRunningResult As New DataTable
+        Dim dtRunningResultCopy As New DataTable
+        Dim dtScaledResult As New DataTable
+        'Dim dtLocked As Boolean = False
+        'Dim StartTime As DateTime
+        'Dim EndTime As DateTime
+        'Dim RunDuration As Integer = 0
+
+        Private Sub graphPlottingTimer_Tick(sender As Object, e As EventArgs) Handles graphPlottingTimer.Tick
+            'Dim getSecElapsed As Decimal = ((dtRunningResult.Rows.Count + 1) * TickRateInMilliseconds) / 1000
+            'Dim getInletPress As Decimal = InletPress
+            'Dim getOutletPress As Decimal = OutletPress
+            'Dim getDiffPress As Decimal = OutletPress - InletPress
+            'Dim getFlowRate As Decimal = FlowRate
+
+            'dtRunningResult.Rows.Add($"{getSecElapsed}", $"{getInletPress}", $"{getOutletPress}", $"{getDiffPress}", $"{getFlowRate}")
+
+            'Dim dtCopy As New DataTable
+
+            'Try
+            '    If dataQueue.Count > 0 Then
+            '        dtRunningResultCopy.Rows.Clear()
+            '        dtRunningResultCopy = dataQueue.Dequeue() 'dtRunningResult.Copy
+            '    End If
+            'Catch ex As Exception
+
+            'End Try
+
+            dtRunningResultCopy = FormMainModule.dtresult.Copy
+
+            If dtRunningResultCopy.Rows.Count > 0 Then
+                ' Calculate Step Size
+                'Dim stepSize As Integer = Math.Max(dtRunningResult.Rows.Count \ PublicVariables.ChartPlotMax, 1)
+                Dim stepSize As Integer = Math.Max(dtRunningResultCopy.Rows.Count \ 200, 1)
+
+                ' Plot Data With Scaling 
+                dtScaledResult.Rows.Clear()
+                For i As Integer = 0 To dtRunningResultCopy.Rows.Count - 2 Step stepSize
+                    With dtScaledResult
+                        .Rows.Add(
+                                    $"{dtRunningResultCopy(i)(0)}",
+                                    $"{dtRunningResultCopy(i)(1)}",
+                                    $"{dtRunningResultCopy(i)(2)}",
+                                    $"{dtRunningResultCopy(i)(3)}",
+                                    $"{dtRunningResultCopy(i)(4)}",
+                                    $"{dtRunningResultCopy(i)(5)}",
+                                    $"{dtRunningResultCopy(i)(6)}"
+                                )
+                    End With
+                Next
+
+                'Dim maxDecimal As Decimal
+                'Dim minDecimal As Decimal
+
+                'If True Then
+                '    For Each row As DataRow In dtRunningResult.Rows
+                '        Dim value As String = row.Field(Of String)("diff_pressure")
+                '        Dim currentDecimal As Decimal
+                '        If Decimal.TryParse(value, currentDecimal) Then
+                '            maxDecimal = Math.Max(maxDecimal, currentDecimal)
+                '        End If
+                '    Next
+
+                '    For Each row As DataRow In dtRunningResult.Rows
+                '        Dim value As String = row.Field(Of String)("diff_pressure")
+                '        Dim currentDecimal As Decimal
+                '        If Decimal.TryParse(value, currentDecimal) Then
+                '            minDecimal = Math.Min(minDecimal, currentDecimal)
+                '        End If
+                '    Next
+                'End If
+
+                With chartLiveGraph
+                    .Series(0).Points.Clear()
+                    '.Series(1).Points.Clear()
+                    '.Series(2).Points.Clear()
+
+                    '.ChartAreas(0).AxisY2.Interval = 0.5
+                    '.ChartAreas(0).AxisY2.Minimum = Convert.ToInt32(minDecimal) - 1
+                    '.ChartAreas(0).AxisY2.Maximum = Convert.ToInt32(maxDecimal) + 0.5
+                    Select Case cmbxSelection.SelectedIndex
+                        Case 0
+                            .Series(0).YValueMembers = "Differential Pressure (kPa)" '"diff_pressure"
+                        Case 1
+                            .Series(0).YValueMembers = "Flowrate (l/min)" '"flow_rate"
+                        Case 2
+                            .Series(0).YValueMembers = "Inlet Pressure (kPa)" '"inlet_pressure"
+                        Case 3
+                            .Series(0).YValueMembers = "Outlet Pressure (kPa)" '"outlet_pressure"
+                    End Select
+
+                    .DataSource = Nothing
+                    .DataSource = dtScaledResult
+                End With
+
+                ' TESTING
+                'If dtScaledResult.Rows.Count > 0 Then
+                '    FormMain.btn_Debug1.Text = dtScaledResult(dtScaledResult.Rows.Count - 1)("second")
+                'End If
+            End If
+        End Sub
+
+        'Public Sub StartRun(duration As Integer)
+        '    ' Initialize DataTable
+        '    With dtRunningResult
+        '        .Rows.Clear()
+        '        .Columns.Clear()
+        '        .Columns.Add("second")
+        '        .Columns.Add("inlet_pressure")
+        '        .Columns.Add("outlet_pressure")
+        '        .Columns.Add("diff_pressure")
+        '        .Columns.Add("flow_rate")
+        '    End With
+        '    dtScaledResult.Rows.Clear()
+        '    dtScaledResult.Columns.Clear()
+        '    dtScaledResult = dtRunningResult.Clone
+
+        '    ' Assign ChartValueMember
+        '    chartLiveGraph.Series(0).XValueMember = "second"
+
+        '    ' Set Start/End Time
+        '    StartTime = DateTime.Now
+        '    EndTime = StartTime.AddSeconds(duration).AddMilliseconds(TickRateInMilliseconds)
+
+        '    ' Set Run Duration
+        '    RunDuration = duration
+
+        '    ' Start Timer
+        '    Dim TimerEnable = True
+        '    Dim TimerInterval = 20 'TickRateInMilliseconds
+        '    If TimerEnable = True Then
+        '        Dim timerCallback As System.Threading.TimerCallback = AddressOf TimerCallbackMethod
+        '        graphRuntimeTimer = New Threading.Timer(timerCallback, Nothing, 0, TimerInterval)
+
+        '        With graphPlottingTimer
+        '            .Interval = TimerInterval
+        '            .Enabled = TimerEnable
+        '        End With
+        '    End If
+        'End Sub
+
+        Public Sub ChartPlottingTimer(timerEnable As Boolean)
+            If timerEnable = True Then
+                dtScaledResult.Rows.Clear()
+                dtScaledResult.Columns.Clear()
+                dtScaledResult = FormMainModule.dtresult.Clone
+
+                ' Assign ChartValueMember
+                chartLiveGraph.Series(0).XValueMember = "Sampling Time (s)" '"second"
+
+                ' Start Timer
+                With graphPlottingTimer
+                    .Interval = 1000
+                    .Enabled = timerEnable
+                End With
+            Else
+                graphPlottingTimer.Enabled = False
+            End If
         End Sub
     End Module
 End Namespace

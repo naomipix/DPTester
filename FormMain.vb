@@ -330,196 +330,214 @@ Public Class FormMain
 
 #Region "Main Menu"
     ' Start - [Debugging & Testing]
-    Private cts As New CancellationTokenSource()
-    Dim PlotStarted As Boolean = False
-    Private Async Sub btn_Debug1_Click(sender As Object, e As EventArgs) Handles btn_Debug1.Click
-        Dim ListOfDec() As Decimal = {
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            31.1, 31.8, 32.4, 31.5, 32.7, 31.2, 32.1, 32.9, 31.3, 31.9,
-            31.6, 32.2, 32.6, 31.7, 32.3, 31.4, 32.0, 31.0, 32.8, 33.0,
-            32.5, 31.8, 31.1, 32.4, 32.9, 31.2, 32.7, 31.5, 32.1, 31.3,
-            32.2, 32.3, 31.9, 31.6, 32.6, 31.4, 32.0, 32.5, 31.7, 32.8,
-            33.0, 31.0, 31.1, 32.4, 32.9, 32.7, 31.2, 32.1, 31.3, 31.8,
-            31.9, 32.2, 31.5, 31.6, 32.3, 32.6, 31.4, 32.5, 32.0, 31.7,
-            32.8, 33.0, 31.0, 31.1, 32.4, 32.9, 31.2, 32.7, 32.1, 31.3,
-            32.2, 31.5, 31.8, 32.6, 31.9, 32.3, 31.6, 31.4, 32.5, 32.0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-        }
+    'Private cts As New CancellationTokenSource()
+    'Dim PlotStarted As Boolean = False
+    Private Sub btn_Debug1_Click(sender As Object, e As EventArgs) Handles btn_Debug1.Click
+        'Dim ListOfDec() As Decimal = {
+        '    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        '    31.1, 31.8, 32.4, 31.5, 32.7, 31.2, 32.1, 32.9, 31.3, 31.9,
+        '    31.6, 32.2, 32.6, 31.7, 32.3, 31.4, 32.0, 31.0, 32.8, 33.0,
+        '    32.5, 31.8, 31.1, 32.4, 32.9, 31.2, 32.7, 31.5, 32.1, 31.3,
+        '    32.2, 32.3, 31.9, 31.6, 32.6, 31.4, 32.0, 32.5, 31.7, 32.8,
+        '    33.0, 31.0, 31.1, 32.4, 32.9, 32.7, 31.2, 32.1, 31.3, 31.8,
+        '    31.9, 32.2, 31.5, 31.6, 32.3, 32.6, 31.4, 32.5, 32.0, 31.7,
+        '    32.8, 33.0, 31.0, 31.1, 32.4, 32.9, 31.2, 32.7, 32.1, 31.3,
+        '    32.2, 31.5, 31.8, 32.6, 31.9, 32.3, 31.6, 31.4, 32.5, 32.0,
+        '    0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+        '}
 
-        cts.Cancel()
-        cts = New CancellationTokenSource() ' Create a new CancellationTokenSource
-        PlotStarted = True
-        Try
-            Await TestDummyGraph(ListOfDec, cts.Token)
-        Catch ex As Exception
-            MsgBox(ex.Message & ex.StackTrace)
-        End Try
-    End Sub
+        'cts.Cancel()
+        'cts = New CancellationTokenSource() ' Create a new CancellationTokenSource
+        'PlotStarted = True
+        'Try
+        '    Await TestDummyGraph(ListOfDec, cts.Token)
+        'Catch ex As Exception
+        '    MsgBox(ex.Message & ex.StackTrace)
+        'End Try
 
-    Dim dt As New DataTable
-    Private Async Function TestDummyGraph(ListOfDec() As Decimal, token As CancellationToken) As Task
-        dt.Columns.Clear()
-
-        dt.Columns.Add("second")
-        dt.Columns.Add("inlet_pressure")
-        dt.Columns.Add("outlet_pressure")
-        dt.Columns.Add("diff_pressure")
-        dt.Columns.Add("flow_rate")
-
-        With chart_MainLiveGraph.Series(0)
-            .XValueMember = "second"
-        End With
-        'With chart_MainLiveGraph.Series(1)
-        '    .XValueMember = "second"
-        '    .YValueMembers = "outlet_pressure"
-        'End With
-        'With chart_MainLiveGraph.Series(2)
-        '    .XValueMember = "second"
-        '    .YValueMembers = "diff_pressure"
-        'End With
-
-        Dim stepSize As Integer = Math.Max(ListOfDec.Length \ PublicVariables.ChartPlotMax, 1) ' Calculate step size
-
-        ' Plot Data With Scaling 
-        For i As Integer = 0 To ListOfDec.Length - 2 Step stepSize  'For i As Integer = 0 To ListOfDec.Count - 1
-            If token.IsCancellationRequested Then
-                PlotStarted = False
-                Exit For ' Check if cancellation is requested
-            End If
-
-            Await Task.Delay(50)
-
-            dt.Rows.Add(i + 1, ListOfDec(i), CDec(ListOfDec(i)) - CDec(1), CDec(ListOfDec(i)) - CDec(ListOfDec(i)) - CDec(1), 5)
-
-            ' Dim maxDiffPress As Decimal = dt.AsEnumerable().Max(Function(row) Decimal.Parse(row.Field(Of String)("diff_pressure")))
-            'Dim minDiffPress As Decimal = dt.AsEnumerable().Min(Function(row) Decimal.Parse(row.Field(Of String)("diff_pressure")))
-
-
-            Dim maxDecimal As Decimal
-            For Each row As DataRow In dt.Rows
-                Dim value As String = row.Field(Of String)("diff_pressure")
-                Dim currentDecimal As Decimal
-                If Decimal.TryParse(value, currentDecimal) Then
-                    maxDecimal = Math.Max(maxDecimal, currentDecimal)
-                End If
-            Next
-
-            Dim minDecimal As Decimal
-            For Each row As DataRow In dt.Rows
-                Dim value As String = row.Field(Of String)("diff_pressure")
-                Dim currentDecimal As Decimal
-                If Decimal.TryParse(value, currentDecimal) Then
-                    minDecimal = Math.Min(minDecimal, currentDecimal)
-                End If
-            Next
-
-            With chart_MainLiveGraph
-                .Series(0).Points.Clear()
-                '.Series(1).Points.Clear()
-                '.Series(2).Points.Clear()
-
-                '.ChartAreas(0).AxisY2.Interval = 0.5
-                '.ChartAreas(0).AxisY2.Minimum = Convert.ToInt32(minDecimal) - 1
-                '.ChartAreas(0).AxisY2.Maximum = Convert.ToInt32(maxDecimal) + 0.5
-                Select Case cmbx_GraphSelection.SelectedIndex
-                    Case 0
-                        .Series(0).YValueMembers = "diff_pressure"
-                    Case 1
-                        .Series(0).YValueMembers = "flow_rate"
-                    Case 2
-                        .Series(0).YValueMembers = "inlet_pressure"
-                    Case 3
-                        .Series(0).YValueMembers = "outlet_pressure"
-                End Select
-
-                .DataSource = Nothing
-                .DataSource = dt
-            End With
-        Next
-
-        ' Add Last Data Point (Pre-skipped On Resampling With StepSize)
-        If Not token.IsCancellationRequested Then
-            Await Task.Delay(30)
-
-            dt.Rows.Add(ListOfDec.Length, ListOfDec(ListOfDec.Length - 1), CDec(ListOfDec(ListOfDec.Length - 1)) - CDec(1), ListOfDec(ListOfDec.Length - 1) - CDec(ListOfDec(ListOfDec.Length - 1)) - CDec(1), 5)
-
-            'Dim maxDiffPress As Decimal = dt.AsEnumerable().Max(Function(row) row.Field(Of Decimal)("diff_pressure"))
-            'Dim minDiffPress As Decimal = dt.AsEnumerable().Min(Function(row) row.Field(Of Decimal)("diff_pressure"))
-
-            Dim maxDecimal As Decimal
-            For Each row As DataRow In dt.Rows
-                Dim value As String = row.Field(Of String)("diff_pressure")
-                Dim currentDecimal As Decimal
-                If Decimal.TryParse(value, currentDecimal) Then
-                    maxDecimal = Math.Max(maxDecimal, currentDecimal)
-                End If
-            Next
-
-            Dim minDecimal As Decimal
-            For Each row As DataRow In dt.Rows
-                Dim value As String = row.Field(Of String)("diff_pressure")
-                Dim currentDecimal As Decimal
-                If Decimal.TryParse(value, currentDecimal) Then
-                    minDecimal = Math.Min(minDecimal, currentDecimal)
-                End If
-            Next
-
-            With chart_MainLiveGraph
-                .Series(0).Points.Clear()
-                '.Series(1).Points.Clear()
-                '.Series(2).Points.Clear()
-
-                '.ChartAreas(0).AxisY2.Interval = 0.5
-                '.ChartAreas(0).AxisY2.Minimum = Convert.ToInt32(minDecimal) - 1
-                '.ChartAreas(0).AxisY2.Maximum = Convert.ToInt32(maxDecimal) + 0.5
-                Select Case cmbx_GraphSelection.SelectedIndex
-                    Case 0
-                        .Series(0).YValueMembers = "diff_pressure"
-                        .Series(0).Name = "Diff. Pressure"
-                    Case 1
-                        .Series(0).YValueMembers = "flow_rate"
-                        .Series(0).Name = "Flow Rate"
-                    Case 2
-                        .Series(0).YValueMembers = "inlet_pressure"
-                        .Series(0).Name = "Inlet Pressure"
-                    Case 3
-                        .Series(0).YValueMembers = "outlet_pressure"
-                        .Series(0).Name = "Outlet Pressure"
-                End Select
-
-                .DataSource = Nothing
-                .DataSource = dt
-            End With
+        If True Then
+            dtresult.Columns.Clear()
+            dtresult.Rows.Clear()
+            dtresult.Columns.Add("Serial Usage id")
+            dtresult.Columns.Add("Sampling Time (s)")
+            dtresult.Columns.Add("Temperature (K)")
+            dtresult.Columns.Add("Flowrate (l/min)")
+            dtresult.Columns.Add("Inlet Pressure (kPa)")
+            dtresult.Columns.Add("Outlet Pressure (kPa)")
+            dtresult.Columns.Add("Differential Pressure (kPa)")
         End If
 
-        PlotStarted = False
-    End Function
-
-    Private Sub cmbx_GraphSelection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_GraphSelection.SelectedIndexChanged
-        If PlotStarted = False Then
-            With chart_MainLiveGraph
-                .Series(0).Points.Clear()
-
-                Select Case cmbx_GraphSelection.SelectedIndex
-                    Case 0
-                        .Series(0).YValueMembers = "diff_pressure"
-                        .Series(0).Name = "Diff. Pressure"
-                    Case 1
-                        .Series(0).YValueMembers = "flow_rate"
-                        .Series(0).Name = "Flow Rate"
-                    Case 2
-                        .Series(0).YValueMembers = "inlet_pressure"
-                        .Series(0).Name = "Inlet Pressure"
-                    Case 3
-                        .Series(0).YValueMembers = "outlet_pressure"
-                        .Series(0).Name = "Outlet Pressure"
-                End Select
-
-                .DataSource = Nothing
-                .DataSource = dt
-            End With
+        If LiveGraph.LiveGraph.graphPlottingTimer.Enabled = True Then
+            LiveGraph.LiveGraph.ChartPlottingTimer(False)
+        Else
+            LiveGraph.LiveGraph.ChartPlottingTimer(True)
         End If
     End Sub
+
+    'Dim dt As New DataTable
+    'Private Async Function TestDummyGraph(ListOfDec() As Decimal, token As CancellationToken) As Task
+    '    dt.Columns.Clear()
+
+    '    dt.Columns.Add("second")
+    '    dt.Columns.Add("inlet_pressure")
+    '    dt.Columns.Add("outlet_pressure")
+    '    dt.Columns.Add("diff_pressure")
+    '    dt.Columns.Add("flow_rate")
+
+    '    With chart_MainLiveGraph.Series(0)
+    '        .XValueMember = "second"
+    '    End With
+    '    'With chart_MainLiveGraph.Series(1)
+    '    '    .XValueMember = "second"
+    '    '    .YValueMembers = "outlet_pressure"
+    '    'End With
+    '    'With chart_MainLiveGraph.Series(2)
+    '    '    .XValueMember = "second"
+    '    '    .YValueMembers = "diff_pressure"
+    '    'End With
+
+    '    Dim stepSize As Integer = Math.Max(ListOfDec.Length \ PublicVariables.ChartPlotMax, 1) ' Calculate step size
+
+    '    ' Plot Data With Scaling 
+    '    For i As Integer = 0 To ListOfDec.Length - 2 Step stepSize  'For i As Integer = 0 To ListOfDec.Count - 1
+    '        If token.IsCancellationRequested Then
+    '            PlotStarted = False
+    '            Exit For ' Check if cancellation is requested
+    '        End If
+
+    '        Await Task.Delay(50)
+
+    '        dt.Rows.Add(i + 1, ListOfDec(i), CDec(ListOfDec(i)) - CDec(1), CDec(ListOfDec(i)) - CDec(ListOfDec(i)) - CDec(1), 5)
+
+    '        ' Dim maxDiffPress As Decimal = dt.AsEnumerable().Max(Function(row) Decimal.Parse(row.Field(Of String)("diff_pressure")))
+    '        'Dim minDiffPress As Decimal = dt.AsEnumerable().Min(Function(row) Decimal.Parse(row.Field(Of String)("diff_pressure")))
+
+
+    '        Dim maxDecimal As Decimal
+    '        For Each row As DataRow In dt.Rows
+    '            Dim value As String = row.Field(Of String)("diff_pressure")
+    '            Dim currentDecimal As Decimal
+    '            If Decimal.TryParse(value, currentDecimal) Then
+    '                maxDecimal = Math.Max(maxDecimal, currentDecimal)
+    '            End If
+    '        Next
+
+    '        Dim minDecimal As Decimal
+    '        For Each row As DataRow In dt.Rows
+    '            Dim value As String = row.Field(Of String)("diff_pressure")
+    '            Dim currentDecimal As Decimal
+    '            If Decimal.TryParse(value, currentDecimal) Then
+    '                minDecimal = Math.Min(minDecimal, currentDecimal)
+    '            End If
+    '        Next
+
+    '        With chart_MainLiveGraph
+    '            .Series(0).Points.Clear()
+    '            '.Series(1).Points.Clear()
+    '            '.Series(2).Points.Clear()
+
+    '            '.ChartAreas(0).AxisY2.Interval = 0.5
+    '            '.ChartAreas(0).AxisY2.Minimum = Convert.ToInt32(minDecimal) - 1
+    '            '.ChartAreas(0).AxisY2.Maximum = Convert.ToInt32(maxDecimal) + 0.5
+    '            Select Case cmbx_GraphSelection.SelectedIndex
+    '                Case 0
+    '                    .Series(0).YValueMembers = "diff_pressure"
+    '                Case 1
+    '                    .Series(0).YValueMembers = "flow_rate"
+    '                Case 2
+    '                    .Series(0).YValueMembers = "inlet_pressure"
+    '                Case 3
+    '                    .Series(0).YValueMembers = "outlet_pressure"
+    '            End Select
+
+    '            .DataSource = Nothing
+    '            .DataSource = dt
+    '        End With
+    '    Next
+
+    '    ' Add Last Data Point (Pre-skipped On Resampling With StepSize)
+    '    If Not token.IsCancellationRequested Then
+    '        Await Task.Delay(30)
+
+    '        dt.Rows.Add(ListOfDec.Length, ListOfDec(ListOfDec.Length - 1), CDec(ListOfDec(ListOfDec.Length - 1)) - CDec(1), ListOfDec(ListOfDec.Length - 1) - CDec(ListOfDec(ListOfDec.Length - 1)) - CDec(1), 5)
+
+    '        'Dim maxDiffPress As Decimal = dt.AsEnumerable().Max(Function(row) row.Field(Of Decimal)("diff_pressure"))
+    '        'Dim minDiffPress As Decimal = dt.AsEnumerable().Min(Function(row) row.Field(Of Decimal)("diff_pressure"))
+
+    '        Dim maxDecimal As Decimal
+    '        For Each row As DataRow In dt.Rows
+    '            Dim value As String = row.Field(Of String)("diff_pressure")
+    '            Dim currentDecimal As Decimal
+    '            If Decimal.TryParse(value, currentDecimal) Then
+    '                maxDecimal = Math.Max(maxDecimal, currentDecimal)
+    '            End If
+    '        Next
+
+    '        Dim minDecimal As Decimal
+    '        For Each row As DataRow In dt.Rows
+    '            Dim value As String = row.Field(Of String)("diff_pressure")
+    '            Dim currentDecimal As Decimal
+    '            If Decimal.TryParse(value, currentDecimal) Then
+    '                minDecimal = Math.Min(minDecimal, currentDecimal)
+    '            End If
+    '        Next
+
+    '        With chart_MainLiveGraph
+    '            .Series(0).Points.Clear()
+    '            '.Series(1).Points.Clear()
+    '            '.Series(2).Points.Clear()
+
+    '            '.ChartAreas(0).AxisY2.Interval = 0.5
+    '            '.ChartAreas(0).AxisY2.Minimum = Convert.ToInt32(minDecimal) - 1
+    '            '.ChartAreas(0).AxisY2.Maximum = Convert.ToInt32(maxDecimal) + 0.5
+    '            Select Case cmbx_GraphSelection.SelectedIndex
+    '                Case 0
+    '                    .Series(0).YValueMembers = "diff_pressure"
+    '                    .Series(0).Name = "Diff. Pressure"
+    '                Case 1
+    '                    .Series(0).YValueMembers = "flow_rate"
+    '                    .Series(0).Name = "Flow Rate"
+    '                Case 2
+    '                    .Series(0).YValueMembers = "inlet_pressure"
+    '                    .Series(0).Name = "Inlet Pressure"
+    '                Case 3
+    '                    .Series(0).YValueMembers = "outlet_pressure"
+    '                    .Series(0).Name = "Outlet Pressure"
+    '            End Select
+
+    '            .DataSource = Nothing
+    '            .DataSource = dt
+    '        End With
+    '    End If
+
+    '    PlotStarted = False
+    'End Function
+
+    'Private Sub cmbx_GraphSelection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_GraphSelection.SelectedIndexChanged
+    '    If PlotStarted = False Then
+    '        With chart_MainLiveGraph
+    '            .Series(0).Points.Clear()
+
+    '            Select Case cmbx_GraphSelection.SelectedIndex
+    '                Case 0
+    '                    .Series(0).YValueMembers = "diff_pressure"
+    '                    .Series(0).Name = "Diff. Pressure"
+    '                Case 1
+    '                    .Series(0).YValueMembers = "flow_rate"
+    '                    .Series(0).Name = "Flow Rate"
+    '                Case 2
+    '                    .Series(0).YValueMembers = "inlet_pressure"
+    '                    .Series(0).Name = "Inlet Pressure"
+    '                Case 3
+    '                    .Series(0).YValueMembers = "outlet_pressure"
+    '                    .Series(0).Name = "Outlet Pressure"
+    '            End Select
+
+    '            .DataSource = Nothing
+    '            .DataSource = dt
+    '        End With
+    '    End If
+    'End Sub
 
     ' End   - [Debugging & Testing]
 
@@ -2591,6 +2609,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             MainDptest2start = 0
             MainDptest2end = 0
             Resultcapturetimer.Enabled = True
+            LiveGraph.LiveGraph.ChartPlottingTimer(True)
         End If
 
     End Sub
