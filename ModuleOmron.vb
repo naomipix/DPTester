@@ -2185,6 +2185,7 @@ Module ModuleOmron
 
     Public Sub Calculatefinalresult()
         Resultcapturetimer.Enabled = False
+        LiveGraph.LiveGraph.ChartPlottingTimer(False)
         Dim A As Double = 0.01257187
         Dim B As Double = -0.005806436
         Dim C As Double = 0.001130911
