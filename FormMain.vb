@@ -1362,13 +1362,15 @@ Public Class FormMain
     End Sub
 
     Private Sub btn_UpdateRPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateRPM.Click
+        Dim RPMTemp As String = lbl_ReqRPM.Text
         Float2int(120, CType(txtbx_NewRPM.Text, Decimal))
-        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Pump Speed (RPM) set to {txtbx_NewRPM.Text} from {lbl_ReqRPM.Text}")
+        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Pump Speed (RPM) set to {txtbx_NewRPM.Text} from {RPMTemp}")
     End Sub
 
     Private Sub btn_UpdateLPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateLPM.Click
+        Dim LPMTemp As String = lbl_ReqLPM.Text
         Float2int(122, CType(txtbx_NewLPM.Text, Decimal))
-        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Flowrate (LPM) set to {txtbx_NewLPM.Text} from {lbl_ReqLPM.Text}")
+        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Flowrate (LPM) set to {txtbx_NewLPM.Text} from {LPMTemp}")
     End Sub
 
     'Tank Controls
@@ -1403,12 +1405,16 @@ Public Class FormMain
 
 
     ' Regulator Controls
-    Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs)
+    Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_BckPressureUpdate.Click
+        Dim BackPressTemp As String = lbl_BackPressCurrent.Text
         Float2int(124, CType(txtbx_BackPressRequired.Text, Decimal))
+        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of Back Pressure Regulator (kPa) set to {txtbx_BackPressRequired.Text} from {BackPressTemp}")
     End Sub
 
-    Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs)
+    Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_N2PressureUpdate.Click
+        Dim N2PurgeTemp As String = lbl_N2PurgeCurrent.Text
         Float2int(126, CType(txtbx_N2PurgeRequired.Text, Decimal))
+        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of N2 Purge Regulator (kPa) set to {txtbx_N2PurgeRequired.Text} from {N2PurgeTemp}")
     End Sub
 
     ' Manual Drain
