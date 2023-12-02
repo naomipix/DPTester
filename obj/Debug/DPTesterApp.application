@@ -14,11 +14,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-<<<<<<< HEAD
-        <dsig:DigestValue>HFmshXJ7t7l+i+MYwoygfTK0O6w+726iVXq46bCzDqc=</dsig:DigestValue>
-=======
-        <dsig:DigestValue>DbZzzWveHVInQeRuDKrk3c+uDKiHM/vyEJJQCLDV05c=</dsig:DigestValue>
->>>>>>> Vijay-PLC_PC_Interface_20231128
+        <dsig:DigestValue>Th5fWbVqP/8MViXCs+HU9jDzTLk5RHiJUQHPysUAOt8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

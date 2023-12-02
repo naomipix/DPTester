@@ -1436,19 +1436,13 @@ Public Class FormMain
 
     ' Regulator Controls
     Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_BckPressureUpdate.Click
-<<<<<<< HEAD
         Dim BackPressTemp As String = lbl_BackPressCurrent.Text
-=======
->>>>>>> Vijay-PLC_PC_Interface_20231128
         Float2int(124, CType(txtbx_BackPressRequired.Text, Decimal))
         EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of Back Pressure Regulator (kPa) set to {txtbx_BackPressRequired.Text} from {BackPressTemp}")
     End Sub
 
     Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_N2PressureUpdate.Click
-<<<<<<< HEAD
         Dim N2PurgeTemp As String = lbl_N2PurgeCurrent.Text
-=======
->>>>>>> Vijay-PLC_PC_Interface_20231128
         Float2int(126, CType(txtbx_N2PurgeRequired.Text, Decimal))
         EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of N2 Purge Regulator (kPa) set to {txtbx_N2PurgeRequired.Text} from {N2PurgeTemp}")
     End Sub
