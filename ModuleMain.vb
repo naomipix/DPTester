@@ -777,35 +777,40 @@ Namespace LicensingModule
         Dim DayCountGiven As Integer = 30
         Dim DayLeftTemp As Integer = 0
         Public WithEvents trialTimer As New Timer()
+        Dim trialPromptExit As Boolean = False
 
         Private Sub trialTimer_Tick(sender As Object, e As EventArgs) Handles trialTimer.Tick
             ' Code to execute on each tick of the timer @ 12.00am
-            If DateTime.Now.Hour = 0 Then
-                Dim DayRemaining As Integer = (dtTrialExpiring - DateTime.Now).TotalDays
-                Dim vStr As String = ""
+            If trialPromptExit = False Then
+                If DateTime.Now.Hour = 0 Then
+                    Dim DayRemaining As Integer = (dtTrialExpiring - DateTime.Now).TotalDays
+                    Dim vStr As String = ""
 
-                If DayRemaining < 0 Then
-                    DayRemaining = 0
-                ElseIf DayRemaining > 1 Then
-                    vStr = "s"
-                End If
+                    If DayRemaining < 0 Then
+                        DayRemaining = 0
+                    ElseIf DayRemaining > 1 Then
+                        vStr = "s"
+                    End If
 
-                With FormMain.dsp_LicenseStatus
-                    .Text = $"{LicMsgTrialRemain}{DayRemaining} Day{vStr}"
-                    .BackColor = SystemColors.Info
-                    .Visible = True
-                End With
+                    With FormMain.dsp_LicenseStatus
+                        .Text = $"{LicMsgTrialRemain}{DayRemaining} Day{vStr}"
+                        .BackColor = SystemColors.Info
+                        .Visible = True
+                    End With
 
-                If DayLeftTemp <> DayRemaining Then
-                    MsgBox($"{LicMsgTrialExpiring}{DayRemaining} Day{vStr}", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
-                    MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
-                    Application.Exit()
-                End If
+                    If DayLeftTemp <> DayRemaining Then
+                        trialPromptExit = True
+                        MsgBox($"{LicMsgTrialExpiring}{DayRemaining} Day{vStr}", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                        MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                        Application.Exit()
+                    End If
 
-                If DayRemaining <= 0 Then
-                    MsgBox(LicMsgTrialExpired, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
-                    MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
-                    Application.Exit()
+                    If DayRemaining <= 0 Then
+                        trialPromptExit = True
+                        MsgBox(LicMsgTrialExpired, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                        MsgBox(LicMsgDeclined, MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Information")
+                        Application.Exit()
+                    End If
                 End If
             End If
         End Sub
