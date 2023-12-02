@@ -4634,16 +4634,6 @@ Public Class FormRecipeManagement
         Dim Drain2Enable As String = recipeparametertemp(40)
         Dim Drain3Enable As String = recipeparametertemp(43)
 
-
-
-
-        ' Reference
-        If Not d_vertol = VerificationTolerance Then
-            'EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"")
-        End If
-
-
-
         If Not d_vertol = VerificationTolerance Then
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters - Verification Tolerance (kPa) (+/-) Parameter Changed, from {VerificationTolerance} to {d_vertol}")
         End If
@@ -4763,17 +4753,53 @@ Public Class FormRecipeManagement
             End If
         End If
 
-        '{"drain1_circuit", str_drain1enable},
-        '{"drain1_back_pressure", d_drain1pressure},
-        '{"drain1_time", i_drain1time},
+        If str_drain1enable = "Enable" Then
+            If Not str_drain1enable = Drain1Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-1) - Drain-1 Enable (True)")
+            End If
+            If Not d_drain1pressure = Drain1Press Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-1) - Drain-1 N2 Purge Pressure (kPa) Parameter Changed, from {Drain1Press} to {d_drain1pressure}")
+            End If
+            If Not i_drain1time = Drain1Time Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-1) - Drain-1 Time Parameter Changed, from {Drain1Time} to {i_drain1time}")
+            End If
+        Else
+            If Not str_drain1enable = Drain1Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-1) - Drain-1 Enable (False)")
+            End If
+        End If
 
-        '{"drain2_circuit", str_drain2enable},
-        '{"drain2_back_pressure", d_drain2pressure},
-        '{"drain2_time", i_drain2time},
+        If str_drain2enable = "Enable" Then
+            If Not str_drain2enable = Drain2Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-2) - Drain-2 Enable (True)")
+            End If
+            If Not d_drain2pressure = Drain2Press Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-2) - Drain-2 N2 Purge Pressure (kPa) Parameter Changed, from {Drain2Press} to {d_drain2pressure}")
+            End If
+            If Not i_drain2time = Drain2Time Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-2) - Drain-2 Time Parameter Changed, from {Drain2Time} to {i_drain2time}")
+            End If
+        Else
+            If Not str_drain2enable = Drain2Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-2) - Drain-2 Enable (False)")
+            End If
+        End If
 
-        '{"drain3_circuit", str_drain3enable},
-        '{"drain3_back_pressure", d_drain3pressure},
-        '{"drain3_time", i_drain3time}
+        If str_drain3enable = "Enable" Then
+            If Not str_drain3enable = Drain3Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-3) - Drain-3 Enable (True)")
+            End If
+            If Not d_drain3pressure = Drain3Press Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-3) - Drain-3 N2 Purge Pressure (kPa) Parameter Changed, from {Drain3Press} to {d_drain3pressure}")
+            End If
+            If Not i_drain3time = Drain3Time Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-3) - Drain-3 Time Parameter Changed, from {Drain3Time} to {i_drain3time}")
+            End If
+        Else
+            If Not str_drain3enable = Drain3Enable Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Drain-3) - Drain-3 Enable (False)")
+            End If
+        End If
     End Sub
 
 
