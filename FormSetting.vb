@@ -18,6 +18,9 @@ Public Class FormSetting
     ' Define Label Array
     Public lblArray(18) As Label
 
+    ' Scanner ComboBox Initialize State
+    Dim ScannerInitialized As Boolean = False
+
     Private Sub FormSetting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Always Maximize
         Me.WindowState = FormWindowState.Maximized
@@ -130,6 +133,9 @@ Public Class FormSetting
                 End With
             End If
 
+            ' Set Scanner Initialized State
+            ScannerInitialized = True
+
             ' Scanner Bypass
             If PublicVariables.ScannerBypass = True Then
                 SetButtonState(Button8, PublicVariables.ScannerBypass, btnScannerBypassValueTrue)
@@ -231,11 +237,12 @@ Public Class FormSetting
             If cmbx_ScannerType.SelectedIndex = 0 Then
                 PublicVariables.ScannerType = CStr(cmbx_ScannerType.SelectedItem)
                 RetainedMemory.Update(2, "ScannerType", CStr(cmbx_ScannerType.SelectedItem))
-                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Scanner Settings - Scanner Type ({CStr(cmbx_ScannerType.SelectedItem)})")
             End If
             If cmbx_ScannerType.SelectedIndex = 1 Then
                 PublicVariables.ScannerType = CStr(cmbx_ScannerType.SelectedItem)
                 RetainedMemory.Update(2, "ScannerType", CStr(cmbx_ScannerType.SelectedItem))
+            End If
+            If ScannerInitialized = True Then
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Scanner Settings - Scanner Type ({CStr(cmbx_ScannerType.SelectedItem)})")
             End If
         End If
@@ -575,17 +582,24 @@ Public Class FormSetting
             btn_ResetValve17, btn_ResetValve18, btn_ResetValve19', btn_ResetValve20, btn_ResetValve21
         }
 
-
+        ' Define Label Array
+        Dim lblArray As Label() = {
+            lbl_Valve1, lbl_Valve2, lbl_Valve3, lbl_Valve4, lbl_Valve5, lbl_Valve6, lbl_Valve7, lbl_Valve8,
+            lbl_Valve9, lbl_Valve10, lbl_Valve11, lbl_Valve12, lbl_Valve13, lbl_Valve14, lbl_Valve15, lbl_Valve16,
+            lbl_Valve17, lbl_Valve18, lbl_Valve19', lbl_Valve20, lbl_Valve21
+        }
 
         For i As Integer = 0 To btnArray.Length - 1
             If btnClicked Is btnArray(i) Then
                 If MsgBox($"Are you sure to Reset Tool Counter for [Valve-{i + 1}]?", MsgBoxStyle.Question Or MsgBoxStyle.YesNoCancel, "Question") = MsgBoxResult.Yes Then
+                    Dim ToolCouterTemp As String = lblArray(i).Text
                     If i < 16 Then
                         ToolCounterreset(0)(i) = True
                     Else
                         ToolCounterreset(1)(i - 16) = True
                     End If
                     MsgBox($"[Valve-{i + 1}] Tool Counter Resetted", MsgBoxStyle.OkOnly, "Information")
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Tool Counter - Valve-{i + 1} Counter Reset | Last Counter : {ToolCouterTemp}")
                 End If
             End If
         Next
