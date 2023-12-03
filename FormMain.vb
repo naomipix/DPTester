@@ -236,16 +236,15 @@ Public Class FormMain
         If Not MsgBox("Are you sure you want to Exit?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo Or MsgBoxStyle.DefaultButton2, "Exit Application") = MsgBoxResult.Yes Then
             e.Cancel = True
             PublicVariables.IsExitPromptShown = False
-        End If
-
-        ' Continue Event
-        If PublicVariables.LoggedIn = True Then
-            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Application] Application Exited By User")
         Else
-            EventLog.EventLogger.Log("-", "[Application] Application Exited By User")
+            ' Continue Event
+            If PublicVariables.LoggedIn = True Then
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Application] Application Exited By User")
+            Else
+                EventLog.EventLogger.Log("-", "[Application] Application Exited By User")
+            End If
+            PLCtimer.Enabled = False
         End If
-        PLCtimer.Enabled = False
-
     End Sub
 
 
