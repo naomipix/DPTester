@@ -45,6 +45,15 @@ Module PublicVariables
     Public CSVDelimiterResultSummary As String = ""
 
     ' Retained Memory - Lot Details
+    Public RetainedPartID As String
+    Public RetainedWorkOrder As String
+    Public RetainedLotID As String
+    Public RetainedConfirmationID As String
+    Public RetainedQuantity As String
+    Public RetainedRecipeType As String
+    Public RetainedRecipeID As String
+
+
     'Public LotStarted As Boolean = ""
     'Public LotIDNumber As String = ""
     'Public RecipeType As String = ""
@@ -170,7 +179,7 @@ Module SQL
     Public Function InsertRecord(tableName As String, parameters As Dictionary(Of String, Object)) As Integer
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
         Dim ReturnValue As Integer = 0
-
+        PCStatus(0)(2) = False
         Try
             Using (connection)
                 Dim command As New SqlCommand()
@@ -211,6 +220,7 @@ Module SQL
                 connection.Close()
             End Using
         Catch ex As Exception
+            PCStatus(0)(2) = True
             MsgBox(ex.Message & ex.StackTrace)
         End Try
 
@@ -236,7 +246,7 @@ Module SQL
     Public Function UpdateRecord(tableName As String, parameters As Dictionary(Of String, Object), condition As String) As Integer
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
         Dim ReturnValue As Integer = 0
-
+        PCStatus(0)(2) = False
         Try
             'conn.ConnectionString = connStr
             Using (connection)
@@ -275,6 +285,7 @@ Module SQL
                 connection.Close()
             End Using
         Catch ex As Exception
+            PCStatus(0)(2) = True
             MsgBox(ex.Message & ex.StackTrace)
         End Try
 
@@ -559,12 +570,12 @@ Namespace RetainedMemory
 
                     ' Recipe Type
                     If dt(i)("id") = 14 Then
-
+                        PublicVariables.RetainedRecipeType = dt(i)("retained_value")
                     End If
 
                     ' Recipe ID
                     If dt(i)("id") = 15 Then
-
+                        PublicVariables.RetainedRecipeID = dt(i)("retained_value")
                     End If
 
                     ' CSV Production Details Delimiter
@@ -626,6 +637,30 @@ Namespace RetainedMemory
                     If dt(i)("id") = 23 Then
                         PublicVariables.AutoBackupSQLPath = dt(i)("retained_value")
                     End If
+
+                    ' Get Retained Lot Details
+                    If dt(i)("id") = 25 Then
+                        PublicVariables.RetainedWorkOrder = dt(i)("retained_value")
+                    End If
+
+                    If dt(i)("id") = 26 Then
+                        PublicVariables.RetainedPartID = dt(i)("retained_value")
+                    End If
+
+                    If dt(i)("id") = 27 Then
+                        PublicVariables.RetainedLotID = dt(i)("retained_value")
+                    End If
+
+                    If dt(i)("id") = 28 Then
+                        PublicVariables.RetainedConfirmationID = dt(i)("retained_value")
+                    End If
+
+                    If dt(i)("id") = 29 Then
+                        PublicVariables.RetainedQuantity = dt(i)("retained_value")
+                    End If
+
+
+
                 Next
             End If
         End Sub

@@ -657,6 +657,7 @@ Partial Class FormRecipeManagement
         Me.btn_RcpDetailLoad.TabIndex = 32
         Me.btn_RcpDetailLoad.Text = "Load"
         Me.btn_RcpDetailLoad.UseVisualStyleBackColor = True
+        Me.btn_RcpDetailLoad.Visible = False
         '
         'btn_RcpDetailExport
         '

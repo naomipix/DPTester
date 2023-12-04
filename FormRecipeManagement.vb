@@ -1887,8 +1887,8 @@ Public Class FormRecipeManagement
             'Convert to the required type
             d_dptestlowlimit = CType(txtbx_RcpCreateDPLowLimit.Text, Decimal)
             'Check the value within range
-            If d_dptestlowlimit < min_d_dptestuplimit Or d_dptestlowlimit > max_d_dptestuplimit Then
-                RecipeMessage(20, "DP Test Lower Limit should be within " + CType(min_d_dptestuplimit, String) + " to " + CType(max_d_dptestuplimit, String))
+            If d_dptestlowlimit < min_d_dptestlowlimit Or d_dptestlowlimit > max_d_dptestlowlimit Then
+                RecipeMessage(20, "DP Test Lower Limit should be within " + CType(min_d_dptestlowlimit, String) + " to " + CType(max_d_dptestlowlimit, String))
                 txtbx_RcpCreateDPLowLimit.Text = Nothing
                 txtbx_RcpCreateDPLowLimit.Focus()
             End If
@@ -3504,8 +3504,8 @@ Public Class FormRecipeManagement
             'Convert to the required type
             d_dptestlowlimit = CType(txtbx_RcpEditDPLowLimit.Text, Decimal)
             'Check the value within range
-            If d_dptestlowlimit < min_d_dptestuplimit Or d_dptestlowlimit > max_d_dptestuplimit Then
-                RecipeMessage(20, "DP Test Lower Limit should be within " + CType(min_d_dptestuplimit, String) + " to " + CType(max_d_dptestuplimit, String))
+            If d_dptestlowlimit < min_d_dptestlowlimit Or d_dptestlowlimit > max_d_dptestlowlimit Then
+                RecipeMessage(20, "DP Test Lower Limit should be within " + CType(min_d_dptestlowlimit, String) + " to " + CType(max_d_dptestlowlimit, String))
                 txtbx_RcpEditDPLowLimit.Text = Nothing
                 txtbx_RcpEditDPLowLimit.Focus()
             End If
@@ -3857,7 +3857,7 @@ Public Class FormRecipeManagement
         checkbx_EditDrain1.Enabled = True
         checkbx_EditDrain2.Enabled = True
         checkbx_EditDrain3.Enabled = True
-
+        btn_RcpEditSave.Enabled = True
     End Sub
     Public Sub LoadRecipeParameters(parameterarr As String())
 
@@ -4086,7 +4086,7 @@ Public Class FormRecipeManagement
             checkbx_EditDrain2.Checked = False
             checkbx_EditDrain3.Checked = False
             btn_RcpEdit.Enabled = False
-
+            btn_RcpEditSave.Enabled = False
         End If
 
     End Sub
@@ -5342,6 +5342,10 @@ Public Class FormRecipeManagement
             Me.Close()
         End If
 
+    End Sub
+
+    Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
+        FormPixel.Show()
     End Sub
 
 

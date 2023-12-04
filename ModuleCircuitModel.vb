@@ -272,7 +272,7 @@
                         Lbl_Income(i)(j).BackColor = Color.Transparent
                         Lbl_Income(i)(j).Visible = True
                     Next
-                    Circuitforward(Lbl_Income(i), i, 500, Color.FromArgb(25, 130, 246))
+                    Circuitforward(Lbl_Income(i), i, 200, Color.FromArgb(25, 130, 246))
                 End If
             Next
 
@@ -298,7 +298,7 @@
                     Lbl_N2Purge(i).BackColor = Color.Transparent
                     Lbl_N2Purge(i).BorderStyle = BorderStyle.None
                 Next
-                Circuitforward(Lbl_N2Purge, 4, 500, Color.Yellow)
+                Circuitforward(Lbl_N2Purge, 4, 50, Color.Yellow)
             End If
 
         Else
@@ -324,16 +324,32 @@
                                 Lbl_Junction(i)(j).BackColor = Color.Transparent
                                 Lbl_Junction(i)(j).Visible = True
                             Next
-                            Circuitforward(Lbl_Junction(i), i + 5, 1000, Color.FromArgb(25, 130, 246))
+                            Circuitforward(Lbl_Junction(i), i + 5, 500, Color.Yellow)
                         End If
                     Else
-                        If pathrevack(i + 5) = False Then
-                            For j As Integer = 0 To Lbl_Junction(i).Length - 1
-                                Lbl_Junction(i)(j).BackColor = Color.Transparent
-                                Lbl_Junction(i)(j).Visible = True
-                            Next
-                            Circuitreverse(Lbl_Junction(i), i + 5, 1000, Color.FromArgb(25, 130, 246))
+
+
+                        If i = 0 Then
+                            If pathrevack(i + 5) = False Then
+                                For j As Integer = 0 To Lbl_Junction(i).Length - 1
+                                    Lbl_Junction(i)(j).BackColor = Color.Transparent
+                                    Lbl_Junction(i)(j).Visible = True
+                                Next
+                                Circuitreverse(Lbl_Junction(i), i + 5, 500, Color.FromArgb(25, 130, 246))
+                            End If
+
+                        Else
+                            If pathfwdack(i + 5) = False Then
+                                For j As Integer = 0 To Lbl_Junction(i).Length - 1
+                                    Lbl_Junction(i)(j).BackColor = Color.Transparent
+                                    Lbl_Junction(i)(j).Visible = True
+                                Next
+                                Circuitforward(Lbl_Junction(i), i + 5, 500, Color.FromArgb(25, 130, 246))
+                            End If
+
                         End If
+
+
                     End If
 
                 Next
@@ -373,7 +389,7 @@
                             Lbl_Product(i)(j).BackColor = Color.Transparent
                             Lbl_Product(i)(j).Visible = True
                         Next
-                        Circuitforward(Lbl_Product(i), i + 7, 1000, Color.FromArgb(25, 130, 246))
+                        Circuitforward(Lbl_Product(i), i + 7, 500, bgcolor)
                     End If
                 Next
             Else
@@ -412,7 +428,7 @@
                             Lbl_Bleed(i)(j).BackColor = Color.Transparent
                             Lbl_Bleed(i)(j).Visible = True
                         Next
-                        Circuitforward(Lbl_Bleed(i), i + 11, 1000, Color.FromArgb(25, 130, 246))
+                        Circuitforward(Lbl_Bleed(i), i + 11, 500, bgcolor)
                     End If
                 Next
             Else
@@ -488,7 +504,7 @@
                         Lbl_NPDrain(i).BackColor = Color.Transparent
                         Lbl_NPDrain(i).BorderStyle = BorderStyle.None
                     Next
-                    Circuitforward(Lbl_NPDrain, 16, 500, Color.Yellow)
+                    Circuitforward(Lbl_NPDrain, 16, 100, Color.FromArgb(25, 130, 246))
                 End If
 
             Else
@@ -520,7 +536,7 @@
                             Lbl_PDrain(i)(j).BackColor = Color.Transparent
                             Lbl_PDrain(i)(j).Visible = True
                         Next
-                        Circuitforward(Lbl_PDrain(i), i + 17, 1000, Color.FromArgb(25, 130, 246))
+                        Circuitforward(Lbl_PDrain(i), i + 17, 500, bgcolor)
                     End If
                 Next
             Else
@@ -553,43 +569,43 @@
 
         Select Case Valve
             Case 1
-                delay = 1000
+                delay = 100
             Case 2
-                delay = 1000
+                delay = 100
             Case 3
-                delay = 1000
+                delay = 100
             Case 4
-                delay = 1000
+                delay = 100
             Case 5
-                delay = 1000
+                delay = 100
             Case 6
-                delay = 1000
+                delay = 100
             Case 7
-                delay = 1000
+                delay = 100
             Case 8
-                delay = 1000
+                delay = 100
             Case 9
-                delay = 2000
+                delay = 500
             Case 10
-                delay = 2000
+                delay = 500
             Case 11
-                delay = 1000
+                delay = 500
             Case 12
-                delay = 1000
+                delay = 500
             Case 13
-                delay = 2000
+                delay = 500
             Case 14
-                delay = 2000
+                delay = 500
             Case 15
-                delay = 1000
+                delay = 500
             Case 16
-                delay = 1000
+                delay = 500
             Case 17
-                delay = 2000
+                delay = 500
             Case 18
-                delay = 2000
+                delay = 500
             Case 19
-                delay = 2000
+                delay = 500
             Case Else
                 Exit Select
         End Select

@@ -735,3 +735,4 @@ C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPT
 C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\obj\Debug\DPTesterApp.FormCircuitModel2.resources
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormCircuitModel1.resources
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormCircuitModel2.resources
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\obj\Debug\DPTesterApp.FormPixel.resources

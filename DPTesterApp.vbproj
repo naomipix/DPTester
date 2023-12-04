@@ -156,6 +156,12 @@
     <Compile Include="FormMessageLog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormPixel.Designer.vb">
+      <DependentUpon>FormPixel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormPixel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormRecipeManagement.designer.vb">
       <DependentUpon>FormRecipeManagement.vb</DependentUpon>
     </Compile>
@@ -233,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMessageLog.resx">
       <DependentUpon>FormMessageLog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPixel.resx">
+      <DependentUpon>FormPixel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormRecipeManagement.resx">
       <DependentUpon>FormRecipeManagement.vb</DependentUpon>
