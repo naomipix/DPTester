@@ -220,6 +220,8 @@ Partial Class FormMain
         Me.dsp_PumpStatus = New System.Windows.Forms.Label()
         Me.dsp_PumpIO = New System.Windows.Forms.Label()
         Me.panel_GenCondStatus = New System.Windows.Forms.Panel()
+        Me.lbl_JigSelect_ok = New System.Windows.Forms.Label()
+        Me.dsp_JigSelect_ok = New System.Windows.Forms.Label()
         Me.lbl_RecipeSelectionOK = New System.Windows.Forms.Label()
         Me.dsp_NoAlarm = New System.Windows.Forms.Label()
         Me.lbl_Alarm = New System.Windows.Forms.Label()
@@ -428,8 +430,6 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
-        Me.lbl_JigSelect_ok = New System.Windows.Forms.Label()
-        Me.dsp_JigSelect_ok = New System.Windows.Forms.Label()
         Me.panel_FormControl.SuspendLayout()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
@@ -1854,6 +1854,7 @@ Partial Class FormMain
         '
         Me.txtbx_Quantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_Quantity.Location = New System.Drawing.Point(156, 208)
+        Me.txtbx_Quantity.MaxLength = 2
         Me.txtbx_Quantity.Name = "txtbx_Quantity"
         Me.txtbx_Quantity.Size = New System.Drawing.Size(280, 29)
         Me.txtbx_Quantity.TabIndex = 25
@@ -1862,6 +1863,7 @@ Partial Class FormMain
         '
         Me.txtbx_ConfirmationID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_ConfirmationID.Location = New System.Drawing.Point(156, 173)
+        Me.txtbx_ConfirmationID.MaxLength = 10
         Me.txtbx_ConfirmationID.Name = "txtbx_ConfirmationID"
         Me.txtbx_ConfirmationID.Size = New System.Drawing.Size(280, 29)
         Me.txtbx_ConfirmationID.TabIndex = 24
@@ -1870,6 +1872,7 @@ Partial Class FormMain
         '
         Me.txtbx_PartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_PartID.Location = New System.Drawing.Point(156, 138)
+        Me.txtbx_PartID.MaxLength = 17
         Me.txtbx_PartID.Name = "txtbx_PartID"
         Me.txtbx_PartID.Size = New System.Drawing.Size(280, 29)
         Me.txtbx_PartID.TabIndex = 23
@@ -1878,6 +1881,7 @@ Partial Class FormMain
         '
         Me.txtbx_LotID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_LotID.Location = New System.Drawing.Point(156, 103)
+        Me.txtbx_LotID.MaxLength = 10
         Me.txtbx_LotID.Name = "txtbx_LotID"
         Me.txtbx_LotID.Size = New System.Drawing.Size(280, 29)
         Me.txtbx_LotID.TabIndex = 22
@@ -1886,6 +1890,7 @@ Partial Class FormMain
         '
         Me.txtbx_WorkOrderNumber.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_WorkOrderNumber.Location = New System.Drawing.Point(156, 68)
+        Me.txtbx_WorkOrderNumber.MaxLength = 9
         Me.txtbx_WorkOrderNumber.Name = "txtbx_WorkOrderNumber"
         Me.txtbx_WorkOrderNumber.Size = New System.Drawing.Size(280, 29)
         Me.txtbx_WorkOrderNumber.TabIndex = 21
@@ -2457,6 +2462,28 @@ Partial Class FormMain
         Me.panel_GenCondStatus.Name = "panel_GenCondStatus"
         Me.panel_GenCondStatus.Size = New System.Drawing.Size(250, 453)
         Me.panel_GenCondStatus.TabIndex = 1
+        '
+        'lbl_JigSelect_ok
+        '
+        Me.lbl_JigSelect_ok.BackColor = System.Drawing.SystemColors.Control
+        Me.lbl_JigSelect_ok.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_JigSelect_ok.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_JigSelect_ok.Location = New System.Drawing.Point(161, 358)
+        Me.lbl_JigSelect_ok.Name = "lbl_JigSelect_ok"
+        Me.lbl_JigSelect_ok.Size = New System.Drawing.Size(60, 25)
+        Me.lbl_JigSelect_ok.TabIndex = 12
+        Me.lbl_JigSelect_ok.Text = "OFF"
+        Me.lbl_JigSelect_ok.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_JigSelect_ok
+        '
+        Me.dsp_JigSelect_ok.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_JigSelect_ok.Location = New System.Drawing.Point(30, 353)
+        Me.dsp_JigSelect_ok.Name = "dsp_JigSelect_ok"
+        Me.dsp_JigSelect_ok.Size = New System.Drawing.Size(125, 35)
+        Me.dsp_JigSelect_ok.TabIndex = 13
+        Me.dsp_JigSelect_ok.Text = "Jig Selection" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "OK :"
+        Me.dsp_JigSelect_ok.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lbl_RecipeSelectionOK
         '
@@ -3597,6 +3624,7 @@ Partial Class FormMain
         'txtbx_NewRPM
         '
         Me.txtbx_NewRPM.Location = New System.Drawing.Point(161, 52)
+        Me.txtbx_NewRPM.MaxLength = 4
         Me.txtbx_NewRPM.Name = "txtbx_NewRPM"
         Me.txtbx_NewRPM.Size = New System.Drawing.Size(80, 25)
         Me.txtbx_NewRPM.TabIndex = 23
@@ -3657,6 +3685,7 @@ Partial Class FormMain
         'txtbx_NewLPM
         '
         Me.txtbx_NewLPM.Location = New System.Drawing.Point(160, 52)
+        Me.txtbx_NewLPM.MaxLength = 4
         Me.txtbx_NewLPM.Name = "txtbx_NewLPM"
         Me.txtbx_NewLPM.Size = New System.Drawing.Size(80, 25)
         Me.txtbx_NewLPM.TabIndex = 25
@@ -4021,6 +4050,7 @@ Partial Class FormMain
         'txtbx_N2PurgeRequired
         '
         Me.txtbx_N2PurgeRequired.Location = New System.Drawing.Point(243, 140)
+        Me.txtbx_N2PurgeRequired.MaxLength = 5
         Me.txtbx_N2PurgeRequired.Name = "txtbx_N2PurgeRequired"
         Me.txtbx_N2PurgeRequired.Size = New System.Drawing.Size(80, 25)
         Me.txtbx_N2PurgeRequired.TabIndex = 25
@@ -4028,6 +4058,7 @@ Partial Class FormMain
         'txtbx_BackPressRequired
         '
         Me.txtbx_BackPressRequired.Location = New System.Drawing.Point(243, 94)
+        Me.txtbx_BackPressRequired.MaxLength = 5
         Me.txtbx_BackPressRequired.Name = "txtbx_BackPressRequired"
         Me.txtbx_BackPressRequired.Size = New System.Drawing.Size(80, 25)
         Me.txtbx_BackPressRequired.TabIndex = 22
@@ -4845,28 +4876,6 @@ Partial Class FormMain
         Me.lbl_OperationMode.TabIndex = 34
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_JigSelect_ok
-        '
-        Me.lbl_JigSelect_ok.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_JigSelect_ok.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_JigSelect_ok.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_JigSelect_ok.Location = New System.Drawing.Point(161, 358)
-        Me.lbl_JigSelect_ok.Name = "lbl_JigSelect_ok"
-        Me.lbl_JigSelect_ok.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_JigSelect_ok.TabIndex = 12
-        Me.lbl_JigSelect_ok.Text = "OFF"
-        Me.lbl_JigSelect_ok.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_JigSelect_ok
-        '
-        Me.dsp_JigSelect_ok.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_JigSelect_ok.Location = New System.Drawing.Point(30, 353)
-        Me.dsp_JigSelect_ok.Name = "dsp_JigSelect_ok"
-        Me.dsp_JigSelect_ok.Size = New System.Drawing.Size(125, 35)
-        Me.dsp_JigSelect_ok.TabIndex = 13
-        Me.dsp_JigSelect_ok.Text = "Jig Selection" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "OK :"
-        Me.dsp_JigSelect_ok.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FormMain
         '

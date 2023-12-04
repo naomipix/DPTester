@@ -211,4 +211,8 @@
         ' Set Search State
         IsSearchState = True
     End Sub
+
+    Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
+        FormPixel.Show()
+    End Sub
 End Class
