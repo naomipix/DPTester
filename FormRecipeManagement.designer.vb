@@ -273,6 +273,7 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -307,6 +308,7 @@ Partial Class FormRecipeManagement
         Me.panel_RecipeGeneration.SuspendLayout()
         Me.panel_ProdSKUCreation.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -2915,6 +2917,7 @@ Partial Class FormRecipeManagement
         '
         'panel_FormControl
         '
+        Me.panel_FormControl.Controls.Add(Me.PictureBox1)
         Me.panel_FormControl.Controls.Add(Me.dsp_Home)
         Me.panel_FormControl.Controls.Add(Me.btn_Home)
         Me.panel_FormControl.Controls.Add(Me.picbx_Icon)
@@ -2935,7 +2938,7 @@ Partial Class FormRecipeManagement
         'dsp_Home
         '
         Me.dsp_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Home.Location = New System.Drawing.Point(1696, 65)
+        Me.dsp_Home.Location = New System.Drawing.Point(1532, 49)
         Me.dsp_Home.Name = "dsp_Home"
         Me.dsp_Home.Size = New System.Drawing.Size(80, 25)
         Me.dsp_Home.TabIndex = 103
@@ -2948,7 +2951,7 @@ Partial Class FormRecipeManagement
         Me.btn_Home.BackgroundImage = CType(resources.GetObject("btn_Home.BackgroundImage"), System.Drawing.Image)
         Me.btn_Home.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Home.Location = New System.Drawing.Point(1696, 93)
+        Me.btn_Home.Location = New System.Drawing.Point(1534, 77)
         Me.btn_Home.Name = "btn_Home"
         Me.btn_Home.Size = New System.Drawing.Size(80, 80)
         Me.btn_Home.TabIndex = 0
@@ -2964,6 +2967,16 @@ Partial Class FormRecipeManagement
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(1631, 57)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(150, 100)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 106
+        Me.PictureBox1.TabStop = False
         '
         'FormRecipeManagement
         '
@@ -3035,6 +3048,7 @@ Partial Class FormRecipeManagement
         Me.panel_ProdSKUCreation.ResumeLayout(False)
         Me.panel_ProdSKUCreation.PerformLayout()
         Me.panel_FormControl.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3288,4 +3302,5 @@ Partial Class FormRecipeManagement
     Friend WithEvents dsp_RcpDupSelRecipe As Label
     Friend WithEvents Cmbx_RcpDupNewType As ComboBox
     Friend WithEvents cmbx_RcpDupSelRecipe As ComboBox
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

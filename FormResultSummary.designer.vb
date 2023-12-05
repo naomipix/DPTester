@@ -89,6 +89,7 @@ Partial Class FormResultSummary
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -97,6 +98,7 @@ Partial Class FormResultSummary
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.dgv_Resultsummary, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -206,6 +208,7 @@ Partial Class FormResultSummary
         '
         'panel_FormControl
         '
+        Me.panel_FormControl.Controls.Add(Me.PictureBox1)
         Me.panel_FormControl.Controls.Add(Me.Panel1)
         Me.panel_FormControl.Controls.Add(Me.dsp_Home)
         Me.panel_FormControl.Controls.Add(Me.btn_Home)
@@ -832,7 +835,7 @@ Partial Class FormResultSummary
         'dsp_Home
         '
         Me.dsp_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Home.Location = New System.Drawing.Point(1696, 65)
+        Me.dsp_Home.Location = New System.Drawing.Point(1534, 49)
         Me.dsp_Home.Name = "dsp_Home"
         Me.dsp_Home.Size = New System.Drawing.Size(80, 25)
         Me.dsp_Home.TabIndex = 103
@@ -845,7 +848,7 @@ Partial Class FormResultSummary
         Me.btn_Home.BackgroundImage = CType(resources.GetObject("btn_Home.BackgroundImage"), System.Drawing.Image)
         Me.btn_Home.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Home.Location = New System.Drawing.Point(1696, 93)
+        Me.btn_Home.Location = New System.Drawing.Point(1534, 77)
         Me.btn_Home.Name = "btn_Home"
         Me.btn_Home.Size = New System.Drawing.Size(80, 80)
         Me.btn_Home.TabIndex = 0
@@ -861,6 +864,16 @@ Partial Class FormResultSummary
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Individual Result Summary"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(1631, 57)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(150, 100)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 106
+        Me.PictureBox1.TabStop = False
         '
         'FormResultSummary
         '
@@ -887,6 +900,7 @@ Partial Class FormResultSummary
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         CType(Me.dgv_Resultsummary, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -955,4 +969,5 @@ Partial Class FormResultSummary
     Friend WithEvents cmbx_ResultSearchLot As ComboBox
     Friend WithEvents cmbx_ResultSearchSerial As ComboBox
     Friend WithEvents dsp_ResultSearchSerial As Label
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

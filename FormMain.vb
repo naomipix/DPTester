@@ -2262,75 +2262,75 @@ Public Class FormMain
 
             'Update Retained Memory record 
 
-            If OnContinue = True Then
+            'If OnContinue = True Then
 
-                Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", Workorder}
-                        }
-                    Dim condition As String = $"id='25'"
-                If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                    OnContinue = True
-                Else
-                    OnContinue = False
-                    End If
+            '    Dim updateparameter As New Dictionary(Of String, Object) From {
+            '            {"retained_value", Workorder}
+            '            }
+            '        Dim condition As String = $"id='25'"
+            '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+            '        OnContinue = True
+            '    Else
+            '        OnContinue = False
+            '        End If
 
-            End If
+            'End If
 
-            If OnContinue = True Then
+            'If OnContinue = True Then
 
-                Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", PartID}
-                        }
-                    Dim condition As String = $"id='26'"
-                If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                    OnContinue = True
-                Else
-                    OnContinue = False
-                    End If
+            '    Dim updateparameter As New Dictionary(Of String, Object) From {
+            '            {"retained_value", PartID}
+            '            }
+            '        Dim condition As String = $"id='26'"
+            '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+            '        OnContinue = True
+            '    Else
+            '        OnContinue = False
+            '        End If
 
-            End If
+            'End If
 
-            If OnContinue = True Then
+            'If OnContinue = True Then
 
-                Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", LotID}
-                        }
-                    Dim condition As String = $"id='27'"
-                If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                    OnContinue = True
-                Else
-                    OnContinue = False
-                    End If
+            '    Dim updateparameter As New Dictionary(Of String, Object) From {
+            '            {"retained_value", LotID}
+            '            }
+            '        Dim condition As String = $"id='27'"
+            '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+            '        OnContinue = True
+            '    Else
+            '        OnContinue = False
+            '        End If
 
-            End If
+            'End If
 
-            If OnContinue = True Then
+            'If OnContinue = True Then
 
-                Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", ConfirmationID}
-                        }
-                    Dim condition As String = $"id='28'"
-                If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                    OnContinue = True
-                Else
-                    OnContinue = False
-                    End If
+            '    Dim updateparameter As New Dictionary(Of String, Object) From {
+            '            {"retained_value", ConfirmationID}
+            '            }
+            '        Dim condition As String = $"id='28'"
+            '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+            '        OnContinue = True
+            '    Else
+            '        OnContinue = False
+            '        End If
 
-            End If
+            'End If
 
-            If OnContinue = True Then
+            'If OnContinue = True Then
 
-                Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", Quantity}
-                        }
-                    Dim condition As String = $"id='29'"
-                If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                    OnContinue = True
-                Else
-                    OnContinue = False
-                    End If
+            '    Dim updateparameter As New Dictionary(Of String, Object) From {
+            '            {"retained_value", Quantity}
+            '            }
+            '        Dim condition As String = $"id='29'"
+            '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+            '        OnContinue = True
+            '    Else
+            '        OnContinue = False
+            '        End If
 
-            End If
+            'End If
 
 
             'Insert New record into the Lot Usage Table
@@ -2588,49 +2588,49 @@ Public Class FormMain
         Dim OnContinue As Boolean = True
         RecipeID = cmbx_RecipeID.Text
 
-        If OnContinue = True Then
+        'If OnContinue = True Then
 
-            Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", cmbx_RecipeType.Text}
-                        }
-            Dim condition As String = $"id='14'"
-            If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                OnContinue = True
-            Else
-                OnContinue = False
-            End If
+        '    Dim updateparameter As New Dictionary(Of String, Object) From {
+        '                {"retained_value", cmbx_RecipeType.Text}
+        '                }
+        '    Dim condition As String = $"id='14'"
+        '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+        '        OnContinue = True
+        '    Else
+        '        OnContinue = False
+        '    End If
 
-        End If
+        'End If
 
-        If OnContinue = True Then
+        'If OnContinue = True Then
 
-            Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", RecipeID}
-                        }
-            Dim condition As String = $"id='15'"
-            If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                OnContinue = True
-            Else
-                OnContinue = False
-            End If
+        '    Dim updateparameter As New Dictionary(Of String, Object) From {
+        '                {"retained_value", RecipeID}
+        '                }
+        '    Dim condition As String = $"id='15'"
+        '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+        '        OnContinue = True
+        '    Else
+        '        OnContinue = False
+        '    End If
 
-        End If
+        'End If
         If OnContinue = True Then
             LoadrecipeParameters(RecipeID)
-
+            cmbx_RecipeID.Enabled = False
+            cmbx_RecipeType.Enabled = False
+            btn_RecipeSelectionConfirm.Enabled = False
+            txtbx_TitleRecipeID.Text = cmbx_RecipeID.Text
+            txtbx_TitlePartID.Text = PartID
+            Dim dtfilter As DataTable = SQL.ReadRecords($"SELECT PartTable.filter_type_id, FilterType.filter_type, PartTable.jig_type_id, JigType.jig_description From PartTable
+INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.part_id='{PartID}' INNER JOIN JigType ON PartTable.jig_type_id = JigType.id")
+            txtbx_TitleFilterType.Text = dtfilter.Rows(0)("filter_type")
+            JigType = dtfilter.Rows(0)("jig_type_id")
             FormCalibration.ShowDialog()
         Else
             OnContinue = False
         End If
-        cmbx_RecipeID.Enabled = False
-        cmbx_RecipeType.Enabled = False
-        btn_RecipeSelectionConfirm.Enabled = False
-        txtbx_TitleRecipeID.Text = cmbx_RecipeID.Text
-        txtbx_TitlePartID.Text = PartID
-        Dim dtfilter As DataTable = SQL.ReadRecords($"SELECT PartTable.filter_type_id, FilterType.filter_type, PartTable.jig_type_id, JigType.jig_description From PartTable
-INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.part_id='{PartID}' INNER JOIN JigType ON PartTable.jig_type_id = JigType.id")
-        txtbx_TitleFilterType.Text = dtfilter.Rows(0)("filter_type")
-        JigType = dtfilter.Rows(0)("jig_type_id")
+
 
 
 
@@ -2651,6 +2651,14 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
     End Sub
 
+
+
+    Private Sub txtbx_SerialNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbx_SerialNumber.KeyPress
+        If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
+
+            e.Handled = True ' Suppress the key press
+        End If
+    End Sub
 
 
 
@@ -3225,6 +3233,8 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
     Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
         FormPixel.Show()
     End Sub
+
+
 
 
 End Class

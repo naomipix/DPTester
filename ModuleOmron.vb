@@ -98,8 +98,13 @@ Module ModuleOmron
             Alarmtimer.Interval = 2000
 
             Calseqtimer.Interval = 2000
-            Resultcapturetimer.Interval = 1000
+        Resultcapturetimer.Interval = 1000
 
+        For i As Integer = 0 To 2
+
+            PCStatus(i) = {False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False}
+
+        Next
 
     End Sub
 
@@ -1913,7 +1918,7 @@ Module ModuleOmron
 
 #Region "Main Sequence"
 
-            If FINSinput(20) > 10 Or PLCstatus(1)(10) = True Then
+            If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
                 PCStatus(1)(10) = False
                 FormMain.btn_OprKeyInDtConfirm.Enabled = False
                 FormMain.txtbx_SerialNumber.Enabled = False
@@ -1994,9 +1999,14 @@ Module ModuleOmron
             FINSWrite(0, 200)
             LabelStatusupdate()
         Else
+
+            FormCalibration.tmr_Calibration.Enabled = False
+            FormCalibration.tmr_Verification.Enabled = False
+            Resultcapturetimer.Enabled = False
             LabelStatusupdate()
             Alarmtimer.Enabled = True
             PLCtimer.Enabled = False
+
         End If
 
 
@@ -2235,7 +2245,9 @@ Module ModuleOmron
 
 
         Value = Currentalarm.ElementAt(startindex - Currentindex)
-
+        FormCalibration.tmr_Calibration.Enabled = False
+        FormCalibration.tmr_Verification.Enabled = False
+        Resultcapturetimer.Enabled = False
         If Value.Value.ToString.Substring(0, 3) = "ALM" Or Value.Value.ToString.Contains("Alarm") Then
             bgcolor = Color.Red
             frcolor = SystemColors.Window
@@ -2408,7 +2420,7 @@ Module ModuleOmron
     Private Sub ResultCapture_Ticks(sender As Object, e As EventArgs) Handles Resultcapturetimer.Tick
         Dim serialusageid As Integer
 
-        If MainrecordValue = True Then
+        If MainrecordValue = True And CommLost = False Then
             Dim newrw As DataRow = dtresult.NewRow
 
             serialusageid = dtserialrecord.Rows(0)("id")
