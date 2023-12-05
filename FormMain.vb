@@ -23,6 +23,7 @@ Module FormMainModule
     Public SerialAttempt As Integer
     Public dtresult As New DataTable
     Public Lotendsuccess As Boolean
+
     Public Sub ControlState(i As Integer)
         Select Case i
             Case 0  ' Logged Out
@@ -111,11 +112,30 @@ Public Class FormMain
         btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
         }
 
+        Scannertimer.Enabled = False
+        'Handheld Scanner Initalise
+        If PublicVariables.ScannerBypass = False Then
+            StartSerialComListener1()
+            txtbx_WorkOrderNumber.ReadOnly = True
+            txtbx_LotID.ReadOnly = True
+            txtbx_PartID.ReadOnly = True
+            txtbx_ConfirmationID.ReadOnly = True
+            txtbx_Quantity.ReadOnly = True
+        Else
+            txtbx_WorkOrderNumber.ReadOnly = False
+            txtbx_LotID.ReadOnly = False
+            txtbx_PartID.ReadOnly = False
+            txtbx_ConfirmationID.ReadOnly = False
+            txtbx_Quantity.ReadOnly = False
+
+        End If
 
 
         ModuleCircuitModel.InitialiseCircuit()
         'PLC Impicit Cyclic Messaging via Ethernet IP
         FINSInitialise()
+
+
 
         FormCircuitModel2.TopLevel = False
         While panel_ManualValve_Circuit.Controls.Count > 0
@@ -291,6 +311,7 @@ Public Class FormMain
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         PublicVariables.IsExitPromptShown = True
         If Not MsgBox("Are you sure you want to Exit?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo Or MsgBoxStyle.DefaultButton2, "Exit Application") = MsgBoxResult.Yes Then
+            mySerialPort1.Close()
             e.Cancel = True
             PublicVariables.IsExitPromptShown = False
         Else
@@ -3229,6 +3250,10 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         Next
 
     End Sub
+
+
+
+
 
     Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
         FormPixel.Show()

@@ -1429,6 +1429,9 @@ Module ModuleOmron
 
     Private Sub PLCTimer_Ticks(sender As Object, e As EventArgs) Handles PLCtimer.Tick
 
+
+
+
         If CommLost = False Then
             FINSInputRead()
             FetchPLC_DIn(100)
