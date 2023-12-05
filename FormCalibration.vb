@@ -225,7 +225,7 @@
     End Sub
 
     Private Sub tmr_Calibration_Tick(sender As Object, e As EventArgs) Handles tmr_Calibration.Tick
-        If CalrecordValue = True Then
+        If CalrecordValue = True And CommLost = False Then
             Dim newrw As DataRow = dtCalibration.NewRow
             Cal_samplingtime += 1
             Cal_inletpressure = AIn(9)
@@ -334,7 +334,7 @@
 
     Private Sub tmr_Verification_Tick(sender As Object, e As EventArgs) Handles tmr_Verification.Tick
 
-        If CalrecordValue = True Then
+        If CalrecordValue = True And CommLost = False Then
             Dim newrw As DataRow = dtVerification.NewRow
             Ver_samplingtime += 1
             Ver_inletpressure = AIn(9)

@@ -227,6 +227,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCalibration.resx">
       <DependentUpon>FormCalibration.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FormCircuitModel1.resx">
       <DependentUpon>FormCircuitModel1.vb</DependentUpon>

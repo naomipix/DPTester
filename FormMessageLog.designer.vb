@@ -49,12 +49,14 @@ Partial Class FormMessageLog
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
         Me.panel_MessageLog.SuspendLayout()
         CType(Me.dgv_MessageLog, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpbx_Filter.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -164,6 +166,7 @@ Partial Class FormMessageLog
         '
         'panel_FormControl
         '
+        Me.panel_FormControl.Controls.Add(Me.PictureBox1)
         Me.panel_FormControl.Controls.Add(Me.panel_MessageLog)
         Me.panel_FormControl.Controls.Add(Me.dsp_Home)
         Me.panel_FormControl.Controls.Add(Me.btn_Home)
@@ -314,7 +317,7 @@ Partial Class FormMessageLog
         'dsp_Home
         '
         Me.dsp_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Home.Location = New System.Drawing.Point(1696, 65)
+        Me.dsp_Home.Location = New System.Drawing.Point(1533, 49)
         Me.dsp_Home.Name = "dsp_Home"
         Me.dsp_Home.Size = New System.Drawing.Size(80, 25)
         Me.dsp_Home.TabIndex = 103
@@ -327,7 +330,7 @@ Partial Class FormMessageLog
         Me.btn_Home.BackgroundImage = CType(resources.GetObject("btn_Home.BackgroundImage"), System.Drawing.Image)
         Me.btn_Home.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Home.Location = New System.Drawing.Point(1696, 93)
+        Me.btn_Home.Location = New System.Drawing.Point(1534, 77)
         Me.btn_Home.Name = "btn_Home"
         Me.btn_Home.Size = New System.Drawing.Size(80, 80)
         Me.btn_Home.TabIndex = 0
@@ -343,6 +346,16 @@ Partial Class FormMessageLog
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Event Log"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(1631, 57)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(150, 100)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 106
+        Me.PictureBox1.TabStop = False
         '
         'FormMessageLog
         '
@@ -366,6 +379,7 @@ Partial Class FormMessageLog
         CType(Me.dgv_MessageLog, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpbx_Filter.ResumeLayout(False)
         Me.grpbx_Filter.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -394,4 +408,5 @@ Partial Class FormMessageLog
     Friend WithEvents btn_Search As Button
     Friend WithEvents btn_Reset As Button
     Friend WithEvents dgv_MessageLog As DataGridView
+    Friend WithEvents PictureBox1 As PictureBox
 End Class
