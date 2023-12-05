@@ -192,6 +192,7 @@
     <Compile Include="ModuleMain.vb" />
     <Compile Include="ModuleMemory.vb" />
     <Compile Include="ModuleOmron.vb" />
+    <Compile Include="ModuleSerialComm.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
