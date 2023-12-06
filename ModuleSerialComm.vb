@@ -58,19 +58,19 @@ Module ModuleSerialComm
             SerialDataReceived = True
 
         Catch ex As Exception
-
+            MsgBox("Scan Failed")
         End Try
 
     End Sub
 
     Public Sub PlaceData(str As String)
         If str.Length = 9 Then
-            'If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
-            FormMain.txtbx_WorkOrderNumber.Text = str
-            'End If
+            If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+                FormMain.txtbx_WorkOrderNumber.Text = str
+            End If
         End If
 
-        If str.Length > 15 Then
+            If str.Length > 15  Then
             If FormMain.txtbx_PartID.Enabled = True Then
                 FormMain.txtbx_PartID.Text = str
             End If
@@ -97,25 +97,12 @@ Module ModuleSerialComm
 
     Private Sub ScannerTimer_Ticks(sender As Object, e As EventArgs) Handles Scannertimer.Tick
         If FormMain.lbl_CommOpen.BackColor <> Color.LimeGreen And PublicVariables.ScannerBypass = False Then
+
             StartSerialComListener1()
             ConnectionRetry = ConnectionRetry + 1
         End If
 
-        If PublicVariables.ScannerBypass = False Then
-            'StartSerialComListener1()
-            FormMain.txtbx_WorkOrderNumber.ReadOnly = True
-            FormMain.txtbx_LotID.ReadOnly = True
-            FormMain.txtbx_PartID.ReadOnly = True
-            FormMain.txtbx_ConfirmationID.ReadOnly = True
-            FormMain.txtbx_Quantity.ReadOnly = True
-        Else
-            FormMain.txtbx_WorkOrderNumber.ReadOnly = False
-            FormMain.txtbx_LotID.ReadOnly = False
-            FormMain.txtbx_PartID.ReadOnly = False
-            FormMain.txtbx_ConfirmationID.ReadOnly = False
-            FormMain.txtbx_Quantity.ReadOnly = False
 
-        End If
 
         If SerialDataReceived = True Then
             PlaceData(HandheldScandata)

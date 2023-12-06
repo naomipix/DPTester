@@ -410,7 +410,7 @@ Public Class FormResultSummary
             Dim Filepath As String = $"{PublicVariables.CSVPathToResultSummary}ResultSummary_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
 
             ' Export With Return
-            Dim ReturnValue As Boolean = ExportDataTableToCsv(dt, Filepath, PublicVariables.CSVDelimiterResultSummary)
+            Dim ReturnValue As String = ExportDataTableToCsv(dt, Filepath, PublicVariables.CSVDelimiterResultSummary)
 
             ' Check Return State
             If ReturnValue = "True" Then

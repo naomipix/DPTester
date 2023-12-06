@@ -327,7 +327,7 @@
     End Sub
 
     Private Sub btn_Verify_Click(sender As Object, e As EventArgs) Handles btn_Verify.Click
-        PCStatus(1)(3) = True
+
         VerificationRun()
 
     End Sub
@@ -535,7 +535,7 @@
         If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" Then
             If btn_Verify.BackColor = Color.FromArgb(25, 130, 246) Then
                 'SetButtonState(btn_Verify, True, "Verify")
-
+                PCStatus(1)(3) = True
                 btn_Calibrate.Enabled = False
                 dtVerification = New DataTable()
 
