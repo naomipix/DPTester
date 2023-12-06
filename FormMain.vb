@@ -48,7 +48,7 @@ Public Class FormMain
 #Region "Form Properties [ Load | Shown | Closing ]"
 
     Public btn_ValveCtrlArr(18) As Button
-
+    Public btn_Manualothersarr(12) As Button
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Start Clock Timer
@@ -106,29 +106,21 @@ Public Class FormMain
 
 
 
-        ' Define CheckBox Array
+        ' Define Button for Manual Valve Control Array
         btn_ValveCtrlArr = {
             btn_Valve1, btn_Valve2, btn_Valve3, btn_Valve4, btn_Valve5, btn_Valve6, btn_Valve7, btn_Valve8, btn_Valve9, btn_Valve10, btn_Valve11, btn_Valve12,
         btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
         }
+        ' Define Button for Manual Other Control Array
+        btn_Manualothersarr = {btn_PumpMode, btn_PumpEnable, btn_PumpReset, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank
+            }
 
-        Scannertimer.Enabled = False
+        Scannertimer.Interval = 100
+        'Scannertimer.Enabled = True
         'Handheld Scanner Initalise
-        If PublicVariables.ScannerBypass = False Then
-            StartSerialComListener1()
-            txtbx_WorkOrderNumber.ReadOnly = True
-            txtbx_LotID.ReadOnly = True
-            txtbx_PartID.ReadOnly = True
-            txtbx_ConfirmationID.ReadOnly = True
-            txtbx_Quantity.ReadOnly = True
-        Else
-            txtbx_WorkOrderNumber.ReadOnly = False
-            txtbx_LotID.ReadOnly = False
-            txtbx_PartID.ReadOnly = False
-            txtbx_ConfirmationID.ReadOnly = False
-            txtbx_Quantity.ReadOnly = False
 
-        End If
+        StartSerialComListener1()
+
 
 
         ModuleCircuitModel.InitialiseCircuit()
@@ -371,12 +363,16 @@ Public Class FormMain
 
         ' Button Recipe Management
         If btnClicked Is btn_RecipeManagement Then
+
             FormRecipeManagement.ShowDialog()
+
         End If
 
         ' Button Calibration
         If btnClicked Is btn_Calibration Then
+
             FormCalibration.ShowDialog()
+
         End If
 
         ' Button Setting
@@ -1690,7 +1686,7 @@ Public Class FormMain
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-3 (ON)")
             End If
         End If
-
+        PCtimer.Start()
     End Sub
 
 
@@ -1753,6 +1749,7 @@ Public Class FormMain
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Empty Tank (ON)")
             End If
         End If
+        PCtimer.Start()
     End Sub
 
 

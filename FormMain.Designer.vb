@@ -67,6 +67,10 @@ Partial Class FormMain
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
+        Me.Panel12 = New System.Windows.Forms.Panel()
+        Me.lbl_CommOpen = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.dsp_LicenseStatus = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
@@ -431,17 +435,8 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
-        Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Panel12 = New System.Windows.Forms.Panel()
-        Me.lbl_CommOpen = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label31 = New System.Windows.Forms.Label()
         Me.panel_FormControl.SuspendLayout()
+        Me.Panel12.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
@@ -513,8 +508,6 @@ Partial Class FormMain
         CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_PLCHeartBeat.SuspendLayout()
         Me.panel_SelectLoadRecipe.SuspendLayout()
-        Me.Panel11.SuspendLayout()
-        Me.Panel12.SuspendLayout()
         Me.SuspendLayout()
         '
         'panel_FormControl
@@ -554,6 +547,48 @@ Partial Class FormMain
         Me.panel_FormControl.Size = New System.Drawing.Size(1904, 1001)
         Me.panel_FormControl.TabIndex = 1
         Me.panel_FormControl.Visible = False
+        '
+        'Panel12
+        '
+        Me.Panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel12.Controls.Add(Me.lbl_CommOpen)
+        Me.Panel12.Controls.Add(Me.Label30)
+        Me.Panel12.Controls.Add(Me.Label31)
+        Me.Panel12.Location = New System.Drawing.Point(1583, 187)
+        Me.Panel12.Name = "Panel12"
+        Me.Panel12.Size = New System.Drawing.Size(143, 50)
+        Me.Panel12.TabIndex = 106
+        '
+        'lbl_CommOpen
+        '
+        Me.lbl_CommOpen.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_CommOpen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_CommOpen.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_CommOpen.Location = New System.Drawing.Point(89, 26)
+        Me.lbl_CommOpen.Name = "lbl_CommOpen"
+        Me.lbl_CommOpen.Size = New System.Drawing.Size(17, 17)
+        Me.lbl_CommOpen.TabIndex = 8
+        Me.lbl_CommOpen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label30
+        '
+        Me.Label30.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label30.Location = New System.Drawing.Point(31, 26)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(52, 17)
+        Me.Label30.TabIndex = 8
+        Me.Label30.Text = "Open"
+        Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label31
+        '
+        Me.Label31.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label31.Location = New System.Drawing.Point(3, 4)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(135, 17)
+        Me.Label31.TabIndex = 8
+        Me.Label31.Text = "SerialCommunication"
+        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'PictureBox1
         '
@@ -1471,7 +1506,7 @@ Partial Class FormMain
         Me.dsp_OprKeyInDt.Name = "dsp_OprKeyInDt"
         Me.dsp_OprKeyInDt.Size = New System.Drawing.Size(463, 50)
         Me.dsp_OprKeyInDt.TabIndex = 15
-        Me.dsp_OprKeyInDt.Text = "Operator Key in Data"
+        Me.dsp_OprKeyInDt.Text = "Operator Key in Serial Number"
         Me.dsp_OprKeyInDt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtbx_SerialNumber
@@ -4634,7 +4669,6 @@ Partial Class FormMain
         'panel_PLCHeartBeat
         '
         Me.panel_PLCHeartBeat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panel_PLCHeartBeat.Controls.Add(Me.Panel11)
         Me.panel_PLCHeartBeat.Controls.Add(Me.lbl_B1)
         Me.panel_PLCHeartBeat.Controls.Add(Me.lbl_B0)
         Me.panel_PLCHeartBeat.Controls.Add(Me.dsp_B1)
@@ -4647,7 +4681,7 @@ Partial Class FormMain
         '
         'lbl_B1
         '
-        Me.lbl_B1.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_B1.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_B1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_B1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_B1.Location = New System.Drawing.Point(128, 26)
@@ -4658,7 +4692,7 @@ Partial Class FormMain
         '
         'lbl_B0
         '
-        Me.lbl_B0.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.lbl_B0.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_B0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_B0.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_B0.Location = New System.Drawing.Point(128, 4)
@@ -4904,113 +4938,6 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Panel11
-        '
-        Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel11.Controls.Add(Me.Label18)
-        Me.Panel11.Controls.Add(Me.Label19)
-        Me.Panel11.Controls.Add(Me.Label20)
-        Me.Panel11.Controls.Add(Me.Label24)
-        Me.Panel11.Controls.Add(Me.Label26)
-        Me.Panel11.Location = New System.Drawing.Point(-1, -1)
-        Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(160, 50)
-        Me.Panel11.TabIndex = 58
-        '
-        'Label18
-        '
-        Me.Label18.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(128, 26)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(17, 17)
-        Me.Label18.TabIndex = 8
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label19
-        '
-        Me.Label19.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(128, 4)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(17, 17)
-        Me.Label19.TabIndex = 8
-        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label20
-        '
-        Me.Label20.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(99, 26)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(23, 17)
-        Me.Label20.TabIndex = 8
-        Me.Label20.Text = "B1"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label24
-        '
-        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(99, 4)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(23, 17)
-        Me.Label24.TabIndex = 8
-        Me.Label24.Text = "B0"
-        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label26
-        '
-        Me.Label26.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(3, 4)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(90, 39)
-        Me.Label26.TabIndex = 8
-        Me.Label26.Text = "PLC" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Heartbeat"
-        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Panel12
-        '
-        Me.Panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel12.Controls.Add(Me.lbl_CommOpen)
-        Me.Panel12.Controls.Add(Me.Label30)
-        Me.Panel12.Controls.Add(Me.Label31)
-        Me.Panel12.Location = New System.Drawing.Point(1583, 187)
-        Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(143, 50)
-        Me.Panel12.TabIndex = 106
-        '
-        'lbl_CommOpen
-        '
-        Me.lbl_CommOpen.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lbl_CommOpen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_CommOpen.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_CommOpen.Location = New System.Drawing.Point(89, 26)
-        Me.lbl_CommOpen.Name = "lbl_CommOpen"
-        Me.lbl_CommOpen.Size = New System.Drawing.Size(17, 17)
-        Me.lbl_CommOpen.TabIndex = 8
-        Me.lbl_CommOpen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label30
-        '
-        Me.Label30.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.Location = New System.Drawing.Point(31, 26)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(52, 17)
-        Me.Label30.TabIndex = 8
-        Me.Label30.Text = "Open"
-        Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label31
-        '
-        Me.Label31.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label31.Location = New System.Drawing.Point(3, 4)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(135, 17)
-        Me.Label31.TabIndex = 8
-        Me.Label31.Text = "SerialCommunication"
-        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5025,6 +4952,7 @@ Partial Class FormMain
         Me.Text = "Smart Test DP Tester"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.panel_FormControl.ResumeLayout(False)
+        Me.Panel12.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_UserCategory.ResumeLayout(False)
@@ -5109,8 +5037,6 @@ Partial Class FormMain
         Me.panel_PLCHeartBeat.ResumeLayout(False)
         Me.panel_SelectLoadRecipe.ResumeLayout(False)
         Me.panel_SelectLoadRecipe.PerformLayout()
-        Me.Panel11.ResumeLayout(False)
-        Me.Panel12.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -5485,10 +5411,4 @@ Partial Class FormMain
     Friend WithEvents lbl_CommOpen As Label
     Friend WithEvents Label30 As Label
     Friend WithEvents Label31 As Label
-    Friend WithEvents Panel11 As Panel
-    Friend WithEvents Label18 As Label
-    Friend WithEvents Label19 As Label
-    Friend WithEvents Label20 As Label
-    Friend WithEvents Label24 As Label
-    Friend WithEvents Label26 As Label
 End Class
