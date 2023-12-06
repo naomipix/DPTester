@@ -853,6 +853,20 @@ Namespace LicensingModule
 
         Public Sub trialTimerStart()
             DayLeftTemp = (dtTrialExpiring - DateTime.Now).TotalDays
+            Dim vStr As String = ""
+
+            If DayLeftTemp < 0 Then
+                DayLeftTemp = 0
+            ElseIf DayLeftTemp > 1 Then
+                vStr = "s"
+            End If
+
+            With FormMain.dsp_LicenseStatus
+                .Text = $"{LicMsgTrialRemain}{DayLeftTemp} Day{vStr}"
+                .BackColor = SystemColors.Info
+                .Visible = True
+            End With
+
             EventLog.EventLogger.Log("-", $"[License] Trial License Remaining Day Count: {DayLeftTemp}")
             trialTimer.Interval = 30000
             trialTimer.Enabled = True
