@@ -91,8 +91,8 @@ Module ModuleOmron
             dtMainmsg = SQL.ReadRecords("select * from ProcessMessage")
             FINSOutputRead()
 
-            PLCtimer.Interval = 200
-            PLCtimer.Enabled = True
+        PLCtimer.Interval = 200
+        PLCtimer.Enabled = True
             PCtimer.Interval = 1000
 
             Alarmtimer.Interval = 2000
@@ -1372,7 +1372,7 @@ Module ModuleOmron
 
         Catch ex As Exception
             CommLost = True
-            Return False
+
 
         End Try
 
@@ -1431,7 +1431,6 @@ Module ModuleOmron
 
 
 
-
         If CommLost = False Then
             FINSInputRead()
             FetchPLC_DIn(100)
@@ -1449,19 +1448,20 @@ Module ModuleOmron
 
 
 
+
 #Region "PLC-PC Heartbeat handshake"
 
-            'PLC - PC HeartBeat indication label backcolor control 
+            'PLC -PC HeartBeat indication label backcolor control 
             If PLCstatus(0)(0) = True Then
                 PCStatus(0)(0) = False
                 FormMain.lbl_B0.BackColor = Color.LimeGreen
                 FormMain.lbl_B1.BackColor = SystemColors.Control
-                'FormMain.pb_Valve1Path1.BackColor = SystemColors.Control
+
             Else
                 PCStatus(0)(0) = True
                 FormMain.lbl_B0.BackColor = SystemColors.Control
                 FormMain.lbl_B1.BackColor = Color.LimeGreen
-                'FormMain.pb_Valve1Path1.BackColor = Color.FromArgb(25, 130, 246)
+
             End If
 
 #End Region
