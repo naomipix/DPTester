@@ -88,12 +88,9 @@
 
 
         If dtrecipetable.Rows.Count > 0 Then
-            txtbx_CalFillTime.Text = dtrecipetable.Rows(0)("dp_fill_time")
-            txtbx_CalBleedTime.Text = dtrecipetable.Rows(0)("dp_bleed_time")
-            txtbx_CalFlowrate.Text = dtrecipetable.Rows(0)("dp_flowrate")
-            txtbx_CalFlowTol.Text = dtrecipetable.Rows(0)("dp_flow_tolerance")
+
             txtbx_CalBackPressure.Text = dtrecipetable.Rows(0)("dp_back_pressure")
-            txtbx_CalStabilizeTime.Text = dtrecipetable.Rows(0)("dp_stabilize_time")
+            txtbx_CalDPTestFlowrate.Text = dtrecipetable.Rows(0)("dp_flowrate")
             txtbx_CalDPTesttime.Text = dtrecipetable.Rows(0)("dp_test_time")
             txtbx_CalDPPoints.Text = dtrecipetable.Rows(0)("dp_testpoints")
             txtbx_CalVertol.Text = dtrecipetable.Rows(0)("verification_tolerance")
@@ -129,16 +126,21 @@
 
 
             vertol = dtrecipetable.Rows(0)("verification_tolerance")
-            Else
-                txtbx_CalLotID.Text = Nothing
+            txtbx_EstCalCycletime.Text = CalCycletime.ToString
+
+            txtbx_EstVerCycletime.Text = CalCycletime.ToString
+            txtbx_ActCalCycletime.Text = "0"
+            txtbx_ActVerCycletime.Text = "0"
+        Else
+            txtbx_CalLotID.Text = Nothing
             txtbx_RecipeID.Text = Nothing
             txtbx_OperatorID.Text = Nothing
-            txtbx_CalFillTime.Text = Nothing
-            txtbx_CalBleedTime.Text = Nothing
-            txtbx_CalFlowrate.Text = Nothing
-            txtbx_CalFlowTol.Text = Nothing
+            txtbx_EstCalCycletime.Text = Nothing
+            txtbx_ActCalCycletime.Text = Nothing
+            txtbx_EstVerCycletime.Text = Nothing
+            txtbx_ActVerCycletime.Text = Nothing
             txtbx_CalBackPressure.Text = Nothing
-            txtbx_CalStabilizeTime.Text = Nothing
+            txtbx_CalDPTestFlowrate.Text = Nothing
             txtbx_CalDPTesttime.Text = Nothing
             txtbx_CalDPPoints.Text = Nothing
             txtbx_CalVertol.Text = Nothing
@@ -173,18 +175,11 @@
         If FormMain.MainMessage(11) = DialogResult.Yes Then
             PCStatus(1)(2) = False
             PCStatus(1)(3) = False
-            txtbx_CalLotID.Text = Nothing
-            txtbx_RecipeID.Text = Nothing
-            txtbx_OperatorID.Text = Nothing
-            txtbx_CalFillTime.Text = Nothing
-            txtbx_CalBleedTime.Text = Nothing
-            txtbx_CalFlowrate.Text = Nothing
-            txtbx_CalFlowTol.Text = Nothing
-            txtbx_CalBackPressure.Text = Nothing
-            txtbx_CalStabilizeTime.Text = Nothing
-            txtbx_CalDPTesttime.Text = Nothing
-            txtbx_CalDPPoints.Text = Nothing
-            txtbx_CalVertol.Text = Nothing
+
+            txtbx_ActCalCycletime.Text = "0"
+
+            txtbx_ActVerCycletime.Text = "0"
+
             tmr_Calibration.Enabled = False
             txtbx_CalInletPressure.Text = Nothing
             txtbx_CalOutletPressure.Text = Nothing
@@ -207,7 +202,7 @@
             Drain2cycletime = 0
             Drain3cycletime = 0
             PCStatus(1)(8) = True
-            Me.Close()
+            'Me.Close()
             If dtCalibration.Rows.Count > 0 Then
                 dtCalibration.Clear()
             End If
@@ -225,7 +220,10 @@
     End Sub
 
     Private Sub tmr_Calibration_Tick(sender As Object, e As EventArgs) Handles tmr_Calibration.Tick
+        PCStatus(1)(2) = False
         If CalrecordValue = True And CommLost = False Then
+
+
             Dim newrw As DataRow = dtCalibration.NewRow
             Cal_samplingtime += 1
             Cal_inletpressure = AIn(9)
@@ -274,6 +272,8 @@
         Else
             PCStatus(1)(2) = False
         End If
+
+        txtbx_ActCalCycletime.Text = Cal_samplingtime.ToString
         If Cal_samplingtime = CalCycletime Then
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
                 For i = Dptest1start To dptest1end - 1
@@ -333,7 +333,7 @@
     End Sub
 
     Private Sub tmr_Verification_Tick(sender As Object, e As EventArgs) Handles tmr_Verification.Tick
-
+        PCStatus(1)(3) = False
         If CalrecordValue = True And CommLost = False Then
             Dim newrw As DataRow = dtVerification.NewRow
             Ver_samplingtime += 1
@@ -384,6 +384,8 @@
         Else
             PCStatus(1)(3) = False
         End If
+
+        txtbx_ActVerCycletime.Text = Ver_samplingtime.ToString
         If Ver_samplingtime = CalCycletime Then
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
                 For i = Dptest1start To dptest1end - 1
@@ -459,7 +461,7 @@
                     FormMain.lbl_BlankDP.Text = txtbx_CalOffset.Text
                 End If
                 Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT id,lot_id,lot_attempt FROM LotUsage where lot_id = '{txtbx_CalLotID.Text} ' AND lot_end_time IS NULL")
-                If dtlotusage.Rows.Count = 1 Then
+                If dtlotusage.Rows.Count > 1 Then
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                             {"recipe_id", txtbx_RecipeID.Text},
                             {"calibration_time", lbl_DateTimeClock.Text},
@@ -472,13 +474,27 @@
                             {"cal_result", txtbx_CalResult.Text},
                             {"cal_cycle_time", CalCycletime.ToString}
                         }
-                    Dim Condition As String = $"id = '{dtlotusage.Rows(0).Item("id")}'"
+                    Dim Condition As String = $"id = '{dtlotusage.Rows(dtlotusage.Rows.Count - 1).Item("id")}'"
 
                     If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
-                        If MsgBox($"Calibration/Blank Test Completed with Result as {txtbx_CalResult.Text} and Calibration offset as {Cal_finaloffset}", MsgBoxStyle.OkOnly, "Calibration Result") = DialogResult.OK Then
-                            PCStatus(1)(6) = True
-                            Me.Close()
+                        If txtbx_CalResult.Text = "Fail" Then
+                            If MsgBox($"Calibration/Blank Test Results as {txtbx_CalResult.Text}, Do you Want to Reset and Re-calirbate?", MsgBoxStyle.YesNo, "Calibration Result") = DialogResult.No Then
+                                PCStatus(1)(6) = True
+                                'Me.Close()
+                            Else
+                                btn_Discard.PerformClick()
+                            End If
+                        ElseIf txtbx_CalResult.Text = "Pass" Then
+                            If MsgBox($"Calibration/Blank Test Completed with Result as {txtbx_CalResult.Text} and Calibration offset as {Cal_finaloffset}", MsgBoxStyle.OkOnly, "Calibration Result") = DialogResult.OK Then
+                                PCStatus(1)(6) = True
+                                Me.Close()
+                            End If
+
+                        Else
+                            MsgBox($"Error in Result capture")
                         End If
+
+
 
                     Else
                         MsgBox($"Query to Update Calibration Result Failed")
@@ -526,6 +542,7 @@
             End If
         Else
             SetButtonState(btn_Calibrate, False, "Calibrate")
+            PCStatus(1)(2) = False
             MsgBox($"No Valid data available to start the Test")
         End If
 
@@ -560,6 +577,7 @@
             End If
         Else
             SetButtonState(btn_Verify, False, "Verify")
+            PCStatus(1)(3) = False
             MsgBox($"No Valid data available to start the Test")
         End If
     End Sub

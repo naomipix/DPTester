@@ -95,9 +95,9 @@ Module ModuleOmron
         PLCtimer.Enabled = True
             PCtimer.Interval = 1000
 
-            Alarmtimer.Interval = 2000
+        Alarmtimer.Interval = 1500
 
-            Calseqtimer.Interval = 2000
+        Calseqtimer.Interval = 2000
         Resultcapturetimer.Interval = 1000
 
         For i As Integer = 0 To 2
@@ -1433,7 +1433,6 @@ Module ModuleOmron
     Private Sub PLCTimer_Ticks(sender As Object, e As EventArgs) Handles PLCtimer.Tick
 
 
-
         If CommLost = False Then
             FINSInputRead()
             FetchPLC_DIn(100)
@@ -1468,6 +1467,15 @@ Module ModuleOmron
             End If
 
 #End Region
+
+            If ComPort1Connected = False Then
+                PCStatus(0)(6) = True
+            Else
+                PCStatus(0)(6) = False
+            End If
+
+
+
 
 
 #Region "Pump and tank status update on all page in main form"
@@ -1939,10 +1947,12 @@ Module ModuleOmron
                     Cal_MessageNo = FINSinput(21)
                     CalibrationMessage(Cal_MessageNo)
                     If FINSinput(21) = 20 Then
-                        If MsgBox($"Kindly Check and Acknowledge, Whether the Blank Product has been Connected properly? ", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNoCancel, "Warning") = MsgBoxResult.Yes Then
-                            PCStatus(1)(7) = True
-                        Else
-                            Cal_MessageNo = 0
+                    If MsgBox($"Kindly Check and Acknowledge, Whether the Blank Product has been Connected properly? ", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                        PCStatus(1)(7) = True
+                    ElseIf MsgBox("Do you want to Abort sequence?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.yes Then
+                        PCStatus(1)(8) = True
+                    Else
+                        Cal_MessageNo = 0
                         End If
                     End If
 
@@ -2052,7 +2062,7 @@ Module ModuleOmron
                 LabelStatusupdate()
             Else
 
-                FormCalibration.tmr_Calibration.Enabled = False
+            FormCalibration.tmr_Calibration.Enabled = False
             FormCalibration.tmr_Verification.Enabled = False
             Resultcapturetimer.Enabled = False
             LabelStatusupdate()
@@ -2436,19 +2446,19 @@ Module ModuleOmron
 
 #Region "Calibration sequence timer and Message"
     Private Sub CalSeqTimer_Ticks(sender As Object, e As EventArgs) Handles Calseqtimer.Tick
-        If (PCStatus(1)(2) = True And FormCalibration.btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246)) Then
-            PCStatus(1)(2) = False
-            FormCalibration.btn_Calibrate.Enabled = True
-            FormCalibration.btn_Verify.Enabled = True
-            PCStatus(1)(7) = False
-        End If
+        'If (PCStatus(1)(2) = True And FormCalibration.btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246)) Then
+        '    PCStatus(1)(2) = False
+        '    FormCalibration.btn_Calibrate.Enabled = True
+        '    FormCalibration.btn_Verify.Enabled = True
+        '    PCStatus(1)(7) = False
+        'End If
 
-        If (PCStatus(1)(3) = True And FormCalibration.btn_Verify.BackColor = Color.FromArgb(25, 130, 246)) Then
-            PCStatus(1)(3) = False
-            FormCalibration.btn_Calibrate.Enabled = True
-            FormCalibration.btn_Verify.Enabled = True
-            PCStatus(1)(7) = False
-        End If
+        'If (PCStatus(1)(3) = True And FormCalibration.btn_Verify.BackColor = Color.FromArgb(25, 130, 246)) Then
+        '    PCStatus(1)(3) = False
+        '    FormCalibration.btn_Calibrate.Enabled = True
+        '    FormCalibration.btn_Verify.Enabled = True
+        '    PCStatus(1)(7) = False
+        'End If
     End Sub
 
     Public Sub CalibrationMessage(MsgNumber As Integer)
@@ -2595,9 +2605,9 @@ Module ModuleOmron
         FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)
 
         If result_finaldp >= dtrecipetable.Rows(0)("dp_lowerlimit") And result_finaldp <= dtrecipetable.Rows(0)("dp_upperlimit") Then
-            FormMain.lbl_DPTestResult.Text = "PASS"
-            FormMain.lbl_DPTestResult.BackColor = Color.LimeGreen
-            FormMain.lbl_DPTestResult.ForeColor = SystemColors.Window
+            FormMain.lbl_DPTestResult.Text="PASS"
+                                                                                           FormMain.lbl_DPTestResult.BackColor= Color.LimeGreen
+            FormMain.lbl_DPTestResult.ForeColor= SystemColors.Window
             PCStatus(1)(13) = True
             PCStatus(1)(14) = False
         Else

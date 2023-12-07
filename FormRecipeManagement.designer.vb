@@ -270,10 +270,10 @@ Partial Class FormRecipeManagement
         Me.dsp_PartCreateFiltertype = New System.Windows.Forms.Label()
         Me.dsp_PartCreateJigType = New System.Windows.Forms.Label()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -2846,7 +2846,7 @@ Partial Class FormRecipeManagement
         '
         Me.txtbx_PartCreatePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_PartCreatePartID.Location = New System.Drawing.Point(152, 178)
-        Me.txtbx_PartCreatePartID.MaxLength = 20
+        Me.txtbx_PartCreatePartID.MaxLength = 16
         Me.txtbx_PartCreatePartID.Name = "txtbx_PartCreatePartID"
         Me.txtbx_PartCreatePartID.Size = New System.Drawing.Size(250, 29)
         Me.txtbx_PartCreatePartID.TabIndex = 15
@@ -2935,6 +2935,16 @@ Partial Class FormRecipeManagement
         Me.panel_FormControl.TabIndex = 0
         Me.panel_FormControl.Visible = False
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(1631, 57)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(150, 100)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 106
+        Me.PictureBox1.TabStop = False
+        '
         'dsp_Home
         '
         Me.dsp_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2967,16 +2977,6 @@ Partial Class FormRecipeManagement
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(1631, 57)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(150, 100)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 106
-        Me.PictureBox1.TabStop = False
         '
         'FormRecipeManagement
         '
