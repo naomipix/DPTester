@@ -6,7 +6,7 @@ Imports System.Security.Cryptography
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 
 Public Class FormRecipeManagement
-
+    Public WithEvents Recipetimer As New Timer()
 #Region "Variables"
     'Declare Variables
     Dim CurrentTabPage As TabPage
@@ -110,46 +110,46 @@ Public Class FormRecipeManagement
     Private min_d_vertol As Decimal = 0.1
 
 
-    Private min_i_flush1filltime As Integer = 5
-    Private min_i_flush1bleedtime As Integer = 5
+    Private min_i_flush1filltime As Integer = 0
+    Private min_i_flush1bleedtime As Integer = 0
     Private min_d_flush1flow As Decimal = 3.0
     Private min_d_flush1flowtol As Decimal = 0.2
     Private min_d_flush1pressure As Decimal = 5.0
-    Private min_i_flush1stabilize As Integer = 5
-    Private min_i_flush1time As Integer = 1
+    Private min_i_flush1stabilize As Integer = 0
+    Private min_i_flush1time As Integer = 0
 
 
-    Private min_i_dptestfilltime As Integer = 5
-    Private min_i_dptestbleedtime As Integer = 5
+    Private min_i_dptestfilltime As Integer = 0
+    Private min_i_dptestbleedtime As Integer = 0
     Private min_d_dptestflow As Decimal = 3.0
     Private min_d_dptestflowtol As Decimal = 0.2
-    Private min_d_dptestpressure As Decimal = 5.0
-    Private min_i_dpteststabilize As Integer = 5
-    Private min_i_dptesttime As Integer = 1
+    Private min_d_dptestpressure As Decimal = 1.0
+    Private min_i_dpteststabilize As Integer = 0
+    Private min_i_dptesttime As Integer = 0
     Private min_d_dptestlowlimit As Decimal
     Private min_d_dptestuplimit As Decimal
     Private min_i_dptestpoints As Integer
 
 
 
-    Private min_i_flush2filltime As Integer = 5
-    Private min_i_flush2bleedtime As Integer = 5
+    Private min_i_flush2filltime As Integer = 0
+    Private min_i_flush2bleedtime As Integer = 0
     Private min_d_flush2flow As Decimal = 3.0
     Private min_d_flush2flowtol As Decimal = 0.2
-    Private min_d_flush2pressure As Decimal = 5.0
-    Private min_i_flush2stabilize As Integer = 5
-    Private min_i_flush2time As Integer = 1
+    Private min_d_flush2pressure As Decimal = 1.0
+    Private min_i_flush2stabilize As Integer = 0
+    Private min_i_flush2time As Integer = 0
 
 
 
-    Private min_d_drain1pressure As Decimal = 5.0
-    Private min_i_drain1time As Integer = 1
+    Private min_d_drain1pressure As Decimal = 1.0
+    Private min_i_drain1time As Integer = 0
 
-    Private min_d_drain2pressure As Decimal = 5.0
-    Private min_i_drain2time As Integer = 1
+    Private min_d_drain2pressure As Decimal = 1.0
+    Private min_i_drain2time As Integer = 0
 
-    Private min_d_drain3pressure As Decimal = 5.0
-    Private min_i_drain3time As Integer = 1
+    Private min_d_drain3pressure As Decimal = 1.0
+    Private min_i_drain3time As Integer = 0
 
 
 
@@ -350,46 +350,46 @@ Public Class FormRecipeManagement
         d_vertol = nom_d_vertol
 
         str_flush1enable = nom_str_flush1enable
-        i_flush1filltime = nom_i_flush1filltime
-        i_flush1bleedtime = nom_i_flush1bleedtime
-        d_flush1flow = nom_d_flush1flow
-        d_flush1flowtol = nom_d_flush1flowtol
-        d_flush1pressure = nom_d_flush1pressure
-        i_flush1stabilize = nom_i_flush1stabilize
-        i_flush1time = nom_i_flush1time
+        i_flush1filltime = 0
+        i_flush1bleedtime = 0
+        d_flush1flow = 0
+        d_flush1flowtol = 0
+        d_flush1pressure = 0
+        i_flush1stabilize = 0
+        i_flush1time = 0
 
         str_dptest1enable = nom_str_dptest1enable
-        i_dptestfilltime = nom_i_dptestfilltime
-        i_dptestbleedtime = nom_i_dptestbleedtime
-        d_dptestflow = nom_d_dptestflow
-        d_dptestflowtol = nom_d_dptestflowtol
-        d_dptestpressure = nom_d_dptestpressure
-        i_dpteststabilize = nom_i_dpteststabilize
-        i_dptesttime = nom_i_dptesttime
-        d_dptestlowlimit = nom_d_dptestlowlimit
-        d_dptestuplimit = nom_d_dptestuplimit
-        i_dptestpoints = nom_i_dptestpoints
+        i_dptestfilltime = 0
+        i_dptestbleedtime = 0
+        d_dptestflow = 0
+        d_dptestflowtol = 0
+        d_dptestpressure = 0
+        i_dpteststabilize = 0
+        i_dptesttime = 0
+        d_dptestlowlimit = 0
+        d_dptestuplimit = 0
+        i_dptestpoints = 0
         str_dptest2enable = nom_str_dptest2enable
 
         str_flush2enable = nom_str_flush2enable
-        i_flush2filltime = nom_i_flush2filltime
-        i_flush2bleedtime = nom_i_flush2bleedtime
-        d_flush2flow = nom_d_flush2flow
-        d_flush2flowtol = nom_d_flush2flowtol
-        d_flush2pressure = nom_d_flush2pressure
-        i_flush2stabilize = nom_i_flush2stabilize
-        i_flush2time = nom_i_flush2time
+        i_flush2filltime = 0
+        i_flush2bleedtime = 0
+        d_flush2flow = 0
+        d_flush2flowtol = 0
+        d_flush2pressure = 0
+        i_flush2stabilize = 0
+        i_flush2time = 0
 
 
         str_drain1enable = nom_str_drain1enable
-        d_drain1pressure = nom_d_drain1pressure
-        i_drain1time = nom_i_drain1time
+        d_drain1pressure = 0
+        i_drain1time = 0
         str_drain2enable = nom_str_drain2enable
-        d_drain2pressure = nom_d_drain2pressure
-        i_drain2time = nom_i_drain2time
+        d_drain2pressure = 0
+        i_drain2time = 0
         str_drain3enable = nom_str_drain3enable
-        d_drain3pressure = nom_d_drain3pressure
-        i_drain3time = nom_i_drain3time
+        d_drain3pressure = 0
+        i_drain3time = 0
 
         txtbx_RcpCreateVerTol.Text = CType(d_vertol, String)
 
@@ -420,6 +420,11 @@ Public Class FormRecipeManagement
         ' Initialize Defaults
         CurrentTabPage = tabpg_RecipeDetails                     ' Declare Currently Selected Tab Page
         tabctrl_RecipeCtrl.SelectedTab = tabpg_RecipeDetails     ' Select First Tab Page
+
+
+        Recipetimer.Interval = 1000
+        Recipetimer.Enabled = True
+
 
         txtbx_PartCreatePartID.Text = "--"
         txtbx_RcpCreateRecipeID.Text = "--"
@@ -1023,8 +1028,8 @@ Public Class FormRecipeManagement
         End If
 
         If onContinue = True Then
-            If PartID.Length > 20 Then
-                RecipeMessage(12, $"Part ID is limited to 20 Characters, Try Again")
+            If PartID.Length <> 16 Then
+                RecipeMessage(12, $"Part ID should be 16 Characters, Try Again")
                 onContinue = False
             End If
         End If
@@ -1085,6 +1090,14 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush1Stabilize.Enabled = True
             txtbx_RcpCreateFlush1Time.Enabled = True
 
+            i_flush1filltime = nom_i_flush1filltime
+            i_flush1bleedtime = nom_i_flush1bleedtime
+            d_flush1flow = nom_d_flush1flow
+            d_flush1flowtol = nom_d_flush1flowtol
+            d_flush1pressure = nom_d_flush1pressure
+            i_flush1stabilize = nom_i_flush1stabilize
+            i_flush1time = nom_i_flush1time
+
             str_flush1enable = "Enable"
             txtbx_RcpCreateFlush1Fill.Text = CType(i_flush1filltime, String)
             txtbx_RcpCreateFlush1Bleed.Text = CType(i_flush1bleedtime, String)
@@ -1102,6 +1115,16 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush1Stabilize.Enabled = False
             txtbx_RcpCreateFlush1Time.Enabled = False
 
+            'Load Zero if the Flush-1 is not enabled
+
+            i_flush1filltime = 0
+            i_flush1bleedtime = 0
+            d_flush1flow = 0.0
+            d_flush1flowtol = 0.0
+            d_flush1pressure = 0.0
+            i_flush1stabilize = 0
+            i_flush1time = 0
+
             str_flush1enable = "Disable"
             txtbx_RcpCreateFlush1Fill.Text = Nothing
             txtbx_RcpCreateFlush1Bleed.Text = Nothing
@@ -1110,12 +1133,14 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush1Pressure.Text = Nothing
             txtbx_RcpCreateFlush1Stabilize.Text = Nothing
             txtbx_RcpCreateFlush1Time.Text = Nothing
+
         End If
+
+
 
     End Sub
 
     Private Sub checkbx_CreateDPTest1_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_CreateDPTest1.CheckedChanged
-
         If checkbx_CreateDPTest1.Checked = True Then
 
             txtbx_RcpCreateDPFill.Enabled = True
@@ -1129,6 +1154,18 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateDPUpLimit.Enabled = True
             txtbx_RcpCreateDPPoints.Enabled = True
             checkbx_CreateDPTest2.Enabled = True
+
+            i_dptestfilltime = nom_i_dptestfilltime
+            i_dptestbleedtime = nom_i_dptestbleedtime
+            d_dptestflow = nom_d_dptestflow
+            d_dptestflowtol = nom_d_dptestflowtol
+            d_dptestpressure = nom_d_dptestpressure
+            i_dpteststabilize = nom_i_dpteststabilize
+            i_dptesttime = nom_i_dptesttime
+            d_dptestlowlimit = nom_d_dptestlowlimit
+            d_dptestuplimit = nom_d_dptestuplimit
+            i_dptestpoints = nom_i_dptestpoints
+
             str_dptest1enable = "Enable"
             txtbx_RcpCreateDPFill.Text = CType(i_dptestfilltime, String)
             txtbx_RcpCreateDPBleed.Text = CType(i_dptestbleedtime, String)
@@ -1152,6 +1189,18 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateDPUpLimit.Enabled = False
             checkbx_CreateDPTest2.Enabled = False
             txtbx_RcpCreateDPPoints.Enabled = False
+
+            i_dptestfilltime = 0
+            i_dptestbleedtime = 0
+            d_dptestflow = 0.0
+            d_dptestflowtol = 0.0
+            d_dptestpressure = 0.0
+            i_dpteststabilize = 0
+            i_dptesttime = 0
+            d_dptestlowlimit = 0.0
+            d_dptestuplimit = 0.0
+            i_dptestpoints = 0
+
             str_dptest1enable = "Disable"
             txtbx_RcpCreateDPFill.Text = Nothing
             txtbx_RcpCreateDPBleed.Text = Nothing
@@ -1178,6 +1227,14 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush2Stabilize.Enabled = True
             txtbx_RcpCreateFlush2Time.Enabled = True
 
+            i_flush2filltime = nom_i_flush2filltime
+            i_flush2bleedtime = nom_i_flush2bleedtime
+            d_flush2flow = nom_d_flush2flow
+            d_flush2flowtol = nom_d_flush2flowtol
+            d_flush2pressure = nom_d_flush2pressure
+            i_flush2stabilize = nom_i_flush2stabilize
+            i_flush2time = nom_i_flush2time
+
             str_flush2enable = "Enable"
             txtbx_RcpCreateFlush2Fill.Text = CType(i_flush2filltime, String)
             txtbx_RcpCreateFlush2Bleed.Text = CType(i_flush2bleedtime, String)
@@ -1195,6 +1252,13 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush2Stabilize.Enabled = False
             txtbx_RcpCreateFlush2Time.Enabled = False
 
+            i_flush2filltime = 0
+            i_flush2bleedtime = 0
+            d_flush2flow = 0.0
+            d_flush2flowtol = 0.0
+            d_flush2pressure = 0.0
+            i_flush2stabilize = 0
+            i_flush2time = 0
 
             str_flush2enable = "Disable"
             txtbx_RcpCreateFlush2Fill.Text = Nothing
@@ -1209,7 +1273,6 @@ Public Class FormRecipeManagement
     End Sub
 
     Private Sub checkbx_CreateDPTest2_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_CreateDPTest2.CheckedChanged
-
         If checkbx_CreateDPTest2.Checked = True Then
 
             str_dptest2enable = "Enable"
@@ -1226,12 +1289,20 @@ Public Class FormRecipeManagement
         If checkbx_CreateDrain1.Checked = True Then
             txtbx_RcpCreateDrain1Pressure.Enabled = True
             txtbx_RcpCreateDrain1Time.Enabled = True
+
+            d_drain1pressure = nom_d_drain1pressure
+            i_drain1time = nom_i_drain1time
+
             str_drain1enable = "Enable"
             txtbx_RcpCreateDrain1Pressure.Text = CType(d_drain1pressure, String)
             txtbx_RcpCreateDrain1Time.Text = CType(i_drain1time, String)
         Else
             txtbx_RcpCreateDrain1Pressure.Enabled = False
             txtbx_RcpCreateDrain1Time.Enabled = False
+
+            d_drain1pressure = 0.0
+            i_drain1time = 0
+
             str_drain1enable = "Disable"
             txtbx_RcpCreateDrain1Pressure.Text = Nothing
             txtbx_RcpCreateDrain1Time.Text = Nothing
@@ -1242,12 +1313,20 @@ Public Class FormRecipeManagement
         If checkbx_CreateDrain2.Checked = True Then
             txtbx_RcpCreateDrain2Pressure.Enabled = True
             txtbx_RcpCreateDrain2Time.Enabled = True
+
+            d_drain2pressure = nom_d_drain2pressure
+            i_drain2time = nom_i_drain2time
+
             str_drain2enable = "Enable"
             txtbx_RcpCreateDrain2Pressure.Text = CType(d_drain2pressure, String)
             txtbx_RcpCreateDrain2Time.Text = CType(i_drain2time, String)
         Else
             txtbx_RcpCreateDrain2Pressure.Enabled = False
             txtbx_RcpCreateDrain2Time.Enabled = False
+
+            d_drain2pressure = 0.0
+            i_drain2time = 0
+
             str_drain2enable = "Disable"
             txtbx_RcpCreateDrain2Pressure.Text = Nothing
             txtbx_RcpCreateDrain2Time.Text = Nothing
@@ -1258,16 +1337,25 @@ Public Class FormRecipeManagement
         If checkbx_CreateDrain3.Checked = True Then
             txtbx_RcpCreateDrain3Pressure.Enabled = True
             txtbx_RcpCreateDrain3Time.Enabled = True
+
+            d_drain3pressure = nom_d_drain3pressure
+            i_drain3time = nom_i_drain3time
+
             str_drain3enable = "Enable"
             txtbx_RcpCreateDrain3Pressure.Text = CType(d_drain3pressure, String)
             txtbx_RcpCreateDrain3Time.Text = CType(i_drain3time, String)
         Else
             txtbx_RcpCreateDrain3Pressure.Enabled = False
             txtbx_RcpCreateDrain3Time.Enabled = False
+
+            d_drain3pressure = 0.0
+            i_drain3time = 0
+
             str_drain3enable = "Disable"
             txtbx_RcpCreateDrain3Pressure.Text = Nothing
             txtbx_RcpCreateDrain3Time.Text = Nothing
         End If
+
     End Sub
 
 #End Region
@@ -1317,6 +1405,14 @@ Public Class FormRecipeManagement
         If Char.IsWhiteSpace(e.KeyChar) Then
             e.Handled = True ' Suppress the key press
         End If
+        If Not Char.IsLetterOrDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso Not e.KeyChar = "_" Then
+            e.Handled = True ' Suppress the key press
+        End If
+        If e.KeyChar = "_" AndAlso DirectCast(sender, TextBox).Text.Contains("_") Then
+
+            e.Handled = True ' Suppress the key press
+        End If
+
     End Sub
 
     Private Sub gotcursor(sender As Object, e As EventArgs) Handles txtbx_PartCreatePartID.GotFocus, txtbx_RcpCreateRecipeID.GotFocus, txtbx_RcpDupNewRecipeID.GotFocus
@@ -1325,15 +1421,15 @@ Public Class FormRecipeManagement
         texttooltip.InitialDelay = 100
 
         If txtonfocus Is txtbx_PartCreatePartID Then
-            texttooltip.SetToolTip(txtbx_PartCreatePartID, "Number of characters is restricted to 20")
+            texttooltip.SetToolTip(txtbx_PartCreatePartID, "Number of characters is restricted to 16")
         End If
 
         If txtonfocus Is txtbx_RcpCreateRecipeID Then
-            texttooltip.SetToolTip(txtbx_RcpCreateRecipeID, "Number of characters is restricted to 20")
+            texttooltip.SetToolTip(txtbx_RcpCreateRecipeID, "Number of characters is restricted from 4 to 20")
         End If
 
         If txtonfocus Is txtbx_RcpDupNewRecipeID Then
-            texttooltip.SetToolTip(txtbx_RcpDupNewRecipeID, "Number of characters is restricted to 20")
+            texttooltip.SetToolTip(txtbx_RcpDupNewRecipeID, "Number of characters is restricted from 4 to 20")
         End If
     End Sub
 
@@ -2224,8 +2320,8 @@ Public Class FormRecipeManagement
         End If
         'Check Recipe ID Length exceed
         If onContinue = True Then
-            If RecipeID.Length > 20 Then
-                RecipeMessage(12, $"Recipe ID is limited to 20 Characters, Try Again")
+            If RecipeID.Length < 4 Or RecipeID.Length > 20 Then
+                RecipeMessage(12, $"Recipe ID is limited from 4 to 20 Characters, Try Again")
                 onContinue = False
             End If
         End If
@@ -2473,67 +2569,7 @@ Public Class FormRecipeManagement
             End If
         End If
 
-        'Load Zero if the Flush-1 is not enabled
-        If onContinue = True Then
-            If checkbx_CreateFlush1.Checked = False Then
-                i_flush1filltime = 0
-                i_flush1bleedtime = 0
-                d_flush1flow = 0.0
-                d_flush1flowtol = 0.0
-                d_flush1pressure = 0.0
-                i_flush1stabilize = 0
-                i_flush1time = 0
-            End If
-        End If
 
-        If onContinue = True Then
-            If checkbx_CreateDPTest1.Checked = False Then
-                i_dptestfilltime = 0
-                i_dptestbleedtime = 0
-                d_dptestflow = 0.0
-                d_dptestflowtol = 0.0
-                d_dptestpressure = 0.0
-                i_dpteststabilize = 0
-                i_dptesttime = 0
-                d_dptestlowlimit = 0.0
-                d_dptestuplimit = 0.0
-                i_dptestpoints = 0
-            End If
-        End If
-
-        If onContinue = True Then
-            If checkbx_CreateFlush2.Checked = False Then
-                i_flush2filltime = 0
-                i_flush2bleedtime = 0
-                d_flush2flow = 0.0
-                d_flush2flowtol = 0.0
-                d_flush2pressure = 0.0
-                i_flush2stabilize = 0
-                i_flush2time = 0
-            End If
-        End If
-
-        If onContinue = True Then
-            If checkbx_CreateDrain1.Checked = False Then
-
-                d_drain1pressure = 0.0
-                i_drain1time = 0
-            End If
-        End If
-
-        If onContinue = True Then
-            If checkbx_CreateDrain2.Checked = False Then
-                d_drain2pressure = 0.0
-                i_drain2time = 0
-            End If
-        End If
-
-        If onContinue = True Then
-            If checkbx_CreateDrain3.Checked = False Then
-                d_drain3pressure = 0.0
-                i_drain3time = 0
-            End If
-        End If
 
         'Check whether Test points is greater than Test time
         ' Always Test points should be less than or equal to Test time
@@ -2755,8 +2791,8 @@ Public Class FormRecipeManagement
         End If
         'Check Recipe ID Length exceed
         If Oncontinue = True Then
-            If Newrecipe.Length > 20 Then
-                RecipeMessage(49, $"Recipe ID is limited to 20 Characters, Try Again")
+            If Newrecipe.Length > 20 Or Newrecipe.Length < 4 Then
+                RecipeMessage(49, $"Recipe ID is limited from 4 to 20 Characters, Try Again")
                 Oncontinue = False
             End If
         End If
@@ -3800,6 +3836,7 @@ Public Class FormRecipeManagement
 
 #Region "Edit Recipe"
     Private Sub btn_RcpEdit_Click(sender As Object, e As EventArgs) Handles btn_RcpEdit.Click
+        'cmbx_RcpEditRecipeID.Enabled=false
         txtbx_RcpEditVerTol.Enabled = True
         If checkbx_EditFlush1.Checked = True Then
             txtbx_RcpEditFlush1Fill.Enabled = True
@@ -3904,65 +3941,91 @@ Public Class FormRecipeManagement
 
         txtbx_RcpEditVerTol.Text = CType(d_vertol, String)
 
-        txtbx_RcpEditFlush1Fill.Text = CType(i_flush1filltime, String)
-        txtbx_RcpEditFlush1Bleed.Text = CType(i_flush1bleedtime, String)
-        txtbx_RcpEditFlush1Flow.Text = CType(d_flush1flow, String)
-        txtbx_RcpEditFlush1FlowTol.Text = CType(d_flush1flowtol, String)
-        txtbx_RcpEditFlush1Pressure.Text = CType(d_flush1pressure, String)
-        txtbx_RcpEditFlush1Stabilize.Text = CType(i_flush1stabilize, String)
-        txtbx_RcpEditFlush1Time.Text = CType(i_flush1time, String)
+        'txtbx_RcpEditFlush1Fill.Text = CType(i_flush1filltime, String)
+        'txtbx_RcpEditFlush1Bleed.Text = CType(i_flush1bleedtime, String)
+        'txtbx_RcpEditFlush1Flow.Text = CType(d_flush1flow, String)
+        'txtbx_RcpEditFlush1FlowTol.Text = CType(d_flush1flowtol, String)
+        'txtbx_RcpEditFlush1Pressure.Text = CType(d_flush1pressure, String)
+        'txtbx_RcpEditFlush1Stabilize.Text = CType(i_flush1stabilize, String)
+        'txtbx_RcpEditFlush1Time.Text = CType(i_flush1time, String)
 
-        txtbx_RcpEditDPFill.Text = CType(i_dptestfilltime, String)
-        txtbx_RcpEditDPBleed.Text = CType(i_dptestbleedtime, String)
-        txtbx_RcpEditDPFlow.Text = CType(d_dptestflow, String)
-        txtbx_RcpEditDPFlowTol.Text = CType(d_dptestflowtol, String)
-        txtbx_RcpEditDPPressure.Text = CType(d_dptestpressure, String)
-        txtbx_RcpEditDPStabilize.Text = CType(i_dpteststabilize, String)
-        txtbx_RcpEditDPTime.Text = CType(i_dptesttime, String)
-        txtbx_RcpEditDPLowLimit.Text = CType(d_dptestlowlimit, String)
-        txtbx_RcpEditDPUpLimit.Text = CType(d_dptestuplimit, String)
-        txtbx_RcpEditDPPoints.Text = CType(i_dptestpoints, String)
+        'txtbx_RcpEditDPFill.Text = CType(i_dptestfilltime, String)
+        'txtbx_RcpEditDPBleed.Text = CType(i_dptestbleedtime, String)
+        'txtbx_RcpEditDPFlow.Text = CType(d_dptestflow, String)
+        'txtbx_RcpEditDPFlowTol.Text = CType(d_dptestflowtol, String)
+        'txtbx_RcpEditDPPressure.Text = CType(d_dptestpressure, String)
+        'txtbx_RcpEditDPStabilize.Text = CType(i_dpteststabilize, String)
+        'txtbx_RcpEditDPTime.Text = CType(i_dptesttime, String)
+        'txtbx_RcpEditDPLowLimit.Text = CType(d_dptestlowlimit, String)
+        'txtbx_RcpEditDPUpLimit.Text = CType(d_dptestuplimit, String)
+        'txtbx_RcpEditDPPoints.Text = CType(i_dptestpoints, String)
 
-        txtbx_RcpEditFlush2Fill.Text = CType(i_flush2filltime, String)
-        txtbx_RcpEditFlush2Bleed.Text = CType(i_flush2bleedtime, String)
-        txtbx_RcpEditFlush2Flow.Text = CType(d_flush2flow, String)
-        txtbx_RcpEditFlush2FlowTol.Text = CType(d_flush2flowtol, String)
-        txtbx_RcpEditFlush2Pressure.Text = CType(d_flush2pressure, String)
-        txtbx_RcpEditFlush2Stabilize.Text = CType(i_flush2stabilize, String)
-        txtbx_RcpEditFlush2Time.Text = CType(i_flush2time, String)
+        'txtbx_RcpEditFlush2Fill.Text = CType(i_flush2filltime, String)
+        'txtbx_RcpEditFlush2Bleed.Text = CType(i_flush2bleedtime, String)
+        'txtbx_RcpEditFlush2Flow.Text = CType(d_flush2flow, String)
+        'txtbx_RcpEditFlush2FlowTol.Text = CType(d_flush2flowtol, String)
+        'txtbx_RcpEditFlush2Pressure.Text = CType(d_flush2pressure, String)
+        'txtbx_RcpEditFlush2Stabilize.Text = CType(i_flush2stabilize, String)
+        'txtbx_RcpEditFlush2Time.Text = CType(i_flush2time, String)
 
 
 
-        txtbx_RcpEditDrain1Pressure.Text = CType(d_drain1pressure, String)
-        txtbx_RcpEditDrain1Time.Text = CType(i_drain1time, String)
+        'txtbx_RcpEditDrain1Pressure.Text = CType(d_drain1pressure, String)
+        'txtbx_RcpEditDrain1Time.Text = CType(i_drain1time, String)
 
-        txtbx_RcpEditDrain2Pressure.Text = CType(d_drain2pressure, String)
-        txtbx_RcpEditDrain2Time.Text = CType(i_drain2time, String)
+        'txtbx_RcpEditDrain2Pressure.Text = CType(d_drain2pressure, String)
+        'txtbx_RcpEditDrain2Time.Text = CType(i_drain2time, String)
 
-        txtbx_RcpEditDrain3Pressure.Text = CType(d_drain3pressure, String)
-        txtbx_RcpEditDrain3Time.Text = CType(i_drain3time, String)
+        'txtbx_RcpEditDrain3Pressure.Text = CType(d_drain3pressure, String)
+        'txtbx_RcpEditDrain3Time.Text = CType(i_drain3time, String)
 
 
         If parameterarr(9) = "Enable" Then
             checkbx_EditFlush1.Checked = True
+            txtbx_RcpEditFlush1Fill.Text = CType(i_flush1filltime, String)
+            txtbx_RcpEditFlush1Bleed.Text = CType(i_flush1bleedtime, String)
+            txtbx_RcpEditFlush1Flow.Text = CType(d_flush1flow, String)
+            txtbx_RcpEditFlush1FlowTol.Text = CType(d_flush1flowtol, String)
+            txtbx_RcpEditFlush1Pressure.Text = CType(d_flush1pressure, String)
+            txtbx_RcpEditFlush1Stabilize.Text = CType(i_flush1stabilize, String)
+            txtbx_RcpEditFlush1Time.Text = CType(i_flush1time, String)
         Else
             checkbx_EditFlush1.Checked = False
         End If
 
         If parameterarr(17) = "Enable" Then
             checkbx_EditDPTest1.Checked = True
+            txtbx_RcpEditDPFill.Text = CType(i_dptestfilltime, String)
+            txtbx_RcpEditDPBleed.Text = CType(i_dptestbleedtime, String)
+            txtbx_RcpEditDPFlow.Text = CType(d_dptestflow, String)
+            txtbx_RcpEditDPFlowTol.Text = CType(d_dptestflowtol, String)
+            txtbx_RcpEditDPPressure.Text = CType(d_dptestpressure, String)
+            txtbx_RcpEditDPStabilize.Text = CType(i_dpteststabilize, String)
+            txtbx_RcpEditDPTime.Text = CType(i_dptesttime, String)
+            txtbx_RcpEditDPLowLimit.Text = CType(d_dptestlowlimit, String)
+            txtbx_RcpEditDPUpLimit.Text = CType(d_dptestuplimit, String)
+            txtbx_RcpEditDPPoints.Text = CType(i_dptestpoints, String)
         Else
             checkbx_EditDPTest1.Checked = False
         End If
 
         If parameterarr(28) = "Enable" Then
             checkbx_EditDPTest2.Checked = True
+
         Else
             checkbx_EditDPTest2.Checked = False
         End If
 
         If parameterarr(29) = "Enable" Then
             checkbx_EditFlush2.Checked = True
+            txtbx_RcpEditFlush2Fill.Text = CType(i_flush2filltime, String)
+            txtbx_RcpEditFlush2Bleed.Text = CType(i_flush2bleedtime, String)
+            txtbx_RcpEditFlush2Flow.Text = CType(d_flush2flow, String)
+            txtbx_RcpEditFlush2FlowTol.Text = CType(d_flush2flowtol, String)
+            txtbx_RcpEditFlush2Pressure.Text = CType(d_flush2pressure, String)
+            txtbx_RcpEditFlush2Stabilize.Text = CType(i_flush2stabilize, String)
+            txtbx_RcpEditFlush2Time.Text = CType(i_flush2time, String)
+
         Else
             checkbx_EditFlush2.Checked = False
         End If
@@ -3971,18 +4034,24 @@ Public Class FormRecipeManagement
 
         If parameterarr(37) = "Enable" Then
             checkbx_EditDrain1.Checked = True
+            txtbx_RcpEditDrain1Pressure.Text = CType(d_drain1pressure, String)
+            txtbx_RcpEditDrain1Time.Text = CType(i_drain1time, String)
         Else
             checkbx_EditDrain1.Checked = False
         End If
 
         If parameterarr(40) = "Enable" Then
             checkbx_EditDrain2.Checked = True
+            txtbx_RcpEditDrain2Pressure.Text = CType(d_drain2pressure, String)
+            txtbx_RcpEditDrain2Time.Text = CType(i_drain2time, String)
         Else
             checkbx_EditDrain2.Checked = False
         End If
 
         If parameterarr(43) = "Enable" Then
             checkbx_EditDrain3.Checked = True
+            txtbx_RcpEditDrain3Pressure.Text = CType(d_drain3pressure, String)
+            txtbx_RcpEditDrain3Time.Text = CType(i_drain3time, String)
         Else
             checkbx_EditDrain3.Checked = False
         End If
@@ -5326,35 +5395,80 @@ Public Class FormRecipeManagement
 
 #Region "Form Closing"
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
+
         If txtbx_RcpEditVerTol.Enabled = True Then
             If RecipeMessage(15, "Recipe Edit Tab") = DialogResult.Yes Then
                 Me.Close()
+                Recipetimer.Enabled = False
             End If
         End If
 
         If txtbx_RcpCreateVerTol.Enabled = True Then
             If RecipeMessage(15, "Recipe Create Tab") = DialogResult.Yes Then
                 Me.Close()
+                Recipetimer.Enabled = False
             End If
         End If
 
         If txtbx_RcpEditVerTol.Enabled = False And txtbx_RcpCreateVerTol.Enabled = False Then
             Me.Close()
+            Recipetimer.Enabled = False
         End If
 
     End Sub
 
-    Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
-        FormPixel.Show()
+    Private Sub FormRecipeManagement_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        Recipetimer.Enabled = False
     End Sub
-
-
-
 
 
 
 #End Region
 
+    Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
+        FormPixel.Show()
+    End Sub
+
+    Private Sub Recipetimer_Ticks(sender As Object, e As EventArgs) Handles Recipetimer.Tick
+
+        'Flush-1 Parameters
+
+        'DP Test-1
+
+        'Flush-2
+
+
+        'DP Test-2
+
+
+        'Drain-1
+
+
+
+        'Drain-2
+
+
+        'Drain-3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    End Sub
 
 
 End Class

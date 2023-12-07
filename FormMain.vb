@@ -115,11 +115,13 @@ Public Class FormMain
         btn_Manualothersarr = {btn_PumpMode, btn_PumpEnable, btn_PumpReset, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank
             }
 
-        Scannertimer.Interval = 100
-        'Scannertimer.Enabled = True
-        'Handheld Scanner Initalise
 
-        StartSerialComListener1()
+        'Handheld Scanner Initalise
+        Scannertimer.Interval = 1000
+        Scannertimer.Enabled = True
+
+
+        'StartSerialComListener1()
 
 
 
@@ -2100,7 +2102,15 @@ Public Class FormMain
 
 #Region "Main Menu Content"
     ' To restrict any special character or character key or decimal point press inside Integer type box other than Numeric value
-    Private Sub WorkorderKeypress(sender As Object, e As KeyPressEventArgs) Handles txtbx_WorkOrderNumber.KeyPress, txtbx_PartID.KeyPress, txtbx_LotID.KeyPress, txtbx_ConfirmationID.KeyPress
+
+    Private Sub ScanData_GotFocus(sender As Object, e As EventArgs) Handles txtbx_WorkOrderNumber.GotFocus, txtbx_PartID.GotFocus, txtbx_LotID.GotFocus, txtbx_ConfirmationID.GotFocus, txtbx_Quantity.GotFocus
+        Dim focustextbox As TextBox = DirectCast(sender, TextBox)
+        focustextbox.Text = Nothing
+    End Sub
+
+
+
+    Private Sub ScanDataKeypress(sender As Object, e As KeyPressEventArgs) Handles txtbx_WorkOrderNumber.KeyPress, txtbx_PartID.KeyPress, txtbx_LotID.KeyPress, txtbx_ConfirmationID.KeyPress
         Dim checktextbox As TextBox = DirectCast(sender, TextBox)
 
         If Not Char.IsLetterOrDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
@@ -2977,103 +2987,103 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
         'Update Retained Memory record 
 
-        If OnContinue = True Then
+        'If OnContinue = True Then
 
-            Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
-            Dim condition As String = $"id='25'"
-            If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                OnContinue = True
-            Else
-                OnContinue = False
-                End If
+        '    Dim updateparameter As New Dictionary(Of String, Object) From {
+        '                {"retained_value", "-"}
+        '                }
+        '    Dim condition As String = $"id='25'"
+        '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+        '        OnContinue = True
+        '    Else
+        '        OnContinue = False
+        '        End If
 
-        End If
+        'End If
 
-        If OnContinue = True Then
+        'If OnContinue = True Then
 
-            Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
-            Dim condition As String = $"id='26'"
-            If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                OnContinue = True
-            Else
-                OnContinue = False
-                End If
+        '    Dim updateparameter As New Dictionary(Of String, Object) From {
+        '                {"retained_value", "-"}
+        '                }
+        '    Dim condition As String = $"id='26'"
+        '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+        '        OnContinue = True
+        '    Else
+        '        OnContinue = False
+        '        End If
 
-        End If
+        'End If
 
-        If OnContinue = True Then
+        'If OnContinue = True Then
 
-            Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
-            Dim condition As String = $"id='27'"
-            If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                OnContinue = True
-            Else
-                OnContinue = False
-                End If
+        '    Dim updateparameter As New Dictionary(Of String, Object) From {
+        '                {"retained_value", "-"}
+        '                }
+        '    Dim condition As String = $"id='27'"
+        '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+        '        OnContinue = True
+        '    Else
+        '        OnContinue = False
+        '        End If
 
-        End If
+        'End If
 
-        If OnContinue = True Then
+        'If OnContinue = True Then
 
-            Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
-            Dim condition As String = $"id='28'"
-            If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                OnContinue = True
-            Else
-                OnContinue = False
-                End If
+        '    Dim updateparameter As New Dictionary(Of String, Object) From {
+        '                {"retained_value", "-"}
+        '                }
+        '    Dim condition As String = $"id='28'"
+        '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+        '        OnContinue = True
+        '    Else
+        '        OnContinue = False
+        '        End If
 
-        End If
+        'End If
 
-        If OnContinue = True Then
+        'If OnContinue = True Then
 
-            Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
-            Dim condition As String = $"id='29'"
-            If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                OnContinue = True
-            Else
-                OnContinue = False
-                End If
+        '    Dim updateparameter As New Dictionary(Of String, Object) From {
+        '                {"retained_value", "-"}
+        '                }
+        '    Dim condition As String = $"id='29'"
+        '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+        '        OnContinue = True
+        '    Else
+        '        OnContinue = False
+        '        End If
 
-        End If
+        'End If
 
-        If OnContinue = True Then
+        'If OnContinue = True Then
 
-            Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
-            Dim condition As String = $"id='14'"
-            If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                OnContinue = True
-            Else
-                OnContinue = False
-            End If
+        '    Dim updateparameter As New Dictionary(Of String, Object) From {
+        '                {"retained_value", "-"}
+        '                }
+        '    Dim condition As String = $"id='14'"
+        '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+        '        OnContinue = True
+        '    Else
+        '        OnContinue = False
+        '    End If
 
-        End If
+        'End If
 
-        If OnContinue = True Then
+        'If OnContinue = True Then
 
-            Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
-            Dim condition As String = $"id='15'"
-            If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
-                OnContinue = True
-            Else
-                OnContinue = False
-            End If
+        '    Dim updateparameter As New Dictionary(Of String, Object) From {
+        '                {"retained_value", "-"}
+        '                }
+        '    Dim condition As String = $"id='15'"
+        '    If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
+        '        OnContinue = True
+        '    Else
+        '        OnContinue = False
+        '    End If
 
-        End If
+        'End If
 
 
 
@@ -3099,6 +3109,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             txtbx_TitlePartID.Text = Nothing
             txtbx_TitleFilterType.Text = Nothing
             lbl_CalibrationStatus.Text = Nothing
+            lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
             lbl_BlankDP.Text = Nothing
             lbl_DiffPressAct.Text = Nothing
             lbl_DiffPressMin.Text = Nothing
@@ -3255,8 +3266,6 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
     Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
         FormPixel.Show()
     End Sub
-
-
 
 
 End Class

@@ -814,7 +814,7 @@ Partial Class FormMain
         'lbl_runcycletime
         '
         Me.lbl_runcycletime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_runcycletime.Location = New System.Drawing.Point(712, 634)
+        Me.lbl_runcycletime.Location = New System.Drawing.Point(729, 634)
         Me.lbl_runcycletime.Name = "lbl_runcycletime"
         Me.lbl_runcycletime.Size = New System.Drawing.Size(100, 25)
         Me.lbl_runcycletime.TabIndex = 16
@@ -822,7 +822,7 @@ Partial Class FormMain
         'lbl_EstCycleTime
         '
         Me.lbl_EstCycleTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_EstCycleTime.Location = New System.Drawing.Point(194, 634)
+        Me.lbl_EstCycleTime.Location = New System.Drawing.Point(208, 634)
         Me.lbl_EstCycleTime.Name = "lbl_EstCycleTime"
         Me.lbl_EstCycleTime.Size = New System.Drawing.Size(100, 25)
         Me.lbl_EstCycleTime.TabIndex = 15
@@ -831,18 +831,18 @@ Partial Class FormMain
         '
         Me.Label5.Location = New System.Drawing.Point(572, 634)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(134, 25)
+        Me.Label5.Size = New System.Drawing.Size(160, 25)
         Me.Label5.TabIndex = 14
-        Me.Label5.Text = "Running Cycle Time:"
+        Me.Label5.Text = "Actual Cycle Time (s):"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label2
         '
         Me.Label2.Location = New System.Drawing.Point(42, 634)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(134, 25)
+        Me.Label2.Size = New System.Drawing.Size(160, 25)
         Me.Label2.TabIndex = 13
-        Me.Label2.Text = "Estimated Cycle Time:"
+        Me.Label2.Text = "Estimated Cycle Time (s):"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'cmbx_GraphSelection
