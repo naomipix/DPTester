@@ -52,6 +52,8 @@ Module PublicVariables
     Public RetainedQuantity As String
     Public RetainedRecipeType As String
     Public RetainedRecipeID As String
+    Public RetainedCalStatus As String
+    Public RetainedCaloffset As String
 
 
     'Public LotStarted As Boolean = ""
@@ -659,6 +661,13 @@ Namespace RetainedMemory
                         PublicVariables.RetainedQuantity = dt(i)("retained_value")
                     End If
 
+                    If dt(i)("id") = 30 Then
+                        PublicVariables.RetainedCalStatus = dt(i)("retained_value")
+                    End If
+
+                    If dt(i)("id") = 31 Then
+                        PublicVariables.RetainedCaloffset = dt(i)("retained_value")
+                    End If
 
 
                 Next

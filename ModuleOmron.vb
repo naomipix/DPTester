@@ -2509,14 +2509,14 @@ Module ModuleOmron
         Else
             PCStatus(1)(10) = False
         End If
-        MainCycletime = FormCalibration.CalCycletime
-        MainDptest1start = FormCalibration.Dptest1start
-        MainDptest1end = FormCalibration.dptest1end
-        MainDptest2start = FormCalibration.Dptest2start
-        MainDptest2end = FormCalibration.dptest2end
-        MainDptestpoints = FormCalibration.Cal_dptestpoints
+        'MainCycletime = FormCalibration.CalCycletime
+        'MainDptest1start = FormCalibration.Dptest1start
+        'MainDptest1end = FormCalibration.dptest1end
+        'MainDptest2start = FormCalibration.Dptest2start
+        'MainDptest2end = FormCalibration.dptest2end
+        'MainDptestpoints = FormCalibration.Cal_dptestpoints
 
-        FormMain.lbl_EstCycleTime.Text = MainCycletime.ToString
+        'FormMain.lbl_EstCycleTime.Text = MainCycletime.ToString
         FormMain.lbl_runcycletime.Text = result_samplingtime.ToString
 
         If result_samplingtime = MainCycletime Then
