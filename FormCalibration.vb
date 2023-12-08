@@ -70,8 +70,8 @@
         lbl_Category.Text = PublicVariables.LoginUserCategoryName
 
         ' Initialize Defaults
-        txtbx_CalLotID.Text = FormMainModule.LotID
-        txtbx_RecipeID.Text = FormMainModule.RecipeID
+        txtbx_CalLotID.Text = FormMain.txtbx_LotID.Text
+        txtbx_RecipeID.Text = FormMain.cmbx_RecipeID.Text
         txtbx_OperatorID.Text = PublicVariables.LoginUserName
 
 
@@ -477,18 +477,50 @@
                     Dim Condition As String = $"id = '{dtlotusage.Rows(dtlotusage.Rows.Count - 1).Item("id")}'"
 
                     If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
-                        If txtbx_CalResult.Text = "Fail" Then
-                            If MsgBox($"Calibration/Blank Test Results as {txtbx_CalResult.Text}, Do you Want to Reset and Re-calirbate?", MsgBoxStyle.YesNo, "Calibration Result") = DialogResult.No Then
-                                PCStatus(1)(6) = True
-                                'Me.Close()
+                        Dim onContinue = True
+
+                        If onContinue = True Then
+                            Dim calstatusparameter As New Dictionary(Of String, Object) From {
+                        {"retained_value", txtbx_CalResult.Text}
+                        }
+                            Dim calstatuscondition As String = $"id='30'"
+                            If SQL.UpdateRecord($"[0_RetainedMemory]", calstatusparameter, calstatuscondition) = 1 Then
+                                onContinue = True
                             Else
-                                btn_Discard.PerformClick()
+                                MsgBox($"Query to Update Calibration Result Failed")
+                                onContinue = False
                             End If
-                        ElseIf txtbx_CalResult.Text = "Pass" Then
-                            If MsgBox($"Calibration/Blank Test Completed with Result as {txtbx_CalResult.Text} and Calibration offset as {Cal_finaloffset}", MsgBoxStyle.OkOnly, "Calibration Result") = DialogResult.OK Then
-                                PCStatus(1)(6) = True
-                                Me.Close()
+                        End If
+
+                        If onContinue = True Then
+                            Dim caloffsetparameter As New Dictionary(Of String, Object) From {
+                        {"retained_value", Cal_finaloffset.ToString}
+                        }
+                            Dim caloffsetcondition As String = $"id='31'"
+                            If SQL.UpdateRecord($"[0_RetainedMemory]", caloffsetparameter, caloffsetcondition) = 1 Then
+                                onContinue = True
+                            Else
+                                MsgBox($"Query to Update Calibration Result Failed")
+                                onContinue = False
                             End If
+                        End If
+
+                        If onContinue = True Then
+                            If txtbx_CalResult.Text = "Fail" Then
+                                If MsgBox($"Calibration/Blank Test Results as {txtbx_CalResult.Text}, Do you Want to Reset and Re-calirbate?", MsgBoxStyle.YesNo, "Calibration Result") = DialogResult.No Then
+                                    PCStatus(1)(6) = True
+                                    'Me.Close()
+                                Else
+                                    btn_Discard.PerformClick()
+                                End If
+                            ElseIf txtbx_CalResult.Text = "Pass" Then
+
+                                If MsgBox($"Calibration/Blank Test Completed with Result as {txtbx_CalResult.Text} and Calibration offset as {Cal_finaloffset}", MsgBoxStyle.OkOnly, "Calibration Result") = DialogResult.OK Then
+                                    PCStatus(1)(6) = True
+                                    Me.Close()
+                                End If
+                            End If
+
 
                         Else
                             MsgBox($"Error in Result capture")
