@@ -1193,6 +1193,10 @@ Namespace EventLog ' EventLog.EventLogger.Log( ,)
                 {"event_log", eventmsg}
             }
             SQL.InsertRecord("MessageLog", parameters)
+            If FormSetting.lbl_StartTime.Text.Length > 6 Then
+                FormSetting.dtbuyoffmessage.Rows.Add(FormSetting.dtbuyoffmessage.Rows.Count - 1, FormSetting.dtbuyoffmessage.Rows.Count, user, DateTime.Now, eventmsg)
+            End If
+
         End Sub
     End Module
 End Namespace

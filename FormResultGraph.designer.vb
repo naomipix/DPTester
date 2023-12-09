@@ -42,6 +42,7 @@ Partial Class FormResultGraph
         Me.panel_UserCategory = New System.Windows.Forms.Panel()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -101,16 +102,19 @@ Partial Class FormResultGraph
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.dsp_Graphattempt = New System.Windows.Forms.Label()
+        Me.txtbx_Graphattempt = New System.Windows.Forms.TextBox()
+        Me.dsp_GraphSerialUID = New System.Windows.Forms.Label()
+        Me.txtbx_GraphSerialUID = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.ResultChart, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -238,6 +242,16 @@ Partial Class FormResultGraph
         Me.panel_FormControl.TabIndex = 0
         Me.panel_FormControl.Visible = False
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(1631, 57)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(150, 100)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 106
+        Me.PictureBox1.TabStop = False
+        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.Panel2)
@@ -250,6 +264,10 @@ Partial Class FormResultGraph
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.dsp_Graphattempt)
+        Me.Panel2.Controls.Add(Me.txtbx_Graphattempt)
+        Me.Panel2.Controls.Add(Me.dsp_GraphSerialUID)
+        Me.Panel2.Controls.Add(Me.txtbx_GraphSerialUID)
         Me.Panel2.Controls.Add(Me.Panel4)
         Me.Panel2.Controls.Add(Me.txtbx_GraphTest)
         Me.Panel2.Controls.Add(Me.dsp_GraphTest)
@@ -409,7 +427,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphDiffPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphDiffPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphDiffPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphDiffPressure.Location = New System.Drawing.Point(226, 708)
+        Me.txtbx_GraphDiffPressure.Location = New System.Drawing.Point(226, 712)
         Me.txtbx_GraphDiffPressure.Name = "txtbx_GraphDiffPressure"
         Me.txtbx_GraphDiffPressure.ReadOnly = True
         Me.txtbx_GraphDiffPressure.Size = New System.Drawing.Size(260, 25)
@@ -419,7 +437,7 @@ Partial Class FormResultGraph
         'dsp_GraphDiffPressure
         '
         Me.dsp_GraphDiffPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphDiffPressure.Location = New System.Drawing.Point(20, 703)
+        Me.dsp_GraphDiffPressure.Location = New System.Drawing.Point(20, 707)
         Me.dsp_GraphDiffPressure.Name = "dsp_GraphDiffPressure"
         Me.dsp_GraphDiffPressure.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphDiffPressure.TabIndex = 24
@@ -431,7 +449,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphOutletPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphOutletPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphOutletPressure.Location = New System.Drawing.Point(226, 661)
+        Me.txtbx_GraphOutletPressure.Location = New System.Drawing.Point(226, 669)
         Me.txtbx_GraphOutletPressure.Name = "txtbx_GraphOutletPressure"
         Me.txtbx_GraphOutletPressure.ReadOnly = True
         Me.txtbx_GraphOutletPressure.Size = New System.Drawing.Size(260, 25)
@@ -441,7 +459,7 @@ Partial Class FormResultGraph
         'dsp_GraphOutletPressure
         '
         Me.dsp_GraphOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphOutletPressure.Location = New System.Drawing.Point(20, 656)
+        Me.dsp_GraphOutletPressure.Location = New System.Drawing.Point(20, 664)
         Me.dsp_GraphOutletPressure.Name = "dsp_GraphOutletPressure"
         Me.dsp_GraphOutletPressure.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphOutletPressure.TabIndex = 22
@@ -453,7 +471,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphInletPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphInletPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphInletPressure.Location = New System.Drawing.Point(226, 614)
+        Me.txtbx_GraphInletPressure.Location = New System.Drawing.Point(226, 626)
         Me.txtbx_GraphInletPressure.Name = "txtbx_GraphInletPressure"
         Me.txtbx_GraphInletPressure.ReadOnly = True
         Me.txtbx_GraphInletPressure.Size = New System.Drawing.Size(260, 25)
@@ -463,7 +481,7 @@ Partial Class FormResultGraph
         'dsp_GraphInletPressure
         '
         Me.dsp_GraphInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphInletPressure.Location = New System.Drawing.Point(20, 609)
+        Me.dsp_GraphInletPressure.Location = New System.Drawing.Point(20, 621)
         Me.dsp_GraphInletPressure.Name = "dsp_GraphInletPressure"
         Me.dsp_GraphInletPressure.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphInletPressure.TabIndex = 20
@@ -475,7 +493,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphFlowrate.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphFlowrate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphFlowrate.Location = New System.Drawing.Point(226, 567)
+        Me.txtbx_GraphFlowrate.Location = New System.Drawing.Point(226, 583)
         Me.txtbx_GraphFlowrate.Name = "txtbx_GraphFlowrate"
         Me.txtbx_GraphFlowrate.ReadOnly = True
         Me.txtbx_GraphFlowrate.Size = New System.Drawing.Size(260, 25)
@@ -487,7 +505,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphTemperature.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphTemperature.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphTemperature.Location = New System.Drawing.Point(226, 520)
+        Me.txtbx_GraphTemperature.Location = New System.Drawing.Point(226, 540)
         Me.txtbx_GraphTemperature.Name = "txtbx_GraphTemperature"
         Me.txtbx_GraphTemperature.ReadOnly = True
         Me.txtbx_GraphTemperature.Size = New System.Drawing.Size(260, 25)
@@ -499,7 +517,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphCalOffset.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphCalOffset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphCalOffset.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphCalOffset.Location = New System.Drawing.Point(226, 473)
+        Me.txtbx_GraphCalOffset.Location = New System.Drawing.Point(226, 497)
         Me.txtbx_GraphCalOffset.Name = "txtbx_GraphCalOffset"
         Me.txtbx_GraphCalOffset.ReadOnly = True
         Me.txtbx_GraphCalOffset.Size = New System.Drawing.Size(260, 25)
@@ -509,7 +527,7 @@ Partial Class FormResultGraph
         'dsp_GraphFlowrate
         '
         Me.dsp_GraphFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphFlowrate.Location = New System.Drawing.Point(20, 562)
+        Me.dsp_GraphFlowrate.Location = New System.Drawing.Point(20, 578)
         Me.dsp_GraphFlowrate.Name = "dsp_GraphFlowrate"
         Me.dsp_GraphFlowrate.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphFlowrate.TabIndex = 8
@@ -519,7 +537,7 @@ Partial Class FormResultGraph
         'dsp_GraphTemperature
         '
         Me.dsp_GraphTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphTemperature.Location = New System.Drawing.Point(20, 515)
+        Me.dsp_GraphTemperature.Location = New System.Drawing.Point(20, 535)
         Me.dsp_GraphTemperature.Name = "dsp_GraphTemperature"
         Me.dsp_GraphTemperature.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphTemperature.TabIndex = 8
@@ -529,7 +547,7 @@ Partial Class FormResultGraph
         'dsp_GraphCalOffset
         '
         Me.dsp_GraphCalOffset.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphCalOffset.Location = New System.Drawing.Point(20, 468)
+        Me.dsp_GraphCalOffset.Location = New System.Drawing.Point(20, 492)
         Me.dsp_GraphCalOffset.Name = "dsp_GraphCalOffset"
         Me.dsp_GraphCalOffset.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphCalOffset.TabIndex = 8
@@ -539,7 +557,7 @@ Partial Class FormResultGraph
         'dsp_GraphRecipeID
         '
         Me.dsp_GraphRecipeID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphRecipeID.Location = New System.Drawing.Point(20, 421)
+        Me.dsp_GraphRecipeID.Location = New System.Drawing.Point(20, 449)
         Me.dsp_GraphRecipeID.Name = "dsp_GraphRecipeID"
         Me.dsp_GraphRecipeID.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphRecipeID.TabIndex = 8
@@ -549,7 +567,7 @@ Partial Class FormResultGraph
         'dsp_GraphConfirmation
         '
         Me.dsp_GraphConfirmation.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphConfirmation.Location = New System.Drawing.Point(20, 374)
+        Me.dsp_GraphConfirmation.Location = New System.Drawing.Point(20, 406)
         Me.dsp_GraphConfirmation.Name = "dsp_GraphConfirmation"
         Me.dsp_GraphConfirmation.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphConfirmation.TabIndex = 8
@@ -559,7 +577,7 @@ Partial Class FormResultGraph
         'dsp_GraphPartID
         '
         Me.dsp_GraphPartID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphPartID.Location = New System.Drawing.Point(20, 327)
+        Me.dsp_GraphPartID.Location = New System.Drawing.Point(20, 363)
         Me.dsp_GraphPartID.Name = "dsp_GraphPartID"
         Me.dsp_GraphPartID.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphPartID.TabIndex = 8
@@ -569,7 +587,7 @@ Partial Class FormResultGraph
         'dsp_GraphWorkOrder
         '
         Me.dsp_GraphWorkOrder.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphWorkOrder.Location = New System.Drawing.Point(20, 280)
+        Me.dsp_GraphWorkOrder.Location = New System.Drawing.Point(20, 320)
         Me.dsp_GraphWorkOrder.Name = "dsp_GraphWorkOrder"
         Me.dsp_GraphWorkOrder.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphWorkOrder.TabIndex = 8
@@ -579,7 +597,7 @@ Partial Class FormResultGraph
         'dsp_GraphTimestamp
         '
         Me.dsp_GraphTimestamp.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphTimestamp.Location = New System.Drawing.Point(20, 233)
+        Me.dsp_GraphTimestamp.Location = New System.Drawing.Point(20, 277)
         Me.dsp_GraphTimestamp.Name = "dsp_GraphTimestamp"
         Me.dsp_GraphTimestamp.Size = New System.Drawing.Size(200, 35)
         Me.dsp_GraphTimestamp.TabIndex = 8
@@ -591,7 +609,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphRecipeID.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphRecipeID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphRecipeID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphRecipeID.Location = New System.Drawing.Point(226, 426)
+        Me.txtbx_GraphRecipeID.Location = New System.Drawing.Point(226, 454)
         Me.txtbx_GraphRecipeID.Name = "txtbx_GraphRecipeID"
         Me.txtbx_GraphRecipeID.ReadOnly = True
         Me.txtbx_GraphRecipeID.Size = New System.Drawing.Size(260, 25)
@@ -603,7 +621,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphConfirmation.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphConfirmation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphConfirmation.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphConfirmation.Location = New System.Drawing.Point(226, 379)
+        Me.txtbx_GraphConfirmation.Location = New System.Drawing.Point(226, 411)
         Me.txtbx_GraphConfirmation.Name = "txtbx_GraphConfirmation"
         Me.txtbx_GraphConfirmation.ReadOnly = True
         Me.txtbx_GraphConfirmation.Size = New System.Drawing.Size(260, 25)
@@ -615,7 +633,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphPartID.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphPartID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphPartID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphPartID.Location = New System.Drawing.Point(226, 332)
+        Me.txtbx_GraphPartID.Location = New System.Drawing.Point(226, 368)
         Me.txtbx_GraphPartID.Name = "txtbx_GraphPartID"
         Me.txtbx_GraphPartID.ReadOnly = True
         Me.txtbx_GraphPartID.Size = New System.Drawing.Size(260, 25)
@@ -627,7 +645,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphWorkOrder.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphWorkOrder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphWorkOrder.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphWorkOrder.Location = New System.Drawing.Point(226, 285)
+        Me.txtbx_GraphWorkOrder.Location = New System.Drawing.Point(226, 325)
         Me.txtbx_GraphWorkOrder.Name = "txtbx_GraphWorkOrder"
         Me.txtbx_GraphWorkOrder.ReadOnly = True
         Me.txtbx_GraphWorkOrder.Size = New System.Drawing.Size(260, 25)
@@ -639,7 +657,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphTimestamp.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_GraphTimestamp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_GraphTimestamp.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphTimestamp.Location = New System.Drawing.Point(226, 238)
+        Me.txtbx_GraphTimestamp.Location = New System.Drawing.Point(226, 282)
         Me.txtbx_GraphTimestamp.Name = "txtbx_GraphTimestamp"
         Me.txtbx_GraphTimestamp.ReadOnly = True
         Me.txtbx_GraphTimestamp.Size = New System.Drawing.Size(260, 25)
@@ -965,15 +983,49 @@ Partial Class FormResultGraph
         Me.Label1.Text = "Result Graph"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'PictureBox1
+        'dsp_Graphattempt
         '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(1631, 57)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(150, 100)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 106
-        Me.PictureBox1.TabStop = False
+        Me.dsp_Graphattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_Graphattempt.Location = New System.Drawing.Point(345, 234)
+        Me.dsp_Graphattempt.Name = "dsp_Graphattempt"
+        Me.dsp_Graphattempt.Size = New System.Drawing.Size(90, 35)
+        Me.dsp_Graphattempt.TabIndex = 61
+        Me.dsp_Graphattempt.Text = "Attempt No :"
+        Me.dsp_Graphattempt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_Graphattempt
+        '
+        Me.txtbx_Graphattempt.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_Graphattempt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_Graphattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_Graphattempt.Location = New System.Drawing.Point(441, 239)
+        Me.txtbx_Graphattempt.Name = "txtbx_Graphattempt"
+        Me.txtbx_Graphattempt.ReadOnly = True
+        Me.txtbx_Graphattempt.Size = New System.Drawing.Size(80, 25)
+        Me.txtbx_Graphattempt.TabIndex = 62
+        Me.txtbx_Graphattempt.TabStop = False
+        '
+        'dsp_GraphSerialUID
+        '
+        Me.dsp_GraphSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_GraphSerialUID.Location = New System.Drawing.Point(19, 234)
+        Me.dsp_GraphSerialUID.Name = "dsp_GraphSerialUID"
+        Me.dsp_GraphSerialUID.Size = New System.Drawing.Size(100, 35)
+        Me.dsp_GraphSerialUID.TabIndex = 59
+        Me.dsp_GraphSerialUID.Text = "Serial UID :"
+        Me.dsp_GraphSerialUID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_GraphSerialUID
+        '
+        Me.txtbx_GraphSerialUID.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_GraphSerialUID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_GraphSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_GraphSerialUID.Location = New System.Drawing.Point(131, 239)
+        Me.txtbx_GraphSerialUID.Name = "txtbx_GraphSerialUID"
+        Me.txtbx_GraphSerialUID.ReadOnly = True
+        Me.txtbx_GraphSerialUID.Size = New System.Drawing.Size(200, 25)
+        Me.txtbx_GraphSerialUID.TabIndex = 60
+        Me.txtbx_GraphSerialUID.TabStop = False
         '
         'FormResultGraph
         '
@@ -993,6 +1045,7 @@ Partial Class FormResultGraph
         Me.panel_UserCategory.ResumeLayout(False)
         Me.panel_UserCategory.PerformLayout()
         Me.panel_FormControl.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
@@ -1000,7 +1053,6 @@ Partial Class FormResultGraph
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         CType(Me.ResultChart, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1075,4 +1127,8 @@ Partial Class FormResultGraph
     Friend WithEvents checkbx_GraphInletPressure As CheckBox
     Friend WithEvents checkbx_GraphDP As CheckBox
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents dsp_Graphattempt As Label
+    Friend WithEvents txtbx_Graphattempt As TextBox
+    Friend WithEvents dsp_GraphSerialUID As Label
+    Friend WithEvents txtbx_GraphSerialUID As TextBox
 End Class

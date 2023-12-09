@@ -13,6 +13,7 @@ Module FormMainModule
     Public Quantity As String
     Public RecipeID As String
     Public JigType As Integer
+    Public Jig As String
     Public LotStartTime As String
     Public LotEndTime As String
     Public LotAttempt As Integer
@@ -21,8 +22,15 @@ Module FormMainModule
     Public Lotusageid As Integer
     Public SerialUid As String
     Public SerialAttempt As Integer
+    Public SerialPrevResult As String
     Public dtresult As New DataTable
     Public Lotendsuccess As Boolean
+    Public lotquantity As Integer
+    Public Processedquantity As Integer
+    Public Remainingquantity As Integer
+
+
+
 
     Public Sub ControlState(i As Integer)
         Select Case i
@@ -2242,6 +2250,7 @@ Public Class FormMain
         PartID = FormRecipeManagement.Formatstring(txtbx_PartID.Text)
         ConfirmationID = FormRecipeManagement.Formatstring(txtbx_ConfirmationID.Text)
         Quantity = FormRecipeManagement.Formatstring(txtbx_Quantity.Text)
+        lotquantity = CType(Quantity, Integer)
         PCStatus(0)(10) = False
         Lotendsuccess = False
         'Empty box check
@@ -2393,6 +2402,36 @@ Public Class FormMain
             End If
 
 
+
+
+
+            'Insert New record into the Lot Usage Table
+            If OnContinue = True Then
+                If dtlot.Rows.Count > 0 Then
+
+                    If dtlot.Rows(0)("part_id") = PartID And dtlot.Rows(0)("confirmation_id") = ConfirmationID And dtlot.Rows(0)("work_order") = Workorder Then
+                        If MsgBox($"This Lot {LotID} has already been processed in the machine, Do you want to proceed?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                            Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT lot_id,lot_attempt FROM LotUsage WHERE lot_id ='{LotID}' ORDER BY lot_attempt ASC")
+                            If dtlotusage.Rows.Count > 0 Then
+                                LotAttempt = dtlotusage.Rows.Count + 1
+                                LotStartTime = lbl_DateTimeClock.Text
+                            Else
+                                LotAttempt = 1
+                            End If
+                        Else
+
+                            OnContinue = False
+                        End If
+
+                    Else
+                            MainMessage(7, $" {dtlot.Rows(0)("work_order")}, {dtlot.Rows(0)("part_id")}, {dtlot.Rows(0)("confirmation_id")} ")
+                        OnContinue = False
+                    End If
+
+                Else
+                    LotAttempt = 1
+                End If
+            End If
             'Update Retained Memory record 
 
             If OnContinue = True Then
@@ -2464,29 +2503,6 @@ Public Class FormMain
                 End If
 
             End If
-
-
-            'Insert New record into the Lot Usage Table
-            If OnContinue = True Then
-                If dtlot.Rows.Count > 0 Then
-                    If dtlot.Rows(0)("part_id") = PartID And dtlot.Rows(0)("confirmation_id") = ConfirmationID And dtlot.Rows(0)("work_order") = Workorder Then
-                        Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT lot_id,lot_attempt FROM LotUsage WHERE lot_id ='{LotID}' ORDER BY lot_attempt ASC")
-                        If dtlotusage.Rows.Count > 0 Then
-                            LotAttempt = dtlotusage.Rows.Count + 1
-                            LotStartTime = lbl_DateTimeClock.Text
-                        Else
-                            LotAttempt = 1
-                        End If
-                    Else
-                        MainMessage(7, $" {dtlot.Rows(0)("work_order")}, {dtlot.Rows(0)("part_id")}, {dtlot.Rows(0)("confirmation_id")} ")
-                        OnContinue = False
-                    End If
-
-                Else
-                    LotAttempt = 1
-                End If
-            End If
-
             If OnContinue = True Then
                 Dim Lotusageparameter As New Dictionary(Of String, Object) From {
                     {"lot_id", LotID},
@@ -2779,12 +2795,14 @@ Public Class FormMain
         btn_RecipeSelectionConfirm.Enabled = False
         txtbx_TitleRecipeID.Text = cmbx_RecipeID.Text
         txtbx_TitlePartID.Text = txtbx_PartID.Text
+
         Dim dtfilter As DataTable = SQL.ReadRecords($"SELECT PartTable.filter_type_id, FilterType.filter_type, PartTable.jig_type_id, JigType.jig_description From PartTable
 INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.part_id='{txtbx_PartID.Text}' INNER JOIN JigType ON PartTable.jig_type_id = JigType.id")
         If dtfilter.Rows.Count > 0 Then
             txtbx_TitleFilterType.Text = dtfilter.Rows(0)("filter_type")
             JigType = dtfilter.Rows(0)("jig_type_id")
-
+            Jig = dtfilter.Rows(0)("jig_description")
+            txtbx_TitleJigType.Text = Jig
         Else
             MsgBox("Unable to find PartID Details!")
         End If
@@ -2913,15 +2931,33 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
             If dtproduct.Rows.Count > 0 Then
                 SerialAttempt = dtproduct.Rows(dtproduct.Rows.Count - 1)("serial_attempt") + 1
+                If Not String.IsNullOrEmpty(dtproduct.Rows(dtproduct.Rows.Count - 1)("result").ToString) = True Then
+                    SerialPrevResult = dtproduct.Rows(dtproduct.Rows.Count - 1)("result").ToString
+                Else
+                    SerialPrevResult = String.Empty
+                End If
+
             Else
                 SerialAttempt = 1
+                SerialPrevResult = String.Empty
             End If
+
 
 
             If dtlotrecord.Rows.Count <= 0 Then
                 Oncontinue = False
             Else
                 Oncontinue = True
+            End If
+
+            If Oncontinue = True Then
+                If SerialPrevResult = "Pass" Then
+                    If MsgBox($"This Serial Number {SerialUid} has already been tested and have ""Passed"" the test In the machine, Do you want to Test it again?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                        Oncontinue = True
+                    Else
+                        Oncontinue = False
+                    End If
+                End If
             End If
 
 
@@ -3027,10 +3063,10 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
         dtresult = New DataTable()
         CreateTable("Production_Result")
-        dtrecipetable = SQL.ReadRecords($"SELECT * From RecipeTable WHERE recipe_id ='{cmbx_RecipeID.Text}'")
+        dtrecipetable = SQL.ReadRecords($"Select * From RecipeTable WHERE recipe_id ='{cmbx_RecipeID.Text}'")
         dtserialrecord = SQL.ReadRecords($"SELECT * FROM ProductionDetail WHERE serial_uid='{SerialUid}' AND serial_attempt='{SerialAttempt}'")
 
-        If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
+                    If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
             flush1cycletime = (dtrecipetable.Rows(0)("firstflush_fill_time") + dtrecipetable.Rows(0)("firstflush_bleed_time") + dtrecipetable.Rows(0)("firstflush_stabilize_time") + dtrecipetable.Rows(0)("firstflush_time"))
         End If
         If dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
@@ -3278,6 +3314,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             txtbx_TitleRecipeID.Text = Nothing
             txtbx_TitlePartID.Text = Nothing
             txtbx_TitleFilterType.Text = Nothing
+            txtbx_TitleJigType.Text = Nothing
             lbl_CalibrationStatus.Text = Nothing
             lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
             lbl_BlankDP.Text = Nothing

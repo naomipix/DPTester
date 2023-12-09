@@ -23,7 +23,7 @@ Partial Class FormResultSummary
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormResultSummary))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -35,6 +35,7 @@ Partial Class FormResultSummary
         Me.panel_UserCategory = New System.Windows.Forms.Panel()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -89,16 +90,19 @@ Partial Class FormResultSummary
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.dsp_ResultSerialUID = New System.Windows.Forms.Label()
+        Me.txtbx_ResultSerialUID = New System.Windows.Forms.TextBox()
+        Me.dsp_Resultattempt = New System.Windows.Forms.Label()
+        Me.txtbx_Resultattempt = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.dgv_Resultsummary, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -226,6 +230,16 @@ Partial Class FormResultSummary
         Me.panel_FormControl.TabIndex = 0
         Me.panel_FormControl.Visible = False
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(1631, 57)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(150, 100)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 106
+        Me.PictureBox1.TabStop = False
+        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.Panel2)
@@ -238,6 +252,10 @@ Partial Class FormResultSummary
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.dsp_Resultattempt)
+        Me.Panel2.Controls.Add(Me.txtbx_Resultattempt)
+        Me.Panel2.Controls.Add(Me.dsp_ResultSerialUID)
+        Me.Panel2.Controls.Add(Me.txtbx_ResultSerialUID)
         Me.Panel2.Controls.Add(Me.Panel4)
         Me.Panel2.Controls.Add(Me.txtbx_ResultTest)
         Me.Panel2.Controls.Add(Me.dsp_ResultTest)
@@ -397,7 +415,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultDiffPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultDiffPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultDiffPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultDiffPressure.Location = New System.Drawing.Point(226, 708)
+        Me.txtbx_ResultDiffPressure.Location = New System.Drawing.Point(226, 712)
         Me.txtbx_ResultDiffPressure.Name = "txtbx_ResultDiffPressure"
         Me.txtbx_ResultDiffPressure.ReadOnly = True
         Me.txtbx_ResultDiffPressure.Size = New System.Drawing.Size(260, 25)
@@ -407,7 +425,7 @@ Partial Class FormResultSummary
         'dsp_ResultDiffPressure
         '
         Me.dsp_ResultDiffPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultDiffPressure.Location = New System.Drawing.Point(20, 703)
+        Me.dsp_ResultDiffPressure.Location = New System.Drawing.Point(20, 707)
         Me.dsp_ResultDiffPressure.Name = "dsp_ResultDiffPressure"
         Me.dsp_ResultDiffPressure.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultDiffPressure.TabIndex = 24
@@ -419,7 +437,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultOutletPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultOutletPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultOutletPressure.Location = New System.Drawing.Point(226, 661)
+        Me.txtbx_ResultOutletPressure.Location = New System.Drawing.Point(226, 669)
         Me.txtbx_ResultOutletPressure.Name = "txtbx_ResultOutletPressure"
         Me.txtbx_ResultOutletPressure.ReadOnly = True
         Me.txtbx_ResultOutletPressure.Size = New System.Drawing.Size(260, 25)
@@ -429,7 +447,7 @@ Partial Class FormResultSummary
         'dsp_ResultOutletPressure
         '
         Me.dsp_ResultOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultOutletPressure.Location = New System.Drawing.Point(20, 656)
+        Me.dsp_ResultOutletPressure.Location = New System.Drawing.Point(20, 664)
         Me.dsp_ResultOutletPressure.Name = "dsp_ResultOutletPressure"
         Me.dsp_ResultOutletPressure.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultOutletPressure.TabIndex = 22
@@ -441,7 +459,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultInletPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultInletPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultInletPressure.Location = New System.Drawing.Point(226, 614)
+        Me.txtbx_ResultInletPressure.Location = New System.Drawing.Point(226, 626)
         Me.txtbx_ResultInletPressure.Name = "txtbx_ResultInletPressure"
         Me.txtbx_ResultInletPressure.ReadOnly = True
         Me.txtbx_ResultInletPressure.Size = New System.Drawing.Size(260, 25)
@@ -451,7 +469,7 @@ Partial Class FormResultSummary
         'dsp_ResultInletPressure
         '
         Me.dsp_ResultInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultInletPressure.Location = New System.Drawing.Point(20, 609)
+        Me.dsp_ResultInletPressure.Location = New System.Drawing.Point(20, 621)
         Me.dsp_ResultInletPressure.Name = "dsp_ResultInletPressure"
         Me.dsp_ResultInletPressure.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultInletPressure.TabIndex = 20
@@ -463,7 +481,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultFlowrate.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultFlowrate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultFlowrate.Location = New System.Drawing.Point(226, 567)
+        Me.txtbx_ResultFlowrate.Location = New System.Drawing.Point(226, 583)
         Me.txtbx_ResultFlowrate.Name = "txtbx_ResultFlowrate"
         Me.txtbx_ResultFlowrate.ReadOnly = True
         Me.txtbx_ResultFlowrate.Size = New System.Drawing.Size(260, 25)
@@ -475,7 +493,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultTemperature.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultTemperature.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultTemperature.Location = New System.Drawing.Point(226, 520)
+        Me.txtbx_ResultTemperature.Location = New System.Drawing.Point(226, 540)
         Me.txtbx_ResultTemperature.Name = "txtbx_ResultTemperature"
         Me.txtbx_ResultTemperature.ReadOnly = True
         Me.txtbx_ResultTemperature.Size = New System.Drawing.Size(260, 25)
@@ -487,7 +505,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultCalOffset.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultCalOffset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultCalOffset.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultCalOffset.Location = New System.Drawing.Point(226, 473)
+        Me.txtbx_ResultCalOffset.Location = New System.Drawing.Point(226, 497)
         Me.txtbx_ResultCalOffset.Name = "txtbx_ResultCalOffset"
         Me.txtbx_ResultCalOffset.ReadOnly = True
         Me.txtbx_ResultCalOffset.Size = New System.Drawing.Size(260, 25)
@@ -497,7 +515,7 @@ Partial Class FormResultSummary
         'dsp_ResultFlowrate
         '
         Me.dsp_ResultFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultFlowrate.Location = New System.Drawing.Point(20, 562)
+        Me.dsp_ResultFlowrate.Location = New System.Drawing.Point(20, 578)
         Me.dsp_ResultFlowrate.Name = "dsp_ResultFlowrate"
         Me.dsp_ResultFlowrate.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultFlowrate.TabIndex = 8
@@ -507,7 +525,7 @@ Partial Class FormResultSummary
         'dsp_ResultTemperature
         '
         Me.dsp_ResultTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultTemperature.Location = New System.Drawing.Point(20, 515)
+        Me.dsp_ResultTemperature.Location = New System.Drawing.Point(20, 535)
         Me.dsp_ResultTemperature.Name = "dsp_ResultTemperature"
         Me.dsp_ResultTemperature.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultTemperature.TabIndex = 8
@@ -517,7 +535,7 @@ Partial Class FormResultSummary
         'dsp_ResultCalOffset
         '
         Me.dsp_ResultCalOffset.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultCalOffset.Location = New System.Drawing.Point(20, 468)
+        Me.dsp_ResultCalOffset.Location = New System.Drawing.Point(20, 492)
         Me.dsp_ResultCalOffset.Name = "dsp_ResultCalOffset"
         Me.dsp_ResultCalOffset.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultCalOffset.TabIndex = 8
@@ -527,7 +545,7 @@ Partial Class FormResultSummary
         'dsp_ResultRecipeID
         '
         Me.dsp_ResultRecipeID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultRecipeID.Location = New System.Drawing.Point(20, 421)
+        Me.dsp_ResultRecipeID.Location = New System.Drawing.Point(20, 449)
         Me.dsp_ResultRecipeID.Name = "dsp_ResultRecipeID"
         Me.dsp_ResultRecipeID.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultRecipeID.TabIndex = 8
@@ -537,7 +555,7 @@ Partial Class FormResultSummary
         'dsp_ResultConfirmation
         '
         Me.dsp_ResultConfirmation.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultConfirmation.Location = New System.Drawing.Point(20, 374)
+        Me.dsp_ResultConfirmation.Location = New System.Drawing.Point(20, 406)
         Me.dsp_ResultConfirmation.Name = "dsp_ResultConfirmation"
         Me.dsp_ResultConfirmation.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultConfirmation.TabIndex = 8
@@ -547,7 +565,7 @@ Partial Class FormResultSummary
         'dsp_ResultPartID
         '
         Me.dsp_ResultPartID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultPartID.Location = New System.Drawing.Point(20, 327)
+        Me.dsp_ResultPartID.Location = New System.Drawing.Point(20, 363)
         Me.dsp_ResultPartID.Name = "dsp_ResultPartID"
         Me.dsp_ResultPartID.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultPartID.TabIndex = 8
@@ -557,7 +575,7 @@ Partial Class FormResultSummary
         'dsp_ResultWorkOrder
         '
         Me.dsp_ResultWorkOrder.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultWorkOrder.Location = New System.Drawing.Point(20, 280)
+        Me.dsp_ResultWorkOrder.Location = New System.Drawing.Point(20, 320)
         Me.dsp_ResultWorkOrder.Name = "dsp_ResultWorkOrder"
         Me.dsp_ResultWorkOrder.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultWorkOrder.TabIndex = 8
@@ -567,7 +585,7 @@ Partial Class FormResultSummary
         'dsp_ResultTimestamp
         '
         Me.dsp_ResultTimestamp.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultTimestamp.Location = New System.Drawing.Point(20, 233)
+        Me.dsp_ResultTimestamp.Location = New System.Drawing.Point(20, 277)
         Me.dsp_ResultTimestamp.Name = "dsp_ResultTimestamp"
         Me.dsp_ResultTimestamp.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultTimestamp.TabIndex = 8
@@ -579,7 +597,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultRecipeID.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultRecipeID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultRecipeID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultRecipeID.Location = New System.Drawing.Point(226, 426)
+        Me.txtbx_ResultRecipeID.Location = New System.Drawing.Point(226, 454)
         Me.txtbx_ResultRecipeID.Name = "txtbx_ResultRecipeID"
         Me.txtbx_ResultRecipeID.ReadOnly = True
         Me.txtbx_ResultRecipeID.Size = New System.Drawing.Size(260, 25)
@@ -591,7 +609,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultConfirmation.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultConfirmation.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultConfirmation.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultConfirmation.Location = New System.Drawing.Point(226, 379)
+        Me.txtbx_ResultConfirmation.Location = New System.Drawing.Point(226, 411)
         Me.txtbx_ResultConfirmation.Name = "txtbx_ResultConfirmation"
         Me.txtbx_ResultConfirmation.ReadOnly = True
         Me.txtbx_ResultConfirmation.Size = New System.Drawing.Size(260, 25)
@@ -603,7 +621,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultPartID.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultPartID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultPartID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultPartID.Location = New System.Drawing.Point(226, 332)
+        Me.txtbx_ResultPartID.Location = New System.Drawing.Point(226, 368)
         Me.txtbx_ResultPartID.Name = "txtbx_ResultPartID"
         Me.txtbx_ResultPartID.ReadOnly = True
         Me.txtbx_ResultPartID.Size = New System.Drawing.Size(260, 25)
@@ -615,7 +633,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultWorkOrder.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultWorkOrder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultWorkOrder.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultWorkOrder.Location = New System.Drawing.Point(226, 285)
+        Me.txtbx_ResultWorkOrder.Location = New System.Drawing.Point(226, 325)
         Me.txtbx_ResultWorkOrder.Name = "txtbx_ResultWorkOrder"
         Me.txtbx_ResultWorkOrder.ReadOnly = True
         Me.txtbx_ResultWorkOrder.Size = New System.Drawing.Size(260, 25)
@@ -627,7 +645,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultTimestamp.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ResultTimestamp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_ResultTimestamp.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultTimestamp.Location = New System.Drawing.Point(226, 238)
+        Me.txtbx_ResultTimestamp.Location = New System.Drawing.Point(226, 282)
         Me.txtbx_ResultTimestamp.Name = "txtbx_ResultTimestamp"
         Me.txtbx_ResultTimestamp.ReadOnly = True
         Me.txtbx_ResultTimestamp.Size = New System.Drawing.Size(260, 25)
@@ -817,14 +835,14 @@ Partial Class FormResultSummary
         Me.dgv_Resultsummary.AllowUserToDeleteRows = False
         Me.dgv_Resultsummary.AllowUserToResizeColumns = False
         Me.dgv_Resultsummary.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_Resultsummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_Resultsummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv_Resultsummary.ColumnHeadersHeight = 30
         Me.dgv_Resultsummary.Location = New System.Drawing.Point(50, 125)
         Me.dgv_Resultsummary.Name = "dgv_Resultsummary"
@@ -865,15 +883,49 @@ Partial Class FormResultSummary
         Me.Label1.Text = "Individual Result Summary"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'PictureBox1
+        'dsp_ResultSerialUID
         '
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(1631, 57)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(150, 100)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 106
-        Me.PictureBox1.TabStop = False
+        Me.dsp_ResultSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_ResultSerialUID.Location = New System.Drawing.Point(19, 234)
+        Me.dsp_ResultSerialUID.Name = "dsp_ResultSerialUID"
+        Me.dsp_ResultSerialUID.Size = New System.Drawing.Size(100, 35)
+        Me.dsp_ResultSerialUID.TabIndex = 55
+        Me.dsp_ResultSerialUID.Text = "Serial UID :"
+        Me.dsp_ResultSerialUID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_ResultSerialUID
+        '
+        Me.txtbx_ResultSerialUID.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_ResultSerialUID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_ResultSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_ResultSerialUID.Location = New System.Drawing.Point(131, 239)
+        Me.txtbx_ResultSerialUID.Name = "txtbx_ResultSerialUID"
+        Me.txtbx_ResultSerialUID.ReadOnly = True
+        Me.txtbx_ResultSerialUID.Size = New System.Drawing.Size(200, 25)
+        Me.txtbx_ResultSerialUID.TabIndex = 56
+        Me.txtbx_ResultSerialUID.TabStop = False
+        '
+        'dsp_Resultattempt
+        '
+        Me.dsp_Resultattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_Resultattempt.Location = New System.Drawing.Point(345, 234)
+        Me.dsp_Resultattempt.Name = "dsp_Resultattempt"
+        Me.dsp_Resultattempt.Size = New System.Drawing.Size(90, 35)
+        Me.dsp_Resultattempt.TabIndex = 57
+        Me.dsp_Resultattempt.Text = "Attempt No :"
+        Me.dsp_Resultattempt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_Resultattempt
+        '
+        Me.txtbx_Resultattempt.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_Resultattempt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_Resultattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_Resultattempt.Location = New System.Drawing.Point(441, 239)
+        Me.txtbx_Resultattempt.Name = "txtbx_Resultattempt"
+        Me.txtbx_Resultattempt.ReadOnly = True
+        Me.txtbx_Resultattempt.Size = New System.Drawing.Size(80, 25)
+        Me.txtbx_Resultattempt.TabIndex = 58
+        Me.txtbx_Resultattempt.TabStop = False
         '
         'FormResultSummary
         '
@@ -893,6 +945,7 @@ Partial Class FormResultSummary
         Me.panel_UserCategory.ResumeLayout(False)
         Me.panel_UserCategory.PerformLayout()
         Me.panel_FormControl.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
@@ -900,7 +953,6 @@ Partial Class FormResultSummary
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         CType(Me.dgv_Resultsummary, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -970,4 +1022,8 @@ Partial Class FormResultSummary
     Friend WithEvents cmbx_ResultSearchSerial As ComboBox
     Friend WithEvents dsp_ResultSearchSerial As Label
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents dsp_ResultSerialUID As Label
+    Friend WithEvents txtbx_ResultSerialUID As TextBox
+    Friend WithEvents dsp_Resultattempt As Label
+    Friend WithEvents txtbx_Resultattempt As TextBox
 End Class
