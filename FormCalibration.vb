@@ -43,6 +43,22 @@
     Public Ver_finalinlet As Decimal
     Public Ver_finaloutlet As Decimal
     Public Ver_finaldp As Decimal
+    Public Cal_avgtemperature1 As Decimal
+    Public Cal_avgflowrate1 As Decimal
+    Public Cal_avgtemperature2 As Decimal
+    Public Cal_avgflowrate2 As Decimal
+    Public Cal_finaltemperature As Decimal
+    Public Cal_finalflowrate As Decimal
+    Public Ver_avgtemperature1 As Decimal
+    Public Ver_avgflowrate1 As Decimal
+    Public Ver_avgtemperature2 As Decimal
+    Public Ver_avgflowrate2 As Decimal
+    Public Ver_finaltemperature As Decimal
+    Public Ver_finalflowrate As Decimal
+
+
+
+
 
     Public flush1cycletime As Integer
     Public flush2cycletime As Integer
@@ -72,7 +88,9 @@
         ' Initialize Defaults
         txtbx_CalLotID.Text = FormMain.txtbx_LotID.Text
         txtbx_RecipeID.Text = FormMain.cmbx_RecipeID.Text
-        txtbx_OperatorID.Text = PublicVariables.LoginUserName
+
+
+        txtbx_JigType.Text = Jig
 
 
 
@@ -134,7 +152,7 @@
         Else
             txtbx_CalLotID.Text = Nothing
             txtbx_RecipeID.Text = Nothing
-            txtbx_OperatorID.Text = Nothing
+            txtbx_JigType.Text = Nothing
             txtbx_EstCalCycletime.Text = Nothing
             txtbx_ActCalCycletime.Text = Nothing
             txtbx_EstVerCycletime.Text = Nothing
@@ -275,26 +293,47 @@
 
         txtbx_ActCalCycletime.Text = Cal_samplingtime.ToString
         If Cal_samplingtime = CalCycletime Then
+            Dim A As Double = 0.01257187
+            Dim B As Double = -0.005806436
+            Dim C As Double = 0.001130911
+            Dim D As Double = 0.000005723952
+            Dim T2 As Double
+            Dim exp As Double
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
                 For i = Dptest1start To dptest1end - 1
                     Cal_avginlet1 = Cal_avginlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Cal_avgoutlet1 = Cal_avgoutlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Cal_avgflowrate1 = Cal_avgflowrate1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
+                    Cal_avgtemperature1 = Cal_avgtemperature1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (K)")
                 Next
                 Cal_avginlet1 = Cal_avginlet1 / Cal_dptestpoints
                 Cal_avgoutlet1 = Cal_avgoutlet1 / Cal_dptestpoints
+                Cal_avgflowrate1 = Cal_avgflowrate1 / Cal_dptestpoints
+                Cal_avgtemperature1 = Cal_avgtemperature1 / Cal_dptestpoints
                 Cal_offset1 = Cal_avginlet1 - Cal_avgoutlet1
 
                 For i = Dptest2start To dptest2end - 1
                     Cal_avginlet2 = Cal_avginlet2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Cal_avgoutlet2 = Cal_avgoutlet2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Cal_avgflowrate2 = Cal_avgflowrate2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
+                    Cal_avgtemperature2 = Cal_avgtemperature2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (K)")
                 Next
                 Cal_avginlet2 = Cal_avginlet2 / Cal_dptestpoints
                 Cal_avgoutlet2 = Cal_avgoutlet2 / Cal_dptestpoints
+                Cal_avgflowrate2 = Cal_avgflowrate2 / Cal_dptestpoints
+                Cal_avgtemperature2 = Cal_avgtemperature2 / Cal_dptestpoints
                 Cal_offset2 = Cal_avginlet2 - Cal_avgoutlet2
 
                 Cal_finalInlet = ((Cal_avginlet1 + Cal_avginlet2) / 2)
                 Cal_finalOutlet = ((Cal_avgoutlet1 + Cal_avgoutlet2) / 2)
-                Cal_finaloffset = (Cal_offset1 - Cal_offset2) / 2
+                Cal_finalflowrate = ((Cal_avgflowrate1 + Cal_avgflowrate2) / 2)
+                Cal_finaltemperature = ((Cal_avgtemperature1 + Cal_avgtemperature2) / 2)
+
+                T2 = Cal_finaltemperature * Cal_finaltemperature
+                exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
+                Viscosity = A * exp
+                Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
+                ' Cal_finaloffset = (Cal_offset1 - Cal_offset2) / 2
 
 
 
@@ -304,20 +343,31 @@
                 For i = Dptest1start To dptest1end - 1
                     Cal_avginlet1 = Cal_avginlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Cal_avgoutlet1 = Cal_avgoutlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Cal_avgflowrate1 = Cal_avgflowrate1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
+                    Cal_avgtemperature1 = Cal_avgtemperature1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (K)")
                 Next
                 Cal_avginlet1 = Cal_avginlet1 / Cal_dptestpoints
                 Cal_avgoutlet1 = Cal_avgoutlet1 / Cal_dptestpoints
+                Cal_avgflowrate1 = Cal_avgflowrate1 / Cal_dptestpoints
+                Cal_avgtemperature1 = Cal_avgtemperature1 / Cal_dptestpoints
                 Cal_offset1 = Cal_avginlet1 - Cal_avgoutlet1
 
                 Cal_finalInlet = Cal_avginlet1
                 Cal_finalOutlet = Cal_avgoutlet1
-                Cal_finaloffset = Cal_offset1
+                Cal_finalflowrate = Cal_avgflowrate1
+                Cal_finaltemperature = Cal_avgtemperature1
+
+                T2 = Cal_finaltemperature * Cal_finaltemperature
+                exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
+                Viscosity = A * exp
+                Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
+                'Cal_finaloffset = Cal_offset1
 
 
             End If
             txtbx_CalInletPressure.Text = CType(Cal_finalInlet, String)
             txtbx_CalOutletPressure.Text = CType(Cal_finalOutlet, String)
-            txtbx_CalOffset.Text = CType(Cal_finaloffset, String)
+            txtbx_CalOffset.Text = CType(Math.Round(Cal_finaloffset, 2), String)
             'btn_Verify.Enabled = True
             PCStatus(1)(4) = True
             VerificationRun()
@@ -387,26 +437,49 @@
 
         txtbx_ActVerCycletime.Text = Ver_samplingtime.ToString
         If Ver_samplingtime = CalCycletime Then
+            Dim A As Double = 0.01257187
+            Dim B As Double = -0.005806436
+            Dim C As Double = 0.001130911
+            Dim D As Double = 0.000005723952
+            Dim T2 As Double
+            Dim exp As Double
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
                 For i = Dptest1start To dptest1end - 1
                     Ver_avginlet1 = Ver_avginlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Ver_avgoutlet1 = Ver_avgoutlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Ver_avgflowrate1 = Ver_avgflowrate1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Flowrate (l/min)")
+                    Ver_avgtemperature1 = Ver_avgtemperature1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Temperature (K)")
+
+
                 Next
                 Ver_avginlet1 = Ver_avginlet1 / Cal_dptestpoints
                 Ver_avgoutlet1 = Ver_avgoutlet1 / Cal_dptestpoints
+                Ver_avgflowrate1 = Ver_avgflowrate1 / Cal_dptestpoints
+                Ver_avgtemperature1 = Ver_avgtemperature1 / Cal_dptestpoints
                 Ver_avgdp1 = Ver_avginlet1 - Ver_avgoutlet1
 
                 For i = Dptest2start To dptest2end - 1
                     Ver_avginlet2 = Ver_avginlet2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Ver_avgoutlet2 = Ver_avgoutlet2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Ver_avgflowrate2 = Ver_avgflowrate2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Flowrate (l/min)")
+                    Ver_avgtemperature2 = Ver_avgtemperature2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Temperature (K)")
                 Next
                 Ver_avginlet2 = Ver_avginlet2 / Cal_dptestpoints
                 Ver_avgoutlet2 = Ver_avgoutlet2 / Cal_dptestpoints
+                Ver_avgflowrate2 = Ver_avgflowrate2 / Cal_dptestpoints
+                Ver_avgtemperature2 = Ver_avgtemperature2 / Cal_dptestpoints
                 Ver_avgdp2 = Ver_avginlet2 - Ver_avgoutlet2
 
                 Ver_finalinlet = ((Ver_avginlet1 + Ver_avginlet2) / 2)
                 Ver_finaloutlet = ((Ver_avgoutlet1 + Ver_avgoutlet2) / 2)
-                Ver_finaldp = ((Ver_avgdp1 + Ver_avgdp2) / 2)
+                Ver_finalflowrate = ((Ver_avgflowrate1 + Ver_avgflowrate2) / 2)
+                Ver_finaltemperature = ((Ver_avgtemperature1 + Ver_avgtemperature2) / 2)
+
+                T2 = Ver_finaltemperature * Ver_finaltemperature
+                exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
+                Viscosity = A * exp
+                Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet))
+                'Ver_finaldp = ((Ver_avgdp1 + Ver_avgdp2) / 2)
 
 
             End If
@@ -415,16 +488,28 @@
                 For i = Dptest1start To dptest1end - 1
                     Ver_avginlet1 = Ver_avginlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Ver_avgoutlet1 = Ver_avgoutlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Ver_avgflowrate1 = Ver_avgflowrate1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Flowrate (l/min)")
+                    Ver_avgtemperature1 = Ver_avgtemperature1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Temperature (K)")
                 Next
                 Ver_avginlet1 = Ver_avginlet1 / Cal_dptestpoints
                 Ver_avgoutlet1 = Ver_avgoutlet1 / Cal_dptestpoints
+                Ver_avgflowrate1 = Ver_avgflowrate1 / Cal_dptestpoints
+                Ver_avgtemperature1 = Ver_avgtemperature1 / Cal_dptestpoints
                 Ver_avgdp1 = Ver_avginlet1 - Ver_avgoutlet1
 
 
                 Ver_finalinlet = Ver_avginlet1
                 Ver_finaloutlet = Ver_avgoutlet1
-                Ver_finaldp = Ver_avgdp1
 
+
+                Ver_finalflowrate = Ver_avgflowrate1
+                Ver_finaltemperature = Ver_avgtemperature1
+                T2 = Ver_finaltemperature * Ver_finaltemperature
+                exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
+                Viscosity = A * exp
+                Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet))
+
+                'Ver_finaldp = Ver_avgdp1
 
             End If
             txtbx_VerInletPressure.Text = CType(Ver_finalinlet, String)
@@ -434,7 +519,7 @@
 
             PCStatus(1)(5) = True
 
-            txtbx_VerDP.Text = CType(Ver_finaldp, String)
+            txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
 
 
         End If
@@ -467,7 +552,7 @@
                             {"calibration_time", lbl_DateTimeClock.Text},
                             {"cal_inlet_pressure", Cal_finalInlet.ToString},
                             {"cal_outlet_pressure", Cal_finalOutlet.ToString},
-                            {"cal_diff_pressure", Cal_finaloffset.ToString},
+                            {"cal_diff_pressure", txtbx_CalOffset.Text},
                              {"verify_inlet_pressure", Ver_finalinlet.ToString},
                             {"verify_outlet_pressure", Ver_finaloutlet.ToString},
                             {"verify_diff_pressure", Ver_finaldp.ToString},
@@ -494,7 +579,7 @@
 
                         If onContinue = True Then
                             Dim caloffsetparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", Cal_finaloffset.ToString}
+                        {"retained_value", txtbx_CalOffset.Text}
                         }
                             Dim caloffsetcondition As String = $"id='31'"
                             If SQL.UpdateRecord($"[0_RetainedMemory]", caloffsetparameter, caloffsetcondition) = 1 Then
@@ -515,7 +600,7 @@
                                 End If
                             ElseIf txtbx_CalResult.Text = "Pass" Then
 
-                                If MsgBox($"Calibration/Blank Test Completed with Result as {txtbx_CalResult.Text} and Calibration offset as {Cal_finaloffset}", MsgBoxStyle.OkOnly, "Calibration Result") = DialogResult.OK Then
+                                If MsgBox($"Calibration/Blank Test Completed with Result as {txtbx_CalResult.Text} and Calibration offset as {txtbx_CalOffset.Text}", MsgBoxStyle.OkOnly, "Calibration Result") = DialogResult.OK Then
                                     PCStatus(1)(6) = True
                                     Me.Close()
                                 End If
@@ -617,4 +702,6 @@
     Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
         FormPixel.Show()
     End Sub
+
+
 End Class

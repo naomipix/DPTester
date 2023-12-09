@@ -24,8 +24,8 @@ Partial Class FormSetting
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSetting))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -48,6 +48,13 @@ Partial Class FormSetting
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.panel_Scanner = New System.Windows.Forms.Panel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.cmbx_ScannerType = New System.Windows.Forms.ComboBox()
+        Me.dsp_ScannerBypass = New System.Windows.Forms.Label()
+        Me.txtbx_ScannerRawData = New System.Windows.Forms.TextBox()
+        Me.dsp_ScannerRawData = New System.Windows.Forms.Label()
+        Me.dsp_ScannerType = New System.Windows.Forms.Label()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.TextBox10 = New System.Windows.Forms.TextBox()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -86,13 +93,6 @@ Partial Class FormSetting
         Me.Label12 = New System.Windows.Forms.Label()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.cmbx_ScannerType = New System.Windows.Forms.ComboBox()
-        Me.dsp_ScannerBypass = New System.Windows.Forms.Label()
-        Me.txtbx_ScannerRawData = New System.Windows.Forms.TextBox()
-        Me.dsp_ScannerRawData = New System.Windows.Forms.Label()
-        Me.dsp_ScannerType = New System.Windows.Forms.Label()
         Me.dsp_Scanner = New System.Windows.Forms.Label()
         Me.tabpg_ToolCounter = New System.Windows.Forms.TabPage()
         Me.panel_ToolCounter = New System.Windows.Forms.Panel()
@@ -220,6 +220,7 @@ Partial Class FormSetting
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.timer_Buyoff = New System.Windows.Forms.Timer(Me.components)
+        Me.btn_Reset = New System.Windows.Forms.Button()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabctrl_Settings.SuspendLayout()
@@ -229,10 +230,10 @@ Partial Class FormSetting
         Me.Panel3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.panel_Scanner.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.tabpg_ToolCounter.SuspendLayout()
         Me.panel_ToolCounter.SuspendLayout()
         Me.tabpg_BuyOff.SuspendLayout()
@@ -404,15 +405,15 @@ Partial Class FormSetting
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView1.Location = New System.Drawing.Point(3, 58)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
@@ -505,6 +506,88 @@ Partial Class FormSetting
         Me.panel_Scanner.Name = "panel_Scanner"
         Me.panel_Scanner.Size = New System.Drawing.Size(556, 761)
         Me.panel_Scanner.TabIndex = 1
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.Button8)
+        Me.GroupBox2.Controls.Add(Me.cmbx_ScannerType)
+        Me.GroupBox2.Controls.Add(Me.dsp_ScannerBypass)
+        Me.GroupBox2.Controls.Add(Me.txtbx_ScannerRawData)
+        Me.GroupBox2.Controls.Add(Me.dsp_ScannerRawData)
+        Me.GroupBox2.Controls.Add(Me.dsp_ScannerType)
+        Me.GroupBox2.Location = New System.Drawing.Point(286, 58)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(250, 225)
+        Me.GroupBox2.TabIndex = 108
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Scanner Settings"
+        Me.GroupBox2.Visible = False
+        '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button8.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold)
+        Me.Button8.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button8.Location = New System.Drawing.Point(17, 46)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(215, 40)
+        Me.Button8.TabIndex = 109
+        Me.Button8.Text = "ON"
+        Me.Button8.UseVisualStyleBackColor = False
+        '
+        'cmbx_ScannerType
+        '
+        Me.cmbx_ScannerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbx_ScannerType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbx_ScannerType.FormattingEnabled = True
+        Me.cmbx_ScannerType.Items.AddRange(New Object() {"RS232 Scanner", "USB Scanner"})
+        Me.cmbx_ScannerType.Location = New System.Drawing.Point(17, 119)
+        Me.cmbx_ScannerType.Name = "cmbx_ScannerType"
+        Me.cmbx_ScannerType.Size = New System.Drawing.Size(215, 25)
+        Me.cmbx_ScannerType.TabIndex = 106
+        '
+        'dsp_ScannerBypass
+        '
+        Me.dsp_ScannerBypass.AutoSize = True
+        Me.dsp_ScannerBypass.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_ScannerBypass.Location = New System.Drawing.Point(14, 26)
+        Me.dsp_ScannerBypass.Name = "dsp_ScannerBypass"
+        Me.dsp_ScannerBypass.Size = New System.Drawing.Size(105, 17)
+        Me.dsp_ScannerBypass.TabIndex = 104
+        Me.dsp_ScannerBypass.Text = "Scanner Bypass :"
+        Me.dsp_ScannerBypass.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_ScannerRawData
+        '
+        Me.txtbx_ScannerRawData.BackColor = System.Drawing.SystemColors.Control
+        Me.txtbx_ScannerRawData.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_ScannerRawData.Location = New System.Drawing.Point(17, 177)
+        Me.txtbx_ScannerRawData.Name = "txtbx_ScannerRawData"
+        Me.txtbx_ScannerRawData.ReadOnly = True
+        Me.txtbx_ScannerRawData.Size = New System.Drawing.Size(215, 25)
+        Me.txtbx_ScannerRawData.TabIndex = 2
+        '
+        'dsp_ScannerRawData
+        '
+        Me.dsp_ScannerRawData.AutoSize = True
+        Me.dsp_ScannerRawData.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_ScannerRawData.Location = New System.Drawing.Point(14, 157)
+        Me.dsp_ScannerRawData.Name = "dsp_ScannerRawData"
+        Me.dsp_ScannerRawData.Size = New System.Drawing.Size(70, 17)
+        Me.dsp_ScannerRawData.TabIndex = 104
+        Me.dsp_ScannerRawData.Text = "Raw Data :"
+        Me.dsp_ScannerRawData.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_ScannerType
+        '
+        Me.dsp_ScannerType.AutoSize = True
+        Me.dsp_ScannerType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_ScannerType.Location = New System.Drawing.Point(14, 99)
+        Me.dsp_ScannerType.Name = "dsp_ScannerType"
+        Me.dsp_ScannerType.Size = New System.Drawing.Size(92, 17)
+        Me.dsp_ScannerType.TabIndex = 104
+        Me.dsp_ScannerType.Text = "Scanner Type :"
+        Me.dsp_ScannerType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'GroupBox6
         '
@@ -934,88 +1017,6 @@ Partial Class FormSetting
         Me.Label16.TabIndex = 109
         Me.Label16.Text = "Delete After (Day) :"
         Me.Label16.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.Button8)
-        Me.GroupBox2.Controls.Add(Me.cmbx_ScannerType)
-        Me.GroupBox2.Controls.Add(Me.dsp_ScannerBypass)
-        Me.GroupBox2.Controls.Add(Me.txtbx_ScannerRawData)
-        Me.GroupBox2.Controls.Add(Me.dsp_ScannerRawData)
-        Me.GroupBox2.Controls.Add(Me.dsp_ScannerType)
-        Me.GroupBox2.Location = New System.Drawing.Point(286, 58)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(250, 225)
-        Me.GroupBox2.TabIndex = 108
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Scanner Settings"
-        Me.GroupBox2.Visible = False
-        '
-        'Button8
-        '
-        Me.Button8.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.Button8.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold)
-        Me.Button8.ForeColor = System.Drawing.SystemColors.Window
-        Me.Button8.Location = New System.Drawing.Point(17, 46)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(215, 40)
-        Me.Button8.TabIndex = 109
-        Me.Button8.Text = "ON"
-        Me.Button8.UseVisualStyleBackColor = False
-        '
-        'cmbx_ScannerType
-        '
-        Me.cmbx_ScannerType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbx_ScannerType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbx_ScannerType.FormattingEnabled = True
-        Me.cmbx_ScannerType.Items.AddRange(New Object() {"RS232 Scanner", "USB Scanner"})
-        Me.cmbx_ScannerType.Location = New System.Drawing.Point(17, 119)
-        Me.cmbx_ScannerType.Name = "cmbx_ScannerType"
-        Me.cmbx_ScannerType.Size = New System.Drawing.Size(215, 25)
-        Me.cmbx_ScannerType.TabIndex = 106
-        '
-        'dsp_ScannerBypass
-        '
-        Me.dsp_ScannerBypass.AutoSize = True
-        Me.dsp_ScannerBypass.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ScannerBypass.Location = New System.Drawing.Point(14, 26)
-        Me.dsp_ScannerBypass.Name = "dsp_ScannerBypass"
-        Me.dsp_ScannerBypass.Size = New System.Drawing.Size(105, 17)
-        Me.dsp_ScannerBypass.TabIndex = 104
-        Me.dsp_ScannerBypass.Text = "Scanner Bypass :"
-        Me.dsp_ScannerBypass.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_ScannerRawData
-        '
-        Me.txtbx_ScannerRawData.BackColor = System.Drawing.SystemColors.Control
-        Me.txtbx_ScannerRawData.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ScannerRawData.Location = New System.Drawing.Point(17, 177)
-        Me.txtbx_ScannerRawData.Name = "txtbx_ScannerRawData"
-        Me.txtbx_ScannerRawData.ReadOnly = True
-        Me.txtbx_ScannerRawData.Size = New System.Drawing.Size(215, 25)
-        Me.txtbx_ScannerRawData.TabIndex = 2
-        '
-        'dsp_ScannerRawData
-        '
-        Me.dsp_ScannerRawData.AutoSize = True
-        Me.dsp_ScannerRawData.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ScannerRawData.Location = New System.Drawing.Point(14, 157)
-        Me.dsp_ScannerRawData.Name = "dsp_ScannerRawData"
-        Me.dsp_ScannerRawData.Size = New System.Drawing.Size(70, 17)
-        Me.dsp_ScannerRawData.TabIndex = 104
-        Me.dsp_ScannerRawData.Text = "Raw Data :"
-        Me.dsp_ScannerRawData.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'dsp_ScannerType
-        '
-        Me.dsp_ScannerType.AutoSize = True
-        Me.dsp_ScannerType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ScannerType.Location = New System.Drawing.Point(14, 99)
-        Me.dsp_ScannerType.Name = "dsp_ScannerType"
-        Me.dsp_ScannerType.Size = New System.Drawing.Size(92, 17)
-        Me.dsp_ScannerType.TabIndex = 104
-        Me.dsp_ScannerType.Text = "Scanner Type :"
-        Me.dsp_ScannerType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_Scanner
         '
@@ -1850,6 +1851,7 @@ Partial Class FormSetting
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btn_Reset)
         Me.GroupBox1.Controls.Add(Me.lbl_EndTime)
         Me.GroupBox1.Controls.Add(Me.lbl_StartTime)
         Me.GroupBox1.Controls.Add(Me.dsp_EndTime)
@@ -1945,19 +1947,19 @@ Partial Class FormSetting
         Me.dgv_MessageLog.AllowUserToAddRows = False
         Me.dgv_MessageLog.AllowUserToDeleteRows = False
         Me.dgv_MessageLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle3
         Me.dgv_MessageLog.Location = New System.Drawing.Point(86, 148)
         Me.dgv_MessageLog.Name = "dgv_MessageLog"
         Me.dgv_MessageLog.ReadOnly = True
-        Me.dgv_MessageLog.Size = New System.Drawing.Size(1700, 247)
+        Me.dgv_MessageLog.Size = New System.Drawing.Size(1700, 522)
         Me.dgv_MessageLog.TabIndex = 111
         Me.dgv_MessageLog.TabStop = False
         '
@@ -2528,6 +2530,18 @@ Partial Class FormSetting
         'timer_Buyoff
         '
         '
+        'btn_Reset
+        '
+        Me.btn_Reset.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_Reset.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Reset.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_Reset.Location = New System.Drawing.Point(1611, 68)
+        Me.btn_Reset.Name = "btn_Reset"
+        Me.btn_Reset.Size = New System.Drawing.Size(100, 40)
+        Me.btn_Reset.TabIndex = 112
+        Me.btn_Reset.Text = "Reset"
+        Me.btn_Reset.UseVisualStyleBackColor = False
+        '
         'FormSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2552,14 +2566,14 @@ Partial Class FormSetting
         Me.Panel3.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.panel_Scanner.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.tabpg_ToolCounter.ResumeLayout(False)
         Me.panel_ToolCounter.ResumeLayout(False)
         Me.tabpg_BuyOff.ResumeLayout(False)
@@ -2777,4 +2791,5 @@ Partial Class FormSetting
     Friend WithEvents Label19 As Label
     Friend WithEvents Button13 As Button
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btn_Reset As Button
 End Class

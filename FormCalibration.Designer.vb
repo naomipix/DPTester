@@ -67,7 +67,7 @@ Partial Class FormCalibration
         Me.txtbx_CalDPTestFlowrate = New System.Windows.Forms.TextBox()
         Me.txtbx_ActVerCycletime = New System.Windows.Forms.TextBox()
         Me.txtbx_EstVerCycletime = New System.Windows.Forms.TextBox()
-        Me.txtbx_OperatorID = New System.Windows.Forms.TextBox()
+        Me.txtbx_JigType = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -279,7 +279,7 @@ Partial Class FormCalibration
         Me.Panel2.Controls.Add(Me.txtbx_CalDPTestFlowrate)
         Me.Panel2.Controls.Add(Me.txtbx_ActVerCycletime)
         Me.Panel2.Controls.Add(Me.txtbx_EstVerCycletime)
-        Me.Panel2.Controls.Add(Me.txtbx_OperatorID)
+        Me.Panel2.Controls.Add(Me.txtbx_JigType)
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(564, 802)
@@ -543,7 +543,7 @@ Partial Class FormCalibration
         Me.dsp_OperatorID.Name = "dsp_OperatorID"
         Me.dsp_OperatorID.Size = New System.Drawing.Size(200, 35)
         Me.dsp_OperatorID.TabIndex = 8
-        Me.dsp_OperatorID.Text = "Operator ID :"
+        Me.dsp_OperatorID.Text = "Jig Type :"
         Me.dsp_OperatorID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtbx_CalDPTestFlowrate
@@ -579,16 +579,16 @@ Partial Class FormCalibration
         Me.txtbx_EstVerCycletime.TabIndex = 12
         Me.txtbx_EstVerCycletime.TabStop = False
         '
-        'txtbx_OperatorID
+        'txtbx_JigType
         '
-        Me.txtbx_OperatorID.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_OperatorID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_OperatorID.Location = New System.Drawing.Point(226, 112)
-        Me.txtbx_OperatorID.Name = "txtbx_OperatorID"
-        Me.txtbx_OperatorID.ReadOnly = True
-        Me.txtbx_OperatorID.Size = New System.Drawing.Size(260, 25)
-        Me.txtbx_OperatorID.TabIndex = 11
-        Me.txtbx_OperatorID.TabStop = False
+        Me.txtbx_JigType.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_JigType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_JigType.Location = New System.Drawing.Point(226, 112)
+        Me.txtbx_JigType.Name = "txtbx_JigType"
+        Me.txtbx_JigType.ReadOnly = True
+        Me.txtbx_JigType.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_JigType.TabIndex = 11
+        Me.txtbx_JigType.TabStop = False
         '
         'Panel3
         '
@@ -976,7 +976,7 @@ Partial Class FormCalibration
     Friend WithEvents txtbx_CalBackPressure As TextBox
     Friend WithEvents txtbx_ActVerCycletime As TextBox
     Friend WithEvents txtbx_EstVerCycletime As TextBox
-    Friend WithEvents txtbx_OperatorID As TextBox
+    Friend WithEvents txtbx_JigType As TextBox
     Friend WithEvents btn_Discard As Button
     Friend WithEvents btn_Verify As Button
     Friend WithEvents btn_Calibrate As Button

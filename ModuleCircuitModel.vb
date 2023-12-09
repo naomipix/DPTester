@@ -184,6 +184,9 @@
     ' Circuit Control logic
     Private Sub CircuitTimer_Ticks(sender As Object, e As EventArgs) Handles Circuittimer.Tick
 
+
+
+
         ' For Output of Valve 1 to Valve 16
         For i As Integer = 0 To 15
             If DOut(1)(i) = True Then

@@ -20,7 +20,6 @@ Public Class FormResultSummary
         lbl_Category.Text = PublicVariables.LoginUserCategoryName
 
         ' Initialize Defaults
-        GetLotid()
         dgv_Resultsummary.DataSource = Nothing
         txtbx_ResultTimestamp.Text = Nothing
         txtbx_ResultWorkOrder.Text = Nothing
@@ -42,6 +41,29 @@ Public Class FormResultSummary
         txtbx_ResultDrain1.Text = Nothing
         txtbx_ResultDrain2.Text = Nothing
         txtbx_ResultDrain3.Text = Nothing
+        txtbx_ResultSerialUID.Text = Nothing
+        txtbx_Resultattempt.Text = Nothing
+
+        ' Get User Category Table
+        Dim dtdefaultRecord As DataTable = SQL.ReadRecords($"SELECT DISTINCT serial_usage_id FROM ProductResult ORDER BY serial_usage_id DESC")
+        Dim lastrecord As String = dtdefaultRecord.Rows(0)("serial_usage_id").ToString
+        Dim dtdefaultdetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+                  LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id = Lotusage.id
+                  WHERE ProductionDetail.id ='{lastrecord}' ")
+
+        If dtdefaultdetail.Rows.Count > 0 Then
+            Dim lastrecordlot = dtdefaultdetail.Rows(0)("lot_id")
+            Dim Lastrecordserialnum = dtdefaultdetail.Rows(0)("serial_number")
+            Dim lastrecordserialattmept = dtdefaultdetail.Rows(0)("serial_attempt")
+            LoadResult(lastrecordlot, Lastrecordserialnum, lastrecordserialattmept)
+        End If
+
+
+
+
+
+        GetLotid()
+        btn_ResultExport.Enabled = True
 
 
     End Sub
@@ -65,9 +87,9 @@ Public Class FormResultSummary
 
         ' Assign Defaults
         LotcomboSource.Add("0", "-Not Selected-")
-        Dim dvGetRecord As DataView = SQL.ReadRecords($"SELECT id,lot_id FROM LotUsage").DefaultView
+        Dim dvGetRecord As DataView = SQL.ReadRecords($"SELECT DISTINCT ProductResult.serial_usage_id,Lotusage.lot_id FROM ProductResult INNER JOIN ProductionDetail ON ProductionDetail.id = ProductResult.serial_usage_id INNER JOIN LotUsage ON Lotusage.id=ProductionDetail.lot_usage_id").DefaultView
         ' Sort Recipe Table
-        dvGetRecord.Sort = "lot_id" & " ASC"
+        dvGetRecord.Sort = "serial_usage_id " & "DESC"
 
 
         ' Get User Category Table
@@ -260,13 +282,10 @@ Public Class FormResultSummary
         Dim Lotid As String = cmbx_ResultSearchLot.Text
         Dim serialnum As String = cmbx_ResultSearchSerial.Text
         Dim attempt As String = cmbx_ResultSearchAttempt.Text
-        Dim resultsummary(90) As String
 
-        Dim dt_Resultsummary As DataTable
-        Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
-                    LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
-                    LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
-                    LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{Lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+
+
+
 
 
 
@@ -293,6 +312,229 @@ Public Class FormResultSummary
         End If
 
         If Oncontinue = True Then
+            LoadResult(Lotid, serialnum, attempt)
+        End If
+
+
+
+        'Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+        '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+        '            LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
+        '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{Lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+
+        'If Oncontinue = True Then
+
+        '    If dtproductiondetail.Rows.Count > 0 Then
+        '        For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
+        '            If Not dtproductiondetail.Rows(0).IsNull(i) Then
+        '                resultsummary(i) = dtproductiondetail.Rows(0).Item(i)
+        '            Else
+        '                resultsummary(i) = String.Empty
+        '            End If
+
+        '        Next
+
+        '        dt_Resultsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{resultsummary(0)}'ORDER BY ProductResult.sampling_time ASC")
+        '        dgv_Resultsummary.DataSource = dt_Resultsummary
+        '    Else
+        '        ResultMessage(6)
+        '        Oncontinue = False
+        '    End If
+
+        'End If
+
+        'If Oncontinue = True Then
+        '    If dgv_Resultsummary.RowCount = 0 Then
+        '        ResultMessage(6)
+        '        Oncontinue = False
+        '    End If
+        'End If
+
+        'With dgv_Resultsummary
+        '    .BackgroundColor = SystemColors.Window
+
+        '    'Hide Unwanted columns
+        '    .Columns("id").Visible = False
+        '    .Columns("serial_usage_id").Visible = False
+
+        '    'Change header name
+        '    .Columns("sampling_time").HeaderCell.Value = "Sampling Time (s)"
+        '    .Columns("temperature").HeaderCell.Value = "Temperature (K)"
+        '    .Columns("flowrate").HeaderCell.Value = "Flowrate (l/min)"
+        '    .Columns("inlet_pressure").HeaderCell.Value = "Inlet Pressure (kPa)"
+        '    .Columns("outlet_pressure").HeaderCell.Value = "Outlet Pressure (kPa)"
+        '    .Columns("calculated_dp_pressure").HeaderCell.Value = "Differential Pressure (kPa)"
+
+        '    'Set Column Width
+        '    .Columns("sampling_time").Width = 150
+        '    .Columns("temperature").Width = 200
+        '    .Columns("flowrate").Width = 200
+        '    .Columns("inlet_pressure").Width = 200
+        '    .Columns("outlet_pressure").Width = 200
+        '    .Columns("calculated_dp_pressure").Width = 200
+
+        '    'Header Cell Alignment
+        '    .Columns("sampling_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        '    .Columns("temperature").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        '    .Columns("flowrate").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        '    .Columns("inlet_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        '    .Columns("outlet_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+        '    .Columns("calculated_dp_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        '    'Header Cell Font Bold
+        '    .Columns("sampling_time").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+        '    .Columns("temperature").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+        '    .Columns("flowrate").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+        '    .Columns("inlet_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+        '    .Columns("outlet_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+        '    .Columns("calculated_dp_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+
+        'End With
+
+
+        'If Oncontinue = True Then
+
+        '    txtbx_ResultTimestamp.Text = resultsummary(5)
+        '    txtbx_ResultTemperature.Text = resultsummary(6)
+        '    txtbx_ResultFlowrate.Text = resultsummary(7)
+        '    txtbx_ResultInletPressure.Text = resultsummary(8)
+        '    txtbx_ResultOutletPressure.Text = resultsummary(9)
+        '    txtbx_ResultDiffPressure.Text = resultsummary(11)
+        '    txtbx_ResultTest.Text = resultsummary(13).ToUpper
+
+        '    txtbx_ResultCalOffset.Text = resultsummary(24)
+        '    txtbx_ResultRecipeID.Text = resultsummary(31)
+        '    txtbx_Resultflush1.Text = resultsummary(39).ToUpper
+        '    txtbx_ResultDPTest1.Text = resultsummary(47).ToUpper
+        '    txtbx_ResultDPTest2.Text = resultsummary(58).ToUpper
+        '    txtbx_Resultflush2.Text = resultsummary(59).ToUpper
+        '    txtbx_ResultDrain1.Text = resultsummary(67).ToUpper
+        '    txtbx_ResultDrain2.Text = resultsummary(70).ToUpper
+        '    txtbx_ResultDrain3.Text = resultsummary(73).ToUpper
+        '    txtbx_ResultWorkOrder.Text = resultsummary(77)
+        '    txtbx_ResultPartID.Text = resultsummary(78)
+        '    txtbx_ResultConfirmation.Text = resultsummary(79)
+
+        'End If
+
+
+
+
+    End Sub
+#End Region
+
+
+
+#Region "Result Export"
+    Private Sub btn_ResultExport_Click(sender As Object, e As EventArgs) Handles btn_ResultExport.Click
+        ' Convert Visible DataGridView Columns To DataTable
+        Dim Lotid As String = cmbx_ResultSearchLot.Text
+        Dim serialnum As String = cmbx_ResultSearchSerial.Text
+        Dim attempt As String = cmbx_ResultSearchAttempt.Text
+        If dgv_Resultsummary.RowCount = 0 Then
+            ResultMessage(5)
+        Else
+            Dim dt As DataTable = GetVisibleColumnsDataTable(dgv_Resultsummary)    'GetVisibleColumnsDataTable(dgv_recipedetails)
+            'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
+
+            ' Get Path
+            'Dim dtGetPath As DataTable = SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={11}")
+            Dim Filepath As String = $"{PublicVariables.CSVPathToResultSummary}ResultSummary_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
+
+            ' Export With Return
+            Dim ReturnValue As String = ExportDataTableToCsv(dt, Filepath, PublicVariables.CSVDelimiterResultSummary)
+
+            ' Check Return State
+            If ReturnValue = "True" Then
+                ResultMessage(4)
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Individual Result Summary] CSV Export Success ""{Filepath}""")
+            ElseIf ReturnValue = "Missing" Then
+                ResultMessage(9)
+            ElseIf ReturnValue = "False" Then
+                ResultMessage(5)
+            End If
+        End If
+    End Sub
+#End Region
+
+
+#Region "Text Formatting"
+    Private Sub txtbx_ResultTest_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultTest.TextChanged
+        If txtbx_ResultTest.Text = "PASS" Then
+            txtbx_ResultTest.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_ResultTest.ForeColor = SystemColors.ControlText
+        Else
+            txtbx_ResultTest.BackColor = Color.Red
+            txtbx_ResultTest.ForeColor = SystemColors.Window
+        End If
+    End Sub
+
+    Private Sub txtbx_Resultflush1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_Resultflush1.TextChanged
+        If txtbx_Resultflush1.Text = "ENABLE" Then
+            txtbx_Resultflush1.BackColor = Color.FromArgb(192, 255, 192)
+        Else
+            txtbx_Resultflush1.BackColor = SystemColors.Window
+        End If
+    End Sub
+
+    Private Sub txtbx_ResultDPTest1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDPTest1.TextChanged
+        If txtbx_ResultDPTest1.Text = "ENABLE" Then
+            txtbx_ResultDPTest1.BackColor = Color.FromArgb(192, 255, 192)
+        Else
+            txtbx_ResultDPTest1.BackColor = SystemColors.Window
+        End If
+    End Sub
+
+    Private Sub txtbx_Resultflush2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_Resultflush2.TextChanged
+        If txtbx_Resultflush2.Text = "ENABLE" Then
+            txtbx_Resultflush2.BackColor = Color.FromArgb(192, 255, 192)
+        Else
+            txtbx_Resultflush2.BackColor = SystemColors.Window
+        End If
+    End Sub
+
+    Private Sub txtbx_ResultDPTest2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDPTest2.TextChanged
+        If txtbx_ResultDPTest2.Text = "ENABLE" Then
+            txtbx_ResultDPTest2.BackColor = Color.FromArgb(192, 255, 192)
+        Else
+            txtbx_ResultDPTest2.BackColor = SystemColors.Window
+        End If
+    End Sub
+
+    Private Sub txtbx_ResultDrain1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDrain1.TextChanged
+        If txtbx_ResultDrain1.Text = "ENABLE" Then
+            txtbx_ResultDrain1.BackColor = Color.FromArgb(192, 255, 192)
+        Else
+            txtbx_ResultDrain1.BackColor = SystemColors.Window
+        End If
+    End Sub
+
+    Private Sub txtbx_ResultDrain2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDrain2.TextChanged
+        If txtbx_ResultDrain2.Text = "ENABLE" Then
+            txtbx_ResultDrain2.BackColor = Color.FromArgb(192, 255, 192)
+        Else
+            txtbx_ResultDrain2.BackColor = SystemColors.Window
+        End If
+    End Sub
+
+    Private Sub txtbx_ResultDrain3_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDrain3.TextChanged
+        If txtbx_ResultDrain3.Text = "ENABLE" Then
+            txtbx_ResultDrain3.BackColor = Color.FromArgb(192, 255, 192)
+        Else
+            txtbx_ResultDrain3.BackColor = SystemColors.Window
+        End If
+    End Sub
+
+    Private Sub LoadResult(lotid As String, serialnum As String, attempt As String)
+        Dim Oncontinue As Boolean = True
+        Dim resultsummary(90) As String
+        Dim dt_Resultsummary As DataTable
+        Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+                    LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+                    LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
+                    LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+
+        If Oncontinue = True Then
 
             If dtproductiondetail.Rows.Count > 0 Then
                 For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
@@ -311,6 +553,13 @@ Public Class FormResultSummary
                 Oncontinue = False
             End If
 
+        End If
+
+        If Oncontinue = True Then
+            If dgv_Resultsummary.RowCount = 0 Then
+                ResultMessage(6)
+                Oncontinue = False
+            End If
         End If
 
         With dgv_Resultsummary
@@ -377,122 +626,10 @@ Public Class FormResultSummary
             txtbx_ResultWorkOrder.Text = resultsummary(77)
             txtbx_ResultPartID.Text = resultsummary(78)
             txtbx_ResultConfirmation.Text = resultsummary(79)
-
-        End If
-
-
-        If Oncontinue = True Then
-            If dgv_Resultsummary.RowCount = 0 Then
-                ResultMessage(6)
-                Oncontinue = False
-            End If
-        End If
-
-    End Sub
-#End Region
-
-
-
-#Region "Result Export"
-    Private Sub btn_ResultExport_Click(sender As Object, e As EventArgs) Handles btn_ResultExport.Click
-        ' Convert Visible DataGridView Columns To DataTable
-        Dim Lotid As String = cmbx_ResultSearchLot.Text
-        Dim serialnum As String = cmbx_ResultSearchSerial.Text
-        Dim attempt As String = cmbx_ResultSearchAttempt.Text
-        If dgv_Resultsummary.RowCount = 0 Then
-            ResultMessage(5)
-        Else
-            Dim dt As DataTable = GetVisibleColumnsDataTable(dgv_Resultsummary)    'GetVisibleColumnsDataTable(dgv_recipedetails)
-            'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
-
-            ' Get Path
-            'Dim dtGetPath As DataTable = SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={11}")
-            Dim Filepath As String = $"{PublicVariables.CSVPathToResultSummary}ResultSummary_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
-
-            ' Export With Return
-            Dim ReturnValue As String = ExportDataTableToCsv(dt, Filepath, PublicVariables.CSVDelimiterResultSummary)
-
-            ' Check Return State
-            If ReturnValue = "True" Then
-                ResultMessage(4)
-                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Individual Result Summary] CSV Export Success ""{Filepath}""")
-            ElseIf ReturnValue = "Missing" Then
-                ResultMessage(9)
-            ElseIf ReturnValue = "False" Then
-                ResultMessage(5)
-            End If
+            txtbx_ResultSerialUID.Text = resultsummary(1)
+            txtbx_Resultattempt.Text = resultsummary(3)
         End If
     End Sub
-#End Region
-
-
-#Region "Text Formatting"
-    Private Sub txtbx_ResultTest_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultTest.TextChanged
-        If txtbx_ResultTest.Text = "PASS" Then
-            txtbx_ResultTest.BackColor = Color.FromArgb(192, 255, 192)
-
-        Else
-            txtbx_ResultTest.BackColor = SystemColors.Window
-        End If
-    End Sub
-
-    Private Sub txtbx_Resultflush1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_Resultflush1.TextChanged
-        If txtbx_Resultflush1.Text = "ENABLE" Then
-            txtbx_Resultflush1.BackColor = Color.FromArgb(192, 255, 192)
-        Else
-            txtbx_Resultflush1.BackColor = SystemColors.Window
-        End If
-    End Sub
-
-    Private Sub txtbx_ResultDPTest1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDPTest1.TextChanged
-        If txtbx_ResultDPTest1.Text = "ENABLE" Then
-            txtbx_ResultDPTest1.BackColor = Color.FromArgb(192, 255, 192)
-        Else
-            txtbx_ResultDPTest1.BackColor = SystemColors.Window
-        End If
-    End Sub
-
-    Private Sub txtbx_Resultflush2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_Resultflush2.TextChanged
-        If txtbx_Resultflush2.Text = "ENABLE" Then
-            txtbx_Resultflush2.BackColor = Color.FromArgb(192, 255, 192)
-        Else
-            txtbx_Resultflush2.BackColor = SystemColors.Window
-        End If
-    End Sub
-
-    Private Sub txtbx_ResultDPTest2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDPTest2.TextChanged
-        If txtbx_ResultDPTest2.Text = "ENABLE" Then
-            txtbx_ResultDPTest2.BackColor = Color.FromArgb(192, 255, 192)
-        Else
-            txtbx_ResultDPTest2.BackColor = SystemColors.Window
-        End If
-    End Sub
-
-    Private Sub txtbx_ResultDrain1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDrain1.TextChanged
-        If txtbx_ResultDrain1.Text = "ENABLE" Then
-            txtbx_ResultDrain1.BackColor = Color.FromArgb(192, 255, 192)
-        Else
-            txtbx_ResultDrain1.BackColor = SystemColors.Window
-        End If
-    End Sub
-
-    Private Sub txtbx_ResultDrain2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDrain2.TextChanged
-        If txtbx_ResultDrain2.Text = "ENABLE" Then
-            txtbx_ResultDrain2.BackColor = Color.FromArgb(192, 255, 192)
-        Else
-            txtbx_ResultDrain2.BackColor = SystemColors.Window
-        End If
-    End Sub
-
-    Private Sub txtbx_ResultDrain3_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDrain3.TextChanged
-        If txtbx_ResultDrain3.Text = "ENABLE" Then
-            txtbx_ResultDrain3.BackColor = Color.FromArgb(192, 255, 192)
-        Else
-            txtbx_ResultDrain3.BackColor = SystemColors.Window
-        End If
-    End Sub
-
-
 
 
 #End Region

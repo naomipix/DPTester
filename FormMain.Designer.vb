@@ -23,49 +23,49 @@ Partial Class FormMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim DataPoint1 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 1.0R)
-        Dim DataPoint2 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 3.0R)
-        Dim DataPoint3 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 7.0R)
-        Dim DataPoint4 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint5 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint6 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint7 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint8 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint9 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint10 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint11 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint12 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint13 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint14 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint15 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint16 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint17 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint18 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint19 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint20 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint21 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint22 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint23 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint24 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint25 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint26 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint27 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint28 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint29 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint30 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataPoint151 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 1.0R)
+        Dim DataPoint152 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 3.0R)
+        Dim DataPoint153 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 7.0R)
+        Dim DataPoint154 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint155 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint156 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint157 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint158 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint159 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint160 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint161 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint162 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint163 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint164 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint165 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint166 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint167 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint168 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint169 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint170 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint171 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint172 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint173 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint174 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint175 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint176 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint177 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint178 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint179 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint180 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim Title6 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim DataGridViewCellStyle46 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle47 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle48 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle49 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle50 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle51 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle52 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle53 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle54 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
         Me.Panel12 = New System.Windows.Forms.Panel()
         Me.lbl_CommOpen = New System.Windows.Forms.Label()
@@ -222,7 +222,6 @@ Partial Class FormMain
         Me.tabpg_StatusDevice = New System.Windows.Forms.TabPage()
         Me.dsp_GenCondStatus = New System.Windows.Forms.Label()
         Me.dsp_FlwTempCtrlIO = New System.Windows.Forms.Label()
-        Me.dsp_PumpStatus = New System.Windows.Forms.Label()
         Me.dsp_PumpIO = New System.Windows.Forms.Label()
         Me.panel_GenCondStatus = New System.Windows.Forms.Panel()
         Me.lbl_JigSelect_ok = New System.Windows.Forms.Label()
@@ -244,15 +243,6 @@ Partial Class FormMain
         Me.dsp_FlwAlarm = New System.Windows.Forms.Label()
         Me.dsp_TempALM1 = New System.Windows.Forms.Label()
         Me.lbl_TempALM1 = New System.Windows.Forms.Label()
-        Me.panel_PumpStatus = New System.Windows.Forms.Panel()
-        Me.lbl_PumpSetReference = New System.Windows.Forms.Label()
-        Me.dsp_PumpFilterDrain = New System.Windows.Forms.Label()
-        Me.dsp_PumpFilterVent = New System.Windows.Forms.Label()
-        Me.lbl_Tankhealthy = New System.Windows.Forms.Label()
-        Me.dsp_PumpPressure = New System.Windows.Forms.Label()
-        Me.dsp_PumpSetReference = New System.Windows.Forms.Label()
-        Me.lbl_PumpPressure = New System.Windows.Forms.Label()
-        Me.lbl_TankAutofill = New System.Windows.Forms.Label()
         Me.panel_PumpIOLeft = New System.Windows.Forms.Panel()
         Me.lbl_PumpWarning = New System.Windows.Forms.Label()
         Me.dsp_PumpWarning = New System.Windows.Forms.Label()
@@ -419,6 +409,8 @@ Partial Class FormMain
         Me.dsp_B0 = New System.Windows.Forms.Label()
         Me.dsp_PLCHeartBeat = New System.Windows.Forms.Label()
         Me.panel_SelectLoadRecipe = New System.Windows.Forms.Panel()
+        Me.txtbx_TitleJigType = New System.Windows.Forms.TextBox()
+        Me.dsp_JigType = New System.Windows.Forms.Label()
         Me.txtbx_TitleFilterType = New System.Windows.Forms.TextBox()
         Me.txtbx_TitlePartID = New System.Windows.Forms.TextBox()
         Me.txtbx_TitleRecipeID = New System.Windows.Forms.TextBox()
@@ -435,6 +427,14 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
+        Me.dsp_PLCWrite = New System.Windows.Forms.Label()
+        Me.dsp_PLCRead = New System.Windows.Forms.Label()
+        Me.txtbx_PLCRead = New System.Windows.Forms.RichTextBox()
+        Me.txtbx_PLCWrite = New System.Windows.Forms.RichTextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.txtbx_HandScanner = New System.Windows.Forms.RichTextBox()
+        Me.dsp_PumpController = New System.Windows.Forms.Label()
+        Me.txtbx_Pumpcontroller = New System.Windows.Forms.RichTextBox()
         Me.panel_FormControl.SuspendLayout()
         Me.Panel12.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -474,7 +474,6 @@ Partial Class FormMain
         Me.tabpg_StatusDevice.SuspendLayout()
         Me.panel_GenCondStatus.SuspendLayout()
         Me.panel_FlwTempCtrlIO.SuspendLayout()
-        Me.panel_PumpStatus.SuspendLayout()
         Me.panel_PumpIOLeft.SuspendLayout()
         Me.tabpg_ManualCtrl.SuspendLayout()
         Me.tabctrl_SubManualCtrl.SuspendLayout()
@@ -909,133 +908,133 @@ Partial Class FormMain
         '
         Me.chart_MainLiveGraph.BackColor = System.Drawing.Color.LightSkyBlue
         Me.chart_MainLiveGraph.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter
-        ChartArea1.AxisX.IsLabelAutoFit = False
-        ChartArea1.AxisX.LabelStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
-        ChartArea1.AxisX.MinorGrid.Enabled = True
-        ChartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightSkyBlue
-        ChartArea1.AxisX.Title = "Time (s)"
-        ChartArea1.AxisX.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
-        ChartArea1.AxisY.Title = "Inlet/Outlet Pressure (kPa)"
-        ChartArea1.AxisY.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea1.AxisY2.MajorGrid.LineColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
-        ChartArea1.AxisY2.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold)
-        ChartArea1.Name = "ChartArea1"
-        Me.chart_MainLiveGraph.ChartAreas.Add(ChartArea1)
-        Legend1.Alignment = System.Drawing.StringAlignment.Center
-        Legend1.DockedToChartArea = "ChartArea1"
-        Legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom
-        Legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row
-        Legend1.Name = "Legend1"
-        Me.chart_MainLiveGraph.Legends.Add(Legend1)
+        ChartArea6.AxisX.IsLabelAutoFit = False
+        ChartArea6.AxisX.LabelStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea6.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
+        ChartArea6.AxisX.MinorGrid.Enabled = True
+        ChartArea6.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightSkyBlue
+        ChartArea6.AxisX.Title = "Time (s)"
+        ChartArea6.AxisX.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea6.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
+        ChartArea6.AxisY.Title = "Inlet/Outlet Pressure (kPa)"
+        ChartArea6.AxisY.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea6.AxisY2.MajorGrid.LineColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        ChartArea6.AxisY2.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold)
+        ChartArea6.Name = "ChartArea1"
+        Me.chart_MainLiveGraph.ChartAreas.Add(ChartArea6)
+        Legend6.Alignment = System.Drawing.StringAlignment.Center
+        Legend6.DockedToChartArea = "ChartArea1"
+        Legend6.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom
+        Legend6.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row
+        Legend6.Name = "Legend1"
+        Me.chart_MainLiveGraph.Legends.Add(Legend6)
         Me.chart_MainLiveGraph.Location = New System.Drawing.Point(0, 0)
         Me.chart_MainLiveGraph.Name = "chart_MainLiveGraph"
-        Series1.BorderWidth = 2
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Series1.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        DataPoint1.MarkerSize = 5
-        DataPoint1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint2.MarkerSize = 5
-        DataPoint2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint3.MarkerSize = 5
-        DataPoint3.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint4.MarkerSize = 5
-        DataPoint4.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint5.MarkerSize = 5
-        DataPoint5.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint6.MarkerSize = 5
-        DataPoint6.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint7.MarkerSize = 5
-        DataPoint7.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint8.MarkerSize = 5
-        DataPoint8.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint9.MarkerSize = 5
-        DataPoint9.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint10.MarkerSize = 5
-        DataPoint10.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint11.MarkerSize = 5
-        DataPoint11.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint12.MarkerSize = 5
-        DataPoint12.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint13.MarkerSize = 5
-        DataPoint13.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint14.MarkerSize = 5
-        DataPoint14.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint15.MarkerSize = 5
-        DataPoint15.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint16.MarkerSize = 5
-        DataPoint16.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint17.MarkerSize = 5
-        DataPoint17.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint18.MarkerSize = 5
-        DataPoint18.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint19.MarkerSize = 5
-        DataPoint19.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint20.MarkerSize = 5
-        DataPoint20.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint21.MarkerSize = 5
-        DataPoint21.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint22.MarkerSize = 5
-        DataPoint22.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint23.MarkerSize = 5
-        DataPoint23.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint24.MarkerSize = 5
-        DataPoint24.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint25.MarkerSize = 5
-        DataPoint25.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint26.MarkerSize = 5
-        DataPoint26.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint27.MarkerSize = 5
-        DataPoint27.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint28.MarkerSize = 5
-        DataPoint28.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint29.MarkerSize = 5
-        DataPoint29.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint30.MarkerSize = 5
-        DataPoint30.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        Series1.Points.Add(DataPoint1)
-        Series1.Points.Add(DataPoint2)
-        Series1.Points.Add(DataPoint3)
-        Series1.Points.Add(DataPoint4)
-        Series1.Points.Add(DataPoint5)
-        Series1.Points.Add(DataPoint6)
-        Series1.Points.Add(DataPoint7)
-        Series1.Points.Add(DataPoint8)
-        Series1.Points.Add(DataPoint9)
-        Series1.Points.Add(DataPoint10)
-        Series1.Points.Add(DataPoint11)
-        Series1.Points.Add(DataPoint12)
-        Series1.Points.Add(DataPoint13)
-        Series1.Points.Add(DataPoint14)
-        Series1.Points.Add(DataPoint15)
-        Series1.Points.Add(DataPoint16)
-        Series1.Points.Add(DataPoint17)
-        Series1.Points.Add(DataPoint18)
-        Series1.Points.Add(DataPoint19)
-        Series1.Points.Add(DataPoint20)
-        Series1.Points.Add(DataPoint21)
-        Series1.Points.Add(DataPoint22)
-        Series1.Points.Add(DataPoint23)
-        Series1.Points.Add(DataPoint24)
-        Series1.Points.Add(DataPoint25)
-        Series1.Points.Add(DataPoint26)
-        Series1.Points.Add(DataPoint27)
-        Series1.Points.Add(DataPoint28)
-        Series1.Points.Add(DataPoint29)
-        Series1.Points.Add(DataPoint30)
-        Me.chart_MainLiveGraph.Series.Add(Series1)
+        Series6.BorderWidth = 2
+        Series6.ChartArea = "ChartArea1"
+        Series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series6.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Series6.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Series6.Legend = "Legend1"
+        Series6.Name = "Series1"
+        DataPoint151.MarkerSize = 5
+        DataPoint151.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint152.MarkerSize = 5
+        DataPoint152.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint153.MarkerSize = 5
+        DataPoint153.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint154.MarkerSize = 5
+        DataPoint154.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint155.MarkerSize = 5
+        DataPoint155.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint156.MarkerSize = 5
+        DataPoint156.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint157.MarkerSize = 5
+        DataPoint157.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint158.MarkerSize = 5
+        DataPoint158.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint159.MarkerSize = 5
+        DataPoint159.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint160.MarkerSize = 5
+        DataPoint160.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint161.MarkerSize = 5
+        DataPoint161.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint162.MarkerSize = 5
+        DataPoint162.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint163.MarkerSize = 5
+        DataPoint163.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint164.MarkerSize = 5
+        DataPoint164.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint165.MarkerSize = 5
+        DataPoint165.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint166.MarkerSize = 5
+        DataPoint166.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint167.MarkerSize = 5
+        DataPoint167.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint168.MarkerSize = 5
+        DataPoint168.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint169.MarkerSize = 5
+        DataPoint169.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint170.MarkerSize = 5
+        DataPoint170.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint171.MarkerSize = 5
+        DataPoint171.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint172.MarkerSize = 5
+        DataPoint172.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint173.MarkerSize = 5
+        DataPoint173.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint174.MarkerSize = 5
+        DataPoint174.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint175.MarkerSize = 5
+        DataPoint175.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint176.MarkerSize = 5
+        DataPoint176.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint177.MarkerSize = 5
+        DataPoint177.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint178.MarkerSize = 5
+        DataPoint178.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint179.MarkerSize = 5
+        DataPoint179.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint180.MarkerSize = 5
+        DataPoint180.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        Series6.Points.Add(DataPoint151)
+        Series6.Points.Add(DataPoint152)
+        Series6.Points.Add(DataPoint153)
+        Series6.Points.Add(DataPoint154)
+        Series6.Points.Add(DataPoint155)
+        Series6.Points.Add(DataPoint156)
+        Series6.Points.Add(DataPoint157)
+        Series6.Points.Add(DataPoint158)
+        Series6.Points.Add(DataPoint159)
+        Series6.Points.Add(DataPoint160)
+        Series6.Points.Add(DataPoint161)
+        Series6.Points.Add(DataPoint162)
+        Series6.Points.Add(DataPoint163)
+        Series6.Points.Add(DataPoint164)
+        Series6.Points.Add(DataPoint165)
+        Series6.Points.Add(DataPoint166)
+        Series6.Points.Add(DataPoint167)
+        Series6.Points.Add(DataPoint168)
+        Series6.Points.Add(DataPoint169)
+        Series6.Points.Add(DataPoint170)
+        Series6.Points.Add(DataPoint171)
+        Series6.Points.Add(DataPoint172)
+        Series6.Points.Add(DataPoint173)
+        Series6.Points.Add(DataPoint174)
+        Series6.Points.Add(DataPoint175)
+        Series6.Points.Add(DataPoint176)
+        Series6.Points.Add(DataPoint177)
+        Series6.Points.Add(DataPoint178)
+        Series6.Points.Add(DataPoint179)
+        Series6.Points.Add(DataPoint180)
+        Me.chart_MainLiveGraph.Series.Add(Series6)
         Me.chart_MainLiveGraph.Size = New System.Drawing.Size(929, 528)
         Me.chart_MainLiveGraph.TabIndex = 0
         Me.chart_MainLiveGraph.Text = "Chart1"
-        Title1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Title1.Name = "Title1"
-        Title1.Text = "Recipe Details"
-        Me.chart_MainLiveGraph.Titles.Add(Title1)
+        Title6.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Title6.Name = "Title1"
+        Title6.Text = "Recipe Details"
+        Me.chart_MainLiveGraph.Titles.Add(Title6)
         '
         'tabpg_MainOverview
         '
@@ -2253,15 +2252,15 @@ Partial Class FormMain
         Me.dgv_ProdDetail.AllowUserToAddRows = False
         Me.dgv_ProdDetail.AllowUserToDeleteRows = False
         Me.dgv_ProdDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_ProdDetail.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle46.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle46.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle46.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle46.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle46.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle46.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_ProdDetail.DefaultCellStyle = DataGridViewCellStyle46
         Me.dgv_ProdDetail.Location = New System.Drawing.Point(3, 92)
         Me.dgv_ProdDetail.Name = "dgv_ProdDetail"
         Me.dgv_ProdDetail.ReadOnly = True
@@ -2317,15 +2316,15 @@ Partial Class FormMain
         Me.dgv_AnalogOutput.AllowUserToDeleteRows = False
         Me.dgv_AnalogOutput.AllowUserToResizeColumns = False
         Me.dgv_AnalogOutput.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_AnalogOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle47.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle47.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle47.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle47.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_AnalogOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle47
         Me.dgv_AnalogOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_AnalogOutput.Location = New System.Drawing.Point(1383, 56)
         Me.dgv_AnalogOutput.Name = "dgv_AnalogOutput"
@@ -2340,15 +2339,15 @@ Partial Class FormMain
         Me.dgv_DigitalOutput.AllowUserToDeleteRows = False
         Me.dgv_DigitalOutput.AllowUserToResizeColumns = False
         Me.dgv_DigitalOutput.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_DigitalOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle48.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle48.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle48.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle48.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle48.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle48.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_DigitalOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle48
         Me.dgv_DigitalOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_DigitalOutput.Location = New System.Drawing.Point(471, 56)
         Me.dgv_DigitalOutput.Name = "dgv_DigitalOutput"
@@ -2363,15 +2362,15 @@ Partial Class FormMain
         Me.dgv_AnalogInput.AllowUserToDeleteRows = False
         Me.dgv_AnalogInput.AllowUserToResizeColumns = False
         Me.dgv_AnalogInput.AllowUserToResizeRows = False
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_AnalogInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle49.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle49.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle49.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle49.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle49.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle49.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_AnalogInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle49
         Me.dgv_AnalogInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_AnalogInput.Location = New System.Drawing.Point(927, 56)
         Me.dgv_AnalogInput.Name = "dgv_AnalogInput"
@@ -2386,15 +2385,15 @@ Partial Class FormMain
         Me.dgv_DigitalInput.AllowUserToDeleteRows = False
         Me.dgv_DigitalInput.AllowUserToResizeColumns = False
         Me.dgv_DigitalInput.AllowUserToResizeRows = False
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_DigitalInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle50.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle50.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle50.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle50.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle50.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle50.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle50.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_DigitalInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle50
         Me.dgv_DigitalInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_DigitalInput.Location = New System.Drawing.Point(15, 56)
         Me.dgv_DigitalInput.Name = "dgv_DigitalInput"
@@ -2446,13 +2445,19 @@ Partial Class FormMain
         'tabpg_StatusDevice
         '
         Me.tabpg_StatusDevice.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_Pumpcontroller)
+        Me.tabpg_StatusDevice.Controls.Add(Me.dsp_PumpController)
+        Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_HandScanner)
+        Me.tabpg_StatusDevice.Controls.Add(Me.Label19)
+        Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_PLCWrite)
+        Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_PLCRead)
+        Me.tabpg_StatusDevice.Controls.Add(Me.dsp_PLCRead)
+        Me.tabpg_StatusDevice.Controls.Add(Me.dsp_PLCWrite)
         Me.tabpg_StatusDevice.Controls.Add(Me.dsp_GenCondStatus)
         Me.tabpg_StatusDevice.Controls.Add(Me.dsp_FlwTempCtrlIO)
-        Me.tabpg_StatusDevice.Controls.Add(Me.dsp_PumpStatus)
         Me.tabpg_StatusDevice.Controls.Add(Me.dsp_PumpIO)
         Me.tabpg_StatusDevice.Controls.Add(Me.panel_GenCondStatus)
         Me.tabpg_StatusDevice.Controls.Add(Me.panel_FlwTempCtrlIO)
-        Me.tabpg_StatusDevice.Controls.Add(Me.panel_PumpStatus)
         Me.tabpg_StatusDevice.Controls.Add(Me.panel_PumpIOLeft)
         Me.tabpg_StatusDevice.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabpg_StatusDevice.Location = New System.Drawing.Point(4, 44)
@@ -2465,9 +2470,9 @@ Partial Class FormMain
         'dsp_GenCondStatus
         '
         Me.dsp_GenCondStatus.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GenCondStatus.Location = New System.Drawing.Point(1433, 21)
+        Me.dsp_GenCondStatus.Location = New System.Drawing.Point(1172, 16)
         Me.dsp_GenCondStatus.Name = "dsp_GenCondStatus"
-        Me.dsp_GenCondStatus.Size = New System.Drawing.Size(253, 35)
+        Me.dsp_GenCondStatus.Size = New System.Drawing.Size(615, 25)
         Me.dsp_GenCondStatus.TabIndex = 9
         Me.dsp_GenCondStatus.Text = "General Condition Status"
         Me.dsp_GenCondStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2475,29 +2480,19 @@ Partial Class FormMain
         'dsp_FlwTempCtrlIO
         '
         Me.dsp_FlwTempCtrlIO.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_FlwTempCtrlIO.Location = New System.Drawing.Point(480, 21)
+        Me.dsp_FlwTempCtrlIO.Location = New System.Drawing.Point(617, 10)
         Me.dsp_FlwTempCtrlIO.Name = "dsp_FlwTempCtrlIO"
-        Me.dsp_FlwTempCtrlIO.Size = New System.Drawing.Size(343, 35)
+        Me.dsp_FlwTempCtrlIO.Size = New System.Drawing.Size(280, 25)
         Me.dsp_FlwTempCtrlIO.TabIndex = 9
         Me.dsp_FlwTempCtrlIO.Text = "Flowmeter and Temperature Controller IO"
         Me.dsp_FlwTempCtrlIO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'dsp_PumpStatus
-        '
-        Me.dsp_PumpStatus.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpStatus.Location = New System.Drawing.Point(134, 281)
-        Me.dsp_PumpStatus.Name = "dsp_PumpStatus"
-        Me.dsp_PumpStatus.Size = New System.Drawing.Size(343, 35)
-        Me.dsp_PumpStatus.TabIndex = 9
-        Me.dsp_PumpStatus.Text = "Tank Status"
-        Me.dsp_PumpStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'dsp_PumpIO
         '
         Me.dsp_PumpIO.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpIO.Location = New System.Drawing.Point(134, 21)
+        Me.dsp_PumpIO.Location = New System.Drawing.Point(15, 10)
         Me.dsp_PumpIO.Name = "dsp_PumpIO"
-        Me.dsp_PumpIO.Size = New System.Drawing.Size(343, 35)
+        Me.dsp_PumpIO.Size = New System.Drawing.Size(280, 25)
         Me.dsp_PumpIO.TabIndex = 9
         Me.dsp_PumpIO.Text = "Pump IO"
         Me.dsp_PumpIO.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2519,9 +2514,9 @@ Partial Class FormMain
         Me.panel_GenCondStatus.Controls.Add(Me.dsp_ScannerBypass)
         Me.panel_GenCondStatus.Controls.Add(Me.dsp_SafetyConOK)
         Me.panel_GenCondStatus.Controls.Add(Me.dsp_AutoSeqComplete)
-        Me.panel_GenCondStatus.Location = New System.Drawing.Point(1436, 59)
+        Me.panel_GenCondStatus.Location = New System.Drawing.Point(1175, 44)
         Me.panel_GenCondStatus.Name = "panel_GenCondStatus"
-        Me.panel_GenCondStatus.Size = New System.Drawing.Size(250, 453)
+        Me.panel_GenCondStatus.Size = New System.Drawing.Size(615, 306)
         Me.panel_GenCondStatus.TabIndex = 1
         '
         'lbl_JigSelect_ok
@@ -2529,7 +2524,7 @@ Partial Class FormMain
         Me.lbl_JigSelect_ok.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_JigSelect_ok.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_JigSelect_ok.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_JigSelect_ok.Location = New System.Drawing.Point(161, 358)
+        Me.lbl_JigSelect_ok.Location = New System.Drawing.Point(518, 118)
         Me.lbl_JigSelect_ok.Name = "lbl_JigSelect_ok"
         Me.lbl_JigSelect_ok.Size = New System.Drawing.Size(60, 25)
         Me.lbl_JigSelect_ok.TabIndex = 12
@@ -2539,7 +2534,7 @@ Partial Class FormMain
         'dsp_JigSelect_ok
         '
         Me.dsp_JigSelect_ok.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_JigSelect_ok.Location = New System.Drawing.Point(30, 353)
+        Me.dsp_JigSelect_ok.Location = New System.Drawing.Point(387, 113)
         Me.dsp_JigSelect_ok.Name = "dsp_JigSelect_ok"
         Me.dsp_JigSelect_ok.Size = New System.Drawing.Size(125, 35)
         Me.dsp_JigSelect_ok.TabIndex = 13
@@ -2551,7 +2546,7 @@ Partial Class FormMain
         Me.lbl_RecipeSelectionOK.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_RecipeSelectionOK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_RecipeSelectionOK.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_RecipeSelectionOK.Location = New System.Drawing.Point(161, 307)
+        Me.lbl_RecipeSelectionOK.Location = New System.Drawing.Point(518, 69)
         Me.lbl_RecipeSelectionOK.Name = "lbl_RecipeSelectionOK"
         Me.lbl_RecipeSelectionOK.Size = New System.Drawing.Size(60, 25)
         Me.lbl_RecipeSelectionOK.TabIndex = 10
@@ -2561,7 +2556,7 @@ Partial Class FormMain
         'dsp_NoAlarm
         '
         Me.dsp_NoAlarm.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_NoAlarm.Location = New System.Drawing.Point(30, 139)
+        Me.dsp_NoAlarm.Location = New System.Drawing.Point(12, 113)
         Me.dsp_NoAlarm.Name = "dsp_NoAlarm"
         Me.dsp_NoAlarm.Size = New System.Drawing.Size(125, 35)
         Me.dsp_NoAlarm.TabIndex = 11
@@ -2573,7 +2568,7 @@ Partial Class FormMain
         Me.lbl_Alarm.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_Alarm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_Alarm.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Alarm.Location = New System.Drawing.Point(161, 144)
+        Me.lbl_Alarm.Location = New System.Drawing.Point(143, 118)
         Me.lbl_Alarm.Name = "lbl_Alarm"
         Me.lbl_Alarm.Size = New System.Drawing.Size(60, 25)
         Me.lbl_Alarm.TabIndex = 10
@@ -2583,7 +2578,7 @@ Partial Class FormMain
         'dsp_AutoRunning
         '
         Me.dsp_AutoRunning.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_AutoRunning.Location = New System.Drawing.Point(30, 30)
+        Me.dsp_AutoRunning.Location = New System.Drawing.Point(12, 14)
         Me.dsp_AutoRunning.Name = "dsp_AutoRunning"
         Me.dsp_AutoRunning.Size = New System.Drawing.Size(125, 35)
         Me.dsp_AutoRunning.TabIndex = 11
@@ -2595,7 +2590,7 @@ Partial Class FormMain
         Me.lbl_ScannerBypass.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_ScannerBypass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_ScannerBypass.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_ScannerBypass.Location = New System.Drawing.Point(161, 253)
+        Me.lbl_ScannerBypass.Location = New System.Drawing.Point(518, 19)
         Me.lbl_ScannerBypass.Name = "lbl_ScannerBypass"
         Me.lbl_ScannerBypass.Size = New System.Drawing.Size(60, 25)
         Me.lbl_ScannerBypass.TabIndex = 10
@@ -2607,7 +2602,7 @@ Partial Class FormMain
         Me.lbl_SafetyConOK.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_SafetyConOK.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_SafetyConOK.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_SafetyConOK.Location = New System.Drawing.Point(161, 199)
+        Me.lbl_SafetyConOK.Location = New System.Drawing.Point(143, 167)
         Me.lbl_SafetyConOK.Name = "lbl_SafetyConOK"
         Me.lbl_SafetyConOK.Size = New System.Drawing.Size(60, 25)
         Me.lbl_SafetyConOK.TabIndex = 10
@@ -2619,7 +2614,7 @@ Partial Class FormMain
         Me.lbl_AutoRunning.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_AutoRunning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_AutoRunning.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_AutoRunning.Location = New System.Drawing.Point(161, 35)
+        Me.lbl_AutoRunning.Location = New System.Drawing.Point(143, 19)
         Me.lbl_AutoRunning.Name = "lbl_AutoRunning"
         Me.lbl_AutoRunning.Size = New System.Drawing.Size(60, 25)
         Me.lbl_AutoRunning.TabIndex = 10
@@ -2629,7 +2624,7 @@ Partial Class FormMain
         'dsp_RecipeSelectionOK
         '
         Me.dsp_RecipeSelectionOK.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RecipeSelectionOK.Location = New System.Drawing.Point(30, 302)
+        Me.dsp_RecipeSelectionOK.Location = New System.Drawing.Point(387, 64)
         Me.dsp_RecipeSelectionOK.Name = "dsp_RecipeSelectionOK"
         Me.dsp_RecipeSelectionOK.Size = New System.Drawing.Size(125, 35)
         Me.dsp_RecipeSelectionOK.TabIndex = 11
@@ -2641,7 +2636,7 @@ Partial Class FormMain
         Me.lbl_AutoSeqComplete.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_AutoSeqComplete.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_AutoSeqComplete.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_AutoSeqComplete.Location = New System.Drawing.Point(161, 90)
+        Me.lbl_AutoSeqComplete.Location = New System.Drawing.Point(143, 69)
         Me.lbl_AutoSeqComplete.Name = "lbl_AutoSeqComplete"
         Me.lbl_AutoSeqComplete.Size = New System.Drawing.Size(60, 25)
         Me.lbl_AutoSeqComplete.TabIndex = 10
@@ -2651,7 +2646,7 @@ Partial Class FormMain
         'dsp_ScannerBypass
         '
         Me.dsp_ScannerBypass.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ScannerBypass.Location = New System.Drawing.Point(30, 248)
+        Me.dsp_ScannerBypass.Location = New System.Drawing.Point(387, 14)
         Me.dsp_ScannerBypass.Name = "dsp_ScannerBypass"
         Me.dsp_ScannerBypass.Size = New System.Drawing.Size(125, 35)
         Me.dsp_ScannerBypass.TabIndex = 11
@@ -2661,7 +2656,7 @@ Partial Class FormMain
         'dsp_SafetyConOK
         '
         Me.dsp_SafetyConOK.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_SafetyConOK.Location = New System.Drawing.Point(30, 194)
+        Me.dsp_SafetyConOK.Location = New System.Drawing.Point(12, 162)
         Me.dsp_SafetyConOK.Name = "dsp_SafetyConOK"
         Me.dsp_SafetyConOK.Size = New System.Drawing.Size(125, 35)
         Me.dsp_SafetyConOK.TabIndex = 11
@@ -2671,7 +2666,7 @@ Partial Class FormMain
         'dsp_AutoSeqComplete
         '
         Me.dsp_AutoSeqComplete.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_AutoSeqComplete.Location = New System.Drawing.Point(30, 85)
+        Me.dsp_AutoSeqComplete.Location = New System.Drawing.Point(12, 64)
         Me.dsp_AutoSeqComplete.Name = "dsp_AutoSeqComplete"
         Me.dsp_AutoSeqComplete.Size = New System.Drawing.Size(125, 35)
         Me.dsp_AutoSeqComplete.TabIndex = 11
@@ -2685,9 +2680,9 @@ Partial Class FormMain
         Me.panel_FlwTempCtrlIO.Controls.Add(Me.dsp_FlwAlarm)
         Me.panel_FlwTempCtrlIO.Controls.Add(Me.dsp_TempALM1)
         Me.panel_FlwTempCtrlIO.Controls.Add(Me.lbl_TempALM1)
-        Me.panel_FlwTempCtrlIO.Location = New System.Drawing.Point(483, 59)
+        Me.panel_FlwTempCtrlIO.Location = New System.Drawing.Point(620, 44)
         Me.panel_FlwTempCtrlIO.Name = "panel_FlwTempCtrlIO"
-        Me.panel_FlwTempCtrlIO.Size = New System.Drawing.Size(340, 211)
+        Me.panel_FlwTempCtrlIO.Size = New System.Drawing.Size(280, 170)
         Me.panel_FlwTempCtrlIO.TabIndex = 1
         '
         'lbl_FlwAlarm
@@ -2695,7 +2690,7 @@ Partial Class FormMain
         Me.lbl_FlwAlarm.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_FlwAlarm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_FlwAlarm.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_FlwAlarm.Location = New System.Drawing.Point(198, 35)
+        Me.lbl_FlwAlarm.Location = New System.Drawing.Point(168, 19)
         Me.lbl_FlwAlarm.Name = "lbl_FlwAlarm"
         Me.lbl_FlwAlarm.Size = New System.Drawing.Size(60, 25)
         Me.lbl_FlwAlarm.TabIndex = 10
@@ -2705,7 +2700,7 @@ Partial Class FormMain
         'dsp_FlwAlarm
         '
         Me.dsp_FlwAlarm.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_FlwAlarm.Location = New System.Drawing.Point(67, 30)
+        Me.dsp_FlwAlarm.Location = New System.Drawing.Point(37, 14)
         Me.dsp_FlwAlarm.Name = "dsp_FlwAlarm"
         Me.dsp_FlwAlarm.Size = New System.Drawing.Size(125, 35)
         Me.dsp_FlwAlarm.TabIndex = 11
@@ -2715,7 +2710,7 @@ Partial Class FormMain
         'dsp_TempALM1
         '
         Me.dsp_TempALM1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_TempALM1.Location = New System.Drawing.Point(67, 85)
+        Me.dsp_TempALM1.Location = New System.Drawing.Point(37, 64)
         Me.dsp_TempALM1.Name = "dsp_TempALM1"
         Me.dsp_TempALM1.Size = New System.Drawing.Size(125, 35)
         Me.dsp_TempALM1.TabIndex = 11
@@ -2728,117 +2723,13 @@ Partial Class FormMain
         Me.lbl_TempALM1.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_TempALM1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_TempALM1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TempALM1.Location = New System.Drawing.Point(198, 90)
+        Me.lbl_TempALM1.Location = New System.Drawing.Point(168, 69)
         Me.lbl_TempALM1.Name = "lbl_TempALM1"
         Me.lbl_TempALM1.Size = New System.Drawing.Size(60, 25)
         Me.lbl_TempALM1.TabIndex = 10
         Me.lbl_TempALM1.Text = "OFF"
         Me.lbl_TempALM1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.lbl_TempALM1.Visible = False
-        '
-        'panel_PumpStatus
-        '
-        Me.panel_PumpStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panel_PumpStatus.Controls.Add(Me.lbl_PumpSetReference)
-        Me.panel_PumpStatus.Controls.Add(Me.dsp_PumpFilterDrain)
-        Me.panel_PumpStatus.Controls.Add(Me.dsp_PumpFilterVent)
-        Me.panel_PumpStatus.Controls.Add(Me.lbl_Tankhealthy)
-        Me.panel_PumpStatus.Controls.Add(Me.dsp_PumpPressure)
-        Me.panel_PumpStatus.Controls.Add(Me.dsp_PumpSetReference)
-        Me.panel_PumpStatus.Controls.Add(Me.lbl_PumpPressure)
-        Me.panel_PumpStatus.Controls.Add(Me.lbl_TankAutofill)
-        Me.panel_PumpStatus.Location = New System.Drawing.Point(137, 319)
-        Me.panel_PumpStatus.Name = "panel_PumpStatus"
-        Me.panel_PumpStatus.Size = New System.Drawing.Size(340, 211)
-        Me.panel_PumpStatus.TabIndex = 1
-        '
-        'lbl_PumpSetReference
-        '
-        Me.lbl_PumpSetReference.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_PumpSetReference.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_PumpSetReference.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpSetReference.Location = New System.Drawing.Point(200, 167)
-        Me.lbl_PumpSetReference.Name = "lbl_PumpSetReference"
-        Me.lbl_PumpSetReference.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_PumpSetReference.TabIndex = 10
-        Me.lbl_PumpSetReference.Text = "50"
-        Me.lbl_PumpSetReference.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_PumpFilterDrain
-        '
-        Me.dsp_PumpFilterDrain.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpFilterDrain.Location = New System.Drawing.Point(26, 14)
-        Me.dsp_PumpFilterDrain.Name = "dsp_PumpFilterDrain"
-        Me.dsp_PumpFilterDrain.Size = New System.Drawing.Size(150, 35)
-        Me.dsp_PumpFilterDrain.TabIndex = 11
-        Me.dsp_PumpFilterDrain.Text = "Tank Healthy"
-        Me.dsp_PumpFilterDrain.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'dsp_PumpFilterVent
-        '
-        Me.dsp_PumpFilterVent.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpFilterVent.Location = New System.Drawing.Point(26, 64)
-        Me.dsp_PumpFilterVent.Name = "dsp_PumpFilterVent"
-        Me.dsp_PumpFilterVent.Size = New System.Drawing.Size(150, 35)
-        Me.dsp_PumpFilterVent.TabIndex = 11
-        Me.dsp_PumpFilterVent.Text = "Tank Auto Filling"
-        Me.dsp_PumpFilterVent.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lbl_Tankhealthy
-        '
-        Me.lbl_Tankhealthy.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_Tankhealthy.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Tankhealthy.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Tankhealthy.Location = New System.Drawing.Point(200, 19)
-        Me.lbl_Tankhealthy.Name = "lbl_Tankhealthy"
-        Me.lbl_Tankhealthy.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_Tankhealthy.TabIndex = 10
-        Me.lbl_Tankhealthy.Text = "OFF"
-        Me.lbl_Tankhealthy.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_PumpPressure
-        '
-        Me.dsp_PumpPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpPressure.Location = New System.Drawing.Point(26, 113)
-        Me.dsp_PumpPressure.Name = "dsp_PumpPressure"
-        Me.dsp_PumpPressure.Size = New System.Drawing.Size(150, 35)
-        Me.dsp_PumpPressure.TabIndex = 11
-        Me.dsp_PumpPressure.Text = "Pump Pressure (kPa) :"
-        Me.dsp_PumpPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'dsp_PumpSetReference
-        '
-        Me.dsp_PumpSetReference.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpSetReference.Location = New System.Drawing.Point(26, 162)
-        Me.dsp_PumpSetReference.Name = "dsp_PumpSetReference"
-        Me.dsp_PumpSetReference.Size = New System.Drawing.Size(150, 35)
-        Me.dsp_PumpSetReference.TabIndex = 11
-        Me.dsp_PumpSetReference.Text = "Pump Set Reference :"
-        Me.dsp_PumpSetReference.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'lbl_PumpPressure
-        '
-        Me.lbl_PumpPressure.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_PumpPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_PumpPressure.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpPressure.Location = New System.Drawing.Point(200, 118)
-        Me.lbl_PumpPressure.Name = "lbl_PumpPressure"
-        Me.lbl_PumpPressure.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_PumpPressure.TabIndex = 10
-        Me.lbl_PumpPressure.Text = "22.11"
-        Me.lbl_PumpPressure.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_TankAutofill
-        '
-        Me.lbl_TankAutofill.BackColor = System.Drawing.SystemColors.Control
-        Me.lbl_TankAutofill.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_TankAutofill.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_TankAutofill.Location = New System.Drawing.Point(200, 69)
-        Me.lbl_TankAutofill.Name = "lbl_TankAutofill"
-        Me.lbl_TankAutofill.Size = New System.Drawing.Size(60, 25)
-        Me.lbl_TankAutofill.TabIndex = 10
-        Me.lbl_TankAutofill.Text = "OFF"
-        Me.lbl_TankAutofill.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'panel_PumpIOLeft
         '
@@ -2849,9 +2740,9 @@ Partial Class FormMain
         Me.panel_PumpIOLeft.Controls.Add(Me.dsp_PumpError)
         Me.panel_PumpIOLeft.Controls.Add(Me.lbl_PumpState)
         Me.panel_PumpIOLeft.Controls.Add(Me.dsp_PumpState)
-        Me.panel_PumpIOLeft.Location = New System.Drawing.Point(137, 59)
+        Me.panel_PumpIOLeft.Location = New System.Drawing.Point(18, 44)
         Me.panel_PumpIOLeft.Name = "panel_PumpIOLeft"
-        Me.panel_PumpIOLeft.Size = New System.Drawing.Size(340, 211)
+        Me.panel_PumpIOLeft.Size = New System.Drawing.Size(280, 170)
         Me.panel_PumpIOLeft.TabIndex = 1
         '
         'lbl_PumpWarning
@@ -2859,7 +2750,7 @@ Partial Class FormMain
         Me.lbl_PumpWarning.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_PumpWarning.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_PumpWarning.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpWarning.Location = New System.Drawing.Point(200, 144)
+        Me.lbl_PumpWarning.Location = New System.Drawing.Point(160, 118)
         Me.lbl_PumpWarning.Name = "lbl_PumpWarning"
         Me.lbl_PumpWarning.Size = New System.Drawing.Size(60, 25)
         Me.lbl_PumpWarning.TabIndex = 10
@@ -2869,9 +2760,9 @@ Partial Class FormMain
         'dsp_PumpWarning
         '
         Me.dsp_PumpWarning.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpWarning.Location = New System.Drawing.Point(26, 139)
+        Me.dsp_PumpWarning.Location = New System.Drawing.Point(26, 113)
         Me.dsp_PumpWarning.Name = "dsp_PumpWarning"
-        Me.dsp_PumpWarning.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_PumpWarning.Size = New System.Drawing.Size(125, 35)
         Me.dsp_PumpWarning.TabIndex = 11
         Me.dsp_PumpWarning.Text = "Pump Warning :"
         Me.dsp_PumpWarning.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -2881,7 +2772,7 @@ Partial Class FormMain
         Me.lbl_PumpError.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_PumpError.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_PumpError.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpError.Location = New System.Drawing.Point(200, 90)
+        Me.lbl_PumpError.Location = New System.Drawing.Point(160, 69)
         Me.lbl_PumpError.Name = "lbl_PumpError"
         Me.lbl_PumpError.Size = New System.Drawing.Size(60, 25)
         Me.lbl_PumpError.TabIndex = 10
@@ -2891,9 +2782,9 @@ Partial Class FormMain
         'dsp_PumpError
         '
         Me.dsp_PumpError.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpError.Location = New System.Drawing.Point(26, 85)
+        Me.dsp_PumpError.Location = New System.Drawing.Point(26, 64)
         Me.dsp_PumpError.Name = "dsp_PumpError"
-        Me.dsp_PumpError.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_PumpError.Size = New System.Drawing.Size(125, 35)
         Me.dsp_PumpError.TabIndex = 11
         Me.dsp_PumpError.Text = "Pump Error :"
         Me.dsp_PumpError.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -2903,7 +2794,7 @@ Partial Class FormMain
         Me.lbl_PumpState.BackColor = System.Drawing.SystemColors.Control
         Me.lbl_PumpState.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_PumpState.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_PumpState.Location = New System.Drawing.Point(200, 35)
+        Me.lbl_PumpState.Location = New System.Drawing.Point(160, 19)
         Me.lbl_PumpState.Name = "lbl_PumpState"
         Me.lbl_PumpState.Size = New System.Drawing.Size(60, 25)
         Me.lbl_PumpState.TabIndex = 10
@@ -2913,9 +2804,9 @@ Partial Class FormMain
         'dsp_PumpState
         '
         Me.dsp_PumpState.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PumpState.Location = New System.Drawing.Point(26, 30)
+        Me.dsp_PumpState.Location = New System.Drawing.Point(26, 14)
         Me.dsp_PumpState.Name = "dsp_PumpState"
-        Me.dsp_PumpState.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_PumpState.Size = New System.Drawing.Size(125, 35)
         Me.dsp_PumpState.TabIndex = 11
         Me.dsp_PumpState.Text = "Pump State :"
         Me.dsp_PumpState.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -4473,36 +4364,36 @@ Partial Class FormMain
         Me.dgv_CurrentAlarm.AllowUserToResizeColumns = False
         Me.dgv_CurrentAlarm.AllowUserToResizeRows = False
         Me.dgv_CurrentAlarm.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle6.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_CurrentAlarm.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle51.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle51.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle51.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle51.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle51.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle51.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle51.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_CurrentAlarm.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle51
         Me.dgv_CurrentAlarm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle7.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_CurrentAlarm.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle52.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle52.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle52.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle52.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_CurrentAlarm.DefaultCellStyle = DataGridViewCellStyle52
         Me.dgv_CurrentAlarm.Location = New System.Drawing.Point(106, 25)
         Me.dgv_CurrentAlarm.Name = "dgv_CurrentAlarm"
         Me.dgv_CurrentAlarm.ReadOnly = True
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_CurrentAlarm.RowHeadersDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle53.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle53.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle53.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle53.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle53.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_CurrentAlarm.RowHeadersDefaultCellStyle = DataGridViewCellStyle53
         Me.dgv_CurrentAlarm.RowHeadersVisible = False
         Me.dgv_CurrentAlarm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv_CurrentAlarm.Size = New System.Drawing.Size(1606, 537)
@@ -4559,15 +4450,15 @@ Partial Class FormMain
         Me.dgv_AlarmHistory.AllowUserToAddRows = False
         Me.dgv_AlarmHistory.AllowUserToDeleteRows = False
         Me.dgv_AlarmHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle9.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_AlarmHistory.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle54.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle54.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle54.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle54.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle54.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle54.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_AlarmHistory.DefaultCellStyle = DataGridViewCellStyle54
         Me.dgv_AlarmHistory.Location = New System.Drawing.Point(106, 92)
         Me.dgv_AlarmHistory.Name = "dgv_AlarmHistory"
         Me.dgv_AlarmHistory.ReadOnly = True
@@ -4734,6 +4625,8 @@ Partial Class FormMain
         'panel_SelectLoadRecipe
         '
         Me.panel_SelectLoadRecipe.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_SelectLoadRecipe.Controls.Add(Me.txtbx_TitleJigType)
+        Me.panel_SelectLoadRecipe.Controls.Add(Me.dsp_JigType)
         Me.panel_SelectLoadRecipe.Controls.Add(Me.txtbx_TitleFilterType)
         Me.panel_SelectLoadRecipe.Controls.Add(Me.txtbx_TitlePartID)
         Me.panel_SelectLoadRecipe.Controls.Add(Me.txtbx_TitleRecipeID)
@@ -4745,13 +4638,37 @@ Partial Class FormMain
         Me.panel_SelectLoadRecipe.Size = New System.Drawing.Size(400, 125)
         Me.panel_SelectLoadRecipe.TabIndex = 0
         '
+        'txtbx_TitleJigType
+        '
+        Me.txtbx_TitleJigType.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_TitleJigType.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtbx_TitleJigType.Enabled = False
+        Me.txtbx_TitleJigType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_TitleJigType.Location = New System.Drawing.Point(114, 93)
+        Me.txtbx_TitleJigType.Name = "txtbx_TitleJigType"
+        Me.txtbx_TitleJigType.ReadOnly = True
+        Me.txtbx_TitleJigType.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_TitleJigType.TabIndex = 14
+        Me.txtbx_TitleJigType.TabStop = False
+        Me.txtbx_TitleJigType.Text = "-"
+        '
+        'dsp_JigType
+        '
+        Me.dsp_JigType.AutoSize = True
+        Me.dsp_JigType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_JigType.Location = New System.Drawing.Point(34, 97)
+        Me.dsp_JigType.Name = "dsp_JigType"
+        Me.dsp_JigType.Size = New System.Drawing.Size(62, 17)
+        Me.dsp_JigType.TabIndex = 13
+        Me.dsp_JigType.Text = "Jig Type :"
+        '
         'txtbx_TitleFilterType
         '
         Me.txtbx_TitleFilterType.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_TitleFilterType.Cursor = System.Windows.Forms.Cursors.Default
         Me.txtbx_TitleFilterType.Enabled = False
         Me.txtbx_TitleFilterType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_TitleFilterType.Location = New System.Drawing.Point(114, 77)
+        Me.txtbx_TitleFilterType.Location = New System.Drawing.Point(114, 64)
         Me.txtbx_TitleFilterType.Name = "txtbx_TitleFilterType"
         Me.txtbx_TitleFilterType.ReadOnly = True
         Me.txtbx_TitleFilterType.Size = New System.Drawing.Size(260, 25)
@@ -4765,7 +4682,7 @@ Partial Class FormMain
         Me.txtbx_TitlePartID.Cursor = System.Windows.Forms.Cursors.Default
         Me.txtbx_TitlePartID.Enabled = False
         Me.txtbx_TitlePartID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_TitlePartID.Location = New System.Drawing.Point(114, 46)
+        Me.txtbx_TitlePartID.Location = New System.Drawing.Point(114, 35)
         Me.txtbx_TitlePartID.Name = "txtbx_TitlePartID"
         Me.txtbx_TitlePartID.ReadOnly = True
         Me.txtbx_TitlePartID.Size = New System.Drawing.Size(260, 25)
@@ -4779,7 +4696,7 @@ Partial Class FormMain
         Me.txtbx_TitleRecipeID.Cursor = System.Windows.Forms.Cursors.Default
         Me.txtbx_TitleRecipeID.Enabled = False
         Me.txtbx_TitleRecipeID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_TitleRecipeID.Location = New System.Drawing.Point(114, 15)
+        Me.txtbx_TitleRecipeID.Location = New System.Drawing.Point(114, 6)
         Me.txtbx_TitleRecipeID.Name = "txtbx_TitleRecipeID"
         Me.txtbx_TitleRecipeID.ReadOnly = True
         Me.txtbx_TitleRecipeID.Size = New System.Drawing.Size(260, 25)
@@ -4791,7 +4708,7 @@ Partial Class FormMain
         '
         Me.dsp_ProductFamily.AutoSize = True
         Me.dsp_ProductFamily.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ProductFamily.Location = New System.Drawing.Point(34, 80)
+        Me.dsp_ProductFamily.Location = New System.Drawing.Point(34, 68)
         Me.dsp_ProductFamily.Name = "dsp_ProductFamily"
         Me.dsp_ProductFamily.Size = New System.Drawing.Size(74, 17)
         Me.dsp_ProductFamily.TabIndex = 8
@@ -4801,7 +4718,7 @@ Partial Class FormMain
         '
         Me.dsp_ProductSKU.AutoSize = True
         Me.dsp_ProductSKU.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ProductSKU.Location = New System.Drawing.Point(54, 49)
+        Me.dsp_ProductSKU.Location = New System.Drawing.Point(54, 39)
         Me.dsp_ProductSKU.Name = "dsp_ProductSKU"
         Me.dsp_ProductSKU.Size = New System.Drawing.Size(54, 17)
         Me.dsp_ProductSKU.TabIndex = 8
@@ -4812,7 +4729,7 @@ Partial Class FormMain
         '
         Me.dsp_RecipeID.AutoSize = True
         Me.dsp_RecipeID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RecipeID.Location = New System.Drawing.Point(38, 18)
+        Me.dsp_RecipeID.Location = New System.Drawing.Point(38, 10)
         Me.dsp_RecipeID.Name = "dsp_RecipeID"
         Me.dsp_RecipeID.Size = New System.Drawing.Size(70, 17)
         Me.dsp_RecipeID.TabIndex = 8
@@ -4938,6 +4855,86 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'dsp_PLCWrite
+        '
+        Me.dsp_PLCWrite.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_PLCWrite.Location = New System.Drawing.Point(31, 338)
+        Me.dsp_PLCWrite.Name = "dsp_PLCWrite"
+        Me.dsp_PLCWrite.Size = New System.Drawing.Size(343, 25)
+        Me.dsp_PLCWrite.TabIndex = 11
+        Me.dsp_PLCWrite.Text = "PLC Write"
+        Me.dsp_PLCWrite.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'dsp_PLCRead
+        '
+        Me.dsp_PLCRead.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_PLCRead.Location = New System.Drawing.Point(31, 447)
+        Me.dsp_PLCRead.Name = "dsp_PLCRead"
+        Me.dsp_PLCRead.Size = New System.Drawing.Size(343, 25)
+        Me.dsp_PLCRead.TabIndex = 13
+        Me.dsp_PLCRead.Text = "PLC Read"
+        Me.dsp_PLCRead.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtbx_PLCRead
+        '
+        Me.txtbx_PLCRead.Cursor = System.Windows.Forms.Cursors.No
+        Me.txtbx_PLCRead.Location = New System.Drawing.Point(32, 475)
+        Me.txtbx_PLCRead.Name = "txtbx_PLCRead"
+        Me.txtbx_PLCRead.ReadOnly = True
+        Me.txtbx_PLCRead.Size = New System.Drawing.Size(1767, 100)
+        Me.txtbx_PLCRead.TabIndex = 14
+        Me.txtbx_PLCRead.Text = ""
+        '
+        'txtbx_PLCWrite
+        '
+        Me.txtbx_PLCWrite.Cursor = System.Windows.Forms.Cursors.No
+        Me.txtbx_PLCWrite.Location = New System.Drawing.Point(32, 365)
+        Me.txtbx_PLCWrite.Name = "txtbx_PLCWrite"
+        Me.txtbx_PLCWrite.ReadOnly = True
+        Me.txtbx_PLCWrite.Size = New System.Drawing.Size(1767, 80)
+        Me.txtbx_PLCWrite.TabIndex = 15
+        Me.txtbx_PLCWrite.Text = ""
+        '
+        'Label19
+        '
+        Me.Label19.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(31, 227)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(280, 25)
+        Me.Label19.TabIndex = 16
+        Me.Label19.Text = "HandHeld Scanner"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'txtbx_HandScanner
+        '
+        Me.txtbx_HandScanner.Cursor = System.Windows.Forms.Cursors.No
+        Me.txtbx_HandScanner.Location = New System.Drawing.Point(31, 251)
+        Me.txtbx_HandScanner.Name = "txtbx_HandScanner"
+        Me.txtbx_HandScanner.ReadOnly = True
+        Me.txtbx_HandScanner.Size = New System.Drawing.Size(581, 80)
+        Me.txtbx_HandScanner.TabIndex = 17
+        Me.txtbx_HandScanner.Text = ""
+        '
+        'dsp_PumpController
+        '
+        Me.dsp_PumpController.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_PumpController.Location = New System.Drawing.Point(316, 10)
+        Me.dsp_PumpController.Name = "dsp_PumpController"
+        Me.dsp_PumpController.Size = New System.Drawing.Size(280, 25)
+        Me.dsp_PumpController.TabIndex = 18
+        Me.dsp_PumpController.Text = "Pump Controller"
+        Me.dsp_PumpController.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtbx_Pumpcontroller
+        '
+        Me.txtbx_Pumpcontroller.Cursor = System.Windows.Forms.Cursors.No
+        Me.txtbx_Pumpcontroller.Location = New System.Drawing.Point(319, 44)
+        Me.txtbx_Pumpcontroller.Name = "txtbx_Pumpcontroller"
+        Me.txtbx_Pumpcontroller.ReadOnly = True
+        Me.txtbx_Pumpcontroller.Size = New System.Drawing.Size(280, 170)
+        Me.txtbx_Pumpcontroller.TabIndex = 19
+        Me.txtbx_Pumpcontroller.Text = ""
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4998,7 +4995,6 @@ Partial Class FormMain
         Me.tabpg_StatusDevice.ResumeLayout(False)
         Me.panel_GenCondStatus.ResumeLayout(False)
         Me.panel_FlwTempCtrlIO.ResumeLayout(False)
-        Me.panel_PumpStatus.ResumeLayout(False)
         Me.panel_PumpIOLeft.ResumeLayout(False)
         Me.tabpg_ManualCtrl.ResumeLayout(False)
         Me.tabctrl_SubManualCtrl.ResumeLayout(False)
@@ -5128,7 +5124,6 @@ Partial Class FormMain
     Friend WithEvents tabpg_StatusDevice As TabPage
     Friend WithEvents dsp_GenCondStatus As Label
     Friend WithEvents dsp_FlwTempCtrlIO As Label
-    Friend WithEvents dsp_PumpStatus As Label
     Friend WithEvents dsp_PumpIO As Label
     Friend WithEvents panel_GenCondStatus As Panel
     Friend WithEvents lbl_RecipeSelectionOK As Label
@@ -5148,15 +5143,6 @@ Partial Class FormMain
     Friend WithEvents dsp_FlwAlarm As Label
     Friend WithEvents dsp_TempALM1 As Label
     Friend WithEvents lbl_TempALM1 As Label
-    Friend WithEvents panel_PumpStatus As Panel
-    Friend WithEvents lbl_PumpSetReference As Label
-    Friend WithEvents dsp_PumpFilterDrain As Label
-    Friend WithEvents dsp_PumpFilterVent As Label
-    Friend WithEvents lbl_Tankhealthy As Label
-    Friend WithEvents dsp_PumpPressure As Label
-    Friend WithEvents dsp_PumpSetReference As Label
-    Friend WithEvents lbl_PumpPressure As Label
-    Friend WithEvents lbl_TankAutofill As Label
     Friend WithEvents panel_PumpIOLeft As Panel
     Friend WithEvents lbl_PumpWarning As Label
     Friend WithEvents dsp_PumpWarning As Label
@@ -5411,4 +5397,14 @@ Partial Class FormMain
     Friend WithEvents lbl_CommOpen As Label
     Friend WithEvents Label30 As Label
     Friend WithEvents Label31 As Label
+    Friend WithEvents txtbx_TitleJigType As TextBox
+    Friend WithEvents dsp_JigType As Label
+    Friend WithEvents dsp_PLCWrite As Label
+    Friend WithEvents dsp_PLCRead As Label
+    Friend WithEvents txtbx_PLCWrite As RichTextBox
+    Friend WithEvents txtbx_PLCRead As RichTextBox
+    Friend WithEvents txtbx_HandScanner As RichTextBox
+    Friend WithEvents Label19 As Label
+    Friend WithEvents txtbx_Pumpcontroller As RichTextBox
+    Friend WithEvents dsp_PumpController As Label
 End Class

@@ -17,7 +17,7 @@ Public Class FormSetting
 
     ' Define Label Array
     Public lblArray(18) As Label
-
+    Public dtbuyoffmessage As New DataTable
     ' Scanner ComboBox Initialize State
     Dim ScannerInitialized As Boolean = False
 
@@ -46,6 +46,14 @@ Public Class FormSetting
         For Each dgv As DataGridView In dgvArr
             DoubleBuffer.DoubleBuffered(dgv, True)
         Next
+        dtbuyoffmessage.Columns.Add("id")
+        dtbuyoffmessage.Columns.Add("no")
+        dtbuyoffmessage.Columns.Add("user_name")
+        dtbuyoffmessage.Columns.Add("trigger_time")
+        dtbuyoffmessage.Columns.Add("event_log")
+
+
+
 
         ' Hide dgv_LoginTable
         DataGridView1.Visible = False
@@ -630,29 +638,33 @@ Public Class FormSetting
         Dim FilterStr As String = ""
 
         ' Check Buyoff State
-        If timer_Buyoff.Enabled = False Then
-            FilterStr = "WHERE 1 = 0"
-        Else
-            FilterStr = $"WHERE MessageLog.trigger_time >= {StartTime.ToString("yyyy-MM-ddTHH:mm:ss")}" ' YYYY-MM-DDTHH:mm:ss
-        End If
+        'If timer_Buyoff.Enabled = False Then
+        '    FilterStr = "WHERE 1 = 0"
+        'Else
+        '    FilterStr = $"WHERE MessageLog.trigger_time >=' {StartTime.ToString("yyyy-MM-dd HH:mm:ss:000")}'" ' YYYY-MM-DDTHH:mm:ss
+        'End If
 
-        ' Define SQL String
-        Dim sqlString As String = $"
-        SELECT row_number() OVER (ORDER BY MessageLog.trigger_time DESC) AS no,
-            MessageLog.id, 
-            MessageLog.user_name, 
-            MessageLog.trigger_time, 
-            MessageLog.event_log 
-        FROM MessageLog 
-        {FilterStr} 
-        ORDER BY MessageLog.trigger_time DESC
-        "
+        '' Define SQL String
+        'Dim sqlString As String = $"
+        'SELECT row_number() OVER (ORDER BY MessageLog.trigger_time DESC) AS no,
+        '    MessageLog.id, 
+        '    MessageLog.user_name, 
+        '    MessageLog.trigger_time, 
+        '    MessageLog.event_log 
+        'FROM MessageLog 
+        '{FilterStr} 
+        'ORDER BY MessageLog.trigger_time DESC
+        '"
 
-        ' Populate Datatable From SQL Query
-        Dim dtMessageLog As DataTable = Await Task.Run(Function() SQL.ReadRecords(sqlString))   'SQL.ReadRecords(sqlString)
+        '' Populate Datatable From SQL Query
+        'Dim dtMessageLog As DataTable = SQL.ReadRecords(sqlString)   'SQL.ReadRecords(sqlString)
+
+        '' Bind To DataGridView DataSource
+        'dgv_MessageLog.DataSource = dtMessageLog
 
         ' Bind To DataGridView DataSource
-        dgv_MessageLog.DataSource = dtMessageLog
+        dgv_MessageLog.DataSource = dtbuyoffmessage
+
 
         With dgv_MessageLog
             ' Set DataGridView Properties
@@ -699,15 +711,19 @@ Public Class FormSetting
         If True Then
             If chkbxCheckedChanged Is chkbx_DryRun Then
                 If chkbxCheckedChanged.Checked = False Then
+                    chkbx_BuyOffRun.Enabled = True
                     RetainedMemory.Update(4, "DryRunEnabled", "0")
                 Else
+                    chkbx_BuyOffRun.Enabled = False
                     RetainedMemory.Update(4, "DryRunEnabled", "1")
                 End If
             End If
             If chkbxCheckedChanged Is chkbx_BuyOffRun Then
                 If chkbxCheckedChanged.Checked = False Then
+                    chkbx_DryRun.Enabled = True
                     RetainedMemory.Update(5, "BuyOffEnabled", "0")
                 Else
+                    chkbx_DryRun.Enabled = False
                     RetainedMemory.Update(5, "BuyOffEnabled", "1")
                 End If
             End If
@@ -1463,8 +1479,10 @@ Public Class FormSetting
         FormPixel.Show()
     End Sub
 
-
-
-
-
+    Private Sub btn_Reset_Click(sender As Object, e As EventArgs) Handles btn_Reset.Click
+        lbl_EndTime.Text = "-N/A-"
+        lbl_StartTime.Text = "-N/A-"
+        lbl_Duration.Text = "-N/A-"
+        dtbuyoffmessage.Clear()
+    End Sub
 End Class

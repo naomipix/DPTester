@@ -9,6 +9,7 @@ Module ModuleSerialComm
     Public Tempscandata As String
     Public ConnectionRetry As Integer
     Public WithEvents Scannertimer As New Timer()
+    Public rcv As String
     Public Sub StartSerialComListener1()
         Try
             mySerialPort1 = New SerialPort()
@@ -50,7 +51,8 @@ Module ModuleSerialComm
 
     Private Sub SerialComDataReceivedHandler1(sender As Object, e As SerialDataReceivedEventArgs)
         Try
-            Dim rcv As String = mySerialPort1.ReadLine()
+            rcv = String.Empty
+            rcv = mySerialPort1.ReadLine()
             HandheldScanraw = rcv
 
             If HandheldScanraw <> "" And HandheldScanraw <> Tempscandata Then
@@ -107,6 +109,7 @@ Module ModuleSerialComm
         If SerialDataReceived = True Then
             PlaceData(HandheldScandata)
             FormSetting.txtbx_ScannerRawData.Text = HandheldScanraw
+            FormMain.txtbx_HandScanner.Text = rcv
             SerialDataReceived = False
         End If
 

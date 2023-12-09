@@ -21,7 +21,7 @@ Public Class FormResultGraph
         lbl_Category.Text = PublicVariables.LoginUserCategoryName
 
         ' Initialize Defaults
-        GetLotid()
+
 
         txtbx_GraphTimestamp.Text = Nothing
         txtbx_GraphWorkOrder.Text = Nothing
@@ -43,10 +43,27 @@ Public Class FormResultGraph
         txtbx_GraphDrain1.Text = Nothing
         txtbx_GraphDrain2.Text = Nothing
         txtbx_GraphDrain3.Text = Nothing
-
+        txtbx_GraphSerialUID.Text = Nothing
+        txtbx_Graphattempt.Text = Nothing
         ResultChart.DataSource = Nothing
         ResultChart.Series.Clear()
 
+        ' Get User Category Table
+        Dim dtdefaultRecord As DataTable = SQL.ReadRecords($"SELECT DISTINCT serial_usage_id FROM ProductResult ORDER BY serial_usage_id DESC")
+        Dim lastrecord As String = dtdefaultRecord.Rows(0)("serial_usage_id").ToString
+        Dim dtdefaultdetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+                  LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id = Lotusage.id
+                  WHERE ProductionDetail.id ='{lastrecord}' ")
+
+        If dtdefaultdetail.Rows.Count > 0 Then
+            Dim lastrecordlot = dtdefaultdetail.Rows(0)("lot_id")
+            Dim Lastrecordserialnum = dtdefaultdetail.Rows(0)("serial_number")
+            Dim lastrecordserialattmept = dtdefaultdetail.Rows(0)("serial_attempt")
+            LoadResult(lastrecordlot, Lastrecordserialnum, lastrecordserialattmept)
+        End If
+
+
+        GetLotid()
 
     End Sub
 
@@ -62,6 +79,7 @@ Public Class FormResultGraph
 
 
 #Region "Combobox Data"
+
     Private Sub GetLotid()
         Dim LotcomboSource As New Dictionary(Of String, String)()
 
@@ -70,9 +88,9 @@ Public Class FormResultGraph
 
         ' Assign Defaults
         LotcomboSource.Add("0", "-Not Selected-")
-        Dim dvGetRecord As DataView = SQL.ReadRecords($"SELECT id,lot_id FROM LotUsage").DefaultView
+        Dim dvGetRecord As DataView = SQL.ReadRecords($"SELECT DISTINCT ProductResult.serial_usage_id,Lotusage.lot_id FROM ProductResult INNER JOIN ProductionDetail ON ProductionDetail.id = ProductResult.serial_usage_id INNER JOIN LotUsage ON Lotusage.id=ProductionDetail.lot_usage_id").DefaultView
         ' Sort Recipe Table
-        dvGetRecord.Sort = "lot_id" & " ASC"
+        dvGetRecord.Sort = "serial_usage_id " & "DESC"
 
 
         ' Get User Category Table
@@ -97,6 +115,7 @@ Public Class FormResultGraph
             End With
         Next
     End Sub
+
 
 
     Private Sub cmbx_GraphSearchLot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_GraphSearchLot.SelectedIndexChanged
@@ -259,13 +278,6 @@ Public Class FormResultGraph
         Dim Lotid As String = cmbx_GraphSearchLot.Text
         Dim serialnum As String = cmbx_GraphSearchSerial.Text
         Dim attempt As String = cmbx_GraphSearchAttempt.Text
-        Dim resultsummary(90) As String
-
-        Dim dt_Graphsummary As DataTable
-        Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
-                    LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
-                    LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
-                    LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{Lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
 
 
 
@@ -291,73 +303,87 @@ Public Class FormResultGraph
             End If
         End If
 
-        If Oncontinue = True Then
-
-            If dtproductiondetail.Rows.Count > 0 Then
-                checkbx_GraphDP.Checked = True
-                checkbx_GraphInletPressure.Checked = True
-                checkbx_GraphOutletPressure.Checked = True
-
-                For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
-                    If Not dtproductiondetail.Rows(0).IsNull(i) Then
-                        resultsummary(i) = dtproductiondetail.Rows(0).Item(i)
-                    Else
-                        resultsummary(i) = String.Empty
-                    End If
-
-                Next
-
-                dt_Graphsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{resultsummary(0)}'ORDER BY ProductResult.sampling_time ASC")
-                'dgv_Graphsummary.DataSource = dt_Graphsummary
-
-                If dt_Graphsummary.Rows.Count > 0 Then
-                    CreateResultGraph()
-
-
-
-                    ResultChart.ChartAreas(0).Axes(0).MajorGrid.Enabled = False  'To Disable the Grid line in the X Axis
-                    ResultChart.ChartAreas(0).Axes(1).MajorGrid.Enabled = False  'To Disable the Grid line in the Y Axis
-                    ResultChart.DataSource = Nothing
-                    ResultChart.DataSource = dt_Graphsummary
-                Else
-                    checkbx_GraphDP.Checked = False
-                    checkbx_GraphInletPressure.Checked = False
-                    checkbx_GraphOutletPressure.Checked = False
-                    ResultMessage(6)
-                    Oncontinue = False
-                End If
-            Else
-                ResultMessage(6)
-                Oncontinue = False
-
-            End If
-
-        End If
 
 
         If Oncontinue = True Then
-            txtbx_GraphTimestamp.Text = resultsummary(5)
-            txtbx_GraphTemperature.Text = resultsummary(6)
-            txtbx_GraphFlowrate.Text = resultsummary(7)
-            txtbx_GraphInletPressure.Text = resultsummary(8)
-            txtbx_GraphOutletPressure.Text = resultsummary(9)
-            txtbx_GraphDiffPressure.Text = resultsummary(11)
-            txtbx_GraphTest.Text = resultsummary(13).ToUpper
-
-            txtbx_GraphCalOffset.Text = resultsummary(24)
-            txtbx_GraphRecipeID.Text = resultsummary(31)
-            txtbx_Graphflush1.Text = resultsummary(39).ToUpper
-            txtbx_GraphDPTest1.Text = resultsummary(47).ToUpper
-            txtbx_GraphDPTest2.Text = resultsummary(58).ToUpper
-            txtbx_Graphflush2.Text = resultsummary(59).ToUpper
-            txtbx_GraphDrain1.Text = resultsummary(67).ToUpper
-            txtbx_GraphDrain2.Text = resultsummary(70).ToUpper
-            txtbx_GraphDrain3.Text = resultsummary(73).ToUpper
-            txtbx_GraphWorkOrder.Text = resultsummary(77)
-            txtbx_GraphPartID.Text = resultsummary(78)
-            txtbx_GraphConfirmation.Text = resultsummary(79)
-
+            LoadResult(Lotid, serialnum, attempt)
         End If
+
+
+        'Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+        '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+        '            LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
+        '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{Lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+
+
+
+        'If Oncontinue = True Then
+
+        '    If dtproductiondetail.Rows.Count > 0 Then
+        '        checkbx_GraphDP.Checked = True
+        '        checkbx_GraphInletPressure.Checked = True
+        '        checkbx_GraphOutletPressure.Checked = True
+
+        '        For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
+        '            If Not dtproductiondetail.Rows(0).IsNull(i) Then
+        '                resultsummary(i) = dtproductiondetail.Rows(0).Item(i)
+        '            Else
+        '                resultsummary(i) = String.Empty
+        '            End If
+
+        '        Next
+
+        '        dt_Graphsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{resultsummary(0)}'ORDER BY ProductResult.sampling_time ASC")
+        '        'dgv_Graphsummary.DataSource = dt_Graphsummary
+
+        '        If dt_Graphsummary.Rows.Count > 0 Then
+        '            CreateResultGraph()
+
+
+
+        '            ResultChart.ChartAreas(0).Axes(0).MajorGrid.Enabled = False  'To Disable the Grid line in the X Axis
+        '            ResultChart.ChartAreas(0).Axes(1).MajorGrid.Enabled = False  'To Disable the Grid line in the Y Axis
+        '            ResultChart.DataSource = Nothing
+        '            ResultChart.DataSource = dt_Graphsummary
+        '        Else
+        '            checkbx_GraphDP.Checked = False
+        '            checkbx_GraphInletPressure.Checked = False
+        '            checkbx_GraphOutletPressure.Checked = False
+        '            ResultMessage(6)
+        '            Oncontinue = False
+        '        End If
+        '    Else
+        '        ResultMessage(6)
+        '        Oncontinue = False
+
+        '    End If
+
+        'End If
+
+
+        'If Oncontinue = True Then
+        '    txtbx_GraphTimestamp.Text = resultsummary(5)
+        '    txtbx_GraphTemperature.Text = resultsummary(6)
+        '    txtbx_GraphFlowrate.Text = resultsummary(7)
+        '    txtbx_GraphInletPressure.Text = resultsummary(8)
+        '    txtbx_GraphOutletPressure.Text = resultsummary(9)
+        '    txtbx_GraphDiffPressure.Text = resultsummary(11)
+        '    txtbx_GraphTest.Text = resultsummary(13).ToUpper
+
+        '    txtbx_GraphCalOffset.Text = resultsummary(24)
+        '    txtbx_GraphRecipeID.Text = resultsummary(31)
+        '    txtbx_Graphflush1.Text = resultsummary(39).ToUpper
+        '    txtbx_GraphDPTest1.Text = resultsummary(47).ToUpper
+        '    txtbx_GraphDPTest2.Text = resultsummary(58).ToUpper
+        '    txtbx_Graphflush2.Text = resultsummary(59).ToUpper
+        '    txtbx_GraphDrain1.Text = resultsummary(67).ToUpper
+        '    txtbx_GraphDrain2.Text = resultsummary(70).ToUpper
+        '    txtbx_GraphDrain3.Text = resultsummary(73).ToUpper
+        '    txtbx_GraphWorkOrder.Text = resultsummary(77)
+        '    txtbx_GraphPartID.Text = resultsummary(78)
+        '    txtbx_GraphConfirmation.Text = resultsummary(79)
+
+        'End If
 
 
     End Sub
@@ -509,9 +535,10 @@ Public Class FormResultGraph
     Private Sub txtbx_GraphTest_TextChanged(sender As Object, e As EventArgs) Handles txtbx_GraphTest.TextChanged
         If txtbx_GraphTest.Text = "PASS" Then
             txtbx_GraphTest.BackColor = Color.FromArgb(192, 255, 192)
-
+            txtbx_GraphTest.ForeColor = SystemColors.ControlText
         Else
-            txtbx_GraphTest.BackColor = SystemColors.Window
+            txtbx_GraphTest.BackColor = Color.Red
+            txtbx_GraphTest.ForeColor = SystemColors.Window
         End If
     End Sub
 
@@ -586,6 +613,90 @@ Public Class FormResultGraph
 
 
 #End Region
+
+#Region "Result Load"
+    Private Sub LoadResult(lotid As String, serialnum As String, attempt As String)
+        Dim Oncontinue As Boolean = True
+        Dim resultsummary(90) As String
+        Dim dt_Graphsummary As DataTable
+        Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+                    LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+                    LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
+                    LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+
+        If Oncontinue = True Then
+            If dtproductiondetail.Rows.Count > 0 Then
+                checkbx_GraphDP.Checked = True
+                checkbx_GraphInletPressure.Checked = True
+                checkbx_GraphOutletPressure.Checked = True
+
+                For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
+                    If Not dtproductiondetail.Rows(0).IsNull(i) Then
+                        resultsummary(i) = dtproductiondetail.Rows(0).Item(i)
+                    Else
+                        resultsummary(i) = String.Empty
+                    End If
+
+                Next
+
+                dt_Graphsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{resultsummary(0)}'ORDER BY ProductResult.sampling_time ASC")
+                'dgv_Graphsummary.DataSource = dt_Graphsummary
+
+                If dt_Graphsummary.Rows.Count > 0 Then
+                    CreateResultGraph()
+
+
+
+                    ResultChart.ChartAreas(0).Axes(0).MajorGrid.Enabled = False  'To Disable the Grid line in the X Axis
+                    ResultChart.ChartAreas(0).Axes(1).MajorGrid.Enabled = False  'To Disable the Grid line in the Y Axis
+                    ResultChart.DataSource = Nothing
+                    ResultChart.DataSource = dt_Graphsummary
+                Else
+                    checkbx_GraphDP.Checked = False
+                    checkbx_GraphInletPressure.Checked = False
+                    checkbx_GraphOutletPressure.Checked = False
+                    ResultMessage(6)
+                    Oncontinue = False
+                End If
+            Else
+                ResultMessage(6)
+                Oncontinue = False
+            End If
+        End If
+
+
+
+
+        If Oncontinue = True Then
+            txtbx_GraphTimestamp.Text = resultsummary(5)
+            txtbx_GraphTemperature.Text = resultsummary(6)
+            txtbx_GraphFlowrate.Text = resultsummary(7)
+            txtbx_GraphInletPressure.Text = resultsummary(8)
+            txtbx_GraphOutletPressure.Text = resultsummary(9)
+            txtbx_GraphDiffPressure.Text = resultsummary(11)
+            txtbx_GraphTest.Text = resultsummary(13).ToUpper
+
+            txtbx_GraphCalOffset.Text = resultsummary(24)
+            txtbx_GraphRecipeID.Text = resultsummary(31)
+            txtbx_Graphflush1.Text = resultsummary(39).ToUpper
+            txtbx_GraphDPTest1.Text = resultsummary(47).ToUpper
+            txtbx_GraphDPTest2.Text = resultsummary(58).ToUpper
+            txtbx_Graphflush2.Text = resultsummary(59).ToUpper
+            txtbx_GraphDrain1.Text = resultsummary(67).ToUpper
+            txtbx_GraphDrain2.Text = resultsummary(70).ToUpper
+            txtbx_GraphDrain3.Text = resultsummary(73).ToUpper
+            txtbx_GraphWorkOrder.Text = resultsummary(77)
+            txtbx_GraphPartID.Text = resultsummary(78)
+            txtbx_GraphConfirmation.Text = resultsummary(79)
+            txtbx_GraphSerialUID.Text = resultsummary(1)
+            txtbx_Graphattempt.Text = resultsummary(3)
+        End If
+    End Sub
+#End Region
+
+
+
+
 
     Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
         FormPixel.Show()
