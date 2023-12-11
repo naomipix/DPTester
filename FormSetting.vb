@@ -503,7 +503,10 @@ Public Class FormSetting
                     End If
 
                 Next
-                MsgBox("Changes Updated Sucessfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
+                MsgBox("Changes Updated Sucessfully.Kindly restart the application to make changes effective. ", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
+
+
+
             Else
                 MsgBox($"Invalid Path ""{directoryInvalid}""", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             End If

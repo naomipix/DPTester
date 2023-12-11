@@ -2569,7 +2569,7 @@ Module ModuleOmron
             T2 = result_finaltemperature * result_finaltemperature
             exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
             Viscosity = A * exp
-            result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - FormCalibration.Cal_finaloffset
+            result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet) ) - FormCalibration.Cal_finaloffset
 
         End If
         FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)

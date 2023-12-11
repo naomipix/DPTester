@@ -736,3 +736,12 @@ C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPT
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormCircuitModel1.resources
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormCircuitModel2.resources
 C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\obj\Debug\DPTesterApp.FormPixel.resources
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\DocumentFormat.OpenXml.Framework.xml
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\Spire.Pdf.dll
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\Spire.XLS.dll
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\Microsoft.mshtml.dll
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\Spire.Pdf.xml
+C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\Spire.XLS.xml

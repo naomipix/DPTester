@@ -418,7 +418,7 @@ Public Class FormMain
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         PublicVariables.IsExitPromptShown = True
         If Not MsgBox("Are you sure you want to Exit?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo Or MsgBoxStyle.DefaultButton2, "Exit Application") = MsgBoxResult.Yes Then
-            mySerialPort1.Close()
+            'mySerialPort1.Close()
             e.Cancel = True
             PublicVariables.IsExitPromptShown = False
         Else
@@ -1902,6 +1902,7 @@ Public Class FormMain
 
         If tabctrl_SubAlarm.SelectedTab Is tabpg_AlarmHistory Then
             dgvClearSelection(dgv_AlarmHistory)
+            LoadAlarmHistoryTable(False, Nothing, Nothing, Nothing)
         End If
     End Sub
 
@@ -3142,10 +3143,46 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
 
     Public Sub Endlot()
+
         Dim OnContinue As Boolean = True
         Dim dtlotrecord As DataTable = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id = '{txtbx_LotID.Text}'")
 
 
+
+        'Generate csv for the lot id
+        If OnContinue = True Then
+            Dim dtlotreport As DataTable = SQL.ReadRecords($"SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY serial_uid ORDER BY serial_attempt DESC) AS ROW FROM ProductionDetail WHERE serial_uid LIKE 'SG23000011%') AS tbl WHERE ROW = 1")
+            If dtlotreport.Rows.Count > 0 Then
+                ' Get Path
+                If OnContinue = True Then
+                    Dim reportresult As String = GenerateLotReport(dtlotreport)
+                    If reportresult = "True" Then
+                        OnContinue = True
+                    Else
+                        MsgBox("Unable To Export Report File, Please Try Again.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Failed")
+                        OnContinue = False
+                    End If
+                End If
+
+
+                Dim ExportPath As String = PublicVariables.CSVPathToProductionDetails 'dtGetPath(0)("retained_value")
+
+                ' Export With Return
+                Dim ReturnValue As String = ExportDataTableToCsv(dtlotreport, ExportPath & $"LotDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv", vbTab)
+
+                ' Check Return State
+                If ReturnValue = "True" Then
+                    'MsgBox("CSV File Exported Successfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Export - Success")
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Lot Details] CSV Export Success ""{ExportPath}LotDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv""")
+                ElseIf ReturnValue = "Missing" Then
+                    MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
+                    OnContinue = False
+                ElseIf ReturnValue = "False" Then
+                    MsgBox("Unable To Export CSV File, Please Try Again.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Failed")
+                    OnContinue = False
+                End If
+            End If
+        End If
 
 
 
@@ -3164,9 +3201,16 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                 Lotendsuccess = False
                 'MainMessage(10)
                 OnContinue = False
-                End If
+            End If
 
         End If
+
+
+
+
+
+
+
 
         'Update Retained Memory record 
 
@@ -3293,6 +3337,8 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                 OnContinue = False
             End If
         End If
+
+
 
 
 
@@ -3518,12 +3564,4 @@ End Class
 
 
 
-'Dim dt As DataTable = SQL.ReadRecords("SELECT id, serial_uid FROM ProductionDetail")
 
-'For Each row As DataRow In dt.Rows
-
-'    Dim updateParameters As New Dictionary(Of String, Object) From {
-'        {"serial_number", CStr(row.Item("serial_uid")).Substring(CStr(row.Item("serial_uid")).Length - 3)}
-'    }
-'    SQL.UpdateRecord("ProductionDetail", updateParameters, $"id='{row.Item("id")}'")
-'Next
