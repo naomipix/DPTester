@@ -21,6 +21,9 @@ Public Class FormUserRegister
         ' Initialize Text Box
         txtbox_RegPassword.Text = ""
         txtbox_RegUserName.Text = ""
+        txtbox_RegPassword.PasswordChar = "*"
+        btn_RegPwdVisible.BackColor = Color.FromArgb(25, 130, 246)
+
 
         ' Load Category List
         GetUserCategory()

@@ -46,6 +46,8 @@ Public Class FormSetting
         For Each dgv As DataGridView In dgvArr
             DoubleBuffer.DoubleBuffered(dgv, True)
         Next
+
+        dtbuyoffmessage = New DataTable
         dtbuyoffmessage.Columns.Add("id")
         dtbuyoffmessage.Columns.Add("no")
         dtbuyoffmessage.Columns.Add("user_name")
@@ -444,7 +446,7 @@ Public Class FormSetting
             }
 
             For Each txtbx As TextBox In txtbxArr
-                If txtbx Is {TextBox2, TextBox3, TextBox4, TextBox5} Then
+                If (txtbx Is TextBox2) Or (txtbx Is TextBox3) Or (txtbx Is TextBox4) Or (txtbx Is TextBox5) Then
                     If Not Directory.Exists(txtbx.Text) Then
                         directoryExists = False
                         directoryInvalid = txtbx.Text
@@ -500,8 +502,8 @@ Public Class FormSetting
                         EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] CSV Settings - Result Summary Delimiter set to {txtbx.Text} from {tempValue}")
                     End If
 
-                    MsgBox("Changes Updated Sucessfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
                 Next
+                MsgBox("Changes Updated Sucessfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
             Else
                 MsgBox($"Invalid Path ""{directoryInvalid}""", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             End If
