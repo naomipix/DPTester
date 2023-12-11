@@ -9,6 +9,8 @@ Public Class FormUserLogin
         ' Initialize Defaults
         txtbox_LogUserName.Text = ""
         txtbox_LogPassword.Text = ""
+        txtbox_LogPassword.PasswordChar = "*"
+        btn_LogPwdVisible.BackColor = Color.FromArgb(25, 130, 246)
     End Sub
 
     Private Sub UserLogin_Shown(sender As Object, e As EventArgs) Handles Me.Shown

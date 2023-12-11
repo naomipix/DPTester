@@ -2250,7 +2250,7 @@ Public Class FormMain
         PartID = FormRecipeManagement.Formatstring(txtbx_PartID.Text)
         ConfirmationID = FormRecipeManagement.Formatstring(txtbx_ConfirmationID.Text)
         Quantity = FormRecipeManagement.Formatstring(txtbx_Quantity.Text)
-        lotquantity = CType(Quantity, Integer)
+
         PCStatus(0)(10) = False
         Lotendsuccess = False
         'Empty box check
@@ -2286,6 +2286,8 @@ Public Class FormMain
             If Quantity.Length = 0 Then
                 MainMessage(1, "Quantity")
                 OnContinue = False
+            Else
+                lotquantity = CType(Quantity, Integer)
             End If
         End If
 

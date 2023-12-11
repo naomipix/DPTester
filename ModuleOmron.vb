@@ -1587,20 +1587,21 @@ Module ModuleOmron
 #Region "Auto Mode restrictions"
 
             If PLCstatus(0)(3) = True Then
+
                 FormMain.btn_RecipeManagement.Enabled = False
                 FormMain.btn_RecipeManagement.BackColor = SystemColors.ControlDark
-                If MainMenu_BtnCalibrate = True Then
-                    FormMain.btn_Calibration.Enabled = True
-                    FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
-                End If
-                If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
-                    FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
-                Else
-                    FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
-                End If
+                    If MainMenu_BtnCalibrate = True Then
+                        FormMain.btn_Calibration.Enabled = True
+                        FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
+                    End If
+                    If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+                        FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+                    Else
+                        FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+                    End If
 
-            Else
-                If MainMenu_BtnRecipe = True Then
+                Else
+                    If MainMenu_BtnRecipe = True Then
                     FormMain.btn_RecipeManagement.Enabled = True
                     FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
                 End If
