@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DPTesterApp.exe" size="26837976">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DPTesterApp.exe" size="26834904">
       <assemblyIdentity name="DPTesterApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>WOAsvkyp2b6QZTB/51OiaebO7Uc9BFu3oGK3sMSTlqU=</dsig:DigestValue>
+        <dsig:DigestValue>vqU+cCC+NZoEqax3urpoaDcTs2WDCxFEGJtEL3bisl0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

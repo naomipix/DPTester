@@ -11,12 +11,12 @@
         If btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
 
             SetButtonState(btn_MVCShowcircuit, True, "Hide Circuit Path")
-            Circuittimer.Interval = 200
-            Circuittimer.Enabled = True
+            'Circuittimer.Interval = 200
+            'Circuittimer.Enabled = True
 
         Else
             SetButtonState(btn_MVCShowcircuit, False, "Show Circuit Path")
-            Circuittimer.Enabled = False
+            'Circuittimer.Enabled = False
 
         End If
     End Sub

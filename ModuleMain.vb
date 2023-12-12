@@ -1371,5 +1371,11 @@ Namespace LiveGraph
                 graphPlottingTimer.Enabled = False
             End If
         End Sub
+
+
+
+
+
+
     End Module
 End Namespace

@@ -28,7 +28,7 @@ Module FormMainModule
     Public lotquantity As Integer
     Public Processedquantity As Integer
     Public Remainingquantity As Integer
-
+    Public Circuitshown(3) As Boolean
 
 
 
@@ -65,9 +65,11 @@ Module FormMainModule
 
                     Else
                         FormMain.LoadMainRecipeCombo()
-                        FormMain.btn_RecipeSelectionConfirm.Enabled = True
+
                         FormMain.cmbx_RecipeType.Enabled = True
                         FormMain.cmbx_RecipeID.Enabled = True
+                        FormMain.btn_RecipeSelectionConfirm.Enabled = False
+
 
                     End If
                 Else
@@ -198,21 +200,58 @@ Public Class FormMain
 
 
 
-        ModuleCircuitModel.InitialiseCircuit()
+        'ModuleCircuitModel.InitialiseCircuit()
         'PLC Impicit Cyclic Messaging via Ethernet IP
         FINSInitialise()
 
+        Dim overviewform As New FormCircuitModel2()
+        'overviewform.TopLevel = True
+        While Panel_Overview.Controls.Count > 0
+            Panel_Overview.Controls(0).Dispose()
+        End While
+        overviewform.TopLevel = False
+        Panel_Overview.Controls.Add(overviewform)
+        overviewform.Show()
 
+        Dim ManualValveForm As New FormCircuitModel2()
 
-        FormCircuitModel2.TopLevel = False
         While panel_ManualValve_Circuit.Controls.Count > 0
             panel_ManualValve_Circuit.Controls(0).Dispose()
         End While
+        ManualValveForm.TopLevel = False
+        panel_ManualValve_Circuit.Controls.Add(ManualValveForm)
+        ManualValveForm.Show()
 
-        panel_ManualValve_Circuit.Controls.Add(FormCircuitModel2)
-        FormCircuitModel2.Show()
-        CircuitShown(0) = True
+        Dim MaintenForm As New FormCircuitModel2()
 
+        While Panel_Mainten_Circuit.Controls.Count > 0
+            Panel_Mainten_Circuit.Controls(0).Dispose()
+        End While
+        MaintenForm.TopLevel = False
+        Panel_Mainten_Circuit.Controls.Add(MaintenForm)
+        MaintenForm.Show()
+
+
+        Dim ManualDrainForm As New FormCircuitModel2()
+        ManualDrainForm.TopLevel = False
+        While Panel_ManualDrain_Circuit.Controls.Count > 0
+            Panel_ManualDrain_Circuit.Controls(0).Dispose()
+        End While
+
+        Panel_ManualDrain_Circuit.Controls.Add(ManualDrainForm)
+        ManualDrainForm.Show()
+
+        'FormCircuitModel2.TopLevel = False
+        'While panel_ManualValve_Circuit.Controls.Count > 0
+        '    panel_ManualValve_Circuit.Controls(0).Dispose()
+        'End While
+        'FormCircuitModel2.Dock = DockStyle.None
+        'panel_ManualValve_Circuit.Controls.Add(FormCircuitModel2)
+        'FormCircuitModel2.Show()
+        'CircuitShown(0) = True
+        'CircuitShown(1) = False
+        'CircuitShown(2) = False
+        'CircuitShown(3) = False
 
         'Top Status Bar
         lbl_OperationMode.Text = "No Status"
@@ -749,22 +788,10 @@ Public Class FormMain
         If tabctrl_MainCtrl.SelectedTab Is tabpg_ManualCtrl Then
             ' Focus First Tab Page
             tabctrl_SubManualCtrl.SelectedTab = tabpg_ManualControlValve
-            If Not CircuitShown(0) = True Then
-                FormCircuitModel2.TopLevel = False
-                While panel_ManualValve_Circuit.Controls.Count > 0
-                    panel_ManualValve_Circuit.Controls(0).Dispose()
-                End While
-
-                panel_ManualValve_Circuit.Controls.Add(FormCircuitModel2)
-                FormCircuitModel2.Show()
-                CircuitShown(0) = True
-                CircuitShown(1) = False
-                CircuitShown(2) = False
-                CircuitShown(3) = False
-            End If
 
 
-            If tabctrl_MainCtrl.SelectedTab Is tabpg_Alarm Then
+        End If
+        If tabctrl_MainCtrl.SelectedTab Is tabpg_Alarm Then
                 ' Focus First Tab Page
                 tabctrl_SubAlarm.SelectedTab = tabpg_AlarmCurrent
                 LoadCurrentalarmtable()
@@ -774,7 +801,7 @@ Public Class FormMain
                 ' Load Alarm History
                 Dim t2 As Task = LoadAlarm()
             End If
-        End If
+
 
     End Sub
 
@@ -799,19 +826,7 @@ Public Class FormMain
         End If
 
         If tabctrl_SubMain.SelectedIndex = 1 Then
-            If Not CircuitShown(3) = True Then
-                FormCircuitModel2.TopLevel = False
-                While Panel_Overview.Controls.Count > 0
-                    Panel_Overview.Controls(0).Dispose()
-                End While
 
-                Panel_Overview.Controls.Add(FormCircuitModel2)
-                FormCircuitModel2.Show()
-                CircuitShown(3) = True
-                CircuitShown(0) = False
-                CircuitShown(1) = False
-                CircuitShown(2) = False
-            End If
 
         End If
     End Sub
@@ -1587,22 +1602,28 @@ Public Class FormMain
 
     Private Sub txtbx_NewLPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_NewLPM.Validating
         Dim newLPM As Decimal
-        newLPM = CType(txtbx_NewLPM.Text, Decimal)
-        If newLPM < 0.1 Or newLPM > 24.9 Then
-            MsgBox("Invalid data, Enter Value between 0.1 to 24.9")
-            txtbx_NewLPM.Text = Nothing
-            txtbx_NewLPM.Focus()
+        If txtbx_NewLPM.MaxLength > 0 Then
+            newLPM = CType(txtbx_NewLPM.Text, Decimal)
+            If newLPM < 0.1 Or newLPM > 24.9 Then
+                MsgBox("Invalid data, Enter Value between 0.1 to 24.9")
+                txtbx_NewLPM.Text = Nothing
+                txtbx_NewLPM.Focus()
+            End If
         End If
+
     End Sub
 
     Private Sub txtbx_NewRPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_NewRPM.Validating
         Dim newRPM As Decimal
-        newRPM = CType(txtbx_NewRPM.Text, Integer)
-        If newRPM < 1 Or newRPM > 3000 Then
-            MsgBox("Invalid data, Enter Value between 1 to 3000")
-            txtbx_NewRPM.Text = Nothing
-            txtbx_NewRPM.Focus()
+        If txtbx_NewRPM.Text.Length > 0 Then
+            newRPM = CType(txtbx_NewRPM.Text, Integer)
+            If newRPM < 1 Or newRPM > 3000 Then
+                MsgBox("Invalid data, Enter Value between 1 to 3000")
+                txtbx_NewRPM.Text = Nothing
+                txtbx_NewRPM.Focus()
+            End If
         End If
+
     End Sub
 
     Private Sub txtbx_NewLPM_GotFocus(sender As Object, e As EventArgs) Handles txtbx_NewLPM.GotFocus
@@ -1646,16 +1667,22 @@ Public Class FormMain
 
     Private Sub btn_UpdateRPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateRPM.Click
         Dim RPMTemp As String = lbl_ReqRPM.Text
-        Float2int(120, CType(txtbx_NewRPM.Text, Decimal))
-        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Pump Speed (RPM) set to {txtbx_NewRPM.Text} from {RPMTemp}")
-        txtbx_NewRPM.Text = Nothing
+        If RPMTemp.Length > 0 Then
+            Float2int(120, CType(txtbx_NewRPM.Text, Decimal))
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Pump Speed (RPM) set to {txtbx_NewRPM.Text} from {RPMTemp}")
+            txtbx_NewRPM.Text = Nothing
+        End If
+
     End Sub
 
     Private Sub btn_UpdateLPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateLPM.Click
         Dim LPMTemp As String = lbl_ReqLPM.Text
-        Float2int(122, CType(txtbx_NewLPM.Text, Decimal))
-        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Flowrate (LPM) set to {txtbx_NewLPM.Text} from {LPMTemp}")
-        txtbx_NewLPM.Text = Nothing
+        If LPMTemp.Length > 0 Then
+            Float2int(122, CType(txtbx_NewLPM.Text, Decimal))
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Flowrate (LPM) set to {txtbx_NewLPM.Text} from {LPMTemp}")
+            txtbx_NewLPM.Text = Nothing
+        End If
+
     End Sub
 
     'Tank Controls
@@ -1693,22 +1720,28 @@ Public Class FormMain
 
     Private Sub txtbx_BackPressRequired_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_BackPressRequired.Validating
         Dim backpressure As Decimal
-        backpressure = CType(txtbx_BackPressRequired.Text, Decimal)
-        If backpressure < 0.0 Or backpressure > 149.9 Then
-            MsgBox("Invalid data, Enter Value between 0.0 to 149.9")
-            txtbx_BackPressRequired.Text = Nothing
-            txtbx_BackPressRequired.Focus()
+        If txtbx_BackPressRequired.Text.Length > 0 Then
+            backpressure = CType(txtbx_BackPressRequired.Text, Decimal)
+            If backpressure < 0.0 Or backpressure > 149.9 Then
+                MsgBox("Invalid data, Enter Value between 0.0 to 149.9")
+                txtbx_BackPressRequired.Text = Nothing
+                txtbx_BackPressRequired.Focus()
+            End If
         End If
+
     End Sub
 
     Private Sub txtbx_N2PurgeRequired_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_N2PurgeRequired.Validating
         Dim N2pressure As Decimal
-        N2pressure = CType(txtbx_N2PurgeRequired.Text, Decimal)
-        If N2pressure < 0.0 Or N2pressure > 149.9 Then
-            MsgBox("Invalid data, Enter Value between 0.0 to 149.9")
-            txtbx_N2PurgeRequired.Text = Nothing
-            txtbx_N2PurgeRequired.Focus()
+        If txtbx_N2PurgeRequired.Text.Length > 0 Then
+            N2pressure = CType(txtbx_N2PurgeRequired.Text, Decimal)
+            If N2pressure < 0.0 Or N2pressure > 149.9 Then
+                MsgBox("Invalid data, Enter Value between 0.0 to 149.9")
+                txtbx_N2PurgeRequired.Text = Nothing
+                txtbx_N2PurgeRequired.Focus()
+            End If
         End If
+
     End Sub
 
     Private Sub txtbx_BackPressRequired_GotFocus(sender As Object, e As EventArgs) Handles txtbx_BackPressRequired.GotFocus
@@ -1755,16 +1788,22 @@ Public Class FormMain
 
     Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_BckPressureUpdate.Click
         Dim BackPressTemp As String = lbl_BackPressCurrent.Text
-        Float2int(124, CType(txtbx_BackPressRequired.Text, Decimal))
-        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of Back Pressure Regulator (kPa) set to {txtbx_BackPressRequired.Text} from {BackPressTemp}")
-        txtbx_BackPressRequired.Text = Nothing
+        If BackPressTemp.Length > 0 Then
+            Float2int(124, CType(txtbx_BackPressRequired.Text, Decimal))
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of Back Pressure Regulator (kPa) set to {txtbx_BackPressRequired.Text} from {BackPressTemp}")
+            txtbx_BackPressRequired.Text = Nothing
+        End If
+
     End Sub
 
     Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_N2PressureUpdate.Click
         Dim N2PurgeTemp As String = lbl_N2PurgeCurrent.Text
-        Float2int(126, CType(txtbx_N2PurgeRequired.Text, Decimal))
-        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of N2 Purge Regulator (kPa) set to {txtbx_N2PurgeRequired.Text} from {N2PurgeTemp}")
-        txtbx_N2PurgeRequired.Text = Nothing
+        If N2PurgeTemp.Length > 0 Then
+            Float2int(126, CType(txtbx_N2PurgeRequired.Text, Decimal))
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of N2 Purge Regulator (kPa) set to {txtbx_N2PurgeRequired.Text} from {N2PurgeTemp}")
+            txtbx_N2PurgeRequired.Text = Nothing
+        End If
+
     End Sub
 
     ' Manual Drain
@@ -2997,53 +3036,17 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
     Private Sub tabctrl_SubManualCtrl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_SubManualCtrl.SelectedIndexChanged
         If tabctrl_SubManualCtrl.SelectedIndex = 0 Then
 
-            If Not CircuitShown(0) = True Then
-                FormCircuitModel2.TopLevel = False
-                While panel_ManualValve_Circuit.Controls.Count > 0
-                    panel_ManualValve_Circuit.Controls(0).Dispose()
-                End While
 
-                panel_ManualValve_Circuit.Controls.Add(FormCircuitModel2)
-                FormCircuitModel2.Show()
-                CircuitShown(0) = True
-                CircuitShown(1) = False
-                CircuitShown(2) = False
-                CircuitShown(3) = False
-            End If
 
         End If
 
         If tabctrl_SubManualCtrl.SelectedIndex = 3 Then
-            If Not CircuitShown(1) = True Then
-                FormCircuitModel2.TopLevel = False
-                While Panel_ManualDrain_Circuit.Controls.Count > 0
-                    Panel_ManualDrain_Circuit.Controls(0).Dispose()
-                End While
 
-                Panel_ManualDrain_Circuit.Controls.Add(FormCircuitModel2)
-                FormCircuitModel2.Show()
-                CircuitShown(1) = True
-                CircuitShown(0) = False
-                CircuitShown(2) = False
-                CircuitShown(3) = False
-            End If
 
         End If
 
         If tabctrl_SubManualCtrl.SelectedIndex = 4 Then
-            If Not CircuitShown(2) = True Then
-                FormCircuitModel2.TopLevel = False
-                While Panel_Mainten_Circuit.Controls.Count > 0
-                    Panel_Mainten_Circuit.Controls(0).Dispose()
-                End While
 
-                Panel_Mainten_Circuit.Controls.Add(FormCircuitModel2)
-                FormCircuitModel2.Show()
-                CircuitShown(2) = True
-                CircuitShown(3) = False
-                CircuitShown(0) = False
-                CircuitShown(1) = False
-            End If
 
         End If
     End Sub
