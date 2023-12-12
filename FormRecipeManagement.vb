@@ -5429,46 +5429,7 @@ Public Class FormRecipeManagement
         FormPixel.Show()
     End Sub
 
-    Private Sub Recipetimer_Ticks(sender As Object, e As EventArgs) Handles Recipetimer.Tick
 
-        'Flush-1 Parameters
-
-        'DP Test-1
-
-        'Flush-2
-
-
-        'DP Test-2
-
-
-        'Drain-1
-
-
-
-        'Drain-2
-
-
-        'Drain-3
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    End Sub
 
 
 End Class

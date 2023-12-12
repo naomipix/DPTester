@@ -104,6 +104,12 @@ Module ModuleOmron
 
         Next
 
+        For i As Integer = 0 To 2
+
+            PLCstatus(i) = {False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False}
+
+        Next
+
         For i As Integer = 0 To 1
             ToolCounterreset(i) = {False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False}
         Next
@@ -1445,6 +1451,79 @@ Module ModuleOmron
 
     Private Sub PLCTimer_Ticks(sender As Object, e As EventArgs) Handles PLCtimer.Tick
 
+#Region "Auto Mode restrictions"
+
+        If PLCstatus(0)(3) = True Then
+
+            FormMain.btn_RecipeManagement.Enabled = False
+            FormMain.btn_RecipeManagement.BackColor = SystemColors.ControlDark
+            If MainMenu_BtnCalibrate = True Then
+                FormMain.btn_Calibration.Enabled = True
+                FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
+            End If
+            If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+                FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+            Else
+                FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+            End If
+
+        Else
+            If MainMenu_BtnRecipe = True Then
+                FormMain.btn_RecipeManagement.Enabled = True
+                FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
+            End If
+            FormMain.btn_Calibration.Enabled = False
+            FormMain.btn_Calibration.BackColor = SystemColors.ControlDark
+            FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+            FormMain.btn_RecipeSelectionConfirm.Enabled = False
+        End If
+
+#End Region
+
+#Region "Manual Control Page Enable"
+
+        If PLCstatus(0)(2) = True Then
+            FormMain.tabpg_ManualControlValve.Enabled = True
+            FormMain.tabpg_ManualControlPump.Enabled = True
+            FormMain.tabpg_ManualControlTank.Enabled = True
+            FormMain.tabpg_ManualControlDrain.Enabled = True
+            FormMain.tabpg_ManualControlMaintenance.Enabled = True
+        Else
+            FormMain.tabpg_ManualControlValve.Enabled = False
+            FormMain.tabpg_ManualControlPump.Enabled = False
+            FormMain.tabpg_ManualControlTank.Enabled = False
+            FormMain.tabpg_ManualControlDrain.Enabled = False
+            FormMain.tabpg_ManualControlMaintenance.Enabled = False
+        End If
+
+#End Region
+
+#Region "PLC-PC Heartbeat handshake"
+
+        'PLC -PC HeartBeat indication label backcolor control 
+        If PLCstatus(0)(0) = True Then
+            PCStatus(0)(0) = False
+            FormMain.lbl_B0.BackColor = Color.LimeGreen
+            FormMain.lbl_B1.BackColor = SystemColors.Control
+
+        Else
+            PCStatus(0)(0) = True
+            FormMain.lbl_B0.BackColor = SystemColors.Control
+            FormMain.lbl_B1.BackColor = Color.LimeGreen
+
+        End If
+
+#End Region
+
+#Region "HandHeld Scanner"
+
+        If ComPort1Connected = False Then
+            PCStatus(0)(6) = True
+        Else
+            PCStatus(0)(6) = False
+        End If
+
+#End Region
 
         If CommLost = False Then
             FINSInputRead()
@@ -1458,38 +1537,7 @@ Module ModuleOmron
 
             For i As Integer = 0 To 2
                 PLCstatus(i) = Int2BoolArr(FINSinput(i))
-
             Next
-
-
-
-
-#Region "PLC-PC Heartbeat handshake"
-
-            'PLC -PC HeartBeat indication label backcolor control 
-            If PLCstatus(0)(0) = True Then
-                PCStatus(0)(0) = False
-                FormMain.lbl_B0.BackColor = Color.LimeGreen
-                FormMain.lbl_B1.BackColor = SystemColors.Control
-
-            Else
-                PCStatus(0)(0) = True
-                FormMain.lbl_B0.BackColor = SystemColors.Control
-                FormMain.lbl_B1.BackColor = Color.LimeGreen
-
-            End If
-
-#End Region
-
-            If ComPort1Connected = False Then
-                PCStatus(0)(6) = True
-            Else
-                PCStatus(0)(6) = False
-            End If
-
-
-
-
 
 #Region "Pump and tank status update on all page in main form"
             'Manual Pump Control label based on controller feedback
@@ -1584,63 +1632,7 @@ Module ModuleOmron
 #End Region
 
 
-#Region "Auto Mode restrictions"
 
-            If PLCstatus(0)(3) = True Then
-
-                FormMain.btn_RecipeManagement.Enabled = False
-                FormMain.btn_RecipeManagement.BackColor = SystemColors.ControlDark
-                    If MainMenu_BtnCalibrate = True Then
-                        FormMain.btn_Calibration.Enabled = True
-                        FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
-                    End If
-                    If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
-                        FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
-                    Else
-                        FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
-                    End If
-
-                Else
-                    If MainMenu_BtnRecipe = True Then
-                    FormMain.btn_RecipeManagement.Enabled = True
-                    FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
-                End If
-                FormMain.btn_Calibration.Enabled = False
-                FormMain.btn_Calibration.BackColor = SystemColors.ControlDark
-                FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
-            End If
-
-
-
-
-
-
-
-
-
-#End Region
-#Region "Manual Control Page Enable"
-
-            If PLCstatus(0)(2) = True Then
-                FormMain.tabpg_ManualControlValve.Enabled = True
-                FormMain.tabpg_ManualControlPump.Enabled = True
-                FormMain.tabpg_ManualControlTank.Enabled = True
-                FormMain.tabpg_ManualControlDrain.Enabled = True
-                FormMain.tabpg_ManualControlMaintenance.Enabled = True
-            Else
-                FormMain.tabpg_ManualControlValve.Enabled = False
-                FormMain.tabpg_ManualControlPump.Enabled = False
-                FormMain.tabpg_ManualControlTank.Enabled = False
-                FormMain.tabpg_ManualControlDrain.Enabled = False
-                FormMain.tabpg_ManualControlMaintenance.Enabled = False
-            End If
-
-
-
-
-
-
-#End Region
 #Region "Manual Control-Valve Screen Button state update"
             'Manual valve Control Button Color change on Output on
             For i As Integer = 0 To 15
@@ -1796,8 +1788,8 @@ Module ModuleOmron
 
 #End Region
 #Region "Mimic Panel Circuit Model 1"
-            Circuittimer.Interval = 100
-            Circuittimer.Enabled = True
+            'Circuittimer.Interval = 100
+            'Circuittimer.Enabled = True
 
             FormCircuitModel2.txtbx_BackPressActual.Text = AIn(1).ToString
             FormCircuitModel2.txtbx_N2PurgeActual.Text = AIn(0).ToString
@@ -2048,7 +2040,7 @@ Module ModuleOmron
         Resultcapturetimer.Enabled = False
         LabelStatusupdate()
         Alarmtimer.Enabled = True
-        PLCtimer.Enabled = False
+            ' PLCtimer.Enabled = False
         End If
 
 
