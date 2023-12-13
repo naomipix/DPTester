@@ -92,7 +92,7 @@ Module IniFileDefaults
 End Module
 
 Module IniFileInitialize
-    Dim IniFilePath As String = "appconfig.ini"
+    Dim IniFilePath As String = "C:\DPTester\Ini File\appconfig.ini"
 
     Public Sub ReadConfig()
         Try
@@ -136,8 +136,11 @@ Module IniFileInitialize
             End If
 
             Dim Section6 As String = "Export"
-            PublicVariables.Recipeexportpath = IniFileHandler.ReadIniValue(IniFilePath, Section6, "RecipeExportPath", "C:\Users\")
-            PublicVariables.Resultexportpath = IniFileHandler.ReadIniValue(IniFilePath, Section6, "ResultExportPath", "C:\Users\")
+            PublicVariables.DefaultpathToProductionDetails = IniFileHandler.ReadIniValue(IniFilePath, Section6, "ProductionFolder", "C:\Users\")
+            PublicVariables.DefaultpathToAlarmHistory = IniFileHandler.ReadIniValue(IniFilePath, Section6, "AlarmFolder", "C:\Users\")
+            PublicVariables.DefaultpathToRecipeDetails = IniFileHandler.ReadIniValue(IniFilePath, Section6, "RecipeFolder", "C:\Users\")
+            PublicVariables.DefaultpathToResultSummary = IniFileHandler.ReadIniValue(IniFilePath, Section6, "ResultFolder", "C:\Users\")
+
 
         Catch ex As Exception
             MsgBox($"Incorrect Parameters Detected.{vbCrLf}Application Will Now Close.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, $"Configuration Error - {IniFilePath}")

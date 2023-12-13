@@ -65,7 +65,7 @@
         Await Task.Delay(20)
 
         MessageLogFieldReset()
-        LoadMessageLogTable(False, Nothing, Nothing, Nothing)
+        LoadMessageLogTable(False, Nothing, DateTime.Now.AddDays(-1), DateTime.Now)
     End Function
 
 
@@ -89,7 +89,7 @@
         ' Button Reset
         If btnClicked Is btn_Reset Then
             MessageLogFieldReset()
-            LoadMessageLogTable(False, Nothing, Nothing, Nothing)
+            LoadMessageLogTable(False, Nothing, DateTime.Now.AddDays(-1), DateTime.Now)
         End If
 
         ' Button Search
@@ -101,13 +101,14 @@
     ' Populate DataGridView From SQL Tables
     Private Async Sub LoadMessageLogTable(containSearch As Boolean, SearchText As String, dtStart As DateTime, dtEnd As DateTime)
         ' Define SQL String
-        Dim sqlString As String = "
+        'The constant 105 is the datastyle which suits the database datatime format, hence it is used
+        Dim sqlString As String = $"
         SELECT row_number() OVER (ORDER BY MessageLog.trigger_time DESC) AS no,
             MessageLog.id, 
             MessageLog.user_name, 
             MessageLog.trigger_time, 
             MessageLog.event_log 
-        FROM MessageLog 
+        FROM MessageLog WHERE MessageLog.trigger_time Between CONVERT(datetime,'{dtStart}',105) AND CONVERT(datetime,'{dtEnd}',105) 
         ORDER BY MessageLog.trigger_time DESC
         "
 

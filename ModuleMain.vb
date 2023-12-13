@@ -43,6 +43,10 @@ Module PublicVariables
     Public CSVDelimiterAlarmHistory As String = ""
     Public CSVDelimiterRecipeDetails As String = ""
     Public CSVDelimiterResultSummary As String = ""
+    Public DefaultpathToProductionDetails As String = ""
+    Public DefaultpathToAlarmHistory As String = ""
+    Public DefaultpathToRecipeDetails As String = ""
+    Public DefaultpathToResultSummary As String = ""
 
     ' Retained Memory - Lot Details
     Public RetainedPartID As String
@@ -422,6 +426,9 @@ Module CsvExportModule
             Dim directoryPath As String = Path.GetDirectoryName(filePath)
 
             If Not String.IsNullOrEmpty(directoryPath) AndAlso Directory.Exists(directoryPath) Then
+                If File.Exists(filePath) Then
+                    File.Delete(filePath)
+                End If
                 Using writer As New StreamWriter(filePath)
                     ' Write header row
                     writer.WriteLine(String.Join(delimiter, dataTable.Columns.Cast(Of DataColumn).Select(Function(column) column.ColumnName)))
@@ -542,22 +549,40 @@ Namespace RetainedMemory
 
                     ' CSV Path To Production Details
                     If dt(i)("id") = 8 Then
-                        PublicVariables.CSVPathToProductionDetails = dt(i)("retained_value")
+                        If File.Exists(dt(i)("retained_value")) Then
+                            PublicVariables.CSVPathToProductionDetails = dt(i)("retained_value")
+                        Else
+                            PublicVariables.CSVPathToProductionDetails = PublicVariables.DefaultpathToProductionDetails
+                        End If
                     End If
-
                     ' CSV Path To Alarm History
                     If dt(i)("id") = 9 Then
-                        PublicVariables.CSVPathToAlarmHistory = dt(i)("retained_value")
+                        If File.Exists(dt(i)("retained_value")) Then
+                            PublicVariables.CSVPathToAlarmHistory = dt(i)("retained_value")
+                        Else
+                            PublicVariables.CSVPathToAlarmHistory = PublicVariables.DefaultpathToAlarmHistory
+                        End If
+
                     End If
 
                     ' CSV Path To Recipe Details
                     If dt(i)("id") = 10 Then
-                        PublicVariables.CSVPathToRecipeDetails = dt(i)("retained_value")
+                        If File.Exists(dt(i)("retained_value")) Then
+                            PublicVariables.CSVPathToRecipeDetails = dt(i)("retained_value")
+                        Else
+                            PublicVariables.CSVPathToRecipeDetails = PublicVariables.DefaultpathToRecipeDetails
+                        End If
+
                     End If
 
                     ' CSV Path To Result Summary
                     If dt(i)("id") = 11 Then
-                        PublicVariables.CSVPathToResultSummary = dt(i)("retained_value")
+                        If File.Exists(dt(i)("retained_value")) Then
+                            PublicVariables.CSVPathToResultSummary = dt(i)("retained_value")
+                        Else
+                            PublicVariables.CSVPathToResultSummary = PublicVariables.DefaultpathToResultSummary
+                        End If
+
                     End If
 
                     ' Lot Started
@@ -1193,6 +1218,20 @@ Namespace EventLog ' EventLog.EventLogger.Log( ,)
                 {"event_log", eventmsg}
             }
             SQL.InsertRecord("MessageLog", parameters)
+
+            Dim dttodayevent As DataTable = SQL.ReadRecords($"SELECT row_number() OVER (ORDER BY MessageLog.trigger_time DESC) AS no,
+            MessageLog.id, 
+            MessageLog.user_name, 
+            MessageLog.trigger_time, 
+            MessageLog.event_log 
+        FROM MessageLog WHERE MessageLog.trigger_time Between CONVERT(datetime,'{Date.Today}',105) AND CONVERT(datetime,'{Date.Today.AddDays(1)}',105) 
+        ORDER BY MessageLog.trigger_time DESC
+        ")
+            Dim ReturnValue As String = ExportDataTableToCsv(dttodayevent, EventFolder & $"\EventLog_{System.DateTime.Now.ToString("yyyyMMdd")}.csv", vbTab)
+
+
+
+
             If FormSetting.lbl_StartTime.Text.Length > 6 Then
                 FormSetting.dtbuyoffmessage.Rows.Add(FormSetting.dtbuyoffmessage.Rows.Count - 1, FormSetting.dtbuyoffmessage.Rows.Count, user, DateTime.Now, eventmsg)
             End If

@@ -43,7 +43,7 @@ Module ModuleOmron
     Public MainrecordValue As Boolean
     Public MainCycletime As Integer = 0
     Public MainDptestpoints As Integer
-    Public result_samplingtime As Integer
+    Public result_samplingtime As Decimal
     Public result_temperature As Decimal
     Public result_flowrate As Decimal
     Public result_inletpressure As Decimal
@@ -90,13 +90,13 @@ Module ModuleOmron
         dtMainmsg = SQL.ReadRecords("select * from ProcessMessage")
         FINSOutputRead()
 
-        PLCtimer.Interval = 200
+        PLCtimer.Interval = 100
         PLCtimer.Enabled = True
         PCtimer.Interval = 1000
         Alarmtimer.Interval = 1500
 
         Calseqtimer.Interval = 2000
-        Resultcapturetimer.Interval = 1000
+        Resultcapturetimer.Interval = 500
 
         For i As Integer = 0 To 2
 
@@ -2454,7 +2454,7 @@ Module ModuleOmron
             Dim newrw As DataRow = dtresult.NewRow
 
             serialusageid = dtserialrecord.Rows(0)("id")
-            result_samplingtime += 1
+            result_samplingtime += CType((Resultcapturetimer.Interval / 1000), Decimal)
             result_inletpressure = AIn(9)
             result_outletpressure = AIn(10)
             result_flowrate = AIn(12)
@@ -2496,7 +2496,7 @@ Module ModuleOmron
         Dim A As Double = 0.01257187
         Dim B As Double = -0.005806436
         Dim C As Double = 0.001130911
-        Dim D As Double = 0.000005723952
+        Dim D As Double = -0.000005723952
         Dim T2 As Double
         Dim exp As Double
         If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
@@ -2561,7 +2561,7 @@ Module ModuleOmron
             T2 = result_finaltemperature * result_finaltemperature
             exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
             Viscosity = A * exp
-            result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet) ) - FormCalibration.Cal_finaloffset
+            result_finaldp = (((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal))
 
         End If
         FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)
