@@ -85,13 +85,13 @@ Module ModuleSerialComm
             End If
         End If
 
-        If str.Length = 10 And str.Contains("SG") = True Then
+        If str.Length = 10 And Char.IsLetter(str.Substring(0, 1)) = True Then
             If FormMain.txtbx_LotID.Enabled = True Then
                 FormMain.txtbx_LotID.Text = str
             End If
         End If
 
-        If str.Length = 10 And str.Contains("SG") = False Then
+        If str.Length = 10 And Char.IsLetter(str.Substring(0, 1)) = False Then
             If FormMain.txtbx_ConfirmationID.Enabled = True Then
                 FormMain.txtbx_ConfirmationID.Text = str
             End If

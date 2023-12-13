@@ -2,7 +2,7 @@
     Dim CurrentTabPage As TabPage
 
 
-    Public Cal_samplingtime As Integer
+    Public Cal_samplingtime As Decimal
     Public Cal_temperature As Decimal
     Public Cal_flowrate As Decimal
     Public Cal_inletpressure As Decimal
@@ -10,7 +10,7 @@
     Public Cal_dp As Decimal
     Public CalCycletime As Integer
 
-    Public Ver_samplingtime As Integer
+    Public Ver_samplingtime As Decimal
     Public Ver_temperature As Decimal
     Public Ver_flowrate As Decimal
     Public Ver_inletpressure As Decimal
@@ -137,9 +137,9 @@
             CalCycletime = flush1cycletime + flush2cycletime + DPtest1cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime
             Cal_dptestpoints = dtrecipetable.Rows(0)("dp_testpoints")
 
-            dptest1end = CalCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime)
+            dptest1end = CType((CalCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / tmr_Calibration.Interval), Decimal)
             Dptest1start = dptest1end - Cal_dptestpoints
-            dptest2end = CalCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime)
+            dptest2end = CType((CalCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / tmr_Calibration.Interval), Decimal)
             Dptest2start = dptest2end - Cal_dptestpoints
 
 
@@ -243,7 +243,7 @@
 
 
             Dim newrw As DataRow = dtCalibration.NewRow
-            Cal_samplingtime += 1
+            Cal_samplingtime += CType((tmr_Calibration.Interval / 1000), Decimal)
             Cal_inletpressure = AIn(9)
             Cal_outletpressure = AIn(10)
             Cal_flowrate = AIn(12)
@@ -296,7 +296,7 @@
             Dim A As Double = 0.01257187
             Dim B As Double = -0.005806436
             Dim C As Double = 0.001130911
-            Dim D As Double = 0.000005723952
+            Dim D As Double = -0.000005723952
             Dim T2 As Double
             Dim exp As Double
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
@@ -386,7 +386,7 @@
         PCStatus(1)(3) = False
         If CalrecordValue = True And CommLost = False Then
             Dim newrw As DataRow = dtVerification.NewRow
-            Ver_samplingtime += 1
+            Ver_samplingtime += CType((tmr_Verification.Interval / 1000), Decimal)
             Ver_inletpressure = AIn(9)
             Ver_outletpressure = AIn(10)
             Ver_flowrate = AIn(12)
@@ -440,7 +440,7 @@
             Dim A As Double = 0.01257187
             Dim B As Double = -0.005806436
             Dim C As Double = 0.001130911
-            Dim D As Double = 0.000005723952
+            Dim D As Double = -0.000005723952
             Dim T2 As Double
             Dim exp As Double
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
@@ -654,7 +654,13 @@
                 Cal_finalInlet = 0
                 Cal_finalOutlet = 0
                 Cal_finaloffset = 0
-                tmr_Calibration.Interval = 1000
+                Cal_finalflowrate = 0
+                Cal_finaltemperature = 0
+                Cal_avgflowrate1 = 0
+                Cal_avgflowrate2 = 0
+                Cal_avgtemperature1 = 0
+                Cal_avgtemperature2 = 0
+                tmr_Calibration.Interval = 500
                 tmr_Calibration.Enabled = True
             End If
         Else
@@ -688,8 +694,16 @@
                 Ver_avgdp2 = 0
                 Ver_avginlet2 = 0
                 Ver_avgoutlet2 = 0
-
-                tmr_Verification.Interval = 1000
+                Ver_avgflowrate1 = 0
+                Ver_avgflowrate2 = 0
+                Ver_avgtemperature1 = 0
+                Ver_avgtemperature2 = 0
+                Ver_finalinlet = 0
+                Ver_finaloutlet = 0
+                Ver_finaldp = 0
+                Ver_finalflowrate = 0
+                Ver_finaltemperature = 0
+                tmr_Verification.Interval = 500
                 tmr_Verification.Enabled = True
             End If
         Else
