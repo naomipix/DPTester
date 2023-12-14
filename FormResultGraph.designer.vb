@@ -45,6 +45,10 @@ Partial Class FormResultGraph
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.dsp_Graphattempt = New System.Windows.Forms.Label()
+        Me.txtbx_Graphattempt = New System.Windows.Forms.TextBox()
+        Me.dsp_GraphSerialUID = New System.Windows.Forms.Label()
+        Me.txtbx_GraphSerialUID = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.cmbx_GraphSearchSerial = New System.Windows.Forms.ComboBox()
         Me.dsp_GraphSearchSerial = New System.Windows.Forms.Label()
@@ -102,10 +106,6 @@ Partial Class FormResultGraph
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dsp_Graphattempt = New System.Windows.Forms.Label()
-        Me.txtbx_Graphattempt = New System.Windows.Forms.TextBox()
-        Me.dsp_GraphSerialUID = New System.Windows.Forms.Label()
-        Me.txtbx_GraphSerialUID = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -298,6 +298,50 @@ Partial Class FormResultGraph
         Me.Panel2.Size = New System.Drawing.Size(564, 802)
         Me.Panel2.TabIndex = 1
         '
+        'dsp_Graphattempt
+        '
+        Me.dsp_Graphattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_Graphattempt.Location = New System.Drawing.Point(345, 234)
+        Me.dsp_Graphattempt.Name = "dsp_Graphattempt"
+        Me.dsp_Graphattempt.Size = New System.Drawing.Size(90, 35)
+        Me.dsp_Graphattempt.TabIndex = 61
+        Me.dsp_Graphattempt.Text = "Attempt No :"
+        Me.dsp_Graphattempt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_Graphattempt
+        '
+        Me.txtbx_Graphattempt.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_Graphattempt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_Graphattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_Graphattempt.Location = New System.Drawing.Point(441, 239)
+        Me.txtbx_Graphattempt.Name = "txtbx_Graphattempt"
+        Me.txtbx_Graphattempt.ReadOnly = True
+        Me.txtbx_Graphattempt.Size = New System.Drawing.Size(80, 25)
+        Me.txtbx_Graphattempt.TabIndex = 62
+        Me.txtbx_Graphattempt.TabStop = False
+        '
+        'dsp_GraphSerialUID
+        '
+        Me.dsp_GraphSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_GraphSerialUID.Location = New System.Drawing.Point(19, 234)
+        Me.dsp_GraphSerialUID.Name = "dsp_GraphSerialUID"
+        Me.dsp_GraphSerialUID.Size = New System.Drawing.Size(100, 35)
+        Me.dsp_GraphSerialUID.TabIndex = 59
+        Me.dsp_GraphSerialUID.Text = "Serial UID :"
+        Me.dsp_GraphSerialUID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_GraphSerialUID
+        '
+        Me.txtbx_GraphSerialUID.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_GraphSerialUID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_GraphSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_GraphSerialUID.Location = New System.Drawing.Point(131, 239)
+        Me.txtbx_GraphSerialUID.Name = "txtbx_GraphSerialUID"
+        Me.txtbx_GraphSerialUID.ReadOnly = True
+        Me.txtbx_GraphSerialUID.Size = New System.Drawing.Size(200, 25)
+        Me.txtbx_GraphSerialUID.TabIndex = 60
+        Me.txtbx_GraphSerialUID.TabStop = False
+        '
         'Panel4
         '
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -336,7 +380,8 @@ Partial Class FormResultGraph
         '
         'cmbx_GraphSearchLot
         '
-        Me.cmbx_GraphSearchLot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbx_GraphSearchLot.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cmbx_GraphSearchLot.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbx_GraphSearchLot.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_GraphSearchLot.FormattingEnabled = True
         Me.cmbx_GraphSearchLot.Location = New System.Drawing.Point(223, 17)
@@ -982,50 +1027,6 @@ Partial Class FormResultGraph
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Result Graph"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'dsp_Graphattempt
-        '
-        Me.dsp_Graphattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Graphattempt.Location = New System.Drawing.Point(345, 234)
-        Me.dsp_Graphattempt.Name = "dsp_Graphattempt"
-        Me.dsp_Graphattempt.Size = New System.Drawing.Size(90, 35)
-        Me.dsp_Graphattempt.TabIndex = 61
-        Me.dsp_Graphattempt.Text = "Attempt No :"
-        Me.dsp_Graphattempt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_Graphattempt
-        '
-        Me.txtbx_Graphattempt.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_Graphattempt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_Graphattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_Graphattempt.Location = New System.Drawing.Point(441, 239)
-        Me.txtbx_Graphattempt.Name = "txtbx_Graphattempt"
-        Me.txtbx_Graphattempt.ReadOnly = True
-        Me.txtbx_Graphattempt.Size = New System.Drawing.Size(80, 25)
-        Me.txtbx_Graphattempt.TabIndex = 62
-        Me.txtbx_Graphattempt.TabStop = False
-        '
-        'dsp_GraphSerialUID
-        '
-        Me.dsp_GraphSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphSerialUID.Location = New System.Drawing.Point(19, 234)
-        Me.dsp_GraphSerialUID.Name = "dsp_GraphSerialUID"
-        Me.dsp_GraphSerialUID.Size = New System.Drawing.Size(100, 35)
-        Me.dsp_GraphSerialUID.TabIndex = 59
-        Me.dsp_GraphSerialUID.Text = "Serial UID :"
-        Me.dsp_GraphSerialUID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_GraphSerialUID
-        '
-        Me.txtbx_GraphSerialUID.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_GraphSerialUID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_GraphSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphSerialUID.Location = New System.Drawing.Point(131, 239)
-        Me.txtbx_GraphSerialUID.Name = "txtbx_GraphSerialUID"
-        Me.txtbx_GraphSerialUID.ReadOnly = True
-        Me.txtbx_GraphSerialUID.Size = New System.Drawing.Size(200, 25)
-        Me.txtbx_GraphSerialUID.TabIndex = 60
-        Me.txtbx_GraphSerialUID.TabStop = False
         '
         'FormResultGraph
         '

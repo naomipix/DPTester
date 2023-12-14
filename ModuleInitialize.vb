@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports DocumentFormat.OpenXml.Packaging
 
 Module ModuleInitialize
     Public iniFolderLocation As String = "C:\DPTester\Ini File"
@@ -10,6 +11,8 @@ Module ModuleInitialize
     Public EventFolder As String = "C:\DPTester\Event Log\Export"
     Public LotreportFolder As String = "C:\DPTester\LotEnd Report"
     Public TemplateFolder As String = "C:\DPTester\Template"
+    Public TemplateFile As String = Environment.CurrentDirectory & "\EndLotReportTemplate.xlsx"
+    Public CdriveTemplate As String = "C:\DPTester\Template\EndLotReportTemplate.xlsx"
 
     Public Sub CreateFolders()
         Try
@@ -59,6 +62,9 @@ Module ModuleInitialize
                 Directory.CreateDirectory(TemplateFolder)
             End If
 
+            If Not File.Exists(CdriveTemplate) Then
+                MoveFile()
+            End If
 
 
         Catch ex As Exception
@@ -113,5 +119,20 @@ Module ModuleInitialize
         End Try
 
     End Sub
+
+    Public Sub MoveFile()
+        Try
+
+            If System.IO.File.Exists(TemplateFile) Then
+
+                File.Copy(TemplateFile, "C:\DPTester\Template\EndLotReportTemplate.xlsx", True)
+
+            End If
+        Catch ex As Exception
+            MsgBox(ex)
+        End Try
+
+    End Sub
+
 
 End Module

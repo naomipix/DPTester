@@ -317,6 +317,8 @@ Public Class FormRecipeManagement
                 Return MsgBox("Failed to Load Duplicate Recipe for Edit ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 52
                 Return MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
+            Case 53
+                Return MsgBox($"{field}", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case Else
                 Exit Select
         End Select
@@ -2569,6 +2571,32 @@ Public Class FormRecipeManagement
             End If
         End If
 
+        If onContinue = True Then
+            If checkbx_CreateFlush1.Checked = True Then
+                If Not (i_flush1time > 0 And d_flush1flow > 0 And d_flush1pressure > 0) Then
+                    RecipeMessage(53, "If Flush-1 Enabled, then Flush-1 Time, Flush-1 FLowrate and Flush-1 BackPressure Cannot be Zero")
+                    onContinue = False
+                End If
+            End If
+        End If
+
+        If onContinue = True Then
+            If checkbx_CreateDPTest1.Checked = True Then
+                If Not (i_dptesttime > 0 And i_dptestpoints > 0 And d_dptestflow > 0 And d_dptestpressure > 0) Then
+                    RecipeMessage(53, "If DP Test Enabled, then DPTest Time, DPTest Points, DPTest FLowrate and DPTest BackPressure Cannot be Zero")
+                    onContinue = False
+                End If
+            End If
+        End If
+
+        If onContinue = True Then
+            If checkbx_CreateFlush2.Checked = True Then
+                If Not (i_flush2time > 0 And d_flush2flow > 0 And d_flush2pressure > 0) Then
+                    RecipeMessage(53, "If Flush-2 Enabled, then Flush-2 Time, Flush-2 FLowrate and Flush-2 BackPressure Cannot be Zero")
+                    onContinue = False
+                End If
+            End If
+        End If
 
 
         'Check whether Test points is greater than Test time
@@ -4418,6 +4446,9 @@ Public Class FormRecipeManagement
                 d_flush1pressure = 0.0
                 i_flush1stabilize = 0
                 i_flush1time = 0
+            ElseIf Not (i_flush1time > 0 And d_flush1flow > 0 And d_flush1pressure > 0) Then
+                RecipeMessage(53, "If Flush-1 Enabled, then Flush-1 Time, Flush-1 FLowrate and Flush-1 BackPressure Cannot be Zero")
+                onContinue = False
             End If
         End If
 
@@ -4433,6 +4464,9 @@ Public Class FormRecipeManagement
                 d_dptestlowlimit = 0.0
                 d_dptestuplimit = 0.0
                 i_dptestpoints = 0
+            ElseIf Not (i_dptesttime > 0 And i_dptestpoints > 0 And d_dptestflow > 0 And d_dptestpressure > 0) Then
+                RecipeMessage(53, "If DP Test Enabled, then DPTest Time, DPTest Points, DPTest FLowrate and DPTest BackPressure Cannot be Zero")
+                onContinue = False
             End If
         End If
 
@@ -4445,6 +4479,9 @@ Public Class FormRecipeManagement
                 d_flush2pressure = 0.0
                 i_flush2stabilize = 0
                 i_flush2time = 0
+            ElseIf Not (i_flush2time > 0 And d_flush2flow > 0 And d_flush2pressure > 0) Then
+                RecipeMessage(53, "If Flush-2 Enabled, then Flush-2 Time, Flush-2 FLowrate and Flush-2 BackPressure Cannot be Zero")
+                onContinue = False
             End If
         End If
 
@@ -4499,29 +4536,29 @@ Public Class FormRecipeManagement
         End If
 
         'On Enabling the time for process should be greater than Zero
-        'If Flush-1 is enabled, Check if the Flush-1 time is greater than Zero
-        If onContinue = True Then
-            If checkbx_EditFlush1.Checked = True And i_flush1time = 0 Then
-                RecipeMessage(23, "Flush-1")
-                onContinue = False
-            End If
-        End If
+        ''If Flush-1 is enabled, Check if the Flush-1 time is greater than Zero
+        'If onContinue = True Then
+        '    If checkbx_EditFlush1.Checked = True And i_flush1time = 0 Then
+        '        RecipeMessage(23, "Flush-1")
+        '        onContinue = False
+        '    End If
+        'End If
 
-        'If Flush-2 is enabled, Check if the Flush-2 time is greater than Zero
-        If onContinue = True Then
-            If checkbx_EditFlush2.Checked = True And i_flush2time = 0 Then
-                RecipeMessage(23, "Flush-2")
-                onContinue = False
-            End If
-        End If
+        ''If Flush-2 is enabled, Check if the Flush-2 time is greater than Zero
+        'If onContinue = True Then
+        '    If checkbx_EditFlush2.Checked = True And i_flush2time = 0 Then
+        '        RecipeMessage(23, "Flush-2")
+        '        onContinue = False
+        '    End If
+        'End If
 
-        'If DP Test-1 is enabled, Check if the DP Test time is greater than Zero
-        If onContinue = True Then
-            If checkbx_EditDPTest1.Checked = True And i_dptesttime = 0 Then
-                RecipeMessage(23, "DP Test-1")
-                onContinue = False
-            End If
-        End If
+        ''If DP Test-1 is enabled, Check if the DP Test time is greater than Zero
+        'If onContinue = True Then
+        '    If checkbx_EditDPTest1.Checked = True And i_dptesttime = 0 Then
+        '        RecipeMessage(23, "DP Test-1")
+        '        onContinue = False
+        '    End If
+        'End If
 
         'If Drain-1 is enabled, Check if the Drain-1 time is greater than Zero
         If onContinue = True Then

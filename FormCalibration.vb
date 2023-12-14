@@ -91,8 +91,8 @@
 
 
         txtbx_JigType.Text = Jig
-
-
+        tmr_Calibration.Interval = 500
+        tmr_Verification.Interval = 500
 
 
 
@@ -106,6 +106,64 @@
 
 
         If dtrecipetable.Rows.Count > 0 Then
+
+            If dtrecipetable.Rows(0)("firstdp_circuit") = "Disable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Disable" Then
+                FormMain.lbl_CalibrationStatus.Text = "Pass"
+                FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(192, 255, 192)
+                FormMain.lbl_BlankDP.Text = "0.0"
+                Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT id,lot_id,lot_attempt FROM LotUsage where lot_id = '{FormMain.txtbx_LotID.Text} ' AND lot_end_time IS NULL")
+                If dtlotusage.Rows.Count > 0 Then
+                    Dim Updateparameter As New Dictionary(Of String, Object) From {
+                            {"recipe_id", FormMain.cmbx_RecipeID.Text},
+                            {"calibration_time", lbl_DateTimeClock.Text},
+                            {"cal_inlet_pressure", "0"},
+                            {"cal_outlet_pressure", "0"},
+                            {"cal_diff_pressure", "0"},
+                             {"verify_inlet_pressure", "0"},
+                            {"verify_outlet_pressure", "0"},
+                            {"verify_diff_pressure", "0"},
+                            {"cal_result", "Pass"},
+                            {"cal_cycle_time", "0"}
+                        }
+                    Dim Condition As String = $"id = '{dtlotusage.Rows(dtlotusage.Rows.Count - 1).Item("id")}'"
+
+                    If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
+                        Dim onContinue = True
+
+                        If onContinue = True Then
+                            Dim calstatusparameter As New Dictionary(Of String, Object) From {
+                        {"retained_value", "Pass"}
+                        }
+                            Dim calstatuscondition As String = $"id='30'"
+                            If SQL.UpdateRecord($"[0_RetainedMemory]", calstatusparameter, calstatuscondition) = 1 Then
+                                onContinue = True
+                            Else
+                                MsgBox($"Query to Update Calibration Result Failed")
+                                onContinue = False
+                            End If
+                        End If
+
+                        If onContinue = True Then
+                            Dim caloffsetparameter As New Dictionary(Of String, Object) From {
+                        {"retained_value", "0.0"}
+                        }
+                            Dim caloffsetcondition As String = $"id='31'"
+                            If SQL.UpdateRecord($"[0_RetainedMemory]", caloffsetparameter, caloffsetcondition) = 1 Then
+                                onContinue = True
+                            Else
+                                MsgBox($"Query to Update Calibration Result Failed")
+                                onContinue = False
+                            End If
+                        End If
+                    Else
+                        MsgBox($"Query to Update Calibration Result Failed")
+                    End If
+                End If
+
+                Me.Close()
+            End If
+
+
 
             txtbx_CalBackPressure.Text = dtrecipetable.Rows(0)("dp_back_pressure")
             txtbx_CalDPTestFlowrate.Text = dtrecipetable.Rows(0)("dp_flowrate")
@@ -625,7 +683,7 @@
 
 
     Public Sub CalibrationRun()
-        If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" Then
+        If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" And Not txtbx_CalDPPoints.Text = "0" Then
             If btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246) Then
 
                 'SetButtonState(btn_Calibrate, True, "Calibrate")
@@ -660,7 +718,7 @@
                 Cal_avgflowrate2 = 0
                 Cal_avgtemperature1 = 0
                 Cal_avgtemperature2 = 0
-                tmr_Calibration.Interval = 500
+
                 tmr_Calibration.Enabled = True
             End If
         Else
@@ -672,7 +730,7 @@
     End Sub
 
     Public Sub VerificationRun()
-        If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" Then
+        If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" And Not txtbx_CalDPPoints.Text = "0" Then
             If btn_Verify.BackColor = Color.FromArgb(25, 130, 246) Then
                 'SetButtonState(btn_Verify, True, "Verify")
                 PCStatus(1)(3) = True
@@ -703,7 +761,7 @@
                 Ver_finaldp = 0
                 Ver_finalflowrate = 0
                 Ver_finaltemperature = 0
-                tmr_Verification.Interval = 500
+
                 tmr_Verification.Enabled = True
             End If
         Else

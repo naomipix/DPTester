@@ -1412,8 +1412,6 @@ Module ModuleOmron
                 PCStatus(i) = Int2BoolArr(FINSOutput(i))
             Next
 
-
-
         Catch ex As Exception
             CommLost = True
         End Try
@@ -1921,11 +1919,12 @@ Module ModuleOmron
 
 
 
-            If FINSinput(21) = 300 Or FINSinput(21) = 320 Or FINSinput(21) = 350 Or FINSinput(21) = 370 Or FINSinput(21) = 600 Or FINSinput(21) = 620 Or FINSinput(21) = 650 Or FINSinput(21) = 670 Or FINSinput(21) = 800 Or FINSinput(21) = 820 Or FINSinput(21) = 850 Or FINSinput(21) = 870 Or FINSinput(21) = 1000 Or FINSinput(21) = 1020 Or FINSinput(21) = 1050 Or FINSinput(21) = 1070 Or FINSinput(21) = 1160 Or FINSinput(21) = 1360 Or FINSinput(21) = 1560 Or FINSinput(21) = 1700 Then
+            If FINSinput(21) = 300 Or FINSinput(21) = 320 Or FINSinput(21) = 350 Or FINSinput(21) = 370 Or FINSinput(21) = 600 Or FINSinput(21) = 620 Or FINSinput(21) = 650 Or FINSinput(21) = 670 Or FINSinput(21) = 800 Or FINSinput(21) = 820 Or FINSinput(21) = 850 Or FINSinput(21) = 870 Or FINSinput(21) = 1000 Or FINSinput(21) = 1020 Or FINSinput(21) = 1050 Or FINSinput(21) = 1070 Or FINSinput(21) = 1160 Or FINSinput(21) = 1360 Or FINSinput(21) = 1560 Then
                 CalrecordValue = True
             Else
                 CalrecordValue = False
             End If
+
             If FINSinput(21) <> Cal_MessageNo Then
                 Cal_MessageNo = FINSinput(21)
                 CalibrationMessage(Cal_MessageNo)
@@ -1987,13 +1986,13 @@ Module ModuleOmron
             MainMessage(Main_MessageNo)
         End If
 
-        If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Or FINSinput(20) = 1700 Then
-            MainrecordValue = True
-        Else
-            MainrecordValue = False
-        End If
+            If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Then
+                MainrecordValue = True
+            Else
+                MainrecordValue = False
+            End If
 
-        FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
+            FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
         FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
 #End Region
 
@@ -2534,7 +2533,7 @@ Module ModuleOmron
             T2 = result_finaltemperature * result_finaltemperature
             exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
             Viscosity = A * exp
-            result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - FormCalibration.Cal_finaloffset
+            result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal)
 
         End If
 
