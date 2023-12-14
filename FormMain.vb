@@ -3036,32 +3036,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
 #End Region
 
-#Region "Mimic Panel (Circuit Path)"
 
-    Private Sub tabctrl_SubManualCtrl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_SubManualCtrl.SelectedIndexChanged
-        If tabctrl_SubManualCtrl.SelectedIndex = 0 Then
-
-
-
-        End If
-
-        If tabctrl_SubManualCtrl.SelectedIndex = 3 Then
-
-
-        End If
-
-        If tabctrl_SubManualCtrl.SelectedIndex = 4 Then
-
-
-        End If
-    End Sub
-
-
-
-
-
-
-#End Region
 
     Public Sub Startresultrecord()
         Dim flush1cycletime As Integer
@@ -3077,10 +3052,11 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         dtrecipetable = SQL.ReadRecords($"Select * From RecipeTable WHERE recipe_id ='{cmbx_RecipeID.Text}'")
         dtserialrecord = SQL.ReadRecords($"SELECT * FROM ProductionDetail WHERE serial_uid='{SerialUid}' AND serial_attempt='{SerialAttempt}'")
 
-                    If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
+        If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
+
             flush1cycletime = (dtrecipetable.Rows(0)("firstflush_fill_time") + dtrecipetable.Rows(0)("firstflush_bleed_time") + dtrecipetable.Rows(0)("firstflush_stabilize_time") + dtrecipetable.Rows(0)("firstflush_time"))
-        End If
-        If dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
+            End If
+            If dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
             flush2cycletime = (dtrecipetable.Rows(0)("secondflush_fill_time") + dtrecipetable.Rows(0)("secondflush_bleed_time") + dtrecipetable.Rows(0)("secondflush_stabilize_time") + dtrecipetable.Rows(0)("secondflush_time"))
         End If
         If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" Then
@@ -3493,7 +3469,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                     End If
                 End If
                 If LoginUserCategoryName = "Engineer" Or LoginUserCategoryName = "Administrator" Or LoginUserCategoryName = "Developer" Then
-                    If type(i)("recipe_type") <> "Production" Then
+                    If type(i)("recipe_type") <> "Production" And type(i)("recipe_type") <> "Rework" And type(i)("recipe_type") <> "QC-Return" Then
                         TypecomboSource.Add(i + 1, type(i)("recipe_type"))
                     End If
 

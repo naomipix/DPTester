@@ -1,4 +1,5 @@
-﻿Imports System.Media
+﻿Imports System.ComponentModel
+Imports System.Media
 
 Public Class FormResultSummary
     Public Resultsummaryexportpath As String = PublicVariables.Resultexportpath
@@ -114,6 +115,7 @@ Public Class FormResultSummary
             End With
         Next
     End Sub
+
 
 
     Private Sub cmbx_ResultSearchLot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_ResultSearchLot.SelectedIndexChanged
@@ -638,5 +640,6 @@ Public Class FormResultSummary
         FormPixel.Show()
 
     End Sub
+
 
 End Class

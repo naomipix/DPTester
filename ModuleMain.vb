@@ -703,7 +703,7 @@ Namespace RetainedMemory
         Public Function Update(MemId As Integer, MemDesc As String, MemValue As String)
             Dim updateParameters As New Dictionary(Of String, Object) From {
                 {"description", MemDesc.Substring(0, Math.Min(MemDesc.Length, 50))},
-                {"retained_value", MemValue.Substring(0, Math.Min(MemValue.Length, 50))}
+                {"retained_value", MemValue.Substring(0, Math.Min(MemValue.Length, 200))}
             }
             Return SQL.UpdateRecord("[0_RetainedMemory]", updateParameters, $"id = '{MemId}'")
         End Function

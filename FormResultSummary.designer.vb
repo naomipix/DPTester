@@ -23,7 +23,7 @@ Partial Class FormResultSummary
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormResultSummary))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -38,6 +38,10 @@ Partial Class FormResultSummary
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.dsp_Resultattempt = New System.Windows.Forms.Label()
+        Me.txtbx_Resultattempt = New System.Windows.Forms.TextBox()
+        Me.dsp_ResultSerialUID = New System.Windows.Forms.Label()
+        Me.txtbx_ResultSerialUID = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.cmbx_ResultSearchSerial = New System.Windows.Forms.ComboBox()
         Me.dsp_ResultSearchSerial = New System.Windows.Forms.Label()
@@ -90,10 +94,6 @@ Partial Class FormResultSummary
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dsp_ResultSerialUID = New System.Windows.Forms.Label()
-        Me.txtbx_ResultSerialUID = New System.Windows.Forms.TextBox()
-        Me.dsp_Resultattempt = New System.Windows.Forms.Label()
-        Me.txtbx_Resultattempt = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -286,6 +286,50 @@ Partial Class FormResultSummary
         Me.Panel2.Size = New System.Drawing.Size(564, 802)
         Me.Panel2.TabIndex = 1
         '
+        'dsp_Resultattempt
+        '
+        Me.dsp_Resultattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_Resultattempt.Location = New System.Drawing.Point(345, 234)
+        Me.dsp_Resultattempt.Name = "dsp_Resultattempt"
+        Me.dsp_Resultattempt.Size = New System.Drawing.Size(90, 35)
+        Me.dsp_Resultattempt.TabIndex = 57
+        Me.dsp_Resultattempt.Text = "Attempt No :"
+        Me.dsp_Resultattempt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_Resultattempt
+        '
+        Me.txtbx_Resultattempt.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_Resultattempt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_Resultattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_Resultattempt.Location = New System.Drawing.Point(441, 239)
+        Me.txtbx_Resultattempt.Name = "txtbx_Resultattempt"
+        Me.txtbx_Resultattempt.ReadOnly = True
+        Me.txtbx_Resultattempt.Size = New System.Drawing.Size(80, 25)
+        Me.txtbx_Resultattempt.TabIndex = 58
+        Me.txtbx_Resultattempt.TabStop = False
+        '
+        'dsp_ResultSerialUID
+        '
+        Me.dsp_ResultSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_ResultSerialUID.Location = New System.Drawing.Point(19, 234)
+        Me.dsp_ResultSerialUID.Name = "dsp_ResultSerialUID"
+        Me.dsp_ResultSerialUID.Size = New System.Drawing.Size(100, 35)
+        Me.dsp_ResultSerialUID.TabIndex = 55
+        Me.dsp_ResultSerialUID.Text = "Serial UID :"
+        Me.dsp_ResultSerialUID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_ResultSerialUID
+        '
+        Me.txtbx_ResultSerialUID.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_ResultSerialUID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_ResultSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_ResultSerialUID.Location = New System.Drawing.Point(131, 239)
+        Me.txtbx_ResultSerialUID.Name = "txtbx_ResultSerialUID"
+        Me.txtbx_ResultSerialUID.ReadOnly = True
+        Me.txtbx_ResultSerialUID.Size = New System.Drawing.Size(200, 25)
+        Me.txtbx_ResultSerialUID.TabIndex = 56
+        Me.txtbx_ResultSerialUID.TabStop = False
+        '
         'Panel4
         '
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -324,7 +368,8 @@ Partial Class FormResultSummary
         '
         'cmbx_ResultSearchLot
         '
-        Me.cmbx_ResultSearchLot.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbx_ResultSearchLot.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cmbx_ResultSearchLot.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbx_ResultSearchLot.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_ResultSearchLot.FormattingEnabled = True
         Me.cmbx_ResultSearchLot.Location = New System.Drawing.Point(223, 17)
@@ -835,14 +880,14 @@ Partial Class FormResultSummary
         Me.dgv_Resultsummary.AllowUserToDeleteRows = False
         Me.dgv_Resultsummary.AllowUserToResizeColumns = False
         Me.dgv_Resultsummary.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_Resultsummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_Resultsummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dgv_Resultsummary.ColumnHeadersHeight = 30
         Me.dgv_Resultsummary.Location = New System.Drawing.Point(50, 125)
         Me.dgv_Resultsummary.Name = "dgv_Resultsummary"
@@ -882,50 +927,6 @@ Partial Class FormResultSummary
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Individual Result Summary"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'dsp_ResultSerialUID
-        '
-        Me.dsp_ResultSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ResultSerialUID.Location = New System.Drawing.Point(19, 234)
-        Me.dsp_ResultSerialUID.Name = "dsp_ResultSerialUID"
-        Me.dsp_ResultSerialUID.Size = New System.Drawing.Size(100, 35)
-        Me.dsp_ResultSerialUID.TabIndex = 55
-        Me.dsp_ResultSerialUID.Text = "Serial UID :"
-        Me.dsp_ResultSerialUID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_ResultSerialUID
-        '
-        Me.txtbx_ResultSerialUID.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_ResultSerialUID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_ResultSerialUID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ResultSerialUID.Location = New System.Drawing.Point(131, 239)
-        Me.txtbx_ResultSerialUID.Name = "txtbx_ResultSerialUID"
-        Me.txtbx_ResultSerialUID.ReadOnly = True
-        Me.txtbx_ResultSerialUID.Size = New System.Drawing.Size(200, 25)
-        Me.txtbx_ResultSerialUID.TabIndex = 56
-        Me.txtbx_ResultSerialUID.TabStop = False
-        '
-        'dsp_Resultattempt
-        '
-        Me.dsp_Resultattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Resultattempt.Location = New System.Drawing.Point(345, 234)
-        Me.dsp_Resultattempt.Name = "dsp_Resultattempt"
-        Me.dsp_Resultattempt.Size = New System.Drawing.Size(90, 35)
-        Me.dsp_Resultattempt.TabIndex = 57
-        Me.dsp_Resultattempt.Text = "Attempt No :"
-        Me.dsp_Resultattempt.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_Resultattempt
-        '
-        Me.txtbx_Resultattempt.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_Resultattempt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_Resultattempt.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_Resultattempt.Location = New System.Drawing.Point(441, 239)
-        Me.txtbx_Resultattempt.Name = "txtbx_Resultattempt"
-        Me.txtbx_Resultattempt.ReadOnly = True
-        Me.txtbx_Resultattempt.Size = New System.Drawing.Size(80, 25)
-        Me.txtbx_Resultattempt.TabIndex = 58
-        Me.txtbx_Resultattempt.TabStop = False
         '
         'FormResultSummary
         '
