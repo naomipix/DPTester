@@ -642,30 +642,7 @@ Public Class FormSetting
         ' Special Filter
         Dim FilterStr As String = ""
 
-        ' Check Buyoff State
-        'If timer_Buyoff.Enabled = False Then
-        '    FilterStr = "WHERE 1 = 0"
-        'Else
-        '    FilterStr = $"WHERE MessageLog.trigger_time >=' {StartTime.ToString("yyyy-MM-dd HH:mm:ss:000")}'" ' YYYY-MM-DDTHH:mm:ss
-        'End If
 
-        '' Define SQL String
-        'Dim sqlString As String = $"
-        'SELECT row_number() OVER (ORDER BY MessageLog.trigger_time DESC) AS no,
-        '    MessageLog.id, 
-        '    MessageLog.user_name, 
-        '    MessageLog.trigger_time, 
-        '    MessageLog.event_log 
-        'FROM MessageLog 
-        '{FilterStr} 
-        'ORDER BY MessageLog.trigger_time DESC
-        '"
-
-        '' Populate Datatable From SQL Query
-        'Dim dtMessageLog As DataTable = SQL.ReadRecords(sqlString)   'SQL.ReadRecords(sqlString)
-
-        '' Bind To DataGridView DataSource
-        'dgv_MessageLog.DataSource = dtMessageLog
 
         ' Bind To DataGridView DataSource
         dgv_MessageLog.DataSource = dtbuyoffmessage
@@ -701,38 +678,25 @@ Public Class FormSetting
         FormMain.dgvClearSelection(dgv_MessageLog)
     End Sub
 
-    Private Sub chkbx_Buyoff_CheckedChanged(sender As Object, e As EventArgs) Handles chkbx_DryRun.CheckedChanged, chkbx_BuyOffRun.CheckedChanged
-        ' Declare CheckBox Checked Changed
-        Dim chkbxCheckedChanged As CheckBox = DirectCast(sender, CheckBox)
 
-        ' CheckBox CheckState Changed
-        If chkbxCheckedChanged.Checked = False Then
-            chkbxCheckedChanged.Text = "Enable"
+
+    Private Sub cmbx_RunSelection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RunSelection.SelectedIndexChanged
+        If cmbx_RunSelection.SelectedItem = "DRY RUN" Then
+            RetainedMemory.Update(4, "DryRunEnabled", "1")
+
         Else
-            chkbxCheckedChanged.Text = "Disable"
+            RetainedMemory.Update(4, "DryRunEnabled", "0")
+
         End If
 
-        ' Update RetainedMemoryTable
-        If True Then
-            If chkbxCheckedChanged Is chkbx_DryRun Then
-                If chkbxCheckedChanged.Checked = False Then
-                    chkbx_BuyOffRun.Enabled = True
-                    RetainedMemory.Update(4, "DryRunEnabled", "0")
-                Else
-                    chkbx_BuyOffRun.Enabled = False
-                    RetainedMemory.Update(4, "DryRunEnabled", "1")
-                End If
-            End If
-            If chkbxCheckedChanged Is chkbx_BuyOffRun Then
-                If chkbxCheckedChanged.Checked = False Then
-                    chkbx_DryRun.Enabled = True
-                    RetainedMemory.Update(5, "BuyOffEnabled", "0")
-                Else
-                    chkbx_DryRun.Enabled = False
-                    RetainedMemory.Update(5, "BuyOffEnabled", "1")
-                End If
-            End If
+        If cmbx_RunSelection.SelectedItem = "BUY OFF RUN" Then
+
+            RetainedMemory.Update(5, "BuyOffEnabled", "1")
+        Else
+
+            RetainedMemory.Update(5, "BuyOffEnabled", "0")
         End If
+
     End Sub
 
     Private Sub btn_StartStop_Click(sender As Object, e As EventArgs) Handles btn_Start.Click, btn_Stop.Click
@@ -745,8 +709,8 @@ Public Class FormSetting
         ' Button Start
         If btn Is btn_Start Then
             ' Check State
-            If Not (chkbx_DryRun.Checked = True And chkbx_BuyOffRun.Checked = True) Then
-                If chkbx_DryRun.Checked = True OrElse chkbx_BuyOffRun.Checked = True Then
+
+            If (cmbx_RunSelection.SelectedItem = "DRY RUN" Or cmbx_RunSelection.SelectedItem = "BUY OFF RUN") Then
                     ' Set Start Time
                     lbl_StartTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
@@ -756,28 +720,24 @@ Public Class FormSetting
                     ' Clear End Time
                     lbl_EndTime.Text = "-N/A-"
 
-                    ' Disable CheckBox Buttons
-                    For Each chkbx As CheckBox In {chkbx_DryRun, chkbx_BuyOffRun}
-                        chkbx.Enabled = False
-                    Next
 
-                    ' Start Timer
-                    timer_Buyoff.Start()
 
-                    ' Event Log
-                    If chkbx_DryRun.Checked = True Then
-                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Dry-Run Started")
-                    Else
-                        EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Buy-Off Run Started")
+                cmbx_RunSelection.Enabled = False
+                ' Start Timer
+                timer_Buyoff.Start()
+
+                ' Event Log
+                If cmbx_RunSelection.SelectedItem = "DRY RUN" Then
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Dry-Run Started")
+                Else
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Buy-Off Run Started")
                     End If
                 End If
             Else
-                ' Set CheckBoxes To Unchecked
-                For Each chkbx As CheckBox In {chkbx_DryRun, chkbx_BuyOffRun}
-                    chkbx.Checked = False
-                Next
-            End If
+            cmbx_RunSelection.SelectedItem = "NO SELECTION"
+
         End If
+
 
         ' Button Stop
         If btn Is btn_Stop Then
@@ -786,19 +746,18 @@ Public Class FormSetting
                 ' Set End Time
                 lbl_EndTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
-                ' Enable CheckBox Buttons
-                For Each chkbx As CheckBox In {chkbx_DryRun, chkbx_BuyOffRun}
-                    chkbx.Enabled = True
-                Next
+
+
+                cmbx_RunSelection.Enabled = True
 
                 ' End Timer
                 timer_Buyoff.Stop()
 
                 ' Event Log
-                If chkbx_DryRun.Checked = True Then
-                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Dry-Run Stopped | Duration : {lbl_Duration.Text} | Cycles : {lbl_CycleCount.Text}")
+                If cmbx_RunSelection.SelectedItem = "DRY RUN" Then
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Dry-Run Stopped | Duration : {lbl_Duration.Text} ")
                 Else
-                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Buy-Off Run Stopped | Duration : {lbl_Duration.Text} | Cycles : {lbl_CycleCount.Text}")
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Buy-Off Run Stopped | Duration : {lbl_Duration.Text}")
                 End If
             End If
         End If
@@ -926,11 +885,7 @@ Public Class FormSetting
                 Next
             End If
 
-            'If chklstbxArr(i) Is chklstbx_Calibrate Then
-            '    For item As Integer = 0 To chklstbxArr(i).Items.Count - 1
 
-            '    Next
-            'End If
 
             If chklstbxArr(i) Is chklstbx_Settings Then
                 For item As Integer = 0 To chklstbxArr(i).Items.Count - 1
@@ -946,23 +901,7 @@ Public Class FormSetting
                 Next
             End If
 
-            'If chklstbxArr(i) Is chklstbx_MessageLog Then
-            '    For item As Integer = 0 To chklstbxArr(i).Items.Count - 1
 
-            '    Next
-            'End If
-
-            'If chklstbxArr(i) Is chklstbx_ResultSummary Then
-            '    For item As Integer = 0 To chklstbxArr(i).Items.Count - 1
-
-            '    Next
-            'End If
-
-            'If chklstbxArr(i) Is chklstbx_ResultGraph Then
-            '    For item As Integer = 0 To chklstbxArr(i).Items.Count - 1
-
-            '    Next
-            'End If
         Next
     End Sub
 
@@ -1449,13 +1388,7 @@ Public Class FormSetting
                         End If
                     Next
                 End If
-                'If row.Item("permission") = "Developer" Then
-                '    For i As Integer = 0 To chklstbx_Settings.Items.Count - 1
-                '        If chklstbx_Settings.Items(i) = "Developer" Then
-                '            chklstbx_Settings.SetItemChecked(i, True)
-                '        End If
-                '    Next
-                'End If
+
             Next
         Else
             ' Clear All Selected
@@ -1484,10 +1417,12 @@ Public Class FormSetting
         FormPixel.Show()
     End Sub
 
-    Private Sub btn_Reset_Click(sender As Object, e As EventArgs) Handles btn_Reset.Click
+    Private Sub btn_Clear_Click(sender As Object, e As EventArgs) Handles btn_Clear.Click
         lbl_EndTime.Text = "-N/A-"
         lbl_StartTime.Text = "-N/A-"
         lbl_Duration.Text = "-N/A-"
         dtbuyoffmessage.Clear()
     End Sub
+
+
 End Class

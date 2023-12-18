@@ -110,46 +110,46 @@ Public Class FormRecipeManagement
     Private min_d_vertol As Decimal = 0.1
 
 
-    Private min_i_flush1filltime As Integer = 0
-    Private min_i_flush1bleedtime As Integer = 0
+    Private min_i_flush1filltime As Integer = 1
+    Private min_i_flush1bleedtime As Integer = 1
     Private min_d_flush1flow As Decimal = 3.0
     Private min_d_flush1flowtol As Decimal = 0.2
-    Private min_d_flush1pressure As Decimal = 5.0
-    Private min_i_flush1stabilize As Integer = 0
-    Private min_i_flush1time As Integer = 0
+    Private min_d_flush1pressure As Decimal = 1.0
+    Private min_i_flush1stabilize As Integer = 1
+    Private min_i_flush1time As Integer = 1
 
 
-    Private min_i_dptestfilltime As Integer = 0
-    Private min_i_dptestbleedtime As Integer = 0
+    Private min_i_dptestfilltime As Integer = 1
+    Private min_i_dptestbleedtime As Integer = 1
     Private min_d_dptestflow As Decimal = 3.0
     Private min_d_dptestflowtol As Decimal = 0.2
     Private min_d_dptestpressure As Decimal = 1.0
-    Private min_i_dpteststabilize As Integer = 0
-    Private min_i_dptesttime As Integer = 0
+    Private min_i_dpteststabilize As Integer = 1
+    Private min_i_dptesttime As Integer = 1
     Private min_d_dptestlowlimit As Decimal
     Private min_d_dptestuplimit As Decimal
     Private min_i_dptestpoints As Integer
 
 
 
-    Private min_i_flush2filltime As Integer = 0
-    Private min_i_flush2bleedtime As Integer = 0
+    Private min_i_flush2filltime As Integer = 1
+    Private min_i_flush2bleedtime As Integer = 1
     Private min_d_flush2flow As Decimal = 3.0
     Private min_d_flush2flowtol As Decimal = 0.2
     Private min_d_flush2pressure As Decimal = 1.0
-    Private min_i_flush2stabilize As Integer = 0
-    Private min_i_flush2time As Integer = 0
+    Private min_i_flush2stabilize As Integer = 1
+    Private min_i_flush2time As Integer = 1
 
 
 
     Private min_d_drain1pressure As Decimal = 1.0
-    Private min_i_drain1time As Integer = 0
+    Private min_i_drain1time As Integer = 1
 
     Private min_d_drain2pressure As Decimal = 1.0
-    Private min_i_drain2time As Integer = 0
+    Private min_i_drain2time As Integer = 1
 
     Private min_d_drain3pressure As Decimal = 1.0
-    Private min_i_drain3time As Integer = 0
+    Private min_i_drain3time As Integer = 1
 
 
 
@@ -452,7 +452,7 @@ Public Class FormRecipeManagement
             DoubleBuffer.DoubleBuffered(dgv, True)
         Next
 
-        ' lbl_Testing.Text = CurrentTabPage.Text
+
         'Load Filter Type
         GetFilterType()
         LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
@@ -479,7 +479,7 @@ Public Class FormRecipeManagement
         Dim FiltercomboSource As New Dictionary(Of String, String)()
 
         ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
+
 
         ' Assign Defaults
         FiltercomboSource.Add("0", "-Not Selected-")
@@ -499,9 +499,7 @@ Public Class FormRecipeManagement
                 .DataSource = New BindingSource(FiltercomboSource, Nothing)
                 .DisplayMember = "Value"
                 .ValueMember = "Key"
-                'If .Items.Count > 0 Then
-                '    .SelectedIndex = 0
-                'End If
+
             End With
         Next
     End Sub
@@ -511,7 +509,7 @@ Public Class FormRecipeManagement
         Dim JigcomboSource As New Dictionary(Of String, String)()
 
         ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
+
 
         ' Assign Defaults
         JigcomboSource.Add("0", "-Not Selected-")
@@ -545,7 +543,7 @@ Public Class FormRecipeManagement
         Dim TypecomboSource As New Dictionary(Of String, String)()
 
         ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
+
 
         ' Assign Defaults
         TypecomboSource.Add("0", "-Not Selected-")
@@ -578,7 +576,7 @@ Public Class FormRecipeManagement
         Dim RecipecomboSource As New Dictionary(Of String, String)()
 
         ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
+
 
         ' Assign Defaults
         RecipecomboSource.Add("0", "-Not Selected-")
@@ -624,7 +622,7 @@ Public Class FormRecipeManagement
         Dim RecipecomboSource As New Dictionary(Of String, String)()
 
         ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
+
 
         ' Assign Defaults
         FiltercomboSource.Add("0", "-Not Selected-")
@@ -1680,20 +1678,7 @@ Public Class FormRecipeManagement
     End Sub
 
 
-    'Private Sub textchangeevent(sender As Object, e As EventArgs) Handles txtbx_RcpCreateFlush1Fill.TextChanged
-    '    Dim txtonfocus As TextBox = DirectCast(sender, TextBox)
 
-    '    If txtonfocus Is txtbx_RcpCreateFlush1Fill Then
-    '        If IsNumeric(txtonfocus.Text) Then
-    '            If CType(txtonfocus.Text, Integer) < min_i_flush1filltime Then
-    '                txtonfocus.Text = min_i_flush1filltime.ToString
-    '            End If
-    '            If CType(txtonfocus.Text, Integer) > max_i_flush1filltime Then
-    '                txtonfocus.Text = max_i_flush1filltime.ToString
-    '            End If
-    '        End If
-    '    End If
-    'End Sub
 
 
 #End Region
@@ -2342,234 +2327,654 @@ Public Class FormRecipeManagement
             End If
         End If
 
+
+#Region "Recipe Create Parameter Range Validating Event"
+        If onContinue = True Then
+            'Check verification tolerance
+
+            'Check the text is empty or has only decimal point
+            If Not txtbx_RcpCreateVerTol.Text = "" And Not txtbx_RcpCreateVerTol.Text = "." Then
+                'Convert to the required type
+                d_vertol = CType(txtbx_RcpCreateVerTol.Text, Decimal)
+                'Check the value within range
+                If d_vertol < min_d_vertol Or d_vertol > max_d_vertol Then
+                    RecipeMessage(20, "Verification tolerance should be within " + CType(min_d_vertol, String) + " to " + CType(max_d_vertol, String))
+                    txtbx_RcpCreateVerTol.Text = Nothing
+                    txtbx_RcpCreateVerTol.Focus()
+                    onContinue = False
+                End If
+            Else
+                RecipeMessage(19, "Verification tolerance")
+                onContinue = False
+            End If
+        End If
+
+
+
         'In Case of Flush-1 Enabled, the Field should not be empty
         If checkbx_CreateFlush1.Checked = True Then
+
             If onContinue = True Then
-                If txtbx_RcpCreateFlush1Fill.Text = "" And txtbx_RcpCreateFlush1Fill.Text = "." Then
+                'Check fill time 
+
+                'Check the text is empty
+                If Not txtbx_RcpCreateFlush1Fill.Text = "" Then
+                    'Convert to the required type
+                    i_flush1filltime = CType(txtbx_RcpCreateFlush1Fill.Text, Integer)
+                    'Check the value within range
+                    If i_flush1filltime < min_i_flush1filltime Or i_flush1filltime > max_i_flush1filltime Then
+                        RecipeMessage(20, "Flush-1 Fill Time should be within " + CType(min_i_flush1filltime, String) + " to " + CType(max_i_flush1filltime, String))
+                        txtbx_RcpCreateFlush1Fill.Text = Nothing
+                        txtbx_RcpCreateFlush1Fill.Focus()
+                        onContinue = False
+
+                    End If
+                Else
                     RecipeMessage(19, "Flush-1 Fill Time")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush1Bleed.Text = "" And txtbx_RcpCreateFlush1Bleed.Text = "." Then
+                'Check air bleed time
+
+                'Check the text is empty
+                If Not txtbx_RcpCreateFlush1Bleed.Text = "" Then
+                    'Convert to the required type
+                    i_flush1bleedtime = CType(txtbx_RcpCreateFlush1Bleed.Text, Integer)
+                    'Check the value within range
+                    If i_flush1bleedtime < min_i_flush1bleedtime Or i_flush1bleedtime > max_i_flush1bleedtime Then
+                        RecipeMessage(20, "Flush-1 Bleed Time should be within " + CType(min_i_flush1bleedtime, String) + " to " + CType(max_i_flush1bleedtime, String))
+                        txtbx_RcpCreateFlush1Bleed.Text = Nothing
+                        txtbx_RcpCreateFlush1Bleed.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-1 Bleed Time")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush1Flow.Text = "" And txtbx_RcpCreateFlush1Flow.Text = "." Then
+                'Check for Flush-1 Flowrate
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateFlush1Flow.Text = "" And Not txtbx_RcpCreateFlush1Flow.Text = "." Then
+                    'Convert to the required type
+                    d_flush1flow = CType(txtbx_RcpCreateFlush1Flow.Text, Decimal)
+                    'Check the value within range
+                    If d_flush1flow < min_d_flush1flow Or d_flush1flow > max_d_flush1flow Then
+                        RecipeMessage(20, "Flush-1 Flowrate should be within " + CType(min_d_flush1flow, String) + " to " + CType(max_d_flush1flow, String))
+                        txtbx_RcpCreateFlush1Flow.Text = Nothing
+                        txtbx_RcpCreateFlush1Flow.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-1 Flowrate")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush1FlowTol.Text = "" And txtbx_RcpCreateFlush1FlowTol.Text = "." Then
-                    RecipeMessage(19, "Flush-1 Flow Tolerance")
+                'Check for Flush-1 Flow Tolerance
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateFlush1FlowTol.Text = "" And Not txtbx_RcpCreateFlush1FlowTol.Text = "." Then
+                    'Convert to the required type
+                    d_flush1flowtol = CType(txtbx_RcpCreateFlush1FlowTol.Text, Decimal)
+                    'Check the value within range
+                    If d_flush1flowtol < min_d_flush1flowtol Or d_flush1flowtol > max_d_flush1flowtol Then
+                        RecipeMessage(20, "Flush-1 Flow Tolerance should be within " + CType(min_d_flush1flowtol, String) + " to " + CType(max_d_flush1flowtol, String))
+                        txtbx_RcpCreateFlush1FlowTol.Text = Nothing
+                        txtbx_RcpCreateFlush1FlowTol.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-1 Flow tolerance")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush1Pressure.Text = "" And txtbx_RcpCreateFlush1Pressure.Text = "." Then
-                    RecipeMessage(19, "Flush-1 Pressure")
+                'Check for Flush-1 Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateFlush1Pressure.Text = "" And Not txtbx_RcpCreateFlush1Pressure.Text = "." Then
+                    'Convert to the required type
+                    d_flush1pressure = CType(txtbx_RcpCreateFlush1Pressure.Text, Decimal)
+                    'Check the value within range
+                    If d_flush1pressure < min_d_flush1pressure Or d_flush1pressure > max_d_flush1pressure Then
+                        RecipeMessage(20, "Flush-1 Pressure should be within " + CType(min_d_flush1pressure, String) + " to " + CType(max_d_flush1pressure, String))
+                        txtbx_RcpCreateFlush1Pressure.Text = Nothing
+                        txtbx_RcpCreateFlush1Pressure.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-1 Back Pressure")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush1Stabilize.Text = "" And txtbx_RcpCreateFlush1Stabilize.Text = "." Then
+                'Check for Flush-1 Stabilize Time
+                'Check the text is empty
+                If Not txtbx_RcpCreateFlush1Stabilize.Text = "" Then
+                    'Convert to the required type
+                    i_flush1stabilize = CType(txtbx_RcpCreateFlush1Stabilize.Text, Integer)
+                    'Check the value within range
+                    If i_flush1stabilize < min_i_flush1stabilize Or i_flush1stabilize > max_i_flush1stabilize Then
+                        RecipeMessage(20, "Flush-1 Stabilize Time should be within " + CType(min_i_flush1stabilize, String) + " to " + CType(max_i_flush1stabilize, String))
+                        txtbx_RcpCreateFlush1Stabilize.Text = Nothing
+                        txtbx_RcpCreateFlush1Stabilize.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-1 Stabilize Time")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush1Time.Text = "" And txtbx_RcpCreateFlush1Time.Text = "." Then
+                'Check for Flush-1 Time
+                'Check the text is empty
+                If Not txtbx_RcpCreateFlush1Time.Text = "" Then
+                    'Convert to the required type
+                    i_flush1time = CType(txtbx_RcpCreateFlush1Time.Text, Integer)
+                    'Check the value within range
+                    If i_flush1time < min_i_flush1time Or i_flush1time > max_i_flush1time Then
+                        RecipeMessage(20, "Flush-1 Time should be within " + CType(min_i_flush1time, String) + " to " + CType(max_i_flush1time, String))
+                        txtbx_RcpCreateFlush1Time.Text = Nothing
+                        txtbx_RcpCreateFlush1Time.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-1 Time")
                     onContinue = False
                 End If
             End If
+
         End If
 
         'In Case of Flush-2 Enabled, the Field should not be empty
         If checkbx_CreateFlush2.Checked = True Then
+
             If onContinue = True Then
-                If txtbx_RcpCreateFlush2Fill.Text = "" And txtbx_RcpCreateFlush2Fill.Text = "." Then
+                'Check fill time 
+
+                'Check the text is empty
+                If Not txtbx_RcpCreateFlush2Fill.Text = "" Then
+                    'Convert to the required type
+                    i_flush2filltime = CType(txtbx_RcpCreateFlush2Fill.Text, Integer)
+                    'Check the value within range
+                    If i_flush2filltime < min_i_flush2filltime Or i_flush2filltime > max_i_flush2filltime Then
+                        RecipeMessage(20, "Flush-2 Fill Time should be within " + CType(min_i_flush2filltime, String) + " to " + CType(max_i_flush2filltime, String))
+                        txtbx_RcpCreateFlush2Fill.Text = Nothing
+                        txtbx_RcpCreateFlush2Fill.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-2 Fill Time")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush2Bleed.Text = "" And txtbx_RcpCreateFlush2Bleed.Text = "." Then
+                'Check air bleed time
+
+                'Check the text is empty
+                If Not txtbx_RcpCreateFlush2Bleed.Text = "" Then
+                    'Convert to the required type
+                    i_flush2bleedtime = CType(txtbx_RcpCreateFlush2Bleed.Text, Integer)
+                    'Check the value within range
+                    If i_flush2bleedtime < min_i_flush2bleedtime Or i_flush2bleedtime > max_i_flush2bleedtime Then
+                        RecipeMessage(20, "Flush-2 Bleed Time should be within " + CType(min_i_flush2bleedtime, String) + " to " + CType(max_i_flush2bleedtime, String))
+                        txtbx_RcpCreateFlush2Bleed.Text = Nothing
+                        txtbx_RcpCreateFlush2Bleed.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-2 Bleed Time")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush2Flow.Text = "" And txtbx_RcpCreateFlush2Flow.Text = "." Then
+                'Check for Flush-2 Flowrate
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateFlush2Flow.Text = "" And Not txtbx_RcpCreateFlush2Flow.Text = "." Then
+                    'Convert to the required type
+                    d_flush2flow = CType(txtbx_RcpCreateFlush2Flow.Text, Decimal)
+                    'Check the value within range
+                    If d_flush2flow < min_d_flush2flow Or d_flush2flow > max_d_flush2flow Then
+                        RecipeMessage(20, "Flush-2 Flowrate should be within " + CType(min_d_flush2flow, String) + " to " + CType(max_d_flush2flow, String))
+                        txtbx_RcpCreateFlush2Flow.Text = Nothing
+                        txtbx_RcpCreateFlush2Flow.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-2 Flowrate")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush2FlowTol.Text = "" And txtbx_RcpCreateFlush2FlowTol.Text = "." Then
-                    RecipeMessage(19, "Flush-2 Flow Tolerance")
+                'Check for Flush-2 Flow Tolerance
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateFlush2FlowTol.Text = "" And Not txtbx_RcpCreateFlush2FlowTol.Text = "." Then
+                    'Convert to the required type
+                    d_flush2flowtol = CType(txtbx_RcpCreateFlush2FlowTol.Text, Decimal)
+                    'Check the value within range
+                    If d_flush2flowtol < min_d_flush2flowtol Or d_flush2flowtol > max_d_flush2flowtol Then
+                        RecipeMessage(20, "Flush-2 Flow Tolerance should be within " + CType(min_d_flush2flowtol, String) + " to " + CType(max_d_flush2flowtol, String))
+                        txtbx_RcpCreateFlush2FlowTol.Text = Nothing
+                        txtbx_RcpCreateFlush2FlowTol.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-2 Flow tolerance")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush2Pressure.Text = "" And txtbx_RcpCreateFlush2Pressure.Text = "." Then
-                    RecipeMessage(19, "Flush-2 Pressure")
+                'Check for Flush-2 Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateFlush2Pressure.Text = "" And Not txtbx_RcpCreateFlush2Pressure.Text = "." Then
+                    'Convert to the required type
+                    d_flush2pressure = CType(txtbx_RcpCreateFlush2Pressure.Text, Decimal)
+                    'Check the value within range
+                    If d_flush2pressure < min_d_flush2pressure Or d_flush2pressure > max_d_flush2pressure Then
+                        RecipeMessage(20, "Flush-2 Pressure should be within " + CType(min_d_flush2pressure, String) + " to " + CType(max_d_flush2pressure, String))
+                        txtbx_RcpCreateFlush2Pressure.Text = Nothing
+                        txtbx_RcpCreateFlush2Pressure.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-2 Back Pressure")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush2Stabilize.Text = "" And txtbx_RcpCreateFlush2Stabilize.Text = "." Then
+                'Check for Flush-2 Stabilize Time
+                'Check the text is empty
+                If Not txtbx_RcpCreateFlush2Stabilize.Text = "" Then
+                    'Convert to the required type
+                    i_flush2stabilize = CType(txtbx_RcpCreateFlush2Stabilize.Text, Integer)
+                    'Check the value within range
+                    If i_flush2stabilize < min_i_flush2stabilize Or i_flush2stabilize > max_i_flush2stabilize Then
+                        RecipeMessage(20, "Flush-2 Stabilize Time should be within " + CType(min_i_flush2stabilize, String) + " to " + CType(max_i_flush2stabilize, String))
+                        txtbx_RcpCreateFlush2Stabilize.Text = Nothing
+                        txtbx_RcpCreateFlush2Stabilize.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-2 Stabilize Time")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateFlush2Time.Text = "" And txtbx_RcpCreateFlush2Time.Text = "." Then
+                'Check for Flush-2 Time
+                'Check the text is empty
+                If Not txtbx_RcpCreateFlush2Time.Text = "" Then
+                    'Convert to the required type
+                    i_flush2time = CType(txtbx_RcpCreateFlush2Time.Text, Integer)
+                    'Check the value within range
+                    If i_flush2time < min_i_flush2time Or i_flush2time > max_i_flush2time Then
+                        RecipeMessage(20, "Flush-2 Time should be within " + CType(min_i_flush2time, String) + " to " + CType(max_i_flush2time, String))
+                        txtbx_RcpCreateFlush2Time.Text = Nothing
+                        txtbx_RcpCreateFlush2Time.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-2 Time")
                     onContinue = False
                 End If
             End If
+
         End If
 
         'In Case of DP Test-1 Enabled, the Field should not be empty
         If checkbx_CreateDPTest1.Checked = True Then
+
             If onContinue = True Then
-                If txtbx_RcpCreateDPFill.Text = "" And txtbx_RcpCreateDPFill.Text = "." Then
+                'Check fill time 
+
+                'Check the text is empty
+                If Not txtbx_RcpCreateDPFill.Text = "" Then
+                    'Convert to the required type
+                    i_dptestfilltime = CType(txtbx_RcpCreateDPFill.Text, Integer)
+                    'Check the value within range
+                    If i_dptestfilltime < min_i_dptestfilltime Or i_dptestfilltime > max_i_dptestfilltime Then
+                        RecipeMessage(20, "DP Test Fill Time should be within " + CType(min_i_dptestfilltime, String) + " to " + CType(max_i_dptestfilltime, String))
+                        txtbx_RcpCreateDPFill.Text = Nothing
+                        txtbx_RcpCreateDPFill.Focus()
+                        onContinue = False
+
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Fill Time")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateDPBleed.Text = "" And txtbx_RcpCreateDPBleed.Text = "." Then
+                'Check air bleed time
+
+                'Check the text is empty
+                If Not txtbx_RcpCreateDPBleed.Text = "" Then
+                    'Convert to the required type
+                    i_dptestbleedtime = CType(txtbx_RcpCreateDPBleed.Text, Integer)
+                    'Check the value within range
+                    If i_dptestbleedtime < min_i_dptestbleedtime Or i_dptestbleedtime > max_i_dptestbleedtime Then
+                        RecipeMessage(20, "DP Test Bleed Time should be within " + CType(min_i_dptestbleedtime, String) + " to " + CType(max_i_dptestbleedtime, String))
+                        txtbx_RcpCreateDPBleed.Text = Nothing
+                        txtbx_RcpCreateDPBleed.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Bleed Time")
                     onContinue = False
                 End If
             End If
 
+
             If onContinue = True Then
-                If txtbx_RcpCreateDPFlow.Text = "" And txtbx_RcpCreateDPFlow.Text = "." Then
+                'Check for DP Test Flowrate
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateDPFlow.Text = "" And Not txtbx_RcpCreateDPFlow.Text = "." Then
+                    'Convert to the required type
+                    d_dptestflow = CType(txtbx_RcpCreateDPFlow.Text, Decimal)
+                    'Check the value within range
+                    If d_dptestflow < min_d_dptestflow Or d_dptestflow > max_d_dptestflow Then
+                        RecipeMessage(20, "DP Test Flowrate should be within " + CType(min_d_dptestflow, String) + " to " + CType(max_d_dptestflow, String))
+                        txtbx_RcpCreateDPFlow.Text = Nothing
+                        txtbx_RcpCreateDPFlow.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Flowrate")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateDPFlowTol.Text = "" And txtbx_RcpCreateDPFlowTol.Text = "." Then
-                    RecipeMessage(19, "DP Test Flow Tolerance")
+                'Check for DP Test Flow Tolerance
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateDPFlowTol.Text = "" And Not txtbx_RcpCreateDPFlowTol.Text = "." Then
+                    'Convert to the required type
+                    d_dptestflowtol = CType(txtbx_RcpCreateDPFlowTol.Text, Decimal)
+                    'Check the value within range
+                    If d_dptestflowtol < min_d_dptestflowtol Or d_dptestflowtol > max_d_dptestflowtol Then
+                        RecipeMessage(20, "DP Test Flow Tolerance should be within " + CType(min_d_dptestflowtol, String) + " to " + CType(max_d_dptestflowtol, String))
+                        txtbx_RcpCreateDPFlowTol.Text = Nothing
+                        txtbx_RcpCreateDPFlowTol.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "DP Test Flow tolerance")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateDPPressure.Text = "" And txtbx_RcpCreateDPPressure.Text = "." Then
-                    RecipeMessage(19, "DP Test Pressure")
+                'Check for DP Test Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateDPPressure.Text = "" And Not txtbx_RcpCreateDPPressure.Text = "." Then
+                    'Convert to the required type
+                    d_dptestpressure = CType(txtbx_RcpCreateDPPressure.Text, Decimal)
+                    'Check the value within range
+                    If d_dptestpressure < min_d_dptestpressure Or d_dptestpressure > max_d_dptestpressure Then
+                        RecipeMessage(20, "DP Test Pressure should be within " + CType(min_d_dptestpressure, String) + " to " + CType(max_d_dptestpressure, String))
+                        txtbx_RcpCreateDPPressure.Text = Nothing
+                        txtbx_RcpCreateDPPressure.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "DP Test Back Pressure")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateDPStabilize.Text = "" And txtbx_RcpCreateDPStabilize.Text = "." Then
+                'Check for DP Test Stabilize Time
+                'Check the text is empty
+                If Not txtbx_RcpCreateDPStabilize.Text = "" Then
+                    'Convert to the required type
+                    i_dpteststabilize = CType(txtbx_RcpCreateDPStabilize.Text, Integer)
+                    'Check the value within range
+                    If i_dpteststabilize < min_i_dpteststabilize Or i_dpteststabilize > max_i_dpteststabilize Then
+                        RecipeMessage(20, "DP Test Stabilize Time should be within " + CType(min_i_dpteststabilize, String) + " to " + CType(max_i_dpteststabilize, String))
+                        txtbx_RcpCreateDPStabilize.Text = Nothing
+                        txtbx_RcpCreateDPStabilize.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Stabilize Time")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateDPTime.Text = "" And txtbx_RcpCreateDPTime.Text = "." Then
+                'Check for DP Test Time
+                'Check the text is empty
+                If Not txtbx_RcpCreateDPTime.Text = "" Then
+                    'Convert to the required type
+                    i_dptesttime = CType(txtbx_RcpCreateDPTime.Text, Integer)
+                    'Check the value within range
+                    If i_dptesttime < min_i_dptesttime Or i_dptesttime > max_i_dptesttime Then
+                        RecipeMessage(20, "DP Test Time should be within " + CType(min_i_dptesttime, String) + " to " + CType(max_i_dptesttime, String))
+                        txtbx_RcpCreateDPTime.Text = Nothing
+                        txtbx_RcpCreateDPTime.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Time")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateDPLowLimit.Text = "" And txtbx_RcpCreateDPLowLimit.Text = "." Then
+                'Check for DP Test LowerLimit
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateDPLowLimit.Text = "" And Not txtbx_RcpCreateDPLowLimit.Text = "." Then
+                    'Convert to the required type
+                    d_dptestlowlimit = CType(txtbx_RcpCreateDPLowLimit.Text, Decimal)
+                    'Check the value within range
+                    If d_dptestlowlimit < min_d_dptestlowlimit Or d_dptestlowlimit > max_d_dptestlowlimit Then
+                        RecipeMessage(20, "DP Test Lower Limit should be within " + CType(min_d_dptestlowlimit, String) + " to " + CType(max_d_dptestlowlimit, String))
+                        txtbx_RcpCreateDPLowLimit.Text = Nothing
+                        txtbx_RcpCreateDPLowLimit.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Lower Limit")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateDPUpLimit.Text = "" And txtbx_RcpCreateDPUpLimit.Text = "." Then
+                'check for dp test upperlimit
+                'check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateDPUpLimit.Text = "" And Not txtbx_RcpCreateDPUpLimit.Text = "." Then
+                    'convert to the required type
+                    d_dptestuplimit = CType(txtbx_RcpCreateDPUpLimit.Text, Decimal)
+                    'check the value within range
+                    If d_dptestuplimit < min_d_dptestuplimit Or d_dptestuplimit > max_d_dptestuplimit Then
+                        RecipeMessage(20, "DP Test Upper Limit should be within " + CType(min_d_dptestuplimit, String) + " to " + CType(max_d_dptestuplimit, String))
+                        txtbx_RcpCreateDPUpLimit.Text = Nothing
+                        txtbx_RcpCreateDPUpLimit.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Upper Limit")
                     onContinue = False
                 End If
             End If
-
             If onContinue = True Then
-                If txtbx_RcpCreateDPPoints.Text = "" And txtbx_RcpCreateDPPoints.Text = "." Then
-                    RecipeMessage(19, "DP Test Points")
+                'Check for DP Test points
+                'Check the text is empty
+                If Not txtbx_RcpCreateDPPoints.Text = "" Then
+                    'Convert to the required type
+                    i_dptestpoints = CType(txtbx_RcpCreateDPPoints.Text, Integer)
+                    'Check the value within range
+                    If i_dptestpoints < min_i_dptestpoints Or i_dptestpoints > max_i_dptestpoints Then
+                        RecipeMessage(20, "DP Test Point should be within " + CType(min_i_dptestpoints, String) + " to " + CType(max_i_dptestpoints, String))
+                        txtbx_RcpCreateDPPoints.Text = Nothing
+                        txtbx_RcpCreateDPPoints.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "DP Test points")
                     onContinue = False
                 End If
             End If
+
+
         End If
 
 
         'In Case of Drain-1 Enabled, the Field should not be empty
         If checkbx_CreateDrain1.Checked = True Then
             If onContinue = True Then
-                If txtbx_RcpCreateDrain1Pressure.Text = "" And txtbx_RcpCreateDrain1Pressure.Text = "." Then
+
+
+                'Check for Drain-1 Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateDrain1Pressure.Text = "" And Not txtbx_RcpCreateDrain1Pressure.Text = "." Then
+                    'Convert to the required type
+                    d_drain1pressure = CType(txtbx_RcpCreateDrain1Pressure.Text, Decimal)
+                    'Check the value within range
+                    If d_drain1pressure < min_d_drain1pressure Or d_drain1pressure > max_d_drain1pressure Then
+                        RecipeMessage(20, "Drain-1 Pressure should be within " + CType(min_d_drain1pressure, String) + " to " + CType(max_d_drain1pressure, String))
+                        txtbx_RcpCreateDrain1Pressure.Text = Nothing
+                        txtbx_RcpCreateDrain1Pressure.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-1 Pressure")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateDrain1Time.Text = "" And txtbx_RcpCreateDrain1Time.Text = "." Then
+
+                'Check for Drain-1 Time
+                'Check the text is empty
+                If Not txtbx_RcpCreateDrain1Time.Text = "" Then
+                    'Convert to the required type
+                    i_drain1time = CType(txtbx_RcpCreateDrain1Time.Text, Integer)
+                    'Check the value within range
+                    If i_drain1time < min_i_drain1time Or i_drain1time > max_i_drain1time Then
+                        RecipeMessage(20, "Drain-1 Time should be within " + CType(min_i_drain1time, String) + " to " + CType(max_i_drain1time, String))
+                        txtbx_RcpCreateDrain1Time.Text = Nothing
+                        txtbx_RcpCreateDrain1Time.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-1 Time")
                     onContinue = False
                 End If
+
             End If
+
         End If
 
         'In Case of Drain-2 Enabled, the Field should not be empty
         If checkbx_CreateDrain2.Checked = True Then
             If onContinue = True Then
-                If txtbx_RcpCreateDrain2Pressure.Text = "" And txtbx_RcpCreateDrain2Pressure.Text = "." Then
+
+                'Check for Drain-2 Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateDrain2Pressure.Text = "" And Not txtbx_RcpCreateDrain2Pressure.Text = "." Then
+                    'Convert to the required type
+                    d_drain2pressure = CType(txtbx_RcpCreateDrain2Pressure.Text, Decimal)
+                    'Check the value within range
+                    If d_drain2pressure < min_d_drain2pressure Or d_drain2pressure > max_d_drain2pressure Then
+                        RecipeMessage(20, "Drain-2 Pressure should be within " + CType(min_d_drain2pressure, String) + " to " + CType(max_d_drain2pressure, String))
+                        txtbx_RcpCreateDrain2Pressure.Text = Nothing
+                        txtbx_RcpCreateDrain2Pressure.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-2 Pressure")
                     onContinue = False
                 End If
+
+
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateDrain2Time.Text = "" And txtbx_RcpCreateDrain2Time.Text = "." Then
+                'Check for Drain-2 Time
+                'Check the text is empty
+                If Not txtbx_RcpCreateDrain2Time.Text = "" Then
+                    'Convert to the required type
+                    i_drain2time = CType(txtbx_RcpCreateDrain2Time.Text, Integer)
+                    'Check the value within range
+                    If i_drain2time < min_i_drain2time Or i_drain2time > max_i_drain2time Then
+                        RecipeMessage(20, "Drain-2 Time should be within " + CType(min_i_drain2time, String) + " to " + CType(max_i_drain2time, String))
+                        txtbx_RcpCreateDrain2Time.Text = Nothing
+                        txtbx_RcpCreateDrain2Time.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-2 Time")
                     onContinue = False
                 End If
             End If
+
         End If
 
         'In Case of Drain-3 Enabled, the Field should not be empty
         If checkbx_CreateDrain3.Checked = True Then
             If onContinue = True Then
-                If txtbx_RcpCreateDrain3Pressure.Text = "" And txtbx_RcpCreateDrain3Pressure.Text = "." Then
+
+                'Check for FDrain-3 Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpCreateDrain3Pressure.Text = "" And Not txtbx_RcpCreateDrain3Pressure.Text = "." Then
+                    'Convert to the required type
+                    d_drain3pressure = CType(txtbx_RcpCreateDrain3Pressure.Text, Decimal)
+                    'Check the value within range
+                    If d_drain3pressure < min_d_drain3pressure Or d_drain3pressure > max_d_drain3pressure Then
+                        RecipeMessage(20, "Drain-3 Pressure should be within " + CType(min_d_drain3pressure, String) + " to " + CType(max_d_drain3pressure, String))
+                        txtbx_RcpCreateDrain3Pressure.Text = Nothing
+                        txtbx_RcpCreateDrain3Pressure.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-3 Pressure")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpCreateDrain3Time.Text = "" And txtbx_RcpCreateDrain3Time.Text = "." Then
+                'Check for Drain-3 Time
+                'Check the text is empty
+                If Not txtbx_RcpCreateDrain3Time.Text = "" Then
+                    'Convert to the required type
+                    i_drain3time = CType(txtbx_RcpCreateDrain3Time.Text, Integer)
+                    'Check the value within range
+                    If i_drain3time < min_i_drain3time Or i_drain3time > max_i_drain3time Then
+                        RecipeMessage(20, "Drain-3 Time should be within " + CType(min_i_drain3time, String) + " to " + CType(max_i_drain3time, String))
+                        txtbx_RcpCreateDrain3Time.Text = Nothing
+                        txtbx_RcpCreateDrain3Time.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-3 Time")
                     onContinue = False
                 End If
             End If
+
         End If
+
+
+#End Region
 
         If onContinue = True Then
             If checkbx_CreateFlush1.Checked = True Then
@@ -2627,54 +3032,7 @@ Public Class FormRecipeManagement
             End If
         End If
 
-        'On Enabling the time for process should be greater than Zero
-        'If Flush-1 is enabled, Check if the Flush-1 time is greater than Zero
-        If onContinue = True Then
-            If checkbx_CreateFlush1.Checked = True And i_flush1time = 0 Then
-                RecipeMessage(23, "Flush-1")
-                onContinue = False
-            End If
-        End If
 
-        'If Flush-2 is enabled, Check if the Flush-2 time is greater than Zero
-        If onContinue = True Then
-            If checkbx_CreateFlush2.Checked = True And i_flush2time = 0 Then
-                RecipeMessage(23, "Flush-2")
-                onContinue = False
-            End If
-        End If
-
-        'If DP Test-1 is enabled, Check if the DP Test time is greater than Zero
-        If onContinue = True Then
-            If checkbx_CreateDPTest1.Checked = True And i_dptesttime = 0 Then
-                RecipeMessage(23, "DP Test-1")
-                onContinue = False
-            End If
-        End If
-
-        'If Drain-1 is enabled, Check if the Drain-1 time is greater than Zero
-        If onContinue = True Then
-            If checkbx_CreateDrain1.Checked = True And i_drain1time = 0 Then
-                RecipeMessage(23, "Drain-1")
-                onContinue = False
-            End If
-        End If
-
-        'If Drain-2 is enabled, Check if the Drain-2 time is greater than Zero
-        If onContinue = True Then
-            If checkbx_CreateDrain2.Checked = True And i_drain2time = 0 Then
-                RecipeMessage(23, "Drain-2")
-                onContinue = False
-            End If
-        End If
-
-        'If Drain-3 is enabled, Check if the Drain-3 time is greater than Zero
-        If onContinue = True Then
-            If checkbx_CreateDrain3.Checked = True And i_drain3time = 0 Then
-                RecipeMessage(23, "Drain-3")
-                onContinue = False
-            End If
-        End If
 
         If onContinue = True Then
             ' Upon all previous conditions are true,
@@ -3969,43 +4327,7 @@ Public Class FormRecipeManagement
 
         txtbx_RcpEditVerTol.Text = CType(d_vertol, String)
 
-        'txtbx_RcpEditFlush1Fill.Text = CType(i_flush1filltime, String)
-        'txtbx_RcpEditFlush1Bleed.Text = CType(i_flush1bleedtime, String)
-        'txtbx_RcpEditFlush1Flow.Text = CType(d_flush1flow, String)
-        'txtbx_RcpEditFlush1FlowTol.Text = CType(d_flush1flowtol, String)
-        'txtbx_RcpEditFlush1Pressure.Text = CType(d_flush1pressure, String)
-        'txtbx_RcpEditFlush1Stabilize.Text = CType(i_flush1stabilize, String)
-        'txtbx_RcpEditFlush1Time.Text = CType(i_flush1time, String)
 
-        'txtbx_RcpEditDPFill.Text = CType(i_dptestfilltime, String)
-        'txtbx_RcpEditDPBleed.Text = CType(i_dptestbleedtime, String)
-        'txtbx_RcpEditDPFlow.Text = CType(d_dptestflow, String)
-        'txtbx_RcpEditDPFlowTol.Text = CType(d_dptestflowtol, String)
-        'txtbx_RcpEditDPPressure.Text = CType(d_dptestpressure, String)
-        'txtbx_RcpEditDPStabilize.Text = CType(i_dpteststabilize, String)
-        'txtbx_RcpEditDPTime.Text = CType(i_dptesttime, String)
-        'txtbx_RcpEditDPLowLimit.Text = CType(d_dptestlowlimit, String)
-        'txtbx_RcpEditDPUpLimit.Text = CType(d_dptestuplimit, String)
-        'txtbx_RcpEditDPPoints.Text = CType(i_dptestpoints, String)
-
-        'txtbx_RcpEditFlush2Fill.Text = CType(i_flush2filltime, String)
-        'txtbx_RcpEditFlush2Bleed.Text = CType(i_flush2bleedtime, String)
-        'txtbx_RcpEditFlush2Flow.Text = CType(d_flush2flow, String)
-        'txtbx_RcpEditFlush2FlowTol.Text = CType(d_flush2flowtol, String)
-        'txtbx_RcpEditFlush2Pressure.Text = CType(d_flush2pressure, String)
-        'txtbx_RcpEditFlush2Stabilize.Text = CType(i_flush2stabilize, String)
-        'txtbx_RcpEditFlush2Time.Text = CType(i_flush2time, String)
-
-
-
-        'txtbx_RcpEditDrain1Pressure.Text = CType(d_drain1pressure, String)
-        'txtbx_RcpEditDrain1Time.Text = CType(i_drain1time, String)
-
-        'txtbx_RcpEditDrain2Pressure.Text = CType(d_drain2pressure, String)
-        'txtbx_RcpEditDrain2Time.Text = CType(i_drain2time, String)
-
-        'txtbx_RcpEditDrain3Pressure.Text = CType(d_drain3pressure, String)
-        'txtbx_RcpEditDrain3Time.Text = CType(i_drain3time, String)
 
 
         If parameterarr(9) = "Enable" Then
@@ -4204,54 +4526,165 @@ Public Class FormRecipeManagement
         Dim dtrecipeidcheck As DataTable = SQL.ReadRecords("select * from RecipeTable where recipe_id = '" + RecipeID + "'")
 
 
+#Region "Recipe Edit Parameter Range Validating Event"
+        If onContinue = True Then
+            'Check verification tolerance
+
+            'Check the text is empty or has only decimal point
+            If Not txtbx_RcpEditVerTol.Text = "" And Not txtbx_RcpEditVerTol.Text = "." Then
+                'Convert to the required type
+                d_vertol = CType(txtbx_RcpEditVerTol.Text, Decimal)
+                'Check the value within range
+                If d_vertol < min_d_vertol Or d_vertol > max_d_vertol Then
+                    RecipeMessage(20, "Verification tolerance should be within " + CType(min_d_vertol, String) + " to " + CType(max_d_vertol, String))
+                    txtbx_RcpEditVerTol.Text = Nothing
+                    txtbx_RcpEditVerTol.Focus()
+                    onContinue = False
+                End If
+            Else
+                RecipeMessage(19, "Verification tolerance")
+                onContinue = False
+            End If
+        End If
+
+
 
         'In Case of Flush-1 Enabled, the Field should not be empty
 
         If checkbx_EditFlush1.Checked = True Then
             If onContinue = True Then
-                If txtbx_RcpEditFlush1Fill.Text = "" And txtbx_RcpEditFlush1Fill.Text = "." Then
+                'Check fill time 
+
+                'Check the text is empty
+                If Not txtbx_RcpEditFlush1Fill.Text = "" Then
+                    'Convert to the required type
+                    i_flush1filltime = CType(txtbx_RcpEditFlush1Fill.Text, Integer)
+                    'Check the value within range
+                    If i_flush1filltime < min_i_flush1filltime Or i_flush1filltime > max_i_flush1filltime Then
+                        RecipeMessage(20, "Flush-1 Fill Time should be within " + CType(min_i_flush1filltime, String) + " to " + CType(max_i_flush1filltime, String))
+                        txtbx_RcpEditFlush1Fill.Text = Nothing
+                        txtbx_RcpEditFlush1Fill.Focus()
+                        onContinue = False
+
+                    End If
+                Else
                     RecipeMessage(19, "Flush-1 Fill Time")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush1Bleed.Text = "" And txtbx_RcpEditFlush1Bleed.Text = "." Then
+                'Check air bleed time
+
+                'Check the text is empty
+                If Not txtbx_RcpEditFlush1Bleed.Text = "" Then
+                    'Convert to the required type
+                    i_flush1bleedtime = CType(txtbx_RcpEditFlush1Bleed.Text, Integer)
+                    'Check the value within range
+                    If i_flush1bleedtime < min_i_flush1bleedtime Or i_flush1bleedtime > max_i_flush1bleedtime Then
+                        RecipeMessage(20, "Flush-1 Bleed Time should be within " + CType(min_i_flush1bleedtime, String) + " to " + CType(max_i_flush1bleedtime, String))
+                        txtbx_RcpEditFlush1Bleed.Text = Nothing
+                        txtbx_RcpEditFlush1Bleed.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-1 Bleed Time")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush1Flow.Text = "" And txtbx_RcpEditFlush1Flow.Text = "." Then
+                'Check for Flush-1 Flowrate
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditFlush1Flow.Text = "" And Not txtbx_RcpEditFlush1Flow.Text = "." Then
+                    'Convert to the required type
+                    d_flush1flow = CType(txtbx_RcpEditFlush1Flow.Text, Decimal)
+                    'Check the value within range
+                    If d_flush1flow < min_d_flush1flow Or d_flush1flow > max_d_flush1flow Then
+                        RecipeMessage(20, "Flush-1 Flowrate should be within " + CType(min_d_flush1flow, String) + " to " + CType(max_d_flush1flow, String))
+                        txtbx_RcpEditFlush1Flow.Text = Nothing
+                        txtbx_RcpEditFlush1Flow.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-1 Flowrate")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush1FlowTol.Text = "" And txtbx_RcpEditFlush1FlowTol.Text = "." Then
-                    RecipeMessage(19, "Flush-1 Flow Tolerance")
+                'Check for Flush-1 Flow Tolerance
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditFlush1FlowTol.Text = "" And Not txtbx_RcpEditFlush1FlowTol.Text = "." Then
+                    'Convert to the required type
+                    d_flush1flowtol = CType(txtbx_RcpEditFlush1FlowTol.Text, Decimal)
+                    'Check the value within range
+                    If d_flush1flowtol < min_d_flush1flowtol Or d_flush1flowtol > max_d_flush1flowtol Then
+                        RecipeMessage(20, "Flush-1 Flow Tolerance should be within " + CType(min_d_flush1flowtol, String) + " to " + CType(max_d_flush1flowtol, String))
+                        txtbx_RcpEditFlush1FlowTol.Text = Nothing
+                        txtbx_RcpEditFlush1FlowTol.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-1 Flow tolerance")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush1Pressure.Text = "" And txtbx_RcpEditFlush1Pressure.Text = "." Then
-                    RecipeMessage(19, "Flush-1 Pressure")
+                'Check for Flush-1 Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditFlush1Pressure.Text = "" And Not txtbx_RcpEditFlush1Pressure.Text = "." Then
+                    'Convert to the required type
+                    d_flush1pressure = CType(txtbx_RcpEditFlush1Pressure.Text, Decimal)
+                    'Check the value within range
+                    If d_flush1pressure < min_d_flush1pressure Or d_flush1pressure > max_d_flush1pressure Then
+                        RecipeMessage(20, "Flush-1 Pressure should be within " + CType(min_d_flush1pressure, String) + " to " + CType(max_d_flush1pressure, String))
+                        txtbx_RcpEditFlush1Pressure.Text = Nothing
+                        txtbx_RcpEditFlush1Pressure.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-1 Back Pressure")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush1Stabilize.Text = "" And txtbx_RcpEditFlush1Stabilize.Text = "." Then
+                'Check for Flush-1 Stabilize Time
+                'Check the text is empty
+                If Not txtbx_RcpEditFlush1Stabilize.Text = "" Then
+                    'Convert to the required type
+                    i_flush1stabilize = CType(txtbx_RcpEditFlush1Stabilize.Text, Integer)
+                    'Check the value within range
+                    If i_flush1stabilize < min_i_flush1stabilize Or i_flush1stabilize > max_i_flush1stabilize Then
+                        RecipeMessage(20, "Flush-1 Stabilize Time should be within " + CType(min_i_flush1stabilize, String) + " to " + CType(max_i_flush1stabilize, String))
+                        txtbx_RcpEditFlush1Stabilize.Text = Nothing
+                        txtbx_RcpEditFlush1Stabilize.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-1 Stabilize Time")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush1Time.Text = "" And txtbx_RcpEditFlush1Time.Text = "." Then
+                'Check for Flush-1 Time
+                'Check the text is empty
+                If Not txtbx_RcpEditFlush1Time.Text = "" Then
+                    'Convert to the required type
+                    i_flush1time = CType(txtbx_RcpEditFlush1Time.Text, Integer)
+                    'Check the value within range
+                    If i_flush1time < min_i_flush1time Or i_flush1time > max_i_flush1time Then
+                        RecipeMessage(20, "Flush-1 Time should be within " + CType(min_i_flush1time, String) + " to " + CType(max_i_flush1time, String))
+                        txtbx_RcpEditFlush1Time.Text = Nothing
+                        txtbx_RcpEditFlush1Time.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-1 Time")
                     onContinue = False
                 End If
@@ -4261,49 +4694,137 @@ Public Class FormRecipeManagement
         'In Case of Flush-2 Enabled, the Field should not be empty
         If checkbx_EditFlush2.Checked = True Then
             If onContinue = True Then
-                If txtbx_RcpEditFlush2Fill.Text = "" And txtbx_RcpEditFlush2Fill.Text = "." Then
+                'Check fill time 
+
+                'Check the text is empty
+                If Not txtbx_RcpEditFlush2Fill.Text = "" Then
+                    'Convert to the required type
+                    i_flush2filltime = CType(txtbx_RcpEditFlush2Fill.Text, Integer)
+                    'Check the value within range
+                    If i_flush2filltime < min_i_flush2filltime Or i_flush2filltime > max_i_flush2filltime Then
+                        RecipeMessage(20, "Flush-2 Fill Time should be within " + CType(min_i_flush2filltime, String) + " to " + CType(max_i_flush2filltime, String))
+                        txtbx_RcpEditFlush2Fill.Text = Nothing
+                        txtbx_RcpEditFlush2Fill.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-2 Fill Time")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush2Bleed.Text = "" And txtbx_RcpEditFlush2Bleed.Text = "." Then
+                'Check air bleed time
+
+                'Check the text is empty
+                If Not txtbx_RcpEditFlush2Bleed.Text = "" Then
+                    'Convert to the required type
+                    i_flush2bleedtime = CType(txtbx_RcpEditFlush2Bleed.Text, Integer)
+                    'Check the value within range
+                    If i_flush2bleedtime < min_i_flush2bleedtime Or i_flush2bleedtime > max_i_flush2bleedtime Then
+                        RecipeMessage(20, "Flush-2 Bleed Time should be within " + CType(min_i_flush2bleedtime, String) + " to " + CType(max_i_flush2bleedtime, String))
+                        txtbx_RcpEditFlush2Bleed.Text = Nothing
+                        txtbx_RcpEditFlush2Bleed.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-2 Bleed Time")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush2Flow.Text = "" And txtbx_RcpEditFlush2Flow.Text = "." Then
+                'Check for Flush-2 Flowrate
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditFlush2Flow.Text = "" And Not txtbx_RcpEditFlush2Flow.Text = "." Then
+                    'Convert to the required type
+                    d_flush2flow = CType(txtbx_RcpEditFlush2Flow.Text, Decimal)
+                    'Check the value within range
+                    If d_flush2flow < min_d_flush2flow Or d_flush2flow > max_d_flush2flow Then
+                        RecipeMessage(20, "Flush-2 Flowrate should be within " + CType(min_d_flush2flow, String) + " to " + CType(max_d_flush2flow, String))
+                        txtbx_RcpEditFlush2Flow.Text = Nothing
+                        txtbx_RcpEditFlush2Flow.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-2 Flowrate")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush2FlowTol.Text = "" And txtbx_RcpEditFlush2FlowTol.Text = "." Then
-                    RecipeMessage(19, "Flush-2 Flow Tolerance")
+                'Check for Flush-2 Flow Tolerance
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditFlush2FlowTol.Text = "" And Not txtbx_RcpEditFlush2FlowTol.Text = "." Then
+                    'Convert to the required type
+                    d_flush2flowtol = CType(txtbx_RcpEditFlush2FlowTol.Text, Decimal)
+                    'Check the value within range
+                    If d_flush2flowtol < min_d_flush2flowtol Or d_flush2flowtol > max_d_flush2flowtol Then
+                        RecipeMessage(20, "Flush-2 Flow Tolerance should be within " + CType(min_d_flush2flowtol, String) + " to " + CType(max_d_flush2flowtol, String))
+                        txtbx_RcpEditFlush2FlowTol.Text = Nothing
+                        txtbx_RcpEditFlush2FlowTol.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-2 Flow tolerance")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush2Pressure.Text = "" And txtbx_RcpEditFlush2Pressure.Text = "." Then
-                    RecipeMessage(19, "Flush-2 Pressure")
+                'Check for Flush-2 Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditFlush2Pressure.Text = "" And Not txtbx_RcpEditFlush2Pressure.Text = "." Then
+                    'Convert to the required type
+                    d_flush2pressure = CType(txtbx_RcpEditFlush2Pressure.Text, Decimal)
+                    'Check the value within range
+                    If d_flush2pressure < min_d_flush2pressure Or d_flush2pressure > max_d_flush2pressure Then
+                        RecipeMessage(20, "Flush-2 Pressure should be within " + CType(min_d_flush2pressure, String) + " to " + CType(max_d_flush2pressure, String))
+                        txtbx_RcpEditFlush2Pressure.Text = Nothing
+                        txtbx_RcpEditFlush2Pressure.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-2 Back Pressure")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush2Stabilize.Text = "" And txtbx_RcpEditFlush2Stabilize.Text = "." Then
+                'Check for Flush-2 Stabilize Time
+                'Check the text is empty
+                If Not txtbx_RcpEditFlush2Stabilize.Text = "" Then
+                    'Convert to the required type
+                    i_flush2stabilize = CType(txtbx_RcpEditFlush2Stabilize.Text, Integer)
+                    'Check the value within range
+                    If i_flush2stabilize < min_i_flush2stabilize Or i_flush2stabilize > max_i_flush2stabilize Then
+                        RecipeMessage(20, "Flush-2 Stabilize Time should be within " + CType(min_i_flush2stabilize, String) + " to " + CType(max_i_flush2stabilize, String))
+                        txtbx_RcpEditFlush2Stabilize.Text = Nothing
+                        txtbx_RcpEditFlush2Stabilize.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-2 Stabilize Time")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditFlush2Time.Text = "" And txtbx_RcpEditFlush2Time.Text = "." Then
+                'Check for Flush-2 Time
+                'Check the text is empty
+                If Not txtbx_RcpEditFlush2Time.Text = "" Then
+                    'Convert to the required type
+                    i_flush2time = CType(txtbx_RcpEditFlush2Time.Text, Integer)
+                    'Check the value within range
+                    If i_flush2time < min_i_flush2time Or i_flush2time > max_i_flush2time Then
+                        RecipeMessage(20, "Flush-2 Time should be within " + CType(min_i_flush2time, String) + " to " + CType(max_i_flush2time, String))
+                        txtbx_RcpEditFlush2Time.Text = Nothing
+                        txtbx_RcpEditFlush2Time.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Flush-2 Time")
                     onContinue = False
                 End If
@@ -4313,71 +4834,195 @@ Public Class FormRecipeManagement
         'In Case of DP Test-1 Enabled, the Field should not be empty
         If checkbx_EditDPTest1.Checked = True Then
             If onContinue = True Then
-                If txtbx_RcpEditDPFill.Text = "" And txtbx_RcpEditDPFill.Text = "." Then
+                'Check fill time 
+
+                'Check the text is empty
+                If Not txtbx_RcpEditDPFill.Text = "" Then
+                    'Convert to the required type
+                    i_dptestfilltime = CType(txtbx_RcpEditDPFill.Text, Integer)
+                    'Check the value within range
+                    If i_dptestfilltime < min_i_dptestfilltime Or i_dptestfilltime > max_i_dptestfilltime Then
+                        RecipeMessage(20, "DP Test Fill Time should be within " + CType(min_i_dptestfilltime, String) + " to " + CType(max_i_dptestfilltime, String))
+                        txtbx_RcpEditDPFill.Text = Nothing
+                        txtbx_RcpEditDPFill.Focus()
+                        onContinue = False
+
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Fill Time")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDPBleed.Text = "" And txtbx_RcpEditDPBleed.Text = "." Then
+                'Check air bleed time
+
+                'Check the text is empty
+                If Not txtbx_RcpEditDPBleed.Text = "" Then
+                    'Convert to the required type
+                    i_dptestbleedtime = CType(txtbx_RcpEditDPBleed.Text, Integer)
+                    'Check the value within range
+                    If i_dptestbleedtime < min_i_dptestbleedtime Or i_dptestbleedtime > max_i_dptestbleedtime Then
+                        RecipeMessage(20, "DP Test Bleed Time should be within " + CType(min_i_dptestbleedtime, String) + " to " + CType(max_i_dptestbleedtime, String))
+                        txtbx_RcpEditDPBleed.Text = Nothing
+                        txtbx_RcpEditDPBleed.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Bleed Time")
                     onContinue = False
                 End If
             End If
 
+
             If onContinue = True Then
-                If txtbx_RcpEditDPFlow.Text = "" And txtbx_RcpEditDPFlow.Text = "." Then
+                'Check for DP Test Flowrate
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditDPFlow.Text = "" And Not txtbx_RcpEditDPFlow.Text = "." Then
+                    'Convert to the required type
+                    d_dptestflow = CType(txtbx_RcpEditDPFlow.Text, Decimal)
+                    'Check the value within range
+                    If d_dptestflow < min_d_dptestflow Or d_dptestflow > max_d_dptestflow Then
+                        RecipeMessage(20, "DP Test Flowrate should be within " + CType(min_d_dptestflow, String) + " to " + CType(max_d_dptestflow, String))
+                        txtbx_RcpEditDPFlow.Text = Nothing
+                        txtbx_RcpEditDPFlow.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Flowrate")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDPFlowTol.Text = "" And txtbx_RcpEditDPFlowTol.Text = "." Then
-                    RecipeMessage(19, "DP Test Flow Tolerance")
+                'Check for DP Test Flow Tolerance
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditDPFlowTol.Text = "" And Not txtbx_RcpEditDPFlowTol.Text = "." Then
+                    'Convert to the required type
+                    d_dptestflowtol = CType(txtbx_RcpEditDPFlowTol.Text, Decimal)
+                    'Check the value within range
+                    If d_dptestflowtol < min_d_dptestflowtol Or d_dptestflowtol > max_d_dptestflowtol Then
+                        RecipeMessage(20, "DP Test Flow Tolerance should be within " + CType(min_d_dptestflowtol, String) + " to " + CType(max_d_dptestflowtol, String))
+                        txtbx_RcpEditDPFlowTol.Text = Nothing
+                        txtbx_RcpEditDPFlowTol.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "DP Test Flow tolerance")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDPPressure.Text = "" And txtbx_RcpEditDPPressure.Text = "." Then
-                    RecipeMessage(19, "DP Test Pressure")
+                'Check for DP Test Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditDPPressure.Text = "" And Not txtbx_RcpEditDPPressure.Text = "." Then
+                    'Convert to the required type
+                    d_dptestpressure = CType(txtbx_RcpEditDPPressure.Text, Decimal)
+                    'Check the value within range
+                    If d_dptestpressure < min_d_dptestpressure Or d_dptestpressure > max_d_dptestpressure Then
+                        RecipeMessage(20, "DP Test Pressure should be within " + CType(min_d_dptestpressure, String) + " to " + CType(max_d_dptestpressure, String))
+                        txtbx_RcpEditDPPressure.Text = Nothing
+                        txtbx_RcpEditDPPressure.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "DP Test Back Pressure")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDPStabilize.Text = "" And txtbx_RcpEditDPStabilize.Text = "." Then
+                'Check for DP Test Stabilize Time
+                'Check the text is empty
+                If Not txtbx_RcpEditDPStabilize.Text = "" Then
+                    'Convert to the required type
+                    i_dpteststabilize = CType(txtbx_RcpEditDPStabilize.Text, Integer)
+                    'Check the value within range
+                    If i_dpteststabilize < min_i_dpteststabilize Or i_dpteststabilize > max_i_dpteststabilize Then
+                        RecipeMessage(20, "DP Test Stabilize Time should be within " + CType(min_i_dpteststabilize, String) + " to " + CType(max_i_dpteststabilize, String))
+                        txtbx_RcpEditDPStabilize.Text = Nothing
+                        txtbx_RcpEditDPStabilize.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Stabilize Time")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDPTime.Text = "" And txtbx_RcpEditDPTime.Text = "." Then
+                'Check for DP Test Time
+                'Check the text is empty
+                If Not txtbx_RcpEditDPTime.Text = "" Then
+                    'Convert to the required type
+                    i_dptesttime = CType(txtbx_RcpEditDPTime.Text, Integer)
+                    'Check the value within range
+                    If i_dptesttime < min_i_dptesttime Or i_dptesttime > max_i_dptesttime Then
+                        RecipeMessage(20, "DP Test Time should be within " + CType(min_i_dptesttime, String) + " to " + CType(max_i_dptesttime, String))
+                        txtbx_RcpEditDPTime.Text = Nothing
+                        txtbx_RcpEditDPTime.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Time")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDPLowLimit.Text = "" And txtbx_RcpEditDPLowLimit.Text = "." Then
+                'Check for DP Test LowerLimit
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditDPLowLimit.Text = "" And Not txtbx_RcpEditDPLowLimit.Text = "." Then
+                    'Convert to the required type
+                    d_dptestlowlimit = CType(txtbx_RcpEditDPLowLimit.Text, Decimal)
+                    'Check the value within range
+                    If d_dptestlowlimit < min_d_dptestlowlimit Or d_dptestlowlimit > max_d_dptestlowlimit Then
+                        RecipeMessage(20, "DP Test Lower Limit should be within " + CType(min_d_dptestlowlimit, String) + " to " + CType(max_d_dptestlowlimit, String))
+                        txtbx_RcpEditDPLowLimit.Text = Nothing
+                        txtbx_RcpEditDPLowLimit.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Lower Limit")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDPUpLimit.Text = "" And txtbx_RcpEditDPUpLimit.Text = "." Then
+                'check for dp test upperlimit
+                'check the text is empty or has only decimal point
+                If Not txtbx_RcpEditDPUpLimit.Text = "" And Not txtbx_RcpEditDPUpLimit.Text = "." Then
+                    'convert to the required type
+                    d_dptestuplimit = CType(txtbx_RcpEditDPUpLimit.Text, Decimal)
+                    'check the value within range
+                    If d_dptestuplimit < min_d_dptestuplimit Or d_dptestuplimit > max_d_dptestuplimit Then
+                        RecipeMessage(20, "DP Test Upper Limit should be within " + CType(min_d_dptestuplimit, String) + " to " + CType(max_d_dptestuplimit, String))
+                        txtbx_RcpEditDPUpLimit.Text = Nothing
+                        txtbx_RcpEditDPUpLimit.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "DP Test Upper Limit")
                     onContinue = False
                 End If
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDPPoints.Text = "" And txtbx_RcpEditDPPoints.Text = "." Then
-                    RecipeMessage(19, "DP Test Points")
+                'Check for DP Test points
+                'Check the text is empty
+                If Not txtbx_RcpEditDPPoints.Text = "" Then
+                    'Convert to the required type
+                    i_dptestpoints = CType(txtbx_RcpEditDPPoints.Text, Integer)
+                    'Check the value within range
+                    If i_dptestpoints < min_i_dptestpoints Or i_dptestpoints > max_i_dptestpoints Then
+                        RecipeMessage(20, "DP Test Point should be within " + CType(min_i_dptestpoints, String) + " to " + CType(max_i_dptestpoints, String))
+                        txtbx_RcpEditDPPoints.Text = Nothing
+                        txtbx_RcpEditDPPoints.Focus()
+                        onContinue = False
+                    End If
+                Else
+                    RecipeMessage(19, "DP Test points")
                     onContinue = False
                 End If
             End If
@@ -4387,31 +5032,88 @@ Public Class FormRecipeManagement
         'In Case of Drain-1 Enabled, the Field should not be empty
         If checkbx_EditDrain1.Checked = True Then
             If onContinue = True Then
-                If txtbx_RcpEditDrain1Pressure.Text = "" And txtbx_RcpEditDrain1Pressure.Text = "." Then
+
+
+                'Check for Drain-1 Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditDrain1Pressure.Text = "" And Not txtbx_RcpEditDrain1Pressure.Text = "." Then
+                    'Convert to the required type
+                    d_drain1pressure = CType(txtbx_RcpEditDrain1Pressure.Text, Decimal)
+                    'Check the value within range
+                    If d_drain1pressure < min_d_drain1pressure Or d_drain1pressure > max_d_drain1pressure Then
+                        RecipeMessage(20, "Drain-1 Pressure should be within " + CType(min_d_drain1pressure, String) + " to " + CType(max_d_drain1pressure, String))
+                        txtbx_RcpEditDrain1Pressure.Text = Nothing
+                        txtbx_RcpEditDrain1Pressure.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-1 Pressure")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDrain1Time.Text = "" And txtbx_RcpEditDrain1Time.Text = "." Then
+
+                'Check for Drain-1 Time
+                'Check the text is empty
+                If Not txtbx_RcpEditDrain1Time.Text = "" Then
+                    'Convert to the required type
+                    i_drain1time = CType(txtbx_RcpEditDrain1Time.Text, Integer)
+                    'Check the value within range
+                    If i_drain1time < min_i_drain1time Or i_drain1time > max_i_drain1time Then
+                        RecipeMessage(20, "Drain-1 Time should be within " + CType(min_i_drain1time, String) + " to " + CType(max_i_drain1time, String))
+                        txtbx_RcpEditDrain1Time.Text = Nothing
+                        txtbx_RcpEditDrain1Time.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-1 Time")
                     onContinue = False
                 End If
+
             End If
         End If
 
         'In Case of Drain-2 Enabled, the Field should not be empty
         If checkbx_EditDrain2.Checked = True Then
             If onContinue = True Then
-                If txtbx_RcpEditDrain2Pressure.Text = "" And txtbx_RcpEditDrain2Pressure.Text = "." Then
+
+                'Check for Drain-2 Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditDrain2Pressure.Text = "" And Not txtbx_RcpEditDrain2Pressure.Text = "." Then
+                    'Convert to the required type
+                    d_drain2pressure = CType(txtbx_RcpEditDrain2Pressure.Text, Decimal)
+                    'Check the value within range
+                    If d_drain2pressure < min_d_drain2pressure Or d_drain2pressure > max_d_drain2pressure Then
+                        RecipeMessage(20, "Drain-2 Pressure should be within " + CType(min_d_drain2pressure, String) + " to " + CType(max_d_drain2pressure, String))
+                        txtbx_RcpEditDrain2Pressure.Text = Nothing
+                        txtbx_RcpEditDrain2Pressure.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-2 Pressure")
                     onContinue = False
                 End If
+
+
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDrain2Time.Text = "" And txtbx_RcpEditDrain2Time.Text = "." Then
+                'Check for Drain-2 Time
+                'Check the text is empty
+                If Not txtbx_RcpEditDrain2Time.Text = "" Then
+                    'Convert to the required type
+                    i_drain2time = CType(txtbx_RcpEditDrain2Time.Text, Integer)
+                    'Check the value within range
+                    If i_drain2time < min_i_drain2time Or i_drain2time > max_i_drain2time Then
+                        RecipeMessage(20, "Drain-2 Time should be within " + CType(min_i_drain2time, String) + " to " + CType(max_i_drain2time, String))
+                        txtbx_RcpEditDrain2Time.Text = Nothing
+                        txtbx_RcpEditDrain2Time.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-2 Time")
                     onContinue = False
                 End If
@@ -4421,20 +5123,58 @@ Public Class FormRecipeManagement
         'In Case of Drain-3 Enabled, the Field should not be empty
         If checkbx_EditDrain3.Checked = True Then
             If onContinue = True Then
-                If txtbx_RcpEditDrain3Pressure.Text = "" And txtbx_RcpEditDrain3Pressure.Text = "." Then
+
+                'Check for FDrain-3 Pressure
+                'Check the text is empty or has only decimal point
+                If Not txtbx_RcpEditDrain3Pressure.Text = "" And Not txtbx_RcpEditDrain3Pressure.Text = "." Then
+                    'Convert to the required type
+                    d_drain3pressure = CType(txtbx_RcpEditDrain3Pressure.Text, Decimal)
+                    'Check the value within range
+                    If d_drain3pressure < min_d_drain3pressure Or d_drain3pressure > max_d_drain3pressure Then
+                        RecipeMessage(20, "Drain-3 Pressure should be within " + CType(min_d_drain3pressure, String) + " to " + CType(max_d_drain3pressure, String))
+                        txtbx_RcpEditDrain3Pressure.Text = Nothing
+                        txtbx_RcpEditDrain3Pressure.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-3 Pressure")
                     onContinue = False
                 End If
+
             End If
 
             If onContinue = True Then
-                If txtbx_RcpEditDrain3Time.Text = "" And txtbx_RcpEditDrain3Time.Text = "." Then
+                'Check for Drain-3 Time
+                'Check the text is empty
+                If Not txtbx_RcpEditDrain3Time.Text = "" Then
+                    'Convert to the required type
+                    i_drain3time = CType(txtbx_RcpEditDrain3Time.Text, Integer)
+                    'Check the value within range
+                    If i_drain3time < min_i_drain3time Or i_drain3time > max_i_drain3time Then
+                        RecipeMessage(20, "Drain-3 Time should be within " + CType(min_i_drain3time, String) + " to " + CType(max_i_drain3time, String))
+                        txtbx_RcpEditDrain3Time.Text = Nothing
+                        txtbx_RcpEditDrain3Time.Focus()
+                        onContinue = False
+                    End If
+                Else
                     RecipeMessage(19, "Drain-3 Time")
                     onContinue = False
                 End If
             End If
         End If
 
+
+
+
+
+
+
+
+
+
+
+
+#End Region
 
         'Load Zero if the Flush-1 is not enabled
         If onContinue = True Then
@@ -4535,54 +5275,7 @@ Public Class FormRecipeManagement
             End If
         End If
 
-        'On Enabling the time for process should be greater than Zero
-        ''If Flush-1 is enabled, Check if the Flush-1 time is greater than Zero
-        'If onContinue = True Then
-        '    If checkbx_EditFlush1.Checked = True And i_flush1time = 0 Then
-        '        RecipeMessage(23, "Flush-1")
-        '        onContinue = False
-        '    End If
-        'End If
 
-        ''If Flush-2 is enabled, Check if the Flush-2 time is greater than Zero
-        'If onContinue = True Then
-        '    If checkbx_EditFlush2.Checked = True And i_flush2time = 0 Then
-        '        RecipeMessage(23, "Flush-2")
-        '        onContinue = False
-        '    End If
-        'End If
-
-        ''If DP Test-1 is enabled, Check if the DP Test time is greater than Zero
-        'If onContinue = True Then
-        '    If checkbx_EditDPTest1.Checked = True And i_dptesttime = 0 Then
-        '        RecipeMessage(23, "DP Test-1")
-        '        onContinue = False
-        '    End If
-        'End If
-
-        'If Drain-1 is enabled, Check if the Drain-1 time is greater than Zero
-        If onContinue = True Then
-            If checkbx_EditDrain1.Checked = True And i_drain1time = 0 Then
-                RecipeMessage(23, "Drain-1")
-                onContinue = False
-            End If
-        End If
-
-        'If Drain-2 is enabled, Check if the Drain-2 time is greater than Zero
-        If onContinue = True Then
-            If checkbx_EditDrain2.Checked = True And i_drain2time = 0 Then
-                RecipeMessage(23, "Drain-2")
-                onContinue = False
-            End If
-        End If
-
-        'If Drain-3 is enabled, Check if the Drain-3 time is greater than Zero
-        If onContinue = True Then
-            If checkbx_EditDrain3.Checked = True And i_drain3time = 0 Then
-                RecipeMessage(23, "Drain-3")
-                onContinue = False
-            End If
-        End If
 
 
         If onContinue = True Then
@@ -4929,9 +5622,6 @@ Public Class FormRecipeManagement
 
 
 
-
-
-
         If containSearch = 1 Then
             Dim bstemp As New BindingSource
             bstemp.DataSource = dtrecipetable
@@ -5252,7 +5942,7 @@ Public Class FormRecipeManagement
 
 
             ''Wrap content
-            '.Columns("last_modified_time").DefaultCellStyle.WrapMode = DataGridViewTriState.True
+
 
             dgv_RecipeDetails.ColumnHeadersHeight = 100
 
@@ -5283,24 +5973,25 @@ Public Class FormRecipeManagement
     End Sub
 
     Private Sub btn_RcpDetailEdit_Click(sender As Object, e As EventArgs) Handles btn_RcpDetailEdit.Click
-        Dim row As DataGridViewRow = dgv_RecipeDetails.CurrentRow
-        Dim recipeid As String = row.Cells(1).Value
-        Dim partid As String = row.Cells(2).Value
-        Dim filtertype As String = row.Cells(53).Value
-        tabctrl_RecipeCtrl.SelectedTab = tabpg_Edit
-        cmbx_RcpEditFilterType.Text = filtertype
-        cmbx_RcpEditPartID.Text = partid
-        cmbx_RcpEditRecipeID.Text = recipeid
-
+        If dgv_RecipeDetails.SelectedRows.Count > 0 Then
+            Dim row As DataGridViewRow = dgv_RecipeDetails.CurrentRow
+            Dim recipeid As String = row.Cells(1).Value
+            Dim partid As String = row.Cells(2).Value
+            Dim filtertype As String = row.Cells(53).Value
+            tabctrl_RecipeCtrl.SelectedTab = tabpg_Edit
+            cmbx_RcpEditFilterType.Text = filtertype
+            cmbx_RcpEditPartID.Text = partid
+            cmbx_RcpEditRecipeID.Text = recipeid
+        End If
     End Sub
 
     Private Sub btn_RcpDetailExport_Click(sender As Object, e As EventArgs) Handles btn_RcpDetailExport.Click
         ' Convert Visible DataGridView Columns To DataTable
         Dim dt As DataTable = GetVisibleColumnsDataTable(dgv_RecipeDetails)    'GetVisibleColumnsDataTable(dgv_recipedetails)
-        'Dim Filepath As String = $"{Recipeexportpath}RecipeDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmm")}.csv"
+
 
         ' Get Path
-        'Dim dtGetPath As DataTable = SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={10}")
+
         Dim Filepath As String = $"{PublicVariables.CSVPathToRecipeDetails}RecipeDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
 
         ' Export With Return
@@ -5433,23 +6124,15 @@ Public Class FormRecipeManagement
 #Region "Form Closing"
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
 
-        If txtbx_RcpEditVerTol.Enabled = True Then
-            If RecipeMessage(15, "Recipe Edit Tab") = DialogResult.Yes Then
-                Me.Close()
-                Recipetimer.Enabled = False
-            End If
-        End If
+        If txtbx_RcpEditVerTol.Enabled = True Or txtbx_RcpCreateVerTol.Enabled = True Then
 
-        If txtbx_RcpCreateVerTol.Enabled = True Then
-            If RecipeMessage(15, "Recipe Create Tab") = DialogResult.Yes Then
+            If RecipeMessage(15, "Recipe Edit/Create Tab") = DialogResult.Yes Then
                 Me.Close()
-                Recipetimer.Enabled = False
             End If
         End If
 
         If txtbx_RcpEditVerTol.Enabled = False And txtbx_RcpCreateVerTol.Enabled = False Then
             Me.Close()
-            Recipetimer.Enabled = False
         End If
 
     End Sub
@@ -5465,8 +6148,6 @@ Public Class FormRecipeManagement
     Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
         FormPixel.Show()
     End Sub
-
-
 
 
 End Class

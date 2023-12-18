@@ -44,6 +44,7 @@ Module FormMainModule
             Case 1  ' Logged In
                 ' Enable Tab Control
                 FormMain.tabctrl_MainCtrl.Enabled = True
+                RetainedMemory.RetainedMemory.LoadAndApply()
                 If PublicVariables.RetainedWorkOrder <> "-" Then
                     If PublicVariables.RetainedRecipeType <> "-" Then
                         If (PublicVariables.RetainedRecipeType = "Production" Or PublicVariables.RetainedRecipeType = "Rework" Or PublicVariables.RetainedRecipeType = "QC-Return") OrElse (PublicVariables.RetainedRecipeType = "Evaluation" And (LoginUserCategoryName = "Technician" Or LoginUserCategoryName = "Engineer" Or LoginUserCategoryName = "Administrator")) OrElse (PublicVariables.RetainedRecipeType = "Engineering" And (LoginUserCategoryName = "Engineer" Or LoginUserCategoryName = "Administrator")) Then
@@ -201,11 +202,7 @@ Public Class FormMain
         Scannertimer.Enabled = True
 
 
-        'StartSerialComListener1()
 
-
-
-        'ModuleCircuitModel.InitialiseCircuit()
         'PLC Impicit Cyclic Messaging via Ethernet IP
         FINSInitialise()
 
@@ -246,17 +243,7 @@ Public Class FormMain
         Panel_ManualDrain_Circuit.Controls.Add(ManualDrainForm)
         ManualDrainForm.Show()
 
-        'FormCircuitModel2.TopLevel = False
-        'While panel_ManualValve_Circuit.Controls.Count > 0
-        '    panel_ManualValve_Circuit.Controls(0).Dispose()
-        'End While
-        'FormCircuitModel2.Dock = DockStyle.None
-        'panel_ManualValve_Circuit.Controls.Add(FormCircuitModel2)
-        'FormCircuitModel2.Show()
-        'CircuitShown(0) = True
-        'CircuitShown(1) = False
-        'CircuitShown(2) = False
-        'CircuitShown(3) = False
+
 
         'Top Status Bar
         lbl_OperationMode.Text = "No Status"
@@ -310,28 +297,6 @@ Public Class FormMain
         End If
 
 
-        'Disable buttons contents
-        'txtbx_WorkOrderNumber.Enabled = True
-        'txtbx_LotID.Enabled = True
-        'txtbx_PartID.Enabled = True
-        'txtbx_ConfirmationID.Enabled = True
-        'txtbx_Quantity.Enabled = True
-        'btn_WrkOrdScnDtConfirm.Enabled = True
-        'btn_WrkOrdScnDtEndLot.Enabled = False
-        'txtbx_WorkOrderNumber.Text = Nothing
-        'txtbx_LotID.Text = Nothing
-        'txtbx_PartID.Text = Nothing
-        'txtbx_ConfirmationID.Text = Nothing
-        'txtbx_Quantity.Text = Nothing
-        'txtbx_Operatorlotid.Text = Nothing
-
-
-
-        'btn_RecipeSelectionConfirm.Enabled = False
-        'cmbx_RecipeType.Enabled = False
-        'txtbx_SerialNumber.Enabled = False
-        'btn_OprKeyInDtConfirm.Enabled = False
-        'cmbx_RecipeID.Enabled = False
 
         If PublicVariables.RetainedWorkOrder <> "-" Then
             If PublicVariables.RetainedRecipeType <> "-" Then
@@ -455,14 +420,13 @@ Public Class FormMain
 
 
         ' Start Activity [TESTING] 
-        'Dim test1 As Task = ClassActivity.GetActivityIO()
-        'Dim test2 As Task = ClassActivity.UpdateActivityIO()
+
     End Sub
 
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         PublicVariables.IsExitPromptShown = True
         If Not MsgBox("Are you sure you want to Exit?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo Or MsgBoxStyle.DefaultButton2, "Exit Application") = MsgBoxResult.Yes Then
-            'mySerialPort1.Close()
+
             e.Cancel = True
             PublicVariables.IsExitPromptShown = False
         Else
@@ -507,7 +471,7 @@ Public Class FormMain
                     FormMainModule.ControlState(0)
                     lbl_Username.Text = "-"
                     lbl_Category.Text = "-"
-                    'Endlot()
+
 
 
 
@@ -1607,7 +1571,7 @@ Public Class FormMain
 
     Private Sub txtbx_NewLPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_NewLPM.Validating
         Dim newLPM As Decimal
-        If txtbx_NewLPM.MaxLength > 0 Then
+        If txtbx_NewLPM.Text.Length > 0 Then
             newLPM = CType(txtbx_NewLPM.Text, Decimal)
             If newLPM < 0.1 Or newLPM > 24.9 Then
                 MsgBox("Invalid data, Enter Value between 0.1 to 24.9")
@@ -1672,7 +1636,7 @@ Public Class FormMain
 
     Private Sub btn_UpdateRPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateRPM.Click
         Dim RPMTemp As String = lbl_ReqRPM.Text
-        If RPMTemp.Length > 0 Then
+        If txtbx_NewRPM.Text.Length > 0 Then
             Float2int(120, CType(txtbx_NewRPM.Text, Decimal))
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Pump Speed (RPM) set to {txtbx_NewRPM.Text} from {RPMTemp}")
             txtbx_NewRPM.Text = Nothing
@@ -1682,7 +1646,7 @@ Public Class FormMain
 
     Private Sub btn_UpdateLPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateLPM.Click
         Dim LPMTemp As String = lbl_ReqLPM.Text
-        If LPMTemp.Length > 0 Then
+        If txtbx_NewLPM.Text.Length > 0 Then
             Float2int(122, CType(txtbx_NewLPM.Text, Decimal))
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Flowrate (LPM) set to {txtbx_NewLPM.Text} from {LPMTemp}")
             txtbx_NewLPM.Text = Nothing
@@ -1793,7 +1757,7 @@ Public Class FormMain
 
     Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_BckPressureUpdate.Click
         Dim BackPressTemp As String = lbl_BackPressCurrent.Text
-        If BackPressTemp.Length > 0 Then
+        If txtbx_BackPressRequired.Text.Length > 0 Then
             Float2int(124, CType(txtbx_BackPressRequired.Text, Decimal))
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of Back Pressure Regulator (kPa) set to {txtbx_BackPressRequired.Text} from {BackPressTemp}")
             txtbx_BackPressRequired.Text = Nothing
@@ -1803,7 +1767,7 @@ Public Class FormMain
 
     Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_N2PressureUpdate.Click
         Dim N2PurgeTemp As String = lbl_N2PurgeCurrent.Text
-        If N2PurgeTemp.Length > 0 Then
+        If txtbx_N2PurgeRequired.Text.Length > 0 Then
             Float2int(126, CType(txtbx_N2PurgeRequired.Text, Decimal))
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of N2 Purge Regulator (kPa) set to {txtbx_N2PurgeRequired.Text} from {N2PurgeTemp}")
             txtbx_N2PurgeRequired.Text = Nothing
@@ -1921,14 +1885,6 @@ Public Class FormMain
     ' Initialize Alarm History Tab
     Private Async Function LoadAlarm() As Task
         Try
-            '[Current Alarm]
-            'dgvClearSelection(dgv_CurrentAlarm)
-            'dgv_CurrentAlarm.DataSource = mainalarm
-
-            '[Alarm History]
-            'LoadAlarmHistoryFilterList()
-
-
             Await LoadAlarmHistoryFilterList()
         Catch ex As Exception
             MsgBox(ex.Message & ex.StackTrace)
@@ -2192,7 +2148,7 @@ Public Class FormMain
         Dim dt As DataTable = Await Task.Run(Function() GetVisibleColumnsDataTable(dgv_AlarmHistory))   'GetVisibleColumnsDataTable(dgv_AlarmHistory)
 
         ' Get Path
-        'Dim dtGetPath As DataTable = Await Task.Run(Function() SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={9}"))
+
         Dim ExportPath As String = PublicVariables.CSVPathToAlarmHistory 'dtGetPath(0)("retained_value")
 
         ' Export With Return
@@ -2602,135 +2558,6 @@ Public Class FormMain
             MainMessage(10)
         End If
 
-        'Dim OnContinue As Boolean = True
-        'PCStatus(0)(10) = True
-        'If OnContinue = True Then
-        '    LotEndTime = lbl_DateTimeClock.Text
-
-        '    Dim Updateparameter As New Dictionary(Of String, Object) From {
-        '        {"lot_end_time", LotEndTime}
-        '        }
-        '    Dim Condition As String = $"lot_id ='{LotID}' AND lot_attempt = '{LotAttempt}'"
-        '    If MainMessage(8, LotID) = DialogResult.Yes Then
-        '        If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
-        '            MainMessage(9, LotID)
-        '        Else
-        '            MainMessage(10)
-        '            OnContinue = False
-        '        End If
-        '    Else
-        '        OnContinue = False
-        '    End If
-        'End If
-
-        'If OnContinue = True Then
-
-        '    txtbx_WorkOrderNumber.Enabled = True
-        '    txtbx_LotID.Enabled = True
-        '    txtbx_PartID.Enabled = True
-        '    txtbx_ConfirmationID.Enabled = True
-        '    txtbx_Quantity.Enabled = True
-        '    btn_WrkOrdScnDtConfirm.Enabled = True
-        '    btn_WrkOrdScnDtEndLot.Enabled = False
-        '    txtbx_SerialNumber.Enabled = False
-
-        '    txtbx_WorkOrderNumber.Text = Nothing
-        '    txtbx_LotID.Text = Nothing
-        '    txtbx_PartID.Text = Nothing
-        '    txtbx_ConfirmationID.Text = Nothing
-        '    txtbx_Quantity.Text = Nothing
-        '    txtbx_SerialNumber.Text = Nothing
-        '    txtbx_TitleRecipeID.Text = Nothing
-        '    txtbx_TitlePartID.Text = Nothing
-        '    txtbx_TitleFilterType.Text = Nothing
-        '    lbl_CalibrationStatus.Text = Nothing
-        '    lbl_BlankDP.Text = Nothing
-        '    lbl_DiffPressAct.Text = Nothing
-        '    lbl_DiffPressMin.Text = Nothing
-        '    lbl_DiffPressMax.Text = Nothing
-        '    lbl_DPTestResult.Text = Nothing
-
-
-        '    JigType = 0
-        '    btn_RecipeSelectionConfirm.Enabled = False
-        '    txtbx_Operatorlotid.Text = Nothing
-        '    If cmbx_RecipeType.SelectedIndex > 0 Then
-        '        cmbx_RecipeType.SelectedIndex = 0
-        '    End If
-
-        '    If cmbx_RecipeID.SelectedIndex > 0 Then
-        '        cmbx_RecipeID.SelectedIndex = 0
-        '    End If
-        '    cmbx_RecipeType.Enabled = False
-
-        '    cmbx_RecipeID.Enabled = False
-        'End If
-
-        'If OnContinue = True Then
-
-        '    Workorder = Nothing
-        '    LotID = Nothing
-        '    PartID = Nothing
-        '    ConfirmationID = Nothing
-        '    Quantity = Nothing
-        '    RecipeID = Nothing
-        '    LotStartTime = Nothing
-        '    LotEndTime = Nothing
-        '    LotAttempt = 0
-        '    dtRecipeID = Nothing
-        '    FormCalibration.Cal_samplingtime = 0
-        '    FormCalibration.Cal_temperature = 0
-        '    FormCalibration.Cal_inletpressure = 0
-        '    FormCalibration.Cal_outletpressure = 0
-        '    FormCalibration.Cal_flowrate = 0
-        '    FormCalibration.Cal_dp = 0
-
-        '    FormCalibration.Ver_samplingtime = 0
-        '    FormCalibration.Ver_temperature = 0
-        '    FormCalibration.Ver_inletpressure = 0
-        '    FormCalibration.Ver_outletpressure = 0
-        '    FormCalibration.Ver_flowrate = 0
-        '    FormCalibration.Ver_dp = 0
-        '    FormCalibration.vertol = 0
-        '    FormCalibration.Dptest1start = 0
-        '    FormCalibration.dptest1end = 0
-        '    FormCalibration.Dptest2start = 0
-        '    FormCalibration.dptest2end = 0
-        '    FormCalibration.Cal_dptestpoints = 0
-        '    FormCalibration.Cal_avginlet1 = 0
-        '    FormCalibration.Cal_avgoutlet1 = 0
-        '    FormCalibration.Cal_offset1 = 0
-        '    FormCalibration.Ver_avginlet1 = 0
-        '    FormCalibration.Ver_avgoutlet1 = 0
-        '    FormCalibration.Ver_avgdp1 = 0
-        '    FormCalibration.Cal_avginlet2 = 0
-        '    FormCalibration.Cal_avgoutlet2 = 0
-        '    FormCalibration.Cal_offset2 = 0
-        '    FormCalibration.Ver_avginlet2 = 0
-        '    FormCalibration.Ver_avgoutlet2 = 0
-        '    FormCalibration.Ver_avgdp2 = 0
-        '    FormCalibration.Cal_finalInlet = 0
-        '    FormCalibration.Cal_finalOutlet = 0
-        '    FormCalibration.Cal_finaloffset = 0
-        '    FormCalibration.Ver_finalinlet = 0
-        '    FormCalibration.Ver_finaloutlet = 0
-        '    FormCalibration.Ver_finaldp = 0
-
-        '    FormCalibration.txtbx_CalInletPressure.Text = Nothing
-        '    FormCalibration.txtbx_CalOutletPressure.Text = Nothing
-        '    FormCalibration.txtbx_CalOffset.Text = Nothing
-        '    FormCalibration.txtbx_CalResult.Text = Nothing
-        '    FormCalibration.txtbx_VerInletPressure.Text = Nothing
-        '    FormCalibration.txtbx_VerOutletPressure.Text = Nothing
-        '    FormCalibration.txtbx_VerDP.Text = Nothing
-        '    FormCalibration.txtbx_VerStatus.Text = Nothing
-        '    FormCalibration.txtbx_VerStatus.BackColor = SystemColors.Window
-        '    FormCalibration.txtbx_CalResult.BackColor = SystemColors.Window
-        '    FormCalibration.dgv_CalibrationResult.DataSource = Nothing
-        '    FormCalibration.dgv_VerificationResult.DataSource = Nothing
-
-        'End If
-
     End Sub
 
     Private Sub cmbx_RecipeType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RecipeType.SelectedIndexChanged
@@ -2781,20 +2608,7 @@ Public Class FormMain
 
         If OnContinue = True Then
             LoadrecipeParameters(RecipeID)
-            '            cmbx_RecipeID.Enabled = False
-            '            cmbx_RecipeType.Enabled = False
-            '            btn_RecipeSelectionConfirm.Enabled = False
-            '            txtbx_TitleRecipeID.Text = cmbx_RecipeID.Text
-            '            txtbx_TitlePartID.Text = txtbx_PartID.Text
-            '            Dim dtfilter As DataTable = SQL.ReadRecords($"SELECT PartTable.filter_type_id, FilterType.filter_type, PartTable.jig_type_id, JigType.jig_description From PartTable
-            'INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.part_id='{PartID}' INNER JOIN JigType ON PartTable.jig_type_id = JigType.id")
-            '            If dtfilter.Rows.Count > 0 Then
-            '                txtbx_TitleFilterType.Text = dtfilter.Rows(0)("filter_type")
-            '                JigType = dtfilter.Rows(0)("jig_type_id")
-            '                FormCalibration.ShowDialog()
-            'Else
-            '        MsgBox("Unable to find PartID Details!")
-            '    End If
+
             FormCalibration.ShowDialog()
         Else
             OnContinue = False
@@ -2805,20 +2619,9 @@ Public Class FormMain
 
     End Sub
 
-    Private Sub lbl_CalibrationStatus_TextChanged(sender As Object, e As EventArgs) Handles lbl_CalibrationStatus.TextChanged
-        If lbl_CalibrationStatus.Text = "Pass" Then
-            txtbx_SerialNumber.Enabled = True
-            btn_OprKeyInDtConfirm.Enabled = True
-        End If
-    End Sub
 
-    Private Sub lbl_OperationMode_Click(sender As Object, e As EventArgs) Handles lbl_OperationMode.Click
-        'Form1.Show()
-    End Sub
 
-    Private Sub dtpicker_StartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpicker_StartDate.ValueChanged
 
-    End Sub
 
 
 
@@ -2950,12 +2753,6 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
 
     End Sub
-
-
-
-
-
-
 
 
 #End Region
@@ -3109,12 +2906,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             result_finaltemperature = 0.0
             result_finalflowrate = 0.0
 
-            'MainCycletime = FormCalibration.CalCycletime
-            'MainDptest1start = FormCalibration.Dptest1start
-            'MainDptest1end = FormCalibration.dptest1end
-            'MainDptest2start = FormCalibration.Dptest2start
-            'MainDptest2end = FormCalibration.dptest2end
-            'MainDptestpoints = FormCalibration.Cal_dptestpoints
+
 
             lbl_EstCycleTime.Text = MainCycletime.ToString
             Resultcapturetimer.Enabled = True
@@ -3444,7 +3236,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         Dim TypecomboSource As New Dictionary(Of String, String)()
 
         ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
+
 
         'Assign Defaults
         TypecomboSource.Add("0", "-Not Selected-")
@@ -3506,7 +3298,6 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         Dim RecipecomboSource As New Dictionary(Of String, String)()
 
         ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
 
         'Assign Defaults
         RecipecomboSource.Add("0", "-Not Selected-")

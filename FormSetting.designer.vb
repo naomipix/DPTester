@@ -162,19 +162,16 @@ Partial Class FormSetting
         Me.lbl_Valve1 = New System.Windows.Forms.Label()
         Me.tabpg_BuyOff = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.cmbx_RunSelection = New System.Windows.Forms.ComboBox()
+        Me.btn_Clear = New System.Windows.Forms.Button()
         Me.lbl_EndTime = New System.Windows.Forms.Label()
         Me.lbl_StartTime = New System.Windows.Forms.Label()
         Me.dsp_EndTime = New System.Windows.Forms.Label()
         Me.dsp_StartTime = New System.Windows.Forms.Label()
-        Me.dsp_DryRun = New System.Windows.Forms.Label()
-        Me.chkbx_DryRun = New System.Windows.Forms.CheckBox()
         Me.dgv_MessageLog = New System.Windows.Forms.DataGridView()
-        Me.chkbx_BuyOffRun = New System.Windows.Forms.CheckBox()
         Me.lbl_Duration = New System.Windows.Forms.Label()
-        Me.lbl_CycleCount = New System.Windows.Forms.Label()
         Me.dsp_Duration = New System.Windows.Forms.Label()
-        Me.dsp_CycleCount = New System.Windows.Forms.Label()
-        Me.dsp_BuyOffRun = New System.Windows.Forms.Label()
         Me.btn_Start = New System.Windows.Forms.Button()
         Me.btn_Stop = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -220,7 +217,6 @@ Partial Class FormSetting
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.timer_Buyoff = New System.Windows.Forms.Timer(Me.components)
-        Me.btn_Reset = New System.Windows.Forms.Button()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabctrl_Settings.SuspendLayout()
@@ -1851,20 +1847,16 @@ Partial Class FormSetting
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.btn_Reset)
+        Me.GroupBox1.Controls.Add(Me.Label20)
+        Me.GroupBox1.Controls.Add(Me.cmbx_RunSelection)
+        Me.GroupBox1.Controls.Add(Me.btn_Clear)
         Me.GroupBox1.Controls.Add(Me.lbl_EndTime)
         Me.GroupBox1.Controls.Add(Me.lbl_StartTime)
         Me.GroupBox1.Controls.Add(Me.dsp_EndTime)
         Me.GroupBox1.Controls.Add(Me.dsp_StartTime)
-        Me.GroupBox1.Controls.Add(Me.dsp_DryRun)
-        Me.GroupBox1.Controls.Add(Me.chkbx_DryRun)
         Me.GroupBox1.Controls.Add(Me.dgv_MessageLog)
-        Me.GroupBox1.Controls.Add(Me.chkbx_BuyOffRun)
         Me.GroupBox1.Controls.Add(Me.lbl_Duration)
-        Me.GroupBox1.Controls.Add(Me.lbl_CycleCount)
         Me.GroupBox1.Controls.Add(Me.dsp_Duration)
-        Me.GroupBox1.Controls.Add(Me.dsp_CycleCount)
-        Me.GroupBox1.Controls.Add(Me.dsp_BuyOffRun)
         Me.GroupBox1.Controls.Add(Me.btn_Start)
         Me.GroupBox1.Controls.Add(Me.btn_Stop)
         Me.GroupBox1.Location = New System.Drawing.Point(3, 53)
@@ -1873,12 +1865,45 @@ Partial Class FormSetting
         Me.GroupBox1.TabIndex = 113
         Me.GroupBox1.TabStop = False
         '
+        'Label20
+        '
+        Me.Label20.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(6, 46)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(100, 25)
+        Me.Label20.TabIndex = 114
+        Me.Label20.Text = "Action :"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'cmbx_RunSelection
+        '
+        Me.cmbx_RunSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbx_RunSelection.FormattingEnabled = True
+        Me.cmbx_RunSelection.ItemHeight = 17
+        Me.cmbx_RunSelection.Items.AddRange(New Object() {"NO SELECTION", "DRY RUN", "BUY OFF RUN"})
+        Me.cmbx_RunSelection.Location = New System.Drawing.Point(110, 46)
+        Me.cmbx_RunSelection.Name = "cmbx_RunSelection"
+        Me.cmbx_RunSelection.Size = New System.Drawing.Size(200, 25)
+        Me.cmbx_RunSelection.TabIndex = 113
+        '
+        'btn_Clear
+        '
+        Me.btn_Clear.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_Clear.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Clear.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_Clear.Location = New System.Drawing.Point(82, 458)
+        Me.btn_Clear.Name = "btn_Clear"
+        Me.btn_Clear.Size = New System.Drawing.Size(200, 50)
+        Me.btn_Clear.TabIndex = 112
+        Me.btn_Clear.Text = "Clear"
+        Me.btn_Clear.UseVisualStyleBackColor = False
+        '
         'lbl_EndTime
         '
         Me.lbl_EndTime.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_EndTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lbl_EndTime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_EndTime.Location = New System.Drawing.Point(1092, 46)
+        Me.lbl_EndTime.Location = New System.Drawing.Point(110, 335)
         Me.lbl_EndTime.Name = "lbl_EndTime"
         Me.lbl_EndTime.Size = New System.Drawing.Size(200, 29)
         Me.lbl_EndTime.TabIndex = 109
@@ -1890,7 +1915,7 @@ Partial Class FormSetting
         Me.lbl_StartTime.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_StartTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lbl_StartTime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_StartTime.Location = New System.Drawing.Point(696, 46)
+        Me.lbl_StartTime.Location = New System.Drawing.Point(110, 282)
         Me.lbl_StartTime.Name = "lbl_StartTime"
         Me.lbl_StartTime.Size = New System.Drawing.Size(200, 29)
         Me.lbl_StartTime.TabIndex = 109
@@ -1900,47 +1925,22 @@ Partial Class FormSetting
         'dsp_EndTime
         '
         Me.dsp_EndTime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_EndTime.Location = New System.Drawing.Point(1088, 18)
+        Me.dsp_EndTime.Location = New System.Drawing.Point(6, 337)
         Me.dsp_EndTime.Name = "dsp_EndTime"
-        Me.dsp_EndTime.Size = New System.Drawing.Size(125, 25)
+        Me.dsp_EndTime.Size = New System.Drawing.Size(100, 25)
         Me.dsp_EndTime.TabIndex = 109
         Me.dsp_EndTime.Text = "End Time :"
-        Me.dsp_EndTime.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.dsp_EndTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_StartTime
         '
         Me.dsp_StartTime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_StartTime.Location = New System.Drawing.Point(692, 18)
+        Me.dsp_StartTime.Location = New System.Drawing.Point(6, 284)
         Me.dsp_StartTime.Name = "dsp_StartTime"
-        Me.dsp_StartTime.Size = New System.Drawing.Size(125, 25)
+        Me.dsp_StartTime.Size = New System.Drawing.Size(100, 25)
         Me.dsp_StartTime.TabIndex = 109
         Me.dsp_StartTime.Text = "Start Time :"
-        Me.dsp_StartTime.TextAlign = System.Drawing.ContentAlignment.BottomLeft
-        '
-        'dsp_DryRun
-        '
-        Me.dsp_DryRun.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_DryRun.Location = New System.Drawing.Point(521, 18)
-        Me.dsp_DryRun.Name = "dsp_DryRun"
-        Me.dsp_DryRun.Size = New System.Drawing.Size(125, 25)
-        Me.dsp_DryRun.TabIndex = 109
-        Me.dsp_DryRun.Text = "Dry-Run :"
-        Me.dsp_DryRun.TextAlign = System.Drawing.ContentAlignment.BottomLeft
-        '
-        'chkbx_DryRun
-        '
-        Me.chkbx_DryRun.Appearance = System.Windows.Forms.Appearance.Button
-        Me.chkbx_DryRun.BackColor = System.Drawing.SystemColors.Window
-        Me.chkbx_DryRun.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.chkbx_DryRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.chkbx_DryRun.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkbx_DryRun.Location = New System.Drawing.Point(525, 46)
-        Me.chkbx_DryRun.Name = "chkbx_DryRun"
-        Me.chkbx_DryRun.Size = New System.Drawing.Size(125, 29)
-        Me.chkbx_DryRun.TabIndex = 108
-        Me.chkbx_DryRun.Text = "Enable"
-        Me.chkbx_DryRun.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.chkbx_DryRun.UseVisualStyleBackColor = False
+        Me.dsp_StartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dgv_MessageLog
         '
@@ -1956,90 +1956,43 @@ Partial Class FormSetting
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgv_MessageLog.Location = New System.Drawing.Point(86, 148)
+        Me.dgv_MessageLog.Location = New System.Drawing.Point(346, 44)
         Me.dgv_MessageLog.Name = "dgv_MessageLog"
         Me.dgv_MessageLog.ReadOnly = True
-        Me.dgv_MessageLog.Size = New System.Drawing.Size(1700, 522)
+        Me.dgv_MessageLog.Size = New System.Drawing.Size(1440, 626)
         Me.dgv_MessageLog.TabIndex = 111
         Me.dgv_MessageLog.TabStop = False
-        '
-        'chkbx_BuyOffRun
-        '
-        Me.chkbx_BuyOffRun.Appearance = System.Windows.Forms.Appearance.Button
-        Me.chkbx_BuyOffRun.BackColor = System.Drawing.SystemColors.Window
-        Me.chkbx_BuyOffRun.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.chkbx_BuyOffRun.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.chkbx_BuyOffRun.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkbx_BuyOffRun.Location = New System.Drawing.Point(525, 102)
-        Me.chkbx_BuyOffRun.Name = "chkbx_BuyOffRun"
-        Me.chkbx_BuyOffRun.Size = New System.Drawing.Size(125, 29)
-        Me.chkbx_BuyOffRun.TabIndex = 108
-        Me.chkbx_BuyOffRun.Text = "Enable"
-        Me.chkbx_BuyOffRun.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.chkbx_BuyOffRun.UseVisualStyleBackColor = False
         '
         'lbl_Duration
         '
         Me.lbl_Duration.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Duration.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.lbl_Duration.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Duration.Location = New System.Drawing.Point(696, 102)
+        Me.lbl_Duration.Location = New System.Drawing.Point(110, 388)
         Me.lbl_Duration.Name = "lbl_Duration"
         Me.lbl_Duration.Size = New System.Drawing.Size(200, 29)
         Me.lbl_Duration.TabIndex = 109
         Me.lbl_Duration.Text = "-N/A-"
         Me.lbl_Duration.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'lbl_CycleCount
-        '
-        Me.lbl_CycleCount.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_CycleCount.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.lbl_CycleCount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_CycleCount.Location = New System.Drawing.Point(1092, 102)
-        Me.lbl_CycleCount.Name = "lbl_CycleCount"
-        Me.lbl_CycleCount.Size = New System.Drawing.Size(200, 29)
-        Me.lbl_CycleCount.TabIndex = 109
-        Me.lbl_CycleCount.Text = "0"
-        Me.lbl_CycleCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'dsp_Duration
         '
         Me.dsp_Duration.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Duration.Location = New System.Drawing.Point(692, 74)
+        Me.dsp_Duration.Location = New System.Drawing.Point(6, 390)
         Me.dsp_Duration.Name = "dsp_Duration"
-        Me.dsp_Duration.Size = New System.Drawing.Size(125, 25)
+        Me.dsp_Duration.Size = New System.Drawing.Size(100, 25)
         Me.dsp_Duration.TabIndex = 109
         Me.dsp_Duration.Text = "Duration :"
-        Me.dsp_Duration.TextAlign = System.Drawing.ContentAlignment.BottomLeft
-        '
-        'dsp_CycleCount
-        '
-        Me.dsp_CycleCount.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CycleCount.Location = New System.Drawing.Point(1088, 74)
-        Me.dsp_CycleCount.Name = "dsp_CycleCount"
-        Me.dsp_CycleCount.Size = New System.Drawing.Size(172, 25)
-        Me.dsp_CycleCount.TabIndex = 109
-        Me.dsp_CycleCount.Text = "Number of Cycles :"
-        Me.dsp_CycleCount.TextAlign = System.Drawing.ContentAlignment.BottomLeft
-        '
-        'dsp_BuyOffRun
-        '
-        Me.dsp_BuyOffRun.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_BuyOffRun.Location = New System.Drawing.Point(521, 74)
-        Me.dsp_BuyOffRun.Name = "dsp_BuyOffRun"
-        Me.dsp_BuyOffRun.Size = New System.Drawing.Size(121, 25)
-        Me.dsp_BuyOffRun.TabIndex = 109
-        Me.dsp_BuyOffRun.Text = "Buy-Off Run :"
-        Me.dsp_BuyOffRun.TextAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.dsp_Duration.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'btn_Start
         '
         Me.btn_Start.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.btn_Start.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Start.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Start.Location = New System.Drawing.Point(912, 68)
+        Me.btn_Start.Location = New System.Drawing.Point(60, 102)
         Me.btn_Start.Name = "btn_Start"
-        Me.btn_Start.Size = New System.Drawing.Size(100, 40)
+        Me.btn_Start.Size = New System.Drawing.Size(100, 50)
         Me.btn_Start.TabIndex = 110
         Me.btn_Start.Text = "Start"
         Me.btn_Start.UseVisualStyleBackColor = False
@@ -2049,9 +2002,9 @@ Partial Class FormSetting
         Me.btn_Stop.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.btn_Stop.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Stop.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Stop.Location = New System.Drawing.Point(1308, 68)
+        Me.btn_Stop.Location = New System.Drawing.Point(210, 102)
         Me.btn_Stop.Name = "btn_Stop"
-        Me.btn_Stop.Size = New System.Drawing.Size(100, 40)
+        Me.btn_Stop.Size = New System.Drawing.Size(100, 50)
         Me.btn_Stop.TabIndex = 110
         Me.btn_Stop.Text = "Stop"
         Me.btn_Stop.UseVisualStyleBackColor = False
@@ -2530,18 +2483,6 @@ Partial Class FormSetting
         'timer_Buyoff
         '
         '
-        'btn_Reset
-        '
-        Me.btn_Reset.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.btn_Reset.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_Reset.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Reset.Location = New System.Drawing.Point(1611, 68)
-        Me.btn_Reset.Name = "btn_Reset"
-        Me.btn_Reset.Size = New System.Drawing.Size(100, 40)
-        Me.btn_Reset.TabIndex = 112
-        Me.btn_Reset.Text = "Reset"
-        Me.btn_Reset.UseVisualStyleBackColor = False
-        '
         'FormSetting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2690,20 +2631,14 @@ Partial Class FormSetting
     Friend WithEvents btn_ResetValve17 As Button
     Friend WithEvents btn_ResetValve12 As Button
     Friend WithEvents dsp_ToolCounter As Label
-    Friend WithEvents dsp_DryRun As Label
-    Friend WithEvents chkbx_DryRun As CheckBox
     Friend WithEvents btn_Stop As Button
     Friend WithEvents btn_Start As Button
-    Friend WithEvents dsp_BuyOffRun As Label
-    Friend WithEvents dsp_CycleCount As Label
     Friend WithEvents dsp_Duration As Label
-    Friend WithEvents lbl_CycleCount As Label
     Friend WithEvents lbl_Duration As Label
     Friend WithEvents lbl_EndTime As Label
     Friend WithEvents lbl_StartTime As Label
     Friend WithEvents dsp_EndTime As Label
     Friend WithEvents dsp_StartTime As Label
-    Friend WithEvents chkbx_BuyOffRun As CheckBox
     Friend WithEvents dgv_MessageLog As DataGridView
     Friend WithEvents panel_UserPermission As Panel
     Friend WithEvents dsp_UserPermissions As Label
@@ -2791,5 +2726,7 @@ Partial Class FormSetting
     Friend WithEvents Label19 As Label
     Friend WithEvents Button13 As Button
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents btn_Reset As Button
+    Friend WithEvents btn_Clear As Button
+    Friend WithEvents Label20 As Label
+    Friend WithEvents cmbx_RunSelection As ComboBox
 End Class

@@ -16,10 +16,7 @@ Module ModuleOmron
     Public AIn(19) As Decimal 'Consists of DM620-DM659
     Public AOut(9) As Decimal 'Consists of DM660-DM679
     Public Alarm(19)() As Boolean 'Consists of DM700-DM709
-    'Public Warning(9)() As Boolean 'Consists of DM710-DM719
-    'Public EXEIPFetchManualCtrl(212) As Byte ' Consists of DM3 to DM8
-    'Public EXEIPFetchPLCStatus(200) As Byte ' Consists of DM500 to DM599
-    'Public EXEIPPut(498) As Byte
+
     Public ManualCtrl(5)() As Boolean ' Consists of DM3 to DM8
     Public FINSinput() As Integer
     Public FINSOutput(199) As Integer
@@ -88,6 +85,7 @@ Module ModuleOmron
         dtAlarm = SQL.ReadRecords("select id,code,description from AlarmTable")
         dtCalibrationmsg = SQL.ReadRecords("select * from CalibrationMessage")
         dtMainmsg = SQL.ReadRecords("select * from ProcessMessage")
+
         FINSOutputRead()
 
         PLCtimer.Interval = 100
@@ -466,16 +464,6 @@ Module ModuleOmron
         Return True
     End Function
 
-    '    Public Function IMEIPReadDInt(offset As Integer) As Int32
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Val(3) As Byte
-
-    '        For i As Integer = 0 To 3
-    '            Val(i) = OmronEEIP.T_O_IOData((offset * 2) + i)
-    '        Next
-    '        Return BitConverter.ToInt32(Val, 0)
-    '    End Function
-
 
 #End Region
 
@@ -556,13 +544,6 @@ Module ModuleOmron
     End Function
 
     Public Function Fillzerobefore(str As String, len As Integer) As String
-        'String Text = strInput;
-        '    While (Text.Length < len)
-        '    {
-        '        Text = "0" + Text;
-        '    }
-
-        '    Return Text;
 
         Dim text As String = str
         While (text.Length < len)
@@ -573,637 +554,8 @@ Module ModuleOmron
 
 
 
-
 #End Region
 
-    '
-    '
-    '
-    '
-    '
-    '
-    '
-    '    
-#Region "EEIP Module Data Conversion-Implicit Messaging"
-    '    'For EEIP Module Data
-
-    '    Public Sub IMEIPInitialise()
-    '        Try
-    '            OmronEEIP.RegisterSession("192.168.0.1", 44818)
-
-    '            OmronEEIP.O_T_InstanceID = &H64             ' //Instance ID Of the Output Assembly
-    '            OmronEEIP.O_T_Length = 212              '// The Method "Detect_O_T_Length" detect the Length Using an UCMM Message
-    '            OmronEEIP.O_T_RealTimeFormat = EEIP.RealTimeFormat.Header32Bit  '//Header Format
-    '            OmronEEIP.O_T_OwnerRedundant = False
-    '            OmronEEIP.O_T_Priority = EEIP.Priority.Scheduled
-    '            OmronEEIP.O_T_VariableLength = False
-    '            OmronEEIP.O_T_ConnectionType = EEIP.ConnectionType.Point_to_Point
-    '            OmronEEIP.RequestedPacketRate_O_T = 10000        '//The data will update at frequency of 10ms, if we increase this time, then there will be delay in the data updation
-
-    '            '//Parameters from Target -> Originator
-    '            OmronEEIP.T_O_InstanceID = &H65
-    '            OmronEEIP.T_O_Length = 200
-    '            OmronEEIP.T_O_RealTimeFormat = EEIP.RealTimeFormat.Modeless
-    '            OmronEEIP.T_O_OwnerRedundant = False
-    '            OmronEEIP.T_O_Priority = EEIP.Priority.Scheduled
-    '            OmronEEIP.T_O_VariableLength = False
-    '            OmronEEIP.T_O_ConnectionType = EEIP.ConnectionType.Multicast
-    '            OmronEEIP.RequestedPacketRate_T_O = 10000    '//RPI In  500ms Is the Standard value
-
-    '            '//Forward open initiates the Implicit Messaging
-    '            OmronEEIP.ForwardOpen(True)
-    '        Catch ex As Exception
-    '            MsgBox(ex.Message)
-    '        End Try
-
-    '    End Sub
-
-    '    Public Sub IMEIPClose()
-    '        Try
-    '            OmronEEIP.ForwardClose()
-    '            OmronEEIP.UnRegisterSession()
-    '        Catch ex As Exception
-    '            MsgBox(ex.Message)
-    '        End Try
-    '    End Sub
-
-    '    Public Sub IMEIPreconnect()
-    '        Try
-    '            OmronEEIP.ForwardClose()
-    '            OmronEEIP.UnRegisterSession()
-    '            IMEIPInitialise()
-
-    '        Catch ex As Exception
-    '            MsgBox(ex.Message)
-    '        End Try
-    '    End Sub
-
-
-
-    '    Public Function IMEIPReadBoolean(offset As Integer, bit As Integer) As Boolean
-
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Value(1) As Byte
-    '        Dim result(15) As Boolean
-    '        Value(0) = OmronEEIP.T_O_IOData(offset * 2)
-    '        Value(1) = OmronEEIP.T_O_IOData((offset * 2) + 1)
-    '        For i As Integer = 0 To 7
-    '            result(i) = ((Value(0) And 2 ^ i) / 2 ^ i)
-    '            result(i + 8) = ((Value(1) And 2 ^ i) / 2 ^ i)
-    '        Next
-    '        Return result(bit)
-    '    End Function
-
-    '    Public Function IMEIPReadBooleanArr(Offset As Integer) As Boolean()
-    '        '16 BIT WORD TO BOOLEAN(16)
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Value(1) As Byte
-    '        Dim result(15) As Boolean
-    '        Dim Binary As New Text.StringBuilder
-    '        Value(0) = OmronEEIP.T_O_IOData(Offset * 2)
-    '        Value(1) = OmronEEIP.T_O_IOData((Offset * 2) + 1)
-
-    '        For i As Integer = 0 To 7
-    '            result(i) = ((Value(0) And 2 ^ i) / 2 ^ i)
-    '            result(i + 8) = ((Value(1) And 2 ^ i) / 2 ^ i)
-    '        Next
-    '        Return result
-    '    End Function
-
-    '    Public Function IMEIPWriteBoolean(Offset As Integer, bit As Integer, state As Boolean) As Boolean
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Value(1) As Byte
-    '        Dim result As UInt16
-    '        Dim newVal As Byte()
-    '        Dim resultarr(15) As Boolean
-
-    '        Value(0) = OmronEEIP.O_T_IOData(Offset * 2)
-    '        Value(1) = OmronEEIP.O_T_IOData((Offset * 2) + 1)
-
-    '        For i As Integer = 0 To 7
-    '            resultarr(i) = ((Value(0) And 2 ^ i) / 2 ^ i)
-    '            resultarr(i + 8) = ((Value(1) And 2 ^ i) / 2 ^ i)
-    '        Next
-
-
-    '        result = BitConverter.ToUInt16(Value, 0)
-
-    '        If Not resultarr(bit) = state Then
-    '            If state = True Then
-    '                result = result + (2 ^ bit)
-    '            Else
-    '                If result >= (2 ^ bit) Then
-    '                    result = result - (2 ^ bit)
-    '                End If
-    '            End If
-    '        End If
-
-    '        newVal = BitConverter.GetBytes(result)
-
-    '        OmronEEIP.O_T_IOData(Offset * 2) = newVal(0)
-    '        OmronEEIP.O_T_IOData((Offset * 2) + 1) = newVal(1)
-
-    '        Return True
-    '    End Function
-
-
-
-    '    Public Function IMEIPReadString(offset As Integer, length As Integer) As String
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim text As New Text.StringBuilder
-    '        Dim value(length - 1) As Byte
-    '        For i As Integer = 0 To length - 1
-    '            value(i) = OmronEEIP.T_O_IOData((offset * 2) + i)
-    '            text.Append(Convert.ToChar(value(i)))
-    '        Next
-    '        Return text.ToString
-    '    End Function
-
-
-    '    Public Function IMEIPWriteString(offset As Integer, str As String, length As Integer) As Boolean
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim value(length - 1) As Byte
-    '        For i As Integer = 0 To str.Length - 1
-    '            value(i) = Convert.ToByte(str.Chars(i))
-    '        Next
-    '        For j As Integer = 0 To length - 1
-    '            OmronEEIP.O_T_IOData((offset * 2) + j) = value(j)
-    '        Next
-    '        Return True
-    '    End Function
-
-
-    '    Public Function IMEIPWriteFloat(offset As Integer, real As Double) As Boolean
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim sign_value As Integer
-    '        Dim fraction As Decimal
-    '        Dim Absreal As Double = Math.Abs(real)
-    '        Dim j As Integer = 0
-    '        Dim exponent As Integer = 0
-    '        Dim fractionpart As New Text.StringBuilder
-    '        Dim fractionfinal As String = ""
-    '        Dim Binarypart As New Text.StringBuilder
-    '        Dim hexpart As New Text.StringBuilder
-    '        Dim hexstr As String
-    '        Dim val(3) As Byte
-
-    '        ' Need to convert the decimal value into IEEE 754 form "0 10001000 10000000100101100000000"  bit 0 indicate sign, bit 1-8 indicate exponent, bit 9-31 indicate Mantessia
-    '        'Finding the Sign Bit and add to binary text
-    '        If real >= 0 Then
-    '            sign_value = 0
-    '            Binarypart.Append("0")
-    '        Else
-    '            sign_value = 1
-    '            Binarypart.Append("1")
-    '        End If
-
-    '        'To find the exponent divide the number starting with 2 till we get value greater than 1 and less than 2
-    '        If Absreal > 2 Then
-    '            While Absreal > 2
-    '                Absreal = Absreal / 2
-    '                exponent = exponent + 1
-    '            End While
-
-    '        Else
-    '            While Absreal < 1
-    '                Absreal = Absreal * 2
-    '                exponent = exponent - 1
-    '            End While
-    '        End If
-    '        ' To Convert Signed exponent into unsigned bin
-    '        If exponent >= -127 And exponent <= 127 Then
-    '            exponent = 127 + exponent
-    '        End If
-    '        'Add binary of exponent to the binary text
-    '        Binarypart.Append(DecToBin(exponent, 8))
-
-    '        'Find the Value of Mantessa Part
-    '        If Absreal > 1 Then
-    '            fraction = Absreal - 1
-    '        Else
-    '            fraction = Absreal
-    '        End If
-
-    '        If fraction < 1 Then
-    '            While fraction <> 0.0 And j < 23
-    '                fraction = fraction * 2
-    '                If fraction >= 1 Then
-    '                    fractionpart.Append("1")
-    '                    fraction = fraction - 1
-    '                Else
-    '                    fractionpart.Append("0")
-    '                End If
-    '                j = j + 1
-    '            End While
-    '        End If
-    '        'If the Mantessa part length is less than 23, add zero to the right
-    '        If (fractionpart.ToString).Length <= 23 Then
-    '            fractionfinal = fractionpart.ToString.PadRight(23, "0"c)
-    '        End If
-
-    '        ' Add binary mantessa to binary text
-    '        Binarypart.Append(fractionfinal)
-
-    '        If Binarypart.ToString.Length = 32 Then
-    '            hexpart.Append(BinToHex(Binarypart.ToString))
-    '        End If
-    '        hexpart.Insert(0, hexpart.ToString.Substring(4, 4))
-    '        hexstr = hexpart.ToString.Remove(8, 4)
-
-    '        For k As Integer = 0 To 3
-    '            val(k) = HextoDec(hexstr.Substring(k * 2, 2))
-    '        Next
-    '        For l As Integer = 0 To 3
-    '            If l Mod 2 = 0 Then
-    '                OmronEEIP.O_T_IOData((offset * 2) + l) = val(l + 1)
-    '            Else
-    '                OmronEEIP.O_T_IOData((offset * 2) + l) = val(l - 1)
-    '            End If
-    '        Next
-    '        Return True
-    '    End Function
-
-    '    Public Function IMEIPReadFloat(offset As Integer) As Decimal
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim hexchar As New Text.StringBuilder
-    '        Dim firstpart As String
-    '        Dim secondpart As String
-    '        Dim modhex As String
-    '        Dim boolstring As New Text.StringBuilder
-    '        Dim hextoint(7) As Integer
-    '        Dim Value(3) As Byte
-
-    '        For i As Integer = 0 To 3
-    '            If i Mod 2 = 0 Then
-    '                Value(i) = OmronEEIP.T_O_IOData((offset * 2) + i + 1)
-    '            Else
-    '                Value(i) = OmronEEIP.T_O_IOData((offset * 2) + i - 1)
-    '            End If
-    '            hexchar.Append(Value(i).ToString("X2"))
-    '        Next
-
-    '        'The String has to be 2 words, we need to swap the words before processing
-    '        firstpart = hexchar.ToString.Substring(0, 4)
-    '        secondpart = hexchar.ToString.Substring(4, 4)
-    '        modhex = String.Concat(secondpart, firstpart)
-
-    '        'Convert the hex char into Decimal equivalent
-    '        For i As Integer = 0 To modhex.Length - 1
-    '            hextoint(i) = Convert.ToInt32(modhex.Substring(i, 1), 16)
-    '        Next
-
-    '        'Convert the Decimal equivalent into Boolean String
-    '        For j As Integer = 0 To hexchar.Length - 1
-    '            boolstring.Append(Convert.ToString(hextoint(j), 2).PadLeft(4, "0"c))
-    '        Next
-    '        Return (Math.Round(DecimalBoolStringtoDecimal(boolstring.ToString), 2)).ToString
-    '    End Function
-
-    '    Public Function IMEIPWriteInt(offset As Integer, Value As Integer) As Boolean
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Val As Byte() = BitConverter.GetBytes(Value)
-
-    '        OmronEEIP.O_T_IOData(offset * 2) = Val(0)
-    '        OmronEEIP.O_T_IOData((offset * 2) + 1) = Val(1)
-    '        Return True
-    '    End Function
-
-    '    Public Function IMEIPReadInt(offset As Integer) As Integer
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Val(1) As Byte
-    '        Val(0) = OmronEEIP.T_O_IOData(offset * 2)
-    '        Val(1) = OmronEEIP.T_O_IOData((offset * 2) + 1)
-
-    '        Return BitConverter.ToInt16(Val, 0)
-
-    '    End Function
-
-
-
-    '    Public Function IMEIPWriteDInt(offset As Integer, Value As Int32) As Boolean
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Val As Byte() = BitConverter.GetBytes(Value)
-
-    '        For i As Integer = 0 To 3
-    '            OmronEEIP.O_T_IOData((offset * 2) + i) = Val(i)
-    '        Next
-    '        Return True
-    '    End Function
-
-    '    Public Function IMEIPReadDInt(offset As Integer) As Int32
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Val(3) As Byte
-
-    '        For i As Integer = 0 To 3
-    '            Val(i) = OmronEEIP.T_O_IOData((offset * 2) + i)
-    '        Next
-    '        Return BitConverter.ToInt32(Val, 0)
-    '    End Function
-
-
-
-
-
-
-#End Region
-
-
-#Region "EEIP Module Data Conversion-Explicit Messaging"
-    '    'For EEIP Module Data
-
-    '    Public Sub EXEIPInitialise()
-    '        Try
-    '            OmronEEIP.RegisterSession("192.168.0.1", 44818)
-    '        Catch ex As Exception
-    '            MsgBox(ex.Message & ex.StackTrace)
-    '        End Try
-
-    '    End Sub
-
-    '    Public Sub EXEIPClose()
-    '        Try
-
-    '            OmronEEIP.UnRegisterSession()
-    '        Catch ex As Exception
-    '            MsgBox(ex.Message & ex.StackTrace)
-    '        End Try
-    '    End Sub
-
-    '    Public Sub EXEIPreconnect()
-    '        Try
-
-    '            OmronEEIP.UnRegisterSession()
-    '            EXEIPInitialise()
-
-    '        Catch ex As Exception
-    '            MsgBox(ex.Message & ex.StackTrace)
-    '        End Try
-    '    End Sub
-
-
-
-    '    Public Function EXEIPReadBoolean(bytearr As Byte(), offset As Integer, bit As Integer) As Boolean
-
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Value(1) As Byte
-    '        Dim result(15) As Boolean
-    '        Value(0) = bytearr(offset * 2)
-    '        Value(1) = bytearr((offset * 2) + 1)
-    '        For i As Integer = 0 To 7
-    '            result(i) = ((Value(0) And 2 ^ i) / 2 ^ i)
-    '            result(i + 8) = ((Value(1) And 2 ^ i) / 2 ^ i)
-    '        Next
-    '        Return result(bit)
-    '    End Function
-
-    '    Public Function EXEIPReadBooleanArr(bytearr() As Byte, Offset As Integer) As Boolean()
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Value(1) As Byte
-    '        Dim result(15) As Boolean
-    '        Value(0) = bytearr(Offset * 2)
-    '        Value(1) = bytearr((Offset * 2) + 1)
-    '        For i As Integer = 0 To 7
-    '            result(i) = ((Value(0) And 2 ^ i) / 2 ^ i)
-    '            result(i + 8) = ((Value(1) And 2 ^ i) / 2 ^ i)
-    '        Next
-    '        Return result
-    '    End Function
-
-    '    Public Function EXEIPWriteBoolean(bytearr As Byte(), Offset As Integer, bit As Integer, state As Boolean) As Boolean
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Value(1) As Byte
-    '        Dim result As Integer
-    '        Dim newVal As Byte()
-    '        Dim resultarr(15) As Boolean
-
-    '        Value(0) = bytearr(Offset * 2)
-    '        Value(1) = bytearr((Offset * 2) + 1)
-    '        For i As Integer = 0 To 7
-    '            resultarr(i) = ((Value(0) And 2 ^ i) / 2 ^ i)
-    '            resultarr(i + 8) = ((Value(1) And 2 ^ i) / 2 ^ i)
-    '        Next
-
-
-    '        result = BitConverter.ToUInt16(Value, 0)
-
-    '        If Not resultarr(bit) = state Then
-    '            If state = True Then
-    '                result = result + (2 ^ bit)
-    '            Else
-    '                If result >= (2 ^ bit) Then
-    '                    result = result - (2 ^ bit)
-    '                End If
-    '            End If
-    '        End If
-
-    '        newVal = BitConverter.GetBytes(result)
-
-    '        bytearr(Offset * 2) = newVal(0)
-    '        bytearr((Offset * 2) + 1) = newVal(1)
-
-    '        Return True
-    '    End Function
-
-
-
-    '    Public Function EXEIPReadString(bytearr As Byte(), offset As Integer, length As Integer) As String
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim text As New Text.StringBuilder
-    '        Dim value(length - 1) As Byte
-    '        For i As Integer = 0 To length - 1
-    '            value(i) = bytearr((offset * 2) + i)
-    '            text.Append(Convert.ToChar(value(i)))
-    '        Next
-    '        Return text.ToString
-    '    End Function
-
-
-    '    Public Function EXEIPWriteString(bytearr As Byte(), offset As Integer, str As String, length As Integer) As Boolean
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-
-    '        Dim value(length - 1) As Byte
-    '        For i As Integer = 0 To str.Length - 1
-    '            value(i) = Convert.ToByte(str.Chars(i))
-    '        Next
-    '        For j As Integer = 0 To length - 1
-    '            bytearr((offset * 2) + j) = value(j)
-    '        Next
-    '        Return True
-    '    End Function
-
-
-    '    Public Function EXEIPWriteFloat(bytearr As Byte(), offset As Integer, real As Double) As Boolean
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim sign_value As Integer
-    '        Dim fraction As Decimal
-    '        Dim Absreal As Double = Math.Abs(real)
-    '        Dim j As Integer = 0
-    '        Dim exponent As Integer = 0
-    '        Dim fractionpart As New Text.StringBuilder
-    '        Dim fractionfinal As String = ""
-    '        Dim Binarypart As New Text.StringBuilder
-    '        Dim hexpart As New Text.StringBuilder
-    '        Dim hexstr As String
-    '        Dim val(3) As Byte
-
-    '        ' Need to convert the decimal value into IEEE 754 form "0 10001000 10000000100101100000000"  bit 0 indicate sign, bit 1-8 indicate exponent, bit 9-31 indicate Mantessia
-    '        'Finding the Sign Bit and add to binary text
-    '        If real >= 0 Then
-    '            sign_value = 0
-    '            Binarypart.Append("0")
-    '        Else
-    '            sign_value = 1
-    '            Binarypart.Append("1")
-    '        End If
-
-    '        'To find the exponent divide the number starting with 2 till we get value greater than 1 and less than 2
-    '        If Absreal > 2 Then
-    '            While Absreal > 2
-    '                Absreal = Absreal / 2
-    '                exponent = exponent + 1
-    '            End While
-
-    '        Else
-    '            While Absreal < 1
-    '                Absreal = Absreal * 2
-    '                exponent = exponent - 1
-    '            End While
-    '        End If
-    '        ' To Convert Signed exponent into unsigned bin
-    '        If exponent >= -127 And exponent <= 127 Then
-    '            exponent = 127 + exponent
-    '        End If
-    '        'Add binary of exponent to the binary text
-    '        Binarypart.Append(DecToBin(exponent, 8))
-
-    '        'Find the Value of Mantessa Part
-    '        If Absreal > 1 Then
-    '            fraction = Absreal - 1
-    '        Else
-    '            fraction = Absreal
-    '        End If
-
-    '        If fraction < 1 Then
-    '            While fraction <> 0.0 And j < 23
-    '                fraction = fraction * 2
-    '                If fraction >= 1 Then
-    '                    fractionpart.Append("1")
-    '                    fraction = fraction - 1
-    '                Else
-    '                    fractionpart.Append("0")
-    '                End If
-    '                j = j + 1
-    '            End While
-    '        End If
-    '        'If the Mantessa part length is less than 23, add zero to the right
-    '        If (fractionpart.ToString).Length <= 23 Then
-    '            fractionfinal = fractionpart.ToString.PadRight(23, "0"c)
-    '        End If
-
-    '        ' Add binary mantessa to binary text
-    '        Binarypart.Append(fractionfinal)
-
-    '        If Binarypart.ToString.Length = 32 Then
-    '            hexpart.Append(BinToHex(Binarypart.ToString))
-    '        End If
-    '        hexpart.Insert(0, hexpart.ToString.Substring(4, 4))
-    '        hexstr = hexpart.ToString.Remove(8, 4)
-
-    '        For k As Integer = 0 To 3
-    '            val(k) = HextoDec(hexstr.Substring(k * 2, 2))
-    '        Next
-    '        For l As Integer = 0 To 3
-    '            If l Mod 2 = 0 Then
-    '                bytearr((offset * 2) + l) = val(l + 1)
-    '            Else
-    '                bytearr((offset * 2) + l) = val(l - 1)
-    '            End If
-    '        Next
-    '        Return True
-    '    End Function
-
-    '    Public Function EXEIPReadFloat(bytearr As Byte(), offset As Integer) As Decimal
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim hexchar As New Text.StringBuilder
-    '        Dim firstpart As String
-    '        Dim secondpart As String
-    '        Dim modhex As String
-    '        Dim boolstring As New Text.StringBuilder
-    '        Dim hextoint(7) As Integer
-    '        Dim Value(3) As Byte
-
-    '        For i As Integer = 0 To 3
-    '            If i Mod 2 = 0 Then
-    '                Value(i) = bytearr((offset * 2) + i + 1)
-    '            Else
-    '                Value(i) = bytearr((offset * 2) + i - 1)
-    '            End If
-    '            hexchar.Append(Value(i).ToString("X2"))
-    '        Next
-
-    '        'The String has to be 2 words, we need to swap the words before processing
-    '        firstpart = hexchar.ToString.Substring(0, 4)
-    '        secondpart = hexchar.ToString.Substring(4, 4)
-    '        modhex = String.Concat(secondpart, firstpart)
-
-    '        'Convert the hex char into Decimal equivalent
-    '        For i As Integer = 0 To modhex.Length - 1
-    '            hextoint(i) = Convert.ToInt32(modhex.Substring(i, 1), 16)
-    '        Next
-
-    '        'Convert the Decimal equivalent into Boolean String
-    '        For j As Integer = 0 To hexchar.Length - 1
-    '            boolstring.Append(Convert.ToString(hextoint(j), 2).PadLeft(4, "0"c))
-    '        Next
-    '        Return (Math.Round(DecimalBoolStringtoDecimal(boolstring.ToString), 2)).ToString
-    '    End Function
-
-    '    Public Function EXEIPWriteInt(bytearr As Byte(), offset As Integer, Value As Integer) As Boolean
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Val As Byte() = BitConverter.GetBytes(Value)
-
-    '        bytearr(offset * 2) = Val(0)
-    '        bytearr((offset * 2) + 1) = Val(1)
-    '        Return True
-    '    End Function
-
-    '    Public Function EXEIPReadInt(bytearr As Byte(), offset As Integer) As Integer
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Val(1) As Byte
-    '        Val(0) = bytearr(offset * 2)
-    '        Val(1) = bytearr((offset * 2) + 1)
-
-    '        Return BitConverter.ToInt16(Val, 0)
-
-    '    End Function
-
-
-    '    Public Function EXEIPWriteDInt(bytearr As Byte(), offset As Integer, Value As Int32) As Boolean
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Val As Byte() = BitConverter.GetBytes(Value)
-
-    '        For i As Integer = 0 To 3
-    '            bytearr((offset * 2) + i) = Val(i)
-    '        Next
-    '        Return True
-    '    End Function
-
-    '    Public Function EXEIPReadDInt(bytearr As Byte(), offset As Integer) As Int32
-    '        'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-    '        Dim Val(3) As Byte
-
-    '        For i As Integer = 0 To 3
-    '            Val(i) = bytearr((offset * 2) + i)
-    '        Next
-    '        Return BitConverter.ToInt32(Val, 0)
-    '    End Function
-
-
-
-
-
-
-#End Region
 
 
 #Region "IO Status Fetch"
@@ -1675,9 +1027,6 @@ Module ModuleOmron
 
 
 
-            'If ManualCtrl(3)(3) = True And FormMain.btn_PumpReset.Text = "ON" Then
-            '    ManualCtrl(3)(3) = False
-            'End If
 
 #End Region
 #Region "Manual Control- Tank Control page Button"
@@ -1786,8 +1135,6 @@ Module ModuleOmron
 
 #End Region
 #Region "Mimic Panel Circuit Model 1"
-            'Circuittimer.Interval = 100
-            'Circuittimer.Enabled = True
 
             FormCircuitModel2.txtbx_BackPressActual.Text = AIn(1).ToString
             FormCircuitModel2.txtbx_N2PurgeActual.Text = AIn(0).ToString
@@ -1795,10 +1142,6 @@ Module ModuleOmron
             FormCircuitModel2.lbl_OutletPress.Text = AIn(10).ToString
             FormCircuitModel2.lbl_Flowmtr.Text = AIn(12).ToString
             FormCircuitModel2.lbl_Temp.Text = AIn(13).ToString
-
-
-
-            'MimicPanel()
 
 #End Region
 #Region "Device status screen status update"
@@ -1885,10 +1228,6 @@ Module ModuleOmron
                 FINSOutput(21) = 0
             End If
 
-
-
-
-
 #End Region
 #Region "Calibration and verification"
             If PLCstatus(1)(2) = True Then
@@ -1953,100 +1292,94 @@ Module ModuleOmron
             PCStatus(1)(6) = False
         End If
 
-
-
-
-
-
+            If PLCstatus(1)(2) = True Or PLCstatus(1)(3) = True Then
+                FormCalibration.btn_Home.Enabled = False
+            Else
+                FormCalibration.btn_Home.Enabled = True
+            End If
 
 #End Region
 #Region "Main Sequence"
-        If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
-            PCStatus(1)(10) = False
-            FormMain.btn_OprKeyInDtConfirm.Enabled = False
-            FormMain.txtbx_SerialNumber.Enabled = False
-        End If
-        If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
-            FormMain.btn_OprKeyInDtConfirm.Enabled = True
-            FormMain.txtbx_SerialNumber.Enabled = True
-        End If
+            If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
+                    PCStatus(1)(10) = False
+                    FormMain.btn_OprKeyInDtConfirm.Enabled = False
+                    FormMain.txtbx_SerialNumber.Enabled = False
+                End If
+                If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
+                    FormMain.btn_OprKeyInDtConfirm.Enabled = True
+                    FormMain.txtbx_SerialNumber.Enabled = True
+                End If
 
-        If PLCstatus(1)(10) = False Then
+                If PLCstatus(1)(10) = False Then
 
-            PCStatus(1)(11) = False
+                    PCStatus(1)(11) = False
 
-        End If
-        If PLCstatus(0)(1) = False Then
-            PCStatus(1)(12) = False
-            PCStatus(1)(13) = False
-            PCStatus(1)(14) = False
-        End If
-        If FINSinput(20) <> Main_MessageNo Then
-            Main_MessageNo = FINSinput(20)
-            MainMessage(Main_MessageNo)
-        End If
+                End If
+                If PLCstatus(0)(1) = False Then
+                    PCStatus(1)(12) = False
+                    PCStatus(1)(13) = False
+                    PCStatus(1)(14) = False
+                End If
+                If FINSinput(20) <> Main_MessageNo Then
+                    Main_MessageNo = FINSinput(20)
+                    MainMessage(Main_MessageNo)
+                End If
 
-            If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Then
-                MainrecordValue = True
-            Else
-                MainrecordValue = False
-            End If
+                If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Then
+                    MainrecordValue = True
+                Else
+                    MainrecordValue = False
+                End If
 
-            FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
-        FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
+                FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
+                FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
 #End Region
 
 
 #Region "Tool Counter"
-        FormSetting.lblArray = {
+                FormSetting.lblArray = {
             FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
             FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
 }
-        For i As Integer = 0 To FormSetting.lblArray.Length - 1
+                For i As Integer = 0 To FormSetting.lblArray.Length - 1
 
-            FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
-        Next
-        FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
-        FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
+                    FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
+                Next
+                FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
+                FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
 
-        If FINSOutput(10) > 0 Then
-            For i As Integer = 0 To 15
-                If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
-                    ToolCounterreset(0)(i) = False
+                If FINSOutput(10) > 0 Then
+                    For i As Integer = 0 To 15
+                        If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
+                            ToolCounterreset(0)(i) = False
+                        End If
+                    Next
                 End If
-            Next
-        End If
-        If FINSOutput(11) > 0 Then
-            For i As Integer = 0 To 15
-                If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
-                    ToolCounterreset(1)(i) = False
-                End If
+                If FINSOutput(11) > 0 Then
+                    For i As Integer = 0 To 15
+                        If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
+                            ToolCounterreset(1)(i) = False
+                        End If
 
-            Next
-        End If
+                    Next
+                End If
 
 
 #End Region
 
-        'Write the PLC Output
-        Put_PCManualctrl()
-        FINSWrite(0, 200)
-        LabelStatusupdate()
-        Else
 
-        FormCalibration.tmr_Calibration.Enabled = False
+            Put_PCManualctrl()
+                FINSWrite(0, 200)
+                LabelStatusupdate()
+            Else
+
+                FormCalibration.tmr_Calibration.Enabled = False
         FormCalibration.tmr_Verification.Enabled = False
         Resultcapturetimer.Enabled = False
         LabelStatusupdate()
         Alarmtimer.Enabled = True
-            ' PLCtimer.Enabled = False
+
         End If
-
-
-        'LabelStatusupdate()
-
-
-
 
 
     End Sub
@@ -2239,8 +1572,7 @@ Module ModuleOmron
                         Currentalarm.Add(0, "Machine in Warning Condition")
                     End If
 
-                    'FormMain.lbl_OperationMode.BackColor = Color.Red
-                    'FormMain.lbl_OperationMode.Text = "Machine in Alarm Condition"
+
 
                     If Alarmtimer.Enabled = False Then
                         Alarmtimer.Enabled = True
@@ -2406,21 +1738,7 @@ Module ModuleOmron
 
 
 #Region "Calibration sequence timer and Message"
-    Private Sub CalSeqTimer_Ticks(sender As Object, e As EventArgs) Handles Calseqtimer.Tick
-        'If (PCStatus(1)(2) = True And FormCalibration.btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246)) Then
-        '    PCStatus(1)(2) = False
-        '    FormCalibration.btn_Calibrate.Enabled = True
-        '    FormCalibration.btn_Verify.Enabled = True
-        '    PCStatus(1)(7) = False
-        'End If
 
-        'If (PCStatus(1)(3) = True And FormCalibration.btn_Verify.BackColor = Color.FromArgb(25, 130, 246)) Then
-        '    PCStatus(1)(3) = False
-        '    FormCalibration.btn_Calibrate.Enabled = True
-        '    FormCalibration.btn_Verify.Enabled = True
-        '    PCStatus(1)(7) = False
-        'End If
-    End Sub
 
     Public Sub CalibrationMessage(MsgNumber As Integer)
         Dim msg As DataRow() = dtCalibrationmsg.Select($"step_id ='{MsgNumber}'")
@@ -2470,12 +1788,7 @@ Module ModuleOmron
         Else
             PCStatus(1)(10) = False
         End If
-        'MainCycletime = FormCalibration.CalCycletime
-        'MainDptest1start = FormCalibration.Dptest1start
-        'MainDptest1end = FormCalibration.dptest1end
-        'MainDptest2start = FormCalibration.Dptest2start
-        'MainDptest2end = FormCalibration.dptest2end
-        'MainDptestpoints = FormCalibration.Cal_dptestpoints
+
 
         'FormMain.lbl_EstCycleTime.Text = MainCycletime.ToString
         FormMain.lbl_runcycletime.Text = result_samplingtime.ToString
@@ -2607,7 +1920,7 @@ Module ModuleOmron
                             {"flowrate", Math.Round(result_finalflowrate, 1)},
                             {"inlet_pressure", Math.Round(result_finalinlet, 1)},
                             {"outlet_pressure", Math.Round(result_finaloutlet, 1)},
-                            {"viscosity", Math.Round(Viscosity, 3).ToString},
+                            {"viscosity", Math.Round(Viscosity, 3)},
                             {"diff_pressure", Math.Round(result_finaldp, 1)},
                             {"cycle_time", MainCycletime},
                             {"result", FormMain.lbl_DPTestResult.Text.ToLower}
@@ -2688,99 +2001,6 @@ Module ModuleOmron
             dtresult.Columns.Add("Outlet Pressure (kPa)")
             dtresult.Columns.Add("Differential Pressure (kPa)")
         End If
-    End Sub
-
-
-
-    Private Sub MimicPanel()
-        'Manual valve Control Button Color change on Output on
-        'For i As Integer = 0 To 15
-
-        '    If DOut(1)(i) = False Then
-
-        '        ModuleCircuitModel.Lbl_ValvestatusArr(i).BackColor = SystemColors.Window
-        '        ModuleCircuitModel.Lbl_ValvestatusArr(i).ForeColor = SystemColors.ControlText
-        '    Else
-
-        '        ModuleCircuitModel.Lbl_ValvestatusArr(i).BackColor = Color.LimeGreen
-        '        ModuleCircuitModel.Lbl_ValvestatusArr(i).ForeColor = SystemColors.Window
-
-        '    End If
-
-        'Next
-
-        'For i As Integer = 0 To 2
-
-        '    If DOut(2)(i) = False Then
-
-        '        ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).BackColor = SystemColors.Window
-        '        ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.ControlText
-        '    Else
-
-        '        ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).BackColor = Color.LimeGreen
-        '        ModuleCircuitModel.Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.Window
-        '    End If
-
-        'Next
-
-        'If FormCircuitModel1.btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-        '    For i As Integer = 0 To 18
-        '        Circuitcall(i) = 0
-        '        For j As Integer = 0 To pb_MCVCircuitArr(i + 1).Length - 1
-        '            pb_MCVCircuitArr(i + 1)(j).Visible = False
-        '            pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
-        '            pb_MCVCircuitArr(i + 1)(j).SendToBack()
-        '        Next
-        '        For j As Integer = 0 To pb_MCVCircuitPathArr(i + 1).Length - 1
-        '            pb_MCVCircuitArr(i + 1)(j).Visible = False
-        '            pb_MCVCircuitPathArr(i + 1)(j).BackColor = Color.Transparent
-        '            pb_MCVCircuitPathArr(i + 1)(j).SendToBack()
-
-        '        Next
-        '    Next
-        'End If
-        'FormCircuitModel1.txtbx_BackPressActual.Text = AIn(1).ToString
-        'FormCircuitModel1.txtbx_N2PurgeActual.Text = AIn(0).ToString
-        'FormCircuitModel1.lbl_InletPress.Text = AIn(9).ToString
-        'FormCircuitModel1.lbl_OutletPress.Text = AIn(10).ToString
-        'FormCircuitModel1.lbl_Flowmtr.Text = AIn(12).ToString
-        'FormCircuitModel1.lbl_Temp.Text = AIn(13).ToString
-
-        'Circuit path and valve signal remove
-        'For i As Integer = 0 To 15
-
-        '    If DOut(1)(i) = False Then
-        '        For j As Integer = 0 To pb_MCVCircuitArr(i + 1).Length - 1
-        '            pb_MCVCircuitArr(i + 1)(j).Visible = False
-        '            pb_MCVCircuitArr(i + 1)(j).BackColor = Color.Transparent
-        '            pb_MCVCircuitArr(i + 1)(j).SendToBack()
-        '        Next
-        '        For j As Integer = 0 To pb_MCVCircuitPathArr(i + 1).Length - 1
-        '            pb_MCVCircuitArr(i + 1)(j).Visible = False
-        '            pb_MCVCircuitPathArr(i + 1)(j).BackColor = Color.Transparent
-        '            pb_MCVCircuitPathArr(i + 1)(j).SendToBack()
-        '        Next
-
-        '    End If
-        'Next
-
-        'For i As Integer = 0 To 2
-
-        '    If DOut(2)(i) = False Then
-        '        For j As Integer = 0 To pb_MCVCircuitArr(i + 17).Length - 1
-        '            pb_MCVCircuitArr(i + 17)(j).Visible = False
-        '            pb_MCVCircuitArr(i + 17)(j).BackColor = Color.Transparent
-        '            pb_MCVCircuitArr(i + 17)(j).SendToBack()
-        '        Next
-        '        For j As Integer = 0 To pb_MCVCircuitPathArr(i + 17).Length - 1
-        '            pb_MCVCircuitArr(i + 1)(j).Visible = False
-        '            pb_MCVCircuitPathArr(i + 17)(j).BackColor = Color.Transparent
-        '            pb_MCVCircuitPathArr(i + 17)(j).SendToBack()
-
-        '        Next
-        '    End If
-        'Next
-
     End Sub
 
 

@@ -113,10 +113,7 @@ Module ModuleSerialComm
             SerialDataReceived = False
         End If
 
-        'If mySerialPort1.IsOpen = False Then
-        '    ComPort1Connected = False
-        '    FormMain.lbl_CommOpen.BackColor = SystemColors.Window
-        'End If
+
 
         If My.Computer.Ports.SerialPortNames.Contains("COM3") = True Then
             If ComPort1Connected = False Then
