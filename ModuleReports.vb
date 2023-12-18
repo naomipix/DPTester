@@ -232,8 +232,7 @@ Module ModuleReports
                     End Using
                     ' Output As PDF
                     If True Then
-                        'Dim ExcelOutputPath As String = Path.Combine(OutputFolder, Label14.Text & "_" & OutputDate.ToString("yyyyMMdd_HHmmss") & ".xlsx")
-                        'Dim PDFOutputPath As String = Path.Combine(OutputFolder, Label14.Text & "_" & OutputDate.ToString("yyyyMMdd_HHmmss") & ".pdf")
+
 
                         Dim workbook As Spire.Xls.Workbook = New Spire.Xls.Workbook 'Workbook = New Workbook
                         workbook.LoadFromFile(OutputPath, Spire.Xls.ExcelVersion.Version2010)

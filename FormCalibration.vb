@@ -98,8 +98,7 @@
 
         btn_Calibrate.Enabled = True
         btn_Verify.Enabled = True
-        'tmr_Calibration.Enabled = False
-        'tmr_Verification.Enabled = False
+
 
 
         dtrecipetable = SQL.ReadRecords($"SELECT * FROM RecipeTable Where recipe_id ='{txtbx_RecipeID.Text}'")
@@ -242,8 +241,7 @@
     End Sub
 
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
-        'tmr_Calibration.Enabled = False
-        ' tmr_Verification.Enabled = False
+
         Me.Close()
     End Sub
 
@@ -278,7 +276,7 @@
             Drain2cycletime = 0
             Drain3cycletime = 0
             PCStatus(1)(8) = True
-            'Me.Close()
+
             If dtCalibration.Rows.Count > 0 Then
                 dtCalibration.Clear()
             End If
@@ -391,7 +389,7 @@
                 exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
                 Viscosity = A * exp
                 Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
-                ' Cal_finaloffset = (Cal_offset1 - Cal_offset2) / 2
+
 
 
 
@@ -419,14 +417,14 @@
                 exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
                 Viscosity = A * exp
                 Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
-                'Cal_finaloffset = Cal_offset1
+
 
 
             End If
             txtbx_CalInletPressure.Text = CType(Cal_finalInlet, String)
             txtbx_CalOutletPressure.Text = CType(Cal_finalOutlet, String)
             txtbx_CalOffset.Text = CType(Math.Round(Cal_finaloffset, 2), String)
-            'btn_Verify.Enabled = True
+
             PCStatus(1)(4) = True
             VerificationRun()
             tmr_Calibration.Enabled = False
@@ -537,7 +535,7 @@
                 exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
                 Viscosity = A * exp
                 Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet))
-                'Ver_finaldp = ((Ver_avgdp1 + Ver_avgdp2) / 2)
+
 
 
             End If
@@ -567,7 +565,7 @@
                 Viscosity = A * exp
                 Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet))
 
-                'Ver_finaldp = Ver_avgdp1
+
 
             End If
             txtbx_VerInletPressure.Text = CType(Ver_finalinlet, String)
@@ -686,7 +684,7 @@
         If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" And Not txtbx_CalDPPoints.Text = "0" Then
             If btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246) Then
 
-                'SetButtonState(btn_Calibrate, True, "Calibrate")
+
                 PCStatus(1)(2) = True
                 dtCalibration = New DataTable()
                 dgv_CalibrationResult.DataSource = Nothing
@@ -701,8 +699,7 @@
 
                 End With
                 Cal_samplingtime = 0
-                'Cal_inletpressure = 0
-                'Cal_outletpressure = 0
+
                 Cal_avginlet1 = 0
                 Cal_avgoutlet1 = 0
                 Cal_offset1 = 0
@@ -732,7 +729,7 @@
     Public Sub VerificationRun()
         If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" And Not txtbx_CalDPPoints.Text = "0" Then
             If btn_Verify.BackColor = Color.FromArgb(25, 130, 246) Then
-                'SetButtonState(btn_Verify, True, "Verify")
+
                 PCStatus(1)(3) = True
                 btn_Calibrate.Enabled = False
                 dtVerification = New DataTable()
@@ -744,8 +741,7 @@
 
                 End With
                 Ver_samplingtime = 0
-                'Ver_inletpressure = 0
-                'Ver_outletpressure = 0
+
                 Ver_avgdp1 = 0
                 Ver_avginlet1 = 0
                 Ver_avgoutlet1 = 0

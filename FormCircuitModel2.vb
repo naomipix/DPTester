@@ -204,8 +204,7 @@
         ' Circuit Control logic
         Private Sub CircuitTimer_Ticks(sender As Object, e As EventArgs) Handles Circuittimer.Tick
 
-
-
+        If CommLost = False Then
             If CircuitInitalised = True Then
                 ' For Output of Valve 1 to Valve 16
                 For i As Integer = 0 To 15
@@ -234,44 +233,40 @@
                 End If
 
 
-            'Based on Output setting Path for Valve-1 to Valve 19
-            If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                For i As Integer = 1 To 19
-                    For j As Integer = 0 To Lbl_Valvepath(i).Length - 1
-                        Lbl_Valvepath(i)(j).Visible = True
-                        Lbl_Valvepath(i)(j).BorderStyle = BorderStyle.None
-                    Next
-                Next
-
-                For i As Integer = 0 To 18
-                    If Lbl_ValvestatusArr(i).BackColor = Color.LimeGreen Then
-                        If i < 7 And i <> 18 Then
-                            If pathtask(i + 1) = False Then
-                                'Lbl_Valvepath(i + 1)(0).BackColor = bgcolor
-                                'Lbl_Valvepath(i + 1)(Lbl_Valvepath(i + 1).Length - 1).BackColor = bgcolor
-                                'circuit mimic is used to create multiple tasks parallely
-                                CircuitMimic(i + 1)
-                            End If
-                        Else
-                            If pathtask(i + 1) = False Then
-                                'Lbl_Valvepath(i + 1)(0).BackColor = Color.FromArgb(25, 130, 246)
-                                'Lbl_Valvepath(i + 1)(Lbl_Valvepath(i + 1).Length - 1).BackColor = Color.FromArgb(25, 130, 246)
-                                'circuit mimic is used to create multiple tasks parallely
-                                CircuitMimic(i + 1)
-                            End If
-                        End If
-
-                    Else
-
-                        For k As Integer = 0 To Lbl_Valvepath(i + 1).Length - 1
-                            Lbl_Valvepath(i + 1)(k).BackColor = Color.Transparent
-                            Lbl_Valvepath(i + 1)(k).Visible = False
+                'Based on Output setting Path for Valve-1 to Valve 19
+                If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+                    For i As Integer = 1 To 19
+                        For j As Integer = 0 To Lbl_Valvepath(i).Length - 1
+                            Lbl_Valvepath(i)(j).Visible = True
+                            Lbl_Valvepath(i)(j).BorderStyle = BorderStyle.None
                         Next
+                    Next
 
-                    End If
-                Next
-            Else
-                For i As Integer = 1 To 19
+                    For i As Integer = 0 To 18
+                        If Lbl_ValvestatusArr(i).BackColor = Color.LimeGreen Then
+                            If i < 7 And i <> 18 Then
+                                If pathtask(i + 1) = False Then
+
+                                    CircuitMimic(i + 1)
+                                End If
+                            Else
+                                If pathtask(i + 1) = False Then
+
+                                    CircuitMimic(i + 1)
+                                End If
+                            End If
+
+                        Else
+
+                            For k As Integer = 0 To Lbl_Valvepath(i + 1).Length - 1
+                                Lbl_Valvepath(i + 1)(k).BackColor = Color.Transparent
+                                Lbl_Valvepath(i + 1)(k).Visible = False
+                            Next
+
+                        End If
+                    Next
+                Else
+                    For i As Integer = 1 To 19
                         For j As Integer = 0 To Lbl_Valvepath(i).Length - 1
                             Lbl_Valvepath(i)(j).BackColor = Color.Transparent
                             Lbl_Valvepath(i)(j).Visible = False
@@ -280,27 +275,27 @@
                 End If
 
 
-            'For Income Line Path
-            'pathfwdack -0,1,2,3
-            If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+                'For Income Line Path
+                'pathfwdack -0,1,2,3
+                If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
 
-                For i As Integer = 0 To Lbl_Income.Length - 1
-                    For j As Integer = 0 To Lbl_Income(i).Length - 1
-                        Lbl_Income(i)(j).BorderStyle = BorderStyle.None
-                        Lbl_Income(i)(j).Visible = True
-                    Next
-
-                    If pathfwdack(i) = False Then
+                    For i As Integer = 0 To Lbl_Income.Length - 1
                         For j As Integer = 0 To Lbl_Income(i).Length - 1
-                            Lbl_Income(i)(j).BackColor = Color.Transparent
+                            Lbl_Income(i)(j).BorderStyle = BorderStyle.None
                             Lbl_Income(i)(j).Visible = True
                         Next
-                        Circuitforward(Lbl_Income(i), i, 200, Color.FromArgb(25, 130, 246))
-                    End If
-                Next
 
-            Else
-                For i As Integer = 0 To Lbl_Income.Length - 1
+                        If pathfwdack(i) = False Then
+                            For j As Integer = 0 To Lbl_Income(i).Length - 1
+                                Lbl_Income(i)(j).BackColor = Color.Transparent
+                                Lbl_Income(i)(j).Visible = True
+                            Next
+                            Circuitforward(Lbl_Income(i), i, 200, Color.FromArgb(25, 130, 246))
+                        End If
+                    Next
+
+                Else
+                    For i As Integer = 0 To Lbl_Income.Length - 1
 
                         For j As Integer = 0 To Lbl_Income(i).Length - 1
                             Lbl_Income(i)(j).BackColor = Color.Transparent
@@ -310,72 +305,82 @@
                     Next
                 End If
 
-            'For N2 Purge Path
-            'pathfwdack -4
-            If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+                'For N2 Purge Path
+                'pathfwdack -4
+                If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
 
 
-                If pathfwdack(4) = False Then
+                    If pathfwdack(4) = False Then
+                        For i As Integer = 0 To Lbl_N2Purge.Length - 1
+                            Lbl_N2Purge(i).Visible = True
+                            Lbl_N2Purge(i).BackColor = Color.Transparent
+                            Lbl_N2Purge(i).BorderStyle = BorderStyle.None
+                        Next
+                        Circuitforward(Lbl_N2Purge, 4, 50, Color.Yellow)
+                    End If
+
+                Else
+
                     For i As Integer = 0 To Lbl_N2Purge.Length - 1
-                        Lbl_N2Purge(i).Visible = True
-                        Lbl_N2Purge(i).BackColor = Color.Transparent
-                        Lbl_N2Purge(i).BorderStyle = BorderStyle.None
-                    Next
-                    Circuitforward(Lbl_N2Purge, 4, 50, Color.Yellow)
-                End If
-
-            Else
-
-                For i As Integer = 0 To Lbl_N2Purge.Length - 1
                         Lbl_N2Purge(i).BackColor = Color.Transparent
                         Lbl_N2Purge(i).Visible = False
                     Next
                 End If
 
-            'For Junction Path
-            'pathfwdack -5,6
-            If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                If (Lbl_ValvestatusArr(10).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(8).BackColor = Color.LimeGreen) Then
-                    For i As Integer = 0 To Lbl_Junction.Length - 1
-                        For j As Integer = 0 To Lbl_Junction(i).Length - 1
-                            Lbl_Junction(i)(j).BorderStyle = BorderStyle.None
-                            Lbl_Junction(i)(j).Visible = True
-                        Next
-                        If (Lbl_ValvestatusArr(10).BackColor = Color.LimeGreen) Then
-                            If pathfwdack(i + 5) = False Then
-                                For j As Integer = 0 To Lbl_Junction(i).Length - 1
-                                    Lbl_Junction(i)(j).BackColor = Color.Transparent
-                                    Lbl_Junction(i)(j).Visible = True
-                                Next
-                                Circuitforward(Lbl_Junction(i), i + 5, 500, Color.Yellow)
-                            End If
-                        Else
-
-
-                            If i = 0 Then
-                                If pathrevack(i + 5) = False Then
-                                    For j As Integer = 0 To Lbl_Junction(i).Length - 1
-                                        Lbl_Junction(i)(j).BackColor = Color.Transparent
-                                        Lbl_Junction(i)(j).Visible = True
-                                    Next
-                                    Circuitreverse(Lbl_Junction(i), i + 5, 500, Color.FromArgb(25, 130, 246))
-                                End If
-
-                            Else
+                'For Junction Path
+                'pathfwdack -5,6
+                If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+                    If (Lbl_ValvestatusArr(10).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(8).BackColor = Color.LimeGreen) Then
+                        For i As Integer = 0 To Lbl_Junction.Length - 1
+                            For j As Integer = 0 To Lbl_Junction(i).Length - 1
+                                Lbl_Junction(i)(j).BorderStyle = BorderStyle.None
+                                Lbl_Junction(i)(j).Visible = True
+                            Next
+                            If (Lbl_ValvestatusArr(10).BackColor = Color.LimeGreen) Then
                                 If pathfwdack(i + 5) = False Then
                                     For j As Integer = 0 To Lbl_Junction(i).Length - 1
                                         Lbl_Junction(i)(j).BackColor = Color.Transparent
                                         Lbl_Junction(i)(j).Visible = True
                                     Next
-                                    Circuitforward(Lbl_Junction(i), i + 5, 500, Color.FromArgb(25, 130, 246))
+                                    Circuitforward(Lbl_Junction(i), i + 5, 500, Color.Yellow)
                                 End If
+                            Else
+
+
+                                If i = 0 Then
+                                    If pathrevack(i + 5) = False Then
+                                        For j As Integer = 0 To Lbl_Junction(i).Length - 1
+                                            Lbl_Junction(i)(j).BackColor = Color.Transparent
+                                            Lbl_Junction(i)(j).Visible = True
+                                        Next
+                                        Circuitreverse(Lbl_Junction(i), i + 5, 500, Color.FromArgb(25, 130, 246))
+                                    End If
+
+                                Else
+                                    If pathfwdack(i + 5) = False Then
+                                        For j As Integer = 0 To Lbl_Junction(i).Length - 1
+                                            Lbl_Junction(i)(j).BackColor = Color.Transparent
+                                            Lbl_Junction(i)(j).Visible = True
+                                        Next
+                                        Circuitforward(Lbl_Junction(i), i + 5, 500, Color.FromArgb(25, 130, 246))
+                                    End If
+
+                                End If
+
 
                             End If
 
+                        Next
+                    Else
+                        For i As Integer = 0 To Lbl_Junction.Length - 1
 
-                        End If
+                            For j As Integer = 0 To Lbl_Junction(i).Length - 1
+                                Lbl_Junction(i)(j).BackColor = Color.Transparent
+                                Lbl_Junction(i)(j).Visible = False
+                            Next
 
-                    Next
+                        Next
+                    End If
                 Else
                     For i As Integer = 0 To Lbl_Junction.Length - 1
 
@@ -386,35 +391,35 @@
 
                     Next
                 End If
-            Else
-                For i As Integer = 0 To Lbl_Junction.Length - 1
 
-                        For j As Integer = 0 To Lbl_Junction(i).Length - 1
-                            Lbl_Junction(i)(j).BackColor = Color.Transparent
-                            Lbl_Junction(i)(j).Visible = False
-                        Next
-
-                    Next
-                End If
-
-            'For Product Path
-            'pathfwdack -7,8,9,10
-            If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                If (Lbl_ValvestatusArr(9).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(12).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(13).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(14).BackColor = Color.LimeGreen) Then
-                    For i As Integer = 0 To Lbl_Product.Length - 1
-                        For j As Integer = 0 To Lbl_Product(i).Length - 1
-                            Lbl_Product(i)(j).BorderStyle = BorderStyle.None
-                            Lbl_Product(i)(j).Visible = True
-                        Next
-
-                        If pathfwdack(i + 7) = False Then
+                'For Product Path
+                'pathfwdack -7,8,9,10
+                If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+                    If (Lbl_ValvestatusArr(9).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(12).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(13).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(14).BackColor = Color.LimeGreen) Then
+                        For i As Integer = 0 To Lbl_Product.Length - 1
                             For j As Integer = 0 To Lbl_Product(i).Length - 1
-                                Lbl_Product(i)(j).BackColor = Color.Transparent
+                                Lbl_Product(i)(j).BorderStyle = BorderStyle.None
                                 Lbl_Product(i)(j).Visible = True
                             Next
-                            Circuitforward(Lbl_Product(i), i + 7, 500, bgcolor)
-                        End If
-                    Next
+
+                            If pathfwdack(i + 7) = False Then
+                                For j As Integer = 0 To Lbl_Product(i).Length - 1
+                                    Lbl_Product(i)(j).BackColor = Color.Transparent
+                                    Lbl_Product(i)(j).Visible = True
+                                Next
+                                Circuitforward(Lbl_Product(i), i + 7, 500, bgcolor)
+                            End If
+                        Next
+                    Else
+                        For i As Integer = 0 To Lbl_Product.Length - 1
+
+                            For j As Integer = 0 To Lbl_Product(i).Length - 1
+                                Lbl_Product(i)(j).BackColor = Color.Transparent
+                                Lbl_Product(i)(j).Visible = False
+                            Next
+
+                        Next
+                    End If
                 Else
                     For i As Integer = 0 To Lbl_Product.Length - 1
 
@@ -425,35 +430,35 @@
 
                     Next
                 End If
-            Else
-                For i As Integer = 0 To Lbl_Product.Length - 1
 
-                        For j As Integer = 0 To Lbl_Product(i).Length - 1
-                            Lbl_Product(i)(j).BackColor = Color.Transparent
-                            Lbl_Product(i)(j).Visible = False
-                        Next
-
-                    Next
-                End If
-
-            'For Bleed Path
-            'pathfwdack -11,12,13
-            If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                If (Lbl_ValvestatusArr(12).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(13).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(17).BackColor = Color.LimeGreen) Then
-                    For i As Integer = 0 To Lbl_Bleed.Length - 1
-                        For j As Integer = 0 To Lbl_Bleed(i).Length - 1
-                            Lbl_Bleed(i)(j).BorderStyle = BorderStyle.None
-                            Lbl_Bleed(i)(j).Visible = True
-                        Next
-
-                        If pathfwdack(i + 11) = False Then
+                'For Bleed Path
+                'pathfwdack -11,12,13
+                If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+                    If (Lbl_ValvestatusArr(12).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(13).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(17).BackColor = Color.LimeGreen) Then
+                        For i As Integer = 0 To Lbl_Bleed.Length - 1
                             For j As Integer = 0 To Lbl_Bleed(i).Length - 1
-                                Lbl_Bleed(i)(j).BackColor = Color.Transparent
+                                Lbl_Bleed(i)(j).BorderStyle = BorderStyle.None
                                 Lbl_Bleed(i)(j).Visible = True
                             Next
-                            Circuitforward(Lbl_Bleed(i), i + 11, 500, bgcolor)
-                        End If
-                    Next
+
+                            If pathfwdack(i + 11) = False Then
+                                For j As Integer = 0 To Lbl_Bleed(i).Length - 1
+                                    Lbl_Bleed(i)(j).BackColor = Color.Transparent
+                                    Lbl_Bleed(i)(j).Visible = True
+                                Next
+                                Circuitforward(Lbl_Bleed(i), i + 11, 500, bgcolor)
+                            End If
+                        Next
+                    Else
+                        For i As Integer = 0 To Lbl_Bleed.Length - 1
+
+                            For j As Integer = 0 To Lbl_Bleed(i).Length - 1
+                                Lbl_Bleed(i)(j).BackColor = Color.Transparent
+                                Lbl_Bleed(i)(j).Visible = False
+                            Next
+
+                        Next
+                    End If
                 Else
                     For i As Integer = 0 To Lbl_Bleed.Length - 1
 
@@ -464,37 +469,37 @@
 
                     Next
                 End If
-            Else
-                For i As Integer = 0 To Lbl_Bleed.Length - 1
-
-                        For j As Integer = 0 To Lbl_Bleed(i).Length - 1
-                            Lbl_Bleed(i)(j).BackColor = Color.Transparent
-                            Lbl_Bleed(i)(j).Visible = False
-                        Next
-
-                    Next
-                End If
 
 
 
-            'For Pump Path
-            'pathfwdack -14,15
-            If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                If (Lbl_ValvestatusArr(18).BackColor = Color.LimeGreen) Then
-                    For i As Integer = 0 To Lbl_Pump.Length - 1
-                        For j As Integer = 0 To Lbl_Pump(i).Length - 1
-                            Lbl_Pump(i)(j).BorderStyle = BorderStyle.None
-                            Lbl_Pump(i)(j).Visible = True
-                        Next
-
-                        If pathfwdack(i + 14) = False Then
+                'For Pump Path
+                'pathfwdack -14,15
+                If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+                    If (Lbl_ValvestatusArr(18).BackColor = Color.LimeGreen) Then
+                        For i As Integer = 0 To Lbl_Pump.Length - 1
                             For j As Integer = 0 To Lbl_Pump(i).Length - 1
-                                Lbl_Pump(i)(j).BackColor = Color.Transparent
+                                Lbl_Pump(i)(j).BorderStyle = BorderStyle.None
                                 Lbl_Pump(i)(j).Visible = True
                             Next
-                            Circuitforward(Lbl_Pump(i), i + 14, 1000, Color.FromArgb(25, 130, 246))
-                        End If
-                    Next
+
+                            If pathfwdack(i + 14) = False Then
+                                For j As Integer = 0 To Lbl_Pump(i).Length - 1
+                                    Lbl_Pump(i)(j).BackColor = Color.Transparent
+                                    Lbl_Pump(i)(j).Visible = True
+                                Next
+                                Circuitforward(Lbl_Pump(i), i + 14, 1000, Color.FromArgb(25, 130, 246))
+                            End If
+                        Next
+                    Else
+                        For i As Integer = 0 To Lbl_Pump.Length - 1
+
+                            For j As Integer = 0 To Lbl_Pump(i).Length - 1
+                                Lbl_Pump(i)(j).BackColor = Color.Transparent
+                                Lbl_Pump(i)(j).Visible = False
+                            Next
+
+                        Next
+                    End If
                 Else
                     For i As Integer = 0 To Lbl_Pump.Length - 1
 
@@ -505,75 +510,65 @@
 
                     Next
                 End If
-            Else
-                For i As Integer = 0 To Lbl_Pump.Length - 1
-
-                        For j As Integer = 0 To Lbl_Pump(i).Length - 1
-                            Lbl_Pump(i)(j).BackColor = Color.Transparent
-                            Lbl_Pump(i)(j).Visible = False
-                        Next
-
-                    Next
-                End If
 
 
-            'For Non Pressurised Drain Path
-            'pathfwdack -16
-            If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                If (Lbl_ValvestatusArr(0).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(1).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(2).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(4).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(6).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(7).BackColor = Color.LimeGreen) Then
-                    If pathfwdack(16) = False Then
+                'For Non Pressurised Drain Path
+                'pathfwdack -16
+                If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+                    If (Lbl_ValvestatusArr(0).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(1).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(2).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(4).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(6).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(7).BackColor = Color.LimeGreen) Then
+                        If pathfwdack(16) = False Then
+                            For i As Integer = 0 To Lbl_NPDrain.Length - 1
+                                Lbl_NPDrain(i).Visible = True
+                                Lbl_NPDrain(i).BackColor = Color.Transparent
+                                Lbl_NPDrain(i).BorderStyle = BorderStyle.None
+                            Next
+                            Circuitforward(Lbl_NPDrain, 16, 100, Color.FromArgb(25, 130, 246))
+                        End If
+
+                    Else
+
                         For i As Integer = 0 To Lbl_NPDrain.Length - 1
-                            Lbl_NPDrain(i).Visible = True
                             Lbl_NPDrain(i).BackColor = Color.Transparent
-                            Lbl_NPDrain(i).BorderStyle = BorderStyle.None
+                            Lbl_NPDrain(i).Visible = False
                         Next
-                        Circuitforward(Lbl_NPDrain, 16, 100, Color.FromArgb(25, 130, 246))
                     End If
-
                 Else
-
                     For i As Integer = 0 To Lbl_NPDrain.Length - 1
                         Lbl_NPDrain(i).BackColor = Color.Transparent
                         Lbl_NPDrain(i).Visible = False
                     Next
                 End If
-            Else
-                For i As Integer = 0 To Lbl_NPDrain.Length - 1
-                        Lbl_NPDrain(i).BackColor = Color.Transparent
-                        Lbl_NPDrain(i).Visible = False
-                    Next
-                End If
 
-            'For Pressurised Drain Path
-            'pathfwdack -17,18,19
-            If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                If (Lbl_ValvestatusArr(11).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(14).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(15).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(16).BackColor = Color.LimeGreen) Then
-                    For i As Integer = 0 To Lbl_PDrain.Length - 1
-                        For j As Integer = 0 To Lbl_PDrain(i).Length - 1
-                            Lbl_PDrain(i)(j).BorderStyle = BorderStyle.None
-                            Lbl_PDrain(i)(j).Visible = True
-                        Next
-
-                        If pathfwdack(i + 17) = False Then
+                'For Pressurised Drain Path
+                'pathfwdack -17,18,19
+                If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
+                    If (Lbl_ValvestatusArr(11).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(14).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(15).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(16).BackColor = Color.LimeGreen) Then
+                        For i As Integer = 0 To Lbl_PDrain.Length - 1
                             For j As Integer = 0 To Lbl_PDrain(i).Length - 1
-                                Lbl_PDrain(i)(j).BackColor = Color.Transparent
+                                Lbl_PDrain(i)(j).BorderStyle = BorderStyle.None
                                 Lbl_PDrain(i)(j).Visible = True
                             Next
-                            Circuitforward(Lbl_PDrain(i), i + 17, 500, bgcolor)
-                        End If
-                    Next
+
+                            If pathfwdack(i + 17) = False Then
+                                For j As Integer = 0 To Lbl_PDrain(i).Length - 1
+                                    Lbl_PDrain(i)(j).BackColor = Color.Transparent
+                                    Lbl_PDrain(i)(j).Visible = True
+                                Next
+                                Circuitforward(Lbl_PDrain(i), i + 17, 500, bgcolor)
+                            End If
+                        Next
+                    Else
+                        For i As Integer = 0 To Lbl_PDrain.Length - 1
+
+                            For j As Integer = 0 To Lbl_PDrain(i).Length - 1
+                                Lbl_PDrain(i)(j).BackColor = Color.Transparent
+                                Lbl_PDrain(i)(j).Visible = False
+                            Next
+
+                        Next
+                    End If
                 Else
                     For i As Integer = 0 To Lbl_PDrain.Length - 1
-
-                        For j As Integer = 0 To Lbl_PDrain(i).Length - 1
-                            Lbl_PDrain(i)(j).BackColor = Color.Transparent
-                            Lbl_PDrain(i)(j).Visible = False
-                        Next
-
-                    Next
-                End If
-            Else
-                For i As Integer = 0 To Lbl_PDrain.Length - 1
 
                         For j As Integer = 0 To Lbl_PDrain(i).Length - 1
                             Lbl_PDrain(i)(j).BackColor = Color.Transparent
@@ -585,8 +580,10 @@
             End If
 
 
+        End If
 
-        End Sub
+
+    End Sub
 
 
         Public Async Function CircuitMimic(Valve As Integer) As Task
@@ -731,68 +728,8 @@
         End Function
 
 
-        'COlouring one by one, once complete deleting one by one
 
-
-        'While Not Lbl_Valvepath(Valve)(0).BackColor = Color.Transparent And Not Lbl_Valvepath(Valve)(0).BackColor = Color.Red
-        '    Dim size(1) As Integer
-        '    size(0) = 0
-        '    While size(0) < Lbl_Valvepath(Valve).Length - 1 And Not Lbl_Valvepath(Valve)(0).BackColor = Color.Transparent And Not Lbl_Valvepath(Valve)(0).BackColor = Color.Red
-        '        Await Task.Delay(100)
-
-        '        If Not Lbl_Valvepath(Valve)(0).BackColor = Color.Transparent Then 'And Not Lbl_Valvepath(Valve)(Lbl_Valvepath(Valve).Length - 1).BackColor = Color.Transparent Then
-        '            Lbl_Valvepath(Valve)(size(0) + 1).BackColor = bgcolor
-        '        Else
-        '            Lbl_Valvepath(Valve)(size(0) + 1).BackColor = Color.Transparent
-        '        End If
-
-
-        '        size(0) = size(0) + 1
-        '    End While
-        '    size(1) = 0
-        '    While size(1) < Lbl_Valvepath(Valve).Length - 2 And Not Lbl_Valvepath(Valve)(0).BackColor = Color.Transparent And Not Lbl_Valvepath(Valve)(0).BackColor = Color.Red
-        '        Await Task.Delay(100)
-
-        '        If Not Lbl_Valvepath(Valve)(0).BackColor = Color.Transparent And Not Lbl_Valvepath(Valve)(Lbl_Valvepath(Valve).Length - 1).BackColor = Color.Transparent Then
-        '            Lbl_Valvepath(Valve)(size(1) + 1).BackColor = Color.Transparent
-        '        Else
-        '            Lbl_Valvepath(Valve)(size(1) + 1).BackColor = Color.Transparent
-        '        End If
-        '        size(1) = size(1) + 1
-        '    End While
-        'End While
-
-
-
-
-        'Public Async Function CircuitReverse(lblarr As Label(), index As Integer) As Task
-
-
-        '    While Lbl_ValvestatusArr(Valve - 1).BackColor = Color.LimeGreen
-        '        pathtask(index) = True
-        '        Dim size As Integer
-        '        size = 0
-        '        While size <= Lbl_Valvepath(Valve).Length - 1 And Lbl_ValvestatusArr(Valve - 1).BackColor = Color.LimeGreen
-        '            Await Task.Delay(100)
-        '            If size = 0 Then
-        '                Lbl_Valvepath(Valve)(Lbl_Valvepath(Valve).Length - 1).BackColor = Color.Transparent
-        '                Lbl_Valvepath(Valve)(size).BackColor = bgcolor
-        '            End If
-
-        '            If size > 0 And size <= Lbl_Valvepath(Valve).Length - 1 Then
-        '                Lbl_Valvepath(Valve)(size - 1).BackColor = Color.Transparent
-        '                Lbl_Valvepath(Valve)(size).BackColor = bgcolor
-        '            End If
-
-
-        '            size = size + 1
-        '        End While
-        '    End While
-
-        '    pathtask(Valve) = False
-        'End Function
-
-        Public Sub ChildformOverview(Childform As Form)
+    Public Sub ChildformOverview(Childform As Form)
 
             Childform.TopLevel = False
             While FormMain.panel_ManualValve_Circuit.Controls.Count > 0

@@ -147,14 +147,7 @@ Module LoginModule
                     ' Convert To DataTable
                     Dim dtUserAccount As DataTable = dvUserAccount.ToTable
 
-                    'For Each row As DataRow In dtUserAccount.Rows
-                    '    If row.RowState <> DataRowState.Deleted Then
-                    '        If Not String.Compare(row.Item("user_name"), LoginUsername, True) = 0 Then
-                    '            row.Delete()
-                    '        End If
-                    '    End If
-                    'Next
-                    'dtUserAccount.AcceptChanges()
+
 
                     If dtUserAccount.Rows.Count > 0 Then
                         If dtUserAccount.Rows.Count = 1 Then
@@ -512,11 +505,7 @@ Module PermissionModule
         Else
             FormSetting.tabpg_BuyOff.Enabled = False
         End If
-        'If Setting_Developer = True Then
-        '    FormSetting.tabpg_Developer.Enabled = True
-        'Else
-        '    FormSetting.tabpg_Developer.Enabled = False
-        'End If
+
     End Sub
 End Module
 

@@ -60,10 +60,6 @@ Module PublicVariables
     Public RetainedCaloffset As String
 
 
-    'Public LotStarted As Boolean = ""
-    'Public LotIDNumber As String = ""
-    'Public RecipeType As String = ""
-    'Public RecipeID As String = ""
 
     ' Retained Memory - User Login Table Settings
     Public UserLoginHistoryTopCount As Integer = 100
@@ -400,25 +396,7 @@ Module SQL
 End Module
 
 Module CsvExportModule
-    'Function ExportDataTableToCsv(dataTable As DataTable, filePath As String, Optional delimiter As String = ",") As Boolean
-    '    Dim ReturnState As Boolean = False
-    '    Try
-    '        Using writer As New StreamWriter(filePath)
-    '            ' Write header row
-    '            writer.WriteLine(String.Join(delimiter, dataTable.Columns.Cast(Of DataColumn).Select(Function(column) column.ColumnName)))
 
-    '            ' Write data rows
-    '            For Each row As DataRow In dataTable.Rows
-    '                writer.WriteLine(String.Join(delimiter, row.ItemArray.Select(Function(item) item.ToString())))
-    '            Next
-    '        End Using
-    '        ReturnState = True
-    '    Catch ex As Exception
-    '        ReturnState = False
-    '    End Try
-
-    '    Return ReturnState
-    'End Function
 
     Function ExportDataTableToCsv(dataTable As DataTable, filePath As String, Optional delimiter As String = ",") As String
         Dim ReturnState As String = ""
@@ -476,13 +454,7 @@ End Module
 
 Namespace RetainedMemory
     Module RetainedMemory
-        ' Retained Memory
-        'Public AutoDeleteEnabled As String = ""
-        'Public AutoDeleteDayAfter As String = ""
-        'Public LotStarted As String = ""
-        'Public LotIDNumber As String = ""
-        'Public RecipeType As String = ""
-        'Public RecipeID As String = ""
+
 
         Public Sub LoadAndApply()
             Dim dt As New DataTable
@@ -549,7 +521,7 @@ Namespace RetainedMemory
 
                     ' CSV Path To Production Details
                     If dt(i)("id") = 8 Then
-                        If File.Exists(dt(i)("retained_value")) Then
+                        If Directory.Exists(dt(i)("retained_value")) Then
                             PublicVariables.CSVPathToProductionDetails = dt(i)("retained_value")
                         Else
                             PublicVariables.CSVPathToProductionDetails = PublicVariables.DefaultpathToProductionDetails
@@ -557,7 +529,7 @@ Namespace RetainedMemory
                     End If
                     ' CSV Path To Alarm History
                     If dt(i)("id") = 9 Then
-                        If File.Exists(dt(i)("retained_value")) Then
+                        If Directory.Exists(dt(i)("retained_value")) Then
                             PublicVariables.CSVPathToAlarmHistory = dt(i)("retained_value")
                         Else
                             PublicVariables.CSVPathToAlarmHistory = PublicVariables.DefaultpathToAlarmHistory
@@ -567,7 +539,7 @@ Namespace RetainedMemory
 
                     ' CSV Path To Recipe Details
                     If dt(i)("id") = 10 Then
-                        If File.Exists(dt(i)("retained_value")) Then
+                        If Directory.Exists(dt(i)("retained_value")) Then
                             PublicVariables.CSVPathToRecipeDetails = dt(i)("retained_value")
                         Else
                             PublicVariables.CSVPathToRecipeDetails = PublicVariables.DefaultpathToRecipeDetails
@@ -577,7 +549,7 @@ Namespace RetainedMemory
 
                     ' CSV Path To Result Summary
                     If dt(i)("id") = 11 Then
-                        If File.Exists(dt(i)("retained_value")) Then
+                        If Directory.Exists(dt(i)("retained_value")) Then
                             PublicVariables.CSVPathToResultSummary = dt(i)("retained_value")
                         Else
                             PublicVariables.CSVPathToResultSummary = PublicVariables.DefaultpathToResultSummary
@@ -829,18 +801,17 @@ Namespace LicensingModule
         Dim LicMsgTrialRemain As String = "Trial Remaining: "
 
         ' License Encryption Keys
-        'Dim ENC_key As String = "706978656C6175746F6D6174696F6E20"  ' [pixelautomation ]
-        'Dim ENC_IV As String = "706978656C202020"                   ' [pixel   ]
+
 
         ' TEMP Path
         'Dim tempPath As String = Environment.GetEnvironmentVariable("TEMP")
         Dim tempPath As String = Environment.GetEnvironmentVariable("LOCALAPPDATA")
 
         ' File Path
-        Dim PathToLicenseFolder As String = $"{Application.StartupPath()}\License"
-        Dim PathToLicenseFile As String = $"{Application.StartupPath()}\License\{LicFileName}"
+        Dim PathToLicenseFolder As String = $"C:\DPTester\License"
+        Dim PathToLicenseFile As String = $"C:\DPTester\License\{LicFileName}"
         Dim PathToTrialFile As String = $"{tempPath}\{LicTrialFileName}"
-        Dim PathToLicReqFile As String = $"{Application.StartupPath()}\License\{LicReqFileName}"
+        Dim PathToLicReqFile As String = $"C:\DPTester\License\{LicReqFileName}"
 
         ' Trial License
         Dim dtTrialExpiring As New DateTime
@@ -1026,6 +997,7 @@ Namespace LicensingModule
                                     If MsgBox(LicMsgActivateTrial, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Information") = MsgBoxResult.Yes Then
                                         If CreateLicTrial() = True Then
                                             TrialValid = True
+                                            dtTrialExpiring = DateTime.Now.AddDays(DayCountGiven)
                                             trialTimerStart()
                                             Return "TRIAL"
                                         End If
@@ -1250,34 +1222,14 @@ Namespace LiveGraph
         Public WithEvents graphPlottingTimer As New Timer()
 
         ' Declare Parameter
-        'Dim TickRateInMilliseconds As Integer = 50
+
         Dim dtRunningResult As New DataTable
         Dim dtRunningResultCopy As New DataTable
         Dim dtScaledResult As New DataTable
-        'Dim dtLocked As Boolean = False
-        'Dim StartTime As DateTime
-        'Dim EndTime As DateTime
-        'Dim RunDuration As Integer = 0
+
 
         Private Sub graphPlottingTimer_Tick(sender As Object, e As EventArgs) Handles graphPlottingTimer.Tick
-            'Dim getSecElapsed As Decimal = ((dtRunningResult.Rows.Count + 1) * TickRateInMilliseconds) / 1000
-            'Dim getInletPress As Decimal = InletPress
-            'Dim getOutletPress As Decimal = OutletPress
-            'Dim getDiffPress As Decimal = OutletPress - InletPress
-            'Dim getFlowRate As Decimal = FlowRate
 
-            'dtRunningResult.Rows.Add($"{getSecElapsed}", $"{getInletPress}", $"{getOutletPress}", $"{getDiffPress}", $"{getFlowRate}")
-
-            'Dim dtCopy As New DataTable
-
-            'Try
-            '    If dataQueue.Count > 0 Then
-            '        dtRunningResultCopy.Rows.Clear()
-            '        dtRunningResultCopy = dataQueue.Dequeue() 'dtRunningResult.Copy
-            '    End If
-            'Catch ex As Exception
-
-            'End Try
 
             dtRunningResultCopy = FormMainModule.dtresult.Copy
 
@@ -1353,44 +1305,7 @@ Namespace LiveGraph
             End If
         End Sub
 
-        'Public Sub StartRun(duration As Integer)
-        '    ' Initialize DataTable
-        '    With dtRunningResult
-        '        .Rows.Clear()
-        '        .Columns.Clear()
-        '        .Columns.Add("second")
-        '        .Columns.Add("inlet_pressure")
-        '        .Columns.Add("outlet_pressure")
-        '        .Columns.Add("diff_pressure")
-        '        .Columns.Add("flow_rate")
-        '    End With
-        '    dtScaledResult.Rows.Clear()
-        '    dtScaledResult.Columns.Clear()
-        '    dtScaledResult = dtRunningResult.Clone
 
-        '    ' Assign ChartValueMember
-        '    chartLiveGraph.Series(0).XValueMember = "second"
-
-        '    ' Set Start/End Time
-        '    StartTime = DateTime.Now
-        '    EndTime = StartTime.AddSeconds(duration).AddMilliseconds(TickRateInMilliseconds)
-
-        '    ' Set Run Duration
-        '    RunDuration = duration
-
-        '    ' Start Timer
-        '    Dim TimerEnable = True
-        '    Dim TimerInterval = 20 'TickRateInMilliseconds
-        '    If TimerEnable = True Then
-        '        Dim timerCallback As System.Threading.TimerCallback = AddressOf TimerCallbackMethod
-        '        graphRuntimeTimer = New Threading.Timer(timerCallback, Nothing, 0, TimerInterval)
-
-        '        With graphPlottingTimer
-        '            .Interval = TimerInterval
-        '            .Enabled = TimerEnable
-        '        End With
-        '    End If
-        'End Sub
 
         Public Sub ChartPlottingTimer(timerEnable As Boolean)
             If timerEnable = True Then
@@ -1410,10 +1325,6 @@ Namespace LiveGraph
                 graphPlottingTimer.Enabled = False
             End If
         End Sub
-
-
-
-
 
 
     End Module
