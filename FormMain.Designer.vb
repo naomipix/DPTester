@@ -220,7 +220,6 @@ Partial Class FormMain
         Me.dsp_DigitalOutput = New System.Windows.Forms.Label()
         Me.dsp_DigitalInput = New System.Windows.Forms.Label()
         Me.tabpg_StatusDevice = New System.Windows.Forms.TabPage()
-        Me.txtbx_Pumpcontroller = New System.Windows.Forms.RichTextBox()
         Me.dsp_PumpController = New System.Windows.Forms.Label()
         Me.txtbx_HandScanner = New System.Windows.Forms.RichTextBox()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -435,6 +434,8 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
+        Me.txtbx_PumpcontrolResponse = New System.Windows.Forms.RichTextBox()
+        Me.txtbx_PumpcontrolQuery = New System.Windows.Forms.RichTextBox()
         Me.panel_FormControl.SuspendLayout()
         Me.Panel12.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2446,7 +2447,8 @@ Partial Class FormMain
         'tabpg_StatusDevice
         '
         Me.tabpg_StatusDevice.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_Pumpcontroller)
+        Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_PumpcontrolResponse)
+        Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_PumpcontrolQuery)
         Me.tabpg_StatusDevice.Controls.Add(Me.dsp_PumpController)
         Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_HandScanner)
         Me.tabpg_StatusDevice.Controls.Add(Me.Label19)
@@ -2467,16 +2469,6 @@ Partial Class FormMain
         Me.tabpg_StatusDevice.Size = New System.Drawing.Size(1828, 583)
         Me.tabpg_StatusDevice.TabIndex = 1
         Me.tabpg_StatusDevice.Text = "Device Status"
-        '
-        'txtbx_Pumpcontroller
-        '
-        Me.txtbx_Pumpcontroller.Cursor = System.Windows.Forms.Cursors.No
-        Me.txtbx_Pumpcontroller.Location = New System.Drawing.Point(319, 44)
-        Me.txtbx_Pumpcontroller.Name = "txtbx_Pumpcontroller"
-        Me.txtbx_Pumpcontroller.ReadOnly = True
-        Me.txtbx_Pumpcontroller.Size = New System.Drawing.Size(280, 170)
-        Me.txtbx_Pumpcontroller.TabIndex = 19
-        Me.txtbx_Pumpcontroller.Text = ""
         '
         'dsp_PumpController
         '
@@ -4936,6 +4928,26 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'txtbx_PumpcontrolResponse
+        '
+        Me.txtbx_PumpcontrolResponse.Cursor = System.Windows.Forms.Cursors.No
+        Me.txtbx_PumpcontrolResponse.Location = New System.Drawing.Point(319, 144)
+        Me.txtbx_PumpcontrolResponse.Name = "txtbx_PumpcontrolResponse"
+        Me.txtbx_PumpcontrolResponse.ReadOnly = True
+        Me.txtbx_PumpcontrolResponse.Size = New System.Drawing.Size(280, 70)
+        Me.txtbx_PumpcontrolResponse.TabIndex = 22
+        Me.txtbx_PumpcontrolResponse.Text = ""
+        '
+        'txtbx_PumpcontrolQuery
+        '
+        Me.txtbx_PumpcontrolQuery.Cursor = System.Windows.Forms.Cursors.No
+        Me.txtbx_PumpcontrolQuery.Location = New System.Drawing.Point(319, 44)
+        Me.txtbx_PumpcontrolQuery.Name = "txtbx_PumpcontrolQuery"
+        Me.txtbx_PumpcontrolQuery.ReadOnly = True
+        Me.txtbx_PumpcontrolQuery.Size = New System.Drawing.Size(280, 70)
+        Me.txtbx_PumpcontrolQuery.TabIndex = 21
+        Me.txtbx_PumpcontrolQuery.Text = ""
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5406,6 +5418,7 @@ Partial Class FormMain
     Friend WithEvents txtbx_PLCRead As RichTextBox
     Friend WithEvents txtbx_HandScanner As RichTextBox
     Friend WithEvents Label19 As Label
-    Friend WithEvents txtbx_Pumpcontroller As RichTextBox
     Friend WithEvents dsp_PumpController As Label
+    Friend WithEvents txtbx_PumpcontrolResponse As RichTextBox
+    Friend WithEvents txtbx_PumpcontrolQuery As RichTextBox
 End Class

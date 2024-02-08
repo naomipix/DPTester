@@ -6,6 +6,7 @@ Imports System.Runtime.InteropServices.ComTypes
 Imports System.Diagnostics.Eventing.Reader
 Imports System.Security.Cryptography
 Imports Microsoft.VisualBasic.ApplicationServices
+Imports DocumentFormat.OpenXml.Drawing
 
 Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
@@ -72,7 +73,6 @@ Module ModuleOmron
 
 
 
-
 #Region "FINS protocol"
     Public Sub FINSInitialise()
         OmronPLC.PLC_IPAddress = "192.168.0.1"
@@ -90,7 +90,7 @@ Module ModuleOmron
 
         PLCtimer.Interval = 100
         PLCtimer.Enabled = True
-        PCtimer.Interval = 1000
+        PCtimer.Interval = 3000
         Alarmtimer.Interval = 1500
 
         Calseqtimer.Interval = 2000
@@ -121,7 +121,7 @@ Module ModuleOmron
         Dim firstpart As String
         Dim secondpart As String
         Dim modhex As String
-        Dim boolstring As New Text.StringBuilder
+        Dim boolstring As New StringBuilder
         Dim hextoint(7) As Integer
         'On reading the PLC Memory it will give the string of Hex Character
         hexchar = (PLC.ReadMemory(Mem, Startoffset, 2))
@@ -204,10 +204,10 @@ Module ModuleOmron
         Dim Absreal As Double = Math.Abs(real)
         Dim j As Integer = 0
         Dim exponent As Integer = 0
-        Dim fractionpart As New Text.StringBuilder
+        Dim fractionpart As New StringBuilder
         Dim fractionfinal As String = ""
-        Dim Binarypart As New Text.StringBuilder
-        Dim hexpart As New Text.StringBuilder
+        Dim Binarypart As New StringBuilder
+        Dim hexpart As New StringBuilder
         Dim val(2) As Int32
 
         ' Need to convert the decimal value into IEEE 754 form "0 10001000 10000000100101100000000"  bit 0 indicate sign, bit 1-8 indicate exponent, bit 9-31 indicate Mantessia
@@ -323,10 +323,10 @@ Module ModuleOmron
         Dim Absreal As Double = Math.Abs(real)
         Dim j As Integer = 0
         Dim exponent As Integer = 0
-        Dim fractionpart As New Text.StringBuilder
+        Dim fractionpart As New StringBuilder
         Dim fractionfinal As String = ""
-        Dim Binarypart As New Text.StringBuilder
-        Dim hexpart As New Text.StringBuilder
+        Dim Binarypart As New StringBuilder
+        Dim hexpart As New StringBuilder
         Dim hexstr As String
         Dim val(1) As UInt16
 
@@ -423,9 +423,9 @@ Module ModuleOmron
 
     Public Function Int2Float(Intarr As Integer(), offset As Integer) As Decimal
         'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
-        Dim hexchar As New Text.StringBuilder
+        Dim hexchar As New StringBuilder
         Dim modhex As String
-        Dim boolstring As New Text.StringBuilder
+        Dim boolstring As New StringBuilder
         Dim hextoint(7) As Integer
         Dim Value0(1) As Byte
         Dim Value1(1) As Byte
@@ -529,7 +529,7 @@ Module ModuleOmron
 
     Public Function StringByteSwap(str As String) As String
         'This to swap bytes in the string, so that the same data can be write or read from the PLC
-        Dim text As New Text.StringBuilder
+        Dim text As New StringBuilder
         If (str.Length Mod 2) = 1 Then
             str += " "
         End If
@@ -735,13 +735,25 @@ Module ModuleOmron
     Public Function FINSInputRead() As Boolean
         Try
             Dim readtext As New StringBuilder(1500)
+            Dim pumpcontrolquery As New StringBuilder(10)
+            Dim pumpcontrolresponse As New StringBuilder(20)
             ' FormMain.txtbx_PLCWrite.Text = Nothing
             FINSinput = OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 500, 300, PoohFinsETN.DataTypes.UnSignBIN)
             For i = 0 To 299
                 readtext.Append(Fillzerobefore(Conversion.Hex(FINSinput(i)), 4))
             Next
             FormMain.txtbx_PLCRead.Text = readtext.ToString
+            For a As Integer = 0 To 2
+                pumpcontrolquery.Append(Fillzerobefore(Conversion.Hex(FINSinput(180 + a)), 4))
+            Next
 
+            For b As Integer = 0 To 4
+                pumpcontrolresponse.Append(Fillzerobefore(Conversion.Hex(FINSinput(183 + b)), 4))
+            Next
+
+
+            FormMain.txtbx_PumpcontrolQuery.Text = pumpcontrolquery.ToString
+            FormMain.txtbx_PumpcontrolResponse.Text = pumpcontrolresponse.ToString
         Catch ex As Exception
             CommLost = True
 
@@ -884,6 +896,8 @@ Module ModuleOmron
             FetchAlarm(200)
 
             'Spiltting the Input into Boolean Array for Processing
+
+
 
             For i As Integer = 0 To 2
                 PLCstatus(i) = Int2BoolArr(FINSinput(i))
@@ -1134,16 +1148,16 @@ Module ModuleOmron
 
 
 #End Region
-#Region "Mimic Panel Circuit Model 1"
+            '#Region "Mimic Panel Circuit Model 1"
 
-            FormCircuitModel2.txtbx_BackPressActual.Text = AIn(1).ToString
-            FormCircuitModel2.txtbx_N2PurgeActual.Text = AIn(0).ToString
-            FormCircuitModel2.lbl_InletPress.Text = AIn(9).ToString
-            FormCircuitModel2.lbl_OutletPress.Text = AIn(10).ToString
-            FormCircuitModel2.lbl_Flowmtr.Text = AIn(12).ToString
-            FormCircuitModel2.lbl_Temp.Text = AIn(13).ToString
+            '            FormCircuitModel2.txtbx_BackPressActual.Text = AIn(1).ToString
+            '            FormCircuitModel2.txtbx_N2PurgeActual.Text = AIn(0).ToString
+            '            FormCircuitModel2.lbl_InletPress.Text = AIn(9).ToString
+            '            FormCircuitModel2.lbl_OutletPress.Text = AIn(10).ToString
+            '            FormCircuitModel2.lbl_Flowmtr.Text = AIn(12).ToString
+            '            FormCircuitModel2.lbl_Temp.Text = AIn(13).ToString
 
-#End Region
+            '#End Region
 #Region "Device status screen status update"
             'Device status screen status update
 
@@ -1281,16 +1295,15 @@ Module ModuleOmron
 
 
             If PLCstatus(1)(2) = False And PLCstatus(1)(3) = False Then
+                PCStatus(1)(7) = False
+                PCStatus(1)(4) = False
+                PCStatus(1)(5) = False
+            End If
 
-            PCStatus(1)(7) = False
-            PCStatus(1)(4) = False
-            PCStatus(1)(5) = False
-        End If
-
-        If FormCalibration.btn_Calibrate.Enabled = True Or FormCalibration.btn_Verify.Enabled = True Then
-            PCStatus(1)(8) = False
-            PCStatus(1)(6) = False
-        End If
+            If FormCalibration.btn_Calibrate.Enabled = True Or FormCalibration.btn_Verify.Enabled = True Then
+                PCStatus(1)(8) = False
+                PCStatus(1)(6) = False
+            End If
 
             If PLCstatus(1)(2) = True Or PLCstatus(1)(3) = True Then
                 FormCalibration.btn_Home.Enabled = False
@@ -1301,83 +1314,80 @@ Module ModuleOmron
 #End Region
 #Region "Main Sequence"
             If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
-                    PCStatus(1)(10) = False
-                    FormMain.btn_OprKeyInDtConfirm.Enabled = False
-                    FormMain.txtbx_SerialNumber.Enabled = False
-                End If
-                If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
-                    FormMain.btn_OprKeyInDtConfirm.Enabled = True
-                    FormMain.txtbx_SerialNumber.Enabled = True
-                End If
+                PCStatus(1)(10) = False
+                FormMain.btn_OprKeyInDtConfirm.Enabled = False
+                FormMain.txtbx_SerialNumber.Enabled = False
+            End If
+            If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
+                FormMain.btn_OprKeyInDtConfirm.Enabled = True
+                FormMain.txtbx_SerialNumber.Enabled = True
+            End If
 
-                If PLCstatus(1)(10) = False Then
+            If PLCstatus(1)(10) = False Then
 
-                    PCStatus(1)(11) = False
+                PCStatus(1)(11) = False
 
-                End If
-                If PLCstatus(0)(1) = False Then
-                    PCStatus(1)(12) = False
-                    PCStatus(1)(13) = False
-                    PCStatus(1)(14) = False
-                End If
-                If FINSinput(20) <> Main_MessageNo Then
-                    Main_MessageNo = FINSinput(20)
-                    MainMessage(Main_MessageNo)
-                End If
+            End If
+            If PLCstatus(0)(1) = False Then
+                PCStatus(1)(12) = False
+                PCStatus(1)(13) = False
+                PCStatus(1)(14) = False
+            End If
+            If FINSinput(20) <> Main_MessageNo Then
+                Main_MessageNo = FINSinput(20)
+                MainMessage(Main_MessageNo)
+            End If
 
-                If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Then
-                    MainrecordValue = True
-                Else
-                    MainrecordValue = False
-                End If
+            If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Then
+                MainrecordValue = True
+            Else
+                MainrecordValue = False
+            End If
+            FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
+            FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
 
-                FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
-                FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
+
 #End Region
-
-
 #Region "Tool Counter"
-                FormSetting.lblArray = {
+            FormSetting.lblArray = {
             FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
             FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
 }
-                For i As Integer = 0 To FormSetting.lblArray.Length - 1
-
-                    FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
+            For i As Integer = 0 To FormSetting.lblArray.Length - 1
+                FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
+            Next
+            FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
+            FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
+            If FINSOutput(10) > 0 Then
+                For i As Integer = 0 To 15
+                    If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
+                        ToolCounterreset(0)(i) = False
+                    End If
                 Next
-                FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
-                FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
+            End If
+            If FINSOutput(11) > 0 Then
+                For i As Integer = 0 To 15
+                    If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
+                        ToolCounterreset(1)(i) = False
+                    End If
+                Next
+            End If
 
-                If FINSOutput(10) > 0 Then
-                    For i As Integer = 0 To 15
-                        If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
-                            ToolCounterreset(0)(i) = False
-                        End If
-                    Next
-                End If
-                If FINSOutput(11) > 0 Then
-                    For i As Integer = 0 To 15
-                        If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
-                            ToolCounterreset(1)(i) = False
-                        End If
 
-                    Next
-                End If
+
+
 
 
 #End Region
-
-
             Put_PCManualctrl()
-                FINSWrite(0, 200)
-                LabelStatusupdate()
-            Else
-
-                FormCalibration.tmr_Calibration.Enabled = False
-        FormCalibration.tmr_Verification.Enabled = False
-        Resultcapturetimer.Enabled = False
-        LabelStatusupdate()
-        Alarmtimer.Enabled = True
+            FINSWrite(0, 200)
+            LabelStatusupdate()
+        Else
+            FormCalibration.tmr_Calibration.Enabled = False
+            FormCalibration.tmr_Verification.Enabled = False
+            Resultcapturetimer.Enabled = False
+            LabelStatusupdate()
+            Alarmtimer.Enabled = True
 
         End If
 
@@ -1401,7 +1411,12 @@ Module ModuleOmron
                 ManualCtrl(3)(i) = False
             End If
         Next
-        PCtimer.Stop()
+        For i As Integer = 3 To 7
+            If ManualCtrl(3)(i) = True And FormMain.btn_Manualothersarr(i - 3).Text = "OFF" Then
+                ManualCtrl(3)(i) = False
+            End If
+        Next
+        'PCtimer.Stop()
     End Sub
 
 

@@ -1484,6 +1484,7 @@ Public Class FormMain
 #End Region
 #End Region
 
+
 #Region "Manual Control"
     ' Valve Control
 
@@ -1565,7 +1566,7 @@ Public Class FormMain
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Pump Enable (ON)")
             End If
         End If
-
+        PCtimer.Start()
     End Sub
 
 
@@ -1573,8 +1574,8 @@ Public Class FormMain
         Dim newLPM As Decimal
         If txtbx_NewLPM.Text.Length > 0 Then
             newLPM = CType(txtbx_NewLPM.Text, Decimal)
-            If newLPM < 0.1 Or newLPM > 24.9 Then
-                MsgBox("Invalid data, Enter Value between 0.1 to 24.9")
+            If newLPM < PublicVariables.PumpFlowrateLowLimit Or newLPM > PublicVariables.PumpFlowrateHighLimit Then
+                MsgBox($"Invalid data, Enter Value between {PublicVariables.PumpFlowrateLowLimit} to {PublicVariables.PumpFlowrateHighLimit}")
                 txtbx_NewLPM.Text = Nothing
                 txtbx_NewLPM.Focus()
             End If
@@ -1586,8 +1587,8 @@ Public Class FormMain
         Dim newRPM As Decimal
         If txtbx_NewRPM.Text.Length > 0 Then
             newRPM = CType(txtbx_NewRPM.Text, Integer)
-            If newRPM < 1 Or newRPM > 3000 Then
-                MsgBox("Invalid data, Enter Value between 1 to 3000")
+            If newRPM < PublicVariables.PumpSpeedLowLimit Or newRPM > PublicVariables.PumpSpeedHighLimit Then
+                MsgBox($"Invalid data, Enter Value between {PublicVariables.PumpSpeedLowLimit} to {PublicVariables.PumpSpeedHighLimit}")
                 txtbx_NewRPM.Text = Nothing
                 txtbx_NewRPM.Focus()
             End If
@@ -1598,13 +1599,13 @@ Public Class FormMain
     Private Sub txtbx_NewLPM_GotFocus(sender As Object, e As EventArgs) Handles txtbx_NewLPM.GotFocus
         Dim focustooltip As New ToolTip
         focustooltip.InitialDelay = 100
-        focustooltip.SetToolTip(txtbx_NewLPM, $"Enter Value between 0.1 to 24.9 ")
+        focustooltip.SetToolTip(txtbx_NewLPM, $"Enter Value between {PublicVariables.PumpFlowrateLowLimit} to {PublicVariables.PumpFlowrateHighLimit} ")
     End Sub
 
     Private Sub txtbx_NewRPM_GotFocus(sender As Object, e As EventArgs) Handles txtbx_NewRPM.GotFocus
         Dim focustooltip As New ToolTip
         focustooltip.InitialDelay = 100
-        focustooltip.SetToolTip(txtbx_NewRPM, $"Enter Value between 1 to 3000 ")
+        focustooltip.SetToolTip(txtbx_NewRPM, $"Enter Value between {PublicVariables.PumpSpeedLowLimit} to {PublicVariables.PumpSpeedHighLimit} ")
     End Sub
 
 
@@ -1691,8 +1692,8 @@ Public Class FormMain
         Dim backpressure As Decimal
         If txtbx_BackPressRequired.Text.Length > 0 Then
             backpressure = CType(txtbx_BackPressRequired.Text, Decimal)
-            If backpressure < 0.0 Or backpressure > 149.9 Then
-                MsgBox("Invalid data, Enter Value between 0.0 to 149.9")
+            If backpressure < PublicVariables.BPRegulatorLowLimit Or backpressure > PublicVariables.BPRegulatorHighLimit Then
+                MsgBox($"Invalid data, Enter Value between {PublicVariables.BPRegulatorLowLimit} to {PublicVariables.BPRegulatorHighLimit}")
                 txtbx_BackPressRequired.Text = Nothing
                 txtbx_BackPressRequired.Focus()
             End If
@@ -1704,8 +1705,8 @@ Public Class FormMain
         Dim N2pressure As Decimal
         If txtbx_N2PurgeRequired.Text.Length > 0 Then
             N2pressure = CType(txtbx_N2PurgeRequired.Text, Decimal)
-            If N2pressure < 0.0 Or N2pressure > 149.9 Then
-                MsgBox("Invalid data, Enter Value between 0.0 to 149.9")
+            If N2pressure < PublicVariables.N2RegulatorLowLimit Or N2pressure > PublicVariables.N2RegulatorHighLimit Then
+                MsgBox($"Invalid data, Enter Value between {PublicVariables.N2RegulatorLowLimit} to {PublicVariables.N2RegulatorHighLimit}")
                 txtbx_N2PurgeRequired.Text = Nothing
                 txtbx_N2PurgeRequired.Focus()
             End If
@@ -1716,13 +1717,13 @@ Public Class FormMain
     Private Sub txtbx_BackPressRequired_GotFocus(sender As Object, e As EventArgs) Handles txtbx_BackPressRequired.GotFocus
         Dim focustooltip As New ToolTip
         focustooltip.InitialDelay = 100
-        focustooltip.SetToolTip(txtbx_BackPressRequired, $"Enter Value between 0.0 to 149.9 ")
+        focustooltip.SetToolTip(txtbx_BackPressRequired, $"Enter Value between {PublicVariables.BPRegulatorLowLimit} to {PublicVariables.BPRegulatorHighLimit} ")
     End Sub
 
     Private Sub txtbx_N2PurgeRequired_GotFocus(sender As Object, e As EventArgs) Handles txtbx_N2PurgeRequired.GotFocus
         Dim focustooltip As New ToolTip
         focustooltip.InitialDelay = 100
-        focustooltip.SetToolTip(txtbx_N2PurgeRequired, $"Enter Value between  0.0 to 149.9 ")
+        focustooltip.SetToolTip(txtbx_N2PurgeRequired, $"Enter Value between  {PublicVariables.N2RegulatorLowLimit} to {PublicVariables.N2RegulatorHighLimit}")
     End Sub
 
 
@@ -1880,6 +1881,7 @@ Public Class FormMain
 
 
 #End Region
+
 
 #Region "Alarm"
     ' Initialize Alarm History Tab

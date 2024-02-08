@@ -98,6 +98,19 @@ Module PublicVariables
     ' Ini - Production Details
     Public ProdDetailsDisplayedTableCount As Integer = 10000
 
+
+    'Ini - Limits
+    Public BPRegulatorLowLimit As Single
+    Public BPRegulatorHighLimit As Single
+    Public N2RegulatorLowLimit As Single
+    Public N2RegulatorHighLimit As Single
+    Public PumpSpeedLowLimit As Integer
+    Public PumpSpeedHighLimit As Integer
+    Public PumpFlowrateLowLimit As Single
+    Public PumpFlowrateHighLimit As Single
+
+
+
     ' Login
     Public LoggedIn As Boolean = False
     Public LoggedInIsDeveloper As Boolean = True

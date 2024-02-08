@@ -141,6 +141,16 @@ Module IniFileInitialize
             PublicVariables.DefaultpathToRecipeDetails = IniFileHandler.ReadIniValue(IniFilePath, Section6, "RecipeFolder", "C:\Users\")
             PublicVariables.DefaultpathToResultSummary = IniFileHandler.ReadIniValue(IniFilePath, Section6, "ResultFolder", "C:\Users\")
 
+            Dim Section7 As String = "Limits"
+            PublicVariables.BPRegulatorLowLimit = IniFileHandler.ReadIniValue(IniFilePath, Section7, "BackPressureLowLimit", "0.0")
+            PublicVariables.BPRegulatorHighLimit = IniFileHandler.ReadIniValue(IniFilePath, Section7, "BackPressureHighLimit", "500.0")
+            PublicVariables.N2RegulatorLowLimit = IniFileHandler.ReadIniValue(IniFilePath, Section7, "N2PressureLowLimit", "0.0")
+            PublicVariables.N2RegulatorHighLimit = IniFileHandler.ReadIniValue(IniFilePath, Section7, "N2PressureHighLimit", "500.0")
+            PublicVariables.PumpSpeedLowLimit = IniFileHandler.ReadIniValue(IniFilePath, Section7, "PumpSpeedLowLimit", "0")
+            PublicVariables.PumpSpeedHighLimit = IniFileHandler.ReadIniValue(IniFilePath, Section7, "PumpSpeedHighLimit", "10000")
+            PublicVariables.PumpFlowrateLowLimit = IniFileHandler.ReadIniValue(IniFilePath, Section7, "PumpFlowrateLowLimit", "0.0")
+            PublicVariables.PumpFlowrateHighLimit = IniFileHandler.ReadIniValue(IniFilePath, Section7, "PumpFlowrateHighLimit", "100.0")
+
 
         Catch ex As Exception
             MsgBox($"Incorrect Parameters Detected.{vbCrLf}Application Will Now Close.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, $"Configuration Error - {IniFilePath}")

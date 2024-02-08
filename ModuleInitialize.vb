@@ -111,6 +111,17 @@ Module ModuleInitialize
                             ResultFolder=C:\DPTester\Result Details\Export\
                             "
 
+                Inilines(8) = "[Limits]
+                            BackPressureLowLimit=0.0
+                            BackPressureHighLimit=500.0
+                            N2PressureLowLimit=0.0
+                            N2PressureHighLimit=500.0
+                            PumpSpeedLowLimit=0
+                            PumpSpeedLowLimit=10000
+                            PumpFlowrateLowLimit=0.0
+                            PumpFlowrateHighLimit=100.0
+                            "
+
                 System.IO.File.WriteAllLines(iniFileLocation, Inilines)
 
             End If
