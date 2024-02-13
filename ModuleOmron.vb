@@ -988,7 +988,7 @@ Module ModuleOmron
             FormMain.lbl_OutletPress.Text = AIn(10).ToString
             FormMain.lbl_Flowmtr.Text = AIn(12).ToString
             FormMain.lbl_Temp.Text = AIn(13).ToString
-
+            FormMain.lbl_PumpSpeed.Text = AIn(2).ToString
 
 
 
@@ -1145,7 +1145,29 @@ Module ModuleOmron
                 SetButtonState(FormMain.btn_EmptyTank, True, "ON")
             End If
 
+            If PLCstatus(2)(8) = False Then
+                SetButtonState(FormMain.btn_InletConnect, False, "OFF")
+            Else
+                SetButtonState(FormMain.btn_InletConnect, True, "ON")
+            End If
 
+            If PLCstatus(2)(9) = False Then
+                SetButtonState(FormMain.btn_OutletConnect, False, "OFF")
+            Else
+                SetButtonState(FormMain.btn_OutletConnect, True, "ON")
+            End If
+
+            If PLCstatus(2)(10) = False Then
+                SetButtonState(FormMain.btn_VentConnect, False, "OFF")
+            Else
+                SetButtonState(FormMain.btn_VentConnect, True, "ON")
+            End If
+
+            If PLCstatus(2)(11) = False Then
+                SetButtonState(FormMain.btn_DrainConnect, False, "OFF")
+            Else
+                SetButtonState(FormMain.btn_DrainConnect, True, "ON")
+            End If
 
 #End Region
             '#Region "Mimic Panel Circuit Model 1"
@@ -1272,7 +1294,7 @@ Module ModuleOmron
 
 
 
-            If FINSinput(21) = 300 Or FINSinput(21) = 320 Or FINSinput(21) = 350 Or FINSinput(21) = 370 Or FINSinput(21) = 600 Or FINSinput(21) = 620 Or FINSinput(21) = 650 Or FINSinput(21) = 670 Or FINSinput(21) = 800 Or FINSinput(21) = 820 Or FINSinput(21) = 850 Or FINSinput(21) = 870 Or FINSinput(21) = 1000 Or FINSinput(21) = 1020 Or FINSinput(21) = 1050 Or FINSinput(21) = 1070 Or FINSinput(21) = 1160 Or FINSinput(21) = 1360 Or FINSinput(21) = 1560 Then
+            If FINSinput(21) = 300 Or FINSinput(21) = 320 Or FINSinput(21) = 350 Or FINSinput(21) = 370 Or FINSinput(21) = 600 Or FINSinput(21) = 620 Or FINSinput(21) = 650 Or FINSinput(21) = 670 Or FINSinput(21) = 800 Or FINSinput(21) = 820 Or FINSinput(21) = 850 Or FINSinput(21) = 870 Or FINSinput(21) = 1000 Or FINSinput(21) = 1020 Or FINSinput(21) = 1050 Or FINSinput(21) = 1070 Or FINSinput(21) = 1160 Or FINSinput(21) = 1360 Or FINSinput(21) = 1560 Or FINSinput(21) = 1700 Then
                 CalrecordValue = True
             Else
                 CalrecordValue = False
@@ -1296,82 +1318,88 @@ Module ModuleOmron
 
             If PLCstatus(1)(2) = False And PLCstatus(1)(3) = False Then
                 PCStatus(1)(7) = False
+
+            End If
+
+            'Auto Running is False, Reset PC Acknowledge of Calibration and Verification reset
+            If PLCstatus(0)(1) = False Then
                 PCStatus(1)(4) = False
                 PCStatus(1)(5) = False
             End If
 
-            If FormCalibration.btn_Calibrate.Enabled = True Or FormCalibration.btn_Verify.Enabled = True Then
-                PCStatus(1)(8) = False
-                PCStatus(1)(6) = False
-            End If
 
-            If PLCstatus(1)(2) = True Or PLCstatus(1)(3) = True Then
-                FormCalibration.btn_Home.Enabled = False
-            Else
-                FormCalibration.btn_Home.Enabled = True
-            End If
+            If FormCalibration.btn_Calibrate.Enabled = True Or FormCalibration.btn_Verify.Enabled = True Then
+                    PCStatus(1)(8) = False
+                    PCStatus(1)(6) = False
+                End If
+
+                If PLCstatus(1)(2) = True Or PLCstatus(1)(3) = True Then
+                    FormCalibration.btn_Home.Enabled = False
+                Else
+                    FormCalibration.btn_Home.Enabled = True
+                End If
 
 #End Region
 #Region "Main Sequence"
-            If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
-                PCStatus(1)(10) = False
-                FormMain.btn_OprKeyInDtConfirm.Enabled = False
-                FormMain.txtbx_SerialNumber.Enabled = False
-            End If
-            If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
-                FormMain.btn_OprKeyInDtConfirm.Enabled = True
-                FormMain.txtbx_SerialNumber.Enabled = True
-            End If
+                If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
+                    PCStatus(1)(10) = False
+                    FormMain.btn_OprKeyInDtConfirm.Enabled = False
+                    FormMain.txtbx_SerialNumber.Enabled = False
+                End If
+                If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
+                    FormMain.btn_OprKeyInDtConfirm.Enabled = True
+                    FormMain.txtbx_SerialNumber.Enabled = True
+                End If
 
-            If PLCstatus(1)(10) = False Then
+                If PLCstatus(1)(10) = False Then
 
-                PCStatus(1)(11) = False
+                    PCStatus(1)(11) = False
 
-            End If
-            If PLCstatus(0)(1) = False Then
-                PCStatus(1)(12) = False
-                PCStatus(1)(13) = False
-                PCStatus(1)(14) = False
-            End If
-            If FINSinput(20) <> Main_MessageNo Then
-                Main_MessageNo = FINSinput(20)
-                MainMessage(Main_MessageNo)
-            End If
+                End If
+                If PLCstatus(0)(1) = False Then
+                    PCStatus(1)(12) = False
+                    PCStatus(1)(13) = False
+                    PCStatus(1)(14) = False
+                End If
+                If FINSinput(20) <> Main_MessageNo Then
+                    Main_MessageNo = FINSinput(20)
+                    MainMessage(Main_MessageNo)
+                End If
 
-            If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Then
-                MainrecordValue = True
-            Else
-                MainrecordValue = False
-            End If
-            FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
-            FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
+                If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Then
+                    MainrecordValue = True
+                Else
+                    MainrecordValue = False
+                End If
+                FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
+                FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
 
 
 #End Region
 #Region "Tool Counter"
-            FormSetting.lblArray = {
+                FormSetting.lblArray = {
             FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
             FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
 }
-            For i As Integer = 0 To FormSetting.lblArray.Length - 1
-                FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
-            Next
-            FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
-            FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
-            If FINSOutput(10) > 0 Then
-                For i As Integer = 0 To 15
-                    If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
-                        ToolCounterreset(0)(i) = False
-                    End If
+                For i As Integer = 0 To FormSetting.lblArray.Length - 1
+                    FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
                 Next
-            End If
-            If FINSOutput(11) > 0 Then
-                For i As Integer = 0 To 15
-                    If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
-                        ToolCounterreset(1)(i) = False
-                    End If
-                Next
-            End If
+                FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
+                FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
+                If FINSOutput(10) > 0 Then
+                    For i As Integer = 0 To 15
+                        If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
+                            ToolCounterreset(0)(i) = False
+                        End If
+                    Next
+                End If
+                If FINSOutput(11) > 0 Then
+                    For i As Integer = 0 To 15
+                        If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
+                            ToolCounterreset(1)(i) = False
+                        End If
+                    Next
+                End If
 
 
 
@@ -1379,11 +1407,11 @@ Module ModuleOmron
 
 
 #End Region
-            Put_PCManualctrl()
-            FINSWrite(0, 200)
-            LabelStatusupdate()
-        Else
-            FormCalibration.tmr_Calibration.Enabled = False
+                Put_PCManualctrl()
+                FINSWrite(0, 200)
+                LabelStatusupdate()
+            Else
+                FormCalibration.tmr_Calibration.Enabled = False
             FormCalibration.tmr_Verification.Enabled = False
             Resultcapturetimer.Enabled = False
             LabelStatusupdate()
@@ -1416,6 +1444,13 @@ Module ModuleOmron
                 ManualCtrl(3)(i) = False
             End If
         Next
+
+        For i As Integer = 0 To 3
+            If ManualCtrl(4)(i) = True And FormMain.btn_Manualothersarr(13 + i).Text = "OFF" Then
+                ManualCtrl(4)(i) = False
+            End If
+        Next
+
         'PCtimer.Stop()
     End Sub
 

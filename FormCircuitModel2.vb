@@ -84,7 +84,7 @@
 
         Lbl_Valvepath(10) = {lbl_V10_P1, lbl_V10_P2, lbl_V10_P3, lbl_V10_P4}
 
-        Lbl_Valvepath(11) = {lbl_V11_P1, lbl_V11_P2, lbl_V11_P3, lbl_V15_P4}
+        Lbl_Valvepath(11) = {lbl_V11_P1, lbl_V11_P2, lbl_V11_P3, lbl_V11_P4}
 
         Lbl_Valvepath(12) = {lbl_V12_P1, lbl_V12_P2, lbl_V12_P3}
 
@@ -586,6 +586,39 @@
             lbl_OutletPress.Text = AIn(10).ToString
             lbl_Flowmtr.Text = AIn(12).ToString
             lbl_Temp.Text = AIn(13).ToString
+            lbl_PumpPress.Text = AIn(8).ToString
+            lbl_N2Press.Text = AIn(11).ToString
+            lbl_PumpSpeed.Text = AIn(2).ToString
+
+            If DOut(2)(5) = False Then
+                lbl_PumpEnable.BackColor = SystemColors.Window
+            Else
+                lbl_PumpEnable.BackColor = Color.LimeGreen
+            End If
+
+            If DIn(1)(2) = False Then
+                lbl_PumpHighHigh.BackColor = SystemColors.Window
+            Else
+                lbl_PumpHighHigh.BackColor = Color.LimeGreen
+            End If
+
+            If DIn(1)(3) = False Then
+                lbl_PumpHigh.BackColor = SystemColors.Window
+            Else
+                lbl_PumpHigh.BackColor = Color.LimeGreen
+            End If
+
+            If DIn(1)(4) = False Then
+                lbl_PumpLow.BackColor = SystemColors.Window
+            Else
+                lbl_PumpLow.BackColor = Color.LimeGreen
+            End If
+
+            If DIn(1)(5) = False Then
+                lbl_PumpLowLow.BackColor = SystemColors.Window
+            Else
+                lbl_PumpLowLow.BackColor = Color.LimeGreen
+            End If
 
 #End Region
 

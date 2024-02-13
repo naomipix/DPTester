@@ -24,6 +24,20 @@ Partial Class FormCircuitModel2
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCircuitModel2))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lbl_PumpSpeed = New System.Windows.Forms.Label()
+        Me.lbl_PumpEnable = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.lbl_PumpLowLow = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.lbl_PumpLow = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lbl_PumpHigh = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.lbl_PumpHighHigh = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.lbl_N2Press = New System.Windows.Forms.Label()
+        Me.lbl_PumpPress = New System.Windows.Forms.Label()
         Me.lbl_N2Purge_P58 = New System.Windows.Forms.Label()
         Me.lbl_N2Purge_P56 = New System.Windows.Forms.Label()
         Me.lbl_N2Purge_P55 = New System.Windows.Forms.Label()
@@ -385,6 +399,20 @@ Partial Class FormCircuitModel2
         '
         Me.Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), System.Drawing.Image)
         Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel1.Controls.Add(Me.lbl_PumpSpeed)
+        Me.Panel1.Controls.Add(Me.lbl_PumpEnable)
+        Me.Panel1.Controls.Add(Me.Label11)
+        Me.Panel1.Controls.Add(Me.lbl_PumpLowLow)
+        Me.Panel1.Controls.Add(Me.Label9)
+        Me.Panel1.Controls.Add(Me.lbl_PumpLow)
+        Me.Panel1.Controls.Add(Me.Label7)
+        Me.Panel1.Controls.Add(Me.lbl_PumpHigh)
+        Me.Panel1.Controls.Add(Me.Label4)
+        Me.Panel1.Controls.Add(Me.lbl_PumpHighHigh)
+        Me.Panel1.Controls.Add(Me.Label6)
+        Me.Panel1.Controls.Add(Me.Label5)
+        Me.Panel1.Controls.Add(Me.lbl_N2Press)
+        Me.Panel1.Controls.Add(Me.lbl_PumpPress)
         Me.Panel1.Controls.Add(Me.lbl_N2Purge_P58)
         Me.Panel1.Controls.Add(Me.lbl_N2Purge_P56)
         Me.Panel1.Controls.Add(Me.lbl_N2Purge_P55)
@@ -743,6 +771,163 @@ Partial Class FormCircuitModel2
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(950, 450)
         Me.Panel1.TabIndex = 2
+        '
+        'lbl_PumpSpeed
+        '
+        Me.lbl_PumpSpeed.BackColor = System.Drawing.SystemColors.Info
+        Me.lbl_PumpSpeed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_PumpSpeed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_PumpSpeed.Location = New System.Drawing.Point(314, 330)
+        Me.lbl_PumpSpeed.Name = "lbl_PumpSpeed"
+        Me.lbl_PumpSpeed.Size = New System.Drawing.Size(50, 25)
+        Me.lbl_PumpSpeed.TabIndex = 792
+        Me.lbl_PumpSpeed.Text = "0"
+        Me.lbl_PumpSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_PumpEnable
+        '
+        Me.lbl_PumpEnable.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_PumpEnable.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_PumpEnable.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_PumpEnable.Location = New System.Drawing.Point(326, 304)
+        Me.lbl_PumpEnable.Name = "lbl_PumpEnable"
+        Me.lbl_PumpEnable.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_PumpEnable.TabIndex = 791
+        Me.lbl_PumpEnable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label11
+        '
+        Me.Label11.BackColor = System.Drawing.SystemColors.Window
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(312, 161)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(82, 20)
+        Me.Label11.TabIndex = 790
+        Me.Label11.Text = "Tank Safe Low"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_PumpLowLow
+        '
+        Me.lbl_PumpLowLow.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_PumpLowLow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_PumpLowLow.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_PumpLowLow.Location = New System.Drawing.Point(286, 161)
+        Me.lbl_PumpLowLow.Name = "lbl_PumpLowLow"
+        Me.lbl_PumpLowLow.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_PumpLowLow.TabIndex = 789
+        Me.lbl_PumpLowLow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label9
+        '
+        Me.Label9.BackColor = System.Drawing.SystemColors.Window
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(312, 137)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(82, 20)
+        Me.Label9.TabIndex = 788
+        Me.Label9.Text = "Tank Low"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_PumpLow
+        '
+        Me.lbl_PumpLow.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_PumpLow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_PumpLow.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_PumpLow.Location = New System.Drawing.Point(286, 137)
+        Me.lbl_PumpLow.Name = "lbl_PumpLow"
+        Me.lbl_PumpLow.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_PumpLow.TabIndex = 787
+        Me.lbl_PumpLow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label7
+        '
+        Me.Label7.BackColor = System.Drawing.SystemColors.Window
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(312, 113)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(82, 20)
+        Me.Label7.TabIndex = 786
+        Me.Label7.Text = "Tank High"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_PumpHigh
+        '
+        Me.lbl_PumpHigh.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_PumpHigh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_PumpHigh.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_PumpHigh.Location = New System.Drawing.Point(286, 113)
+        Me.lbl_PumpHigh.Name = "lbl_PumpHigh"
+        Me.lbl_PumpHigh.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_PumpHigh.TabIndex = 785
+        Me.lbl_PumpHigh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.SystemColors.Window
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(312, 89)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(82, 20)
+        Me.Label4.TabIndex = 784
+        Me.Label4.Text = "Tank Overflow"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_PumpHighHigh
+        '
+        Me.lbl_PumpHighHigh.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_PumpHighHigh.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_PumpHighHigh.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_PumpHighHigh.Location = New System.Drawing.Point(286, 89)
+        Me.lbl_PumpHighHigh.Name = "lbl_PumpHighHigh"
+        Me.lbl_PumpHighHigh.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_PumpHighHigh.TabIndex = 783
+        Me.lbl_PumpHighHigh.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label6
+        '
+        Me.Label6.BackColor = System.Drawing.SystemColors.Window
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(242, 6)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(83, 25)
+        Me.Label6.TabIndex = 782
+        Me.Label6.Text = "N2 Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label5
+        '
+        Me.Label5.BackColor = System.Drawing.SystemColors.Window
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(380, 204)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(53, 43)
+        Me.Label5.TabIndex = 781
+        Me.Label5.Text = "Pump Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_N2Press
+        '
+        Me.lbl_N2Press.BackColor = System.Drawing.SystemColors.Info
+        Me.lbl_N2Press.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_N2Press.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_N2Press.Location = New System.Drawing.Point(186, 6)
+        Me.lbl_N2Press.Name = "lbl_N2Press"
+        Me.lbl_N2Press.Size = New System.Drawing.Size(50, 25)
+        Me.lbl_N2Press.TabIndex = 780
+        Me.lbl_N2Press.Text = "25.2"
+        Me.lbl_N2Press.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_PumpPress
+        '
+        Me.lbl_PumpPress.BackColor = System.Drawing.SystemColors.Info
+        Me.lbl_PumpPress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_PumpPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_PumpPress.Location = New System.Drawing.Point(375, 251)
+        Me.lbl_PumpPress.Name = "lbl_PumpPress"
+        Me.lbl_PumpPress.Size = New System.Drawing.Size(50, 25)
+        Me.lbl_PumpPress.TabIndex = 779
+        Me.lbl_PumpPress.Text = "25.2"
+        Me.lbl_PumpPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_N2Purge_P58
         '
@@ -4005,7 +4190,7 @@ Partial Class FormCircuitModel2
         Me.dsp_Temp.Name = "dsp_Temp"
         Me.dsp_Temp.Size = New System.Drawing.Size(61, 25)
         Me.dsp_Temp.TabIndex = 352
-        Me.dsp_Temp.Text = "Temperature" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(K)"
+        Me.dsp_Temp.Text = "Temperature" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(°C)"
         Me.dsp_Temp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_V17_P8
@@ -4387,4 +4572,18 @@ Partial Class FormCircuitModel2
     Friend WithEvents lbl_N2Purge_P3 As Label
     Friend WithEvents lbl_N2Purge_P2 As Label
     Friend WithEvents lbl_V17_P8 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents lbl_N2Press As Label
+    Friend WithEvents lbl_PumpPress As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents lbl_PumpLowLow As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents lbl_PumpLow As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents lbl_PumpHigh As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents lbl_PumpHighHigh As Label
+    Friend WithEvents lbl_PumpEnable As Label
+    Friend WithEvents lbl_PumpSpeed As Label
 End Class

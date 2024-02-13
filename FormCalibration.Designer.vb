@@ -24,8 +24,8 @@ Partial Class FormCalibration
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCalibration))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -37,6 +37,7 @@ Partial Class FormCalibration
         Me.panel_UserCategory = New System.Windows.Forms.Panel()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
+        Me.btn_CircuitView = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -90,6 +91,7 @@ Partial Class FormCalibration
         Me.txtbx_CalInletPressure = New System.Windows.Forms.TextBox()
         Me.dsp_VerStatus = New System.Windows.Forms.Label()
         Me.lbl_CalibrationMsg = New System.Windows.Forms.Label()
+        Me.Panel_Calibration_Circuit = New System.Windows.Forms.Panel()
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -214,6 +216,7 @@ Partial Class FormCalibration
         '
         'panel_FormControl
         '
+        Me.panel_FormControl.Controls.Add(Me.btn_CircuitView)
         Me.panel_FormControl.Controls.Add(Me.PictureBox1)
         Me.panel_FormControl.Controls.Add(Me.Panel1)
         Me.panel_FormControl.Controls.Add(Me.dsp_Home)
@@ -231,6 +234,19 @@ Partial Class FormCalibration
         Me.panel_FormControl.Size = New System.Drawing.Size(1904, 1001)
         Me.panel_FormControl.TabIndex = 0
         Me.panel_FormControl.Visible = False
+        '
+        'btn_CircuitView
+        '
+        Me.btn_CircuitView.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_CircuitView.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btn_CircuitView.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_CircuitView.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_CircuitView.Location = New System.Drawing.Point(1430, 77)
+        Me.btn_CircuitView.Name = "btn_CircuitView"
+        Me.btn_CircuitView.Size = New System.Drawing.Size(80, 80)
+        Me.btn_CircuitView.TabIndex = 106
+        Me.btn_CircuitView.Text = "Circuit View"
+        Me.btn_CircuitView.UseVisualStyleBackColor = False
         '
         'PictureBox1
         '
@@ -614,6 +630,7 @@ Partial Class FormCalibration
         Me.Panel3.Controls.Add(Me.txtbx_CalInletPressure)
         Me.Panel3.Controls.Add(Me.dsp_VerStatus)
         Me.Panel3.Controls.Add(Me.lbl_CalibrationMsg)
+        Me.Panel3.Controls.Add(Me.Panel_Calibration_Circuit)
         Me.Panel3.Location = New System.Drawing.Point(566, 3)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1311, 802)
@@ -649,14 +666,14 @@ Partial Class FormCalibration
         Me.dgv_VerificationResult.AllowUserToDeleteRows = False
         Me.dgv_VerificationResult.AllowUserToResizeColumns = False
         Me.dgv_VerificationResult.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dgv_VerificationResult.ColumnHeadersHeight = 60
         Me.dgv_VerificationResult.Location = New System.Drawing.Point(679, 215)
         Me.dgv_VerificationResult.Name = "dgv_VerificationResult"
@@ -670,14 +687,14 @@ Partial Class FormCalibration
         Me.dgv_CalibrationResult.AllowUserToDeleteRows = False
         Me.dgv_CalibrationResult.AllowUserToResizeColumns = False
         Me.dgv_CalibrationResult.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dgv_CalibrationResult.ColumnHeadersHeight = 60
         Me.dgv_CalibrationResult.Location = New System.Drawing.Point(49, 215)
         Me.dgv_CalibrationResult.Name = "dgv_CalibrationResult"
@@ -870,6 +887,17 @@ Partial Class FormCalibration
         Me.lbl_CalibrationMsg.Text = "Press ""Calibrate"" to Start"
         Me.lbl_CalibrationMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Panel_Calibration_Circuit
+        '
+        Me.Panel_Calibration_Circuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.Panel_Calibration_Circuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel_Calibration_Circuit.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel_Calibration_Circuit.Location = New System.Drawing.Point(0, 0)
+        Me.Panel_Calibration_Circuit.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel_Calibration_Circuit.Name = "Panel_Calibration_Circuit"
+        Me.Panel_Calibration_Circuit.Size = New System.Drawing.Size(1309, 800)
+        Me.Panel_Calibration_Circuit.TabIndex = 85
+        '
         'dsp_Home
         '
         Me.dsp_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1010,4 +1038,6 @@ Partial Class FormCalibration
     Friend WithEvents dgv_VerificationResult As DataGridView
     Friend WithEvents Label4 As Label
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btn_CircuitView As Button
+    Friend WithEvents Panel_Calibration_Circuit As Panel
 End Class

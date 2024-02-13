@@ -190,13 +190,13 @@ Public Class FormRecipeManagement
 
 
 
-    Private max_d_drain1pressure As Decimal = 30.0
+    Private max_d_drain1pressure As Decimal = 300.0
     Private max_i_drain1time As Integer = 500
 
-    Private max_d_drain2pressure As Decimal = 30.0
+    Private max_d_drain2pressure As Decimal = 300.0
     Private max_i_drain2time As Integer = 500
 
-    Private max_d_drain3pressure As Decimal = 30.0
+    Private max_d_drain3pressure As Decimal = 300.0
     Private max_i_drain3time As Integer = 500
 
     'Decalre Recipe parameters for collecting Edit recipe
@@ -1028,8 +1028,8 @@ Public Class FormRecipeManagement
         End If
 
         If onContinue = True Then
-            If PartID.Length <> 16 Then
-                RecipeMessage(12, $"Part ID should be 16 Characters, Try Again")
+            If PartID.Length < 12 Then
+                RecipeMessage(12, $"Part ID should be greater than 12 Characters, Try Again")
                 onContinue = False
             End If
         End If

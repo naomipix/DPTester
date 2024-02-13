@@ -193,7 +193,8 @@ Public Class FormMain
         btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
         }
         ' Define Button for Manual Other Control Array
-        btn_Manualothersarr = {btn_PumpMode, btn_PumpEnable, btn_PumpReset, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank
+        btn_Manualothersarr = {btn_PumpReset, btn_PumpMode, btn_PumpEnable, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank, btn_InletConnect,
+            btn_OutletConnect, btn_VentConnect, btn_DrainConnect
             }
 
 
@@ -243,7 +244,16 @@ Public Class FormMain
         Panel_ManualDrain_Circuit.Controls.Add(ManualDrainForm)
         ManualDrainForm.Show()
 
+        Dim CalibrationForm As New FormCircuitModel2()
 
+        While FormCalibration.Panel_Calibration_Circuit.Controls.Count > 0
+            FormCalibration.Panel_Calibration_Circuit.Controls(0).Dispose()
+        End While
+        CalibrationForm.TopLevel = False
+        FormCalibration.Panel_Calibration_Circuit.Controls.Add(MaintenForm)
+        CalibrationForm.Show()
+        FormCalibration.Panel_Calibration_Circuit.BringToFront()
+        FormCalibration.Panel_Calibration_Circuit.Visible = False
 
         'Top Status Bar
         lbl_OperationMode.Text = "No Status"
@@ -1821,7 +1831,7 @@ Public Class FormMain
 
     ' Maintenance
 
-    Private Sub btn_MaintenanceCtrl_Click(sender As Object, e As EventArgs) Handles btn_InFiltrDrain.Click, btn_InFiltrVent.Click, btn_PumpFiltrDrain.Click, btn_PumpFiltrVent.Click, btn_EmptyTank.Click
+    Private Sub btn_MaintenanceCtrl_Click(sender As Object, e As EventArgs) Handles btn_InFiltrDrain.Click, btn_InFiltrVent.Click, btn_PumpFiltrDrain.Click, btn_PumpFiltrVent.Click, btn_EmptyTank.Click, btn_InletConnect.Click, btn_OutletConnect.Click, btn_VentConnect.Click, btn_DrainConnect.Click
         Dim btn_Maintenance As Button = DirectCast(sender, Button)
 
         If btn_Maintenance Is btn_InFiltrDrain Then
@@ -1873,6 +1883,47 @@ Public Class FormMain
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Empty Tank (ON)")
             End If
         End If
+
+        If btn_Maintenance Is btn_InletConnect Then
+            If btn_InletConnect.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(0) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Inlet Connect (OFF)")
+            Else
+                ManualCtrl(4)(0) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Inlet Connect (ON)")
+            End If
+        End If
+
+        If btn_Maintenance Is btn_OutletConnect Then
+            If btn_OutletConnect.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(1) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Outlet Connect (OFF)")
+            Else
+                ManualCtrl(4)(1) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Outlet Connect (ON)")
+            End If
+        End If
+
+        If btn_Maintenance Is btn_VentConnect Then
+            If btn_VentConnect.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(2) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Vent Connect (OFF)")
+            Else
+                ManualCtrl(4)(2) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Vent Connect (ON)")
+            End If
+        End If
+
+        If btn_Maintenance Is btn_DrainConnect Then
+            If btn_DrainConnect.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(3) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Drain Connect (OFF)")
+            Else
+                ManualCtrl(4)(3) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Drain Connect (ON)")
+            End If
+        End If
+
         PCtimer.Start()
     End Sub
 

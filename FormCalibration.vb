@@ -110,7 +110,7 @@
                 FormMain.lbl_CalibrationStatus.Text = "Pass"
                 FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(192, 255, 192)
                 FormMain.lbl_BlankDP.Text = "0.0"
-                Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT id,lot_id,lot_attempt FROM LotUsage where lot_id = '{FormMain.txtbx_LotID.Text} ' AND lot_end_time IS NULL")
+                Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT id,lot_id,lot_attempt FROM LotUsage where lot_id = '{FormMain.txtbx_LotID.Text}' AND lot_end_time IS NULL")
                 If dtlotusage.Rows.Count > 0 Then
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                             {"recipe_id", FormMain.cmbx_RecipeID.Text},
@@ -175,12 +175,19 @@
             If dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
                 flush2cycletime = (dtrecipetable.Rows(0)("secondflush_fill_time") + dtrecipetable.Rows(0)("secondflush_bleed_time") + dtrecipetable.Rows(0)("secondflush_stabilize_time") + dtrecipetable.Rows(0)("secondflush_time"))
             End If
-            If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" Then
+
+            If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("firstflush_circuit") = "Disable" Then
                 DPtest1cycletime = (dtrecipetable.Rows(0)("dp_fill_time") + dtrecipetable.Rows(0)("dp_bleed_time") + dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+            ElseIf dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
+                DPtest1cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
             End If
-            If dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
+
+            If dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" And dtrecipetable.Rows(0)("secondflush_circuit") = "Disable" Then
                 DPtest2cycletime = (dtrecipetable.Rows(0)("dp_fill_time") + dtrecipetable.Rows(0)("dp_bleed_time") + dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+            ElseIf dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" And dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
+                DPtest2cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
             End If
+
             If dtrecipetable.Rows(0)("drain1_circuit") = "Enable" Then
                 Drain1cycletime = (dtrecipetable.Rows(0)("drain1_time"))
             End If
@@ -383,7 +390,7 @@
                 Cal_finalInlet = ((Cal_avginlet1 + Cal_avginlet2) / 2)
                 Cal_finalOutlet = ((Cal_avgoutlet1 + Cal_avgoutlet2) / 2)
                 Cal_finalflowrate = ((Cal_avgflowrate1 + Cal_avgflowrate2) / 2)
-                Cal_finaltemperature = ((Cal_avgtemperature1 + Cal_avgtemperature2) / 2)
+                Cal_finaltemperature = (((Cal_avgtemperature1 + Cal_avgtemperature2) / 2) + 273.15)
 
                 T2 = Cal_finaltemperature * Cal_finaltemperature
                 exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
@@ -411,7 +418,7 @@
                 Cal_finalInlet = Cal_avginlet1
                 Cal_finalOutlet = Cal_avgoutlet1
                 Cal_finalflowrate = Cal_avgflowrate1
-                Cal_finaltemperature = Cal_avgtemperature1
+                Cal_finaltemperature = (Cal_avgtemperature1 + 273.15)
 
                 T2 = Cal_finaltemperature * Cal_finaltemperature
                 exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
@@ -529,7 +536,7 @@
                 Ver_finalinlet = ((Ver_avginlet1 + Ver_avginlet2) / 2)
                 Ver_finaloutlet = ((Ver_avgoutlet1 + Ver_avgoutlet2) / 2)
                 Ver_finalflowrate = ((Ver_avgflowrate1 + Ver_avgflowrate2) / 2)
-                Ver_finaltemperature = ((Ver_avgtemperature1 + Ver_avgtemperature2) / 2)
+                Ver_finaltemperature = (((Ver_avgtemperature1 + Ver_avgtemperature2) / 2) + 273.15)
 
                 T2 = Ver_finaltemperature * Ver_finaltemperature
                 exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
@@ -559,7 +566,7 @@
 
 
                 Ver_finalflowrate = Ver_avgflowrate1
-                Ver_finaltemperature = Ver_avgtemperature1
+                Ver_finaltemperature = (Ver_avgtemperature1 + 273.15)
                 T2 = Ver_finaltemperature * Ver_finaltemperature
                 exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
                 Viscosity = A * exp
@@ -601,8 +608,8 @@
                     FormMain.lbl_CalibrationStatus.BackColor = Color.OrangeRed
                     FormMain.lbl_BlankDP.Text = txtbx_CalOffset.Text
                 End If
-                Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT id,lot_id,lot_attempt FROM LotUsage where lot_id = '{txtbx_CalLotID.Text} ' AND lot_end_time IS NULL")
-                If dtlotusage.Rows.Count > 1 Then
+                Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT id,lot_id,lot_attempt FROM LotUsage where lot_id = '{txtbx_CalLotID.Text}' AND lot_end_time IS NULL")
+                If dtlotusage.Rows.Count > 0 Then
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                             {"recipe_id", txtbx_RecipeID.Text},
                             {"calibration_time", lbl_DateTimeClock.Text},
@@ -619,7 +626,7 @@
 
                     If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
                         Dim onContinue = True
-
+                        PCStatus(1)(6) = True
                         If onContinue = True Then
                             Dim calstatusparameter As New Dictionary(Of String, Object) From {
                         {"retained_value", txtbx_CalResult.Text}
@@ -649,15 +656,15 @@
                         If onContinue = True Then
                             If txtbx_CalResult.Text = "Fail" Then
                                 If MsgBox($"Calibration/Blank Test Results as {txtbx_CalResult.Text}, Do you Want to Reset and Re-calirbate?", MsgBoxStyle.YesNo, "Calibration Result") = DialogResult.No Then
-                                    PCStatus(1)(6) = True
-                                    'Me.Close()
+
+                                    Me.Close()
                                 Else
                                     btn_Discard.PerformClick()
                                 End If
                             ElseIf txtbx_CalResult.Text = "Pass" Then
 
                                 If MsgBox($"Calibration/Blank Test Completed with Result as {txtbx_CalResult.Text} and Calibration offset as {txtbx_CalOffset.Text}", MsgBoxStyle.OkOnly, "Calibration Result") = DialogResult.OK Then
-                                    PCStatus(1)(6) = True
+
                                     Me.Close()
                                 End If
                             End If
@@ -672,9 +679,14 @@
                     Else
                         MsgBox($"Query to Update Calibration Result Failed")
                     End If
-
+                Else
+                    MsgBox($"Lot information Not Found!")
                 End If
+            Else
+                MsgBox($"Numeric Data not found in Calibration offset")
             End If
+        Else
+            MsgBox($"Numeric Data not found in Verification DP")
         End If
     End Sub
 
@@ -771,5 +783,14 @@
         FormPixel.Show()
     End Sub
 
+    Private Sub btn_CircuitView_Click(sender As Object, e As EventArgs) Handles btn_CircuitView.Click
 
+        If btn_CircuitView.BackColor = Color.FromArgb(25, 130, 246) Then
+            Panel_Calibration_Circuit.Visible = True
+            btn_CircuitView.BackColor = Color.FromArgb(0, 192, 0)
+        Else
+            Panel_Calibration_Circuit.Visible = False
+            btn_CircuitView.BackColor = Color.FromArgb(25, 130, 246)
+        End If
+    End Sub
 End Class
