@@ -124,7 +124,7 @@ Public Class FormMain
 #Region "Form Properties [ Load | Shown | Closing ]"
 
     Public btn_ValveCtrlArr(18) As Button
-    Public btn_Manualothersarr(12) As Button
+    Public btn_Manualothersarr(20) As Button
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Start Clock Timer
@@ -194,7 +194,7 @@ Public Class FormMain
         }
         ' Define Button for Manual Other Control Array
         btn_Manualothersarr = {btn_PumpReset, btn_PumpMode, btn_PumpEnable, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank, btn_InletConnect,
-            btn_OutletConnect, btn_VentConnect, btn_DrainConnect
+            btn_OutletConnect, btn_VentConnect, btn_DrainConnect, btn_BackPressureOn, btn_N2PressureOn
             }
 
 
@@ -250,8 +250,9 @@ Public Class FormMain
             FormCalibration.Panel_Calibration_Circuit.Controls(0).Dispose()
         End While
         CalibrationForm.TopLevel = False
-        FormCalibration.Panel_Calibration_Circuit.Controls.Add(MaintenForm)
+        FormCalibration.Panel_Calibration_Circuit.Controls.Add(CalibrationForm)
         CalibrationForm.Show()
+
         FormCalibration.Panel_Calibration_Circuit.BringToFront()
         FormCalibration.Panel_Calibration_Circuit.Visible = False
 
@@ -1052,7 +1053,7 @@ Public Class FormMain
             LotUsage.cal_diff_pressure, 
             ProductionDetail.flowrate, 
             ProductionDetail.diff_pressure, 
-            CONCAT(UPPER(SUBSTRING(ProductionDetail.result, 1, 1)), LOWER(SUBSTRING(ProductionDetail.result, 2, LEN(ProductionDetail.result)))) AS result, 
+            UPPER(ProductionDetail.result) AS result, 
             ProductionDetail.temperature, 
             ProductionDetail.viscosity, 
             ProductionDetail.inlet_pressure, 
@@ -1785,6 +1786,35 @@ Public Class FormMain
         End If
 
     End Sub
+
+
+    Private Sub btn_PressureRegulator_Click(sender As Object, e As EventArgs) Handles btn_BackPressureOn.Click, btn_N2PressureOn.Click
+        Dim btn_PressureRegualtor As Button = DirectCast(sender, Button)
+        If btn_PressureRegualtor Is btn_BackPressureOn Then
+            If btn_BackPressureOn.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(4) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pressure Regulator Control - Back Pressure (OFF)")
+            Else
+                ManualCtrl(4)(4) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pressure Regulator Control - Back Pressure (ON)")
+            End If
+        End If
+
+        If btn_PressureRegualtor Is btn_N2PressureOn Then
+            If btn_N2PressureOn.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(5) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pressure Regulator Control - N2 Pressure (OFF)")
+            Else
+                ManualCtrl(4)(5) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pressure Regulator Control - N2 Pressure (ON)")
+            End If
+        End If
+
+
+    End Sub
+
+
+
 
     ' Manual Drain
 
@@ -2860,12 +2890,22 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
             If Oncontinue = True Then
                 Lotusageid = dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("id")
+                Dim dummyfloat As Decimal = 0
+                Dim dummystring As String = "NA"
                 Dim Productionparameter As New Dictionary(Of String, Object) From {
                     {"serial_uid", SerialUid},
                         {"serial_number", txtbx_SerialNumber.Text},
                         {"serial_attempt", SerialAttempt},
                         {"lot_usage_id", Lotusageid},
-                        {"timestamp", lbl_DateTimeClock.Text}
+                        {"timestamp", lbl_DateTimeClock.Text},
+                        {"temperature", dummyfloat},
+                        {"flowrate", dummyfloat},
+                        {"inlet_pressure", dummyfloat},
+                        {"outlet_pressure", dummyfloat},
+                        {"viscosity", dummyfloat},
+                        {"diff_pressure", dummyfloat},
+                        {"cycle_time", dummyfloat},
+                        {"result", dummystring}
                     }
                 If SQL.InsertRecord("ProductionDetail", Productionparameter) = 1 Then
 
@@ -2905,16 +2945,24 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
 
             flush1cycletime = (dtrecipetable.Rows(0)("firstflush_fill_time") + dtrecipetable.Rows(0)("firstflush_bleed_time") + dtrecipetable.Rows(0)("firstflush_stabilize_time") + dtrecipetable.Rows(0)("firstflush_time"))
-            End If
-            If dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
+        End If
+
+        If dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
             flush2cycletime = (dtrecipetable.Rows(0)("secondflush_fill_time") + dtrecipetable.Rows(0)("secondflush_bleed_time") + dtrecipetable.Rows(0)("secondflush_stabilize_time") + dtrecipetable.Rows(0)("secondflush_time"))
         End If
-        If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" Then
+
+        If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("firstflush_circuit") = "Disable" Then
             DPtest1cycletime = (dtrecipetable.Rows(0)("dp_fill_time") + dtrecipetable.Rows(0)("dp_bleed_time") + dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+        ElseIf dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
+            DPtest1cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
         End If
-        If dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
+
+        If dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" And dtrecipetable.Rows(0)("secondflush_circuit") = "Disable" Then
             DPtest2cycletime = (dtrecipetable.Rows(0)("dp_fill_time") + dtrecipetable.Rows(0)("dp_bleed_time") + dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+        ElseIf dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" And dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
+            DPtest2cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
         End If
+
         If dtrecipetable.Rows(0)("drain1_circuit") = "Enable" Then
             Drain1cycletime = (dtrecipetable.Rows(0)("drain1_time"))
         End If
@@ -3199,7 +3247,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             lbl_DiffPressMin.Text = Nothing
             lbl_DiffPressMax.Text = Nothing
             lbl_DPTestResult.Text = Nothing
-
+            lbl_DPTestResult.BackColor = Color.FromArgb(224, 224, 224)
 
             JigType = 0
             btn_RecipeSelectionConfirm.Enabled = False

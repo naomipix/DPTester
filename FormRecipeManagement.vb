@@ -107,97 +107,97 @@ Public Class FormRecipeManagement
 
 
     'Declare Recipe Parameter Min Limit Variables
-    Private min_d_vertol As Decimal = 0.1
+    Private min_d_vertol As Decimal = PublicVariables.Limit_Min_d_vertol
 
 
-    Private min_i_flush1filltime As Integer = 1
-    Private min_i_flush1bleedtime As Integer = 1
-    Private min_d_flush1flow As Decimal = 3.0
-    Private min_d_flush1flowtol As Decimal = 0.2
-    Private min_d_flush1pressure As Decimal = 1.0
-    Private min_i_flush1stabilize As Integer = 1
-    Private min_i_flush1time As Integer = 1
+    Private min_i_flush1filltime As Integer = PublicVariables.Limit_Min_i_flush1filltime
+    Private min_i_flush1bleedtime As Integer = PublicVariables.Limit_Min_i_flush1bleedtime
+    Private min_d_flush1flow As Decimal = PublicVariables.Limit_Min_d_flush1flow
+    Private min_d_flush1flowtol As Decimal = PublicVariables.Limit_Min_d_flush1flowtol
+    Private min_d_flush1pressure As Decimal = PublicVariables.Limit_Min_d_flush1pressure
+    Private min_i_flush1stabilize As Integer = PublicVariables.Limit_Min_i_flush1stabilize
+    Private min_i_flush1time As Integer = PublicVariables.Limit_Min_i_flush1time
 
 
-    Private min_i_dptestfilltime As Integer = 1
-    Private min_i_dptestbleedtime As Integer = 1
-    Private min_d_dptestflow As Decimal = 3.0
-    Private min_d_dptestflowtol As Decimal = 0.2
-    Private min_d_dptestpressure As Decimal = 1.0
-    Private min_i_dpteststabilize As Integer = 1
-    Private min_i_dptesttime As Integer = 1
-    Private min_d_dptestlowlimit As Decimal
-    Private min_d_dptestuplimit As Decimal
-    Private min_i_dptestpoints As Integer
-
-
-
-    Private min_i_flush2filltime As Integer = 1
-    Private min_i_flush2bleedtime As Integer = 1
-    Private min_d_flush2flow As Decimal = 3.0
-    Private min_d_flush2flowtol As Decimal = 0.2
-    Private min_d_flush2pressure As Decimal = 1.0
-    Private min_i_flush2stabilize As Integer = 1
-    Private min_i_flush2time As Integer = 1
+    Private min_i_dptestfilltime As Integer = PublicVariables.Limit_Min_i_dptestfilltime
+    Private min_i_dptestbleedtime As Integer = PublicVariables.Limit_Min_i_dptestbleedtime
+    Private min_d_dptestflow As Decimal = PublicVariables.Limit_Min_d_dptestflow
+    Private min_d_dptestflowtol As Decimal = PublicVariables.Limit_Min_d_dptestflowtol
+    Private min_d_dptestpressure As Decimal = PublicVariables.Limit_Min_d_dptestpressure
+    Private min_i_dpteststabilize As Integer = PublicVariables.Limit_Min_i_dpteststabilize
+    Private min_i_dptesttime As Integer = PublicVariables.Limit_Min_i_dptesttime
+    Private min_d_dptestlowlimit As Decimal = PublicVariables.Limit_Min_d_dptestlowlimit
+    Private min_d_dptestuplimit As Decimal = PublicVariables.Limit_Min_d_dptestuplimit
+    Private min_i_dptestpoints As Integer = PublicVariables.Limit_Min_i_dptestpoints
 
 
 
-    Private min_d_drain1pressure As Decimal = 1.0
-    Private min_i_drain1time As Integer = 1
+    Private min_i_flush2filltime As Integer = PublicVariables.Limit_Min_i_flush2filltime
+    Private min_i_flush2bleedtime As Integer = PublicVariables.Limit_Min_i_flush2bleedtime
+    Private min_d_flush2flow As Decimal = PublicVariables.Limit_Min_d_flush2flow
+    Private min_d_flush2flowtol As Decimal = PublicVariables.Limit_Min_d_flush2flowtol
+    Private min_d_flush2pressure As Decimal = PublicVariables.Limit_Min_d_flush2pressure
+    Private min_i_flush2stabilize As Integer = PublicVariables.Limit_Min_i_flush2stabilize
+    Private min_i_flush2time As Integer = PublicVariables.Limit_Min_i_flush2time
 
-    Private min_d_drain2pressure As Decimal = 1.0
-    Private min_i_drain2time As Integer = 1
 
-    Private min_d_drain3pressure As Decimal = 1.0
-    Private min_i_drain3time As Integer = 1
+
+    Private min_d_drain1pressure As Decimal = PublicVariables.Limit_Min_d_drain1pressure
+    Private min_i_drain1time As Integer = PublicVariables.Limit_Min_i_drain1time
+
+    Private min_d_drain2pressure As Decimal = PublicVariables.Limit_Min_d_drain2pressure
+    Private min_i_drain2time As Integer = PublicVariables.Limit_Min_i_drain2time
+
+    Private min_d_drain3pressure As Decimal = PublicVariables.Limit_Min_d_drain3pressure
+    Private min_i_drain3time As Integer = PublicVariables.Limit_Min_i_drain3time
 
 
 
 
     'Declare Recipe Parameter Max Limit Variables
-    Private max_d_vertol As Decimal = 9.9
+    Private max_d_vertol As Decimal = PublicVariables.Limit_Max_d_vertol
 
 
-    Private max_i_flush1filltime As Integer = 60
-    Private max_i_flush1bleedtime As Integer = 60
-    Private max_d_flush1flow As Decimal = 24.9
-    Private max_d_flush1flowtol As Decimal = 9.9
-    Private max_d_flush1pressure As Decimal = 149.9
-    Private max_i_flush1stabilize As Integer = 60
-    Private max_i_flush1time As Integer = 500
+    Private max_i_flush1filltime As Integer = PublicVariables.Limit_Max_i_flush1filltime
+    Private max_i_flush1bleedtime As Integer = PublicVariables.Limit_Max_i_flush1bleedtime
+    Private max_d_flush1flow As Decimal = PublicVariables.Limit_Max_d_flush1flow
+    Private max_d_flush1flowtol As Decimal = PublicVariables.Limit_Max_d_flush1flowtol
+    Private max_d_flush1pressure As Decimal = PublicVariables.Limit_Max_d_flush1pressure
+    Private max_i_flush1stabilize As Integer = PublicVariables.Limit_Max_i_flush1stabilize
+    Private max_i_flush1time As Integer = PublicVariables.Limit_Max_i_flush1time
 
 
-    Private max_i_dptestfilltime As Integer = 60
-    Private max_i_dptestbleedtime As Integer = 60
-    Private max_d_dptestflow As Decimal = 24.9
-    Private max_d_dptestflowtol As Decimal = 9.9
-    Private max_d_dptestpressure As Decimal = 149.9
-    Private max_i_dpteststabilize As Integer = 60
-    Private max_i_dptesttime As Integer = 500
-    Private max_d_dptestlowlimit As Decimal = 99.9
-    Private max_d_dptestuplimit As Decimal = 149.9
-    Private max_i_dptestpoints As Integer = 60
-
-
-
-    Private max_i_flush2filltime As Integer = 60
-    Private max_i_flush2bleedtime As Integer = 60
-    Private max_d_flush2flow As Decimal = 24.9
-    Private max_d_flush2flowtol As Decimal = 9.9
-    Private max_d_flush2pressure As Decimal = 149.9
-    Private max_i_flush2stabilize As Integer = 60
-    Private max_i_flush2time As Integer = 500
+    Private max_i_dptestfilltime As Integer = PublicVariables.Limit_Max_i_dptestfilltime
+    Private max_i_dptestbleedtime As Integer = PublicVariables.Limit_Max_i_dptestbleedtime
+    Private max_d_dptestflow As Decimal = PublicVariables.Limit_Max_d_dptestflow
+    Private max_d_dptestflowtol As Decimal = PublicVariables.Limit_Max_d_dptestflowtol
+    Private max_d_dptestpressure As Decimal = PublicVariables.Limit_Max_d_dptestpressure
+    Private max_i_dpteststabilize As Integer = PublicVariables.Limit_Max_i_dpteststabilize
+    Private max_i_dptesttime As Integer = PublicVariables.Limit_Max_i_dptesttime
+    Private max_d_dptestlowlimit As Decimal = PublicVariables.Limit_Max_d_dptestlowlimit
+    Private max_d_dptestuplimit As Decimal = PublicVariables.Limit_Max_d_dptestuplimit
+    Private max_i_dptestpoints As Integer = PublicVariables.Limit_Max_i_dptestpoints
 
 
 
-    Private max_d_drain1pressure As Decimal = 300.0
-    Private max_i_drain1time As Integer = 500
+    Private max_i_flush2filltime As Integer = PublicVariables.Limit_Max_i_flush2filltime
+    Private max_i_flush2bleedtime As Integer = PublicVariables.Limit_Max_i_flush2bleedtime
+    Private max_d_flush2flow As Decimal = PublicVariables.Limit_Max_d_flush2flow
+    Private max_d_flush2flowtol As Decimal = PublicVariables.Limit_Max_d_flush2flowtol
+    Private max_d_flush2pressure As Decimal = PublicVariables.Limit_Max_d_flush2pressure
+    Private max_i_flush2stabilize As Integer = PublicVariables.Limit_Max_i_flush2stabilize
+    Private max_i_flush2time As Integer = PublicVariables.Limit_Max_i_flush2time
 
-    Private max_d_drain2pressure As Decimal = 300.0
-    Private max_i_drain2time As Integer = 500
 
-    Private max_d_drain3pressure As Decimal = 300.0
-    Private max_i_drain3time As Integer = 500
+
+    Private max_d_drain1pressure As Decimal = PublicVariables.Limit_Max_d_drain1pressure
+    Private max_i_drain1time As Integer = PublicVariables.Limit_Max_i_drain1time
+
+    Private max_d_drain2pressure As Decimal = PublicVariables.Limit_Max_d_drain2pressure
+    Private max_i_drain2time As Integer = PublicVariables.Limit_Max_i_drain2time
+
+    Private max_d_drain3pressure As Decimal = PublicVariables.Limit_Max_d_drain3pressure
+    Private max_i_drain3time As Integer = PublicVariables.Limit_Max_i_drain3time
 
     'Decalre Recipe parameters for collecting Edit recipe
     Dim recipeparameter(50) As String

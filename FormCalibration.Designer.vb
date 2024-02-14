@@ -889,6 +889,7 @@ Partial Class FormCalibration
         '
         'Panel_Calibration_Circuit
         '
+        Me.Panel_Calibration_Circuit.AutoSize = True
         Me.Panel_Calibration_Circuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.Panel_Calibration_Circuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel_Calibration_Circuit.Dock = System.Windows.Forms.DockStyle.Fill
