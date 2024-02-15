@@ -2406,7 +2406,7 @@ Public Class FormMain
         End If
 
         If OnContinue = True Then
-            If PartID.Length <> PublicVariables.PartIdLen Then
+            If PartID.Length < PublicVariables.PartIdLen Then
                 MainMessage(2, $"Character(s) length for Part ID is {PublicVariables.PartIdLen} ")
                 OnContinue = False
             End If
@@ -2976,7 +2976,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         MainCycletime = flush1cycletime + flush2cycletime + DPtest1cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime
         MainDptestpoints = dtrecipetable.Rows(0)("dp_testpoints")
 
-        MainDptest1end = CType((MainCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / Resultcapturetimer.Interval), Decimal)
+        MainDptest1end = CType((MainCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime) - 1) * (1000 / Resultcapturetimer.Interval), Decimal)
         MainDptest1start = MainDptest1end - MainDptestpoints
         MainDptest2end = CType((MainCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / Resultcapturetimer.Interval), Decimal)
         MainDptest2start = MainDptest2end - MainDptestpoints

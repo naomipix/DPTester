@@ -2846,7 +2846,7 @@ Partial Class FormRecipeManagement
         '
         Me.txtbx_PartCreatePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_PartCreatePartID.Location = New System.Drawing.Point(152, 178)
-        Me.txtbx_PartCreatePartID.MaxLength = 16
+        Me.txtbx_PartCreatePartID.MaxLength = 20
         Me.txtbx_PartCreatePartID.Name = "txtbx_PartCreatePartID"
         Me.txtbx_PartCreatePartID.Size = New System.Drawing.Size(250, 29)
         Me.txtbx_PartCreatePartID.TabIndex = 15

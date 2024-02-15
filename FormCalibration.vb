@@ -201,7 +201,7 @@
             CalCycletime = flush1cycletime + flush2cycletime + DPtest1cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime
             Cal_dptestpoints = dtrecipetable.Rows(0)("dp_testpoints")
 
-            dptest1end = CType((CalCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / tmr_Calibration.Interval), Decimal)
+            dptest1end = CType((CalCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime) - 1) * (1000 / tmr_Calibration.Interval), Decimal)
             Dptest1start = dptest1end - Cal_dptestpoints
             dptest2end = CType((CalCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / tmr_Calibration.Interval), Decimal)
             Dptest2start = dptest2end - Cal_dptestpoints
@@ -685,8 +685,7 @@
             Else
                 MsgBox($"Numeric Data not found in Calibration offset")
             End If
-        Else
-            MsgBox($"Numeric Data not found in Verification DP")
+
         End If
     End Sub
 
