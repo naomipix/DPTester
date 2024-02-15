@@ -21,28 +21,28 @@
     'Public pb_MCVCircuitArr(19)() As PictureBox
     'Public pb_MCVCircuitPathArr(19)() As PictureBox
     Public Lbl_ValvestatusArr(18) As Label
-        Public Lbl_Valvepath(19)() As Label
-        Public pathtask(19) As Boolean
-        Public pathforward(22) As Boolean
-        Public pathfwdack(22) As Boolean
-        Public pathreverse(22) As Boolean
-        Public pathrevack(22) As Boolean
-        Public WithEvents Circuittimer As New Timer()
-        Public Circuitcall(19) As Integer
-        Public Arrowbgcolor As Color
-        Public Circuitbgcolor As Color
-        Public Lbl_Income(3)() As Label
-        Public Lbl_NPDrain(1) As Label
-        Public Lbl_PDrain(2)() As Label
-        Public Lbl_Junction(1)() As Label
-        Public Lbl_Product(3)() As Label
-        Public Lbl_Bleed(1)() As Label
-        Public Lbl_N2Purge(1) As Label
-        Public Lbl_Pump(1)() As Label
-        Public bgcolor As Color
-        Public CircuitShown(3) As Boolean
-        Public CircuitInitalised As Boolean
-        Public Sub InitialiseCircuit()
+    Public Lbl_Valvepath(19)() As Label
+    Public pathtask(19) As Boolean
+    Public pathforward(22) As Boolean
+    Public pathfwdack(22) As Boolean
+    Public pathreverse(22) As Boolean
+    Public pathrevack(22) As Boolean
+    Public WithEvents Circuittimer As New Timer()
+    Public Circuitcall(19) As Integer
+    Public Arrowbgcolor As Color
+    Public Circuitbgcolor As Color
+    Public Lbl_Income(3)() As Label
+    Public Lbl_NPDrain(1) As Label
+    Public Lbl_PDrain(2)() As Label
+    Public Lbl_Junction(1)() As Label
+    Public Lbl_Product(3)() As Label
+    Public Lbl_Bleed(1)() As Label
+    Public Lbl_N2Purge(1) As Label
+    Public Lbl_Pump(1)() As Label
+    Public bgcolor As Color
+    Public CircuitShown(3) As Boolean
+    Public CircuitInitalised As Boolean
+    Public Sub InitialiseCircuit()
         'Define Label Array
         Lbl_ValvestatusArr = {lbl_Valve1, lbl_Valve2, lbl_Valve3, lbl_Valve4,
                   lbl_Valve5, lbl_Valve6, lbl_Valve7, lbl_Valve8, lbl_Valve9,
@@ -84,7 +84,7 @@
 
         Lbl_Valvepath(10) = {lbl_V10_P1, lbl_V10_P2, lbl_V10_P3, lbl_V10_P4}
 
-        Lbl_Valvepath(11) = {lbl_V11_P1, lbl_V11_P2, lbl_V11_P3, lbl_V15_P4}
+        Lbl_Valvepath(11) = {lbl_V11_P1, lbl_V11_P2, lbl_V11_P3, lbl_V11_P4}
 
         Lbl_Valvepath(12) = {lbl_V12_P1, lbl_V12_P2, lbl_V12_P3}
 
@@ -199,10 +199,10 @@
         CircuitInitalised = True
 
 
-        End Sub
+    End Sub
 
-        ' Circuit Control logic
-        Private Sub CircuitTimer_Ticks(sender As Object, e As EventArgs) Handles Circuittimer.Tick
+    ' Circuit Control logic
+    Private Sub CircuitTimer_Ticks(sender As Object, e As EventArgs) Handles Circuittimer.Tick
 
         If CommLost = False Then
             If CircuitInitalised = True Then
@@ -578,7 +578,49 @@
                     Next
                 End If
             End If
+#Region "Mimic Panel Circuit Model 1"
 
+            txtbx_BackPressActual.Text = AIn(1).ToString
+            txtbx_N2PurgeActual.Text = AIn(0).ToString
+            lbl_InletPress.Text = AIn(9).ToString
+            lbl_OutletPress.Text = AIn(10).ToString
+            lbl_Flowmtr.Text = AIn(12).ToString
+            lbl_Temp.Text = AIn(13).ToString
+            lbl_PumpPress.Text = AIn(8).ToString
+            lbl_N2Press.Text = AIn(11).ToString
+            lbl_PumpSpeed.Text = AIn(2).ToString
+
+            If DOut(2)(5) = False Then
+                lbl_PumpEnable.BackColor = SystemColors.Window
+            Else
+                lbl_PumpEnable.BackColor = Color.LimeGreen
+            End If
+
+            If DIn(1)(2) = False Then
+                lbl_PumpHighHigh.BackColor = SystemColors.Window
+            Else
+                lbl_PumpHighHigh.BackColor = Color.LimeGreen
+            End If
+
+            If DIn(1)(3) = False Then
+                lbl_PumpHigh.BackColor = SystemColors.Window
+            Else
+                lbl_PumpHigh.BackColor = Color.LimeGreen
+            End If
+
+            If DIn(1)(4) = False Then
+                lbl_PumpLow.BackColor = SystemColors.Window
+            Else
+                lbl_PumpLow.BackColor = Color.LimeGreen
+            End If
+
+            If DIn(1)(5) = False Then
+                lbl_PumpLowLow.BackColor = SystemColors.Window
+            Else
+                lbl_PumpLowLow.BackColor = Color.LimeGreen
+            End If
+
+#End Region
 
         End If
 
@@ -586,162 +628,162 @@
     End Sub
 
 
-        Public Async Function CircuitMimic(Valve As Integer) As Task
-            Dim delay As Integer
+    Public Async Function CircuitMimic(Valve As Integer) As Task
+        Dim delay As Integer
 
-            Select Case Valve
-                Case 1
-                    delay = 100
-                Case 2
-                    delay = 100
-                Case 3
-                    delay = 100
-                Case 4
-                    delay = 100
-                Case 5
-                    delay = 100
-                Case 6
-                    delay = 100
-                Case 7
-                    delay = 100
-                Case 8
-                    delay = 100
-                Case 9
-                    delay = 500
-                Case 10
-                    delay = 500
-                Case 11
-                    delay = 500
-                Case 12
-                    delay = 500
-                Case 13
-                    delay = 500
-                Case 14
-                    delay = 500
-                Case 15
-                    delay = 500
-                Case 16
-                    delay = 500
-                Case 17
-                    delay = 500
-                Case 18
-                    delay = 500
-                Case 19
-                    delay = 500
-                Case Else
-                    Exit Select
-            End Select
-
-
-            While Lbl_ValvestatusArr(Valve - 1).BackColor = Color.LimeGreen
-                pathtask(Valve) = True
-                Dim size As Integer
-                size = 0
-                While size <= Lbl_Valvepath(Valve).Length - 1 And Lbl_ValvestatusArr(Valve - 1).BackColor = Color.LimeGreen
-                    Await Task.Delay(delay)
-                    If size = 0 Then
-                        Lbl_Valvepath(Valve)(Lbl_Valvepath(Valve).Length - 1).BackColor = Color.Transparent
-                        Lbl_Valvepath(Valve)(size).BackColor = bgcolor
-                    End If
-
-                    If size > 0 And size <= Lbl_Valvepath(Valve).Length - 1 Then
-                        Lbl_Valvepath(Valve)(size - 1).BackColor = Color.Transparent
-                        Lbl_Valvepath(Valve)(size).BackColor = bgcolor
-                    End If
+        Select Case Valve
+            Case 1
+                delay = 100
+            Case 2
+                delay = 100
+            Case 3
+                delay = 100
+            Case 4
+                delay = 100
+            Case 5
+                delay = 100
+            Case 6
+                delay = 100
+            Case 7
+                delay = 100
+            Case 8
+                delay = 100
+            Case 9
+                delay = 500
+            Case 10
+                delay = 500
+            Case 11
+                delay = 500
+            Case 12
+                delay = 500
+            Case 13
+                delay = 500
+            Case 14
+                delay = 500
+            Case 15
+                delay = 500
+            Case 16
+                delay = 500
+            Case 17
+                delay = 500
+            Case 18
+                delay = 500
+            Case 19
+                delay = 500
+            Case Else
+                Exit Select
+        End Select
 
 
-                    size = size + 1
-                End While
+        While Lbl_ValvestatusArr(Valve - 1).BackColor = Color.LimeGreen
+            pathtask(Valve) = True
+            Dim size As Integer
+            size = 0
+            While size <= Lbl_Valvepath(Valve).Length - 1 And Lbl_ValvestatusArr(Valve - 1).BackColor = Color.LimeGreen
+                Await Task.Delay(delay)
+                If size = 0 Then
+                    Lbl_Valvepath(Valve)(Lbl_Valvepath(Valve).Length - 1).BackColor = Color.Transparent
+                    Lbl_Valvepath(Valve)(size).BackColor = bgcolor
+                End If
+
+                If size > 0 And size <= Lbl_Valvepath(Valve).Length - 1 Then
+                    Lbl_Valvepath(Valve)(size - 1).BackColor = Color.Transparent
+                    Lbl_Valvepath(Valve)(size).BackColor = bgcolor
+                End If
+
+
+                size = size + 1
             End While
+        End While
 
-            pathtask(Valve) = False
-
-
-
-
-
-        End Function
+        pathtask(Valve) = False
 
 
 
-        Public Async Function Circuitforward(lblarr As Label(), index As Integer, delay As Integer, bg As Color) As Task
 
 
-            While lblarr(0).Visible = True
-                pathrevack(index) = False
-                pathfwdack(index) = True
-                Dim size As Integer
-                size = 0
-                While size <= lblarr.Length - 1 And lblarr(0).Visible = True
-                    Await Task.Delay(delay)
-                    If size = 0 Then
-                        lblarr(lblarr.Length - 1).BackColor = Color.Transparent
-
-                        lblarr(size).BackColor = bg
-                    End If
-
-                    If size > 0 And size <= lblarr.Length - 1 Then
-                        lblarr(size - 1).BackColor = Color.Transparent
-
-                        lblarr(size).BackColor = bg
-                    End If
+    End Function
 
 
-                    size = size + 1
-                End While
 
-            End While
-
-            pathfwdack(index) = False
-        End Function
+    Public Async Function Circuitforward(lblarr As Label(), index As Integer, delay As Integer, bg As Color) As Task
 
 
-        Public Async Function Circuitreverse(lblarr As Label(), index As Integer, delay As Integer, bg As Color) As Task
-
-
-            While lblarr(0).Visible = True
-                pathfwdack(index) = False
-                pathrevack(index) = True
-                Dim size As Integer
-                size = lblarr.Length - 1
-                While size >= 0 And lblarr(0).Visible = True
-                    Await Task.Delay(delay)
-                    If size = lblarr.Length - 1 Then
-                        lblarr(0).BackColor = Color.Transparent
-
-                        lblarr(size).BackColor = bg
-                    End If
-
-                    If size >= 0 And size < lblarr.Length - 1 Then
-                        lblarr(size + 1).BackColor = Color.Transparent
-
-                        lblarr(size).BackColor = bg
-                    End If
-
-
-                    size = size - 1
-                End While
-
-            End While
-
+        While lblarr(0).Visible = True
             pathrevack(index) = False
-        End Function
+            pathfwdack(index) = True
+            Dim size As Integer
+            size = 0
+            While size <= lblarr.Length - 1 And lblarr(0).Visible = True
+                Await Task.Delay(delay)
+                If size = 0 Then
+                    lblarr(lblarr.Length - 1).BackColor = Color.Transparent
+
+                    lblarr(size).BackColor = bg
+                End If
+
+                If size > 0 And size <= lblarr.Length - 1 Then
+                    lblarr(size - 1).BackColor = Color.Transparent
+
+                    lblarr(size).BackColor = bg
+                End If
+
+
+                size = size + 1
+            End While
+
+        End While
+
+        pathfwdack(index) = False
+    End Function
+
+
+    Public Async Function Circuitreverse(lblarr As Label(), index As Integer, delay As Integer, bg As Color) As Task
+
+
+        While lblarr(0).Visible = True
+            pathfwdack(index) = False
+            pathrevack(index) = True
+            Dim size As Integer
+            size = lblarr.Length - 1
+            While size >= 0 And lblarr(0).Visible = True
+                Await Task.Delay(delay)
+                If size = lblarr.Length - 1 Then
+                    lblarr(0).BackColor = Color.Transparent
+
+                    lblarr(size).BackColor = bg
+                End If
+
+                If size >= 0 And size < lblarr.Length - 1 Then
+                    lblarr(size + 1).BackColor = Color.Transparent
+
+                    lblarr(size).BackColor = bg
+                End If
+
+
+                size = size - 1
+            End While
+
+        End While
+
+        pathrevack(index) = False
+    End Function
 
 
 
     Public Sub ChildformOverview(Childform As Form)
 
-            Childform.TopLevel = False
-            While FormMain.panel_ManualValve_Circuit.Controls.Count > 0
-                FormMain.panel_ManualValve_Circuit.Controls(0).Dispose()
-            End While
-            FormMain.panel_ManualValve_Circuit.Controls.Add(Childform)
-            Childform.Show()
-            CircuitShown(0) = True
-            CircuitShown(1) = False
-            CircuitShown(2) = False
-            CircuitShown(3) = False
-        End Sub
+        Childform.TopLevel = False
+        While FormMain.panel_ManualValve_Circuit.Controls.Count > 0
+            FormMain.panel_ManualValve_Circuit.Controls(0).Dispose()
+        End While
+        FormMain.panel_ManualValve_Circuit.Controls.Add(Childform)
+        Childform.Show()
+        CircuitShown(0) = True
+        CircuitShown(1) = False
+        CircuitShown(2) = False
+        CircuitShown(3) = False
+    End Sub
 
 
 End Class

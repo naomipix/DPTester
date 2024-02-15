@@ -111,6 +111,86 @@ Module ModuleInitialize
                             ResultFolder=C:\DPTester\Result Details\Export\
                             "
 
+                Inilines(8) = "[Limits]
+                            BackPressureLowLimit=0.0
+                            BackPressureHighLimit=500.0
+                            N2PressureLowLimit=0.0
+                            N2PressureHighLimit=500.0
+                            PumpSpeedLowLimit=0
+                            PumpSpeedLowLimit=10000
+                            PumpFlowrateLowLimit=0.0
+                            PumpFlowrateHighLimit=100.0
+                            "
+
+                Inilines(9) = "[Recipe Parameter Limits]
+                            MinVerificationTolerance=0
+                            MinFlush1_FillTime=0
+                            MinFlush1_BleedTime=0
+                            MinFlush1_Flowrate=0
+                            MinFlush1_FlowTolerance=0
+                            MinFlush1_BackPressure=0
+                            MinFlush1_StabilizeTime=0
+                            MinFlush1_Time=0
+                            MinDPTest_FillTime=0
+                            MinDPTest_BleedTime=0
+                            MinDPTest_Flowrate=0
+                            MinDPTest_FLowTolerance=0
+                            MinDPTest_BackPressure=0
+                            MinDPTest_StabilizeTime=0
+                            MinDPTest_Time=0
+                            MinDPTest_LowLimit=0
+                            MinDPTest_HighLimit=0 
+                            MinDPTest_Points=0
+                            MinFlush2_FillTime=0
+                            MinFlush2_BleedTime=0
+                            MinFlush2_Flowrate=0
+                            MinFlush2_FlowTolerance=0
+                            MinFlush2_BackPressure=0
+                            MinFlush2_StabilizeTime=0
+                            MinFlush2_Time=0
+                            MinDrain1_Pressure=0
+                            MinDrain1_Time=0
+                            MinDrain2_Pressure=0
+                            MinDrain2_Time=0
+                            MinDrain3_Pressure=0
+                            MinDrain3_Time=0
+
+                            MaxVerificationTolerance=50
+                            MaxFlush1_FillTime=600
+                            MaxFlush1_BleedTime=600
+                            MaxFlush1_Flowrate=20
+                            MaxFlush1_FlowTolerance=5
+                            MaxFlush1_BackPressure=500
+                            MaxFlush1_StabilizeTime=600
+                            MaxFlush1_Time=600
+                            MaxDPTest_FillTime=600
+                            MaxDPTest_BleedTime=600
+                            MaxDPTest_Flowrate=20
+                            MaxDPTest_FLowTolerance=5
+                            MaxDPTest_BackPressure=500
+                            MaxDPTest_StabilizeTime=600
+                            MaxDPTest_Time=600
+                            MaxDPTest_LowLimit=100
+                            MaxDPTest_HighLimit=500 
+                            MaxDPTest_Points=60
+                            MaxFlush2_FillTime=600
+                            MaxFlush2_BleedTime=600
+                            MaxFlush2_Flowrate=20
+                            MaxFlush2_FlowTolerance=5
+                            MaxFlush2_BackPressure=500
+                            MaxFlush2_StabilizeTime=600
+                            MaxFlush2_Time=600
+                            MaxDrain1_Pressure=500
+                            MaxDrain1_Time=600
+                            MaxDrain2_Pressure=500
+                            MaxDrain2_Time=600
+                            MaxDrain3_Pressure=500
+                            MaxDrain3_Time=600
+                            "
+
+
+
+
                 System.IO.File.WriteAllLines(iniFileLocation, Inilines)
 
             End If

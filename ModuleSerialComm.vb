@@ -79,7 +79,7 @@ Module ModuleSerialComm
             End If
         End If
 
-            If str.Length > 15  Then
+        If str.Length >= 11 Then
             If FormMain.txtbx_PartID.Enabled = True Then
                 FormMain.txtbx_PartID.Text = str
             End If

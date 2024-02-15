@@ -124,7 +124,7 @@ Public Class FormMain
 #Region "Form Properties [ Load | Shown | Closing ]"
 
     Public btn_ValveCtrlArr(18) As Button
-    Public btn_Manualothersarr(12) As Button
+    Public btn_Manualothersarr(20) As Button
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Start Clock Timer
@@ -193,7 +193,8 @@ Public Class FormMain
         btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
         }
         ' Define Button for Manual Other Control Array
-        btn_Manualothersarr = {btn_PumpMode, btn_PumpEnable, btn_PumpReset, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank
+        btn_Manualothersarr = {btn_PumpReset, btn_PumpMode, btn_PumpEnable, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank, btn_InletConnect,
+            btn_OutletConnect, btn_VentConnect, btn_DrainConnect, btn_BackPressureOn, btn_N2PressureOn
             }
 
 
@@ -243,7 +244,17 @@ Public Class FormMain
         Panel_ManualDrain_Circuit.Controls.Add(ManualDrainForm)
         ManualDrainForm.Show()
 
+        Dim CalibrationForm As New FormCircuitModel2()
 
+        While FormCalibration.Panel_Calibration_Circuit.Controls.Count > 0
+            FormCalibration.Panel_Calibration_Circuit.Controls(0).Dispose()
+        End While
+        CalibrationForm.TopLevel = False
+        FormCalibration.Panel_Calibration_Circuit.Controls.Add(CalibrationForm)
+        CalibrationForm.Show()
+
+        FormCalibration.Panel_Calibration_Circuit.BringToFront()
+        FormCalibration.Panel_Calibration_Circuit.Visible = False
 
         'Top Status Bar
         lbl_OperationMode.Text = "No Status"
@@ -1042,7 +1053,7 @@ Public Class FormMain
             LotUsage.cal_diff_pressure, 
             ProductionDetail.flowrate, 
             ProductionDetail.diff_pressure, 
-            CONCAT(UPPER(SUBSTRING(ProductionDetail.result, 1, 1)), LOWER(SUBSTRING(ProductionDetail.result, 2, LEN(ProductionDetail.result)))) AS result, 
+            UPPER(ProductionDetail.result) AS result, 
             ProductionDetail.temperature, 
             ProductionDetail.viscosity, 
             ProductionDetail.inlet_pressure, 
@@ -1484,6 +1495,7 @@ Public Class FormMain
 #End Region
 #End Region
 
+
 #Region "Manual Control"
     ' Valve Control
 
@@ -1565,7 +1577,7 @@ Public Class FormMain
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Pump Enable (ON)")
             End If
         End If
-
+        PCtimer.Start()
     End Sub
 
 
@@ -1573,8 +1585,8 @@ Public Class FormMain
         Dim newLPM As Decimal
         If txtbx_NewLPM.Text.Length > 0 Then
             newLPM = CType(txtbx_NewLPM.Text, Decimal)
-            If newLPM < 0.1 Or newLPM > 24.9 Then
-                MsgBox("Invalid data, Enter Value between 0.1 to 24.9")
+            If newLPM < PublicVariables.PumpFlowrateLowLimit Or newLPM > PublicVariables.PumpFlowrateHighLimit Then
+                MsgBox($"Invalid data, Enter Value between {PublicVariables.PumpFlowrateLowLimit} to {PublicVariables.PumpFlowrateHighLimit}")
                 txtbx_NewLPM.Text = Nothing
                 txtbx_NewLPM.Focus()
             End If
@@ -1586,8 +1598,8 @@ Public Class FormMain
         Dim newRPM As Decimal
         If txtbx_NewRPM.Text.Length > 0 Then
             newRPM = CType(txtbx_NewRPM.Text, Integer)
-            If newRPM < 1 Or newRPM > 3000 Then
-                MsgBox("Invalid data, Enter Value between 1 to 3000")
+            If newRPM < PublicVariables.PumpSpeedLowLimit Or newRPM > PublicVariables.PumpSpeedHighLimit Then
+                MsgBox($"Invalid data, Enter Value between {PublicVariables.PumpSpeedLowLimit} to {PublicVariables.PumpSpeedHighLimit}")
                 txtbx_NewRPM.Text = Nothing
                 txtbx_NewRPM.Focus()
             End If
@@ -1598,13 +1610,13 @@ Public Class FormMain
     Private Sub txtbx_NewLPM_GotFocus(sender As Object, e As EventArgs) Handles txtbx_NewLPM.GotFocus
         Dim focustooltip As New ToolTip
         focustooltip.InitialDelay = 100
-        focustooltip.SetToolTip(txtbx_NewLPM, $"Enter Value between 0.1 to 24.9 ")
+        focustooltip.SetToolTip(txtbx_NewLPM, $"Enter Value between {PublicVariables.PumpFlowrateLowLimit} to {PublicVariables.PumpFlowrateHighLimit} ")
     End Sub
 
     Private Sub txtbx_NewRPM_GotFocus(sender As Object, e As EventArgs) Handles txtbx_NewRPM.GotFocus
         Dim focustooltip As New ToolTip
         focustooltip.InitialDelay = 100
-        focustooltip.SetToolTip(txtbx_NewRPM, $"Enter Value between 1 to 3000 ")
+        focustooltip.SetToolTip(txtbx_NewRPM, $"Enter Value between {PublicVariables.PumpSpeedLowLimit} to {PublicVariables.PumpSpeedHighLimit} ")
     End Sub
 
 
@@ -1691,8 +1703,8 @@ Public Class FormMain
         Dim backpressure As Decimal
         If txtbx_BackPressRequired.Text.Length > 0 Then
             backpressure = CType(txtbx_BackPressRequired.Text, Decimal)
-            If backpressure < 0.0 Or backpressure > 149.9 Then
-                MsgBox("Invalid data, Enter Value between 0.0 to 149.9")
+            If backpressure < PublicVariables.BPRegulatorLowLimit Or backpressure > PublicVariables.BPRegulatorHighLimit Then
+                MsgBox($"Invalid data, Enter Value between {PublicVariables.BPRegulatorLowLimit} to {PublicVariables.BPRegulatorHighLimit}")
                 txtbx_BackPressRequired.Text = Nothing
                 txtbx_BackPressRequired.Focus()
             End If
@@ -1704,8 +1716,8 @@ Public Class FormMain
         Dim N2pressure As Decimal
         If txtbx_N2PurgeRequired.Text.Length > 0 Then
             N2pressure = CType(txtbx_N2PurgeRequired.Text, Decimal)
-            If N2pressure < 0.0 Or N2pressure > 149.9 Then
-                MsgBox("Invalid data, Enter Value between 0.0 to 149.9")
+            If N2pressure < PublicVariables.N2RegulatorLowLimit Or N2pressure > PublicVariables.N2RegulatorHighLimit Then
+                MsgBox($"Invalid data, Enter Value between {PublicVariables.N2RegulatorLowLimit} to {PublicVariables.N2RegulatorHighLimit}")
                 txtbx_N2PurgeRequired.Text = Nothing
                 txtbx_N2PurgeRequired.Focus()
             End If
@@ -1716,13 +1728,13 @@ Public Class FormMain
     Private Sub txtbx_BackPressRequired_GotFocus(sender As Object, e As EventArgs) Handles txtbx_BackPressRequired.GotFocus
         Dim focustooltip As New ToolTip
         focustooltip.InitialDelay = 100
-        focustooltip.SetToolTip(txtbx_BackPressRequired, $"Enter Value between 0.0 to 149.9 ")
+        focustooltip.SetToolTip(txtbx_BackPressRequired, $"Enter Value between {PublicVariables.BPRegulatorLowLimit} to {PublicVariables.BPRegulatorHighLimit} ")
     End Sub
 
     Private Sub txtbx_N2PurgeRequired_GotFocus(sender As Object, e As EventArgs) Handles txtbx_N2PurgeRequired.GotFocus
         Dim focustooltip As New ToolTip
         focustooltip.InitialDelay = 100
-        focustooltip.SetToolTip(txtbx_N2PurgeRequired, $"Enter Value between  0.0 to 149.9 ")
+        focustooltip.SetToolTip(txtbx_N2PurgeRequired, $"Enter Value between  {PublicVariables.N2RegulatorLowLimit} to {PublicVariables.N2RegulatorHighLimit}")
     End Sub
 
 
@@ -1775,6 +1787,35 @@ Public Class FormMain
 
     End Sub
 
+
+    Private Sub btn_PressureRegulator_Click(sender As Object, e As EventArgs) Handles btn_BackPressureOn.Click, btn_N2PressureOn.Click
+        Dim btn_PressureRegualtor As Button = DirectCast(sender, Button)
+        If btn_PressureRegualtor Is btn_BackPressureOn Then
+            If btn_BackPressureOn.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(4) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pressure Regulator Control - Back Pressure (OFF)")
+            Else
+                ManualCtrl(4)(4) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pressure Regulator Control - Back Pressure (ON)")
+            End If
+        End If
+
+        If btn_PressureRegualtor Is btn_N2PressureOn Then
+            If btn_N2PressureOn.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(5) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pressure Regulator Control - N2 Pressure (OFF)")
+            Else
+                ManualCtrl(4)(5) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pressure Regulator Control - N2 Pressure (ON)")
+            End If
+        End If
+
+
+    End Sub
+
+
+
+
     ' Manual Drain
 
 
@@ -1820,7 +1861,7 @@ Public Class FormMain
 
     ' Maintenance
 
-    Private Sub btn_MaintenanceCtrl_Click(sender As Object, e As EventArgs) Handles btn_InFiltrDrain.Click, btn_InFiltrVent.Click, btn_PumpFiltrDrain.Click, btn_PumpFiltrVent.Click, btn_EmptyTank.Click
+    Private Sub btn_MaintenanceCtrl_Click(sender As Object, e As EventArgs) Handles btn_InFiltrDrain.Click, btn_InFiltrVent.Click, btn_PumpFiltrDrain.Click, btn_PumpFiltrVent.Click, btn_EmptyTank.Click, btn_InletConnect.Click, btn_OutletConnect.Click, btn_VentConnect.Click, btn_DrainConnect.Click
         Dim btn_Maintenance As Button = DirectCast(sender, Button)
 
         If btn_Maintenance Is btn_InFiltrDrain Then
@@ -1872,6 +1913,47 @@ Public Class FormMain
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Empty Tank (ON)")
             End If
         End If
+
+        If btn_Maintenance Is btn_InletConnect Then
+            If btn_InletConnect.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(0) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Inlet Connect (OFF)")
+            Else
+                ManualCtrl(4)(0) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Inlet Connect (ON)")
+            End If
+        End If
+
+        If btn_Maintenance Is btn_OutletConnect Then
+            If btn_OutletConnect.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(1) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Outlet Connect (OFF)")
+            Else
+                ManualCtrl(4)(1) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Outlet Connect (ON)")
+            End If
+        End If
+
+        If btn_Maintenance Is btn_VentConnect Then
+            If btn_VentConnect.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(2) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Vent Connect (OFF)")
+            Else
+                ManualCtrl(4)(2) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Vent Connect (ON)")
+            End If
+        End If
+
+        If btn_Maintenance Is btn_DrainConnect Then
+            If btn_DrainConnect.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(3) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Drain Connect (OFF)")
+            Else
+                ManualCtrl(4)(3) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Maintenance Circuit - Drain Connect (ON)")
+            End If
+        End If
+
         PCtimer.Start()
     End Sub
 
@@ -1880,6 +1962,7 @@ Public Class FormMain
 
 
 #End Region
+
 
 #Region "Alarm"
     ' Initialize Alarm History Tab
@@ -2323,7 +2406,7 @@ Public Class FormMain
         End If
 
         If OnContinue = True Then
-            If PartID.Length <> PublicVariables.PartIdLen Then
+            If PartID.Length < PublicVariables.PartIdLen Then
                 MainMessage(2, $"Character(s) length for Part ID is {PublicVariables.PartIdLen} ")
                 OnContinue = False
             End If
@@ -2807,12 +2890,22 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
             If Oncontinue = True Then
                 Lotusageid = dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("id")
+                Dim dummyfloat As Decimal = 0
+                Dim dummystring As String = "NA"
                 Dim Productionparameter As New Dictionary(Of String, Object) From {
                     {"serial_uid", SerialUid},
                         {"serial_number", txtbx_SerialNumber.Text},
                         {"serial_attempt", SerialAttempt},
                         {"lot_usage_id", Lotusageid},
-                        {"timestamp", lbl_DateTimeClock.Text}
+                        {"timestamp", lbl_DateTimeClock.Text},
+                        {"temperature", dummyfloat},
+                        {"flowrate", dummyfloat},
+                        {"inlet_pressure", dummyfloat},
+                        {"outlet_pressure", dummyfloat},
+                        {"viscosity", dummyfloat},
+                        {"diff_pressure", dummyfloat},
+                        {"cycle_time", dummyfloat},
+                        {"result", dummystring}
                     }
                 If SQL.InsertRecord("ProductionDetail", Productionparameter) = 1 Then
 
@@ -2852,16 +2945,24 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
 
             flush1cycletime = (dtrecipetable.Rows(0)("firstflush_fill_time") + dtrecipetable.Rows(0)("firstflush_bleed_time") + dtrecipetable.Rows(0)("firstflush_stabilize_time") + dtrecipetable.Rows(0)("firstflush_time"))
-            End If
-            If dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
+        End If
+
+        If dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
             flush2cycletime = (dtrecipetable.Rows(0)("secondflush_fill_time") + dtrecipetable.Rows(0)("secondflush_bleed_time") + dtrecipetable.Rows(0)("secondflush_stabilize_time") + dtrecipetable.Rows(0)("secondflush_time"))
         End If
-        If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" Then
+
+        If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("firstflush_circuit") = "Disable" Then
             DPtest1cycletime = (dtrecipetable.Rows(0)("dp_fill_time") + dtrecipetable.Rows(0)("dp_bleed_time") + dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+        ElseIf dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
+            DPtest1cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
         End If
-        If dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
+
+        If dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" And dtrecipetable.Rows(0)("secondflush_circuit") = "Disable" Then
             DPtest2cycletime = (dtrecipetable.Rows(0)("dp_fill_time") + dtrecipetable.Rows(0)("dp_bleed_time") + dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+        ElseIf dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" And dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
+            DPtest2cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
         End If
+
         If dtrecipetable.Rows(0)("drain1_circuit") = "Enable" Then
             Drain1cycletime = (dtrecipetable.Rows(0)("drain1_time"))
         End If
@@ -2875,7 +2976,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         MainCycletime = flush1cycletime + flush2cycletime + DPtest1cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime
         MainDptestpoints = dtrecipetable.Rows(0)("dp_testpoints")
 
-        MainDptest1end = CType((MainCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / Resultcapturetimer.Interval), Decimal)
+        MainDptest1end = CType((MainCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime) - 1) * (1000 / Resultcapturetimer.Interval), Decimal)
         MainDptest1start = MainDptest1end - MainDptestpoints
         MainDptest2end = CType((MainCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / Resultcapturetimer.Interval), Decimal)
         MainDptest2start = MainDptest2end - MainDptestpoints
@@ -3146,7 +3247,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             lbl_DiffPressMin.Text = Nothing
             lbl_DiffPressMax.Text = Nothing
             lbl_DPTestResult.Text = Nothing
-
+            lbl_DPTestResult.BackColor = Color.FromArgb(224, 224, 224)
 
             JigType = 0
             btn_RecipeSelectionConfirm.Enabled = False

@@ -220,7 +220,8 @@ Partial Class FormMain
         Me.dsp_DigitalOutput = New System.Windows.Forms.Label()
         Me.dsp_DigitalInput = New System.Windows.Forms.Label()
         Me.tabpg_StatusDevice = New System.Windows.Forms.TabPage()
-        Me.txtbx_Pumpcontroller = New System.Windows.Forms.RichTextBox()
+        Me.txtbx_PumpcontrolResponse = New System.Windows.Forms.RichTextBox()
+        Me.txtbx_PumpcontrolQuery = New System.Windows.Forms.RichTextBox()
         Me.dsp_PumpController = New System.Windows.Forms.Label()
         Me.txtbx_HandScanner = New System.Windows.Forms.RichTextBox()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -305,6 +306,7 @@ Partial Class FormMain
         Me.btn_Valve5 = New System.Windows.Forms.Button()
         Me.tabpg_ManualControlPump = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lbl_PumpSpeed = New System.Windows.Forms.Label()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.lbl_MCPumpWarning = New System.Windows.Forms.Label()
         Me.lbl_MCPumpError = New System.Windows.Forms.Label()
@@ -381,6 +383,16 @@ Partial Class FormMain
         Me.tabpg_ManualControlMaintenance = New System.Windows.Forms.TabPage()
         Me.Panel_Mainten_Circuit = New System.Windows.Forms.Panel()
         Me.panel_Maintenance = New System.Windows.Forms.Panel()
+        Me.panel_subMain = New System.Windows.Forms.Panel()
+        Me.btn_InletConnect = New System.Windows.Forms.Button()
+        Me.dsp_InletConnect = New System.Windows.Forms.Label()
+        Me.btn_OutletConnect = New System.Windows.Forms.Button()
+        Me.btn_DrainConnect = New System.Windows.Forms.Button()
+        Me.btn_VentConnect = New System.Windows.Forms.Button()
+        Me.dsp_DrainConnect = New System.Windows.Forms.Label()
+        Me.dsp_VentConnect = New System.Windows.Forms.Label()
+        Me.dsp_OutletConnect = New System.Windows.Forms.Label()
+        Me.Label35 = New System.Windows.Forms.Label()
         Me.panel_SubMaintenance = New System.Windows.Forms.Panel()
         Me.btn_EmptyTank = New System.Windows.Forms.Button()
         Me.dsp_EmptyTank = New System.Windows.Forms.Label()
@@ -435,6 +447,8 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
+        Me.btn_BackPressureOn = New System.Windows.Forms.Button()
+        Me.btn_N2PressureOn = New System.Windows.Forms.Button()
         Me.panel_FormControl.SuspendLayout()
         Me.Panel12.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -498,6 +512,7 @@ Partial Class FormMain
         Me.panel_SubManualDrain.SuspendLayout()
         Me.tabpg_ManualControlMaintenance.SuspendLayout()
         Me.panel_Maintenance.SuspendLayout()
+        Me.panel_subMain.SuspendLayout()
         Me.panel_SubMaintenance.SuspendLayout()
         Me.tabpg_Alarm.SuspendLayout()
         Me.tabctrl_SubAlarm.SuspendLayout()
@@ -2446,7 +2461,8 @@ Partial Class FormMain
         'tabpg_StatusDevice
         '
         Me.tabpg_StatusDevice.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_Pumpcontroller)
+        Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_PumpcontrolResponse)
+        Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_PumpcontrolQuery)
         Me.tabpg_StatusDevice.Controls.Add(Me.dsp_PumpController)
         Me.tabpg_StatusDevice.Controls.Add(Me.txtbx_HandScanner)
         Me.tabpg_StatusDevice.Controls.Add(Me.Label19)
@@ -2468,15 +2484,25 @@ Partial Class FormMain
         Me.tabpg_StatusDevice.TabIndex = 1
         Me.tabpg_StatusDevice.Text = "Device Status"
         '
-        'txtbx_Pumpcontroller
+        'txtbx_PumpcontrolResponse
         '
-        Me.txtbx_Pumpcontroller.Cursor = System.Windows.Forms.Cursors.No
-        Me.txtbx_Pumpcontroller.Location = New System.Drawing.Point(319, 44)
-        Me.txtbx_Pumpcontroller.Name = "txtbx_Pumpcontroller"
-        Me.txtbx_Pumpcontroller.ReadOnly = True
-        Me.txtbx_Pumpcontroller.Size = New System.Drawing.Size(280, 170)
-        Me.txtbx_Pumpcontroller.TabIndex = 19
-        Me.txtbx_Pumpcontroller.Text = ""
+        Me.txtbx_PumpcontrolResponse.Cursor = System.Windows.Forms.Cursors.No
+        Me.txtbx_PumpcontrolResponse.Location = New System.Drawing.Point(319, 144)
+        Me.txtbx_PumpcontrolResponse.Name = "txtbx_PumpcontrolResponse"
+        Me.txtbx_PumpcontrolResponse.ReadOnly = True
+        Me.txtbx_PumpcontrolResponse.Size = New System.Drawing.Size(280, 70)
+        Me.txtbx_PumpcontrolResponse.TabIndex = 22
+        Me.txtbx_PumpcontrolResponse.Text = ""
+        '
+        'txtbx_PumpcontrolQuery
+        '
+        Me.txtbx_PumpcontrolQuery.Cursor = System.Windows.Forms.Cursors.No
+        Me.txtbx_PumpcontrolQuery.Location = New System.Drawing.Point(319, 44)
+        Me.txtbx_PumpcontrolQuery.Name = "txtbx_PumpcontrolQuery"
+        Me.txtbx_PumpcontrolQuery.ReadOnly = True
+        Me.txtbx_PumpcontrolQuery.Size = New System.Drawing.Size(280, 70)
+        Me.txtbx_PumpcontrolQuery.TabIndex = 21
+        Me.txtbx_PumpcontrolQuery.Text = ""
         '
         'dsp_PumpController
         '
@@ -3422,11 +3448,24 @@ Partial Class FormMain
         '
         Me.Panel4.BackgroundImage = CType(resources.GetObject("Panel4.BackgroundImage"), System.Drawing.Image)
         Me.Panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Panel4.Controls.Add(Me.lbl_PumpSpeed)
         Me.Panel4.Controls.Add(Me.Panel8)
         Me.Panel4.Location = New System.Drawing.Point(682, 0)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1136, 583)
         Me.Panel4.TabIndex = 23
+        '
+        'lbl_PumpSpeed
+        '
+        Me.lbl_PumpSpeed.BackColor = System.Drawing.SystemColors.Info
+        Me.lbl_PumpSpeed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_PumpSpeed.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_PumpSpeed.Location = New System.Drawing.Point(535, 425)
+        Me.lbl_PumpSpeed.Name = "lbl_PumpSpeed"
+        Me.lbl_PumpSpeed.Size = New System.Drawing.Size(66, 25)
+        Me.lbl_PumpSpeed.TabIndex = 793
+        Me.lbl_PumpSpeed.Text = "0"
+        Me.lbl_PumpSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Panel8
         '
@@ -3850,7 +3889,7 @@ Partial Class FormMain
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(170, 25)
         Me.Label9.TabIndex = 13
-        Me.Label9.Text = "Tank P.Protect Sensor"
+        Me.Label9.Text = "Tank Safe Low Sensor"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label10
@@ -3862,7 +3901,7 @@ Partial Class FormMain
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(170, 25)
         Me.Label10.TabIndex = 13
-        Me.Label10.Text = "Tank Precondition Sensor"
+        Me.Label10.Text = "Tank Low Sensor"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label11
@@ -3874,7 +3913,7 @@ Partial Class FormMain
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(170, 25)
         Me.Label11.TabIndex = 13
-        Me.Label11.Text = "Tank Nominal Sensor"
+        Me.Label11.Text = "Tank High Sensor"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label12
@@ -4024,6 +4063,8 @@ Partial Class FormMain
         'panel_SubRegulatorControl
         '
         Me.panel_SubRegulatorControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_SubRegulatorControl.Controls.Add(Me.btn_BackPressureOn)
+        Me.panel_SubRegulatorControl.Controls.Add(Me.btn_N2PressureOn)
         Me.panel_SubRegulatorControl.Controls.Add(Me.btn_BckPressureUpdate)
         Me.panel_SubRegulatorControl.Controls.Add(Me.btn_N2PressureUpdate)
         Me.panel_SubRegulatorControl.Controls.Add(Me.lbl_N2PurgeCurrent)
@@ -4035,9 +4076,9 @@ Partial Class FormMain
         Me.panel_SubRegulatorControl.Controls.Add(Me.dsp_CurrentValue)
         Me.panel_SubRegulatorControl.Controls.Add(Me.dsp_BackPressReg)
         Me.panel_SubRegulatorControl.Controls.Add(Me.dsp_ElecRegCtrl)
-        Me.panel_SubRegulatorControl.Location = New System.Drawing.Point(80, 9)
+        Me.panel_SubRegulatorControl.Location = New System.Drawing.Point(13, 12)
         Me.panel_SubRegulatorControl.Name = "panel_SubRegulatorControl"
-        Me.panel_SubRegulatorControl.Size = New System.Drawing.Size(500, 199)
+        Me.panel_SubRegulatorControl.Size = New System.Drawing.Size(652, 199)
         Me.panel_SubRegulatorControl.TabIndex = 6
         '
         'btn_BckPressureUpdate
@@ -4142,7 +4183,7 @@ Partial Class FormMain
         Me.dsp_ElecRegCtrl.Font = New System.Drawing.Font("Segoe UI Semibold", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dsp_ElecRegCtrl.Location = New System.Drawing.Point(0, 0)
         Me.dsp_ElecRegCtrl.Name = "dsp_ElecRegCtrl"
-        Me.dsp_ElecRegCtrl.Size = New System.Drawing.Size(498, 50)
+        Me.dsp_ElecRegCtrl.Size = New System.Drawing.Size(650, 50)
         Me.dsp_ElecRegCtrl.TabIndex = 4
         Me.dsp_ElecRegCtrl.Text = "Electronic Regulator Control"
         Me.dsp_ElecRegCtrl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -4261,12 +4302,125 @@ Partial Class FormMain
         '
         'panel_Maintenance
         '
+        Me.panel_Maintenance.Controls.Add(Me.panel_subMain)
         Me.panel_Maintenance.Controls.Add(Me.panel_SubMaintenance)
         Me.panel_Maintenance.Dock = System.Windows.Forms.DockStyle.Left
         Me.panel_Maintenance.Location = New System.Drawing.Point(0, 0)
         Me.panel_Maintenance.Name = "panel_Maintenance"
         Me.panel_Maintenance.Size = New System.Drawing.Size(682, 583)
         Me.panel_Maintenance.TabIndex = 1
+        '
+        'panel_subMain
+        '
+        Me.panel_subMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_subMain.Controls.Add(Me.btn_InletConnect)
+        Me.panel_subMain.Controls.Add(Me.dsp_InletConnect)
+        Me.panel_subMain.Controls.Add(Me.btn_OutletConnect)
+        Me.panel_subMain.Controls.Add(Me.btn_DrainConnect)
+        Me.panel_subMain.Controls.Add(Me.btn_VentConnect)
+        Me.panel_subMain.Controls.Add(Me.dsp_DrainConnect)
+        Me.panel_subMain.Controls.Add(Me.dsp_VentConnect)
+        Me.panel_subMain.Controls.Add(Me.dsp_OutletConnect)
+        Me.panel_subMain.Controls.Add(Me.Label35)
+        Me.panel_subMain.Location = New System.Drawing.Point(79, 305)
+        Me.panel_subMain.Name = "panel_subMain"
+        Me.panel_subMain.Size = New System.Drawing.Size(500, 264)
+        Me.panel_subMain.TabIndex = 7
+        '
+        'btn_InletConnect
+        '
+        Me.btn_InletConnect.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_InletConnect.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_InletConnect.Location = New System.Drawing.Point(272, 58)
+        Me.btn_InletConnect.Name = "btn_InletConnect"
+        Me.btn_InletConnect.Size = New System.Drawing.Size(100, 40)
+        Me.btn_InletConnect.TabIndex = 49
+        Me.btn_InletConnect.Text = "OFF"
+        Me.btn_InletConnect.UseVisualStyleBackColor = False
+        '
+        'dsp_InletConnect
+        '
+        Me.dsp_InletConnect.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_InletConnect.Location = New System.Drawing.Point(56, 70)
+        Me.dsp_InletConnect.Name = "dsp_InletConnect"
+        Me.dsp_InletConnect.Size = New System.Drawing.Size(210, 17)
+        Me.dsp_InletConnect.TabIndex = 48
+        Me.dsp_InletConnect.Text = "Inlet Connection Circuit :"
+        Me.dsp_InletConnect.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'btn_OutletConnect
+        '
+        Me.btn_OutletConnect.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_OutletConnect.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_OutletConnect.Location = New System.Drawing.Point(272, 106)
+        Me.btn_OutletConnect.Name = "btn_OutletConnect"
+        Me.btn_OutletConnect.Size = New System.Drawing.Size(100, 40)
+        Me.btn_OutletConnect.TabIndex = 45
+        Me.btn_OutletConnect.Text = "OFF"
+        Me.btn_OutletConnect.UseVisualStyleBackColor = False
+        '
+        'btn_DrainConnect
+        '
+        Me.btn_DrainConnect.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_DrainConnect.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_DrainConnect.Location = New System.Drawing.Point(272, 202)
+        Me.btn_DrainConnect.Name = "btn_DrainConnect"
+        Me.btn_DrainConnect.Size = New System.Drawing.Size(100, 40)
+        Me.btn_DrainConnect.TabIndex = 47
+        Me.btn_DrainConnect.Text = "OFF"
+        Me.btn_DrainConnect.UseVisualStyleBackColor = False
+        '
+        'btn_VentConnect
+        '
+        Me.btn_VentConnect.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_VentConnect.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_VentConnect.Location = New System.Drawing.Point(272, 154)
+        Me.btn_VentConnect.Name = "btn_VentConnect"
+        Me.btn_VentConnect.Size = New System.Drawing.Size(100, 40)
+        Me.btn_VentConnect.TabIndex = 46
+        Me.btn_VentConnect.Text = "OFF"
+        Me.btn_VentConnect.UseVisualStyleBackColor = False
+        '
+        'dsp_DrainConnect
+        '
+        Me.dsp_DrainConnect.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_DrainConnect.Location = New System.Drawing.Point(56, 214)
+        Me.dsp_DrainConnect.Name = "dsp_DrainConnect"
+        Me.dsp_DrainConnect.Size = New System.Drawing.Size(210, 17)
+        Me.dsp_DrainConnect.TabIndex = 12
+        Me.dsp_DrainConnect.Text = "Drain Connection Circuit :"
+        Me.dsp_DrainConnect.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_VentConnect
+        '
+        Me.dsp_VentConnect.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_VentConnect.Location = New System.Drawing.Point(56, 166)
+        Me.dsp_VentConnect.Name = "dsp_VentConnect"
+        Me.dsp_VentConnect.Size = New System.Drawing.Size(210, 17)
+        Me.dsp_VentConnect.TabIndex = 11
+        Me.dsp_VentConnect.Text = "Vent Connection Circuit :"
+        Me.dsp_VentConnect.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_OutletConnect
+        '
+        Me.dsp_OutletConnect.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_OutletConnect.Location = New System.Drawing.Point(56, 118)
+        Me.dsp_OutletConnect.Name = "dsp_OutletConnect"
+        Me.dsp_OutletConnect.Size = New System.Drawing.Size(210, 17)
+        Me.dsp_OutletConnect.TabIndex = 12
+        Me.dsp_OutletConnect.Text = "Outlet Connection Circuit :"
+        Me.dsp_OutletConnect.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label35
+        '
+        Me.Label35.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label35.Font = New System.Drawing.Font("Segoe UI Semibold", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label35.Location = New System.Drawing.Point(0, 0)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(498, 50)
+        Me.Label35.TabIndex = 4
+        Me.Label35.Text = "Main Circuit"
+        Me.Label35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'panel_SubMaintenance
         '
@@ -4936,6 +5090,28 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'btn_BackPressureOn
+        '
+        Me.btn_BackPressureOn.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_BackPressureOn.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_BackPressureOn.Location = New System.Drawing.Point(491, 85)
+        Me.btn_BackPressureOn.Name = "btn_BackPressureOn"
+        Me.btn_BackPressureOn.Size = New System.Drawing.Size(100, 40)
+        Me.btn_BackPressureOn.TabIndex = 46
+        Me.btn_BackPressureOn.Text = "OFF"
+        Me.btn_BackPressureOn.UseVisualStyleBackColor = False
+        '
+        'btn_N2PressureOn
+        '
+        Me.btn_N2PressureOn.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_N2PressureOn.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_N2PressureOn.Location = New System.Drawing.Point(491, 131)
+        Me.btn_N2PressureOn.Name = "btn_N2PressureOn"
+        Me.btn_N2PressureOn.Size = New System.Drawing.Size(100, 40)
+        Me.btn_N2PressureOn.TabIndex = 47
+        Me.btn_N2PressureOn.Text = "OFF"
+        Me.btn_N2PressureOn.UseVisualStyleBackColor = False
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5023,6 +5199,7 @@ Partial Class FormMain
         Me.panel_SubManualDrain.ResumeLayout(False)
         Me.tabpg_ManualControlMaintenance.ResumeLayout(False)
         Me.panel_Maintenance.ResumeLayout(False)
+        Me.panel_subMain.ResumeLayout(False)
         Me.panel_SubMaintenance.ResumeLayout(False)
         Me.tabpg_Alarm.ResumeLayout(False)
         Me.tabctrl_SubAlarm.ResumeLayout(False)
@@ -5406,6 +5583,20 @@ Partial Class FormMain
     Friend WithEvents txtbx_PLCRead As RichTextBox
     Friend WithEvents txtbx_HandScanner As RichTextBox
     Friend WithEvents Label19 As Label
-    Friend WithEvents txtbx_Pumpcontroller As RichTextBox
     Friend WithEvents dsp_PumpController As Label
+    Friend WithEvents txtbx_PumpcontrolResponse As RichTextBox
+    Friend WithEvents txtbx_PumpcontrolQuery As RichTextBox
+    Friend WithEvents panel_subMain As Panel
+    Friend WithEvents btn_InletConnect As Button
+    Friend WithEvents dsp_InletConnect As Label
+    Friend WithEvents btn_OutletConnect As Button
+    Friend WithEvents btn_DrainConnect As Button
+    Friend WithEvents btn_VentConnect As Button
+    Friend WithEvents dsp_DrainConnect As Label
+    Friend WithEvents dsp_VentConnect As Label
+    Friend WithEvents dsp_OutletConnect As Label
+    Friend WithEvents Label35 As Label
+    Friend WithEvents lbl_PumpSpeed As Label
+    Friend WithEvents btn_BackPressureOn As Button
+    Friend WithEvents btn_N2PressureOn As Button
 End Class
