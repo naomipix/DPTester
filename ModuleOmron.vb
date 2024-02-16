@@ -1938,6 +1938,32 @@ Module ModuleOmron
         End If
         FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)
 
+        If dtresult.Rows.Count = 0 Then
+
+        Else
+            'Dim dtVerresultexport As DataTable = GetVisibleColumnsDataTable(dgv_VerificationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
+            'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
+
+            ' Get Path
+            'Dim dtGetPath As DataTable = SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={11}")
+            Dim Filepath As String = $"{PublicVariables.CSVPathToResultSummary}ResultSummary_{FormMainModule.SerialUid}_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
+
+            ' Export With Return
+            Dim ReturnValue As String = ExportDataTableToCsv(dtresult, Filepath, PublicVariables.CSVDelimiterResultSummary)
+
+            ' Check Return State
+            If ReturnValue = "True" Then
+
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Result Summary] CSV Export Success ""{Filepath}""")
+            ElseIf ReturnValue = "Missing" Then
+
+            ElseIf ReturnValue = "False" Then
+
+            End If
+        End If
+
+
+
         If result_finaldp >= dtrecipetable.Rows(0)("dp_lowerlimit") And result_finaldp <= dtrecipetable.Rows(0)("dp_upperlimit") Then
             FormMain.lbl_DPTestResult.Text = "PASS"
             FormMain.lbl_DPTestResult.BackColor = Color.LimeGreen

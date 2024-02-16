@@ -264,11 +264,15 @@
             tmr_Calibration.Enabled = False
             txtbx_CalInletPressure.Text = Nothing
             txtbx_CalOutletPressure.Text = Nothing
+            txtbx_CalFlowrate.Text = Nothing
+            txtbx_CalTemperature.Text = Nothing
             txtbx_CalOffset.Text = Nothing
             tmr_Verification.Enabled = False
             txtbx_CalResult.Text = Nothing
             txtbx_VerInletPressure.Text = Nothing
             txtbx_VerOutletPressure.Text = Nothing
+            txtbx_VerFlowrate.Text = Nothing
+            txtbx_VerTemperature.Text = Nothing
             txtbx_VerDP.Text = Nothing
             txtbx_VerStatus.Text = Nothing
             txtbx_VerStatus.BackColor = SystemColors.Window
@@ -430,7 +434,36 @@
             End If
             txtbx_CalInletPressure.Text = CType(Cal_finalInlet, String)
             txtbx_CalOutletPressure.Text = CType(Cal_finalOutlet, String)
+            txtbx_CalFlowrate.Text = CType(Cal_finalflowrate, String)
+            txtbx_CalTemperature.Text = CType(Cal_finaltemperature - 273.15, String)
             txtbx_CalOffset.Text = CType(Math.Round(Cal_finaloffset, 2), String)
+
+            ' Convert Visible DataGridView Columns To DataTable
+
+            If dgv_CalibrationResult.RowCount = 0 Then
+
+            Else
+                Dim dtcalresultexport As DataTable = GetVisibleColumnsDataTable(dgv_CalibrationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
+                'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
+
+                ' Get Path
+                'Dim dtGetPath As DataTable = SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={11}")
+                Dim Filepath As String = $"{PublicVariables.CSVPathToResultSummary}CalibrationSummary_{txtbx_CalLotID.Text}_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
+
+                ' Export With Return
+                Dim ReturnValue As String = ExportDataTableToCsv(dtcalresultexport, Filepath, PublicVariables.CSVDelimiterResultSummary)
+
+                ' Check Return State
+                If ReturnValue = "True" Then
+
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result Summary] CSV Export Success ""{Filepath}""")
+                ElseIf ReturnValue = "Missing" Then
+
+                ElseIf ReturnValue = "False" Then
+
+                End If
+            End If
+
 
             PCStatus(1)(4) = True
             VerificationRun()
@@ -577,8 +610,35 @@
             End If
             txtbx_VerInletPressure.Text = CType(Ver_finalinlet, String)
             txtbx_VerOutletPressure.Text = CType(Ver_finaloutlet, String)
+            txtbx_VerFlowrate.Text = CType(Ver_finalflowrate, String)
+            txtbx_VerTemperature.Text = CType(Ver_finaltemperature - 273.15, String)
             txtbx_VerStatus.Text = "Completed"
             txtbx_VerStatus.BackColor = Color.FromArgb(192, 255, 192)
+            ' Convert Visible DataGridView Columns To DataTable
+
+            If dgv_VerificationResult.RowCount = 0 Then
+
+            Else
+                Dim dtVerresultexport As DataTable = GetVisibleColumnsDataTable(dgv_VerificationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
+                'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
+
+                ' Get Path
+                'Dim dtGetPath As DataTable = SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={11}")
+                Dim Filepath As String = $"{PublicVariables.CSVPathToResultSummary}VerificationSummary_{txtbx_CalLotID.Text}_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
+
+                ' Export With Return
+                Dim ReturnValue As String = ExportDataTableToCsv(dtVerresultexport, Filepath, PublicVariables.CSVDelimiterResultSummary)
+
+                ' Check Return State
+                If ReturnValue = "True" Then
+
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result Summary] CSV Export Success ""{Filepath}""")
+                ElseIf ReturnValue = "Missing" Then
+
+                ElseIf ReturnValue = "False" Then
+
+                End If
+            End If
 
             PCStatus(1)(5) = True
 
@@ -792,4 +852,6 @@
             btn_CircuitView.BackColor = Color.FromArgb(25, 130, 246)
         End If
     End Sub
+
+
 End Class

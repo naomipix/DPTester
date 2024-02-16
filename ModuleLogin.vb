@@ -271,6 +271,39 @@ Module PermissionModule
     Public Sub ApplyOnLogon()
         Dim dt As DataTable = SQL.ReadRecords($"SELECT permission FROM UserPermission WHERE user_category_id='{PublicVariables.LoginUserCategoryID}'")
 
+        ' Apply All Permission (Developer)
+        If PublicVariables.LoggedInIsDeveloper Then
+            dt = New DataTable
+            dt.Columns.Add("permission")
+
+            dt.Rows.Add("Main Menu")
+            dt.Rows.Add("Registration")
+            dt.Rows.Add("Recipe")
+            dt.Rows.Add("Calibrate")
+            dt.Rows.Add("Settings")
+            dt.Rows.Add("Message Log")
+            dt.Rows.Add("Result Summary")
+            dt.Rows.Add("Result Graph")
+
+            dt.Rows.Add("Main")
+            dt.Rows.Add("Production Details")
+            dt.Rows.Add("Status")
+            dt.Rows.Add("Manual Control")
+            dt.Rows.Add("Alarm")
+
+            dt.Rows.Add("User Registration")
+            dt.Rows.Add("User Deletion")
+
+            dt.Rows.Add("Recipe Details")
+            dt.Rows.Add("Recipe Edit")
+            dt.Rows.Add("Recipe Create")
+            dt.Rows.Add("Recipe Delete")
+
+            dt.Rows.Add("Main Settings")
+            dt.Rows.Add("Tool Counter")
+            dt.Rows.Add("Dry Run / Buy-Off")
+        End If
+
         For Each row As DataRow In dt.Rows
             ' Apply Permission
             If True Then
