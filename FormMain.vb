@@ -468,7 +468,14 @@ Public Class FormMain
         InitializeComponent()
     End Sub
 
-    Private Sub InitializeLiveChartXAxes(XLimit As Integer)
+    Private Sub InitializeLiveChartXAxes(XLimit As Integer, XScaleMSec As Integer)
+        Dim XScaleSec As Double = XScaleMSec / 1000
+        Dim XLabelArr(XLimit / XScaleSec) As String
+
+        For i As Integer = 0 To XLimit / XScaleSec
+            XLabelArr(i) = i * XScaleSec
+        Next
+
         CartesianChart_MainLiveGraph.XAxes = New ICartesianAxis() {
             New LiveChartsCore.SkiaSharpView.Axis() With {
                 .Name = "Time (s)",
@@ -483,7 +490,8 @@ Public Class FormMain
                 .DrawTicksPath = True,
                 .MinStep = 1,
                 .MaxLimit = XLimit,
-                .MinLimit = 0
+                .MinLimit = 0,
+                .Labels = XLabelArr
             }
         }
     End Sub
@@ -498,7 +506,7 @@ Public Class FormMain
             .Paint = New SolidColorPaint(SKColors.Black)
         }
 
-        InitializeLiveChartXAxes(10)
+        InitializeLiveChartXAxes(10, 1000)
 
         CartesianChart_MainLiveGraph.YAxes = New ICartesianAxis() {
             New LiveChartsCore.SkiaSharpView.Axis() With {
@@ -3114,7 +3122,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             LiveChartFLWRValue.Clear()
 
             ' Set Live Graph Cycle Time
-            InitializeLiveChartXAxes(MainCycletime)
+            InitializeLiveChartXAxes(MainCycletime, Resultcapturetimer.Interval)
 
             ' Set Live Graph Sections
             If True Then
