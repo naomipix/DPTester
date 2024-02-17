@@ -378,7 +378,10 @@ Public Class FormMain
 
         txtbx_Operatorlotid.Enabled = False
         lbl_DiffPressAct.Text = Nothing
-
+        lbl_ProductFlowrate.Text = Nothing
+        lbl_ProductInlet.Text = Nothing
+        lbl_ProductOutlet.Text = Nothing
+        lbl_ProductTemperature.Text = Nothing
         lbl_DPTestResult.Text = Nothing
 
 
@@ -2849,6 +2852,10 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             lbl_DPTestResult.Text = Nothing
             lbl_DPTestResult.BackColor = Color.Gray
             lbl_DiffPressAct.Text = Nothing
+            lbl_ProductFlowrate.Text = Nothing
+            lbl_ProductInlet.Text = Nothing
+            lbl_ProductOutlet.Text = Nothing
+            lbl_ProductTemperature.Text = Nothing
 
             Dim Oncontinue As Boolean = True
             SerialUid = txtbx_LotID.Text + "-" + txtbx_SerialNumber.Text
@@ -3244,6 +3251,11 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
             lbl_BlankDP.Text = Nothing
             lbl_DiffPressAct.Text = Nothing
+            lbl_ProductFlowrate.Text = Nothing
+            lbl_ProductInlet.Text = Nothing
+            lbl_ProductOutlet.Text = Nothing
+            lbl_ProductTemperature.Text = Nothing
+
             lbl_DiffPressMin.Text = Nothing
             lbl_DiffPressMax.Text = Nothing
             lbl_DPTestResult.Text = Nothing

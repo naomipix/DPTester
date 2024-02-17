@@ -1420,7 +1420,7 @@ Module ModuleOmron
                 FINSWrite(0, 200)
                 LabelStatusupdate()
             Else
-                FormCalibration.tmr_Calibration.Enabled = False
+            FormCalibration.tmr_Calibration.Enabled = False
             FormCalibration.tmr_Verification.Enabled = False
             Resultcapturetimer.Enabled = False
             LabelStatusupdate()
@@ -1665,9 +1665,12 @@ Module ModuleOmron
 
 
         Value = Currentalarm.ElementAt(startindex - Currentindex)
-        FormCalibration.tmr_Calibration.Enabled = False
-        FormCalibration.tmr_Verification.Enabled = False
-        Resultcapturetimer.Enabled = False
+        If PLCstatus(0)(4) = True Then
+            FormCalibration.tmr_Calibration.Enabled = False
+            FormCalibration.tmr_Verification.Enabled = False
+            Resultcapturetimer.Enabled = False
+        End If
+
         If Value.Value.ToString.Substring(0, 3) = "ALM" Or Value.Value.ToString.Contains("Alarm") Then
             bgcolor = Color.Red
             frcolor = SystemColors.Window
@@ -1937,6 +1940,12 @@ Module ModuleOmron
 
         End If
         FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)
+        FormMain.lbl_ProductFlowrate.Text = CType(Math.Round(result_finalflowrate, 3), String)
+        FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature - 273.15, 3), String)
+        FormMain.lbl_ProductInlet.Text = CType(Math.Round(result_finalinlet, 3), String)
+        FormMain.lbl_ProductOutlet.Text = CType(Math.Round(result_finaloutlet, 3), String)
+
+
 
         If dtresult.Rows.Count = 0 Then
 
@@ -1946,7 +1955,7 @@ Module ModuleOmron
 
             ' Get Path
             'Dim dtGetPath As DataTable = SQL.ReadRecords($"SELECT id, description, retained_value FROM [0_RetainedMemory] WHERE id={11}")
-            Dim Filepath As String = $"{PublicVariables.CSVPathToResultSummary}ResultSummary_{FormMainModule.SerialUid}_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
+            Dim Filepath As String = $"{PublicVariables.CSVPathToResultSummary}ResultSummary_{FormMainModule.SerialUid}_{FormMainModule.SerialAttempt}_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
 
             ' Export With Return
             Dim ReturnValue As String = ExportDataTableToCsv(dtresult, Filepath, PublicVariables.CSVDelimiterResultSummary)
