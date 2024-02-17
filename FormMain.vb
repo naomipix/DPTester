@@ -3,7 +3,15 @@ Imports System.Net.NetworkInformation
 Imports System.Runtime.InteropServices
 Imports System.Threading
 Imports System.Windows.Forms.DataVisualization.Charting
+Imports LiveChartsCore
+Imports LiveChartsCore.Kernel.Sketches
+Imports LiveChartsCore.SkiaSharpView
+Imports LiveChartsCore.SkiaSharpView.Painting
+Imports LiveChartsCore.SkiaSharpView.VisualElements
+Imports SkiaSharp
 Imports PoohPlcLink
+Imports LiveChartsCore.SkiaSharpView.Painting.Effects
+Imports LiveChartsCore.SkiaSharpView.WinForms
 
 Module FormMainModule
     Public Workorder As String
@@ -134,6 +142,8 @@ Public Class FormMain
         ModuleInitialize.CreateFolders()
 
 
+        ' Initialize Chart
+        InitializeLiveChart()
 
         ' Load Ini file
         IniFileInitialize.ReadConfig()
@@ -451,8 +461,97 @@ Public Class FormMain
         End If
     End Sub
 
+    Public Sub New()
+        ' Initialize Cartesian Chart
+        InitializeComponent()
+    End Sub
 
+    Private Sub InitializeLiveChartXAxes(XLimit As Integer)
+        CartesianChart_MainLiveGraph.XAxes = New ICartesianAxis() {
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Time (s)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Black),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(0, 20, 0, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                .TicksPaint = New SolidColorPaint(SKColors.Black),
+                .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                .DrawTicksPath = True,
+                .MinStep = 1,
+                .MaxLimit = XLimit,
+                .MinLimit = 0
+            }
+        }
+    End Sub
 
+    Private Sub InitializeLiveChart()
+        CartesianChart_MainLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
+
+        CartesianChart_MainLiveGraph.Title = New LabelVisual() With {
+            .Text = "DP Tester Live Graph",
+            .TextSize = 14,
+            .Padding = New LiveChartsCore.Drawing.Padding(15),
+            .Paint = New SolidColorPaint(SKColors.Black)
+        }
+
+        InitializeLiveChartXAxes(10)
+
+        CartesianChart_MainLiveGraph.YAxes = New ICartesianAxis() {
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Differential Pressure (kPa)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Blue),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Blue),
+                .TicksPaint = New SolidColorPaint(SKColors.Blue),
+                .SubticksPaint = New SolidColorPaint(SKColors.Blue),
+                .DrawTicksPath = True
+            },
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Flowrate (l/Min)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.DarkMagenta),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                .TicksPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                .SubticksPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                .DrawTicksPath = True,
+                .ShowSeparatorLines = False,
+                .Position = LiveChartsCore.Measure.AxisPosition.End
+            }
+        }
+
+        CartesianChart_MainLiveGraph.Series = New ISeries() {
+            New LineSeries(Of Double)() With {
+                .Name = "1",
+                .Values = LiveChartDPValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Blue,
+                    .StrokeThickness = 2
+                },
+                .GeometrySize = 0,
+                .ScalesYAt = 0
+            },
+            New LineSeries(Of Double)() With {
+                .Name = "2",
+                .Values = LiveChartFLWRValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.DarkMagenta,
+                    .StrokeThickness = 2
+                },
+                .GeometrySize = 0,
+                .ScalesYAt = 1
+            }
+        }
+    End Sub
 
 
 
@@ -768,19 +867,17 @@ Public Class FormMain
         If tabctrl_MainCtrl.SelectedTab Is tabpg_ManualCtrl Then
             ' Focus First Tab Page
             tabctrl_SubManualCtrl.SelectedTab = tabpg_ManualControlValve
-
-
         End If
         If tabctrl_MainCtrl.SelectedTab Is tabpg_Alarm Then
-                ' Focus First Tab Page
-                tabctrl_SubAlarm.SelectedTab = tabpg_AlarmCurrent
-                LoadCurrentalarmtable()
-                ' Initialize Current Alarm
+            ' Focus First Tab Page
+            tabctrl_SubAlarm.SelectedTab = tabpg_AlarmCurrent
+            LoadCurrentalarmtable()
+            ' Initialize Current Alarm
 
 
-                ' Load Alarm History
-                Dim t2 As Task = LoadAlarm()
-            End If
+            ' Load Alarm History
+            Dim t2 As Task = LoadAlarm()
+        End If
 
 
     End Sub
@@ -797,13 +894,13 @@ Public Class FormMain
 #Region "Main"
     ' Perform Action According To TabSelected
     Private Sub tabctrl_SubMain_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_SubMain.SelectedIndexChanged
-        If tabctrl_SubMain.SelectedTab Is tabpg_MainLiveGraph Then
-            dsp_GraphSelection.Visible = True
-            cmbx_GraphSelection.Visible = True
-        Else
-            dsp_GraphSelection.Visible = False
-            cmbx_GraphSelection.Visible = False
-        End If
+        'If tabctrl_SubMain.SelectedTab Is tabpg_MainLiveGraph Then
+        '    dsp_GraphSelection.Visible = True
+        '    cmbx_GraphSelection.Visible = True
+        'Else
+        '    dsp_GraphSelection.Visible = False
+        '    cmbx_GraphSelection.Visible = False
+        'End If
 
         If tabctrl_SubMain.SelectedIndex = 1 Then
 
@@ -2508,9 +2605,8 @@ Public Class FormMain
 
                             OnContinue = False
                         End If
-
                     Else
-                            MainMessage(7, $" {dtlot.Rows(0)("work_order")}, {dtlot.Rows(0)("part_id")}, {dtlot.Rows(0)("confirmation_id")} ")
+                        MainMessage(7, $" {dtlot.Rows(0)("work_order")}, {dtlot.Rows(0)("part_id")}, {dtlot.Rows(0)("confirmation_id")} ")
                         OnContinue = False
                     End If
 
@@ -2644,7 +2740,7 @@ Public Class FormMain
     End Sub
 
     Private Sub cmbx_RecipeType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RecipeType.SelectedIndexChanged
-        LoadRecipeIDcombo()
+        LoadRecipeIDCombo()
     End Sub
 
     Private Sub cmbx_RecipeID_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RecipeID.SelectedIndexChanged
@@ -3007,12 +3103,32 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             result_finaltemperature = 0.0
             result_finalflowrate = 0.0
 
+            ' Clear Live Graph Value
+            LiveChartDPValue.Clear()
+            LiveChartFLWRValue.Clear()
 
+            ' Set Live Graph Cycle Time
+            InitializeLiveChartXAxes(MainCycletime)
+
+            ' Set Live Graph Sections
+            If True Then
+                CartesianChart_MainLiveGraph.Sections = New RectangularSection() {
+                    New RectangularSection With {
+                        .Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
+                        .Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.Salmon,
+                            .StrokeThickness = 1,
+                            .PathEffect = New DashEffect(New Single() {6, 6})
+                        }
+                    }
+                }
+            End If
 
             lbl_EstCycleTime.Text = MainCycletime.ToString
-            Resultcapturetimer.Enabled = True
-            LiveGraph.LiveGraph.ChartPlottingTimer(True)
-        End If
+                Resultcapturetimer.Enabled = True
+                'LiveGraph.LiveGraph.ChartPlottingTimer(True)
+            End If
 
 
     End Sub
@@ -3353,8 +3469,8 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             For i As Integer = 0 To type.Rows.Count - 1
                 'If LoginUserCategoryName = "Production" Then
                 If type(i)("recipe_type") <> "Evaluation" And type(i)("recipe_type") <> "Engineering" Then
-                        TypecomboSource.Add(i + 1, type(i)("recipe_type"))
-                    End If
+                    TypecomboSource.Add(i + 1, type(i)("recipe_type"))
+                End If
                 'End If
                 If LoginUserCategoryName = "Technician" Then
                     If type(i)("recipe_type") <> "Engineering" And type(i)("recipe_type") <> "Production" Then

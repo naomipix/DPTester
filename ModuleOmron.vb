@@ -1844,6 +1844,9 @@ Module ModuleOmron
             newrw(5) = result_outletpressure
             newrw(6) = result_dp
             dtresult.Rows.Add(newrw)
+
+            LiveChartDPValue.Add(result_dp)
+            LiveChartFLWRValue.Add(result_flowrate)
         Else
             PCStatus(1)(10) = False
         End If
@@ -1864,7 +1867,7 @@ Module ModuleOmron
 
     Public Sub Calculatefinalresult()
         Resultcapturetimer.Enabled = False
-        LiveGraph.LiveGraph.ChartPlottingTimer(False)
+        'LiveGraph.LiveGraph.ChartPlottingTimer(False)
         Dim A As Double = 0.01257187
         Dim B As Double = -0.005806436
         Dim C As Double = 0.001130911
