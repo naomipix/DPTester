@@ -10,6 +10,7 @@ Imports LiveChartsCore.SkiaSharpView.Painting
 Imports LiveChartsCore.SkiaSharpView.VisualElements
 Imports SkiaSharp
 Imports PoohPlcLink
+Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 
 Module FormMainModule
     Public Workorder As String
@@ -3108,11 +3109,31 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             result_finaltemperature = 0.0
             result_finalflowrate = 0.0
 
+            ' Clear Live Graph Value
+            LiveChartDPValue.Clear()
+            LiveChartFLWRValue.Clear()
 
+            ' Set Live Graph Cycle Time
+            InitializeLiveChartXAxes(MainCycletime)
+
+            ' Set Live Graph Sections
+            If True Then
+                CartesianChart_MainLiveGraph.Sections = New RectangularSection() {
+                    New RectangularSection With {
+                        .Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
+                        .Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.Salmon,
+                            .StrokeThickness = 1,
+                            .PathEffect = New DashEffect(New Single() {6, 6})
+                        }
+                    }
+                }
+            End If
 
             lbl_EstCycleTime.Text = MainCycletime.ToString
             Resultcapturetimer.Enabled = True
-            LiveGraph.LiveGraph.ChartPlottingTimer(True)
+            'LiveGraph.LiveGraph.ChartPlottingTimer(True)
         End If
 
 
