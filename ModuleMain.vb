@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Collections.ObjectModel
+Imports System.Data.SqlClient
 Imports System.Globalization
 Imports System.IO
 Imports System.Net.NetworkInformation
@@ -212,6 +213,8 @@ Module PublicVariables
 
     ' Main Form
     Public IsExitPromptShown As Boolean = False
+    Public LiveChartDPValue = New ObservableCollection(Of Double)({})
+    Public LiveChartFLWRValue = New ObservableCollection(Of Double)({})
 End Module
 
 ' DataGridView DoubleBuffering Module
@@ -1418,12 +1421,12 @@ Namespace LiveGraph
                 dtScaledResult = FormMainModule.dtresult.Clone
 
                 ' Assign ChartValueMember
-                chartLiveGraph.Series(0).XValueMember = "Sampling Time (s)" '"second"
+                'chartLiveGraph.Series(0).XValueMember = "Sampling Time (s)" '"second"
 
                 ' Start Timer
                 With graphPlottingTimer
                     .Interval = 1000
-                    .Enabled = timerEnable
+                    '.Enabled = timerEnable
                 End With
             Else
                 graphPlottingTimer.Enabled = False
