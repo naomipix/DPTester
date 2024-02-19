@@ -7,6 +7,7 @@ Imports System.Diagnostics.Eventing.Reader
 Imports System.Security.Cryptography
 Imports Microsoft.VisualBasic.ApplicationServices
 Imports DocumentFormat.OpenXml.Drawing
+Imports LiveChartsCore.Defaults
 
 Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
@@ -62,6 +63,12 @@ Module ModuleOmron
     Public result_avgflowrate2 As Decimal
     Public result_finaltemperature As Decimal
     Public result_finalflowrate As Decimal
+
+    Public result_backpressure As Decimal
+    Public result_avgbackpressure1 As Decimal
+    Public result_avgbackpressure2 As Decimal
+    Public result_finalbackpressure As Decimal
+
     Public dtrecipetable As DataTable
     Public MainDptest1start As Integer
     Public MainDptest1end As Integer
@@ -1341,27 +1348,26 @@ Module ModuleOmron
 
 
             If FormCalibration.btn_Calibrate.Enabled = True Or FormCalibration.btn_Verify.Enabled = True Then
-                    PCStatus(1)(8) = False
-                    PCStatus(1)(6) = False
-                End If
-
-                If PLCstatus(1)(2) = True Or PLCstatus(1)(3) = True Then
-                    FormCalibration.btn_Home.Enabled = False
-                Else
-                    FormCalibration.btn_Home.Enabled = True
-                End If
+                PCStatus(1)(8) = False
+                PCStatus(1)(6) = False
+            End If
+            If PLCstatus(1)(2) = True Or PLCstatus(1)(3) = True Then
+                FormCalibration.btn_Home.Enabled = False
+            Else
+                FormCalibration.btn_Home.Enabled = True
+            End If
 
 #End Region
 #Region "Main Sequence"
-                If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
-                    PCStatus(1)(10) = False
-                    FormMain.btn_OprKeyInDtConfirm.Enabled = False
-                    FormMain.txtbx_SerialNumber.Enabled = False
-                End If
-                If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
-                    FormMain.btn_OprKeyInDtConfirm.Enabled = True
-                    FormMain.txtbx_SerialNumber.Enabled = True
-                End If
+            If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
+                PCStatus(1)(10) = False
+                FormMain.btn_OprKeyInDtConfirm.Enabled = False
+                FormMain.txtbx_SerialNumber.Enabled = False
+            End If
+            If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
+                FormMain.btn_OprKeyInDtConfirm.Enabled = True
+                FormMain.txtbx_SerialNumber.Enabled = True
+            End If
 
 
             If PLCstatus(0)(1) = False Then
@@ -1371,44 +1377,44 @@ Module ModuleOmron
                 PCStatus(1)(14) = False
             End If
             If FINSinput(20) <> Main_MessageNo Then
-                    Main_MessageNo = FINSinput(20)
-                    MainMessage(Main_MessageNo)
-                End If
+                Main_MessageNo = FINSinput(20)
+                MainMessage(Main_MessageNo)
+            End If
 
             If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Or FINSinput(20) = 1700 Then
                 MainrecordValue = True
             Else
                 MainrecordValue = False
-                End If
-                FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
-                FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
+            End If
+            FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
+            FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
 
 
 #End Region
 #Region "Tool Counter"
-                FormSetting.lblArray = {
+            FormSetting.lblArray = {
             FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
-            FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
+FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
 }
-                For i As Integer = 0 To FormSetting.lblArray.Length - 1
-                    FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
+            For i As Integer = 0 To FormSetting.lblArray.Length - 1
+                FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
+            Next
+            FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
+            FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
+            If FINSOutput(10) > 0 Then
+                For i As Integer = 0 To 15
+                    If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
+                        ToolCounterreset(0)(i) = False
+                    End If
                 Next
-                FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
-                FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
-                If FINSOutput(10) > 0 Then
-                    For i As Integer = 0 To 15
-                        If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
-                            ToolCounterreset(0)(i) = False
-                        End If
-                    Next
-                End If
-                If FINSOutput(11) > 0 Then
-                    For i As Integer = 0 To 15
-                        If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
-                            ToolCounterreset(1)(i) = False
-                        End If
-                    Next
-                End If
+            End If
+            If FINSOutput(11) > 0 Then
+                For i As Integer = 0 To 15
+                    If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
+                        ToolCounterreset(1)(i) = False
+                    End If
+                Next
+            End If
 
 
 
@@ -1416,10 +1422,10 @@ Module ModuleOmron
 
 
 #End Region
-                Put_PCManualctrl()
-                FINSWrite(0, 200)
-                LabelStatusupdate()
-            Else
+            Put_PCManualctrl()
+            FINSWrite(0, 200)
+            LabelStatusupdate()
+        Else
             FormCalibration.tmr_Calibration.Enabled = False
             FormCalibration.tmr_Verification.Enabled = False
             Resultcapturetimer.Enabled = False
@@ -1839,6 +1845,7 @@ Module ModuleOmron
             result_flowrate = AIn(12)
             result_temperature = AIn(13)
             result_dp = result_inletpressure - result_outletpressure
+            result_backpressure = AIn(1)
             newrw(0) = serialusageid
             newrw(1) = result_samplingtime
             newrw(2) = result_temperature
@@ -1846,10 +1853,24 @@ Module ModuleOmron
             newrw(4) = result_inletpressure
             newrw(5) = result_outletpressure
             newrw(6) = result_dp
+            newrw(7) = result_backpressure
             dtresult.Rows.Add(newrw)
 
-            LiveChartDPValue.Add(result_dp)
-            LiveChartFLWRValue.Add(result_flowrate)
+            'LiveChartDPValue.Add(result_dp)
+            'LiveChartFLWRValue.Add(result_flowrate)
+
+            LiveChartDPValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_dp
+            })
+            LiveChartFLWRValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_flowrate
+            })
+            LiveChartBPValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_backpressure
+            })
         Else
             PCStatus(1)(10) = False
         End If
@@ -1883,11 +1904,13 @@ Module ModuleOmron
                 result_avgoutlet1 = result_avgoutlet1 + dtresult.Rows(i)("Outlet Pressure (kPa)")
                 result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (°C)")
+                result_avgbackpressure1 = result_avgbackpressure1 + dtresult.Rows(i)("Back Pressure (kPa)")
             Next
             result_avginlet1 = result_avginlet1 / MainDptestpoints
             result_avgoutlet1 = result_avgoutlet1 / MainDptestpoints
             result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
             result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
+            result_avgbackpressure1 = result_avgbackpressure1 / MainDptestpoints
             result_avgdp1 = result_avginlet1 - result_avgoutlet1
 
             For i = MainDptest2start To MainDptest2end - 1
@@ -1895,11 +1918,13 @@ Module ModuleOmron
                 result_avgoutlet2 = result_avgoutlet2 + dtresult.Rows(i)("Outlet Pressure (kPa)")
                 result_avgflowrate2 = result_avgflowrate2 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature2 = result_avgtemperature2 + dtresult.Rows(i)("Temperature (°C)")
+                result_avgbackpressure2 = result_avgbackpressure2 + dtresult.Rows(i)("Back Pressure (kPa)")
             Next
             result_avginlet2 = result_avginlet2 / MainDptestpoints
             result_avgoutlet2 = result_avgoutlet2 / MainDptestpoints
             result_avgflowrate2 = result_avgflowrate2 / MainDptestpoints
             result_avgtemperature2 = result_avgtemperature2 / MainDptestpoints
+            result_avgbackpressure2 = result_avgbackpressure2 / MainDptestpoints
             result_avgdp2 = result_avginlet2 - result_avgoutlet2
 
 
@@ -1908,6 +1933,8 @@ Module ModuleOmron
 
             result_finalflowrate = ((result_avgflowrate1 + result_avgflowrate2) / 2)
             result_finaltemperature = (((result_avgtemperature1 + result_avgtemperature2) / 2) + 273.15)
+
+            result_finalbackpressure = ((result_avgbackpressure1 + result_avgbackpressure2) / 2)
 
             T2 = result_finaltemperature * result_finaltemperature
             exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
@@ -1922,6 +1949,7 @@ Module ModuleOmron
                 result_avgoutlet1 = result_avgoutlet1 + dtresult.Rows(i)("Outlet Pressure (kPa)")
                 result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (°C)")
+                result_avgbackpressure1 = result_avgbackpressure1 + dtresult.Rows(i)("Back Pressure (kPa)")
             Next
 
             result_avginlet1 = result_avginlet1 / MainDptestpoints
@@ -1929,12 +1957,15 @@ Module ModuleOmron
             result_avgdp1 = result_avginlet1 - result_avgoutlet1
             result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
             result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
+            result_avgbackpressure1 = result_avgbackpressure1 / MainDptestpoints
 
             result_finalinlet = result_avginlet1
             result_finaloutlet = result_avgoutlet1
 
             result_finalflowrate = result_avgflowrate1
             result_finaltemperature = (result_avgtemperature1 + 273.15)
+
+            result_finalbackpressure = result_avgbackpressure1
 
             T2 = result_finaltemperature * result_finaltemperature
             exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
@@ -1947,6 +1978,7 @@ Module ModuleOmron
         FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature - 273.15, 3), String)
         FormMain.lbl_ProductInlet.Text = CType(Math.Round(result_finalinlet, 3), String)
         FormMain.lbl_ProductOutlet.Text = CType(Math.Round(result_finaloutlet, 3), String)
+        FormMain.lbl_ProductBackpress.Text = CType(Math.Round(result_finalbackpressure, 3), String)
 
 
 
@@ -2000,7 +2032,8 @@ Module ModuleOmron
                         {"flowrate", dtresult.Rows(i)("Flowrate (l/min)")},
                         {"inlet_pressure", dtresult.Rows(i)("Inlet Pressure (kPa)")},
                         {"outlet_pressure", dtresult.Rows(i)("Outlet Pressure (kPa)")},
-                        {"calculated_dp_pressure", dtresult.Rows(i)("Differential Pressure (kPa)")}
+                        {"calculated_dp_pressure", dtresult.Rows(i)("Differential Pressure (kPa)")},
+                        {"back_pressure", dtresult.Rows(i)("Back Pressure (kPa)")}
                     }
                     SQL.InsertRecord("ProductResult", resultparameter)
                 Next
@@ -2020,6 +2053,7 @@ Module ModuleOmron
                             {"outlet_pressure", Math.Round(result_finaloutlet, 1)},
                             {"viscosity", Math.Round(Viscosity, 3)},
                             {"diff_pressure", Math.Round(result_finaldp, 1)},
+                            {"back_pressure", Math.Round(result_finalbackpressure, 1)},
                             {"cycle_time", MainCycletime},
                             {"result", FormMain.lbl_DPTestResult.Text.ToLower}
                         }
@@ -2079,6 +2113,7 @@ Module ModuleOmron
             FormCalibration.dtCalibration.Columns.Add("Inlet Pressure (kPa)")
             FormCalibration.dtCalibration.Columns.Add("Outlet Pressure (kPa)")
             FormCalibration.dtCalibration.Columns.Add("Differential Pressure (kPa)")
+            FormCalibration.dtCalibration.Columns.Add("Back Pressure (kPa)")
         End If
 
         If str = "Verification" Then
@@ -2088,6 +2123,7 @@ Module ModuleOmron
             FormCalibration.dtVerification.Columns.Add("Inlet Pressure (kPa)")
             FormCalibration.dtVerification.Columns.Add("Outlet Pressure (kPa)")
             FormCalibration.dtVerification.Columns.Add("Differential Pressure (kPa)")
+            FormCalibration.dtVerification.Columns.Add("Back Pressure (kPa)")
         End If
 
         If str = "Production_Result" Then
@@ -2099,6 +2135,7 @@ Module ModuleOmron
             dtresult.Columns.Add("Inlet Pressure (kPa)")
             dtresult.Columns.Add("Outlet Pressure (kPa)")
             dtresult.Columns.Add("Differential Pressure (kPa)")
+            dtresult.Columns.Add("Back Pressure (kPa)")
         End If
     End Sub
 

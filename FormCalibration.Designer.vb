@@ -105,6 +105,10 @@ Partial Class FormCalibration
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tmr_Calibration = New System.Windows.Forms.Timer(Me.components)
         Me.tmr_Verification = New System.Windows.Forms.Timer(Me.components)
+        Me.dsp_CalBackpress = New System.Windows.Forms.Label()
+        Me.txtbx_CalBackpress = New System.Windows.Forms.TextBox()
+        Me.dsp_VerBackpress = New System.Windows.Forms.Label()
+        Me.txtbx_VerBackpress = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -236,6 +240,7 @@ Partial Class FormCalibration
         Me.panel_FormControl.Controls.Add(Me.lbl_DateTimeClock)
         Me.panel_FormControl.Controls.Add(Me.lbl_Title)
         Me.panel_FormControl.Controls.Add(Me.lbl_OperationMode)
+        Me.panel_FormControl.Controls.Add(Me.Panel_Calibration_Circuit)
         Me.panel_FormControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.panel_FormControl.Location = New System.Drawing.Point(0, 0)
         Me.panel_FormControl.Name = "panel_FormControl"
@@ -617,6 +622,10 @@ Partial Class FormCalibration
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.dsp_VerBackpress)
+        Me.Panel3.Controls.Add(Me.txtbx_VerBackpress)
+        Me.Panel3.Controls.Add(Me.dsp_CalBackpress)
+        Me.Panel3.Controls.Add(Me.txtbx_CalBackpress)
         Me.Panel3.Controls.Add(Me.dsp_Vertemperature)
         Me.Panel3.Controls.Add(Me.txtbx_VerTemperature)
         Me.Panel3.Controls.Add(Me.dsp_Verflowrate)
@@ -646,7 +655,6 @@ Partial Class FormCalibration
         Me.Panel3.Controls.Add(Me.txtbx_CalInletPressure)
         Me.Panel3.Controls.Add(Me.dsp_VerStatus)
         Me.Panel3.Controls.Add(Me.lbl_CalibrationMsg)
-        Me.Panel3.Controls.Add(Me.Panel_Calibration_Circuit)
         Me.Panel3.Location = New System.Drawing.Point(566, 3)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1311, 802)
@@ -745,7 +753,7 @@ Partial Class FormCalibration
         Me.Label4.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label4.Location = New System.Drawing.Point(679, 180)
+        Me.Label4.Location = New System.Drawing.Point(679, 232)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(600, 30)
         Me.Label4.TabIndex = 84
@@ -757,7 +765,7 @@ Partial Class FormCalibration
         Me.Label2.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label2.Location = New System.Drawing.Point(50, 180)
+        Me.Label2.Location = New System.Drawing.Point(49, 232)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(600, 30)
         Me.Label2.TabIndex = 83
@@ -779,10 +787,10 @@ Partial Class FormCalibration
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgv_VerificationResult.ColumnHeadersHeight = 60
-        Me.dgv_VerificationResult.Location = New System.Drawing.Point(679, 215)
+        Me.dgv_VerificationResult.Location = New System.Drawing.Point(679, 265)
         Me.dgv_VerificationResult.Name = "dgv_VerificationResult"
         Me.dgv_VerificationResult.ReadOnly = True
-        Me.dgv_VerificationResult.Size = New System.Drawing.Size(600, 560)
+        Me.dgv_VerificationResult.Size = New System.Drawing.Size(600, 510)
         Me.dgv_VerificationResult.TabIndex = 82
         '
         'dgv_CalibrationResult
@@ -800,10 +808,10 @@ Partial Class FormCalibration
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv_CalibrationResult.ColumnHeadersHeight = 60
-        Me.dgv_CalibrationResult.Location = New System.Drawing.Point(49, 215)
+        Me.dgv_CalibrationResult.Location = New System.Drawing.Point(49, 265)
         Me.dgv_CalibrationResult.Name = "dgv_CalibrationResult"
         Me.dgv_CalibrationResult.ReadOnly = True
-        Me.dgv_CalibrationResult.Size = New System.Drawing.Size(600, 560)
+        Me.dgv_CalibrationResult.Size = New System.Drawing.Size(600, 510)
         Me.dgv_CalibrationResult.TabIndex = 81
         '
         'txtbx_CalResult
@@ -996,11 +1004,10 @@ Partial Class FormCalibration
         Me.Panel_Calibration_Circuit.AutoSize = True
         Me.Panel_Calibration_Circuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.Panel_Calibration_Circuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel_Calibration_Circuit.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel_Calibration_Circuit.Location = New System.Drawing.Point(0, 0)
+        Me.Panel_Calibration_Circuit.Location = New System.Drawing.Point(640, 155)
         Me.Panel_Calibration_Circuit.Margin = New System.Windows.Forms.Padding(0)
         Me.Panel_Calibration_Circuit.Name = "Panel_Calibration_Circuit"
-        Me.Panel_Calibration_Circuit.Size = New System.Drawing.Size(1309, 800)
+        Me.Panel_Calibration_Circuit.Size = New System.Drawing.Size(2, 2)
         Me.Panel_Calibration_Circuit.TabIndex = 85
         '
         'dsp_Home
@@ -1042,6 +1049,50 @@ Partial Class FormCalibration
         'tmr_Verification
         '
         '
+        'dsp_CalBackpress
+        '
+        Me.dsp_CalBackpress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_CalBackpress.Location = New System.Drawing.Point(58, 180)
+        Me.dsp_CalBackpress.Name = "dsp_CalBackpress"
+        Me.dsp_CalBackpress.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_CalBackpress.TabIndex = 93
+        Me.dsp_CalBackpress.Text = "Calibration Back Pressure (kPa) :"
+        Me.dsp_CalBackpress.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_CalBackpress
+        '
+        Me.txtbx_CalBackpress.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_CalBackpress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_CalBackpress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_CalBackpress.Location = New System.Drawing.Point(228, 185)
+        Me.txtbx_CalBackpress.Name = "txtbx_CalBackpress"
+        Me.txtbx_CalBackpress.ReadOnly = True
+        Me.txtbx_CalBackpress.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_CalBackpress.TabIndex = 94
+        Me.txtbx_CalBackpress.TabStop = False
+        '
+        'dsp_VerBackpress
+        '
+        Me.dsp_VerBackpress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_VerBackpress.Location = New System.Drawing.Point(661, 180)
+        Me.dsp_VerBackpress.Name = "dsp_VerBackpress"
+        Me.dsp_VerBackpress.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_VerBackpress.TabIndex = 95
+        Me.dsp_VerBackpress.Text = "Verification Back Pressure (kPa) :"
+        Me.dsp_VerBackpress.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_VerBackpress
+        '
+        Me.txtbx_VerBackpress.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_VerBackpress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_VerBackpress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_VerBackpress.Location = New System.Drawing.Point(831, 185)
+        Me.txtbx_VerBackpress.Name = "txtbx_VerBackpress"
+        Me.txtbx_VerBackpress.ReadOnly = True
+        Me.txtbx_VerBackpress.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_VerBackpress.TabIndex = 96
+        Me.txtbx_VerBackpress.TabStop = False
+        '
         'FormCalibration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1061,6 +1112,7 @@ Partial Class FormCalibration
         Me.panel_UserCategory.ResumeLayout(False)
         Me.panel_UserCategory.PerformLayout()
         Me.panel_FormControl.ResumeLayout(False)
+        Me.panel_FormControl.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
@@ -1153,4 +1205,8 @@ Partial Class FormCalibration
     Friend WithEvents txtbx_CalTemperature As TextBox
     Friend WithEvents dsp_Calflowrate As Label
     Friend WithEvents txtbx_CalFlowrate As TextBox
+    Friend WithEvents dsp_CalBackpress As Label
+    Friend WithEvents txtbx_CalBackpress As TextBox
+    Friend WithEvents dsp_VerBackpress As Label
+    Friend WithEvents txtbx_VerBackpress As TextBox
 End Class

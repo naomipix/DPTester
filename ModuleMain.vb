@@ -8,6 +8,7 @@ Imports System.Security.Cryptography
 Imports System.Text
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Xml.Schema
+Imports LiveChartsCore.Defaults
 
 Module PublicVariables
     ' Version
@@ -213,8 +214,9 @@ Module PublicVariables
 
     ' Main Form
     Public IsExitPromptShown As Boolean = False
-    Public LiveChartDPValue = New ObservableCollection(Of Double)({})
-    Public LiveChartFLWRValue = New ObservableCollection(Of Double)({})
+    Public LiveChartDPValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartBPValue = New ObservableCollection(Of ObservablePoint)({})
 End Module
 
 ' DataGridView DoubleBuffering Module

@@ -1,7 +1,21 @@
-﻿Imports System.Media
+﻿Imports System.Collections.ObjectModel
+Imports System.Media
 Imports System.Windows.Forms.DataVisualization.Charting
+Imports LiveChartsCore
+Imports LiveChartsCore.Defaults
+Imports LiveChartsCore.Kernel.Sketches
+Imports LiveChartsCore.SkiaSharpView
+Imports LiveChartsCore.SkiaSharpView.Painting
+Imports LiveChartsCore.SkiaSharpView.VisualElements
+Imports SkiaSharp
 
 Public Class FormResultGraph
+    Dim ResultChartDPValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartInletValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartOutletValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartBPValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartTempValue = New ObservableCollection(Of ObservablePoint)({})
 
 
 #Region "Form Loading"
@@ -21,7 +35,7 @@ Public Class FormResultGraph
         lbl_Category.Text = PublicVariables.LoginUserCategoryName
 
         ' Initialize Defaults
-
+        InitializeResultChart()
 
         txtbx_GraphTimestamp.Text = Nothing
         txtbx_GraphWorkOrder.Text = Nothing
@@ -74,6 +88,169 @@ Public Class FormResultGraph
         ' Display Form Control
         panel_FormControl.Visible = True
 
+    End Sub
+
+    Private Sub InitializeResultChartXAxes()
+        CartesianChart_ResultGraph.XAxes = New ICartesianAxis() {
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Sampling Time (s)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Black),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(0, 20, 0, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                .TicksPaint = New SolidColorPaint(SKColors.Black),
+                .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                .DrawTicksPath = True,
+                .MinLimit = 0
+            }
+        }
+    End Sub
+
+    Private Sub InitializeResultChart()
+        CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
+        CartesianChart_ResultGraph.LegendPosition = LiveChartsCore.Measure.LegendPosition.Right
+        CartesianChart_ResultGraph.LegendTextSize = 12
+
+        CartesianChart_ResultGraph.Title = New LabelVisual() With {
+            .Text = "Result Graph",
+            .TextSize = 14,
+            .Padding = New LiveChartsCore.Drawing.Padding(15),
+            .Paint = New SolidColorPaint(SKColors.Black)
+        }
+
+        InitializeResultChartXAxes()
+
+        CartesianChart_ResultGraph.YAxes = New ICartesianAxis() {
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Pressure (kPa)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Black),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                .TicksPaint = New SolidColorPaint(SKColors.Black),
+                .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                .DrawTicksPath = True
+            },
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Temperature (C)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Red),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Red),
+                .TicksPaint = New SolidColorPaint(SKColors.Red),
+                .SubticksPaint = New SolidColorPaint(SKColors.Red),
+                .DrawTicksPath = True,
+                .ShowSeparatorLines = False,
+                .Position = LiveChartsCore.Measure.AxisPosition.End
+            },
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Flowrate (l/Min)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Brown),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Brown),
+                .TicksPaint = New SolidColorPaint(SKColors.Brown),
+                .SubticksPaint = New SolidColorPaint(SKColors.Brown),
+                .DrawTicksPath = True,
+                .ShowSeparatorLines = False,
+                .Position = LiveChartsCore.Measure.AxisPosition.End
+            }
+        }
+
+        CartesianChart_ResultGraph.Series = New ISeries() {
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Diff. Pressure",
+                .Values = ResultChartDPValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Blue,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Blue),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 6,
+                .ScalesYAt = 0,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Inlet Pressure",
+                .Values = ResultChartInletValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Green,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Green),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 6,
+                .ScalesYAt = 0,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Outlet Pressure",
+                .Values = ResultChartOutletValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Magenta,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Magenta),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 6,
+                .ScalesYAt = 0,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Back Pressure",
+                .Values = ResultChartBPValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.DarkOrange,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.DarkOrange),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 6,
+                .ScalesYAt = 0,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Flowrate",
+                .Values = ResultChartFLWRValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Brown,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Brown),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 6,
+                .ScalesYAt = 2,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Temperature",
+                .Values = ResultChartTempValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Red,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Red),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 6,
+                .ScalesYAt = 1,
+                .ScalesXAt = 0
+            }
+        }
     End Sub
 #End Region
 
@@ -163,8 +340,8 @@ Public Class FormResultGraph
                 ResultMessage(8)
             End If
             cmbx_GraphSearchSerial.Enabled = True
-            Else
-                cmbx_GraphSearchSerial.Enabled = False
+        Else
+            cmbx_GraphSearchSerial.Enabled = False
         End If
     End Sub
 
@@ -361,6 +538,14 @@ Public Class FormResultGraph
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
 
             End With
+
+            With CartesianChart_ResultGraph
+                .Series(0).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(0).IsVisible = False
+            End With
         End If
 
         If checkbx_GraphInletPressure.Checked = True Then
@@ -373,6 +558,14 @@ Public Class FormResultGraph
                 ' .IsValueShownAsLabel = True (To Show Data Points label with X and Y Coordinate)
                 '.LabelToolTip = "X= #VALX, Y= #VALY" (To Show X and Y value when clicking on the datapoint label)
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
+            End With
+
+            With CartesianChart_ResultGraph
+                .Series(1).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(1).IsVisible = False
             End With
         End If
 
@@ -387,6 +580,24 @@ Public Class FormResultGraph
                 '.LabelToolTip = "X= #VALX, Y= #VALY" (To Show X and Y value when clicking on the datapoint label)
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
             End With
+
+            With CartesianChart_ResultGraph
+                .Series(2).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(2).IsVisible = False
+            End With
+        End If
+
+        If checkbx_GraphBP.Checked = True Then
+            With CartesianChart_ResultGraph
+                .Series(3).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(3).IsVisible = False
+            End With
         End If
 
         If checkbx_GraphFlowrate.Checked = True Then
@@ -399,6 +610,14 @@ Public Class FormResultGraph
                 ' .IsValueShownAsLabel = True (To Show Data Points label with X and Y Coordinate)
                 '.LabelToolTip = "X= #VALX, Y= #VALY" (To Show X and Y value when clicking on the datapoint label)
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
+            End With
+
+            With CartesianChart_ResultGraph
+                .Series(4).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(4).IsVisible = False
             End With
         End If
 
@@ -413,11 +632,71 @@ Public Class FormResultGraph
                 '.LabelToolTip = "X= #VALX, Y= #VALY" (To Show X and Y value when clicking on the datapoint label)
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
             End With
+
+            With CartesianChart_ResultGraph
+                .Series(5).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(5).IsVisible = False
+            End With
         End If
 
 
     End Sub
 
+    Public Sub CreateResultGraphNew(dtResult As DataTable)
+        ' Clear Result Graph Value
+        ResultChartDPValue.Clear()
+        ResultChartInletValue.Clear()
+        ResultChartOutletValue.Clear()
+        ResultChartBPValue.Clear()
+        ResultChartFLWRValue.Clear()
+        ResultChartTempValue.Clear()
+
+        ' Populate Result Graph Values
+        For i As Integer = 0 To dtResult.Rows.Count - 1
+            ResultChartDPValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("calculated_dp_pressure"))
+            })
+            ResultChartInletValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("inlet_pressure"))
+            })
+            ResultChartOutletValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("outlet_pressure"))
+            })
+            ResultChartBPValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(0)
+            })
+            ResultChartFLWRValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("flowrate"))
+            })
+            ResultChartTempValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("temperature"))
+            })
+        Next
+
+        ' Set Result Graph Sections
+        'If True Then
+        '    CartesianChart_ResultGraph.Sections = New RectangularSection() {
+        '        New RectangularSection With {
+        '            .Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
+        '            .Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
+        '            .Stroke = New SolidColorPaint With {
+        '                .Color = SKColors.Salmon,
+        '                .StrokeThickness = 1,
+        '                .PathEffect = New DashEffect(New Single() {6, 6})
+        '            }
+        '        }
+        '    }
+        'End If
+    End Sub
 #End Region
 
 
@@ -528,7 +807,7 @@ Public Class FormResultGraph
 
 
 #Region "Checkbox checked"
-    Private Sub checkbx_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_GraphDP.CheckedChanged, checkbx_GraphInletPressure.CheckedChanged, checkbx_GraphOutletPressure.CheckedChanged, checkbx_GraphTemperature.CheckedChanged, checkbx_GraphFlowrate.CheckedChanged
+    Private Sub checkbx_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_GraphDP.CheckedChanged, checkbx_GraphInletPressure.CheckedChanged, checkbx_GraphOutletPressure.CheckedChanged, checkbx_GraphTemperature.CheckedChanged, checkbx_GraphFlowrate.CheckedChanged, checkbx_GraphBP.CheckedChanged
         CreateResultGraph()
     End Sub
 
@@ -553,6 +832,7 @@ Public Class FormResultGraph
                 checkbx_GraphDP.Checked = True
                 checkbx_GraphInletPressure.Checked = True
                 checkbx_GraphOutletPressure.Checked = True
+                checkbx_GraphBP.Checked = True
 
                 For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
                     If Not dtproductiondetail.Rows(0).IsNull(i) Then
@@ -568,6 +848,7 @@ Public Class FormResultGraph
 
                 If dt_Graphsummary.Rows.Count > 0 Then
                     CreateResultGraph()
+                    CreateResultGraphNew(dt_Graphsummary)
 
 
 
@@ -579,6 +860,7 @@ Public Class FormResultGraph
                     checkbx_GraphDP.Checked = False
                     checkbx_GraphInletPressure.Checked = False
                     checkbx_GraphOutletPressure.Checked = False
+                    checkbx_GraphBP.Checked = False
                     ResultMessage(6)
                     Oncontinue = False
                 End If

@@ -100,6 +100,7 @@ Partial Class FormMain
         Me.tabctrl_SubMain = New System.Windows.Forms.TabControl()
         Me.tabpg_MainLiveGraph = New System.Windows.Forms.TabPage()
         Me.btn_Debug1 = New System.Windows.Forms.Button()
+        Me.CartesianChart_MainLiveGraph = New LiveChartsCore.SkiaSharpView.WinForms.CartesianChart()
         Me.chart_MainLiveGraph = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.tabpg_MainOverview = New System.Windows.Forms.TabPage()
         Me.Panel_Overview = New System.Windows.Forms.Panel()
@@ -457,7 +458,7 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
-        Me.CartesianChart_MainLiveGraph = New LiveChartsCore.SkiaSharpView.WinForms.CartesianChart()
+        Me.lbl_ProductBackpress = New System.Windows.Forms.Label()
         Me.panel_FormControl.SuspendLayout()
         Me.Panel12.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -931,6 +932,15 @@ Partial Class FormMain
         Me.btn_Debug1.Text = "Test Plot"
         Me.btn_Debug1.UseVisualStyleBackColor = True
         Me.btn_Debug1.Visible = False
+        '
+        'CartesianChart_MainLiveGraph
+        '
+        Me.CartesianChart_MainLiveGraph.BackColor = System.Drawing.Color.AliceBlue
+        Me.CartesianChart_MainLiveGraph.Location = New System.Drawing.Point(0, 0)
+        Me.CartesianChart_MainLiveGraph.Margin = New System.Windows.Forms.Padding(4)
+        Me.CartesianChart_MainLiveGraph.Name = "CartesianChart_MainLiveGraph"
+        Me.CartesianChart_MainLiveGraph.Size = New System.Drawing.Size(929, 528)
+        Me.CartesianChart_MainLiveGraph.TabIndex = 11
         '
         'chart_MainLiveGraph
         '
@@ -1663,6 +1673,7 @@ Partial Class FormMain
         'panel_DPTestResult
         '
         Me.panel_DPTestResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_DPTestResult.Controls.Add(Me.lbl_ProductBackpress)
         Me.panel_DPTestResult.Controls.Add(Me.lbl_ProductOutlet)
         Me.panel_DPTestResult.Controls.Add(Me.dsp_ProductOutlet)
         Me.panel_DPTestResult.Controls.Add(Me.lbl_ProductInlet)
@@ -5221,14 +5232,17 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'CartesianChart_MainLiveGraph
+        'lbl_ProductBackpress
         '
-        Me.CartesianChart_MainLiveGraph.BackColor = System.Drawing.Color.AliceBlue
-        Me.CartesianChart_MainLiveGraph.Location = New System.Drawing.Point(0, 0)
-        Me.CartesianChart_MainLiveGraph.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.CartesianChart_MainLiveGraph.Name = "CartesianChart_MainLiveGraph"
-        Me.CartesianChart_MainLiveGraph.Size = New System.Drawing.Size(929, 528)
-        Me.CartesianChart_MainLiveGraph.TabIndex = 11
+        Me.lbl_ProductBackpress.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.lbl_ProductBackpress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_ProductBackpress.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_ProductBackpress.Location = New System.Drawing.Point(16, 125)
+        Me.lbl_ProductBackpress.Name = "lbl_ProductBackpress"
+        Me.lbl_ProductBackpress.Size = New System.Drawing.Size(90, 40)
+        Me.lbl_ProductBackpress.TabIndex = 25
+        Me.lbl_ProductBackpress.Text = "-"
+        Me.lbl_ProductBackpress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FormMain
         '
@@ -5727,4 +5741,5 @@ Partial Class FormMain
     Friend WithEvents lbl_ProductInlet As Label
     Friend WithEvents dsp_ProductInlet As Label
     Friend WithEvents CartesianChart_MainLiveGraph As LiveChartsCore.SkiaSharpView.WinForms.CartesianChart
+    Friend WithEvents lbl_ProductBackpress As Label
 End Class

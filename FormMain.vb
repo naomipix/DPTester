@@ -11,6 +11,7 @@ Imports LiveChartsCore.SkiaSharpView.VisualElements
 Imports SkiaSharp
 Imports PoohPlcLink
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
+Imports LiveChartsCore.Defaults
 
 Module FormMainModule
     Public Workorder As String
@@ -390,6 +391,7 @@ Public Class FormMain
         lbl_ProductFlowrate.Text = Nothing
         lbl_ProductInlet.Text = Nothing
         lbl_ProductOutlet.Text = Nothing
+        lbl_ProductBackpress.Text = Nothing
         lbl_ProductTemperature.Text = Nothing
         lbl_DPTestResult.Text = Nothing
 
@@ -468,13 +470,13 @@ Public Class FormMain
         InitializeComponent()
     End Sub
 
-    Private Sub InitializeLiveChartXAxes(XLimit As Integer, XScaleMSec As Integer)
-        Dim XScaleSec As Double = XScaleMSec / 1000
-        Dim XLabelArr(XLimit / XScaleSec) As String
+    Private Sub InitializeLiveChartXAxes(XLimit As Integer) '(XLimit As Integer, XScaleMSec As Integer)
+        'Dim XScaleSec As Double = XScaleMSec / 1000
+        'Dim XLabelArr(XLimit / XScaleSec) As String
 
-        For i As Integer = 0 To XLimit / XScaleSec
-            XLabelArr(i) = i * XScaleSec
-        Next
+        'For i As Integer = 0 To XLimit / XScaleSec
+        '    XLabelArr(i) = i * XScaleSec
+        'Next
 
         CartesianChart_MainLiveGraph.XAxes = New ICartesianAxis() {
             New LiveChartsCore.SkiaSharpView.Axis() With {
@@ -489,11 +491,11 @@ Public Class FormMain
                 .SubticksPaint = New SolidColorPaint(SKColors.Black),
                 .DrawTicksPath = True,
                 .MinStep = 1,
-                .MaxLimit = XLimit,
-                .MinLimit = 0,
-                .Labels = XLabelArr
+                .MinLimit = 0
             }
         }
+
+        ' .MaxLimit = XLimit,
     End Sub
 
     Private Sub InitializeLiveChart()
@@ -506,7 +508,7 @@ Public Class FormMain
             .Paint = New SolidColorPaint(SKColors.Black)
         }
 
-        InitializeLiveChartXAxes(10, 1000)
+        InitializeLiveChartXAxes(10)
 
         CartesianChart_MainLiveGraph.YAxes = New ICartesianAxis() {
             New LiveChartsCore.SkiaSharpView.Axis() With {
@@ -538,7 +540,7 @@ Public Class FormMain
         }
 
         CartesianChart_MainLiveGraph.Series = New ISeries() {
-            New LineSeries(Of Double)() With {
+            New LineSeries(Of ObservablePoint)() With {
                 .Name = "1",
                 .Values = LiveChartDPValue,
                 .Fill = Nothing,
@@ -549,8 +551,19 @@ Public Class FormMain
                 .GeometrySize = 0,
                 .ScalesYAt = 0
             },
-            New LineSeries(Of Double)() With {
+            New LineSeries(Of ObservablePoint)() With {
                 .Name = "2",
+                .Values = LiveChartBPValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Black,
+                    .StrokeThickness = 2
+                },
+                .GeometrySize = 0,
+                .ScalesYAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "3",
                 .Values = LiveChartFLWRValue,
                 .Fill = Nothing,
                 .Stroke = New SolidColorPaint With {
@@ -904,13 +917,13 @@ Public Class FormMain
 #Region "Main"
     ' Perform Action According To TabSelected
     Private Sub tabctrl_SubMain_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_SubMain.SelectedIndexChanged
-        If tabctrl_SubMain.SelectedTab Is tabpg_MainLiveGraph Then
-            dsp_GraphSelection.Visible = True
-            cmbx_GraphSelection.Visible = True
-        Else
-            dsp_GraphSelection.Visible = False
-            cmbx_GraphSelection.Visible = False
-        End If
+        'If tabctrl_SubMain.SelectedTab Is tabpg_MainLiveGraph Then
+        '    dsp_GraphSelection.Visible = True
+        '    cmbx_GraphSelection.Visible = True
+        'Else
+        '    dsp_GraphSelection.Visible = False
+        '    cmbx_GraphSelection.Visible = False
+        'End If
 
         If tabctrl_SubMain.SelectedIndex = 1 Then
 
@@ -1165,6 +1178,7 @@ Public Class FormMain
             ProductionDetail.viscosity, 
             ProductionDetail.inlet_pressure, 
             ProductionDetail.outlet_pressure, 
+            ProductionDetail.back_pressure, 
             ProductionDetail.cycle_time, 
             WorkOrder.work_order, 
             WorkOrder.part_id, 
@@ -1293,6 +1307,7 @@ Public Class FormMain
             .Columns("viscosity").HeaderCell.Value = "Viscosity (mPa.s)"
             .Columns("inlet_pressure").HeaderCell.Value = "Inlet Pressure (kPa)"
             .Columns("outlet_pressure").HeaderCell.Value = "Outlet Pressure (kPa)"
+            .Columns("back_pressure").HeaderCell.Value = "Back Pressure (kPa)"
             .Columns("cycle_time").HeaderCell.Value = "Cycle Time (s)"
             .Columns("work_order").HeaderCell.Value = "Work Order Number"
             .Columns("part_id").HeaderCell.Value = "Part ID"
@@ -1316,6 +1331,7 @@ Public Class FormMain
             .Columns("viscosity").Width = 90
             .Columns("inlet_pressure").Width = 90
             .Columns("outlet_pressure").Width = 90
+            .Columns("back_pressure").Width = 90
             .Columns("cycle_time").Width = 90
             .Columns("work_order").Width = 90
             .Columns("part_id").Width = 145
@@ -1348,6 +1364,9 @@ Public Class FormMain
             End If
             If dgv.Rows(e.RowIndex).Cells("result").Value.ToString().ToUpper = CStr("Fail").ToUpper Then
                 dgv.Rows(e.RowIndex).Cells("result").Style.BackColor = Color.FromArgb(255, 192, 192)
+            End If
+            If dgv.Rows(e.RowIndex).Cells("result").Value.ToString().ToUpper = CStr("NA").ToUpper Then
+                dgv.Rows(e.RowIndex).Cells("result").Style.BackColor = SystemColors.Window
             End If
         Catch ex As Exception
 
@@ -2958,6 +2977,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             lbl_ProductFlowrate.Text = Nothing
             lbl_ProductInlet.Text = Nothing
             lbl_ProductOutlet.Text = Nothing
+            lbl_ProductBackpress.Text = Nothing
             lbl_ProductTemperature.Text = Nothing
 
             Dim Oncontinue As Boolean = True
@@ -3120,9 +3140,11 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             ' Clear Live Graph Value
             LiveChartDPValue.Clear()
             LiveChartFLWRValue.Clear()
+            LiveChartBPValue.Clear()
 
             ' Set Live Graph Cycle Time
-            InitializeLiveChartXAxes(MainCycletime, Resultcapturetimer.Interval)
+            'InitializeLiveChartXAxes(MainCycletime, Resultcapturetimer.Interval)
+            InitializeLiveChartXAxes(MainCycletime)
 
             ' Set Live Graph Sections
             If True Then
@@ -3377,6 +3399,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             lbl_ProductFlowrate.Text = Nothing
             lbl_ProductInlet.Text = Nothing
             lbl_ProductOutlet.Text = Nothing
+            lbl_ProductBackpress.Text = Nothing
             lbl_ProductTemperature.Text = Nothing
 
             lbl_DiffPressMin.Text = Nothing

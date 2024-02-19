@@ -56,6 +56,15 @@
     Public Ver_finaltemperature As Decimal
     Public Ver_finalflowrate As Decimal
 
+    Public Cal_backpressure As Decimal
+    Public Cal_avgbackpressure1 As Decimal
+    Public Cal_avgbackpressure2 As Decimal
+    Public Cal_finalbackpressure As Decimal
+
+    Public Ver_backpressure As Decimal
+    Public Ver_avgbackpressure1 As Decimal
+    Public Ver_avgbackpressure2 As Decimal
+    Public Ver_finalbackpressure As Decimal
 
 
 
@@ -316,12 +325,14 @@
             Cal_flowrate = AIn(12)
             Cal_temperature = AIn(13)
             Cal_dp = Cal_inletpressure - Cal_outletpressure
+            Cal_backpressure = AIn(1)
             newrw(0) = Cal_samplingtime
             newrw(1) = Cal_temperature
             newrw(2) = Cal_flowrate
             newrw(3) = Cal_inletpressure
             newrw(4) = Cal_outletpressure
             newrw(5) = Cal_dp
+            newrw(6) = Cal_backpressure
             dtCalibration.Rows.InsertAt(newrw, 0)
             With dgv_CalibrationResult
                 .BackgroundColor = SystemColors.Window
@@ -334,6 +345,7 @@
                 .Columns(3).Width = 100
                 .Columns(4).Width = 100
                 .Columns(5).Width = 100
+                .Columns(6).Width = 100
 
                 'Header Cell Alignment
                 .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -342,6 +354,7 @@
                 .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
                 'Header Cell Font Bold
                 .Columns(0).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
@@ -350,6 +363,7 @@
                 .Columns(3).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(4).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(6).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
 
             End With
 
@@ -372,11 +386,13 @@
                     Cal_avgoutlet1 = Cal_avgoutlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
                     Cal_avgflowrate1 = Cal_avgflowrate1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Cal_avgtemperature1 = Cal_avgtemperature1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (°C)")
+                    Cal_avgbackpressure1 = Cal_avgbackpressure1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Back Pressure (kPa)")
                 Next
                 Cal_avginlet1 = Cal_avginlet1 / Cal_dptestpoints
                 Cal_avgoutlet1 = Cal_avgoutlet1 / Cal_dptestpoints
                 Cal_avgflowrate1 = Cal_avgflowrate1 / Cal_dptestpoints
                 Cal_avgtemperature1 = Cal_avgtemperature1 / Cal_dptestpoints
+                Cal_avgbackpressure1 = Cal_avgbackpressure1 / Cal_dptestpoints
                 Cal_offset1 = Cal_avginlet1 - Cal_avgoutlet1
 
                 For i = Dptest2start To dptest2end - 1
@@ -384,17 +400,20 @@
                     Cal_avgoutlet2 = Cal_avgoutlet2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
                     Cal_avgflowrate2 = Cal_avgflowrate2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Cal_avgtemperature2 = Cal_avgtemperature2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (°C)")
+                    Cal_avgbackpressure2 = Cal_avgbackpressure2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Back Pressure (kPa)")
                 Next
                 Cal_avginlet2 = Cal_avginlet2 / Cal_dptestpoints
                 Cal_avgoutlet2 = Cal_avgoutlet2 / Cal_dptestpoints
                 Cal_avgflowrate2 = Cal_avgflowrate2 / Cal_dptestpoints
                 Cal_avgtemperature2 = Cal_avgtemperature2 / Cal_dptestpoints
+                Cal_avgbackpressure2 = Cal_avgbackpressure2 / Cal_dptestpoints
                 Cal_offset2 = Cal_avginlet2 - Cal_avgoutlet2
 
                 Cal_finalInlet = ((Cal_avginlet1 + Cal_avginlet2) / 2)
                 Cal_finalOutlet = ((Cal_avgoutlet1 + Cal_avgoutlet2) / 2)
                 Cal_finalflowrate = ((Cal_avgflowrate1 + Cal_avgflowrate2) / 2)
                 Cal_finaltemperature = (((Cal_avgtemperature1 + Cal_avgtemperature2) / 2) + 273.15)
+                Cal_finalbackpressure = ((Cal_avgbackpressure1 + Cal_avgbackpressure2) / 2)
 
                 T2 = Cal_finaltemperature * Cal_finaltemperature
                 exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
@@ -412,17 +431,20 @@
                     Cal_avgoutlet1 = Cal_avgoutlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
                     Cal_avgflowrate1 = Cal_avgflowrate1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Cal_avgtemperature1 = Cal_avgtemperature1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (°C)")
+                    Cal_avgbackpressure1 = Cal_avgbackpressure1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Back Pressure (kPa)")
                 Next
                 Cal_avginlet1 = Cal_avginlet1 / Cal_dptestpoints
                 Cal_avgoutlet1 = Cal_avgoutlet1 / Cal_dptestpoints
                 Cal_avgflowrate1 = Cal_avgflowrate1 / Cal_dptestpoints
                 Cal_avgtemperature1 = Cal_avgtemperature1 / Cal_dptestpoints
+                Cal_avgbackpressure1 = Cal_avgbackpressure1 / Cal_dptestpoints
                 Cal_offset1 = Cal_avginlet1 - Cal_avgoutlet1
 
                 Cal_finalInlet = Cal_avginlet1
                 Cal_finalOutlet = Cal_avgoutlet1
                 Cal_finalflowrate = Cal_avgflowrate1
                 Cal_finaltemperature = (Cal_avgtemperature1 + 273.15)
+                Cal_finalbackpressure = Cal_avgbackpressure1
 
                 T2 = Cal_finaltemperature * Cal_finaltemperature
                 exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
@@ -436,6 +458,7 @@
             txtbx_CalOutletPressure.Text = CType(Cal_finalOutlet, String)
             txtbx_CalFlowrate.Text = CType(Cal_finalflowrate, String)
             txtbx_CalTemperature.Text = CType(Cal_finaltemperature - 273.15, String)
+            txtbx_CalBackpress.Text = CType(Cal_finalbackpressure, String)
             txtbx_CalOffset.Text = CType(Math.Round(Cal_finaloffset, 2), String)
 
             ' Convert Visible DataGridView Columns To DataTable
@@ -487,6 +510,7 @@
             Ver_outletpressure = AIn(10)
             Ver_flowrate = AIn(12)
             Ver_temperature = AIn(13)
+            Ver_backpressure = AIn(1)
             Ver_dp = Ver_inletpressure - Ver_outletpressure
             newrw(0) = Ver_samplingtime
             newrw(1) = Ver_temperature
@@ -494,6 +518,7 @@
             newrw(3) = Ver_inletpressure
             newrw(4) = Ver_outletpressure
             newrw(5) = Ver_dp
+            newrw(6) = Ver_backpressure
             dtVerification.Rows.InsertAt(newrw, 0)
             With dgv_VerificationResult
                 .BackgroundColor = SystemColors.Window
@@ -508,6 +533,7 @@
                 .Columns(3).Width = 100
                 .Columns(4).Width = 100
                 .Columns(5).Width = 100
+                .Columns(6).Width = 100
 
                 'Header Cell Alignment
                 .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -516,6 +542,7 @@
                 .Columns(3).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
                 'Header Cell Font Bold
                 .Columns(0).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
@@ -524,6 +551,7 @@
                 .Columns(3).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(4).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(6).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
 
             End With
 
@@ -545,6 +573,7 @@
                     Ver_avgoutlet1 = Ver_avgoutlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
                     Ver_avgflowrate1 = Ver_avgflowrate1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Ver_avgtemperature1 = Ver_avgtemperature1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Temperature (°C)")
+                    Ver_avgbackpressure1 = Ver_avgbackpressure1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Back Pressure (kPa)")
 
 
                 Next
@@ -552,6 +581,7 @@
                 Ver_avgoutlet1 = Ver_avgoutlet1 / Cal_dptestpoints
                 Ver_avgflowrate1 = Ver_avgflowrate1 / Cal_dptestpoints
                 Ver_avgtemperature1 = Ver_avgtemperature1 / Cal_dptestpoints
+                Ver_avgbackpressure1 = Ver_avgbackpressure1 / Cal_dptestpoints
                 Ver_avgdp1 = Ver_avginlet1 - Ver_avgoutlet1
 
                 For i = Dptest2start To dptest2end - 1
@@ -559,17 +589,20 @@
                     Ver_avgoutlet2 = Ver_avgoutlet2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
                     Ver_avgflowrate2 = Ver_avgflowrate2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Ver_avgtemperature2 = Ver_avgtemperature2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Temperature (°C)")
+                    Ver_avgbackpressure2 = Ver_avgbackpressure2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Back Pressure (kPa)")
                 Next
                 Ver_avginlet2 = Ver_avginlet2 / Cal_dptestpoints
                 Ver_avgoutlet2 = Ver_avgoutlet2 / Cal_dptestpoints
                 Ver_avgflowrate2 = Ver_avgflowrate2 / Cal_dptestpoints
                 Ver_avgtemperature2 = Ver_avgtemperature2 / Cal_dptestpoints
+                Ver_avgbackpressure2 = Ver_avgbackpressure2 / Cal_dptestpoints
                 Ver_avgdp2 = Ver_avginlet2 - Ver_avgoutlet2
 
                 Ver_finalinlet = ((Ver_avginlet1 + Ver_avginlet2) / 2)
                 Ver_finaloutlet = ((Ver_avgoutlet1 + Ver_avgoutlet2) / 2)
                 Ver_finalflowrate = ((Ver_avgflowrate1 + Ver_avgflowrate2) / 2)
                 Ver_finaltemperature = (((Ver_avgtemperature1 + Ver_avgtemperature2) / 2) + 273.15)
+                Ver_finalbackpressure = ((Ver_avgbackpressure1 + Ver_avgbackpressure2) / 2)
 
                 T2 = Ver_finaltemperature * Ver_finaltemperature
                 exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
@@ -586,11 +619,13 @@
                     Ver_avgoutlet1 = Ver_avgoutlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
                     Ver_avgflowrate1 = Ver_avgflowrate1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Ver_avgtemperature1 = Ver_avgtemperature1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Temperature (°C)")
+                    Ver_avgbackpressure1 = Ver_avgbackpressure1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Back Pressure (kPa)")
                 Next
                 Ver_avginlet1 = Ver_avginlet1 / Cal_dptestpoints
                 Ver_avgoutlet1 = Ver_avgoutlet1 / Cal_dptestpoints
                 Ver_avgflowrate1 = Ver_avgflowrate1 / Cal_dptestpoints
                 Ver_avgtemperature1 = Ver_avgtemperature1 / Cal_dptestpoints
+                Ver_avgbackpressure1 = Ver_avgbackpressure1 / Cal_dptestpoints
                 Ver_avgdp1 = Ver_avginlet1 - Ver_avgoutlet1
 
 
@@ -600,6 +635,7 @@
 
                 Ver_finalflowrate = Ver_avgflowrate1
                 Ver_finaltemperature = (Ver_avgtemperature1 + 273.15)
+                Ver_finalbackpressure = Ver_avgbackpressure1
                 T2 = Ver_finaltemperature * Ver_finaltemperature
                 exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
                 Viscosity = A * exp
@@ -612,6 +648,7 @@
             txtbx_VerOutletPressure.Text = CType(Ver_finaloutlet, String)
             txtbx_VerFlowrate.Text = CType(Ver_finalflowrate, String)
             txtbx_VerTemperature.Text = CType(Ver_finaltemperature - 273.15, String)
+            txtbx_VerBackpress.Text = CType(Ver_finalbackpressure, String)
             txtbx_VerStatus.Text = "Completed"
             txtbx_VerStatus.BackColor = Color.FromArgb(192, 255, 192)
             ' Convert Visible DataGridView Columns To DataTable

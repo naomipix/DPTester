@@ -106,6 +106,8 @@ Partial Class FormResultGraph
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.CartesianChart_ResultGraph = New LiveChartsCore.SkiaSharpView.WinForms.CartesianChart()
+        Me.checkbx_GraphBP = New System.Windows.Forms.CheckBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -714,10 +716,10 @@ Partial Class FormResultGraph
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel3.Controls.Add(Me.checkbx_GraphTemperature)
         Me.Panel3.Controls.Add(Me.checkbx_GraphFlowrate)
+        Me.Panel3.Controls.Add(Me.checkbx_GraphBP)
         Me.Panel3.Controls.Add(Me.checkbx_GraphOutletPressure)
         Me.Panel3.Controls.Add(Me.checkbx_GraphInletPressure)
         Me.Panel3.Controls.Add(Me.checkbx_GraphDP)
-        Me.Panel3.Controls.Add(Me.ResultChart)
         Me.Panel3.Controls.Add(Me.dsp_GraphDrain3)
         Me.Panel3.Controls.Add(Me.txtbx_GraphDrain3)
         Me.Panel3.Controls.Add(Me.dsp_GraphDrain2)
@@ -732,6 +734,8 @@ Partial Class FormResultGraph
         Me.Panel3.Controls.Add(Me.txtbx_GraphDPTest1)
         Me.Panel3.Controls.Add(Me.dsp_Graphflush1)
         Me.Panel3.Controls.Add(Me.txtbx_Graphflush1)
+        Me.Panel3.Controls.Add(Me.CartesianChart_ResultGraph)
+        Me.Panel3.Controls.Add(Me.ResultChart)
         Me.Panel3.Location = New System.Drawing.Point(566, 3)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1311, 802)
@@ -752,7 +756,7 @@ Partial Class FormResultGraph
         '
         Me.checkbx_GraphFlowrate.AutoSize = True
         Me.checkbx_GraphFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphFlowrate.Location = New System.Drawing.Point(880, 137)
+        Me.checkbx_GraphFlowrate.Location = New System.Drawing.Point(922, 137)
         Me.checkbx_GraphFlowrate.Name = "checkbx_GraphFlowrate"
         Me.checkbx_GraphFlowrate.Size = New System.Drawing.Size(76, 21)
         Me.checkbx_GraphFlowrate.TabIndex = 73
@@ -763,7 +767,7 @@ Partial Class FormResultGraph
         '
         Me.checkbx_GraphOutletPressure.AutoSize = True
         Me.checkbx_GraphOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphOutletPressure.Location = New System.Drawing.Point(619, 137)
+        Me.checkbx_GraphOutletPressure.Location = New System.Drawing.Point(506, 137)
         Me.checkbx_GraphOutletPressure.Name = "checkbx_GraphOutletPressure"
         Me.checkbx_GraphOutletPressure.Size = New System.Drawing.Size(116, 21)
         Me.checkbx_GraphOutletPressure.TabIndex = 72
@@ -774,7 +778,7 @@ Partial Class FormResultGraph
         '
         Me.checkbx_GraphInletPressure.AutoSize = True
         Me.checkbx_GraphInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphInletPressure.Location = New System.Drawing.Point(369, 137)
+        Me.checkbx_GraphInletPressure.Location = New System.Drawing.Point(315, 137)
         Me.checkbx_GraphInletPressure.Name = "checkbx_GraphInletPressure"
         Me.checkbx_GraphInletPressure.Size = New System.Drawing.Size(105, 21)
         Me.checkbx_GraphInletPressure.TabIndex = 71
@@ -1028,6 +1032,25 @@ Partial Class FormResultGraph
         Me.Label1.Text = "Result Graph"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
+        'CartesianChart_ResultGraph
+        '
+        Me.CartesianChart_ResultGraph.BackColor = System.Drawing.Color.AliceBlue
+        Me.CartesianChart_ResultGraph.Location = New System.Drawing.Point(50, 177)
+        Me.CartesianChart_ResultGraph.Name = "CartesianChart_ResultGraph"
+        Me.CartesianChart_ResultGraph.Size = New System.Drawing.Size(1210, 600)
+        Me.CartesianChart_ResultGraph.TabIndex = 75
+        '
+        'checkbx_GraphBP
+        '
+        Me.checkbx_GraphBP.AutoSize = True
+        Me.checkbx_GraphBP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphBP.Location = New System.Drawing.Point(718, 137)
+        Me.checkbx_GraphBP.Name = "checkbx_GraphBP"
+        Me.checkbx_GraphBP.Size = New System.Drawing.Size(107, 21)
+        Me.checkbx_GraphBP.TabIndex = 72
+        Me.checkbx_GraphBP.Text = "Back Pressure"
+        Me.checkbx_GraphBP.UseVisualStyleBackColor = True
+        '
         'FormResultGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1132,4 +1155,6 @@ Partial Class FormResultGraph
     Friend WithEvents txtbx_Graphattempt As TextBox
     Friend WithEvents dsp_GraphSerialUID As Label
     Friend WithEvents txtbx_GraphSerialUID As TextBox
+    Friend WithEvents CartesianChart_ResultGraph As LiveChartsCore.SkiaSharpView.WinForms.CartesianChart
+    Friend WithEvents checkbx_GraphBP As CheckBox
 End Class
