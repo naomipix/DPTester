@@ -12,6 +12,7 @@ Imports SkiaSharp
 Imports PoohPlcLink
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 Imports LiveChartsCore.Defaults
+Imports LiveChartsCore.SkiaSharpView.WinForms
 
 Module FormMainModule
     Public Workorder As String
@@ -37,8 +38,6 @@ Module FormMainModule
     Public Processedquantity As Integer
     Public Remainingquantity As Integer
     Public Circuitshown(3) As Boolean
-
-
 
     Public Sub ControlState(i As Integer)
         Select Case i
@@ -264,7 +263,7 @@ Public Class FormMain
         CalibrationForm.Show()
 
         FormCalibration.Panel_Calibration_Circuit.BringToFront()
-        FormCalibration.Panel_Calibration_Circuit.Visible = False
+        'FormCalibration.Panel_Calibration_Circuit.Visible = False
 
         'Top Status Bar
         lbl_OperationMode.Text = "No Status"
@@ -478,102 +477,107 @@ Public Class FormMain
         '    XLabelArr(i) = i * XScaleSec
         'Next
 
-        CartesianChart_MainLiveGraph.XAxes = New ICartesianAxis() {
-            New LiveChartsCore.SkiaSharpView.Axis() With {
-                .Name = "Time (s)",
-                .NameTextSize = 14,
-                .NamePaint = New SolidColorPaint(SKColors.Black),
-                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
-                .Padding = New LiveChartsCore.Drawing.Padding(0, 20, 0, 0),
-                .TextSize = 12,
-                .LabelsPaint = New SolidColorPaint(SKColors.Black),
-                .TicksPaint = New SolidColorPaint(SKColors.Black),
-                .SubticksPaint = New SolidColorPaint(SKColors.Black),
-                .DrawTicksPath = True,
-                .MinStep = 1,
-                .MinLimit = 0
+        For Each LiveGraphChart In {CartesianChart_MainLiveGraph} 'CartesianChartArr
+            LiveGraphChart.XAxes = New ICartesianAxis() {
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .Name = "Time (s)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.Black),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(0, 20, 0, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                    .TicksPaint = New SolidColorPaint(SKColors.Black),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                    .DrawTicksPath = True,
+                    .MinLimit = 0
+                }
             }
-        }
+        Next
 
+        ' .MinStep = 1,
         ' .MaxLimit = XLimit,
     End Sub
 
     Private Sub InitializeLiveChart()
-        CartesianChart_MainLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
 
-        CartesianChart_MainLiveGraph.Title = New LabelVisual() With {
-            .Text = "DP Tester Live Graph",
-            .TextSize = 14,
-            .Padding = New LiveChartsCore.Drawing.Padding(15),
-            .Paint = New SolidColorPaint(SKColors.Black)
-        }
+        For Each LiveGraphChart In {CartesianChart_MainLiveGraph} 'CartesianChartArr
+            LiveGraphChart.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
 
-        InitializeLiveChartXAxes(10)
-
-        CartesianChart_MainLiveGraph.YAxes = New ICartesianAxis() {
-            New LiveChartsCore.SkiaSharpView.Axis() With {
-                .Name = "Differential Pressure (kPa)",
-                .NameTextSize = 14,
-                .NamePaint = New SolidColorPaint(SKColors.Blue),
-                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
-                .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
-                .TextSize = 12,
-                .LabelsPaint = New SolidColorPaint(SKColors.Blue),
-                .TicksPaint = New SolidColorPaint(SKColors.Blue),
-                .SubticksPaint = New SolidColorPaint(SKColors.Blue),
-                .DrawTicksPath = True
-            },
-            New LiveChartsCore.SkiaSharpView.Axis() With {
-                .Name = "Flowrate (l/Min)",
-                .NameTextSize = 14,
-                .NamePaint = New SolidColorPaint(SKColors.DarkMagenta),
-                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
-                .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
-                .TextSize = 12,
-                .LabelsPaint = New SolidColorPaint(SKColors.DarkMagenta),
-                .TicksPaint = New SolidColorPaint(SKColors.DarkMagenta),
-                .SubticksPaint = New SolidColorPaint(SKColors.DarkMagenta),
-                .DrawTicksPath = True,
-                .ShowSeparatorLines = False,
-                .Position = LiveChartsCore.Measure.AxisPosition.End
+            LiveGraphChart.Title = New LabelVisual() With {
+                .Text = "DP Tester Live Graph",
+                .TextSize = 14,
+                .Padding = New LiveChartsCore.Drawing.Padding(15),
+                .Paint = New SolidColorPaint(SKColors.Black)
             }
-        }
 
-        CartesianChart_MainLiveGraph.Series = New ISeries() {
-            New LineSeries(Of ObservablePoint)() With {
-                .Name = "1",
-                .Values = LiveChartDPValue,
-                .Fill = Nothing,
-                .Stroke = New SolidColorPaint With {
-                    .Color = SKColors.Blue,
-                    .StrokeThickness = 2
+            InitializeLiveChartXAxes(10)
+
+            LiveGraphChart.YAxes = New ICartesianAxis() {
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .Name = "Differential Pressure (kPa)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.Blue),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.Blue),
+                    .TicksPaint = New SolidColorPaint(SKColors.Blue),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Blue),
+                    .DrawTicksPath = True
                 },
-                .GeometrySize = 0,
-                .ScalesYAt = 0
-            },
-            New LineSeries(Of ObservablePoint)() With {
-                .Name = "2",
-                .Values = LiveChartBPValue,
-                .Fill = Nothing,
-                .Stroke = New SolidColorPaint With {
-                    .Color = SKColors.Black,
-                    .StrokeThickness = 2
-                },
-                .GeometrySize = 0,
-                .ScalesYAt = 0
-            },
-            New LineSeries(Of ObservablePoint)() With {
-                .Name = "3",
-                .Values = LiveChartFLWRValue,
-                .Fill = Nothing,
-                .Stroke = New SolidColorPaint With {
-                    .Color = SKColors.DarkMagenta,
-                    .StrokeThickness = 2
-                },
-                .GeometrySize = 0,
-                .ScalesYAt = 1
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .Name = "Flowrate (l/Min)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .TicksPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .SubticksPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .DrawTicksPath = True,
+                    .ShowSeparatorLines = False,
+                    .Position = LiveChartsCore.Measure.AxisPosition.End
+                }
             }
-        }
+
+            LiveGraphChart.Series = New ISeries() {
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "1",
+                    .Values = LiveChartDPValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Blue,
+                        .StrokeThickness = 2
+                    },
+                    .GeometrySize = 0,
+                    .ScalesYAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "2",
+                    .Values = LiveChartBPValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Black,
+                        .StrokeThickness = 2
+                    },
+                    .GeometrySize = 0,
+                    .ScalesYAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "3",
+                    .Values = LiveChartFLWRValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.DarkMagenta,
+                        .StrokeThickness = 2
+                    },
+                    .GeometrySize = 0,
+                    .ScalesYAt = 1
+                }
+            }
+        Next
     End Sub
 
 
@@ -3067,6 +3071,16 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         Dim Drain2cycletime As Integer
         Dim Drain3cycletime As Integer
 
+        Dim Flush1Enabled As Boolean = False
+        Dim DP1Enabled As Boolean = False
+
+        Dim Flush2Enabled As Boolean = False
+        Dim DP2Enabled As Boolean = False
+
+        Dim Drain1Enabled As Boolean = False
+        Dim Drain2Enabled As Boolean = False
+        Dim Drain3Enabled As Boolean = False
+
         dtresult = New DataTable()
         CreateTable("Production_Result")
         dtrecipetable = SQL.ReadRecords($"Select * From RecipeTable WHERE recipe_id ='{cmbx_RecipeID.Text}'")
@@ -3075,32 +3089,41 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
 
             flush1cycletime = (dtrecipetable.Rows(0)("firstflush_fill_time") + dtrecipetable.Rows(0)("firstflush_bleed_time") + dtrecipetable.Rows(0)("firstflush_stabilize_time") + dtrecipetable.Rows(0)("firstflush_time"))
+            Flush1Enabled = true
         End If
 
         If dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
             flush2cycletime = (dtrecipetable.Rows(0)("secondflush_fill_time") + dtrecipetable.Rows(0)("secondflush_bleed_time") + dtrecipetable.Rows(0)("secondflush_stabilize_time") + dtrecipetable.Rows(0)("secondflush_time"))
+            Flush2Enabled = True
         End If
 
         If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("firstflush_circuit") = "Disable" Then
             DPtest1cycletime = (dtrecipetable.Rows(0)("dp_fill_time") + dtrecipetable.Rows(0)("dp_bleed_time") + dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+            DP1Enabled = True
         ElseIf dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
             DPtest1cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+            DP1Enabled = True
         End If
 
         If dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" And dtrecipetable.Rows(0)("secondflush_circuit") = "Disable" Then
             DPtest2cycletime = (dtrecipetable.Rows(0)("dp_fill_time") + dtrecipetable.Rows(0)("dp_bleed_time") + dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+            DP2Enabled = True
         ElseIf dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" And dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
             DPtest2cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+            DP2Enabled = True
         End If
 
         If dtrecipetable.Rows(0)("drain1_circuit") = "Enable" Then
             Drain1cycletime = (dtrecipetable.Rows(0)("drain1_time"))
+            Drain1Enabled = True
         End If
         If dtrecipetable.Rows(0)("drain2_circuit") = "Enable" Then
             Drain2cycletime = (dtrecipetable.Rows(0)("drain2_time"))
+            Drain2Enabled = True
         End If
         If dtrecipetable.Rows(0)("drain3_circuit") = "Enable" Then
             Drain3cycletime = (dtrecipetable.Rows(0)("drain3_time"))
+            Drain3Enabled = True
         End If
 
         MainCycletime = flush1cycletime + flush2cycletime + DPtest1cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime
@@ -3137,6 +3160,11 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             result_finaltemperature = 0.0
             result_finalflowrate = 0.0
 
+            result_backpressure = 0.0
+            result_avgbackpressure1 = 0.0
+            result_avgbackpressure2 = 0.0
+            result_finalbackpressure = 0.0
+
             ' Clear Live Graph Value
             LiveChartDPValue.Clear()
             LiveChartFLWRValue.Clear()
@@ -3148,15 +3176,147 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
             ' Set Live Graph Sections
             If True Then
+                Dim Flush1Start As Decimal = 0
+                Dim DP1Start As Decimal = 0
+
+                Dim Flush2Start As Decimal = 0
+                Dim DP2Start As Decimal = 0
+
+                Dim Drain1Start As Decimal = 0
+                Dim Drain2Start As Decimal = 0
+                Dim Drain3Start As Decimal = 0
+
+                Dim CycleTimeTotal As Decimal = 0
+
+                If True Then
+                    If Flush1Enabled Then
+                        DP1Start = flush1cycletime
+                    End If
+
+                    If DP1Enabled Then
+                        Flush2Start = DP1Start + DPtest1cycletime
+                    Else
+                        Flush2Start = DP1Start
+                    End If
+
+                    If Flush2Enabled Then
+                        DP2Start = Flush2Start + flush2cycletime
+                    Else
+                        DP2Start = Flush2Start
+                    End If
+
+                    If DP2Enabled Then
+                        Drain1Start = DP2Start + DPtest2cycletime
+                    Else
+                        Drain1Start = DP2Start
+                    End If
+
+                    If Drain1Enabled Then
+                        Drain2Start = Drain1Start + Drain1cycletime
+                    Else
+                        Drain2Start = Drain1Start
+                    End If
+
+                    If Drain2Enabled Then
+                        Drain3Start = Drain2Start + Drain2cycletime
+                    Else
+                        Drain3Start = Drain2Start
+                    End If
+
+                    If Drain3Enabled Then
+                        CycleTimeTotal = Drain3Start + Drain3cycletime
+                    Else
+                        CycleTimeTotal = Drain3Start
+                    End If
+                End If
+
                 CartesianChart_MainLiveGraph.Sections = New RectangularSection() {
                     New RectangularSection With {
+                        .IsVisible = DP1Enabled,
                         .Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
                         .Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
+                        .Xi = CInt((Flush2Start - 1) - (MainDptestpoints * (1000 / Resultcapturetimer.Interval))),
+                        .Xj = Flush2Start - 1,
                         .Stroke = New SolidColorPaint With {
                             .Color = SKColors.Salmon,
                             .StrokeThickness = 1,
                             .PathEffect = New DashEffect(New Single() {6, 6})
                         }
+                    },
+                    New RectangularSection With {
+                        .IsVisible = DP2Enabled,
+                        .Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
+                        .Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
+                        .Xi = CInt((Drain1Start - 1) - (MainDptestpoints * (1000 / Resultcapturetimer.Interval))),
+                        .Xj = Drain1Start - 1,
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.Salmon,
+                            .StrokeThickness = 1,
+                            .PathEffect = New DashEffect(New Single() {6, 6})
+                        }
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Flush1Enabled,
+                        .Xi = Flush1Start,
+                        .Xj = DP1Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                        .Label = "Flush 1",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = DP1Enabled,
+                        .Xi = DP1Start,
+                        .Xj = Flush2Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Blue.WithAlpha(20)},
+                        .Label = "DP 1",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Flush2Enabled,
+                        .Xi = Flush2Start,
+                        .Xj = DP2Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                        .Label = "Flush 2",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = DP2Enabled,
+                        .Xi = DP2Start,
+                        .Xj = Drain1Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Blue.WithAlpha(20)},
+                        .Label = "DP 2",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Drain1Enabled,
+                        .Xi = Drain1Start,
+                        .Xj = Drain2Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                        .Label = "Drain 1",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Drain2Enabled,
+                        .Xi = Drain2Start,
+                        .Xj = Drain3Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                        .Label = "Drain 2",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Drain3Enabled,
+                        .Xi = Drain3Start,
+                        .Xj = CycleTimeTotal,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                        .Label = "Drain 3",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                     }
                 }
             End If
@@ -3478,10 +3638,12 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             FormCalibration.txtbx_CalResult.Text = Nothing
             FormCalibration.txtbx_CalFlowrate.Text = Nothing
             FormCalibration.txtbx_CalTemperature.Text = Nothing
+            FormCalibration.txtbx_CalBackpress.Text = Nothing
             FormCalibration.txtbx_VerInletPressure.Text = Nothing
             FormCalibration.txtbx_VerOutletPressure.Text = Nothing
             FormCalibration.txtbx_VerFlowrate.Text = Nothing
             FormCalibration.txtbx_VerTemperature.Text = Nothing
+            FormCalibration.txtbx_VerBackpress.Text = Nothing
             FormCalibration.txtbx_VerDP.Text = Nothing
             FormCalibration.txtbx_VerStatus.Text = Nothing
             FormCalibration.txtbx_VerStatus.BackColor = SystemColors.Window

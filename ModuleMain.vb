@@ -9,6 +9,7 @@ Imports System.Text
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Xml.Schema
 Imports LiveChartsCore.Defaults
+Imports LiveChartsCore.SkiaSharpView.WinForms
 
 Module PublicVariables
     ' Version
@@ -214,9 +215,15 @@ Module PublicVariables
 
     ' Main Form
     Public IsExitPromptShown As Boolean = False
+    Public CartesianChartArr As CartesianChart() = {FormMain.CartesianChart_MainLiveGraph, FormCalibration.CartesianChart_CalibrationLiveGraph}
+
     Public LiveChartDPValue = New ObservableCollection(Of ObservablePoint)({})
     Public LiveChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
     Public LiveChartBPValue = New ObservableCollection(Of ObservablePoint)({})
+
+    Public CalibrateChartDPValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartBPValue = New ObservableCollection(Of ObservablePoint)({})
 End Module
 
 ' DataGridView DoubleBuffering Module
@@ -1324,7 +1331,7 @@ End Namespace
 Namespace LiveGraph
     Module LiveGraph
         ' Declare Controls
-        Dim chartLiveGraph As Chart = FormMain.chart_MainLiveGraph
+        Dim chartLiveGraph As DataVisualization.Charting.Chart = FormMain.chart_MainLiveGraph
         Dim cmbxSelection As ComboBox = FormMain.cmbx_GraphSelection
 
         ' Plotting Timer

@@ -6,6 +6,7 @@ Imports LiveChartsCore.Defaults
 Imports LiveChartsCore.Kernel.Sketches
 Imports LiveChartsCore.SkiaSharpView
 Imports LiveChartsCore.SkiaSharpView.Painting
+Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 Imports LiveChartsCore.SkiaSharpView.VisualElements
 Imports SkiaSharp
 
@@ -176,7 +177,7 @@ Public Class FormResultGraph
                 },
                 .GeometryFill = New SolidColorPaint(SKColors.Blue),
                 .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
-                .GeometrySize = 6,
+                .GeometrySize = 0,
                 .ScalesYAt = 0,
                 .ScalesXAt = 0
             },
@@ -190,7 +191,7 @@ Public Class FormResultGraph
                 },
                 .GeometryFill = New SolidColorPaint(SKColors.Green),
                 .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
-                .GeometrySize = 6,
+                .GeometrySize = 0,
                 .ScalesYAt = 0,
                 .ScalesXAt = 0
             },
@@ -204,7 +205,7 @@ Public Class FormResultGraph
                 },
                 .GeometryFill = New SolidColorPaint(SKColors.Magenta),
                 .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
-                .GeometrySize = 6,
+                .GeometrySize = 0,
                 .ScalesYAt = 0,
                 .ScalesXAt = 0
             },
@@ -218,7 +219,7 @@ Public Class FormResultGraph
                 },
                 .GeometryFill = New SolidColorPaint(SKColors.DarkOrange),
                 .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
-                .GeometrySize = 6,
+                .GeometrySize = 0,
                 .ScalesYAt = 0,
                 .ScalesXAt = 0
             },
@@ -232,7 +233,7 @@ Public Class FormResultGraph
                 },
                 .GeometryFill = New SolidColorPaint(SKColors.Brown),
                 .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
-                .GeometrySize = 6,
+                .GeometrySize = 0,
                 .ScalesYAt = 2,
                 .ScalesXAt = 0
             },
@@ -246,7 +247,7 @@ Public Class FormResultGraph
                 },
                 .GeometryFill = New SolidColorPaint(SKColors.Red),
                 .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
-                .GeometrySize = 6,
+                .GeometrySize = 0,
                 .ScalesYAt = 1,
                 .ScalesXAt = 0
             }
@@ -645,7 +646,7 @@ Public Class FormResultGraph
 
     End Sub
 
-    Public Sub CreateResultGraphNew(dtResult As DataTable)
+    Public Sub CreateResultGraphNew(dtResult As DataTable, resultsummary As String())
         ' Clear Result Graph Value
         ResultChartDPValue.Clear()
         ResultChartInletValue.Clear()
@@ -670,7 +671,7 @@ Public Class FormResultGraph
             })
             ResultChartBPValue.Add(New ObservablePoint With {
                 .X = CDbl(dtResult(i)("sampling_time")),
-                .Y = CDbl(0)
+                .Y = CDbl(dtResult(i)("back_pressure"))
             })
             ResultChartFLWRValue.Add(New ObservablePoint With {
                 .X = CDbl(dtResult(i)("sampling_time")),
@@ -683,19 +684,247 @@ Public Class FormResultGraph
         Next
 
         ' Set Result Graph Sections
-        'If True Then
-        '    CartesianChart_ResultGraph.Sections = New RectangularSection() {
-        '        New RectangularSection With {
-        '            .Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
-        '            .Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
-        '            .Stroke = New SolidColorPaint With {
-        '                .Color = SKColors.Salmon,
-        '                .StrokeThickness = 1,
-        '                .PathEffect = New DashEffect(New Single() {6, 6})
-        '            }
-        '        }
-        '    }
-        'End If
+        If True Then
+            Dim Flush1Enabled As Boolean = False
+            Dim DP1Enabled As Boolean = False
+
+            Dim Flush2Enabled As Boolean = False
+            Dim DP2Enabled As Boolean = False
+
+            Dim Drain1Enabled As Boolean = False
+            Dim Drain2Enabled As Boolean = False
+            Dim Drain3Enabled As Boolean = False
+
+            If True Then
+                If resultsummary(40) = "Enable" Then
+                    Flush1Enabled = True
+                End If
+                If resultsummary(48) = "Enable" Then
+                    DP1Enabled = True
+                End If
+                If resultsummary(59) = "Enable" Then
+                    Flush2Enabled = True
+                End If
+                If resultsummary(60) = "Enable" Then
+                    DP2Enabled = True
+                End If
+                If resultsummary(68) = "Enable" Then
+                    Drain1Enabled = True
+                End If
+                If resultsummary(71) = "Enable" Then
+                    Drain2Enabled = True
+                End If
+                If resultsummary(74) = "Enable" Then
+                    Drain3Enabled = True
+                End If
+            End If
+
+            Dim DPtest1cycletime As Integer
+            Dim DPtest2cycletime As Integer
+
+            If True Then
+                If DP1Enabled And Flush1Enabled = False Then
+                    DPtest1cycletime = (CInt(resultsummary(49)) + CInt(resultsummary(50)) + CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                ElseIf DP1Enabled And Flush1Enabled Then
+                    DPtest1cycletime = (CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                End If
+
+                If DP2Enabled And Flush2Enabled = False Then
+                    DPtest2cycletime = (CInt(resultsummary(49)) + CInt(resultsummary(50)) + CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                ElseIf DP2Enabled And Flush2Enabled Then
+                    DPtest2cycletime = (CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                End If
+            End If
+
+
+            Dim Flush1Start As Decimal = 0
+            Dim DP1Start As Decimal = 0
+
+            Dim Flush2Start As Decimal = 0
+            Dim DP2Start As Decimal = 0
+
+            Dim Drain1Start As Decimal = 0
+            Dim Drain2Start As Decimal = 0
+            Dim Drain3Start As Decimal = 0
+
+            Dim CycleTimeTotal As Decimal = 0
+
+            If True Then
+                If Flush1Enabled Then
+                    DP1Start = CDec(resultsummary(41)) + CDec(resultsummary(42)) + CDec(resultsummary(46)) + CDec(resultsummary(47))
+                End If
+
+                If DP1Enabled Then
+                    Flush2Start = DP1Start + DPtest1cycletime
+                Else
+                    Flush2Start = DP1Start
+                End If
+
+                If Flush2Enabled Then
+                    DP2Start = Flush2Start + CDec(resultsummary(61)) + CDec(resultsummary(62)) + CDec(resultsummary(66)) + CDec(resultsummary(67))
+                Else
+                    DP2Start = Flush2Start
+                End If
+
+                If DP2Enabled Then
+                    Drain1Start = DP2Start + DPtest2cycletime
+                Else
+                    Drain1Start = DP2Start
+                End If
+
+                If Drain1Enabled Then
+                    Drain2Start = Drain1Start + CDec(resultsummary(70))
+                Else
+                    Drain2Start = Drain1Start
+                End If
+
+                If Drain2Enabled Then
+                    Drain3Start = Drain2Start + CDec(resultsummary(73))
+                Else
+                    Drain3Start = Drain2Start
+                End If
+
+                If Drain3Enabled Then
+                    CycleTimeTotal = Drain3Start + CDec(resultsummary(76))
+                Else
+                    CycleTimeTotal = Drain3Start
+                End If
+            End If
+
+            Dim DP1CaptureStart As Decimal = Flush2Start
+            Dim DP2CaptureStart As Decimal = Drain1Start
+
+            If True Then
+                Dim RowCountStart As Integer = 0
+                For i As Integer = 0 To dtResult.Rows.Count - 1
+                    If dtResult(i)("sampling_time") = DPtest1cycletime - CInt(resultsummary(55)) Then
+                        RowCountStart = i
+                        Exit For
+                    End If
+                Next
+                For i As Integer = 0 To dtResult.Rows.Count - 1
+                    If dtResult(i)("sampling_time") = Flush2Start - 1 Then
+                        If i - 10 > RowCountStart Then
+                            RowCountStart = i - 10
+                        End If
+                        Exit For
+                    End If
+                Next
+                If RowCountStart > 0 Then
+                    DP1CaptureStart = CDec(dtResult(RowCountStart)("sampling_time"))
+                End If
+            End If
+            If True Then
+                Dim RowCountStart As Integer = 0
+                For i As Integer = 0 To dtResult.Rows.Count - 1
+                    If dtResult(i)("sampling_time") = DPtest2cycletime - CInt(resultsummary(55)) Then
+                        RowCountStart = i
+                        Exit For
+                    End If
+                Next
+                For i As Integer = 0 To dtResult.Rows.Count - 1
+                    If dtResult(i)("sampling_time") = Drain1Start - 1 Then
+                        If i - 10 > RowCountStart Then
+                            RowCountStart = i - 10
+                        End If
+                        Exit For
+                    End If
+                Next
+                If RowCountStart > 0 Then
+                    DP2CaptureStart = CDec(dtResult(RowCountStart)("sampling_time"))
+                End If
+            End If
+
+            CartesianChart_ResultGraph.Sections = New RectangularSection() {
+                New RectangularSection With {
+                    .IsVisible = DP1Enabled,
+                    .Yi = CDec(resultsummary(56)),
+                    .Yj = CDec(resultsummary(57)),
+                    .Xi = DP1CaptureStart,
+                    .Xj = Flush2Start - 1,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Salmon,
+                        .StrokeThickness = 1,
+                        .PathEffect = New DashEffect(New Single() {6, 6})
+                    }
+                },
+                New RectangularSection With {
+                    .IsVisible = DP2Enabled,
+                    .Yi = CDec(resultsummary(56)),
+                    .Yj = CDec(resultsummary(57)),
+                    .Xi = DP2CaptureStart,
+                    .Xj = Drain1Start - 1,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Salmon,
+                        .StrokeThickness = 1,
+                        .PathEffect = New DashEffect(New Single() {6, 6})
+                    }
+                },
+                New RectangularSection With {
+                    .IsVisible = Flush1Enabled,
+                    .Xi = Flush1Start,
+                    .Xj = DP1Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                    .Label = "Flush 1",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = DP1Enabled,
+                    .Xi = DP1Start,
+                    .Xj = Flush2Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Blue.WithAlpha(20)},
+                    .Label = "DP 1",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Flush2Enabled,
+                    .Xi = Flush2Start,
+                    .Xj = DP2Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                    .Label = "Flush 2",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = DP2Enabled,
+                    .Xi = DP2Start,
+                    .Xj = Drain1Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Blue.WithAlpha(20)},
+                    .Label = "DP 2",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Drain1Enabled,
+                    .Xi = Drain1Start,
+                    .Xj = Drain2Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                    .Label = "Drain 1",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Drain2Enabled,
+                    .Xi = Drain2Start,
+                    .Xj = Drain3Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                    .Label = "Drain 2",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Drain3Enabled,
+                    .Xi = Drain3Start,
+                    .Xj = CycleTimeTotal,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                    .Label = "Drain 3",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                }
+            }
+        End If
     End Sub
 #End Region
 
@@ -807,7 +1036,7 @@ Public Class FormResultGraph
 
 
 #Region "Checkbox checked"
-    Private Sub checkbx_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_GraphDP.CheckedChanged, checkbx_GraphInletPressure.CheckedChanged, checkbx_GraphOutletPressure.CheckedChanged, checkbx_GraphTemperature.CheckedChanged, checkbx_GraphFlowrate.CheckedChanged, checkbx_GraphBP.CheckedChanged
+    Private Sub checkbx_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_GraphDP.CheckedChanged, checkbx_GraphInletPressure.CheckedChanged, checkbx_GraphOutletPressure.CheckedChanged, checkbx_GraphTemperature.CheckedChanged, checkbx_GraphFlowrate.CheckedChanged, checkbx_GraphBP.CheckedChanged, CheckBox1.CheckedChanged
         CreateResultGraph()
     End Sub
 
@@ -848,7 +1077,7 @@ Public Class FormResultGraph
 
                 If dt_Graphsummary.Rows.Count > 0 Then
                     CreateResultGraph()
-                    CreateResultGraphNew(dt_Graphsummary)
+                    CreateResultGraphNew(dt_Graphsummary, resultsummary)
 
 
 
@@ -884,13 +1113,15 @@ Public Class FormResultGraph
 
             txtbx_GraphCalOffset.Text = resultsummary(24)
             txtbx_GraphRecipeID.Text = resultsummary(31)
-            txtbx_Graphflush1.Text = resultsummary(39).ToUpper
-            txtbx_GraphDPTest1.Text = resultsummary(47).ToUpper
-            txtbx_GraphDPTest2.Text = resultsummary(58).ToUpper
-            txtbx_Graphflush2.Text = resultsummary(59).ToUpper
-            txtbx_GraphDrain1.Text = resultsummary(67).ToUpper
-            txtbx_GraphDrain2.Text = resultsummary(70).ToUpper
-            txtbx_GraphDrain3.Text = resultsummary(73).ToUpper
+
+            txtbx_Graphflush1.Text = resultsummary(40).ToUpper
+            txtbx_GraphDPTest1.Text = resultsummary(48).ToUpper
+            txtbx_GraphDPTest2.Text = resultsummary(49).ToUpper
+            txtbx_Graphflush2.Text = resultsummary(60).ToUpper
+            txtbx_GraphDrain1.Text = resultsummary(68).ToUpper
+            txtbx_GraphDrain2.Text = resultsummary(71).ToUpper
+            txtbx_GraphDrain3.Text = resultsummary(74).ToUpper
+
             txtbx_GraphWorkOrder.Text = resultsummary(77)
             txtbx_GraphPartID.Text = resultsummary(78)
             txtbx_GraphConfirmation.Text = resultsummary(79)

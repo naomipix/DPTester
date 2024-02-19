@@ -515,13 +515,16 @@ Public Class FormResultSummary
 
             txtbx_ResultCalOffset.Text = resultsummary(24)
             txtbx_ResultRecipeID.Text = resultsummary(31)
-            txtbx_Resultflush1.Text = resultsummary(39).ToUpper
-            txtbx_ResultDPTest1.Text = resultsummary(47).ToUpper
-            txtbx_ResultDPTest2.Text = resultsummary(58).ToUpper
-            txtbx_Resultflush2.Text = resultsummary(59).ToUpper
-            txtbx_ResultDrain1.Text = resultsummary(67).ToUpper
-            txtbx_ResultDrain2.Text = resultsummary(70).ToUpper
-            txtbx_ResultDrain3.Text = resultsummary(73).ToUpper
+
+            txtbx_Resultflush1.Text = resultsummary(40).ToUpper
+            txtbx_ResultDPTest1.Text = resultsummary(48).ToUpper
+            txtbx_ResultDPTest2.Text = resultsummary(59).ToUpper
+            txtbx_Resultflush2.Text = resultsummary(60).ToUpper
+            txtbx_ResultDrain1.Text = resultsummary(68).ToUpper
+            txtbx_ResultDrain2.Text = resultsummary(71).ToUpper
+            txtbx_ResultDrain3.Text = resultsummary(74).ToUpper
+
+
             txtbx_ResultWorkOrder.Text = resultsummary(77)
             txtbx_ResultPartID.Text = resultsummary(78)
             txtbx_ResultConfirmation.Text = resultsummary(79)

@@ -85,10 +85,10 @@ Partial Class FormResultGraph
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.checkbx_GraphTemperature = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphFlowrate = New System.Windows.Forms.CheckBox()
+        Me.checkbx_GraphBP = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphOutletPressure = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphInletPressure = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphDP = New System.Windows.Forms.CheckBox()
-        Me.ResultChart = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.dsp_GraphDrain3 = New System.Windows.Forms.Label()
         Me.txtbx_GraphDrain3 = New System.Windows.Forms.TextBox()
         Me.dsp_GraphDrain2 = New System.Windows.Forms.Label()
@@ -103,11 +103,13 @@ Partial Class FormResultGraph
         Me.txtbx_GraphDPTest1 = New System.Windows.Forms.TextBox()
         Me.dsp_Graphflush1 = New System.Windows.Forms.Label()
         Me.txtbx_Graphflush1 = New System.Windows.Forms.TextBox()
+        Me.CartesianChart_ResultGraph = New LiveChartsCore.SkiaSharpView.WinForms.CartesianChart()
+        Me.ResultChart = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.CartesianChart_ResultGraph = New LiveChartsCore.SkiaSharpView.WinForms.CartesianChart()
-        Me.checkbx_GraphBP = New System.Windows.Forms.CheckBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -714,6 +716,8 @@ Partial Class FormResultGraph
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.ComboBox1)
+        Me.Panel3.Controls.Add(Me.CheckBox1)
         Me.Panel3.Controls.Add(Me.checkbx_GraphTemperature)
         Me.Panel3.Controls.Add(Me.checkbx_GraphFlowrate)
         Me.Panel3.Controls.Add(Me.checkbx_GraphBP)
@@ -745,7 +749,7 @@ Partial Class FormResultGraph
         '
         Me.checkbx_GraphTemperature.AutoSize = True
         Me.checkbx_GraphTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphTemperature.Location = New System.Drawing.Point(1101, 137)
+        Me.checkbx_GraphTemperature.Location = New System.Drawing.Point(978, 137)
         Me.checkbx_GraphTemperature.Name = "checkbx_GraphTemperature"
         Me.checkbx_GraphTemperature.Size = New System.Drawing.Size(101, 21)
         Me.checkbx_GraphTemperature.TabIndex = 74
@@ -756,18 +760,29 @@ Partial Class FormResultGraph
         '
         Me.checkbx_GraphFlowrate.AutoSize = True
         Me.checkbx_GraphFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphFlowrate.Location = New System.Drawing.Point(922, 137)
+        Me.checkbx_GraphFlowrate.Location = New System.Drawing.Point(830, 137)
         Me.checkbx_GraphFlowrate.Name = "checkbx_GraphFlowrate"
         Me.checkbx_GraphFlowrate.Size = New System.Drawing.Size(76, 21)
         Me.checkbx_GraphFlowrate.TabIndex = 73
         Me.checkbx_GraphFlowrate.Text = "Flowrate"
         Me.checkbx_GraphFlowrate.UseVisualStyleBackColor = True
         '
+        'checkbx_GraphBP
+        '
+        Me.checkbx_GraphBP.AutoSize = True
+        Me.checkbx_GraphBP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphBP.Location = New System.Drawing.Point(652, 137)
+        Me.checkbx_GraphBP.Name = "checkbx_GraphBP"
+        Me.checkbx_GraphBP.Size = New System.Drawing.Size(107, 21)
+        Me.checkbx_GraphBP.TabIndex = 72
+        Me.checkbx_GraphBP.Text = "Back Pressure"
+        Me.checkbx_GraphBP.UseVisualStyleBackColor = True
+        '
         'checkbx_GraphOutletPressure
         '
         Me.checkbx_GraphOutletPressure.AutoSize = True
         Me.checkbx_GraphOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphOutletPressure.Location = New System.Drawing.Point(506, 137)
+        Me.checkbx_GraphOutletPressure.Location = New System.Drawing.Point(466, 137)
         Me.checkbx_GraphOutletPressure.Name = "checkbx_GraphOutletPressure"
         Me.checkbx_GraphOutletPressure.Size = New System.Drawing.Size(116, 21)
         Me.checkbx_GraphOutletPressure.TabIndex = 72
@@ -778,7 +793,7 @@ Partial Class FormResultGraph
         '
         Me.checkbx_GraphInletPressure.AutoSize = True
         Me.checkbx_GraphInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphInletPressure.Location = New System.Drawing.Point(315, 137)
+        Me.checkbx_GraphInletPressure.Location = New System.Drawing.Point(290, 137)
         Me.checkbx_GraphInletPressure.Name = "checkbx_GraphInletPressure"
         Me.checkbx_GraphInletPressure.Size = New System.Drawing.Size(105, 21)
         Me.checkbx_GraphInletPressure.TabIndex = 71
@@ -795,55 +810,6 @@ Partial Class FormResultGraph
         Me.checkbx_GraphDP.TabIndex = 70
         Me.checkbx_GraphDP.Text = "Differential Pressure"
         Me.checkbx_GraphDP.UseVisualStyleBackColor = True
-        '
-        'ResultChart
-        '
-        Me.ResultChart.BackColor = System.Drawing.Color.LightSkyBlue
-        Me.ResultChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter
-        ChartArea1.AxisX.MajorGrid.Interval = 0R
-        ChartArea1.AxisX.MajorGrid.IntervalOffset = 0R
-        ChartArea1.AxisX.Title = "Sampling Time (s)"
-        ChartArea1.AxisX.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea1.AxisY.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea1.Name = "ChartArea1"
-        Me.ResultChart.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.ResultChart.Legends.Add(Legend1)
-        Me.ResultChart.Location = New System.Drawing.Point(50, 177)
-        Me.ResultChart.Name = "ResultChart"
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Series1.LabelToolTip = "X= #VALX, Y= #VALY"
-        Series1.Legend = "Legend1"
-        Series1.Name = "DP"
-        Series1.ToolTip = "X= #VALX, Y= #VALY"
-        Series2.ChartArea = "ChartArea1"
-        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series2.Legend = "Legend1"
-        Series2.Name = "Inlet Pressure"
-        Series3.ChartArea = "ChartArea1"
-        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series3.Legend = "Legend1"
-        Series3.Name = "Outlet Pressure"
-        Series4.ChartArea = "ChartArea1"
-        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series4.Legend = "Legend1"
-        Series4.Name = "Flowrate"
-        Series5.ChartArea = "ChartArea1"
-        Series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series5.Legend = "Legend1"
-        Series5.Name = "Temperature"
-        Me.ResultChart.Series.Add(Series1)
-        Me.ResultChart.Series.Add(Series2)
-        Me.ResultChart.Series.Add(Series3)
-        Me.ResultChart.Series.Add(Series4)
-        Me.ResultChart.Series.Add(Series5)
-        Me.ResultChart.Size = New System.Drawing.Size(1210, 600)
-        Me.ResultChart.TabIndex = 69
-        Me.ResultChart.Text = "ResultChart"
-        Title1.Name = "Result Graph"
-        Me.ResultChart.Titles.Add(Title1)
         '
         'dsp_GraphDrain3
         '
@@ -999,6 +965,63 @@ Partial Class FormResultGraph
         Me.txtbx_Graphflush1.TabIndex = 56
         Me.txtbx_Graphflush1.TabStop = False
         '
+        'CartesianChart_ResultGraph
+        '
+        Me.CartesianChart_ResultGraph.BackColor = System.Drawing.Color.AliceBlue
+        Me.CartesianChart_ResultGraph.Location = New System.Drawing.Point(50, 177)
+        Me.CartesianChart_ResultGraph.Name = "CartesianChart_ResultGraph"
+        Me.CartesianChart_ResultGraph.Size = New System.Drawing.Size(1210, 600)
+        Me.CartesianChart_ResultGraph.TabIndex = 75
+        '
+        'ResultChart
+        '
+        Me.ResultChart.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.ResultChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter
+        ChartArea1.AxisX.MajorGrid.Interval = 0R
+        ChartArea1.AxisX.MajorGrid.IntervalOffset = 0R
+        ChartArea1.AxisX.Title = "Sampling Time (s)"
+        ChartArea1.AxisX.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea1.AxisY.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea1.Name = "ChartArea1"
+        Me.ResultChart.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.ResultChart.Legends.Add(Legend1)
+        Me.ResultChart.Location = New System.Drawing.Point(50, 177)
+        Me.ResultChart.Name = "ResultChart"
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Series1.LabelToolTip = "X= #VALX, Y= #VALY"
+        Series1.Legend = "Legend1"
+        Series1.Name = "DP"
+        Series1.ToolTip = "X= #VALX, Y= #VALY"
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series2.Legend = "Legend1"
+        Series2.Name = "Inlet Pressure"
+        Series3.ChartArea = "ChartArea1"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series3.Legend = "Legend1"
+        Series3.Name = "Outlet Pressure"
+        Series4.ChartArea = "ChartArea1"
+        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series4.Legend = "Legend1"
+        Series4.Name = "Flowrate"
+        Series5.ChartArea = "ChartArea1"
+        Series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series5.Legend = "Legend1"
+        Series5.Name = "Temperature"
+        Me.ResultChart.Series.Add(Series1)
+        Me.ResultChart.Series.Add(Series2)
+        Me.ResultChart.Series.Add(Series3)
+        Me.ResultChart.Series.Add(Series4)
+        Me.ResultChart.Series.Add(Series5)
+        Me.ResultChart.Size = New System.Drawing.Size(1210, 600)
+        Me.ResultChart.TabIndex = 69
+        Me.ResultChart.Text = "ResultChart"
+        Title1.Name = "Result Graph"
+        Me.ResultChart.Titles.Add(Title1)
+        '
         'dsp_Home
         '
         Me.dsp_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1032,24 +1055,27 @@ Partial Class FormResultGraph
         Me.Label1.Text = "Result Graph"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'CartesianChart_ResultGraph
+        'ComboBox1
         '
-        Me.CartesianChart_ResultGraph.BackColor = System.Drawing.Color.AliceBlue
-        Me.CartesianChart_ResultGraph.Location = New System.Drawing.Point(50, 177)
-        Me.CartesianChart_ResultGraph.Name = "CartesianChart_ResultGraph"
-        Me.CartesianChart_ResultGraph.Size = New System.Drawing.Size(1210, 600)
-        Me.CartesianChart_ResultGraph.TabIndex = 75
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"DP vs Seconds", "DP vs Back Pressure", "DP vs Flow Rate"})
+        Me.ComboBox1.Location = New System.Drawing.Point(1091, 193)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(150, 25)
+        Me.ComboBox1.TabIndex = 14
         '
-        'checkbx_GraphBP
+        'CheckBox1
         '
-        Me.checkbx_GraphBP.AutoSize = True
-        Me.checkbx_GraphBP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphBP.Location = New System.Drawing.Point(718, 137)
-        Me.checkbx_GraphBP.Name = "checkbx_GraphBP"
-        Me.checkbx_GraphBP.Size = New System.Drawing.Size(107, 21)
-        Me.checkbx_GraphBP.TabIndex = 72
-        Me.checkbx_GraphBP.Text = "Back Pressure"
-        Me.checkbx_GraphBP.UseVisualStyleBackColor = True
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox1.Location = New System.Drawing.Point(1135, 137)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(91, 21)
+        Me.CheckBox1.TabIndex = 74
+        Me.CheckBox1.Text = "Pump RPM"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'FormResultGraph
         '
@@ -1157,4 +1183,6 @@ Partial Class FormResultGraph
     Friend WithEvents txtbx_GraphSerialUID As TextBox
     Friend WithEvents CartesianChart_ResultGraph As LiveChartsCore.SkiaSharpView.WinForms.CartesianChart
     Friend WithEvents checkbx_GraphBP As CheckBox
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents CheckBox1 As CheckBox
 End Class

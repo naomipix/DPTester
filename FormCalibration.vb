@@ -1,4 +1,12 @@
-﻿Public Class FormCalibration
+﻿Imports LiveChartsCore
+Imports LiveChartsCore.Kernel.Sketches
+Imports LiveChartsCore.SkiaSharpView
+Imports LiveChartsCore.SkiaSharpView.Painting
+Imports LiveChartsCore.SkiaSharpView.VisualElements
+Imports SkiaSharp
+Imports LiveChartsCore.Defaults
+
+Public Class FormCalibration
     Dim CurrentTabPage As TabPage
 
 
@@ -82,6 +90,9 @@
     Private Sub FormCalibration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Always Maximize
         Me.WindowState = FormWindowState.Maximized
+
+        ' Initialize Chart
+        InitializeLiveChart()
 
         ' Load Version
         lbl_Version.Text = PublicVariables.AppVersion
@@ -256,6 +267,117 @@
         panel_FormControl.Visible = True
     End Sub
 
+    Private Sub InitializeLiveChartXAxes(XLimit As Integer) '(XLimit As Integer, XScaleMSec As Integer)
+        'Dim XScaleSec As Double = XScaleMSec / 1000
+        'Dim XLabelArr(XLimit / XScaleSec) As String
+
+        'For i As Integer = 0 To XLimit / XScaleSec
+        '    XLabelArr(i) = i * XScaleSec
+        'Next
+
+        For Each LiveGraphChart In {CartesianChart_CalibrationLiveGraph} 'CartesianChartArr
+            LiveGraphChart.XAxes = New ICartesianAxis() {
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .Name = "Time (s)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.Black),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(0, 20, 0, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                    .TicksPaint = New SolidColorPaint(SKColors.Black),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                    .DrawTicksPath = True,
+                    .MinLimit = 0
+                }
+            }
+        Next
+
+        ' .MinStep = 1,
+        ' .MaxLimit = XLimit,
+    End Sub
+
+    Private Sub InitializeLiveChart()
+
+        For Each LiveGraphChart In {CartesianChart_CalibrationLiveGraph} 'CartesianChartArr
+            LiveGraphChart.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
+
+            LiveGraphChart.Title = New LabelVisual() With {
+                .Text = "DP Tester Live Graph",
+                .TextSize = 14,
+                .Padding = New LiveChartsCore.Drawing.Padding(15),
+                .Paint = New SolidColorPaint(SKColors.Black)
+            }
+
+            InitializeLiveChartXAxes(10)
+
+            LiveGraphChart.YAxes = New ICartesianAxis() {
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .Name = "Differential Pressure (kPa)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.Blue),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.Blue),
+                    .TicksPaint = New SolidColorPaint(SKColors.Blue),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Blue),
+                    .DrawTicksPath = True
+                },
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .Name = "Flowrate (l/Min)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .TicksPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .SubticksPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .DrawTicksPath = True,
+                    .ShowSeparatorLines = False,
+                    .Position = LiveChartsCore.Measure.AxisPosition.End
+                }
+            }
+
+            LiveGraphChart.Series = New ISeries() {
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "1",
+                    .Values = CalibrateChartDPValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Blue,
+                        .StrokeThickness = 2
+                    },
+                    .GeometrySize = 0,
+                    .ScalesYAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "2",
+                    .Values = CalibrateChartBPValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Black,
+                        .StrokeThickness = 2
+                    },
+                    .GeometrySize = 0,
+                    .ScalesYAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "3",
+                    .Values = CalibrateChartFLWRValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.DarkMagenta,
+                        .StrokeThickness = 2
+                    },
+                    .GeometrySize = 0,
+                    .ScalesYAt = 1
+                }
+            }
+        Next
+    End Sub
+
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
 
         Me.Close()
@@ -275,6 +397,7 @@
             txtbx_CalOutletPressure.Text = Nothing
             txtbx_CalFlowrate.Text = Nothing
             txtbx_CalTemperature.Text = Nothing
+            txtbx_CalBackpress.Text = Nothing
             txtbx_CalOffset.Text = Nothing
             tmr_Verification.Enabled = False
             txtbx_CalResult.Text = Nothing
@@ -282,6 +405,7 @@
             txtbx_VerOutletPressure.Text = Nothing
             txtbx_VerFlowrate.Text = Nothing
             txtbx_VerTemperature.Text = Nothing
+            txtbx_VerBackpress.Text = Nothing
             txtbx_VerDP.Text = Nothing
             txtbx_VerStatus.Text = Nothing
             txtbx_VerStatus.BackColor = SystemColors.Window
@@ -334,6 +458,20 @@
             newrw(5) = Cal_dp
             newrw(6) = Cal_backpressure
             dtCalibration.Rows.InsertAt(newrw, 0)
+
+            CalibrateChartDPValue.Add(New ObservablePoint With {
+                .X = Cal_samplingtime,
+                .Y = Cal_dp
+            })
+            CalibrateChartFLWRValue.Add(New ObservablePoint With {
+                .X = Cal_samplingtime,
+                .Y = Cal_flowrate
+            })
+            CalibrateChartBPValue.Add(New ObservablePoint With {
+                .X = Cal_samplingtime,
+                .Y = Cal_backpressure
+            })
+
             With dgv_CalibrationResult
                 .BackgroundColor = SystemColors.Window
 
@@ -520,6 +658,20 @@
             newrw(5) = Ver_dp
             newrw(6) = Ver_backpressure
             dtVerification.Rows.InsertAt(newrw, 0)
+
+            CalibrateChartDPValue.Add(New ObservablePoint With {
+                .X = Ver_samplingtime,
+                .Y = Ver_dp
+            })
+            CalibrateChartFLWRValue.Add(New ObservablePoint With {
+                .X = Ver_samplingtime,
+                .Y = Ver_flowrate
+            })
+            CalibrateChartBPValue.Add(New ObservablePoint With {
+                .X = Ver_samplingtime,
+                .Y = Ver_backpressure
+            })
+
             With dgv_VerificationResult
                 .BackgroundColor = SystemColors.Window
 
@@ -824,6 +976,16 @@
                 Cal_avgtemperature1 = 0
                 Cal_avgtemperature2 = 0
 
+                Cal_backpressure = 0
+                Cal_avgbackpressure1 = 0
+                Cal_avgbackpressure2 = 0
+                Cal_finalbackpressure = 0
+
+                ' Clear Live Graph Value
+                CalibrateChartDPValue.Clear()
+                CalibrateChartFLWRValue.Clear()
+                CalibrateChartBPValue.Clear()
+
                 tmr_Calibration.Enabled = True
             End If
         Else
@@ -865,6 +1027,16 @@
                 Ver_finaldp = 0
                 Ver_finalflowrate = 0
                 Ver_finaltemperature = 0
+
+                Ver_backpressure = 0
+                Ver_avgbackpressure1 = 0
+                Ver_avgbackpressure2 = 0
+                Ver_finalbackpressure = 0
+
+                ' Clear Live Graph Value
+                CalibrateChartDPValue.Clear()
+                CalibrateChartFLWRValue.Clear()
+                CalibrateChartBPValue.Clear()
 
                 tmr_Verification.Enabled = True
             End If
