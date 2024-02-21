@@ -133,6 +133,10 @@ Public Class FormMain
     Public btn_ValveCtrlArr(18) As Button
     Public btn_Manualothersarr(20) As Button
 
+    ' For Live Graph DP Test Points
+    Dim DP1Enabled As Boolean = False
+    Dim DP2Enabled As Boolean = False
+
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Start Clock Timer
         TimerModule.clockTimer.Start()
@@ -142,7 +146,9 @@ Public Class FormMain
 
 
         ' Initialize Chart
+        cmbx_LiveGraphSelection.SelectedIndex = 0
         InitializeLiveChart()
+        CartesianChart_MainLiveGraph.YAxes(0).IsVisible = True
 
         ' Load Ini file
         IniFileInitialize.ReadConfig()
@@ -490,13 +496,13 @@ Public Class FormMain
                     .TicksPaint = New SolidColorPaint(SKColors.Black),
                     .SubticksPaint = New SolidColorPaint(SKColors.Black),
                     .DrawTicksPath = True,
+                    .MinStep = 1,
+                    .MaxLimit = XLimit,
                     .MinLimit = 0
                 }
             }
         Next
 
-        ' .MinStep = 1,
-        ' .MaxLimit = XLimit,
     End Sub
 
     Private Sub InitializeLiveChart()
@@ -515,66 +521,196 @@ Public Class FormMain
 
             LiveGraphChart.YAxes = New ICartesianAxis() {
                 New LiveChartsCore.SkiaSharpView.Axis() With {
-                    .Name = "Differential Pressure (kPa)",
+                    .IsVisible = False,
+                    .Name = "Pressure (kPa)",
                     .NameTextSize = 14,
-                    .NamePaint = New SolidColorPaint(SKColors.Blue),
+                    .NamePaint = New SolidColorPaint(SKColors.Black),
                     .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                     .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
                     .TextSize = 12,
-                    .LabelsPaint = New SolidColorPaint(SKColors.Blue),
-                    .TicksPaint = New SolidColorPaint(SKColors.Blue),
-                    .SubticksPaint = New SolidColorPaint(SKColors.Blue),
+                    .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                    .TicksPaint = New SolidColorPaint(SKColors.Black),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Black),
                     .DrawTicksPath = True
+                },
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .IsVisible = False,
+                    .Name = "Pump RPM (RPM)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.Orange),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.Orange),
+                    .TicksPaint = New SolidColorPaint(SKColors.Orange),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Orange),
+                    .DrawTicksPath = True,
+                    .ShowSeparatorLines = False
+                },
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .IsVisible = False,
+                    .Name = "Temperature (C)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.Red),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.Red),
+                    .TicksPaint = New SolidColorPaint(SKColors.Red),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Red),
+                    .DrawTicksPath = True,
+                    .ShowSeparatorLines = False
                 },
                 New LiveChartsCore.SkiaSharpView.Axis() With {
                     .Name = "Flowrate (l/Min)",
                     .NameTextSize = 14,
-                    .NamePaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .NamePaint = New SolidColorPaint(SKColors.Brown),
                     .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                     .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
                     .TextSize = 12,
-                    .LabelsPaint = New SolidColorPaint(SKColors.DarkMagenta),
-                    .TicksPaint = New SolidColorPaint(SKColors.DarkMagenta),
-                    .SubticksPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .LabelsPaint = New SolidColorPaint(SKColors.Brown),
+                    .TicksPaint = New SolidColorPaint(SKColors.Brown),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Brown),
                     .DrawTicksPath = True,
                     .ShowSeparatorLines = False,
                     .Position = LiveChartsCore.Measure.AxisPosition.End
                 }
             }
 
+            'LiveGraphChart.Series = New ISeries() {
+            '    New LineSeries(Of ObservablePoint)() With {
+            '        .Name = "1",
+            '        .Values = LiveChartDPValue,
+            '        .Fill = Nothing,
+            '        .Stroke = New SolidColorPaint With {
+            '            .Color = SKColors.Blue,
+            '            .StrokeThickness = 2
+            '        },
+            '        .GeometrySize = 0,
+            '        .ScalesYAt = 0
+            '    },
+            '    New LineSeries(Of ObservablePoint)() With {
+            '        .Name = "2",
+            '        .Values = LiveChartBPValue,
+            '        .Fill = Nothing,
+            '        .Stroke = New SolidColorPaint With {
+            '            .Color = SKColors.Black,
+            '            .StrokeThickness = 2
+            '        },
+            '        .GeometrySize = 0,
+            '        .ScalesYAt = 0
+            '    },
+            '    New LineSeries(Of ObservablePoint)() With {
+            '        .Name = "3",
+            '        .Values = LiveChartFLWRValue,
+            '        .Fill = Nothing,
+            '        .Stroke = New SolidColorPaint With {
+            '            .Color = SKColors.DarkMagenta,
+            '            .StrokeThickness = 2
+            '        },
+            '        .GeometrySize = 0,
+            '        .ScalesYAt = 1
+            '    }
+            '}
+
             LiveGraphChart.Series = New ISeries() {
                 New LineSeries(Of ObservablePoint)() With {
-                    .Name = "1",
+                    .Name = "Diff. Pressure",
                     .Values = LiveChartDPValue,
                     .Fill = Nothing,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.Blue,
-                        .StrokeThickness = 2
+                        .StrokeThickness = 1
                     },
+                    .GeometryFill = New SolidColorPaint(SKColors.Blue),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
-                    .Name = "2",
+                    .Name = "Inlet Pressure",
+                    .Values = LiveChartInletValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Green,
+                        .StrokeThickness = 1
+                    },
+                    .GeometryFill = New SolidColorPaint(SKColors.Green),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                    .GeometrySize = 0,
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "Outlet Pressure",
+                    .Values = LiveChartOutletValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Magenta,
+                        .StrokeThickness = 1
+                    },
+                    .GeometryFill = New SolidColorPaint(SKColors.Magenta),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                    .GeometrySize = 0,
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "Back Pressure",
                     .Values = LiveChartBPValue,
                     .Fill = Nothing,
                     .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.Black,
-                        .StrokeThickness = 2
+                        .Color = SKColors.DarkOrange,
+                        .StrokeThickness = 1
                     },
+                    .GeometryFill = New SolidColorPaint(SKColors.DarkOrange),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
-                    .Name = "3",
+                    .Name = "Pump Speed",
+                    .Values = LiveChartRPMValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Orange,
+                        .StrokeThickness = 1
+                    },
+                    .GeometryFill = New SolidColorPaint(SKColors.Orange),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                    .GeometrySize = 0,
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "Flowrate",
                     .Values = LiveChartFLWRValue,
                     .Fill = Nothing,
                     .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.DarkMagenta,
-                        .StrokeThickness = 2
+                        .Color = SKColors.Brown,
+                        .StrokeThickness = 1
                     },
+                    .GeometryFill = New SolidColorPaint(SKColors.Brown),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 1
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "Temperature",
+                    .Values = LiveChartTempValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Red,
+                        .StrokeThickness = 1
+                    },
+                    .GeometryFill = New SolidColorPaint(SKColors.Red),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                    .GeometrySize = 0,
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
                 }
             }
         Next
@@ -948,6 +1084,79 @@ Public Class FormMain
     End Sub
 
     Private Sub CheckForProductionCount()
+
+    End Sub
+
+    Private Sub cmbx_LiveGraphSelection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_LiveGraphSelection.SelectedIndexChanged
+
+        If CartesianChart_MainLiveGraph.Series.Count > 0 Then
+            ' Reset Y-Axis Visibility
+            With CartesianChart_MainLiveGraph
+                .YAxes(0).IsVisible = False
+                .YAxes(2).IsVisible = False
+                .YAxes(1).IsVisible = False
+            End With
+
+            ' Differential Pressure
+            If cmbx_LiveGraphSelection.SelectedIndex = 0 Then
+                With CartesianChart_MainLiveGraph
+                    .Series(0).IsVisible = True
+                    .YAxes(0).IsVisible = True
+
+                    If DP1Enabled Then
+                        .Sections(0).IsVisible = True
+                    End If
+                    If DP2Enabled Then
+                        .Sections(1).IsVisible = True
+                    End If
+
+                End With
+            Else
+                With CartesianChart_MainLiveGraph
+                    .Series(0).IsVisible = False
+                End With
+            End If
+
+            ' Inlet/Outlet/Back Pressure
+            If cmbx_LiveGraphSelection.SelectedIndex = 1 Then
+                With CartesianChart_MainLiveGraph
+                    .Series(1).IsVisible = True
+                    .Series(2).IsVisible = True
+                    .Series(3).IsVisible = True
+                    .YAxes(0).IsVisible = True
+                End With
+            Else
+                With CartesianChart_MainLiveGraph
+                    .Series(1).IsVisible = False
+                    .Series(2).IsVisible = False
+                    .Series(3).IsVisible = False
+                End With
+            End If
+
+            ' Temperature
+            If cmbx_LiveGraphSelection.SelectedIndex = 2 Then
+                With CartesianChart_MainLiveGraph
+                    .Series(6).IsVisible = True
+                    .YAxes(2).IsVisible = True
+                End With
+            Else
+                With CartesianChart_MainLiveGraph
+                    .Series(6).IsVisible = False
+                End With
+            End If
+
+            ' Pump Speed
+            If cmbx_LiveGraphSelection.SelectedIndex = 3 Then
+                With CartesianChart_MainLiveGraph
+                    .Series(4).IsVisible = True
+                    .YAxes(1).IsVisible = True
+                End With
+            Else
+                With CartesianChart_MainLiveGraph
+                    .Series(4).IsVisible = False
+                End With
+            End If
+        End If
 
     End Sub
 #End Region
@@ -3072,10 +3281,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         Dim Drain3cycletime As Integer
 
         Dim Flush1Enabled As Boolean = False
-        Dim DP1Enabled As Boolean = False
-
         Dim Flush2Enabled As Boolean = False
-        Dim DP2Enabled As Boolean = False
 
         Dim Drain1Enabled As Boolean = False
         Dim Drain2Enabled As Boolean = False
@@ -3167,8 +3373,12 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
             ' Clear Live Graph Value
             LiveChartDPValue.Clear()
-            LiveChartFLWRValue.Clear()
+            LiveChartInletValue.Clear()
+            LiveChartOutletValue.Clear()
             LiveChartBPValue.Clear()
+            LiveChartRPMValue.Clear()
+            LiveChartFLWRValue.Clear()
+            LiveChartTempValue.Clear()
 
             ' Set Live Graph Cycle Time
             'InitializeLiveChartXAxes(MainCycletime, Resultcapturetimer.Interval)
@@ -3230,12 +3440,20 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                     End If
                 End If
 
+                Dim ShowDP1Section As Boolean = DP1Enabled
+                Dim ShowDP2Section As Boolean = DP2Enabled
+
+                If cmbx_LiveGraphSelection.SelectedIndex > 0 Then
+                    ShowDP1Section = False
+                    ShowDP2Section = False
+                End If
+
                 CartesianChart_MainLiveGraph.Sections = New RectangularSection() {
                     New RectangularSection With {
                         .IsVisible = DP1Enabled,
                         .Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
                         .Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
-                        .Xi = CInt((Flush2Start - 1) - (MainDptestpoints * (1000 / Resultcapturetimer.Interval))),
+                        .Xi = CInt((Flush2Start - 1) - (MainDptestpoints * (Resultcapturetimer.Interval / 1000))),
                         .Xj = Flush2Start - 1,
                         .Stroke = New SolidColorPaint With {
                             .Color = SKColors.Salmon,
@@ -3247,7 +3465,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                         .IsVisible = DP2Enabled,
                         .Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
                         .Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
-                        .Xi = CInt((Drain1Start - 1) - (MainDptestpoints * (1000 / Resultcapturetimer.Interval))),
+                        .Xi = CInt((Drain1Start - 1) - (MainDptestpoints * (Resultcapturetimer.Interval / 1000))),
                         .Xj = Drain1Start - 1,
                         .Stroke = New SolidColorPaint With {
                             .Color = SKColors.Salmon,
@@ -3758,7 +3976,6 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
     Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
         FormPixel.Show()
     End Sub
-
 
 End Class
 

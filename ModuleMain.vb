@@ -218,12 +218,20 @@ Module PublicVariables
     Public CartesianChartArr As CartesianChart() = {FormMain.CartesianChart_MainLiveGraph, FormCalibration.CartesianChart_CalibrationLiveGraph}
 
     Public LiveChartDPValue = New ObservableCollection(Of ObservablePoint)({})
-    Public LiveChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartInletValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartOutletValue = New ObservableCollection(Of ObservablePoint)({})
     Public LiveChartBPValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartRPMValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartTempValue = New ObservableCollection(Of ObservablePoint)({})
 
     Public CalibrateChartDPValue = New ObservableCollection(Of ObservablePoint)({})
-    Public CalibrateChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartInletValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartOutletValue = New ObservableCollection(Of ObservablePoint)({})
     Public CalibrateChartBPValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartRPMValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartTempValue = New ObservableCollection(Of ObservablePoint)({})
 End Module
 
 ' DataGridView DoubleBuffering Module

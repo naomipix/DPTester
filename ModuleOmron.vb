@@ -69,6 +69,8 @@ Module ModuleOmron
     Public result_avgbackpressure2 As Decimal
     Public result_finalbackpressure As Decimal
 
+    Public result_pumprpm As Decimal
+
     Public dtrecipetable As DataTable
     Public MainDptest1start As Integer
     Public MainDptest1end As Integer
@@ -1846,6 +1848,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
             result_temperature = AIn(13)
             result_dp = result_inletpressure - result_outletpressure
             result_backpressure = AIn(1)
+            result_pumprpm = AIn(2)
             newrw(0) = serialusageid
             newrw(1) = result_samplingtime
             newrw(2) = result_temperature
@@ -1854,6 +1857,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
             newrw(5) = result_outletpressure
             newrw(6) = result_dp
             newrw(7) = result_backpressure
+            newrw(8) = result_pumprpm
             dtresult.Rows.Add(newrw)
 
             'LiveChartDPValue.Add(result_dp)
@@ -1863,13 +1867,29 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
                 .X = result_samplingtime,
                 .Y = result_dp
             })
-            LiveChartFLWRValue.Add(New ObservablePoint With {
+            LiveChartInletValue.Add(New ObservablePoint With {
                 .X = result_samplingtime,
-                .Y = result_flowrate
+                .Y = result_inletpressure
+            })
+            LiveChartOutletValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_outletpressure
             })
             LiveChartBPValue.Add(New ObservablePoint With {
                 .X = result_samplingtime,
                 .Y = result_backpressure
+            })
+            LiveChartRPMValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_pumprpm
+            })
+            LiveChartFLWRValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_flowrate
+            })
+            LiveChartTempValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_temperature
             })
         Else
             PCStatus(1)(10) = False
@@ -2033,7 +2053,8 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
                         {"inlet_pressure", dtresult.Rows(i)("Inlet Pressure (kPa)")},
                         {"outlet_pressure", dtresult.Rows(i)("Outlet Pressure (kPa)")},
                         {"calculated_dp_pressure", dtresult.Rows(i)("Differential Pressure (kPa)")},
-                        {"back_pressure", dtresult.Rows(i)("Back Pressure (kPa)")}
+                        {"back_pressure", dtresult.Rows(i)("Back Pressure (kPa)")},
+                        {"pump_rpm", dtresult.Rows(i)("Pump Speed (RPM)")}
                     }
                     SQL.InsertRecord("ProductResult", resultparameter)
                 Next
@@ -2114,6 +2135,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
             FormCalibration.dtCalibration.Columns.Add("Outlet Pressure (kPa)")
             FormCalibration.dtCalibration.Columns.Add("Differential Pressure (kPa)")
             FormCalibration.dtCalibration.Columns.Add("Back Pressure (kPa)")
+            FormCalibration.dtCalibration.Columns.Add("Pump Speed (RPM)")
         End If
 
         If str = "Verification" Then
@@ -2124,6 +2146,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
             FormCalibration.dtVerification.Columns.Add("Outlet Pressure (kPa)")
             FormCalibration.dtVerification.Columns.Add("Differential Pressure (kPa)")
             FormCalibration.dtVerification.Columns.Add("Back Pressure (kPa)")
+            FormCalibration.dtVerification.Columns.Add("Pump Speed (RPM)")
         End If
 
         If str = "Production_Result" Then
@@ -2136,6 +2159,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
             dtresult.Columns.Add("Outlet Pressure (kPa)")
             dtresult.Columns.Add("Differential Pressure (kPa)")
             dtresult.Columns.Add("Back Pressure (kPa)")
+            dtresult.Columns.Add("Pump Speed (RPM)")
         End If
     End Sub
 

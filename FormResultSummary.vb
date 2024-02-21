@@ -470,11 +470,13 @@ Public Class FormResultSummary
 
             'Change header name
             .Columns("sampling_time").HeaderCell.Value = "Sampling Time (s)"
-            .Columns("temperature").HeaderCell.Value = "Temperature (K)"
+            .Columns("temperature").HeaderCell.Value = "Temperature (C)"
             .Columns("flowrate").HeaderCell.Value = "Flowrate (l/min)"
             .Columns("inlet_pressure").HeaderCell.Value = "Inlet Pressure (kPa)"
             .Columns("outlet_pressure").HeaderCell.Value = "Outlet Pressure (kPa)"
             .Columns("calculated_dp_pressure").HeaderCell.Value = "Differential Pressure (kPa)"
+            .Columns("back_pressure").HeaderCell.Value = "Back Pressure (kPa)"
+            .Columns("pump_rpm").HeaderCell.Value = "Pump Speed (RPM)"
 
             'Set Column Width
             .Columns("sampling_time").Width = 150
@@ -483,6 +485,8 @@ Public Class FormResultSummary
             .Columns("inlet_pressure").Width = 200
             .Columns("outlet_pressure").Width = 200
             .Columns("calculated_dp_pressure").Width = 200
+            .Columns("back_pressure").Width = 200
+            .Columns("pump_rpm").Width = 200
 
             'Header Cell Alignment
             .Columns("sampling_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -491,6 +495,8 @@ Public Class FormResultSummary
             .Columns("inlet_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("outlet_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("calculated_dp_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("back_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("pump_rpm").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             'Header Cell Font Bold
             .Columns("sampling_time").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
@@ -499,6 +505,8 @@ Public Class FormResultSummary
             .Columns("inlet_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
             .Columns("outlet_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
             .Columns("calculated_dp_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+            .Columns("back_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+            .Columns("pump_rpm").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
 
         End With
 

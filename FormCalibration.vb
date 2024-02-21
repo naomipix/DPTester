@@ -5,6 +5,7 @@ Imports LiveChartsCore.SkiaSharpView.Painting
 Imports LiveChartsCore.SkiaSharpView.VisualElements
 Imports SkiaSharp
 Imports LiveChartsCore.Defaults
+Imports System.Collections.ObjectModel
 
 Public Class FormCalibration
     Dim CurrentTabPage As TabPage
@@ -74,6 +75,8 @@ Public Class FormCalibration
     Public Ver_avgbackpressure2 As Decimal
     Public Ver_finalbackpressure As Decimal
 
+    Public Ver_pumprpm As Decimal
+    Public Cal_pumprpm As Decimal
 
 
 
@@ -265,6 +268,9 @@ Public Class FormCalibration
 
         ' Display Form Control
         panel_FormControl.Visible = True
+
+        ' Reset Graph View Selection
+        SetVisibleLineSeries()
     End Sub
 
     Private Sub InitializeLiveChartXAxes(XLimit As Integer) '(XLimit As Integer, XScaleMSec As Integer)
@@ -313,27 +319,55 @@ Public Class FormCalibration
 
             LiveGraphChart.YAxes = New ICartesianAxis() {
                 New LiveChartsCore.SkiaSharpView.Axis() With {
-                    .Name = "Differential Pressure (kPa)",
+                    .Name = "Pressure (kPa)",
                     .NameTextSize = 14,
-                    .NamePaint = New SolidColorPaint(SKColors.Blue),
+                    .NamePaint = New SolidColorPaint(SKColors.Black),
                     .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                     .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
                     .TextSize = 12,
-                    .LabelsPaint = New SolidColorPaint(SKColors.Blue),
-                    .TicksPaint = New SolidColorPaint(SKColors.Blue),
-                    .SubticksPaint = New SolidColorPaint(SKColors.Blue),
+                    .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                    .TicksPaint = New SolidColorPaint(SKColors.Black),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Black),
                     .DrawTicksPath = True
+                },
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .Name = "Pump RPM (RPM)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.Orange),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.Orange),
+                    .TicksPaint = New SolidColorPaint(SKColors.Orange),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Orange),
+                    .DrawTicksPath = True,
+                    .ShowSeparatorLines = False,
+                    .Position = LiveChartsCore.Measure.AxisPosition.End
+                },
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .Name = "Temperature (C)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.Red),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.Red),
+                    .TicksPaint = New SolidColorPaint(SKColors.Red),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Red),
+                    .DrawTicksPath = True,
+                    .ShowSeparatorLines = False,
+                    .Position = LiveChartsCore.Measure.AxisPosition.End
                 },
                 New LiveChartsCore.SkiaSharpView.Axis() With {
                     .Name = "Flowrate (l/Min)",
                     .NameTextSize = 14,
-                    .NamePaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .NamePaint = New SolidColorPaint(SKColors.Brown),
                     .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                     .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
                     .TextSize = 12,
-                    .LabelsPaint = New SolidColorPaint(SKColors.DarkMagenta),
-                    .TicksPaint = New SolidColorPaint(SKColors.DarkMagenta),
-                    .SubticksPaint = New SolidColorPaint(SKColors.DarkMagenta),
+                    .LabelsPaint = New SolidColorPaint(SKColors.Brown),
+                    .TicksPaint = New SolidColorPaint(SKColors.Brown),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Brown),
                     .DrawTicksPath = True,
                     .ShowSeparatorLines = False,
                     .Position = LiveChartsCore.Measure.AxisPosition.End
@@ -342,40 +376,181 @@ Public Class FormCalibration
 
             LiveGraphChart.Series = New ISeries() {
                 New LineSeries(Of ObservablePoint)() With {
-                    .Name = "1",
+                    .Name = "Diff. Pressure",
                     .Values = CalibrateChartDPValue,
                     .Fill = Nothing,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.Blue,
-                        .StrokeThickness = 2
+                        .StrokeThickness = 1
                     },
+                    .GeometryFill = New SolidColorPaint(SKColors.Blue),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
-                    .Name = "2",
+                    .Name = "Inlet Pressure",
+                    .Values = CalibrateChartInletValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Green,
+                        .StrokeThickness = 1
+                    },
+                    .GeometryFill = New SolidColorPaint(SKColors.Green),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                    .GeometrySize = 0,
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "Outlet Pressure",
+                    .Values = CalibrateChartOutletValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Magenta,
+                        .StrokeThickness = 1
+                    },
+                    .GeometryFill = New SolidColorPaint(SKColors.Magenta),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                    .GeometrySize = 0,
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "Back Pressure",
                     .Values = CalibrateChartBPValue,
                     .Fill = Nothing,
                     .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.Black,
-                        .StrokeThickness = 2
+                        .Color = SKColors.DarkOrange,
+                        .StrokeThickness = 1
                     },
+                    .GeometryFill = New SolidColorPaint(SKColors.DarkOrange),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0
+                    .ScalesYAt = 0,
+                    .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
-                    .Name = "3",
+                    .Name = "Pump Speed",
+                    .Values = CalibrateChartRPMValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Orange,
+                        .StrokeThickness = 1
+                    },
+                    .GeometryFill = New SolidColorPaint(SKColors.Orange),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                    .GeometrySize = 0,
+                    .ScalesYAt = 1,
+                    .ScalesXAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "Flowrate",
                     .Values = CalibrateChartFLWRValue,
                     .Fill = Nothing,
                     .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.DarkMagenta,
-                        .StrokeThickness = 2
+                        .Color = SKColors.Brown,
+                        .StrokeThickness = 1
                     },
+                    .GeometryFill = New SolidColorPaint(SKColors.Brown),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 1
+                    .ScalesYAt = 3,
+                    .ScalesXAt = 0
+                },
+                New LineSeries(Of ObservablePoint)() With {
+                    .Name = "Temperature",
+                    .Values = CalibrateChartTempValue,
+                    .Fill = Nothing,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Red,
+                        .StrokeThickness = 1
+                    },
+                    .GeometryFill = New SolidColorPaint(SKColors.Red),
+                    .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                    .GeometrySize = 0,
+                    .ScalesYAt = 2,
+                    .ScalesXAt = 0
                 }
             }
         Next
+    End Sub
+
+    Private Sub checkbx_Graph_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_GraphDP.CheckedChanged, checkbx_GraphInletPressure.CheckedChanged, checkbx_GraphOutletPressure.CheckedChanged, checkbx_GraphBP.CheckedChanged, checkbx_GraphFlowrate.CheckedChanged, checkbx_GraphTemperature.CheckedChanged, checkbx_GraphRPM.CheckedChanged
+        SetVisibleLineSeries()
+    End Sub
+
+    Private Sub SetVisibleLineSeries()
+        If checkbx_GraphDP.Checked Then
+            With CartesianChart_CalibrationLiveGraph
+                .Series(0).IsVisible = True
+            End With
+        Else
+            With CartesianChart_CalibrationLiveGraph
+                .Series(0).IsVisible = False
+            End With
+        End If
+
+        If checkbx_GraphInletPressure.Checked Then
+            With CartesianChart_CalibrationLiveGraph
+                .Series(1).IsVisible = True
+            End With
+        Else
+            With CartesianChart_CalibrationLiveGraph
+                .Series(1).IsVisible = False
+            End With
+        End If
+
+        If checkbx_GraphOutletPressure.Checked Then
+            With CartesianChart_CalibrationLiveGraph
+                .Series(2).IsVisible = True
+            End With
+        Else
+            With CartesianChart_CalibrationLiveGraph
+                .Series(2).IsVisible = False
+            End With
+        End If
+
+        If checkbx_GraphBP.Checked Then
+            With CartesianChart_CalibrationLiveGraph
+                .Series(3).IsVisible = True
+            End With
+        Else
+            With CartesianChart_CalibrationLiveGraph
+                .Series(3).IsVisible = False
+            End With
+        End If
+
+        If checkbx_GraphFlowrate.Checked Then
+            With CartesianChart_CalibrationLiveGraph
+                .Series(5).IsVisible = True
+            End With
+        Else
+            With CartesianChart_CalibrationLiveGraph
+                .Series(5).IsVisible = False
+            End With
+        End If
+
+        If checkbx_GraphTemperature.Checked Then
+            With CartesianChart_CalibrationLiveGraph
+                .Series(6).IsVisible = True
+            End With
+        Else
+            With CartesianChart_CalibrationLiveGraph
+                .Series(6).IsVisible = False
+            End With
+        End If
+
+        If checkbx_GraphRPM.Checked Then
+            With CartesianChart_CalibrationLiveGraph
+                .Series(4).IsVisible = True
+            End With
+        Else
+            With CartesianChart_CalibrationLiveGraph
+                .Series(4).IsVisible = False
+            End With
+        End If
     End Sub
 
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
@@ -450,6 +625,7 @@ Public Class FormCalibration
             Cal_temperature = AIn(13)
             Cal_dp = Cal_inletpressure - Cal_outletpressure
             Cal_backpressure = AIn(1)
+            Cal_pumprpm = AIn(2)
             newrw(0) = Cal_samplingtime
             newrw(1) = Cal_temperature
             newrw(2) = Cal_flowrate
@@ -457,19 +633,36 @@ Public Class FormCalibration
             newrw(4) = Cal_outletpressure
             newrw(5) = Cal_dp
             newrw(6) = Cal_backpressure
+            newrw(7) = Cal_pumprpm
             dtCalibration.Rows.InsertAt(newrw, 0)
 
             CalibrateChartDPValue.Add(New ObservablePoint With {
                 .X = Cal_samplingtime,
                 .Y = Cal_dp
             })
-            CalibrateChartFLWRValue.Add(New ObservablePoint With {
+            CalibrateChartInletValue.Add(New ObservablePoint With {
                 .X = Cal_samplingtime,
-                .Y = Cal_flowrate
+                .Y = Cal_inletpressure
+            })
+            CalibrateChartOutletValue.Add(New ObservablePoint With {
+                .X = Cal_samplingtime,
+                .Y = Cal_outletpressure
             })
             CalibrateChartBPValue.Add(New ObservablePoint With {
                 .X = Cal_samplingtime,
                 .Y = Cal_backpressure
+            })
+            CalibrateChartRPMValue.Add(New ObservablePoint With {
+                .X = Cal_samplingtime,
+                .Y = Cal_pumprpm
+            })
+            CalibrateChartFLWRValue.Add(New ObservablePoint With {
+                .X = Cal_samplingtime,
+                .Y = Cal_flowrate
+            })
+            CalibrateChartTempValue.Add(New ObservablePoint With {
+                .X = Cal_samplingtime,
+                .Y = Cal_temperature
             })
 
             With dgv_CalibrationResult
@@ -484,6 +677,7 @@ Public Class FormCalibration
                 .Columns(4).Width = 100
                 .Columns(5).Width = 100
                 .Columns(6).Width = 100
+                .Columns(7).Width = 100
 
                 'Header Cell Alignment
                 .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -493,6 +687,7 @@ Public Class FormCalibration
                 .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 .Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
                 'Header Cell Font Bold
                 .Columns(0).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
@@ -502,6 +697,7 @@ Public Class FormCalibration
                 .Columns(4).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(6).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(7).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
 
             End With
 
@@ -649,6 +845,7 @@ Public Class FormCalibration
             Ver_flowrate = AIn(12)
             Ver_temperature = AIn(13)
             Ver_backpressure = AIn(1)
+            Ver_pumprpm = AIn(2)
             Ver_dp = Ver_inletpressure - Ver_outletpressure
             newrw(0) = Ver_samplingtime
             newrw(1) = Ver_temperature
@@ -657,19 +854,36 @@ Public Class FormCalibration
             newrw(4) = Ver_outletpressure
             newrw(5) = Ver_dp
             newrw(6) = Ver_backpressure
+            newrw(6) = Ver_pumprpm
             dtVerification.Rows.InsertAt(newrw, 0)
 
             CalibrateChartDPValue.Add(New ObservablePoint With {
                 .X = Ver_samplingtime,
                 .Y = Ver_dp
             })
-            CalibrateChartFLWRValue.Add(New ObservablePoint With {
+            CalibrateChartInletValue.Add(New ObservablePoint With {
                 .X = Ver_samplingtime,
-                .Y = Ver_flowrate
+                .Y = Ver_inletpressure
+            })
+            CalibrateChartOutletValue.Add(New ObservablePoint With {
+                .X = Ver_samplingtime,
+                .Y = Ver_outletpressure
             })
             CalibrateChartBPValue.Add(New ObservablePoint With {
                 .X = Ver_samplingtime,
                 .Y = Ver_backpressure
+            })
+            CalibrateChartRPMValue.Add(New ObservablePoint With {
+                .X = Ver_samplingtime,
+                .Y = Ver_pumprpm
+            })
+            CalibrateChartFLWRValue.Add(New ObservablePoint With {
+                .X = Ver_samplingtime,
+                .Y = Ver_flowrate
+            })
+            CalibrateChartTempValue.Add(New ObservablePoint With {
+                .X = Ver_samplingtime,
+                .Y = Ver_temperature
             })
 
             With dgv_VerificationResult
@@ -686,6 +900,7 @@ Public Class FormCalibration
                 .Columns(4).Width = 100
                 .Columns(5).Width = 100
                 .Columns(6).Width = 100
+                .Columns(7).Width = 100
 
                 'Header Cell Alignment
                 .Columns(0).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -695,6 +910,7 @@ Public Class FormCalibration
                 .Columns(4).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 .Columns(5).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
                 .Columns(6).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
                 'Header Cell Font Bold
                 .Columns(0).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
@@ -704,6 +920,7 @@ Public Class FormCalibration
                 .Columns(4).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(6).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(7).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
 
             End With
 
@@ -983,8 +1200,21 @@ Public Class FormCalibration
 
                 ' Clear Live Graph Value
                 CalibrateChartDPValue.Clear()
-                CalibrateChartFLWRValue.Clear()
+                CalibrateChartInletValue.Clear()
+                CalibrateChartOutletValue.Clear()
                 CalibrateChartBPValue.Clear()
+                CalibrateChartRPMValue.Clear()
+                CalibrateChartFLWRValue.Clear()
+                CalibrateChartTempValue.Clear()
+
+                checkbx_GraphDP.Checked = True
+                checkbx_GraphInletPressure.Checked = False
+                checkbx_GraphOutletPressure.Checked = False
+                checkbx_GraphBP.Checked = False
+                checkbx_GraphFlowrate.Checked = True
+                checkbx_GraphTemperature.Checked = False
+                checkbx_GraphRPM.Checked = False
+                'SetVisibleLineSeries()
 
                 tmr_Calibration.Enabled = True
             End If
@@ -1035,8 +1265,12 @@ Public Class FormCalibration
 
                 ' Clear Live Graph Value
                 CalibrateChartDPValue.Clear()
-                CalibrateChartFLWRValue.Clear()
+                CalibrateChartInletValue.Clear()
+                CalibrateChartOutletValue.Clear()
                 CalibrateChartBPValue.Clear()
+                CalibrateChartRPMValue.Clear()
+                CalibrateChartFLWRValue.Clear()
+                CalibrateChartTempValue.Clear()
 
                 tmr_Verification.Enabled = True
             End If
@@ -1061,6 +1295,4 @@ Public Class FormCalibration
             btn_CircuitView.BackColor = Color.FromArgb(25, 130, 246)
         End If
     End Sub
-
-
 End Class
