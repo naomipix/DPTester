@@ -209,24 +209,28 @@
                 ' For Output of Valve 1 to Valve 16
                 For i As Integer = 0 To 15
                     If DOut(1)(i) = True Then
-                        Lbl_ValvestatusArr(i).BackColor = Color.LimeGreen
+                        Lbl_ValvestatusArr(i).BackColor = PublicVariables.StatusGreen
+                        Lbl_ValvestatusArr(i).ForeColor = PublicVariables.StatusGreenT
                     Else
                         Lbl_ValvestatusArr(i).BackColor = SystemColors.Window
+                        Lbl_ValvestatusArr(i).ForeColor = SystemColors.ControlText
                     End If
                 Next
 
                 ' For Output of Valve 17 to Valve 19
                 For i As Integer = 0 To 2
                     If DOut(2)(i) = True Then
-                        Lbl_ValvestatusArr(i + 16).BackColor = Color.LimeGreen
+                        Lbl_ValvestatusArr(i + 16).BackColor = PublicVariables.StatusGreen
+                        Lbl_ValvestatusArr(i + 16).ForeColor = PublicVariables.StatusGreenT
                     Else
                         Lbl_ValvestatusArr(i + 16).BackColor = SystemColors.Window
+                        Lbl_ValvestatusArr(i + 16).ForeColor = SystemColors.ControlText
                     End If
                 Next
 
 
                 ' Colour selection based on N2 Purge valve Output
-                If Lbl_ValvestatusArr(10).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(17).BackColor = Color.LimeGreen Then
+                If Lbl_ValvestatusArr(10).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(17).BackColor = PublicVariables.StatusGreen Then
                     bgcolor = Color.Yellow
                 Else
                     bgcolor = Color.FromArgb(25, 130, 246)
@@ -243,7 +247,7 @@
                     Next
 
                     For i As Integer = 0 To 18
-                        If Lbl_ValvestatusArr(i).BackColor = Color.LimeGreen Then
+                        If Lbl_ValvestatusArr(i).BackColor = PublicVariables.StatusGreen Then
                             If i < 7 And i <> 18 Then
                                 If pathtask(i + 1) = False Then
 
@@ -330,13 +334,13 @@
                 'For Junction Path
                 'pathfwdack -5,6
                 If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                    If (Lbl_ValvestatusArr(10).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(8).BackColor = Color.LimeGreen) Then
+                    If (Lbl_ValvestatusArr(10).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(8).BackColor = PublicVariables.StatusGreen) Then
                         For i As Integer = 0 To Lbl_Junction.Length - 1
                             For j As Integer = 0 To Lbl_Junction(i).Length - 1
                                 Lbl_Junction(i)(j).BorderStyle = BorderStyle.None
                                 Lbl_Junction(i)(j).Visible = True
                             Next
-                            If (Lbl_ValvestatusArr(10).BackColor = Color.LimeGreen) Then
+                            If (Lbl_ValvestatusArr(10).BackColor = PublicVariables.StatusGreen) Then
                                 If pathfwdack(i + 5) = False Then
                                     For j As Integer = 0 To Lbl_Junction(i).Length - 1
                                         Lbl_Junction(i)(j).BackColor = Color.Transparent
@@ -395,7 +399,7 @@
                 'For Product Path
                 'pathfwdack -7,8,9,10
                 If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                    If (Lbl_ValvestatusArr(9).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(12).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(13).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(14).BackColor = Color.LimeGreen) Then
+                    If (Lbl_ValvestatusArr(9).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(12).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(13).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(14).BackColor = PublicVariables.StatusGreen) Then
                         For i As Integer = 0 To Lbl_Product.Length - 1
                             For j As Integer = 0 To Lbl_Product(i).Length - 1
                                 Lbl_Product(i)(j).BorderStyle = BorderStyle.None
@@ -434,7 +438,7 @@
                 'For Bleed Path
                 'pathfwdack -11,12,13
                 If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                    If (Lbl_ValvestatusArr(12).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(13).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(17).BackColor = Color.LimeGreen) Then
+                    If (Lbl_ValvestatusArr(12).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(13).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(17).BackColor = PublicVariables.StatusGreen) Then
                         For i As Integer = 0 To Lbl_Bleed.Length - 1
                             For j As Integer = 0 To Lbl_Bleed(i).Length - 1
                                 Lbl_Bleed(i)(j).BorderStyle = BorderStyle.None
@@ -475,7 +479,7 @@
                 'For Pump Path
                 'pathfwdack -14,15
                 If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                    If (Lbl_ValvestatusArr(18).BackColor = Color.LimeGreen) Then
+                    If (Lbl_ValvestatusArr(18).BackColor = PublicVariables.StatusGreen) Then
                         For i As Integer = 0 To Lbl_Pump.Length - 1
                             For j As Integer = 0 To Lbl_Pump(i).Length - 1
                                 Lbl_Pump(i)(j).BorderStyle = BorderStyle.None
@@ -515,7 +519,7 @@
                 'For Non Pressurised Drain Path
                 'pathfwdack -16
                 If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                    If (Lbl_ValvestatusArr(0).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(1).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(2).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(4).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(6).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(7).BackColor = Color.LimeGreen) Then
+                    If (Lbl_ValvestatusArr(0).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(1).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(2).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(4).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(6).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(7).BackColor = PublicVariables.StatusGreen) Then
                         If pathfwdack(16) = False Then
                             For i As Integer = 0 To Lbl_NPDrain.Length - 1
                                 Lbl_NPDrain(i).Visible = True
@@ -542,7 +546,7 @@
                 'For Pressurised Drain Path
                 'pathfwdack -17,18,19
                 If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-                    If (Lbl_ValvestatusArr(11).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(14).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(15).BackColor = Color.LimeGreen Or Lbl_ValvestatusArr(16).BackColor = Color.LimeGreen) Then
+                    If (Lbl_ValvestatusArr(11).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(14).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(15).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(16).BackColor = PublicVariables.StatusGreen) Then
                         For i As Integer = 0 To Lbl_PDrain.Length - 1
                             For j As Integer = 0 To Lbl_PDrain(i).Length - 1
                                 Lbl_PDrain(i)(j).BorderStyle = BorderStyle.None
@@ -593,31 +597,31 @@
             If DOut(2)(5) = False Then
                 lbl_PumpEnable.BackColor = SystemColors.Window
             Else
-                lbl_PumpEnable.BackColor = Color.LimeGreen
+                lbl_PumpEnable.BackColor = PublicVariables.StatusGreen
             End If
 
             If DIn(1)(2) = False Then
                 lbl_PumpHighHigh.BackColor = SystemColors.Window
             Else
-                lbl_PumpHighHigh.BackColor = Color.LimeGreen
+                lbl_PumpHighHigh.BackColor = PublicVariables.StatusGreen
             End If
 
             If DIn(1)(3) = False Then
                 lbl_PumpHigh.BackColor = SystemColors.Window
             Else
-                lbl_PumpHigh.BackColor = Color.LimeGreen
+                lbl_PumpHigh.BackColor = PublicVariables.StatusGreen
             End If
 
             If DIn(1)(4) = False Then
                 lbl_PumpLow.BackColor = SystemColors.Window
             Else
-                lbl_PumpLow.BackColor = Color.LimeGreen
+                lbl_PumpLow.BackColor = PublicVariables.StatusGreen
             End If
 
             If DIn(1)(5) = False Then
                 lbl_PumpLowLow.BackColor = SystemColors.Window
             Else
-                lbl_PumpLowLow.BackColor = Color.LimeGreen
+                lbl_PumpLowLow.BackColor = PublicVariables.StatusGreen
             End If
 
 #End Region
@@ -675,11 +679,11 @@
         End Select
 
 
-        While Lbl_ValvestatusArr(Valve - 1).BackColor = Color.LimeGreen
+        While Lbl_ValvestatusArr(Valve - 1).BackColor = PublicVariables.StatusGreen
             pathtask(Valve) = True
             Dim size As Integer
             size = 0
-            While size <= Lbl_Valvepath(Valve).Length - 1 And Lbl_ValvestatusArr(Valve - 1).BackColor = Color.LimeGreen
+            While size <= Lbl_Valvepath(Valve).Length - 1 And Lbl_ValvestatusArr(Valve - 1).BackColor = PublicVariables.StatusGreen
                 Await Task.Delay(delay)
                 If size = 0 Then
                     Lbl_Valvepath(Valve)(Lbl_Valvepath(Valve).Length - 1).BackColor = Color.Transparent

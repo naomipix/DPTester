@@ -6,6 +6,7 @@ Imports LiveChartsCore.SkiaSharpView.VisualElements
 Imports SkiaSharp
 Imports LiveChartsCore.Defaults
 Imports System.Collections.ObjectModel
+Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 
 Public Class FormCalibration
     Dim CurrentTabPage As TabPage
@@ -307,6 +308,8 @@ Public Class FormCalibration
 
         For Each LiveGraphChart In {CartesianChart_CalibrationLiveGraph} 'CartesianChartArr
             LiveGraphChart.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
+            LiveGraphChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Right
+            LiveGraphChart.LegendTextSize = 12
 
             LiveGraphChart.Title = New LabelVisual() With {
                 .Text = "DP Tester Live Graph",
@@ -525,30 +528,36 @@ Public Class FormCalibration
         If checkbx_GraphFlowrate.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(5).IsVisible = True
+                .YAxes(3).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(5).IsVisible = False
+                .YAxes(3).IsVisible = False
             End With
         End If
 
         If checkbx_GraphTemperature.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(6).IsVisible = True
+                .YAxes(2).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(6).IsVisible = False
+                .YAxes(2).IsVisible = False
             End With
         End If
 
         If checkbx_GraphRPM.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(4).IsVisible = True
+                .YAxes(1).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(4).IsVisible = False
+                .YAxes(1).IsVisible = False
             End With
         End If
     End Sub
@@ -584,7 +593,9 @@ Public Class FormCalibration
             txtbx_VerDP.Text = Nothing
             txtbx_VerStatus.Text = Nothing
             txtbx_VerStatus.BackColor = SystemColors.Window
+            txtbx_VerStatus.ForeColor = SystemColors.ControlText
             txtbx_CalResult.BackColor = SystemColors.Window
+            txtbx_CalResult.ForeColor = SystemColors.ControlText
             SetButtonState(btn_Calibrate, False, "Calibrate")
             SetButtonState(btn_Verify, False, "Verify")
             flush1cycletime = 0
@@ -788,18 +799,33 @@ Public Class FormCalibration
 
 
             End If
-            txtbx_CalInletPressure.Text = CType(Cal_finalInlet, String)
-            txtbx_CalOutletPressure.Text = CType(Cal_finalOutlet, String)
-            txtbx_CalFlowrate.Text = CType(Cal_finalflowrate, String)
-            txtbx_CalTemperature.Text = CType(Cal_finaltemperature - 273.15, String)
-            txtbx_CalBackpress.Text = CType(Cal_finalbackpressure, String)
-            txtbx_CalOffset.Text = CType(Math.Round(Cal_finaloffset, 2), String)
+            'txtbx_CalInletPressure.Text = CType(Cal_finalInlet, String)
+            'txtbx_CalOutletPressure.Text = CType(Cal_finalOutlet, String)
+            'txtbx_CalFlowrate.Text = CType(Cal_finalflowrate, String)
+            'txtbx_CalTemperature.Text = CType(Cal_finaltemperature - 273.15, String)
+            'txtbx_CalBackpress.Text = CType(Cal_finalbackpressure, String)
+            'txtbx_CalOffset.Text = CType(Math.Round(Cal_finaloffset, 2), String)
+
+            txtbx_CalInletPressure.Text = Decimal.Round(Cal_finalInlet, 2)
+            txtbx_CalOutletPressure.Text = Decimal.Round(Cal_finalOutlet, 2)
+            txtbx_CalFlowrate.Text = Decimal.Round(Cal_finalflowrate, 2)
+            txtbx_CalTemperature.Text = Decimal.Round(CDec(Cal_finaltemperature - 273.15), 2)
+            txtbx_CalBackpress.Text = Decimal.Round(Cal_finalbackpressure, 2)
+            txtbx_CalOffset.Text = Decimal.Round(Math.Round(Cal_finaloffset, 2), 2)
 
             ' Convert Visible DataGridView Columns To DataTable
 
             If dgv_CalibrationResult.RowCount = 0 Then
 
             Else
+
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Inlet Pressure (kPa) : {txtbx_CalInletPressure.Text}")
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Outlet Pressure (kPa) : {txtbx_CalOutletPressure.Text}")
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Back Pressure (kPa) : {txtbx_CalBackpress.Text}")
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] DP Pressure (kPa) : {txtbx_CalOffset.Text}")
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Flowrate (l/min) : {txtbx_CalFlowrate.Text}")
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Temperature (C) : {txtbx_CalTemperature.Text}")
+
                 Dim dtcalresultexport As DataTable = GetVisibleColumnsDataTable(dgv_CalibrationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
                 'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
 
@@ -1013,18 +1039,37 @@ Public Class FormCalibration
 
 
             End If
-            txtbx_VerInletPressure.Text = CType(Ver_finalinlet, String)
-            txtbx_VerOutletPressure.Text = CType(Ver_finaloutlet, String)
-            txtbx_VerFlowrate.Text = CType(Ver_finalflowrate, String)
-            txtbx_VerTemperature.Text = CType(Ver_finaltemperature - 273.15, String)
-            txtbx_VerBackpress.Text = CType(Ver_finalbackpressure, String)
+            'txtbx_VerInletPressure.Text = CType(Ver_finalinlet, String)
+            'txtbx_VerOutletPressure.Text = CType(Ver_finaloutlet, String)
+            'txtbx_VerFlowrate.Text = CType(Ver_finalflowrate, String)
+            'txtbx_VerTemperature.Text = CType(Ver_finaltemperature - 273.15, String)
+            'txtbx_VerBackpress.Text = CType(Ver_finalbackpressure, String)
+            'txtbx_VerStatus.Text = "Completed"
+            'txtbx_VerStatus.BackColor = Color.FromArgb(192, 255, 192)
+
+            txtbx_VerInletPressure.Text = Decimal.Round(Ver_finalinlet, 2)
+            txtbx_VerOutletPressure.Text = Decimal.Round(Ver_finaloutlet, 2)
+            txtbx_VerFlowrate.Text = Decimal.Round(Ver_finalflowrate, 2)
+            txtbx_VerTemperature.Text = Decimal.Round(CDec(Ver_finaltemperature - 273.15), 2)
+            txtbx_VerBackpress.Text = Decimal.Round(Ver_finalbackpressure, 2)
             txtbx_VerStatus.Text = "Completed"
-            txtbx_VerStatus.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_VerStatus.BackColor = PublicVariables.StatusGreen
+            txtbx_VerStatus.ForeColor = PublicVariables.StatusGreenT
+
             ' Convert Visible DataGridView Columns To DataTable
 
             If dgv_VerificationResult.RowCount = 0 Then
 
             Else
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] Inlet Pressure (kPa) : {txtbx_VerInletPressure.Text}")
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] Outlet Pressure (kPa) : {txtbx_VerOutletPressure.Text}")
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] Back Pressure (kPa) : {txtbx_VerBackpress.Text}")
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] DP Pressure (kPa) : {Ver_finaldp}")
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] Flowrate (l/min) : {txtbx_VerFlowrate.Text}")
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] Temperature (C) : {txtbx_VerTemperature.Text}")
+
+
+
                 Dim dtVerresultexport As DataTable = GetVisibleColumnsDataTable(dgv_VerificationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
                 'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
 
@@ -1062,16 +1107,20 @@ Public Class FormCalibration
                 Dim max As Decimal = CType(txtbx_CalOffset.Text, Decimal) + vertol
                 If CType(txtbx_VerDP.Text, Decimal) >= min And CType(txtbx_VerDP.Text, Decimal) <= max Then
                     txtbx_CalResult.Text = "Pass"
-                    txtbx_CalResult.BackColor = Color.FromArgb(192, 255, 192)
+                    txtbx_CalResult.BackColor = PublicVariables.StatusGreen
+                    txtbx_CalResult.ForeColor = PublicVariables.StatusGreenT
                     FormMain.lbl_CalibrationStatus.Text = "Pass"
-                    FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(192, 255, 192)
+                    FormMain.lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_CalibrationStatus.ForeColor = PublicVariables.StatusGreenT
                     FormMain.lbl_BlankDP.Text = txtbx_CalOffset.Text
 
                 Else
                     txtbx_CalResult.Text = "Fail"
-                    txtbx_CalResult.BackColor = Color.OrangeRed
+                    txtbx_CalResult.BackColor = PublicVariables.StatusRed
+                    txtbx_CalResult.ForeColor = PublicVariables.StatusRedT
                     FormMain.lbl_CalibrationStatus.Text = "Fail"
-                    FormMain.lbl_CalibrationStatus.BackColor = Color.OrangeRed
+                    FormMain.lbl_CalibrationStatus.BackColor = PublicVariables.StatusRed
+                    FormMain.lbl_CalibrationStatus.ForeColor = PublicVariables.StatusRedT
                     FormMain.lbl_BlankDP.Text = txtbx_CalOffset.Text
                 End If
                 Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT id,lot_id,lot_attempt FROM LotUsage where lot_id = '{txtbx_CalLotID.Text}' AND lot_end_time IS NULL")
@@ -1158,6 +1207,24 @@ Public Class FormCalibration
 
 
     Public Sub CalibrationRun()
+        Dim flush1cycletime As Integer
+        Dim flush2cycletime As Integer
+        Dim DPtest1cycletime As Integer
+        Dim DPtest2cycletime As Integer
+        Dim Drain1cycletime As Integer
+        Dim Drain2cycletime As Integer
+        Dim Drain3cycletime As Integer
+
+        Dim DP1Enabled As Boolean = False
+        Dim DP2Enabled As Boolean = False
+
+        Dim Flush1Enabled As Boolean = False
+        Dim Flush2Enabled As Boolean = False
+
+        Dim Drain1Enabled As Boolean = False
+        Dim Drain2Enabled As Boolean = False
+        Dim Drain3Enabled As Boolean = False
+
         If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" And Not txtbx_CalDPPoints.Text = "0" Then
             If btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246) Then
 
@@ -1206,6 +1273,205 @@ Public Class FormCalibration
                 CalibrateChartRPMValue.Clear()
                 CalibrateChartFLWRValue.Clear()
                 CalibrateChartTempValue.Clear()
+
+                ' Get Recipe Details
+                Dim dtGetRecipe As DataTable = SQL.ReadRecords($"Select * From RecipeTable WHERE recipe_id ='{txtbx_RecipeID.Text}'")
+                If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
+
+                    flush1cycletime = (dtrecipetable.Rows(0)("firstflush_fill_time") + dtrecipetable.Rows(0)("firstflush_bleed_time") + dtrecipetable.Rows(0)("firstflush_stabilize_time") + dtrecipetable.Rows(0)("firstflush_time"))
+                    Flush1Enabled = True
+                End If
+
+                If dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
+                    flush2cycletime = (dtrecipetable.Rows(0)("secondflush_fill_time") + dtrecipetable.Rows(0)("secondflush_bleed_time") + dtrecipetable.Rows(0)("secondflush_stabilize_time") + dtrecipetable.Rows(0)("secondflush_time"))
+                    Flush2Enabled = True
+                End If
+
+                If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("firstflush_circuit") = "Disable" Then
+                    DPtest1cycletime = (dtrecipetable.Rows(0)("dp_fill_time") + dtrecipetable.Rows(0)("dp_bleed_time") + dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+                    DP1Enabled = True
+                ElseIf dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
+                    DPtest1cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+                    DP1Enabled = True
+                End If
+
+                If dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" And dtrecipetable.Rows(0)("secondflush_circuit") = "Disable" Then
+                    DPtest2cycletime = (dtrecipetable.Rows(0)("dp_fill_time") + dtrecipetable.Rows(0)("dp_bleed_time") + dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+                    DP2Enabled = True
+                ElseIf dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" And dtrecipetable.Rows(0)("secondflush_circuit") = "Enable" Then
+                    DPtest2cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
+                    DP2Enabled = True
+                End If
+
+                If dtrecipetable.Rows(0)("drain1_circuit") = "Enable" Then
+                    Drain1cycletime = (dtrecipetable.Rows(0)("drain1_time"))
+                    Drain1Enabled = True
+                End If
+                If dtrecipetable.Rows(0)("drain2_circuit") = "Enable" Then
+                    Drain2cycletime = (dtrecipetable.Rows(0)("drain2_time"))
+                    Drain2Enabled = True
+                End If
+                If dtrecipetable.Rows(0)("drain3_circuit") = "Enable" Then
+                    Drain3cycletime = (dtrecipetable.Rows(0)("drain3_time"))
+                    Drain3Enabled = True
+                End If
+
+                ' Set Live Graph Cycle Time
+                'InitializeLiveChartXAxes(MainCycletime)
+
+                ' Set Live Graph Sections
+                If True Then
+                    Dim Flush1Start As Decimal = 0
+                    Dim DP1Start As Decimal = 0
+
+                    Dim Flush2Start As Decimal = 0
+                    Dim DP2Start As Decimal = 0
+
+                    Dim Drain1Start As Decimal = 0
+                    Dim Drain2Start As Decimal = 0
+                    Dim Drain3Start As Decimal = 0
+
+                    Dim CycleTimeTotal As Decimal = 0
+
+                    If True Then
+                        If Flush1Enabled Then
+                            DP1Start = flush1cycletime
+                        End If
+
+                        If DP1Enabled Then
+                            Flush2Start = DP1Start + DPtest1cycletime
+                        Else
+                            Flush2Start = DP1Start
+                        End If
+
+                        If Flush2Enabled Then
+                            DP2Start = Flush2Start + flush2cycletime
+                        Else
+                            DP2Start = Flush2Start
+                        End If
+
+                        If DP2Enabled Then
+                            Drain1Start = DP2Start + DPtest2cycletime
+                        Else
+                            Drain1Start = DP2Start
+                        End If
+
+                        If Drain1Enabled Then
+                            Drain2Start = Drain1Start + Drain1cycletime
+                        Else
+                            Drain2Start = Drain1Start
+                        End If
+
+                        If Drain2Enabled Then
+                            Drain3Start = Drain2Start + Drain2cycletime
+                        Else
+                            Drain3Start = Drain2Start
+                        End If
+
+                        If Drain3Enabled Then
+                            CycleTimeTotal = Drain3Start + Drain3cycletime
+                        Else
+                            CycleTimeTotal = Drain3Start
+                        End If
+                    End If
+
+                    Dim ShowDP1Section As Boolean = DP1Enabled
+                    Dim ShowDP2Section As Boolean = DP2Enabled
+
+                    'If cmbx_LiveGraphSelection.SelectedIndex > 0 Then
+                    '    ShowDP1Section = False
+                    '    ShowDP2Section = False
+                    'End If
+
+                    '.Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
+                    '.Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
+
+                    CartesianChart_CalibrationLiveGraph.Sections = New RectangularSection() {
+                    New RectangularSection With {
+                        .IsVisible = DP1Enabled,
+                        .Xi = CInt((Flush2Start - 1) - (MainDptestpoints * (Resultcapturetimer.Interval / 1000))),
+                        .Xj = Flush2Start - 1,
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.Black,
+                            .StrokeThickness = 1,
+                            .PathEffect = New DashEffect(New Single() {6, 6})
+                        }
+                    },
+                    New RectangularSection With {
+                        .IsVisible = DP2Enabled,
+                        .Xi = CInt((Drain1Start - 1) - (MainDptestpoints * (Resultcapturetimer.Interval / 1000))),
+                        .Xj = Drain1Start - 1,
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.Black,
+                            .StrokeThickness = 1,
+                            .PathEffect = New DashEffect(New Single() {6, 6})
+                        }
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Flush1Enabled,
+                        .Xi = Flush1Start,
+                        .Xj = DP1Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                        .Label = "Flush 1",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = DP1Enabled,
+                        .Xi = DP1Start,
+                        .Xj = Flush2Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Blue.WithAlpha(20)},
+                        .Label = "DP 1",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Flush2Enabled,
+                        .Xi = Flush2Start,
+                        .Xj = DP2Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                        .Label = "Flush 2",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = DP2Enabled,
+                        .Xi = DP2Start,
+                        .Xj = Drain1Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Blue.WithAlpha(20)},
+                        .Label = "DP 2",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Drain1Enabled,
+                        .Xi = Drain1Start,
+                        .Xj = Drain2Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                        .Label = "Drain 1",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Drain2Enabled,
+                        .Xi = Drain2Start,
+                        .Xj = Drain3Start,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                        .Label = "Drain 2",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Drain3Enabled,
+                        .Xi = Drain3Start,
+                        .Xj = CycleTimeTotal,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                        .Label = "Drain 3",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    }
+                }
+                End If
 
                 checkbx_GraphDP.Checked = True
                 checkbx_GraphInletPressure.Checked = False

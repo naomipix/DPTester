@@ -23,14 +23,14 @@ Partial Class FormResultGraph
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormResultGraph))
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Title2 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -832,6 +832,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphDrain3.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_GraphDrain3.TabIndex = 68
         Me.txtbx_GraphDrain3.TabStop = False
+        Me.txtbx_GraphDrain3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_GraphDrain2
         '
@@ -854,6 +855,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphDrain2.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_GraphDrain2.TabIndex = 66
         Me.txtbx_GraphDrain2.TabStop = False
+        Me.txtbx_GraphDrain2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_GraphDrain1
         '
@@ -876,6 +878,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphDrain1.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_GraphDrain1.TabIndex = 64
         Me.txtbx_GraphDrain1.TabStop = False
+        Me.txtbx_GraphDrain1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_GraphDPTest2
         '
@@ -898,6 +901,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphDPTest2.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_GraphDPTest2.TabIndex = 62
         Me.txtbx_GraphDPTest2.TabStop = False
+        Me.txtbx_GraphDPTest2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_Graphflush2
         '
@@ -920,6 +924,7 @@ Partial Class FormResultGraph
         Me.txtbx_Graphflush2.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_Graphflush2.TabIndex = 60
         Me.txtbx_Graphflush2.TabStop = False
+        Me.txtbx_Graphflush2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_GraphDPTest1
         '
@@ -942,6 +947,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphDPTest1.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_GraphDPTest1.TabIndex = 58
         Me.txtbx_GraphDPTest1.TabStop = False
+        Me.txtbx_GraphDPTest1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_Graphflush1
         '
@@ -964,6 +970,7 @@ Partial Class FormResultGraph
         Me.txtbx_Graphflush1.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_Graphflush1.TabIndex = 56
         Me.txtbx_Graphflush1.TabStop = False
+        Me.txtbx_Graphflush1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'CartesianChart_ResultGraph
         '
@@ -977,50 +984,50 @@ Partial Class FormResultGraph
         '
         Me.ResultChart.BackColor = System.Drawing.Color.LightSkyBlue
         Me.ResultChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter
-        ChartArea2.AxisX.MajorGrid.Interval = 0R
-        ChartArea2.AxisX.MajorGrid.IntervalOffset = 0R
-        ChartArea2.AxisX.Title = "Sampling Time (s)"
-        ChartArea2.AxisX.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea2.AxisY.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea2.Name = "ChartArea1"
-        Me.ResultChart.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.ResultChart.Legends.Add(Legend2)
+        ChartArea1.AxisX.MajorGrid.Interval = 0R
+        ChartArea1.AxisX.MajorGrid.IntervalOffset = 0R
+        ChartArea1.AxisX.Title = "Sampling Time (s)"
+        ChartArea1.AxisX.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea1.AxisY.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea1.Name = "ChartArea1"
+        Me.ResultChart.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.ResultChart.Legends.Add(Legend1)
         Me.ResultChart.Location = New System.Drawing.Point(50, 177)
         Me.ResultChart.Name = "ResultChart"
-        Series6.ChartArea = "ChartArea1"
-        Series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Series6.LabelToolTip = "X= #VALX, Y= #VALY"
-        Series6.Legend = "Legend1"
-        Series6.Name = "DP"
-        Series6.ToolTip = "X= #VALX, Y= #VALY"
-        Series7.ChartArea = "ChartArea1"
-        Series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series7.Legend = "Legend1"
-        Series7.Name = "Inlet Pressure"
-        Series8.ChartArea = "ChartArea1"
-        Series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series8.Legend = "Legend1"
-        Series8.Name = "Outlet Pressure"
-        Series9.ChartArea = "ChartArea1"
-        Series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series9.Legend = "Legend1"
-        Series9.Name = "Flowrate"
-        Series10.ChartArea = "ChartArea1"
-        Series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series10.Legend = "Legend1"
-        Series10.Name = "Temperature"
-        Me.ResultChart.Series.Add(Series6)
-        Me.ResultChart.Series.Add(Series7)
-        Me.ResultChart.Series.Add(Series8)
-        Me.ResultChart.Series.Add(Series9)
-        Me.ResultChart.Series.Add(Series10)
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Series1.LabelToolTip = "X= #VALX, Y= #VALY"
+        Series1.Legend = "Legend1"
+        Series1.Name = "DP"
+        Series1.ToolTip = "X= #VALX, Y= #VALY"
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series2.Legend = "Legend1"
+        Series2.Name = "Inlet Pressure"
+        Series3.ChartArea = "ChartArea1"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series3.Legend = "Legend1"
+        Series3.Name = "Outlet Pressure"
+        Series4.ChartArea = "ChartArea1"
+        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series4.Legend = "Legend1"
+        Series4.Name = "Flowrate"
+        Series5.ChartArea = "ChartArea1"
+        Series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series5.Legend = "Legend1"
+        Series5.Name = "Temperature"
+        Me.ResultChart.Series.Add(Series1)
+        Me.ResultChart.Series.Add(Series2)
+        Me.ResultChart.Series.Add(Series3)
+        Me.ResultChart.Series.Add(Series4)
+        Me.ResultChart.Series.Add(Series5)
         Me.ResultChart.Size = New System.Drawing.Size(1210, 600)
         Me.ResultChart.TabIndex = 69
         Me.ResultChart.Text = "ResultChart"
-        Title2.Name = "Result Graph"
-        Me.ResultChart.Titles.Add(Title2)
+        Title1.Name = "Result Graph"
+        Me.ResultChart.Titles.Add(Title1)
         '
         'dsp_Home
         '

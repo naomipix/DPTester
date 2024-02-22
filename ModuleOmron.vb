@@ -824,29 +824,31 @@ Module ModuleOmron
 
 #Region "Auto Mode restrictions"
 
-        If PLCstatus(0)(3) = True Then
+        If Not PublicVariables.LoggedInIsDeveloper Then
+            If PLCstatus(0)(3) = True Then
 
-            FormMain.btn_RecipeManagement.Enabled = False
-            FormMain.btn_RecipeManagement.BackColor = SystemColors.ControlDark
-            If MainMenu_BtnCalibrate = True Then
-                FormMain.btn_Calibration.Enabled = True
-                FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
-            End If
-            If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
-                FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+                FormMain.btn_RecipeManagement.Enabled = False
+                FormMain.btn_RecipeManagement.BackColor = SystemColors.ControlDark
+                If MainMenu_BtnCalibrate = True Then
+                    FormMain.btn_Calibration.Enabled = True
+                    FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
+                End If
+                If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+                    FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+                Else
+                    FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+                End If
+
             Else
+                If MainMenu_BtnRecipe = True Then
+                    FormMain.btn_RecipeManagement.Enabled = True
+                    FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
+                End If
+                FormMain.btn_Calibration.Enabled = False
+                FormMain.btn_Calibration.BackColor = SystemColors.ControlDark
                 FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+                FormMain.btn_RecipeSelectionConfirm.Enabled = False
             End If
-
-        Else
-            If MainMenu_BtnRecipe = True Then
-                FormMain.btn_RecipeManagement.Enabled = True
-                FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
-            End If
-            FormMain.btn_Calibration.Enabled = False
-            FormMain.btn_Calibration.BackColor = SystemColors.ControlDark
-            FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
-            FormMain.btn_RecipeSelectionConfirm.Enabled = False
         End If
 
 #End Region
@@ -874,13 +876,13 @@ Module ModuleOmron
         'PLC -PC HeartBeat indication label backcolor control 
         If PLCstatus(0)(0) = True Then
             PCStatus(0)(0) = False
-            FormMain.lbl_B0.BackColor = Color.LimeGreen
-            FormMain.lbl_B1.BackColor = SystemColors.Control
+            FormMain.lbl_B0.BackColor = PublicVariables.StatusGreen
+            FormMain.lbl_B1.BackColor = SystemColors.Window
 
         Else
             PCStatus(0)(0) = True
-            FormMain.lbl_B0.BackColor = SystemColors.Control
-            FormMain.lbl_B1.BackColor = Color.LimeGreen
+            FormMain.lbl_B0.BackColor = SystemColors.Window
+            FormMain.lbl_B1.BackColor = PublicVariables.StatusGreen
 
         End If
 
@@ -915,10 +917,10 @@ Module ModuleOmron
 #Region "Pump and tank status update on all page in main form"
             'Manual Pump Control label based on controller feedback
             If DIn(1)(7) = True Then
-                FormMain.lbl_MCPumpState.BackColor = Color.LimeGreen
-                FormMain.lbl_PZonePumpState.BackColor = Color.LimeGreen
-                FormMain.lbl_PumpState.BackColor = Color.LimeGreen
-                FormMain.lbl_PumpState.ForeColor = SystemColors.Window
+                FormMain.lbl_MCPumpState.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PZonePumpState.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PumpState.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PumpState.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_PumpState.Text = "ON"
             Else
                 FormMain.lbl_MCPumpState.BackColor = SystemColors.Window
@@ -935,10 +937,10 @@ Module ModuleOmron
                 FormMain.lbl_PumpError.ForeColor = SystemColors.ControlText
                 FormMain.lbl_PumpError.Text = "ON"
             Else
-                FormMain.lbl_MCPumpError.BackColor = Color.Red
-                FormMain.lbl_PZonePumpError.BackColor = Color.Red
-                FormMain.lbl_PumpError.BackColor = Color.Red
-                FormMain.lbl_PumpError.ForeColor = SystemColors.Window
+                FormMain.lbl_MCPumpError.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PZonePumpError.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PumpError.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PumpError.ForeColor = PublicVariables.StatusRedT
                 FormMain.lbl_PumpError.Text = "OFF"
             End If
 
@@ -949,17 +951,17 @@ Module ModuleOmron
                 FormMain.lbl_PumpWarning.ForeColor = SystemColors.ControlText
                 FormMain.lbl_PumpWarning.Text = "ON"
             Else
-                FormMain.lbl_MCPumpWarning.BackColor = Color.Red
-                FormMain.lbl_PZonePumpWarning.BackColor = Color.Red
-                FormMain.lbl_PumpWarning.BackColor = Color.Red
-                FormMain.lbl_PumpWarning.ForeColor = SystemColors.Window
+                FormMain.lbl_MCPumpWarning.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PZonePumpWarning.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PumpWarning.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PumpWarning.ForeColor = PublicVariables.StatusRedT
                 FormMain.lbl_PumpWarning.Text = "OFF"
             End If
 
             'Manual Tank Level Label Color Change based on sensor
             If DIn(1)(2) = True Then
-                FormMain.lbl_TankOverflow.BackColor = Color.LimeGreen
-                FormMain.lbl_PZoneTankOverflow.BackColor = Color.LimeGreen
+                FormMain.lbl_TankOverflow.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PZoneTankOverflow.BackColor = PublicVariables.StatusGreen
 
             Else
                 FormMain.lbl_TankOverflow.BackColor = SystemColors.Window
@@ -968,24 +970,24 @@ Module ModuleOmron
             End If
 
             If DIn(1)(3) = True Then
-                FormMain.lbl_TankNominal.BackColor = Color.LimeGreen
-                FormMain.lbl_PZoneTankNominal.BackColor = Color.LimeGreen
+                FormMain.lbl_TankNominal.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PZoneTankNominal.BackColor = PublicVariables.StatusGreen
             Else
                 FormMain.lbl_TankNominal.BackColor = SystemColors.Window
                 FormMain.lbl_PZoneTankNominal.BackColor = SystemColors.Window
             End If
 
             If DIn(1)(4) = True Then
-                FormMain.lbl_TankPrecondition.BackColor = Color.LimeGreen
-                FormMain.lbl_PZoneTankPrecondition.BackColor = Color.LimeGreen
+                FormMain.lbl_TankPrecondition.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PZoneTankPrecondition.BackColor = PublicVariables.StatusGreen
             Else
                 FormMain.lbl_TankPrecondition.BackColor = SystemColors.Window
                 FormMain.lbl_PZoneTankPrecondition.BackColor = SystemColors.Window
             End If
 
             If DIn(1)(5) = True Then
-                FormMain.lbl_TankPumpProtect.BackColor = Color.LimeGreen
-                FormMain.lbl_PZoneTankPumpProtect.BackColor = Color.LimeGreen
+                FormMain.lbl_TankPumpProtect.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PZoneTankPumpProtect.BackColor = PublicVariables.StatusGreen
             Else
                 FormMain.lbl_TankPumpProtect.BackColor = SystemColors.Window
                 FormMain.lbl_PZoneTankPumpProtect.BackColor = SystemColors.Window
@@ -1056,14 +1058,18 @@ Module ModuleOmron
 
             'Manual Tank Valve Label Color Change based on output
             If DOut(1)(3) = True Then
-                FormMain.lbl_TankValve4.BackColor = Color.LimeGreen
+                FormMain.lbl_TankValve4.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_TankValve4.ForeColor = PublicVariables.StatusGreenT
             Else
                 FormMain.lbl_TankValve4.BackColor = SystemColors.Window
+                FormMain.lbl_TankValve4.ForeColor = SystemColors.ControlText
             End If
             If DOut(1)(4) = True Then
-                FormMain.lbl_TankValve5.BackColor = Color.LimeGreen
+                FormMain.lbl_TankValve5.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_TankValve5.ForeColor = PublicVariables.StatusGreenT
             Else
                 FormMain.lbl_TankValve5.BackColor = SystemColors.Window
+                FormMain.lbl_TankValve5.ForeColor = SystemColors.ControlText
             End If
 
             ' Current Value update in the Pump control label  field
@@ -1206,8 +1212,8 @@ Module ModuleOmron
 
 
             If DIn(1)(11) = True Then
-                FormMain.lbl_FlwAlarm.BackColor = Color.Red
-                FormMain.lbl_FlwAlarm.ForeColor = SystemColors.Window
+                FormMain.lbl_FlwAlarm.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_FlwAlarm.ForeColor = PublicVariables.StatusRedT
                 FormMain.lbl_FlwAlarm.Text = "ON"
             Else
                 FormMain.lbl_FlwAlarm.BackColor = SystemColors.Window
@@ -1215,8 +1221,8 @@ Module ModuleOmron
                 FormMain.lbl_FlwAlarm.Text = "OFF"
             End If
             If PLCstatus(0)(1) = True Then
-                FormMain.lbl_AutoRunning.BackColor = Color.LimeGreen
-                FormMain.lbl_AutoRunning.ForeColor = SystemColors.Window
+                FormMain.lbl_AutoRunning.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_AutoRunning.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_AutoRunning.Text = "ON"
             Else
                 FormMain.lbl_AutoRunning.BackColor = SystemColors.Window
@@ -1225,8 +1231,8 @@ Module ModuleOmron
             End If
 
             If PLCstatus(1)(11) = True Then
-                FormMain.lbl_AutoSeqComplete.BackColor = Color.LimeGreen
-                FormMain.lbl_AutoSeqComplete.ForeColor = SystemColors.Window
+                FormMain.lbl_AutoSeqComplete.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_AutoSeqComplete.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_AutoSeqComplete.Text = "ON"
             Else
                 FormMain.lbl_AutoSeqComplete.BackColor = SystemColors.Window
@@ -1234,8 +1240,8 @@ Module ModuleOmron
                 FormMain.lbl_AutoSeqComplete.Text = "OFF"
             End If
             If PLCstatus(0)(4) = True Then
-                FormMain.lbl_Alarm.BackColor = Color.Red
-                FormMain.lbl_Alarm.ForeColor = SystemColors.Window
+                FormMain.lbl_Alarm.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_Alarm.ForeColor = PublicVariables.StatusRedT
                 FormMain.lbl_Alarm.Text = "ON"
             Else
                 FormMain.lbl_Alarm.BackColor = SystemColors.Window
@@ -1243,8 +1249,8 @@ Module ModuleOmron
                 FormMain.lbl_Alarm.Text = "OFF"
             End If
             If DIn(0)(4) = True Then
-                FormMain.lbl_SafetyConOK.BackColor = Color.LimeGreen
-                FormMain.lbl_SafetyConOK.ForeColor = SystemColors.Window
+                FormMain.lbl_SafetyConOK.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_SafetyConOK.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_SafetyConOK.Text = "ON"
             Else
                 FormMain.lbl_SafetyConOK.BackColor = Color.Red
@@ -1253,8 +1259,8 @@ Module ModuleOmron
             End If
 
             If PLCstatus(1)(12) = True Then
-                FormMain.lbl_RecipeSelectionOK.BackColor = Color.LimeGreen
-                FormMain.lbl_RecipeSelectionOK.ForeColor = SystemColors.Window
+                FormMain.lbl_RecipeSelectionOK.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_RecipeSelectionOK.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_RecipeSelectionOK.Text = "ON"
             Else
                 FormMain.lbl_RecipeSelectionOK.BackColor = SystemColors.Window
@@ -1262,8 +1268,8 @@ Module ModuleOmron
                 FormMain.lbl_RecipeSelectionOK.Text = "OFF"
             End If
             If PLCstatus(1)(13) = True Then
-                FormMain.lbl_JigSelect_ok.BackColor = Color.LimeGreen
-                FormMain.lbl_JigSelect_ok.ForeColor = SystemColors.Window
+                FormMain.lbl_JigSelect_ok.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_JigSelect_ok.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_JigSelect_ok.Text = "ON"
             Else
                 FormMain.lbl_JigSelect_ok.BackColor = SystemColors.Window
@@ -2030,14 +2036,14 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
         If result_finaldp >= dtrecipetable.Rows(0)("dp_lowerlimit") And result_finaldp <= dtrecipetable.Rows(0)("dp_upperlimit") Then
             FormMain.lbl_DPTestResult.Text = "PASS"
-            FormMain.lbl_DPTestResult.BackColor = Color.LimeGreen
-            FormMain.lbl_DPTestResult.ForeColor = SystemColors.Window
+            FormMain.lbl_DPTestResult.BackColor = PublicVariables.StatusGreen
+            FormMain.lbl_DPTestResult.ForeColor = PublicVariables.StatusGreenT
             PCStatus(1)(13) = True
             PCStatus(1)(14) = False
         Else
             FormMain.lbl_DPTestResult.Text = "FAIL"
-            FormMain.lbl_DPTestResult.BackColor = Color.Red
-            FormMain.lbl_DPTestResult.ForeColor = SystemColors.Window
+            FormMain.lbl_DPTestResult.BackColor = PublicVariables.StatusRed
+            FormMain.lbl_DPTestResult.ForeColor = PublicVariables.StatusRedT
             PCStatus(1)(14) = True
             PCStatus(1)(13) = False
         End If

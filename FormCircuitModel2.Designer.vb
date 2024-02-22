@@ -781,7 +781,7 @@ Partial Class FormCircuitModel2
         Me.lbl_PumpSpeed.Name = "lbl_PumpSpeed"
         Me.lbl_PumpSpeed.Size = New System.Drawing.Size(50, 25)
         Me.lbl_PumpSpeed.TabIndex = 792
-        Me.lbl_PumpSpeed.Text = "0"
+        Me.lbl_PumpSpeed.Text = "0.0"
         Me.lbl_PumpSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_PumpEnable
@@ -914,7 +914,7 @@ Partial Class FormCircuitModel2
         Me.lbl_N2Press.Name = "lbl_N2Press"
         Me.lbl_N2Press.Size = New System.Drawing.Size(50, 25)
         Me.lbl_N2Press.TabIndex = 780
-        Me.lbl_N2Press.Text = "25.2"
+        Me.lbl_N2Press.Text = "0.0"
         Me.lbl_N2Press.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_PumpPress
@@ -926,7 +926,7 @@ Partial Class FormCircuitModel2
         Me.lbl_PumpPress.Name = "lbl_PumpPress"
         Me.lbl_PumpPress.Size = New System.Drawing.Size(50, 25)
         Me.lbl_PumpPress.TabIndex = 779
-        Me.lbl_PumpPress.Text = "25.2"
+        Me.lbl_PumpPress.Text = "0.0"
         Me.lbl_PumpPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_N2Purge_P58
@@ -3827,7 +3827,7 @@ Partial Class FormCircuitModel2
         Me.lbl_Flowmtr.Name = "lbl_Flowmtr"
         Me.lbl_Flowmtr.Size = New System.Drawing.Size(50, 25)
         Me.lbl_Flowmtr.TabIndex = 353
-        Me.lbl_Flowmtr.Text = "25.2"
+        Me.lbl_Flowmtr.Text = "0.0"
         Me.lbl_Flowmtr.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_OutletPress
@@ -3839,7 +3839,7 @@ Partial Class FormCircuitModel2
         Me.lbl_OutletPress.Name = "lbl_OutletPress"
         Me.lbl_OutletPress.Size = New System.Drawing.Size(50, 25)
         Me.lbl_OutletPress.TabIndex = 354
-        Me.lbl_OutletPress.Text = "25.2"
+        Me.lbl_OutletPress.Text = "0.0"
         Me.lbl_OutletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dsp_OutletPress
@@ -3862,7 +3862,7 @@ Partial Class FormCircuitModel2
         Me.lbl_InletPress.Name = "lbl_InletPress"
         Me.lbl_InletPress.Size = New System.Drawing.Size(50, 25)
         Me.lbl_InletPress.TabIndex = 355
-        Me.lbl_InletPress.Text = "25.2"
+        Me.lbl_InletPress.Text = "0.0"
         Me.lbl_InletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dsp_InletPress
@@ -3885,7 +3885,7 @@ Partial Class FormCircuitModel2
         Me.lbl_Temp.Name = "lbl_Temp"
         Me.lbl_Temp.Size = New System.Drawing.Size(60, 25)
         Me.lbl_Temp.TabIndex = 351
-        Me.lbl_Temp.Text = "300.0"
+        Me.lbl_Temp.Text = "0.0"
         Me.lbl_Temp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label3
@@ -3916,21 +3916,27 @@ Partial Class FormCircuitModel2
         '
         Me.txtbx_N2PurgeActual.BackColor = System.Drawing.SystemColors.Info
         Me.txtbx_N2PurgeActual.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_N2PurgeActual.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.txtbx_N2PurgeActual.Location = New System.Drawing.Point(95, 10)
         Me.txtbx_N2PurgeActual.Name = "txtbx_N2PurgeActual"
         Me.txtbx_N2PurgeActual.ReadOnly = True
-        Me.txtbx_N2PurgeActual.Size = New System.Drawing.Size(50, 20)
+        Me.txtbx_N2PurgeActual.Size = New System.Drawing.Size(50, 22)
         Me.txtbx_N2PurgeActual.TabIndex = 348
+        Me.txtbx_N2PurgeActual.Text = "0.0"
+        Me.txtbx_N2PurgeActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtbx_BackPressActual
         '
         Me.txtbx_BackPressActual.BackColor = System.Drawing.SystemColors.Info
         Me.txtbx_BackPressActual.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_BackPressActual.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.txtbx_BackPressActual.Location = New System.Drawing.Point(881, 303)
         Me.txtbx_BackPressActual.Name = "txtbx_BackPressActual"
         Me.txtbx_BackPressActual.ReadOnly = True
-        Me.txtbx_BackPressActual.Size = New System.Drawing.Size(50, 20)
+        Me.txtbx_BackPressActual.Size = New System.Drawing.Size(50, 22)
         Me.txtbx_BackPressActual.TabIndex = 347
+        Me.txtbx_BackPressActual.Text = "0.0"
+        Me.txtbx_BackPressActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'lbl_Valve17
         '

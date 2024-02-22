@@ -22,6 +22,12 @@ Module PublicVariables
     Public LastSQLAutoBackup As DateTime
     Public LastSQLAutoDelete As DateTime
 
+    ' Status Colours
+    Public StatusRed As Color = Color.FromArgb(255, 0, 0)
+    Public StatusRedT As Color = Color.FromArgb(255, 255, 255)
+    Public StatusGreen As Color = Color.FromArgb(0, 192, 0)
+    Public StatusGreenT As Color = Color.FromArgb(255, 255, 255)
+
     ' Retained Memory - Operation Mode
     Public OperationMode As String = ""
 
@@ -993,6 +999,7 @@ Namespace LicensingModule
             With FormMain.dsp_LicenseStatus
                 .Text = $"{LicMsgTrialRemain}{DayLeftTemp} Day{vStr}"
                 .BackColor = SystemColors.Info
+                .ForeColor = SystemColors.ControlText
                 .Visible = True
             End With
 

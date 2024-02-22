@@ -95,7 +95,8 @@ Module FormMainModule
                         FormMain.lbl_BlankDP.Text = PublicVariables.RetainedCaloffset
                         If PublicVariables.RetainedCalStatus = "Pass" Then
                             FormMain.lbl_CalibrationStatus.Text = "Pass"
-                            FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(192, 255, 192)
+                            FormMain.lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
+                            FormMain.lbl_CalibrationStatus.ForeColor = PublicVariables.StatusGreenT
                             FormMain.txtbx_SerialNumber.Enabled = True
                             FormMain.btn_OprKeyInDtConfirm.Enabled = True
                         Else
@@ -108,6 +109,7 @@ Module FormMainModule
                     Else
                         FormMain.lbl_CalibrationStatus.Text = Nothing
                         FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
+                        FormMain.lbl_CalibrationStatus.ForeColor = SystemColors.ControlText
                         FormMain.lbl_BlankDP.Text = Nothing
                         FormMain.txtbx_SerialNumber.Enabled = False
                         FormMain.btn_OprKeyInDtConfirm.Enabled = False
@@ -116,6 +118,7 @@ Module FormMainModule
                 Else
                     FormMain.lbl_CalibrationStatus.Text = Nothing
                     FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
+                    FormMain.lbl_CalibrationStatus.ForeColor = SystemColors.ControlText
                     FormMain.lbl_BlankDP.Text = Nothing
                     FormMain.txtbx_SerialNumber.Enabled = False
                     FormMain.btn_OprKeyInDtConfirm.Enabled = False
@@ -169,6 +172,7 @@ Public Class FormMain
         ' DoubleBuffer DataGridView
         Dim dgvArr() As DataGridView = {
             dgv_ProdDetail,
+            dgv_CurrentAlarm,
             dgv_AlarmHistory,
                              _
             dgv_DigitalInput,
@@ -417,7 +421,8 @@ Public Class FormMain
             If PublicVariables.LicenseType = "LICENSED" Then
                 With dsp_LicenseStatus
                     .Text = "License Activated"
-                    .BackColor = Color.FromArgb(192, 255, 192)
+                    .BackColor = PublicVariables.StatusGreen
+                    .ForeColor = PublicVariables.StatusGreenT
                     .Visible = True
                 End With
                 EventLog.EventLogger.Log("-", "[License] License Activated")
@@ -1088,7 +1093,10 @@ Public Class FormMain
     End Sub
 
     Private Sub cmbx_LiveGraphSelection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_LiveGraphSelection.SelectedIndexChanged
+        SetLiveGraphSeries()
+    End Sub
 
+    Private Sub SetLiveGraphSeries()
         If CartesianChart_MainLiveGraph.Series.Count > 0 Then
             ' Reset Y-Axis Visibility
             With CartesianChart_MainLiveGraph
@@ -1103,11 +1111,13 @@ Public Class FormMain
                     .Series(0).IsVisible = True
                     .YAxes(0).IsVisible = True
 
-                    If DP1Enabled Then
-                        .Sections(0).IsVisible = True
-                    End If
-                    If DP2Enabled Then
-                        .Sections(1).IsVisible = True
+                    If .Sections.Count > 0 Then
+                        If DP1Enabled Then
+                            .Sections(0).IsVisible = True
+                        End If
+                        If DP2Enabled Then
+                            .Sections(1).IsVisible = True
+                        End If
                     End If
 
                 End With
@@ -1157,7 +1167,6 @@ Public Class FormMain
                 End With
             End If
         End If
-
     End Sub
 #End Region
 
@@ -1387,7 +1396,10 @@ Public Class FormMain
             ProductionDetail.flowrate, 
             ProductionDetail.diff_pressure, 
             UPPER(ProductionDetail.result) AS result, 
-            ProductionDetail.temperature, 
+            CASE 
+                WHEN ProductionDetail.temperature - 273.15 <= -273.15 THEN 0
+                ELSE ProductionDetail.temperature - 273.15
+            END AS temperature, 
             ProductionDetail.viscosity, 
             ProductionDetail.inlet_pressure, 
             ProductionDetail.outlet_pressure, 
@@ -1516,7 +1528,7 @@ Public Class FormMain
             .Columns("flowrate").HeaderCell.Value = "Flowrate (l/min)"
             .Columns("diff_pressure").HeaderCell.Value = "Calculated DP (kPa)"
             .Columns("result").HeaderCell.Value = "DP test Result"
-            .Columns("temperature").HeaderCell.Value = "Temperature (K)"
+            .Columns("temperature").HeaderCell.Value = "Temperature (C)"
             .Columns("viscosity").HeaderCell.Value = "Viscosity (mPa.s)"
             .Columns("inlet_pressure").HeaderCell.Value = "Inlet Pressure (kPa)"
             .Columns("outlet_pressure").HeaderCell.Value = "Outlet Pressure (kPa)"
@@ -1573,13 +1585,20 @@ Public Class FormMain
         Try
             'e.CellStyle.BackColor = Color.FromArgb(255, 192, 192)
             If dgv.Rows(e.RowIndex).Cells("result").Value.ToString().ToUpper = CStr("Pass").ToUpper Then
-                dgv.Rows(e.RowIndex).Cells("result").Style.BackColor = Color.FromArgb(192, 255, 192)
+                dgv.Rows(e.RowIndex).Cells("result").Style.BackColor = PublicVariables.StatusGreen
+                dgv.Rows(e.RowIndex).Cells("result").Style.ForeColor = PublicVariables.StatusGreenT
             End If
             If dgv.Rows(e.RowIndex).Cells("result").Value.ToString().ToUpper = CStr("Fail").ToUpper Then
-                dgv.Rows(e.RowIndex).Cells("result").Style.BackColor = Color.FromArgb(255, 192, 192)
+                dgv.Rows(e.RowIndex).Cells("result").Style.BackColor = PublicVariables.StatusRed
+                dgv.Rows(e.RowIndex).Cells("result").Style.ForeColor = PublicVariables.StatusRedT
             End If
             If dgv.Rows(e.RowIndex).Cells("result").Value.ToString().ToUpper = CStr("NA").ToUpper Then
                 dgv.Rows(e.RowIndex).Cells("result").Style.BackColor = SystemColors.Window
+                dgv.Rows(e.RowIndex).Cells("result").Style.ForeColor = SystemColors.ControlText
+            End If
+            If dgv.Rows(e.RowIndex).Cells("result").Value.ToString().Length = 0 Then
+                dgv.Rows(e.RowIndex).Cells("result").Style.BackColor = SystemColors.Window
+                dgv.Rows(e.RowIndex).Cells("result").Style.ForeColor = SystemColors.ControlText
             End If
         Catch ex As Exception
 
@@ -1792,7 +1811,7 @@ Public Class FormMain
         Dim fontSize As Decimal = 9.75
 
         ' CheckBox Properties [Colors]
-        Dim checkedColor As Color = Color.LimeGreen                 ' Default Color For CheckBox Checked
+        Dim checkedColor As Color = PublicVariables.StatusGreen     ' Default Color For CheckBox Checked
         Dim uncheckedColor As Color = SystemColors.Window           ' Default Color For CheckBox Unchecked
         Dim borderColor As Color = SystemColors.ControlDarkDark     ' Default Color For CheckBox Border
 
@@ -3384,6 +3403,9 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             'InitializeLiveChartXAxes(MainCycletime, Resultcapturetimer.Interval)
             InitializeLiveChartXAxes(MainCycletime)
 
+            ' Reinitialize Y Axes
+            SetLiveGraphSeries()
+
             ' Set Live Graph Sections
             If True Then
                 Dim Flush1Start As Decimal = 0
@@ -3448,27 +3470,27 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                     ShowDP2Section = False
                 End If
 
+
+                '.Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
+                '.Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
+
                 CartesianChart_MainLiveGraph.Sections = New RectangularSection() {
                     New RectangularSection With {
                         .IsVisible = DP1Enabled,
-                        .Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
-                        .Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
                         .Xi = CInt((Flush2Start - 1) - (MainDptestpoints * (Resultcapturetimer.Interval / 1000))),
                         .Xj = Flush2Start - 1,
                         .Stroke = New SolidColorPaint With {
-                            .Color = SKColors.Salmon,
+                            .Color = SKColors.Black,
                             .StrokeThickness = 1,
                             .PathEffect = New DashEffect(New Single() {6, 6})
                         }
                     },
                     New RectangularSection With {
                         .IsVisible = DP2Enabled,
-                        .Yi = CDbl(dtrecipetable.Rows(0)("dp_upperlimit")),
-                        .Yj = CDbl(dtrecipetable.Rows(0)("dp_lowerlimit")),
                         .Xi = CInt((Drain1Start - 1) - (MainDptestpoints * (Resultcapturetimer.Interval / 1000))),
                         .Xj = Drain1Start - 1,
                         .Stroke = New SolidColorPaint With {
-                            .Color = SKColors.Salmon,
+                            .Color = SKColors.Black,
                             .StrokeThickness = 1,
                             .PathEffect = New DashEffect(New Single() {6, 6})
                         }

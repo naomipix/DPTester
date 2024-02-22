@@ -901,27 +901,26 @@ Public Class FormResultGraph
                 End If
             End If
 
+            '.Yi = CDec(resultsummary(56)),
+            '.Yj = CDec(resultsummary(57)),
+
             CartesianChart_ResultGraph.Sections = New RectangularSection() {
                 New RectangularSection With {
                     .IsVisible = DP1Enabled,
-                    .Yi = CDec(resultsummary(56)),
-                    .Yj = CDec(resultsummary(57)),
                     .Xi = DP1CaptureStart,
                     .Xj = Flush2Start - 1,
                     .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.Salmon,
+                        .Color = SKColors.Black,
                         .StrokeThickness = 1,
                         .PathEffect = New DashEffect(New Single() {6, 6})
                     }
                 },
                 New RectangularSection With {
                     .IsVisible = DP2Enabled,
-                    .Yi = CDec(resultsummary(56)),
-                    .Yj = CDec(resultsummary(57)),
                     .Xi = DP2CaptureStart,
                     .Xj = Drain1Start - 1,
                     .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.Salmon,
+                        .Color = SKColors.Black,
                         .StrokeThickness = 1,
                         .PathEffect = New DashEffect(New Single() {6, 6})
                     }
@@ -1196,7 +1195,7 @@ Public Class FormResultGraph
 
             txtbx_Graphflush1.Text = resultsummary(40).ToUpper
             txtbx_GraphDPTest1.Text = resultsummary(48).ToUpper
-            txtbx_GraphDPTest2.Text = resultsummary(49).ToUpper
+            txtbx_GraphDPTest2.Text = resultsummary(59).ToUpper
             txtbx_Graphflush2.Text = resultsummary(60).ToUpper
             txtbx_GraphDrain1.Text = resultsummary(68).ToUpper
             txtbx_GraphDrain2.Text = resultsummary(71).ToUpper
