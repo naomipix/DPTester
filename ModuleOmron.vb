@@ -7,6 +7,7 @@ Imports System.Diagnostics.Eventing.Reader
 Imports System.Security.Cryptography
 Imports Microsoft.VisualBasic.ApplicationServices
 Imports DocumentFormat.OpenXml.Drawing
+Imports LiveChartsCore.Defaults
 
 Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
@@ -62,6 +63,14 @@ Module ModuleOmron
     Public result_avgflowrate2 As Decimal
     Public result_finaltemperature As Decimal
     Public result_finalflowrate As Decimal
+
+    Public result_backpressure As Decimal
+    Public result_avgbackpressure1 As Decimal
+    Public result_avgbackpressure2 As Decimal
+    Public result_finalbackpressure As Decimal
+
+    Public result_pumprpm As Decimal
+
     Public dtrecipetable As DataTable
     Public MainDptest1start As Integer
     Public MainDptest1end As Integer
@@ -815,29 +824,31 @@ Module ModuleOmron
 
 #Region "Auto Mode restrictions"
 
-        If PLCstatus(0)(3) = True Then
+        If Not PublicVariables.LoggedInIsDeveloper Then
+            If PLCstatus(0)(3) = True Then
 
-            FormMain.btn_RecipeManagement.Enabled = False
-            FormMain.btn_RecipeManagement.BackColor = SystemColors.ControlDark
-            If MainMenu_BtnCalibrate = True Then
-                FormMain.btn_Calibration.Enabled = True
-                FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
-            End If
-            If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
-                FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+                FormMain.btn_RecipeManagement.Enabled = False
+                FormMain.btn_RecipeManagement.BackColor = SystemColors.ControlDark
+                If MainMenu_BtnCalibrate = True Then
+                    FormMain.btn_Calibration.Enabled = True
+                    FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
+                End If
+                If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+                    FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+                Else
+                    FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+                End If
+
             Else
+                If MainMenu_BtnRecipe = True Then
+                    FormMain.btn_RecipeManagement.Enabled = True
+                    FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
+                End If
+                FormMain.btn_Calibration.Enabled = False
+                FormMain.btn_Calibration.BackColor = SystemColors.ControlDark
                 FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+                FormMain.btn_RecipeSelectionConfirm.Enabled = False
             End If
-
-        Else
-            If MainMenu_BtnRecipe = True Then
-                FormMain.btn_RecipeManagement.Enabled = True
-                FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
-            End If
-            FormMain.btn_Calibration.Enabled = False
-            FormMain.btn_Calibration.BackColor = SystemColors.ControlDark
-            FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
-            FormMain.btn_RecipeSelectionConfirm.Enabled = False
         End If
 
 #End Region
@@ -865,13 +876,13 @@ Module ModuleOmron
         'PLC -PC HeartBeat indication label backcolor control 
         If PLCstatus(0)(0) = True Then
             PCStatus(0)(0) = False
-            FormMain.lbl_B0.BackColor = Color.LimeGreen
-            FormMain.lbl_B1.BackColor = SystemColors.Control
+            FormMain.lbl_B0.BackColor = PublicVariables.StatusGreen
+            FormMain.lbl_B1.BackColor = SystemColors.Window
 
         Else
             PCStatus(0)(0) = True
-            FormMain.lbl_B0.BackColor = SystemColors.Control
-            FormMain.lbl_B1.BackColor = Color.LimeGreen
+            FormMain.lbl_B0.BackColor = SystemColors.Window
+            FormMain.lbl_B1.BackColor = PublicVariables.StatusGreen
 
         End If
 
@@ -906,10 +917,10 @@ Module ModuleOmron
 #Region "Pump and tank status update on all page in main form"
             'Manual Pump Control label based on controller feedback
             If DIn(1)(7) = True Then
-                FormMain.lbl_MCPumpState.BackColor = Color.LimeGreen
-                FormMain.lbl_PZonePumpState.BackColor = Color.LimeGreen
-                FormMain.lbl_PumpState.BackColor = Color.LimeGreen
-                FormMain.lbl_PumpState.ForeColor = SystemColors.Window
+                FormMain.lbl_MCPumpState.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PZonePumpState.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PumpState.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PumpState.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_PumpState.Text = "ON"
             Else
                 FormMain.lbl_MCPumpState.BackColor = SystemColors.Window
@@ -926,10 +937,10 @@ Module ModuleOmron
                 FormMain.lbl_PumpError.ForeColor = SystemColors.ControlText
                 FormMain.lbl_PumpError.Text = "ON"
             Else
-                FormMain.lbl_MCPumpError.BackColor = Color.Red
-                FormMain.lbl_PZonePumpError.BackColor = Color.Red
-                FormMain.lbl_PumpError.BackColor = Color.Red
-                FormMain.lbl_PumpError.ForeColor = SystemColors.Window
+                FormMain.lbl_MCPumpError.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PZonePumpError.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PumpError.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PumpError.ForeColor = PublicVariables.StatusRedT
                 FormMain.lbl_PumpError.Text = "OFF"
             End If
 
@@ -940,17 +951,17 @@ Module ModuleOmron
                 FormMain.lbl_PumpWarning.ForeColor = SystemColors.ControlText
                 FormMain.lbl_PumpWarning.Text = "ON"
             Else
-                FormMain.lbl_MCPumpWarning.BackColor = Color.Red
-                FormMain.lbl_PZonePumpWarning.BackColor = Color.Red
-                FormMain.lbl_PumpWarning.BackColor = Color.Red
-                FormMain.lbl_PumpWarning.ForeColor = SystemColors.Window
+                FormMain.lbl_MCPumpWarning.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PZonePumpWarning.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PumpWarning.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_PumpWarning.ForeColor = PublicVariables.StatusRedT
                 FormMain.lbl_PumpWarning.Text = "OFF"
             End If
 
             'Manual Tank Level Label Color Change based on sensor
             If DIn(1)(2) = True Then
-                FormMain.lbl_TankOverflow.BackColor = Color.LimeGreen
-                FormMain.lbl_PZoneTankOverflow.BackColor = Color.LimeGreen
+                FormMain.lbl_TankOverflow.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PZoneTankOverflow.BackColor = PublicVariables.StatusGreen
 
             Else
                 FormMain.lbl_TankOverflow.BackColor = SystemColors.Window
@@ -959,24 +970,24 @@ Module ModuleOmron
             End If
 
             If DIn(1)(3) = True Then
-                FormMain.lbl_TankNominal.BackColor = Color.LimeGreen
-                FormMain.lbl_PZoneTankNominal.BackColor = Color.LimeGreen
+                FormMain.lbl_TankNominal.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PZoneTankNominal.BackColor = PublicVariables.StatusGreen
             Else
                 FormMain.lbl_TankNominal.BackColor = SystemColors.Window
                 FormMain.lbl_PZoneTankNominal.BackColor = SystemColors.Window
             End If
 
             If DIn(1)(4) = True Then
-                FormMain.lbl_TankPrecondition.BackColor = Color.LimeGreen
-                FormMain.lbl_PZoneTankPrecondition.BackColor = Color.LimeGreen
+                FormMain.lbl_TankPrecondition.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PZoneTankPrecondition.BackColor = PublicVariables.StatusGreen
             Else
                 FormMain.lbl_TankPrecondition.BackColor = SystemColors.Window
                 FormMain.lbl_PZoneTankPrecondition.BackColor = SystemColors.Window
             End If
 
             If DIn(1)(5) = True Then
-                FormMain.lbl_TankPumpProtect.BackColor = Color.LimeGreen
-                FormMain.lbl_PZoneTankPumpProtect.BackColor = Color.LimeGreen
+                FormMain.lbl_TankPumpProtect.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_PZoneTankPumpProtect.BackColor = PublicVariables.StatusGreen
             Else
                 FormMain.lbl_TankPumpProtect.BackColor = SystemColors.Window
                 FormMain.lbl_PZoneTankPumpProtect.BackColor = SystemColors.Window
@@ -1047,14 +1058,18 @@ Module ModuleOmron
 
             'Manual Tank Valve Label Color Change based on output
             If DOut(1)(3) = True Then
-                FormMain.lbl_TankValve4.BackColor = Color.LimeGreen
+                FormMain.lbl_TankValve4.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_TankValve4.ForeColor = PublicVariables.StatusGreenT
             Else
                 FormMain.lbl_TankValve4.BackColor = SystemColors.Window
+                FormMain.lbl_TankValve4.ForeColor = SystemColors.ControlText
             End If
             If DOut(1)(4) = True Then
-                FormMain.lbl_TankValve5.BackColor = Color.LimeGreen
+                FormMain.lbl_TankValve5.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_TankValve5.ForeColor = PublicVariables.StatusGreenT
             Else
                 FormMain.lbl_TankValve5.BackColor = SystemColors.Window
+                FormMain.lbl_TankValve5.ForeColor = SystemColors.ControlText
             End If
 
             ' Current Value update in the Pump control label  field
@@ -1197,8 +1212,8 @@ Module ModuleOmron
 
 
             If DIn(1)(11) = True Then
-                FormMain.lbl_FlwAlarm.BackColor = Color.Red
-                FormMain.lbl_FlwAlarm.ForeColor = SystemColors.Window
+                FormMain.lbl_FlwAlarm.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_FlwAlarm.ForeColor = PublicVariables.StatusRedT
                 FormMain.lbl_FlwAlarm.Text = "ON"
             Else
                 FormMain.lbl_FlwAlarm.BackColor = SystemColors.Window
@@ -1206,8 +1221,8 @@ Module ModuleOmron
                 FormMain.lbl_FlwAlarm.Text = "OFF"
             End If
             If PLCstatus(0)(1) = True Then
-                FormMain.lbl_AutoRunning.BackColor = Color.LimeGreen
-                FormMain.lbl_AutoRunning.ForeColor = SystemColors.Window
+                FormMain.lbl_AutoRunning.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_AutoRunning.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_AutoRunning.Text = "ON"
             Else
                 FormMain.lbl_AutoRunning.BackColor = SystemColors.Window
@@ -1216,8 +1231,8 @@ Module ModuleOmron
             End If
 
             If PLCstatus(1)(11) = True Then
-                FormMain.lbl_AutoSeqComplete.BackColor = Color.LimeGreen
-                FormMain.lbl_AutoSeqComplete.ForeColor = SystemColors.Window
+                FormMain.lbl_AutoSeqComplete.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_AutoSeqComplete.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_AutoSeqComplete.Text = "ON"
             Else
                 FormMain.lbl_AutoSeqComplete.BackColor = SystemColors.Window
@@ -1225,8 +1240,8 @@ Module ModuleOmron
                 FormMain.lbl_AutoSeqComplete.Text = "OFF"
             End If
             If PLCstatus(0)(4) = True Then
-                FormMain.lbl_Alarm.BackColor = Color.Red
-                FormMain.lbl_Alarm.ForeColor = SystemColors.Window
+                FormMain.lbl_Alarm.BackColor = PublicVariables.StatusRed
+                FormMain.lbl_Alarm.ForeColor = PublicVariables.StatusRedT
                 FormMain.lbl_Alarm.Text = "ON"
             Else
                 FormMain.lbl_Alarm.BackColor = SystemColors.Window
@@ -1234,8 +1249,8 @@ Module ModuleOmron
                 FormMain.lbl_Alarm.Text = "OFF"
             End If
             If DIn(0)(4) = True Then
-                FormMain.lbl_SafetyConOK.BackColor = Color.LimeGreen
-                FormMain.lbl_SafetyConOK.ForeColor = SystemColors.Window
+                FormMain.lbl_SafetyConOK.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_SafetyConOK.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_SafetyConOK.Text = "ON"
             Else
                 FormMain.lbl_SafetyConOK.BackColor = Color.Red
@@ -1244,8 +1259,8 @@ Module ModuleOmron
             End If
 
             If PLCstatus(1)(12) = True Then
-                FormMain.lbl_RecipeSelectionOK.BackColor = Color.LimeGreen
-                FormMain.lbl_RecipeSelectionOK.ForeColor = SystemColors.Window
+                FormMain.lbl_RecipeSelectionOK.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_RecipeSelectionOK.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_RecipeSelectionOK.Text = "ON"
             Else
                 FormMain.lbl_RecipeSelectionOK.BackColor = SystemColors.Window
@@ -1253,8 +1268,8 @@ Module ModuleOmron
                 FormMain.lbl_RecipeSelectionOK.Text = "OFF"
             End If
             If PLCstatus(1)(13) = True Then
-                FormMain.lbl_JigSelect_ok.BackColor = Color.LimeGreen
-                FormMain.lbl_JigSelect_ok.ForeColor = SystemColors.Window
+                FormMain.lbl_JigSelect_ok.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_JigSelect_ok.ForeColor = PublicVariables.StatusGreenT
                 FormMain.lbl_JigSelect_ok.Text = "ON"
             Else
                 FormMain.lbl_JigSelect_ok.BackColor = SystemColors.Window
@@ -1341,27 +1356,26 @@ Module ModuleOmron
 
 
             If FormCalibration.btn_Calibrate.Enabled = True Or FormCalibration.btn_Verify.Enabled = True Then
-                    PCStatus(1)(8) = False
-                    PCStatus(1)(6) = False
-                End If
-
-                If PLCstatus(1)(2) = True Or PLCstatus(1)(3) = True Then
-                    FormCalibration.btn_Home.Enabled = False
-                Else
-                    FormCalibration.btn_Home.Enabled = True
-                End If
+                PCStatus(1)(8) = False
+                PCStatus(1)(6) = False
+            End If
+            If PLCstatus(1)(2) = True Or PLCstatus(1)(3) = True Then
+                FormCalibration.btn_Home.Enabled = False
+            Else
+                FormCalibration.btn_Home.Enabled = True
+            End If
 
 #End Region
 #Region "Main Sequence"
-                If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
-                    PCStatus(1)(10) = False
-                    FormMain.btn_OprKeyInDtConfirm.Enabled = False
-                    FormMain.txtbx_SerialNumber.Enabled = False
-                End If
-                If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
-                    FormMain.btn_OprKeyInDtConfirm.Enabled = True
-                    FormMain.txtbx_SerialNumber.Enabled = True
-                End If
+            If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
+                PCStatus(1)(10) = False
+                FormMain.btn_OprKeyInDtConfirm.Enabled = False
+                FormMain.txtbx_SerialNumber.Enabled = False
+            End If
+            If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
+                FormMain.btn_OprKeyInDtConfirm.Enabled = True
+                FormMain.txtbx_SerialNumber.Enabled = True
+            End If
 
 
             If PLCstatus(0)(1) = False Then
@@ -1371,44 +1385,44 @@ Module ModuleOmron
                 PCStatus(1)(14) = False
             End If
             If FINSinput(20) <> Main_MessageNo Then
-                    Main_MessageNo = FINSinput(20)
-                    MainMessage(Main_MessageNo)
-                End If
+                Main_MessageNo = FINSinput(20)
+                MainMessage(Main_MessageNo)
+            End If
 
             If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Or FINSinput(20) = 1700 Then
                 MainrecordValue = True
             Else
                 MainrecordValue = False
-                End If
-                FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
-                FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
+            End If
+            FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
+            FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
 
 
 #End Region
 #Region "Tool Counter"
-                FormSetting.lblArray = {
+            FormSetting.lblArray = {
             FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
-            FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
+FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
 }
-                For i As Integer = 0 To FormSetting.lblArray.Length - 1
-                    FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
+            For i As Integer = 0 To FormSetting.lblArray.Length - 1
+                FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
+            Next
+            FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
+            FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
+            If FINSOutput(10) > 0 Then
+                For i As Integer = 0 To 15
+                    If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
+                        ToolCounterreset(0)(i) = False
+                    End If
                 Next
-                FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
-                FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
-                If FINSOutput(10) > 0 Then
-                    For i As Integer = 0 To 15
-                        If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
-                            ToolCounterreset(0)(i) = False
-                        End If
-                    Next
-                End If
-                If FINSOutput(11) > 0 Then
-                    For i As Integer = 0 To 15
-                        If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
-                            ToolCounterreset(1)(i) = False
-                        End If
-                    Next
-                End If
+            End If
+            If FINSOutput(11) > 0 Then
+                For i As Integer = 0 To 15
+                    If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
+                        ToolCounterreset(1)(i) = False
+                    End If
+                Next
+            End If
 
 
 
@@ -1416,10 +1430,10 @@ Module ModuleOmron
 
 
 #End Region
-                Put_PCManualctrl()
-                FINSWrite(0, 200)
-                LabelStatusupdate()
-            Else
+            Put_PCManualctrl()
+            FINSWrite(0, 200)
+            LabelStatusupdate()
+        Else
             FormCalibration.tmr_Calibration.Enabled = False
             FormCalibration.tmr_Verification.Enabled = False
             Resultcapturetimer.Enabled = False
@@ -1839,6 +1853,8 @@ Module ModuleOmron
             result_flowrate = AIn(12)
             result_temperature = AIn(13)
             result_dp = result_inletpressure - result_outletpressure
+            result_backpressure = AIn(1)
+            result_pumprpm = AIn(2)
             newrw(0) = serialusageid
             newrw(1) = result_samplingtime
             newrw(2) = result_temperature
@@ -1846,7 +1862,41 @@ Module ModuleOmron
             newrw(4) = result_inletpressure
             newrw(5) = result_outletpressure
             newrw(6) = result_dp
+            newrw(7) = result_backpressure
+            newrw(8) = result_pumprpm
             dtresult.Rows.Add(newrw)
+
+            'LiveChartDPValue.Add(result_dp)
+            'LiveChartFLWRValue.Add(result_flowrate)
+
+            LiveChartDPValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_dp
+            })
+            LiveChartInletValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_inletpressure
+            })
+            LiveChartOutletValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_outletpressure
+            })
+            LiveChartBPValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_backpressure
+            })
+            LiveChartRPMValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_pumprpm
+            })
+            LiveChartFLWRValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_flowrate
+            })
+            LiveChartTempValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_temperature
+            })
         Else
             PCStatus(1)(10) = False
         End If
@@ -1867,7 +1917,7 @@ Module ModuleOmron
 
     Public Sub Calculatefinalresult()
         Resultcapturetimer.Enabled = False
-        LiveGraph.LiveGraph.ChartPlottingTimer(False)
+        'LiveGraph.LiveGraph.ChartPlottingTimer(False)
         Dim A As Double = 0.01257187
         Dim B As Double = -0.005806436
         Dim C As Double = 0.001130911
@@ -1880,11 +1930,13 @@ Module ModuleOmron
                 result_avgoutlet1 = result_avgoutlet1 + dtresult.Rows(i)("Outlet Pressure (kPa)")
                 result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (°C)")
+                result_avgbackpressure1 = result_avgbackpressure1 + dtresult.Rows(i)("Back Pressure (kPa)")
             Next
             result_avginlet1 = result_avginlet1 / MainDptestpoints
             result_avgoutlet1 = result_avgoutlet1 / MainDptestpoints
             result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
             result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
+            result_avgbackpressure1 = result_avgbackpressure1 / MainDptestpoints
             result_avgdp1 = result_avginlet1 - result_avgoutlet1
 
             For i = MainDptest2start To MainDptest2end - 1
@@ -1892,11 +1944,13 @@ Module ModuleOmron
                 result_avgoutlet2 = result_avgoutlet2 + dtresult.Rows(i)("Outlet Pressure (kPa)")
                 result_avgflowrate2 = result_avgflowrate2 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature2 = result_avgtemperature2 + dtresult.Rows(i)("Temperature (°C)")
+                result_avgbackpressure2 = result_avgbackpressure2 + dtresult.Rows(i)("Back Pressure (kPa)")
             Next
             result_avginlet2 = result_avginlet2 / MainDptestpoints
             result_avgoutlet2 = result_avgoutlet2 / MainDptestpoints
             result_avgflowrate2 = result_avgflowrate2 / MainDptestpoints
             result_avgtemperature2 = result_avgtemperature2 / MainDptestpoints
+            result_avgbackpressure2 = result_avgbackpressure2 / MainDptestpoints
             result_avgdp2 = result_avginlet2 - result_avgoutlet2
 
 
@@ -1905,6 +1959,8 @@ Module ModuleOmron
 
             result_finalflowrate = ((result_avgflowrate1 + result_avgflowrate2) / 2)
             result_finaltemperature = (((result_avgtemperature1 + result_avgtemperature2) / 2) + 273.15)
+
+            result_finalbackpressure = ((result_avgbackpressure1 + result_avgbackpressure2) / 2)
 
             T2 = result_finaltemperature * result_finaltemperature
             exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
@@ -1919,6 +1975,7 @@ Module ModuleOmron
                 result_avgoutlet1 = result_avgoutlet1 + dtresult.Rows(i)("Outlet Pressure (kPa)")
                 result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (°C)")
+                result_avgbackpressure1 = result_avgbackpressure1 + dtresult.Rows(i)("Back Pressure (kPa)")
             Next
 
             result_avginlet1 = result_avginlet1 / MainDptestpoints
@@ -1926,12 +1983,15 @@ Module ModuleOmron
             result_avgdp1 = result_avginlet1 - result_avgoutlet1
             result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
             result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
+            result_avgbackpressure1 = result_avgbackpressure1 / MainDptestpoints
 
             result_finalinlet = result_avginlet1
             result_finaloutlet = result_avgoutlet1
 
             result_finalflowrate = result_avgflowrate1
             result_finaltemperature = (result_avgtemperature1 + 273.15)
+
+            result_finalbackpressure = result_avgbackpressure1
 
             T2 = result_finaltemperature * result_finaltemperature
             exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
@@ -1944,6 +2004,7 @@ Module ModuleOmron
         FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature - 273.15, 3), String)
         FormMain.lbl_ProductInlet.Text = CType(Math.Round(result_finalinlet, 3), String)
         FormMain.lbl_ProductOutlet.Text = CType(Math.Round(result_finaloutlet, 3), String)
+        FormMain.lbl_ProductBackpress.Text = CType(Math.Round(result_finalbackpressure, 3), String)
 
 
 
@@ -1975,14 +2036,14 @@ Module ModuleOmron
 
         If result_finaldp >= dtrecipetable.Rows(0)("dp_lowerlimit") And result_finaldp <= dtrecipetable.Rows(0)("dp_upperlimit") Then
             FormMain.lbl_DPTestResult.Text = "PASS"
-            FormMain.lbl_DPTestResult.BackColor = Color.LimeGreen
-            FormMain.lbl_DPTestResult.ForeColor = SystemColors.Window
+            FormMain.lbl_DPTestResult.BackColor = PublicVariables.StatusGreen
+            FormMain.lbl_DPTestResult.ForeColor = PublicVariables.StatusGreenT
             PCStatus(1)(13) = True
             PCStatus(1)(14) = False
         Else
             FormMain.lbl_DPTestResult.Text = "FAIL"
-            FormMain.lbl_DPTestResult.BackColor = Color.Red
-            FormMain.lbl_DPTestResult.ForeColor = SystemColors.Window
+            FormMain.lbl_DPTestResult.BackColor = PublicVariables.StatusRed
+            FormMain.lbl_DPTestResult.ForeColor = PublicVariables.StatusRedT
             PCStatus(1)(14) = True
             PCStatus(1)(13) = False
         End If
@@ -1997,7 +2058,9 @@ Module ModuleOmron
                         {"flowrate", dtresult.Rows(i)("Flowrate (l/min)")},
                         {"inlet_pressure", dtresult.Rows(i)("Inlet Pressure (kPa)")},
                         {"outlet_pressure", dtresult.Rows(i)("Outlet Pressure (kPa)")},
-                        {"calculated_dp_pressure", dtresult.Rows(i)("Differential Pressure (kPa)")}
+                        {"calculated_dp_pressure", dtresult.Rows(i)("Differential Pressure (kPa)")},
+                        {"back_pressure", dtresult.Rows(i)("Back Pressure (kPa)")},
+                        {"pump_rpm", dtresult.Rows(i)("Pump Speed (RPM)")}
                     }
                     SQL.InsertRecord("ProductResult", resultparameter)
                 Next
@@ -2017,6 +2080,7 @@ Module ModuleOmron
                             {"outlet_pressure", Math.Round(result_finaloutlet, 1)},
                             {"viscosity", Math.Round(Viscosity, 3)},
                             {"diff_pressure", Math.Round(result_finaldp, 1)},
+                            {"back_pressure", Math.Round(result_finalbackpressure, 1)},
                             {"cycle_time", MainCycletime},
                             {"result", FormMain.lbl_DPTestResult.Text.ToLower}
                         }
@@ -2076,6 +2140,8 @@ Module ModuleOmron
             FormCalibration.dtCalibration.Columns.Add("Inlet Pressure (kPa)")
             FormCalibration.dtCalibration.Columns.Add("Outlet Pressure (kPa)")
             FormCalibration.dtCalibration.Columns.Add("Differential Pressure (kPa)")
+            FormCalibration.dtCalibration.Columns.Add("Back Pressure (kPa)")
+            FormCalibration.dtCalibration.Columns.Add("Pump Speed (RPM)")
         End If
 
         If str = "Verification" Then
@@ -2085,6 +2151,8 @@ Module ModuleOmron
             FormCalibration.dtVerification.Columns.Add("Inlet Pressure (kPa)")
             FormCalibration.dtVerification.Columns.Add("Outlet Pressure (kPa)")
             FormCalibration.dtVerification.Columns.Add("Differential Pressure (kPa)")
+            FormCalibration.dtVerification.Columns.Add("Back Pressure (kPa)")
+            FormCalibration.dtVerification.Columns.Add("Pump Speed (RPM)")
         End If
 
         If str = "Production_Result" Then
@@ -2096,6 +2164,8 @@ Module ModuleOmron
             dtresult.Columns.Add("Inlet Pressure (kPa)")
             dtresult.Columns.Add("Outlet Pressure (kPa)")
             dtresult.Columns.Add("Differential Pressure (kPa)")
+            dtresult.Columns.Add("Back Pressure (kPa)")
+            dtresult.Columns.Add("Pump Speed (RPM)")
         End If
     End Sub
 

@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Collections.ObjectModel
+Imports System.Data.SqlClient
 Imports System.Globalization
 Imports System.IO
 Imports System.Net.NetworkInformation
@@ -7,6 +8,8 @@ Imports System.Security.Cryptography
 Imports System.Text
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Xml.Schema
+Imports LiveChartsCore.Defaults
+Imports LiveChartsCore.SkiaSharpView.WinForms
 
 Module PublicVariables
     ' Version
@@ -18,6 +21,12 @@ Module PublicVariables
     ' SQL Auto Backup / Delete Status
     Public LastSQLAutoBackup As DateTime
     Public LastSQLAutoDelete As DateTime
+
+    ' Status Colours
+    Public StatusRed As Color = Color.FromArgb(255, 0, 0)
+    Public StatusRedT As Color = Color.FromArgb(255, 255, 255)
+    Public StatusGreen As Color = Color.FromArgb(0, 192, 0)
+    Public StatusGreenT As Color = Color.FromArgb(255, 255, 255)
 
     ' Retained Memory - Operation Mode
     Public OperationMode As String = ""
@@ -212,6 +221,23 @@ Module PublicVariables
 
     ' Main Form
     Public IsExitPromptShown As Boolean = False
+    Public CartesianChartArr As CartesianChart() = {FormMain.CartesianChart_MainLiveGraph, FormCalibration.CartesianChart_CalibrationLiveGraph}
+
+    Public LiveChartDPValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartInletValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartOutletValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartBPValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartRPMValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
+    Public LiveChartTempValue = New ObservableCollection(Of ObservablePoint)({})
+
+    Public CalibrateChartDPValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartInletValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartOutletValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartBPValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartRPMValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
+    Public CalibrateChartTempValue = New ObservableCollection(Of ObservablePoint)({})
 End Module
 
 ' DataGridView DoubleBuffering Module
@@ -973,6 +999,7 @@ Namespace LicensingModule
             With FormMain.dsp_LicenseStatus
                 .Text = $"{LicMsgTrialRemain}{DayLeftTemp} Day{vStr}"
                 .BackColor = SystemColors.Info
+                .ForeColor = SystemColors.ControlText
                 .Visible = True
             End With
 
@@ -1319,7 +1346,7 @@ End Namespace
 Namespace LiveGraph
     Module LiveGraph
         ' Declare Controls
-        Dim chartLiveGraph As Chart = FormMain.chart_MainLiveGraph
+        Dim chartLiveGraph As DataVisualization.Charting.Chart = FormMain.chart_MainLiveGraph
         Dim cmbxSelection As ComboBox = FormMain.cmbx_GraphSelection
 
         ' Plotting Timer
@@ -1418,12 +1445,12 @@ Namespace LiveGraph
                 dtScaledResult = FormMainModule.dtresult.Clone
 
                 ' Assign ChartValueMember
-                chartLiveGraph.Series(0).XValueMember = "Sampling Time (s)" '"second"
+                'chartLiveGraph.Series(0).XValueMember = "Sampling Time (s)" '"second"
 
                 ' Start Timer
                 With graphPlottingTimer
                     .Interval = 1000
-                    .Enabled = timerEnable
+                    '.Enabled = timerEnable
                 End With
             Else
                 graphPlottingTimer.Enabled = False

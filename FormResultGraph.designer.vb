@@ -85,10 +85,10 @@ Partial Class FormResultGraph
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.checkbx_GraphTemperature = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphFlowrate = New System.Windows.Forms.CheckBox()
+        Me.checkbx_GraphBP = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphOutletPressure = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphInletPressure = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphDP = New System.Windows.Forms.CheckBox()
-        Me.ResultChart = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.dsp_GraphDrain3 = New System.Windows.Forms.Label()
         Me.txtbx_GraphDrain3 = New System.Windows.Forms.TextBox()
         Me.dsp_GraphDrain2 = New System.Windows.Forms.Label()
@@ -103,9 +103,13 @@ Partial Class FormResultGraph
         Me.txtbx_GraphDPTest1 = New System.Windows.Forms.TextBox()
         Me.dsp_Graphflush1 = New System.Windows.Forms.Label()
         Me.txtbx_Graphflush1 = New System.Windows.Forms.TextBox()
+        Me.CartesianChart_ResultGraph = New LiveChartsCore.SkiaSharpView.WinForms.CartesianChart()
+        Me.ResultChart = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.checkbx_GraphRPM = New System.Windows.Forms.CheckBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -712,12 +716,14 @@ Partial Class FormResultGraph
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.ComboBox1)
+        Me.Panel3.Controls.Add(Me.checkbx_GraphRPM)
         Me.Panel3.Controls.Add(Me.checkbx_GraphTemperature)
         Me.Panel3.Controls.Add(Me.checkbx_GraphFlowrate)
+        Me.Panel3.Controls.Add(Me.checkbx_GraphBP)
         Me.Panel3.Controls.Add(Me.checkbx_GraphOutletPressure)
         Me.Panel3.Controls.Add(Me.checkbx_GraphInletPressure)
         Me.Panel3.Controls.Add(Me.checkbx_GraphDP)
-        Me.Panel3.Controls.Add(Me.ResultChart)
         Me.Panel3.Controls.Add(Me.dsp_GraphDrain3)
         Me.Panel3.Controls.Add(Me.txtbx_GraphDrain3)
         Me.Panel3.Controls.Add(Me.dsp_GraphDrain2)
@@ -732,6 +738,8 @@ Partial Class FormResultGraph
         Me.Panel3.Controls.Add(Me.txtbx_GraphDPTest1)
         Me.Panel3.Controls.Add(Me.dsp_Graphflush1)
         Me.Panel3.Controls.Add(Me.txtbx_Graphflush1)
+        Me.Panel3.Controls.Add(Me.CartesianChart_ResultGraph)
+        Me.Panel3.Controls.Add(Me.ResultChart)
         Me.Panel3.Location = New System.Drawing.Point(566, 3)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1311, 802)
@@ -741,7 +749,7 @@ Partial Class FormResultGraph
         '
         Me.checkbx_GraphTemperature.AutoSize = True
         Me.checkbx_GraphTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphTemperature.Location = New System.Drawing.Point(1101, 137)
+        Me.checkbx_GraphTemperature.Location = New System.Drawing.Point(978, 137)
         Me.checkbx_GraphTemperature.Name = "checkbx_GraphTemperature"
         Me.checkbx_GraphTemperature.Size = New System.Drawing.Size(101, 21)
         Me.checkbx_GraphTemperature.TabIndex = 74
@@ -752,18 +760,29 @@ Partial Class FormResultGraph
         '
         Me.checkbx_GraphFlowrate.AutoSize = True
         Me.checkbx_GraphFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphFlowrate.Location = New System.Drawing.Point(880, 137)
+        Me.checkbx_GraphFlowrate.Location = New System.Drawing.Point(830, 137)
         Me.checkbx_GraphFlowrate.Name = "checkbx_GraphFlowrate"
         Me.checkbx_GraphFlowrate.Size = New System.Drawing.Size(76, 21)
         Me.checkbx_GraphFlowrate.TabIndex = 73
         Me.checkbx_GraphFlowrate.Text = "Flowrate"
         Me.checkbx_GraphFlowrate.UseVisualStyleBackColor = True
         '
+        'checkbx_GraphBP
+        '
+        Me.checkbx_GraphBP.AutoSize = True
+        Me.checkbx_GraphBP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphBP.Location = New System.Drawing.Point(652, 137)
+        Me.checkbx_GraphBP.Name = "checkbx_GraphBP"
+        Me.checkbx_GraphBP.Size = New System.Drawing.Size(107, 21)
+        Me.checkbx_GraphBP.TabIndex = 72
+        Me.checkbx_GraphBP.Text = "Back Pressure"
+        Me.checkbx_GraphBP.UseVisualStyleBackColor = True
+        '
         'checkbx_GraphOutletPressure
         '
         Me.checkbx_GraphOutletPressure.AutoSize = True
         Me.checkbx_GraphOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphOutletPressure.Location = New System.Drawing.Point(619, 137)
+        Me.checkbx_GraphOutletPressure.Location = New System.Drawing.Point(466, 137)
         Me.checkbx_GraphOutletPressure.Name = "checkbx_GraphOutletPressure"
         Me.checkbx_GraphOutletPressure.Size = New System.Drawing.Size(116, 21)
         Me.checkbx_GraphOutletPressure.TabIndex = 72
@@ -774,7 +793,7 @@ Partial Class FormResultGraph
         '
         Me.checkbx_GraphInletPressure.AutoSize = True
         Me.checkbx_GraphInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphInletPressure.Location = New System.Drawing.Point(369, 137)
+        Me.checkbx_GraphInletPressure.Location = New System.Drawing.Point(290, 137)
         Me.checkbx_GraphInletPressure.Name = "checkbx_GraphInletPressure"
         Me.checkbx_GraphInletPressure.Size = New System.Drawing.Size(105, 21)
         Me.checkbx_GraphInletPressure.TabIndex = 71
@@ -791,6 +810,175 @@ Partial Class FormResultGraph
         Me.checkbx_GraphDP.TabIndex = 70
         Me.checkbx_GraphDP.Text = "Differential Pressure"
         Me.checkbx_GraphDP.UseVisualStyleBackColor = True
+        '
+        'dsp_GraphDrain3
+        '
+        Me.dsp_GraphDrain3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_GraphDrain3.Location = New System.Drawing.Point(654, 73)
+        Me.dsp_GraphDrain3.Name = "dsp_GraphDrain3"
+        Me.dsp_GraphDrain3.Size = New System.Drawing.Size(150, 30)
+        Me.dsp_GraphDrain3.TabIndex = 67
+        Me.dsp_GraphDrain3.Text = "Drain-3 Circuit :"
+        Me.dsp_GraphDrain3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_GraphDrain3
+        '
+        Me.txtbx_GraphDrain3.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_GraphDrain3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_GraphDrain3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_GraphDrain3.Location = New System.Drawing.Point(824, 76)
+        Me.txtbx_GraphDrain3.Name = "txtbx_GraphDrain3"
+        Me.txtbx_GraphDrain3.ReadOnly = True
+        Me.txtbx_GraphDrain3.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_GraphDrain3.TabIndex = 68
+        Me.txtbx_GraphDrain3.TabStop = False
+        Me.txtbx_GraphDrain3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'dsp_GraphDrain2
+        '
+        Me.dsp_GraphDrain2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_GraphDrain2.Location = New System.Drawing.Point(352, 73)
+        Me.dsp_GraphDrain2.Name = "dsp_GraphDrain2"
+        Me.dsp_GraphDrain2.Size = New System.Drawing.Size(150, 30)
+        Me.dsp_GraphDrain2.TabIndex = 65
+        Me.dsp_GraphDrain2.Text = "Drain-2 Circuit :"
+        Me.dsp_GraphDrain2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_GraphDrain2
+        '
+        Me.txtbx_GraphDrain2.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_GraphDrain2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_GraphDrain2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_GraphDrain2.Location = New System.Drawing.Point(522, 76)
+        Me.txtbx_GraphDrain2.Name = "txtbx_GraphDrain2"
+        Me.txtbx_GraphDrain2.ReadOnly = True
+        Me.txtbx_GraphDrain2.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_GraphDrain2.TabIndex = 66
+        Me.txtbx_GraphDrain2.TabStop = False
+        Me.txtbx_GraphDrain2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'dsp_GraphDrain1
+        '
+        Me.dsp_GraphDrain1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_GraphDrain1.Location = New System.Drawing.Point(50, 73)
+        Me.dsp_GraphDrain1.Name = "dsp_GraphDrain1"
+        Me.dsp_GraphDrain1.Size = New System.Drawing.Size(150, 30)
+        Me.dsp_GraphDrain1.TabIndex = 63
+        Me.dsp_GraphDrain1.Text = "Drain-1 Circuit :"
+        Me.dsp_GraphDrain1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_GraphDrain1
+        '
+        Me.txtbx_GraphDrain1.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_GraphDrain1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_GraphDrain1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_GraphDrain1.Location = New System.Drawing.Point(220, 76)
+        Me.txtbx_GraphDrain1.Name = "txtbx_GraphDrain1"
+        Me.txtbx_GraphDrain1.ReadOnly = True
+        Me.txtbx_GraphDrain1.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_GraphDrain1.TabIndex = 64
+        Me.txtbx_GraphDrain1.TabStop = False
+        Me.txtbx_GraphDrain1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'dsp_GraphDPTest2
+        '
+        Me.dsp_GraphDPTest2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_GraphDPTest2.Location = New System.Drawing.Point(956, 12)
+        Me.dsp_GraphDPTest2.Name = "dsp_GraphDPTest2"
+        Me.dsp_GraphDPTest2.Size = New System.Drawing.Size(150, 30)
+        Me.dsp_GraphDPTest2.TabIndex = 61
+        Me.dsp_GraphDPTest2.Text = "DP Test-2 Circuit :"
+        Me.dsp_GraphDPTest2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_GraphDPTest2
+        '
+        Me.txtbx_GraphDPTest2.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_GraphDPTest2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_GraphDPTest2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_GraphDPTest2.Location = New System.Drawing.Point(1126, 15)
+        Me.txtbx_GraphDPTest2.Name = "txtbx_GraphDPTest2"
+        Me.txtbx_GraphDPTest2.ReadOnly = True
+        Me.txtbx_GraphDPTest2.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_GraphDPTest2.TabIndex = 62
+        Me.txtbx_GraphDPTest2.TabStop = False
+        Me.txtbx_GraphDPTest2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'dsp_Graphflush2
+        '
+        Me.dsp_Graphflush2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_Graphflush2.Location = New System.Drawing.Point(654, 12)
+        Me.dsp_Graphflush2.Name = "dsp_Graphflush2"
+        Me.dsp_Graphflush2.Size = New System.Drawing.Size(150, 30)
+        Me.dsp_Graphflush2.TabIndex = 59
+        Me.dsp_Graphflush2.Text = "Flush-2 Circuit :"
+        Me.dsp_Graphflush2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_Graphflush2
+        '
+        Me.txtbx_Graphflush2.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_Graphflush2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_Graphflush2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_Graphflush2.Location = New System.Drawing.Point(824, 15)
+        Me.txtbx_Graphflush2.Name = "txtbx_Graphflush2"
+        Me.txtbx_Graphflush2.ReadOnly = True
+        Me.txtbx_Graphflush2.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_Graphflush2.TabIndex = 60
+        Me.txtbx_Graphflush2.TabStop = False
+        Me.txtbx_Graphflush2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'dsp_GraphDPTest1
+        '
+        Me.dsp_GraphDPTest1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_GraphDPTest1.Location = New System.Drawing.Point(352, 12)
+        Me.dsp_GraphDPTest1.Name = "dsp_GraphDPTest1"
+        Me.dsp_GraphDPTest1.Size = New System.Drawing.Size(150, 30)
+        Me.dsp_GraphDPTest1.TabIndex = 57
+        Me.dsp_GraphDPTest1.Text = "DP Test-1 Circuit :"
+        Me.dsp_GraphDPTest1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_GraphDPTest1
+        '
+        Me.txtbx_GraphDPTest1.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_GraphDPTest1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_GraphDPTest1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_GraphDPTest1.Location = New System.Drawing.Point(522, 15)
+        Me.txtbx_GraphDPTest1.Name = "txtbx_GraphDPTest1"
+        Me.txtbx_GraphDPTest1.ReadOnly = True
+        Me.txtbx_GraphDPTest1.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_GraphDPTest1.TabIndex = 58
+        Me.txtbx_GraphDPTest1.TabStop = False
+        Me.txtbx_GraphDPTest1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'dsp_Graphflush1
+        '
+        Me.dsp_Graphflush1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_Graphflush1.Location = New System.Drawing.Point(50, 12)
+        Me.dsp_Graphflush1.Name = "dsp_Graphflush1"
+        Me.dsp_Graphflush1.Size = New System.Drawing.Size(150, 30)
+        Me.dsp_Graphflush1.TabIndex = 55
+        Me.dsp_Graphflush1.Text = "Flush-1 Circuit :"
+        Me.dsp_Graphflush1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_Graphflush1
+        '
+        Me.txtbx_Graphflush1.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_Graphflush1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_Graphflush1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_Graphflush1.Location = New System.Drawing.Point(220, 15)
+        Me.txtbx_Graphflush1.Name = "txtbx_Graphflush1"
+        Me.txtbx_Graphflush1.ReadOnly = True
+        Me.txtbx_Graphflush1.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_Graphflush1.TabIndex = 56
+        Me.txtbx_Graphflush1.TabStop = False
+        Me.txtbx_Graphflush1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'CartesianChart_ResultGraph
+        '
+        Me.CartesianChart_ResultGraph.BackColor = System.Drawing.Color.AliceBlue
+        Me.CartesianChart_ResultGraph.Location = New System.Drawing.Point(50, 177)
+        Me.CartesianChart_ResultGraph.Name = "CartesianChart_ResultGraph"
+        Me.CartesianChart_ResultGraph.Size = New System.Drawing.Size(1210, 600)
+        Me.CartesianChart_ResultGraph.TabIndex = 75
         '
         'ResultChart
         '
@@ -841,160 +1029,6 @@ Partial Class FormResultGraph
         Title1.Name = "Result Graph"
         Me.ResultChart.Titles.Add(Title1)
         '
-        'dsp_GraphDrain3
-        '
-        Me.dsp_GraphDrain3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphDrain3.Location = New System.Drawing.Point(654, 73)
-        Me.dsp_GraphDrain3.Name = "dsp_GraphDrain3"
-        Me.dsp_GraphDrain3.Size = New System.Drawing.Size(150, 30)
-        Me.dsp_GraphDrain3.TabIndex = 67
-        Me.dsp_GraphDrain3.Text = "Drain-3 Circuit :"
-        Me.dsp_GraphDrain3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_GraphDrain3
-        '
-        Me.txtbx_GraphDrain3.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_GraphDrain3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_GraphDrain3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphDrain3.Location = New System.Drawing.Point(824, 76)
-        Me.txtbx_GraphDrain3.Name = "txtbx_GraphDrain3"
-        Me.txtbx_GraphDrain3.ReadOnly = True
-        Me.txtbx_GraphDrain3.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_GraphDrain3.TabIndex = 68
-        Me.txtbx_GraphDrain3.TabStop = False
-        '
-        'dsp_GraphDrain2
-        '
-        Me.dsp_GraphDrain2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphDrain2.Location = New System.Drawing.Point(352, 73)
-        Me.dsp_GraphDrain2.Name = "dsp_GraphDrain2"
-        Me.dsp_GraphDrain2.Size = New System.Drawing.Size(150, 30)
-        Me.dsp_GraphDrain2.TabIndex = 65
-        Me.dsp_GraphDrain2.Text = "Drain-2 Circuit :"
-        Me.dsp_GraphDrain2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_GraphDrain2
-        '
-        Me.txtbx_GraphDrain2.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_GraphDrain2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_GraphDrain2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphDrain2.Location = New System.Drawing.Point(522, 76)
-        Me.txtbx_GraphDrain2.Name = "txtbx_GraphDrain2"
-        Me.txtbx_GraphDrain2.ReadOnly = True
-        Me.txtbx_GraphDrain2.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_GraphDrain2.TabIndex = 66
-        Me.txtbx_GraphDrain2.TabStop = False
-        '
-        'dsp_GraphDrain1
-        '
-        Me.dsp_GraphDrain1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphDrain1.Location = New System.Drawing.Point(50, 73)
-        Me.dsp_GraphDrain1.Name = "dsp_GraphDrain1"
-        Me.dsp_GraphDrain1.Size = New System.Drawing.Size(150, 30)
-        Me.dsp_GraphDrain1.TabIndex = 63
-        Me.dsp_GraphDrain1.Text = "Drain-1 Circuit :"
-        Me.dsp_GraphDrain1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_GraphDrain1
-        '
-        Me.txtbx_GraphDrain1.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_GraphDrain1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_GraphDrain1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphDrain1.Location = New System.Drawing.Point(220, 76)
-        Me.txtbx_GraphDrain1.Name = "txtbx_GraphDrain1"
-        Me.txtbx_GraphDrain1.ReadOnly = True
-        Me.txtbx_GraphDrain1.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_GraphDrain1.TabIndex = 64
-        Me.txtbx_GraphDrain1.TabStop = False
-        '
-        'dsp_GraphDPTest2
-        '
-        Me.dsp_GraphDPTest2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphDPTest2.Location = New System.Drawing.Point(956, 12)
-        Me.dsp_GraphDPTest2.Name = "dsp_GraphDPTest2"
-        Me.dsp_GraphDPTest2.Size = New System.Drawing.Size(150, 30)
-        Me.dsp_GraphDPTest2.TabIndex = 61
-        Me.dsp_GraphDPTest2.Text = "DP Test-2 Circuit :"
-        Me.dsp_GraphDPTest2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_GraphDPTest2
-        '
-        Me.txtbx_GraphDPTest2.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_GraphDPTest2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_GraphDPTest2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphDPTest2.Location = New System.Drawing.Point(1126, 15)
-        Me.txtbx_GraphDPTest2.Name = "txtbx_GraphDPTest2"
-        Me.txtbx_GraphDPTest2.ReadOnly = True
-        Me.txtbx_GraphDPTest2.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_GraphDPTest2.TabIndex = 62
-        Me.txtbx_GraphDPTest2.TabStop = False
-        '
-        'dsp_Graphflush2
-        '
-        Me.dsp_Graphflush2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Graphflush2.Location = New System.Drawing.Point(654, 12)
-        Me.dsp_Graphflush2.Name = "dsp_Graphflush2"
-        Me.dsp_Graphflush2.Size = New System.Drawing.Size(150, 30)
-        Me.dsp_Graphflush2.TabIndex = 59
-        Me.dsp_Graphflush2.Text = "Flush-2 Circuit :"
-        Me.dsp_Graphflush2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_Graphflush2
-        '
-        Me.txtbx_Graphflush2.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_Graphflush2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_Graphflush2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_Graphflush2.Location = New System.Drawing.Point(824, 15)
-        Me.txtbx_Graphflush2.Name = "txtbx_Graphflush2"
-        Me.txtbx_Graphflush2.ReadOnly = True
-        Me.txtbx_Graphflush2.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_Graphflush2.TabIndex = 60
-        Me.txtbx_Graphflush2.TabStop = False
-        '
-        'dsp_GraphDPTest1
-        '
-        Me.dsp_GraphDPTest1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_GraphDPTest1.Location = New System.Drawing.Point(352, 12)
-        Me.dsp_GraphDPTest1.Name = "dsp_GraphDPTest1"
-        Me.dsp_GraphDPTest1.Size = New System.Drawing.Size(150, 30)
-        Me.dsp_GraphDPTest1.TabIndex = 57
-        Me.dsp_GraphDPTest1.Text = "DP Test-1 Circuit :"
-        Me.dsp_GraphDPTest1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_GraphDPTest1
-        '
-        Me.txtbx_GraphDPTest1.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_GraphDPTest1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_GraphDPTest1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_GraphDPTest1.Location = New System.Drawing.Point(522, 15)
-        Me.txtbx_GraphDPTest1.Name = "txtbx_GraphDPTest1"
-        Me.txtbx_GraphDPTest1.ReadOnly = True
-        Me.txtbx_GraphDPTest1.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_GraphDPTest1.TabIndex = 58
-        Me.txtbx_GraphDPTest1.TabStop = False
-        '
-        'dsp_Graphflush1
-        '
-        Me.dsp_Graphflush1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Graphflush1.Location = New System.Drawing.Point(50, 12)
-        Me.dsp_Graphflush1.Name = "dsp_Graphflush1"
-        Me.dsp_Graphflush1.Size = New System.Drawing.Size(150, 30)
-        Me.dsp_Graphflush1.TabIndex = 55
-        Me.dsp_Graphflush1.Text = "Flush-1 Circuit :"
-        Me.dsp_Graphflush1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_Graphflush1
-        '
-        Me.txtbx_Graphflush1.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_Graphflush1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_Graphflush1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_Graphflush1.Location = New System.Drawing.Point(220, 15)
-        Me.txtbx_Graphflush1.Name = "txtbx_Graphflush1"
-        Me.txtbx_Graphflush1.ReadOnly = True
-        Me.txtbx_Graphflush1.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_Graphflush1.TabIndex = 56
-        Me.txtbx_Graphflush1.TabStop = False
-        '
         'dsp_Home
         '
         Me.dsp_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1027,6 +1061,28 @@ Partial Class FormResultGraph
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Result Graph"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"DP vs Seconds", "DP vs Back Pressure", "DP vs Flow Rate"})
+        Me.ComboBox1.Location = New System.Drawing.Point(1042, 190)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(200, 25)
+        Me.ComboBox1.TabIndex = 14
+        '
+        'checkbx_GraphRPM
+        '
+        Me.checkbx_GraphRPM.AutoSize = True
+        Me.checkbx_GraphRPM.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphRPM.Location = New System.Drawing.Point(1135, 137)
+        Me.checkbx_GraphRPM.Name = "checkbx_GraphRPM"
+        Me.checkbx_GraphRPM.Size = New System.Drawing.Size(91, 21)
+        Me.checkbx_GraphRPM.TabIndex = 74
+        Me.checkbx_GraphRPM.Text = "Pump RPM"
+        Me.checkbx_GraphRPM.UseVisualStyleBackColor = True
         '
         'FormResultGraph
         '
@@ -1132,4 +1188,8 @@ Partial Class FormResultGraph
     Friend WithEvents txtbx_Graphattempt As TextBox
     Friend WithEvents dsp_GraphSerialUID As Label
     Friend WithEvents txtbx_GraphSerialUID As TextBox
+    Friend WithEvents CartesianChart_ResultGraph As LiveChartsCore.SkiaSharpView.WinForms.CartesianChart
+    Friend WithEvents checkbx_GraphBP As CheckBox
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents checkbx_GraphRPM As CheckBox
 End Class

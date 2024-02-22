@@ -70,6 +70,23 @@ Partial Class FormCalibration
         Me.txtbx_EstVerCycletime = New System.Windows.Forms.TextBox()
         Me.txtbx_JigType = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.tabpg_GraphView = New System.Windows.Forms.TabPage()
+        Me.checkbx_GraphRPM = New System.Windows.Forms.CheckBox()
+        Me.checkbx_GraphTemperature = New System.Windows.Forms.CheckBox()
+        Me.checkbx_GraphFlowrate = New System.Windows.Forms.CheckBox()
+        Me.checkbx_GraphBP = New System.Windows.Forms.CheckBox()
+        Me.checkbx_GraphOutletPressure = New System.Windows.Forms.CheckBox()
+        Me.checkbx_GraphInletPressure = New System.Windows.Forms.CheckBox()
+        Me.checkbx_GraphDP = New System.Windows.Forms.CheckBox()
+        Me.CartesianChart_CalibrationLiveGraph = New LiveChartsCore.SkiaSharpView.WinForms.CartesianChart()
+        Me.tabpg_TableView = New System.Windows.Forms.TabPage()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.dgv_CalibrationResult = New System.Windows.Forms.DataGridView()
+        Me.dgv_VerificationResult = New System.Windows.Forms.DataGridView()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.tabpg_CircuitView = New System.Windows.Forms.TabPage()
+        Me.Panel_Calibration_Circuit = New System.Windows.Forms.Panel()
         Me.dsp_Vertemperature = New System.Windows.Forms.Label()
         Me.txtbx_VerTemperature = New System.Windows.Forms.TextBox()
         Me.dsp_Verflowrate = New System.Windows.Forms.Label()
@@ -78,10 +95,6 @@ Partial Class FormCalibration
         Me.txtbx_CalTemperature = New System.Windows.Forms.TextBox()
         Me.dsp_Calflowrate = New System.Windows.Forms.Label()
         Me.txtbx_CalFlowrate = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.dgv_VerificationResult = New System.Windows.Forms.DataGridView()
-        Me.dgv_CalibrationResult = New System.Windows.Forms.DataGridView()
         Me.txtbx_CalResult = New System.Windows.Forms.TextBox()
         Me.txtbx_VerStatus = New System.Windows.Forms.TextBox()
         Me.txtbx_VerDP = New System.Windows.Forms.TextBox()
@@ -99,7 +112,10 @@ Partial Class FormCalibration
         Me.txtbx_CalInletPressure = New System.Windows.Forms.TextBox()
         Me.dsp_VerStatus = New System.Windows.Forms.Label()
         Me.lbl_CalibrationMsg = New System.Windows.Forms.Label()
-        Me.Panel_Calibration_Circuit = New System.Windows.Forms.Panel()
+        Me.dsp_VerBackpress = New System.Windows.Forms.Label()
+        Me.txtbx_VerBackpress = New System.Windows.Forms.TextBox()
+        Me.dsp_CalBackpress = New System.Windows.Forms.Label()
+        Me.txtbx_CalBackpress = New System.Windows.Forms.TextBox()
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -113,8 +129,12 @@ Partial Class FormCalibration
         Me.Panel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        CType(Me.dgv_VerificationResult, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl1.SuspendLayout()
+        Me.tabpg_GraphView.SuspendLayout()
+        Me.tabpg_TableView.SuspendLayout()
         CType(Me.dgv_CalibrationResult, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgv_VerificationResult, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpg_CircuitView.SuspendLayout()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -255,6 +275,7 @@ Partial Class FormCalibration
         Me.btn_CircuitView.TabIndex = 106
         Me.btn_CircuitView.Text = "Circuit View"
         Me.btn_CircuitView.UseVisualStyleBackColor = False
+        Me.btn_CircuitView.Visible = False
         '
         'PictureBox1
         '
@@ -272,7 +293,7 @@ Partial Class FormCalibration
         Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Location = New System.Drawing.Point(12, 181)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1880, 808)
+        Me.Panel1.Size = New System.Drawing.Size(1880, 830)
         Me.Panel1.TabIndex = 1
         '
         'Panel2
@@ -306,15 +327,15 @@ Partial Class FormCalibration
         Me.Panel2.Controls.Add(Me.txtbx_JigType)
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(564, 802)
+        Me.Panel2.Size = New System.Drawing.Size(450, 815)
         Me.Panel2.TabIndex = 1
         '
         'dsp_RecipeID
         '
         Me.dsp_RecipeID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RecipeID.Location = New System.Drawing.Point(20, 56)
+        Me.dsp_RecipeID.Location = New System.Drawing.Point(10, 56)
         Me.dsp_RecipeID.Name = "dsp_RecipeID"
-        Me.dsp_RecipeID.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_RecipeID.Size = New System.Drawing.Size(150, 35)
         Me.dsp_RecipeID.TabIndex = 56
         Me.dsp_RecipeID.Text = "Recipe ID :"
         Me.dsp_RecipeID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -323,10 +344,10 @@ Partial Class FormCalibration
         '
         Me.txtbx_RecipeID.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_RecipeID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_RecipeID.Location = New System.Drawing.Point(226, 61)
+        Me.txtbx_RecipeID.Location = New System.Drawing.Point(166, 61)
         Me.txtbx_RecipeID.Name = "txtbx_RecipeID"
         Me.txtbx_RecipeID.ReadOnly = True
-        Me.txtbx_RecipeID.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_RecipeID.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_RecipeID.TabIndex = 57
         Me.txtbx_RecipeID.TabStop = False
         '
@@ -334,21 +355,21 @@ Partial Class FormCalibration
         '
         Me.txtbx_CalVertol.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalVertol.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalVertol.Location = New System.Drawing.Point(226, 571)
+        Me.txtbx_CalVertol.Location = New System.Drawing.Point(166, 571)
         Me.txtbx_CalVertol.Name = "txtbx_CalVertol"
         Me.txtbx_CalVertol.ReadOnly = True
-        Me.txtbx_CalVertol.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_CalVertol.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalVertol.TabIndex = 55
         Me.txtbx_CalVertol.TabStop = False
         '
         'dsp_CalVertol
         '
         Me.dsp_CalVertol.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalVertol.Location = New System.Drawing.Point(20, 566)
+        Me.dsp_CalVertol.Location = New System.Drawing.Point(10, 566)
         Me.dsp_CalVertol.Name = "dsp_CalVertol"
-        Me.dsp_CalVertol.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_CalVertol.Size = New System.Drawing.Size(150, 35)
         Me.dsp_CalVertol.TabIndex = 54
-        Me.dsp_CalVertol.Text = "Verification Tolerance (kPa)(+/-) :"
+        Me.dsp_CalVertol.Text = "Verification Tolerance" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)(+/-) :"
         Me.dsp_CalVertol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Panel4
@@ -359,7 +380,7 @@ Partial Class FormCalibration
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(562, 40)
+        Me.Panel4.Size = New System.Drawing.Size(448, 40)
         Me.Panel4.TabIndex = 53
         '
         'txtbx_CalLotID
@@ -367,10 +388,10 @@ Partial Class FormCalibration
         Me.txtbx_CalLotID.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalLotID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_CalLotID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalLotID.Location = New System.Drawing.Point(226, 8)
+        Me.txtbx_CalLotID.Location = New System.Drawing.Point(166, 8)
         Me.txtbx_CalLotID.Name = "txtbx_CalLotID"
         Me.txtbx_CalLotID.ReadOnly = True
-        Me.txtbx_CalLotID.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_CalLotID.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalLotID.TabIndex = 54
         Me.txtbx_CalLotID.TabStop = False
         '
@@ -379,9 +400,9 @@ Partial Class FormCalibration
         Me.dsp_CalLotID.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.dsp_CalLotID.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dsp_CalLotID.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.dsp_CalLotID.Location = New System.Drawing.Point(20, 3)
+        Me.dsp_CalLotID.Location = New System.Drawing.Point(10, 3)
         Me.dsp_CalLotID.Name = "dsp_CalLotID"
-        Me.dsp_CalLotID.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_CalLotID.Size = New System.Drawing.Size(150, 35)
         Me.dsp_CalLotID.TabIndex = 35
         Me.dsp_CalLotID.Text = "Lot ID :"
         Me.dsp_CalLotID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -390,42 +411,42 @@ Partial Class FormCalibration
         '
         Me.txtbx_CalBackPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalBackPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalBackPressure.Location = New System.Drawing.Point(226, 367)
+        Me.txtbx_CalBackPressure.Location = New System.Drawing.Point(166, 367)
         Me.txtbx_CalBackPressure.Name = "txtbx_CalBackPressure"
         Me.txtbx_CalBackPressure.ReadOnly = True
-        Me.txtbx_CalBackPressure.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_CalBackPressure.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalBackPressure.TabIndex = 14
         Me.txtbx_CalBackPressure.TabStop = False
         '
         'dsp_CalBackPressure
         '
         Me.dsp_CalBackPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalBackPressure.Location = New System.Drawing.Point(20, 362)
+        Me.dsp_CalBackPressure.Location = New System.Drawing.Point(10, 362)
         Me.dsp_CalBackPressure.Name = "dsp_CalBackPressure"
-        Me.dsp_CalBackPressure.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_CalBackPressure.Size = New System.Drawing.Size(150, 35)
         Me.dsp_CalBackPressure.TabIndex = 8
-        Me.dsp_CalBackPressure.Text = "Back Pressure (kPa) :"
+        Me.dsp_CalBackPressure.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
         Me.dsp_CalBackPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtbx_ActCalCycletime
         '
         Me.txtbx_ActCalCycletime.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ActCalCycletime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ActCalCycletime.Location = New System.Drawing.Point(226, 214)
+        Me.txtbx_ActCalCycletime.Location = New System.Drawing.Point(166, 214)
         Me.txtbx_ActCalCycletime.Name = "txtbx_ActCalCycletime"
         Me.txtbx_ActCalCycletime.ReadOnly = True
-        Me.txtbx_ActCalCycletime.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_ActCalCycletime.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_ActCalCycletime.TabIndex = 17
         Me.txtbx_ActCalCycletime.TabStop = False
         '
         'dsp_ActCalCycletime
         '
         Me.dsp_ActCalCycletime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ActCalCycletime.Location = New System.Drawing.Point(20, 209)
+        Me.dsp_ActCalCycletime.Location = New System.Drawing.Point(10, 209)
         Me.dsp_ActCalCycletime.Name = "dsp_ActCalCycletime"
-        Me.dsp_ActCalCycletime.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_ActCalCycletime.Size = New System.Drawing.Size(150, 35)
         Me.dsp_ActCalCycletime.TabIndex = 8
-        Me.dsp_ActCalCycletime.Text = "Actual Calibration Cycle Time " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_ActCalCycletime.Text = "Actual Calibration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Cycle Time (s) :"
         Me.dsp_ActCalCycletime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'btn_Discard
@@ -434,7 +455,7 @@ Partial Class FormCalibration
         Me.btn_Discard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Discard.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Discard.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Discard.Location = New System.Drawing.Point(207, 720)
+        Me.btn_Discard.Location = New System.Drawing.Point(148, 719)
         Me.btn_Discard.Name = "btn_Discard"
         Me.btn_Discard.Size = New System.Drawing.Size(150, 60)
         Me.btn_Discard.TabIndex = 52
@@ -447,7 +468,7 @@ Partial Class FormCalibration
         Me.btn_Verify.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Verify.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Verify.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Verify.Location = New System.Drawing.Point(305, 634)
+        Me.btn_Verify.Location = New System.Drawing.Point(246, 633)
         Me.btn_Verify.Name = "btn_Verify"
         Me.btn_Verify.Size = New System.Drawing.Size(150, 60)
         Me.btn_Verify.TabIndex = 51
@@ -460,7 +481,7 @@ Partial Class FormCalibration
         Me.btn_Calibrate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Calibrate.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Calibrate.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Calibrate.Location = New System.Drawing.Point(109, 634)
+        Me.btn_Calibrate.Location = New System.Drawing.Point(50, 633)
         Me.btn_Calibrate.Name = "btn_Calibrate"
         Me.btn_Calibrate.Size = New System.Drawing.Size(150, 60)
         Me.btn_Calibrate.TabIndex = 50
@@ -471,10 +492,10 @@ Partial Class FormCalibration
         '
         Me.txtbx_EstCalCycletime.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_EstCalCycletime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_EstCalCycletime.Location = New System.Drawing.Point(226, 163)
+        Me.txtbx_EstCalCycletime.Location = New System.Drawing.Point(166, 163)
         Me.txtbx_EstCalCycletime.Name = "txtbx_EstCalCycletime"
         Me.txtbx_EstCalCycletime.ReadOnly = True
-        Me.txtbx_EstCalCycletime.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_EstCalCycletime.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_EstCalCycletime.TabIndex = 15
         Me.txtbx_EstCalCycletime.TabStop = False
         '
@@ -482,40 +503,40 @@ Partial Class FormCalibration
         '
         Me.txtbx_CalDPPoints.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalDPPoints.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalDPPoints.Location = New System.Drawing.Point(226, 520)
+        Me.txtbx_CalDPPoints.Location = New System.Drawing.Point(166, 520)
         Me.txtbx_CalDPPoints.Name = "txtbx_CalDPPoints"
         Me.txtbx_CalDPPoints.ReadOnly = True
-        Me.txtbx_CalDPPoints.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_CalDPPoints.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalDPPoints.TabIndex = 19
         Me.txtbx_CalDPPoints.TabStop = False
         '
         'dsp_EstCalCycletime
         '
         Me.dsp_EstCalCycletime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_EstCalCycletime.Location = New System.Drawing.Point(20, 158)
+        Me.dsp_EstCalCycletime.Location = New System.Drawing.Point(10, 158)
         Me.dsp_EstCalCycletime.Name = "dsp_EstCalCycletime"
-        Me.dsp_EstCalCycletime.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_EstCalCycletime.Size = New System.Drawing.Size(150, 35)
         Me.dsp_EstCalCycletime.TabIndex = 8
-        Me.dsp_EstCalCycletime.Text = "Estimated Calibration Cycle Time (s) :"
+        Me.dsp_EstCalCycletime.Text = "Estimated Calibration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Cycle Time (s) :"
         Me.dsp_EstCalCycletime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtbx_CalDPTesttime
         '
         Me.txtbx_CalDPTesttime.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalDPTesttime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalDPTesttime.Location = New System.Drawing.Point(226, 469)
+        Me.txtbx_CalDPTesttime.Location = New System.Drawing.Point(166, 469)
         Me.txtbx_CalDPTesttime.Name = "txtbx_CalDPTesttime"
         Me.txtbx_CalDPTesttime.ReadOnly = True
-        Me.txtbx_CalDPTesttime.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_CalDPTesttime.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalDPTesttime.TabIndex = 18
         Me.txtbx_CalDPTesttime.TabStop = False
         '
         'dsp_CalDPPoints
         '
         Me.dsp_CalDPPoints.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalDPPoints.Location = New System.Drawing.Point(20, 515)
+        Me.dsp_CalDPPoints.Location = New System.Drawing.Point(10, 515)
         Me.dsp_CalDPPoints.Name = "dsp_CalDPPoints"
-        Me.dsp_CalDPPoints.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_CalDPPoints.Size = New System.Drawing.Size(150, 35)
         Me.dsp_CalDPPoints.TabIndex = 8
         Me.dsp_CalDPPoints.Text = "DP Test Points :"
         Me.dsp_CalDPPoints.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -523,49 +544,49 @@ Partial Class FormCalibration
         'dsp_CalDPTesttime
         '
         Me.dsp_CalDPTesttime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalDPTesttime.Location = New System.Drawing.Point(20, 464)
+        Me.dsp_CalDPTesttime.Location = New System.Drawing.Point(10, 464)
         Me.dsp_CalDPTesttime.Name = "dsp_CalDPTesttime"
-        Me.dsp_CalDPTesttime.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_CalDPTesttime.Size = New System.Drawing.Size(150, 35)
         Me.dsp_CalDPTesttime.TabIndex = 8
-        Me.dsp_CalDPTesttime.Text = "DP Test Time (s) :"
+        Me.dsp_CalDPTesttime.Text = "DP Test Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
         Me.dsp_CalDPTesttime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_CalStabilizeTime
         '
         Me.dsp_CalStabilizeTime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalStabilizeTime.Location = New System.Drawing.Point(20, 413)
+        Me.dsp_CalStabilizeTime.Location = New System.Drawing.Point(10, 413)
         Me.dsp_CalStabilizeTime.Name = "dsp_CalStabilizeTime"
-        Me.dsp_CalStabilizeTime.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_CalStabilizeTime.Size = New System.Drawing.Size(150, 35)
         Me.dsp_CalStabilizeTime.TabIndex = 8
-        Me.dsp_CalStabilizeTime.Text = "DP Test Flowrate (l/min)  :"
+        Me.dsp_CalStabilizeTime.Text = "DP Test Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min)  :"
         Me.dsp_CalStabilizeTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_ActVerCycletime
         '
         Me.dsp_ActVerCycletime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ActVerCycletime.Location = New System.Drawing.Point(20, 311)
+        Me.dsp_ActVerCycletime.Location = New System.Drawing.Point(10, 311)
         Me.dsp_ActVerCycletime.Name = "dsp_ActVerCycletime"
-        Me.dsp_ActVerCycletime.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_ActVerCycletime.Size = New System.Drawing.Size(150, 35)
         Me.dsp_ActVerCycletime.TabIndex = 8
-        Me.dsp_ActVerCycletime.Text = "Actual Verification Cycle Time " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_ActVerCycletime.Text = "Actual Verification" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Cycle Time (s) :"
         Me.dsp_ActVerCycletime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_EstVerCycletime
         '
         Me.dsp_EstVerCycletime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_EstVerCycletime.Location = New System.Drawing.Point(20, 260)
+        Me.dsp_EstVerCycletime.Location = New System.Drawing.Point(10, 260)
         Me.dsp_EstVerCycletime.Name = "dsp_EstVerCycletime"
-        Me.dsp_EstVerCycletime.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_EstVerCycletime.Size = New System.Drawing.Size(150, 35)
         Me.dsp_EstVerCycletime.TabIndex = 8
-        Me.dsp_EstVerCycletime.Text = "Estimated Verification Cycle Time (s) :"
+        Me.dsp_EstVerCycletime.Text = "Estimated Verification" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Cycle Time (s) :"
         Me.dsp_EstVerCycletime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_OperatorID
         '
         Me.dsp_OperatorID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_OperatorID.Location = New System.Drawing.Point(20, 107)
+        Me.dsp_OperatorID.Location = New System.Drawing.Point(10, 107)
         Me.dsp_OperatorID.Name = "dsp_OperatorID"
-        Me.dsp_OperatorID.Size = New System.Drawing.Size(200, 35)
+        Me.dsp_OperatorID.Size = New System.Drawing.Size(150, 35)
         Me.dsp_OperatorID.TabIndex = 8
         Me.dsp_OperatorID.Text = "Jig Type :"
         Me.dsp_OperatorID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -574,10 +595,10 @@ Partial Class FormCalibration
         '
         Me.txtbx_CalDPTestFlowrate.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalDPTestFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalDPTestFlowrate.Location = New System.Drawing.Point(226, 418)
+        Me.txtbx_CalDPTestFlowrate.Location = New System.Drawing.Point(166, 418)
         Me.txtbx_CalDPTestFlowrate.Name = "txtbx_CalDPTestFlowrate"
         Me.txtbx_CalDPTestFlowrate.ReadOnly = True
-        Me.txtbx_CalDPTestFlowrate.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_CalDPTestFlowrate.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalDPTestFlowrate.TabIndex = 16
         Me.txtbx_CalDPTestFlowrate.TabStop = False
         '
@@ -585,10 +606,10 @@ Partial Class FormCalibration
         '
         Me.txtbx_ActVerCycletime.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_ActVerCycletime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_ActVerCycletime.Location = New System.Drawing.Point(226, 316)
+        Me.txtbx_ActVerCycletime.Location = New System.Drawing.Point(166, 316)
         Me.txtbx_ActVerCycletime.Name = "txtbx_ActVerCycletime"
         Me.txtbx_ActVerCycletime.ReadOnly = True
-        Me.txtbx_ActVerCycletime.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_ActVerCycletime.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_ActVerCycletime.TabIndex = 13
         Me.txtbx_ActVerCycletime.TabStop = False
         '
@@ -596,10 +617,10 @@ Partial Class FormCalibration
         '
         Me.txtbx_EstVerCycletime.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_EstVerCycletime.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_EstVerCycletime.Location = New System.Drawing.Point(226, 265)
+        Me.txtbx_EstVerCycletime.Location = New System.Drawing.Point(166, 265)
         Me.txtbx_EstVerCycletime.Name = "txtbx_EstVerCycletime"
         Me.txtbx_EstVerCycletime.ReadOnly = True
-        Me.txtbx_EstVerCycletime.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_EstVerCycletime.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_EstVerCycletime.TabIndex = 12
         Me.txtbx_EstVerCycletime.TabStop = False
         '
@@ -607,16 +628,17 @@ Partial Class FormCalibration
         '
         Me.txtbx_JigType.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_JigType.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_JigType.Location = New System.Drawing.Point(226, 112)
+        Me.txtbx_JigType.Location = New System.Drawing.Point(166, 112)
         Me.txtbx_JigType.Name = "txtbx_JigType"
         Me.txtbx_JigType.ReadOnly = True
-        Me.txtbx_JigType.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_JigType.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_JigType.TabIndex = 11
         Me.txtbx_JigType.TabStop = False
         '
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.TabControl1)
         Me.Panel3.Controls.Add(Me.dsp_Vertemperature)
         Me.Panel3.Controls.Add(Me.txtbx_VerTemperature)
         Me.Panel3.Controls.Add(Me.dsp_Verflowrate)
@@ -625,10 +647,6 @@ Partial Class FormCalibration
         Me.Panel3.Controls.Add(Me.txtbx_CalTemperature)
         Me.Panel3.Controls.Add(Me.dsp_Calflowrate)
         Me.Panel3.Controls.Add(Me.txtbx_CalFlowrate)
-        Me.Panel3.Controls.Add(Me.Label4)
-        Me.Panel3.Controls.Add(Me.Label2)
-        Me.Panel3.Controls.Add(Me.dgv_VerificationResult)
-        Me.Panel3.Controls.Add(Me.dgv_CalibrationResult)
         Me.Panel3.Controls.Add(Me.txtbx_CalResult)
         Me.Panel3.Controls.Add(Me.txtbx_VerStatus)
         Me.Panel3.Controls.Add(Me.txtbx_VerDP)
@@ -646,20 +664,245 @@ Partial Class FormCalibration
         Me.Panel3.Controls.Add(Me.txtbx_CalInletPressure)
         Me.Panel3.Controls.Add(Me.dsp_VerStatus)
         Me.Panel3.Controls.Add(Me.lbl_CalibrationMsg)
-        Me.Panel3.Controls.Add(Me.Panel_Calibration_Circuit)
-        Me.Panel3.Location = New System.Drawing.Point(566, 3)
+        Me.Panel3.Controls.Add(Me.dsp_VerBackpress)
+        Me.Panel3.Controls.Add(Me.txtbx_VerBackpress)
+        Me.Panel3.Controls.Add(Me.dsp_CalBackpress)
+        Me.Panel3.Controls.Add(Me.txtbx_CalBackpress)
+        Me.Panel3.Location = New System.Drawing.Point(452, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1311, 802)
+        Me.Panel3.Size = New System.Drawing.Size(1425, 815)
         Me.Panel3.TabIndex = 2
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.tabpg_GraphView)
+        Me.TabControl1.Controls.Add(Me.tabpg_TableView)
+        Me.TabControl1.Controls.Add(Me.tabpg_CircuitView)
+        Me.TabControl1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabControl1.ItemSize = New System.Drawing.Size(110, 30)
+        Me.TabControl1.Location = New System.Drawing.Point(96, 191)
+        Me.TabControl1.Multiline = True
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(1244, 620)
+        Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
+        Me.TabControl1.TabIndex = 97
+        '
+        'tabpg_GraphView
+        '
+        Me.tabpg_GraphView.BackColor = System.Drawing.Color.AliceBlue
+        Me.tabpg_GraphView.Controls.Add(Me.checkbx_GraphRPM)
+        Me.tabpg_GraphView.Controls.Add(Me.checkbx_GraphTemperature)
+        Me.tabpg_GraphView.Controls.Add(Me.checkbx_GraphFlowrate)
+        Me.tabpg_GraphView.Controls.Add(Me.checkbx_GraphBP)
+        Me.tabpg_GraphView.Controls.Add(Me.checkbx_GraphOutletPressure)
+        Me.tabpg_GraphView.Controls.Add(Me.checkbx_GraphInletPressure)
+        Me.tabpg_GraphView.Controls.Add(Me.checkbx_GraphDP)
+        Me.tabpg_GraphView.Controls.Add(Me.CartesianChart_CalibrationLiveGraph)
+        Me.tabpg_GraphView.Location = New System.Drawing.Point(4, 34)
+        Me.tabpg_GraphView.Name = "tabpg_GraphView"
+        Me.tabpg_GraphView.Size = New System.Drawing.Size(1236, 582)
+        Me.tabpg_GraphView.TabIndex = 2
+        Me.tabpg_GraphView.Text = "Graph View"
+        '
+        'checkbx_GraphRPM
+        '
+        Me.checkbx_GraphRPM.AutoSize = True
+        Me.checkbx_GraphRPM.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphRPM.Location = New System.Drawing.Point(1102, 22)
+        Me.checkbx_GraphRPM.Name = "checkbx_GraphRPM"
+        Me.checkbx_GraphRPM.Size = New System.Drawing.Size(91, 21)
+        Me.checkbx_GraphRPM.TabIndex = 80
+        Me.checkbx_GraphRPM.Text = "Pump RPM"
+        Me.checkbx_GraphRPM.UseVisualStyleBackColor = True
+        '
+        'checkbx_GraphTemperature
+        '
+        Me.checkbx_GraphTemperature.AutoSize = True
+        Me.checkbx_GraphTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphTemperature.Location = New System.Drawing.Point(945, 22)
+        Me.checkbx_GraphTemperature.Name = "checkbx_GraphTemperature"
+        Me.checkbx_GraphTemperature.Size = New System.Drawing.Size(101, 21)
+        Me.checkbx_GraphTemperature.TabIndex = 81
+        Me.checkbx_GraphTemperature.Text = "Temperature"
+        Me.checkbx_GraphTemperature.UseVisualStyleBackColor = True
+        '
+        'checkbx_GraphFlowrate
+        '
+        Me.checkbx_GraphFlowrate.AutoSize = True
+        Me.checkbx_GraphFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphFlowrate.Location = New System.Drawing.Point(797, 22)
+        Me.checkbx_GraphFlowrate.Name = "checkbx_GraphFlowrate"
+        Me.checkbx_GraphFlowrate.Size = New System.Drawing.Size(76, 21)
+        Me.checkbx_GraphFlowrate.TabIndex = 79
+        Me.checkbx_GraphFlowrate.Text = "Flowrate"
+        Me.checkbx_GraphFlowrate.UseVisualStyleBackColor = True
+        '
+        'checkbx_GraphBP
+        '
+        Me.checkbx_GraphBP.AutoSize = True
+        Me.checkbx_GraphBP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphBP.Location = New System.Drawing.Point(619, 22)
+        Me.checkbx_GraphBP.Name = "checkbx_GraphBP"
+        Me.checkbx_GraphBP.Size = New System.Drawing.Size(107, 21)
+        Me.checkbx_GraphBP.TabIndex = 77
+        Me.checkbx_GraphBP.Text = "Back Pressure"
+        Me.checkbx_GraphBP.UseVisualStyleBackColor = True
+        '
+        'checkbx_GraphOutletPressure
+        '
+        Me.checkbx_GraphOutletPressure.AutoSize = True
+        Me.checkbx_GraphOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphOutletPressure.Location = New System.Drawing.Point(433, 22)
+        Me.checkbx_GraphOutletPressure.Name = "checkbx_GraphOutletPressure"
+        Me.checkbx_GraphOutletPressure.Size = New System.Drawing.Size(116, 21)
+        Me.checkbx_GraphOutletPressure.TabIndex = 78
+        Me.checkbx_GraphOutletPressure.Text = "Outlet Pressure"
+        Me.checkbx_GraphOutletPressure.UseVisualStyleBackColor = True
+        '
+        'checkbx_GraphInletPressure
+        '
+        Me.checkbx_GraphInletPressure.AutoSize = True
+        Me.checkbx_GraphInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphInletPressure.Location = New System.Drawing.Point(257, 22)
+        Me.checkbx_GraphInletPressure.Name = "checkbx_GraphInletPressure"
+        Me.checkbx_GraphInletPressure.Size = New System.Drawing.Size(105, 21)
+        Me.checkbx_GraphInletPressure.TabIndex = 76
+        Me.checkbx_GraphInletPressure.Text = "Inlet Pressure"
+        Me.checkbx_GraphInletPressure.UseVisualStyleBackColor = True
+        '
+        'checkbx_GraphDP
+        '
+        Me.checkbx_GraphDP.AutoSize = True
+        Me.checkbx_GraphDP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphDP.Location = New System.Drawing.Point(47, 22)
+        Me.checkbx_GraphDP.Name = "checkbx_GraphDP"
+        Me.checkbx_GraphDP.Size = New System.Drawing.Size(144, 21)
+        Me.checkbx_GraphDP.TabIndex = 75
+        Me.checkbx_GraphDP.Text = "Differential Pressure"
+        Me.checkbx_GraphDP.UseVisualStyleBackColor = True
+        '
+        'CartesianChart_CalibrationLiveGraph
+        '
+        Me.CartesianChart_CalibrationLiveGraph.BackColor = System.Drawing.Color.AliceBlue
+        Me.CartesianChart_CalibrationLiveGraph.Location = New System.Drawing.Point(0, 56)
+        Me.CartesianChart_CalibrationLiveGraph.Margin = New System.Windows.Forms.Padding(5)
+        Me.CartesianChart_CalibrationLiveGraph.Name = "CartesianChart_CalibrationLiveGraph"
+        Me.CartesianChart_CalibrationLiveGraph.Size = New System.Drawing.Size(1236, 526)
+        Me.CartesianChart_CalibrationLiveGraph.TabIndex = 12
+        '
+        'tabpg_TableView
+        '
+        Me.tabpg_TableView.Controls.Add(Me.Label2)
+        Me.tabpg_TableView.Controls.Add(Me.dgv_CalibrationResult)
+        Me.tabpg_TableView.Controls.Add(Me.dgv_VerificationResult)
+        Me.tabpg_TableView.Controls.Add(Me.Label4)
+        Me.tabpg_TableView.Location = New System.Drawing.Point(4, 34)
+        Me.tabpg_TableView.Name = "tabpg_TableView"
+        Me.tabpg_TableView.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpg_TableView.Size = New System.Drawing.Size(1236, 582)
+        Me.tabpg_TableView.TabIndex = 0
+        Me.tabpg_TableView.Text = "Table View"
+        Me.tabpg_TableView.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label2.Location = New System.Drawing.Point(3, 3)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(600, 30)
+        Me.Label2.TabIndex = 83
+        Me.Label2.Text = "Calibration"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dgv_CalibrationResult
+        '
+        Me.dgv_CalibrationResult.AllowUserToAddRows = False
+        Me.dgv_CalibrationResult.AllowUserToDeleteRows = False
+        Me.dgv_CalibrationResult.AllowUserToResizeColumns = False
+        Me.dgv_CalibrationResult.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgv_CalibrationResult.ColumnHeadersHeight = 60
+        Me.dgv_CalibrationResult.Location = New System.Drawing.Point(3, 36)
+        Me.dgv_CalibrationResult.Name = "dgv_CalibrationResult"
+        Me.dgv_CalibrationResult.ReadOnly = True
+        Me.dgv_CalibrationResult.Size = New System.Drawing.Size(600, 529)
+        Me.dgv_CalibrationResult.TabIndex = 81
+        '
+        'dgv_VerificationResult
+        '
+        Me.dgv_VerificationResult.AllowUserToAddRows = False
+        Me.dgv_VerificationResult.AllowUserToDeleteRows = False
+        Me.dgv_VerificationResult.AllowUserToResizeColumns = False
+        Me.dgv_VerificationResult.AllowUserToResizeRows = False
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.dgv_VerificationResult.ColumnHeadersHeight = 60
+        Me.dgv_VerificationResult.Location = New System.Drawing.Point(633, 36)
+        Me.dgv_VerificationResult.Name = "dgv_VerificationResult"
+        Me.dgv_VerificationResult.ReadOnly = True
+        Me.dgv_VerificationResult.Size = New System.Drawing.Size(600, 529)
+        Me.dgv_VerificationResult.TabIndex = 82
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label4.Location = New System.Drawing.Point(633, 3)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(600, 30)
+        Me.Label4.TabIndex = 84
+        Me.Label4.Text = "Verification"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'tabpg_CircuitView
+        '
+        Me.tabpg_CircuitView.Controls.Add(Me.Panel_Calibration_Circuit)
+        Me.tabpg_CircuitView.Location = New System.Drawing.Point(4, 34)
+        Me.tabpg_CircuitView.Name = "tabpg_CircuitView"
+        Me.tabpg_CircuitView.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpg_CircuitView.Size = New System.Drawing.Size(1236, 582)
+        Me.tabpg_CircuitView.TabIndex = 1
+        Me.tabpg_CircuitView.Text = "Circuit View"
+        Me.tabpg_CircuitView.UseVisualStyleBackColor = True
+        '
+        'Panel_Calibration_Circuit
+        '
+        Me.Panel_Calibration_Circuit.AutoSize = True
+        Me.Panel_Calibration_Circuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.Panel_Calibration_Circuit.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel_Calibration_Circuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel_Calibration_Circuit.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel_Calibration_Circuit.Location = New System.Drawing.Point(3, 3)
+        Me.Panel_Calibration_Circuit.Margin = New System.Windows.Forms.Padding(0)
+        Me.Panel_Calibration_Circuit.Name = "Panel_Calibration_Circuit"
+        Me.Panel_Calibration_Circuit.Size = New System.Drawing.Size(1230, 576)
+        Me.Panel_Calibration_Circuit.TabIndex = 85
         '
         'dsp_Vertemperature
         '
         Me.dsp_Vertemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Vertemperature.Location = New System.Drawing.Point(964, 91)
+        Me.dsp_Vertemperature.Location = New System.Drawing.Point(948, 91)
         Me.dsp_Vertemperature.Name = "dsp_Vertemperature"
-        Me.dsp_Vertemperature.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_Vertemperature.Size = New System.Drawing.Size(115, 35)
         Me.dsp_Vertemperature.TabIndex = 91
-        Me.dsp_Vertemperature.Text = "Verification Temperature (°C) :"
+        Me.dsp_Vertemperature.Text = "Verification" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Temperature (°C) :"
         Me.dsp_Vertemperature.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtbx_VerTemperature
@@ -667,7 +910,7 @@ Partial Class FormCalibration
         Me.txtbx_VerTemperature.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_VerTemperature.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_VerTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_VerTemperature.Location = New System.Drawing.Point(1134, 96)
+        Me.txtbx_VerTemperature.Location = New System.Drawing.Point(1073, 96)
         Me.txtbx_VerTemperature.Name = "txtbx_VerTemperature"
         Me.txtbx_VerTemperature.ReadOnly = True
         Me.txtbx_VerTemperature.Size = New System.Drawing.Size(100, 25)
@@ -677,9 +920,9 @@ Partial Class FormCalibration
         'dsp_Verflowrate
         '
         Me.dsp_Verflowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Verflowrate.Location = New System.Drawing.Point(662, 91)
+        Me.dsp_Verflowrate.Location = New System.Drawing.Point(722, 91)
         Me.dsp_Verflowrate.Name = "dsp_Verflowrate"
-        Me.dsp_Verflowrate.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_Verflowrate.Size = New System.Drawing.Size(110, 35)
         Me.dsp_Verflowrate.TabIndex = 89
         Me.dsp_Verflowrate.Text = "Verification Flowrate (l/min) :"
         Me.dsp_Verflowrate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -689,7 +932,7 @@ Partial Class FormCalibration
         Me.txtbx_VerFlowrate.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_VerFlowrate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_VerFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_VerFlowrate.Location = New System.Drawing.Point(832, 96)
+        Me.txtbx_VerFlowrate.Location = New System.Drawing.Point(842, 96)
         Me.txtbx_VerFlowrate.Name = "txtbx_VerFlowrate"
         Me.txtbx_VerFlowrate.ReadOnly = True
         Me.txtbx_VerFlowrate.Size = New System.Drawing.Size(100, 25)
@@ -699,11 +942,11 @@ Partial Class FormCalibration
         'dsp_Caltemperature
         '
         Me.dsp_Caltemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Caltemperature.Location = New System.Drawing.Point(360, 91)
+        Me.dsp_Caltemperature.Location = New System.Drawing.Point(238, 94)
         Me.dsp_Caltemperature.Name = "dsp_Caltemperature"
-        Me.dsp_Caltemperature.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_Caltemperature.Size = New System.Drawing.Size(115, 35)
         Me.dsp_Caltemperature.TabIndex = 87
-        Me.dsp_Caltemperature.Text = "Calibration Temperature (°C) :"
+        Me.dsp_Caltemperature.Text = "Calibration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Temperature (°C) :"
         Me.dsp_Caltemperature.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtbx_CalTemperature
@@ -711,7 +954,7 @@ Partial Class FormCalibration
         Me.txtbx_CalTemperature.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalTemperature.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_CalTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalTemperature.Location = New System.Drawing.Point(530, 96)
+        Me.txtbx_CalTemperature.Location = New System.Drawing.Point(363, 99)
         Me.txtbx_CalTemperature.Name = "txtbx_CalTemperature"
         Me.txtbx_CalTemperature.ReadOnly = True
         Me.txtbx_CalTemperature.Size = New System.Drawing.Size(100, 25)
@@ -721,9 +964,9 @@ Partial Class FormCalibration
         'dsp_Calflowrate
         '
         Me.dsp_Calflowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Calflowrate.Location = New System.Drawing.Point(58, 91)
+        Me.dsp_Calflowrate.Location = New System.Drawing.Point(12, 94)
         Me.dsp_Calflowrate.Name = "dsp_Calflowrate"
-        Me.dsp_Calflowrate.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_Calflowrate.Size = New System.Drawing.Size(110, 35)
         Me.dsp_Calflowrate.TabIndex = 85
         Me.dsp_Calflowrate.Text = "Calibration Flowrate (l/min) :"
         Me.dsp_Calflowrate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -733,85 +976,19 @@ Partial Class FormCalibration
         Me.txtbx_CalFlowrate.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalFlowrate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_CalFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalFlowrate.Location = New System.Drawing.Point(228, 96)
+        Me.txtbx_CalFlowrate.Location = New System.Drawing.Point(132, 99)
         Me.txtbx_CalFlowrate.Name = "txtbx_CalFlowrate"
         Me.txtbx_CalFlowrate.ReadOnly = True
         Me.txtbx_CalFlowrate.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_CalFlowrate.TabIndex = 86
         Me.txtbx_CalFlowrate.TabStop = False
         '
-        'Label4
-        '
-        Me.Label4.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label4.Location = New System.Drawing.Point(679, 180)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(600, 30)
-        Me.Label4.TabIndex = 84
-        Me.Label4.Text = "Verification"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label2
-        '
-        Me.Label2.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label2.Location = New System.Drawing.Point(50, 180)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(600, 30)
-        Me.Label2.TabIndex = 83
-        Me.Label2.Text = "Calibration"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dgv_VerificationResult
-        '
-        Me.dgv_VerificationResult.AllowUserToAddRows = False
-        Me.dgv_VerificationResult.AllowUserToDeleteRows = False
-        Me.dgv_VerificationResult.AllowUserToResizeColumns = False
-        Me.dgv_VerificationResult.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.dgv_VerificationResult.ColumnHeadersHeight = 60
-        Me.dgv_VerificationResult.Location = New System.Drawing.Point(679, 215)
-        Me.dgv_VerificationResult.Name = "dgv_VerificationResult"
-        Me.dgv_VerificationResult.ReadOnly = True
-        Me.dgv_VerificationResult.Size = New System.Drawing.Size(600, 560)
-        Me.dgv_VerificationResult.TabIndex = 82
-        '
-        'dgv_CalibrationResult
-        '
-        Me.dgv_CalibrationResult.AllowUserToAddRows = False
-        Me.dgv_CalibrationResult.AllowUserToDeleteRows = False
-        Me.dgv_CalibrationResult.AllowUserToResizeColumns = False
-        Me.dgv_CalibrationResult.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.dgv_CalibrationResult.ColumnHeadersHeight = 60
-        Me.dgv_CalibrationResult.Location = New System.Drawing.Point(49, 215)
-        Me.dgv_CalibrationResult.Name = "dgv_CalibrationResult"
-        Me.dgv_CalibrationResult.ReadOnly = True
-        Me.dgv_CalibrationResult.Size = New System.Drawing.Size(600, 560)
-        Me.dgv_CalibrationResult.TabIndex = 81
-        '
         'txtbx_CalResult
         '
         Me.txtbx_CalResult.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalResult.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_CalResult.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalResult.Location = New System.Drawing.Point(1133, 139)
+        Me.txtbx_CalResult.Location = New System.Drawing.Point(1277, 150)
         Me.txtbx_CalResult.Name = "txtbx_CalResult"
         Me.txtbx_CalResult.ReadOnly = True
         Me.txtbx_CalResult.Size = New System.Drawing.Size(100, 29)
@@ -822,7 +999,7 @@ Partial Class FormCalibration
         Me.txtbx_VerStatus.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_VerStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_VerStatus.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_VerStatus.Location = New System.Drawing.Point(529, 137)
+        Me.txtbx_VerStatus.Location = New System.Drawing.Point(517, 146)
         Me.txtbx_VerStatus.Name = "txtbx_VerStatus"
         Me.txtbx_VerStatus.ReadOnly = True
         Me.txtbx_VerStatus.Size = New System.Drawing.Size(100, 29)
@@ -833,7 +1010,7 @@ Partial Class FormCalibration
         Me.txtbx_VerDP.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_VerDP.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_VerDP.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_VerDP.Location = New System.Drawing.Point(831, 137)
+        Me.txtbx_VerDP.Location = New System.Drawing.Point(975, 148)
         Me.txtbx_VerDP.Name = "txtbx_VerDP"
         Me.txtbx_VerDP.ReadOnly = True
         Me.txtbx_VerDP.Size = New System.Drawing.Size(100, 29)
@@ -844,7 +1021,7 @@ Partial Class FormCalibration
         Me.txtbx_CalOffset.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalOffset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_CalOffset.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalOffset.Location = New System.Drawing.Point(227, 137)
+        Me.txtbx_CalOffset.Location = New System.Drawing.Point(215, 146)
         Me.txtbx_CalOffset.Name = "txtbx_CalOffset"
         Me.txtbx_CalOffset.ReadOnly = True
         Me.txtbx_CalOffset.Size = New System.Drawing.Size(100, 29)
@@ -853,7 +1030,7 @@ Partial Class FormCalibration
         'dsp_CalResult
         '
         Me.dsp_CalResult.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalResult.Location = New System.Drawing.Point(963, 126)
+        Me.dsp_CalResult.Location = New System.Drawing.Point(1107, 137)
         Me.dsp_CalResult.Name = "dsp_CalResult"
         Me.dsp_CalResult.Size = New System.Drawing.Size(150, 50)
         Me.dsp_CalResult.TabIndex = 76
@@ -863,7 +1040,7 @@ Partial Class FormCalibration
         'dsp_VerDP
         '
         Me.dsp_VerDP.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_VerDP.Location = New System.Drawing.Point(661, 126)
+        Me.dsp_VerDP.Location = New System.Drawing.Point(805, 137)
         Me.dsp_VerDP.Name = "dsp_VerDP"
         Me.dsp_VerDP.Size = New System.Drawing.Size(150, 50)
         Me.dsp_VerDP.TabIndex = 74
@@ -873,7 +1050,7 @@ Partial Class FormCalibration
         'dsp_CalOffset
         '
         Me.dsp_CalOffset.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalOffset.Location = New System.Drawing.Point(57, 126)
+        Me.dsp_CalOffset.Location = New System.Drawing.Point(45, 135)
         Me.dsp_CalOffset.Name = "dsp_CalOffset"
         Me.dsp_CalOffset.Size = New System.Drawing.Size(150, 50)
         Me.dsp_CalOffset.TabIndex = 72
@@ -883,9 +1060,9 @@ Partial Class FormCalibration
         'dsp_VerOutletPressure
         '
         Me.dsp_VerOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_VerOutletPressure.Location = New System.Drawing.Point(963, 48)
+        Me.dsp_VerOutletPressure.Location = New System.Drawing.Point(951, 48)
         Me.dsp_VerOutletPressure.Name = "dsp_VerOutletPressure"
-        Me.dsp_VerOutletPressure.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_VerOutletPressure.Size = New System.Drawing.Size(111, 35)
         Me.dsp_VerOutletPressure.TabIndex = 69
         Me.dsp_VerOutletPressure.Text = "Verification Outlet Pressure (kPa) :"
         Me.dsp_VerOutletPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -895,7 +1072,7 @@ Partial Class FormCalibration
         Me.txtbx_VerOutletPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_VerOutletPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_VerOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_VerOutletPressure.Location = New System.Drawing.Point(1133, 53)
+        Me.txtbx_VerOutletPressure.Location = New System.Drawing.Point(1072, 53)
         Me.txtbx_VerOutletPressure.Name = "txtbx_VerOutletPressure"
         Me.txtbx_VerOutletPressure.ReadOnly = True
         Me.txtbx_VerOutletPressure.Size = New System.Drawing.Size(100, 25)
@@ -905,9 +1082,9 @@ Partial Class FormCalibration
         'dsp_VerInletPressure
         '
         Me.dsp_VerInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_VerInletPressure.Location = New System.Drawing.Point(661, 48)
+        Me.dsp_VerInletPressure.Location = New System.Drawing.Point(721, 48)
         Me.dsp_VerInletPressure.Name = "dsp_VerInletPressure"
-        Me.dsp_VerInletPressure.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_VerInletPressure.Size = New System.Drawing.Size(110, 35)
         Me.dsp_VerInletPressure.TabIndex = 67
         Me.dsp_VerInletPressure.Text = "Verification Inlet Pressure (kPa) :"
         Me.dsp_VerInletPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -917,7 +1094,7 @@ Partial Class FormCalibration
         Me.txtbx_VerInletPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_VerInletPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_VerInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_VerInletPressure.Location = New System.Drawing.Point(831, 53)
+        Me.txtbx_VerInletPressure.Location = New System.Drawing.Point(841, 53)
         Me.txtbx_VerInletPressure.Name = "txtbx_VerInletPressure"
         Me.txtbx_VerInletPressure.ReadOnly = True
         Me.txtbx_VerInletPressure.Size = New System.Drawing.Size(100, 25)
@@ -927,9 +1104,9 @@ Partial Class FormCalibration
         'dsp_CalOutletPressure
         '
         Me.dsp_CalOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalOutletPressure.Location = New System.Drawing.Point(359, 48)
+        Me.dsp_CalOutletPressure.Location = New System.Drawing.Point(242, 51)
         Me.dsp_CalOutletPressure.Name = "dsp_CalOutletPressure"
-        Me.dsp_CalOutletPressure.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_CalOutletPressure.Size = New System.Drawing.Size(110, 35)
         Me.dsp_CalOutletPressure.TabIndex = 65
         Me.dsp_CalOutletPressure.Text = "Calibration Outlet Pressure (kPa) :"
         Me.dsp_CalOutletPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -939,7 +1116,7 @@ Partial Class FormCalibration
         Me.txtbx_CalOutletPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalOutletPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_CalOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalOutletPressure.Location = New System.Drawing.Point(529, 53)
+        Me.txtbx_CalOutletPressure.Location = New System.Drawing.Point(362, 56)
         Me.txtbx_CalOutletPressure.Name = "txtbx_CalOutletPressure"
         Me.txtbx_CalOutletPressure.ReadOnly = True
         Me.txtbx_CalOutletPressure.Size = New System.Drawing.Size(100, 25)
@@ -949,9 +1126,9 @@ Partial Class FormCalibration
         'dsp_CalInletPressure
         '
         Me.dsp_CalInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalInletPressure.Location = New System.Drawing.Point(57, 48)
+        Me.dsp_CalInletPressure.Location = New System.Drawing.Point(11, 51)
         Me.dsp_CalInletPressure.Name = "dsp_CalInletPressure"
-        Me.dsp_CalInletPressure.Size = New System.Drawing.Size(150, 35)
+        Me.dsp_CalInletPressure.Size = New System.Drawing.Size(110, 35)
         Me.dsp_CalInletPressure.TabIndex = 63
         Me.dsp_CalInletPressure.Text = "Calibration Inlet Pressure (kPa) :"
         Me.dsp_CalInletPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -961,7 +1138,7 @@ Partial Class FormCalibration
         Me.txtbx_CalInletPressure.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalInletPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_CalInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalInletPressure.Location = New System.Drawing.Point(227, 53)
+        Me.txtbx_CalInletPressure.Location = New System.Drawing.Point(131, 56)
         Me.txtbx_CalInletPressure.Name = "txtbx_CalInletPressure"
         Me.txtbx_CalInletPressure.ReadOnly = True
         Me.txtbx_CalInletPressure.Size = New System.Drawing.Size(100, 25)
@@ -971,7 +1148,7 @@ Partial Class FormCalibration
         'dsp_VerStatus
         '
         Me.dsp_VerStatus.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_VerStatus.Location = New System.Drawing.Point(359, 126)
+        Me.dsp_VerStatus.Location = New System.Drawing.Point(347, 135)
         Me.dsp_VerStatus.Name = "dsp_VerStatus"
         Me.dsp_VerStatus.Size = New System.Drawing.Size(150, 50)
         Me.dsp_VerStatus.TabIndex = 37
@@ -986,22 +1163,54 @@ Partial Class FormCalibration
         Me.lbl_CalibrationMsg.ForeColor = System.Drawing.SystemColors.ControlText
         Me.lbl_CalibrationMsg.Location = New System.Drawing.Point(0, 0)
         Me.lbl_CalibrationMsg.Name = "lbl_CalibrationMsg"
-        Me.lbl_CalibrationMsg.Size = New System.Drawing.Size(1309, 40)
+        Me.lbl_CalibrationMsg.Size = New System.Drawing.Size(1423, 40)
         Me.lbl_CalibrationMsg.TabIndex = 35
         Me.lbl_CalibrationMsg.Text = "Press ""Calibrate"" to Start"
         Me.lbl_CalibrationMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Panel_Calibration_Circuit
+        'dsp_VerBackpress
         '
-        Me.Panel_Calibration_Circuit.AutoSize = True
-        Me.Panel_Calibration_Circuit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.Panel_Calibration_Circuit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel_Calibration_Circuit.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel_Calibration_Circuit.Location = New System.Drawing.Point(0, 0)
-        Me.Panel_Calibration_Circuit.Margin = New System.Windows.Forms.Padding(0)
-        Me.Panel_Calibration_Circuit.Name = "Panel_Calibration_Circuit"
-        Me.Panel_Calibration_Circuit.Size = New System.Drawing.Size(1309, 800)
-        Me.Panel_Calibration_Circuit.TabIndex = 85
+        Me.dsp_VerBackpress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_VerBackpress.Location = New System.Drawing.Point(1183, 48)
+        Me.dsp_VerBackpress.Name = "dsp_VerBackpress"
+        Me.dsp_VerBackpress.Size = New System.Drawing.Size(110, 35)
+        Me.dsp_VerBackpress.TabIndex = 95
+        Me.dsp_VerBackpress.Text = "Verification Back Pressure (kPa) :"
+        Me.dsp_VerBackpress.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_VerBackpress
+        '
+        Me.txtbx_VerBackpress.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_VerBackpress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_VerBackpress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_VerBackpress.Location = New System.Drawing.Point(1303, 53)
+        Me.txtbx_VerBackpress.Name = "txtbx_VerBackpress"
+        Me.txtbx_VerBackpress.ReadOnly = True
+        Me.txtbx_VerBackpress.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_VerBackpress.TabIndex = 96
+        Me.txtbx_VerBackpress.TabStop = False
+        '
+        'dsp_CalBackpress
+        '
+        Me.dsp_CalBackpress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_CalBackpress.Location = New System.Drawing.Point(473, 51)
+        Me.dsp_CalBackpress.Name = "dsp_CalBackpress"
+        Me.dsp_CalBackpress.Size = New System.Drawing.Size(110, 35)
+        Me.dsp_CalBackpress.TabIndex = 93
+        Me.dsp_CalBackpress.Text = "Calibration Back Pressure (kPa) :"
+        Me.dsp_CalBackpress.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_CalBackpress
+        '
+        Me.txtbx_CalBackpress.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_CalBackpress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_CalBackpress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_CalBackpress.Location = New System.Drawing.Point(593, 56)
+        Me.txtbx_CalBackpress.Name = "txtbx_CalBackpress"
+        Me.txtbx_CalBackpress.ReadOnly = True
+        Me.txtbx_CalBackpress.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_CalBackpress.TabIndex = 94
+        Me.txtbx_CalBackpress.TabStop = False
         '
         'dsp_Home
         '
@@ -1069,8 +1278,14 @@ Partial Class FormCalibration
         Me.Panel4.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        CType(Me.dgv_VerificationResult, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl1.ResumeLayout(False)
+        Me.tabpg_GraphView.ResumeLayout(False)
+        Me.tabpg_GraphView.PerformLayout()
+        Me.tabpg_TableView.ResumeLayout(False)
         CType(Me.dgv_CalibrationResult, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgv_VerificationResult, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabpg_CircuitView.ResumeLayout(False)
+        Me.tabpg_CircuitView.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1153,4 +1368,20 @@ Partial Class FormCalibration
     Friend WithEvents txtbx_CalTemperature As TextBox
     Friend WithEvents dsp_Calflowrate As Label
     Friend WithEvents txtbx_CalFlowrate As TextBox
+    Friend WithEvents dsp_CalBackpress As Label
+    Friend WithEvents txtbx_CalBackpress As TextBox
+    Friend WithEvents dsp_VerBackpress As Label
+    Friend WithEvents txtbx_VerBackpress As TextBox
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tabpg_GraphView As TabPage
+    Friend WithEvents tabpg_TableView As TabPage
+    Friend WithEvents tabpg_CircuitView As TabPage
+    Friend WithEvents CartesianChart_CalibrationLiveGraph As LiveChartsCore.SkiaSharpView.WinForms.CartesianChart
+    Friend WithEvents checkbx_GraphRPM As CheckBox
+    Friend WithEvents checkbx_GraphTemperature As CheckBox
+    Friend WithEvents checkbx_GraphFlowrate As CheckBox
+    Friend WithEvents checkbx_GraphBP As CheckBox
+    Friend WithEvents checkbx_GraphOutletPressure As CheckBox
+    Friend WithEvents checkbx_GraphInletPressure As CheckBox
+    Friend WithEvents checkbx_GraphDP As CheckBox
 End Class

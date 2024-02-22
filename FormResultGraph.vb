@@ -1,8 +1,28 @@
-﻿Imports System.Media
+﻿Imports System.Collections.ObjectModel
+Imports System.Media
 Imports System.Windows.Forms.DataVisualization.Charting
+Imports LiveChartsCore
+Imports LiveChartsCore.Defaults
+Imports LiveChartsCore.Kernel.Sketches
+Imports LiveChartsCore.SkiaSharpView
+Imports LiveChartsCore.SkiaSharpView.Painting
+Imports LiveChartsCore.SkiaSharpView.Painting.Effects
+Imports LiveChartsCore.SkiaSharpView.VisualElements
+Imports SkiaSharp
 
 Public Class FormResultGraph
+    Dim ResultChartDPValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartInletValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartOutletValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartBPValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartFLWRValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartTempValue = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartRPMValue = New ObservableCollection(Of ObservablePoint)({})
 
+    Dim ResultChartYAxesVisible As Boolean() = {True}
+
+    Dim ResultChartDPBP = New ObservableCollection(Of ObservablePoint)({})
+    Dim ResultChartDPFLWR = New ObservableCollection(Of ObservablePoint)({})
 
 #Region "Form Loading"
     Private Sub FormResultGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -21,7 +41,8 @@ Public Class FormResultGraph
         lbl_Category.Text = PublicVariables.LoginUserCategoryName
 
         ' Initialize Defaults
-
+        InitializeResultChart()
+        ComboBox1.SelectedIndex = 0
 
         txtbx_GraphTimestamp.Text = Nothing
         txtbx_GraphWorkOrder.Text = Nothing
@@ -74,6 +95,197 @@ Public Class FormResultGraph
         ' Display Form Control
         panel_FormControl.Visible = True
 
+    End Sub
+
+    Private Sub InitializeResultChartXAxes()
+        CartesianChart_ResultGraph.XAxes = New ICartesianAxis() {
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Sampling Time (s)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Black),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(0, 20, 0, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                .TicksPaint = New SolidColorPaint(SKColors.Black),
+                .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                .DrawTicksPath = True,
+                .MinLimit = 0
+            }
+        }
+    End Sub
+
+    Private Sub InitializeResultChart()
+        CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
+        CartesianChart_ResultGraph.LegendPosition = LiveChartsCore.Measure.LegendPosition.Right
+        CartesianChart_ResultGraph.LegendTextSize = 12
+
+        CartesianChart_ResultGraph.Title = New LabelVisual() With {
+            .Text = "Result Graph",
+            .TextSize = 14,
+            .Padding = New LiveChartsCore.Drawing.Padding(15),
+            .Paint = New SolidColorPaint(SKColors.Black)
+        }
+
+        InitializeResultChartXAxes()
+
+        CartesianChart_ResultGraph.YAxes = New ICartesianAxis() {
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Pressure (kPa)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Black),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                .TicksPaint = New SolidColorPaint(SKColors.Black),
+                .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                .DrawTicksPath = True
+            },
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Pump RPM (RPM)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Orange),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Orange),
+                .TicksPaint = New SolidColorPaint(SKColors.Orange),
+                .SubticksPaint = New SolidColorPaint(SKColors.Orange),
+                .DrawTicksPath = True,
+                .ShowSeparatorLines = False,
+                .Position = LiveChartsCore.Measure.AxisPosition.End
+            },
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Temperature (C)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Red),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Red),
+                .TicksPaint = New SolidColorPaint(SKColors.Red),
+                .SubticksPaint = New SolidColorPaint(SKColors.Red),
+                .DrawTicksPath = True,
+                .ShowSeparatorLines = False,
+                .Position = LiveChartsCore.Measure.AxisPosition.End
+            },
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Flowrate (l/Min)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Brown),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Brown),
+                .TicksPaint = New SolidColorPaint(SKColors.Brown),
+                .SubticksPaint = New SolidColorPaint(SKColors.Brown),
+                .DrawTicksPath = True,
+                .ShowSeparatorLines = False,
+                .Position = LiveChartsCore.Measure.AxisPosition.End
+            }
+        }
+
+        CartesianChart_ResultGraph.Series = New ISeries() {
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Diff. Pressure",
+                .Values = ResultChartDPValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Blue,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Blue),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 0,
+                .ScalesYAt = 0,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Inlet Pressure",
+                .Values = ResultChartInletValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Green,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Green),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 0,
+                .ScalesYAt = 0,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Outlet Pressure",
+                .Values = ResultChartOutletValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Magenta,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Magenta),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 0,
+                .ScalesYAt = 0,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Back Pressure",
+                .Values = ResultChartBPValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.DarkOrange,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.DarkOrange),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 0,
+                .ScalesYAt = 0,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Pump Speed",
+                .Values = ResultChartRPMValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Orange,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Orange),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 0,
+                .ScalesYAt = 1,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Flowrate",
+                .Values = ResultChartFLWRValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Brown,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Brown),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 0,
+                .ScalesYAt = 3,
+                .ScalesXAt = 0
+            },
+            New LineSeries(Of ObservablePoint)() With {
+                .Name = "Temperature",
+                .Values = ResultChartTempValue,
+                .Fill = Nothing,
+                .Stroke = New SolidColorPaint With {
+                    .Color = SKColors.Red,
+                    .StrokeThickness = 1
+                },
+                .GeometryFill = New SolidColorPaint(SKColors.Red),
+                .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
+                .GeometrySize = 0,
+                .ScalesYAt = 2,
+                .ScalesXAt = 0
+            }
+        }
     End Sub
 #End Region
 
@@ -163,8 +375,8 @@ Public Class FormResultGraph
                 ResultMessage(8)
             End If
             cmbx_GraphSearchSerial.Enabled = True
-            Else
-                cmbx_GraphSearchSerial.Enabled = False
+        Else
+            cmbx_GraphSearchSerial.Enabled = False
         End If
     End Sub
 
@@ -361,6 +573,14 @@ Public Class FormResultGraph
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
 
             End With
+
+            With CartesianChart_ResultGraph
+                .Series(0).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(0).IsVisible = False
+            End With
         End If
 
         If checkbx_GraphInletPressure.Checked = True Then
@@ -373,6 +593,14 @@ Public Class FormResultGraph
                 ' .IsValueShownAsLabel = True (To Show Data Points label with X and Y Coordinate)
                 '.LabelToolTip = "X= #VALX, Y= #VALY" (To Show X and Y value when clicking on the datapoint label)
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
+            End With
+
+            With CartesianChart_ResultGraph
+                .Series(1).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(1).IsVisible = False
             End With
         End If
 
@@ -387,6 +615,24 @@ Public Class FormResultGraph
                 '.LabelToolTip = "X= #VALX, Y= #VALY" (To Show X and Y value when clicking on the datapoint label)
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
             End With
+
+            With CartesianChart_ResultGraph
+                .Series(2).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(2).IsVisible = False
+            End With
+        End If
+
+        If checkbx_GraphBP.Checked = True Then
+            With CartesianChart_ResultGraph
+                .Series(3).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(3).IsVisible = False
+            End With
         End If
 
         If checkbx_GraphFlowrate.Checked = True Then
@@ -399,6 +645,16 @@ Public Class FormResultGraph
                 ' .IsValueShownAsLabel = True (To Show Data Points label with X and Y Coordinate)
                 '.LabelToolTip = "X= #VALX, Y= #VALY" (To Show X and Y value when clicking on the datapoint label)
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
+            End With
+
+            With CartesianChart_ResultGraph
+                .Series(5).IsVisible = True
+                .YAxes(3).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(5).IsVisible = False
+                .YAxes(3).IsVisible = False
             End With
         End If
 
@@ -413,11 +669,333 @@ Public Class FormResultGraph
                 '.LabelToolTip = "X= #VALX, Y= #VALY" (To Show X and Y value when clicking on the datapoint label)
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
             End With
+
+            With CartesianChart_ResultGraph
+                .Series(6).IsVisible = True
+                .YAxes(2).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(6).IsVisible = False
+                .YAxes(2).IsVisible = False
+            End With
+        End If
+
+        If checkbx_GraphRPM.Checked = True Then
+            With CartesianChart_ResultGraph
+                .Series(4).IsVisible = True
+                .YAxes(1).IsVisible = True
+            End With
+        Else
+            With CartesianChart_ResultGraph
+                .Series(4).IsVisible = False
+                .YAxes(1).IsVisible = False
+            End With
         End If
 
 
     End Sub
 
+    Public Sub CreateResultGraphNew(dtResult As DataTable, resultsummary As String())
+        ' Clear Result Graph Value
+        ResultChartDPValue.Clear()
+        ResultChartInletValue.Clear()
+        ResultChartOutletValue.Clear()
+        ResultChartBPValue.Clear()
+        ResultChartFLWRValue.Clear()
+        ResultChartTempValue.Clear()
+        ResultChartRPMValue.Clear()
+
+        ' Populate Result Graph Values
+        For i As Integer = 0 To dtResult.Rows.Count - 1
+            Dim XValue As Double = 0
+
+            ResultChartDPValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("calculated_dp_pressure"))
+            })
+            ResultChartInletValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("inlet_pressure"))
+            })
+            ResultChartOutletValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("outlet_pressure"))
+            })
+            ResultChartBPValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("back_pressure"))
+            })
+            ResultChartFLWRValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("flowrate"))
+            })
+            ResultChartTempValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("temperature"))
+            })
+            ResultChartRPMValue.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("sampling_time")),
+                .Y = CDbl(dtResult(i)("pump_rpm"))
+            })
+
+            ResultChartDPBP.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("back_pressure")),
+                .Y = CDbl(dtResult(i)("calculated_dp_pressure"))
+            })
+            ResultChartDPFLWR.Add(New ObservablePoint With {
+                .X = CDbl(dtResult(i)("flowrate")),
+                .Y = CDbl(dtResult(i)("calculated_dp_pressure"))
+            })
+        Next
+
+        ' Set Result Graph Sections
+        If True Then
+            Dim Flush1Enabled As Boolean = False
+            Dim DP1Enabled As Boolean = False
+
+            Dim Flush2Enabled As Boolean = False
+            Dim DP2Enabled As Boolean = False
+
+            Dim Drain1Enabled As Boolean = False
+            Dim Drain2Enabled As Boolean = False
+            Dim Drain3Enabled As Boolean = False
+
+            If True Then
+                If resultsummary(40) = "Enable" Then
+                    Flush1Enabled = True
+                End If
+                If resultsummary(48) = "Enable" Then
+                    DP1Enabled = True
+                End If
+                If resultsummary(59) = "Enable" Then
+                    Flush2Enabled = True
+                End If
+                If resultsummary(60) = "Enable" Then
+                    DP2Enabled = True
+                End If
+                If resultsummary(68) = "Enable" Then
+                    Drain1Enabled = True
+                End If
+                If resultsummary(71) = "Enable" Then
+                    Drain2Enabled = True
+                End If
+                If resultsummary(74) = "Enable" Then
+                    Drain3Enabled = True
+                End If
+            End If
+
+            Dim DPtest1cycletime As Integer
+            Dim DPtest2cycletime As Integer
+
+            If True Then
+                If DP1Enabled And Flush1Enabled = False Then
+                    DPtest1cycletime = (CInt(resultsummary(49)) + CInt(resultsummary(50)) + CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                ElseIf DP1Enabled And Flush1Enabled Then
+                    DPtest1cycletime = (CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                End If
+
+                If DP2Enabled And Flush2Enabled = False Then
+                    DPtest2cycletime = (CInt(resultsummary(49)) + CInt(resultsummary(50)) + CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                ElseIf DP2Enabled And Flush2Enabled Then
+                    DPtest2cycletime = (CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                End If
+            End If
+
+
+            Dim Flush1Start As Decimal = 0
+            Dim DP1Start As Decimal = 0
+
+            Dim Flush2Start As Decimal = 0
+            Dim DP2Start As Decimal = 0
+
+            Dim Drain1Start As Decimal = 0
+            Dim Drain2Start As Decimal = 0
+            Dim Drain3Start As Decimal = 0
+
+            Dim CycleTimeTotal As Decimal = 0
+
+            If True Then
+                If Flush1Enabled Then
+                    DP1Start = CDec(resultsummary(41)) + CDec(resultsummary(42)) + CDec(resultsummary(46)) + CDec(resultsummary(47))
+                End If
+
+                If DP1Enabled Then
+                    Flush2Start = DP1Start + DPtest1cycletime
+                Else
+                    Flush2Start = DP1Start
+                End If
+
+                If Flush2Enabled Then
+                    DP2Start = Flush2Start + CDec(resultsummary(61)) + CDec(resultsummary(62)) + CDec(resultsummary(66)) + CDec(resultsummary(67))
+                Else
+                    DP2Start = Flush2Start
+                End If
+
+                If DP2Enabled Then
+                    Drain1Start = DP2Start + DPtest2cycletime
+                Else
+                    Drain1Start = DP2Start
+                End If
+
+                If Drain1Enabled Then
+                    Drain2Start = Drain1Start + CDec(resultsummary(70))
+                Else
+                    Drain2Start = Drain1Start
+                End If
+
+                If Drain2Enabled Then
+                    Drain3Start = Drain2Start + CDec(resultsummary(73))
+                Else
+                    Drain3Start = Drain2Start
+                End If
+
+                If Drain3Enabled Then
+                    CycleTimeTotal = Drain3Start + CDec(resultsummary(76))
+                Else
+                    CycleTimeTotal = Drain3Start
+                End If
+            End If
+
+            Dim DP1CaptureStart As Decimal = Flush2Start
+            Dim DP2CaptureStart As Decimal = Drain1Start
+
+            If True Then
+                Dim RowCountStart As Integer = 0
+                For i As Integer = 0 To dtResult.Rows.Count - 1
+                    If dtResult(i)("sampling_time") = DPtest1cycletime - CInt(resultsummary(55)) Then
+                        RowCountStart = i
+                        Exit For
+                    End If
+                Next
+                For i As Integer = 0 To dtResult.Rows.Count - 1
+                    If dtResult(i)("sampling_time") = Flush2Start - 1 Then
+                        If i - 10 > RowCountStart Then
+                            RowCountStart = i - 10
+                        End If
+                        Exit For
+                    End If
+                Next
+                If RowCountStart > 0 Then
+                    DP1CaptureStart = CDec(dtResult(RowCountStart)("sampling_time"))
+                End If
+            End If
+            If True Then
+                Dim RowCountStart As Integer = 0
+                For i As Integer = 0 To dtResult.Rows.Count - 1
+                    If dtResult(i)("sampling_time") = DPtest2cycletime - CInt(resultsummary(55)) Then
+                        RowCountStart = i
+                        Exit For
+                    End If
+                Next
+                For i As Integer = 0 To dtResult.Rows.Count - 1
+                    If dtResult(i)("sampling_time") = Drain1Start - 1 Then
+                        If i - 10 > RowCountStart Then
+                            RowCountStart = i - 10
+                        End If
+                        Exit For
+                    End If
+                Next
+                If RowCountStart > 0 Then
+                    DP2CaptureStart = CDec(dtResult(RowCountStart)("sampling_time"))
+                End If
+            End If
+
+            '.Yi = CDec(resultsummary(56)),
+            '.Yj = CDec(resultsummary(57)),
+
+            CartesianChart_ResultGraph.Sections = New RectangularSection() {
+                New RectangularSection With {
+                    .IsVisible = DP1Enabled,
+                    .Xi = DP1CaptureStart,
+                    .Xj = Flush2Start - 1,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Black,
+                        .StrokeThickness = 1,
+                        .PathEffect = New DashEffect(New Single() {6, 6})
+                    }
+                },
+                New RectangularSection With {
+                    .IsVisible = DP2Enabled,
+                    .Xi = DP2CaptureStart,
+                    .Xj = Drain1Start - 1,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.Black,
+                        .StrokeThickness = 1,
+                        .PathEffect = New DashEffect(New Single() {6, 6})
+                    }
+                },
+                New RectangularSection With {
+                    .IsVisible = Flush1Enabled,
+                    .Xi = Flush1Start,
+                    .Xj = DP1Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                    .Label = "Flush 1",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = DP1Enabled,
+                    .Xi = DP1Start,
+                    .Xj = Flush2Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Blue.WithAlpha(20)},
+                    .Label = "DP 1",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Flush2Enabled,
+                    .Xi = Flush2Start,
+                    .Xj = DP2Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                    .Label = "Flush 2",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = DP2Enabled,
+                    .Xi = DP2Start,
+                    .Xj = Drain1Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Blue.WithAlpha(20)},
+                    .Label = "DP 2",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Drain1Enabled,
+                    .Xi = Drain1Start,
+                    .Xj = Drain2Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                    .Label = "Drain 1",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Drain2Enabled,
+                    .Xi = Drain2Start,
+                    .Xj = Drain3Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                    .Label = "Drain 2",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Drain3Enabled,
+                    .Xi = Drain3Start,
+                    .Xj = CycleTimeTotal,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                    .Label = "Drain 3",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                }
+            }
+
+            Array.Resize(ResultChartYAxesVisible, CartesianChart_ResultGraph.Sections.Count)
+            For i As Integer = 0 To CartesianChart_ResultGraph.Sections.Count - 1
+                ResultChartYAxesVisible(i) = CartesianChart_ResultGraph.Sections(i).IsVisible
+            Next
+        End If
+    End Sub
 #End Region
 
 
@@ -528,8 +1106,15 @@ Public Class FormResultGraph
 
 
 #Region "Checkbox checked"
-    Private Sub checkbx_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_GraphDP.CheckedChanged, checkbx_GraphInletPressure.CheckedChanged, checkbx_GraphOutletPressure.CheckedChanged, checkbx_GraphTemperature.CheckedChanged, checkbx_GraphFlowrate.CheckedChanged
+    Private Sub checkbx_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_GraphDP.CheckedChanged, checkbx_GraphInletPressure.CheckedChanged, checkbx_GraphOutletPressure.CheckedChanged, checkbx_GraphTemperature.CheckedChanged, checkbx_GraphFlowrate.CheckedChanged, checkbx_GraphBP.CheckedChanged, checkbx_GraphRPM.CheckedChanged
         CreateResultGraph()
+
+        If ComboBox1.SelectedIndex > 0 Then
+            Dim chkbxArr As CheckBox() = {checkbx_GraphInletPressure, checkbx_GraphOutletPressure, checkbx_GraphBP, checkbx_GraphFlowrate, checkbx_GraphTemperature, checkbx_GraphRPM}
+            For Each chkbx In chkbxArr
+                chkbx.Checked = False
+            Next
+        End If
     End Sub
 
 
@@ -553,6 +1138,7 @@ Public Class FormResultGraph
                 checkbx_GraphDP.Checked = True
                 checkbx_GraphInletPressure.Checked = True
                 checkbx_GraphOutletPressure.Checked = True
+                checkbx_GraphBP.Checked = True
 
                 For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
                     If Not dtproductiondetail.Rows(0).IsNull(i) Then
@@ -566,8 +1152,11 @@ Public Class FormResultGraph
                 dt_Graphsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{resultsummary(0)}'ORDER BY ProductResult.sampling_time ASC")
                 'dgv_Graphsummary.DataSource = dt_Graphsummary
 
+
+
                 If dt_Graphsummary.Rows.Count > 0 Then
                     CreateResultGraph()
+                    CreateResultGraphNew(dt_Graphsummary, resultsummary)
 
 
 
@@ -579,6 +1168,7 @@ Public Class FormResultGraph
                     checkbx_GraphDP.Checked = False
                     checkbx_GraphInletPressure.Checked = False
                     checkbx_GraphOutletPressure.Checked = False
+                    checkbx_GraphBP.Checked = False
                     ResultMessage(6)
                     Oncontinue = False
                 End If
@@ -602,13 +1192,15 @@ Public Class FormResultGraph
 
             txtbx_GraphCalOffset.Text = resultsummary(24)
             txtbx_GraphRecipeID.Text = resultsummary(31)
-            txtbx_Graphflush1.Text = resultsummary(39).ToUpper
-            txtbx_GraphDPTest1.Text = resultsummary(47).ToUpper
-            txtbx_GraphDPTest2.Text = resultsummary(58).ToUpper
-            txtbx_Graphflush2.Text = resultsummary(59).ToUpper
-            txtbx_GraphDrain1.Text = resultsummary(67).ToUpper
-            txtbx_GraphDrain2.Text = resultsummary(70).ToUpper
-            txtbx_GraphDrain3.Text = resultsummary(73).ToUpper
+
+            txtbx_Graphflush1.Text = resultsummary(40).ToUpper
+            txtbx_GraphDPTest1.Text = resultsummary(48).ToUpper
+            txtbx_GraphDPTest2.Text = resultsummary(59).ToUpper
+            txtbx_Graphflush2.Text = resultsummary(60).ToUpper
+            txtbx_GraphDrain1.Text = resultsummary(68).ToUpper
+            txtbx_GraphDrain2.Text = resultsummary(71).ToUpper
+            txtbx_GraphDrain3.Text = resultsummary(74).ToUpper
+
             txtbx_GraphWorkOrder.Text = resultsummary(77)
             txtbx_GraphPartID.Text = resultsummary(78)
             txtbx_GraphConfirmation.Text = resultsummary(79)
@@ -626,4 +1218,64 @@ Public Class FormResultGraph
         FormPixel.Show()
     End Sub
 
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        Dim chkbxArr As CheckBox() = {checkbx_GraphInletPressure, checkbx_GraphOutletPressure, checkbx_GraphBP, checkbx_GraphFlowrate, checkbx_GraphTemperature, checkbx_GraphRPM}
+
+        Select Case ComboBox1.SelectedIndex
+            Case 0
+                ' Seconds
+                CartesianChart_ResultGraph.XAxes(0).Name = "Sampling Time (s)"
+                CartesianChart_ResultGraph.Series(0).Values = ResultChartDPValue
+
+                For i As Integer = 0 To CartesianChart_ResultGraph.Sections.Count - 1
+                    CartesianChart_ResultGraph.Sections(i).IsVisible = ResultChartYAxesVisible(i)
+                Next
+
+                For i As Integer = 0 To CartesianChart_ResultGraph.YAxes.Count - 1
+                    CartesianChart_ResultGraph.YAxes(i).IsVisible = True
+                Next
+            Case 1
+                ' BP
+                CartesianChart_ResultGraph.XAxes(0).Name = "Back Pressure (kPa)"
+                CartesianChart_ResultGraph.Series(0).Values = ResultChartDPBP
+
+                For Each chkbx In chkbxArr
+                    chkbx.Checked = False
+                Next
+                checkbx_GraphDP.Checked = True
+
+                For i As Integer = 0 To CartesianChart_ResultGraph.Sections.Count - 1
+                    CartesianChart_ResultGraph.Sections(i).IsVisible = False
+                Next
+
+                For i As Integer = 0 To CartesianChart_ResultGraph.YAxes.Count - 1
+                    If i = 0 Then
+                        CartesianChart_ResultGraph.YAxes(i).IsVisible = True
+                    Else
+                        CartesianChart_ResultGraph.YAxes(i).IsVisible = False
+                    End If
+                Next
+            Case 2
+                ' Flowrate
+                CartesianChart_ResultGraph.XAxes(0).Name = "Flowrate (l/min)"
+                CartesianChart_ResultGraph.Series(0).Values = ResultChartDPFLWR
+
+                For Each chkbx In chkbxArr
+                    chkbx.Checked = False
+                Next
+                checkbx_GraphDP.Checked = True
+
+                For i As Integer = 0 To CartesianChart_ResultGraph.Sections.Count - 1
+                    CartesianChart_ResultGraph.Sections(i).IsVisible = False
+                Next
+
+                For i As Integer = 0 To CartesianChart_ResultGraph.YAxes.Count - 1
+                    If i = 0 Then
+                        CartesianChart_ResultGraph.YAxes(i).IsVisible = True
+                    Else
+                        CartesianChart_ResultGraph.YAxes(i).IsVisible = False
+                    End If
+                Next
+        End Select
+    End Sub
 End Class

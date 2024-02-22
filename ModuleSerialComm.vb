@@ -26,7 +26,7 @@ Module ModuleSerialComm
             If mySerialPort1.IsOpen Then
                 ComPort1Connected = True
 
-                FormMain.lbl_CommOpen.BackColor = Color.LimeGreen
+                FormMain.lbl_CommOpen.BackColor = PublicVariables.StatusGreen
                 Scannertimer.Interval = 100
                 Scannertimer.Enabled = True
             Else

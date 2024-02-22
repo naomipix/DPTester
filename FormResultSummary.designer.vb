@@ -23,7 +23,7 @@ Partial Class FormResultSummary
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormResultSummary))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -741,6 +741,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultDrain3.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_ResultDrain3.TabIndex = 68
         Me.txtbx_ResultDrain3.TabStop = False
+        Me.txtbx_ResultDrain3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_ResultDrain2
         '
@@ -763,6 +764,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultDrain2.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_ResultDrain2.TabIndex = 66
         Me.txtbx_ResultDrain2.TabStop = False
+        Me.txtbx_ResultDrain2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_ResultDrain1
         '
@@ -785,6 +787,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultDrain1.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_ResultDrain1.TabIndex = 64
         Me.txtbx_ResultDrain1.TabStop = False
+        Me.txtbx_ResultDrain1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_ResultDPTest2
         '
@@ -807,6 +810,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultDPTest2.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_ResultDPTest2.TabIndex = 62
         Me.txtbx_ResultDPTest2.TabStop = False
+        Me.txtbx_ResultDPTest2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_Resultflush2
         '
@@ -829,6 +833,7 @@ Partial Class FormResultSummary
         Me.txtbx_Resultflush2.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_Resultflush2.TabIndex = 60
         Me.txtbx_Resultflush2.TabStop = False
+        Me.txtbx_Resultflush2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_ResultDPTest1
         '
@@ -851,6 +856,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultDPTest1.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_ResultDPTest1.TabIndex = 58
         Me.txtbx_ResultDPTest1.TabStop = False
+        Me.txtbx_ResultDPTest1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dsp_Resultflush1
         '
@@ -873,6 +879,7 @@ Partial Class FormResultSummary
         Me.txtbx_Resultflush1.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_Resultflush1.TabIndex = 56
         Me.txtbx_Resultflush1.TabStop = False
+        Me.txtbx_Resultflush1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'dgv_Resultsummary
         '
@@ -880,14 +887,14 @@ Partial Class FormResultSummary
         Me.dgv_Resultsummary.AllowUserToDeleteRows = False
         Me.dgv_Resultsummary.AllowUserToResizeColumns = False
         Me.dgv_Resultsummary.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_Resultsummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_Resultsummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgv_Resultsummary.ColumnHeadersHeight = 30
         Me.dgv_Resultsummary.Location = New System.Drawing.Point(50, 125)
         Me.dgv_Resultsummary.Name = "dgv_Resultsummary"
