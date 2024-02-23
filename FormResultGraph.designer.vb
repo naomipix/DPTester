@@ -83,6 +83,8 @@ Partial Class FormResultGraph
         Me.txtbx_GraphWorkOrder = New System.Windows.Forms.TextBox()
         Me.txtbx_GraphTimestamp = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.checkbx_GraphRPM = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphTemperature = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphFlowrate = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphBP = New System.Windows.Forms.CheckBox()
@@ -108,8 +110,7 @@ Partial Class FormResultGraph
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.checkbx_GraphRPM = New System.Windows.Forms.CheckBox()
+        Me.checkbx_ShowTooltip = New System.Windows.Forms.CheckBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -716,6 +717,7 @@ Partial Class FormResultGraph
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.checkbx_ShowTooltip)
         Me.Panel3.Controls.Add(Me.ComboBox1)
         Me.Panel3.Controls.Add(Me.checkbx_GraphRPM)
         Me.Panel3.Controls.Add(Me.checkbx_GraphTemperature)
@@ -744,6 +746,29 @@ Partial Class FormResultGraph
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1311, 802)
         Me.Panel3.TabIndex = 2
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"DP vs Seconds", "DP vs Back Pressure", "DP vs Flow Rate"})
+        Me.ComboBox1.Location = New System.Drawing.Point(1042, 190)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(200, 25)
+        Me.ComboBox1.TabIndex = 14
+        Me.ComboBox1.Visible = False
+        '
+        'checkbx_GraphRPM
+        '
+        Me.checkbx_GraphRPM.AutoSize = True
+        Me.checkbx_GraphRPM.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphRPM.Location = New System.Drawing.Point(1134, 137)
+        Me.checkbx_GraphRPM.Name = "checkbx_GraphRPM"
+        Me.checkbx_GraphRPM.Size = New System.Drawing.Size(91, 21)
+        Me.checkbx_GraphRPM.TabIndex = 74
+        Me.checkbx_GraphRPM.Text = "Pump RPM"
+        Me.checkbx_GraphRPM.UseVisualStyleBackColor = True
         '
         'checkbx_GraphTemperature
         '
@@ -1028,6 +1053,7 @@ Partial Class FormResultGraph
         Me.ResultChart.Text = "ResultChart"
         Title1.Name = "Result Graph"
         Me.ResultChart.Titles.Add(Title1)
+        Me.ResultChart.Visible = False
         '
         'dsp_Home
         '
@@ -1062,27 +1088,17 @@ Partial Class FormResultGraph
         Me.Label1.Text = "Result Graph"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'ComboBox1
+        'checkbx_ShowTooltip
         '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"DP vs Seconds", "DP vs Back Pressure", "DP vs Flow Rate"})
-        Me.ComboBox1.Location = New System.Drawing.Point(1042, 190)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(200, 25)
-        Me.ComboBox1.TabIndex = 14
-        '
-        'checkbx_GraphRPM
-        '
-        Me.checkbx_GraphRPM.AutoSize = True
-        Me.checkbx_GraphRPM.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_GraphRPM.Location = New System.Drawing.Point(1135, 137)
-        Me.checkbx_GraphRPM.Name = "checkbx_GraphRPM"
-        Me.checkbx_GraphRPM.Size = New System.Drawing.Size(91, 21)
-        Me.checkbx_GraphRPM.TabIndex = 74
-        Me.checkbx_GraphRPM.Text = "Pump RPM"
-        Me.checkbx_GraphRPM.UseVisualStyleBackColor = True
+        Me.checkbx_ShowTooltip.AutoSize = True
+        Me.checkbx_ShowTooltip.BackColor = System.Drawing.Color.AliceBlue
+        Me.checkbx_ShowTooltip.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(1134, 190)
+        Me.checkbx_ShowTooltip.Name = "checkbx_ShowTooltip"
+        Me.checkbx_ShowTooltip.Size = New System.Drawing.Size(108, 21)
+        Me.checkbx_ShowTooltip.TabIndex = 76
+        Me.checkbx_ShowTooltip.Text = "Show Tooltips"
+        Me.checkbx_ShowTooltip.UseVisualStyleBackColor = False
         '
         'FormResultGraph
         '
@@ -1192,4 +1208,5 @@ Partial Class FormResultGraph
     Friend WithEvents checkbx_GraphBP As CheckBox
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents checkbx_GraphRPM As CheckBox
+    Friend WithEvents checkbx_ShowTooltip As CheckBox
 End Class

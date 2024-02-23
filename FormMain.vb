@@ -393,7 +393,7 @@ Public Class FormMain
             btn_OprKeyInDtConfirm.Enabled = False
         End If
 
-
+        txtbx_SerialNumber.MaxLength = PublicVariables.SerialNumLen
 
         txtbx_Operatorlotid.Enabled = False
         lbl_DiffPressAct.Text = Nothing
@@ -514,6 +514,7 @@ Public Class FormMain
 
         For Each LiveGraphChart In {CartesianChart_MainLiveGraph} 'CartesianChartArr
             LiveGraphChart.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
+            LiveGraphChart.ZoomMode = Measure.ZoomAndPanMode.X
 
             LiveGraphChart.Title = New LabelVisual() With {
                 .Text = "DP Tester Live Graph",
@@ -686,7 +687,7 @@ Public Class FormMain
                     .GeometryFill = New SolidColorPaint(SKColors.Orange),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0,
+                    .ScalesYAt = 1,
                     .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
@@ -700,7 +701,7 @@ Public Class FormMain
                     .GeometryFill = New SolidColorPaint(SKColors.Brown),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0,
+                    .ScalesYAt = 3,
                     .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
@@ -714,7 +715,7 @@ Public Class FormMain
                     .GeometryFill = New SolidColorPaint(SKColors.Red),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0,
+                    .ScalesYAt = 2,
                     .ScalesXAt = 0
                 }
             }
@@ -1164,6 +1165,56 @@ Public Class FormMain
             Else
                 With CartesianChart_MainLiveGraph
                     .Series(4).IsVisible = False
+                End With
+            End If
+        End If
+    End Sub
+
+    Private Sub checkbx_ShowTooltip_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_ShowTooltip.CheckedChanged
+        If CartesianChart_MainLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden Then
+            CartesianChart_MainLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Top
+
+            If CartesianChart_MainLiveGraph.XAxes.Count > 0 Then
+                Dim XAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_MainLiveGraph.XAxes(0)
+                }
+                With XAxes(0)
+                    .CrosshairLabelsBackground = New SKColor(25, 130, 246, 255).AsLvcColor()
+                    .CrosshairLabelsPaint = New SolidColorPaint(New SKColor(255, 255, 255, 255), 1)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 255), 1)
+                    .CrosshairSnapEnabled = True
+                End With
+            End If
+
+            If CartesianChart_MainLiveGraph.YAxes.Count > 0 Then
+                Dim YAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_MainLiveGraph.YAxes(0)
+                }
+                With YAxes(0)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 255), 1)
+                End With
+            End If
+        Else
+            CartesianChart_MainLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
+
+            If CartesianChart_MainLiveGraph.XAxes.Count > 0 Then
+                Dim XAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_MainLiveGraph.XAxes(0)
+                }
+                With XAxes(0)
+                    .CrosshairLabelsBackground = New SKColor(25, 130, 246, 0).AsLvcColor()
+                    .CrosshairLabelsPaint = New SolidColorPaint(New SKColor(255, 255, 255, 0), 1)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 0), 1)
+                    .CrosshairSnapEnabled = True
+                End With
+            End If
+
+            If CartesianChart_MainLiveGraph.YAxes.Count > 0 Then
+                Dim YAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_MainLiveGraph.YAxes(0)
+                }
+                With YAxes(0)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 0), 1)
                 End With
             End If
         End If
@@ -2735,8 +2786,8 @@ Public Class FormMain
 
         'Check whether the scanned data meeting the Character length Criteria
         If OnContinue = True Then
-            If Workorder.Length <> PublicVariables.WorkOrderLen Then
-                MainMessage(2, $"Character(s) length for Work Order is {PublicVariables.WorkOrderLen} ")
+            If Workorder.Length < PublicVariables.WorkOrderLenLow And Workorder.Length > PublicVariables.WorkOrderLenHigh Then
+                MainMessage(2, $"Character(s) length for Work Order is within {PublicVariables.WorkOrderLenLow} - {PublicVariables.WorkOrderLenHigh} ")
                 OnContinue = False
             End If
         End If
@@ -2750,8 +2801,8 @@ Public Class FormMain
         End If
 
         If OnContinue = True Then
-            If LotID.Length <> PublicVariables.LotIdLen Then
-                MainMessage(2, $"Character(s) length for Lot ID is {PublicVariables.LotIdLen} ")
+            If LotID.Length < PublicVariables.LotIdLenLow And LotID.Length > PublicVariables.LotIdLenHigh Then
+                MainMessage(2, $"Character(s) length for Lot ID is within {PublicVariables.LotIdLenLow} - {PublicVariables.LotIdLenHigh} ")
                 OnContinue = False
             End If
         End If
@@ -2764,8 +2815,8 @@ Public Class FormMain
         End If
 
         If OnContinue = True Then
-            If PartID.Length < PublicVariables.PartIdLen Then
-                MainMessage(2, $"Character(s) length for Part ID is {PublicVariables.PartIdLen} ")
+            If PartID.Length < PublicVariables.PartIdLenLow And PartID.Length > PublicVariables.PartIdLenHigh Then
+                MainMessage(2, $"Character(s) length for Part ID is within {PublicVariables.PartIdLenLow} - {PublicVariables.PartIdLenHigh} ")
                 OnContinue = False
             End If
         End If
@@ -2778,8 +2829,8 @@ Public Class FormMain
         End If
 
         If OnContinue = True Then
-            If ConfirmationID.Length <> PublicVariables.ConfirmationIdLen Then
-                MainMessage(2, $"Character(s) length for Confirmation ID is {PublicVariables.ConfirmationIdLen} ")
+            If ConfirmationID.Length < PublicVariables.ConfirmationIdLenLow And ConfirmationID.Length > PublicVariables.ConfirmationIdLenHigh Then
+                MainMessage(2, $"Character(s) length for Confirmation ID is within {PublicVariables.ConfirmationIdLenLow} - {PublicVariables.ConfirmationIdLenHigh} ")
                 OnContinue = False
             End If
         End If
@@ -2792,8 +2843,8 @@ Public Class FormMain
         End If
 
         If OnContinue = True Then
-            If Quantity.Length <> PublicVariables.QuantityLen Then
-                MainMessage(2, $"Character(s) length for Quantity is {PublicVariables.QuantityLen} ")
+            If Quantity.Length < PublicVariables.QuantityLenLow And Quantity.Length > PublicVariables.QuantityLenHigh Then
+                MainMessage(2, $"Character(s) length for Quantity is within {PublicVariables.QuantityLenLow} - {PublicVariables.QuantityLenHigh} ")
                 OnContinue = False
             End If
         End If

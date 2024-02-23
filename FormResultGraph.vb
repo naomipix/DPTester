@@ -8,6 +8,7 @@ Imports LiveChartsCore.SkiaSharpView
 Imports LiveChartsCore.SkiaSharpView.Painting
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 Imports LiveChartsCore.SkiaSharpView.VisualElements
+Imports LiveChartsCore.SkiaSharpView.WinForms
 Imports SkiaSharp
 
 Public Class FormResultGraph
@@ -110,15 +111,19 @@ Public Class FormResultGraph
                 .TicksPaint = New SolidColorPaint(SKColors.Black),
                 .SubticksPaint = New SolidColorPaint(SKColors.Black),
                 .DrawTicksPath = True,
-                .MinLimit = 0
+                .MinLimit = 0,
+                .MaxLimit = Nothing
             }
         }
     End Sub
 
     Private Sub InitializeResultChart()
         CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
+        CartesianChart_ResultGraph.TooltipTextSize = 12
+        CartesianChart_ResultGraph.TooltipBackgroundPaint = New SolidColorPaint(New SKColor(0, 0, 0, 10))
         CartesianChart_ResultGraph.LegendPosition = LiveChartsCore.Measure.LegendPosition.Right
         CartesianChart_ResultGraph.LegendTextSize = 12
+        CartesianChart_ResultGraph.ZoomMode = Measure.ZoomAndPanMode.X
 
         CartesianChart_ResultGraph.Title = New LabelVisual() With {
             .Text = "Result Graph",
@@ -1036,67 +1041,81 @@ Public Class FormResultGraph
 #Region "Text Formatting"
     Private Sub txtbx_GraphTest_TextChanged(sender As Object, e As EventArgs) Handles txtbx_GraphTest.TextChanged
         If txtbx_GraphTest.Text = "PASS" Then
-            txtbx_GraphTest.BackColor = Color.FromArgb(192, 255, 192)
-            txtbx_GraphTest.ForeColor = SystemColors.ControlText
+            txtbx_GraphTest.BackColor = PublicVariables.StatusGreen
+            txtbx_GraphTest.ForeColor = PublicVariables.StatusGreenT
         Else
-            txtbx_GraphTest.BackColor = Color.Red
-            txtbx_GraphTest.ForeColor = SystemColors.Window
+            txtbx_GraphTest.BackColor = PublicVariables.StatusRed
+            txtbx_GraphTest.ForeColor = PublicVariables.StatusRedT
         End If
     End Sub
 
     Private Sub txtbx_Graphflush1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_Graphflush1.TextChanged
         If txtbx_Graphflush1.Text = "ENABLE" Then
-            txtbx_Graphflush1.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_Graphflush1.BackColor = PublicVariables.StatusGreen
+            txtbx_Graphflush1.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_Graphflush1.BackColor = SystemColors.Window
+            txtbx_Graphflush1.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_GraphDPTest1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_GraphDPTest1.TextChanged
         If txtbx_GraphDPTest1.Text = "ENABLE" Then
-            txtbx_GraphDPTest1.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_GraphDPTest1.BackColor = PublicVariables.StatusGreen
+            txtbx_GraphDPTest1.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_GraphDPTest1.BackColor = SystemColors.Window
+            txtbx_GraphDPTest1.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_Graphflush2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_Graphflush2.TextChanged
         If txtbx_Graphflush2.Text = "ENABLE" Then
-            txtbx_Graphflush2.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_Graphflush2.BackColor = PublicVariables.StatusGreen
+            txtbx_Graphflush2.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_Graphflush2.BackColor = SystemColors.Window
+            txtbx_Graphflush2.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_GraphDPTest2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_GraphDPTest2.TextChanged
         If txtbx_GraphDPTest2.Text = "ENABLE" Then
-            txtbx_GraphDPTest2.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_GraphDPTest2.BackColor = PublicVariables.StatusGreen
+            txtbx_GraphDPTest2.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_GraphDPTest2.BackColor = SystemColors.Window
+            txtbx_GraphDPTest2.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_GraphDrain1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_GraphDrain1.TextChanged
         If txtbx_GraphDrain1.Text = "ENABLE" Then
-            txtbx_GraphDrain1.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_GraphDrain1.BackColor = PublicVariables.StatusGreen
+            txtbx_GraphDrain1.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_GraphDrain1.BackColor = SystemColors.Window
+            txtbx_GraphDrain1.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_GraphDrain2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_GraphDrain2.TextChanged
         If txtbx_GraphDrain2.Text = "ENABLE" Then
-            txtbx_GraphDrain2.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_GraphDrain2.BackColor = PublicVariables.StatusGreen
+            txtbx_GraphDrain2.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_GraphDrain2.BackColor = SystemColors.Window
+            txtbx_GraphDrain2.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_GraphDrain3_TextChanged(sender As Object, e As EventArgs) Handles txtbx_GraphDrain3.TextChanged
         If txtbx_GraphDrain3.Text = "ENABLE" Then
-            txtbx_GraphDrain3.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_GraphDrain3.BackColor = PublicVariables.StatusGreen
+            txtbx_GraphDrain3.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_GraphDrain3.BackColor = SystemColors.Window
+            txtbx_GraphDrain3.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
@@ -1277,5 +1296,55 @@ Public Class FormResultGraph
                     End If
                 Next
         End Select
+    End Sub
+
+    Private Sub checkbx_ShowTooltip_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_ShowTooltip.CheckedChanged
+        If CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden Then
+            CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Top
+
+            If CartesianChart_ResultGraph.XAxes.Count > 0 Then
+                Dim XAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_ResultGraph.XAxes(0)
+                }
+                With XAxes(0)
+                    .CrosshairLabelsBackground = New SKColor(25, 130, 246, 255).AsLvcColor()
+                    .CrosshairLabelsPaint = New SolidColorPaint(New SKColor(255, 255, 255, 255), 1)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 255), 1)
+                    .CrosshairSnapEnabled = True
+                End With
+            End If
+
+            If CartesianChart_ResultGraph.YAxes.Count > 0 Then
+                Dim YAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_ResultGraph.YAxes(0)
+                }
+                With YAxes(0)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 255), 1)
+                End With
+            End If
+        Else
+            CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
+
+            If CartesianChart_ResultGraph.XAxes.Count > 0 Then
+                Dim XAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_ResultGraph.XAxes(0)
+                }
+                With XAxes(0)
+                    .CrosshairLabelsBackground = New SKColor(25, 130, 246, 0).AsLvcColor()
+                    .CrosshairLabelsPaint = New SolidColorPaint(New SKColor(255, 255, 255, 0), 1)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 0), 1)
+                    .CrosshairSnapEnabled = True
+                End With
+            End If
+
+            If CartesianChart_ResultGraph.YAxes.Count > 0 Then
+                Dim YAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_ResultGraph.YAxes(0)
+                }
+                With YAxes(0)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 0), 1)
+                End With
+            End If
+        End If
     End Sub
 End Class

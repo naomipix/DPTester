@@ -295,6 +295,8 @@ Public Class FormCalibration
                     .TicksPaint = New SolidColorPaint(SKColors.Black),
                     .SubticksPaint = New SolidColorPaint(SKColors.Black),
                     .DrawTicksPath = True,
+                    .MinStep = 1,
+                    .MaxLimit = XLimit,
                     .MinLimit = 0
                 }
             }
@@ -310,6 +312,7 @@ Public Class FormCalibration
             LiveGraphChart.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
             LiveGraphChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Right
             LiveGraphChart.LegendTextSize = 12
+            LiveGraphChart.ZoomMode = Measure.ZoomAndPanMode.X
 
             LiveGraphChart.Title = New LabelVisual() With {
                 .Text = "DP Tester Live Graph",
@@ -880,7 +883,7 @@ Public Class FormCalibration
             newrw(4) = Ver_outletpressure
             newrw(5) = Ver_dp
             newrw(6) = Ver_backpressure
-            newrw(6) = Ver_pumprpm
+            newrw(7) = Ver_pumprpm
             dtVerification.Rows.InsertAt(newrw, 0)
 
             CalibrateChartDPValue.Add(New ObservablePoint With {
@@ -1317,7 +1320,8 @@ Public Class FormCalibration
                 End If
 
                 ' Set Live Graph Cycle Time
-                'InitializeLiveChartXAxes(MainCycletime)
+                Dim TotalCycleTime As Integer = flush1cycletime + flush2cycletime + DPtest1cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime
+                InitializeLiveChartXAxes(TotalCycleTime)
 
                 ' Set Live Graph Sections
                 If True Then
@@ -1559,6 +1563,56 @@ Public Class FormCalibration
         Else
             Panel_Calibration_Circuit.Visible = False
             btn_CircuitView.BackColor = Color.FromArgb(25, 130, 246)
+        End If
+    End Sub
+
+    Private Sub checkbx_ShowTooltip_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_ShowTooltip.CheckedChanged
+        If CartesianChart_CalibrationLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden Then
+            CartesianChart_CalibrationLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Top
+
+            If CartesianChart_CalibrationLiveGraph.XAxes.Count > 0 Then
+                Dim XAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_CalibrationLiveGraph.XAxes(0)
+                }
+                With XAxes(0)
+                    .CrosshairLabelsBackground = New SKColor(25, 130, 246, 255).AsLvcColor()
+                    .CrosshairLabelsPaint = New SolidColorPaint(New SKColor(255, 255, 255, 255), 1)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 255), 1)
+                    .CrosshairSnapEnabled = True
+                End With
+            End If
+
+            If CartesianChart_CalibrationLiveGraph.YAxes.Count > 0 Then
+                Dim YAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_CalibrationLiveGraph.YAxes(0)
+                }
+                With YAxes(0)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 255), 1)
+                End With
+            End If
+        Else
+            CartesianChart_CalibrationLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
+
+            If CartesianChart_CalibrationLiveGraph.XAxes.Count > 0 Then
+                Dim XAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_CalibrationLiveGraph.XAxes(0)
+                }
+                With XAxes(0)
+                    .CrosshairLabelsBackground = New SKColor(25, 130, 246, 0).AsLvcColor()
+                    .CrosshairLabelsPaint = New SolidColorPaint(New SKColor(255, 255, 255, 0), 1)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 0), 1)
+                    .CrosshairSnapEnabled = True
+                End With
+            End If
+
+            If CartesianChart_CalibrationLiveGraph.YAxes.Count > 0 Then
+                Dim YAxes As SkiaSharpView.Axis() = New SkiaSharpView.Axis() {
+                    CartesianChart_CalibrationLiveGraph.YAxes(0)
+                }
+                With YAxes(0)
+                    .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 0), 1)
+                End With
+            End If
         End If
     End Sub
 End Class

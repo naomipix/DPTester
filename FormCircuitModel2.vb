@@ -624,6 +624,59 @@
                 lbl_PumpLowLow.BackColor = PublicVariables.StatusGreen
             End If
 
+            If DIn(0)(7) = False Then
+                lbl_JigSensor1.BackColor = SystemColors.Window
+            Else
+                lbl_JigSensor1.BackColor = PublicVariables.StatusGreen
+            End If
+
+            If DIn(0)(8) = False Then
+                lbl_JigSensor2.BackColor = SystemColors.Window
+            Else
+                lbl_JigSensor2.BackColor = PublicVariables.StatusGreen
+            End If
+
+            If DIn(0)(9) = False Then
+                lbl_JigSensor3.BackColor = SystemColors.Window
+            Else
+                lbl_JigSensor3.BackColor = PublicVariables.StatusGreen
+            End If
+
+            If DIn(0)(10) = False Then
+                lbl_FilSensorS.BackColor = SystemColors.Window
+            Else
+                lbl_FilSensorS.BackColor = PublicVariables.StatusGreen
+            End If
+
+            If DIn(0)(11) = False Then
+                lbl_FilSensorB.BackColor = SystemColors.Window
+            Else
+                lbl_FilSensorB.BackColor = PublicVariables.StatusGreen
+            End If
+
+            If DIn(0)(12) = False Then
+                lbl_FilSensorH.BackColor = SystemColors.Window
+            Else
+                lbl_FilSensorH.BackColor = PublicVariables.StatusGreen
+            End If
+
+            If DIn(0)(13) = False Then
+                lbl_FilSensorV.BackColor = SystemColors.Window
+            Else
+                lbl_FilSensorV.BackColor = PublicVariables.StatusGreen
+            End If
+
+            If DIn(1)(0) = False Then
+                lbl_FilSensorPushIn.BackColor = SystemColors.Window
+            Else
+                lbl_FilSensorPushIn.BackColor = PublicVariables.StatusGreen
+            End If
+
+            If DIn(1)(1) = False Then
+                lbl_FilSensorPullOut.BackColor = SystemColors.Window
+            Else
+                lbl_FilSensorPullOut.BackColor = PublicVariables.StatusGreen
+            End If
 #End Region
 
         End If

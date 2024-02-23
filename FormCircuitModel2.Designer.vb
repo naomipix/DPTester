@@ -392,6 +392,15 @@ Partial Class FormCircuitModel2
         Me.dsp_Flowmtr = New System.Windows.Forms.Label()
         Me.dsp_Temp = New System.Windows.Forms.Label()
         Me.lbl_V17_P8 = New System.Windows.Forms.Label()
+        Me.lbl_FilSensorH = New System.Windows.Forms.Label()
+        Me.lbl_FilSensorV = New System.Windows.Forms.Label()
+        Me.lbl_JigSensor2 = New System.Windows.Forms.Label()
+        Me.lbl_JigSensor3 = New System.Windows.Forms.Label()
+        Me.lbl_FilSensorS = New System.Windows.Forms.Label()
+        Me.lbl_FilSensorB = New System.Windows.Forms.Label()
+        Me.lbl_JigSensor1 = New System.Windows.Forms.Label()
+        Me.lbl_FilSensorPullOut = New System.Windows.Forms.Label()
+        Me.lbl_FilSensorPushIn = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -399,6 +408,16 @@ Partial Class FormCircuitModel2
         '
         Me.Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), System.Drawing.Image)
         Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel1.Controls.Add(Me.lbl_FilSensorPushIn)
+        Me.Panel1.Controls.Add(Me.lbl_JigSensor1)
+        Me.Panel1.Controls.Add(Me.lbl_FilSensorB)
+        Me.Panel1.Controls.Add(Me.lbl_FilSensorS)
+        Me.Panel1.Controls.Add(Me.lbl_FilSensorPullOut)
+        Me.Panel1.Controls.Add(Me.lbl_JigSensor3)
+        Me.Panel1.Controls.Add(Me.lbl_JigSensor2)
+        Me.Panel1.Controls.Add(Me.lbl_FilSensorV)
+        Me.Panel1.Controls.Add(Me.lbl_FilSensorH)
+        Me.Panel1.Controls.Add(Me.lbl_Temp)
         Me.Panel1.Controls.Add(Me.lbl_PumpSpeed)
         Me.Panel1.Controls.Add(Me.lbl_PumpEnable)
         Me.Panel1.Controls.Add(Me.Label11)
@@ -739,7 +758,6 @@ Partial Class FormCircuitModel2
         Me.Panel1.Controls.Add(Me.dsp_OutletPress)
         Me.Panel1.Controls.Add(Me.lbl_InletPress)
         Me.Panel1.Controls.Add(Me.dsp_InletPress)
-        Me.Panel1.Controls.Add(Me.lbl_Temp)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.txtbx_N2PurgeActual)
@@ -3835,7 +3853,7 @@ Partial Class FormCircuitModel2
         Me.lbl_OutletPress.BackColor = System.Drawing.SystemColors.Info
         Me.lbl_OutletPress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_OutletPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_OutletPress.Location = New System.Drawing.Point(675, 117)
+        Me.lbl_OutletPress.Location = New System.Drawing.Point(680, 88)
         Me.lbl_OutletPress.Name = "lbl_OutletPress"
         Me.lbl_OutletPress.Size = New System.Drawing.Size(50, 25)
         Me.lbl_OutletPress.TabIndex = 354
@@ -3846,9 +3864,9 @@ Partial Class FormCircuitModel2
         '
         Me.dsp_OutletPress.BackColor = System.Drawing.SystemColors.Window
         Me.dsp_OutletPress.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_OutletPress.Location = New System.Drawing.Point(679, 146)
+        Me.dsp_OutletPress.Location = New System.Drawing.Point(668, 53)
         Me.dsp_OutletPress.Name = "dsp_OutletPress"
-        Me.dsp_OutletPress.Size = New System.Drawing.Size(45, 45)
+        Me.dsp_OutletPress.Size = New System.Drawing.Size(70, 30)
         Me.dsp_OutletPress.TabIndex = 357
         Me.dsp_OutletPress.Text = "Outlet Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
         Me.dsp_OutletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3858,7 +3876,7 @@ Partial Class FormCircuitModel2
         Me.lbl_InletPress.BackColor = System.Drawing.SystemColors.Info
         Me.lbl_InletPress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_InletPress.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_InletPress.Location = New System.Drawing.Point(594, 117)
+        Me.lbl_InletPress.Location = New System.Drawing.Point(587, 87)
         Me.lbl_InletPress.Name = "lbl_InletPress"
         Me.lbl_InletPress.Size = New System.Drawing.Size(50, 25)
         Me.lbl_InletPress.TabIndex = 355
@@ -3869,9 +3887,9 @@ Partial Class FormCircuitModel2
         '
         Me.dsp_InletPress.BackColor = System.Drawing.SystemColors.Window
         Me.dsp_InletPress.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_InletPress.Location = New System.Drawing.Point(595, 146)
+        Me.dsp_InletPress.Location = New System.Drawing.Point(578, 53)
         Me.dsp_InletPress.Name = "dsp_InletPress"
-        Me.dsp_InletPress.Size = New System.Drawing.Size(45, 45)
+        Me.dsp_InletPress.Size = New System.Drawing.Size(70, 30)
         Me.dsp_InletPress.TabIndex = 358
         Me.dsp_InletPress.Text = "Inlet Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
         Me.dsp_InletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3881,9 +3899,9 @@ Partial Class FormCircuitModel2
         Me.lbl_Temp.BackColor = System.Drawing.SystemColors.Info
         Me.lbl_Temp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_Temp.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_Temp.Location = New System.Drawing.Point(540, 162)
+        Me.lbl_Temp.Location = New System.Drawing.Point(543, 162)
         Me.lbl_Temp.Name = "lbl_Temp"
-        Me.lbl_Temp.Size = New System.Drawing.Size(60, 25)
+        Me.lbl_Temp.Size = New System.Drawing.Size(50, 25)
         Me.lbl_Temp.TabIndex = 351
         Me.lbl_Temp.Text = "0.0"
         Me.lbl_Temp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -4192,7 +4210,7 @@ Partial Class FormCircuitModel2
         '
         Me.dsp_Temp.BackColor = System.Drawing.SystemColors.Window
         Me.dsp_Temp.Font = New System.Drawing.Font("Segoe UI", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Temp.Location = New System.Drawing.Point(542, 137)
+        Me.dsp_Temp.Location = New System.Drawing.Point(538, 137)
         Me.dsp_Temp.Name = "dsp_Temp"
         Me.dsp_Temp.Size = New System.Drawing.Size(61, 25)
         Me.dsp_Temp.TabIndex = 352
@@ -4207,6 +4225,87 @@ Partial Class FormCircuitModel2
         Me.lbl_V17_P8.Name = "lbl_V17_P8"
         Me.lbl_V17_P8.Size = New System.Drawing.Size(8, 15)
         Me.lbl_V17_P8.TabIndex = 778
+        '
+        'lbl_FilSensorH
+        '
+        Me.lbl_FilSensorH.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_FilSensorH.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_FilSensorH.Location = New System.Drawing.Point(649, 90)
+        Me.lbl_FilSensorH.Name = "lbl_FilSensorH"
+        Me.lbl_FilSensorH.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorH.TabIndex = 793
+        '
+        'lbl_FilSensorV
+        '
+        Me.lbl_FilSensorV.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_FilSensorV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_FilSensorV.Location = New System.Drawing.Point(649, 120)
+        Me.lbl_FilSensorV.Name = "lbl_FilSensorV"
+        Me.lbl_FilSensorV.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorV.TabIndex = 793
+        '
+        'lbl_JigSensor2
+        '
+        Me.lbl_JigSensor2.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_JigSensor2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_JigSensor2.Location = New System.Drawing.Point(649, 150)
+        Me.lbl_JigSensor2.Name = "lbl_JigSensor2"
+        Me.lbl_JigSensor2.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_JigSensor2.TabIndex = 793
+        '
+        'lbl_JigSensor3
+        '
+        Me.lbl_JigSensor3.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_JigSensor3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_JigSensor3.Location = New System.Drawing.Point(679, 150)
+        Me.lbl_JigSensor3.Name = "lbl_JigSensor3"
+        Me.lbl_JigSensor3.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_JigSensor3.TabIndex = 793
+        '
+        'lbl_FilSensorS
+        '
+        Me.lbl_FilSensorS.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_FilSensorS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_FilSensorS.Location = New System.Drawing.Point(619, 120)
+        Me.lbl_FilSensorS.Name = "lbl_FilSensorS"
+        Me.lbl_FilSensorS.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorS.TabIndex = 793
+        '
+        'lbl_FilSensorB
+        '
+        Me.lbl_FilSensorB.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_FilSensorB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_FilSensorB.Location = New System.Drawing.Point(679, 120)
+        Me.lbl_FilSensorB.Name = "lbl_FilSensorB"
+        Me.lbl_FilSensorB.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorB.TabIndex = 793
+        '
+        'lbl_JigSensor1
+        '
+        Me.lbl_JigSensor1.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_JigSensor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_JigSensor1.Location = New System.Drawing.Point(619, 150)
+        Me.lbl_JigSensor1.Name = "lbl_JigSensor1"
+        Me.lbl_JigSensor1.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_JigSensor1.TabIndex = 793
+        '
+        'lbl_FilSensorPullOut
+        '
+        Me.lbl_FilSensorPullOut.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_FilSensorPullOut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_FilSensorPullOut.Location = New System.Drawing.Point(679, 180)
+        Me.lbl_FilSensorPullOut.Name = "lbl_FilSensorPullOut"
+        Me.lbl_FilSensorPullOut.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorPullOut.TabIndex = 793
+        '
+        'lbl_FilSensorPushIn
+        '
+        Me.lbl_FilSensorPushIn.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_FilSensorPushIn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_FilSensorPushIn.Location = New System.Drawing.Point(619, 180)
+        Me.lbl_FilSensorPushIn.Name = "lbl_FilSensorPushIn"
+        Me.lbl_FilSensorPushIn.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorPushIn.TabIndex = 793
         '
         'FormCircuitModel2
         '
@@ -4592,4 +4691,13 @@ Partial Class FormCircuitModel2
     Friend WithEvents lbl_PumpHighHigh As Label
     Friend WithEvents lbl_PumpEnable As Label
     Friend WithEvents lbl_PumpSpeed As Label
+    Friend WithEvents lbl_JigSensor1 As Label
+    Friend WithEvents lbl_FilSensorB As Label
+    Friend WithEvents lbl_FilSensorS As Label
+    Friend WithEvents lbl_JigSensor3 As Label
+    Friend WithEvents lbl_JigSensor2 As Label
+    Friend WithEvents lbl_FilSensorV As Label
+    Friend WithEvents lbl_FilSensorH As Label
+    Friend WithEvents lbl_FilSensorPushIn As Label
+    Friend WithEvents lbl_FilSensorPullOut As Label
 End Class
