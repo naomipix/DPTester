@@ -93,11 +93,23 @@ Module PublicVariables
 
     ' Ini - Main
     Public ProgramTitle As String = ""
-    Public WorkOrderLen As Integer = 0
-    Public LotIdLen As Integer = 0
-    Public PartIdLen As Integer = 0
-    Public ConfirmationIdLen As Integer = 0
-    Public QuantityLen As Integer = 0
+    'Public WorkOrderLen As Integer = 0
+    'Public LotIdLen As Integer = 0
+    'Public PartIdLen As Integer = 0
+    'Public ConfirmationIdLen As Integer = 0
+    'Public QuantityLen As Integer = 0
+
+    Public WorkOrderLenLow As Integer = 0
+    Public WorkOrderLenHigh As Integer = 0
+    Public LotIdLenLow As Integer = 0
+    Public LotIdLenHigh As Integer = 0
+    Public PartIdLenLow As Integer = 0
+    Public PartIdLenHigh As Integer = 0
+    Public ConfirmationIdLenLow As Integer = 0
+    Public ConfirmationIdLenHigh As Integer = 0
+    Public QuantityLenLow As Integer = 0
+    Public QuantityLenHigh As Integer = 0
+    Public SerialNumLen As Integer = 0
 
     ' Ini - Chart
     Public ChartPlotMax As Integer = 200

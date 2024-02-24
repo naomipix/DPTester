@@ -360,67 +360,81 @@ Public Class FormResultSummary
 #Region "Text Formatting"
     Private Sub txtbx_ResultTest_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultTest.TextChanged
         If txtbx_ResultTest.Text = "PASS" Then
-            txtbx_ResultTest.BackColor = Color.FromArgb(192, 255, 192)
-            txtbx_ResultTest.ForeColor = SystemColors.ControlText
+            txtbx_ResultTest.BackColor = PublicVariables.StatusGreen
+            txtbx_ResultTest.ForeColor = PublicVariables.StatusGreenT
         Else
-            txtbx_ResultTest.BackColor = Color.Red
-            txtbx_ResultTest.ForeColor = SystemColors.Window
+            txtbx_ResultTest.BackColor = PublicVariables.StatusRed
+            txtbx_ResultTest.ForeColor = PublicVariables.StatusRedT
         End If
     End Sub
 
     Private Sub txtbx_Resultflush1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_Resultflush1.TextChanged
         If txtbx_Resultflush1.Text = "ENABLE" Then
-            txtbx_Resultflush1.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_Resultflush1.BackColor = PublicVariables.StatusGreen
+            txtbx_Resultflush1.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_Resultflush1.BackColor = SystemColors.Window
+            txtbx_Resultflush1.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_ResultDPTest1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDPTest1.TextChanged
         If txtbx_ResultDPTest1.Text = "ENABLE" Then
-            txtbx_ResultDPTest1.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_ResultDPTest1.BackColor = PublicVariables.StatusGreen
+            txtbx_ResultDPTest1.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_ResultDPTest1.BackColor = SystemColors.Window
+            txtbx_ResultDPTest1.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_Resultflush2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_Resultflush2.TextChanged
         If txtbx_Resultflush2.Text = "ENABLE" Then
-            txtbx_Resultflush2.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_Resultflush2.BackColor = PublicVariables.StatusGreen
+            txtbx_Resultflush2.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_Resultflush2.BackColor = SystemColors.Window
+            txtbx_Resultflush2.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_ResultDPTest2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDPTest2.TextChanged
         If txtbx_ResultDPTest2.Text = "ENABLE" Then
-            txtbx_ResultDPTest2.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_ResultDPTest2.BackColor = PublicVariables.StatusGreen
+            txtbx_ResultDPTest2.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_ResultDPTest2.BackColor = SystemColors.Window
+            txtbx_ResultDPTest2.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_ResultDrain1_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDrain1.TextChanged
         If txtbx_ResultDrain1.Text = "ENABLE" Then
-            txtbx_ResultDrain1.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_ResultDrain1.BackColor = PublicVariables.StatusGreen
+            txtbx_ResultDrain1.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_ResultDrain1.BackColor = SystemColors.Window
+            txtbx_ResultDrain1.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_ResultDrain2_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDrain2.TextChanged
         If txtbx_ResultDrain2.Text = "ENABLE" Then
-            txtbx_ResultDrain2.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_ResultDrain2.BackColor = PublicVariables.StatusGreen
+            txtbx_ResultDrain2.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_ResultDrain2.BackColor = SystemColors.Window
+            txtbx_ResultDrain2.ForeColor = SystemColors.ControlText
         End If
     End Sub
 
     Private Sub txtbx_ResultDrain3_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultDrain3.TextChanged
         If txtbx_ResultDrain3.Text = "ENABLE" Then
-            txtbx_ResultDrain3.BackColor = Color.FromArgb(192, 255, 192)
+            txtbx_ResultDrain3.BackColor = PublicVariables.StatusGreen
+            txtbx_ResultDrain3.ForeColor = PublicVariables.StatusGreenT
         Else
             txtbx_ResultDrain3.BackColor = SystemColors.Window
+            txtbx_ResultDrain3.ForeColor = SystemColors.ControlText
         End If
     End Sub
 

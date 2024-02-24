@@ -72,6 +72,7 @@ Partial Class FormCalibration
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabpg_GraphView = New System.Windows.Forms.TabPage()
+        Me.checkbx_ShowTooltip = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphRPM = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphTemperature = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphFlowrate = New System.Windows.Forms.CheckBox()
@@ -691,6 +692,7 @@ Partial Class FormCalibration
         'tabpg_GraphView
         '
         Me.tabpg_GraphView.BackColor = System.Drawing.Color.AliceBlue
+        Me.tabpg_GraphView.Controls.Add(Me.checkbx_ShowTooltip)
         Me.tabpg_GraphView.Controls.Add(Me.checkbx_GraphRPM)
         Me.tabpg_GraphView.Controls.Add(Me.checkbx_GraphTemperature)
         Me.tabpg_GraphView.Controls.Add(Me.checkbx_GraphFlowrate)
@@ -704,6 +706,18 @@ Partial Class FormCalibration
         Me.tabpg_GraphView.Size = New System.Drawing.Size(1236, 582)
         Me.tabpg_GraphView.TabIndex = 2
         Me.tabpg_GraphView.Text = "Graph View"
+        '
+        'checkbx_ShowTooltip
+        '
+        Me.checkbx_ShowTooltip.AutoSize = True
+        Me.checkbx_ShowTooltip.BackColor = System.Drawing.Color.AliceBlue
+        Me.checkbx_ShowTooltip.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(1102, 66)
+        Me.checkbx_ShowTooltip.Name = "checkbx_ShowTooltip"
+        Me.checkbx_ShowTooltip.Size = New System.Drawing.Size(108, 21)
+        Me.checkbx_ShowTooltip.TabIndex = 82
+        Me.checkbx_ShowTooltip.Text = "Show Tooltips"
+        Me.checkbx_ShowTooltip.UseVisualStyleBackColor = False
         '
         'checkbx_GraphRPM
         '
@@ -1384,4 +1398,5 @@ Partial Class FormCalibration
     Friend WithEvents checkbx_GraphOutletPressure As CheckBox
     Friend WithEvents checkbx_GraphInletPressure As CheckBox
     Friend WithEvents checkbx_GraphDP As CheckBox
+    Friend WithEvents checkbx_ShowTooltip As CheckBox
 End Class

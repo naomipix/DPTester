@@ -110,11 +110,17 @@ Module IniFileInitialize
 
             Dim Section3 As String = "Main"
             PublicVariables.ProgramTitle = IniFileHandler.ReadIniValue(IniFilePath, Section3, "Title", "DP Tester")
-            PublicVariables.WorkOrderLen = IniFileHandler.ReadIniValue(IniFilePath, Section3, "WorkOrderLen", "5")
-            PublicVariables.LotIdLen = IniFileHandler.ReadIniValue(IniFilePath, Section3, "LotIdLen", "5")
-            PublicVariables.PartIdLen = IniFileHandler.ReadIniValue(IniFilePath, Section3, "PartIdLen", "5")
-            PublicVariables.ConfirmationIdLen = IniFileHandler.ReadIniValue(IniFilePath, Section3, "ConfirmationIdLen", "5")
-            PublicVariables.QuantityLen = IniFileHandler.ReadIniValue(IniFilePath, Section3, "QuantityLen", "1")
+            PublicVariables.WorkOrderLenLow = IniFileHandler.ReadIniValue(IniFilePath, Section3, "WorkOrderLenLow", "5")
+            PublicVariables.WorkOrderLenHigh = IniFileHandler.ReadIniValue(IniFilePath, Section3, "WorkOrderLenHigh", "5")
+            PublicVariables.LotIdLenLow = IniFileHandler.ReadIniValue(IniFilePath, Section3, "LotIdLenLow", "5")
+            PublicVariables.LotIdLenHigh = IniFileHandler.ReadIniValue(IniFilePath, Section3, "LotIdLenHigh", "5")
+            PublicVariables.PartIdLenLow = IniFileHandler.ReadIniValue(IniFilePath, Section3, "PartIdLenLow", "5")
+            PublicVariables.PartIdLenHigh = IniFileHandler.ReadIniValue(IniFilePath, Section3, "PartIdLenHigh", "5")
+            PublicVariables.ConfirmationIdLenLow = IniFileHandler.ReadIniValue(IniFilePath, Section3, "ConfirmationIdLenLow", "5")
+            PublicVariables.ConfirmationIdLenHigh = IniFileHandler.ReadIniValue(IniFilePath, Section3, "ConfirmationIdLenHigh", "5")
+            PublicVariables.QuantityLenLow = IniFileHandler.ReadIniValue(IniFilePath, Section3, "QuantityLenLow", "1")
+            PublicVariables.QuantityLenHigh = IniFileHandler.ReadIniValue(IniFilePath, Section3, "QuantityLenHigh", "1")
+            PublicVariables.SerialNumLen = IniFileHandler.ReadIniValue(IniFilePath, Section3, "SerialNumLen", "3")
 
             Dim Section4 As String = "Chart"
             If CInt(IniFileHandler.ReadIniValue(IniFilePath, Section3, "ChartPlotMax", 500)) >= 100 Then

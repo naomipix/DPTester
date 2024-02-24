@@ -1028,8 +1028,15 @@ Public Class FormRecipeManagement
         End If
 
         If onContinue = True Then
-            If PartID.Length < PublicVariables.PartIdLen Then
-                RecipeMessage(12, $"Part ID should be greater than {PublicVariables.PartIdLen} Characters, Try Again")
+            If PartID.Length < PublicVariables.PartIdLenLow Then
+                RecipeMessage(12, $"Part ID should be greater than {PublicVariables.PartIdLenLow} Characters, Try Again")
+                onContinue = False
+            End If
+        End If
+
+        If onContinue = True Then
+            If PartID.Length > PublicVariables.PartIdLenHigh Then
+                RecipeMessage(12, $"Part ID should be lower than {PublicVariables.PartIdLenHigh} Characters, Try Again")
                 onContinue = False
             End If
         End If
