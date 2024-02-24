@@ -24,8 +24,8 @@ Partial Class FormCalibration
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCalibration))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -72,6 +72,7 @@ Partial Class FormCalibration
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabpg_GraphView = New System.Windows.Forms.TabPage()
+        Me.checkbx_ShowTooltip = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphRPM = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphTemperature = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphFlowrate = New System.Windows.Forms.CheckBox()
@@ -121,7 +122,6 @@ Partial Class FormCalibration
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tmr_Calibration = New System.Windows.Forms.Timer(Me.components)
         Me.tmr_Verification = New System.Windows.Forms.Timer(Me.components)
-        Me.checkbx_ShowTooltip = New System.Windows.Forms.CheckBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -707,6 +707,18 @@ Partial Class FormCalibration
         Me.tabpg_GraphView.TabIndex = 2
         Me.tabpg_GraphView.Text = "Graph View"
         '
+        'checkbx_ShowTooltip
+        '
+        Me.checkbx_ShowTooltip.AutoSize = True
+        Me.checkbx_ShowTooltip.BackColor = System.Drawing.Color.AliceBlue
+        Me.checkbx_ShowTooltip.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(1102, 66)
+        Me.checkbx_ShowTooltip.Name = "checkbx_ShowTooltip"
+        Me.checkbx_ShowTooltip.Size = New System.Drawing.Size(108, 21)
+        Me.checkbx_ShowTooltip.TabIndex = 82
+        Me.checkbx_ShowTooltip.Text = "Show Tooltips"
+        Me.checkbx_ShowTooltip.UseVisualStyleBackColor = False
+        '
         'checkbx_GraphRPM
         '
         Me.checkbx_GraphRPM.AutoSize = True
@@ -825,14 +837,14 @@ Partial Class FormCalibration
         Me.dgv_CalibrationResult.AllowUserToDeleteRows = False
         Me.dgv_CalibrationResult.AllowUserToResizeColumns = False
         Me.dgv_CalibrationResult.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgv_CalibrationResult.ColumnHeadersHeight = 60
         Me.dgv_CalibrationResult.Location = New System.Drawing.Point(3, 36)
         Me.dgv_CalibrationResult.Name = "dgv_CalibrationResult"
@@ -846,14 +858,14 @@ Partial Class FormCalibration
         Me.dgv_VerificationResult.AllowUserToDeleteRows = False
         Me.dgv_VerificationResult.AllowUserToResizeColumns = False
         Me.dgv_VerificationResult.AllowUserToResizeRows = False
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv_VerificationResult.ColumnHeadersHeight = 60
         Me.dgv_VerificationResult.Location = New System.Drawing.Point(633, 36)
         Me.dgv_VerificationResult.Name = "dgv_VerificationResult"
@@ -1252,18 +1264,6 @@ Partial Class FormCalibration
         '
         'tmr_Verification
         '
-        '
-        'checkbx_ShowTooltip
-        '
-        Me.checkbx_ShowTooltip.AutoSize = True
-        Me.checkbx_ShowTooltip.BackColor = System.Drawing.Color.AliceBlue
-        Me.checkbx_ShowTooltip.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(1102, 66)
-        Me.checkbx_ShowTooltip.Name = "checkbx_ShowTooltip"
-        Me.checkbx_ShowTooltip.Size = New System.Drawing.Size(108, 21)
-        Me.checkbx_ShowTooltip.TabIndex = 82
-        Me.checkbx_ShowTooltip.Text = "Show Tooltips"
-        Me.checkbx_ShowTooltip.UseVisualStyleBackColor = False
         '
         'FormCalibration
         '

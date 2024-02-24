@@ -793,17 +793,36 @@ Public Class FormResultGraph
             Dim DPtest1cycletime As Integer
             Dim DPtest2cycletime As Integer
 
+            Dim DPFillTime As Integer = CInt(resultsummary(49))
+            Dim DPBleedTime As Integer = CInt(resultsummary(50))
+            Dim DPStabilizeTime As Integer = CInt(resultsummary(54))
+            Dim DPTestTime As Integer = CInt(resultsummary(55))
+
+            Dim Flush1FillTime As Integer = CInt(resultsummary(41))
+            Dim Flush1BleedTime As Integer = CInt(resultsummary(42))
+            Dim Flush1StabilizeTime As Integer = CInt(resultsummary(46))
+            Dim Flush1TestTime As Integer = CInt(resultsummary(47))
+
+            Dim Flush2FillTime As Integer = CInt(resultsummary(61))
+            Dim Flush2BleedTime As Integer = CInt(resultsummary(62))
+            Dim Flush2StabilizeTime As Integer = CInt(resultsummary(66))
+            Dim Flush2TestTime As Integer = CInt(resultsummary(67))
+
+            Dim Drain1Time As Integer = CInt(resultsummary(70))
+            Dim Drain2Time As Integer = CInt(resultsummary(73))
+            Dim Drain3Time As Integer = CInt(resultsummary(76))
+
             If True Then
                 If DP1Enabled And Flush1Enabled = False Then
-                    DPtest1cycletime = (CInt(resultsummary(49)) + CInt(resultsummary(50)) + CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                    DPtest1cycletime = DPFillTime + DPBleedTime + DPStabilizeTime + DPTestTime
                 ElseIf DP1Enabled And Flush1Enabled Then
-                    DPtest1cycletime = (CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                    DPtest1cycletime = DPStabilizeTime + DPTestTime
                 End If
 
                 If DP2Enabled And Flush2Enabled = False Then
-                    DPtest2cycletime = (CInt(resultsummary(49)) + CInt(resultsummary(50)) + CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                    DPtest2cycletime = DPFillTime + DPBleedTime + DPStabilizeTime + DPTestTime
                 ElseIf DP2Enabled And Flush2Enabled Then
-                    DPtest2cycletime = (CInt(resultsummary(54)) + CInt(resultsummary(55)))
+                    DPtest2cycletime = DPStabilizeTime + DPTestTime
                 End If
             End If
 
@@ -822,7 +841,7 @@ Public Class FormResultGraph
 
             If True Then
                 If Flush1Enabled Then
-                    DP1Start = CDec(resultsummary(41)) + CDec(resultsummary(42)) + CDec(resultsummary(46)) + CDec(resultsummary(47))
+                    DP1Start = Flush1FillTime + Flush1BleedTime + Flush1StabilizeTime + Flush1TestTime
                 End If
 
                 If DP1Enabled Then
@@ -832,7 +851,7 @@ Public Class FormResultGraph
                 End If
 
                 If Flush2Enabled Then
-                    DP2Start = Flush2Start + CDec(resultsummary(61)) + CDec(resultsummary(62)) + CDec(resultsummary(66)) + CDec(resultsummary(67))
+                    DP2Start = Flush2Start + Flush2FillTime + Flush2BleedTime + Flush2StabilizeTime + Flush2TestTime
                 Else
                     DP2Start = Flush2Start
                 End If
@@ -844,19 +863,19 @@ Public Class FormResultGraph
                 End If
 
                 If Drain1Enabled Then
-                    Drain2Start = Drain1Start + CDec(resultsummary(70))
+                    Drain2Start = Drain1Start + Drain1Time
                 Else
                     Drain2Start = Drain1Start
                 End If
 
                 If Drain2Enabled Then
-                    Drain3Start = Drain2Start + CDec(resultsummary(73))
+                    Drain3Start = Drain2Start + Drain2Time
                 Else
                     Drain3Start = Drain2Start
                 End If
 
                 If Drain3Enabled Then
-                    CycleTimeTotal = Drain3Start + CDec(resultsummary(76))
+                    CycleTimeTotal = Drain3Start + Drain3Time
                 Else
                     CycleTimeTotal = Drain3Start
                 End If
@@ -930,42 +949,239 @@ Public Class FormResultGraph
                         .PathEffect = New DashEffect(New Single() {6, 6})
                     }
                 },
+                  _ ' Flush 1
                 New RectangularSection With {
                     .IsVisible = Flush1Enabled,
                     .Xi = Flush1Start,
                     .Xj = DP1Start,
                     .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
-                    .Label = "Flush 1",
+                    .Label = "",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
+                New RectangularSection With {
+                    .IsVisible = Flush1Enabled,
+                    .Xi = Flush1Start,
+                    .Xj = Flush1Start + Flush1FillTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = $"Flush 1 - Fill",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Flush1Enabled,
+                    .Xi = Flush1Start + Flush1FillTime,
+                    .Xj = Flush1Start + Flush1FillTime + Flush1BleedTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Vent",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Flush1Enabled,
+                    .Xi = Flush1Start + Flush1FillTime + Flush1BleedTime,
+                    .Xj = Flush1Start + Flush1FillTime + Flush1BleedTime + Flush1StabilizeTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Stab",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Flush1Enabled,
+                    .Xi = Flush1Start + Flush1FillTime + Flush1BleedTime + Flush1StabilizeTime,
+                    .Xj = DP1Start,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Test",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                  _ ' DP 1
                 New RectangularSection With {
                     .IsVisible = DP1Enabled,
                     .Xi = DP1Start,
                     .Xj = Flush2Start,
                     .Fill = New SolidColorPaint With {.Color = SKColors.Blue.WithAlpha(20)},
-                    .Label = "DP 1",
+                    .Label = "",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = IIf(DP1Enabled, IIf(Flush1Enabled, False, True), False),
+                    .Xi = DP1Start,
+                    .Xj = DP1Start + DPFillTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = $"DP 1 - Fill",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = IIf(DP1Enabled, IIf(Flush1Enabled, False, True), False),
+                    .Xi = DP1Start + DPFillTime,
+                    .Xj = DP1Start + DPFillTime + DPBleedTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Vent",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = DP1Enabled,
+                    .Xi = CDec(IIf(Flush1Enabled, DP1Start, DP1Start + DPFillTime + DPBleedTime)),
+                    .Xj = CDec(IIf(Flush1Enabled, DP1Start + DPStabilizeTime, DP1Start + DPFillTime + DPBleedTime + DPStabilizeTime)),
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = IIf(Flush1Enabled, $"DP 1 - Stab", "Stab"),
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = DP1Enabled,
+                    .Xi = CDec(IIf(Flush1Enabled, DP1Start + DPStabilizeTime, DP1Start + DPFillTime + DPBleedTime + DPStabilizeTime)),
+                    .Xj = Flush2Start,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Test",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                  _ ' Flush 2
+                New RectangularSection With {
+                    .IsVisible = Flush2Enabled,
+                    .Xi = Flush2Start,
+                    .Xj = DP2Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                    .Label = "",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
                 New RectangularSection With {
                     .IsVisible = Flush2Enabled,
                     .Xi = Flush2Start,
-                    .Xj = DP2Start,
-                    .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
-                    .Label = "Flush 2",
+                    .Xj = Flush2Start + Flush2FillTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = $"Flush 2 - Fill",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
+                New RectangularSection With {
+                    .IsVisible = Flush2Enabled,
+                    .Xi = Flush2Start + Flush2FillTime,
+                    .Xj = Flush2Start + Flush2FillTime + Flush2BleedTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Vent",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Flush2Enabled,
+                    .Xi = Flush2Start + Flush2FillTime + Flush2BleedTime,
+                    .Xj = Flush2Start + Flush2FillTime + Flush2BleedTime + Flush2StabilizeTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Stab",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = Flush2Enabled,
+                    .Xi = Flush2Start + Flush2FillTime + Flush2BleedTime + Flush2StabilizeTime,
+                    .Xj = DP1Start,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Test",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                  _ ' DP 2
                 New RectangularSection With {
                     .IsVisible = DP2Enabled,
                     .Xi = DP2Start,
                     .Xj = Drain1Start,
                     .Fill = New SolidColorPaint With {.Color = SKColors.Blue.WithAlpha(20)},
-                    .Label = "DP 2",
+                    .Label = "",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
+                New RectangularSection With {
+                    .IsVisible = IIf(DP2Enabled, IIf(Flush1Enabled, False, True), False),
+                    .Xi = DP2Start,
+                    .Xj = DP2Start + DPFillTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = $"DP 2 - Fill",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = IIf(DP2Enabled, IIf(Flush1Enabled, False, True), False),
+                    .Xi = DP2Start + DPFillTime,
+                    .Xj = DP2Start + DPFillTime + DPBleedTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Vent",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = DP2Enabled,
+                    .Xi = CDec(IIf(Flush2Enabled, DP2Start, DP2Start + DPFillTime + DPBleedTime)),
+                    .Xj = CDec(IIf(Flush2Enabled, DP2Start + DPStabilizeTime, DP2Start + DPFillTime + DPBleedTime + DPStabilizeTime)),
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = IIf(Flush1Enabled, $"DP 1 - Stab", "Stab"),
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = DP2Enabled,
+                    .Xi = CDec(IIf(Flush2Enabled, DP2Start + DPStabilizeTime, DP2Start + DPFillTime + DPBleedTime + DPStabilizeTime)),
+                    .Xj = Drain1Start,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Test",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                  _ ' Drain
                 New RectangularSection With {
                     .IsVisible = Drain1Enabled,
                     .Xi = Drain1Start,
@@ -973,7 +1189,11 @@ Public Class FormResultGraph
                     .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                     .Label = "Drain 1",
                     .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    }
                 },
                 New RectangularSection With {
                     .IsVisible = Drain2Enabled,
@@ -982,7 +1202,11 @@ Public Class FormResultGraph
                     .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                     .Label = "Drain 2",
                     .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    }
                 },
                 New RectangularSection With {
                     .IsVisible = Drain3Enabled,
@@ -991,7 +1215,11 @@ Public Class FormResultGraph
                     .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                     .Label = "Drain 3",
                     .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    }
                 }
             }
 
