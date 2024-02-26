@@ -3806,7 +3806,11 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                         .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                         .Label = "Drain 1",
                         .LabelSize = 12,
-                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.LightGray,
+                            .StrokeThickness = 1
+                        }
                     },
                     New RectangularSection With {
                         .IsVisible = Drain2Enabled,
@@ -3815,7 +3819,11 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                         .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                         .Label = "Drain 2",
                         .LabelSize = 12,
-                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.LightGray,
+                            .StrokeThickness = 1
+                        }
                     },
                     New RectangularSection With {
                         .IsVisible = Drain3Enabled,
@@ -3824,7 +3832,11 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                         .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                         .Label = "Drain 3",
                         .LabelSize = 12,
-                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.LightGray,
+                            .StrokeThickness = 1
+                        }
                     }
                 }
             End If
