@@ -1005,7 +1005,7 @@ Public Class FormCalibration
                 T2 = Ver_finaltemperature * Ver_finaltemperature
                 exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
                 Viscosity = A * exp
-                Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet))
+                Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet)) - CType(txtbx_CalOffset.Text, Decimal)
 
 
 
@@ -1037,7 +1037,7 @@ Public Class FormCalibration
                 T2 = Ver_finaltemperature * Ver_finaltemperature
                 exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
                 Viscosity = A * exp
-                Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet))
+                Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet)) - CType(txtbx_CalOffset.Text, Decimal)
 
 
 
@@ -1106,8 +1106,14 @@ Public Class FormCalibration
         tmr_Verification.Enabled = False
         If IsNumeric(txtbx_VerDP.Text) Then
             If IsNumeric(txtbx_CalOffset.Text) Then
-                Dim min As Decimal = CType(txtbx_CalOffset.Text, Decimal) - vertol
-                Dim max As Decimal = CType(txtbx_CalOffset.Text, Decimal) + vertol
+                Dim min As Decimal = 0 ' CType(txtbx_CalOffset.Text, Decimal) - vertol
+                Dim max As Decimal = 0 ' CType(txtbx_CalOffset.Text, Decimal) + vertol
+
+                If vertol >= 0 Then
+                    min = 0 - vertol
+                    max = 0 + vertol
+                End If
+
                 If CType(txtbx_VerDP.Text, Decimal) >= min And CType(txtbx_VerDP.Text, Decimal) <= max Then
                     txtbx_CalResult.Text = "Pass"
                     txtbx_CalResult.BackColor = PublicVariables.StatusGreen
@@ -1675,7 +1681,11 @@ Public Class FormCalibration
                         .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                         .Label = "Drain 1",
                         .LabelSize = 12,
-                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.LightGray,
+                            .StrokeThickness = 1
+                        }
                     },
                     New RectangularSection With {
                         .IsVisible = Drain2Enabled,
@@ -1684,7 +1694,11 @@ Public Class FormCalibration
                         .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                         .Label = "Drain 2",
                         .LabelSize = 12,
-                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.LightGray,
+                            .StrokeThickness = 1
+                        }
                     },
                     New RectangularSection With {
                         .IsVisible = Drain3Enabled,
@@ -1693,7 +1707,11 @@ Public Class FormCalibration
                         .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                         .Label = "Drain 3",
                         .LabelSize = 12,
-                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.LightGray,
+                            .StrokeThickness = 1
+                        }
                     }
                 }
                 End If
