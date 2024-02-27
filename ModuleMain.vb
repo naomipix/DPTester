@@ -115,6 +115,7 @@ Module PublicVariables
     Public ChartPlotMax As Integer = 200
     Public ChartType As String = ""
     Public MarkerEnabled As Integer = 0
+    Public RollingAvgSize As Integer = 1
 
     ' Ini - Production Details
     Public ProdDetailsDisplayedTableCount As Integer = 10000

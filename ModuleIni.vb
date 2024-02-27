@@ -130,6 +130,11 @@ Module IniFileInitialize
             End If
             PublicVariables.ChartType = IniFileHandler.ReadIniValue(IniFilePath, Section4, "ChartType", "Line")
             PublicVariables.MarkerEnabled = IniFileHandler.ReadIniValue(IniFilePath, Section4, "MarkerEnabled", 0)
+            If CInt(IniFileHandler.ReadIniValue(IniFilePath, Section4, "RollingAvgSize", 3)) > 0 Then
+                PublicVariables.RollingAvgSize = IniFileHandler.ReadIniValue(IniFilePath, Section4, "RollingAvgSize", 3)
+            Else
+                PublicVariables.RollingAvgSize = 1
+            End If
 
             Dim Section5 As String = "Production Details"
             If True Then
