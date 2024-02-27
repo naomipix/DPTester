@@ -110,7 +110,8 @@ Module ModuleInitialize
                 Inilines(5) = vbCrLf + "[Chart]" + vbCrLf +
                               "ChartType=Spline" + vbCrLf +
                               "MarkerEnabled=0" + vbCrLf +
-                              "ChartPlotMax=1000"
+                              "ChartPlotMax=1000" + vbCrLf +
+                              "RollingAvgSize=3"
 
                 Inilines(6) = vbCrLf + "[Production Details]" + vbCrLf +
                               "MaxCountDisplayed=10000"

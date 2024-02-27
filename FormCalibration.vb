@@ -630,12 +630,29 @@ Public Class FormCalibration
         PCStatus(1)(2) = False
         If CalrecordValue = True And CommLost = False Then
 
+            ' Rolling Average
+            Dim FinalFlowrate As Decimal = 0
+            If True Then
+                RollingAvgArr(RollingAvgCount) = AIn(12)
+
+                If RollingAvgCount = RollingAvgArr.Length - 1 Then
+                    RollingAvgCount = 0
+                Else
+                    RollingAvgCount += 1
+                End If
+
+                Dim FlwrateTemp As Decimal = 0
+                For i As Integer = 0 To RollingAvgArr.Length - 1
+                    FlwrateTemp += RollingAvgArr(i)
+                Next
+                FinalFlowrate = FlwrateTemp / RollingAvgArr.Length
+            End If
 
             Dim newrw As DataRow = dtCalibration.NewRow
             Cal_samplingtime += CType((tmr_Calibration.Interval / 1000), Decimal)
             Cal_inletpressure = AIn(9)
             Cal_outletpressure = AIn(10)
-            Cal_flowrate = AIn(12)
+            Cal_flowrate = FinalFlowrate
             Cal_temperature = AIn(13)
             Cal_dp = Cal_inletpressure - Cal_outletpressure
             Cal_backpressure = AIn(1)
@@ -867,11 +884,30 @@ Public Class FormCalibration
     Private Sub tmr_Verification_Tick(sender As Object, e As EventArgs) Handles tmr_Verification.Tick
         PCStatus(1)(3) = False
         If CalrecordValue = True And CommLost = False Then
+
+            ' Rolling Average
+            Dim FinalFlowrate As Decimal = 0
+            If True Then
+                RollingAvgArr(RollingAvgCount) = AIn(12)
+
+                If RollingAvgCount = RollingAvgArr.Length - 1 Then
+                    RollingAvgCount = 0
+                Else
+                    RollingAvgCount += 1
+                End If
+
+                Dim FlwrateTemp As Decimal = 0
+                For i As Integer = 0 To RollingAvgArr.Length - 1
+                    FlwrateTemp += RollingAvgArr(i)
+                Next
+                FinalFlowrate = FlwrateTemp / RollingAvgArr.Length
+            End If
+
             Dim newrw As DataRow = dtVerification.NewRow
             Ver_samplingtime += CType((tmr_Verification.Interval / 1000), Decimal)
             Ver_inletpressure = AIn(9)
             Ver_outletpressure = AIn(10)
-            Ver_flowrate = AIn(12)
+            Ver_flowrate = FinalFlowrate
             Ver_temperature = AIn(13)
             Ver_backpressure = AIn(1)
             Ver_pumprpm = AIn(2)
@@ -1295,6 +1331,12 @@ Public Class FormCalibration
                 Dim Drain1Time As Integer = dtrecipetable.Rows(0)("drain1_time")
                 Dim Drain2Time As Integer = dtrecipetable.Rows(0)("drain2_time")
                 Dim Drain3Time As Integer = dtrecipetable.Rows(0)("drain3_time")
+
+                ' Reset Rolling Average
+                For i As Integer = 0 To RollingAvgArr.Length - 1
+                    RollingAvgArr(i) = 0
+                Next
+                RollingAvgCount = 0
 
                 ' Clear Live Graph Value
                 CalibrateChartDPValue.Clear()
@@ -1771,6 +1813,12 @@ Public Class FormCalibration
                 Ver_avgbackpressure1 = 0
                 Ver_avgbackpressure2 = 0
                 Ver_finalbackpressure = 0
+
+                ' Reset Rolling Average
+                For i As Integer = 0 To RollingAvgArr.Length - 1
+                    RollingAvgArr(i) = 0
+                Next
+                RollingAvgCount = 0
 
                 ' Clear Live Graph Value
                 CalibrateChartDPValue.Clear()

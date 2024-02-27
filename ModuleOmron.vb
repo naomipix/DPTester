@@ -80,7 +80,8 @@ Module ModuleOmron
     Public Viscosity As Double
     Public CommLost As Boolean
 
-
+    Public RollingAvgArr As Decimal()
+    Public RollingAvgCount As Integer = 0
 
 #Region "FINS protocol"
     Public Sub FINSInitialise()
@@ -100,7 +101,7 @@ Module ModuleOmron
         PLCtimer.Interval = 100
         PLCtimer.Enabled = True
         PCtimer.Interval = 3000
-        Alarmtimer.Interval = 1500
+        Alarmtimer.Interval = 3000
 
         Calseqtimer.Interval = 2000
         Resultcapturetimer.Interval = 500
@@ -1843,6 +1844,24 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
     Private Sub ResultCapture_Ticks(sender As Object, e As EventArgs) Handles Resultcapturetimer.Tick
         Dim serialusageid As Integer
 
+        ' Rolling Average
+        Dim FinalFlowrate As Decimal = 0
+        If True Then
+            RollingAvgArr(RollingAvgCount) = AIn(12)
+
+            If RollingAvgCount = RollingAvgArr.Length - 1 Then
+                RollingAvgCount = 0
+            Else
+                RollingAvgCount += 1
+            End If
+
+            Dim FlwrateTemp As Decimal = 0
+            For i As Integer = 0 To RollingAvgArr.Length - 1
+                FlwrateTemp += RollingAvgArr(i)
+            Next
+            FinalFlowrate = FlwrateTemp / RollingAvgArr.Length
+        End If
+
         If MainrecordValue = True And CommLost = False Then
             Dim newrw As DataRow = dtresult.NewRow
 
@@ -1850,7 +1869,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
             result_samplingtime += CType((Resultcapturetimer.Interval / 1000), Decimal)
             result_inletpressure = AIn(9)
             result_outletpressure = AIn(10)
-            result_flowrate = AIn(12)
+            result_flowrate = FinalFlowrate
             result_temperature = AIn(13)
             result_dp = result_inletpressure - result_outletpressure
             result_backpressure = AIn(1)

@@ -148,13 +148,14 @@ Public Class FormMain
         ModuleInitialize.CreateFolders()
 
 
+        ' Load Ini file
+        IniFileInitialize.ReadConfig()
+
         ' Initialize Chart
         cmbx_LiveGraphSelection.SelectedIndex = 0
         InitializeLiveChart()
         CartesianChart_MainLiveGraph.YAxes(0).IsVisible = True
-
-        ' Load Ini file
-        IniFileInitialize.ReadConfig()
+        Array.Resize(RollingAvgArr, CInt(IIf(RollingAvgSize - 1 < 0, 0, RollingAvgSize - 1)))
 
         ' Load Retained Memory
         RetainedMemory.RetainedMemory.LoadAndApply()
@@ -3460,6 +3461,12 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             Dim Drain1Time As Integer = dtrecipetable.Rows(0)("drain1_time")
             Dim Drain2Time As Integer = dtrecipetable.Rows(0)("drain2_time")
             Dim Drain3Time As Integer = dtrecipetable.Rows(0)("drain3_time")
+
+            ' Reset Rolling Average
+            For i As Integer = 0 To RollingAvgArr.Length - 1
+                RollingAvgArr(i) = 0
+            Next
+            RollingAvgCount = 0
 
             ' Clear Live Graph Value
             LiveChartDPValue.Clear()
