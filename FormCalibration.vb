@@ -7,6 +7,7 @@ Imports SkiaSharp
 Imports LiveChartsCore.Defaults
 Imports System.Collections.ObjectModel
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
+Imports DocumentFormat.OpenXml.VariantTypes
 
 Public Class FormCalibration
     Dim CurrentTabPage As TabPage
@@ -1139,6 +1140,8 @@ Public Class FormCalibration
     End Sub
 
     Private Sub txtbx_VerDP_TextChanged(sender As Object, e As EventArgs) Handles txtbx_VerDP.TextChanged
+        Dim CurrentDate As DateTime = DateTime.Now
+
         tmr_Verification.Enabled = False
         If IsNumeric(txtbx_VerDP.Text) Then
             If IsNumeric(txtbx_CalOffset.Text) Then
@@ -1158,7 +1161,7 @@ Public Class FormCalibration
                     FormMain.lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
                     FormMain.lbl_CalibrationStatus.ForeColor = PublicVariables.StatusGreenT
                     FormMain.lbl_BlankDP.Text = txtbx_CalOffset.Text
-
+                    FormMain.lbl_CalibrationDate.Text = CurrentDate.ToString("yyyy-MM-dd HH:mm:ss")
                 Else
                     txtbx_CalResult.Text = "Fail"
                     txtbx_CalResult.BackColor = PublicVariables.StatusRed
@@ -1167,16 +1170,21 @@ Public Class FormCalibration
                     FormMain.lbl_CalibrationStatus.BackColor = PublicVariables.StatusRed
                     FormMain.lbl_CalibrationStatus.ForeColor = PublicVariables.StatusRedT
                     FormMain.lbl_BlankDP.Text = txtbx_CalOffset.Text
+                    FormMain.lbl_CalibrationDate.Text = CurrentDate.ToString("yyyy-MM-dd HH:mm:ss")
                 End If
+
+                txtbx_CalDate.Text = CurrentDate.ToString("yyyy-MM-dd HH:mm:ss")
+
                 Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT id,lot_id,lot_attempt FROM LotUsage where lot_id = '{txtbx_CalLotID.Text}' AND lot_end_time IS NULL")
                 If dtlotusage.Rows.Count > 0 Then
+
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                             {"recipe_id", txtbx_RecipeID.Text},
-                            {"calibration_time", lbl_DateTimeClock.Text},
+                            {"calibration_time", CurrentDate},
                             {"cal_inlet_pressure", Cal_finalInlet.ToString},
                             {"cal_outlet_pressure", Cal_finalOutlet.ToString},
                             {"cal_diff_pressure", txtbx_CalOffset.Text},
-                             {"verify_inlet_pressure", Ver_finalinlet.ToString},
+                            {"verify_inlet_pressure", Ver_finalinlet.ToString},
                             {"verify_outlet_pressure", Ver_finaloutlet.ToString},
                             {"verify_diff_pressure", Ver_finaldp.ToString},
                             {"cal_result", txtbx_CalResult.Text},
@@ -1206,6 +1214,19 @@ Public Class FormCalibration
                         }
                             Dim caloffsetcondition As String = $"id='31'"
                             If SQL.UpdateRecord($"[0_RetainedMemory]", caloffsetparameter, caloffsetcondition) = 1 Then
+                                onContinue = True
+                            Else
+                                MsgBox($"Query to Update Calibration Result Failed")
+                                onContinue = False
+                            End If
+                        End If
+
+                        If onContinue = True Then
+                            Dim caldatetimeparameter As New Dictionary(Of String, Object) From {
+                        {"retained_value", txtbx_CalDate.Text}
+                        }
+                            Dim caldatetimecondition As String = $"id='32'"
+                            If SQL.UpdateRecord($"[0_RetainedMemory]", caldatetimeparameter, caldatetimecondition) = 1 Then
                                 onContinue = True
                             Else
                                 MsgBox($"Query to Update Calibration Result Failed")

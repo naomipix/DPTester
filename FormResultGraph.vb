@@ -754,6 +754,38 @@ Public Class FormResultGraph
             })
         Next
 
+        ' testing
+        If True Then
+            Dim TempMaxLimit As Decimal = 0
+            Dim TempMinLimit As Decimal = 0
+            Dim TempDifference As Integer = 5
+
+            For i As Integer = 0 To ResultChartTempValue.Count - 1
+                Dim maxVal As Decimal = 0
+                Dim minVal As Decimal = 0
+
+                maxVal = ResultChartTempValue(i).Y + TempDifference
+                minVal = ResultChartTempValue(i).Y - TempDifference
+
+                If i = 0 Then
+                    TempMaxLimit = maxVal
+                    TempMinLimit = minVal
+                Else
+                    If maxVal > TempMaxLimit Then
+                        TempMaxLimit = maxVal
+                    End If
+                    If minVal < TempMinLimit Then
+                        TempMinLimit = minVal
+                    End If
+                End If
+            Next
+
+            With CartesianChart_ResultGraph.YAxes(2)
+                .MaxLimit = Math.Ceiling(TempMaxLimit)
+                .MinLimit = Math.Floor(TempMinLimit)
+            End With
+        End If
+
         ' Set Result Graph Sections
         If True Then
             Dim Flush1Enabled As Boolean = False

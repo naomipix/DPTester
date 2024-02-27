@@ -122,6 +122,8 @@ Partial Class FormCalibration
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tmr_Calibration = New System.Windows.Forms.Timer(Me.components)
         Me.tmr_Verification = New System.Windows.Forms.Timer(Me.components)
+        Me.dsp_CalDate = New System.Windows.Forms.Label()
+        Me.txtbx_CalDate = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -302,7 +304,9 @@ Partial Class FormCalibration
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.dsp_RecipeID)
         Me.Panel2.Controls.Add(Me.txtbx_RecipeID)
+        Me.Panel2.Controls.Add(Me.txtbx_CalDate)
         Me.Panel2.Controls.Add(Me.txtbx_CalVertol)
+        Me.Panel2.Controls.Add(Me.dsp_CalDate)
         Me.Panel2.Controls.Add(Me.dsp_CalVertol)
         Me.Panel2.Controls.Add(Me.Panel4)
         Me.Panel2.Controls.Add(Me.txtbx_CalBackPressure)
@@ -456,7 +460,7 @@ Partial Class FormCalibration
         Me.btn_Discard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Discard.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Discard.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Discard.Location = New System.Drawing.Point(148, 719)
+        Me.btn_Discard.Location = New System.Drawing.Point(148, 739)
         Me.btn_Discard.Name = "btn_Discard"
         Me.btn_Discard.Size = New System.Drawing.Size(150, 60)
         Me.btn_Discard.TabIndex = 52
@@ -469,7 +473,7 @@ Partial Class FormCalibration
         Me.btn_Verify.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Verify.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Verify.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Verify.Location = New System.Drawing.Point(246, 633)
+        Me.btn_Verify.Location = New System.Drawing.Point(246, 663)
         Me.btn_Verify.Name = "btn_Verify"
         Me.btn_Verify.Size = New System.Drawing.Size(150, 60)
         Me.btn_Verify.TabIndex = 51
@@ -482,7 +486,7 @@ Partial Class FormCalibration
         Me.btn_Calibrate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Calibrate.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Calibrate.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Calibrate.Location = New System.Drawing.Point(50, 633)
+        Me.btn_Calibrate.Location = New System.Drawing.Point(50, 663)
         Me.btn_Calibrate.Name = "btn_Calibrate"
         Me.btn_Calibrate.Size = New System.Drawing.Size(150, 60)
         Me.btn_Calibrate.TabIndex = 50
@@ -1265,6 +1269,27 @@ Partial Class FormCalibration
         'tmr_Verification
         '
         '
+        'dsp_CalDate
+        '
+        Me.dsp_CalDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_CalDate.Location = New System.Drawing.Point(-2, 616)
+        Me.dsp_CalDate.Name = "dsp_CalDate"
+        Me.dsp_CalDate.Size = New System.Drawing.Size(162, 35)
+        Me.dsp_CalDate.TabIndex = 54
+        Me.dsp_CalDate.Text = "Calibration Date :"
+        Me.dsp_CalDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_CalDate
+        '
+        Me.txtbx_CalDate.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_CalDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_CalDate.Location = New System.Drawing.Point(166, 622)
+        Me.txtbx_CalDate.Name = "txtbx_CalDate"
+        Me.txtbx_CalDate.ReadOnly = True
+        Me.txtbx_CalDate.Size = New System.Drawing.Size(250, 25)
+        Me.txtbx_CalDate.TabIndex = 55
+        Me.txtbx_CalDate.TabStop = False
+        '
         'FormCalibration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1399,4 +1424,6 @@ Partial Class FormCalibration
     Friend WithEvents checkbx_GraphInletPressure As CheckBox
     Friend WithEvents checkbx_GraphDP As CheckBox
     Friend WithEvents checkbx_ShowTooltip As CheckBox
+    Friend WithEvents txtbx_CalDate As TextBox
+    Friend WithEvents dsp_CalDate As Label
 End Class

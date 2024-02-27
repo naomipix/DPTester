@@ -67,6 +67,7 @@ Module PublicVariables
     Public RetainedRecipeID As String
     Public RetainedCalStatus As String
     Public RetainedCaloffset As String
+    Public RetainedCaldate As String
 
 
 
@@ -807,6 +808,10 @@ Namespace RetainedMemory
 
                     If dt(i)("id") = 31 Then
                         PublicVariables.RetainedCaloffset = dt(i)("retained_value")
+                    End If
+
+                    If dt(i)("id") = 32 Then
+                        PublicVariables.RetainedCaldate = dt(i)("retained_value")
                     End If
 
 

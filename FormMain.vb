@@ -93,6 +93,7 @@ Module FormMainModule
                 If PublicVariables.RetainedWorkOrder <> "-" And PublicVariables.RetainedRecipeType <> "-" Then
                     If PublicVariables.RetainedCalStatus <> "-" Then
                         FormMain.lbl_BlankDP.Text = PublicVariables.RetainedCaloffset
+                        FormMain.lbl_CalibrationDate.Text = PublicVariables.RetainedCaldate
                         If PublicVariables.RetainedCalStatus = "Pass" Then
                             FormMain.lbl_CalibrationStatus.Text = "Pass"
                             FormMain.lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
@@ -111,6 +112,7 @@ Module FormMainModule
                         FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
                         FormMain.lbl_CalibrationStatus.ForeColor = SystemColors.ControlText
                         FormMain.lbl_BlankDP.Text = Nothing
+                        FormMain.lbl_CalibrationDate.Text = Nothing
                         FormMain.txtbx_SerialNumber.Enabled = False
                         FormMain.btn_OprKeyInDtConfirm.Enabled = False
 
@@ -120,6 +122,7 @@ Module FormMainModule
                     FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
                     FormMain.lbl_CalibrationStatus.ForeColor = SystemColors.ControlText
                     FormMain.lbl_BlankDP.Text = Nothing
+                    FormMain.lbl_CalibrationDate.Text = Nothing
                     FormMain.txtbx_SerialNumber.Enabled = False
                     FormMain.btn_OprKeyInDtConfirm.Enabled = False
                 End If
@@ -366,6 +369,7 @@ Public Class FormMain
         If PublicVariables.RetainedWorkOrder <> "-" And PublicVariables.RetainedRecipeType <> "-" Then
             If PublicVariables.RetainedCalStatus <> "-" Then
                 lbl_BlankDP.Text = PublicVariables.RetainedCaloffset
+                lbl_CalibrationDate.Text = PublicVariables.RetainedCaldate
                 If PublicVariables.RetainedCalStatus = "Pass" Then
                     lbl_CalibrationStatus.Text = "Pass"
                     lbl_CalibrationStatus.BackColor = Color.FromArgb(192, 255, 192)
@@ -382,6 +386,7 @@ Public Class FormMain
                 lbl_CalibrationStatus.Text = Nothing
                 lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
                 lbl_BlankDP.Text = Nothing
+                lbl_CalibrationDate.Text = Nothing
                 txtbx_SerialNumber.Enabled = False
                 btn_OprKeyInDtConfirm.Enabled = False
 
@@ -390,6 +395,7 @@ Public Class FormMain
             lbl_CalibrationStatus.Text = Nothing
             lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
             lbl_BlankDP.Text = Nothing
+            lbl_CalibrationDate.Text = Nothing
             txtbx_SerialNumber.Enabled = False
             btn_OprKeyInDtConfirm.Enabled = False
         End If
@@ -2911,6 +2917,38 @@ Public Class FormMain
                             If dtlotusage.Rows.Count > 0 Then
                                 LotAttempt = dtlotusage.Rows.Count + 1
                                 LotStartTime = lbl_DateTimeClock.Text
+
+                                If True Then
+                                    Dim LastCalibrateDate As DateTime = DateTime.Now
+
+                                    If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")) Then
+                                        LastCalibrateDate = dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")
+
+                                        If CStr(dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")).ToUpper() = "PASS" Then
+                                            If MsgBox($"Do you want continue with last calibration? Last Calibrated: {LastCalibrateDate.ToString("yyyy-MM-dd HH:mm:ss")}", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                                                Dim CalDP As Decimal = 0
+
+                                                If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")) Then
+                                                    CalDP = dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")
+
+                                                    ' Set DP
+                                                    lbl_BlankDP.Text = CalDP
+                                                    RetainedMemory.Update(31, "CalibrationOffset", CalDP)
+
+                                                    ' Set Pass
+                                                    lbl_CalibrationStatus.Text = dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")
+                                                    lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
+                                                    lbl_CalibrationStatus.ForeColor = PublicVariables.StatusGreenT
+                                                    RetainedMemory.Update(30, "CalibrationStatus", lbl_CalibrationStatus.Text)
+
+                                                    ' Set Date
+                                                    lbl_CalibrationDate.Text = LastCalibrateDate.ToString("yyyy-MM-dd HH:mm:ss")
+                                                    RetainedMemory.Update(32, "CalibrationDate", LastCalibrateDate.ToString("yyyy-MM-dd HH:mm:ss"))
+                                                End If
+                                            End If
+                                        End If
+                                    End If
+                                End If
                             Else
                                 LotAttempt = 1
                             End If
@@ -3101,7 +3139,12 @@ Public Class FormMain
         If OnContinue = True Then
             LoadrecipeParameters(RecipeID)
 
-            FormCalibration.ShowDialog()
+            If CStr(lbl_CalibrationStatus.Text).ToUpper = "PASS" Then
+                txtbx_SerialNumber.Enabled = True
+                btn_OprKeyInDtConfirm.Enabled = True
+            Else
+                FormCalibration.ShowDialog()
+            End If
         Else
             OnContinue = False
         End If
@@ -4082,6 +4125,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             lbl_CalibrationStatus.Text = Nothing
             lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
             lbl_BlankDP.Text = Nothing
+            lbl_CalibrationDate.Text = Nothing
             lbl_DiffPressAct.Text = Nothing
             lbl_ProductFlowrate.Text = Nothing
             lbl_ProductInlet.Text = Nothing
