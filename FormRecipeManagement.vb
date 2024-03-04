@@ -5374,12 +5374,35 @@ Public Class FormRecipeManagement
                 Dim Condition As String = "recipe_id = '" + RecipeID + "'"
                 If RecipeMessage(36, RecipeID) = DialogResult.Yes Then
                     If SQL.UpdateRecord("RecipeTable", Updateparameter, Condition) = 1 Then
-                        RecipeMessage(37)
+                        Dim recipeUpdateContinue As Boolean = False
 
-                        RcpEditEventLogger(Updateparameter)
+                        ' Check Edit Recipe Match Current Recipe Selected
+                        If FormMainModule.RecipeID = RecipeID Then
+                            ' Check Lot Status
+                            If True Then
+                                If MsgBox("This action will End Lot. Continue?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = DialogResult.Yes Then
+                                    ' Continue Recipe Update
+                                    recipeUpdateContinue = True
 
-                        cmbx_RcpEditFilterType.SelectedIndex = 0
-                        LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
+                                    ' End Lot
+                                    FormMain.Endlot()
+
+                                    ' Clear Calibration Records
+
+                                End If
+                            End If
+                        Else
+                            recipeUpdateContinue = True
+                        End If
+
+                        If recipeUpdateContinue Then
+                            RecipeMessage(37)
+
+                            RcpEditEventLogger(Updateparameter)
+
+                            cmbx_RcpEditFilterType.SelectedIndex = 0
+                            LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
+                        End If
                     Else
                         RecipeMessage(38)
                         onContinue = False

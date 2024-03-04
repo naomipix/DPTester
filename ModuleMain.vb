@@ -67,6 +67,7 @@ Module PublicVariables
     Public RetainedRecipeID As String
     Public RetainedCalStatus As String
     Public RetainedCaloffset As String
+    Public RetainedCaldate As String
 
 
 
@@ -226,7 +227,7 @@ Module PublicVariables
 
     ' Login
     Public LoggedIn As Boolean = False
-    Public LoggedInIsDeveloper As Boolean = True
+    Public LoggedInIsDeveloper As Boolean = False
     Public LoginUserID As Long = 0
     Public LoginUserName As String = ""
     Public LoginUserCategoryID As Integer = -1
@@ -357,6 +358,10 @@ Module SQL
 
                 ' Concatenate SQL String
                 Dim sqlConcatenate As String = $"INSERT INTO {tableName} ({InsertKey}) VALUES ({InsertValue})"
+                If LoggedInIsDeveloper Then
+                    MsgBox(sqlConcatenate)
+                End If
+
                 With command
                     .CommandText = sqlConcatenate
                     ReturnValue = .ExecuteNonQuery()
@@ -807,6 +812,10 @@ Namespace RetainedMemory
 
                     If dt(i)("id") = 31 Then
                         PublicVariables.RetainedCaloffset = dt(i)("retained_value")
+                    End If
+
+                    If dt(i)("id") = 32 Then
+                        PublicVariables.RetainedCaldate = dt(i)("retained_value")
                     End If
 
 

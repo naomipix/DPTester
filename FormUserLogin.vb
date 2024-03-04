@@ -44,6 +44,13 @@ Public Class FormUserLogin
         Dim ReturnString As String = LoginModule.Authenticate(txtbox_LogUserName.Text, txtbox_LogPassword.Text)
 
         If ReturnString = "LoginSuccess" Or ReturnString = "LoginSuccessDeveloper" Then
+            Select Case ReturnString
+                Case "LoginSuccess"
+                    LoginMessage.LoginPrompt(5, PublicVariables.LoginUserName, PublicVariables.LoginUserCategoryName)
+                Case "LoginSuccessDeveloper"
+                    LoginMessage.LoginPrompt(6, 0, 0)
+            End Select
+
             FormMain.lbl_Username.Text = PublicVariables.LoginUserName
             FormMain.lbl_Category.Text = PublicVariables.LoginUserCategoryName
             FormMainModule.ControlState(1)
@@ -65,10 +72,10 @@ Public Class FormUserLogin
             Case "DeveloperLoginFailed"
                 LoginMessage.LoginPrompt(7, 0, 0)
                 txtbox_LogPassword.Text = ""
-            Case "LoginSuccess"
-                LoginMessage.LoginPrompt(5, PublicVariables.LoginUserName, PublicVariables.LoginUserCategoryName)
-            Case "LoginSuccessDeveloper"
-                LoginMessage.LoginPrompt(6, 0, 0)
+            'Case "LoginSuccess"
+            '    LoginMessage.LoginPrompt(5, PublicVariables.LoginUserName, PublicVariables.LoginUserCategoryName)
+            'Case "LoginSuccessDeveloper"
+            '    LoginMessage.LoginPrompt(6, 0, 0)
             Case "WrongPassword"
                 LoginMessage.LoginPrompt(4, 0, 0)
                 txtbox_LogPassword.Text = ""

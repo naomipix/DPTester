@@ -442,9 +442,13 @@ Public Class FormResultSummary
         Dim Oncontinue As Boolean = True
         Dim resultsummary(90) As String
         Dim dt_Resultsummary As DataTable
+        'Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+        '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+        '            LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
+        '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+
         Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
                     LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
-                    LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
                     LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
 
         If Oncontinue = True Then
@@ -535,21 +539,21 @@ Public Class FormResultSummary
             txtbx_ResultDiffPressure.Text = resultsummary(11)
             txtbx_ResultTest.Text = resultsummary(13).ToUpper
 
-            txtbx_ResultCalOffset.Text = resultsummary(24)
-            txtbx_ResultRecipeID.Text = resultsummary(31)
+            txtbx_ResultCalOffset.Text = resultsummary(25)
+            txtbx_ResultRecipeID.Text = resultsummary(21)
 
-            txtbx_Resultflush1.Text = resultsummary(40).ToUpper
-            txtbx_ResultDPTest1.Text = resultsummary(48).ToUpper
-            txtbx_ResultDPTest2.Text = resultsummary(59).ToUpper
-            txtbx_Resultflush2.Text = resultsummary(60).ToUpper
-            txtbx_ResultDrain1.Text = resultsummary(68).ToUpper
-            txtbx_ResultDrain2.Text = resultsummary(71).ToUpper
-            txtbx_ResultDrain3.Text = resultsummary(74).ToUpper
+            txtbx_Resultflush1.Text = resultsummary(40 - 8).ToUpper
+            txtbx_ResultDPTest1.Text = resultsummary(48 - 8).ToUpper
+            txtbx_ResultDPTest2.Text = resultsummary(59 - 8).ToUpper
+            txtbx_Resultflush2.Text = resultsummary(60 - 8).ToUpper
+            txtbx_ResultDrain1.Text = resultsummary(68 - 8).ToUpper
+            txtbx_ResultDrain2.Text = resultsummary(71 - 8).ToUpper
+            txtbx_ResultDrain3.Text = resultsummary(74 - 8).ToUpper
 
 
-            txtbx_ResultWorkOrder.Text = resultsummary(77)
-            txtbx_ResultPartID.Text = resultsummary(78)
-            txtbx_ResultConfirmation.Text = resultsummary(79)
+            txtbx_ResultWorkOrder.Text = resultsummary(77 - 7)
+            txtbx_ResultPartID.Text = resultsummary(78 - 7)
+            txtbx_ResultConfirmation.Text = resultsummary(79 - 7)
             txtbx_ResultSerialUID.Text = resultsummary(1)
             txtbx_Resultattempt.Text = resultsummary(3)
         End If

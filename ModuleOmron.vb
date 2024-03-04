@@ -643,6 +643,9 @@ Module ModuleOmron
 
 #Region "Alarm and Warnings Fetch"
     Public Function FetchAlarm(start As Integer) As Boolean
+        Dim AlarmIsFirstTick As Boolean = False
+        Dim AlarmTableOld As DataTable = Mainalarm.Copy()
+
         Dim serialno As Integer = 0
         Dim alarmdescription As New StringBuilder
         Dim alarmid As Integer
@@ -709,12 +712,28 @@ Module ModuleOmron
 
                         End If
 
+                        ' Set Alarm Timer If Is First Tick
+                        If Alarmtimer.Enabled = False Then
+                            AlarmIsFirstTick = True
+                        End If
+
                         Alarmtimer.Enabled = True
                     End If
                 End If
             Next
         Next
         startindex = Currentalarm.Count - 1
+
+        ' Force Alarm Timer Tick
+        If AlarmIsFirstTick Then
+            AlarmTimerTick()
+        Else
+            If AlarmTableOld.Rows.Count = 0 Then
+                If Mainalarm.Rows.Count > 0 Then
+                    AlarmTimerTick()
+                End If
+            End If
+        End If
 
         Return True
     End Function
@@ -827,7 +846,7 @@ Module ModuleOmron
 
         If Not PublicVariables.LoggedInIsDeveloper Then
             If PLCstatus(0)(3) = True Then
-
+                ' Auto Mode
                 FormMain.btn_RecipeManagement.Enabled = False
                 FormMain.btn_RecipeManagement.BackColor = SystemColors.ControlDark
                 If MainMenu_BtnCalibrate = True Then
@@ -841,15 +860,26 @@ Module ModuleOmron
                 End If
 
             Else
+                ' Manual Mode
                 If MainMenu_BtnRecipe = True Then
-                    FormMain.btn_RecipeManagement.Enabled = True
-                    FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
+                    If FormMain.btn_WrkOrdScnDtEndLot.Enabled Then
+                        FormMain.btn_RecipeManagement.Enabled = False
+                        FormMain.btn_RecipeManagement.BackColor = SystemColors.ControlDark
+                    Else
+                        FormMain.btn_RecipeManagement.Enabled = True
+                        FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
+                    End If
                 End If
                 FormMain.btn_Calibration.Enabled = False
                 FormMain.btn_Calibration.BackColor = SystemColors.ControlDark
                 FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
                 FormMain.btn_RecipeSelectionConfirm.Enabled = False
             End If
+        Else
+            FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+
+            FormMain.btn_RecipeManagement.Enabled = True
+            FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
         End If
 
 #End Region
@@ -1596,7 +1626,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
                 End If
 
-                If PLCstatus(0)(1) = False And PLCstatus(0)(2) = False And PLCstatus(0)(3) = False Then
+                If PLCstatus(0)(1) = False And PLCstatus(0)(2) = False And PLCstatus(0)(3) = False And PLCstatus(0)(14) = False And PLCstatus(0)(4) = False Then
                     FormMain.lbl_OperationMode.Text = "No Status"
                     FormMain.lbl_OperationMode.BackColor = Color.Gray
 
@@ -1633,26 +1663,32 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
                     FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
                 End If
             Else
-                If PLCstatus(0)(4) = True Or PLCstatus(0)(14) = True Then
-
-                    If PLCstatus(0)(4) = True Then
-                        Currentalarm.Remove(0)
-                        If Not Currentalarm.ContainsKey(0) Then
-                            Currentalarm.Add(0, "Machine in Alarm Condition")
-                        End If
-
-                    Else
-                        Currentalarm.Remove(0)
-                        Currentalarm.Add(0, "Machine in Warning Condition")
+                If PLCstatus(0)(4) = True And PLCstatus(0)(14) = False Then
+                    Currentalarm.Remove(0)
+                    If Not Currentalarm.ContainsKey(0) Then
+                        Currentalarm.Add(0, "Machine in Alarm Condition")
                     End If
 
+                    If Alarmtimer.Enabled = False Then
+                        Alarmtimer.Enabled = True
+                    End If
+                ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
+                    Currentalarm.Remove(0)
+                    Currentalarm.Add(0, "Machine in Warning Condition")
 
+                    If Alarmtimer.Enabled = False Then
+                        Alarmtimer.Enabled = True
+                    End If
+                ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = True Then
+                    Currentalarm.Remove(0)
+                    If Not Currentalarm.ContainsKey(0) Then
+                        Currentalarm.Add(0, "Machine in Alarm Condition")
+                    End If
 
                     If Alarmtimer.Enabled = False Then
                         Alarmtimer.Enabled = True
                     End If
                 End If
-
             End If
         Else
             Currentalarm.Remove(0)
@@ -1674,6 +1710,10 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
     End Sub
 
     Private Sub AlarmTimer_Ticks(sender As Object, e As EventArgs) Handles Alarmtimer.Tick
+        AlarmTimerTick()
+    End Sub
+
+    Private Sub AlarmTimerTick()
         Dim Value As KeyValuePair(Of Integer, Object)
         Dim bgcolor As Color
         Dim frcolor As Color
@@ -1734,11 +1774,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
         Else
             Currentindex = Currentindex + 1
         End If
-
-
     End Sub
-
-
 #End Region
 
 
