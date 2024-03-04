@@ -43,7 +43,9 @@ Partial Class FormCalibration
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.dsp_RecipeID = New System.Windows.Forms.Label()
         Me.txtbx_RecipeID = New System.Windows.Forms.TextBox()
+        Me.txtbx_CalDate = New System.Windows.Forms.TextBox()
         Me.txtbx_CalVertol = New System.Windows.Forms.TextBox()
+        Me.dsp_CalDate = New System.Windows.Forms.Label()
         Me.dsp_CalVertol = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.txtbx_CalLotID = New System.Windows.Forms.TextBox()
@@ -122,8 +124,6 @@ Partial Class FormCalibration
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tmr_Calibration = New System.Windows.Forms.Timer(Me.components)
         Me.tmr_Verification = New System.Windows.Forms.Timer(Me.components)
-        Me.dsp_CalDate = New System.Windows.Forms.Label()
-        Me.txtbx_CalDate = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -356,6 +356,17 @@ Partial Class FormCalibration
         Me.txtbx_RecipeID.TabIndex = 57
         Me.txtbx_RecipeID.TabStop = False
         '
+        'txtbx_CalDate
+        '
+        Me.txtbx_CalDate.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_CalDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_CalDate.Location = New System.Drawing.Point(166, 622)
+        Me.txtbx_CalDate.Name = "txtbx_CalDate"
+        Me.txtbx_CalDate.ReadOnly = True
+        Me.txtbx_CalDate.Size = New System.Drawing.Size(250, 25)
+        Me.txtbx_CalDate.TabIndex = 55
+        Me.txtbx_CalDate.TabStop = False
+        '
         'txtbx_CalVertol
         '
         Me.txtbx_CalVertol.BackColor = System.Drawing.SystemColors.Window
@@ -366,6 +377,16 @@ Partial Class FormCalibration
         Me.txtbx_CalVertol.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalVertol.TabIndex = 55
         Me.txtbx_CalVertol.TabStop = False
+        '
+        'dsp_CalDate
+        '
+        Me.dsp_CalDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_CalDate.Location = New System.Drawing.Point(-2, 616)
+        Me.dsp_CalDate.Name = "dsp_CalDate"
+        Me.dsp_CalDate.Size = New System.Drawing.Size(162, 35)
+        Me.dsp_CalDate.TabIndex = 54
+        Me.dsp_CalDate.Text = "Calibration Date :"
+        Me.dsp_CalDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_CalVertol
         '
@@ -1268,27 +1289,6 @@ Partial Class FormCalibration
         '
         'tmr_Verification
         '
-        '
-        'dsp_CalDate
-        '
-        Me.dsp_CalDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalDate.Location = New System.Drawing.Point(-2, 616)
-        Me.dsp_CalDate.Name = "dsp_CalDate"
-        Me.dsp_CalDate.Size = New System.Drawing.Size(162, 35)
-        Me.dsp_CalDate.TabIndex = 54
-        Me.dsp_CalDate.Text = "Calibration Date :"
-        Me.dsp_CalDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_CalDate
-        '
-        Me.txtbx_CalDate.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_CalDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalDate.Location = New System.Drawing.Point(166, 622)
-        Me.txtbx_CalDate.Name = "txtbx_CalDate"
-        Me.txtbx_CalDate.ReadOnly = True
-        Me.txtbx_CalDate.Size = New System.Drawing.Size(250, 25)
-        Me.txtbx_CalDate.TabIndex = 55
-        Me.txtbx_CalDate.TabStop = False
         '
         'FormCalibration
         '

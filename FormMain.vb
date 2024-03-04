@@ -25,6 +25,9 @@ Module FormMainModule
     Public Jig As String
     Public LotStartTime As String
     Public LotEndTime As String
+    Public LastLotCalTime As String
+    Public LastLotCalOffset As String
+    Public LastLotCalResult As String
     Public LotAttempt As Integer
     Public dtRecipeID As DataTable
     Public Mainalarm As New DataTable
@@ -159,6 +162,7 @@ Public Class FormMain
         InitializeLiveChart()
         CartesianChart_MainLiveGraph.YAxes(0).IsVisible = True
         Array.Resize(RollingAvgArr, CInt(IIf(RollingAvgSize - 1 < 0, 0, RollingAvgSize - 1)))
+        FormCalibration.InitializeLiveChart()
 
         ' Load Retained Memory
         RetainedMemory.RetainedMemory.LoadAndApply()
@@ -2744,6 +2748,9 @@ Public Class FormMain
 
 
     Private Sub btn_WrkOrdScnDtConfirm_Click(sender As Object, e As EventArgs) Handles btn_WrkOrdScnDtConfirm.Click
+        'Dim continueLastCal As Boolean = False
+        Dim dtlotusage As New DataTable
+
         Dim OnContinue As Boolean = True
         Workorder = FormRecipeManagement.Formatstring(txtbx_WorkOrderNumber.Text)
         LotID = FormRecipeManagement.Formatstring(txtbx_LotID.Text)
@@ -2887,7 +2894,7 @@ Public Class FormMain
             If OnContinue = True Then
                 If dtlot.Rows.Count = 0 Then
                     Dim Workorderparameter As New Dictionary(Of String, Object) From {
-                    {"lot_id", LotID},
+                        {"lot_id", LotID},
                         {"work_order", Workorder},
                         {"part_id", PartID},
                         {"confirmation_id", ConfirmationID},
@@ -2913,42 +2920,78 @@ Public Class FormMain
 
                     If dtlot.Rows(0)("part_id") = PartID And dtlot.Rows(0)("confirmation_id") = ConfirmationID And dtlot.Rows(0)("work_order") = Workorder Then
                         If MsgBox($"This Lot {LotID} has already been processed in the machine, Do you want to proceed?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
-                            Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT lot_id,lot_attempt FROM LotUsage WHERE lot_id ='{LotID}' ORDER BY lot_attempt ASC")
+                            'dtlotusage = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id ='{LotID}' AND NOT calibration_time IS NULL ORDER BY lot_attempt ASC")
+                            dtlotusage = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id ='{LotID}' ORDER BY lot_attempt ASC")
                             If dtlotusage.Rows.Count > 0 Then
                                 LotAttempt = dtlotusage.Rows.Count + 1
                                 LotStartTime = lbl_DateTimeClock.Text
 
-                                If True Then
-                                    Dim LastCalibrateDate As DateTime = DateTime.Now
+                                ' Check if user want to use back previous calibration
+                                'Dim dtRetainedMemory As DataTable = SQL.ReadRecords("SELECT retained_value FROM [0_RetainedMemory] WHERE id='33'")
+                                'Dim LastCalibrateLotID = dtRetainedMemory(0)(0)
+                                'If LotID = LastCalibrateLotID Then
+                                'Dim LastCalibrateDate As DateTime = DateTime.Now
 
-                                    If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")) Then
-                                        LastCalibrateDate = dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")
+                                'If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")) Then
+                                '        LastCalibrateDate = dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")
 
-                                        If CStr(dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")).ToUpper() = "PASS" Then
-                                            If MsgBox($"Do you want continue with last calibration? Last Calibrated: {LastCalibrateDate.ToString("yyyy-MM-dd HH:mm:ss")}", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
-                                                Dim CalDP As Decimal = 0
+                                ' Get Recipe Details from Lot Usage Records
+                                'If True Then
+                                '    ' Get Recipe ID
+                                '    Dim LotRecipeID As String = dtlotusage(dtlotusage.Rows.Count - 1)("recipe_id")
 
-                                                If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")) Then
-                                                    CalDP = dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")
+                                '    ' Get Recipe Type
+                                '    Dim dtRecipe As DataTable = SQL.ReadRecords($"SELECT RecipeType.recipe_type FROM RecipeTable LEFT JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id WHERE RecipeTable.recipe_id='{LotRecipeID}'")
+                                '    Dim LotRecipeType As String = ""
+                                '    If dtRecipe.Rows.Count > 0 Then
+                                '        LotRecipeType = dtRecipe(0)("recipe_type")
+                                '    End If
 
-                                                    ' Set DP
-                                                    lbl_BlankDP.Text = CalDP
-                                                    RetainedMemory.Update(31, "CalibrationOffset", CalDP)
+                                '    ' Find & Select Recipe Type
+                                '    If cmbx_RecipeType.Items.Count > 1 Then
+                                '        cmbx_RecipeType.SelectedIndex = cmbx_RecipeType.FindStringExact(LotRecipeType)
+                                '    End If
 
-                                                    ' Set Pass
-                                                    lbl_CalibrationStatus.Text = dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")
-                                                    lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
-                                                    lbl_CalibrationStatus.ForeColor = PublicVariables.StatusGreenT
-                                                    RetainedMemory.Update(30, "CalibrationStatus", lbl_CalibrationStatus.Text)
+                                '    ' Find & Select Recipe ID
+                                '    If cmbx_RecipeID.Items.Count > 1 Then
+                                '        cmbx_RecipeID.SelectedIndex = cmbx_RecipeID.FindStringExact(LotRecipeID)
+                                '    End If
+                                'End If
 
-                                                    ' Set Date
-                                                    lbl_CalibrationDate.Text = LastCalibrateDate.ToString("yyyy-MM-dd HH:mm:ss")
-                                                    RetainedMemory.Update(32, "CalibrationDate", LastCalibrateDate.ToString("yyyy-MM-dd HH:mm:ss"))
-                                                End If
-                                            End If
-                                        End If
-                                    End If
-                                End If
+                                ' Update Calibration Values
+                                'If cmbx_RecipeID.SelectedIndex > 0 Then
+                                '    If CStr(dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")).ToUpper() = "PASS" Then
+                                '        If MsgBox($"Do you want continue with last calibration? Last Calibrated: {LastLotCalTime}, with Calibration Offset of {LastLotCalOffset} and Calibration Result as {LastLotCalResult}", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                                '            Dim CalDP As Decimal = 0
+
+                                '            If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")) Then
+                                '                CalDP = dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")
+
+                                '                ' Set DP
+                                '                lbl_BlankDP.Text = CalDP
+                                '                RetainedMemory.Update(31, "CalibrationOffset", CalDP)
+
+                                '                ' Set Pass
+                                '                lbl_CalibrationStatus.Text = dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")
+                                '                lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
+                                '                lbl_CalibrationStatus.ForeColor = PublicVariables.StatusGreenT
+                                '                RetainedMemory.Update(30, "CalibrationStatus", lbl_CalibrationStatus.Text)
+
+                                '                ' Set Date
+                                '                lbl_CalibrationDate.Text = LastLotCalTime
+                                '                RetainedMemory.Update(32, "CalibrationDate", LastLotCalTime)
+
+                                '                ' Set Last Calibrated
+                                '                RetainedMemory.Update(33, "LastCalibrateLotID", LotID)
+                                '            End If
+
+                                '            continueLastCal = True
+                                '        End If
+                                '    End If
+                                'End If
+
+                                ' End If
+                                'End If
                             Else
                                 LotAttempt = 1
                             End If
@@ -3039,10 +3082,10 @@ Public Class FormMain
             If OnContinue = True Then
                 Dim Lotusageparameter As New Dictionary(Of String, Object) From {
                     {"lot_id", LotID},
-                        {"lot_attempt", LotAttempt},
-                        {"lot_start_time", LotStartTime},
-                        {"run_by", PublicVariables.LoginUserName}
-                    }
+                    {"lot_attempt", LotAttempt},
+                    {"lot_start_time", DateTime.Now}, 'LotStartTime not updated, causing sql insert error
+                    {"run_by", PublicVariables.LoginUserName}
+                }
                 If SQL.InsertRecord("LotUsage", Lotusageparameter) = 1 Then
                     MainMessage(3)
                     txtbx_WorkOrderNumber.Enabled = False
@@ -3072,6 +3115,129 @@ Public Class FormMain
 
         End If
 
+        If cmbx_RecipeType.Enabled = True Then
+            If dtlotusage.Rows.Count > 0 Then
+                If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")) Then
+                    If CStr(dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")).ToUpper() = "PASS" Then
+                        LastLotCalTime = CDate(dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")).ToString("yyyy-MM-dd HH:mm:ss")
+                        LastLotCalOffset = dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")
+                        LastLotCalResult = dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")
+
+                        If MsgBox($"Do you want continue with last calibration? Last Calibrated: {LastLotCalTime}, with Calibration Offset of {LastLotCalOffset} and Calibration Result as {LastLotCalResult}", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                            Dim CalDP As Decimal = 0
+
+                            If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")) Then
+                                CalDP = dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")
+
+                                ' Set Recipe
+                                If True Then
+                                    ' Get Recipe ID
+                                    Dim LotRecipeID As String = dtlotusage(dtlotusage.Rows.Count - 1)("recipe_id")
+
+                                    ' Get Recipe Type
+                                    Dim dtRecipe As DataTable = SQL.ReadRecords($"SELECT RecipeType.recipe_type FROM RecipeTable LEFT JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id WHERE RecipeTable.recipe_id='{LotRecipeID}'")
+                                    Dim LotRecipeType As String = ""
+                                    If dtRecipe.Rows.Count > 0 Then
+                                        LotRecipeType = dtRecipe(0)("recipe_type")
+                                    End If
+
+                                    ' Find & Select Recipe Type
+                                    If cmbx_RecipeType.Items.Count > 1 Then
+                                        cmbx_RecipeType.SelectedIndex = cmbx_RecipeType.FindStringExact(LotRecipeType)
+                                    End If
+
+                                    ' Find & Select Recipe ID
+                                    If cmbx_RecipeID.Items.Count > 1 Then
+                                        cmbx_RecipeID.SelectedIndex = cmbx_RecipeID.FindStringExact(LotRecipeID)
+                                    End If
+
+                                    ' Update Lot Usage Table w/Calibration Details
+                                    If True Then
+                                        Dim Updateparameter As New Dictionary(Of String, Object) From {
+                                            {"recipe_id", dtlotusage(dtlotusage.Rows.Count - 1)("recipe_id")},
+                                            {"calibration_time", dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")},
+                                            {"cal_inlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_inlet_pressure")},
+                                            {"cal_outlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_outlet_pressure")},
+                                            {"cal_diff_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")},
+                                            {"verify_inlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_inlet_pressure")},
+                                            {"verify_outlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_outlet_pressure")},
+                                            {"verify_diff_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_diff_pressure")},
+                                            {"cal_result", dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")},
+                                            {"cal_cycle_time", dtlotusage(dtlotusage.Rows.Count - 1)("cal_cycle_time")},
+                                                                                                                        _
+                                            {"verification_tolerance", dtlotusage(dtlotusage.Rows.Count - 1)("verification_tolerance")},
+                                            {"firstflush_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_circuit")},
+                                            {"firstflush_fill_time", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_fill_time")},
+                                            {"firstflush_bleed_time", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_bleed_time")},
+                                            {"firstflush_flowrate", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_flowrate")},
+                                            {"firstflush_flow_tolerance", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_flow_tolerance")},
+                                            {"firstflush_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_back_pressure")},
+                                            {"firstflush_stabilize_time", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_stabilize_time")},
+                                            {"firstflush_time", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_time")},
+                                            {"firstdp_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("firstdp_circuit")},
+                                            {"dp_fill_time", dtlotusage(dtlotusage.Rows.Count - 1)("dp_fill_time")},
+                                            {"dp_bleed_time", dtlotusage(dtlotusage.Rows.Count - 1)("dp_bleed_time")},
+                                            {"dp_flowrate", dtlotusage(dtlotusage.Rows.Count - 1)("dp_flowrate")},
+                                            {"dp_flow_tolerance", dtlotusage(dtlotusage.Rows.Count - 1)("dp_flow_tolerance")},
+                                            {"dp_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("dp_back_pressure")},
+                                            {"dp_stabilize_time", dtlotusage(dtlotusage.Rows.Count - 1)("dp_stabilize_time")},
+                                            {"dp_test_time", dtlotusage(dtlotusage.Rows.Count - 1)("dp_test_time")},
+                                            {"dp_lowerlimit", dtlotusage(dtlotusage.Rows.Count - 1)("dp_lowerlimit")},
+                                            {"dp_upperlimit", dtlotusage(dtlotusage.Rows.Count - 1)("dp_upperlimit")},
+                                            {"dp_testpoints", dtlotusage(dtlotusage.Rows.Count - 1)("dp_testpoints")},
+                                            {"seconddp_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("seconddp_circuit")},
+                                            {"secondflush_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_circuit")},
+                                            {"secondflush_fill_time", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_fill_time")},
+                                            {"secondflush_bleed_time", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_bleed_time")},
+                                            {"secondflush_flowrate", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_flowrate")},
+                                            {"secondflush_flow_tolerance", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_flow_tolerance")},
+                                            {"secondflush_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_back_pressure")},
+                                            {"secondflush_stabilize_time", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_stabilize_time")},
+                                            {"secondflush_time", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_time")},
+                                            {"drain1_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("drain1_circuit")},
+                                            {"drain1_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("drain1_back_pressure")},
+                                            {"drain1_time", dtlotusage(dtlotusage.Rows.Count - 1)("drain1_time")},
+                                            {"drain2_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("drain2_circuit")},
+                                            {"drain2_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("drain2_back_pressure")},
+                                            {"drain2_time", dtlotusage(dtlotusage.Rows.Count - 1)("drain2_time")},
+                                            {"drain3_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("drain3_circuit")},
+                                            {"drain3_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("drain3_back_pressure")},
+                                            {"drain3_time", dtlotusage(dtlotusage.Rows.Count - 1)("drain3_time")}
+                                        }
+                                        Dim Condition As String = $"lot_id='{LotID}' AND lot_attempt='{LotAttempt}'"
+
+                                        If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
+                                            ' Apply Recipe
+                                            RecipeSelectionConfirmClicked(True)
+
+                                            ' Set DP
+                                            lbl_BlankDP.Text = CalDP
+                                            RetainedMemory.Update(31, "CalibrationOffset", CalDP)
+
+                                            ' Set Pass
+                                            lbl_CalibrationStatus.Text = dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")
+                                            lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
+                                            lbl_CalibrationStatus.ForeColor = PublicVariables.StatusGreenT
+                                            RetainedMemory.Update(30, "CalibrationStatus", lbl_CalibrationStatus.Text)
+
+                                            ' Set Date
+                                            lbl_CalibrationDate.Text = LastLotCalTime
+                                            RetainedMemory.Update(32, "CalibrationDate", LastLotCalTime)
+
+                                            ' Set Last Calibrated
+                                            RetainedMemory.Update(33, "LastCalibrateLotID", LotID)
+                                        Else
+                                            MsgBox($"Query to Update Calibration Result Failed")
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+
+            End If
+        End If
     End Sub
 
 
@@ -3105,6 +3271,10 @@ Public Class FormMain
 
 
     Private Sub btn_RecipeSelectionConfirm_Click(sender As Object, e As EventArgs) Handles btn_RecipeSelectionConfirm.Click
+        RecipeSelectionConfirmClicked(False)
+    End Sub
+
+    Private Sub RecipeSelectionConfirmClicked(ReuseCal As Boolean)
         Dim OnContinue As Boolean = True
         RecipeID = cmbx_RecipeID.Text
 
@@ -3139,7 +3309,7 @@ Public Class FormMain
         If OnContinue = True Then
             LoadrecipeParameters(RecipeID)
 
-            If CStr(lbl_CalibrationStatus.Text).ToUpper = "PASS" Then
+            If ReuseCal Then
                 txtbx_SerialNumber.Enabled = True
                 btn_OprKeyInDtConfirm.Enabled = True
             Else
@@ -3148,13 +3318,7 @@ Public Class FormMain
         Else
             OnContinue = False
         End If
-
-
-
-
     End Sub
-
-
 
 
 
@@ -3953,6 +4117,11 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                 }
             Dim Condition As String = $"lot_id ='{txtbx_LotID.Text}' AND lot_attempt = '{dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}'"
 
+            If LoggedInIsDeveloper Then
+                MsgBox(Condition)
+                MsgBox($"{txtbx_LotID.Text} | {dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}")
+            End If
+
             If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
                 Lotendsuccess = True
                 'MainMessage(9, LotID)
@@ -4090,6 +4259,32 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
                         }
             Dim caloffsetcondition As String = $"id='31'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", caloffsetparameter, caloffsetcondition) = 1 Then
+                OnContinue = True
+            Else
+                MsgBox($"Query to Update Calibration Result Failed")
+                OnContinue = False
+            End If
+        End If
+
+        If OnContinue = True Then
+            Dim caldateparameter As New Dictionary(Of String, Object) From {
+                        {"retained_value", "-"}
+                        }
+            Dim caldatecondition As String = $"id='32'"
+            If SQL.UpdateRecord($"[0_RetainedMemory]", caldateparameter, caldatecondition) = 1 Then
+                OnContinue = True
+            Else
+                MsgBox($"Query to Update Calibration Result Failed")
+                OnContinue = False
+            End If
+        End If
+
+        If OnContinue = True Then
+            Dim caloldlotidparameter As New Dictionary(Of String, Object) From {
+                        {"retained_value", "-"}
+                        }
+            Dim caloldlotidcondition As String = $"id='33'"
+            If SQL.UpdateRecord($"[0_RetainedMemory]", caloldlotidparameter, caloldlotidcondition) = 1 Then
                 OnContinue = True
             Else
                 MsgBox($"Query to Update Calibration Result Failed")

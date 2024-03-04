@@ -97,7 +97,9 @@ Public Class FormCalibration
         Me.WindowState = FormWindowState.Maximized
 
         ' Initialize Chart
-        InitializeLiveChart()
+        'InitializeLiveChart()
+        CartesianChart_CalibrationLiveGraph.XAxes(0).MinLimit = 0
+        CartesianChart_CalibrationLiveGraph.XAxes(0).MaxLimit = Nothing
 
         ' Load Version
         lbl_Version.Text = PublicVariables.AppVersion
@@ -307,7 +309,7 @@ Public Class FormCalibration
         ' .MaxLimit = XLimit,
     End Sub
 
-    Private Sub InitializeLiveChart()
+    Public Sub InitializeLiveChart()
 
         For Each LiveGraphChart In {CartesianChart_CalibrationLiveGraph} 'CartesianChartArr
             LiveGraphChart.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
@@ -697,6 +699,38 @@ Public Class FormCalibration
                 .Y = Cal_temperature
             })
 
+            ' Autoscale YAxis (Temperature)
+            If True Then
+                Dim TempMaxLimit As Decimal = 0
+                Dim TempMinLimit As Decimal = 0
+                Dim TempDifference As Integer = 5
+
+                For i As Integer = 0 To CalibrateChartTempValue.Count - 1
+                    Dim maxVal As Decimal = 0
+                    Dim minVal As Decimal = 0
+
+                    maxVal = CalibrateChartTempValue(i).Y + TempDifference
+                    minVal = CalibrateChartTempValue(i).Y - TempDifference
+
+                    If i = 0 Then
+                        TempMaxLimit = maxVal
+                        TempMinLimit = minVal
+                    Else
+                        If maxVal > TempMaxLimit Then
+                            TempMaxLimit = maxVal
+                        End If
+                        If minVal < TempMinLimit Then
+                            TempMinLimit = minVal
+                        End If
+                    End If
+                Next
+
+                With CartesianChart_CalibrationLiveGraph.YAxes(2)
+                    .MaxLimit = Math.Ceiling(TempMaxLimit)
+                    .MinLimit = Math.Floor(TempMinLimit)
+                End With
+            End If
+
             With dgv_CalibrationResult
                 .BackgroundColor = SystemColors.Window
 
@@ -847,7 +881,9 @@ Public Class FormCalibration
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Flowrate (l/min) : {txtbx_CalFlowrate.Text}")
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Temperature (C) : {txtbx_CalTemperature.Text}")
 
-                Dim dtcalresultexport As DataTable = GetVisibleColumnsDataTable(dgv_CalibrationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
+                Dim dtTemp As DataTable = GetVisibleColumnsDataTable(dgv_CalibrationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
+                dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
+                Dim dtcalresultexport As DataTable = dtTemp.DefaultView.ToTable
                 'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
 
                 ' Get Path
@@ -951,6 +987,38 @@ Public Class FormCalibration
                 .X = Ver_samplingtime,
                 .Y = Ver_temperature
             })
+
+            ' Autoscale YAxis (Temperature)
+            If True Then
+                Dim TempMaxLimit As Decimal = 0
+                Dim TempMinLimit As Decimal = 0
+                Dim TempDifference As Integer = 5
+
+                For i As Integer = 0 To CalibrateChartTempValue.Count - 1
+                    Dim maxVal As Decimal = 0
+                    Dim minVal As Decimal = 0
+
+                    maxVal = CalibrateChartTempValue(i).Y + TempDifference
+                    minVal = CalibrateChartTempValue(i).Y - TempDifference
+
+                    If i = 0 Then
+                        TempMaxLimit = maxVal
+                        TempMinLimit = minVal
+                    Else
+                        If maxVal > TempMaxLimit Then
+                            TempMaxLimit = maxVal
+                        End If
+                        If minVal < TempMinLimit Then
+                            TempMinLimit = minVal
+                        End If
+                    End If
+                Next
+
+                With CartesianChart_CalibrationLiveGraph.YAxes(2)
+                    .MaxLimit = Math.Ceiling(TempMaxLimit)
+                    .MinLimit = Math.Floor(TempMinLimit)
+                End With
+            End If
 
             With dgv_VerificationResult
                 .BackgroundColor = SystemColors.Window
@@ -1110,7 +1178,9 @@ Public Class FormCalibration
 
 
 
-                Dim dtVerresultexport As DataTable = GetVisibleColumnsDataTable(dgv_VerificationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
+                Dim dtTemp As DataTable = GetVisibleColumnsDataTable(dgv_VerificationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
+                dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
+                Dim dtVerresultexport As DataTable = dtTemp.DefaultView.ToTable
                 'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
 
                 ' Get Path
@@ -1177,6 +1247,8 @@ Public Class FormCalibration
 
                 Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT id,lot_id,lot_attempt FROM LotUsage where lot_id = '{txtbx_CalLotID.Text}' AND lot_end_time IS NULL")
                 If dtlotusage.Rows.Count > 0 Then
+                    Dim dtRecipeTable As DataTable = SQL.ReadRecords($"SELECT * FROM RecipeTable WHERE recipe_id='{CStr(txtbx_RecipeID.Text)}'")
+                    Dim recipeFound As Boolean = CBool(IIf(dtRecipeTable.Rows.Count > 0, True, False))
 
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                             {"recipe_id", txtbx_RecipeID.Text},
@@ -1188,7 +1260,46 @@ Public Class FormCalibration
                             {"verify_outlet_pressure", Ver_finaloutlet.ToString},
                             {"verify_diff_pressure", Ver_finaldp.ToString},
                             {"cal_result", txtbx_CalResult.Text},
-                            {"cal_cycle_time", CalCycletime.ToString}
+                            {"cal_cycle_time", CalCycletime.ToString},
+                                                                      _
+                            {"verification_tolerance", IIf(recipeFound, dtRecipeTable(0)("verification_tolerance"), 0)},
+                            {"firstflush_circuit", IIf(recipeFound, dtRecipeTable(0)("firstflush_circuit"), "")},
+                            {"firstflush_fill_time", IIf(recipeFound, dtRecipeTable(0)("firstflush_fill_time"), 0)},
+                            {"firstflush_bleed_time", IIf(recipeFound, dtRecipeTable(0)("firstflush_bleed_time"), 0)},
+                            {"firstflush_flowrate", IIf(recipeFound, dtRecipeTable(0)("firstflush_flowrate"), 0)},
+                            {"firstflush_flow_tolerance", IIf(recipeFound, dtRecipeTable(0)("firstflush_flow_tolerance"), 0)},
+                            {"firstflush_back_pressure", IIf(recipeFound, dtRecipeTable(0)("firstflush_back_pressure"), 0)},
+                            {"firstflush_stabilize_time", IIf(recipeFound, dtRecipeTable(0)("firstflush_stabilize_time"), 0)},
+                            {"firstflush_time", IIf(recipeFound, dtRecipeTable(0)("firstflush_time"), 0)},
+                            {"firstdp_circuit", IIf(recipeFound, dtRecipeTable(0)("firstdp_circuit"), "")},
+                            {"dp_fill_time", IIf(recipeFound, dtRecipeTable(0)("dp_fill_time"), 0)},
+                            {"dp_bleed_time", IIf(recipeFound, dtRecipeTable(0)("dp_bleed_time"), 0)},
+                            {"dp_flowrate", IIf(recipeFound, dtRecipeTable(0)("dp_flowrate"), 0)},
+                            {"dp_flow_tolerance", IIf(recipeFound, dtRecipeTable(0)("dp_flow_tolerance"), 0)},
+                            {"dp_back_pressure", IIf(recipeFound, dtRecipeTable(0)("dp_back_pressure"), 0)},
+                            {"dp_stabilize_time", IIf(recipeFound, dtRecipeTable(0)("dp_stabilize_time"), 0)},
+                            {"dp_test_time", IIf(recipeFound, dtRecipeTable(0)("dp_test_time"), 0)},
+                            {"dp_lowerlimit", IIf(recipeFound, dtRecipeTable(0)("dp_lowerlimit"), 0)},
+                            {"dp_upperlimit", IIf(recipeFound, dtRecipeTable(0)("dp_upperlimit"), 0)},
+                            {"dp_testpoints", IIf(recipeFound, dtRecipeTable(0)("dp_testpoints"), 0)},
+                            {"seconddp_circuit", IIf(recipeFound, dtRecipeTable(0)("seconddp_circuit"), "")},
+                            {"secondflush_circuit", IIf(recipeFound, dtRecipeTable(0)("secondflush_circuit"), "")},
+                            {"secondflush_fill_time", IIf(recipeFound, dtRecipeTable(0)("secondflush_fill_time"), 0)},
+                            {"secondflush_bleed_time", IIf(recipeFound, dtRecipeTable(0)("secondflush_bleed_time"), 0)},
+                            {"secondflush_flowrate", IIf(recipeFound, dtRecipeTable(0)("secondflush_flowrate"), 0)},
+                            {"secondflush_flow_tolerance", IIf(recipeFound, dtRecipeTable(0)("secondflush_flow_tolerance"), 0)},
+                            {"secondflush_back_pressure", IIf(recipeFound, dtRecipeTable(0)("secondflush_back_pressure"), 0)},
+                            {"secondflush_stabilize_time", IIf(recipeFound, dtRecipeTable(0)("secondflush_stabilize_time"), 0)},
+                            {"secondflush_time", IIf(recipeFound, dtRecipeTable(0)("secondflush_time"), 0)},
+                            {"drain1_circuit", IIf(recipeFound, dtRecipeTable(0)("drain1_circuit"), "")},
+                            {"drain1_back_pressure", IIf(recipeFound, dtRecipeTable(0)("drain1_back_pressure"), 0)},
+                            {"drain1_time", IIf(recipeFound, dtRecipeTable(0)("drain1_time"), 0)},
+                            {"drain2_circuit", IIf(recipeFound, dtRecipeTable(0)("drain2_circuit"), "")},
+                            {"drain2_back_pressure", IIf(recipeFound, dtRecipeTable(0)("drain2_back_pressure"), 0)},
+                            {"drain2_time", IIf(recipeFound, dtRecipeTable(0)("drain2_time"), 0)},
+                            {"drain3_circuit", IIf(recipeFound, dtRecipeTable(0)("drain3_circuit"), "")},
+                            {"drain3_back_pressure", IIf(recipeFound, dtRecipeTable(0)("drain3_back_pressure"), 0)},
+                            {"drain3_time", IIf(recipeFound, dtRecipeTable(0)("drain3_time"), 0)}
                         }
                     Dim Condition As String = $"id = '{dtlotusage.Rows(dtlotusage.Rows.Count - 1).Item("id")}'"
 
@@ -1223,7 +1334,7 @@ Public Class FormCalibration
 
                         If onContinue = True Then
                             Dim caldatetimeparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", txtbx_CalDate.Text}
+                        {"retained_value", CStr(txtbx_CalDate.Text)}
                         }
                             Dim caldatetimecondition As String = $"id='32'"
                             If SQL.UpdateRecord($"[0_RetainedMemory]", caldatetimeparameter, caldatetimecondition) = 1 Then
@@ -1236,7 +1347,7 @@ Public Class FormCalibration
 
                         If onContinue = True Then
                             If txtbx_CalResult.Text = "Fail" Then
-                                If MsgBox($"Calibration/Blank Test Results as {txtbx_CalResult.Text}, Do you Want to Reset and Re-calirbate?", MsgBoxStyle.YesNo, "Calibration Result") = DialogResult.No Then
+                                If MsgBox($"Calibration/Blank Test Results as {txtbx_CalResult.Text}, Do you Want to Reset and Re-calibrate?", MsgBoxStyle.YesNo, "Calibration Result") = DialogResult.No Then
 
                                     Me.Close()
                                 Else

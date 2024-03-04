@@ -1002,7 +1002,7 @@ Partial Class FormCircuitModel2
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(83, 25)
         Me.Label6.TabIndex = 782
-        Me.Label6.Text = "N2 Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
+        Me.Label6.Text = "N2 Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P3 (kPa)"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label5
@@ -1013,7 +1013,7 @@ Partial Class FormCircuitModel2
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(53, 43)
         Me.Label5.TabIndex = 781
-        Me.Label5.Text = "Pump Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
+        Me.Label5.Text = "Pump Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P4 (kPa)"
         Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_N2Press
@@ -3961,7 +3961,7 @@ Partial Class FormCircuitModel2
         Me.dsp_OutletPress.Name = "dsp_OutletPress"
         Me.dsp_OutletPress.Size = New System.Drawing.Size(70, 30)
         Me.dsp_OutletPress.TabIndex = 357
-        Me.dsp_OutletPress.Text = "Outlet Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
+        Me.dsp_OutletPress.Text = "Outlet Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P2 (kPa)"
         Me.dsp_OutletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_InletPress
@@ -3984,7 +3984,7 @@ Partial Class FormCircuitModel2
         Me.dsp_InletPress.Name = "dsp_InletPress"
         Me.dsp_InletPress.Size = New System.Drawing.Size(70, 30)
         Me.dsp_InletPress.TabIndex = 358
-        Me.dsp_InletPress.Text = "Inlet Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)"
+        Me.dsp_InletPress.Text = "Inlet Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P1 (kPa)"
         Me.dsp_InletPress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label3
@@ -4041,24 +4041,24 @@ Partial Class FormCircuitModel2
         '
         Me.lbl_Valve17.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve17.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve17.Location = New System.Drawing.Point(878, 204)
         Me.lbl_Valve17.Name = "lbl_Valve17"
         Me.lbl_Valve17.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve17.TabIndex = 176
-        Me.lbl_Valve17.Text = "17"
+        Me.lbl_Valve17.Text = "V17"
         Me.lbl_Valve17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve6
         '
         Me.lbl_Valve6.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve6.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve6.Location = New System.Drawing.Point(422, 77)
         Me.lbl_Valve6.Name = "lbl_Valve6"
         Me.lbl_Valve6.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve6.TabIndex = 235
-        Me.lbl_Valve6.Text = "6"
+        Me.lbl_Valve6.Text = "V6"
         Me.lbl_Valve6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'btn_MVCShowcircuit
@@ -4076,204 +4076,204 @@ Partial Class FormCircuitModel2
         '
         Me.lbl_Valve19.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve19.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve19.Location = New System.Drawing.Point(343, 222)
         Me.lbl_Valve19.Name = "lbl_Valve19"
         Me.lbl_Valve19.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve19.TabIndex = 164
-        Me.lbl_Valve19.Text = "19"
+        Me.lbl_Valve19.Text = "V19"
         Me.lbl_Valve19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve1
         '
         Me.lbl_Valve1.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve1.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve1.Location = New System.Drawing.Point(61, 200)
         Me.lbl_Valve1.Name = "lbl_Valve1"
         Me.lbl_Valve1.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve1.TabIndex = 179
-        Me.lbl_Valve1.Text = "1"
+        Me.lbl_Valve1.Text = "V1"
         Me.lbl_Valve1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve18
         '
         Me.lbl_Valve18.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve18.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve18.Location = New System.Drawing.Point(902, 143)
         Me.lbl_Valve18.Name = "lbl_Valve18"
         Me.lbl_Valve18.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve18.TabIndex = 178
-        Me.lbl_Valve18.Text = "18"
+        Me.lbl_Valve18.Text = "V18"
         Me.lbl_Valve18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve2
         '
         Me.lbl_Valve2.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve2.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve2.Location = New System.Drawing.Point(110, 200)
         Me.lbl_Valve2.Name = "lbl_Valve2"
         Me.lbl_Valve2.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve2.TabIndex = 177
-        Me.lbl_Valve2.Text = "2"
+        Me.lbl_Valve2.Text = "V2"
         Me.lbl_Valve2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve3
         '
         Me.lbl_Valve3.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve3.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve3.Location = New System.Drawing.Point(178, 200)
         Me.lbl_Valve3.Name = "lbl_Valve3"
         Me.lbl_Valve3.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve3.TabIndex = 175
-        Me.lbl_Valve3.Text = "3"
+        Me.lbl_Valve3.Text = "V3"
         Me.lbl_Valve3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve16
         '
         Me.lbl_Valve16.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve16.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve16.Location = New System.Drawing.Point(833, 259)
         Me.lbl_Valve16.Name = "lbl_Valve16"
         Me.lbl_Valve16.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve16.TabIndex = 174
-        Me.lbl_Valve16.Text = "16"
+        Me.lbl_Valve16.Text = "V16"
         Me.lbl_Valve16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve4
         '
         Me.lbl_Valve4.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve4.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve4.Location = New System.Drawing.Point(208, 124)
         Me.lbl_Valve4.Name = "lbl_Valve4"
         Me.lbl_Valve4.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve4.TabIndex = 173
-        Me.lbl_Valve4.Text = "4"
+        Me.lbl_Valve4.Text = "V4"
         Me.lbl_Valve4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve15
         '
         Me.lbl_Valve15.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve15.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve15.Location = New System.Drawing.Point(749, 259)
         Me.lbl_Valve15.Name = "lbl_Valve15"
         Me.lbl_Valve15.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve15.TabIndex = 180
-        Me.lbl_Valve15.Text = "15"
+        Me.lbl_Valve15.Text = "V15"
         Me.lbl_Valve15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve5
         '
         Me.lbl_Valve5.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve5.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve5.Location = New System.Drawing.Point(265, 216)
         Me.lbl_Valve5.Name = "lbl_Valve5"
         Me.lbl_Valve5.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve5.TabIndex = 172
-        Me.lbl_Valve5.Text = "5"
+        Me.lbl_Valve5.Text = "V5"
         Me.lbl_Valve5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve14
         '
         Me.lbl_Valve14.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve14.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve14.Location = New System.Drawing.Point(858, 143)
         Me.lbl_Valve14.Name = "lbl_Valve14"
         Me.lbl_Valve14.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve14.TabIndex = 170
-        Me.lbl_Valve14.Text = "14"
+        Me.lbl_Valve14.Text = "V14"
         Me.lbl_Valve14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve13
         '
         Me.lbl_Valve13.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve13.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve13.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve13.Location = New System.Drawing.Point(811, 144)
         Me.lbl_Valve13.Name = "lbl_Valve13"
         Me.lbl_Valve13.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve13.TabIndex = 169
-        Me.lbl_Valve13.Text = "13"
+        Me.lbl_Valve13.Text = "V13"
         Me.lbl_Valve13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve7
         '
         Me.lbl_Valve7.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve7.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve7.Location = New System.Drawing.Point(405, 339)
         Me.lbl_Valve7.Name = "lbl_Valve7"
         Me.lbl_Valve7.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve7.TabIndex = 168
-        Me.lbl_Valve7.Text = "7"
+        Me.lbl_Valve7.Text = "V7"
         Me.lbl_Valve7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve12
         '
         Me.lbl_Valve12.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve12.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve12.Location = New System.Drawing.Point(650, 304)
         Me.lbl_Valve12.Name = "lbl_Valve12"
         Me.lbl_Valve12.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve12.TabIndex = 167
-        Me.lbl_Valve12.Text = "12"
+        Me.lbl_Valve12.Text = "V12"
         Me.lbl_Valve12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve8
         '
         Me.lbl_Valve8.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve8.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve8.Location = New System.Drawing.Point(468, 337)
         Me.lbl_Valve8.Name = "lbl_Valve8"
         Me.lbl_Valve8.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve8.TabIndex = 166
-        Me.lbl_Valve8.Text = "8"
+        Me.lbl_Valve8.Text = "V8"
         Me.lbl_Valve8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve11
         '
         Me.lbl_Valve11.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve11.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve11.Location = New System.Drawing.Point(493, 77)
         Me.lbl_Valve11.Name = "lbl_Valve11"
         Me.lbl_Valve11.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve11.TabIndex = 165
-        Me.lbl_Valve11.Text = "11"
+        Me.lbl_Valve11.Text = "V11"
         Me.lbl_Valve11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve9
         '
         Me.lbl_Valve9.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve9.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve9.Location = New System.Drawing.Point(537, 255)
         Me.lbl_Valve9.Name = "lbl_Valve9"
         Me.lbl_Valve9.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve9.TabIndex = 171
-        Me.lbl_Valve9.Text = "9"
+        Me.lbl_Valve9.Text = "V9"
         Me.lbl_Valve9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lbl_Valve10
         '
         Me.lbl_Valve10.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_Valve10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_Valve10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_Valve10.Font = New System.Drawing.Font("Segoe UI", 8.25!)
         Me.lbl_Valve10.Location = New System.Drawing.Point(542, 204)
         Me.lbl_Valve10.Name = "lbl_Valve10"
         Me.lbl_Valve10.Size = New System.Drawing.Size(28, 25)
         Me.lbl_Valve10.TabIndex = 181
-        Me.lbl_Valve10.Text = "10"
+        Me.lbl_Valve10.Text = "V10"
         Me.lbl_Valve10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'dsp_Flowmtr

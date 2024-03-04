@@ -227,7 +227,7 @@ Module PublicVariables
 
     ' Login
     Public LoggedIn As Boolean = False
-    Public LoggedInIsDeveloper As Boolean = True
+    Public LoggedInIsDeveloper As Boolean = False
     Public LoginUserID As Long = 0
     Public LoginUserName As String = ""
     Public LoginUserCategoryID As Integer = -1
@@ -358,6 +358,10 @@ Module SQL
 
                 ' Concatenate SQL String
                 Dim sqlConcatenate As String = $"INSERT INTO {tableName} ({InsertKey}) VALUES ({InsertValue})"
+                If LoggedInIsDeveloper Then
+                    MsgBox(sqlConcatenate)
+                End If
+
                 With command
                     .CommandText = sqlConcatenate
                     ReturnValue = .ExecuteNonQuery()
