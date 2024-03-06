@@ -3411,15 +3411,15 @@ Public Class FormRecipeManagement
         Dim Newrecipe As String = txtbx_RcpDupNewRecipeID.Text
         Dim selrecipeid As Integer = cmbx_RcpDupSelRecipe.SelectedIndex
         Dim selrecipe As String = cmbx_RcpDupSelRecipe.Text
-        Dim duplicaterecipe(50) As String
-        Dim dtDuplicaterecipe As DataTable = SQL.ReadRecords("SELECT * FROM RecipeTable WHERE recipe_id = '" + selrecipe + "'")
+        'Dim duplicaterecipe(50) As String
+        Dim dtDuplicaterecipe As DataTable = SQL.ReadRecords("SELECT * FROM RecipeTable WHERE recipe_id = '" + selrecipe + "' ORDER BY recipe_rev DESC")
         Dim Oncontinue As Boolean = True
         Dim dtrecipeidcheck As DataTable = SQL.ReadRecords("SELECT * FROM RecipeTable WHERE recipe_id = '" + Newrecipe + "'")
-        If dtDuplicaterecipe.Rows.Count > 0 Then
-            For i As Integer = 0 To dtDuplicaterecipe.Columns.Count - 1
-                duplicaterecipe(i) = dtDuplicaterecipe.Rows(0).Item(i)
-            Next
-        End If
+        'If dtDuplicaterecipe.Rows.Count > 0 Then
+        '    For i As Integer = 0 To dtDuplicaterecipe.Columns.Count - 1
+        '        duplicaterecipe(i) = dtDuplicaterecipe.Rows(0).Item(i)
+        '    Next
+        'End If
 
         'Check Selected Recipe ID Empty fields
         If Oncontinue = True Then
@@ -3465,64 +3465,93 @@ Public Class FormRecipeManagement
             End If
         End If
 
+        'Check datatable row count
         If Oncontinue = True Then
-            duplicaterecipe(1) = Newrecipe
-            duplicaterecipe(3) = Newtype
-            duplicaterecipe(4) = PublicVariables.LoginUserName
-            duplicaterecipe(5) = lbl_DateTimeClock.Text
-            duplicaterecipe(6) = PublicVariables.LoginUserName
-            duplicaterecipe(7) = lbl_DateTimeClock.Text
+            If dtDuplicaterecipe.Rows.Count <= 0 Then
+                Oncontinue = False
+            Else
+                For i As Integer = 0 To dtDuplicaterecipe.Columns.Count - 1
+                    If IsDBNull(dtDuplicaterecipe.Rows(0).Item(i)) Then
+                        Oncontinue = False
+                        Exit For
+                    End If
+                Next
+            End If
+
+            If Oncontinue = False Then
+                MsgBox("Recipe not found, Duplication Failed", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            End If
+        End If
+
+        If Oncontinue = True Then
+            Dim CurrentDate As DateTime = DateTime.Now
+
+            dtDuplicaterecipe(0)("recipe_id") = Newrecipe
+            dtDuplicaterecipe(0)("recipe_type_id") = Newtype
+            dtDuplicaterecipe(0)("last_modified_by") = PublicVariables.LoginUserName
+            dtDuplicaterecipe(0)("last_modified_time") = CurrentDate 'lbl_DateTimeClock.Text
+            dtDuplicaterecipe(0)("user_created") = PublicVariables.LoginUserName
+            dtDuplicaterecipe(0)("created_time") = CurrentDate 'lbl_DateTimeClock.Text
 
             ' Upon all previous conditions are true,
             ' Send the Data to SQL Database
             If dtrecipeidcheck.Rows.Count = 0 Then
                 Dim recipeparameter As New Dictionary(Of String, Object) From {
-                        {"recipe_id", duplicaterecipe(1)},
-                            {"part_id", duplicaterecipe(2)},
-                            {"recipe_type_id", duplicaterecipe(3)},
-                            {"last_modified_by", duplicaterecipe(4)},
-                            {"last_modified_time", duplicaterecipe(5)},
-                            {"user_created", duplicaterecipe(6)},
-                            {"created_time", duplicaterecipe(7)},
-                            {"verification_tolerance", duplicaterecipe(8)},
-                            {"firstflush_circuit", duplicaterecipe(9)},
-                                                                       _ '{"firstflush_fill_time", duplicaterecipe(10)},
-                                                                       _ '{"firstflush_bleed_time", duplicaterecipe(11)},
-                            {"firstflush_flowrate", duplicaterecipe(12)},
-                            {"firstflush_flow_tolerance", duplicaterecipe(13)},
-                            {"firstflush_back_pressure", duplicaterecipe(14)},
-                            {"firstflush_stabilize_time", duplicaterecipe(15)},
-                            {"firstflush_time", duplicaterecipe(16)},
-                            {"firstdp_circuit", duplicaterecipe(17)},
-                                                                     _ '{"dp_fill_time", duplicaterecipe(18)},
-                                                                     _ '{"dp_bleed_time", duplicaterecipe(19)},
-                            {"dp_flowrate", duplicaterecipe(20)},
-                            {"dp_flow_tolerance", duplicaterecipe(21)},
-                            {"dp_back_pressure", duplicaterecipe(22)},
-                            {"dp_stabilize_time", duplicaterecipe(23)},
-                            {"dp_test_time", duplicaterecipe(24)},
-                            {"dp_lowerlimit", duplicaterecipe(25)},
-                            {"dp_upperlimit", duplicaterecipe(26)},
-                            {"dp_testpoints", duplicaterecipe(27)},
-                            {"seconddp_circuit", duplicaterecipe(28)},
-                            {"secondflush_circuit", duplicaterecipe(29)},
-                                                                         _ '{"secondflush_fill_time", duplicaterecipe(30)},
-                                                                         _ '{"secondflush_bleed_time", duplicaterecipe(31)},
-                            {"secondflush_flowrate", duplicaterecipe(32)},
-                            {"secondflush_flow_tolerance", duplicaterecipe(33)},
-                            {"secondflush_back_pressure", duplicaterecipe(34)},
-                            {"secondflush_stabilize_time", duplicaterecipe(35)},
-                            {"secondflush_time", duplicaterecipe(36)},
-                            {"drain1_circuit", duplicaterecipe(37)},
-                            {"drain1_back_pressure", duplicaterecipe(38)},
-                            {"drain1_time", duplicaterecipe(39)},
-                            {"drain2_circuit", duplicaterecipe(40)},
-                            {"drain2_back_pressure", duplicaterecipe(41)},
-                            {"drain2_time", duplicaterecipe(42)},
-                            {"drain3_circuit", duplicaterecipe(43)},
-                            {"drain3_back_pressure", duplicaterecipe(44)},
-                            {"drain3_time", duplicaterecipe(45)}
-                        }
+                    {"recipe_id", dtDuplicaterecipe(0)("recipe_id")},
+                    {"recipe_rev", 0},
+                    {"part_id", dtDuplicaterecipe(0)("part_id")},
+                    {"recipe_type_id", dtDuplicaterecipe(0)("recipe_type_id")},
+                    {"last_modified_by", dtDuplicaterecipe(0)("last_modified_by")},
+                    {"last_modified_time", dtDuplicaterecipe(0)("last_modified_time")},
+                    {"user_created", dtDuplicaterecipe(0)("user_created")},
+                    {"created_time", dtDuplicaterecipe(0)("created_time")},
+                    {"verification_tolerance", dtDuplicaterecipe(0)("verification_tolerance")},
+                                                                                               _
+                    {"prep_fill_time", dtDuplicaterecipe(0)("prep_fill_time")},
+                    {"prep_bleed_time", dtDuplicaterecipe(0)("prep_bleed_time")},
+                    {"prep_flowrate", dtDuplicaterecipe(0)("prep_flowrate")},
+                    {"prep_back_pressure", dtDuplicaterecipe(0)("prep_back_pressure")},
+                    {"prep_pressure_drop", dtDuplicaterecipe(0)("prep_pressure_drop")},
+                    {"prep_pressure_drop_time", dtDuplicaterecipe(0)("prep_pressure_drop_time")},
+                                                                               _
+                    {"firstflush_circuit", dtDuplicaterecipe(0)("firstflush_circuit")},
+                                                                                       _ '{"firstflush_fill_time", duplicaterecipe(10)},
+                                                                                       _ '{"firstflush_bleed_time", duplicaterecipe(11)},
+                    {"firstflush_flowrate", dtDuplicaterecipe(0)("firstflush_flowrate")},
+                    {"firstflush_flow_tolerance", dtDuplicaterecipe(0)("firstflush_flow_tolerance")},
+                    {"firstflush_back_pressure", dtDuplicaterecipe(0)("firstflush_back_pressure")},
+                    {"firstflush_stabilize_time", dtDuplicaterecipe(0)("firstflush_stabilize_time")},
+                    {"firstflush_time", dtDuplicaterecipe(0)("firstflush_time")},
+                    {"firstdp_circuit", dtDuplicaterecipe(0)("firstdp_circuit")},
+                                                                                 _ '{"dp_fill_time", duplicaterecipe(18)},
+                                                                                 _ '{"dp_bleed_time", duplicaterecipe(19)},
+                    {"dp_flowrate", dtDuplicaterecipe(0)("dp_flowrate")},
+                    {"dp_flow_tolerance", dtDuplicaterecipe(0)("dp_flow_tolerance")},
+                    {"dp_back_pressure", dtDuplicaterecipe(0)("dp_back_pressure")},
+                    {"dp_stabilize_time", dtDuplicaterecipe(0)("dp_stabilize_time")},
+                    {"dp_test_time", dtDuplicaterecipe(0)("dp_test_time")},
+                    {"dp_lowerlimit", dtDuplicaterecipe(0)("dp_lowerlimit")},
+                    {"dp_upperlimit", dtDuplicaterecipe(0)("dp_upperlimit")},
+                    {"dp_testpoints", dtDuplicaterecipe(0)("dp_testpoints")},
+                    {"seconddp_circuit", dtDuplicaterecipe(0)("seconddp_circuit")},
+                    {"secondflush_circuit", dtDuplicaterecipe(0)("secondflush_circuit")},
+                                                                                         _ '{"secondflush_fill_time", duplicaterecipe(30)},
+                                                                                         _ '{"secondflush_bleed_time", duplicaterecipe(31)},
+                    {"secondflush_flowrate", dtDuplicaterecipe(0)("secondflush_flowrate")},
+                    {"secondflush_flow_tolerance", dtDuplicaterecipe(0)("secondflush_flow_tolerance")},
+                    {"secondflush_back_pressure", dtDuplicaterecipe(0)("secondflush_back_pressure")},
+                    {"secondflush_stabilize_time", dtDuplicaterecipe(0)("secondflush_stabilize_time")},
+                    {"secondflush_time", dtDuplicaterecipe(0)("secondflush_time")},
+                    {"drain1_circuit", dtDuplicaterecipe(0)("drain1_circuit")},
+                    {"drain1_back_pressure", dtDuplicaterecipe(0)("drain1_back_pressure")},
+                    {"drain1_time", dtDuplicaterecipe(0)("drain1_time")},
+                    {"drain2_circuit", dtDuplicaterecipe(0)("drain2_circuit")},
+                    {"drain2_back_pressure", dtDuplicaterecipe(0)("drain2_back_pressure")},
+                    {"drain2_time", dtDuplicaterecipe(0)("drain2_time")},
+                    {"drain3_circuit", dtDuplicaterecipe(0)("drain3_circuit")},
+                    {"drain3_back_pressure", dtDuplicaterecipe(0)("drain3_back_pressure")},
+                    {"drain3_time", dtDuplicaterecipe(0)("drain3_time")}
+                }
                 If SQL.InsertRecord("RecipeTable", recipeparameter) = 1 Then
                     RecipeMessage(47)
 
@@ -3548,11 +3577,11 @@ Public Class FormRecipeManagement
 
         End If
         If Oncontinue = True Then
-            Dim dtfiltertype As DataTable = SQL.ReadRecords($"SELECT Filtertype.id, FilterType.filter_type FROM PartTable INNER JOIN FilterType ON PartTable.filter_type_id=FilterType.id AND PartTable.part_id='{duplicaterecipe(2)}'")
+            Dim dtfiltertype As DataTable = SQL.ReadRecords($"SELECT Filtertype.id, FilterType.filter_type FROM PartTable INNER JOIN FilterType ON PartTable.filter_type_id=FilterType.id AND PartTable.part_id='{dtDuplicaterecipe(0)("part_id")}'")
             If dtfiltertype.Rows.Count > 0 Then
                 cmbx_RcpEditFilterType.Text = dtfiltertype.Rows(0).Item("filter_type")
-                cmbx_RcpEditPartID.Text = duplicaterecipe(2)
-                cmbx_RcpEditRecipeID.Text = duplicaterecipe(1)
+                cmbx_RcpEditPartID.Text = dtDuplicaterecipe(0)("part_id")
+                cmbx_RcpEditRecipeID.Text = dtDuplicaterecipe(0)("recipe_id")
             Else
                 RecipeMessage(51)
                 Oncontinue = False
