@@ -1352,7 +1352,7 @@ Module ModuleOmron
 
 
 
-            If FINSinput(21) = 300 Or FINSinput(21) = 320 Or FINSinput(21) = 350 Or FINSinput(21) = 370 Or FINSinput(21) = 600 Or FINSinput(21) = 620 Or FINSinput(21) = 650 Or FINSinput(21) = 670 Or FINSinput(21) = 800 Or FINSinput(21) = 820 Or FINSinput(21) = 850 Or FINSinput(21) = 870 Or FINSinput(21) = 1000 Or FINSinput(21) = 1020 Or FINSinput(21) = 1050 Or FINSinput(21) = 1070 Or FINSinput(21) = 1160 Or FINSinput(21) = 1360 Or FINSinput(21) = 1560 Or FINSinput(21) = 1700 Or FINSinput(21) = 1730 Then
+            If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(21) = 1700 Or FINSinput(21) = 1730 Then
                 CalrecordValue = True
             Else
                 CalrecordValue = False
@@ -1420,7 +1420,7 @@ Module ModuleOmron
                 MainMessage(Main_MessageNo)
             End If
 
-            If FINSinput(20) = 300 Or FINSinput(20) = 320 Or FINSinput(20) = 350 Or FINSinput(20) = 370 Or FINSinput(20) = 600 Or FINSinput(20) = 620 Or FINSinput(20) = 650 Or FINSinput(20) = 670 Or FINSinput(20) = 800 Or FINSinput(20) = 820 Or FINSinput(20) = 850 Or FINSinput(20) = 870 Or FINSinput(20) = 1000 Or FINSinput(20) = 1020 Or FINSinput(20) = 1050 Or FINSinput(20) = 1070 Or FINSinput(20) = 1160 Or FINSinput(20) = 1360 Or FINSinput(20) = 1560 Or FINSinput(20) = 1700 Then
+            If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(20) = 1700 Then
                 MainrecordValue = True
             Else
                 MainrecordValue = False

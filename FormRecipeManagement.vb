@@ -123,12 +123,12 @@ Public Class FormRecipeManagement
     'Declare Recipe Parameter Min Limit Variables
     Private min_d_vertol As Decimal = PublicVariables.Limit_Min_d_vertol
 
-    Private min_i_prepfilltime As Integer = 0
-    Private min_i_prepbleedtime As Integer = 0
-    Private min_d_prepflow As Decimal = 0
-    Private min_d_preppressure As Decimal = 0
-    Private min_d_preppressuredrop As Decimal = 0
-    Private min_i_preppressuredroptime As Integer = 0
+    Private min_i_prepfilltime As Integer = PublicVariables.Limit_Min_i_prepfilltime
+    Private min_i_prepbleedtime As Integer = PublicVariables.Limit_Min_i_prepbleedtime
+    Private min_d_prepflow As Decimal = PublicVariables.Limit_Min_d_prepflow
+    Private min_d_preppressure As Decimal = PublicVariables.Limit_Min_d_preppressure
+    Private min_d_preppressuredrop As Decimal = PublicVariables.Limit_Min_d_preppressuredrop
+    Private min_i_preppressuredroptime As Integer = PublicVariables.Limit_Min_i_preppressuredroptime
 
     'Private min_i_flush1filltime As Integer = PublicVariables.Limit_Min_i_flush1filltime
     'Private min_i_flush1bleedtime As Integer = PublicVariables.Limit_Min_i_flush1bleedtime
@@ -177,12 +177,12 @@ Public Class FormRecipeManagement
     'Declare Recipe Parameter Max Limit Variables
     Private max_d_vertol As Decimal = PublicVariables.Limit_Max_d_vertol
 
-    Private max_i_prepfilltime As Integer = 1000
-    Private max_i_prepbleedtime As Integer = 1000
-    Private max_d_prepflow As Decimal = 1000
-    Private max_d_preppressure As Decimal = 1000
-    Private max_d_preppressuredrop As Decimal = 1000
-    Private max_i_preppressuredroptime As Integer = 1000
+    Private max_i_prepfilltime As Integer = PublicVariables.Limit_Max_i_prepfilltime
+    Private max_i_prepbleedtime As Integer = PublicVariables.Limit_Max_i_prepbleedtime
+    Private max_d_prepflow As Decimal = PublicVariables.Limit_Max_d_prepflow
+    Private max_d_preppressure As Decimal = PublicVariables.Limit_Max_d_preppressure
+    Private max_d_preppressuredrop As Decimal = PublicVariables.Limit_Max_d_preppressuredrop
+    Private max_i_preppressuredroptime As Integer = PublicVariables.Limit_Max_i_preppressuredroptime
 
 
     'Private max_i_flush1filltime As Integer = PublicVariables.Limit_Max_i_flush1filltime
@@ -1527,47 +1527,47 @@ Public Class FormRecipeManagement
         End If
 
 
-        'If txtonfocus Is txtbx_RcpCreatePrepFill Then
-        '    focustooltip.SetToolTip(txtbx_RcpCreatePrepFill, $"Enter Value between {0} to {0}")
-        'End If
-        'If txtonfocus Is txtbx_RcpEditPrepFill Then
-        '    focustooltip.SetToolTip(txtbx_RcpEditPrepFill, $"Enter Value between {0} to {0}")
-        'End If
+        If txtonfocus Is txtbx_RcpCreatePrepFill Then
+            focustooltip.SetToolTip(txtbx_RcpCreatePrepFill, $"Enter Value between {min_i_prepfilltime} to {max_i_prepfilltime}")
+        End If
+        If txtonfocus Is txtbx_RcpEditPrepFill Then
+            focustooltip.SetToolTip(txtbx_RcpEditPrepFill, $"Enter Value between {min_i_prepfilltime} to {max_i_prepfilltime}")
+        End If
 
-        'If txtonfocus Is txtbx_RcpCreatePrepBleed Then
-        '    focustooltip.SetToolTip(txtbx_RcpCreatePrepBleed, $"Enter Value between {0} to {0}")
-        'End If
-        'If txtonfocus Is txtbx_RcpEditPrepBleed Then
-        '    focustooltip.SetToolTip(txtbx_RcpEditPrepBleed, $"Enter Value between {0} to {0}")
-        'End If
+        If txtonfocus Is txtbx_RcpCreatePrepBleed Then
+            focustooltip.SetToolTip(txtbx_RcpCreatePrepBleed, $"Enter Value between {min_i_prepbleedtime} to {max_i_prepbleedtime}")
+        End If
+        If txtonfocus Is txtbx_RcpEditPrepBleed Then
+            focustooltip.SetToolTip(txtbx_RcpEditPrepBleed, $"Enter Value between {min_i_prepbleedtime} to {max_i_prepbleedtime}")
+        End If
 
-        'If txtonfocus Is txtbx_RcpCreatePrepFlow Then
-        '    focustooltip.SetToolTip(txtbx_RcpCreatePrepFlow, $"Enter Value between {0} to {0}")
-        'End If
-        'If txtonfocus Is txtbx_RcpEditPrepFlow Then
-        '    focustooltip.SetToolTip(txtbx_RcpEditPrepFlow, $"Enter Value between {0} to {0}")
-        'End If
+        If txtonfocus Is txtbx_RcpCreatePrepFlow Then
+            focustooltip.SetToolTip(txtbx_RcpCreatePrepFlow, $"Enter Value between {min_d_prepflow} to {max_d_prepflow}")
+        End If
+        If txtonfocus Is txtbx_RcpEditPrepFlow Then
+            focustooltip.SetToolTip(txtbx_RcpEditPrepFlow, $"Enter Value between {min_d_prepflow} to {max_d_prepflow}")
+        End If
 
-        'If txtonfocus Is txtbx_RcpCreatePrepPressure Then
-        '    focustooltip.SetToolTip(txtbx_RcpCreatePrepPressure, $"Enter Value between {0} to {0}")
-        'End If
-        'If txtonfocus Is txtbx_RcpEditPrepPressure Then
-        '    focustooltip.SetToolTip(txtbx_RcpEditPrepPressure, $"Enter Value between {0} to {0}")
-        'End If
+        If txtonfocus Is txtbx_RcpCreatePrepPressure Then
+            focustooltip.SetToolTip(txtbx_RcpCreatePrepPressure, $"Enter Value between {min_d_preppressure} to {max_d_preppressure}")
+        End If
+        If txtonfocus Is txtbx_RcpEditPrepPressure Then
+            focustooltip.SetToolTip(txtbx_RcpEditPrepPressure, $"Enter Value between {min_d_preppressure} to {max_d_preppressure}")
+        End If
 
-        'If txtonfocus Is txtbx_RcpCreatePrepPressureDrop Then
-        '    focustooltip.SetToolTip(txtbx_RcpCreatePrepPressureDrop, $"Enter Value between {0} to {0}")
-        'End If
-        'If txtonfocus Is txtbx_RcpEditPrepPressureDrop Then
-        '    focustooltip.SetToolTip(txtbx_RcpEditPrepPressureDrop, $"Enter Value between {0} to {0}")
-        'End If
+        If txtonfocus Is txtbx_RcpCreatePrepPressureDrop Then
+            focustooltip.SetToolTip(txtbx_RcpCreatePrepPressureDrop, $"Enter Value between {min_d_preppressuredrop} to {max_d_preppressuredrop}")
+        End If
+        If txtonfocus Is txtbx_RcpEditPrepPressureDrop Then
+            focustooltip.SetToolTip(txtbx_RcpEditPrepPressureDrop, $"Enter Value between {min_d_preppressuredrop} to {max_d_preppressuredrop}")
+        End If
 
-        'If txtonfocus Is txtbx_RcpCreatePrepPressureDropTime Then
-        '    focustooltip.SetToolTip(txtbx_RcpCreatePrepPressureDropTime, $"Enter Value between {0} to {0}")
-        'End If
-        'If txtonfocus Is txtbx_RcpEditPrepPressureDropTime Then
-        '    focustooltip.SetToolTip(txtbx_RcpEditPrepPressureDropTime, $"Enter Value between {0} to {0}")
-        'End If
+        If txtonfocus Is txtbx_RcpCreatePrepPressureDropTime Then
+            focustooltip.SetToolTip(txtbx_RcpCreatePrepPressureDropTime, $"Enter Value between {min_i_preppressuredroptime} to {max_i_preppressuredroptime}")
+        End If
+        If txtonfocus Is txtbx_RcpEditPrepPressureDropTime Then
+            focustooltip.SetToolTip(txtbx_RcpEditPrepPressureDropTime, $"Enter Value between {min_i_preppressuredroptime} to {max_i_preppressuredroptime}")
+        End If
 
 
         'If txtonfocus Is txtbx_RcpCreateFlush1Fill Then
@@ -6357,6 +6357,14 @@ Public Class FormRecipeManagement
             .Columns("last_modified_time").HeaderCell.Value = "Last Mod. Time"
             .Columns("user_created").HeaderCell.Value = "Created by"
             .Columns("Verification_tolerance").HeaderCell.Value = "Verification Tolerance +/-(kPa)"
+
+            .Columns("prep_fill_time").HeaderCell.Value = "Prep. Fill Time (s)"
+            .Columns("prep_bleed_time").HeaderCell.Value = "Prep. Bleed Time (s)"
+            .Columns("prep_flowrate").HeaderCell.Value = "Prep. Flowrate (l/min)"
+            .Columns("prep_back_pressure").HeaderCell.Value = "Prep. Pressure (kPa)"
+            .Columns("prep_pressure_drop").HeaderCell.Value = "Prep. Pressure Drop (kPa)"
+            .Columns("prep_pressure_drop_time").HeaderCell.Value = "Prep. Pressure Drop Time (s)"
+
             .Columns("firstflush_circuit").HeaderCell.Value = "Flush-1 Circuit"
             '.Columns("firstflush_fill_time").HeaderCell.Value = "Flush-1 Fill Time (s)"
             '.Columns("firstflush_bleed_time").HeaderCell.Value = "Flush-1 Bleed Time (s)"
@@ -6406,6 +6414,14 @@ Public Class FormRecipeManagement
             .Columns("last_modified_time").Width = 140
             .Columns("user_created").Width = 100
             .Columns("Verification_tolerance").Width = 80
+
+            .Columns("prep_fill_time").Width = 60
+            .Columns("prep_bleed_time").Width = 60
+            .Columns("prep_flowrate").Width = 60
+            .Columns("prep_back_pressure").Width = 60
+            .Columns("prep_pressure_drop").Width = 60
+            .Columns("prep_pressure_drop_time").Width = 60
+
             .Columns("firstflush_circuit").Width = 70
             '.Columns("firstflush_fill_time").Width = 60
             '.Columns("firstflush_bleed_time").Width = 60
@@ -6456,6 +6472,14 @@ Public Class FormRecipeManagement
             .Columns("last_modified_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("user_created").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("Verification_tolerance").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+            .Columns("prep_fill_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("prep_bleed_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("prep_flowrate").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("prep_back_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("prep_pressure_drop").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("prep_pressure_drop_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
             .Columns("firstflush_circuit").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             '.Columns("firstflush_fill_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             '.Columns("firstflush_bleed_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -6505,6 +6529,14 @@ Public Class FormRecipeManagement
             .Columns("last_modified_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("user_created").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("Verification_tolerance").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+
+            .Columns("prep_fill_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            .Columns("prep_bleed_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            .Columns("prep_flowrate").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            .Columns("prep_back_pressure").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            .Columns("prep_pressure_drop").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            .Columns("prep_pressure_drop_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+
             .Columns("firstflush_circuit").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             '.Columns("firstflush_fill_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             '.Columns("firstflush_bleed_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
@@ -6550,52 +6582,63 @@ Public Class FormRecipeManagement
 
             'Order the column as per requirement
             .Columns("recipe_id").DisplayIndex = 0
-            .Columns("recipe_rev").DisplayIndex = 0 + 1
-            .Columns("part_id").DisplayIndex = 1 + 1
-            .Columns("last_modified_by").DisplayIndex = 5 + 1
-            .Columns("last_modified_time").DisplayIndex = 6 + 1
-            .Columns("user_created").DisplayIndex = 7 + 1
-            .Columns("Verification_tolerance").DisplayIndex = 8 + 1
-            .Columns("firstflush_circuit").DisplayIndex = 9 + 1
-            '.Columns("firstflush_fill_time").DisplayIndex = 10 + 1
-            '.Columns("firstflush_bleed_time").DisplayIndex = 11 + 1
-            .Columns("firstflush_flowrate").DisplayIndex = 12 + 1
-            .Columns("firstflush_flow_tolerance").DisplayIndex = 13 + 1
-            .Columns("firstflush_back_pressure").DisplayIndex = 14 + 1
-            .Columns("firstflush_stabilize_time").DisplayIndex = 15 + 1
-            .Columns("firstflush_time").DisplayIndex = 16 + 1
-            .Columns("firstdp_circuit").DisplayIndex = 17 + 1
-            '.Columns("dp_fill_time").DisplayIndex = 18 + 1
-            '.Columns("dp_bleed_time").DisplayIndex = 19 + 1
-            .Columns("dp_flowrate").DisplayIndex = 20 + 1
-            .Columns("dp_flow_tolerance").DisplayIndex = 21 + 1
-            .Columns("dp_back_pressure").DisplayIndex = 22 + 1
-            .Columns("dp_stabilize_time").DisplayIndex = 23 + 1
-            .Columns("dp_test_time").DisplayIndex = 24 + 1
-            .Columns("dp_lowerlimit").DisplayIndex = 25 + 1
-            .Columns("dp_upperlimit").DisplayIndex = 26 + 1
-            .Columns("dp_testpoints").DisplayIndex = 27 + 1
-            .Columns("seconddp_circuit").DisplayIndex = 28 + 1
-            .Columns("secondflush_circuit").DisplayIndex = 29 + 1
-            '.Columns("secondflush_fill_time").DisplayIndex = 30 + 1
-            '.Columns("secondflush_bleed_time").DisplayIndex = 31 + 1
-            .Columns("secondflush_flowrate").DisplayIndex = 32 + 1
-            .Columns("secondflush_flow_tolerance").DisplayIndex = 33 + 1
-            .Columns("secondflush_back_pressure").DisplayIndex = 34 + 1
-            .Columns("secondflush_stabilize_time").DisplayIndex = 35 + 1
-            .Columns("secondflush_time").DisplayIndex = 36 + 1
-            .Columns("drain1_circuit").DisplayIndex = 37 + 1
-            .Columns("drain1_back_pressure").DisplayIndex = 38 + 1
-            .Columns("drain1_time").DisplayIndex = 39 + 1
-            .Columns("drain2_circuit").DisplayIndex = 40 + 1
-            .Columns("drain2_back_pressure").DisplayIndex = 41 + 1
-            .Columns("drain2_time").DisplayIndex = 42 + 1
-            .Columns("drain3_circuit").DisplayIndex = 43 + 1
-            .Columns("drain3_back_pressure").DisplayIndex = 44 + 1
-            .Columns("drain3_time").DisplayIndex = 45 + 1
-            .Columns("filter_type").DisplayIndex = 2 + 1
-            .Columns("jig_description").DisplayIndex = 3 + 1
-            .Columns("recipe_type").DisplayIndex = 4 + 1
+            .Columns("recipe_rev").DisplayIndex = 1
+            .Columns("part_id").DisplayIndex = 2
+
+            .Columns("filter_type").DisplayIndex = 3
+            .Columns("jig_description").DisplayIndex = 4
+            .Columns("recipe_type").DisplayIndex = 5
+
+            .Columns("last_modified_by").DisplayIndex = 6
+            .Columns("last_modified_time").DisplayIndex = 7
+            .Columns("user_created").DisplayIndex = 8
+            .Columns("Verification_tolerance").DisplayIndex = 9
+
+            .Columns("prep_fill_time").DisplayIndex = 10
+            .Columns("prep_bleed_time").DisplayIndex = 11
+            .Columns("prep_flowrate").DisplayIndex = 12
+            .Columns("prep_back_pressure").DisplayIndex = 13
+            .Columns("prep_pressure_drop").DisplayIndex = 14
+            .Columns("prep_pressure_drop_time").DisplayIndex = 15
+
+            .Columns("firstflush_circuit").DisplayIndex = 10 + 6
+            '.Columns("firstflush_fill_time").DisplayIndex = 11 + 6
+            '.Columns("firstflush_bleed_time").DisplayIndex = 12 + 6
+            .Columns("firstflush_flowrate").DisplayIndex = 13 + 6
+            .Columns("firstflush_flow_tolerance").DisplayIndex = 14 + 6
+            .Columns("firstflush_back_pressure").DisplayIndex = 15 + 6
+            .Columns("firstflush_stabilize_time").DisplayIndex = 16 + 6
+            .Columns("firstflush_time").DisplayIndex = 17 + 6
+            .Columns("firstdp_circuit").DisplayIndex = 18 + 6
+            '.Columns("dp_fill_time").DisplayIndex = 19 + 6
+            '.Columns("dp_bleed_time").DisplayIndex = 20 + 6
+            .Columns("dp_flowrate").DisplayIndex = 21 + 6
+            .Columns("dp_flow_tolerance").DisplayIndex = 22 + 6
+            .Columns("dp_back_pressure").DisplayIndex = 23 + 6
+            .Columns("dp_stabilize_time").DisplayIndex = 24 + 6
+            .Columns("dp_test_time").DisplayIndex = 25 + 6
+            .Columns("dp_lowerlimit").DisplayIndex = 26 + 6
+            .Columns("dp_upperlimit").DisplayIndex = 27 + 6
+            .Columns("dp_testpoints").DisplayIndex = 28 + 6
+            .Columns("seconddp_circuit").DisplayIndex = 29 + 6
+            .Columns("secondflush_circuit").DisplayIndex = 31 + 6
+            '.Columns("secondflush_fill_time").DisplayIndex = 31 + 6
+            '.Columns("secondflush_bleed_time").DisplayIndex = 32 + 6
+            .Columns("secondflush_flowrate").DisplayIndex = 33 + 6
+            .Columns("secondflush_flow_tolerance").DisplayIndex = 34 + 6
+            .Columns("secondflush_back_pressure").DisplayIndex = 35 + 6
+            .Columns("secondflush_stabilize_time").DisplayIndex = 36 + 6
+            .Columns("secondflush_time").DisplayIndex = 37 + 6
+            .Columns("drain1_circuit").DisplayIndex = 38 + 6
+            .Columns("drain1_back_pressure").DisplayIndex = 39 + 6
+            .Columns("drain1_time").DisplayIndex = 40 + 6
+            .Columns("drain2_circuit").DisplayIndex = 41 + 6
+            .Columns("drain2_back_pressure").DisplayIndex = 42 + 6
+            .Columns("drain2_time").DisplayIndex = 43 + 6
+            .Columns("drain3_circuit").DisplayIndex = 44 + 6
+            .Columns("drain3_back_pressure").DisplayIndex = 45 + 6
+            .Columns("drain3_time").DisplayIndex = 46 + 6
+
 
 
             ''Wrap content
