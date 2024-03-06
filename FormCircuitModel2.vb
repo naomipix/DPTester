@@ -842,5 +842,31 @@
         CircuitShown(3) = False
     End Sub
 
+    Private Sub lblValveMouseHover_MouseEnter(sender As Object, e As EventArgs) Handles lbl_Valve1.MouseEnter, lbl_Valve2.MouseEnter, lbl_Valve3.MouseEnter, lbl_Valve4.MouseEnter, lbl_Valve5.MouseEnter, lbl_Valve6.MouseEnter, lbl_Valve7.MouseEnter, lbl_Valve8.MouseEnter, lbl_Valve9.MouseEnter, lbl_Valve10.MouseEnter, lbl_Valve11.MouseEnter, lbl_Valve12.MouseEnter, lbl_Valve13.MouseEnter, lbl_Valve14.MouseEnter, lbl_Valve15.MouseEnter, lbl_Valve16.MouseEnter, lbl_Valve17.MouseEnter, lbl_Valve18.MouseEnter, lbl_Valve19.MouseEnter
+        Dim lblHovered As Label = DirectCast(sender, Label)
+        lblHovered.Cursor = Cursors.Help
 
+        'tooltip_ValveNumber.Show($"Valve {lblHovered.Text}", lblHovered)
+        'tooltip_ValveNumber.ToolTipTitle = "asdasd"
+
+        With lbl_ValveHover
+            ' Set Text
+            .Text = $"Valve {lblHovered.Text}"
+
+            ' Set Position
+            .Location = New Point(lblHovered.Location.X - 18 - 3, lblHovered.Location.Y - 24 - 6)
+
+            ' Show Label 
+            .Visible = True
+        End With
+    End Sub
+
+    Private Sub lblValveMouseHover_MouseLeave(sender As Object, e As EventArgs) Handles lbl_Valve1.MouseLeave, lbl_Valve2.MouseLeave, lbl_Valve3.MouseLeave, lbl_Valve4.MouseLeave, lbl_Valve5.MouseLeave, lbl_Valve6.MouseLeave, lbl_Valve7.MouseLeave, lbl_Valve8.MouseLeave, lbl_Valve9.MouseLeave, lbl_Valve10.MouseLeave, lbl_Valve11.MouseLeave, lbl_Valve12.MouseLeave, lbl_Valve13.MouseLeave, lbl_Valve14.MouseLeave, lbl_Valve15.MouseLeave, lbl_Valve16.MouseLeave, lbl_Valve17.MouseLeave, lbl_Valve18.MouseLeave, lbl_Valve19.MouseLeave
+        Dim lblUnhovered As Label = DirectCast(sender, Label)
+
+        'tooltip_ValveNumber.Hide(Me)
+
+        ' Hide Label 
+        lbl_ValveHover.Visible = False
+    End Sub
 End Class

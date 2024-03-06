@@ -13,6 +13,7 @@ Imports PoohPlcLink
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 Imports LiveChartsCore.Defaults
 Imports LiveChartsCore.SkiaSharpView.WinForms
+Imports Microsoft.VisualBasic.ApplicationServices
 
 Module FormMainModule
     Public Workorder As String
@@ -1454,6 +1455,7 @@ Public Class FormMain
             ProductionDetail.timestamp, 
             ProductionDetail.serial_attempt, 
             LotUsage.recipe_id, 
+            LotUsage.recipe_rev, 
             LotUsage.cal_diff_pressure, 
             ProductionDetail.flowrate, 
             ProductionDetail.diff_pressure, 
@@ -1586,6 +1588,7 @@ Public Class FormMain
             .Columns("timestamp").HeaderCell.Value = "Timestamp"
             .Columns("serial_attempt").HeaderCell.Value = "Number of Attempt"
             .Columns("recipe_id").HeaderCell.Value = "Recipe ID"
+            .Columns("recipe_rev").HeaderCell.Value = "Recipe Rev."
             .Columns("cal_diff_pressure").HeaderCell.Value = "Calibration Offset (kPa)"
             .Columns("flowrate").HeaderCell.Value = "Flowrate (l/min)"
             .Columns("diff_pressure").HeaderCell.Value = "Calculated DP (kPa)"
@@ -1610,6 +1613,7 @@ Public Class FormMain
             .Columns("serial_number").Width = 80
             .Columns("serial_attempt").Width = 90
             .Columns("recipe_id").Width = 150
+            .Columns("recipe_rev").Width = 90
             .Columns("cal_diff_pressure").Width = 90
             .Columns("flowrate").Width = 90
             .Columns("diff_pressure").Width = 90
@@ -2580,15 +2584,24 @@ Public Class FormMain
             ' Bind To DataGridView DataSource
             dgv_AlarmHistory.DataSource = dvAlarmTable.ToTable
         Else
-            ' Bind To DataGridView DataSource
-            dgv_AlarmHistory.DataSource = dtAlarmTable
-
             ' Set dtStart [DateTimePicker] To Earliest Record
-            If dtAlarmTable.Rows.Count > 0 Then
-                dtpicker_AlarmStartDate.Value = dtAlarmTable(dtAlarmTable.Rows.Count - 1)("trigger_time")
-            Else
-                dtpicker_AlarmStartDate.Value = DateTime.Now
-            End If
+            'If dtAlarmTable.Rows.Count > 0 Then
+            '    dtpicker_AlarmStartDate.Value = dtAlarmTable(dtAlarmTable.Rows.Count - 1)("trigger_time")
+            'Else
+            '    dtpicker_AlarmStartDate.Value = DateTime.Now
+            'End If
+
+            ' Set dtStart [DateTimePicker] To Past 1 Day
+            dtpicker_AlarmStartDate.Value = DateTime.Now.AddDays(-1)
+
+            ' Convert To DataView Table
+            Dim dvAlarmTable As DataView = dtAlarmTable.DefaultView
+
+            ' Apply Filter To DataView Table
+            dvAlarmTable.RowFilter = $"Convert(trigger_time, 'System.DateTime')>=#{dtpicker_AlarmStartDate.Value.ToString("MM/dd/yyyy 00:00:00")}#"
+
+            ' Bind To DataGridView DataSource
+            dgv_AlarmHistory.DataSource = dvAlarmTable.ToTable
         End If
 
         With dgv_AlarmHistory
@@ -3123,38 +3136,62 @@ Public Class FormMain
                         LastLotCalOffset = dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")
                         LastLotCalResult = dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")
 
-                        If MsgBox($"Do you want continue with last calibration? Last Calibrated: {LastLotCalTime}, with Calibration Offset of {LastLotCalOffset} and Calibration Result as {LastLotCalResult}", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
-                            Dim CalDP As Decimal = 0
+                        Dim RecipeCheckOK As Boolean = False
+                        If True Then
+                            Dim LastLotRecipeID As String = dtlotusage(dtlotusage.Rows.Count - 1)("recipe_id")
+                            Dim LastLotRecipeRev As Integer = dtlotusage(dtlotusage.Rows.Count - 1)("recipe_rev")
 
-                            If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")) Then
-                                CalDP = dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")
+                            Dim dtRecipeTable As DataTable = SQL.ReadRecords($"
+                                SELECT * FROM RecipeTable t1
+                                WHERE recipe_rev = (
+                                    SELECT MAX(recipe_rev)
+                                    FROM RecipeTable t2
+                                    WHERE t1.recipe_id = t2.recipe_id
+                                )
+                                AND recipe_id='{LastLotRecipeID}'
+                            ")
 
-                                ' Set Recipe
-                                If True Then
-                                    ' Get Recipe ID
-                                    Dim LotRecipeID As String = dtlotusage(dtlotusage.Rows.Count - 1)("recipe_id")
+                            If dtRecipeTable.Rows.Count > 0 Then
+                                If CInt(dtRecipeTable(0)("recipe_rev")) > LastLotRecipeRev Then
+                                    RecipeCheckOK = True
+                                End If
+                            End If
+                        End If
 
-                                    ' Get Recipe Type
-                                    Dim dtRecipe As DataTable = SQL.ReadRecords($"SELECT RecipeType.recipe_type FROM RecipeTable LEFT JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id WHERE RecipeTable.recipe_id='{LotRecipeID}'")
-                                    Dim LotRecipeType As String = ""
-                                    If dtRecipe.Rows.Count > 0 Then
-                                        LotRecipeType = dtRecipe(0)("recipe_type")
-                                    End If
+                        If RecipeCheckOK Then
+                            If MsgBox($"Do you want continue with last calibration? Last Calibrated: {LastLotCalTime}, with Calibration Offset of {LastLotCalOffset} and Calibration Result as {LastLotCalResult}", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                                Dim CalDP As Decimal = 0
 
-                                    ' Find & Select Recipe Type
-                                    If cmbx_RecipeType.Items.Count > 1 Then
-                                        cmbx_RecipeType.SelectedIndex = cmbx_RecipeType.FindStringExact(LotRecipeType)
-                                    End If
+                                If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")) Then
+                                    CalDP = dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")
 
-                                    ' Find & Select Recipe ID
-                                    If cmbx_RecipeID.Items.Count > 1 Then
-                                        cmbx_RecipeID.SelectedIndex = cmbx_RecipeID.FindStringExact(LotRecipeID)
-                                    End If
-
-                                    ' Update Lot Usage Table w/Calibration Details
+                                    ' Set Recipe
                                     If True Then
-                                        Dim Updateparameter As New Dictionary(Of String, Object) From {
+                                        ' Get Recipe ID
+                                        Dim LotRecipeID As String = dtlotusage(dtlotusage.Rows.Count - 1)("recipe_id")
+
+                                        ' Get Recipe Type
+                                        Dim dtRecipe As DataTable = SQL.ReadRecords($"SELECT RecipeType.recipe_type FROM RecipeTable LEFT JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id WHERE RecipeTable.recipe_id='{LotRecipeID}'")
+                                        Dim LotRecipeType As String = ""
+                                        If dtRecipe.Rows.Count > 0 Then
+                                            LotRecipeType = dtRecipe(0)("recipe_type")
+                                        End If
+
+                                        ' Find & Select Recipe Type
+                                        If cmbx_RecipeType.Items.Count > 1 Then
+                                            cmbx_RecipeType.SelectedIndex = cmbx_RecipeType.FindStringExact(LotRecipeType)
+                                        End If
+
+                                        ' Find & Select Recipe ID
+                                        If cmbx_RecipeID.Items.Count > 1 Then
+                                            cmbx_RecipeID.SelectedIndex = cmbx_RecipeID.FindStringExact(LotRecipeID)
+                                        End If
+
+                                        ' Update Lot Usage Table w/Calibration Details
+                                        If True Then
+                                            Dim Updateparameter As New Dictionary(Of String, Object) From {
                                             {"recipe_id", dtlotusage(dtlotusage.Rows.Count - 1)("recipe_id")},
+                                            {"recipe_rev", dtlotusage(dtlotusage.Rows.Count - 1)("recipe_rev")},
                                             {"calibration_time", dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")},
                                             {"cal_inlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_inlet_pressure")},
                                             {"cal_outlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_outlet_pressure")},
@@ -3204,30 +3241,31 @@ Public Class FormMain
                                             {"drain3_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("drain3_back_pressure")},
                                             {"drain3_time", dtlotusage(dtlotusage.Rows.Count - 1)("drain3_time")}
                                         }
-                                        Dim Condition As String = $"lot_id='{LotID}' AND lot_attempt='{LotAttempt}'"
+                                            Dim Condition As String = $"lot_id='{LotID}' AND lot_attempt='{LotAttempt}'"
 
-                                        If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
-                                            ' Apply Recipe
-                                            RecipeSelectionConfirmClicked(True)
+                                            If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
+                                                ' Apply Recipe
+                                                RecipeSelectionConfirmClicked(True)
 
-                                            ' Set DP
-                                            lbl_BlankDP.Text = CalDP
-                                            RetainedMemory.Update(31, "CalibrationOffset", CalDP)
+                                                ' Set DP
+                                                lbl_BlankDP.Text = CalDP
+                                                RetainedMemory.Update(31, "CalibrationOffset", CalDP)
 
-                                            ' Set Pass
-                                            lbl_CalibrationStatus.Text = dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")
-                                            lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
-                                            lbl_CalibrationStatus.ForeColor = PublicVariables.StatusGreenT
-                                            RetainedMemory.Update(30, "CalibrationStatus", lbl_CalibrationStatus.Text)
+                                                ' Set Pass
+                                                lbl_CalibrationStatus.Text = dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")
+                                                lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
+                                                lbl_CalibrationStatus.ForeColor = PublicVariables.StatusGreenT
+                                                RetainedMemory.Update(30, "CalibrationStatus", lbl_CalibrationStatus.Text)
 
-                                            ' Set Date
-                                            lbl_CalibrationDate.Text = LastLotCalTime
-                                            RetainedMemory.Update(32, "CalibrationDate", LastLotCalTime)
+                                                ' Set Date
+                                                lbl_CalibrationDate.Text = LastLotCalTime
+                                                RetainedMemory.Update(32, "CalibrationDate", LastLotCalTime)
 
-                                            ' Set Last Calibrated
-                                            RetainedMemory.Update(33, "LastCalibrateLotID", LotID)
-                                        Else
-                                            MsgBox($"Query to Update Calibration Result Failed")
+                                                ' Set Last Calibrated
+                                                RetainedMemory.Update(33, "LastCalibrateLotID", LotID)
+                                            Else
+                                                MsgBox($"Query to Update Calibration Result Failed")
+                                            End If
                                         End If
                                     End If
                                 End If
@@ -3235,7 +3273,6 @@ Public Class FormMain
                         End If
                     End If
                 End If
-
             End If
         End If
     End Sub
@@ -3567,7 +3604,8 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
 
         dtresult = New DataTable()
         CreateTable("Production_Result")
-        dtrecipetable = SQL.ReadRecords($"Select * From RecipeTable WHERE recipe_id ='{cmbx_RecipeID.Text}'")
+        'dtrecipetable = SQL.ReadRecords($"Select * From RecipeTable WHERE recipe_id ='{cmbx_RecipeID.Text}'")
+        dtrecipetable = SQL.ReadRecords($"SELECT * FROM RecipeTable WHERE id='{DirectCast(cmbx_RecipeID.SelectedItem, KeyValuePair(Of String, String)).Key}'")
         dtserialrecord = SQL.ReadRecords($"SELECT * FROM ProductionDetail WHERE serial_uid='{SerialUid}' AND serial_attempt='{SerialAttempt}'")
 
         If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
@@ -4433,8 +4471,20 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         TypecomboSource.Add("0", "-Not Selected-")
 
         ' Get User Category Table
-        Dim dtRecipeTable As DataTable = SQL.ReadRecords($"SELECT   RecipeTable.id,RecipeTable.recipe_id, RecipeType.recipe_type,RecipeTable.part_id FROM RecipeTable
-                            INNER JOIN RecipeType ON RecipeTable.recipe_type_id= RecipeType.id AND part_id = '{txtbx_PartID.Text}'")
+        Dim dtRecipeTable As DataTable = SQL.ReadRecords($"
+            SELECT RecipeTable.id, 
+                RecipeTable.recipe_id, 
+                RecipeTable.recipe_rev, 
+                RecipeType.recipe_type, 
+                RecipeTable.part_id 
+            FROM RecipeTable
+            INNER JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id AND part_id='{txtbx_PartID.Text}' 
+            WHERE RecipeTable.recipe_rev = (
+                SELECT MAX(recipe_rev)
+                FROM RecipeTable t2
+                WHERE RecipeTable.recipe_id = t2.recipe_id
+            )
+        ")
         dtRecipeID = dtRecipeTable
         ' Insert Available Record Into Dictionary
         If dtRecipeTable.Rows.Count > 0 Then

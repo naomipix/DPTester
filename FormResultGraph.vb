@@ -804,25 +804,25 @@ Public Class FormResultGraph
             Dim Drain3Enabled As Boolean = False
 
             If True Then
-                If resultsummary(40 - 8) = "Enable" Then
+                If resultsummary(40 + 2) = "Enable" Then
                     Flush1Enabled = True
                 End If
-                If resultsummary(48 - 8) = "Enable" Then
+                If resultsummary(48 + 2) = "Enable" Then
                     DP1Enabled = True
                 End If
-                If resultsummary(59 - 8) = "Enable" Then
+                If resultsummary(59 + 2) = "Enable" Then
                     Flush2Enabled = True
                 End If
-                If resultsummary(60 - 8) = "Enable" Then
+                If resultsummary(60 + 2) = "Enable" Then
                     DP2Enabled = True
                 End If
-                If resultsummary(68 - 8) = "Enable" Then
+                If resultsummary(68 + 2) = "Enable" Then
                     Drain1Enabled = True
                 End If
-                If resultsummary(71 - 8) = "Enable" Then
+                If resultsummary(71 + 2) = "Enable" Then
                     Drain2Enabled = True
                 End If
-                If resultsummary(74 - 8) = "Enable" Then
+                If resultsummary(74 + 2) = "Enable" Then
                     Drain3Enabled = True
                 End If
             End If
@@ -849,24 +849,24 @@ Public Class FormResultGraph
             'Dim Drain2Time As Integer = CInt(resultsummary(73 - 8))
             'Dim Drain3Time As Integer = CInt(resultsummary(76 - 8))
 
-            Dim DPFillTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(49 - 8), DPFillTime), DPFillTime, 0)) 'CInt(resultsummary(49 - 8))
-            Dim DPBleedTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(50 - 8), DPBleedTime), DPBleedTime, 0)) 'CInt(resultsummary(50 - 8))
-            Dim DPStabilizeTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(54 - 8), DPStabilizeTime), DPStabilizeTime, 0)) 'CInt(resultsummary(54 - 8))
-            Dim DPTestTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(55 - 8), DPTestTime), DPTestTime, 0)) 'CInt(resultsummary(55 - 8))
+            Dim DPFillTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(49 + 2), DPFillTime), DPFillTime, 0)) 'CInt(resultsummary(49 - 8))
+            Dim DPBleedTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(50 + 2), DPBleedTime), DPBleedTime, 0)) 'CInt(resultsummary(50 - 8))
+            Dim DPStabilizeTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(54 + 2), DPStabilizeTime), DPStabilizeTime, 0)) 'CInt(resultsummary(54 - 8))
+            Dim DPTestTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(55 + 2), DPTestTime), DPTestTime, 0)) 'CInt(resultsummary(55 - 8))
 
-            Dim Flush1FillTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(41 - 8), Flush1FillTime), Flush1FillTime, 0)) 'CInt(resultsummary(41 - 8))
-            Dim Flush1BleedTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(42 - 8), Flush1BleedTime), Flush1BleedTime, 0)) 'CInt(resultsummary(42 - 8))
-            Dim Flush1StabilizeTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(46 - 8), Flush1StabilizeTime), Flush1StabilizeTime, 0)) 'CInt(resultsummary(46 - 8))
-            Dim Flush1TestTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(47 - 8), Flush1TestTime), Flush1TestTime, 0)) 'CInt(resultsummary(47 - 8))
+            Dim Flush1FillTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(41 + 2), Flush1FillTime), Flush1FillTime, 0)) 'CInt(resultsummary(41 - 8))
+            Dim Flush1BleedTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(42 + 2), Flush1BleedTime), Flush1BleedTime, 0)) 'CInt(resultsummary(42 - 8))
+            Dim Flush1StabilizeTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(46 + 2), Flush1StabilizeTime), Flush1StabilizeTime, 0)) 'CInt(resultsummary(46 - 8))
+            Dim Flush1TestTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(47 + 2), Flush1TestTime), Flush1TestTime, 0)) 'CInt(resultsummary(47 - 8))
 
-            Dim Flush2FillTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(61 - 8), Flush2FillTime), Flush2FillTime, 0)) 'CInt(resultsummary(61 - 8))
-            Dim Flush2BleedTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(62 - 8), Flush2BleedTime), Flush2BleedTime, 0)) 'CInt(resultsummary(62 - 8))
-            Dim Flush2StabilizeTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(66 - 8), Flush2StabilizeTime), Flush2StabilizeTime, 0)) 'CInt(resultsummary(66 - 8))
-            Dim Flush2TestTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(67 - 8), Flush2TestTime), Flush2TestTime, 0)) 'CInt(resultsummary(67 - 8))
+            Dim Flush2FillTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(61 + 2), Flush2FillTime), Flush2FillTime, 0)) 'CInt(resultsummary(61 - 8))
+            Dim Flush2BleedTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(62 + 2), Flush2BleedTime), Flush2BleedTime, 0)) 'CInt(resultsummary(62 - 8))
+            Dim Flush2StabilizeTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(66 + 2), Flush2StabilizeTime), Flush2StabilizeTime, 0)) 'CInt(resultsummary(66 - 8))
+            Dim Flush2TestTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(67 + 2), Flush2TestTime), Flush2TestTime, 0)) 'CInt(resultsummary(67 - 8))
 
-            Dim Drain1Time As Integer = CInt(IIf(Integer.TryParse(resultsummary(70 - 8), Drain1Time), Drain1Time, 0)) 'CInt(resultsummary(70 - 8))
-            Dim Drain2Time As Integer = CInt(IIf(Integer.TryParse(resultsummary(73 - 8), Drain2Time), Drain2Time, 0)) 'CInt(resultsummary(73 - 8))
-            Dim Drain3Time As Integer = CInt(IIf(Integer.TryParse(resultsummary(76 - 8), Drain3Time), Drain3Time, 0)) 'CInt(resultsummary(76 - 8))
+            Dim Drain1Time As Integer = CInt(IIf(Integer.TryParse(resultsummary(70 + 2), Drain1Time), Drain1Time, 0)) 'CInt(resultsummary(70 - 8))
+            Dim Drain2Time As Integer = CInt(IIf(Integer.TryParse(resultsummary(73 + 2), Drain2Time), Drain2Time, 0)) 'CInt(resultsummary(73 - 8))
+            Dim Drain3Time As Integer = CInt(IIf(Integer.TryParse(resultsummary(76 + 2), Drain3Time), Drain3Time, 0)) 'CInt(resultsummary(76 - 8))
 
             If True Then
                 If DP1Enabled And Flush1Enabled = False Then
@@ -1431,14 +1431,14 @@ Public Class FormResultGraph
         Dim Oncontinue As Boolean = True
         Dim resultsummary(90) As String
         Dim dt_Graphsummary As DataTable
-        'Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
-        '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
-        '            LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
-        '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
-
         Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
                     LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+                    LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
                     LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+
+        'Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+        '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+        '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
 
         If Oncontinue = True Then
             If dtproductiondetail.Rows.Count > 0 Then
@@ -1500,17 +1500,17 @@ Public Class FormResultGraph
             txtbx_GraphCalOffset.Text = resultsummary(25)
             txtbx_GraphRecipeID.Text = resultsummary(21)
 
-            txtbx_Graphflush1.Text = resultsummary(40 - 8).ToUpper
-            txtbx_GraphDPTest1.Text = resultsummary(48 - 8).ToUpper
-            txtbx_GraphDPTest2.Text = resultsummary(59 - 8).ToUpper
-            txtbx_Graphflush2.Text = resultsummary(60 - 8).ToUpper
-            txtbx_GraphDrain1.Text = resultsummary(68 - 8).ToUpper
-            txtbx_GraphDrain2.Text = resultsummary(71 - 8).ToUpper
-            txtbx_GraphDrain3.Text = resultsummary(74 - 8).ToUpper
+            txtbx_Graphflush1.Text = resultsummary(40 + 2).ToUpper
+            txtbx_GraphDPTest1.Text = resultsummary(48 + 2).ToUpper
+            txtbx_GraphDPTest2.Text = resultsummary(59 + 2).ToUpper
+            txtbx_Graphflush2.Text = resultsummary(60 + 2).ToUpper
+            txtbx_GraphDrain1.Text = resultsummary(68 + 2).ToUpper
+            txtbx_GraphDrain2.Text = resultsummary(71 + 2).ToUpper
+            txtbx_GraphDrain3.Text = resultsummary(74 + 2).ToUpper
 
-            txtbx_GraphWorkOrder.Text = resultsummary(77 - 7)
-            txtbx_GraphPartID.Text = resultsummary(78 - 7)
-            txtbx_GraphConfirmation.Text = resultsummary(79 - 7)
+            txtbx_GraphWorkOrder.Text = resultsummary(77 + 3)
+            txtbx_GraphPartID.Text = resultsummary(78 + 3)
+            txtbx_GraphConfirmation.Text = resultsummary(79 + 3)
             txtbx_GraphSerialUID.Text = resultsummary(1)
             txtbx_Graphattempt.Text = resultsummary(3)
         End If

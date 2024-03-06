@@ -20,6 +20,14 @@ Public Class FormResultSummary
         lbl_Username.Text = PublicVariables.LoginUserName
         lbl_Category.Text = PublicVariables.LoginUserCategoryName
 
+        ' DoubleBuffer DataGridView
+        Dim dgvArr() As DataGridView = {
+            dgv_Resultsummary
+        }
+        For Each dgv As DataGridView In dgvArr
+            DoubleBuffer.DoubleBuffered(dgv, True)
+        Next
+
         ' Initialize Defaults
         dgv_Resultsummary.DataSource = Nothing
         txtbx_ResultTimestamp.Text = Nothing
@@ -442,14 +450,14 @@ Public Class FormResultSummary
         Dim Oncontinue As Boolean = True
         Dim resultsummary(90) As String
         Dim dt_Resultsummary As DataTable
-        'Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
-        '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
-        '            LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
-        '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
-
         Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
                     LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+                    LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
                     LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+
+        'Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+        '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+        '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
 
         If Oncontinue = True Then
 
@@ -542,18 +550,18 @@ Public Class FormResultSummary
             txtbx_ResultCalOffset.Text = resultsummary(25)
             txtbx_ResultRecipeID.Text = resultsummary(21)
 
-            txtbx_Resultflush1.Text = resultsummary(40 - 8).ToUpper
-            txtbx_ResultDPTest1.Text = resultsummary(48 - 8).ToUpper
-            txtbx_ResultDPTest2.Text = resultsummary(59 - 8).ToUpper
-            txtbx_Resultflush2.Text = resultsummary(60 - 8).ToUpper
-            txtbx_ResultDrain1.Text = resultsummary(68 - 8).ToUpper
-            txtbx_ResultDrain2.Text = resultsummary(71 - 8).ToUpper
-            txtbx_ResultDrain3.Text = resultsummary(74 - 8).ToUpper
+            txtbx_Resultflush1.Text = resultsummary(40 + 2).ToUpper
+            txtbx_ResultDPTest1.Text = resultsummary(48 + 2).ToUpper
+            txtbx_ResultDPTest2.Text = resultsummary(59 + 2).ToUpper
+            txtbx_Resultflush2.Text = resultsummary(60 + 2).ToUpper
+            txtbx_ResultDrain1.Text = resultsummary(68 + 2).ToUpper
+            txtbx_ResultDrain2.Text = resultsummary(71 + 2).ToUpper
+            txtbx_ResultDrain3.Text = resultsummary(74 + 2).ToUpper
 
 
-            txtbx_ResultWorkOrder.Text = resultsummary(77 - 7)
-            txtbx_ResultPartID.Text = resultsummary(78 - 7)
-            txtbx_ResultConfirmation.Text = resultsummary(79 - 7)
+            txtbx_ResultWorkOrder.Text = resultsummary(77 + 3)
+            txtbx_ResultPartID.Text = resultsummary(78 + 3)
+            txtbx_ResultConfirmation.Text = resultsummary(79 + 3)
             txtbx_ResultSerialUID.Text = resultsummary(1)
             txtbx_Resultattempt.Text = resultsummary(3)
         End If
