@@ -448,12 +448,109 @@ Public Class FormResultSummary
 
     Private Sub LoadResult(lotid As String, serialnum As String, attempt As String)
         Dim Oncontinue As Boolean = True
-        Dim resultsummary(90) As String
+        'Dim resultsummary(90) As String
         Dim dt_Resultsummary As DataTable
-        Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
-                    LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
-                    LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
-                    LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+        'Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+        '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+        '            LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
+        '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+        Dim dtproductiondetail As DataTable = SQL.ReadRecords($"
+            SELECT 
+
+            ProductionDetail.id AS productiondetail_id, 
+            ProductionDetail.serial_uid AS productiondetail_serial_uid, 
+            ProductionDetail.serial_number AS productiondetail_serial_number, 
+            ProductionDetail.serial_attempt AS productiondetail_serial_attempt, 
+            ProductionDetail.lot_usage_id AS productiondetail_lot_usage_id, 
+            ProductionDetail.timestamp AS productiondetail_timestamp, 
+            ProductionDetail.temperature AS productiondetail_temperature, 
+            ProductionDetail.flowrate AS productiondetail_flowrate, 
+            ProductionDetail.inlet_pressure AS productiondetail_inlet_pressure, 
+            ProductionDetail.outlet_pressure AS productiondetail_outlet_pressure, 
+            ProductionDetail.viscosity AS productiondetail_viscosity, 
+            ProductionDetail.diff_pressure AS productiondetail_diff_pressure, 
+            ProductionDetail.cycle_time AS productiondetail_cycle_time, 
+            ProductionDetail.result AS productiondetail_result, 
+            ProductionDetail.back_pressure AS productiondetail_back_pressure, 
+
+            LotUsage.id AS lotusage_id, 
+            LotUsage.lot_id AS lotusage_lot_id, 
+            LotUsage.lot_attempt AS lotusage_lot_attempt, 
+            LotUsage.lot_start_time AS lotusage_lot_start_time, 
+            LotUsage.lot_end_time AS lotusage_lot_end_time, 
+            LotUsage.run_by AS lotusage_run_by, 
+            LotUsage.recipe_id AS lotusage_recipe_id, 
+            LotUsage.recipe_rev AS lotusage_recipe_rev, 
+            LotUsage.calibration_time AS lotusage_calibration_time, 
+            LotUsage.cal_inlet_pressure AS lotusage_cal_inlet_pressure, 
+            LotUsage.cal_outlet_pressure AS lotusage_cal_outlet_pressure, 
+            LotUsage.cal_diff_pressure AS lotusage_cal_diff_pressure, 
+            LotUsage.verify_inlet_pressure AS lotusage_verify_inlet_pressure, 
+            LotUsage.verify_outlet_pressure AS lotusage_verify_outlet_pressure, 
+            LotUsage.verify_diff_pressure AS lotusage_verify_diff_pressure, 
+            LotUsage.cal_result AS lotusage_cal_result, 
+            LotUsage.cal_cycle_time AS lotusage_cal_cycle_time, 
+
+            RecipeTable.id AS recipetable_id, 
+            RecipeTable.recipe_id AS recipetable_recipe_id, 
+            RecipeTable.recipe_rev AS recipetable_recipe_rev, 
+            RecipeTable.part_id AS recipetable_part_id, 
+            RecipeTable.recipe_type_id AS recipetable_recipe_type_id, 
+            RecipeTable.last_modified_by AS recipetable_last_modified_by, 
+            RecipeTable.last_modified_time AS recipetable_last_modified_time, 
+            RecipeTable.user_created AS recipetable_user_created, 
+            RecipeTable.created_time AS recipetable_created_time, 
+            RecipeTable.verification_tolerance AS recipetable_verification_tolerance, 
+            RecipeTable.prep_fill_time AS recipetable_prep_fill_time, 
+            RecipeTable.prep_bleed_time AS recipetable_prep_bleed_time, 
+            RecipeTable.prep_flowrate AS recipetable_prep_flowrate, 
+            RecipeTable.prep_back_pressure AS recipetable_prep_back_pressure, 
+            RecipeTable.prep_pressure_drop AS recipetable_prep_pressure_drop, 
+            RecipeTable.prep_pressure_drop_time AS recipetable_prep_pressure_drop_time, 
+            RecipeTable.firstflush_circuit AS recipetable_firstflush_circuit, 
+            RecipeTable.firstflush_flowrate AS recipetable_firstflush_flowrate, 
+            RecipeTable.firstflush_flow_tolerance AS recipetable_firstflush_flow_tolerance, 
+            RecipeTable.firstflush_back_pressure AS recipetable_firstflush_back_pressure, 
+            RecipeTable.firstflush_stabilize_time AS recipetable_firstflush_stabilize_time, 
+            RecipeTable.firstflush_time AS recipetable_firstflush_time, 
+            RecipeTable.firstdp_circuit AS recipetable_firstdp_circuit, 
+            RecipeTable.dp_flowrate AS recipetable_dp_flowrate, 
+            RecipeTable.dp_flow_tolerance AS recipetable_dp_flow_tolerance, 
+            RecipeTable.dp_back_pressure AS recipetable_dp_back_pressure, 
+            RecipeTable.dp_stabilize_time AS recipetable_dp_stabilize_time, 
+            RecipeTable.dp_test_time AS recipetable_dp_test_time, 
+            RecipeTable.dp_lowerlimit AS recipetable_dp_lowerlimit, 
+            RecipeTable.dp_upperlimit AS recipetable_dp_upperlimit, 
+            RecipeTable.dp_testpoints AS recipetable_dp_testpoints, 
+            RecipeTable.seconddp_circuit AS recipetable_seconddp_circuit, 
+            RecipeTable.secondflush_circuit AS recipetable_secondflush_circuit, 
+            RecipeTable.secondflush_flowrate AS recipetable_secondflush_flowrate, 
+            RecipeTable.secondflush_flow_tolerance AS recipetable_secondflush_flow_tolerance, 
+            RecipeTable.secondflush_back_pressure AS recipetable_secondflush_back_pressure, 
+            RecipeTable.secondflush_stabilize_time AS recipetable_secondflush_stabilize_time, 
+            RecipeTable.secondflush_time AS recipetable_secondflush_time, 
+            RecipeTable.drain1_circuit AS recipetable_drain1_circuit, 
+            RecipeTable.drain1_back_pressure AS recipetable_drain1_back_pressure, 
+            RecipeTable.drain1_time AS recipetable_drain1_time, 
+            RecipeTable.drain2_circuit AS recipetable_drain2_circuit, 
+            RecipeTable.drain2_back_pressure AS recipetable_drain2_back_pressure, 
+            RecipeTable.drain2_time AS recipetable_drain2_time, 
+            RecipeTable.drain3_circuit AS recipetable_drain3_circuit, 
+            RecipeTable.drain3_back_pressure AS recipetable_drain3_back_pressure, 
+            RecipeTable.drain3_time AS recipetable_drain3_time, 
+
+            WorkOrder.work_order AS workorder_work_order, 
+            WorkOrder.part_id AS workorder_part_id, 
+            WorkOrder.confirmation_id AS workorder_confirmation_id, 
+            WorkOrder.quantity AS workorder_quantity 
+
+            FROM ProductionDetail 
+            LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id
+            LEFT JOIN RecipeTable ON LotUsage.recipe_id=RecipeTable.recipe_id
+            LEFT JOIN WorkOrder ON LotUsage.lot_id=WorkOrder.lot_id 
+            WHERE serial_uid = '{lotid}-{serialnum}' 
+            AND serial_attempt ='{attempt}'
+        ")
 
         'Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
         '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
@@ -462,16 +559,16 @@ Public Class FormResultSummary
         If Oncontinue = True Then
 
             If dtproductiondetail.Rows.Count > 0 Then
-                For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
-                    If Not dtproductiondetail.Rows(0).IsNull(i) Then
-                        resultsummary(i) = dtproductiondetail.Rows(0).Item(i)
-                    Else
-                        resultsummary(i) = String.Empty
-                    End If
+                'For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
+                '    If Not dtproductiondetail.Rows(0).IsNull(i) Then
+                '        resultsummary(i) = dtproductiondetail.Rows(0).Item(i)
+                '    Else
+                '        resultsummary(i) = String.Empty
+                '    End If
 
-                Next
+                'Next
 
-                dt_Resultsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{resultsummary(0)}'ORDER BY ProductResult.sampling_time ASC")
+                dt_Resultsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{dtproductiondetail(0)("productiondetail_id")}'ORDER BY ProductResult.sampling_time ASC")
                 dgv_Resultsummary.DataSource = dt_Resultsummary
             Else
                 ResultMessage(6)
@@ -539,31 +636,31 @@ Public Class FormResultSummary
 
         If Oncontinue = True Then
 
-            txtbx_ResultTimestamp.Text = resultsummary(5)
-            txtbx_ResultTemperature.Text = resultsummary(6)
-            txtbx_ResultFlowrate.Text = resultsummary(7)
-            txtbx_ResultInletPressure.Text = resultsummary(8)
-            txtbx_ResultOutletPressure.Text = resultsummary(9)
-            txtbx_ResultDiffPressure.Text = resultsummary(11)
-            txtbx_ResultTest.Text = resultsummary(13).ToUpper
+            txtbx_ResultTimestamp.Text = dtproductiondetail(0)("productiondetail_timestamp")
+            txtbx_ResultTemperature.Text = dtproductiondetail(0)("productiondetail_temperature")
+            txtbx_ResultFlowrate.Text = dtproductiondetail(0)("productiondetail_flowrate")
+            txtbx_ResultInletPressure.Text = dtproductiondetail(0)("productiondetail_inlet_pressure")
+            txtbx_ResultOutletPressure.Text = dtproductiondetail(0)("productiondetail_outlet_pressure")
+            txtbx_ResultDiffPressure.Text = dtproductiondetail(0)("productiondetail_diff_pressure")
+            txtbx_ResultTest.Text = dtproductiondetail(0)("productiondetail_result").ToUpper
 
-            txtbx_ResultCalOffset.Text = resultsummary(25)
-            txtbx_ResultRecipeID.Text = resultsummary(21)
+            txtbx_ResultCalOffset.Text = dtproductiondetail(0)("lotusage_cal_diff_pressure")
+            txtbx_ResultRecipeID.Text = dtproductiondetail(0)("lotusage_recipe_id")
 
-            txtbx_Resultflush1.Text = resultsummary(40 + 2).ToUpper
-            txtbx_ResultDPTest1.Text = resultsummary(48 + 2).ToUpper
-            txtbx_ResultDPTest2.Text = resultsummary(59 + 2).ToUpper
-            txtbx_Resultflush2.Text = resultsummary(60 + 2).ToUpper
-            txtbx_ResultDrain1.Text = resultsummary(68 + 2).ToUpper
-            txtbx_ResultDrain2.Text = resultsummary(71 + 2).ToUpper
-            txtbx_ResultDrain3.Text = resultsummary(74 + 2).ToUpper
+            txtbx_Resultflush1.Text = dtproductiondetail(0)("recipetable_firstflush_circuit").ToUpper
+            txtbx_ResultDPTest1.Text = dtproductiondetail(0)("recipetable_firstdp_circuit").ToUpper
+            txtbx_ResultDPTest2.Text = dtproductiondetail(0)("recipetable_seconddp_circuit").ToUpper
+            txtbx_Resultflush2.Text = dtproductiondetail(0)("recipetable_secondflush_circuit").ToUpper
+            txtbx_ResultDrain1.Text = dtproductiondetail(0)("recipetable_drain1_circuit").ToUpper
+            txtbx_ResultDrain2.Text = dtproductiondetail(0)("recipetable_drain2_circuit").ToUpper
+            txtbx_ResultDrain3.Text = dtproductiondetail(0)("recipetable_drain3_circuit").ToUpper
 
 
-            txtbx_ResultWorkOrder.Text = resultsummary(77 + 3)
-            txtbx_ResultPartID.Text = resultsummary(78 + 3)
-            txtbx_ResultConfirmation.Text = resultsummary(79 + 3)
-            txtbx_ResultSerialUID.Text = resultsummary(1)
-            txtbx_Resultattempt.Text = resultsummary(3)
+            txtbx_ResultWorkOrder.Text = dtproductiondetail(0)("workorder_work_order")
+            txtbx_ResultPartID.Text = dtproductiondetail(0)("workorder_part_id")
+            txtbx_ResultConfirmation.Text = dtproductiondetail(0)("workorder_confirmation_id")
+            txtbx_ResultSerialUID.Text = dtproductiondetail(0)("productiondetail_serial_uid")
+            txtbx_Resultattempt.Text = dtproductiondetail(0)("productiondetail_serial_attempt")
         End If
     End Sub
 
