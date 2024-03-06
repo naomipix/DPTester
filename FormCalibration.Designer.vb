@@ -71,6 +71,8 @@ Partial Class FormCalibration
         Me.txtbx_ActVerCycletime = New System.Windows.Forms.TextBox()
         Me.txtbx_EstVerCycletime = New System.Windows.Forms.TextBox()
         Me.txtbx_JigType = New System.Windows.Forms.TextBox()
+        Me.txtbx_RecipeRev = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeRev = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tabpg_GraphView = New System.Windows.Forms.TabPage()
@@ -124,8 +126,6 @@ Partial Class FormCalibration
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tmr_Calibration = New System.Windows.Forms.Timer(Me.components)
         Me.tmr_Verification = New System.Windows.Forms.Timer(Me.components)
-        Me.txtbx_RecipeRev = New System.Windows.Forms.TextBox()
-        Me.dsp_RecipeRev = New System.Windows.Forms.Label()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -664,6 +664,27 @@ Partial Class FormCalibration
         Me.txtbx_JigType.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_JigType.TabIndex = 11
         Me.txtbx_JigType.TabStop = False
+        '
+        'txtbx_RecipeRev
+        '
+        Me.txtbx_RecipeRev.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeRev.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_RecipeRev.Location = New System.Drawing.Point(166, 102)
+        Me.txtbx_RecipeRev.Name = "txtbx_RecipeRev"
+        Me.txtbx_RecipeRev.ReadOnly = True
+        Me.txtbx_RecipeRev.Size = New System.Drawing.Size(250, 25)
+        Me.txtbx_RecipeRev.TabIndex = 59
+        Me.txtbx_RecipeRev.TabStop = False
+        '
+        'dsp_RecipeRev
+        '
+        Me.dsp_RecipeRev.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_RecipeRev.Location = New System.Drawing.Point(-2, 96)
+        Me.dsp_RecipeRev.Name = "dsp_RecipeRev"
+        Me.dsp_RecipeRev.Size = New System.Drawing.Size(162, 35)
+        Me.dsp_RecipeRev.TabIndex = 58
+        Me.dsp_RecipeRev.Text = "Recipe Rev. No. :"
+        Me.dsp_RecipeRev.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Panel3
         '
@@ -1293,27 +1314,6 @@ Partial Class FormCalibration
         '
         'tmr_Verification
         '
-        '
-        'txtbx_RecipeRev
-        '
-        Me.txtbx_RecipeRev.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_RecipeRev.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_RecipeRev.Location = New System.Drawing.Point(166, 102)
-        Me.txtbx_RecipeRev.Name = "txtbx_RecipeRev"
-        Me.txtbx_RecipeRev.ReadOnly = True
-        Me.txtbx_RecipeRev.Size = New System.Drawing.Size(250, 25)
-        Me.txtbx_RecipeRev.TabIndex = 59
-        Me.txtbx_RecipeRev.TabStop = False
-        '
-        'dsp_RecipeRev
-        '
-        Me.dsp_RecipeRev.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RecipeRev.Location = New System.Drawing.Point(-2, 96)
-        Me.dsp_RecipeRev.Name = "dsp_RecipeRev"
-        Me.dsp_RecipeRev.Size = New System.Drawing.Size(162, 35)
-        Me.dsp_RecipeRev.TabIndex = 58
-        Me.dsp_RecipeRev.Text = "Recipe Rev. No. :"
-        Me.dsp_RecipeRev.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FormCalibration
         '

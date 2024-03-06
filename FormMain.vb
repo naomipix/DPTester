@@ -2761,6 +2761,15 @@ Public Class FormMain
 
 
     Private Sub btn_WrkOrdScnDtConfirm_Click(sender As Object, e As EventArgs) Handles btn_WrkOrdScnDtConfirm.Click
+        ' Cleanup unused Lotusage before continue
+        If True Then
+            ' Delete LotUsage records that do not have anything in ProductionDetail table
+            SQL.DeleteRecord("LotUsage", "id NOT IN (SELECT DISTINCT lot_usage_id FROM ProductionDetail)")
+
+            ' Delete ProductResult records that do not have corresponding details ProductionDetail table
+            SQL.DeleteRecord("ProductResult", "serial_usage_id NOT IN (SELECT DISTINCT id FROM ProductionDetail)")
+        End If
+
         'Dim continueLastCal As Boolean = False
         Dim dtlotusage As New DataTable
 
@@ -3128,6 +3137,7 @@ Public Class FormMain
 
         End If
 
+        ' Check to reuse previous calibration parameters
         If cmbx_RecipeType.Enabled = True Then
             If dtlotusage.Rows.Count > 0 Then
                 If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")) Then
