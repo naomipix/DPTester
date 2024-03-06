@@ -184,7 +184,9 @@ Partial Class FormMain
         Me.dsp_RecipeSelectionID = New System.Windows.Forms.Label()
         Me.panel_CalibrateStatus = New System.Windows.Forms.Panel()
         Me.lbl_CalibrationStatus = New System.Windows.Forms.Label()
+        Me.lbl_CalibrationDate = New System.Windows.Forms.Label()
         Me.lbl_BlankDP = New System.Windows.Forms.Label()
+        Me.dsp_CalibrationDate = New System.Windows.Forms.Label()
         Me.dsp_CalibrationStatus = New System.Windows.Forms.Label()
         Me.dsp_BlankDP = New System.Windows.Forms.Label()
         Me.panel_WrkOrdScnDt = New System.Windows.Forms.Panel()
@@ -462,8 +464,6 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
-        Me.dsp_CalibrationDate = New System.Windows.Forms.Label()
-        Me.lbl_CalibrationDate = New System.Windows.Forms.Label()
         Me.panel_FormControl.SuspendLayout()
         Me.Panel12.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1574,7 +1574,7 @@ Partial Class FormMain
         Me.dsp_OprKeyInDt.Name = "dsp_OprKeyInDt"
         Me.dsp_OprKeyInDt.Size = New System.Drawing.Size(463, 50)
         Me.dsp_OprKeyInDt.TabIndex = 15
-        Me.dsp_OprKeyInDt.Text = "Operator Key in Serial Number"
+        Me.dsp_OprKeyInDt.Text = "Key in Serial Number"
         Me.dsp_OprKeyInDt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtbx_SerialNumber
@@ -2040,6 +2040,17 @@ Partial Class FormMain
         Me.lbl_CalibrationStatus.Text = "-"
         Me.lbl_CalibrationStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'lbl_CalibrationDate
+        '
+        Me.lbl_CalibrationDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.lbl_CalibrationDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_CalibrationDate.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_CalibrationDate.Location = New System.Drawing.Point(201, 93)
+        Me.lbl_CalibrationDate.Name = "lbl_CalibrationDate"
+        Me.lbl_CalibrationDate.Size = New System.Drawing.Size(200, 30)
+        Me.lbl_CalibrationDate.TabIndex = 1
+        Me.lbl_CalibrationDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'lbl_BlankDP
         '
         Me.lbl_BlankDP.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
@@ -2050,6 +2061,16 @@ Partial Class FormMain
         Me.lbl_BlankDP.Size = New System.Drawing.Size(200, 30)
         Me.lbl_BlankDP.TabIndex = 1
         Me.lbl_BlankDP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_CalibrationDate
+        '
+        Me.dsp_CalibrationDate.AutoSize = True
+        Me.dsp_CalibrationDate.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_CalibrationDate.Location = New System.Drawing.Point(78, 98)
+        Me.dsp_CalibrationDate.Name = "dsp_CalibrationDate"
+        Me.dsp_CalibrationDate.Size = New System.Drawing.Size(120, 21)
+        Me.dsp_CalibrationDate.TabIndex = 1
+        Me.dsp_CalibrationDate.Text = "Last Calibrated :"
         '
         'dsp_CalibrationStatus
         '
@@ -5288,27 +5309,6 @@ Partial Class FormMain
         Me.lbl_OperationMode.TabIndex = 34
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_CalibrationDate
-        '
-        Me.dsp_CalibrationDate.AutoSize = True
-        Me.dsp_CalibrationDate.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalibrationDate.Location = New System.Drawing.Point(78, 98)
-        Me.dsp_CalibrationDate.Name = "dsp_CalibrationDate"
-        Me.dsp_CalibrationDate.Size = New System.Drawing.Size(120, 21)
-        Me.dsp_CalibrationDate.TabIndex = 1
-        Me.dsp_CalibrationDate.Text = "Last Calibrated :"
-        '
-        'lbl_CalibrationDate
-        '
-        Me.lbl_CalibrationDate.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.lbl_CalibrationDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_CalibrationDate.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_CalibrationDate.Location = New System.Drawing.Point(201, 93)
-        Me.lbl_CalibrationDate.Name = "lbl_CalibrationDate"
-        Me.lbl_CalibrationDate.Size = New System.Drawing.Size(200, 30)
-        Me.lbl_CalibrationDate.TabIndex = 1
-        Me.lbl_CalibrationDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FormMain
         '
