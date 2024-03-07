@@ -701,7 +701,7 @@ Public Class FormResultGraph
 
     End Sub
 
-    Public Sub CreateResultGraphNew(dtResult As DataTable, resultsummary As String())
+    Public Sub CreateResultGraphNew(dtResult As DataTable, dtproductiondetail As DataTable)
         ' Clear Result Graph Value
         ResultChartDPValue.Clear()
         ResultChartInletValue.Clear()
@@ -804,85 +804,52 @@ Public Class FormResultGraph
             Dim Drain3Enabled As Boolean = False
 
             If True Then
-                If resultsummary(40 - 8) = "Enable" Then
+                If dtproductiondetail(0)("recipetable_firstflush_circuit") = "Enable" Then
                     Flush1Enabled = True
                 End If
-                If resultsummary(48 - 8) = "Enable" Then
+                If dtproductiondetail(0)("recipetable_firstdp_circuit") = "Enable" Then
                     DP1Enabled = True
                 End If
-                If resultsummary(59 - 8) = "Enable" Then
+                If dtproductiondetail(0)("recipetable_seconddp_circuit") = "Enable" Then
                     Flush2Enabled = True
                 End If
-                If resultsummary(60 - 8) = "Enable" Then
+                If dtproductiondetail(0)("recipetable_secondflush_circuit") = "Enable" Then
                     DP2Enabled = True
                 End If
-                If resultsummary(68 - 8) = "Enable" Then
+                If dtproductiondetail(0)("recipetable_drain1_circuit") = "Enable" Then
                     Drain1Enabled = True
                 End If
-                If resultsummary(71 - 8) = "Enable" Then
+                If dtproductiondetail(0)("recipetable_drain2_circuit") = "Enable" Then
                     Drain2Enabled = True
                 End If
-                If resultsummary(74 - 8) = "Enable" Then
+                If dtproductiondetail(0)("recipetable_drain3_circuit") = "Enable" Then
                     Drain3Enabled = True
                 End If
             End If
 
-            Dim DPtest1cycletime As Integer
-            Dim DPtest2cycletime As Integer
+            Dim PrepFillTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_fill_time"), PrepFillTime), PrepFillTime, 0))
+            Dim PrepBleedTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_bleed_time"), PrepBleedTime), PrepBleedTime, 0))
+            Dim PrepPressureDropTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_pressure_drop_time"), PrepPressureDropTime), PrepPressureDropTime, 0))
 
-            'Dim DPFillTime As Integer = CInt(resultsummary(49 - 8))
-            'Dim DPBleedTime As Integer = CInt(resultsummary(50 - 8))
-            'Dim DPStabilizeTime As Integer = CInt(resultsummary(54 - 8))
-            'Dim DPTestTime As Integer = CInt(resultsummary(55 - 8))
+            Dim DPStabilizeTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_dp_stabilize_time"), DPStabilizeTime), DPStabilizeTime, 0)) 'CInt(resultsummary(54 - 8))
+            Dim DPTestTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_dp_test_time"), DPTestTime), DPTestTime, 0)) 'CInt(resultsummary(55 - 8))
 
-            'Dim Flush1FillTime As Integer = CInt(resultsummary(41 - 8))
-            'Dim Flush1BleedTime As Integer = CInt(resultsummary(42 - 8))
-            'Dim Flush1StabilizeTime As Integer = CInt(resultsummary(46 - 8))
-            'Dim Flush1TestTime As Integer = CInt(resultsummary(47 - 8))
+            Dim Flush1StabilizeTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_firstflush_stabilize_time"), Flush1StabilizeTime), Flush1StabilizeTime, 0)) 'CInt(resultsummary(46 - 8))
+            Dim Flush1TestTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_firstflush_time"), Flush1TestTime), Flush1TestTime, 0)) 'CInt(resultsummary(47 - 8))
 
-            'Dim Flush2FillTime As Integer = CInt(resultsummary(61 - 8))
-            'Dim Flush2BleedTime As Integer = CInt(resultsummary(62 - 8))
-            'Dim Flush2StabilizeTime As Integer = CInt(resultsummary(66 - 8))
-            'Dim Flush2TestTime As Integer = CInt(resultsummary(67 - 8))
+            Dim Flush2StabilizeTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_secondflush_stabilize_time"), Flush2StabilizeTime), Flush2StabilizeTime, 0)) 'CInt(resultsummary(66 - 8))
+            Dim Flush2TestTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_secondflush_time"), Flush2TestTime), Flush2TestTime, 0)) 'CInt(resultsummary(67 - 8))
 
-            'Dim Drain1Time As Integer = CInt(resultsummary(70 - 8))
-            'Dim Drain2Time As Integer = CInt(resultsummary(73 - 8))
-            'Dim Drain3Time As Integer = CInt(resultsummary(76 - 8))
+            Dim Drain1Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain1_time"), Drain1Time), Drain1Time, 0)) 'CInt(resultsummary(70 - 8))
+            Dim Drain2Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain2_time"), Drain2Time), Drain2Time, 0)) 'CInt(resultsummary(73 - 8))
+            Dim Drain3Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain3_time"), Drain3Time), Drain3Time, 0)) 'CInt(resultsummary(76 - 8))
 
-            Dim DPFillTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(49 - 8), DPFillTime), DPFillTime, 0)) 'CInt(resultsummary(49 - 8))
-            Dim DPBleedTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(50 - 8), DPBleedTime), DPBleedTime, 0)) 'CInt(resultsummary(50 - 8))
-            Dim DPStabilizeTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(54 - 8), DPStabilizeTime), DPStabilizeTime, 0)) 'CInt(resultsummary(54 - 8))
-            Dim DPTestTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(55 - 8), DPTestTime), DPTestTime, 0)) 'CInt(resultsummary(55 - 8))
+            Dim Prepcycletime As Integer = PrepFillTime + PrepBleedTime + PrepPressureDropTime
+            Dim DPcycletime As Integer = DPStabilizeTime + DPTestTime
+            Dim Flush1cycletime As Integer = Flush1StabilizeTime + Flush1TestTime
+            Dim Flush2cycletime As Integer = Flush2StabilizeTime + Flush2TestTime
 
-            Dim Flush1FillTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(41 - 8), Flush1FillTime), Flush1FillTime, 0)) 'CInt(resultsummary(41 - 8))
-            Dim Flush1BleedTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(42 - 8), Flush1BleedTime), Flush1BleedTime, 0)) 'CInt(resultsummary(42 - 8))
-            Dim Flush1StabilizeTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(46 - 8), Flush1StabilizeTime), Flush1StabilizeTime, 0)) 'CInt(resultsummary(46 - 8))
-            Dim Flush1TestTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(47 - 8), Flush1TestTime), Flush1TestTime, 0)) 'CInt(resultsummary(47 - 8))
-
-            Dim Flush2FillTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(61 - 8), Flush2FillTime), Flush2FillTime, 0)) 'CInt(resultsummary(61 - 8))
-            Dim Flush2BleedTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(62 - 8), Flush2BleedTime), Flush2BleedTime, 0)) 'CInt(resultsummary(62 - 8))
-            Dim Flush2StabilizeTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(66 - 8), Flush2StabilizeTime), Flush2StabilizeTime, 0)) 'CInt(resultsummary(66 - 8))
-            Dim Flush2TestTime As Integer = CInt(IIf(Integer.TryParse(resultsummary(67 - 8), Flush2TestTime), Flush2TestTime, 0)) 'CInt(resultsummary(67 - 8))
-
-            Dim Drain1Time As Integer = CInt(IIf(Integer.TryParse(resultsummary(70 - 8), Drain1Time), Drain1Time, 0)) 'CInt(resultsummary(70 - 8))
-            Dim Drain2Time As Integer = CInt(IIf(Integer.TryParse(resultsummary(73 - 8), Drain2Time), Drain2Time, 0)) 'CInt(resultsummary(73 - 8))
-            Dim Drain3Time As Integer = CInt(IIf(Integer.TryParse(resultsummary(76 - 8), Drain3Time), Drain3Time, 0)) 'CInt(resultsummary(76 - 8))
-
-            If True Then
-                If DP1Enabled And Flush1Enabled = False Then
-                    DPtest1cycletime = DPFillTime + DPBleedTime + DPStabilizeTime + DPTestTime
-                ElseIf DP1Enabled And Flush1Enabled Then
-                    DPtest1cycletime = DPStabilizeTime + DPTestTime
-                End If
-
-                If DP2Enabled And Flush2Enabled = False Then
-                    DPtest2cycletime = DPFillTime + DPBleedTime + DPStabilizeTime + DPTestTime
-                ElseIf DP2Enabled And Flush2Enabled Then
-                    DPtest2cycletime = DPStabilizeTime + DPTestTime
-                End If
-            End If
-
-
+            Dim PrepStart As Decimal = 0    'First Always 0
             Dim Flush1Start As Decimal = 0
             Dim DP1Start As Decimal = 0
 
@@ -896,24 +863,28 @@ Public Class FormResultGraph
             Dim CycleTimeTotal As Decimal = 0
 
             If True Then
+                Flush1Start = Prepcycletime
+
                 If Flush1Enabled Then
-                    DP1Start = Flush1FillTime + Flush1BleedTime + Flush1StabilizeTime + Flush1TestTime
+                    DP1Start = Flush1cycletime
+                Else
+                    DP1Start = Flush1Start
                 End If
 
                 If DP1Enabled Then
-                    Flush2Start = DP1Start + DPtest1cycletime
+                    Flush2Start = DP1Start + DPcycletime
                 Else
                     Flush2Start = DP1Start
                 End If
 
                 If Flush2Enabled Then
-                    DP2Start = Flush2Start + Flush2FillTime + Flush2BleedTime + Flush2StabilizeTime + Flush2TestTime
+                    DP2Start = Flush2Start + Flush2cycletime
                 Else
                     DP2Start = Flush2Start
                 End If
 
                 If DP2Enabled Then
-                    Drain1Start = DP2Start + DPtest2cycletime
+                    Drain1Start = DP2Start + DPcycletime
                 Else
                     Drain1Start = DP2Start
                 End If
@@ -943,7 +914,7 @@ Public Class FormResultGraph
             If True Then
                 Dim RowCountStart As Integer = 0
                 For i As Integer = 0 To dtResult.Rows.Count - 1
-                    If dtResult(i)("sampling_time") = DPtest1cycletime - DPTestTime Then
+                    If dtResult(i)("sampling_time") = DPcycletime - DPTestTime Then
                         RowCountStart = i
                         Exit For
                     End If
@@ -963,7 +934,7 @@ Public Class FormResultGraph
             If True Then
                 Dim RowCountStart As Integer = 0
                 For i As Integer = 0 To dtResult.Rows.Count - 1
-                    If dtResult(i)("sampling_time") = DPtest2cycletime - DPTestTime Then
+                    If dtResult(i)("sampling_time") = DPcycletime - DPTestTime Then
                         RowCountStart = i
                         Exit For
                     End If
@@ -981,8 +952,8 @@ Public Class FormResultGraph
                 End If
             End If
 
-            '.Yi = CDec(resultsummary(56)),
-            '.Yj = CDec(resultsummary(57)),
+            '.Yi = CDec(dtproductiondetail(0)("recipetable_dp_lowerlimit")),
+            '.Yj = CDec(dtproductiondetail(0)("recipetable_dp_upperlimit")),
 
             CartesianChart_ResultGraph.Sections = New RectangularSection() {
                 New RectangularSection With {
@@ -1005,12 +976,58 @@ Public Class FormResultGraph
                         .PathEffect = New DashEffect(New Single() {6, 6})
                     }
                 },
+                  _ ' Prep
+                New RectangularSection With {
+                    .IsVisible = True,
+                    .Xi = PrepStart,
+                    .Xj = Flush1Start,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                    .Label = "",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = True,
+                    .Xi = PrepStart,
+                    .Xj = PrepStart + PrepFillTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Prep - Fill",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = True,
+                    .Xi = PrepStart + PrepFillTime,
+                    .Xj = PrepStart + PrepFillTime + PrepBleedTime,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Bleed",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
+                New RectangularSection With {
+                    .IsVisible = True,
+                    .Xi = PrepStart + PrepFillTime + PrepBleedTime,
+                    .Xj = Flush1Start,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
+                    .Label = "Drop",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
+                },
                   _ ' Flush 1
                 New RectangularSection With {
                     .IsVisible = Flush1Enabled,
                     .Xi = Flush1Start,
                     .Xj = DP1Start,
-                    .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Yellow.WithAlpha(20)},
                     .Label = "",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
@@ -1018,42 +1035,18 @@ Public Class FormResultGraph
                 New RectangularSection With {
                     .IsVisible = Flush1Enabled,
                     .Xi = Flush1Start,
-                    .Xj = Flush1Start + Flush1FillTime,
+                    .Xj = Flush1Start + Flush1StabilizeTime,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.LightGray,
                         .StrokeThickness = 1
                     },
-                    .Label = $"Flush 1 - Fill",
+                    .Label = "Flush 1 - Stab",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
                 New RectangularSection With {
                     .IsVisible = Flush1Enabled,
-                    .Xi = Flush1Start + Flush1FillTime,
-                    .Xj = Flush1Start + Flush1FillTime + Flush1BleedTime,
-                    .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.LightGray,
-                        .StrokeThickness = 1
-                    },
-                    .Label = "Vent",
-                    .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                },
-                New RectangularSection With {
-                    .IsVisible = Flush1Enabled,
-                    .Xi = Flush1Start + Flush1FillTime + Flush1BleedTime,
-                    .Xj = Flush1Start + Flush1FillTime + Flush1BleedTime + Flush1StabilizeTime,
-                    .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.LightGray,
-                        .StrokeThickness = 1
-                    },
-                    .Label = "Stab",
-                    .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                },
-                New RectangularSection With {
-                    .IsVisible = Flush1Enabled,
-                    .Xi = Flush1Start + Flush1FillTime + Flush1BleedTime + Flush1StabilizeTime,
+                    .Xi = Flush1Start + Flush1StabilizeTime,
                     .Xj = DP1Start,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.LightGray,
@@ -1074,44 +1067,20 @@ Public Class FormResultGraph
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
                 New RectangularSection With {
-                    .IsVisible = IIf(DP1Enabled, IIf(Flush1Enabled, False, True), False),
+                    .IsVisible = DP1Enabled,
                     .Xi = DP1Start,
-                    .Xj = DP1Start + DPFillTime,
+                    .Xj = DP1Start + DPStabilizeTime,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.LightGray,
                         .StrokeThickness = 1
                     },
-                    .Label = $"DP 1 - Fill",
-                    .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                },
-                New RectangularSection With {
-                    .IsVisible = IIf(DP1Enabled, IIf(Flush1Enabled, False, True), False),
-                    .Xi = DP1Start + DPFillTime,
-                    .Xj = DP1Start + DPFillTime + DPBleedTime,
-                    .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.LightGray,
-                        .StrokeThickness = 1
-                    },
-                    .Label = "Vent",
+                    .Label = "DP 1 - Stab",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
                 New RectangularSection With {
                     .IsVisible = DP1Enabled,
-                    .Xi = CDec(IIf(Flush1Enabled, DP1Start, DP1Start + DPFillTime + DPBleedTime)),
-                    .Xj = CDec(IIf(Flush1Enabled, DP1Start + DPStabilizeTime, DP1Start + DPFillTime + DPBleedTime + DPStabilizeTime)),
-                    .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.LightGray,
-                        .StrokeThickness = 1
-                    },
-                    .Label = IIf(Flush1Enabled, $"DP 1 - Stab", "Stab"),
-                    .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                },
-                New RectangularSection With {
-                    .IsVisible = DP1Enabled,
-                    .Xi = CDec(IIf(Flush1Enabled, DP1Start + DPStabilizeTime, DP1Start + DPFillTime + DPBleedTime + DPStabilizeTime)),
+                    .Xi = DP1Start + DPStabilizeTime,
                     .Xj = Flush2Start,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.LightGray,
@@ -1126,7 +1095,7 @@ Public Class FormResultGraph
                     .IsVisible = Flush2Enabled,
                     .Xi = Flush2Start,
                     .Xj = DP2Start,
-                    .Fill = New SolidColorPaint With {.Color = SKColors.Violet.WithAlpha(20)},
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Yellow.WithAlpha(20)},
                     .Label = "",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
@@ -1134,42 +1103,18 @@ Public Class FormResultGraph
                 New RectangularSection With {
                     .IsVisible = Flush2Enabled,
                     .Xi = Flush2Start,
-                    .Xj = Flush2Start + Flush2FillTime,
+                    .Xj = Flush2Start + Flush2StabilizeTime,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.LightGray,
                         .StrokeThickness = 1
                     },
-                    .Label = $"Flush 2 - Fill",
+                    .Label = "Flush 2 - Stab",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
                 New RectangularSection With {
                     .IsVisible = Flush2Enabled,
-                    .Xi = Flush2Start + Flush2FillTime,
-                    .Xj = Flush2Start + Flush2FillTime + Flush2BleedTime,
-                    .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.LightGray,
-                        .StrokeThickness = 1
-                    },
-                    .Label = "Vent",
-                    .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                },
-                New RectangularSection With {
-                    .IsVisible = Flush2Enabled,
-                    .Xi = Flush2Start + Flush2FillTime + Flush2BleedTime,
-                    .Xj = Flush2Start + Flush2FillTime + Flush2BleedTime + Flush2StabilizeTime,
-                    .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.LightGray,
-                        .StrokeThickness = 1
-                    },
-                    .Label = "Stab",
-                    .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                },
-                New RectangularSection With {
-                    .IsVisible = Flush2Enabled,
-                    .Xi = Flush2Start + Flush2FillTime + Flush2BleedTime + Flush2StabilizeTime,
+                    .Xi = Flush2Start + Flush2StabilizeTime,
                     .Xj = DP1Start,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.LightGray,
@@ -1190,44 +1135,20 @@ Public Class FormResultGraph
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
                 New RectangularSection With {
-                    .IsVisible = IIf(DP2Enabled, IIf(Flush1Enabled, False, True), False),
+                    .IsVisible = DP2Enabled,
                     .Xi = DP2Start,
-                    .Xj = DP2Start + DPFillTime,
+                    .Xj = DP2Start + DPStabilizeTime,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.LightGray,
                         .StrokeThickness = 1
                     },
-                    .Label = $"DP 2 - Fill",
-                    .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                },
-                New RectangularSection With {
-                    .IsVisible = IIf(DP2Enabled, IIf(Flush1Enabled, False, True), False),
-                    .Xi = DP2Start + DPFillTime,
-                    .Xj = DP2Start + DPFillTime + DPBleedTime,
-                    .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.LightGray,
-                        .StrokeThickness = 1
-                    },
-                    .Label = "Vent",
+                    .Label = "DP 2 - Stab",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
                 New RectangularSection With {
                     .IsVisible = DP2Enabled,
-                    .Xi = CDec(IIf(Flush2Enabled, DP2Start, DP2Start + DPFillTime + DPBleedTime)),
-                    .Xj = CDec(IIf(Flush2Enabled, DP2Start + DPStabilizeTime, DP2Start + DPFillTime + DPBleedTime + DPStabilizeTime)),
-                    .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.LightGray,
-                        .StrokeThickness = 1
-                    },
-                    .Label = IIf(Flush1Enabled, $"DP 1 - Stab", "Stab"),
-                    .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                },
-                New RectangularSection With {
-                    .IsVisible = DP2Enabled,
-                    .Xi = CDec(IIf(Flush2Enabled, DP2Start + DPStabilizeTime, DP2Start + DPFillTime + DPBleedTime + DPStabilizeTime)),
+                    .Xi = DP2Start + DPStabilizeTime,
                     .Xj = Drain1Start,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.LightGray,
@@ -1436,9 +1357,107 @@ Public Class FormResultGraph
         '            LEFT JOIN RecipeTable ON Lotusage.recipe_id=RecipeTable.recipe_id
         '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
 
-        Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
-                    LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
-                    LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
+        Dim dtproductiondetail As DataTable = SQL.ReadRecords($"
+            SELECT 
+
+            ProductionDetail.id AS productiondetail_id, 
+            ProductionDetail.serial_uid AS productiondetail_serial_uid, 
+            ProductionDetail.serial_number AS productiondetail_serial_number, 
+            ProductionDetail.serial_attempt AS productiondetail_serial_attempt, 
+            ProductionDetail.lot_usage_id AS productiondetail_lot_usage_id, 
+            ProductionDetail.timestamp AS productiondetail_timestamp, 
+            ProductionDetail.temperature AS productiondetail_temperature, 
+            ProductionDetail.flowrate AS productiondetail_flowrate, 
+            ProductionDetail.inlet_pressure AS productiondetail_inlet_pressure, 
+            ProductionDetail.outlet_pressure AS productiondetail_outlet_pressure, 
+            ProductionDetail.viscosity AS productiondetail_viscosity, 
+            ProductionDetail.diff_pressure AS productiondetail_diff_pressure, 
+            ProductionDetail.cycle_time AS productiondetail_cycle_time, 
+            ProductionDetail.result AS productiondetail_result, 
+            ProductionDetail.back_pressure AS productiondetail_back_pressure, 
+
+            LotUsage.id AS lotusage_id, 
+            LotUsage.lot_id AS lotusage_lot_id, 
+            LotUsage.lot_attempt AS lotusage_lot_attempt, 
+            LotUsage.lot_start_time AS lotusage_lot_start_time, 
+            LotUsage.lot_end_time AS lotusage_lot_end_time, 
+            LotUsage.run_by AS lotusage_run_by, 
+            LotUsage.recipe_id AS lotusage_recipe_id, 
+            LotUsage.recipe_rev AS lotusage_recipe_rev, 
+            LotUsage.calibration_time AS lotusage_calibration_time, 
+            LotUsage.cal_inlet_pressure AS lotusage_cal_inlet_pressure, 
+            LotUsage.cal_outlet_pressure AS lotusage_cal_outlet_pressure, 
+            LotUsage.cal_diff_pressure AS lotusage_cal_diff_pressure, 
+            LotUsage.verify_inlet_pressure AS lotusage_verify_inlet_pressure, 
+            LotUsage.verify_outlet_pressure AS lotusage_verify_outlet_pressure, 
+            LotUsage.verify_diff_pressure AS lotusage_verify_diff_pressure, 
+            LotUsage.cal_result AS lotusage_cal_result, 
+            LotUsage.cal_cycle_time AS lotusage_cal_cycle_time, 
+
+            RecipeTable.id AS recipetable_id, 
+            RecipeTable.recipe_id AS recipetable_recipe_id, 
+            RecipeTable.recipe_rev AS recipetable_recipe_rev, 
+            RecipeTable.part_id AS recipetable_part_id, 
+            RecipeTable.recipe_type_id AS recipetable_recipe_type_id, 
+            RecipeTable.last_modified_by AS recipetable_last_modified_by, 
+            RecipeTable.last_modified_time AS recipetable_last_modified_time, 
+            RecipeTable.user_created AS recipetable_user_created, 
+            RecipeTable.created_time AS recipetable_created_time, 
+            RecipeTable.verification_tolerance AS recipetable_verification_tolerance, 
+            RecipeTable.prep_fill_time AS recipetable_prep_fill_time, 
+            RecipeTable.prep_bleed_time AS recipetable_prep_bleed_time, 
+            RecipeTable.prep_flowrate AS recipetable_prep_flowrate, 
+            RecipeTable.prep_back_pressure AS recipetable_prep_back_pressure, 
+            RecipeTable.prep_pressure_drop AS recipetable_prep_pressure_drop, 
+            RecipeTable.prep_pressure_drop_time AS recipetable_prep_pressure_drop_time, 
+            RecipeTable.firstflush_circuit AS recipetable_firstflush_circuit, 
+            RecipeTable.firstflush_flowrate AS recipetable_firstflush_flowrate, 
+            RecipeTable.firstflush_flow_tolerance AS recipetable_firstflush_flow_tolerance, 
+            RecipeTable.firstflush_back_pressure AS recipetable_firstflush_back_pressure, 
+            RecipeTable.firstflush_stabilize_time AS recipetable_firstflush_stabilize_time, 
+            RecipeTable.firstflush_time AS recipetable_firstflush_time, 
+            RecipeTable.firstdp_circuit AS recipetable_firstdp_circuit, 
+            RecipeTable.dp_flowrate AS recipetable_dp_flowrate, 
+            RecipeTable.dp_flow_tolerance AS recipetable_dp_flow_tolerance, 
+            RecipeTable.dp_back_pressure AS recipetable_dp_back_pressure, 
+            RecipeTable.dp_stabilize_time AS recipetable_dp_stabilize_time, 
+            RecipeTable.dp_test_time AS recipetable_dp_test_time, 
+            RecipeTable.dp_lowerlimit AS recipetable_dp_lowerlimit, 
+            RecipeTable.dp_upperlimit AS recipetable_dp_upperlimit, 
+            RecipeTable.dp_testpoints AS recipetable_dp_testpoints, 
+            RecipeTable.seconddp_circuit AS recipetable_seconddp_circuit, 
+            RecipeTable.secondflush_circuit AS recipetable_secondflush_circuit, 
+            RecipeTable.secondflush_flowrate AS recipetable_secondflush_flowrate, 
+            RecipeTable.secondflush_flow_tolerance AS recipetable_secondflush_flow_tolerance, 
+            RecipeTable.secondflush_back_pressure AS recipetable_secondflush_back_pressure, 
+            RecipeTable.secondflush_stabilize_time AS recipetable_secondflush_stabilize_time, 
+            RecipeTable.secondflush_time AS recipetable_secondflush_time, 
+            RecipeTable.drain1_circuit AS recipetable_drain1_circuit, 
+            RecipeTable.drain1_back_pressure AS recipetable_drain1_back_pressure, 
+            RecipeTable.drain1_time AS recipetable_drain1_time, 
+            RecipeTable.drain2_circuit AS recipetable_drain2_circuit, 
+            RecipeTable.drain2_back_pressure AS recipetable_drain2_back_pressure, 
+            RecipeTable.drain2_time AS recipetable_drain2_time, 
+            RecipeTable.drain3_circuit AS recipetable_drain3_circuit, 
+            RecipeTable.drain3_back_pressure AS recipetable_drain3_back_pressure, 
+            RecipeTable.drain3_time AS recipetable_drain3_time, 
+
+            WorkOrder.work_order AS workorder_work_order, 
+            WorkOrder.part_id AS workorder_part_id, 
+            WorkOrder.confirmation_id AS workorder_confirmation_id, 
+            WorkOrder.quantity AS workorder_quantity 
+
+            FROM ProductionDetail 
+            LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id
+            LEFT JOIN RecipeTable ON LotUsage.recipe_id=RecipeTable.recipe_id
+            LEFT JOIN WorkOrder ON LotUsage.lot_id=WorkOrder.lot_id 
+            WHERE serial_uid = '{lotid}-{serialnum}' 
+            AND serial_attempt ='{attempt}'
+        ")
+
+        'Dim dtproductiondetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
+        '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
+        '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
 
         If Oncontinue = True Then
             If dtproductiondetail.Rows.Count > 0 Then
@@ -1463,7 +1482,7 @@ Public Class FormResultGraph
 
                 If dt_Graphsummary.Rows.Count > 0 Then
                     CreateResultGraph()
-                    CreateResultGraphNew(dt_Graphsummary, resultsummary)
+                    CreateResultGraphNew(dt_Graphsummary, dtproductiondetail)
 
 
 
@@ -1489,30 +1508,31 @@ Public Class FormResultGraph
 
 
         If Oncontinue = True Then
-            txtbx_GraphTimestamp.Text = resultsummary(5)
-            txtbx_GraphTemperature.Text = resultsummary(6)
-            txtbx_GraphFlowrate.Text = resultsummary(7)
-            txtbx_GraphInletPressure.Text = resultsummary(8)
-            txtbx_GraphOutletPressure.Text = resultsummary(9)
-            txtbx_GraphDiffPressure.Text = resultsummary(11)
-            txtbx_GraphTest.Text = resultsummary(13).ToUpper
+            txtbx_GraphTimestamp.Text = dtproductiondetail(0)("productiondetail_timestamp")
+            txtbx_GraphTemperature.Text = dtproductiondetail(0)("productiondetail_temperature")
+            txtbx_GraphFlowrate.Text = dtproductiondetail(0)("productiondetail_flowrate")
+            txtbx_GraphInletPressure.Text = dtproductiondetail(0)("productiondetail_inlet_pressure")
+            txtbx_GraphOutletPressure.Text = dtproductiondetail(0)("productiondetail_outlet_pressure")
+            txtbx_GraphDiffPressure.Text = dtproductiondetail(0)("productiondetail_diff_pressure")
+            txtbx_GraphTest.Text = dtproductiondetail(0)("productiondetail_result").ToUpper
 
-            txtbx_GraphCalOffset.Text = resultsummary(25)
-            txtbx_GraphRecipeID.Text = resultsummary(21)
+            txtbx_GraphCalOffset.Text = dtproductiondetail(0)("lotusage_cal_diff_pressure")
+            txtbx_GraphRecipeID.Text = dtproductiondetail(0)("lotusage_recipe_id")
 
-            txtbx_Graphflush1.Text = resultsummary(40 - 8).ToUpper
-            txtbx_GraphDPTest1.Text = resultsummary(48 - 8).ToUpper
-            txtbx_GraphDPTest2.Text = resultsummary(59 - 8).ToUpper
-            txtbx_Graphflush2.Text = resultsummary(60 - 8).ToUpper
-            txtbx_GraphDrain1.Text = resultsummary(68 - 8).ToUpper
-            txtbx_GraphDrain2.Text = resultsummary(71 - 8).ToUpper
-            txtbx_GraphDrain3.Text = resultsummary(74 - 8).ToUpper
+            txtbx_Graphflush1.Text = dtproductiondetail(0)("recipetable_firstflush_circuit").ToUpper
+            txtbx_GraphDPTest1.Text = dtproductiondetail(0)("recipetable_firstdp_circuit").ToUpper
+            txtbx_GraphDPTest2.Text = dtproductiondetail(0)("recipetable_seconddp_circuit").ToUpper
+            txtbx_Graphflush2.Text = dtproductiondetail(0)("recipetable_secondflush_circuit").ToUpper
+            txtbx_GraphDrain1.Text = dtproductiondetail(0)("recipetable_drain1_circuit").ToUpper
+            txtbx_GraphDrain2.Text = dtproductiondetail(0)("recipetable_drain2_circuit").ToUpper
+            txtbx_GraphDrain3.Text = dtproductiondetail(0)("recipetable_drain3_circuit").ToUpper
 
-            txtbx_GraphWorkOrder.Text = resultsummary(77 - 7)
-            txtbx_GraphPartID.Text = resultsummary(78 - 7)
-            txtbx_GraphConfirmation.Text = resultsummary(79 - 7)
-            txtbx_GraphSerialUID.Text = resultsummary(1)
-            txtbx_Graphattempt.Text = resultsummary(3)
+
+            txtbx_GraphWorkOrder.Text = dtproductiondetail(0)("workorder_work_order")
+            txtbx_GraphPartID.Text = dtproductiondetail(0)("workorder_part_id")
+            txtbx_GraphConfirmation.Text = dtproductiondetail(0)("workorder_confirmation_id")
+            txtbx_GraphSerialUID.Text = dtproductiondetail(0)("productiondetail_serial_uid")
+            txtbx_Graphattempt.Text = dtproductiondetail(0)("productiondetail_serial_attempt")
         End If
     End Sub
 #End Region

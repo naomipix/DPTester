@@ -22,8 +22,10 @@ Partial Class FormCircuitModel2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCircuitModel2))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lbl_ValveHover = New System.Windows.Forms.Label()
         Me.lbl_FilSensorPushIn = New System.Windows.Forms.Label()
         Me.lbl_JigSensor1 = New System.Windows.Forms.Label()
         Me.lbl_FilSensorB = New System.Windows.Forms.Label()
@@ -401,6 +403,7 @@ Partial Class FormCircuitModel2
         Me.dsp_Flowmtr = New System.Windows.Forms.Label()
         Me.dsp_Temp = New System.Windows.Forms.Label()
         Me.lbl_V17_P8 = New System.Windows.Forms.Label()
+        Me.tooltip_ValveNumber = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -408,6 +411,7 @@ Partial Class FormCircuitModel2
         '
         Me.Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), System.Drawing.Image)
         Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel1.Controls.Add(Me.lbl_ValveHover)
         Me.Panel1.Controls.Add(Me.lbl_FilSensorPushIn)
         Me.Panel1.Controls.Add(Me.lbl_JigSensor1)
         Me.Panel1.Controls.Add(Me.lbl_FilSensorB)
@@ -790,85 +794,98 @@ Partial Class FormCircuitModel2
         Me.Panel1.Size = New System.Drawing.Size(950, 450)
         Me.Panel1.TabIndex = 2
         '
+        'lbl_ValveHover
+        '
+        Me.lbl_ValveHover.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_ValveHover.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_ValveHover.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.lbl_ValveHover.Location = New System.Drawing.Point(185, 403)
+        Me.lbl_ValveHover.Name = "lbl_ValveHover"
+        Me.lbl_ValveHover.Size = New System.Drawing.Size(65, 23)
+        Me.lbl_ValveHover.TabIndex = 794
+        Me.lbl_ValveHover.Text = "Valve #"
+        Me.lbl_ValveHover.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_ValveHover.Visible = False
+        '
         'lbl_FilSensorPushIn
         '
         Me.lbl_FilSensorPushIn.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_FilSensorPushIn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_FilSensorPushIn.Location = New System.Drawing.Point(619, 165)
+        Me.lbl_FilSensorPushIn.Location = New System.Drawing.Point(624, 170)
         Me.lbl_FilSensorPushIn.Name = "lbl_FilSensorPushIn"
-        Me.lbl_FilSensorPushIn.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorPushIn.Size = New System.Drawing.Size(10, 10)
         Me.lbl_FilSensorPushIn.TabIndex = 793
         '
         'lbl_JigSensor1
         '
         Me.lbl_JigSensor1.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_JigSensor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_JigSensor1.Location = New System.Drawing.Point(619, 140)
+        Me.lbl_JigSensor1.Location = New System.Drawing.Point(624, 145)
         Me.lbl_JigSensor1.Name = "lbl_JigSensor1"
-        Me.lbl_JigSensor1.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_JigSensor1.Size = New System.Drawing.Size(10, 10)
         Me.lbl_JigSensor1.TabIndex = 793
         '
         'lbl_FilSensorB
         '
         Me.lbl_FilSensorB.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_FilSensorB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_FilSensorB.Location = New System.Drawing.Point(679, 115)
+        Me.lbl_FilSensorB.Location = New System.Drawing.Point(684, 120)
         Me.lbl_FilSensorB.Name = "lbl_FilSensorB"
-        Me.lbl_FilSensorB.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorB.Size = New System.Drawing.Size(10, 10)
         Me.lbl_FilSensorB.TabIndex = 793
         '
         'lbl_FilSensorS
         '
         Me.lbl_FilSensorS.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_FilSensorS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_FilSensorS.Location = New System.Drawing.Point(619, 115)
+        Me.lbl_FilSensorS.Location = New System.Drawing.Point(624, 120)
         Me.lbl_FilSensorS.Name = "lbl_FilSensorS"
-        Me.lbl_FilSensorS.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorS.Size = New System.Drawing.Size(10, 10)
         Me.lbl_FilSensorS.TabIndex = 793
         '
         'lbl_FilSensorPullOut
         '
         Me.lbl_FilSensorPullOut.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_FilSensorPullOut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_FilSensorPullOut.Location = New System.Drawing.Point(679, 165)
+        Me.lbl_FilSensorPullOut.Location = New System.Drawing.Point(684, 170)
         Me.lbl_FilSensorPullOut.Name = "lbl_FilSensorPullOut"
-        Me.lbl_FilSensorPullOut.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorPullOut.Size = New System.Drawing.Size(10, 10)
         Me.lbl_FilSensorPullOut.TabIndex = 793
         '
         'lbl_JigSensor3
         '
         Me.lbl_JigSensor3.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_JigSensor3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_JigSensor3.Location = New System.Drawing.Point(679, 140)
+        Me.lbl_JigSensor3.Location = New System.Drawing.Point(684, 145)
         Me.lbl_JigSensor3.Name = "lbl_JigSensor3"
-        Me.lbl_JigSensor3.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_JigSensor3.Size = New System.Drawing.Size(10, 10)
         Me.lbl_JigSensor3.TabIndex = 793
         '
         'lbl_JigSensor2
         '
         Me.lbl_JigSensor2.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_JigSensor2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_JigSensor2.Location = New System.Drawing.Point(649, 140)
+        Me.lbl_JigSensor2.Location = New System.Drawing.Point(654, 145)
         Me.lbl_JigSensor2.Name = "lbl_JigSensor2"
-        Me.lbl_JigSensor2.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_JigSensor2.Size = New System.Drawing.Size(10, 10)
         Me.lbl_JigSensor2.TabIndex = 793
         '
         'lbl_FilSensorV
         '
         Me.lbl_FilSensorV.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_FilSensorV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_FilSensorV.Location = New System.Drawing.Point(649, 115)
+        Me.lbl_FilSensorV.Location = New System.Drawing.Point(654, 120)
         Me.lbl_FilSensorV.Name = "lbl_FilSensorV"
-        Me.lbl_FilSensorV.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorV.Size = New System.Drawing.Size(10, 10)
         Me.lbl_FilSensorV.TabIndex = 793
         '
         'lbl_FilSensorH
         '
         Me.lbl_FilSensorH.BackColor = System.Drawing.SystemColors.Window
         Me.lbl_FilSensorH.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_FilSensorH.Location = New System.Drawing.Point(649, 90)
+        Me.lbl_FilSensorH.Location = New System.Drawing.Point(654, 95)
         Me.lbl_FilSensorH.Name = "lbl_FilSensorH"
-        Me.lbl_FilSensorH.Size = New System.Drawing.Size(20, 20)
+        Me.lbl_FilSensorH.Size = New System.Drawing.Size(10, 10)
         Me.lbl_FilSensorH.TabIndex = 793
         '
         'lbl_Temp
@@ -4307,6 +4324,10 @@ Partial Class FormCircuitModel2
         Me.lbl_V17_P8.Size = New System.Drawing.Size(8, 15)
         Me.lbl_V17_P8.TabIndex = 778
         '
+        'tooltip_ValveNumber
+        '
+        Me.tooltip_ValveNumber.AutomaticDelay = 200
+        '
         'FormCircuitModel2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4700,4 +4721,6 @@ Partial Class FormCircuitModel2
     Friend WithEvents lbl_FilSensorH As Label
     Friend WithEvents lbl_FilSensorPushIn As Label
     Friend WithEvents lbl_FilSensorPullOut As Label
+    Friend WithEvents tooltip_ValveNumber As ToolTip
+    Friend WithEvents lbl_ValveHover As Label
 End Class
