@@ -207,12 +207,12 @@ Module IniFileInitialize
 
             PublicVariables.Limit_Max_d_vertol = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxVerificationTolerance", "10")
 
-            PublicVariables.Limit_Max_i_prepfilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_FillTime", "0")
-            PublicVariables.Limit_Max_i_prepbleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BleedTime", "0")
-            PublicVariables.Limit_Max_d_prepflow = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_Flowrate", "0")
-            PublicVariables.Limit_Max_d_preppressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressure", "0")
-            PublicVariables.Limit_Max_d_preppressuredrop = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressureDrop", "0")
-            PublicVariables.Limit_Max_i_preppressuredroptime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressureDropTime", "0")
+            PublicVariables.Limit_Max_i_prepfilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_FillTime", "600")
+            PublicVariables.Limit_Max_i_prepbleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BleedTime", "600")
+            PublicVariables.Limit_Max_d_prepflow = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_Flowrate", "20")
+            PublicVariables.Limit_Max_d_preppressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressure", "500")
+            PublicVariables.Limit_Max_d_preppressuredrop = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressureDrop", "500")
+            PublicVariables.Limit_Max_i_preppressuredroptime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressureDropTime", "600")
 
             'PublicVariables.Limit_Max_i_flush1filltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_FillTime", "600")
             'PublicVariables.Limit_Max_i_flush1bleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_BleedTime", "600")
