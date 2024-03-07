@@ -6392,7 +6392,7 @@ Public Class FormRecipeManagement
             .Columns("prep_flowrate").HeaderCell.Value = "Prep. Flowrate (l/min)"
             .Columns("prep_back_pressure").HeaderCell.Value = "Prep. Pressure (kPa)"
             .Columns("prep_pressure_drop").HeaderCell.Value = "Prep. Pressure Drop (kPa)"
-            .Columns("prep_pressure_drop_time").HeaderCell.Value = "Prep. Pressure Drop Time (s)"
+            .Columns("prep_pressure_drop_time").HeaderCell.Value = "Prep. Drop Time (s)"
 
             .Columns("firstflush_circuit").HeaderCell.Value = "Flush-1 Circuit"
             '.Columns("firstflush_fill_time").HeaderCell.Value = "Flush-1 Fill Time (s)"
@@ -6491,7 +6491,7 @@ Public Class FormRecipeManagement
             .Columns("filter_type").Width = 90
             .Columns("jig_description").Width = 60
             .Columns("recipe_type").Width = 90
-            .Columns("recipe_rev").Width = 90
+            .Columns("recipe_rev").Width = 60
 
 
             'Header Cell Alignment

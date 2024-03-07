@@ -1613,7 +1613,7 @@ Public Class FormMain
             .Columns("serial_number").Width = 80
             .Columns("serial_attempt").Width = 90
             .Columns("recipe_id").Width = 150
-            .Columns("recipe_rev").Width = 90
+            .Columns("recipe_rev").Width = 60
             .Columns("cal_diff_pressure").Width = 90
             .Columns("flowrate").Width = 90
             .Columns("diff_pressure").Width = 90
