@@ -203,6 +203,17 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_d_drain3pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain3_Pressure", "0")
             PublicVariables.Limit_Min_i_drain3time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain3_Time", "0")
 
+            ' Hard limit to drain time
+            If True Then
+                Dim MinDrainTime As Integer = 15
+                Dim DrainArr As Integer() = {PublicVariables.Limit_Min_i_drain1time, PublicVariables.Limit_Min_i_drain2time, PublicVariables.Limit_Min_i_drain3time}
+
+                For i As Integer = 0 To DrainArr.Length - 1
+                    If DrainArr(i) < MinDrainTime Then
+                        DrainArr(i) = MinDrainTime
+                    End If
+                Next
+            End If
 
 
             PublicVariables.Limit_Max_d_vertol = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxVerificationTolerance", "10")

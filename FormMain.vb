@@ -4842,6 +4842,23 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         FormPixel.Show()
     End Sub
 
+    Private Sub btn_ResetZoom_Click(sender As Object, e As EventArgs) Handles btn_ResetZoom.Click
+        Dim chart As CartesianChart = CartesianChart_MainLiveGraph
+
+        If chart.XAxes.Count > 0 Then
+            For i As Integer = 0 To chart.XAxes.Count - 1
+                chart.XAxes(i).MinLimit = 0
+                chart.XAxes(i).MaxLimit = Nothing
+            Next
+        End If
+
+        If chart.YAxes.Count > 0 Then
+            For i As Integer = 0 To chart.YAxes.Count - 1
+                chart.YAxes(i).MinLimit = Nothing
+                chart.YAxes(i).MaxLimit = Nothing
+            Next
+        End If
+    End Sub
 End Class
 
 

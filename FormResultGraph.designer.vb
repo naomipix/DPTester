@@ -83,6 +83,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphWorkOrder = New System.Windows.Forms.TextBox()
         Me.txtbx_GraphTimestamp = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.checkbx_ShowTooltip = New System.Windows.Forms.CheckBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.checkbx_GraphRPM = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphTemperature = New System.Windows.Forms.CheckBox()
@@ -110,7 +111,7 @@ Partial Class FormResultGraph
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.checkbx_ShowTooltip = New System.Windows.Forms.CheckBox()
+        Me.btn_ResetZoom = New System.Windows.Forms.Button()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -717,6 +718,7 @@ Partial Class FormResultGraph
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.btn_ResetZoom)
         Me.Panel3.Controls.Add(Me.checkbx_ShowTooltip)
         Me.Panel3.Controls.Add(Me.ComboBox1)
         Me.Panel3.Controls.Add(Me.checkbx_GraphRPM)
@@ -746,6 +748,18 @@ Partial Class FormResultGraph
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1311, 802)
         Me.Panel3.TabIndex = 2
+        '
+        'checkbx_ShowTooltip
+        '
+        Me.checkbx_ShowTooltip.AutoSize = True
+        Me.checkbx_ShowTooltip.BackColor = System.Drawing.Color.AliceBlue
+        Me.checkbx_ShowTooltip.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(1134, 190)
+        Me.checkbx_ShowTooltip.Name = "checkbx_ShowTooltip"
+        Me.checkbx_ShowTooltip.Size = New System.Drawing.Size(108, 21)
+        Me.checkbx_ShowTooltip.TabIndex = 76
+        Me.checkbx_ShowTooltip.Text = "Show Tooltips"
+        Me.checkbx_ShowTooltip.UseVisualStyleBackColor = False
         '
         'ComboBox1
         '
@@ -1088,17 +1102,16 @@ Partial Class FormResultGraph
         Me.Label1.Text = "Result Graph"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'checkbx_ShowTooltip
+        'btn_ResetZoom
         '
-        Me.checkbx_ShowTooltip.AutoSize = True
-        Me.checkbx_ShowTooltip.BackColor = System.Drawing.Color.AliceBlue
-        Me.checkbx_ShowTooltip.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(1134, 190)
-        Me.checkbx_ShowTooltip.Name = "checkbx_ShowTooltip"
-        Me.checkbx_ShowTooltip.Size = New System.Drawing.Size(108, 21)
-        Me.checkbx_ShowTooltip.TabIndex = 76
-        Me.checkbx_ShowTooltip.Text = "Show Tooltips"
-        Me.checkbx_ShowTooltip.UseVisualStyleBackColor = False
+        Me.btn_ResetZoom.BackColor = System.Drawing.SystemColors.Window
+        Me.btn_ResetZoom.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.btn_ResetZoom.Location = New System.Drawing.Point(1160, 707)
+        Me.btn_ResetZoom.Name = "btn_ResetZoom"
+        Me.btn_ResetZoom.Size = New System.Drawing.Size(80, 50)
+        Me.btn_ResetZoom.TabIndex = 77
+        Me.btn_ResetZoom.Text = "Reset Zoom"
+        Me.btn_ResetZoom.UseVisualStyleBackColor = False
         '
         'FormResultGraph
         '
@@ -1209,4 +1222,5 @@ Partial Class FormResultGraph
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents checkbx_GraphRPM As CheckBox
     Friend WithEvents checkbx_ShowTooltip As CheckBox
+    Friend WithEvents btn_ResetZoom As Button
 End Class
