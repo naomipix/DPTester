@@ -22,6 +22,7 @@ Module ModuleOmron
     Public ManualCtrl(5)() As Boolean ' Consists of DM3 to DM8
     Public FINSinput() As Integer
     Public FINSOutput(199) As Integer
+    Public WithEvents CommLosttimer As New Timer()
     Public WithEvents PLCtimer As New Timer()
     Public WithEvents PCtimer As New Timer()
     Public WithEvents Alarmtimer As New Timer()
@@ -79,6 +80,7 @@ Module ModuleOmron
     Public dtserialrecord As New DataTable
     Public Viscosity As Double
     Public CommLost As Boolean
+    Public CommLostTime As DateTime
 
     Public RollingAvgArr As Decimal()
     Public RollingAvgCount As Integer = 0
@@ -726,10 +728,12 @@ Module ModuleOmron
 
         ' Force Alarm Timer Tick
         If AlarmIsFirstTick Then
+            LabelStatusupdate()
             AlarmTimerTick()
         Else
             If AlarmTableOld.Rows.Count = 0 Then
                 If Mainalarm.Rows.Count > 0 Then
+                    LabelStatusupdate()
                     AlarmTimerTick()
                 End If
             End If
@@ -784,9 +788,11 @@ Module ModuleOmron
             FormMain.txtbx_PumpcontrolQuery.Text = pumpcontrolquery.ToString
             FormMain.txtbx_PumpcontrolResponse.Text = pumpcontrolresponse.ToString
         Catch ex As Exception
+            'If CommLosttimer.Enabled = False Then
+            '    CommLostTime = DateTime.Now
+            'End If
+            'CommLosttimer.Enabled = True
             CommLost = True
-
-
         End Try
 
         Return True
@@ -806,6 +812,10 @@ Module ModuleOmron
             Next
 
         Catch ex As Exception
+            'If CommLosttimer.Enabled = False Then
+            '    CommLostTime = DateTime.Now
+            'End If
+            'CommLosttimer.Enabled = True
             CommLost = True
         End Try
 
@@ -829,13 +839,25 @@ Module ModuleOmron
             FINSOutputRead()
             PLCtimer.Enabled = True
         Catch ex As Exception
+            'If CommLosttimer.Enabled = False Then
+            '    CommLostTime = DateTime.Now
+            'End If
+            'CommLosttimer.Enabled = True
             CommLost = True
         End Try
 
         Return True
     End Function
 
-
+    Private Sub CommLostTimer_Ticks(sender As Object, e As EventArgs) Handles CommLosttimer.Tick
+        If CommLost = False Then
+            CommLosttimer.Enabled = False
+        Else
+            If DateTime.Now > CommLostTime.AddSeconds(2) Then
+                CommLost = True
+            End If
+        End If
+    End Sub
 #End Region
 
 
@@ -931,6 +953,9 @@ Module ModuleOmron
 
         If CommLost = False Then
             FINSInputRead()
+            'If CommLosttimer.Enabled = True Then
+            'Else
+
             FetchPLC_DIn(100)
             FetchPLC_DOut(110)
             FetchPLC_Ain(120)
@@ -940,6 +965,7 @@ Module ModuleOmron
             'Spiltting the Input into Boolean Array for Processing
 
 
+            'End If
 
             For i As Integer = 0 To 2
                 PLCstatus(i) = Int2BoolArr(FINSinput(i))
@@ -1432,9 +1458,9 @@ Module ModuleOmron
 #End Region
 #Region "Tool Counter"
             FormSetting.lblArray = {
-            FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
-FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
-}
+                                FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
+                    FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
+                    }
             For i As Integer = 0 To FormSetting.lblArray.Length - 1
                 FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
             Next
@@ -1515,11 +1541,13 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
         'To Update the Status of the Header Bar in all Forms
         If CommLost = False Then
             If PLCstatus(0)(4) = False And PLCstatus(0)(14) = False And CommLost = False Then
+                ' Machine OK
                 If Alarmtimer.Enabled = True Then
                     Alarmtimer.Enabled = False
                     startindex = 0
                 End If
 
+                ' Machine in Auto Cycle
                 If PLCstatus(0)(1) = True Then
                     FormMain.lbl_OperationMode.Text = "Auto Cycle Running"
                     FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
@@ -1550,6 +1578,8 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
                     FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
                 End If
+
+                ' Machine in Manual Mode
                 If PLCstatus(0)(2) = True Then
                     FormMain.lbl_OperationMode.Text = "Manual Mode"
                     FormMain.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
@@ -1588,6 +1618,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
                 End If
 
+                ' Machine in Auto Mode
                 If PLCstatus(0)(1) = False And PLCstatus(0)(3) = True And PLCstatus(0)(2) = False Then
                     FormMain.lbl_OperationMode.Text = "Auto Mode"
                     FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
@@ -1626,6 +1657,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
                 End If
 
+                ' Machine Not Running
                 If PLCstatus(0)(1) = False And PLCstatus(0)(2) = False And PLCstatus(0)(3) = False And PLCstatus(0)(14) = False And PLCstatus(0)(4) = False Then
                     FormMain.lbl_OperationMode.Text = "No Status"
                     FormMain.lbl_OperationMode.BackColor = Color.Gray
@@ -1663,7 +1695,9 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
                     FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
                 End If
             Else
+                ' Machine In Alarm & Warning
                 If PLCstatus(0)(4) = True And PLCstatus(0)(14) = False Then
+                    ' Machine In Alarm Mode
                     Currentalarm.Remove(0)
                     If Not Currentalarm.ContainsKey(0) Then
                         Currentalarm.Add(0, "Machine in Alarm Condition")
@@ -1673,6 +1707,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
                         Alarmtimer.Enabled = True
                     End If
                 ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
+                    ' Machine In Warning Mode
                     Currentalarm.Remove(0)
                     Currentalarm.Add(0, "Machine in Warning Condition")
 
@@ -1680,6 +1715,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
                         Alarmtimer.Enabled = True
                     End If
                 ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = True Then
+                    ' Machine In Alarm & Warning Mode
                     Currentalarm.Remove(0)
                     If Not Currentalarm.ContainsKey(0) Then
                         Currentalarm.Add(0, "Machine in Alarm Condition")
@@ -1691,6 +1727,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
                 End If
             End If
         Else
+            ' Machine PC-PLC Communication Lost
             Currentalarm.Remove(0)
             If Not Currentalarm.ContainsKey(0) Then
                 Currentalarm.Add(0, "Machine in Alarm Condition")
