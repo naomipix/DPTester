@@ -6291,12 +6291,14 @@ Public Class FormRecipeManagement
             LEFT JOIN PartTable ON RecipeTable.part_id=PartTable.part_id 
             LEFT JOIN FilterType ON PartTable.filter_type_id=FilterType.id 
             LEFT JOIN JigType ON PartTable.jig_type_id=JigType.id
-            LEFT JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id 
-            WHERE RecipeTable.recipe_rev = (
-                SELECT MAX(recipe_rev)
-                FROM RecipeTable t2
-                WHERE RecipeTable.recipe_id = t2.recipe_id
-            )
+            LEFT JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id             
+            {IIf(cmbx_RcpDetailRecipeIDRev.Items.Count > 0, "", "
+                WHERE RecipeTable.recipe_rev = ( 
+                    SELECT MAX(recipe_rev) 
+                    FROM RecipeTable t2 
+                    WHERE RecipeTable.recipe_id = t2.recipe_id 
+                ) 
+            ")}
             ORDER BY RecipeTable.recipe_id ASC
         "
         Dim dtrecipetable As DataTable = SQL.ReadRecords(strrecipedetails)
@@ -6319,6 +6321,11 @@ Public Class FormRecipeManagement
 
                     If cmbx Is recipeid Then
                         FilterList.Add($"recipe_id='{selectedValue}'")
+
+                        ' Added later on to filter revisions
+                        If cmbx_RcpDetailRecipeIDRev.Items.Count > 0 Then
+                            FilterList.Add($"recipe_rev='{cmbx_RcpDetailRecipeIDRev.SelectedItem}'")
+                        End If
                     End If
                     If cmbx Is filtertype Then
                         FilterList.Add($"filter_type='{selectedValue}'")
@@ -6437,7 +6444,7 @@ Public Class FormRecipeManagement
             .Columns("recipe_rev").HeaderCell.Value = "Recipe Rev."
 
             'Set Column Width
-            .Columns("recipe_id").Width = 100
+            .Columns("recipe_id").Width = 140
             .Columns("part_id").Width = 140
             .Columns("last_modified_by").Width = 100
             .Columns("last_modified_time").Width = 140
@@ -6878,5 +6885,29 @@ Public Class FormRecipeManagement
         FormPixel.Show()
     End Sub
 
+    Private Sub cmbx_RcpDetailRecipeID_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RcpDetailRecipeID.SelectedIndexChanged
+        cmbx_RcpDetailRecipeIDRev.Items.Clear()
 
+        If cmbx_RcpDetailRecipeID.SelectedIndex > 0 Then
+            Dim dtRecipeTbl As DataTable = SQL.ReadRecords($"
+                SELECT DISTINCT recipe_rev FROM RecipeTable 
+                WHERE recipe_id='{DirectCast(cmbx_RcpDetailRecipeID.SelectedItem, KeyValuePair(Of String, String)).Value}' 
+                ORDER BY recipe_rev ASC
+            ")
+
+            If dtRecipeTbl.Rows.Count > 0 Then
+                ' Add Revisions To ComboBox List
+                For i As Integer = 0 To dtRecipeTbl.Rows.Count - 1
+                    cmbx_RcpDetailRecipeIDRev.Items.Add(dtRecipeTbl(i)("recipe_rev"))
+                Next
+
+                With cmbx_RcpDetailRecipeIDRev
+                    .Enabled = True
+                    .SelectedIndex = dtRecipeTbl.Rows.Count - 1
+                End With
+            End If
+        Else
+            cmbx_RcpDetailRecipeIDRev.Enabled = False
+        End If
+    End Sub
 End Class

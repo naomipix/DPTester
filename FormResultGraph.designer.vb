@@ -83,6 +83,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphWorkOrder = New System.Windows.Forms.TextBox()
         Me.txtbx_GraphTimestamp = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btn_ResetZoom = New System.Windows.Forms.Button()
         Me.checkbx_ShowTooltip = New System.Windows.Forms.CheckBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.checkbx_GraphRPM = New System.Windows.Forms.CheckBox()
@@ -111,7 +112,7 @@ Partial Class FormResultGraph
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btn_ResetZoom = New System.Windows.Forms.Button()
+        Me.txtbx_GraphRecipeIDRev = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -294,6 +295,7 @@ Partial Class FormResultGraph
         Me.Panel2.Controls.Add(Me.dsp_GraphPartID)
         Me.Panel2.Controls.Add(Me.dsp_GraphWorkOrder)
         Me.Panel2.Controls.Add(Me.dsp_GraphTimestamp)
+        Me.Panel2.Controls.Add(Me.txtbx_GraphRecipeIDRev)
         Me.Panel2.Controls.Add(Me.txtbx_GraphRecipeID)
         Me.Panel2.Controls.Add(Me.txtbx_GraphConfirmation)
         Me.Panel2.Controls.Add(Me.txtbx_GraphPartID)
@@ -663,7 +665,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphRecipeID.Location = New System.Drawing.Point(226, 454)
         Me.txtbx_GraphRecipeID.Name = "txtbx_GraphRecipeID"
         Me.txtbx_GraphRecipeID.ReadOnly = True
-        Me.txtbx_GraphRecipeID.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_GraphRecipeID.Size = New System.Drawing.Size(180, 25)
         Me.txtbx_GraphRecipeID.TabIndex = 16
         Me.txtbx_GraphRecipeID.TabStop = False
         '
@@ -748,6 +750,17 @@ Partial Class FormResultGraph
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1311, 802)
         Me.Panel3.TabIndex = 2
+        '
+        'btn_ResetZoom
+        '
+        Me.btn_ResetZoom.BackColor = System.Drawing.SystemColors.Window
+        Me.btn_ResetZoom.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.btn_ResetZoom.Location = New System.Drawing.Point(1160, 707)
+        Me.btn_ResetZoom.Name = "btn_ResetZoom"
+        Me.btn_ResetZoom.Size = New System.Drawing.Size(80, 50)
+        Me.btn_ResetZoom.TabIndex = 77
+        Me.btn_ResetZoom.Text = "Reset Zoom"
+        Me.btn_ResetZoom.UseVisualStyleBackColor = False
         '
         'checkbx_ShowTooltip
         '
@@ -1102,16 +1115,17 @@ Partial Class FormResultGraph
         Me.Label1.Text = "Result Graph"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'btn_ResetZoom
+        'txtbx_GraphRecipeIDRev
         '
-        Me.btn_ResetZoom.BackColor = System.Drawing.SystemColors.Window
-        Me.btn_ResetZoom.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.btn_ResetZoom.Location = New System.Drawing.Point(1160, 707)
-        Me.btn_ResetZoom.Name = "btn_ResetZoom"
-        Me.btn_ResetZoom.Size = New System.Drawing.Size(80, 50)
-        Me.btn_ResetZoom.TabIndex = 77
-        Me.btn_ResetZoom.Text = "Reset Zoom"
-        Me.btn_ResetZoom.UseVisualStyleBackColor = False
+        Me.txtbx_GraphRecipeIDRev.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_GraphRecipeIDRev.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_GraphRecipeIDRev.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_GraphRecipeIDRev.Location = New System.Drawing.Point(412, 454)
+        Me.txtbx_GraphRecipeIDRev.Name = "txtbx_GraphRecipeIDRev"
+        Me.txtbx_GraphRecipeIDRev.ReadOnly = True
+        Me.txtbx_GraphRecipeIDRev.Size = New System.Drawing.Size(74, 25)
+        Me.txtbx_GraphRecipeIDRev.TabIndex = 16
+        Me.txtbx_GraphRecipeIDRev.TabStop = False
         '
         'FormResultGraph
         '
@@ -1223,4 +1237,5 @@ Partial Class FormResultGraph
     Friend WithEvents checkbx_GraphRPM As CheckBox
     Friend WithEvents checkbx_ShowTooltip As CheckBox
     Friend WithEvents btn_ResetZoom As Button
+    Friend WithEvents txtbx_GraphRecipeIDRev As TextBox
 End Class

@@ -280,6 +280,7 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.cmbx_RcpDetailRecipeIDRev = New System.Windows.Forms.ComboBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -793,6 +794,7 @@ Partial Class FormRecipeManagement
         '
         'grpbx_Search
         '
+        Me.grpbx_Search.Controls.Add(Me.cmbx_RcpDetailRecipeIDRev)
         Me.grpbx_Search.Controls.Add(Me.cmbx_RcpDetailRecipeID)
         Me.grpbx_Search.Controls.Add(Me.dsp_SearchRecipeID)
         Me.grpbx_Search.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -810,7 +812,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpDetailRecipeID.FormattingEnabled = True
         Me.cmbx_RcpDetailRecipeID.Location = New System.Drawing.Point(15, 41)
         Me.cmbx_RcpDetailRecipeID.Name = "cmbx_RcpDetailRecipeID"
-        Me.cmbx_RcpDetailRecipeID.Size = New System.Drawing.Size(300, 25)
+        Me.cmbx_RcpDetailRecipeID.Size = New System.Drawing.Size(204, 25)
         Me.cmbx_RcpDetailRecipeID.TabIndex = 10
         '
         'dsp_SearchRecipeID
@@ -827,7 +829,6 @@ Partial Class FormRecipeManagement
         '
         Me.dgv_RecipeDetails.AllowUserToAddRows = False
         Me.dgv_RecipeDetails.AllowUserToDeleteRows = False
-        Me.dgv_RecipeDetails.AllowUserToResizeColumns = False
         Me.dgv_RecipeDetails.AllowUserToResizeRows = False
         Me.dgv_RecipeDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.dgv_RecipeDetails.Location = New System.Drawing.Point(3, 92)
@@ -3046,6 +3047,16 @@ Partial Class FormRecipeManagement
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
+        'cmbx_RcpDetailRecipeIDRev
+        '
+        Me.cmbx_RcpDetailRecipeIDRev.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbx_RcpDetailRecipeIDRev.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbx_RcpDetailRecipeIDRev.FormattingEnabled = True
+        Me.cmbx_RcpDetailRecipeIDRev.Location = New System.Drawing.Point(225, 41)
+        Me.cmbx_RcpDetailRecipeIDRev.Name = "cmbx_RcpDetailRecipeIDRev"
+        Me.cmbx_RcpDetailRecipeIDRev.Size = New System.Drawing.Size(90, 25)
+        Me.cmbx_RcpDetailRecipeIDRev.TabIndex = 10
+        '
         'FormRecipeManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3381,4 +3392,5 @@ Partial Class FormRecipeManagement
     Friend WithEvents txtbx_RcpCreatePrepFlow As TextBox
     Friend WithEvents txtbx_RcpCreatePrepBleed As TextBox
     Friend WithEvents txtbx_RcpCreatePrepFill As TextBox
+    Friend WithEvents cmbx_RcpDetailRecipeIDRev As ComboBox
 End Class

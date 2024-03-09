@@ -51,6 +51,7 @@ Public Class FormResultGraph
         txtbx_GraphPartID.Text = Nothing
         txtbx_GraphConfirmation.Text = Nothing
         txtbx_GraphRecipeID.Text = Nothing
+        txtbx_GraphRecipeIDRev.Text = Nothing
         txtbx_GraphCalOffset.Text = Nothing
         txtbx_GraphTemperature.Text = Nothing
         txtbx_GraphFlowrate.Text = Nothing
@@ -1220,6 +1221,7 @@ Public Class FormResultGraph
         txtbx_GraphPartID.Text = Nothing
         txtbx_GraphConfirmation.Text = Nothing
         txtbx_GraphRecipeID.Text = Nothing
+        txtbx_GraphRecipeIDRev.Text = Nothing
         txtbx_GraphCalOffset.Text = Nothing
         txtbx_GraphTemperature.Text = Nothing
         txtbx_GraphFlowrate.Text = Nothing
@@ -1518,6 +1520,7 @@ Public Class FormResultGraph
 
             txtbx_GraphCalOffset.Text = dtproductiondetail(0)("lotusage_cal_diff_pressure")
             txtbx_GraphRecipeID.Text = dtproductiondetail(0)("lotusage_recipe_id")
+            txtbx_GraphRecipeIDRev.Text = dtproductiondetail(0)("lotusage_recipe_rev")
 
             txtbx_Graphflush1.Text = dtproductiondetail(0)("recipetable_firstflush_circuit").ToUpper
             txtbx_GraphDPTest1.Text = dtproductiondetail(0)("recipetable_firstdp_circuit").ToUpper

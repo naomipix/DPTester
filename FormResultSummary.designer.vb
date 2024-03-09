@@ -94,6 +94,7 @@ Partial Class FormResultSummary
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtbx_ResultRecipeIDRev = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -252,6 +253,7 @@ Partial Class FormResultSummary
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.txtbx_ResultRecipeIDRev)
         Me.Panel2.Controls.Add(Me.dsp_Resultattempt)
         Me.Panel2.Controls.Add(Me.txtbx_Resultattempt)
         Me.Panel2.Controls.Add(Me.dsp_ResultSerialUID)
@@ -645,7 +647,7 @@ Partial Class FormResultSummary
         Me.txtbx_ResultRecipeID.Location = New System.Drawing.Point(226, 454)
         Me.txtbx_ResultRecipeID.Name = "txtbx_ResultRecipeID"
         Me.txtbx_ResultRecipeID.ReadOnly = True
-        Me.txtbx_ResultRecipeID.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_ResultRecipeID.Size = New System.Drawing.Size(180, 25)
         Me.txtbx_ResultRecipeID.TabIndex = 16
         Me.txtbx_ResultRecipeID.TabStop = False
         '
@@ -935,6 +937,18 @@ Partial Class FormResultSummary
         Me.Label1.Text = "Individual Result Summary"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
+        'txtbx_ResultRecipeIDRev
+        '
+        Me.txtbx_ResultRecipeIDRev.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_ResultRecipeIDRev.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_ResultRecipeIDRev.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_ResultRecipeIDRev.Location = New System.Drawing.Point(412, 454)
+        Me.txtbx_ResultRecipeIDRev.Name = "txtbx_ResultRecipeIDRev"
+        Me.txtbx_ResultRecipeIDRev.ReadOnly = True
+        Me.txtbx_ResultRecipeIDRev.Size = New System.Drawing.Size(74, 25)
+        Me.txtbx_ResultRecipeIDRev.TabIndex = 59
+        Me.txtbx_ResultRecipeIDRev.TabStop = False
+        '
         'FormResultSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1034,4 +1048,5 @@ Partial Class FormResultSummary
     Friend WithEvents txtbx_ResultSerialUID As TextBox
     Friend WithEvents dsp_Resultattempt As Label
     Friend WithEvents txtbx_Resultattempt As TextBox
+    Friend WithEvents txtbx_ResultRecipeIDRev As TextBox
 End Class

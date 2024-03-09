@@ -3169,7 +3169,21 @@ Public Class FormMain
                         End If
 
                         If RecipeCheckOK Then
-                            If MsgBox($"Do you want continue with last calibration? Last Calibrated: {LastLotCalTime}, with Calibration Offset of {LastLotCalOffset} and Calibration Result as {LastLotCalResult}", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                            Dim restoreCalibrations As Boolean = False
+                            Dim CurrentDateTime As DateTime = DateTime.Now
+                            Dim PrevCalDateTime As DateTime = dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")
+
+                            If CurrentDateTime <= PrevCalDateTime Then
+                                restoreCalibrations = True
+                            End If
+
+                            If restoreCalibrations = False Then
+                                If MsgBox($"Do you want continue with last calibration? Last Calibrated: {LastLotCalTime}, with Calibration Offset of {LastLotCalOffset} and Calibration Result as {LastLotCalResult}", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                                    restoreCalibrations = True
+                                End If
+                            End If
+
+                            If restoreCalibrations = True Then
                                 Dim CalDP As Decimal = 0
 
                                 If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")) Then
