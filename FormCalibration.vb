@@ -90,6 +90,9 @@ Public Class FormCalibration
     Public Drain2cycletime As Integer
     Public Drain3cycletime As Integer
 
+    ' For Chart XLimit Use
+    Private TotalCycleTime As Integer
+
 
 
     Private Sub FormCalibration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -295,6 +298,7 @@ Public Class FormCalibration
         '    XLabelArr(i) = i * XScaleSec
         'Next
 
+        TotalCycleTime = XLimit
         For Each LiveGraphChart In {CartesianChart_CalibrationLiveGraph} 'CartesianChartArr
             LiveGraphChart.XAxes = New ICartesianAxis() {
                 New LiveChartsCore.SkiaSharpView.Axis() With {
@@ -2303,7 +2307,7 @@ Public Class FormCalibration
         If chart.XAxes.Count > 0 Then
             For i As Integer = 0 To chart.XAxes.Count - 1
                 chart.XAxes(i).MinLimit = 0
-                chart.XAxes(i).MaxLimit = Nothing
+                chart.XAxes(i).MaxLimit = TotalCycleTime
             Next
         End If
 

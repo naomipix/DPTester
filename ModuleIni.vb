@@ -203,6 +203,27 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_d_drain3pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain3_Pressure", "0")
             PublicVariables.Limit_Min_i_drain3time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain3_Time", "0")
 
+            ' Hard Limit (BP/N2 Reg)
+            If True Then
+                Dim MinPress As Decimal = 5
+                Dim PressArr As Decimal() = {
+                    PublicVariables.Limit_Min_d_preppressure,
+                    PublicVariables.Limit_Min_d_preppressuredrop,
+                    PublicVariables.Limit_Min_d_flush1pressure,
+                    PublicVariables.Limit_Min_d_flush2pressure,
+                    PublicVariables.Limit_Min_d_dptestpressure,
+                    PublicVariables.Limit_Min_d_drain1pressure,
+                    PublicVariables.Limit_Min_d_drain2pressure,
+                    PublicVariables.Limit_Min_d_drain3pressure
+                }
+
+                For i As Integer = 0 To PressArr.Length - 1
+                    If PressArr(i) < MinPress Then
+                        PressArr(i) = MinPress
+                    End If
+                Next
+            End If
+
             ' Hard limit to drain time
             If True Then
                 Dim MinDrainTime As Integer = 15

@@ -147,6 +147,9 @@ Public Class FormMain
     Dim DP1Enabled As Boolean = False
     Dim DP2Enabled As Boolean = False
 
+    ' For Live Graph XLimit Use
+    Dim TotalCycleTime As Integer
+
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Start Clock Timer
         TimerModule.clockTimer.Start()
@@ -500,6 +503,7 @@ Public Class FormMain
         '    XLabelArr(i) = i * XScaleSec
         'Next
 
+        TotalCycleTime = XLimit
         For Each LiveGraphChart In {CartesianChart_MainLiveGraph} 'CartesianChartArr
             LiveGraphChart.XAxes = New ICartesianAxis() {
                 New LiveChartsCore.SkiaSharpView.Axis() With {
@@ -3303,16 +3307,36 @@ Public Class FormMain
 
 
     Private Sub btn_WrkOrdScnDtEndLot_Click(sender As Object, e As EventArgs) Handles btn_WrkOrdScnDtEndLot.Click
+        Dim continueEndLot As Boolean = False
 
         If MainMessage(8, LotID) = DialogResult.Yes Then
-            Endlot()
-
+            Dim dtProdDetailTbl As DataTable = SQL.ReadRecords($"
+                SELECT DISTINCT ProductionDetail.serial_uid FROM ProductionDetail 
+                LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id 
+                WHERE ProductionDetail.serial_attempt = (
+                    SELECT MAX(serial_attempt)
+                    FROM ProductionDetail t2
+                    WHERE ProductionDetail.lot_usage_id = t2.lot_usage_id
+                )
+                AND LotUsage.lot_id='{LotID}'
+            ")
+            If dtProdDetailTbl.Rows.Count = lotquantity Then
+                continueEndLot = True
+            Else
+                If MsgBox($"Lot Quantity Incomplete. Continue End Lot?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                    continueEndLot = True
+                End If
+            End If
         End If
 
-        If Lotendsuccess = True Then
-            MainMessage(9, LotID)
-        Else
-            MainMessage(10)
+        If continueEndLot = True Then
+            Endlot()
+
+            If Lotendsuccess = True Then
+                MainMessage(9, LotID)
+            Else
+                MainMessage(10)
+            End If
         End If
 
     End Sub
@@ -4862,7 +4886,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         If chart.XAxes.Count > 0 Then
             For i As Integer = 0 To chart.XAxes.Count - 1
                 chart.XAxes(i).MinLimit = 0
-                chart.XAxes(i).MaxLimit = Nothing
+                chart.XAxes(i).MaxLimit = TotalCycleTime
             Next
         End If
 

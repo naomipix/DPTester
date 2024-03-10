@@ -1696,33 +1696,57 @@ Module ModuleOmron
                 End If
             Else
                 ' Machine In Alarm & Warning
-                If PLCstatus(0)(4) = True And PLCstatus(0)(14) = False Then
-                    ' Machine In Alarm Mode
+                'If PLCstatus(0)(4) = True And PLCstatus(0)(14) = False Then
+                '    ' Machine In Alarm Mode
+                '    Currentalarm.Remove(0)
+                '    If Not Currentalarm.ContainsKey(0) Then
+                '        Currentalarm.Add(0, "Machine in Alarm Condition")
+                '    End If
+
+                '    If Alarmtimer.Enabled = False Then
+                '        Alarmtimer.Enabled = True
+                '    End If
+                'ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
+                '    ' Machine In Warning Mode
+                '    Currentalarm.Remove(0)
+                '    Currentalarm.Add(0, "Machine in Warning Condition")
+
+                '    If Alarmtimer.Enabled = False Then
+                '        Alarmtimer.Enabled = True
+                '    End If
+                'ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = True Then
+                '    ' Machine In Alarm & Warning Mode
+                '    Currentalarm.Remove(0)
+                '    If Not Currentalarm.ContainsKey(0) Then
+                '        Currentalarm.Add(0, "Machine in Alarm Condition")
+                '    End If
+
+                '    If Alarmtimer.Enabled = False Then
+                '        Alarmtimer.Enabled = True
+                '    End If
+                'End If
+
+                If PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
+                    ' Warning Mode
                     Currentalarm.Remove(0)
                     If Not Currentalarm.ContainsKey(0) Then
-                        Currentalarm.Add(0, "Machine in Alarm Condition")
+                        Currentalarm.Add(0, "Machine in Warning Condition")
                     End If
 
                     If Alarmtimer.Enabled = False Then
                         Alarmtimer.Enabled = True
                     End If
-                ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
-                    ' Machine In Warning Mode
-                    Currentalarm.Remove(0)
-                    Currentalarm.Add(0, "Machine in Warning Condition")
+                Else
+                    ' Alarm/Warning Mode
+                    If PLCstatus(0)(14) = True Or PLCstatus(0)(4) = True Then
+                        Currentalarm.Remove(0)
+                        If Not Currentalarm.ContainsKey(0) Then
+                            Currentalarm.Add(0, "Machine in Alarm Condition")
+                        End If
 
-                    If Alarmtimer.Enabled = False Then
-                        Alarmtimer.Enabled = True
-                    End If
-                ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = True Then
-                    ' Machine In Alarm & Warning Mode
-                    Currentalarm.Remove(0)
-                    If Not Currentalarm.ContainsKey(0) Then
-                        Currentalarm.Add(0, "Machine in Alarm Condition")
-                    End If
-
-                    If Alarmtimer.Enabled = False Then
-                        Alarmtimer.Enabled = True
+                        If Alarmtimer.Enabled = False Then
+                            Alarmtimer.Enabled = True
+                        End If
                     End If
                 End If
             End If
