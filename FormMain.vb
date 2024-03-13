@@ -3431,8 +3431,17 @@ Public Class FormMain
         txtbx_TitleRecipeID.Text = cmbx_RecipeID.Text
         txtbx_TitlePartID.Text = txtbx_PartID.Text
 
-        Dim dtfilter As DataTable = SQL.ReadRecords($"SELECT PartTable.filter_type_id, FilterType.filter_type, PartTable.jig_type_id, JigType.jig_description From PartTable
-INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.part_id='{txtbx_PartID.Text}' INNER JOIN JigType ON PartTable.jig_type_id = JigType.id")
+        Dim dtfilter As DataTable = SQL.ReadRecords($"
+            SELECT 
+                PartTable.filter_type_id, 
+                FilterType.filter_type, 
+                PartTable.jig_type_id, 
+                JigType.jig_description 
+            From PartTable
+            INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id 
+            AND PartTable.part_id='{txtbx_PartID.Text}' 
+            INNER JOIN JigType ON PartTable.jig_type_id = JigType.id
+        ")
         If dtfilter.Rows.Count > 0 Then
             txtbx_TitleFilterType.Text = dtfilter.Rows(0)("filter_type")
             JigType = dtfilter.Rows(0)("jig_type_id")
@@ -3443,6 +3452,25 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
         End If
 
         Dim dtrecipe As DataTable = SQL.ReadRecords($"SELECT * From RecipeTable WHERE recipe_id ='{Recipe}' ORDER BY recipe_rev DESC")
+
+        ' Load Filter Type
+        If True Then
+            If Not IsDBNull(dtrecipe(0)("filter_inlet")) Then
+                lbl_FilterInletType.Text = dtrecipe(0)("filter_inlet")
+            Else
+                lbl_FilterInletType.Text = ""
+            End If
+            If Not IsDBNull(dtrecipe(0)("filter_outlet")) Then
+                lbl_FilterOutletType.Text = dtrecipe(0)("filter_outlet")
+            Else
+                lbl_FilterOutletType.Text = ""
+            End If
+            If Not IsDBNull(dtrecipe(0)("filter_blank")) Then
+                lbl_FilterBlankType.Text = dtrecipe(0)("filter_blank")
+            Else
+                lbl_FilterBlankType.Text = ""
+            End If
+        End If
 
         If dtrecipe.Rows.Count > 0 Then
             Float2int(30, CType(dtrecipe.Rows(0)("verification_tolerance"), Double))
@@ -4716,6 +4744,10 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             cmbx_RecipeType.Enabled = False
 
             cmbx_RecipeID.Enabled = False
+
+            lbl_FilterInletType.Text = "-"
+            lbl_FilterOutletType.Text = "-"
+            lbl_FilterBlankType.Text = "-"
         End If
 
         If OnContinue = True Then
