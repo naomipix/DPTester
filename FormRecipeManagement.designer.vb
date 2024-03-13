@@ -67,6 +67,7 @@ Partial Class FormRecipeManagement
         Me.dsp_FilterProdSKU = New System.Windows.Forms.Label()
         Me.dsp_FilterCategory = New System.Windows.Forms.Label()
         Me.grpbx_Search = New System.Windows.Forms.GroupBox()
+        Me.cmbx_RcpDetailRecipeIDRev = New System.Windows.Forms.ComboBox()
         Me.cmbx_RcpDetailRecipeID = New System.Windows.Forms.ComboBox()
         Me.dsp_SearchRecipeID = New System.Windows.Forms.Label()
         Me.dgv_RecipeDetails = New System.Windows.Forms.DataGridView()
@@ -280,7 +281,14 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmbx_RcpDetailRecipeIDRev = New System.Windows.Forms.ComboBox()
+        Me.dsp_RcpEditPrepPrefillTime = New System.Windows.Forms.Label()
+        Me.dsp_RcpEditPrepPrefillStartTime = New System.Windows.Forms.Label()
+        Me.txtbx_RcpEditPrepPrefillTime = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpEditPrepPrefillStartTime = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpCreatePrepPrefillTime = New System.Windows.Forms.Label()
+        Me.dsp_RcpCreatePrepPrefillStartTime = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreatePrepPrefillTime = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpCreatePrepPrefillStartTime = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -805,6 +813,16 @@ Partial Class FormRecipeManagement
         Me.grpbx_Search.TabStop = False
         Me.grpbx_Search.Text = "Search"
         '
+        'cmbx_RcpDetailRecipeIDRev
+        '
+        Me.cmbx_RcpDetailRecipeIDRev.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbx_RcpDetailRecipeIDRev.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbx_RcpDetailRecipeIDRev.FormattingEnabled = True
+        Me.cmbx_RcpDetailRecipeIDRev.Location = New System.Drawing.Point(225, 41)
+        Me.cmbx_RcpDetailRecipeIDRev.Name = "cmbx_RcpDetailRecipeIDRev"
+        Me.cmbx_RcpDetailRecipeIDRev.Size = New System.Drawing.Size(90, 25)
+        Me.cmbx_RcpDetailRecipeIDRev.TabIndex = 10
+        '
         'cmbx_RcpDetailRecipeID
         '
         Me.cmbx_RcpDetailRecipeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
@@ -863,6 +881,10 @@ Partial Class FormRecipeManagement
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepPrefillTime)
+        Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepPrefillStartTime)
+        Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepPrefillTime)
+        Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepPrefillStartTime)
         Me.Panel2.Controls.Add(Me.dsp_EditPreparation)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPressureDropTime)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPressureDrop)
@@ -879,7 +901,7 @@ Partial Class FormRecipeManagement
         Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepFill)
         Me.Panel2.Location = New System.Drawing.Point(575, 135)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(307, 371)
+        Me.Panel2.Size = New System.Drawing.Size(307, 470)
         Me.Panel2.TabIndex = 34
         '
         'dsp_EditPreparation
@@ -1943,6 +1965,10 @@ Partial Class FormRecipeManagement
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepPrefillTime)
+        Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepPrefillStartTime)
+        Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepPrefillTime)
+        Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepPrefillStartTime)
         Me.Panel3.Controls.Add(Me.dsp_CreatePreparation)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepPressureDropTime)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepPressureDrop)
@@ -1959,7 +1985,7 @@ Partial Class FormRecipeManagement
         Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepFill)
         Me.Panel3.Location = New System.Drawing.Point(575, 135)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(307, 371)
+        Me.Panel3.Size = New System.Drawing.Size(307, 470)
         Me.Panel3.TabIndex = 35
         '
         'dsp_CreatePreparation
@@ -3047,15 +3073,77 @@ Partial Class FormRecipeManagement
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'cmbx_RcpDetailRecipeIDRev
+        'dsp_RcpEditPrepPrefillTime
         '
-        Me.cmbx_RcpDetailRecipeIDRev.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbx_RcpDetailRecipeIDRev.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbx_RcpDetailRecipeIDRev.FormattingEnabled = True
-        Me.cmbx_RcpDetailRecipeIDRev.Location = New System.Drawing.Point(225, 41)
-        Me.cmbx_RcpDetailRecipeIDRev.Name = "cmbx_RcpDetailRecipeIDRev"
-        Me.cmbx_RcpDetailRecipeIDRev.Size = New System.Drawing.Size(90, 25)
-        Me.cmbx_RcpDetailRecipeIDRev.TabIndex = 10
+        Me.dsp_RcpEditPrepPrefillTime.Location = New System.Drawing.Point(17, 394)
+        Me.dsp_RcpEditPrepPrefillTime.Name = "dsp_RcpEditPrepPrefillTime"
+        Me.dsp_RcpEditPrepPrefillTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditPrepPrefillTime.TabIndex = 34
+        Me.dsp_RcpEditPrepPrefillTime.Text = "Prep Prefill Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.dsp_RcpEditPrepPrefillTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpEditPrepPrefillStartTime
+        '
+        Me.dsp_RcpEditPrepPrefillStartTime.Location = New System.Drawing.Point(17, 346)
+        Me.dsp_RcpEditPrepPrefillStartTime.Name = "dsp_RcpEditPrepPrefillStartTime"
+        Me.dsp_RcpEditPrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditPrepPrefillStartTime.TabIndex = 35
+        Me.dsp_RcpEditPrepPrefillStartTime.Text = "Prep Prefill" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Start Time (s) :"
+        Me.dsp_RcpEditPrepPrefillStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpEditPrepPrefillTime
+        '
+        Me.txtbx_RcpEditPrepPrefillTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditPrepPrefillTime.Location = New System.Drawing.Point(183, 402)
+        Me.txtbx_RcpEditPrepPrefillTime.MaxLength = 3
+        Me.txtbx_RcpEditPrepPrefillTime.Name = "txtbx_RcpEditPrepPrefillTime"
+        Me.txtbx_RcpEditPrepPrefillTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditPrepPrefillTime.TabIndex = 37
+        '
+        'txtbx_RcpEditPrepPrefillStartTime
+        '
+        Me.txtbx_RcpEditPrepPrefillStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditPrepPrefillStartTime.Location = New System.Drawing.Point(183, 354)
+        Me.txtbx_RcpEditPrepPrefillStartTime.MaxLength = 3
+        Me.txtbx_RcpEditPrepPrefillStartTime.Name = "txtbx_RcpEditPrepPrefillStartTime"
+        Me.txtbx_RcpEditPrepPrefillStartTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditPrepPrefillStartTime.TabIndex = 38
+        '
+        'dsp_RcpCreatePrepPrefillTime
+        '
+        Me.dsp_RcpCreatePrepPrefillTime.Location = New System.Drawing.Point(17, 394)
+        Me.dsp_RcpCreatePrepPrefillTime.Name = "dsp_RcpCreatePrepPrefillTime"
+        Me.dsp_RcpCreatePrepPrefillTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreatePrepPrefillTime.TabIndex = 39
+        Me.dsp_RcpCreatePrepPrefillTime.Text = "Prep Prefill Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.dsp_RcpCreatePrepPrefillTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpCreatePrepPrefillStartTime
+        '
+        Me.dsp_RcpCreatePrepPrefillStartTime.Location = New System.Drawing.Point(17, 346)
+        Me.dsp_RcpCreatePrepPrefillStartTime.Name = "dsp_RcpCreatePrepPrefillStartTime"
+        Me.dsp_RcpCreatePrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreatePrepPrefillStartTime.TabIndex = 40
+        Me.dsp_RcpCreatePrepPrefillStartTime.Text = "Prep Prefill" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Start Time (s) :"
+        Me.dsp_RcpCreatePrepPrefillStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpCreatePrepPrefillTime
+        '
+        Me.txtbx_RcpCreatePrepPrefillTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreatePrepPrefillTime.Location = New System.Drawing.Point(183, 402)
+        Me.txtbx_RcpCreatePrepPrefillTime.MaxLength = 3
+        Me.txtbx_RcpCreatePrepPrefillTime.Name = "txtbx_RcpCreatePrepPrefillTime"
+        Me.txtbx_RcpCreatePrepPrefillTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreatePrepPrefillTime.TabIndex = 41
+        '
+        'txtbx_RcpCreatePrepPrefillStartTime
+        '
+        Me.txtbx_RcpCreatePrepPrefillStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreatePrepPrefillStartTime.Location = New System.Drawing.Point(183, 354)
+        Me.txtbx_RcpCreatePrepPrefillStartTime.MaxLength = 3
+        Me.txtbx_RcpCreatePrepPrefillStartTime.Name = "txtbx_RcpCreatePrepPrefillStartTime"
+        Me.txtbx_RcpCreatePrepPrefillStartTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreatePrepPrefillStartTime.TabIndex = 42
         '
         'FormRecipeManagement
         '
@@ -3393,4 +3481,12 @@ Partial Class FormRecipeManagement
     Friend WithEvents txtbx_RcpCreatePrepBleed As TextBox
     Friend WithEvents txtbx_RcpCreatePrepFill As TextBox
     Friend WithEvents cmbx_RcpDetailRecipeIDRev As ComboBox
+    Friend WithEvents dsp_RcpEditPrepPrefillTime As Label
+    Friend WithEvents dsp_RcpEditPrepPrefillStartTime As Label
+    Friend WithEvents txtbx_RcpEditPrepPrefillTime As TextBox
+    Friend WithEvents txtbx_RcpEditPrepPrefillStartTime As TextBox
+    Friend WithEvents dsp_RcpCreatePrepPrefillTime As Label
+    Friend WithEvents dsp_RcpCreatePrepPrefillStartTime As Label
+    Friend WithEvents txtbx_RcpCreatePrepPrefillTime As TextBox
+    Friend WithEvents txtbx_RcpCreatePrepPrefillStartTime As TextBox
 End Class

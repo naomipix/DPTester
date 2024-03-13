@@ -2723,7 +2723,7 @@ Public Class FormMain
             Case 10
                 Return MsgBox($"Query unsuccessful, Lot End data not registered", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 11
-                Return MsgBox($"Are You Sure, Do you want to Abort/Discard Calibration?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning")
+                Return MsgBox($"Are You Sure to Abort/Discard Calibration?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning")
             Case Else
                 Exit Select
 
@@ -2917,6 +2917,39 @@ Public Class FormMain
         'Insert New record into the Work Order Table
         If OnContinue = True Then
             Dim dtlot As DataTable = SQL.ReadRecords($"SELECT * FROM WorkOrder WHERE lot_id ='{LotID}'")
+
+            ' Check Quantity
+            If OnContinue = True Then
+                If dtlot.Rows.Count > 0 Then
+                    If Quantity < dtlot.Rows(0)("quantity") Then
+                        Dim dtProdDetailTbl As DataTable = SQL.ReadRecords($"
+                            SELECT DISTINCT ProductionDetail.serial_uid FROM ProductionDetail 
+                            LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id 
+                            WHERE ProductionDetail.serial_attempt = (
+                                SELECT MAX(serial_attempt)
+                                FROM ProductionDetail t2
+                                WHERE ProductionDetail.lot_usage_id = t2.lot_usage_id
+                            )
+                            AND LotUsage.lot_id='{LotID}'
+                        ")
+
+                        If Quantity < dtProdDetailTbl.Rows.Count Then
+                            OnContinue = False
+                            MsgBox($"Lot Quantity must not be less than Processed Quantity", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                        End If
+
+                        If OnContinue = True Then
+                            If Quantity > dtProdDetailTbl.Rows.Count Then
+                                If MsgBox($"Lot Quantity more than existing record of {dtlot.Rows(0)("quantity")}, Continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.No Then
+                                    OnContinue = False
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+
+            ' Insert Work Order
             If OnContinue = True Then
                 If dtlot.Rows.Count = 0 Then
                     Dim Workorderparameter As New Dictionary(Of String, Object) From {
@@ -2945,7 +2978,7 @@ Public Class FormMain
                 If dtlot.Rows.Count > 0 Then
 
                     If dtlot.Rows(0)("part_id") = PartID And dtlot.Rows(0)("confirmation_id") = ConfirmationID And dtlot.Rows(0)("work_order") = Workorder Then
-                        If MsgBox($"This Lot {LotID} has already been processed in the machine, Do you want to proceed?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                        If MsgBox($"This Lot {LotID} has already been processed, Continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
                             'dtlotusage = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id ='{LotID}' AND NOT calibration_time IS NULL ORDER BY lot_attempt ASC")
                             dtlotusage = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id ='{LotID}' ORDER BY lot_attempt ASC")
                             If dtlotusage.Rows.Count > 0 Then
@@ -3109,7 +3142,7 @@ Public Class FormMain
                 Dim Lotusageparameter As New Dictionary(Of String, Object) From {
                     {"lot_id", LotID},
                     {"lot_attempt", LotAttempt},
-                    {"lot_start_time", DateTime.Now}, 'LotStartTime not updated, causing sql insert error
+                    {"lot_start_time", lbl_DateTimeClock.Text}, 'DateTime.Now 'LotStartTime not updated, causing sql insert error
                     {"run_by", PublicVariables.LoginUserName}
                 }
                 If SQL.InsertRecord("LotUsage", Lotusageparameter) = 1 Then
@@ -3163,6 +3196,7 @@ Public Class FormMain
                                     WHERE t1.recipe_id = t2.recipe_id
                                 )
                                 AND recipe_id='{LastLotRecipeID}'
+                                AND recipe_rev={LastLotRecipeRev}
                             ")
 
                             If dtRecipeTable.Rows.Count > 0 Then
@@ -3174,15 +3208,16 @@ Public Class FormMain
 
                         If RecipeCheckOK Then
                             Dim restoreCalibrations As Boolean = False
-                            Dim CurrentDateTime As DateTime = DateTime.Now
+                            Dim CurrentDateTime As String = lbl_DateTimeClock.Text
+                            Dim CurrentDateTime2 As DateTime = DateTime.Now
                             Dim PrevCalDateTime As DateTime = dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")
 
-                            If CurrentDateTime <= PrevCalDateTime Then
+                            If CDate(CurrentDateTime) <= PrevCalDateTime.AddDays(1) Then
                                 restoreCalibrations = True
                             End If
 
                             If restoreCalibrations = False Then
-                                If MsgBox($"Do you want continue with last calibration? Last Calibrated: {LastLotCalTime}, with Calibration Offset of {LastLotCalOffset} and Calibration Result as {LastLotCalResult}", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                                If MsgBox($"Continue with last calibration? Last Calibrated: {LastLotCalTime}, Calibration Offset: {LastLotCalOffset}, Calibration Result: {LastLotCalResult}", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
                                     restoreCalibrations = True
                                 End If
                             End If
@@ -3218,57 +3253,18 @@ Public Class FormMain
                                         ' Update Lot Usage Table w/Calibration Details
                                         If True Then
                                             Dim Updateparameter As New Dictionary(Of String, Object) From {
-                                            {"recipe_id", dtlotusage(dtlotusage.Rows.Count - 1)("recipe_id")},
-                                            {"recipe_rev", dtlotusage(dtlotusage.Rows.Count - 1)("recipe_rev")},
-                                            {"calibration_time", dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")},
-                                            {"cal_inlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_inlet_pressure")},
-                                            {"cal_outlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_outlet_pressure")},
-                                            {"cal_diff_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")},
-                                            {"verify_inlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_inlet_pressure")},
-                                            {"verify_outlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_outlet_pressure")},
-                                            {"verify_diff_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_diff_pressure")},
-                                            {"cal_result", dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")},
-                                            {"cal_cycle_time", dtlotusage(dtlotusage.Rows.Count - 1)("cal_cycle_time")},
-                                                                                                                        _
-                                            {"verification_tolerance", dtlotusage(dtlotusage.Rows.Count - 1)("verification_tolerance")},
-                                            {"firstflush_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_circuit")},
-                                            {"firstflush_fill_time", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_fill_time")},
-                                            {"firstflush_bleed_time", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_bleed_time")},
-                                            {"firstflush_flowrate", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_flowrate")},
-                                            {"firstflush_flow_tolerance", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_flow_tolerance")},
-                                            {"firstflush_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_back_pressure")},
-                                            {"firstflush_stabilize_time", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_stabilize_time")},
-                                            {"firstflush_time", dtlotusage(dtlotusage.Rows.Count - 1)("firstflush_time")},
-                                            {"firstdp_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("firstdp_circuit")},
-                                            {"dp_fill_time", dtlotusage(dtlotusage.Rows.Count - 1)("dp_fill_time")},
-                                            {"dp_bleed_time", dtlotusage(dtlotusage.Rows.Count - 1)("dp_bleed_time")},
-                                            {"dp_flowrate", dtlotusage(dtlotusage.Rows.Count - 1)("dp_flowrate")},
-                                            {"dp_flow_tolerance", dtlotusage(dtlotusage.Rows.Count - 1)("dp_flow_tolerance")},
-                                            {"dp_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("dp_back_pressure")},
-                                            {"dp_stabilize_time", dtlotusage(dtlotusage.Rows.Count - 1)("dp_stabilize_time")},
-                                            {"dp_test_time", dtlotusage(dtlotusage.Rows.Count - 1)("dp_test_time")},
-                                            {"dp_lowerlimit", dtlotusage(dtlotusage.Rows.Count - 1)("dp_lowerlimit")},
-                                            {"dp_upperlimit", dtlotusage(dtlotusage.Rows.Count - 1)("dp_upperlimit")},
-                                            {"dp_testpoints", dtlotusage(dtlotusage.Rows.Count - 1)("dp_testpoints")},
-                                            {"seconddp_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("seconddp_circuit")},
-                                            {"secondflush_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_circuit")},
-                                            {"secondflush_fill_time", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_fill_time")},
-                                            {"secondflush_bleed_time", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_bleed_time")},
-                                            {"secondflush_flowrate", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_flowrate")},
-                                            {"secondflush_flow_tolerance", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_flow_tolerance")},
-                                            {"secondflush_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_back_pressure")},
-                                            {"secondflush_stabilize_time", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_stabilize_time")},
-                                            {"secondflush_time", dtlotusage(dtlotusage.Rows.Count - 1)("secondflush_time")},
-                                            {"drain1_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("drain1_circuit")},
-                                            {"drain1_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("drain1_back_pressure")},
-                                            {"drain1_time", dtlotusage(dtlotusage.Rows.Count - 1)("drain1_time")},
-                                            {"drain2_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("drain2_circuit")},
-                                            {"drain2_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("drain2_back_pressure")},
-                                            {"drain2_time", dtlotusage(dtlotusage.Rows.Count - 1)("drain2_time")},
-                                            {"drain3_circuit", dtlotusage(dtlotusage.Rows.Count - 1)("drain3_circuit")},
-                                            {"drain3_back_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("drain3_back_pressure")},
-                                            {"drain3_time", dtlotusage(dtlotusage.Rows.Count - 1)("drain3_time")}
-                                        }
+                                                {"recipe_id", dtlotusage(dtlotusage.Rows.Count - 1)("recipe_id")},
+                                                {"recipe_rev", dtlotusage(dtlotusage.Rows.Count - 1)("recipe_rev")},
+                                                {"calibration_time", dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")},
+                                                {"cal_inlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_inlet_pressure")},
+                                                {"cal_outlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_outlet_pressure")},
+                                                {"cal_diff_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("cal_diff_pressure")},
+                                                {"verify_inlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_inlet_pressure")},
+                                                {"verify_outlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_outlet_pressure")},
+                                                {"verify_diff_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_diff_pressure")},
+                                                {"cal_result", dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")},
+                                                {"cal_cycle_time", dtlotusage(dtlotusage.Rows.Count - 1)("cal_cycle_time")}
+                                            }
                                             Dim Condition As String = $"lot_id='{LotID}' AND lot_attempt='{LotAttempt}'"
 
                                             If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
@@ -3310,6 +3306,8 @@ Public Class FormMain
         Dim continueEndLot As Boolean = False
 
         If MainMessage(8, LotID) = DialogResult.Yes Then
+            Dim TxtbxQty As Integer = 0
+
             Dim dtProdDetailTbl As DataTable = SQL.ReadRecords($"
                 SELECT DISTINCT ProductionDetail.serial_uid FROM ProductionDetail 
                 LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id 
@@ -3320,7 +3318,10 @@ Public Class FormMain
                 )
                 AND LotUsage.lot_id='{LotID}'
             ")
-            If dtProdDetailTbl.Rows.Count = lotquantity Then
+
+            Integer.TryParse(txtbx_Quantity.Text, TxtbxQty)
+
+            If dtProdDetailTbl.Rows.Count = TxtbxQty Then
                 continueEndLot = True
             Else
                 If MsgBox($"Lot Quantity Incomplete. Continue End Lot?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
@@ -3539,6 +3540,11 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             End If
             DInt2int(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
 
+
+            DInt2int(140, CType(dtrecipe.Rows(0)("prep_prefill_start_time"), Integer))
+
+            DInt2int(142, CType(dtrecipe.Rows(0)("prep_prefill_time"), Integer))
+
         End If
 
 
@@ -3590,8 +3596,29 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             End If
 
             If Oncontinue = True Then
+                Dim CSerialNum As Integer
+                Dim TxtbxQty As Integer
+
+                If Not Integer.TryParse(txtbx_SerialNumber.Text, CSerialNum) Then
+                    Oncontinue = False
+                    MsgBox($"Serial Number Parse Error", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                End If
+                If Not Integer.TryParse(txtbx_Quantity.Text, TxtbxQty) Then
+                    Oncontinue = False
+                    MsgBox($"Lot Quantity Parse Error", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                End If
+
+                If Oncontinue = True Then
+                    If CSerialNum > TxtbxQty Then
+                        Oncontinue = False
+                        MsgBox($"S/N must not be more than Lot Quantity", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                    End If
+                End If
+            End If
+
+            If Oncontinue = True Then
                 If SerialPrevResult = "Pass" Then
-                    If MsgBox($"This Serial Number {SerialUid} has already been tested and have ""Passed"" the test In the machine, Do you want to Test it again?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                    If MsgBox($"This S/N {SerialUid} tested with ""Pass"", continue with test?", MsgBoxStyle.Information Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
                         Oncontinue = True
                     Else
                         Oncontinue = False
@@ -3632,7 +3659,7 @@ INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id AND PartTable.
             End If
 
         Else
-            MsgBox($"Serial Number length mismatch, Please Input Serial Number Correctly!", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Warning")
+            MsgBox($"S/N Length Mismatch", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
         End If
     End Sub
 

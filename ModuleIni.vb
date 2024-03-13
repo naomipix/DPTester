@@ -171,6 +171,8 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_d_preppressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_BackPressure", "0")
             PublicVariables.Limit_Min_d_preppressuredrop = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_BackPressureDrop", "0")
             PublicVariables.Limit_Min_i_preppressuredroptime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_BackPressureDropTime", "0")
+            PublicVariables.Limit_Min_i_prepprefillstarttime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_PrefillStartTime", "0")
+            PublicVariables.Limit_Min_i_prepprefilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_PrefillTime", "0")
 
             'PublicVariables.Limit_Min_i_flush1filltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush1_FillTime", "0")
             'PublicVariables.Limit_Min_i_flush1bleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush1_BleedTime", "0")
@@ -245,6 +247,8 @@ Module IniFileInitialize
             PublicVariables.Limit_Max_d_preppressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressure", "500")
             PublicVariables.Limit_Max_d_preppressuredrop = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressureDrop", "500")
             PublicVariables.Limit_Max_i_preppressuredroptime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressureDropTime", "600")
+            PublicVariables.Limit_Max_i_prepprefillstarttime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_PrefillStartTime", "600")
+            PublicVariables.Limit_Max_i_prepprefilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_PrefillTime", "600")
 
             'PublicVariables.Limit_Max_i_flush1filltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_FillTime", "600")
             'PublicVariables.Limit_Max_i_flush1bleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_BleedTime", "600")

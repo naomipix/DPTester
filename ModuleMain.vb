@@ -13,7 +13,8 @@ Imports LiveChartsCore.SkiaSharpView.WinForms
 
 Module PublicVariables
     ' Version
-    Public AppVersion As String = "Ver. " & "1.0.0.1"
+    'Public AppVersion As String = "Ver. " & "1.0.0.1"
+    Public AppVersion As String = "Ver. " & "1.0.0"
 
     ' License Status
     Public LicenseType As String = ""
@@ -142,6 +143,8 @@ Module PublicVariables
     Public Limit_Min_d_preppressure As Decimal
     Public Limit_Min_d_preppressuredrop As Decimal
     Public Limit_Min_i_preppressuredroptime As Integer
+    Public Limit_Min_i_prepprefillstarttime As Integer
+    Public Limit_Min_i_prepprefilltime As Integer
 
     'Public Limit_Min_i_flush1filltime As Integer
     'Public Limit_Min_i_flush1bleedtime As Integer
@@ -193,6 +196,8 @@ Module PublicVariables
     Public Limit_Max_d_preppressure As Decimal
     Public Limit_Max_d_preppressuredrop As Decimal
     Public Limit_Max_i_preppressuredroptime As Integer
+    Public Limit_Max_i_prepprefillstarttime As Integer
+    Public Limit_Max_i_prepprefilltime As Integer
 
     'Public Limit_Max_i_flush1filltime As Integer
     'Public Limit_Max_i_flush1bleedtime As Integer

@@ -28,6 +28,9 @@ Module ModuleOmron
     Public WithEvents Alarmtimer As New Timer()
     Public WithEvents Calseqtimer As New Timer()
     Public WithEvents Resultcapturetimer As New Timer()
+    Public ResultendtimerStartTime As DateTime
+    Public WithEvents Resultendtimer As New Timer()
+    Public WithEvents LblUpdateTimer As New Timer()
     Public PLCstatus(2)() As Boolean
     Public ToolCounterreset(1)() As Boolean
     Public PCStatus(2)() As Boolean
@@ -102,11 +105,14 @@ Module ModuleOmron
 
         PLCtimer.Interval = 100
         PLCtimer.Enabled = True
+        LblUpdateTimer.Interval = 100
+        LblUpdateTimer.Enabled = True
         PCtimer.Interval = 3000
         Alarmtimer.Interval = 3000
 
         Calseqtimer.Interval = 2000
         Resultcapturetimer.Interval = 500
+        Resultendtimer.Interval = 100
 
         For i As Integer = 0 To 2
 
@@ -1536,6 +1542,10 @@ Module ModuleOmron
 
 
 #Region "Top Label Status Update"
+    Private Sub LblUpdateTimer_Ticks(sender As Object, e As EventArgs) Handles LblUpdateTimer.Tick
+        LabelStatusupdate()
+    End Sub
+
     Public Sub LabelStatusupdate()
         'To Update the Status of the Header Bar in all Forms
         If CommLost = False Then
@@ -2022,13 +2032,29 @@ Module ModuleOmron
 
         If result_samplingtime = MainCycletime Then
             PCStatus(1)(11) = True
-            Calculatefinalresult()
+            'Calculatefinalresult()
+            ResultendtimerStartTime = DateTime.Now
+            Resultendtimer.Enabled = True
 
             'Resultcapturetimer.Enabled = False
         End If
     End Sub
 
+    Private Sub Resultendtimer_Ticks(sender As Object, e As EventArgs) Handles Resultendtimer.Tick
+        Dim ResultEndTime As DateTime = ResultendtimerStartTime.AddSeconds(10)
 
+        If DateTime.Now > ResultEndTime Then
+            Resultendtimer.Enabled = False
+
+            Calculatefinalresult()
+        Else
+            If PLCstatus(1)(11) = True Then
+                Resultendtimer.Enabled = False
+
+                Calculatefinalresult()
+            End If
+        End If
+    End Sub
 
     Public Sub Calculatefinalresult()
         Resultcapturetimer.Enabled = False

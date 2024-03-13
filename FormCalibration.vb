@@ -93,6 +93,10 @@ Public Class FormCalibration
     ' For Chart XLimit Use
     Private TotalCycleTime As Integer
 
+    ' For End Sequence Use
+    Dim CalEndTime As DateTime
+    Dim VerEndTime As DateTime
+
 
 
     Private Sub FormCalibration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -158,7 +162,7 @@ Public Class FormCalibration
                             {"cal_inlet_pressure", "0"},
                             {"cal_outlet_pressure", "0"},
                             {"cal_diff_pressure", "0"},
-                             {"verify_inlet_pressure", "0"},
+                            {"verify_inlet_pressure", "0"},
                             {"verify_outlet_pressure", "0"},
                             {"verify_diff_pressure", "0"},
                             {"cal_result", "Pass"},
@@ -921,9 +925,27 @@ Public Class FormCalibration
 
             PCStatus(1)(4) = True
             VerificationRun()
+            'CalEndTime = DateTime.Now
+            'tmr_Calibration_EndSeq.Enabled = True
             tmr_Calibration.Enabled = False
         End If
 
+    End Sub
+
+    Private Sub tmr_Calibration_EndSeq_Tick(sender As Object, e As EventArgs) Handles tmr_Calibration_EndSeq.Tick
+        Dim CalEndTimeInterval As DateTime = CalEndTime.AddSeconds(10)
+
+        If DateTime.Now > CalEndTimeInterval Then
+            tmr_Calibration_EndSeq.Enabled = False
+
+            VerificationRun()
+        Else
+            If PLCstatus(1)(4) = True Then
+                tmr_Calibration_EndSeq.Enabled = False
+
+                VerificationRun()
+            End If
+        End If
     End Sub
 
     Private Sub btn_Verify_Click(sender As Object, e As EventArgs) Handles btn_Verify.Click
@@ -1223,6 +1245,22 @@ Public Class FormCalibration
         End If
     End Sub
 
+    Private Sub tmr_Verification_EndSeq_Tick(sender As Object, e As EventArgs) Handles tmr_Verification_EndSeq.Tick
+        Dim VerEndTimeInterval As DateTime = VerEndTime.AddSeconds(10)
+
+        If DateTime.Now > VerEndTimeInterval Then
+            tmr_Verification_EndSeq.Enabled = False
+
+            txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+        Else
+            If PLCstatus(1)(5) = True Then
+                tmr_Verification_EndSeq.Enabled = False
+
+                txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+            End If
+        End If
+    End Sub
+
     Private Sub txtbx_VerDP_TextChanged(sender As Object, e As EventArgs) Handles txtbx_VerDP.TextChanged
         Dim CurrentDate As DateTime = DateTime.Now
 
@@ -1267,7 +1305,7 @@ Public Class FormCalibration
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                         {"recipe_id", txtbx_RecipeID.Text},
                         {"recipe_rev", txtbx_RecipeRev.Text},
-                        {"calibration_time", CurrentDate},
+                        {"calibration_time", txtbx_CalDate.Text},
                         {"cal_inlet_pressure", Cal_finalInlet.ToString},
                         {"cal_outlet_pressure", Cal_finalOutlet.ToString},
                         {"cal_diff_pressure", txtbx_CalOffset.Text},
@@ -1323,8 +1361,8 @@ Public Class FormCalibration
                         PCStatus(1)(6) = True
                         If onContinue = True Then
                             Dim calstatusparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", txtbx_CalResult.Text}
-                        }
+                                {"retained_value", txtbx_CalResult.Text}
+                            }
                             Dim calstatuscondition As String = $"id='30'"
                             If SQL.UpdateRecord($"[0_RetainedMemory]", calstatusparameter, calstatuscondition) = 1 Then
                                 onContinue = True
@@ -1336,8 +1374,8 @@ Public Class FormCalibration
 
                         If onContinue = True Then
                             Dim caloffsetparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", txtbx_CalOffset.Text}
-                        }
+                                {"retained_value", txtbx_CalOffset.Text}
+                            }
                             Dim caloffsetcondition As String = $"id='31'"
                             If SQL.UpdateRecord($"[0_RetainedMemory]", caloffsetparameter, caloffsetcondition) = 1 Then
                                 onContinue = True
@@ -1349,8 +1387,8 @@ Public Class FormCalibration
 
                         If onContinue = True Then
                             Dim caldatetimeparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", CStr(txtbx_CalDate.Text)}
-                        }
+                                {"retained_value", CStr(txtbx_CalDate.Text)}
+                            }
                             Dim caldatetimecondition As String = $"id='32'"
                             If SQL.UpdateRecord($"[0_RetainedMemory]", caldatetimeparameter, caldatetimecondition) = 1 Then
                                 onContinue = True
@@ -2165,6 +2203,7 @@ Public Class FormCalibration
                 checkbx_GraphRPM.Checked = True
                 'SetVisibleLineSeries()
 
+                tmr_Calibration_EndSeq.Enabled = False
                 tmr_Calibration.Enabled = True
             End If
         Else
@@ -2227,6 +2266,7 @@ Public Class FormCalibration
                 CalibrateChartFLWRValue.Clear()
                 CalibrateChartTempValue.Clear()
 
+                tmr_Verification_EndSeq.Enabled = False
                 tmr_Verification.Enabled = True
             End If
         Else

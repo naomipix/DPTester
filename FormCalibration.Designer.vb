@@ -127,6 +127,8 @@ Partial Class FormCalibration
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tmr_Calibration = New System.Windows.Forms.Timer(Me.components)
         Me.tmr_Verification = New System.Windows.Forms.Timer(Me.components)
+        Me.tmr_Calibration_EndSeq = New System.Windows.Forms.Timer(Me.components)
+        Me.tmr_Verification_EndSeq = New System.Windows.Forms.Timer(Me.components)
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -1328,6 +1330,12 @@ Partial Class FormCalibration
         'tmr_Verification
         '
         '
+        'tmr_Calibration_EndSeq
+        '
+        '
+        'tmr_Verification_EndSeq
+        '
+        '
         'FormCalibration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1467,4 +1475,6 @@ Partial Class FormCalibration
     Friend WithEvents txtbx_RecipeRev As TextBox
     Friend WithEvents dsp_RecipeRev As Label
     Friend WithEvents btn_ResetZoom As Button
+    Friend WithEvents tmr_Calibration_EndSeq As Timer
+    Friend WithEvents tmr_Verification_EndSeq As Timer
 End Class
