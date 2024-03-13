@@ -502,7 +502,8 @@ Public Class FormRecipeManagement
         GetRecipedetailsfilter()
         GetRecipeID()
 
-
+        ' Load Fitting Type
+        GetFittingType()
     End Sub
 
     Private Sub FormRecipeManagement_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -983,6 +984,10 @@ Public Class FormRecipeManagement
             checkbx_CreateDrain2.Enabled = True
             checkbx_CreateDrain3.Enabled = True
 
+            ComboBox3.Enabled = True
+            ComboBox4.Enabled = True
+            ComboBox6.Enabled = True
+
             ' For Preparation Sequence
             txtbx_RcpCreatePrepFill.Enabled = True
             txtbx_RcpCreatePrepBleed.Enabled = True
@@ -1023,6 +1028,9 @@ Public Class FormRecipeManagement
             checkbx_CreateDrain1.Enabled = False
             checkbx_CreateDrain2.Enabled = False
             checkbx_CreateDrain3.Enabled = False
+            ComboBox3.Enabled = False
+            ComboBox4.Enabled = False
+            ComboBox6.Enabled = False
             txtbx_RcpCreatePrepFill.Enabled = False
             txtbx_RcpCreatePrepBleed.Enabled = False
             txtbx_RcpCreatePrepFlow.Enabled = False
@@ -3519,6 +3527,14 @@ Public Class FormRecipeManagement
             End If
         End If
 
+        ' Check if filter types are available/selected
+        If True Then
+            If ComboBox3.Items.Count > 0 And ComboBox4.Items.Count > 0 And ComboBox6.Items.Count > 0 Then
+            Else
+                onContinue = False
+                MsgBox("Filter Types Not Selected", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            End If
+        End If
 
         If onContinue = True Then
             ' Upon all previous conditions are true,
@@ -3533,6 +3549,9 @@ Public Class FormRecipeManagement
                     {"last_modified_time", lbl_DateTimeClock.Text},
                     {"user_created", PublicVariables.LoginUserName},
                     {"created_time", lbl_DateTimeClock.Text},
+                    {"filter_inlet", IIf(ComboBox3.Items.Count > 0, ComboBox3.SelectedItem, "")},
+                    {"filter_outlet", IIf(ComboBox4.Items.Count > 0, ComboBox4.SelectedItem, "")},
+                    {"filter_blank", IIf(ComboBox6.Items.Count > 0, ComboBox6.SelectedItem, "")},
                     {"verification_tolerance", d_vertol},
                     {"prep_fill_time", i_prepfilltime},
                     {"prep_bleed_time", i_prepbleedtime},
@@ -3732,6 +3751,9 @@ Public Class FormRecipeManagement
                     {"last_modified_time", dtDuplicaterecipe(0)("last_modified_time")},
                     {"user_created", dtDuplicaterecipe(0)("user_created")},
                     {"created_time", dtDuplicaterecipe(0)("created_time")},
+                    {"filter_inlet", dtDuplicaterecipe(0)("filter_inlet")},
+                    {"filter_outlet", dtDuplicaterecipe(0)("filter_outlet")},
+                    {"filter_blank", dtDuplicaterecipe(0)("filter_blank")},
                     {"verification_tolerance", dtDuplicaterecipe(0)("verification_tolerance")},
                                                                                                _
                     {"prep_fill_time", dtDuplicaterecipe(0)("prep_fill_time")},
@@ -3740,7 +3762,9 @@ Public Class FormRecipeManagement
                     {"prep_back_pressure", dtDuplicaterecipe(0)("prep_back_pressure")},
                     {"prep_pressure_drop", dtDuplicaterecipe(0)("prep_pressure_drop")},
                     {"prep_pressure_drop_time", dtDuplicaterecipe(0)("prep_pressure_drop_time")},
-                                                                               _
+                    {"prep_prefill_start_time", dtDuplicaterecipe(0)("prep_prefill_start_time")},
+                    {"prep_prefill_time", dtDuplicaterecipe(0)("prep_prefill_time")},
+                                                                                     _
                     {"firstflush_circuit", dtDuplicaterecipe(0)("firstflush_circuit")},
                                                                                        _ '{"firstflush_fill_time", duplicaterecipe(10)},
                                                                                        _ '{"firstflush_bleed_time", duplicaterecipe(11)},
@@ -4908,6 +4932,10 @@ Public Class FormRecipeManagement
         'cmbx_RcpEditRecipeID.Enabled=false
         txtbx_RcpEditVerTol.Enabled = True
 
+        ComboBox9.Enabled = True
+        ComboBox8.Enabled = True
+        ComboBox7.Enabled = True
+
         txtbx_RcpEditPrepFill.Enabled = True
         txtbx_RcpEditPrepBleed.Enabled = True
         txtbx_RcpEditPrepFlow.Enabled = True
@@ -5155,6 +5183,16 @@ Public Class FormRecipeManagement
 
         txtbx_RcpEditVerTol.Text = CType(d_vertol, String)
 
+        If Not IsDBNull(dtRecipe(0)("filter_inlet")) Then
+            ComboBox9.SelectedIndex = ComboBox9.FindStringExact(dtRecipe(0)("filter_inlet"))
+        End If
+        If Not IsDBNull(dtRecipe(0)("filter_outlet")) Then
+            ComboBox8.SelectedIndex = ComboBox8.FindStringExact(dtRecipe(0)("filter_outlet"))
+        End If
+        If Not IsDBNull(dtRecipe(0)("filter_blank")) Then
+            ComboBox7.SelectedIndex = ComboBox7.FindStringExact(dtRecipe(0)("filter_blank"))
+        End If
+
         txtbx_RcpEditPrepFill.Text = CType(i_prepfilltime, String)
         txtbx_RcpEditPrepBleed.Text = CType(i_prepbleedtime, String)
         txtbx_RcpEditPrepFlow.Text = CType(d_prepflow, String)
@@ -5265,6 +5303,10 @@ Public Class FormRecipeManagement
             End If
         Else
             txtbx_RcpEditVerTol.Enabled = False
+
+            ComboBox9.Enabled = False
+            ComboBox8.Enabled = False
+            ComboBox7.Enabled = False
 
             txtbx_RcpEditPrepFill.Enabled = False
             txtbx_RcpEditPrepBleed.Enabled = False
@@ -6363,6 +6405,15 @@ Public Class FormRecipeManagement
 
         End If
 
+        ' Check if filter types are available/selected
+        If True Then
+            If ComboBox9.Items.Count > 0 And ComboBox8.Items.Count > 0 And ComboBox7.Items.Count > 0 Then
+            Else
+                onContinue = False
+                MsgBox("Filter Types Not Selected", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            End If
+        End If
+
         If onContinue = True Then
             Dim currentDateTime As String = lbl_DateTimeClock.Text
             Dim currentDateTime2 As DateTime = DateTime.Now
@@ -6374,7 +6425,10 @@ Public Class FormRecipeManagement
                     {"recipe_type_id", dtrecipeidcheck(0)("recipe_type_id")},
                     {"user_created", PublicVariables.LoginUserName},
                     {"created_time", currentDateTime},
-                                                      _
+                    {"filter_inlet", IIf(ComboBox9.Items.Count > 0, ComboBox9.SelectedItem, "")},
+                    {"filter_outlet", IIf(ComboBox8.Items.Count > 0, ComboBox8.SelectedItem, "")},
+                    {"filter_blank", IIf(ComboBox7.Items.Count > 0, ComboBox7.SelectedItem, "")},
+                                                                                                 _
                     {"last_modified_by", PublicVariables.LoginUserName},
                     {"last_modified_time", currentDateTime}, ' lbl_DateTimeClock.Text
                     {"verification_tolerance", d_vertol},
@@ -7364,5 +7418,144 @@ Public Class FormRecipeManagement
         Else
             cmbx_RcpDetailRecipeIDRev.Enabled = False
         End If
+    End Sub
+
+    Private Sub GetFittingType()
+        InitializeFittingType()
+        LoadFittingID()
+        LoadRecipeFittingSelection()
+    End Sub
+
+    Private Sub LoadRecipeFittingSelection()
+        Dim cmbxArr1 As ComboBox() = {ComboBox9, ComboBox8, ComboBox3, ComboBox4}
+        Dim cmbxArr2 As ComboBox() = {ComboBox7, ComboBox6}
+        Dim SelectedType As String = ComboBox1.SelectedItem
+
+        Dim dtFittingTbl As DataTable = SQL.ReadRecords($"
+            SELECT * FROM FittingType 
+            WHERE fitting_type='Fittings' 
+            ORDER BY fitting_name ASC
+        ")
+
+        Dim dtBlankTbl As DataTable = SQL.ReadRecords($"
+            SELECT * FROM FittingType 
+            WHERE fitting_type='Blanks' 
+            ORDER BY fitting_name ASC
+        ")
+
+        For Each cmbx As ComboBox In cmbxArr1
+            cmbx.Items.Clear()
+            If dtFittingTbl.Rows.Count > 0 Then
+                For i As Integer = 0 To dtFittingTbl.Rows.Count - 1
+                    cmbx.Items.Add(dtFittingTbl(i)("fitting_name"))
+                Next
+                cmbx.SelectedIndex = 0
+            End If
+        Next
+
+        For Each cmbx As ComboBox In cmbxArr2
+            cmbx.Items.Clear()
+            If dtBlankTbl.Rows.Count > 0 Then
+                For i As Integer = 0 To dtBlankTbl.Rows.Count - 1
+                    cmbx.Items.Add(dtBlankTbl(i)("fitting_name"))
+                Next
+                cmbx.SelectedIndex = 0
+            End If
+        Next
+    End Sub
+
+    Private Sub InitializeFittingType()
+        Dim cmbxArr As ComboBox() = {ComboBox5, ComboBox1}
+
+        For Each cmbx As ComboBox In cmbxArr
+            cmbx.SelectedIndex = 0
+        Next
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
+        Select Case ComboBox1.SelectedItem
+            Case "Fittings"
+                Label3.Text = "Fitting ID :"
+            Case "Blanks"
+                Label3.Text = "Blank ID :"
+        End Select
+        LoadFittingID()
+        LoadRecipeFittingSelection()
+    End Sub
+
+    Private Sub LoadFittingID()
+        Dim cmbxArr As ComboBox() = {ComboBox2}
+        Dim SelectedType As String = ComboBox1.SelectedItem
+
+        Dim dtFittingTbl As DataTable = SQL.ReadRecords($"
+            SELECT * FROM FittingType 
+            WHERE fitting_type='{SelectedType}' 
+            ORDER BY fitting_name ASC
+        ")
+
+        For Each cmbx As ComboBox In cmbxArr
+            cmbx.Items.Clear()
+            If dtFittingTbl.Rows.Count > 0 Then
+                For i As Integer = 0 To dtFittingTbl.Rows.Count - 1
+                    cmbx.Items.Add(dtFittingTbl(i)("fitting_name"))
+                Next
+                cmbx.SelectedIndex = 0
+            End If
+        Next
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
+        Dim SelectedType As String = ComboBox5.SelectedItem
+        Dim FittingNameInput As String = TextBox1.Text.Trim
+
+        Dim dtFittingTbl As DataTable = SQL.ReadRecords($"
+            SELECT * FROM FittingType 
+            WHERE fitting_type='{SelectedType}' 
+            AND fitting_name='{FittingNameInput}' 
+        ")
+
+        If dtFittingTbl.Rows.Count > 0 Then
+            MsgBox("Fitting Creation Failed, Fitting Exists.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+        Else
+            Dim parameters As New Dictionary(Of String, Object) From {
+                {"fitting_type", SelectedType},
+                {"fitting_name", FittingNameInput},
+                {"user_updated", PublicVariables.LoginUserName},
+                {"date_updated", lbl_DateTimeClock.Text}
+            }
+            Dim InsertRecord As Integer = SQL.InsertRecord("FittingType", parameters)
+
+            If InsertRecord > 0 Then
+                LoadFittingID()
+                LoadRecipeFittingSelection()
+                MsgBox("Fitting Creation Success.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
+            End If
+        End If
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
+        Dim SelectedType As String = ComboBox1.SelectedItem
+        Dim SelectedID As String = ComboBox2.SelectedItem
+
+        If ComboBox2.Items.Count > 0 Then
+            If ComboBox2.SelectedIndex >= 0 Then
+                Dim DeleteRecord As Integer = SQL.DeleteRecord("FittingType", $"fitting_type = '{SelectedType}' AND fitting_name = '{SelectedID}'")
+
+                If DeleteRecord > 0 Then
+                    LoadFittingID()
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub ComboBox5_SelectedIndexChanged(sender As Object, e As EventArgs)
+        Select Case ComboBox1.SelectedItem
+            Case "Fittings"
+                Label8.Text = "Fitting ID :"
+            Case "Blanks"
+                Label8.Text = "Blank ID :"
+        End Select
+        TextBox1.Text = ""
     End Sub
 End Class

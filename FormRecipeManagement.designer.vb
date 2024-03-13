@@ -73,6 +73,10 @@ Partial Class FormRecipeManagement
         Me.dgv_RecipeDetails = New System.Windows.Forms.DataGridView()
         Me.tabpg_Edit = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.dsp_RcpEditPrepPrefillTime = New System.Windows.Forms.Label()
+        Me.dsp_RcpEditPrepPrefillStartTime = New System.Windows.Forms.Label()
+        Me.txtbx_RcpEditPrepPrefillTime = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpEditPrepPrefillStartTime = New System.Windows.Forms.TextBox()
         Me.dsp_EditPreparation = New System.Windows.Forms.Label()
         Me.dsp_RcpEditPressureDropTime = New System.Windows.Forms.Label()
         Me.dsp_RcpEditPressureDrop = New System.Windows.Forms.Label()
@@ -176,6 +180,10 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpEditRcpSelection = New System.Windows.Forms.Label()
         Me.tabpg_Create = New System.Windows.Forms.TabPage()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.dsp_RcpCreatePrepPrefillTime = New System.Windows.Forms.Label()
+        Me.dsp_RcpCreatePrepPrefillStartTime = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreatePrepPrefillTime = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpCreatePrepPrefillStartTime = New System.Windows.Forms.TextBox()
         Me.dsp_CreatePreparation = New System.Windows.Forms.Label()
         Me.dsp_RcpCreatePrepPressureDropTime = New System.Windows.Forms.Label()
         Me.dsp_RcpCreatePrepPressureDrop = New System.Windows.Forms.Label()
@@ -281,14 +289,36 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dsp_RcpEditPrepPrefillTime = New System.Windows.Forms.Label()
-        Me.dsp_RcpEditPrepPrefillStartTime = New System.Windows.Forms.Label()
-        Me.txtbx_RcpEditPrepPrefillTime = New System.Windows.Forms.TextBox()
-        Me.txtbx_RcpEditPrepPrefillStartTime = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpCreatePrepPrefillTime = New System.Windows.Forms.Label()
-        Me.dsp_RcpCreatePrepPrefillStartTime = New System.Windows.Forms.Label()
-        Me.txtbx_RcpCreatePrepPrefillTime = New System.Windows.Forms.TextBox()
-        Me.txtbx_RcpCreatePrepPrefillStartTime = New System.Windows.Forms.TextBox()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox6 = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox8 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox9 = New System.Windows.Forms.ComboBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -326,6 +356,10 @@ Partial Class FormRecipeManagement
         Me.panel_ProdSKUCreation.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel5.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        Me.Panel7.SuspendLayout()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -446,6 +480,7 @@ Partial Class FormRecipeManagement
         '
         'panel_Delete
         '
+        Me.panel_Delete.Controls.Add(Me.Panel5)
         Me.panel_Delete.Controls.Add(Me.panel_RecipeDeletion)
         Me.panel_Delete.Controls.Add(Me.panel_ProdSKUDeletion)
         Me.panel_Delete.Dock = System.Windows.Forms.DockStyle.Left
@@ -486,7 +521,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpDeleteRecipeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpDeleteRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpDeleteRecipeID.FormattingEnabled = True
-        Me.cmbx_RcpDeleteRecipeID.Location = New System.Drawing.Point(152, 178)
+        Me.cmbx_RcpDeleteRecipeID.Location = New System.Drawing.Point(152, 159)
         Me.cmbx_RcpDeleteRecipeID.Name = "cmbx_RcpDeleteRecipeID"
         Me.cmbx_RcpDeleteRecipeID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpDeleteRecipeID.TabIndex = 19
@@ -497,7 +532,7 @@ Partial Class FormRecipeManagement
         Me.btn_RecipeDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_RecipeDelete.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_RecipeDelete.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_RecipeDelete.Location = New System.Drawing.Point(420, 132)
+        Me.btn_RecipeDelete.Location = New System.Drawing.Point(420, 118)
         Me.btn_RecipeDelete.Name = "btn_RecipeDelete"
         Me.btn_RecipeDelete.Size = New System.Drawing.Size(110, 60)
         Me.btn_RecipeDelete.TabIndex = 20
@@ -519,7 +554,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpDeletePartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpDeletePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpDeletePartID.FormattingEnabled = True
-        Me.cmbx_RcpDeletePartID.Location = New System.Drawing.Point(152, 123)
+        Me.cmbx_RcpDeletePartID.Location = New System.Drawing.Point(152, 114)
         Me.cmbx_RcpDeletePartID.Name = "cmbx_RcpDeletePartID"
         Me.cmbx_RcpDeletePartID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpDeletePartID.TabIndex = 17
@@ -527,7 +562,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpDeletePartID
         '
         Me.dsp_RcpDeletePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpDeletePartID.Location = New System.Drawing.Point(21, 124)
+        Me.dsp_RcpDeletePartID.Location = New System.Drawing.Point(21, 115)
         Me.dsp_RcpDeletePartID.Name = "dsp_RcpDeletePartID"
         Me.dsp_RcpDeletePartID.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpDeletePartID.TabIndex = 104
@@ -537,7 +572,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpDeleteRecipeID
         '
         Me.dsp_RcpDeleteRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpDeleteRecipeID.Location = New System.Drawing.Point(21, 179)
+        Me.dsp_RcpDeleteRecipeID.Location = New System.Drawing.Point(21, 160)
         Me.dsp_RcpDeleteRecipeID.Name = "dsp_RcpDeleteRecipeID"
         Me.dsp_RcpDeleteRecipeID.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpDeleteRecipeID.TabIndex = 104
@@ -597,7 +632,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_PartDeletePartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_PartDeletePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_PartDeletePartID.FormattingEnabled = True
-        Me.cmbx_PartDeletePartID.Location = New System.Drawing.Point(152, 123)
+        Me.cmbx_PartDeletePartID.Location = New System.Drawing.Point(152, 113)
         Me.cmbx_PartDeletePartID.Name = "cmbx_PartDeletePartID"
         Me.cmbx_PartDeletePartID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_PartDeletePartID.TabIndex = 14
@@ -615,7 +650,7 @@ Partial Class FormRecipeManagement
         'dsp_ProdSKUDeletionSKU
         '
         Me.dsp_ProdSKUDeletionSKU.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_ProdSKUDeletionSKU.Location = New System.Drawing.Point(21, 124)
+        Me.dsp_ProdSKUDeletionSKU.Location = New System.Drawing.Point(21, 114)
         Me.dsp_ProdSKUDeletionSKU.Name = "dsp_ProdSKUDeletionSKU"
         Me.dsp_ProdSKUDeletionSKU.Size = New System.Drawing.Size(125, 25)
         Me.dsp_ProdSKUDeletionSKU.TabIndex = 104
@@ -861,6 +896,7 @@ Partial Class FormRecipeManagement
         'tabpg_Edit
         '
         Me.tabpg_Edit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabpg_Edit.Controls.Add(Me.Panel7)
         Me.tabpg_Edit.Controls.Add(Me.Panel2)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDrain3)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDrain2)
@@ -901,8 +937,44 @@ Partial Class FormRecipeManagement
         Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepFill)
         Me.Panel2.Location = New System.Drawing.Point(575, 135)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(307, 470)
+        Me.Panel2.Size = New System.Drawing.Size(307, 450)
         Me.Panel2.TabIndex = 34
+        '
+        'dsp_RcpEditPrepPrefillTime
+        '
+        Me.dsp_RcpEditPrepPrefillTime.Location = New System.Drawing.Point(17, 394)
+        Me.dsp_RcpEditPrepPrefillTime.Name = "dsp_RcpEditPrepPrefillTime"
+        Me.dsp_RcpEditPrepPrefillTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditPrepPrefillTime.TabIndex = 34
+        Me.dsp_RcpEditPrepPrefillTime.Text = "Prep Prefill Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.dsp_RcpEditPrepPrefillTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpEditPrepPrefillStartTime
+        '
+        Me.dsp_RcpEditPrepPrefillStartTime.Location = New System.Drawing.Point(17, 346)
+        Me.dsp_RcpEditPrepPrefillStartTime.Name = "dsp_RcpEditPrepPrefillStartTime"
+        Me.dsp_RcpEditPrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditPrepPrefillStartTime.TabIndex = 35
+        Me.dsp_RcpEditPrepPrefillStartTime.Text = "Prep Prefill" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Start Time (s) :"
+        Me.dsp_RcpEditPrepPrefillStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpEditPrepPrefillTime
+        '
+        Me.txtbx_RcpEditPrepPrefillTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditPrepPrefillTime.Location = New System.Drawing.Point(183, 402)
+        Me.txtbx_RcpEditPrepPrefillTime.MaxLength = 3
+        Me.txtbx_RcpEditPrepPrefillTime.Name = "txtbx_RcpEditPrepPrefillTime"
+        Me.txtbx_RcpEditPrepPrefillTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditPrepPrefillTime.TabIndex = 37
+        '
+        'txtbx_RcpEditPrepPrefillStartTime
+        '
+        Me.txtbx_RcpEditPrepPrefillStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditPrepPrefillStartTime.Location = New System.Drawing.Point(183, 354)
+        Me.txtbx_RcpEditPrepPrefillStartTime.MaxLength = 3
+        Me.txtbx_RcpEditPrepPrefillStartTime.Name = "txtbx_RcpEditPrepPrefillStartTime"
+        Me.txtbx_RcpEditPrepPrefillStartTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditPrepPrefillStartTime.TabIndex = 38
         '
         'dsp_EditPreparation
         '
@@ -1721,9 +1793,9 @@ Partial Class FormRecipeManagement
         Me.Panel1.Controls.Add(Me.dsp_RcpDupSelRecipe)
         Me.Panel1.Controls.Add(Me.Cmbx_RcpDupNewType)
         Me.Panel1.Controls.Add(Me.cmbx_RcpDupSelRecipe)
-        Me.Panel1.Location = New System.Drawing.Point(3, 259)
+        Me.Panel1.Location = New System.Drawing.Point(3, 227)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(556, 247)
+        Me.Panel1.Size = New System.Drawing.Size(556, 220)
         Me.Panel1.TabIndex = 109
         '
         'dsp_RcpDuplication
@@ -1742,7 +1814,7 @@ Partial Class FormRecipeManagement
         Me.btn_RcpDuplicate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_RcpDuplicate.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_RcpDuplicate.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_RcpDuplicate.Location = New System.Drawing.Point(421, 95)
+        Me.btn_RcpDuplicate.Location = New System.Drawing.Point(423, 86)
         Me.btn_RcpDuplicate.Name = "btn_RcpDuplicate"
         Me.btn_RcpDuplicate.Size = New System.Drawing.Size(110, 60)
         Me.btn_RcpDuplicate.TabIndex = 105
@@ -1752,7 +1824,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpDupNewRecipeID
         '
         Me.txtbx_RcpDupNewRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_RcpDupNewRecipeID.Location = New System.Drawing.Point(157, 167)
+        Me.txtbx_RcpDupNewRecipeID.Location = New System.Drawing.Point(152, 147)
         Me.txtbx_RcpDupNewRecipeID.MaxLength = 20
         Me.txtbx_RcpDupNewRecipeID.Name = "txtbx_RcpDupNewRecipeID"
         Me.txtbx_RcpDupNewRecipeID.Size = New System.Drawing.Size(250, 29)
@@ -1761,7 +1833,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpDupNewRecipeID
         '
         Me.dsp_RcpDupNewRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpDupNewRecipeID.Location = New System.Drawing.Point(26, 168)
+        Me.dsp_RcpDupNewRecipeID.Location = New System.Drawing.Point(21, 148)
         Me.dsp_RcpDupNewRecipeID.Name = "dsp_RcpDupNewRecipeID"
         Me.dsp_RcpDupNewRecipeID.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpDupNewRecipeID.TabIndex = 104
@@ -1771,7 +1843,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpDupNewType
         '
         Me.dsp_RcpDupNewType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpDupNewType.Location = New System.Drawing.Point(26, 113)
+        Me.dsp_RcpDupNewType.Location = New System.Drawing.Point(21, 103)
         Me.dsp_RcpDupNewType.Name = "dsp_RcpDupNewType"
         Me.dsp_RcpDupNewType.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpDupNewType.TabIndex = 104
@@ -1781,7 +1853,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpDupSelRecipe
         '
         Me.dsp_RcpDupSelRecipe.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpDupSelRecipe.Location = New System.Drawing.Point(26, 58)
+        Me.dsp_RcpDupSelRecipe.Location = New System.Drawing.Point(21, 58)
         Me.dsp_RcpDupSelRecipe.Name = "dsp_RcpDupSelRecipe"
         Me.dsp_RcpDupSelRecipe.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpDupSelRecipe.TabIndex = 104
@@ -1793,7 +1865,7 @@ Partial Class FormRecipeManagement
         Me.Cmbx_RcpDupNewType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.Cmbx_RcpDupNewType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Cmbx_RcpDupNewType.FormattingEnabled = True
-        Me.Cmbx_RcpDupNewType.Location = New System.Drawing.Point(157, 112)
+        Me.Cmbx_RcpDupNewType.Location = New System.Drawing.Point(152, 102)
         Me.Cmbx_RcpDupNewType.Name = "Cmbx_RcpDupNewType"
         Me.Cmbx_RcpDupNewType.Size = New System.Drawing.Size(250, 29)
         Me.Cmbx_RcpDupNewType.TabIndex = 12
@@ -1803,7 +1875,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpDupSelRecipe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpDupSelRecipe.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpDupSelRecipe.FormattingEnabled = True
-        Me.cmbx_RcpDupSelRecipe.Location = New System.Drawing.Point(157, 57)
+        Me.cmbx_RcpDupSelRecipe.Location = New System.Drawing.Point(152, 57)
         Me.cmbx_RcpDupSelRecipe.Name = "cmbx_RcpDupSelRecipe"
         Me.cmbx_RcpDupSelRecipe.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpDupSelRecipe.TabIndex = 11
@@ -1813,7 +1885,7 @@ Partial Class FormRecipeManagement
         Me.btn_EditDiscard.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.btn_EditDiscard.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_EditDiscard.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_EditDiscard.Location = New System.Drawing.Point(181, 654)
+        Me.btn_EditDiscard.Location = New System.Drawing.Point(304, 675)
         Me.btn_EditDiscard.Name = "btn_EditDiscard"
         Me.btn_EditDiscard.Size = New System.Drawing.Size(200, 60)
         Me.btn_EditDiscard.TabIndex = 16
@@ -1825,7 +1897,7 @@ Partial Class FormRecipeManagement
         Me.btn_RcpEditSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.btn_RcpEditSave.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_RcpEditSave.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_RcpEditSave.Location = New System.Drawing.Point(181, 568)
+        Me.btn_RcpEditSave.Location = New System.Drawing.Point(63, 675)
         Me.btn_RcpEditSave.Name = "btn_RcpEditSave"
         Me.btn_RcpEditSave.Size = New System.Drawing.Size(200, 60)
         Me.btn_RcpEditSave.TabIndex = 15
@@ -1846,13 +1918,13 @@ Partial Class FormRecipeManagement
         Me.panel_RecipeManagement.Controls.Add(Me.dsp_RcpEditRcpSelection)
         Me.panel_RecipeManagement.Location = New System.Drawing.Point(3, 3)
         Me.panel_RecipeManagement.Name = "panel_RecipeManagement"
-        Me.panel_RecipeManagement.Size = New System.Drawing.Size(556, 250)
+        Me.panel_RecipeManagement.Size = New System.Drawing.Size(556, 220)
         Me.panel_RecipeManagement.TabIndex = 0
         '
         'Label16
         '
         Me.Label16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(442, 81)
+        Me.Label16.Location = New System.Drawing.Point(441, 71)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(80, 25)
         Me.Label16.TabIndex = 106
@@ -1865,7 +1937,7 @@ Partial Class FormRecipeManagement
         Me.btn_RcpEdit.BackgroundImage = CType(resources.GetObject("btn_RcpEdit.BackgroundImage"), System.Drawing.Image)
         Me.btn_RcpEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_RcpEdit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_RcpEdit.Location = New System.Drawing.Point(442, 109)
+        Me.btn_RcpEdit.Location = New System.Drawing.Point(441, 99)
         Me.btn_RcpEdit.Name = "btn_RcpEdit"
         Me.btn_RcpEdit.Size = New System.Drawing.Size(80, 80)
         Me.btn_RcpEdit.TabIndex = 14
@@ -1874,7 +1946,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpEditRecipeID
         '
         Me.dsp_RcpEditRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpEditRecipeID.Location = New System.Drawing.Point(26, 179)
+        Me.dsp_RcpEditRecipeID.Location = New System.Drawing.Point(21, 159)
         Me.dsp_RcpEditRecipeID.Name = "dsp_RcpEditRecipeID"
         Me.dsp_RcpEditRecipeID.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpEditRecipeID.TabIndex = 104
@@ -1884,7 +1956,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpEditPartID
         '
         Me.dsp_RcpEditPartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpEditPartID.Location = New System.Drawing.Point(26, 124)
+        Me.dsp_RcpEditPartID.Location = New System.Drawing.Point(21, 114)
         Me.dsp_RcpEditPartID.Name = "dsp_RcpEditPartID"
         Me.dsp_RcpEditPartID.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpEditPartID.TabIndex = 104
@@ -1894,7 +1966,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpEditFilterType
         '
         Me.dsp_RcpEditFilterType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpEditFilterType.Location = New System.Drawing.Point(26, 69)
+        Me.dsp_RcpEditFilterType.Location = New System.Drawing.Point(21, 69)
         Me.dsp_RcpEditFilterType.Name = "dsp_RcpEditFilterType"
         Me.dsp_RcpEditFilterType.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpEditFilterType.TabIndex = 104
@@ -1906,7 +1978,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpEditRecipeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpEditRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpEditRecipeID.FormattingEnabled = True
-        Me.cmbx_RcpEditRecipeID.Location = New System.Drawing.Point(157, 178)
+        Me.cmbx_RcpEditRecipeID.Location = New System.Drawing.Point(152, 158)
         Me.cmbx_RcpEditRecipeID.Name = "cmbx_RcpEditRecipeID"
         Me.cmbx_RcpEditRecipeID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpEditRecipeID.TabIndex = 13
@@ -1916,7 +1988,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpEditPartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpEditPartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpEditPartID.FormattingEnabled = True
-        Me.cmbx_RcpEditPartID.Location = New System.Drawing.Point(157, 123)
+        Me.cmbx_RcpEditPartID.Location = New System.Drawing.Point(152, 113)
         Me.cmbx_RcpEditPartID.Name = "cmbx_RcpEditPartID"
         Me.cmbx_RcpEditPartID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpEditPartID.TabIndex = 12
@@ -1926,7 +1998,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpEditFilterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpEditFilterType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpEditFilterType.FormattingEnabled = True
-        Me.cmbx_RcpEditFilterType.Location = New System.Drawing.Point(157, 68)
+        Me.cmbx_RcpEditFilterType.Location = New System.Drawing.Point(152, 68)
         Me.cmbx_RcpEditFilterType.Name = "cmbx_RcpEditFilterType"
         Me.cmbx_RcpEditFilterType.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpEditFilterType.TabIndex = 11
@@ -1945,6 +2017,7 @@ Partial Class FormRecipeManagement
         'tabpg_Create
         '
         Me.tabpg_Create.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabpg_Create.Controls.Add(Me.Panel4)
         Me.tabpg_Create.Controls.Add(Me.Panel3)
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateDrain3)
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateDrain2)
@@ -1985,8 +2058,44 @@ Partial Class FormRecipeManagement
         Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepFill)
         Me.Panel3.Location = New System.Drawing.Point(575, 135)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(307, 470)
+        Me.Panel3.Size = New System.Drawing.Size(307, 450)
         Me.Panel3.TabIndex = 35
+        '
+        'dsp_RcpCreatePrepPrefillTime
+        '
+        Me.dsp_RcpCreatePrepPrefillTime.Location = New System.Drawing.Point(17, 394)
+        Me.dsp_RcpCreatePrepPrefillTime.Name = "dsp_RcpCreatePrepPrefillTime"
+        Me.dsp_RcpCreatePrepPrefillTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreatePrepPrefillTime.TabIndex = 39
+        Me.dsp_RcpCreatePrepPrefillTime.Text = "Prep Prefill Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.dsp_RcpCreatePrepPrefillTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpCreatePrepPrefillStartTime
+        '
+        Me.dsp_RcpCreatePrepPrefillStartTime.Location = New System.Drawing.Point(17, 346)
+        Me.dsp_RcpCreatePrepPrefillStartTime.Name = "dsp_RcpCreatePrepPrefillStartTime"
+        Me.dsp_RcpCreatePrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreatePrepPrefillStartTime.TabIndex = 40
+        Me.dsp_RcpCreatePrepPrefillStartTime.Text = "Prep Prefill" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Start Time (s) :"
+        Me.dsp_RcpCreatePrepPrefillStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpCreatePrepPrefillTime
+        '
+        Me.txtbx_RcpCreatePrepPrefillTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreatePrepPrefillTime.Location = New System.Drawing.Point(183, 402)
+        Me.txtbx_RcpCreatePrepPrefillTime.MaxLength = 3
+        Me.txtbx_RcpCreatePrepPrefillTime.Name = "txtbx_RcpCreatePrepPrefillTime"
+        Me.txtbx_RcpCreatePrepPrefillTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreatePrepPrefillTime.TabIndex = 41
+        '
+        'txtbx_RcpCreatePrepPrefillStartTime
+        '
+        Me.txtbx_RcpCreatePrepPrefillStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreatePrepPrefillStartTime.Location = New System.Drawing.Point(183, 354)
+        Me.txtbx_RcpCreatePrepPrefillStartTime.MaxLength = 3
+        Me.txtbx_RcpCreatePrepPrefillStartTime.Name = "txtbx_RcpCreatePrepPrefillStartTime"
+        Me.txtbx_RcpCreatePrepPrefillStartTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreatePrepPrefillStartTime.TabIndex = 42
         '
         'dsp_CreatePreparation
         '
@@ -2783,6 +2892,7 @@ Partial Class FormRecipeManagement
         '
         'panel_Create
         '
+        Me.panel_Create.Controls.Add(Me.Panel6)
         Me.panel_Create.Controls.Add(Me.panel_RecipeGeneration)
         Me.panel_Create.Controls.Add(Me.panel_ProdSKUCreation)
         Me.panel_Create.Dock = System.Windows.Forms.DockStyle.Left
@@ -2822,7 +2932,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpCreateRecipeID
         '
         Me.txtbx_RcpCreateRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_RcpCreateRecipeID.Location = New System.Drawing.Point(152, 233)
+        Me.txtbx_RcpCreateRecipeID.Location = New System.Drawing.Point(152, 204)
         Me.txtbx_RcpCreateRecipeID.MaxLength = 20
         Me.txtbx_RcpCreateRecipeID.Name = "txtbx_RcpCreateRecipeID"
         Me.txtbx_RcpCreateRecipeID.Size = New System.Drawing.Size(250, 29)
@@ -2833,7 +2943,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpCreateType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpCreateType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpCreateType.FormattingEnabled = True
-        Me.cmbx_RcpCreateType.Location = New System.Drawing.Point(152, 178)
+        Me.cmbx_RcpCreateType.Location = New System.Drawing.Point(152, 159)
         Me.cmbx_RcpCreateType.Name = "cmbx_RcpCreateType"
         Me.cmbx_RcpCreateType.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpCreateType.TabIndex = 20
@@ -2844,7 +2954,7 @@ Partial Class FormRecipeManagement
         Me.btn_RecipeIDCreate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_RecipeIDCreate.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_RecipeIDCreate.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_RecipeIDCreate.Location = New System.Drawing.Point(420, 132)
+        Me.btn_RecipeIDCreate.Location = New System.Drawing.Point(420, 118)
         Me.btn_RecipeIDCreate.Name = "btn_RecipeIDCreate"
         Me.btn_RecipeIDCreate.Size = New System.Drawing.Size(110, 60)
         Me.btn_RecipeIDCreate.TabIndex = 22
@@ -2864,7 +2974,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpCreateType
         '
         Me.dsp_RcpCreateType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpCreateType.Location = New System.Drawing.Point(21, 179)
+        Me.dsp_RcpCreateType.Location = New System.Drawing.Point(21, 160)
         Me.dsp_RcpCreateType.Name = "dsp_RcpCreateType"
         Me.dsp_RcpCreateType.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpCreateType.TabIndex = 104
@@ -2876,7 +2986,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpCreatePartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpCreatePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpCreatePartID.FormattingEnabled = True
-        Me.cmbx_RcpCreatePartID.Location = New System.Drawing.Point(152, 123)
+        Me.cmbx_RcpCreatePartID.Location = New System.Drawing.Point(152, 114)
         Me.cmbx_RcpCreatePartID.Name = "cmbx_RcpCreatePartID"
         Me.cmbx_RcpCreatePartID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpCreatePartID.TabIndex = 18
@@ -2884,7 +2994,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpCreatePart
         '
         Me.dsp_RcpCreatePart.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpCreatePart.Location = New System.Drawing.Point(21, 124)
+        Me.dsp_RcpCreatePart.Location = New System.Drawing.Point(21, 115)
         Me.dsp_RcpCreatePart.Name = "dsp_RcpCreatePart"
         Me.dsp_RcpCreatePart.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpCreatePart.TabIndex = 104
@@ -2894,7 +3004,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpCreateRecipeID
         '
         Me.dsp_RcpCreateRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpCreateRecipeID.Location = New System.Drawing.Point(21, 234)
+        Me.dsp_RcpCreateRecipeID.Location = New System.Drawing.Point(21, 205)
         Me.dsp_RcpCreateRecipeID.Name = "dsp_RcpCreateRecipeID"
         Me.dsp_RcpCreateRecipeID.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpCreateRecipeID.TabIndex = 104
@@ -2932,7 +3042,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_PartCreateJigType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_PartCreateJigType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_PartCreateJigType.FormattingEnabled = True
-        Me.cmbx_PartCreateJigType.Location = New System.Drawing.Point(152, 123)
+        Me.cmbx_PartCreateJigType.Location = New System.Drawing.Point(152, 113)
         Me.cmbx_PartCreateJigType.Name = "cmbx_PartCreateJigType"
         Me.cmbx_PartCreateJigType.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_PartCreateJigType.TabIndex = 105
@@ -2940,7 +3050,7 @@ Partial Class FormRecipeManagement
         'txtbx_PartCreatePartID
         '
         Me.txtbx_PartCreatePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_PartCreatePartID.Location = New System.Drawing.Point(152, 178)
+        Me.txtbx_PartCreatePartID.Location = New System.Drawing.Point(152, 158)
         Me.txtbx_PartCreatePartID.MaxLength = 20
         Me.txtbx_PartCreatePartID.Name = "txtbx_PartCreatePartID"
         Me.txtbx_PartCreatePartID.Size = New System.Drawing.Size(250, 29)
@@ -2983,7 +3093,7 @@ Partial Class FormRecipeManagement
         'dsp_PartCreatePartID
         '
         Me.dsp_PartCreatePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PartCreatePartID.Location = New System.Drawing.Point(21, 179)
+        Me.dsp_PartCreatePartID.Location = New System.Drawing.Point(21, 159)
         Me.dsp_PartCreatePartID.Name = "dsp_PartCreatePartID"
         Me.dsp_PartCreatePartID.Size = New System.Drawing.Size(125, 25)
         Me.dsp_PartCreatePartID.TabIndex = 104
@@ -3003,7 +3113,7 @@ Partial Class FormRecipeManagement
         'dsp_PartCreateJigType
         '
         Me.dsp_PartCreateJigType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_PartCreateJigType.Location = New System.Drawing.Point(21, 124)
+        Me.dsp_PartCreateJigType.Location = New System.Drawing.Point(21, 114)
         Me.dsp_PartCreateJigType.Name = "dsp_PartCreateJigType"
         Me.dsp_PartCreateJigType.Size = New System.Drawing.Size(125, 25)
         Me.dsp_PartCreateJigType.TabIndex = 104
@@ -3073,77 +3183,333 @@ Partial Class FormRecipeManagement
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'dsp_RcpEditPrepPrefillTime
+        'Panel5
         '
-        Me.dsp_RcpEditPrepPrefillTime.Location = New System.Drawing.Point(17, 394)
-        Me.dsp_RcpEditPrepPrefillTime.Name = "dsp_RcpEditPrepPrefillTime"
-        Me.dsp_RcpEditPrepPrefillTime.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditPrepPrefillTime.TabIndex = 34
-        Me.dsp_RcpEditPrepPrefillTime.Text = "Prep Prefill Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.dsp_RcpEditPrepPrefillTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel5.Controls.Add(Me.ComboBox2)
+        Me.Panel5.Controls.Add(Me.Button1)
+        Me.Panel5.Controls.Add(Me.Label2)
+        Me.Panel5.Controls.Add(Me.ComboBox1)
+        Me.Panel5.Controls.Add(Me.Label3)
+        Me.Panel5.Controls.Add(Me.Label4)
+        Me.Panel5.Location = New System.Drawing.Point(3, 508)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(556, 200)
+        Me.Panel5.TabIndex = 4
         '
-        'dsp_RcpEditPrepPrefillStartTime
+        'ComboBox2
         '
-        Me.dsp_RcpEditPrepPrefillStartTime.Location = New System.Drawing.Point(17, 346)
-        Me.dsp_RcpEditPrepPrefillStartTime.Name = "dsp_RcpEditPrepPrefillStartTime"
-        Me.dsp_RcpEditPrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditPrepPrefillStartTime.TabIndex = 35
-        Me.dsp_RcpEditPrepPrefillStartTime.Text = "Prep Prefill" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Start Time (s) :"
-        Me.dsp_RcpEditPrepPrefillStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Fittings", "Blank"})
+        Me.ComboBox2.Location = New System.Drawing.Point(152, 113)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox2.TabIndex = 106
         '
-        'txtbx_RcpEditPrepPrefillTime
+        'Button1
         '
-        Me.txtbx_RcpEditPrepPrefillTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepPrefillTime.Location = New System.Drawing.Point(183, 402)
-        Me.txtbx_RcpEditPrepPrefillTime.MaxLength = 3
-        Me.txtbx_RcpEditPrepPrefillTime.Name = "txtbx_RcpEditPrepPrefillTime"
-        Me.txtbx_RcpEditPrepPrefillTime.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditPrepPrefillTime.TabIndex = 37
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button1.Location = New System.Drawing.Point(420, 75)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(110, 60)
+        Me.Button1.TabIndex = 15
+        Me.Button1.Text = "Delete"
+        Me.Button1.UseVisualStyleBackColor = False
         '
-        'txtbx_RcpEditPrepPrefillStartTime
+        'Label2
         '
-        Me.txtbx_RcpEditPrepPrefillStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepPrefillStartTime.Location = New System.Drawing.Point(183, 354)
-        Me.txtbx_RcpEditPrepPrefillStartTime.MaxLength = 3
-        Me.txtbx_RcpEditPrepPrefillStartTime.Name = "txtbx_RcpEditPrepPrefillStartTime"
-        Me.txtbx_RcpEditPrepPrefillStartTime.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditPrepPrefillStartTime.TabIndex = 38
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(0, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(554, 50)
+        Me.Label2.TabIndex = 103
+        Me.Label2.Text = "Fitting Type Deletion"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'dsp_RcpCreatePrepPrefillTime
+        'ComboBox1
         '
-        Me.dsp_RcpCreatePrepPrefillTime.Location = New System.Drawing.Point(17, 394)
-        Me.dsp_RcpCreatePrepPrefillTime.Name = "dsp_RcpCreatePrepPrefillTime"
-        Me.dsp_RcpCreatePrepPrefillTime.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpCreatePrepPrefillTime.TabIndex = 39
-        Me.dsp_RcpCreatePrepPrefillTime.Text = "Prep Prefill Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.dsp_RcpCreatePrepPrefillTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox1.Location = New System.Drawing.Point(152, 68)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox1.TabIndex = 13
         '
-        'dsp_RcpCreatePrepPrefillStartTime
+        'Label3
         '
-        Me.dsp_RcpCreatePrepPrefillStartTime.Location = New System.Drawing.Point(17, 346)
-        Me.dsp_RcpCreatePrepPrefillStartTime.Name = "dsp_RcpCreatePrepPrefillStartTime"
-        Me.dsp_RcpCreatePrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpCreatePrepPrefillStartTime.TabIndex = 40
-        Me.dsp_RcpCreatePrepPrefillStartTime.Text = "Prep Prefill" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Start Time (s) :"
-        Me.dsp_RcpCreatePrepPrefillStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(21, 114)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(125, 25)
+        Me.Label3.TabIndex = 104
+        Me.Label3.Text = "ID :"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtbx_RcpCreatePrepPrefillTime
+        'Label4
         '
-        Me.txtbx_RcpCreatePrepPrefillTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepPrefillTime.Location = New System.Drawing.Point(183, 402)
-        Me.txtbx_RcpCreatePrepPrefillTime.MaxLength = 3
-        Me.txtbx_RcpCreatePrepPrefillTime.Name = "txtbx_RcpCreatePrepPrefillTime"
-        Me.txtbx_RcpCreatePrepPrefillTime.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreatePrepPrefillTime.TabIndex = 41
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(21, 69)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(125, 25)
+        Me.Label4.TabIndex = 104
+        Me.Label4.Text = "Fitting Type :"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtbx_RcpCreatePrepPrefillStartTime
+        'Panel6
         '
-        Me.txtbx_RcpCreatePrepPrefillStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepPrefillStartTime.Location = New System.Drawing.Point(183, 354)
-        Me.txtbx_RcpCreatePrepPrefillStartTime.MaxLength = 3
-        Me.txtbx_RcpCreatePrepPrefillStartTime.Name = "txtbx_RcpCreatePrepPrefillStartTime"
-        Me.txtbx_RcpCreatePrepPrefillStartTime.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreatePrepPrefillStartTime.TabIndex = 42
+        Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel6.Controls.Add(Me.TextBox1)
+        Me.Panel6.Controls.Add(Me.Button2)
+        Me.Panel6.Controls.Add(Me.Label7)
+        Me.Panel6.Controls.Add(Me.ComboBox5)
+        Me.Panel6.Controls.Add(Me.Label8)
+        Me.Panel6.Controls.Add(Me.Label9)
+        Me.Panel6.Location = New System.Drawing.Point(3, 551)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(556, 200)
+        Me.Panel6.TabIndex = 4
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.TextBox1.Location = New System.Drawing.Point(152, 113)
+        Me.TextBox1.MaxLength = 30
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(250, 29)
+        Me.TextBox1.TabIndex = 105
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button2.Location = New System.Drawing.Point(420, 75)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(110, 60)
+        Me.Button2.TabIndex = 15
+        Me.Button2.Text = "Create"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Label7
+        '
+        Me.Label7.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(0, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(554, 50)
+        Me.Label7.TabIndex = 103
+        Me.Label7.Text = "Fitting Type Creation"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ComboBox5
+        '
+        Me.ComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox5.FormattingEnabled = True
+        Me.ComboBox5.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox5.Location = New System.Drawing.Point(152, 68)
+        Me.ComboBox5.Name = "ComboBox5"
+        Me.ComboBox5.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox5.TabIndex = 13
+        '
+        'Label8
+        '
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(21, 114)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(125, 25)
+        Me.Label8.TabIndex = 104
+        Me.Label8.Text = "ID :"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label9
+        '
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(21, 69)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(125, 25)
+        Me.Label9.TabIndex = 104
+        Me.Label9.Text = "Fitting Type :"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Panel4
+        '
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.Label13)
+        Me.Panel4.Controls.Add(Me.Label12)
+        Me.Panel4.Controls.Add(Me.Label10)
+        Me.Panel4.Controls.Add(Me.Label6)
+        Me.Panel4.Controls.Add(Me.ComboBox6)
+        Me.Panel4.Controls.Add(Me.ComboBox4)
+        Me.Panel4.Controls.Add(Me.ComboBox3)
+        Me.Panel4.Location = New System.Drawing.Point(575, 591)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(307, 170)
+        Me.Panel4.TabIndex = 36
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox3.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox3.Location = New System.Drawing.Point(93, 57)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox3.TabIndex = 14
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(48, 60)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(39, 17)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "Inlet :"
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox4.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox4.Location = New System.Drawing.Point(93, 92)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox4.TabIndex = 14
+        '
+        'ComboBox6
+        '
+        Me.ComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox6.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox6.FormattingEnabled = True
+        Me.ComboBox6.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox6.Location = New System.Drawing.Point(93, 127)
+        Me.ComboBox6.Name = "ComboBox6"
+        Me.ComboBox6.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox6.TabIndex = 14
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(37, 95)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(50, 17)
+        Me.Label10.TabIndex = 15
+        Me.Label10.Text = "Outlet :"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(42, 130)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(45, 17)
+        Me.Label12.TabIndex = 15
+        Me.Label12.Text = "Blank :"
+        '
+        'Label13
+        '
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.Label13.Location = New System.Drawing.Point(49, 5)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(200, 40)
+        Me.Label13.TabIndex = 34
+        Me.Label13.Text = "Fitting Type"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel7
+        '
+        Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel7.Controls.Add(Me.Label14)
+        Me.Panel7.Controls.Add(Me.Label15)
+        Me.Panel7.Controls.Add(Me.Label17)
+        Me.Panel7.Controls.Add(Me.Label18)
+        Me.Panel7.Controls.Add(Me.ComboBox7)
+        Me.Panel7.Controls.Add(Me.ComboBox8)
+        Me.Panel7.Controls.Add(Me.ComboBox9)
+        Me.Panel7.Location = New System.Drawing.Point(575, 591)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(307, 170)
+        Me.Panel7.TabIndex = 37
+        '
+        'Label14
+        '
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.Label14.Location = New System.Drawing.Point(49, 5)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(200, 40)
+        Me.Label14.TabIndex = 34
+        Me.Label14.Text = "Fitting Type"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(42, 130)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(45, 17)
+        Me.Label15.TabIndex = 15
+        Me.Label15.Text = "Blank :"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(37, 95)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(50, 17)
+        Me.Label17.TabIndex = 15
+        Me.Label17.Text = "Outlet :"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(48, 60)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(39, 17)
+        Me.Label18.TabIndex = 15
+        Me.Label18.Text = "Inlet :"
+        '
+        'ComboBox7
+        '
+        Me.ComboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox7.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox7.FormattingEnabled = True
+        Me.ComboBox7.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox7.Location = New System.Drawing.Point(93, 127)
+        Me.ComboBox7.Name = "ComboBox7"
+        Me.ComboBox7.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox7.TabIndex = 14
+        '
+        'ComboBox8
+        '
+        Me.ComboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox8.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox8.FormattingEnabled = True
+        Me.ComboBox8.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox8.Location = New System.Drawing.Point(93, 92)
+        Me.ComboBox8.Name = "ComboBox8"
+        Me.ComboBox8.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox8.TabIndex = 14
+        '
+        'ComboBox9
+        '
+        Me.ComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox9.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox9.FormattingEnabled = True
+        Me.ComboBox9.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox9.Location = New System.Drawing.Point(93, 57)
+        Me.ComboBox9.Name = "ComboBox9"
+        Me.ComboBox9.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox9.TabIndex = 14
         '
         'FormRecipeManagement
         '
@@ -3220,6 +3586,13 @@ Partial Class FormRecipeManagement
         Me.panel_ProdSKUCreation.PerformLayout()
         Me.panel_FormControl.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel6.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3489,4 +3862,34 @@ Partial Class FormRecipeManagement
     Friend WithEvents dsp_RcpCreatePrepPrefillStartTime As Label
     Friend WithEvents txtbx_RcpCreatePrepPrefillTime As TextBox
     Friend WithEvents txtbx_RcpCreatePrepPrefillStartTime As TextBox
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Label2 As Label
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Label7 As Label
+    Friend WithEvents ComboBox5 As ComboBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Label6 As Label
+    Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents ComboBox6 As ComboBox
+    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents ComboBox7 As ComboBox
+    Friend WithEvents ComboBox8 As ComboBox
+    Friend WithEvents ComboBox9 As ComboBox
 End Class
