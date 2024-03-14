@@ -346,15 +346,15 @@ Public Class FormCalibration
 
             LiveGraphChart.YAxes = New ICartesianAxis() {
                 New LiveChartsCore.SkiaSharpView.Axis() With {
-                    .Name = "Pressure (kPa)",
+                    .Name = "Differential Pressure (kPa)",
                     .NameTextSize = 14,
-                    .NamePaint = New SolidColorPaint(SKColors.Black),
+                    .NamePaint = New SolidColorPaint(SKColors.Blue),
                     .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                     .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
                     .TextSize = 12,
-                    .LabelsPaint = New SolidColorPaint(SKColors.Black),
-                    .TicksPaint = New SolidColorPaint(SKColors.Black),
-                    .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                    .LabelsPaint = New SolidColorPaint(SKColors.Blue),
+                    .TicksPaint = New SolidColorPaint(SKColors.Blue),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Blue),
                     .DrawTicksPath = True
                 },
                 New LiveChartsCore.SkiaSharpView.Axis() With {
@@ -398,6 +398,20 @@ Public Class FormCalibration
                     .DrawTicksPath = True,
                     .ShowSeparatorLines = False,
                     .Position = LiveChartsCore.Measure.AxisPosition.End
+                },
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .Name = "Inlet/Outlet/Back Pressure (kPa)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.Black),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                    .TicksPaint = New SolidColorPaint(SKColors.Black),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                    .DrawTicksPath = True,
+                    .ShowSeparatorLines = False,
+                    .Position = LiveChartsCore.Measure.AxisPosition.End
                 }
             }
 
@@ -427,7 +441,7 @@ Public Class FormCalibration
                     .GeometryFill = New SolidColorPaint(SKColors.Green),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0,
+                    .ScalesYAt = 4,
                     .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
@@ -441,7 +455,7 @@ Public Class FormCalibration
                     .GeometryFill = New SolidColorPaint(SKColors.Magenta),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0,
+                    .ScalesYAt = 4,
                     .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
@@ -455,7 +469,7 @@ Public Class FormCalibration
                     .GeometryFill = New SolidColorPaint(SKColors.DarkOrange),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0,
+                    .ScalesYAt = 4,
                     .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
@@ -522,30 +536,36 @@ Public Class FormCalibration
         If checkbx_GraphInletPressure.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(1).IsVisible = True
+                .YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(1).IsVisible = False
+                .YAxes(4).IsVisible = False
             End With
         End If
 
         If checkbx_GraphOutletPressure.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(2).IsVisible = True
+                .YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(2).IsVisible = False
+                .YAxes(4).IsVisible = False
             End With
         End If
 
         If checkbx_GraphBP.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(3).IsVisible = True
+                .YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(3).IsVisible = False
+                .YAxes(4).IsVisible = False
             End With
         End If
 

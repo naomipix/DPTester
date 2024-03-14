@@ -139,6 +139,14 @@ Partial Class FormMain
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.picbx_MainPumpZone = New System.Windows.Forms.PictureBox()
+        Me.tabpg_FittingType = New System.Windows.Forms.TabPage()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.lbl_FilterBlankType = New System.Windows.Forms.Label()
+        Me.lbl_FilterOutletType = New System.Windows.Forms.Label()
+        Me.lbl_FilterInletType = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.lbl_StepwiseMessage = New System.Windows.Forms.Label()
         Me.panel_MainLeft = New System.Windows.Forms.Panel()
         Me.panel_OprKeyInDt = New System.Windows.Forms.Panel()
@@ -465,14 +473,6 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
-        Me.tabpg_FittingType = New System.Windows.Forms.TabPage()
-        Me.lbl_FilterInletType = New System.Windows.Forms.Label()
-        Me.lbl_FilterOutletType = New System.Windows.Forms.Label()
-        Me.lbl_FilterBlankType = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
         Me.panel_FormControl.SuspendLayout()
         Me.Panel12.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -492,6 +492,8 @@ Partial Class FormMain
         Me.Panel5.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabpg_FittingType.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_MainLeft.SuspendLayout()
         Me.panel_OprKeyInDt.SuspendLayout()
         Me.panel_ProductionDetails.SuspendLayout()
@@ -546,8 +548,6 @@ Partial Class FormMain
         CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_PLCHeartBeat.SuspendLayout()
         Me.panel_SelectLoadRecipe.SuspendLayout()
-        Me.tabpg_FittingType.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'panel_FormControl
@@ -1531,6 +1531,101 @@ Partial Class FormMain
         Me.picbx_MainPumpZone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.picbx_MainPumpZone.TabIndex = 5
         Me.picbx_MainPumpZone.TabStop = False
+        '
+        'tabpg_FittingType
+        '
+        Me.tabpg_FittingType.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.tabpg_FittingType.Controls.Add(Me.Label24)
+        Me.tabpg_FittingType.Controls.Add(Me.Label20)
+        Me.tabpg_FittingType.Controls.Add(Me.Label18)
+        Me.tabpg_FittingType.Controls.Add(Me.lbl_FilterBlankType)
+        Me.tabpg_FittingType.Controls.Add(Me.lbl_FilterOutletType)
+        Me.tabpg_FittingType.Controls.Add(Me.lbl_FilterInletType)
+        Me.tabpg_FittingType.Controls.Add(Me.PictureBox2)
+        Me.tabpg_FittingType.Location = New System.Drawing.Point(4, 44)
+        Me.tabpg_FittingType.Name = "tabpg_FittingType"
+        Me.tabpg_FittingType.Size = New System.Drawing.Size(929, 528)
+        Me.tabpg_FittingType.TabIndex = 4
+        Me.tabpg_FittingType.Text = "Fitting Type"
+        '
+        'Label24
+        '
+        Me.Label24.BackColor = System.Drawing.SystemColors.Window
+        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(394, 265)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(150, 30)
+        Me.Label24.TabIndex = 106
+        Me.Label24.Text = "Blank Fitting Type"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label20
+        '
+        Me.Label20.BackColor = System.Drawing.SystemColors.Window
+        Me.Label20.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(515, 114)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(150, 30)
+        Me.Label20.TabIndex = 106
+        Me.Label20.Text = "Outlet Fitting Type"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label18
+        '
+        Me.Label18.BackColor = System.Drawing.SystemColors.Window
+        Me.Label18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.Location = New System.Drawing.Point(266, 114)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(150, 30)
+        Me.Label18.TabIndex = 106
+        Me.Label18.Text = "Inlet Fitting Type"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_FilterBlankType
+        '
+        Me.lbl_FilterBlankType.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_FilterBlankType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_FilterBlankType.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.lbl_FilterBlankType.Location = New System.Drawing.Point(379, 226)
+        Me.lbl_FilterBlankType.Name = "lbl_FilterBlankType"
+        Me.lbl_FilterBlankType.Size = New System.Drawing.Size(180, 35)
+        Me.lbl_FilterBlankType.TabIndex = 0
+        Me.lbl_FilterBlankType.Text = "-"
+        Me.lbl_FilterBlankType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_FilterOutletType
+        '
+        Me.lbl_FilterOutletType.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_FilterOutletType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_FilterOutletType.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.lbl_FilterOutletType.Location = New System.Drawing.Point(501, 148)
+        Me.lbl_FilterOutletType.Name = "lbl_FilterOutletType"
+        Me.lbl_FilterOutletType.Size = New System.Drawing.Size(180, 35)
+        Me.lbl_FilterOutletType.TabIndex = 0
+        Me.lbl_FilterOutletType.Text = "-"
+        Me.lbl_FilterOutletType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lbl_FilterInletType
+        '
+        Me.lbl_FilterInletType.BackColor = System.Drawing.SystemColors.Window
+        Me.lbl_FilterInletType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lbl_FilterInletType.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.lbl_FilterInletType.Location = New System.Drawing.Point(251, 148)
+        Me.lbl_FilterInletType.Name = "lbl_FilterInletType"
+        Me.lbl_FilterInletType.Size = New System.Drawing.Size(180, 35)
+        Me.lbl_FilterInletType.TabIndex = 0
+        Me.lbl_FilterInletType.Text = "-"
+        Me.lbl_FilterInletType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(202, 50)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(526, 412)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox2.TabIndex = 105
+        Me.PictureBox2.TabStop = False
         '
         'lbl_StepwiseMessage
         '
@@ -5334,101 +5429,6 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'tabpg_FittingType
-        '
-        Me.tabpg_FittingType.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.tabpg_FittingType.Controls.Add(Me.Label24)
-        Me.tabpg_FittingType.Controls.Add(Me.Label20)
-        Me.tabpg_FittingType.Controls.Add(Me.Label18)
-        Me.tabpg_FittingType.Controls.Add(Me.lbl_FilterBlankType)
-        Me.tabpg_FittingType.Controls.Add(Me.lbl_FilterOutletType)
-        Me.tabpg_FittingType.Controls.Add(Me.lbl_FilterInletType)
-        Me.tabpg_FittingType.Controls.Add(Me.PictureBox2)
-        Me.tabpg_FittingType.Location = New System.Drawing.Point(4, 44)
-        Me.tabpg_FittingType.Name = "tabpg_FittingType"
-        Me.tabpg_FittingType.Size = New System.Drawing.Size(929, 528)
-        Me.tabpg_FittingType.TabIndex = 4
-        Me.tabpg_FittingType.Text = "Fitting Type"
-        '
-        'lbl_FilterInletType
-        '
-        Me.lbl_FilterInletType.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_FilterInletType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_FilterInletType.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.lbl_FilterInletType.Location = New System.Drawing.Point(251, 148)
-        Me.lbl_FilterInletType.Name = "lbl_FilterInletType"
-        Me.lbl_FilterInletType.Size = New System.Drawing.Size(180, 35)
-        Me.lbl_FilterInletType.TabIndex = 0
-        Me.lbl_FilterInletType.Text = "-"
-        Me.lbl_FilterInletType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_FilterOutletType
-        '
-        Me.lbl_FilterOutletType.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_FilterOutletType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_FilterOutletType.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.lbl_FilterOutletType.Location = New System.Drawing.Point(501, 148)
-        Me.lbl_FilterOutletType.Name = "lbl_FilterOutletType"
-        Me.lbl_FilterOutletType.Size = New System.Drawing.Size(180, 35)
-        Me.lbl_FilterOutletType.TabIndex = 0
-        Me.lbl_FilterOutletType.Text = "-"
-        Me.lbl_FilterOutletType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lbl_FilterBlankType
-        '
-        Me.lbl_FilterBlankType.BackColor = System.Drawing.SystemColors.Window
-        Me.lbl_FilterBlankType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_FilterBlankType.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.lbl_FilterBlankType.Location = New System.Drawing.Point(379, 226)
-        Me.lbl_FilterBlankType.Name = "lbl_FilterBlankType"
-        Me.lbl_FilterBlankType.Size = New System.Drawing.Size(180, 35)
-        Me.lbl_FilterBlankType.TabIndex = 0
-        Me.lbl_FilterBlankType.Text = "-"
-        Me.lbl_FilterBlankType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(202, 50)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(526, 412)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PictureBox2.TabIndex = 105
-        Me.PictureBox2.TabStop = False
-        '
-        'Label18
-        '
-        Me.Label18.BackColor = System.Drawing.SystemColors.Window
-        Me.Label18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(266, 114)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(150, 30)
-        Me.Label18.TabIndex = 106
-        Me.Label18.Text = "Inlet Fitting Type"
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label20
-        '
-        Me.Label20.BackColor = System.Drawing.SystemColors.Window
-        Me.Label20.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(515, 114)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(150, 30)
-        Me.Label20.TabIndex = 106
-        Me.Label20.Text = "Outlet Fitting Type"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label24
-        '
-        Me.Label24.BackColor = System.Drawing.SystemColors.Window
-        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(394, 265)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(150, 30)
-        Me.Label24.TabIndex = 106
-        Me.Label24.Text = "Blank Fitting Type"
-        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5464,6 +5464,9 @@ Partial Class FormMain
         Me.Panel5.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabpg_FittingType.ResumeLayout(False)
+        Me.tabpg_FittingType.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel_MainLeft.ResumeLayout(False)
         Me.panel_OprKeyInDt.ResumeLayout(False)
         Me.panel_OprKeyInDt.PerformLayout()
@@ -5530,9 +5533,6 @@ Partial Class FormMain
         Me.panel_PLCHeartBeat.ResumeLayout(False)
         Me.panel_SelectLoadRecipe.ResumeLayout(False)
         Me.panel_SelectLoadRecipe.PerformLayout()
-        Me.tabpg_FittingType.ResumeLayout(False)
-        Me.tabpg_FittingType.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
