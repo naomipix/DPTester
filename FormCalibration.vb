@@ -648,7 +648,7 @@ Public Class FormCalibration
     End Sub
 
     Private Sub tmr_Calibration_Tick(sender As Object, e As EventArgs) Handles tmr_Calibration.Tick
-        PCStatus(1)(2) = False
+        PCStatus(1)(2) = False ' Reset Calibration Start Signal
         If CalrecordValue = True And CommLost = False Then
 
             ' Rolling Average
@@ -792,6 +792,8 @@ Public Class FormCalibration
 
         txtbx_ActCalCycletime.Text = Cal_samplingtime.ToString
         If Cal_samplingtime = CalCycletime Then
+            tmr_Calibration.Enabled = False
+
             Dim A As Double = 0.01257187
             Dim B As Double = -0.005806436
             Dim C As Double = 0.001130911
@@ -799,18 +801,23 @@ Public Class FormCalibration
             Dim T2 As Double
             Dim exp As Double
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
+                Dim DataCount1 As Integer = 0
+                Dim DataCount2 As Integer = 0
+
                 For i = Dptest1start To dptest1end - 1
                     Cal_avginlet1 = Cal_avginlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Cal_avgoutlet1 = Cal_avgoutlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
                     Cal_avgflowrate1 = Cal_avgflowrate1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Cal_avgtemperature1 = Cal_avgtemperature1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (°C)")
                     Cal_avgbackpressure1 = Cal_avgbackpressure1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Back Pressure (kPa)")
+
+                    DataCount1 += 1
                 Next
-                Cal_avginlet1 = Cal_avginlet1 / Cal_dptestpoints
-                Cal_avgoutlet1 = Cal_avgoutlet1 / Cal_dptestpoints
-                Cal_avgflowrate1 = Cal_avgflowrate1 / Cal_dptestpoints
-                Cal_avgtemperature1 = Cal_avgtemperature1 / Cal_dptestpoints
-                Cal_avgbackpressure1 = Cal_avgbackpressure1 / Cal_dptestpoints
+                Cal_avginlet1 = Cal_avginlet1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgoutlet1 = Cal_avgoutlet1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgflowrate1 = Cal_avgflowrate1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgtemperature1 = Cal_avgtemperature1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgbackpressure1 = Cal_avgbackpressure1 / DataCount1 ' Cal_dptestpoints
                 Cal_offset1 = Cal_avginlet1 - Cal_avgoutlet1
 
                 For i = Dptest2start To dptest2end - 1
@@ -819,12 +826,14 @@ Public Class FormCalibration
                     Cal_avgflowrate2 = Cal_avgflowrate2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Cal_avgtemperature2 = Cal_avgtemperature2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (°C)")
                     Cal_avgbackpressure2 = Cal_avgbackpressure2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Back Pressure (kPa)")
+
+                    DataCount2 += 1
                 Next
-                Cal_avginlet2 = Cal_avginlet2 / Cal_dptestpoints
-                Cal_avgoutlet2 = Cal_avgoutlet2 / Cal_dptestpoints
-                Cal_avgflowrate2 = Cal_avgflowrate2 / Cal_dptestpoints
-                Cal_avgtemperature2 = Cal_avgtemperature2 / Cal_dptestpoints
-                Cal_avgbackpressure2 = Cal_avgbackpressure2 / Cal_dptestpoints
+                Cal_avginlet2 = Cal_avginlet2 / DataCount2 ' Cal_dptestpoints
+                Cal_avgoutlet2 = Cal_avgoutlet2 / DataCount2 ' Cal_dptestpoints
+                Cal_avgflowrate2 = Cal_avgflowrate2 / DataCount2 ' Cal_dptestpoints
+                Cal_avgtemperature2 = Cal_avgtemperature2 / DataCount2 ' Cal_dptestpoints
+                Cal_avgbackpressure2 = Cal_avgbackpressure2 / DataCount2 ' Cal_dptestpoints
                 Cal_offset2 = Cal_avginlet2 - Cal_avgoutlet2
 
                 Cal_finalInlet = ((Cal_avginlet1 + Cal_avginlet2) / 2)
@@ -844,18 +853,22 @@ Public Class FormCalibration
             End If
 
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And Not dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
+                Dim DataCount1 As Integer = 0
+
                 For i = Dptest1start To dptest1end - 1
                     Cal_avginlet1 = Cal_avginlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Cal_avgoutlet1 = Cal_avgoutlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
                     Cal_avgflowrate1 = Cal_avgflowrate1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Cal_avgtemperature1 = Cal_avgtemperature1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (°C)")
                     Cal_avgbackpressure1 = Cal_avgbackpressure1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Back Pressure (kPa)")
+
+                    DataCount1 += 1
                 Next
-                Cal_avginlet1 = Cal_avginlet1 / Cal_dptestpoints
-                Cal_avgoutlet1 = Cal_avgoutlet1 / Cal_dptestpoints
-                Cal_avgflowrate1 = Cal_avgflowrate1 / Cal_dptestpoints
-                Cal_avgtemperature1 = Cal_avgtemperature1 / Cal_dptestpoints
-                Cal_avgbackpressure1 = Cal_avgbackpressure1 / Cal_dptestpoints
+                Cal_avginlet1 = Cal_avginlet1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgoutlet1 = Cal_avgoutlet1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgflowrate1 = Cal_avgflowrate1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgtemperature1 = Cal_avgtemperature1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgbackpressure1 = Cal_avgbackpressure1 / DataCount1 ' Cal_dptestpoints
                 Cal_offset1 = Cal_avginlet1 - Cal_avgoutlet1
 
                 Cal_finalInlet = Cal_avginlet1
@@ -870,7 +883,7 @@ Public Class FormCalibration
                 Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
 
 
-
+                'MsgBox($"Calibration Offset w/o Viscosity: {Cal_finalInlet - Cal_finalOutlet}")
             End If
             'txtbx_CalInletPressure.Text = CType(Cal_finalInlet, String)
             'txtbx_CalOutletPressure.Text = CType(Cal_finalOutlet, String)
@@ -927,7 +940,7 @@ Public Class FormCalibration
             VerificationRun()
             'CalEndTime = DateTime.Now
             'tmr_Calibration_EndSeq.Enabled = True
-            tmr_Calibration.Enabled = False
+            'tmr_Calibration.Enabled = False
         End If
 
     End Sub
@@ -1100,6 +1113,8 @@ Public Class FormCalibration
 
         txtbx_ActVerCycletime.Text = Ver_samplingtime.ToString
         If Ver_samplingtime = CalCycletime Then
+            tmr_Verification.Enabled = False
+
             Dim A As Double = 0.01257187
             Dim B As Double = -0.005806436
             Dim C As Double = 0.001130911
@@ -1264,7 +1279,7 @@ Public Class FormCalibration
     Private Sub txtbx_VerDP_TextChanged(sender As Object, e As EventArgs) Handles txtbx_VerDP.TextChanged
         Dim CurrentDate As DateTime = DateTime.Now
 
-        tmr_Verification.Enabled = False
+        'tmr_Verification.Enabled = False
         If IsNumeric(txtbx_VerDP.Text) Then
             If IsNumeric(txtbx_CalOffset.Text) Then
                 Dim min As Decimal = 0 ' CType(txtbx_CalOffset.Text, Decimal) - vertol

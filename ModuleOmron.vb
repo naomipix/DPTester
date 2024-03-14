@@ -2031,6 +2031,7 @@ Module ModuleOmron
         FormMain.lbl_runcycletime.Text = result_samplingtime.ToString
 
         If result_samplingtime = MainCycletime Then
+            Resultcapturetimer.Enabled = False
             PCStatus(1)(11) = True
             'Calculatefinalresult()
             ResultendtimerStartTime = DateTime.Now
@@ -2057,7 +2058,7 @@ Module ModuleOmron
     End Sub
 
     Public Sub Calculatefinalresult()
-        Resultcapturetimer.Enabled = False
+        'Resultcapturetimer.Enabled = False
         'LiveGraph.LiveGraph.ChartPlottingTimer(False)
         Dim A As Double = 0.01257187
         Dim B As Double = -0.005806436
