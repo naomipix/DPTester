@@ -695,7 +695,19 @@ Public Class FormCalibration
             Cal_outletpressure = AIn(10)
             Cal_flowrate = FinalFlowrate
             Cal_temperature = AIn(13)
-            Cal_dp = Cal_inletpressure - Cal_outletpressure
+
+            'Cal_dp = Cal_inletpressure - Cal_outletpressure
+            If True Then
+                Dim A As Double = 0.01257187
+                Dim B As Double = -0.005806436
+                Dim C As Double = 0.001130911
+                Dim D As Double = -0.000005723952
+                Dim T2 As Double = (Cal_temperature + 273.15) * (Cal_temperature + 273.15)
+                Dim exp As Double = Math.Exp((1 + (B * Cal_temperature)) / ((C * Cal_temperature) + (D * T2)))
+                Dim vis As Double = A * exp
+                Cal_dp = ((1.002 / vis) * (Cal_inletpressure - Cal_outletpressure))
+            End If
+
             Cal_backpressure = AIn(1)
             Cal_pumprpm = AIn(2)
             newrw(0) = Cal_samplingtime
@@ -814,12 +826,12 @@ Public Class FormCalibration
         If Cal_samplingtime = CalCycletime Then
             tmr_Calibration.Enabled = False
 
-            Dim A As Double = 0.01257187
-            Dim B As Double = -0.005806436
-            Dim C As Double = 0.001130911
-            Dim D As Double = -0.000005723952
-            Dim T2 As Double
-            Dim exp As Double
+            'Dim A As Double = 0.01257187
+            'Dim B As Double = -0.005806436
+            'Dim C As Double = 0.001130911
+            'Dim D As Double = -0.000005723952
+            'Dim T2 As Double
+            'Dim exp As Double
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
                 Dim DataCount1 As Integer = 0
                 Dim DataCount2 As Integer = 0
@@ -862,11 +874,12 @@ Public Class FormCalibration
                 Cal_finaltemperature = (((Cal_avgtemperature1 + Cal_avgtemperature2) / 2) + 273.15)
                 Cal_finalbackpressure = ((Cal_avgbackpressure1 + Cal_avgbackpressure2) / 2)
 
-                T2 = Cal_finaltemperature * Cal_finaltemperature
-                exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
-                Viscosity = A * exp
-                Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
+                'T2 = Cal_finaltemperature * Cal_finaltemperature
+                'exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
+                'Viscosity = A * exp
+                'Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
 
+                Cal_finaloffset = Cal_finalInlet - Cal_finalOutlet
 
 
 
@@ -897,11 +910,12 @@ Public Class FormCalibration
                 Cal_finaltemperature = (Cal_avgtemperature1 + 273.15)
                 Cal_finalbackpressure = Cal_avgbackpressure1
 
-                T2 = Cal_finaltemperature * Cal_finaltemperature
-                exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
-                Viscosity = A * exp
-                Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
+                'T2 = Cal_finaltemperature * Cal_finaltemperature
+                'exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
+                'Viscosity = A * exp
+                'Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
 
+                Cal_finaloffset = Cal_finalInlet - Cal_finalOutlet
 
                 'MsgBox($"Calibration Offset w/o Viscosity: {Cal_finalInlet - Cal_finalOutlet}")
             End If
@@ -1017,7 +1031,18 @@ Public Class FormCalibration
             Ver_temperature = AIn(13)
             Ver_backpressure = AIn(1)
             Ver_pumprpm = AIn(2)
-            Ver_dp = Ver_inletpressure - Ver_outletpressure
+            'Ver_dp = Ver_inletpressure - Ver_outletpressure
+            If True Then
+                Dim A As Double = 0.01257187
+                Dim B As Double = -0.005806436
+                Dim C As Double = 0.001130911
+                Dim D As Double = -0.000005723952
+                Dim T2 As Double = (Ver_temperature + 273.15) * (Ver_temperature + 273.15)
+                Dim exp As Double = Math.Exp((1 + (B * Ver_temperature)) / ((C * Ver_temperature) + (D * T2)))
+                Dim vis As Double = A * exp
+                Ver_dp = ((1.002 / vis) * (Ver_inletpressure - Ver_outletpressure))
+            End If
+
             newrw(0) = Ver_samplingtime
             newrw(1) = Ver_temperature
             newrw(2) = Ver_flowrate
@@ -1135,12 +1160,12 @@ Public Class FormCalibration
         If Ver_samplingtime = CalCycletime Then
             tmr_Verification.Enabled = False
 
-            Dim A As Double = 0.01257187
-            Dim B As Double = -0.005806436
-            Dim C As Double = 0.001130911
-            Dim D As Double = -0.000005723952
-            Dim T2 As Double
-            Dim exp As Double
+            'Dim A As Double = 0.01257187
+            'Dim B As Double = -0.005806436
+            'Dim C As Double = 0.001130911
+            'Dim D As Double = -0.000005723952
+            'Dim T2 As Double
+            'Dim exp As Double
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
                 For i = Dptest1start To dptest1end - 1
                     Ver_avginlet1 = Ver_avginlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
@@ -1178,11 +1203,12 @@ Public Class FormCalibration
                 Ver_finaltemperature = (((Ver_avgtemperature1 + Ver_avgtemperature2) / 2) + 273.15)
                 Ver_finalbackpressure = ((Ver_avgbackpressure1 + Ver_avgbackpressure2) / 2)
 
-                T2 = Ver_finaltemperature * Ver_finaltemperature
-                exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
-                Viscosity = A * exp
-                Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet)) - CType(txtbx_CalOffset.Text, Decimal)
+                'T2 = Ver_finaltemperature * Ver_finaltemperature
+                'exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
+                'Viscosity = A * exp
+                'Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet)) - CType(txtbx_CalOffset.Text, Decimal)
 
+                Ver_finaldp = (Ver_finalinlet - Ver_finaloutlet) - CType(txtbx_CalOffset.Text, Decimal)
 
 
             End If
@@ -1210,12 +1236,12 @@ Public Class FormCalibration
                 Ver_finalflowrate = Ver_avgflowrate1
                 Ver_finaltemperature = (Ver_avgtemperature1 + 273.15)
                 Ver_finalbackpressure = Ver_avgbackpressure1
-                T2 = Ver_finaltemperature * Ver_finaltemperature
-                exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
-                Viscosity = A * exp
-                Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet)) - CType(txtbx_CalOffset.Text, Decimal)
+                'T2 = Ver_finaltemperature * Ver_finaltemperature
+                'exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
+                'Viscosity = A * exp
+                'Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet)) - CType(txtbx_CalOffset.Text, Decimal)
 
-
+                Ver_finaldp = (Ver_finalinlet - Ver_finaloutlet) - CType(txtbx_CalOffset.Text, Decimal)
 
             End If
             'txtbx_VerInletPressure.Text = CType(Ver_finalinlet, String)

@@ -1977,7 +1977,17 @@ Module ModuleOmron
             result_outletpressure = AIn(10)
             result_flowrate = FinalFlowrate
             result_temperature = AIn(13)
-            result_dp = result_inletpressure - result_outletpressure
+            'result_dp = result_inletpressure - result_outletpressure
+            If True Then
+                Dim A As Double = 0.01257187
+                Dim B As Double = -0.005806436
+                Dim C As Double = 0.001130911
+                Dim D As Double = -0.000005723952
+                Dim T2 As Double = (result_temperature + 273.15) * (result_temperature + 273.15)
+                Dim exp As Double = Math.Exp((1 + (B * result_temperature)) / ((C * result_temperature) + (D * T2)))
+                Dim vis As Double = A * exp
+                result_dp = ((1.002 / vis) * (result_inletpressure - result_outletpressure))
+            End If
             result_backpressure = AIn(1)
             result_pumprpm = AIn(2)
             newrw(0) = serialusageid
@@ -2060,12 +2070,12 @@ Module ModuleOmron
     Public Sub Calculatefinalresult()
         'Resultcapturetimer.Enabled = False
         'LiveGraph.LiveGraph.ChartPlottingTimer(False)
-        Dim A As Double = 0.01257187
-        Dim B As Double = -0.005806436
-        Dim C As Double = 0.001130911
-        Dim D As Double = -0.000005723952
-        Dim T2 As Double
-        Dim exp As Double
+        'Dim A As Double = 0.01257187
+        'Dim B As Double = -0.005806436
+        'Dim C As Double = 0.001130911
+        'Dim D As Double = -0.000005723952
+        'Dim T2 As Double
+        'Dim exp As Double
         If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
             For i = MainDptest1start To MainDptest1end - 1
                 result_avginlet1 = result_avginlet1 + dtresult.Rows(i)("Inlet Pressure (kPa)")
@@ -2104,11 +2114,12 @@ Module ModuleOmron
 
             result_finalbackpressure = ((result_avgbackpressure1 + result_avgbackpressure2) / 2)
 
-            T2 = result_finaltemperature * result_finaltemperature
-            exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
-            Viscosity = A * exp
-            result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+            'T2 = result_finaltemperature * result_finaltemperature
+            'exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
+            'Viscosity = A * exp
+            'result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal)
 
+            result_finaldp = (result_finalinlet - result_finaloutlet) - CType(FormMain.lbl_BlankDP.Text, Decimal)
         End If
 
         If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And Not dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
@@ -2135,11 +2146,12 @@ Module ModuleOmron
 
             result_finalbackpressure = result_avgbackpressure1
 
-            T2 = result_finaltemperature * result_finaltemperature
-            exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
-            Viscosity = A * exp
-            result_finaldp = (((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal))
+            'T2 = result_finaltemperature * result_finaltemperature
+            'exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
+            'Viscosity = A * exp
+            'result_finaldp = (((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal))
 
+            result_finaldp = (result_finalinlet - result_finaloutlet) - CType(FormMain.lbl_BlankDP.Text, Decimal)
         End If
         FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)
         FormMain.lbl_ProductFlowrate.Text = CType(Math.Round(result_finalflowrate, 3), String)
