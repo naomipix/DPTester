@@ -1984,9 +1984,9 @@ Module ModuleOmron
                 Dim C As Double = 0.001130911
                 Dim D As Double = -0.000005723952
                 Dim T2 As Double = (result_temperature + 273.15) * (result_temperature + 273.15)
-                Dim exp As Double = Math.Exp((1 + (B * result_temperature)) / ((C * result_temperature) + (D * T2)))
+                Dim exp As Double = Math.Exp((1 + (B * (result_temperature + 273.15))) / ((C * (result_temperature + 273.15)) + (D * T2)))
                 Dim vis As Double = A * exp
-                result_dp = ((1.002 / vis) * (result_inletpressure - result_outletpressure))
+                result_dp = Math.Round(CDec((1.002 / vis) * (result_inletpressure - result_outletpressure)), 2)
             End If
             result_backpressure = AIn(1)
             result_pumprpm = AIn(2)

@@ -617,12 +617,12 @@ Public Class FormResultGraph
 
             With CartesianChart_ResultGraph
                 .Series(1).IsVisible = True
-                .YAxes(4).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_ResultGraph
                 .Series(1).IsVisible = False
-                .YAxes(4).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
         End If
 
@@ -640,25 +640,31 @@ Public Class FormResultGraph
 
             With CartesianChart_ResultGraph
                 .Series(2).IsVisible = True
-                .YAxes(4).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_ResultGraph
                 .Series(2).IsVisible = False
-                .YAxes(4).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
         End If
 
         If checkbx_GraphBP.Checked = True Then
             With CartesianChart_ResultGraph
                 .Series(3).IsVisible = True
-                .YAxes(4).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_ResultGraph
                 .Series(3).IsVisible = False
-                .YAxes(4).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
+        End If
+
+        If checkbx_GraphInletPressure.Checked Or checkbx_GraphOutletPressure.Checked Or checkbx_GraphBP.Checked Then
+            CartesianChart_ResultGraph.YAxes(4).IsVisible = True
+        Else
+            CartesianChart_ResultGraph.YAxes(4).IsVisible = False
         End If
 
         If checkbx_GraphFlowrate.Checked = True Then

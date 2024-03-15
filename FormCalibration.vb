@@ -536,37 +536,43 @@ Public Class FormCalibration
         If checkbx_GraphInletPressure.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(1).IsVisible = True
-                .YAxes(4).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(1).IsVisible = False
-                .YAxes(4).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
         End If
 
         If checkbx_GraphOutletPressure.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(2).IsVisible = True
-                .YAxes(4).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(2).IsVisible = False
-                .YAxes(4).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
         End If
 
         If checkbx_GraphBP.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(3).IsVisible = True
-                .YAxes(4).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(3).IsVisible = False
-                .YAxes(4).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
+        End If
+
+        If checkbx_GraphInletPressure.Checked Or checkbx_GraphOutletPressure.Checked Or checkbx_GraphBP.Checked Then
+            CartesianChart_CalibrationLiveGraph.YAxes(4).IsVisible = True
+        Else
+            CartesianChart_CalibrationLiveGraph.YAxes(4).IsVisible = False
         End If
 
         If checkbx_GraphFlowrate.Checked Then
@@ -703,9 +709,9 @@ Public Class FormCalibration
                 Dim C As Double = 0.001130911
                 Dim D As Double = -0.000005723952
                 Dim T2 As Double = (Cal_temperature + 273.15) * (Cal_temperature + 273.15)
-                Dim exp As Double = Math.Exp((1 + (B * Cal_temperature)) / ((C * Cal_temperature) + (D * T2)))
+                Dim exp As Double = Math.Exp((1 + (B * (Cal_temperature + 273.15))) / ((C * (Cal_temperature + 273.15)) + (D * T2)))
                 Dim vis As Double = A * exp
-                Cal_dp = ((1.002 / vis) * (Cal_inletpressure - Cal_outletpressure))
+                Cal_dp = Math.Round(CDec((1.002 / vis) * (Cal_inletpressure - Cal_outletpressure)), 2)
             End If
 
             Cal_backpressure = AIn(1)
@@ -947,8 +953,28 @@ Public Class FormCalibration
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Temperature (C) : {txtbx_CalTemperature.Text}")
 
                 Dim dtTemp As DataTable = GetVisibleColumnsDataTable(dgv_CalibrationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
-                dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
-                Dim dtcalresultexport As DataTable = dtTemp.DefaultView.ToTable
+                'dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
+                Dim dtcalresultexport As New DataTable '= dtTemp.DefaultView.ToTable
+
+                If True Then
+                    With dtTemp
+                        .Columns.Add("newSamplingTime", GetType(Decimal))
+                        .Columns("newSamplingTime").SetOrdinal(dtTemp.Columns.IndexOf("Sampling Time (s)"))
+                    End With
+
+                    For i As Integer = 0 To dtTemp.Rows.Count - 1
+                        dtTemp(i)("newSamplingTime") = CDec(dtTemp(i)("Sampling Time (s)"))
+                    Next
+
+                    With dtTemp
+                        .Columns.Remove("Sampling Time (s)")
+                        .DefaultView.Sort = "newSamplingTime ASC"
+                        .Columns("newSamplingTime").ColumnName = "Sampling Time (s)"
+                    End With
+
+                    dtcalresultexport = dtTemp.DefaultView.ToTable
+                End If
+
                 'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
 
                 ' Get Path
@@ -1038,9 +1064,9 @@ Public Class FormCalibration
                 Dim C As Double = 0.001130911
                 Dim D As Double = -0.000005723952
                 Dim T2 As Double = (Ver_temperature + 273.15) * (Ver_temperature + 273.15)
-                Dim exp As Double = Math.Exp((1 + (B * Ver_temperature)) / ((C * Ver_temperature) + (D * T2)))
+                Dim exp As Double = Math.Exp((1 + (B * (Cal_temperature + 273.15))) / ((C * (Cal_temperature + 273.15)) + (D * T2)))
                 Dim vis As Double = A * exp
-                Ver_dp = ((1.002 / vis) * (Ver_inletpressure - Ver_outletpressure))
+                Ver_dp = Math.Round(CDec((1.002 / vis) * (Ver_inletpressure - Ver_outletpressure)), 2)
             End If
 
             newrw(0) = Ver_samplingtime
@@ -1276,8 +1302,28 @@ Public Class FormCalibration
 
 
                 Dim dtTemp As DataTable = GetVisibleColumnsDataTable(dgv_VerificationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
-                dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
-                Dim dtVerresultexport As DataTable = dtTemp.DefaultView.ToTable
+                'dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
+                Dim dtVerresultexport As New DataTable '= dtTemp.DefaultView.ToTable
+
+                If True Then
+                    With dtTemp
+                        .Columns.Add("newSamplingTime", GetType(Decimal))
+                        .Columns("newSamplingTime").SetOrdinal(dtTemp.Columns.IndexOf("Sampling Time (s)"))
+                    End With
+
+                    For i As Integer = 0 To dtTemp.Rows.Count - 1
+                        dtTemp(i)("newSamplingTime") = CDec(dtTemp(i)("Sampling Time (s)"))
+                    Next
+
+                    With dtTemp
+                        .Columns.Remove("Sampling Time (s)")
+                        .DefaultView.Sort = "newSamplingTime ASC"
+                        .Columns("newSamplingTime").ColumnName = "Sampling Time (s)"
+                    End With
+
+                    dtVerresultexport = dtTemp.DefaultView.ToTable
+                End If
+
                 'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
 
                 ' Get Path

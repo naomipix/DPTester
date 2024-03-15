@@ -7472,7 +7472,7 @@ Public Class FormRecipeManagement
         Next
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.Click
         Select Case ComboBox1.SelectedItem
             Case "Fittings"
                 Label3.Text = "Fitting ID :"
@@ -7504,7 +7504,7 @@ Public Class FormRecipeManagement
         Next
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs)
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Dim SelectedType As String = ComboBox5.SelectedItem
         Dim FittingNameInput As String = TextBox1.Text.Trim
 
@@ -7534,7 +7534,7 @@ Public Class FormRecipeManagement
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim SelectedType As String = ComboBox1.SelectedItem
         Dim SelectedID As String = ComboBox2.SelectedItem
 
@@ -7549,7 +7549,7 @@ Public Class FormRecipeManagement
         End If
     End Sub
 
-    Private Sub ComboBox5_SelectedIndexChanged(sender As Object, e As EventArgs)
+    Private Sub ComboBox5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedIndexChanged
         Select Case ComboBox1.SelectedItem
             Case "Fittings"
                 Label8.Text = "Fitting ID :"
