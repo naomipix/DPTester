@@ -70,10 +70,10 @@ Public Class FormRecipeManagement
 
     'Declare Recipe Parameter Nominal Value Variables
 
-    Private nom_d_vertol As Decimal = 0.1
+    Private nom_d_vertol As Decimal = 1.0
 
     Private nom_i_prepfilltime As Integer = 5
-    Private nom_i_prepbleedtime As Integer = 5
+    Private nom_i_prepbleedtime As Integer = 0
     Private nom_d_prepflow As Decimal = 3
     Private nom_d_preppressure As Decimal = 5
     Private nom_d_preppressuredrop As Decimal = 5
@@ -436,7 +436,7 @@ Public Class FormRecipeManagement
         d_drain3pressure = 0
         i_drain3time = 0
 
-        txtbx_RcpCreateVerTol.Text = CType(d_vertol, String)
+        txtbx_RcpCreateVerTol.Text = "0.0" '"CType(d_vertol, String)
 
         Return 1
     End Function
@@ -973,16 +973,16 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateRecipeID.Enabled = True
             txtbx_RcpCreateRecipeID.Text = ""
             ' Load defaults and enable to the recipe parameters
-            txtbx_RcpCreateVerTol.Enabled = True
+            'txtbx_RcpCreateVerTol.Enabled = True
 
 
             checkbx_CreateFlush1.Enabled = True
             checkbx_CreateDPTest1.Enabled = True
             checkbx_CreateDPTest2.Enabled = False
             checkbx_CreateFlush2.Enabled = True
-            checkbx_CreateDrain1.Enabled = True
+            'checkbx_CreateDrain1.Enabled = True
             checkbx_CreateDrain2.Enabled = True
-            checkbx_CreateDrain3.Enabled = True
+            'checkbx_CreateDrain3.Enabled = True
 
             ComboBox3.Enabled = True
             ComboBox4.Enabled = True
@@ -990,22 +990,45 @@ Public Class FormRecipeManagement
 
             ' For Preparation Sequence
             txtbx_RcpCreatePrepFill.Enabled = True
-            txtbx_RcpCreatePrepBleed.Enabled = True
+            'txtbx_RcpCreatePrepBleed.Enabled = True
             txtbx_RcpCreatePrepFlow.Enabled = True
             txtbx_RcpCreatePrepPressure.Enabled = True
             txtbx_RcpCreatePrepPressureDrop.Enabled = True
             txtbx_RcpCreatePrepPressureDropTime.Enabled = True
-            txtbx_RcpCreatePrepPrefillStartTime.Enabled = True
-            txtbx_RcpCreatePrepPrefillTime.Enabled = True
+            'txtbx_RcpCreatePrepPrefillStartTime.Enabled = True
+            'txtbx_RcpCreatePrepPrefillTime.Enabled = True
 
             recipeparameterdefaults()
 
             btn_RecipeIDCreate.Enabled = True
 
+            If Not DirectCast(cmbx_RcpCreateFilterType.SelectedItem, KeyValuePair(Of String, String)).Value = "Cal. Master" Then
+                txtbx_RcpCreateVerTol.Enabled = True
+                checkbx_CreateDrain1.Enabled = True
+                checkbx_CreateDrain3.Enabled = True
+                txtbx_RcpCreatePrepBleed.Enabled = True
+                txtbx_RcpCreatePrepPrefillStartTime.Enabled = True
+                txtbx_RcpCreatePrepPrefillTime.Enabled = True
+                txtbx_RcpCreateVerTol.Text = CType(d_vertol, String)
+            End If
 
+            i_prepfilltime = nom_i_prepfilltime
+            i_prepbleedtime = nom_i_prepbleedtime
+            d_prepflow = nom_d_prepflow
+            d_preppressure = nom_d_preppressure
+            d_preppressuredrop = nom_d_preppressuredrop
+            i_preppressuredroptime = nom_i_preppressuredroptime
+            i_prepprefillstarttime = nom_i_prepprefillstarttime
+            i_prepprefilltime = nom_i_prepprefilltime
 
-
-
+            txtbx_RcpCreatePrepFill.Text = CType(i_prepfilltime, String)
+            txtbx_RcpCreatePrepBleed.Text = CType(i_prepbleedtime, String)
+            txtbx_RcpCreatePrepFlow.Text = CType(d_prepflow, String)
+            txtbx_RcpCreatePrepPressure.Text = CType(d_preppressure, String)
+            txtbx_RcpCreatePrepPressureDrop.Text = CType(d_preppressuredrop, String)
+            txtbx_RcpCreatePrepPressureDropTime.Text = CType(i_preppressuredroptime, String)
+            txtbx_RcpCreatePrepPrefillStartTime.Text = CType(i_prepprefillstarttime, String)
+            txtbx_RcpCreatePrepPrefillTime.Text = CType(i_prepprefilltime, String)
         Else
             txtbx_RcpCreateRecipeID.Text = "--"
             txtbx_RcpCreateRecipeID.Enabled = False
@@ -1072,7 +1095,23 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateDrain3Time.Enabled = False
             btn_RecipeIDCreate.Enabled = False
 
+            i_prepfilltime = 0
+            i_prepbleedtime = 0
+            d_prepflow = 0
+            d_preppressure = 0
+            d_preppressuredrop = 0
+            i_preppressuredroptime = 0
+            i_prepprefillstarttime = 0
+            i_prepprefilltime = 0
 
+            txtbx_RcpCreatePrepFill.Text = Nothing
+            txtbx_RcpCreatePrepBleed.Text = Nothing
+            txtbx_RcpCreatePrepPressureDropTime.Text = Nothing
+            txtbx_RcpCreatePrepPressure.Text = Nothing
+            txtbx_RcpCreatePrepPressureDrop.Text = Nothing
+            txtbx_RcpCreatePrepPressureDropTime.Text = Nothing
+            txtbx_RcpCreatePrepPrefillStartTime.Text = Nothing
+            txtbx_RcpCreatePrepPrefillTime.Text = Nothing
         End If
     End Sub
 
@@ -3549,9 +3588,9 @@ Public Class FormRecipeManagement
                     {"last_modified_time", lbl_DateTimeClock.Text},
                     {"user_created", PublicVariables.LoginUserName},
                     {"created_time", lbl_DateTimeClock.Text},
-                    {"filter_inlet", IIf(ComboBox3.Items.Count > 0, ComboBox3.SelectedItem, "")},
-                    {"filter_outlet", IIf(ComboBox4.Items.Count > 0, ComboBox4.SelectedItem, "")},
-                    {"filter_blank", IIf(ComboBox6.Items.Count > 0, ComboBox6.SelectedItem, "")},
+                    {"fitting_inlet", IIf(ComboBox3.Items.Count > 0, ComboBox3.SelectedItem, "")},
+                    {"fitting_outlet", IIf(ComboBox4.Items.Count > 0, ComboBox4.SelectedItem, "")},
+                    {"fitting_blank", IIf(ComboBox6.Items.Count > 0, ComboBox6.SelectedItem, "")},
                     {"verification_tolerance", d_vertol},
                     {"prep_fill_time", i_prepfilltime},
                     {"prep_bleed_time", i_prepbleedtime},
@@ -3751,9 +3790,9 @@ Public Class FormRecipeManagement
                     {"last_modified_time", dtDuplicaterecipe(0)("last_modified_time")},
                     {"user_created", dtDuplicaterecipe(0)("user_created")},
                     {"created_time", dtDuplicaterecipe(0)("created_time")},
-                    {"filter_inlet", dtDuplicaterecipe(0)("filter_inlet")},
-                    {"filter_outlet", dtDuplicaterecipe(0)("filter_outlet")},
-                    {"filter_blank", dtDuplicaterecipe(0)("filter_blank")},
+                    {"fitting_inlet", dtDuplicaterecipe(0)("fitting_inlet")},
+                    {"fitting_outlet", dtDuplicaterecipe(0)("fitting_outlet")},
+                    {"fitting_blank", dtDuplicaterecipe(0)("fitting_blank")},
                     {"verification_tolerance", dtDuplicaterecipe(0)("verification_tolerance")},
                                                                                                _
                     {"prep_fill_time", dtDuplicaterecipe(0)("prep_fill_time")},
@@ -4937,13 +4976,22 @@ Public Class FormRecipeManagement
         ComboBox7.Enabled = True
 
         txtbx_RcpEditPrepFill.Enabled = True
-        txtbx_RcpEditPrepBleed.Enabled = True
+        'txtbx_RcpEditPrepBleed.Enabled = True
         txtbx_RcpEditPrepFlow.Enabled = True
         txtbx_RcpEditPrepPressure.Enabled = True
         txtbx_RcpEditPrepPressureDrop.Enabled = True
         txtbx_RcpEditPrepPressureDropTime.Enabled = True
-        txtbx_RcpEditPrepPrefillStartTime.Enabled = True
-        txtbx_RcpEditPrepPrefillTime.Enabled = True
+        'txtbx_RcpEditPrepPrefillStartTime.Enabled = True
+        'txtbx_RcpEditPrepPrefillTime.Enabled = True
+
+        If Not DirectCast(cmbx_RcpEditFilterType.SelectedItem, KeyValuePair(Of String, String)).Value = "Cal. Master" Then
+            checkbx_EditDrain1.Enabled = True
+            checkbx_EditDrain3.Enabled = True
+            txtbx_RcpEditPrepBleed.Enabled = True
+            txtbx_RcpEditPrepPrefillStartTime.Enabled = True
+            txtbx_RcpEditPrepPrefillTime.Enabled = True
+        End If
+
         If checkbx_EditFlush1.Checked = True Then
             'txtbx_RcpEditFlush1Fill.Enabled = True
             'txtbx_RcpEditFlush1Bleed.Enabled = True
@@ -5183,14 +5231,14 @@ Public Class FormRecipeManagement
 
         txtbx_RcpEditVerTol.Text = CType(d_vertol, String)
 
-        If Not IsDBNull(dtRecipe(0)("filter_inlet")) Then
-            ComboBox9.SelectedIndex = ComboBox9.FindStringExact(dtRecipe(0)("filter_inlet"))
+        If Not IsDBNull(dtRecipe(0)("fitting_inlet")) Then
+            ComboBox9.SelectedIndex = ComboBox9.FindStringExact(dtRecipe(0)("fitting_inlet"))
         End If
-        If Not IsDBNull(dtRecipe(0)("filter_outlet")) Then
-            ComboBox8.SelectedIndex = ComboBox8.FindStringExact(dtRecipe(0)("filter_outlet"))
+        If Not IsDBNull(dtRecipe(0)("fitting_outlet")) Then
+            ComboBox8.SelectedIndex = ComboBox8.FindStringExact(dtRecipe(0)("fitting_outlet"))
         End If
-        If Not IsDBNull(dtRecipe(0)("filter_blank")) Then
-            ComboBox7.SelectedIndex = ComboBox7.FindStringExact(dtRecipe(0)("filter_blank"))
+        If Not IsDBNull(dtRecipe(0)("fitting_blank")) Then
+            ComboBox7.SelectedIndex = ComboBox7.FindStringExact(dtRecipe(0)("fitting_blank"))
         End If
 
         txtbx_RcpEditPrepFill.Text = CType(i_prepfilltime, String)
@@ -6425,10 +6473,10 @@ Public Class FormRecipeManagement
                     {"recipe_type_id", dtrecipeidcheck(0)("recipe_type_id")},
                     {"user_created", PublicVariables.LoginUserName},
                     {"created_time", currentDateTime},
-                    {"filter_inlet", IIf(ComboBox9.Items.Count > 0, ComboBox9.SelectedItem, "")},
-                    {"filter_outlet", IIf(ComboBox8.Items.Count > 0, ComboBox8.SelectedItem, "")},
-                    {"filter_blank", IIf(ComboBox7.Items.Count > 0, ComboBox7.SelectedItem, "")},
-                                                                                                 _
+                    {"fitting_inlet", IIf(ComboBox9.Items.Count > 0, ComboBox9.SelectedItem, "")},
+                    {"fitting_outlet", IIf(ComboBox8.Items.Count > 0, ComboBox8.SelectedItem, "")},
+                    {"fitting_blank", IIf(ComboBox7.Items.Count > 0, ComboBox7.SelectedItem, "")},
+                                                                                                  _
                     {"last_modified_by", PublicVariables.LoginUserName},
                     {"last_modified_time", currentDateTime}, ' lbl_DateTimeClock.Text
                     {"verification_tolerance", d_vertol},

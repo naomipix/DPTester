@@ -122,12 +122,12 @@ Public Class FormResultGraph
         CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
         CartesianChart_ResultGraph.TooltipTextSize = 12
         CartesianChart_ResultGraph.TooltipBackgroundPaint = New SolidColorPaint(New SKColor(0, 0, 0, 10))
-        CartesianChart_ResultGraph.LegendPosition = LiveChartsCore.Measure.LegendPosition.Right
+        CartesianChart_ResultGraph.LegendPosition = LiveChartsCore.Measure.LegendPosition.Top 'Right
         CartesianChart_ResultGraph.LegendTextSize = 12
         CartesianChart_ResultGraph.ZoomMode = Measure.ZoomAndPanMode.X
 
+        '.Text = "Result Graph",
         CartesianChart_ResultGraph.Title = New LabelVisual() With {
-            .Text = "Result Graph",
             .TextSize = 14,
             .Padding = New LiveChartsCore.Drawing.Padding(15),
             .Paint = New SolidColorPaint(SKColors.Black)

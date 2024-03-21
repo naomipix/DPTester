@@ -798,3 +798,4 @@ C:\Users\HP\Documents\GitHub\DPTester\bin\Debug\System.Memory.xml
 C:\Users\HP\Documents\GitHub\DPTester\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\HP\Documents\GitHub\DPTester\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormPixel.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.FormTesting.resources

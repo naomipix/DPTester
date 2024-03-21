@@ -3306,9 +3306,10 @@ Public Class FormMain
         Dim continueEndLot As Boolean = False
 
         If MainMessage(8, LotID) = DialogResult.Yes Then
-            Dim TxtbxQty As Integer = 0
+            If Not txtbx_TitleFilterType.Text = "Cal. Master" Then
+                Dim TxtbxQty As Integer = 0
 
-            Dim dtProdDetailTbl As DataTable = SQL.ReadRecords($"
+                Dim dtProdDetailTbl As DataTable = SQL.ReadRecords($"
                 SELECT DISTINCT ProductionDetail.serial_uid FROM ProductionDetail 
                 LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id 
                 WHERE ProductionDetail.serial_attempt = (
@@ -3319,14 +3320,17 @@ Public Class FormMain
                 AND LotUsage.lot_id='{LotID}'
             ")
 
-            Integer.TryParse(txtbx_Quantity.Text, TxtbxQty)
+                Integer.TryParse(txtbx_Quantity.Text, TxtbxQty)
 
-            If dtProdDetailTbl.Rows.Count = TxtbxQty Then
-                continueEndLot = True
-            Else
-                If MsgBox($"Lot Quantity Incomplete. Continue End Lot?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                If dtProdDetailTbl.Rows.Count = TxtbxQty Then
                     continueEndLot = True
+                Else
+                    If MsgBox($"Lot Quantity Incomplete. Continue End Lot?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                        continueEndLot = True
+                    End If
                 End If
+            Else
+                continueEndLot = True
             End If
         End If
 
@@ -3453,26 +3457,37 @@ Public Class FormMain
 
         Dim dtrecipe As DataTable = SQL.ReadRecords($"SELECT * From RecipeTable WHERE recipe_id ='{Recipe}' ORDER BY recipe_rev DESC")
 
-        ' Load Filter Type
+        ' Load Fitting Type
         If True Then
-            If Not IsDBNull(dtrecipe(0)("filter_inlet")) Then
-                lbl_FilterInletType.Text = dtrecipe(0)("filter_inlet")
+            If Not IsDBNull(dtrecipe(0)("fitting_inlet")) Then
+                lbl_FilterInletType.Text = dtrecipe(0)("fitting_inlet")
             Else
                 lbl_FilterInletType.Text = ""
             End If
-            If Not IsDBNull(dtrecipe(0)("filter_outlet")) Then
-                lbl_FilterOutletType.Text = dtrecipe(0)("filter_outlet")
+            If Not IsDBNull(dtrecipe(0)("fitting_outlet")) Then
+                lbl_FilterOutletType.Text = dtrecipe(0)("fitting_outlet")
             Else
                 lbl_FilterOutletType.Text = ""
             End If
-            If Not IsDBNull(dtrecipe(0)("filter_blank")) Then
-                lbl_FilterBlankType.Text = dtrecipe(0)("filter_blank")
+            If Not IsDBNull(dtrecipe(0)("fitting_blank")) Then
+                lbl_FilterBlankType.Text = dtrecipe(0)("fitting_blank")
             Else
                 lbl_FilterBlankType.Text = ""
             End If
         End If
 
         If dtrecipe.Rows.Count > 0 Then
+            Dim VerEnable As Boolean = True
+            Select Case txtbx_TitleFilterType.Text
+                Case "Cal. Master"
+                    VerEnable = False
+            End Select
+            If VerEnable Then
+                DInt2int(118, 1)
+            Else
+                DInt2int(118, 0)
+            End If
+
             Float2int(30, CType(dtrecipe.Rows(0)("verification_tolerance"), Double))
             Float2int(106, CType(dtrecipe.Rows(0)("prep_flowrate"), Double))
             Float2int(108, CType(dtrecipe.Rows(0)("prep_back_pressure"), Double))
@@ -3640,6 +3655,13 @@ Public Class FormMain
                     If CSerialNum > TxtbxQty Then
                         Oncontinue = False
                         MsgBox($"S/N must not be more than Lot Quantity", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                    End If
+                End If
+
+                If Oncontinue = True Then
+                    If TxtbxQty <= 0 Then
+                        Oncontinue = False
+                        MsgBox($"S/N must not be less than 1", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
                     End If
                 End If
             End If
@@ -4935,8 +4957,8 @@ Public Class FormMain
     End Sub
 
 
-    Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
-        FormPixel.Show()
+    Private Sub Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click, PictureBox1.Click
+        FormPixel.ShowDialog()
     End Sub
 
     Private Sub btn_ResetZoom_Click(sender As Object, e As EventArgs) Handles btn_ResetZoom.Click
@@ -4954,6 +4976,12 @@ Public Class FormMain
                 chart.YAxes(i).MinLimit = Nothing
                 chart.YAxes(i).MaxLimit = Nothing
             Next
+        End If
+    End Sub
+
+    Private Sub lbl_Version_Click(sender As Object, e As EventArgs) Handles lbl_Version.Click
+        If LoggedInIsDeveloper Then
+            FormTesting.Show()
         End If
     End Sub
 End Class

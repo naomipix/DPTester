@@ -959,8 +959,9 @@ Partial Class FormMain
         Me.checkbx_ShowTooltip.AutoSize = True
         Me.checkbx_ShowTooltip.BackColor = System.Drawing.Color.AliceBlue
         Me.checkbx_ShowTooltip.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(599, 13)
+        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(724, 494)
         Me.checkbx_ShowTooltip.Name = "checkbx_ShowTooltip"
+        Me.checkbx_ShowTooltip.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.checkbx_ShowTooltip.Size = New System.Drawing.Size(108, 21)
         Me.checkbx_ShowTooltip.TabIndex = 77
         Me.checkbx_ShowTooltip.Text = "Show Tooltips"

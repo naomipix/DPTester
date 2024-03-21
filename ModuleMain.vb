@@ -14,7 +14,7 @@ Imports LiveChartsCore.SkiaSharpView.WinForms
 Module PublicVariables
     ' Version
     'Public AppVersion As String = "Ver. " & "1.0.0.1"
-    Public AppVersion As String = "Ver. " & "1.0.0"
+    Public AppVersion As String = "Ver. " & "1.0.3"
 
     ' License Status
     Public LicenseType As String = ""
@@ -375,9 +375,9 @@ Module SQL
 
                 ' Concatenate SQL String
                 Dim sqlConcatenate As String = $"INSERT INTO {tableName} ({InsertKey}) VALUES ({InsertValue})"
-                If LoggedInIsDeveloper Then
-                    MsgBox(sqlConcatenate)
-                End If
+                'If LoggedInIsDeveloper Then
+                '    MsgBox(sqlConcatenate)
+                'End If
 
                 With command
                     .CommandText = sqlConcatenate
@@ -489,7 +489,11 @@ Module SQL
         Dim command As New SqlCommand()
 
         Dim backupPath As String = PublicVariables.AutoBackupSQLPath.Substring(0, PublicVariables.AutoBackupSQLPath.Length - 1)
-        Directory.CreateDirectory(backupPath)
+        'Directory.CreateDirectory(backupPath)
+        Try
+            Directory.CreateDirectory(backupPath)
+        Catch ex As Exception
+        End Try
 
         Dim backupFileName As String = $"{connection.Database}_{DateTime.Now.ToString("yyyyMMdd_hhmmss")}.bak"
 

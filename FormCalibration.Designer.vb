@@ -37,6 +37,11 @@ Partial Class FormCalibration
         Me.panel_UserCategory = New System.Windows.Forms.Panel()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.btn_CircuitView = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -122,6 +127,7 @@ Partial Class FormCalibration
         Me.txtbx_VerBackpress = New System.Windows.Forms.TextBox()
         Me.dsp_CalBackpress = New System.Windows.Forms.Label()
         Me.txtbx_CalBackpress = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -132,6 +138,7 @@ Partial Class FormCalibration
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -252,9 +259,11 @@ Partial Class FormCalibration
         '
         'panel_FormControl
         '
+        Me.panel_FormControl.Controls.Add(Me.Panel5)
         Me.panel_FormControl.Controls.Add(Me.btn_CircuitView)
         Me.panel_FormControl.Controls.Add(Me.PictureBox1)
         Me.panel_FormControl.Controls.Add(Me.Panel1)
+        Me.panel_FormControl.Controls.Add(Me.Label6)
         Me.panel_FormControl.Controls.Add(Me.dsp_Home)
         Me.panel_FormControl.Controls.Add(Me.btn_Home)
         Me.panel_FormControl.Controls.Add(Me.picbx_Icon)
@@ -270,6 +279,55 @@ Partial Class FormCalibration
         Me.panel_FormControl.Size = New System.Drawing.Size(1904, 1001)
         Me.panel_FormControl.TabIndex = 0
         Me.panel_FormControl.Visible = False
+        '
+        'Panel5
+        '
+        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel5.Controls.Add(Me.Label5)
+        Me.Panel5.Controls.Add(Me.Label3)
+        Me.Panel5.Controls.Add(Me.TextBox2)
+        Me.Panel5.Controls.Add(Me.TextBox1)
+        Me.Panel5.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.Panel5.Location = New System.Drawing.Point(1378, 77)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(150, 80)
+        Me.Panel5.TabIndex = 107
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(12, 47)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(56, 17)
+        Me.Label5.TabIndex = 1
+        Me.Label5.Text = "Warning"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(26, 16)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(42, 17)
+        Me.Label3.TabIndex = 1
+        Me.Label3.Text = "Alarm"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(74, 44)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.Size = New System.Drawing.Size(60, 25)
+        Me.TextBox2.TabIndex = 0
+        Me.TextBox2.Text = "0"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(74, 13)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(60, 25)
+        Me.TextBox1.TabIndex = 0
+        Me.TextBox1.Text = "0"
         '
         'btn_CircuitView
         '
@@ -765,11 +823,11 @@ Partial Class FormCalibration
         '
         Me.btn_ResetZoom.BackColor = System.Drawing.SystemColors.Window
         Me.btn_ResetZoom.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.btn_ResetZoom.Location = New System.Drawing.Point(1143, 519)
+        Me.btn_ResetZoom.Location = New System.Drawing.Point(1146, 537)
         Me.btn_ResetZoom.Name = "btn_ResetZoom"
-        Me.btn_ResetZoom.Size = New System.Drawing.Size(80, 50)
+        Me.btn_ResetZoom.Size = New System.Drawing.Size(80, 35)
         Me.btn_ResetZoom.TabIndex = 98
-        Me.btn_ResetZoom.Text = "Reset Zoom"
+        Me.btn_ResetZoom.Text = "Reset"
         Me.btn_ResetZoom.UseVisualStyleBackColor = False
         '
         'checkbx_ShowTooltip
@@ -777,8 +835,9 @@ Partial Class FormCalibration
         Me.checkbx_ShowTooltip.AutoSize = True
         Me.checkbx_ShowTooltip.BackColor = System.Drawing.Color.AliceBlue
         Me.checkbx_ShowTooltip.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(1102, 66)
+        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(1027, 545)
         Me.checkbx_ShowTooltip.Name = "checkbx_ShowTooltip"
+        Me.checkbx_ShowTooltip.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.checkbx_ShowTooltip.Size = New System.Drawing.Size(108, 21)
         Me.checkbx_ShowTooltip.TabIndex = 82
         Me.checkbx_ShowTooltip.Text = "Show Tooltips"
@@ -864,10 +923,10 @@ Partial Class FormCalibration
         'CartesianChart_CalibrationLiveGraph
         '
         Me.CartesianChart_CalibrationLiveGraph.BackColor = System.Drawing.Color.AliceBlue
-        Me.CartesianChart_CalibrationLiveGraph.Location = New System.Drawing.Point(0, 56)
+        Me.CartesianChart_CalibrationLiveGraph.Location = New System.Drawing.Point(15, 22)
         Me.CartesianChart_CalibrationLiveGraph.Margin = New System.Windows.Forms.Padding(5)
         Me.CartesianChart_CalibrationLiveGraph.Name = "CartesianChart_CalibrationLiveGraph"
-        Me.CartesianChart_CalibrationLiveGraph.Size = New System.Drawing.Size(1236, 526)
+        Me.CartesianChart_CalibrationLiveGraph.Size = New System.Drawing.Size(1206, 560)
         Me.CartesianChart_CalibrationLiveGraph.TabIndex = 12
         '
         'tabpg_TableView
@@ -1291,10 +1350,20 @@ Partial Class FormCalibration
         Me.txtbx_CalBackpress.TabIndex = 94
         Me.txtbx_CalBackpress.TabStop = False
         '
+        'Label6
+        '
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(1378, 49)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(149, 25)
+        Me.Label6.TabIndex = 103
+        Me.Label6.Text = "Alarm/Warn Counter"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'dsp_Home
         '
         Me.dsp_Home.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_Home.Location = New System.Drawing.Point(1531, 49)
+        Me.dsp_Home.Location = New System.Drawing.Point(1534, 49)
         Me.dsp_Home.Name = "dsp_Home"
         Me.dsp_Home.Size = New System.Drawing.Size(80, 25)
         Me.dsp_Home.TabIndex = 103
@@ -1355,6 +1424,8 @@ Partial Class FormCalibration
         Me.panel_UserCategory.ResumeLayout(False)
         Me.panel_UserCategory.PerformLayout()
         Me.panel_FormControl.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
@@ -1477,4 +1548,10 @@ Partial Class FormCalibration
     Friend WithEvents btn_ResetZoom As Button
     Friend WithEvents tmr_Calibration_EndSeq As Timer
     Friend WithEvents tmr_Verification_EndSeq As Timer
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label6 As Label
 End Class

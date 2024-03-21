@@ -35,6 +35,13 @@ Partial Class FormRecipeManagement
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
         Me.tabpg_Delete = New System.Windows.Forms.TabPage()
         Me.panel_Delete = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.panel_RecipeDeletion = New System.Windows.Forms.Panel()
         Me.dsp_RecipeDeletion = New System.Windows.Forms.Label()
         Me.cmbx_RcpDeleteRecipeID = New System.Windows.Forms.ComboBox()
@@ -72,6 +79,14 @@ Partial Class FormRecipeManagement
         Me.dsp_SearchRecipeID = New System.Windows.Forms.Label()
         Me.dgv_RecipeDetails = New System.Windows.Forms.DataGridView()
         Me.tabpg_Edit = New System.Windows.Forms.TabPage()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox8 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox9 = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.dsp_RcpEditPrepPrefillTime = New System.Windows.Forms.Label()
         Me.dsp_RcpEditPrepPrefillStartTime = New System.Windows.Forms.Label()
@@ -179,6 +194,14 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpEditFilterType = New System.Windows.Forms.ComboBox()
         Me.dsp_RcpEditRcpSelection = New System.Windows.Forms.Label()
         Me.tabpg_Create = New System.Windows.Forms.TabPage()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.ComboBox6 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.dsp_RcpCreatePrepPrefillTime = New System.Windows.Forms.Label()
         Me.dsp_RcpCreatePrepPrefillStartTime = New System.Windows.Forms.Label()
@@ -264,6 +287,13 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpCreateFlush1Flow = New System.Windows.Forms.Label()
         Me.dsp_RcpCreateRcpParameters = New System.Windows.Forms.Label()
         Me.panel_Create = New System.Windows.Forms.Panel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.panel_RecipeGeneration = New System.Windows.Forms.Panel()
         Me.dsp_RcpCreation = New System.Windows.Forms.Label()
         Me.txtbx_RcpCreateRecipeID = New System.Windows.Forms.TextBox()
@@ -289,40 +319,11 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox6 = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.ComboBox7 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox8 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox9 = New System.Windows.Forms.ComboBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
         Me.panel_Delete.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         Me.panel_RecipeDeletion.SuspendLayout()
         Me.panel_ProdSKUDeletion.SuspendLayout()
         Me.tabctrl_RecipeCtrl.SuspendLayout()
@@ -331,6 +332,7 @@ Partial Class FormRecipeManagement
         Me.grpbx_Search.SuspendLayout()
         CType(Me.dgv_RecipeDetails, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabpg_Edit.SuspendLayout()
+        Me.Panel7.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.panel_RcpEditDrain3.SuspendLayout()
         Me.panel_RcpEditDrain2.SuspendLayout()
@@ -343,6 +345,7 @@ Partial Class FormRecipeManagement
         Me.Panel1.SuspendLayout()
         Me.panel_RecipeManagement.SuspendLayout()
         Me.tabpg_Create.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.panel_RcpCreateDrain3.SuspendLayout()
         Me.panel_RcpCreateDrain2.SuspendLayout()
@@ -352,14 +355,11 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateDPTest1.SuspendLayout()
         Me.panel_RcpCreateFlush1.SuspendLayout()
         Me.panel_Create.SuspendLayout()
+        Me.Panel6.SuspendLayout()
         Me.panel_RecipeGeneration.SuspendLayout()
         Me.panel_ProdSKUCreation.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel5.SuspendLayout()
-        Me.Panel6.SuspendLayout()
-        Me.Panel4.SuspendLayout()
-        Me.Panel7.SuspendLayout()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -488,6 +488,86 @@ Partial Class FormRecipeManagement
         Me.panel_Delete.Name = "panel_Delete"
         Me.panel_Delete.Size = New System.Drawing.Size(562, 767)
         Me.panel_Delete.TabIndex = 2
+        '
+        'Panel5
+        '
+        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel5.Controls.Add(Me.ComboBox2)
+        Me.Panel5.Controls.Add(Me.Button1)
+        Me.Panel5.Controls.Add(Me.Label2)
+        Me.Panel5.Controls.Add(Me.ComboBox1)
+        Me.Panel5.Controls.Add(Me.Label3)
+        Me.Panel5.Controls.Add(Me.Label4)
+        Me.Panel5.Location = New System.Drawing.Point(3, 508)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(556, 200)
+        Me.Panel5.TabIndex = 4
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Fittings", "Blank"})
+        Me.ComboBox2.Location = New System.Drawing.Point(152, 113)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox2.TabIndex = 106
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button1.Location = New System.Drawing.Point(420, 75)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(110, 60)
+        Me.Button1.TabIndex = 15
+        Me.Button1.Text = "Delete"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Label2
+        '
+        Me.Label2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(0, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(554, 50)
+        Me.Label2.TabIndex = 103
+        Me.Label2.Text = "Fitting Type Deletion"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox1.Location = New System.Drawing.Point(152, 68)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox1.TabIndex = 13
+        '
+        'Label3
+        '
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(21, 114)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(125, 25)
+        Me.Label3.TabIndex = 104
+        Me.Label3.Text = "ID :"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label4
+        '
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(21, 69)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(125, 25)
+        Me.Label4.TabIndex = 104
+        Me.Label4.Text = "Fitting Type :"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'panel_RecipeDeletion
         '
@@ -914,6 +994,91 @@ Partial Class FormRecipeManagement
         Me.tabpg_Edit.Text = "Edit"
         Me.tabpg_Edit.UseVisualStyleBackColor = True
         '
+        'Panel7
+        '
+        Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel7.Controls.Add(Me.Label14)
+        Me.Panel7.Controls.Add(Me.Label15)
+        Me.Panel7.Controls.Add(Me.Label17)
+        Me.Panel7.Controls.Add(Me.Label18)
+        Me.Panel7.Controls.Add(Me.ComboBox7)
+        Me.Panel7.Controls.Add(Me.ComboBox8)
+        Me.Panel7.Controls.Add(Me.ComboBox9)
+        Me.Panel7.Location = New System.Drawing.Point(575, 591)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(307, 170)
+        Me.Panel7.TabIndex = 37
+        '
+        'Label14
+        '
+        Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.Label14.Location = New System.Drawing.Point(49, 5)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(200, 40)
+        Me.Label14.TabIndex = 34
+        Me.Label14.Text = "Fitting Type"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(42, 130)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(45, 17)
+        Me.Label15.TabIndex = 15
+        Me.Label15.Text = "Blank :"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(37, 95)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(50, 17)
+        Me.Label17.TabIndex = 15
+        Me.Label17.Text = "Outlet :"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(48, 60)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(39, 17)
+        Me.Label18.TabIndex = 15
+        Me.Label18.Text = "Inlet :"
+        '
+        'ComboBox7
+        '
+        Me.ComboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox7.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox7.FormattingEnabled = True
+        Me.ComboBox7.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox7.Location = New System.Drawing.Point(93, 127)
+        Me.ComboBox7.Name = "ComboBox7"
+        Me.ComboBox7.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox7.TabIndex = 14
+        '
+        'ComboBox8
+        '
+        Me.ComboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox8.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox8.FormattingEnabled = True
+        Me.ComboBox8.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox8.Location = New System.Drawing.Point(93, 92)
+        Me.ComboBox8.Name = "ComboBox8"
+        Me.ComboBox8.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox8.TabIndex = 14
+        '
+        'ComboBox9
+        '
+        Me.ComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox9.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox9.FormattingEnabled = True
+        Me.ComboBox9.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox9.Location = New System.Drawing.Point(93, 57)
+        Me.ComboBox9.Name = "ComboBox9"
+        Me.ComboBox9.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox9.TabIndex = 14
+        '
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -946,7 +1111,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpEditPrepPrefillTime.Name = "dsp_RcpEditPrepPrefillTime"
         Me.dsp_RcpEditPrepPrefillTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPrepPrefillTime.TabIndex = 34
-        Me.dsp_RcpEditPrepPrefillTime.Text = "Prep Prefill Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.dsp_RcpEditPrepPrefillTime.Text = "Prep Prefill Vent" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Duration (s) :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.dsp_RcpEditPrepPrefillTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpEditPrepPrefillStartTime
@@ -955,7 +1120,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpEditPrepPrefillStartTime.Name = "dsp_RcpEditPrepPrefillStartTime"
         Me.dsp_RcpEditPrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPrepPrefillStartTime.TabIndex = 35
-        Me.dsp_RcpEditPrepPrefillStartTime.Text = "Prep Prefill" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Start Time (s) :"
+        Me.dsp_RcpEditPrepPrefillStartTime.Text = "Prep Prefill Vent" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Start Time (s) :"
         Me.dsp_RcpEditPrepPrefillStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtbx_RcpEditPrepPrefillTime
@@ -992,7 +1157,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpEditPressureDropTime.Name = "dsp_RcpEditPressureDropTime"
         Me.dsp_RcpEditPressureDropTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPressureDropTime.TabIndex = 25
-        Me.dsp_RcpEditPressureDropTime.Text = "Pressure Drop Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RcpEditPressureDropTime.Text = "Back Pressure-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Time (s) :"
         Me.dsp_RcpEditPressureDropTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpEditPressureDrop
@@ -1001,7 +1166,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpEditPressureDrop.Name = "dsp_RcpEditPressureDrop"
         Me.dsp_RcpEditPressureDrop.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPressureDrop.TabIndex = 25
-        Me.dsp_RcpEditPressureDrop.Text = "Pressure Drop" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpEditPressureDrop.Text = "Back Pressure-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
         Me.dsp_RcpEditPressureDrop.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label11
@@ -1019,7 +1184,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpEditPrepPressure.Name = "dsp_RcpEditPrepPressure"
         Me.dsp_RcpEditPrepPressure.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPrepPressure.TabIndex = 26
-        Me.dsp_RcpEditPrepPressure.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpEditPrepPressure.Text = "Back Pressure-1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
         Me.dsp_RcpEditPrepPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpEditPrepFlow
@@ -1037,7 +1202,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpEditPrepBleed.Name = "dsp_RcpEditPrepBleed"
         Me.dsp_RcpEditPrepBleed.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPrepBleed.TabIndex = 27
-        Me.dsp_RcpEditPrepBleed.Text = "Prep Air Bleed Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RcpEditPrepBleed.Text = "Prep Air Bleed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Time (s) :"
         Me.dsp_RcpEditPrepBleed.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpEditPrepFill
@@ -2035,6 +2200,91 @@ Partial Class FormRecipeManagement
         Me.tabpg_Create.Text = "Create"
         Me.tabpg_Create.UseVisualStyleBackColor = True
         '
+        'Panel4
+        '
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel4.Controls.Add(Me.Label13)
+        Me.Panel4.Controls.Add(Me.Label12)
+        Me.Panel4.Controls.Add(Me.Label10)
+        Me.Panel4.Controls.Add(Me.Label6)
+        Me.Panel4.Controls.Add(Me.ComboBox6)
+        Me.Panel4.Controls.Add(Me.ComboBox4)
+        Me.Panel4.Controls.Add(Me.ComboBox3)
+        Me.Panel4.Location = New System.Drawing.Point(575, 591)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(307, 170)
+        Me.Panel4.TabIndex = 36
+        '
+        'Label13
+        '
+        Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.Label13.Location = New System.Drawing.Point(49, 5)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(200, 40)
+        Me.Label13.TabIndex = 34
+        Me.Label13.Text = "Changeover Part"
+        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(42, 130)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(45, 17)
+        Me.Label12.TabIndex = 15
+        Me.Label12.Text = "Blank :"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(37, 95)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(50, 17)
+        Me.Label10.TabIndex = 15
+        Me.Label10.Text = "Outlet :"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(48, 60)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(39, 17)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "Inlet :"
+        '
+        'ComboBox6
+        '
+        Me.ComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox6.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox6.FormattingEnabled = True
+        Me.ComboBox6.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox6.Location = New System.Drawing.Point(93, 127)
+        Me.ComboBox6.Name = "ComboBox6"
+        Me.ComboBox6.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox6.TabIndex = 14
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox4.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox4.Location = New System.Drawing.Point(93, 92)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox4.TabIndex = 14
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox3.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox3.Location = New System.Drawing.Point(93, 57)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(170, 25)
+        Me.ComboBox3.TabIndex = 14
+        '
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -2067,7 +2317,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpCreatePrepPrefillTime.Name = "dsp_RcpCreatePrepPrefillTime"
         Me.dsp_RcpCreatePrepPrefillTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepPrefillTime.TabIndex = 39
-        Me.dsp_RcpCreatePrepPrefillTime.Text = "Prep Prefill Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+        Me.dsp_RcpCreatePrepPrefillTime.Text = "Prep Prefill Vent" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Duration (s) :" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.dsp_RcpCreatePrepPrefillTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpCreatePrepPrefillStartTime
@@ -2076,7 +2326,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpCreatePrepPrefillStartTime.Name = "dsp_RcpCreatePrepPrefillStartTime"
         Me.dsp_RcpCreatePrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepPrefillStartTime.TabIndex = 40
-        Me.dsp_RcpCreatePrepPrefillStartTime.Text = "Prep Prefill" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Start Time (s) :"
+        Me.dsp_RcpCreatePrepPrefillStartTime.Text = "Prep Prefill Vent" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Start Time (s) :"
         Me.dsp_RcpCreatePrepPrefillStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtbx_RcpCreatePrepPrefillTime
@@ -2901,6 +3151,84 @@ Partial Class FormRecipeManagement
         Me.panel_Create.Size = New System.Drawing.Size(562, 767)
         Me.panel_Create.TabIndex = 3
         '
+        'Panel6
+        '
+        Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel6.Controls.Add(Me.TextBox1)
+        Me.Panel6.Controls.Add(Me.Button2)
+        Me.Panel6.Controls.Add(Me.Label7)
+        Me.Panel6.Controls.Add(Me.ComboBox5)
+        Me.Panel6.Controls.Add(Me.Label8)
+        Me.Panel6.Controls.Add(Me.Label9)
+        Me.Panel6.Location = New System.Drawing.Point(3, 551)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(556, 200)
+        Me.Panel6.TabIndex = 4
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
+        Me.TextBox1.Location = New System.Drawing.Point(152, 113)
+        Me.TextBox1.MaxLength = 30
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(250, 29)
+        Me.TextBox1.TabIndex = 105
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button2.Location = New System.Drawing.Point(420, 75)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(110, 60)
+        Me.Button2.TabIndex = 15
+        Me.Button2.Text = "Create"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Label7
+        '
+        Me.Label7.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(0, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(554, 50)
+        Me.Label7.TabIndex = 103
+        Me.Label7.Text = "Changeover Part Creation"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ComboBox5
+        '
+        Me.ComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox5.FormattingEnabled = True
+        Me.ComboBox5.Items.AddRange(New Object() {"Fittings", "Blanks"})
+        Me.ComboBox5.Location = New System.Drawing.Point(152, 68)
+        Me.ComboBox5.Name = "ComboBox5"
+        Me.ComboBox5.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox5.TabIndex = 13
+        '
+        'Label8
+        '
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(21, 114)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(125, 25)
+        Me.Label8.TabIndex = 104
+        Me.Label8.Text = "ID :"
+        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label9
+        '
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(21, 69)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(125, 25)
+        Me.Label9.TabIndex = 104
+        Me.Label9.Text = "Fitting Type :"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'panel_RecipeGeneration
         '
         Me.panel_RecipeGeneration.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -3183,334 +3511,6 @@ Partial Class FormRecipeManagement
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'Panel5
-        '
-        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel5.Controls.Add(Me.ComboBox2)
-        Me.Panel5.Controls.Add(Me.Button1)
-        Me.Panel5.Controls.Add(Me.Label2)
-        Me.Panel5.Controls.Add(Me.ComboBox1)
-        Me.Panel5.Controls.Add(Me.Label3)
-        Me.Panel5.Controls.Add(Me.Label4)
-        Me.Panel5.Location = New System.Drawing.Point(3, 508)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(556, 200)
-        Me.Panel5.TabIndex = 4
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Fittings", "Blank"})
-        Me.ComboBox2.Location = New System.Drawing.Point(152, 113)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(250, 29)
-        Me.ComboBox2.TabIndex = 106
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.SystemColors.Window
-        Me.Button1.Location = New System.Drawing.Point(420, 75)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(110, 60)
-        Me.Button1.TabIndex = 15
-        Me.Button1.Text = "Delete"
-        Me.Button1.UseVisualStyleBackColor = False
-        '
-        'Label2
-        '
-        Me.Label2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(0, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(554, 50)
-        Me.Label2.TabIndex = 103
-        Me.Label2.Text = "Fitting Type Deletion"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Fittings", "Blanks"})
-        Me.ComboBox1.Location = New System.Drawing.Point(152, 68)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(250, 29)
-        Me.ComboBox1.TabIndex = 13
-        '
-        'Label3
-        '
-        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(21, 114)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(125, 25)
-        Me.Label3.TabIndex = 104
-        Me.Label3.Text = "ID :"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label4
-        '
-        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(21, 69)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(125, 25)
-        Me.Label4.TabIndex = 104
-        Me.Label4.Text = "Fitting Type :"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Panel6
-        '
-        Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel6.Controls.Add(Me.TextBox1)
-        Me.Panel6.Controls.Add(Me.Button2)
-        Me.Panel6.Controls.Add(Me.Label7)
-        Me.Panel6.Controls.Add(Me.ComboBox5)
-        Me.Panel6.Controls.Add(Me.Label8)
-        Me.Panel6.Controls.Add(Me.Label9)
-        Me.Panel6.Location = New System.Drawing.Point(3, 551)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(556, 200)
-        Me.Panel6.TabIndex = 4
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.TextBox1.Location = New System.Drawing.Point(152, 113)
-        Me.TextBox1.MaxLength = 30
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(250, 29)
-        Me.TextBox1.TabIndex = 105
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.SystemColors.Window
-        Me.Button2.Location = New System.Drawing.Point(420, 75)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(110, 60)
-        Me.Button2.TabIndex = 15
-        Me.Button2.Text = "Create"
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'Label7
-        '
-        Me.Label7.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(0, 0)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(554, 50)
-        Me.Label7.TabIndex = 103
-        Me.Label7.Text = "Fitting Type Creation"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ComboBox5
-        '
-        Me.ComboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox5.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox5.FormattingEnabled = True
-        Me.ComboBox5.Items.AddRange(New Object() {"Fittings", "Blanks"})
-        Me.ComboBox5.Location = New System.Drawing.Point(152, 68)
-        Me.ComboBox5.Name = "ComboBox5"
-        Me.ComboBox5.Size = New System.Drawing.Size(250, 29)
-        Me.ComboBox5.TabIndex = 13
-        '
-        'Label8
-        '
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(21, 114)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(125, 25)
-        Me.Label8.TabIndex = 104
-        Me.Label8.Text = "ID :"
-        Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Label9
-        '
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(21, 69)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(125, 25)
-        Me.Label9.TabIndex = 104
-        Me.Label9.Text = "Fitting Type :"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Panel4
-        '
-        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel4.Controls.Add(Me.Label13)
-        Me.Panel4.Controls.Add(Me.Label12)
-        Me.Panel4.Controls.Add(Me.Label10)
-        Me.Panel4.Controls.Add(Me.Label6)
-        Me.Panel4.Controls.Add(Me.ComboBox6)
-        Me.Panel4.Controls.Add(Me.ComboBox4)
-        Me.Panel4.Controls.Add(Me.ComboBox3)
-        Me.Panel4.Location = New System.Drawing.Point(575, 591)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(307, 170)
-        Me.Panel4.TabIndex = 36
-        '
-        'ComboBox3
-        '
-        Me.ComboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox3.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Items.AddRange(New Object() {"Fittings", "Blanks"})
-        Me.ComboBox3.Location = New System.Drawing.Point(93, 57)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(170, 25)
-        Me.ComboBox3.TabIndex = 14
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(48, 60)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(39, 17)
-        Me.Label6.TabIndex = 15
-        Me.Label6.Text = "Inlet :"
-        '
-        'ComboBox4
-        '
-        Me.ComboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox4.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {"Fittings", "Blanks"})
-        Me.ComboBox4.Location = New System.Drawing.Point(93, 92)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(170, 25)
-        Me.ComboBox4.TabIndex = 14
-        '
-        'ComboBox6
-        '
-        Me.ComboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox6.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.ComboBox6.FormattingEnabled = True
-        Me.ComboBox6.Items.AddRange(New Object() {"Fittings", "Blanks"})
-        Me.ComboBox6.Location = New System.Drawing.Point(93, 127)
-        Me.ComboBox6.Name = "ComboBox6"
-        Me.ComboBox6.Size = New System.Drawing.Size(170, 25)
-        Me.ComboBox6.TabIndex = 14
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(37, 95)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(50, 17)
-        Me.Label10.TabIndex = 15
-        Me.Label10.Text = "Outlet :"
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(42, 130)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(45, 17)
-        Me.Label12.TabIndex = 15
-        Me.Label12.Text = "Blank :"
-        '
-        'Label13
-        '
-        Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.Label13.Location = New System.Drawing.Point(49, 5)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(200, 40)
-        Me.Label13.TabIndex = 34
-        Me.Label13.Text = "Fitting Type"
-        Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Panel7
-        '
-        Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel7.Controls.Add(Me.Label14)
-        Me.Panel7.Controls.Add(Me.Label15)
-        Me.Panel7.Controls.Add(Me.Label17)
-        Me.Panel7.Controls.Add(Me.Label18)
-        Me.Panel7.Controls.Add(Me.ComboBox7)
-        Me.Panel7.Controls.Add(Me.ComboBox8)
-        Me.Panel7.Controls.Add(Me.ComboBox9)
-        Me.Panel7.Location = New System.Drawing.Point(575, 591)
-        Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(307, 170)
-        Me.Panel7.TabIndex = 37
-        '
-        'Label14
-        '
-        Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.Label14.Location = New System.Drawing.Point(49, 5)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(200, 40)
-        Me.Label14.TabIndex = 34
-        Me.Label14.Text = "Fitting Type"
-        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(42, 130)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(45, 17)
-        Me.Label15.TabIndex = 15
-        Me.Label15.Text = "Blank :"
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(37, 95)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(50, 17)
-        Me.Label17.TabIndex = 15
-        Me.Label17.Text = "Outlet :"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(48, 60)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(39, 17)
-        Me.Label18.TabIndex = 15
-        Me.Label18.Text = "Inlet :"
-        '
-        'ComboBox7
-        '
-        Me.ComboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox7.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.ComboBox7.FormattingEnabled = True
-        Me.ComboBox7.Items.AddRange(New Object() {"Fittings", "Blanks"})
-        Me.ComboBox7.Location = New System.Drawing.Point(93, 127)
-        Me.ComboBox7.Name = "ComboBox7"
-        Me.ComboBox7.Size = New System.Drawing.Size(170, 25)
-        Me.ComboBox7.TabIndex = 14
-        '
-        'ComboBox8
-        '
-        Me.ComboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox8.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.ComboBox8.FormattingEnabled = True
-        Me.ComboBox8.Items.AddRange(New Object() {"Fittings", "Blanks"})
-        Me.ComboBox8.Location = New System.Drawing.Point(93, 92)
-        Me.ComboBox8.Name = "ComboBox8"
-        Me.ComboBox8.Size = New System.Drawing.Size(170, 25)
-        Me.ComboBox8.TabIndex = 14
-        '
-        'ComboBox9
-        '
-        Me.ComboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox9.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.ComboBox9.FormattingEnabled = True
-        Me.ComboBox9.Items.AddRange(New Object() {"Fittings", "Blanks"})
-        Me.ComboBox9.Location = New System.Drawing.Point(93, 57)
-        Me.ComboBox9.Name = "ComboBox9"
-        Me.ComboBox9.Size = New System.Drawing.Size(170, 25)
-        Me.ComboBox9.TabIndex = 14
-        '
         'FormRecipeManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3530,6 +3530,7 @@ Partial Class FormRecipeManagement
         Me.panel_UserCategory.PerformLayout()
         Me.tabpg_Delete.ResumeLayout(False)
         Me.panel_Delete.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
         Me.panel_RecipeDeletion.ResumeLayout(False)
         Me.panel_ProdSKUDeletion.ResumeLayout(False)
         Me.tabctrl_RecipeCtrl.ResumeLayout(False)
@@ -3541,6 +3542,8 @@ Partial Class FormRecipeManagement
         CType(Me.dgv_RecipeDetails, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_Edit.ResumeLayout(False)
         Me.tabpg_Edit.PerformLayout()
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel7.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.panel_RcpEditDrain3.ResumeLayout(False)
@@ -3563,6 +3566,8 @@ Partial Class FormRecipeManagement
         Me.panel_RecipeManagement.ResumeLayout(False)
         Me.tabpg_Create.ResumeLayout(False)
         Me.tabpg_Create.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.panel_RcpCreateDrain3.ResumeLayout(False)
@@ -3580,19 +3585,14 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateFlush1.ResumeLayout(False)
         Me.panel_RcpCreateFlush1.PerformLayout()
         Me.panel_Create.ResumeLayout(False)
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel6.PerformLayout()
         Me.panel_RecipeGeneration.ResumeLayout(False)
         Me.panel_RecipeGeneration.PerformLayout()
         Me.panel_ProdSKUCreation.ResumeLayout(False)
         Me.panel_ProdSKUCreation.PerformLayout()
         Me.panel_FormControl.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel5.ResumeLayout(False)
-        Me.Panel6.ResumeLayout(False)
-        Me.Panel6.PerformLayout()
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
-        Me.Panel7.ResumeLayout(False)
-        Me.Panel7.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

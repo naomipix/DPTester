@@ -8,6 +8,8 @@ Imports System.Security.Cryptography
 Imports Microsoft.VisualBasic.ApplicationServices
 Imports DocumentFormat.OpenXml.Drawing
 Imports LiveChartsCore.Defaults
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar
+Imports System.Reflection.Emit
 
 Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
@@ -23,14 +25,19 @@ Module ModuleOmron
     Public FINSinput() As Integer
     Public FINSOutput(199) As Integer
     Public WithEvents CommLosttimer As New Timer()
+
     Public WithEvents PLCtimer As New Timer()
     Public WithEvents PCtimer As New Timer()
+    Public PLCThreadingTmr As Threading.Timer
+
     Public WithEvents Alarmtimer As New Timer()
+    Public WithEvents Reconnecttimer As New Timer()
+    Public WithEvents LblUpdateTimer As New Timer()
+
     Public WithEvents Calseqtimer As New Timer()
     Public WithEvents Resultcapturetimer As New Timer()
     Public ResultendtimerStartTime As DateTime
     Public WithEvents Resultendtimer As New Timer()
-    Public WithEvents LblUpdateTimer As New Timer()
     Public PLCstatus(2)() As Boolean
     Public ToolCounterreset(1)() As Boolean
     Public PCStatus(2)() As Boolean
@@ -82,11 +89,37 @@ Module ModuleOmron
     Public MainDptest2end As Integer
     Public dtserialrecord As New DataTable
     Public Viscosity As Double
-    Public CommLost As Boolean
+    Public CommLost As Boolean = True ' Always Define True On Initialise
     Public CommLostTime As DateTime
 
     Public RollingAvgArr As Decimal()
     Public RollingAvgCount As Integer = 0
+
+    ' For Top Label
+    Dim statusIndex As Integer = -1
+    Dim currentStatus As String = "No Status"
+    Dim dtAlarmStatus As New DataTable
+    Dim MsgAlarmShown As Boolean = False
+    Dim MsgAlarmShownTime As New DateTime
+
+    Dim MsgNoStatus As String = "No Status"
+    Dim MsgAutoMode As String = "Auto Mode"
+    Dim MsgAutoCycle As String = "Machine In Auto Cycle"
+    Dim MsgManualMode As String = "Manual Mode"
+    Dim MsgAlarm As String = "Machine In Alarm Condition"
+    Dim MsgWarning As String = "Machine In Warning Condition"
+
+    Dim MsgNoStatusColor As Color = Color.Gray
+    Dim MsgManualColor As Color = Color.FromArgb(25, 130, 246)
+    Dim MsgAutoColor As Color = Color.FromArgb(0, 192, 0)
+    Dim MsgWarningColor As Color = Color.Yellow
+    Dim MsgAlarmColor As Color = Color.Red
+
+    Dim MsgNoStatusColorT As Color = SystemColors.Window
+    Dim MsgManualColorT As Color = SystemColors.Window
+    Dim MsgAutoColorT As Color = SystemColors.Window
+    Dim MsgWarningColorT As Color = SystemColors.ControlText
+    Dim MsgAlarmColorT As Color = SystemColors.Window
 
 #Region "FINS protocol"
     Public Sub FINSInitialise()
@@ -103,12 +136,26 @@ Module ModuleOmron
 
         FINSOutputRead()
 
-        PLCtimer.Interval = 100
-        PLCtimer.Enabled = True
+        ' PLC Timer
+        If True Then
+            PLCtimer.Interval = 100
+            PLCtimer.Enabled = True
+            PLCThreadingTmr = New Threading.Timer(AddressOf PLCThreadingTimer_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+
+            ' Enable Threading Timer
+            'PLCThreadingTmr.Change(PLCtimer.Interval, PLCtimer.Interval)
+
+            ' Disable Threading Timer
+            'PLCThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+        End If
+
         LblUpdateTimer.Interval = 100
         LblUpdateTimer.Enabled = True
+
         PCtimer.Interval = 3000
         Alarmtimer.Interval = 3000
+        Reconnecttimer.Interval = 100
+        Reconnecttimer.Enabled = True
 
         Calseqtimer.Interval = 2000
         Resultcapturetimer.Interval = 500
@@ -679,9 +726,9 @@ Module ModuleOmron
                     If Not Currentalarm.ContainsKey(alarmid) Then
                         Dim alarmmessage As DataRow = Mainalarm.NewRow()
                         Dim alarmhistory As New Dictionary(Of String, Object) From {
-                {"trigger_time", FormMain.lbl_DateTimeClock.Text},
-                {"alarm_code", alarmcode}
-                }
+                            {"trigger_time", FormMain.lbl_DateTimeClock.Text},
+                            {"alarm_code", alarmcode}
+                        }
                         SQL.InsertRecord("AlarmHistory", alarmhistory)
                         Currentalarm.Add(alarmid, alarmdescription.ToString)
 
@@ -701,13 +748,14 @@ Module ModuleOmron
                     End If
                 Else
                     If Alarm(i)(j) = False And Currentalarm.ContainsKey(dtAlarm.Rows((i * 16) + j).Item("id")) Then
-                        Alarmtimer.Enabled = False
+                        'Alarmtimer.Enabled = False
                         Currentindex = 0
                         If Currentalarm.Remove(dtAlarm.Rows((i * 16) + j).Item("id")) Then
                             Dim rows As DataRow()
                             Dim findrow As Integer
                             Dim reset As New Dictionary(Of String, Object) From {
-                {"reset_time", FormMain.lbl_DateTimeClock.Text}}
+                                {"reset_time", FormMain.lbl_DateTimeClock.Text}
+                            }
                             'Dim Condition As String = $"lot_id ='{LotID}' AND lot_attempt = '{LotAttempt}'"
                             rows = Mainalarm.Select($"id = '{dtAlarm.Rows((i * 16) + j).Item("id")}'")
                             SQL.UpdateRecord("AlarmHistory", reset, $"reset_time IS NULL AND alarm_code='{dtAlarm.Rows((i * 16) + j).Item("code")}'")
@@ -721,29 +769,29 @@ Module ModuleOmron
                         End If
 
                         ' Set Alarm Timer If Is First Tick
-                        If Alarmtimer.Enabled = False Then
-                            AlarmIsFirstTick = True
-                        End If
+                        'If Alarmtimer.Enabled = False Then
+                        '    AlarmIsFirstTick = True
+                        'End If
 
-                        Alarmtimer.Enabled = True
+                        'Alarmtimer.Enabled = True
                     End If
                 End If
             Next
         Next
         startindex = Currentalarm.Count - 1
 
-        ' Force Alarm Timer Tick
-        If AlarmIsFirstTick Then
-            LabelStatusupdate()
-            AlarmTimerTick()
-        Else
-            If AlarmTableOld.Rows.Count = 0 Then
-                If Mainalarm.Rows.Count > 0 Then
-                    LabelStatusupdate()
-                    AlarmTimerTick()
-                End If
-            End If
-        End If
+        '' Force Alarm Timer Tick
+        'If AlarmIsFirstTick Then
+        '    'LabelStatusupdate()
+        '    AlarmTimerTick()
+        'Else
+        '    If AlarmTableOld.Rows.Count = 0 Then
+        '        If Mainalarm.Rows.Count > 0 Then
+        '            'LabelStatusupdate()
+        '            AlarmTimerTick()
+        '        End If
+        '    End If
+        'End If
 
         Return True
     End Function
@@ -809,6 +857,7 @@ Module ModuleOmron
             'FormMain.txtbx_PLCWrite.Text = Nothing
             FINSOutput = OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 0, 200, PoohFinsETN.DataTypes.UnSignBIN)
             CommLost = False
+            CommLosttimer.Enabled = False
             PLCtimer.Enabled = True
             For i As Integer = 0 To 5
                 ManualCtrl(i) = Int2BoolArr(FINSOutput(3 + i))
@@ -842,6 +891,7 @@ Module ModuleOmron
             FormMain.txtbx_PLCWrite.Text = writetext.ToString
             OmronPLC.WriteMemory(PoohFinsETN.MemoryTypes.DM, 0, writetext.ToString)
             CommLost = False
+            CommLosttimer.Enabled = False
             FINSOutputRead()
             PLCtimer.Enabled = True
         Catch ex As Exception
@@ -866,7 +916,9 @@ Module ModuleOmron
     End Sub
 #End Region
 
+    Private Sub PLCThreadingTimer_Ticks(ByVal state As Object)
 
+    End Sub
 
     Private Sub PLCTimer_Ticks(sender As Object, e As EventArgs) Handles PLCtimer.Tick
 
@@ -1493,14 +1545,14 @@ Module ModuleOmron
 #End Region
                 Put_PCManualctrl()
                 FINSWrite(0, 200)
-                LabelStatusupdate()
+                'LabelStatusupdate()
             End If
         Else
             FormCalibration.tmr_Calibration.Enabled = False
             FormCalibration.tmr_Verification.Enabled = False
             Resultcapturetimer.Enabled = False
-            LabelStatusupdate()
-            Alarmtimer.Enabled = True
+            'LabelStatusupdate()
+            'Alarmtimer.Enabled = True
 
         End If
 
@@ -1509,32 +1561,32 @@ Module ModuleOmron
 
 
     Private Sub PCTimer_Ticks(sender As Object, e As EventArgs) Handles PCtimer.Tick
-        For i As Integer = 0 To 15
-            If ManualCtrl(2)(i) = True And FormMain.btn_ValveCtrlArr(i).Text = "Close" Then
-                ManualCtrl(2)(i) = False
-            End If
-        Next
-        For i As Integer = 0 To 2
-            If ManualCtrl(3)(i) = True And FormMain.btn_ValveCtrlArr(i + 16).Text = "Close" Then
-                ManualCtrl(3)(i) = False
-            End If
-        Next
-        For i As Integer = 8 To 15
-            If ManualCtrl(3)(i) = True And FormMain.btn_Manualothersarr(i - 3).Text = "OFF" Then
-                ManualCtrl(3)(i) = False
-            End If
-        Next
-        For i As Integer = 3 To 7
-            If ManualCtrl(3)(i) = True And FormMain.btn_Manualothersarr(i - 3).Text = "OFF" Then
-                ManualCtrl(3)(i) = False
-            End If
-        Next
+        'For i As Integer = 0 To 15
+        '    If ManualCtrl(2)(i) = True And FormMain.btn_ValveCtrlArr(i).Text = "Close" Then
+        '        ManualCtrl(2)(i) = False
+        '    End If
+        'Next
+        'For i As Integer = 0 To 2
+        '    If ManualCtrl(3)(i) = True And FormMain.btn_ValveCtrlArr(i + 16).Text = "Close" Then
+        '        ManualCtrl(3)(i) = False
+        '    End If
+        'Next
+        'For i As Integer = 8 To 15
+        '    If ManualCtrl(3)(i) = True And FormMain.btn_Manualothersarr(i - 3).Text = "OFF" Then
+        '        ManualCtrl(3)(i) = False
+        '    End If
+        'Next
+        'For i As Integer = 3 To 7
+        '    If ManualCtrl(3)(i) = True And FormMain.btn_Manualothersarr(i - 3).Text = "OFF" Then
+        '        ManualCtrl(3)(i) = False
+        '    End If
+        'Next
 
-        For i As Integer = 0 To 5
-            If ManualCtrl(4)(i) = True And FormMain.btn_Manualothersarr(13 + i).Text = "OFF" Then
-                ManualCtrl(4)(i) = False
-            End If
-        Next
+        'For i As Integer = 0 To 5
+        '    If ManualCtrl(4)(i) = True And FormMain.btn_Manualothersarr(13 + i).Text = "OFF" Then
+        '        ManualCtrl(4)(i) = False
+        '    End If
+        'Next
 
         'PCtimer.Stop()
     End Sub
@@ -1543,13 +1595,147 @@ Module ModuleOmron
 
 #Region "Top Label Status Update"
     Private Sub LblUpdateTimer_Ticks(sender As Object, e As EventArgs) Handles LblUpdateTimer.Tick
-        LabelStatusupdate()
+        'LabelStatusupdate()
+        LabelStatusUpdate2()
+
+        ' Set Alarm Timer Enable
+        Alarmtimer.Enabled = True
+
+        ' Check For Comm Lost
+        If CommLost = True Then
+            Dim alarmID As String = "1"
+            Dim alarmSN As String = dtAlarmStatus.Rows.Count + 1
+            Dim alarmTriggerTime As String = FormMain.lbl_DateTimeClock.Text
+            Dim alarmDescription As String = "PLC-PC Communication Lost Alarm"
+            Dim alarmCode As String = "ALM-001"
+
+            Dim dvAlarmStatus As DataView = dtAlarmStatus.DefaultView
+            dvAlarmStatus.RowFilter = $"[Alarm Code] = '{alarmCode}'"
+            Dim dtTemp As DataTable = dvAlarmStatus.ToTable
+            If dtTemp.Rows.Count <= 0 Then
+                dtAlarmStatus.Rows.Add(alarmID, alarmSN, alarmTriggerTime, alarmDescription, alarmCode)
+            End If
+        End If
+    End Sub
+
+    Public Sub LabelStatusUpdate2()
+        If CommLost = False Then
+            dtAlarmStatus = Mainalarm.Copy()
+        Else
+            If dtAlarmStatus.Columns.Count <= 0 Then
+                dtAlarmStatus = Mainalarm.Clone
+            End If
+        End If
+
+        Dim ManualMode As Boolean = PLCstatus(0)(2)
+        Dim AutoMode As Boolean = PLCstatus(0)(3)
+        Dim AutoCycleMode As Boolean = PLCstatus(0)(1)
+        Dim lblStatusArr() = {
+            FormMain.lbl_OperationMode,
+            FormCalibration.lbl_OperationMode,
+            FormMessageLog.lbl_OperationMode,
+            FormRecipeManagement.lbl_OperationMode,
+            FormResultGraph.lbl_OperationMode,
+            FormResultSummary.lbl_OperationMode,
+            FormSetting.lbl_OperationMode
+        }
+
+        If dtAlarmStatus.Rows.Count = 0 Then
+            ' Reset Status Index
+            statusIndex = -1
+
+            ' Set Alarm Shown
+            MsgAlarmShown = False
+
+            ' No Alarm/Warning
+            If ManualMode Or AutoMode Then
+                If ManualMode Then
+                    currentStatus = MsgManualMode
+                    For i As Integer = 0 To lblStatusArr.Count - 1
+                        With lblStatusArr(i)
+                            .BackColor = MsgManualColor
+                            .ForeColor = MsgManualColorT
+                        End With
+                    Next
+                End If
+                If AutoMode Then
+                    If AutoCycleMode Then
+                        currentStatus = MsgAutoCycle
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgAutoColor
+                                .ForeColor = MsgAutoColorT
+                            End With
+                        Next
+                    Else
+                        currentStatus = MsgAutoMode
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgAutoColor
+                                .ForeColor = MsgAutoColorT
+                            End With
+                        Next
+                    End If
+                End If
+            Else
+                currentStatus = MsgNoStatus
+                For i As Integer = 0 To lblStatusArr.Count - 1
+                    With lblStatusArr(i)
+                        .BackColor = MsgNoStatusColor
+                        .ForeColor = MsgNoStatusColorT
+                    End With
+                Next
+            End If
+
+            ' Set Status Label Text
+            For i As Integer = 0 To lblStatusArr.Count - 1
+                lblStatusArr(i).Text = currentStatus
+            Next
+        Else
+            If MsgAlarmShown = True Then
+                ' Check Alarm Thrown During Warning
+                If currentStatus.Substring(0, 3) = "WAR" Or currentStatus.Contains("Warning") Then
+                    For i As Integer = 0 To dtAlarmStatus.Rows.Count - 1
+                        Dim alarmStr As String = $"{dtAlarmStatus(i)("Alarm Code")} {dtAlarmStatus(i)("Description")}"
+                        If alarmStr.Substring(0, 3) = "ALM" Or alarmStr.Contains("Alarm") Then
+                            ' Reset Warning To Show Alarm
+                            MsgAlarmShown = False
+                            AlarmTimerTick2()
+                            Exit For
+                        End If
+                    Next
+                End If
+            Else
+                ' Display Alarm/Warning
+                AlarmTimerTick2()
+            End If
+        End If
     End Sub
 
     Public Sub LabelStatusupdate()
         'To Update the Status of the Header Bar in all Forms
+
+        If CommLost = True Then
+            ' Machine PC-PLC Communication Lost
+            Currentalarm.Remove(0)
+            If Not Currentalarm.ContainsKey(0) Then
+                Currentalarm.Add(0, "Machine in Alarm Condition")
+            End If
+            Currentalarm.Remove(1)
+            If Not Currentalarm.ContainsKey(1) Then
+                Currentalarm.Add(1, "ALM-001 PLC-PC Communication Lost Alarm")
+            End If
+            If Alarmtimer.Enabled = False Then
+                Alarmtimer.Enabled = True
+                startindex = Currentalarm.Count - 1
+            End If
+        End If
+
         If CommLost = False Then
-            If PLCstatus(0)(4) = False And PLCstatus(0)(14) = False And CommLost = False Then
+            If PLCstatus(0)(4) = False And PLCstatus(0)(14) = False Then ' And CommLost = False Then
+                ' Update Alarm
+                'AlarmTimerTick()
+
                 ' Machine OK
                 If Alarmtimer.Enabled = True Then
                     Alarmtimer.Enabled = False
@@ -1735,52 +1921,244 @@ Module ModuleOmron
                 '    End If
                 'End If
 
+                ' Define Status Variables
+                Dim StatusShowWarning As Boolean = False
+                Dim StatusShowAlarm As Boolean = False
+
+                ' Enable Timer If Not Enabled
+                If Alarmtimer.Enabled = False Then
+                    Alarmtimer.Enabled = True
+                End If
+
+                ' Get Status From PLC
                 If PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
-                    ' Warning Mode
-                    Currentalarm.Remove(0)
-                    If Not Currentalarm.ContainsKey(0) Then
-                        Currentalarm.Add(0, "Machine in Warning Condition")
-                    End If
-
-                    If Alarmtimer.Enabled = False Then
-                        Alarmtimer.Enabled = True
-                    End If
+                    StatusShowWarning = True
                 Else
-                    ' Alarm/Warning Mode
-                    If PLCstatus(0)(14) = True Or PLCstatus(0)(4) = True Then
-                        Currentalarm.Remove(0)
-                        If Not Currentalarm.ContainsKey(0) Then
-                            Currentalarm.Add(0, "Machine in Alarm Condition")
-                        End If
+                    StatusShowAlarm = True
+                End If
 
-                        If Alarmtimer.Enabled = False Then
-                            Alarmtimer.Enabled = True
+                ' Clear Current Alarm
+                Currentalarm.Remove(0)
+
+                ' Show Warning
+                If StatusShowWarning Then
+                    If Not StatusShowAlarm Then
+                        ' Warning Mode
+                        'Currentalarm.Remove(0)
+                        If Not Currentalarm.ContainsKey(0) Then
+                            Currentalarm.Add(0, "Machine in Warning Condition")
                         End If
                     End If
                 End If
-            End If
-        Else
-            ' Machine PC-PLC Communication Lost
-            Currentalarm.Remove(0)
-            If Not Currentalarm.ContainsKey(0) Then
-                Currentalarm.Add(0, "Machine in Alarm Condition")
-            End If
-            Currentalarm.Remove(1)
-            If Not Currentalarm.ContainsKey(1) Then
-                Currentalarm.Add(1, "ALM-001 PLC-PC Communication Lost Alarm")
-            End If
-            If Alarmtimer.Enabled = False Then
-                Alarmtimer.Enabled = True
-                startindex = Currentalarm.Count - 1
-            End If
 
+                ' Show Alarm
+                If StatusShowAlarm Then
+                    ' Alarm Mode
+                    If PLCstatus(0)(14) = True Or PLCstatus(0)(4) = True Then
+                        'Currentalarm.Remove(0)
+                        If Not Currentalarm.ContainsKey(0) Then
+                            Currentalarm.Add(0, "Machine in Alarm Condition")
+                        End If
+                    End If
+                End If
+
+                ' Alarm Counter
+                If PLCstatus(0)(14) = True Then
+                    FormCalibration.TextBox2.Text = CInt(FormCalibration.TextBox2.Text) + 1
+                End If
+                If PLCstatus(0)(4) = True Then
+                    FormCalibration.TextBox1.Text = CInt(FormCalibration.TextBox1.Text) + 1
+                End If
+
+                'If PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
+                '    ' Warning Mode
+                '    Currentalarm.Remove(0)
+                '    If Not Currentalarm.ContainsKey(0) Then
+                '        Currentalarm.Add(0, "Machine in Warning Condition")
+                '    End If
+
+                '    If Alarmtimer.Enabled = False Then
+                '        Alarmtimer.Enabled = True
+                '    End If
+                'Else
+                '    ' Alarm/Warning Mode
+                '    If PLCstatus(0)(14) = True Or PLCstatus(0)(4) = True Then
+                '        Currentalarm.Remove(0)
+                '        If Not Currentalarm.ContainsKey(0) Then
+                '            Currentalarm.Add(0, "Machine in Alarm Condition")
+                '        End If
+
+                '        If Alarmtimer.Enabled = False Then
+                '            Alarmtimer.Enabled = True
+                '        End If
+                '    End If
+                'End If
+            End If
         End If
 
 
     End Sub
 
     Private Sub AlarmTimer_Ticks(sender As Object, e As EventArgs) Handles Alarmtimer.Tick
-        AlarmTimerTick()
+        'AlarmTimerTick()
+        AlarmTimerTick2()
+    End Sub
+
+    Private Sub AlarmTimerTick2()
+        If CommLost = False Then
+            dtAlarmStatus = Mainalarm.Copy()
+        Else
+            If dtAlarmStatus.Columns.Count <= 0 Then
+                dtAlarmStatus = Mainalarm.Clone
+            End If
+        End If
+
+        Dim ManualMode As Boolean = PLCstatus(0)(2)
+        Dim AutoMode As Boolean = PLCstatus(0)(3)
+        Dim AutoCycleMode As Boolean = PLCstatus(0)(1)
+        Dim lblStatusArr() = {
+            FormMain.lbl_OperationMode,
+            FormCalibration.lbl_OperationMode,
+            FormMessageLog.lbl_OperationMode,
+            FormRecipeManagement.lbl_OperationMode,
+            FormResultGraph.lbl_OperationMode,
+            FormResultSummary.lbl_OperationMode,
+            FormSetting.lbl_OperationMode
+        }
+
+        If dtAlarmStatus.Rows.Count = 0 Then
+            ' Reset Status Index
+            statusIndex = -1
+
+            ' Set Alarm Shown
+            MsgAlarmShown = False
+
+            ' No Alarm/Warning
+            If ManualMode Or AutoMode Then
+                If ManualMode Then
+                    currentStatus = MsgManualMode
+                    For i As Integer = 0 To lblStatusArr.Count - 1
+                        With lblStatusArr(i)
+                            .BackColor = MsgManualColor
+                            .ForeColor = MsgManualColorT
+                        End With
+                    Next
+                End If
+                If AutoMode Then
+                    If AutoCycleMode Then
+                        currentStatus = MsgAutoCycle
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgAutoColor
+                                .ForeColor = MsgAutoColorT
+                            End With
+                        Next
+                    Else
+                        currentStatus = MsgAutoMode
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgAutoColor
+                                .ForeColor = MsgAutoColorT
+                            End With
+                        Next
+                    End If
+                End If
+            Else
+                currentStatus = MsgNoStatus
+                For i As Integer = 0 To lblStatusArr.Count - 1
+                    With lblStatusArr(i)
+                        .BackColor = MsgNoStatusColor
+                        .ForeColor = MsgNoStatusColorT
+                    End With
+                Next
+            End If
+
+            ' Set Status Label Text
+            For i As Integer = 0 To lblStatusArr.Count - 1
+                lblStatusArr(i).Text = currentStatus
+            Next
+        Else
+            Dim IsWarning As Boolean = False
+            Dim IsAlarm As Boolean = False
+
+            ' Reset Index On First Thrown
+            If MsgAlarmShown = False Then
+                ' Reset Status Index
+                statusIndex = -1
+            End If
+
+            For i As Integer = 0 To dtAlarmStatus.Rows.Count - 1
+                Dim alarmStr As String = $"{dtAlarmStatus(i)("Alarm Code")} {dtAlarmStatus(i)("Description")}"
+                If alarmStr.Substring(0, 3) = "ALM" Or alarmStr.Contains("Alarm") Then
+                    IsAlarm = True
+                End If
+                If alarmStr.Substring(0, 3) = "WAR" Or alarmStr.Contains("Warning") Then
+                    IsWarning = True
+                End If
+            Next
+
+            If IsAlarm Then
+                currentStatus = MsgAlarm
+            Else
+                If IsWarning Then
+                    currentStatus = MsgWarning
+                End If
+            End If
+
+            ' Reset Index On End Of List
+            If statusIndex > dtAlarmStatus.Rows.Count - 1 Then
+                statusIndex = -1
+            End If
+
+            ' Prevent Updating Too Quickly
+            If DateTime.Now >= MsgAlarmShownTime.AddMilliseconds(Alarmtimer.Interval) Then
+
+                If statusIndex < 0 Then
+                    For i As Integer = 0 To lblStatusArr.Count - 1
+                        lblStatusArr(i).Text = currentStatus
+                    Next
+                Else
+                    For i As Integer = 0 To lblStatusArr.Count - 1
+                        Dim alarmStr As String = $"{dtAlarmStatus(statusIndex)("Alarm Code")} {dtAlarmStatus(statusIndex)("Description")}"
+                        lblStatusArr(i).Text = alarmStr
+                    Next
+                End If
+
+                If dtAlarmStatus.Rows.Count > 0 Then
+                    If CStr(lblStatusArr(0).Text).Substring(0, 3) = "ALM" Or CStr(lblStatusArr(0).Text).Contains("Alarm") Then
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgAlarmColor
+                                .ForeColor = MsgAlarmColorT
+                            End With
+                        Next
+                    ElseIf CStr(lblStatusArr(0).Text).Substring(0, 3) = "WAR" Or CStr(lblStatusArr(0).Text).Contains("Warning") Then
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgWarningColor
+                                .ForeColor = MsgWarningColorT
+                            End With
+                        Next
+                    Else
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgNoStatusColor
+                                .ForeColor = MsgNoStatusColorT
+                            End With
+                        Next
+                    End If
+                End If
+
+                ' Increment the index for the next status
+                statusIndex += 1
+            End If
+
+            ' Set Alarm Thrown State
+            If MsgAlarmShown = False Then
+                MsgAlarmShown = True
+                MsgAlarmShownTime = DateTime.Now
+            End If
+        End If
     End Sub
 
     Private Sub AlarmTimerTick()
@@ -1843,6 +2221,14 @@ Module ModuleOmron
             End If
         Else
             Currentindex = Currentindex + 1
+        End If
+    End Sub
+
+    Private Sub Reconnecttimer_Ticks(sender As Object, e As EventArgs) Handles Reconnecttimer.Tick
+        If CommLost Then
+            If statusIndex < 0 Then
+                FINSOutputRead()
+            End If
         End If
     End Sub
 #End Region
@@ -1986,7 +2372,7 @@ Module ModuleOmron
                 Dim T2 As Double = (result_temperature + 273.15) * (result_temperature + 273.15)
                 Dim exp As Double = Math.Exp((1 + (B * (result_temperature + 273.15))) / ((C * (result_temperature + 273.15)) + (D * T2)))
                 Dim vis As Double = A * exp
-                result_dp = Math.Round(CDec((1.002 / vis) * (result_inletpressure - result_outletpressure)), 2)
+                result_dp = Math.Round(CDec((1.002 / vis) * (result_inletpressure - result_outletpressure)), 2) - CType(FormMain.lbl_BlankDP.Text, Decimal)
             End If
             result_backpressure = AIn(1)
             result_pumprpm = AIn(2)
@@ -2080,30 +2466,34 @@ Module ModuleOmron
             For i = MainDptest1start To MainDptest1end - 1
                 result_avginlet1 = result_avginlet1 + dtresult.Rows(i)("Inlet Pressure (kPa)")
                 result_avgoutlet1 = result_avgoutlet1 + dtresult.Rows(i)("Outlet Pressure (kPa)")
+                result_avgdp1 = result_avgdp1 + dtresult.Rows(i)("Differential Pressure (kPa)")
                 result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (°C)")
                 result_avgbackpressure1 = result_avgbackpressure1 + dtresult.Rows(i)("Back Pressure (kPa)")
             Next
             result_avginlet1 = result_avginlet1 / MainDptestpoints
             result_avgoutlet1 = result_avgoutlet1 / MainDptestpoints
+            result_avgdp1 = result_avgdp1 / MainDptestpoints
             result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
             result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
             result_avgbackpressure1 = result_avgbackpressure1 / MainDptestpoints
-            result_avgdp1 = result_avginlet1 - result_avgoutlet1
+            'result_avgdp1 = result_avginlet1 - result_avgoutlet1
 
             For i = MainDptest2start To MainDptest2end - 1
                 result_avginlet2 = result_avginlet2 + dtresult.Rows(i)("Inlet Pressure (kPa)")
                 result_avgoutlet2 = result_avgoutlet2 + dtresult.Rows(i)("Outlet Pressure (kPa)")
+                result_avgdp2 = result_avgdp2 + dtresult.Rows(i)("Differential Pressure (kPa)")
                 result_avgflowrate2 = result_avgflowrate2 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature2 = result_avgtemperature2 + dtresult.Rows(i)("Temperature (°C)")
                 result_avgbackpressure2 = result_avgbackpressure2 + dtresult.Rows(i)("Back Pressure (kPa)")
             Next
             result_avginlet2 = result_avginlet2 / MainDptestpoints
             result_avgoutlet2 = result_avgoutlet2 / MainDptestpoints
+            result_avgdp2 = result_avgdp2 / MainDptestpoints
             result_avgflowrate2 = result_avgflowrate2 / MainDptestpoints
             result_avgtemperature2 = result_avgtemperature2 / MainDptestpoints
             result_avgbackpressure2 = result_avgbackpressure2 / MainDptestpoints
-            result_avgdp2 = result_avginlet2 - result_avgoutlet2
+            'result_avgdp2 = result_avginlet2 - result_avgoutlet2
 
 
             result_finalinlet = ((result_avginlet1 + result_avginlet2) / 2)
@@ -2119,13 +2509,15 @@ Module ModuleOmron
             'Viscosity = A * exp
             'result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal)
 
-            result_finaldp = (result_finalinlet - result_finaloutlet) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+            'result_finaldp = (result_finalinlet - result_finaloutlet) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+            result_finaldp = ((result_avgdp1 + result_avgdp2) / 2) - CType(FormMain.lbl_BlankDP.Text, Decimal)
         End If
 
         If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And Not dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
             For i = MainDptest1start To MainDptest1end - 1
                 result_avginlet1 = result_avginlet1 + dtresult.Rows(i)("Inlet Pressure (kPa)")
                 result_avgoutlet1 = result_avgoutlet1 + dtresult.Rows(i)("Outlet Pressure (kPa)")
+                result_avgdp1 = result_avgdp1 + dtresult.Rows(i)("Differential Pressure (kPa)")
                 result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (°C)")
                 result_avgbackpressure1 = result_avgbackpressure1 + dtresult.Rows(i)("Back Pressure (kPa)")
@@ -2133,7 +2525,8 @@ Module ModuleOmron
 
             result_avginlet1 = result_avginlet1 / MainDptestpoints
             result_avgoutlet1 = result_avgoutlet1 / MainDptestpoints
-            result_avgdp1 = result_avginlet1 - result_avgoutlet1
+            'result_avgdp1 = result_avginlet1 - result_avgoutlet1
+            result_avgdp1 = result_avgdp1 / MainDptestpoints
             result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
             result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
             result_avgbackpressure1 = result_avgbackpressure1 / MainDptestpoints
@@ -2151,7 +2544,8 @@ Module ModuleOmron
             'Viscosity = A * exp
             'result_finaldp = (((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal))
 
-            result_finaldp = (result_finalinlet - result_finaloutlet) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+            'result_finaldp = (result_finalinlet - result_finaloutlet) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+            result_finaldp = result_avgdp1 '- CType(FormMain.lbl_BlankDP.Text, Decimal)
         End If
         FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)
         FormMain.lbl_ProductFlowrate.Text = CType(Math.Round(result_finalflowrate, 3), String)

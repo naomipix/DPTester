@@ -12,7 +12,7 @@
             Case 5
                 MsgBox(categoryname + " " + username + " Log in Successful", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
             Case 6
-                MsgBox(" Developer Log in Successful", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
+                MsgBox("Developer Log in Successful", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
             Case 7
                 MsgBox("Developer Login failed, Wrong Password, try Camera Resolution unit", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
         End Select
@@ -106,7 +106,7 @@ Module LoginModule
 
             ' Check Is Developer
             If onContinue = True Then
-                If String.Compare(LoginUsername, "Developer", true) = 0 Then
+                If String.Compare(LoginUsername, "Developer", False) = 0 Then
                     LoginDeveloper = True
                 End If
             End If
