@@ -160,6 +160,14 @@ Public Class FormMain
 
         ' Load Ini file
         IniFileInitialize.ReadConfig()
+        ' Load Ini Settings
+        If True Then
+            txtbx_WorkOrderNumber.MaxLength = PublicVariables.WorkOrderLenHigh
+            txtbx_LotID.MaxLength = PublicVariables.LotIdLenHigh
+            txtbx_PartID.MaxLength = PublicVariables.PartIdLenHigh
+            txtbx_ConfirmationID.MaxLength = PublicVariables.ConfirmationIdLenHigh
+            txtbx_Quantity.MaxLength = PublicVariables.QuantityLenHigh
+        End If
 
         ' Initialize Chart
         cmbx_LiveGraphSelection.SelectedIndex = 0
