@@ -8,6 +8,8 @@ Imports System.Security.Cryptography
 Imports Microsoft.VisualBasic.ApplicationServices
 Imports DocumentFormat.OpenXml.Drawing
 Imports LiveChartsCore.Defaults
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar
+Imports System.Reflection.Emit
 
 Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
@@ -22,11 +24,20 @@ Module ModuleOmron
     Public ManualCtrl(5)() As Boolean ' Consists of DM3 to DM8
     Public FINSinput() As Integer
     Public FINSOutput(199) As Integer
+    Public WithEvents CommLosttimer As New Timer()
+
     Public WithEvents PLCtimer As New Timer()
     Public WithEvents PCtimer As New Timer()
+    Public PLCThreadingTmr As Threading.Timer
+
     Public WithEvents Alarmtimer As New Timer()
+    Public WithEvents Reconnecttimer As New Timer()
+    Public WithEvents LblUpdateTimer As New Timer()
+
     Public WithEvents Calseqtimer As New Timer()
     Public WithEvents Resultcapturetimer As New Timer()
+    Public ResultendtimerStartTime As DateTime
+    Public WithEvents Resultendtimer As New Timer()
     Public PLCstatus(2)() As Boolean
     Public ToolCounterreset(1)() As Boolean
     Public PCStatus(2)() As Boolean
@@ -78,10 +89,37 @@ Module ModuleOmron
     Public MainDptest2end As Integer
     Public dtserialrecord As New DataTable
     Public Viscosity As Double
-    Public CommLost As Boolean
+    Public CommLost As Boolean = True ' Always Define True On Initialise
+    Public CommLostTime As DateTime
 
     Public RollingAvgArr As Decimal()
     Public RollingAvgCount As Integer = 0
+
+    ' For Top Label
+    Dim statusIndex As Integer = -1
+    Dim currentStatus As String = "No Status"
+    Dim dtAlarmStatus As New DataTable
+    Dim MsgAlarmShown As Boolean = False
+    Dim MsgAlarmShownTime As New DateTime
+
+    Dim MsgNoStatus As String = "No Status"
+    Dim MsgAutoMode As String = "Auto Mode"
+    Dim MsgAutoCycle As String = "Machine In Auto Cycle"
+    Dim MsgManualMode As String = "Manual Mode"
+    Dim MsgAlarm As String = "Machine In Alarm Condition"
+    Dim MsgWarning As String = "Machine In Warning Condition"
+
+    Dim MsgNoStatusColor As Color = Color.Gray
+    Dim MsgManualColor As Color = Color.FromArgb(25, 130, 246)
+    Dim MsgAutoColor As Color = Color.FromArgb(0, 192, 0)
+    Dim MsgWarningColor As Color = Color.Yellow
+    Dim MsgAlarmColor As Color = Color.Red
+
+    Dim MsgNoStatusColorT As Color = SystemColors.Window
+    Dim MsgManualColorT As Color = SystemColors.Window
+    Dim MsgAutoColorT As Color = SystemColors.Window
+    Dim MsgWarningColorT As Color = SystemColors.ControlText
+    Dim MsgAlarmColorT As Color = SystemColors.Window
 
 #Region "FINS protocol"
     Public Sub FINSInitialise()
@@ -98,13 +136,30 @@ Module ModuleOmron
 
         FINSOutputRead()
 
-        PLCtimer.Interval = 100
-        PLCtimer.Enabled = True
+        ' PLC Timer
+        If True Then
+            PLCtimer.Interval = 100
+            PLCtimer.Enabled = True
+            PLCThreadingTmr = New Threading.Timer(AddressOf PLCThreadingTimer_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+
+            ' Enable Threading Timer
+            'PLCThreadingTmr.Change(PLCtimer.Interval, PLCtimer.Interval)
+
+            ' Disable Threading Timer
+            'PLCThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+        End If
+
+        LblUpdateTimer.Interval = 100
+        LblUpdateTimer.Enabled = True
+
         PCtimer.Interval = 3000
         Alarmtimer.Interval = 3000
+        Reconnecttimer.Interval = 100
+        Reconnecttimer.Enabled = True
 
         Calseqtimer.Interval = 2000
         Resultcapturetimer.Interval = 500
+        Resultendtimer.Interval = 100
 
         For i As Integer = 0 To 2
 
@@ -671,9 +726,9 @@ Module ModuleOmron
                     If Not Currentalarm.ContainsKey(alarmid) Then
                         Dim alarmmessage As DataRow = Mainalarm.NewRow()
                         Dim alarmhistory As New Dictionary(Of String, Object) From {
-                {"trigger_time", FormMain.lbl_DateTimeClock.Text},
-                {"alarm_code", alarmcode}
-                }
+                            {"trigger_time", FormMain.lbl_DateTimeClock.Text},
+                            {"alarm_code", alarmcode}
+                        }
                         SQL.InsertRecord("AlarmHistory", alarmhistory)
                         Currentalarm.Add(alarmid, alarmdescription.ToString)
 
@@ -693,13 +748,14 @@ Module ModuleOmron
                     End If
                 Else
                     If Alarm(i)(j) = False And Currentalarm.ContainsKey(dtAlarm.Rows((i * 16) + j).Item("id")) Then
-                        Alarmtimer.Enabled = False
+                        'Alarmtimer.Enabled = False
                         Currentindex = 0
                         If Currentalarm.Remove(dtAlarm.Rows((i * 16) + j).Item("id")) Then
                             Dim rows As DataRow()
                             Dim findrow As Integer
                             Dim reset As New Dictionary(Of String, Object) From {
-                {"reset_time", FormMain.lbl_DateTimeClock.Text}}
+                                {"reset_time", FormMain.lbl_DateTimeClock.Text}
+                            }
                             'Dim Condition As String = $"lot_id ='{LotID}' AND lot_attempt = '{LotAttempt}'"
                             rows = Mainalarm.Select($"id = '{dtAlarm.Rows((i * 16) + j).Item("id")}'")
                             SQL.UpdateRecord("AlarmHistory", reset, $"reset_time IS NULL AND alarm_code='{dtAlarm.Rows((i * 16) + j).Item("code")}'")
@@ -713,27 +769,29 @@ Module ModuleOmron
                         End If
 
                         ' Set Alarm Timer If Is First Tick
-                        If Alarmtimer.Enabled = False Then
-                            AlarmIsFirstTick = True
-                        End If
+                        'If Alarmtimer.Enabled = False Then
+                        '    AlarmIsFirstTick = True
+                        'End If
 
-                        Alarmtimer.Enabled = True
+                        'Alarmtimer.Enabled = True
                     End If
                 End If
             Next
         Next
         startindex = Currentalarm.Count - 1
 
-        ' Force Alarm Timer Tick
-        If AlarmIsFirstTick Then
-            AlarmTimerTick()
-        Else
-            If AlarmTableOld.Rows.Count = 0 Then
-                If Mainalarm.Rows.Count > 0 Then
-                    AlarmTimerTick()
-                End If
-            End If
-        End If
+        '' Force Alarm Timer Tick
+        'If AlarmIsFirstTick Then
+        '    'LabelStatusupdate()
+        '    AlarmTimerTick()
+        'Else
+        '    If AlarmTableOld.Rows.Count = 0 Then
+        '        If Mainalarm.Rows.Count > 0 Then
+        '            'LabelStatusupdate()
+        '            AlarmTimerTick()
+        '        End If
+        '    End If
+        'End If
 
         Return True
     End Function
@@ -784,9 +842,11 @@ Module ModuleOmron
             FormMain.txtbx_PumpcontrolQuery.Text = pumpcontrolquery.ToString
             FormMain.txtbx_PumpcontrolResponse.Text = pumpcontrolresponse.ToString
         Catch ex As Exception
-            CommLost = True
-
-
+            If CommLosttimer.Enabled = False Then
+                CommLostTime = DateTime.Now
+                CommLosttimer.Enabled = True
+            End If
+            'CommLost = True
         End Try
 
         Return True
@@ -797,6 +857,7 @@ Module ModuleOmron
             'FormMain.txtbx_PLCWrite.Text = Nothing
             FINSOutput = OmronPLC.ReadMemoryWord(PoohFinsETN.MemoryTypes.DM, 0, 200, PoohFinsETN.DataTypes.UnSignBIN)
             CommLost = False
+            CommLosttimer.Enabled = False
             PLCtimer.Enabled = True
             For i As Integer = 0 To 5
                 ManualCtrl(i) = Int2BoolArr(FINSOutput(3 + i))
@@ -806,7 +867,11 @@ Module ModuleOmron
             Next
 
         Catch ex As Exception
-            CommLost = True
+            If CommLosttimer.Enabled = False Then
+                CommLostTime = DateTime.Now
+                CommLosttimer.Enabled = True
+            End If
+            'CommLost = True
         End Try
 
         Return True
@@ -826,19 +891,34 @@ Module ModuleOmron
             FormMain.txtbx_PLCWrite.Text = writetext.ToString
             OmronPLC.WriteMemory(PoohFinsETN.MemoryTypes.DM, 0, writetext.ToString)
             CommLost = False
+            CommLosttimer.Enabled = False
             FINSOutputRead()
             PLCtimer.Enabled = True
         Catch ex As Exception
-            CommLost = True
+            If CommLosttimer.Enabled = False Then
+                CommLostTime = DateTime.Now
+                CommLosttimer.Enabled = True
+            End If
+            'CommLost = True
         End Try
 
         Return True
     End Function
 
-
+    Private Sub CommLostTimer_Ticks(sender As Object, e As EventArgs) Handles CommLosttimer.Tick
+        If CommLost = True Then
+            CommLosttimer.Enabled = False
+        Else
+            If DateTime.Now > CommLostTime.AddSeconds(2) Then
+                CommLost = True
+            End If
+        End If
+    End Sub
 #End Region
 
+    Private Sub PLCThreadingTimer_Ticks(ByVal state As Object)
 
+    End Sub
 
     Private Sub PLCTimer_Ticks(sender As Object, e As EventArgs) Handles PLCtimer.Tick
 
@@ -931,106 +1011,108 @@ Module ModuleOmron
 
         If CommLost = False Then
             FINSInputRead()
-            FetchPLC_DIn(100)
-            FetchPLC_DOut(110)
-            FetchPLC_Ain(120)
-            FetchPLC_AOut(160)
-            FetchAlarm(200)
+            If CommLosttimer.Enabled = False Then
 
-            'Spiltting the Input into Boolean Array for Processing
+                FetchPLC_DIn(100)
+                FetchPLC_DOut(110)
+                FetchPLC_Ain(120)
+                FetchPLC_AOut(160)
+                FetchAlarm(200)
+
+                'Spiltting the Input into Boolean Array for Processing
 
 
 
-            For i As Integer = 0 To 2
-                PLCstatus(i) = Int2BoolArr(FINSinput(i))
-            Next
+                For i As Integer = 0 To 2
+                    PLCstatus(i) = Int2BoolArr(FINSinput(i))
+                Next
 
 #Region "Pump and tank status update on all page in main form"
-            'Manual Pump Control label based on controller feedback
-            If DIn(1)(7) = True Then
-                FormMain.lbl_MCPumpState.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_PZonePumpState.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_PumpState.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_PumpState.ForeColor = PublicVariables.StatusGreenT
-                FormMain.lbl_PumpState.Text = "ON"
-            Else
-                FormMain.lbl_MCPumpState.BackColor = SystemColors.Window
-                FormMain.lbl_PZonePumpState.BackColor = SystemColors.Window
-                FormMain.lbl_PumpState.BackColor = SystemColors.Window
-                FormMain.lbl_PumpState.ForeColor = SystemColors.ControlText
-                FormMain.lbl_PumpState.Text = "OFF"
-            End If
+                'Manual Pump Control label based on controller feedback
+                If DIn(1)(7) = True Then
+                    FormMain.lbl_MCPumpState.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_PZonePumpState.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_PumpState.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_PumpState.ForeColor = PublicVariables.StatusGreenT
+                    FormMain.lbl_PumpState.Text = "ON"
+                Else
+                    FormMain.lbl_MCPumpState.BackColor = SystemColors.Window
+                    FormMain.lbl_PZonePumpState.BackColor = SystemColors.Window
+                    FormMain.lbl_PumpState.BackColor = SystemColors.Window
+                    FormMain.lbl_PumpState.ForeColor = SystemColors.ControlText
+                    FormMain.lbl_PumpState.Text = "OFF"
+                End If
 
-            If DIn(1)(8) = True Then
-                FormMain.lbl_MCPumpError.BackColor = SystemColors.Window
-                FormMain.lbl_PZonePumpError.BackColor = SystemColors.Window
-                FormMain.lbl_PumpError.BackColor = SystemColors.Window
-                FormMain.lbl_PumpError.ForeColor = SystemColors.ControlText
-                FormMain.lbl_PumpError.Text = "ON"
-            Else
-                FormMain.lbl_MCPumpError.BackColor = PublicVariables.StatusRed
-                FormMain.lbl_PZonePumpError.BackColor = PublicVariables.StatusRed
-                FormMain.lbl_PumpError.BackColor = PublicVariables.StatusRed
-                FormMain.lbl_PumpError.ForeColor = PublicVariables.StatusRedT
-                FormMain.lbl_PumpError.Text = "OFF"
-            End If
+                If DIn(1)(8) = True Then
+                    FormMain.lbl_MCPumpError.BackColor = SystemColors.Window
+                    FormMain.lbl_PZonePumpError.BackColor = SystemColors.Window
+                    FormMain.lbl_PumpError.BackColor = SystemColors.Window
+                    FormMain.lbl_PumpError.ForeColor = SystemColors.ControlText
+                    FormMain.lbl_PumpError.Text = "ON"
+                Else
+                    FormMain.lbl_MCPumpError.BackColor = PublicVariables.StatusRed
+                    FormMain.lbl_PZonePumpError.BackColor = PublicVariables.StatusRed
+                    FormMain.lbl_PumpError.BackColor = PublicVariables.StatusRed
+                    FormMain.lbl_PumpError.ForeColor = PublicVariables.StatusRedT
+                    FormMain.lbl_PumpError.Text = "OFF"
+                End If
 
-            If DIn(1)(9) = True Then
-                FormMain.lbl_MCPumpWarning.BackColor = SystemColors.Window
-                FormMain.lbl_PZonePumpWarning.BackColor = SystemColors.Window
-                FormMain.lbl_PumpWarning.BackColor = SystemColors.Window
-                FormMain.lbl_PumpWarning.ForeColor = SystemColors.ControlText
-                FormMain.lbl_PumpWarning.Text = "ON"
-            Else
-                FormMain.lbl_MCPumpWarning.BackColor = PublicVariables.StatusRed
-                FormMain.lbl_PZonePumpWarning.BackColor = PublicVariables.StatusRed
-                FormMain.lbl_PumpWarning.BackColor = PublicVariables.StatusRed
-                FormMain.lbl_PumpWarning.ForeColor = PublicVariables.StatusRedT
-                FormMain.lbl_PumpWarning.Text = "OFF"
-            End If
+                If DIn(1)(9) = True Then
+                    FormMain.lbl_MCPumpWarning.BackColor = SystemColors.Window
+                    FormMain.lbl_PZonePumpWarning.BackColor = SystemColors.Window
+                    FormMain.lbl_PumpWarning.BackColor = SystemColors.Window
+                    FormMain.lbl_PumpWarning.ForeColor = SystemColors.ControlText
+                    FormMain.lbl_PumpWarning.Text = "ON"
+                Else
+                    FormMain.lbl_MCPumpWarning.BackColor = PublicVariables.StatusRed
+                    FormMain.lbl_PZonePumpWarning.BackColor = PublicVariables.StatusRed
+                    FormMain.lbl_PumpWarning.BackColor = PublicVariables.StatusRed
+                    FormMain.lbl_PumpWarning.ForeColor = PublicVariables.StatusRedT
+                    FormMain.lbl_PumpWarning.Text = "OFF"
+                End If
 
-            'Manual Tank Level Label Color Change based on sensor
-            If DIn(1)(2) = True Then
-                FormMain.lbl_TankOverflow.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_PZoneTankOverflow.BackColor = PublicVariables.StatusGreen
+                'Manual Tank Level Label Color Change based on sensor
+                If DIn(1)(2) = True Then
+                    FormMain.lbl_TankOverflow.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_PZoneTankOverflow.BackColor = PublicVariables.StatusGreen
 
-            Else
-                FormMain.lbl_TankOverflow.BackColor = SystemColors.Window
-                FormMain.lbl_PZoneTankOverflow.BackColor = SystemColors.Window
+                Else
+                    FormMain.lbl_TankOverflow.BackColor = SystemColors.Window
+                    FormMain.lbl_PZoneTankOverflow.BackColor = SystemColors.Window
 
-            End If
+                End If
 
-            If DIn(1)(3) = True Then
-                FormMain.lbl_TankNominal.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_PZoneTankNominal.BackColor = PublicVariables.StatusGreen
-            Else
-                FormMain.lbl_TankNominal.BackColor = SystemColors.Window
-                FormMain.lbl_PZoneTankNominal.BackColor = SystemColors.Window
-            End If
+                If DIn(1)(3) = True Then
+                    FormMain.lbl_TankNominal.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_PZoneTankNominal.BackColor = PublicVariables.StatusGreen
+                Else
+                    FormMain.lbl_TankNominal.BackColor = SystemColors.Window
+                    FormMain.lbl_PZoneTankNominal.BackColor = SystemColors.Window
+                End If
 
-            If DIn(1)(4) = True Then
-                FormMain.lbl_TankPrecondition.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_PZoneTankPrecondition.BackColor = PublicVariables.StatusGreen
-            Else
-                FormMain.lbl_TankPrecondition.BackColor = SystemColors.Window
-                FormMain.lbl_PZoneTankPrecondition.BackColor = SystemColors.Window
-            End If
+                If DIn(1)(4) = True Then
+                    FormMain.lbl_TankPrecondition.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_PZoneTankPrecondition.BackColor = PublicVariables.StatusGreen
+                Else
+                    FormMain.lbl_TankPrecondition.BackColor = SystemColors.Window
+                    FormMain.lbl_PZoneTankPrecondition.BackColor = SystemColors.Window
+                End If
 
-            If DIn(1)(5) = True Then
-                FormMain.lbl_TankPumpProtect.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_PZoneTankPumpProtect.BackColor = PublicVariables.StatusGreen
-            Else
-                FormMain.lbl_TankPumpProtect.BackColor = SystemColors.Window
-                FormMain.lbl_PZoneTankPumpProtect.BackColor = SystemColors.Window
-            End If
+                If DIn(1)(5) = True Then
+                    FormMain.lbl_TankPumpProtect.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_PZoneTankPumpProtect.BackColor = PublicVariables.StatusGreen
+                Else
+                    FormMain.lbl_TankPumpProtect.BackColor = SystemColors.Window
+                    FormMain.lbl_PZoneTankPumpProtect.BackColor = SystemColors.Window
+                End If
 
-            FormMain.txtbx_BackPressActual.Text = AIn(1).ToString
+                FormMain.txtbx_BackPressActual.Text = AIn(1).ToString
 
-            FormMain.lbl_InletPress.Text = AIn(9).ToString
-            FormMain.lbl_OutletPress.Text = AIn(10).ToString
-            FormMain.lbl_Flowmtr.Text = AIn(12).ToString
-            FormMain.lbl_Temp.Text = AIn(13).ToString
-            FormMain.lbl_PumpSpeed.Text = AIn(2).ToString
+                FormMain.lbl_InletPress.Text = AIn(9).ToString
+                FormMain.lbl_OutletPress.Text = AIn(10).ToString
+                FormMain.lbl_Flowmtr.Text = AIn(12).ToString
+                FormMain.lbl_Temp.Text = AIn(13).ToString
+                FormMain.lbl_PumpSpeed.Text = AIn(2).ToString
 
 
 
@@ -1040,46 +1122,46 @@ Module ModuleOmron
 
 
 #Region "Manual Control-Valve Screen Button state update"
-            'Manual valve Control Button Color change on Output on
-            For i As Integer = 0 To 15
+                'Manual valve Control Button Color change on Output on
+                For i As Integer = 0 To 15
 
-                If DOut(1)(i) = False Then
-                    SetButtonState(FormMain.btn_ValveCtrlArr(i), False, "Close")
-                Else
-                    SetButtonState(FormMain.btn_ValveCtrlArr(i), True, "Open")
-                End If
-            Next
+                    If DOut(1)(i) = False Then
+                        SetButtonState(FormMain.btn_ValveCtrlArr(i), False, "Close")
+                    Else
+                        SetButtonState(FormMain.btn_ValveCtrlArr(i), True, "Open")
+                    End If
+                Next
 
-            For i As Integer = 0 To 2
-                If DOut(2)(i) = False Then
-                    SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), False, "Close")
-                Else
-                    SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), True, "Open")
-                End If
-            Next
+                For i As Integer = 0 To 2
+                    If DOut(2)(i) = False Then
+                        SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), False, "Close")
+                    Else
+                        SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), True, "Open")
+                    End If
+                Next
 
 
 
 #End Region
 #Region "Manual Control- Pump Control page Button"
-            'Manual Pump Control Button Color change on Output on
+                'Manual Pump Control Button Color change on Output on
 
-            If DOut(2)(3) = False Then
-                SetButtonState(FormMain.btn_PumpReset, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_PumpReset, True, "ON")
-            End If
-            If DOut(2)(4) = False Then
-                SetButtonState(FormMain.btn_PumpMode, False, "Speed")
-            Else
-                SetButtonState(FormMain.btn_PumpMode, True, "Process")
-            End If
+                If DOut(2)(3) = False Then
+                    SetButtonState(FormMain.btn_PumpReset, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_PumpReset, True, "ON")
+                End If
+                If DOut(2)(4) = False Then
+                    SetButtonState(FormMain.btn_PumpMode, False, "Speed")
+                Else
+                    SetButtonState(FormMain.btn_PumpMode, True, "Process")
+                End If
 
-            If DOut(2)(5) = False Then
-                SetButtonState(FormMain.btn_PumpEnable, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_PumpEnable, True, "ON")
-            End If
+                If DOut(2)(5) = False Then
+                    SetButtonState(FormMain.btn_PumpEnable, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_PumpEnable, True, "ON")
+                End If
 
 
 
@@ -1087,82 +1169,82 @@ Module ModuleOmron
 #End Region
 #Region "Manual Control- Tank Control page Button"
 
-            'Manual Tank Valve Label Color Change based on output
-            If DOut(1)(3) = True Then
-                FormMain.lbl_TankValve4.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_TankValve4.ForeColor = PublicVariables.StatusGreenT
-            Else
-                FormMain.lbl_TankValve4.BackColor = SystemColors.Window
-                FormMain.lbl_TankValve4.ForeColor = SystemColors.ControlText
-            End If
-            If DOut(1)(4) = True Then
-                FormMain.lbl_TankValve5.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_TankValve5.ForeColor = PublicVariables.StatusGreenT
-            Else
-                FormMain.lbl_TankValve5.BackColor = SystemColors.Window
-                FormMain.lbl_TankValve5.ForeColor = SystemColors.ControlText
-            End If
+                'Manual Tank Valve Label Color Change based on output
+                If DOut(1)(3) = True Then
+                    FormMain.lbl_TankValve4.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_TankValve4.ForeColor = PublicVariables.StatusGreenT
+                Else
+                    FormMain.lbl_TankValve4.BackColor = SystemColors.Window
+                    FormMain.lbl_TankValve4.ForeColor = SystemColors.ControlText
+                End If
+                If DOut(1)(4) = True Then
+                    FormMain.lbl_TankValve5.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_TankValve5.ForeColor = PublicVariables.StatusGreenT
+                Else
+                    FormMain.lbl_TankValve5.BackColor = SystemColors.Window
+                    FormMain.lbl_TankValve5.ForeColor = SystemColors.ControlText
+                End If
 
-            ' Current Value update in the Pump control label  field
-            FormMain.lbl_ReqRPM.Text = Int2Float(FINSOutput, 120).ToString
-            FormMain.lbl_ReqLPM.Text = Int2Float(FINSOutput, 122).ToString
+                ' Current Value update in the Pump control label  field
+                FormMain.lbl_ReqRPM.Text = Int2Float(FINSOutput, 120).ToString
+                FormMain.lbl_ReqLPM.Text = Int2Float(FINSOutput, 122).ToString
 
-            'Manual Tank Control Button Color change on Output on
+                'Manual Tank Control Button Color change on Output on
 
-            If DOut(1)(3) = False Then
-                SetButtonState(FormMain.btn_TankFill, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_TankFill, True, "ON")
-            End If
+                If DOut(1)(3) = False Then
+                    SetButtonState(FormMain.btn_TankFill, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_TankFill, True, "ON")
+                End If
 
-            If DOut(1)(4) = False Then
-                SetButtonState(FormMain.btn_TankDrain, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_TankDrain, True, "ON")
-            End If
+                If DOut(1)(4) = False Then
+                    SetButtonState(FormMain.btn_TankDrain, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_TankDrain, True, "ON")
+                End If
 
 
 
 #End Region
 #Region "Manual Control - Manual Drain page Button"
 
-            ' Current Value update in the Pressure regulator control label  field
-            FormMain.lbl_BackPressCurrent.Text = Int2Float(FINSOutput, 124).ToString
-            FormMain.lbl_N2PurgeCurrent.Text = Int2Float(FINSOutput, 126).ToString
+                ' Current Value update in the Pressure regulator control label  field
+                FormMain.lbl_BackPressCurrent.Text = Int2Float(FINSOutput, 124).ToString
+                FormMain.lbl_N2PurgeCurrent.Text = Int2Float(FINSOutput, 126).ToString
 
-            If PLCstatus(2)(12) = False Then
-                SetButtonState(FormMain.btn_BackPressureOn, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_BackPressureOn, True, "ON")
-            End If
+                If PLCstatus(2)(12) = False Then
+                    SetButtonState(FormMain.btn_BackPressureOn, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_BackPressureOn, True, "ON")
+                End If
 
-            If PLCstatus(2)(13) = False Then
-                SetButtonState(FormMain.btn_N2PressureOn, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_N2PressureOn, True, "ON")
-            End If
+                If PLCstatus(2)(13) = False Then
+                    SetButtonState(FormMain.btn_N2PressureOn, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_N2PressureOn, True, "ON")
+                End If
 
 
-            If PLCstatus(2)(0) = False And PLCstatus(2)(1) = False And PLCstatus(2)(2) = False Then
-                FormMain.btn_MCN2Purge1.Enabled = True
-                FormMain.btn_MCN2Purge2.Enabled = True
-                FormMain.btn_MCN2Purge3.Enabled = True
-                SetButtonState(FormMain.btn_MCN2Purge1, False, "OFF")
-                SetButtonState(FormMain.btn_MCN2Purge2, False, "OFF")
-                SetButtonState(FormMain.btn_MCN2Purge3, False, "OFF")
-            ElseIf PLCstatus(2)(0) = True Then
-                FormMain.btn_MCN2Purge2.Enabled = False
-                FormMain.btn_MCN2Purge3.Enabled = False
-                SetButtonState(FormMain.btn_MCN2Purge1, True, "ON")
-            ElseIf PLCstatus(2)(1) = True Then
-                FormMain.btn_MCN2Purge1.Enabled = False
-                FormMain.btn_MCN2Purge3.Enabled = False
-                SetButtonState(FormMain.btn_MCN2Purge2, True, "ON")
-            ElseIf PLCstatus(2)(2) = True Then
-                FormMain.btn_MCN2Purge1.Enabled = False
-                FormMain.btn_MCN2Purge2.Enabled = False
-                SetButtonState(FormMain.btn_MCN2Purge3, True, "ON")
-            End If
+                If PLCstatus(2)(0) = False And PLCstatus(2)(1) = False And PLCstatus(2)(2) = False Then
+                    FormMain.btn_MCN2Purge1.Enabled = True
+                    FormMain.btn_MCN2Purge2.Enabled = True
+                    FormMain.btn_MCN2Purge3.Enabled = True
+                    SetButtonState(FormMain.btn_MCN2Purge1, False, "OFF")
+                    SetButtonState(FormMain.btn_MCN2Purge2, False, "OFF")
+                    SetButtonState(FormMain.btn_MCN2Purge3, False, "OFF")
+                ElseIf PLCstatus(2)(0) = True Then
+                    FormMain.btn_MCN2Purge2.Enabled = False
+                    FormMain.btn_MCN2Purge3.Enabled = False
+                    SetButtonState(FormMain.btn_MCN2Purge1, True, "ON")
+                ElseIf PLCstatus(2)(1) = True Then
+                    FormMain.btn_MCN2Purge1.Enabled = False
+                    FormMain.btn_MCN2Purge3.Enabled = False
+                    SetButtonState(FormMain.btn_MCN2Purge2, True, "ON")
+                ElseIf PLCstatus(2)(2) = True Then
+                    FormMain.btn_MCN2Purge1.Enabled = False
+                    FormMain.btn_MCN2Purge2.Enabled = False
+                    SetButtonState(FormMain.btn_MCN2Purge3, True, "ON")
+                End If
 
 
 
@@ -1172,288 +1254,288 @@ Module ModuleOmron
 
 
 #Region "Manual Control - Maintenance page Button"
-            'Maintenance Label Color Change based on PLC status
-            If PLCstatus(2)(3) = False Then
-                SetButtonState(FormMain.btn_InFiltrDrain, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_InFiltrDrain, True, "ON")
-            End If
+                'Maintenance Label Color Change based on PLC status
+                If PLCstatus(2)(3) = False Then
+                    SetButtonState(FormMain.btn_InFiltrDrain, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_InFiltrDrain, True, "ON")
+                End If
 
-            If PLCstatus(2)(4) = False Then
-                SetButtonState(FormMain.btn_InFiltrVent, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_InFiltrVent, True, "ON")
-            End If
+                If PLCstatus(2)(4) = False Then
+                    SetButtonState(FormMain.btn_InFiltrVent, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_InFiltrVent, True, "ON")
+                End If
 
-            If PLCstatus(2)(5) = False Then
-                SetButtonState(FormMain.btn_PumpFiltrDrain, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_PumpFiltrDrain, True, "ON")
-            End If
+                If PLCstatus(2)(5) = False Then
+                    SetButtonState(FormMain.btn_PumpFiltrDrain, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_PumpFiltrDrain, True, "ON")
+                End If
 
-            If PLCstatus(2)(6) = False Then
-                SetButtonState(FormMain.btn_PumpFiltrVent, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_PumpFiltrVent, True, "ON")
-            End If
+                If PLCstatus(2)(6) = False Then
+                    SetButtonState(FormMain.btn_PumpFiltrVent, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_PumpFiltrVent, True, "ON")
+                End If
 
-            If PLCstatus(2)(7) = False Then
-                SetButtonState(FormMain.btn_EmptyTank, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_EmptyTank, True, "ON")
-            End If
+                If PLCstatus(2)(7) = False Then
+                    SetButtonState(FormMain.btn_EmptyTank, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_EmptyTank, True, "ON")
+                End If
 
-            If PLCstatus(2)(8) = False Then
-                SetButtonState(FormMain.btn_InletConnect, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_InletConnect, True, "ON")
-            End If
+                If PLCstatus(2)(8) = False Then
+                    SetButtonState(FormMain.btn_InletConnect, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_InletConnect, True, "ON")
+                End If
 
-            If PLCstatus(2)(9) = False Then
-                SetButtonState(FormMain.btn_OutletConnect, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_OutletConnect, True, "ON")
-            End If
+                If PLCstatus(2)(9) = False Then
+                    SetButtonState(FormMain.btn_OutletConnect, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_OutletConnect, True, "ON")
+                End If
 
-            If PLCstatus(2)(10) = False Then
-                SetButtonState(FormMain.btn_VentConnect, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_VentConnect, True, "ON")
-            End If
+                If PLCstatus(2)(10) = False Then
+                    SetButtonState(FormMain.btn_VentConnect, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_VentConnect, True, "ON")
+                End If
 
-            If PLCstatus(2)(11) = False Then
-                SetButtonState(FormMain.btn_DrainConnect, False, "OFF")
-            Else
-                SetButtonState(FormMain.btn_DrainConnect, True, "ON")
-            End If
+                If PLCstatus(2)(11) = False Then
+                    SetButtonState(FormMain.btn_DrainConnect, False, "OFF")
+                Else
+                    SetButtonState(FormMain.btn_DrainConnect, True, "ON")
+                End If
 
 #End Region
-            '#Region "Mimic Panel Circuit Model 1"
+                '#Region "Mimic Panel Circuit Model 1"
 
-            '            FormCircuitModel2.txtbx_BackPressActual.Text = AIn(1).ToString
-            '            FormCircuitModel2.txtbx_N2PurgeActual.Text = AIn(0).ToString
-            '            FormCircuitModel2.lbl_InletPress.Text = AIn(9).ToString
-            '            FormCircuitModel2.lbl_OutletPress.Text = AIn(10).ToString
-            '            FormCircuitModel2.lbl_Flowmtr.Text = AIn(12).ToString
-            '            FormCircuitModel2.lbl_Temp.Text = AIn(13).ToString
+                '            FormCircuitModel2.txtbx_BackPressActual.Text = AIn(1).ToString
+                '            FormCircuitModel2.txtbx_N2PurgeActual.Text = AIn(0).ToString
+                '            FormCircuitModel2.lbl_InletPress.Text = AIn(9).ToString
+                '            FormCircuitModel2.lbl_OutletPress.Text = AIn(10).ToString
+                '            FormCircuitModel2.lbl_Flowmtr.Text = AIn(12).ToString
+                '            FormCircuitModel2.lbl_Temp.Text = AIn(13).ToString
 
-            '#End Region
+                '#End Region
 #Region "Device status screen status update"
-            'Device status screen status update
+                'Device status screen status update
 
 
-            If DIn(1)(11) = True Then
-                FormMain.lbl_FlwAlarm.BackColor = PublicVariables.StatusRed
-                FormMain.lbl_FlwAlarm.ForeColor = PublicVariables.StatusRedT
-                FormMain.lbl_FlwAlarm.Text = "ON"
-            Else
-                FormMain.lbl_FlwAlarm.BackColor = SystemColors.Window
-                FormMain.lbl_FlwAlarm.ForeColor = SystemColors.ControlText
-                FormMain.lbl_FlwAlarm.Text = "OFF"
-            End If
-            If PLCstatus(0)(1) = True Then
-                FormMain.lbl_AutoRunning.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_AutoRunning.ForeColor = PublicVariables.StatusGreenT
-                FormMain.lbl_AutoRunning.Text = "ON"
-            Else
-                FormMain.lbl_AutoRunning.BackColor = SystemColors.Window
-                FormMain.lbl_AutoRunning.ForeColor = SystemColors.ControlText
-                FormMain.lbl_AutoRunning.Text = "OFF"
-            End If
+                If DIn(1)(11) = True Then
+                    FormMain.lbl_FlwAlarm.BackColor = PublicVariables.StatusRed
+                    FormMain.lbl_FlwAlarm.ForeColor = PublicVariables.StatusRedT
+                    FormMain.lbl_FlwAlarm.Text = "ON"
+                Else
+                    FormMain.lbl_FlwAlarm.BackColor = SystemColors.Window
+                    FormMain.lbl_FlwAlarm.ForeColor = SystemColors.ControlText
+                    FormMain.lbl_FlwAlarm.Text = "OFF"
+                End If
+                If PLCstatus(0)(1) = True Then
+                    FormMain.lbl_AutoRunning.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_AutoRunning.ForeColor = PublicVariables.StatusGreenT
+                    FormMain.lbl_AutoRunning.Text = "ON"
+                Else
+                    FormMain.lbl_AutoRunning.BackColor = SystemColors.Window
+                    FormMain.lbl_AutoRunning.ForeColor = SystemColors.ControlText
+                    FormMain.lbl_AutoRunning.Text = "OFF"
+                End If
 
-            If PLCstatus(1)(11) = True Then
-                FormMain.lbl_AutoSeqComplete.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_AutoSeqComplete.ForeColor = PublicVariables.StatusGreenT
-                FormMain.lbl_AutoSeqComplete.Text = "ON"
-            Else
-                FormMain.lbl_AutoSeqComplete.BackColor = SystemColors.Window
-                FormMain.lbl_AutoSeqComplete.ForeColor = SystemColors.ControlText
-                FormMain.lbl_AutoSeqComplete.Text = "OFF"
-            End If
-            If PLCstatus(0)(4) = True Then
-                FormMain.lbl_Alarm.BackColor = PublicVariables.StatusRed
-                FormMain.lbl_Alarm.ForeColor = PublicVariables.StatusRedT
-                FormMain.lbl_Alarm.Text = "ON"
-            Else
-                FormMain.lbl_Alarm.BackColor = SystemColors.Window
-                FormMain.lbl_Alarm.ForeColor = SystemColors.ControlText
-                FormMain.lbl_Alarm.Text = "OFF"
-            End If
-            If DIn(0)(4) = True Then
-                FormMain.lbl_SafetyConOK.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_SafetyConOK.ForeColor = PublicVariables.StatusGreenT
-                FormMain.lbl_SafetyConOK.Text = "ON"
-            Else
-                FormMain.lbl_SafetyConOK.BackColor = Color.Red
-                FormMain.lbl_SafetyConOK.ForeColor = SystemColors.ControlText
-                FormMain.lbl_SafetyConOK.Text = "OFF"
-            End If
+                If PLCstatus(1)(11) = True Then
+                    FormMain.lbl_AutoSeqComplete.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_AutoSeqComplete.ForeColor = PublicVariables.StatusGreenT
+                    FormMain.lbl_AutoSeqComplete.Text = "ON"
+                Else
+                    FormMain.lbl_AutoSeqComplete.BackColor = SystemColors.Window
+                    FormMain.lbl_AutoSeqComplete.ForeColor = SystemColors.ControlText
+                    FormMain.lbl_AutoSeqComplete.Text = "OFF"
+                End If
+                If PLCstatus(0)(4) = True Then
+                    FormMain.lbl_Alarm.BackColor = PublicVariables.StatusRed
+                    FormMain.lbl_Alarm.ForeColor = PublicVariables.StatusRedT
+                    FormMain.lbl_Alarm.Text = "ON"
+                Else
+                    FormMain.lbl_Alarm.BackColor = SystemColors.Window
+                    FormMain.lbl_Alarm.ForeColor = SystemColors.ControlText
+                    FormMain.lbl_Alarm.Text = "OFF"
+                End If
+                If DIn(0)(4) = True Then
+                    FormMain.lbl_SafetyConOK.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_SafetyConOK.ForeColor = PublicVariables.StatusGreenT
+                    FormMain.lbl_SafetyConOK.Text = "ON"
+                Else
+                    FormMain.lbl_SafetyConOK.BackColor = Color.Red
+                    FormMain.lbl_SafetyConOK.ForeColor = SystemColors.ControlText
+                    FormMain.lbl_SafetyConOK.Text = "OFF"
+                End If
 
-            If PLCstatus(1)(12) = True Then
-                FormMain.lbl_RecipeSelectionOK.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_RecipeSelectionOK.ForeColor = PublicVariables.StatusGreenT
-                FormMain.lbl_RecipeSelectionOK.Text = "ON"
-            Else
-                FormMain.lbl_RecipeSelectionOK.BackColor = SystemColors.Window
-                FormMain.lbl_RecipeSelectionOK.ForeColor = SystemColors.ControlText
-                FormMain.lbl_RecipeSelectionOK.Text = "OFF"
-            End If
-            If PLCstatus(1)(13) = True Then
-                FormMain.lbl_JigSelect_ok.BackColor = PublicVariables.StatusGreen
-                FormMain.lbl_JigSelect_ok.ForeColor = PublicVariables.StatusGreenT
-                FormMain.lbl_JigSelect_ok.Text = "ON"
-            Else
-                FormMain.lbl_JigSelect_ok.BackColor = SystemColors.Window
-                FormMain.lbl_JigSelect_ok.ForeColor = SystemColors.ControlText
-                FormMain.lbl_JigSelect_ok.Text = "OFF"
-            End If
+                If PLCstatus(1)(12) = True Then
+                    FormMain.lbl_RecipeSelectionOK.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_RecipeSelectionOK.ForeColor = PublicVariables.StatusGreenT
+                    FormMain.lbl_RecipeSelectionOK.Text = "ON"
+                Else
+                    FormMain.lbl_RecipeSelectionOK.BackColor = SystemColors.Window
+                    FormMain.lbl_RecipeSelectionOK.ForeColor = SystemColors.ControlText
+                    FormMain.lbl_RecipeSelectionOK.Text = "OFF"
+                End If
+                If PLCstatus(1)(13) = True Then
+                    FormMain.lbl_JigSelect_ok.BackColor = PublicVariables.StatusGreen
+                    FormMain.lbl_JigSelect_ok.ForeColor = PublicVariables.StatusGreenT
+                    FormMain.lbl_JigSelect_ok.Text = "ON"
+                Else
+                    FormMain.lbl_JigSelect_ok.BackColor = SystemColors.Window
+                    FormMain.lbl_JigSelect_ok.ForeColor = SystemColors.ControlText
+                    FormMain.lbl_JigSelect_ok.Text = "OFF"
+                End If
 
 
 
 #End Region
 #Region "Recipe Selection Confirmation"
 
-            'Recipe Selection
-            If FormMain.txtbx_TitleRecipeID.Text.Length > 3 Then
-                FINSOutput(20) = 1
-                FINSOutput(21) = CheckJigType(JigType)
-            Else
-                FINSOutput(20) = 0
-                FINSOutput(21) = 0
-            End If
+                'Recipe Selection
+                If FormMain.txtbx_TitleRecipeID.Text.Length > 3 Then
+                    FINSOutput(20) = 1
+                    FINSOutput(21) = CheckJigType(JigType)
+                Else
+                    FINSOutput(20) = 0
+                    FINSOutput(21) = 0
+                End If
 
 #End Region
 #Region "Calibration and verification"
-            If PLCstatus(1)(2) = True Then
-                SetButtonState(FormCalibration.btn_Calibrate, True, "Calibrate")
-            Else
-                SetButtonState(FormCalibration.btn_Calibrate, False, "Calibrate")
-            End If
-            If PLCstatus(1)(3) = True Then
-                SetButtonState(FormCalibration.btn_Verify, True, "Verify")
+                If PLCstatus(1)(2) = True Then
+                    SetButtonState(FormCalibration.btn_Calibrate, True, "Calibrate")
+                Else
+                    SetButtonState(FormCalibration.btn_Calibrate, False, "Calibrate")
+                End If
+                If PLCstatus(1)(3) = True Then
+                    SetButtonState(FormCalibration.btn_Verify, True, "Verify")
 
-            Else
-                SetButtonState(FormCalibration.btn_Verify, False, "Verify")
+                Else
+                    SetButtonState(FormCalibration.btn_Verify, False, "Verify")
 
-            End If
-            If FINSinput(21) = 0 And FormCalibration.dtCalibration.Rows.Count = 0 And FormCalibration.dtVerification.Rows.Count = 0 Then
-                ' FormCalibration.btn_Verify.Enabled = True
-                FormCalibration.btn_Calibrate.Enabled = True
-            Else
-                ' FormCalibration.btn_Verify.Enabled = False
-                FormCalibration.btn_Calibrate.Enabled = False
-            End If
+                End If
+                If FINSinput(21) = 0 And FormCalibration.dtCalibration.Rows.Count = 0 And FormCalibration.dtVerification.Rows.Count = 0 Then
+                    ' FormCalibration.btn_Verify.Enabled = True
+                    FormCalibration.btn_Calibrate.Enabled = True
+                Else
+                    ' FormCalibration.btn_Verify.Enabled = False
+                    FormCalibration.btn_Calibrate.Enabled = False
+                End If
 
-            If FINSinput(21) = 0 And Not FormCalibration.txtbx_CalOffset.Text = Nothing Then
-                FormCalibration.btn_Verify.Enabled = True
-            Else
-                FormCalibration.btn_Verify.Enabled = False
-            End If
+                If FINSinput(21) = 0 And Not FormCalibration.txtbx_CalOffset.Text = Nothing Then
+                    FormCalibration.btn_Verify.Enabled = True
+                Else
+                    FormCalibration.btn_Verify.Enabled = False
+                End If
 
 
 
-            If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(21) = 1700 Or FINSinput(21) = 1730 Then
-                CalrecordValue = True
-            Else
-                CalrecordValue = False
-            End If
+                If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(21) = 1700 Or FINSinput(21) = 1730 Then
+                    CalrecordValue = True
+                Else
+                    CalrecordValue = False
+                End If
 
-            If FINSinput(21) <> Cal_MessageNo Then
-                Cal_MessageNo = FINSinput(21)
-                CalibrationMessage(Cal_MessageNo)
-                If FINSinput(21) = 20 Then
-                    If MsgBox($"Kindly Check and Acknowledge, Whether the Blank Product has been Connected properly? ", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
-                        PCStatus(1)(7) = True
-                    ElseIf MsgBox("Do you want to Abort sequence?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
-                        PCStatus(1)(8) = True
-                    Else
-                        Cal_MessageNo = 0
+                If FINSinput(21) <> Cal_MessageNo Then
+                    Cal_MessageNo = FINSinput(21)
+                    CalibrationMessage(Cal_MessageNo)
+                    If FINSinput(21) = 20 Then
+                        If MsgBox($"Kindly Check and Acknowledge, Whether the Blank Product has been Connected properly? ", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                            PCStatus(1)(7) = True
+                        ElseIf MsgBox("Do you want to Abort sequence?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                            PCStatus(1)(8) = True
+                        Else
+                            Cal_MessageNo = 0
+                        End If
                     End If
                 End If
-            End If
 
 
 
-            If PLCstatus(1)(2) = False And PLCstatus(1)(3) = False Then
-                PCStatus(1)(7) = False
+                If PLCstatus(1)(2) = False And PLCstatus(1)(3) = False Then
+                    PCStatus(1)(7) = False
 
-            End If
+                End If
 
-            'Auto Running is False, Reset PC Acknowledge of Calibration and Verification reset
-            If PLCstatus(0)(1) = False Then
-                PCStatus(1)(4) = False
-                PCStatus(1)(5) = False
-            End If
+                'Auto Running is False, Reset PC Acknowledge of Calibration and Verification reset
+                If PLCstatus(0)(1) = False Then
+                    PCStatus(1)(4) = False
+                    PCStatus(1)(5) = False
+                End If
 
 
-            If FormCalibration.btn_Calibrate.Enabled = True Or FormCalibration.btn_Verify.Enabled = True Then
-                PCStatus(1)(8) = False
-                PCStatus(1)(6) = False
-            End If
-            If PLCstatus(1)(2) = True Or PLCstatus(1)(3) = True Then
-                FormCalibration.btn_Home.Enabled = False
-            Else
-                FormCalibration.btn_Home.Enabled = True
-            End If
+                If FormCalibration.btn_Calibrate.Enabled = True Or FormCalibration.btn_Verify.Enabled = True Then
+                    PCStatus(1)(8) = False
+                    PCStatus(1)(6) = False
+                End If
+                If PLCstatus(1)(2) = True Or PLCstatus(1)(3) = True Then
+                    FormCalibration.btn_Home.Enabled = False
+                Else
+                    FormCalibration.btn_Home.Enabled = True
+                End If
 
 #End Region
 #Region "Main Sequence"
-            If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
-                PCStatus(1)(10) = False
-                FormMain.btn_OprKeyInDtConfirm.Enabled = False
-                FormMain.txtbx_SerialNumber.Enabled = False
-            End If
-            If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
-                FormMain.btn_OprKeyInDtConfirm.Enabled = True
-                FormMain.txtbx_SerialNumber.Enabled = True
-            End If
+                If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
+                    PCStatus(1)(10) = False
+                    FormMain.btn_OprKeyInDtConfirm.Enabled = False
+                    FormMain.txtbx_SerialNumber.Enabled = False
+                End If
+                If FINSinput(20) = 0 And FormMain.lbl_CalibrationStatus.Text = "Pass" Then
+                    FormMain.btn_OprKeyInDtConfirm.Enabled = True
+                    FormMain.txtbx_SerialNumber.Enabled = True
+                End If
 
 
-            If PLCstatus(0)(1) = False Then
-                PCStatus(1)(11) = False
-                PCStatus(1)(12) = False
-                PCStatus(1)(13) = False
-                PCStatus(1)(14) = False
-            End If
-            If FINSinput(20) <> Main_MessageNo Then
-                Main_MessageNo = FINSinput(20)
-                MainMessage(Main_MessageNo)
-            End If
+                If PLCstatus(0)(1) = False Then
+                    PCStatus(1)(11) = False
+                    PCStatus(1)(12) = False
+                    PCStatus(1)(13) = False
+                    PCStatus(1)(14) = False
+                End If
+                If FINSinput(20) <> Main_MessageNo Then
+                    Main_MessageNo = FINSinput(20)
+                    MainMessage(Main_MessageNo)
+                End If
 
-            If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(20) = 1700 Then
-                MainrecordValue = True
-            Else
-                MainrecordValue = False
-            End If
-            FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
-            FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
+                If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(20) = 1700 Then
+                    MainrecordValue = True
+                Else
+                    MainrecordValue = False
+                End If
+                FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
+                FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
 
 
 #End Region
 #Region "Tool Counter"
-            FormSetting.lblArray = {
-            FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
-FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
-}
-            For i As Integer = 0 To FormSetting.lblArray.Length - 1
-                FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
-            Next
-            FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
-            FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
-            If FINSOutput(10) > 0 Then
-                For i As Integer = 0 To 15
-                    If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
-                        ToolCounterreset(0)(i) = False
-                    End If
+                FormSetting.lblArray = {
+                                                        FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
+                                            FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormSetting.lbl_Valve15, FormSetting.lbl_Valve16, FormSetting.lbl_Valve17, FormSetting.lbl_Valve18, FormSetting.lbl_Valve19', lbl_Valve20, lbl_Valve21
+                                            }
+                For i As Integer = 0 To FormSetting.lblArray.Length - 1
+                    FormSetting.lblArray(i).Text = FINSinput(50 + (i * 2)).ToString
                 Next
-            End If
-            If FINSOutput(11) > 0 Then
-                For i As Integer = 0 To 15
-                    If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
-                        ToolCounterreset(1)(i) = False
-                    End If
-                Next
-            End If
+                FINSOutput(10) = Boolarr2int(ToolCounterreset(0))
+                FINSOutput(11) = Boolarr2int(ToolCounterreset(1))
+                If FINSOutput(10) > 0 Then
+                    For i As Integer = 0 To 15
+                        If FINSinput(50 + i * 2) = 0 And ToolCounterreset(0)(i) = True Then
+                            ToolCounterreset(0)(i) = False
+                        End If
+                    Next
+                End If
+                If FINSOutput(11) > 0 Then
+                    For i As Integer = 0 To 15
+                        If FINSinput(80 + i * 2) = 0 And ToolCounterreset(1)(i) = True Then
+                            ToolCounterreset(1)(i) = False
+                        End If
+                    Next
+                End If
 
 
 
@@ -1461,15 +1543,16 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
 
 #End Region
-            Put_PCManualctrl()
-            FINSWrite(0, 200)
-            LabelStatusupdate()
+                Put_PCManualctrl()
+                FINSWrite(0, 200)
+                'LabelStatusupdate()
+            End If
         Else
             FormCalibration.tmr_Calibration.Enabled = False
             FormCalibration.tmr_Verification.Enabled = False
             Resultcapturetimer.Enabled = False
-            LabelStatusupdate()
-            Alarmtimer.Enabled = True
+            'LabelStatusupdate()
+            'Alarmtimer.Enabled = True
 
         End If
 
@@ -1478,32 +1561,32 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
 
     Private Sub PCTimer_Ticks(sender As Object, e As EventArgs) Handles PCtimer.Tick
-        For i As Integer = 0 To 15
-            If ManualCtrl(2)(i) = True And FormMain.btn_ValveCtrlArr(i).Text = "Close" Then
-                ManualCtrl(2)(i) = False
-            End If
-        Next
-        For i As Integer = 0 To 2
-            If ManualCtrl(3)(i) = True And FormMain.btn_ValveCtrlArr(i + 16).Text = "Close" Then
-                ManualCtrl(3)(i) = False
-            End If
-        Next
-        For i As Integer = 8 To 15
-            If ManualCtrl(3)(i) = True And FormMain.btn_Manualothersarr(i - 3).Text = "OFF" Then
-                ManualCtrl(3)(i) = False
-            End If
-        Next
-        For i As Integer = 3 To 7
-            If ManualCtrl(3)(i) = True And FormMain.btn_Manualothersarr(i - 3).Text = "OFF" Then
-                ManualCtrl(3)(i) = False
-            End If
-        Next
+        'For i As Integer = 0 To 15
+        '    If ManualCtrl(2)(i) = True And FormMain.btn_ValveCtrlArr(i).Text = "Close" Then
+        '        ManualCtrl(2)(i) = False
+        '    End If
+        'Next
+        'For i As Integer = 0 To 2
+        '    If ManualCtrl(3)(i) = True And FormMain.btn_ValveCtrlArr(i + 16).Text = "Close" Then
+        '        ManualCtrl(3)(i) = False
+        '    End If
+        'Next
+        'For i As Integer = 8 To 15
+        '    If ManualCtrl(3)(i) = True And FormMain.btn_Manualothersarr(i - 3).Text = "OFF" Then
+        '        ManualCtrl(3)(i) = False
+        '    End If
+        'Next
+        'For i As Integer = 3 To 7
+        '    If ManualCtrl(3)(i) = True And FormMain.btn_Manualothersarr(i - 3).Text = "OFF" Then
+        '        ManualCtrl(3)(i) = False
+        '    End If
+        'Next
 
-        For i As Integer = 0 To 5
-            If ManualCtrl(4)(i) = True And FormMain.btn_Manualothersarr(13 + i).Text = "OFF" Then
-                ManualCtrl(4)(i) = False
-            End If
-        Next
+        'For i As Integer = 0 To 5
+        '    If ManualCtrl(4)(i) = True And FormMain.btn_Manualothersarr(13 + i).Text = "OFF" Then
+        '        ManualCtrl(4)(i) = False
+        '    End If
+        'Next
 
         'PCtimer.Stop()
     End Sub
@@ -1511,15 +1594,155 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
 
 #Region "Top Label Status Update"
+    Private Sub LblUpdateTimer_Ticks(sender As Object, e As EventArgs) Handles LblUpdateTimer.Tick
+        'LabelStatusupdate()
+        LabelStatusUpdate2()
+
+        ' Set Alarm Timer Enable
+        Alarmtimer.Enabled = True
+
+        ' Check For Comm Lost
+        If CommLost = True Then
+            Dim alarmID As String = "1"
+            Dim alarmSN As String = dtAlarmStatus.Rows.Count + 1
+            Dim alarmTriggerTime As String = FormMain.lbl_DateTimeClock.Text
+            Dim alarmDescription As String = "PLC-PC Communication Lost Alarm"
+            Dim alarmCode As String = "ALM-001"
+
+            Dim dvAlarmStatus As DataView = dtAlarmStatus.DefaultView
+            dvAlarmStatus.RowFilter = $"[Alarm Code] = '{alarmCode}'"
+            Dim dtTemp As DataTable = dvAlarmStatus.ToTable
+            If dtTemp.Rows.Count <= 0 Then
+                dtAlarmStatus.Rows.Add(alarmID, alarmSN, alarmTriggerTime, alarmDescription, alarmCode)
+            End If
+        End If
+    End Sub
+
+    Public Sub LabelStatusUpdate2()
+        If CommLost = False Then
+            dtAlarmStatus = Mainalarm.Copy()
+        Else
+            If dtAlarmStatus.Columns.Count <= 0 Then
+                dtAlarmStatus = Mainalarm.Clone
+            End If
+        End If
+
+        Dim ManualMode As Boolean = PLCstatus(0)(2)
+        Dim AutoMode As Boolean = PLCstatus(0)(3)
+        Dim AutoCycleMode As Boolean = PLCstatus(0)(1)
+        Dim lblStatusArr() = {
+            FormMain.lbl_OperationMode,
+            FormCalibration.lbl_OperationMode,
+            FormMessageLog.lbl_OperationMode,
+            FormRecipeManagement.lbl_OperationMode,
+            FormResultGraph.lbl_OperationMode,
+            FormResultSummary.lbl_OperationMode,
+            FormSetting.lbl_OperationMode
+        }
+
+        If dtAlarmStatus.Rows.Count = 0 Then
+            ' Reset Status Index
+            statusIndex = -1
+
+            ' Set Alarm Shown
+            MsgAlarmShown = False
+
+            ' No Alarm/Warning
+            If ManualMode Or AutoMode Then
+                If ManualMode Then
+                    currentStatus = MsgManualMode
+                    For i As Integer = 0 To lblStatusArr.Count - 1
+                        With lblStatusArr(i)
+                            .BackColor = MsgManualColor
+                            .ForeColor = MsgManualColorT
+                        End With
+                    Next
+                End If
+                If AutoMode Then
+                    If AutoCycleMode Then
+                        currentStatus = MsgAutoCycle
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgAutoColor
+                                .ForeColor = MsgAutoColorT
+                            End With
+                        Next
+                    Else
+                        currentStatus = MsgAutoMode
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgAutoColor
+                                .ForeColor = MsgAutoColorT
+                            End With
+                        Next
+                    End If
+                End If
+            Else
+                currentStatus = MsgNoStatus
+                For i As Integer = 0 To lblStatusArr.Count - 1
+                    With lblStatusArr(i)
+                        .BackColor = MsgNoStatusColor
+                        .ForeColor = MsgNoStatusColorT
+                    End With
+                Next
+            End If
+
+            ' Set Status Label Text
+            For i As Integer = 0 To lblStatusArr.Count - 1
+                lblStatusArr(i).Text = currentStatus
+            Next
+        Else
+            If MsgAlarmShown = True Then
+                ' Check Alarm Thrown During Warning
+                If currentStatus.Substring(0, 3) = "WAR" Or currentStatus.Contains("Warning") Then
+                    For i As Integer = 0 To dtAlarmStatus.Rows.Count - 1
+                        Dim alarmStr As String = $"{dtAlarmStatus(i)("Alarm Code")} {dtAlarmStatus(i)("Description")}"
+                        If alarmStr.Substring(0, 3) = "ALM" Or alarmStr.Contains("Alarm") Then
+                            ' Reset Warning To Show Alarm
+                            MsgAlarmShown = False
+                            AlarmTimerTick2()
+                            Exit For
+                        End If
+                    Next
+                End If
+            Else
+                ' Display Alarm/Warning
+                AlarmTimerTick2()
+            End If
+        End If
+    End Sub
+
     Public Sub LabelStatusupdate()
         'To Update the Status of the Header Bar in all Forms
+
+        If CommLost = True Then
+            ' Machine PC-PLC Communication Lost
+            Currentalarm.Remove(0)
+            If Not Currentalarm.ContainsKey(0) Then
+                Currentalarm.Add(0, "Machine in Alarm Condition")
+            End If
+            Currentalarm.Remove(1)
+            If Not Currentalarm.ContainsKey(1) Then
+                Currentalarm.Add(1, "ALM-001 PLC-PC Communication Lost Alarm")
+            End If
+            If Alarmtimer.Enabled = False Then
+                Alarmtimer.Enabled = True
+                startindex = Currentalarm.Count - 1
+            End If
+        End If
+
         If CommLost = False Then
-            If PLCstatus(0)(4) = False And PLCstatus(0)(14) = False And CommLost = False Then
+            If PLCstatus(0)(4) = False And PLCstatus(0)(14) = False Then ' And CommLost = False Then
+                ' Update Alarm
+                'AlarmTimerTick()
+
+                ' Machine OK
                 If Alarmtimer.Enabled = True Then
                     Alarmtimer.Enabled = False
                     startindex = 0
                 End If
 
+                ' Machine in Auto Cycle
                 If PLCstatus(0)(1) = True Then
                     FormMain.lbl_OperationMode.Text = "Auto Cycle Running"
                     FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
@@ -1550,6 +1773,8 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
                     FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
                 End If
+
+                ' Machine in Manual Mode
                 If PLCstatus(0)(2) = True Then
                     FormMain.lbl_OperationMode.Text = "Manual Mode"
                     FormMain.lbl_OperationMode.BackColor = Color.FromArgb(25, 130, 246)
@@ -1588,6 +1813,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
                 End If
 
+                ' Machine in Auto Mode
                 If PLCstatus(0)(1) = False And PLCstatus(0)(3) = True And PLCstatus(0)(2) = False Then
                     FormMain.lbl_OperationMode.Text = "Auto Mode"
                     FormMain.lbl_OperationMode.BackColor = Color.FromArgb(0, 192, 0)
@@ -1626,6 +1852,7 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
                 End If
 
+                ' Machine Not Running
                 If PLCstatus(0)(1) = False And PLCstatus(0)(2) = False And PLCstatus(0)(3) = False And PLCstatus(0)(14) = False And PLCstatus(0)(4) = False Then
                     FormMain.lbl_OperationMode.Text = "No Status"
                     FormMain.lbl_OperationMode.BackColor = Color.Gray
@@ -1663,54 +1890,275 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
                     FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
                 End If
             Else
-                If PLCstatus(0)(4) = True And PLCstatus(0)(14) = False Then
-                    Currentalarm.Remove(0)
-                    If Not Currentalarm.ContainsKey(0) Then
-                        Currentalarm.Add(0, "Machine in Alarm Condition")
-                    End If
+                ' Machine In Alarm & Warning
+                'If PLCstatus(0)(4) = True And PLCstatus(0)(14) = False Then
+                '    ' Machine In Alarm Mode
+                '    Currentalarm.Remove(0)
+                '    If Not Currentalarm.ContainsKey(0) Then
+                '        Currentalarm.Add(0, "Machine in Alarm Condition")
+                '    End If
 
-                    If Alarmtimer.Enabled = False Then
-                        Alarmtimer.Enabled = True
-                    End If
-                ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
-                    Currentalarm.Remove(0)
-                    Currentalarm.Add(0, "Machine in Warning Condition")
+                '    If Alarmtimer.Enabled = False Then
+                '        Alarmtimer.Enabled = True
+                '    End If
+                'ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
+                '    ' Machine In Warning Mode
+                '    Currentalarm.Remove(0)
+                '    Currentalarm.Add(0, "Machine in Warning Condition")
 
-                    If Alarmtimer.Enabled = False Then
-                        Alarmtimer.Enabled = True
-                    End If
-                ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = True Then
-                    Currentalarm.Remove(0)
-                    If Not Currentalarm.ContainsKey(0) Then
-                        Currentalarm.Add(0, "Machine in Alarm Condition")
-                    End If
+                '    If Alarmtimer.Enabled = False Then
+                '        Alarmtimer.Enabled = True
+                '    End If
+                'ElseIf PLCstatus(0)(14) = True And PLCstatus(0)(4) = True Then
+                '    ' Machine In Alarm & Warning Mode
+                '    Currentalarm.Remove(0)
+                '    If Not Currentalarm.ContainsKey(0) Then
+                '        Currentalarm.Add(0, "Machine in Alarm Condition")
+                '    End If
 
-                    If Alarmtimer.Enabled = False Then
-                        Alarmtimer.Enabled = True
+                '    If Alarmtimer.Enabled = False Then
+                '        Alarmtimer.Enabled = True
+                '    End If
+                'End If
+
+                ' Define Status Variables
+                Dim StatusShowWarning As Boolean = False
+                Dim StatusShowAlarm As Boolean = False
+
+                ' Enable Timer If Not Enabled
+                If Alarmtimer.Enabled = False Then
+                    Alarmtimer.Enabled = True
+                End If
+
+                ' Get Status From PLC
+                If PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
+                    StatusShowWarning = True
+                Else
+                    StatusShowAlarm = True
+                End If
+
+                ' Clear Current Alarm
+                Currentalarm.Remove(0)
+
+                ' Show Warning
+                If StatusShowWarning Then
+                    If Not StatusShowAlarm Then
+                        ' Warning Mode
+                        'Currentalarm.Remove(0)
+                        If Not Currentalarm.ContainsKey(0) Then
+                            Currentalarm.Add(0, "Machine in Warning Condition")
+                        End If
                     End If
                 End If
-            End If
-        Else
-            Currentalarm.Remove(0)
-            If Not Currentalarm.ContainsKey(0) Then
-                Currentalarm.Add(0, "Machine in Alarm Condition")
-            End If
-            Currentalarm.Remove(1)
-            If Not Currentalarm.ContainsKey(1) Then
-                Currentalarm.Add(1, "ALM-001 PLC-PC Communication Lost Alarm")
-            End If
-            If Alarmtimer.Enabled = False Then
-                Alarmtimer.Enabled = True
-                startindex = Currentalarm.Count - 1
-            End If
 
+                ' Show Alarm
+                If StatusShowAlarm Then
+                    ' Alarm Mode
+                    If PLCstatus(0)(14) = True Or PLCstatus(0)(4) = True Then
+                        'Currentalarm.Remove(0)
+                        If Not Currentalarm.ContainsKey(0) Then
+                            Currentalarm.Add(0, "Machine in Alarm Condition")
+                        End If
+                    End If
+                End If
+
+                ' Alarm Counter
+                If PLCstatus(0)(14) = True Then
+                    FormCalibration.TextBox2.Text = CInt(FormCalibration.TextBox2.Text) + 1
+                End If
+                If PLCstatus(0)(4) = True Then
+                    FormCalibration.TextBox1.Text = CInt(FormCalibration.TextBox1.Text) + 1
+                End If
+
+                'If PLCstatus(0)(14) = True And PLCstatus(0)(4) = False Then
+                '    ' Warning Mode
+                '    Currentalarm.Remove(0)
+                '    If Not Currentalarm.ContainsKey(0) Then
+                '        Currentalarm.Add(0, "Machine in Warning Condition")
+                '    End If
+
+                '    If Alarmtimer.Enabled = False Then
+                '        Alarmtimer.Enabled = True
+                '    End If
+                'Else
+                '    ' Alarm/Warning Mode
+                '    If PLCstatus(0)(14) = True Or PLCstatus(0)(4) = True Then
+                '        Currentalarm.Remove(0)
+                '        If Not Currentalarm.ContainsKey(0) Then
+                '            Currentalarm.Add(0, "Machine in Alarm Condition")
+                '        End If
+
+                '        If Alarmtimer.Enabled = False Then
+                '            Alarmtimer.Enabled = True
+                '        End If
+                '    End If
+                'End If
+            End If
         End If
 
 
     End Sub
 
     Private Sub AlarmTimer_Ticks(sender As Object, e As EventArgs) Handles Alarmtimer.Tick
-        AlarmTimerTick()
+        'AlarmTimerTick()
+        AlarmTimerTick2()
+    End Sub
+
+    Private Sub AlarmTimerTick2()
+        If CommLost = False Then
+            dtAlarmStatus = Mainalarm.Copy()
+        Else
+            If dtAlarmStatus.Columns.Count <= 0 Then
+                dtAlarmStatus = Mainalarm.Clone
+            End If
+        End If
+
+        Dim ManualMode As Boolean = PLCstatus(0)(2)
+        Dim AutoMode As Boolean = PLCstatus(0)(3)
+        Dim AutoCycleMode As Boolean = PLCstatus(0)(1)
+        Dim lblStatusArr() = {
+            FormMain.lbl_OperationMode,
+            FormCalibration.lbl_OperationMode,
+            FormMessageLog.lbl_OperationMode,
+            FormRecipeManagement.lbl_OperationMode,
+            FormResultGraph.lbl_OperationMode,
+            FormResultSummary.lbl_OperationMode,
+            FormSetting.lbl_OperationMode
+        }
+
+        If dtAlarmStatus.Rows.Count = 0 Then
+            ' Reset Status Index
+            statusIndex = -1
+
+            ' Set Alarm Shown
+            MsgAlarmShown = False
+
+            ' No Alarm/Warning
+            If ManualMode Or AutoMode Then
+                If ManualMode Then
+                    currentStatus = MsgManualMode
+                    For i As Integer = 0 To lblStatusArr.Count - 1
+                        With lblStatusArr(i)
+                            .BackColor = MsgManualColor
+                            .ForeColor = MsgManualColorT
+                        End With
+                    Next
+                End If
+                If AutoMode Then
+                    If AutoCycleMode Then
+                        currentStatus = MsgAutoCycle
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgAutoColor
+                                .ForeColor = MsgAutoColorT
+                            End With
+                        Next
+                    Else
+                        currentStatus = MsgAutoMode
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgAutoColor
+                                .ForeColor = MsgAutoColorT
+                            End With
+                        Next
+                    End If
+                End If
+            Else
+                currentStatus = MsgNoStatus
+                For i As Integer = 0 To lblStatusArr.Count - 1
+                    With lblStatusArr(i)
+                        .BackColor = MsgNoStatusColor
+                        .ForeColor = MsgNoStatusColorT
+                    End With
+                Next
+            End If
+
+            ' Set Status Label Text
+            For i As Integer = 0 To lblStatusArr.Count - 1
+                lblStatusArr(i).Text = currentStatus
+            Next
+        Else
+            Dim IsWarning As Boolean = False
+            Dim IsAlarm As Boolean = False
+
+            ' Reset Index On First Thrown
+            If MsgAlarmShown = False Then
+                ' Reset Status Index
+                statusIndex = -1
+            End If
+
+            For i As Integer = 0 To dtAlarmStatus.Rows.Count - 1
+                Dim alarmStr As String = $"{dtAlarmStatus(i)("Alarm Code")} {dtAlarmStatus(i)("Description")}"
+                If alarmStr.Substring(0, 3) = "ALM" Or alarmStr.Contains("Alarm") Then
+                    IsAlarm = True
+                End If
+                If alarmStr.Substring(0, 3) = "WAR" Or alarmStr.Contains("Warning") Then
+                    IsWarning = True
+                End If
+            Next
+
+            If IsAlarm Then
+                currentStatus = MsgAlarm
+            Else
+                If IsWarning Then
+                    currentStatus = MsgWarning
+                End If
+            End If
+
+            ' Reset Index On End Of List
+            If statusIndex > dtAlarmStatus.Rows.Count - 1 Then
+                statusIndex = -1
+            End If
+
+            ' Prevent Updating Too Quickly
+            If DateTime.Now >= MsgAlarmShownTime.AddMilliseconds(Alarmtimer.Interval) Then
+
+                If statusIndex < 0 Then
+                    For i As Integer = 0 To lblStatusArr.Count - 1
+                        lblStatusArr(i).Text = currentStatus
+                    Next
+                Else
+                    For i As Integer = 0 To lblStatusArr.Count - 1
+                        Dim alarmStr As String = $"{dtAlarmStatus(statusIndex)("Alarm Code")} {dtAlarmStatus(statusIndex)("Description")}"
+                        lblStatusArr(i).Text = alarmStr
+                    Next
+                End If
+
+                If dtAlarmStatus.Rows.Count > 0 Then
+                    If CStr(lblStatusArr(0).Text).Substring(0, 3) = "ALM" Or CStr(lblStatusArr(0).Text).Contains("Alarm") Then
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgAlarmColor
+                                .ForeColor = MsgAlarmColorT
+                            End With
+                        Next
+                    ElseIf CStr(lblStatusArr(0).Text).Substring(0, 3) = "WAR" Or CStr(lblStatusArr(0).Text).Contains("Warning") Then
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgWarningColor
+                                .ForeColor = MsgWarningColorT
+                            End With
+                        Next
+                    Else
+                        For i As Integer = 0 To lblStatusArr.Count - 1
+                            With lblStatusArr(i)
+                                .BackColor = MsgNoStatusColor
+                                .ForeColor = MsgNoStatusColorT
+                            End With
+                        Next
+                    End If
+                End If
+
+                ' Increment the index for the next status
+                statusIndex += 1
+            End If
+
+            ' Set Alarm Thrown State
+            If MsgAlarmShown = False Then
+                MsgAlarmShown = True
+                MsgAlarmShownTime = DateTime.Now
+            End If
+        End If
     End Sub
 
     Private Sub AlarmTimerTick()
@@ -1773,6 +2221,14 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
             End If
         Else
             Currentindex = Currentindex + 1
+        End If
+    End Sub
+
+    Private Sub Reconnecttimer_Ticks(sender As Object, e As EventArgs) Handles Reconnecttimer.Tick
+        If CommLost Then
+            If statusIndex < 0 Then
+                FINSOutputRead()
+            End If
         End If
     End Sub
 #End Region
@@ -1907,7 +2363,17 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
             result_outletpressure = AIn(10)
             result_flowrate = FinalFlowrate
             result_temperature = AIn(13)
-            result_dp = result_inletpressure - result_outletpressure
+            'result_dp = result_inletpressure - result_outletpressure
+            If True Then
+                Dim A As Double = 0.01257187
+                Dim B As Double = -0.005806436
+                Dim C As Double = 0.001130911
+                Dim D As Double = -0.000005723952
+                Dim T2 As Double = (result_temperature + 273.15) * (result_temperature + 273.15)
+                Dim exp As Double = Math.Exp((1 + (B * (result_temperature + 273.15))) / ((C * (result_temperature + 273.15)) + (D * T2)))
+                Dim vis As Double = A * exp
+                result_dp = Math.Round(CDec((1.002 / vis) * (result_inletpressure - result_outletpressure)), 2) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+            End If
             result_backpressure = AIn(1)
             result_pumprpm = AIn(2)
             newrw(0) = serialusageid
@@ -1961,52 +2427,73 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
         FormMain.lbl_runcycletime.Text = result_samplingtime.ToString
 
         If result_samplingtime = MainCycletime Then
+            Resultcapturetimer.Enabled = False
             PCStatus(1)(11) = True
-            Calculatefinalresult()
+            'Calculatefinalresult()
+            ResultendtimerStartTime = DateTime.Now
+            Resultendtimer.Enabled = True
 
             'Resultcapturetimer.Enabled = False
         End If
     End Sub
 
+    Private Sub Resultendtimer_Ticks(sender As Object, e As EventArgs) Handles Resultendtimer.Tick
+        Dim ResultEndTime As DateTime = ResultendtimerStartTime.AddSeconds(10)
 
+        If DateTime.Now > ResultEndTime Then
+            Resultendtimer.Enabled = False
+
+            Calculatefinalresult()
+        Else
+            If PLCstatus(1)(11) = True Then
+                Resultendtimer.Enabled = False
+
+                Calculatefinalresult()
+            End If
+        End If
+    End Sub
 
     Public Sub Calculatefinalresult()
-        Resultcapturetimer.Enabled = False
+        'Resultcapturetimer.Enabled = False
         'LiveGraph.LiveGraph.ChartPlottingTimer(False)
-        Dim A As Double = 0.01257187
-        Dim B As Double = -0.005806436
-        Dim C As Double = 0.001130911
-        Dim D As Double = -0.000005723952
-        Dim T2 As Double
-        Dim exp As Double
+        'Dim A As Double = 0.01257187
+        'Dim B As Double = -0.005806436
+        'Dim C As Double = 0.001130911
+        'Dim D As Double = -0.000005723952
+        'Dim T2 As Double
+        'Dim exp As Double
         If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
             For i = MainDptest1start To MainDptest1end - 1
                 result_avginlet1 = result_avginlet1 + dtresult.Rows(i)("Inlet Pressure (kPa)")
                 result_avgoutlet1 = result_avgoutlet1 + dtresult.Rows(i)("Outlet Pressure (kPa)")
+                result_avgdp1 = result_avgdp1 + dtresult.Rows(i)("Differential Pressure (kPa)")
                 result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (°C)")
                 result_avgbackpressure1 = result_avgbackpressure1 + dtresult.Rows(i)("Back Pressure (kPa)")
             Next
             result_avginlet1 = result_avginlet1 / MainDptestpoints
             result_avgoutlet1 = result_avgoutlet1 / MainDptestpoints
+            result_avgdp1 = result_avgdp1 / MainDptestpoints
             result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
             result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
             result_avgbackpressure1 = result_avgbackpressure1 / MainDptestpoints
-            result_avgdp1 = result_avginlet1 - result_avgoutlet1
+            'result_avgdp1 = result_avginlet1 - result_avgoutlet1
 
             For i = MainDptest2start To MainDptest2end - 1
                 result_avginlet2 = result_avginlet2 + dtresult.Rows(i)("Inlet Pressure (kPa)")
                 result_avgoutlet2 = result_avgoutlet2 + dtresult.Rows(i)("Outlet Pressure (kPa)")
+                result_avgdp2 = result_avgdp2 + dtresult.Rows(i)("Differential Pressure (kPa)")
                 result_avgflowrate2 = result_avgflowrate2 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature2 = result_avgtemperature2 + dtresult.Rows(i)("Temperature (°C)")
                 result_avgbackpressure2 = result_avgbackpressure2 + dtresult.Rows(i)("Back Pressure (kPa)")
             Next
             result_avginlet2 = result_avginlet2 / MainDptestpoints
             result_avgoutlet2 = result_avgoutlet2 / MainDptestpoints
+            result_avgdp2 = result_avgdp2 / MainDptestpoints
             result_avgflowrate2 = result_avgflowrate2 / MainDptestpoints
             result_avgtemperature2 = result_avgtemperature2 / MainDptestpoints
             result_avgbackpressure2 = result_avgbackpressure2 / MainDptestpoints
-            result_avgdp2 = result_avginlet2 - result_avgoutlet2
+            'result_avgdp2 = result_avginlet2 - result_avgoutlet2
 
 
             result_finalinlet = ((result_avginlet1 + result_avginlet2) / 2)
@@ -2017,17 +2504,20 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
             result_finalbackpressure = ((result_avgbackpressure1 + result_avgbackpressure2) / 2)
 
-            T2 = result_finaltemperature * result_finaltemperature
-            exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
-            Viscosity = A * exp
-            result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+            'T2 = result_finaltemperature * result_finaltemperature
+            'exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
+            'Viscosity = A * exp
+            'result_finaldp = ((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal)
 
+            'result_finaldp = (result_finalinlet - result_finaloutlet) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+            result_finaldp = ((result_avgdp1 + result_avgdp2) / 2) - CType(FormMain.lbl_BlankDP.Text, Decimal)
         End If
 
         If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And Not dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
             For i = MainDptest1start To MainDptest1end - 1
                 result_avginlet1 = result_avginlet1 + dtresult.Rows(i)("Inlet Pressure (kPa)")
                 result_avgoutlet1 = result_avgoutlet1 + dtresult.Rows(i)("Outlet Pressure (kPa)")
+                result_avgdp1 = result_avgdp1 + dtresult.Rows(i)("Differential Pressure (kPa)")
                 result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (°C)")
                 result_avgbackpressure1 = result_avgbackpressure1 + dtresult.Rows(i)("Back Pressure (kPa)")
@@ -2035,7 +2525,8 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
             result_avginlet1 = result_avginlet1 / MainDptestpoints
             result_avgoutlet1 = result_avgoutlet1 / MainDptestpoints
-            result_avgdp1 = result_avginlet1 - result_avgoutlet1
+            'result_avgdp1 = result_avginlet1 - result_avgoutlet1
+            result_avgdp1 = result_avgdp1 / MainDptestpoints
             result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
             result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
             result_avgbackpressure1 = result_avgbackpressure1 / MainDptestpoints
@@ -2048,11 +2539,13 @@ FormSetting.lbl_Valve12, FormSetting.lbl_Valve13, FormSetting.lbl_Valve14, FormS
 
             result_finalbackpressure = result_avgbackpressure1
 
-            T2 = result_finaltemperature * result_finaltemperature
-            exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
-            Viscosity = A * exp
-            result_finaldp = (((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal))
+            'T2 = result_finaltemperature * result_finaltemperature
+            'exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
+            'Viscosity = A * exp
+            'result_finaldp = (((1.002 / Viscosity) * (result_finalinlet - result_finaloutlet)) - CType(FormMain.lbl_BlankDP.Text, Decimal))
 
+            'result_finaldp = (result_finalinlet - result_finaloutlet) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+            result_finaldp = result_avgdp1 '- CType(FormMain.lbl_BlankDP.Text, Decimal)
         End If
         FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)
         FormMain.lbl_ProductFlowrate.Text = CType(Math.Round(result_finalflowrate, 3), String)

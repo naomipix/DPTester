@@ -56,7 +56,7 @@ Public Class FormUserLogin
             FormMainModule.ControlState(1)
 
             ' Login Event
-            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Login/Out] User ({PublicVariables.LoginUserName}/{PublicVariables.LoginUserCategoryName}) Logged In")
+            'EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Login/Out] User ({PublicVariables.LoginUserName}/{PublicVariables.LoginUserCategoryName}) Logged In")
 
             Me.Close()
         End If

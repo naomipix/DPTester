@@ -236,6 +236,12 @@
     <Compile Include="FormSetting.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FormTesting.Designer.vb">
+      <DependentUpon>FormTesting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FormTesting.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ModuleIni.vb" />
     <Compile Include="ModuleInitialize.vb" />
     <Compile Include="ModuleLogin.vb" />
@@ -302,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSetting.resx">
       <DependentUpon>FormSetting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTesting.resx">
+      <DependentUpon>FormTesting.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

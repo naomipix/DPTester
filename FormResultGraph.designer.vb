@@ -23,14 +23,14 @@ Partial Class FormResultGraph
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormResultGraph))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Title2 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -77,12 +77,15 @@ Partial Class FormResultGraph
         Me.dsp_GraphPartID = New System.Windows.Forms.Label()
         Me.dsp_GraphWorkOrder = New System.Windows.Forms.Label()
         Me.dsp_GraphTimestamp = New System.Windows.Forms.Label()
+        Me.txtbx_GraphRecipeIDRev = New System.Windows.Forms.TextBox()
         Me.txtbx_GraphRecipeID = New System.Windows.Forms.TextBox()
         Me.txtbx_GraphConfirmation = New System.Windows.Forms.TextBox()
         Me.txtbx_GraphPartID = New System.Windows.Forms.TextBox()
         Me.txtbx_GraphWorkOrder = New System.Windows.Forms.TextBox()
         Me.txtbx_GraphTimestamp = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btn_ResetZoom = New System.Windows.Forms.Button()
+        Me.checkbx_ShowTooltip = New System.Windows.Forms.CheckBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.checkbx_GraphRPM = New System.Windows.Forms.CheckBox()
         Me.checkbx_GraphTemperature = New System.Windows.Forms.CheckBox()
@@ -110,7 +113,6 @@ Partial Class FormResultGraph
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.checkbx_ShowTooltip = New System.Windows.Forms.CheckBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -293,6 +295,7 @@ Partial Class FormResultGraph
         Me.Panel2.Controls.Add(Me.dsp_GraphPartID)
         Me.Panel2.Controls.Add(Me.dsp_GraphWorkOrder)
         Me.Panel2.Controls.Add(Me.dsp_GraphTimestamp)
+        Me.Panel2.Controls.Add(Me.txtbx_GraphRecipeIDRev)
         Me.Panel2.Controls.Add(Me.txtbx_GraphRecipeID)
         Me.Panel2.Controls.Add(Me.txtbx_GraphConfirmation)
         Me.Panel2.Controls.Add(Me.txtbx_GraphPartID)
@@ -654,6 +657,18 @@ Partial Class FormResultGraph
         Me.dsp_GraphTimestamp.Text = "Production TimeStamp :"
         Me.dsp_GraphTimestamp.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtbx_GraphRecipeIDRev
+        '
+        Me.txtbx_GraphRecipeIDRev.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_GraphRecipeIDRev.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_GraphRecipeIDRev.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_GraphRecipeIDRev.Location = New System.Drawing.Point(412, 454)
+        Me.txtbx_GraphRecipeIDRev.Name = "txtbx_GraphRecipeIDRev"
+        Me.txtbx_GraphRecipeIDRev.ReadOnly = True
+        Me.txtbx_GraphRecipeIDRev.Size = New System.Drawing.Size(74, 25)
+        Me.txtbx_GraphRecipeIDRev.TabIndex = 16
+        Me.txtbx_GraphRecipeIDRev.TabStop = False
+        '
         'txtbx_GraphRecipeID
         '
         Me.txtbx_GraphRecipeID.BackColor = System.Drawing.SystemColors.Window
@@ -662,7 +677,7 @@ Partial Class FormResultGraph
         Me.txtbx_GraphRecipeID.Location = New System.Drawing.Point(226, 454)
         Me.txtbx_GraphRecipeID.Name = "txtbx_GraphRecipeID"
         Me.txtbx_GraphRecipeID.ReadOnly = True
-        Me.txtbx_GraphRecipeID.Size = New System.Drawing.Size(260, 25)
+        Me.txtbx_GraphRecipeID.Size = New System.Drawing.Size(180, 25)
         Me.txtbx_GraphRecipeID.TabIndex = 16
         Me.txtbx_GraphRecipeID.TabStop = False
         '
@@ -717,6 +732,7 @@ Partial Class FormResultGraph
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.btn_ResetZoom)
         Me.Panel3.Controls.Add(Me.checkbx_ShowTooltip)
         Me.Panel3.Controls.Add(Me.ComboBox1)
         Me.Panel3.Controls.Add(Me.checkbx_GraphRPM)
@@ -746,6 +762,30 @@ Partial Class FormResultGraph
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1311, 802)
         Me.Panel3.TabIndex = 2
+        '
+        'btn_ResetZoom
+        '
+        Me.btn_ResetZoom.BackColor = System.Drawing.SystemColors.Window
+        Me.btn_ResetZoom.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.btn_ResetZoom.Location = New System.Drawing.Point(1170, 732)
+        Me.btn_ResetZoom.Name = "btn_ResetZoom"
+        Me.btn_ResetZoom.Size = New System.Drawing.Size(80, 35)
+        Me.btn_ResetZoom.TabIndex = 77
+        Me.btn_ResetZoom.Text = "Reset"
+        Me.btn_ResetZoom.UseVisualStyleBackColor = False
+        '
+        'checkbx_ShowTooltip
+        '
+        Me.checkbx_ShowTooltip.AutoSize = True
+        Me.checkbx_ShowTooltip.BackColor = System.Drawing.Color.AliceBlue
+        Me.checkbx_ShowTooltip.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(1051, 740)
+        Me.checkbx_ShowTooltip.Name = "checkbx_ShowTooltip"
+        Me.checkbx_ShowTooltip.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.checkbx_ShowTooltip.Size = New System.Drawing.Size(108, 21)
+        Me.checkbx_ShowTooltip.TabIndex = 76
+        Me.checkbx_ShowTooltip.Text = "Show Tooltips"
+        Me.checkbx_ShowTooltip.UseVisualStyleBackColor = False
         '
         'ComboBox1
         '
@@ -1009,50 +1049,50 @@ Partial Class FormResultGraph
         '
         Me.ResultChart.BackColor = System.Drawing.Color.LightSkyBlue
         Me.ResultChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter
-        ChartArea1.AxisX.MajorGrid.Interval = 0R
-        ChartArea1.AxisX.MajorGrid.IntervalOffset = 0R
-        ChartArea1.AxisX.Title = "Sampling Time (s)"
-        ChartArea1.AxisX.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea1.AxisY.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea1.Name = "ChartArea1"
-        Me.ResultChart.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.ResultChart.Legends.Add(Legend1)
+        ChartArea2.AxisX.MajorGrid.Interval = 0R
+        ChartArea2.AxisX.MajorGrid.IntervalOffset = 0R
+        ChartArea2.AxisX.Title = "Sampling Time (s)"
+        ChartArea2.AxisX.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea2.AxisY.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea2.Name = "ChartArea1"
+        Me.ResultChart.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.ResultChart.Legends.Add(Legend2)
         Me.ResultChart.Location = New System.Drawing.Point(50, 177)
         Me.ResultChart.Name = "ResultChart"
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Series1.LabelToolTip = "X= #VALX, Y= #VALY"
-        Series1.Legend = "Legend1"
-        Series1.Name = "DP"
-        Series1.ToolTip = "X= #VALX, Y= #VALY"
-        Series2.ChartArea = "ChartArea1"
-        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series2.Legend = "Legend1"
-        Series2.Name = "Inlet Pressure"
-        Series3.ChartArea = "ChartArea1"
-        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series3.Legend = "Legend1"
-        Series3.Name = "Outlet Pressure"
-        Series4.ChartArea = "ChartArea1"
-        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series4.Legend = "Legend1"
-        Series4.Name = "Flowrate"
-        Series5.ChartArea = "ChartArea1"
-        Series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series5.Legend = "Legend1"
-        Series5.Name = "Temperature"
-        Me.ResultChart.Series.Add(Series1)
-        Me.ResultChart.Series.Add(Series2)
-        Me.ResultChart.Series.Add(Series3)
-        Me.ResultChart.Series.Add(Series4)
-        Me.ResultChart.Series.Add(Series5)
+        Series6.ChartArea = "ChartArea1"
+        Series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Series6.LabelToolTip = "X= #VALX, Y= #VALY"
+        Series6.Legend = "Legend1"
+        Series6.Name = "DP"
+        Series6.ToolTip = "X= #VALX, Y= #VALY"
+        Series7.ChartArea = "ChartArea1"
+        Series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series7.Legend = "Legend1"
+        Series7.Name = "Inlet Pressure"
+        Series8.ChartArea = "ChartArea1"
+        Series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series8.Legend = "Legend1"
+        Series8.Name = "Outlet Pressure"
+        Series9.ChartArea = "ChartArea1"
+        Series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series9.Legend = "Legend1"
+        Series9.Name = "Flowrate"
+        Series10.ChartArea = "ChartArea1"
+        Series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series10.Legend = "Legend1"
+        Series10.Name = "Temperature"
+        Me.ResultChart.Series.Add(Series6)
+        Me.ResultChart.Series.Add(Series7)
+        Me.ResultChart.Series.Add(Series8)
+        Me.ResultChart.Series.Add(Series9)
+        Me.ResultChart.Series.Add(Series10)
         Me.ResultChart.Size = New System.Drawing.Size(1210, 600)
         Me.ResultChart.TabIndex = 69
         Me.ResultChart.Text = "ResultChart"
-        Title1.Name = "Result Graph"
-        Me.ResultChart.Titles.Add(Title1)
+        Title2.Name = "Result Graph"
+        Me.ResultChart.Titles.Add(Title2)
         Me.ResultChart.Visible = False
         '
         'dsp_Home
@@ -1087,18 +1127,6 @@ Partial Class FormResultGraph
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Result Graph"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'checkbx_ShowTooltip
-        '
-        Me.checkbx_ShowTooltip.AutoSize = True
-        Me.checkbx_ShowTooltip.BackColor = System.Drawing.Color.AliceBlue
-        Me.checkbx_ShowTooltip.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.checkbx_ShowTooltip.Location = New System.Drawing.Point(1134, 190)
-        Me.checkbx_ShowTooltip.Name = "checkbx_ShowTooltip"
-        Me.checkbx_ShowTooltip.Size = New System.Drawing.Size(108, 21)
-        Me.checkbx_ShowTooltip.TabIndex = 76
-        Me.checkbx_ShowTooltip.Text = "Show Tooltips"
-        Me.checkbx_ShowTooltip.UseVisualStyleBackColor = False
         '
         'FormResultGraph
         '
@@ -1209,4 +1237,6 @@ Partial Class FormResultGraph
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents checkbx_GraphRPM As CheckBox
     Friend WithEvents checkbx_ShowTooltip As CheckBox
+    Friend WithEvents btn_ResetZoom As Button
+    Friend WithEvents txtbx_GraphRecipeIDRev As TextBox
 End Class

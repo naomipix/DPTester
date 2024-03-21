@@ -140,8 +140,10 @@ Module ModuleInitialize
                               "MinPrep_BackPressure=0" + vbCrLf +
                               "MinPrep_BackPressureDrop=0" + vbCrLf +
                               "MinPrep_BackPressureDropTime=0" + vbCrLf +
-                                                                         _ ' "MinFlush1_FillTime=0" + vbCrLf +
-                                                                         _ ' "MinFlush1_BleedTime=0" + vbCrLf +
+                              "MinPrep_PrefillStartTime=0" + vbCrLf +
+                              "MinPrep_PrefillTime=0" + vbCrLf +
+                                                                _ ' "MinFlush1_FillTime=0" + vbCrLf +
+                                                                _ ' "MinFlush1_BleedTime=0" + vbCrLf +
                               "MinFlush1_Flowrate=0" + vbCrLf +
                               "MinFlush1_FlowTolerance=0" + vbCrLf +
                               "MinFlush1_BackPressure=0" + vbCrLf +
@@ -178,8 +180,10 @@ Module ModuleInitialize
                               "MaxPrep_BackPressure=500" + vbCrLf +
                               "MaxPrep_BackPressureDrop=500" + vbCrLf +
                               "MaxPrep_BackPressureDropTime=600" + vbCrLf +
-                                                                           _ ' "MaxFlush1_FillTime=600" + vbCrLf +
-                                                                           _ ' "MaxFlush1_BleedTime=600" + vbCrLf +
+                              "MaxPrep_PrefillStartTime=600" + vbCrLf +
+                              "MaxPrep_PrefillTime=600" + vbCrLf +
+                                                                  _ ' "MaxFlush1_FillTime=600" + vbCrLf +
+                                                                  _ ' "MaxFlush1_BleedTime=600" + vbCrLf +
                               "MaxFlush1_Flowrate=20" + vbCrLf +
                               "MaxFlush1_FlowTolerance=5" + vbCrLf +
                               "MaxFlush1_BackPressure=500" + vbCrLf +

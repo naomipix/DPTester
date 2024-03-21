@@ -171,6 +171,8 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_d_preppressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_BackPressure", "0")
             PublicVariables.Limit_Min_d_preppressuredrop = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_BackPressureDrop", "0")
             PublicVariables.Limit_Min_i_preppressuredroptime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_BackPressureDropTime", "0")
+            PublicVariables.Limit_Min_i_prepprefillstarttime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_PrefillStartTime", "0")
+            PublicVariables.Limit_Min_i_prepprefilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_PrefillTime", "0")
 
             'PublicVariables.Limit_Min_i_flush1filltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush1_FillTime", "0")
             'PublicVariables.Limit_Min_i_flush1bleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush1_BleedTime", "0")
@@ -203,6 +205,38 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_d_drain3pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain3_Pressure", "0")
             PublicVariables.Limit_Min_i_drain3time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain3_Time", "0")
 
+            ' Hard Limit (BP/N2 Reg)
+            If True Then
+                Dim MinPress As Decimal = 5
+                Dim PressArr As Decimal() = {
+                    PublicVariables.Limit_Min_d_preppressure,
+                    PublicVariables.Limit_Min_d_preppressuredrop,
+                    PublicVariables.Limit_Min_d_flush1pressure,
+                    PublicVariables.Limit_Min_d_flush2pressure,
+                    PublicVariables.Limit_Min_d_dptestpressure,
+                    PublicVariables.Limit_Min_d_drain1pressure,
+                    PublicVariables.Limit_Min_d_drain2pressure,
+                    PublicVariables.Limit_Min_d_drain3pressure
+                }
+
+                For i As Integer = 0 To PressArr.Length - 1
+                    If PressArr(i) < MinPress Then
+                        PressArr(i) = MinPress
+                    End If
+                Next
+            End If
+
+            ' Hard limit to drain time
+            If True Then
+                Dim MinDrainTime As Integer = 15
+                Dim DrainArr As Integer() = {PublicVariables.Limit_Min_i_drain1time, PublicVariables.Limit_Min_i_drain2time, PublicVariables.Limit_Min_i_drain3time}
+
+                For i As Integer = 0 To DrainArr.Length - 1
+                    If DrainArr(i) < MinDrainTime Then
+                        DrainArr(i) = MinDrainTime
+                    End If
+                Next
+            End If
 
 
             PublicVariables.Limit_Max_d_vertol = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxVerificationTolerance", "10")
@@ -213,6 +247,8 @@ Module IniFileInitialize
             PublicVariables.Limit_Max_d_preppressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressure", "500")
             PublicVariables.Limit_Max_d_preppressuredrop = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressureDrop", "500")
             PublicVariables.Limit_Max_i_preppressuredroptime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressureDropTime", "600")
+            PublicVariables.Limit_Max_i_prepprefillstarttime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_PrefillStartTime", "600")
+            PublicVariables.Limit_Max_i_prepprefilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_PrefillTime", "600")
 
             'PublicVariables.Limit_Max_i_flush1filltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_FillTime", "600")
             'PublicVariables.Limit_Max_i_flush1bleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_BleedTime", "600")

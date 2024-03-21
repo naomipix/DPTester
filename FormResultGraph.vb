@@ -51,6 +51,7 @@ Public Class FormResultGraph
         txtbx_GraphPartID.Text = Nothing
         txtbx_GraphConfirmation.Text = Nothing
         txtbx_GraphRecipeID.Text = Nothing
+        txtbx_GraphRecipeIDRev.Text = Nothing
         txtbx_GraphCalOffset.Text = Nothing
         txtbx_GraphTemperature.Text = Nothing
         txtbx_GraphFlowrate.Text = Nothing
@@ -121,12 +122,12 @@ Public Class FormResultGraph
         CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
         CartesianChart_ResultGraph.TooltipTextSize = 12
         CartesianChart_ResultGraph.TooltipBackgroundPaint = New SolidColorPaint(New SKColor(0, 0, 0, 10))
-        CartesianChart_ResultGraph.LegendPosition = LiveChartsCore.Measure.LegendPosition.Right
+        CartesianChart_ResultGraph.LegendPosition = LiveChartsCore.Measure.LegendPosition.Top 'Right
         CartesianChart_ResultGraph.LegendTextSize = 12
         CartesianChart_ResultGraph.ZoomMode = Measure.ZoomAndPanMode.X
 
+        '.Text = "Result Graph",
         CartesianChart_ResultGraph.Title = New LabelVisual() With {
-            .Text = "Result Graph",
             .TextSize = 14,
             .Padding = New LiveChartsCore.Drawing.Padding(15),
             .Paint = New SolidColorPaint(SKColors.Black)
@@ -136,15 +137,15 @@ Public Class FormResultGraph
 
         CartesianChart_ResultGraph.YAxes = New ICartesianAxis() {
             New LiveChartsCore.SkiaSharpView.Axis() With {
-                .Name = "Pressure (kPa)",
+                .Name = "Differential Pressure (kPa)",
                 .NameTextSize = 14,
-                .NamePaint = New SolidColorPaint(SKColors.Black),
+                .NamePaint = New SolidColorPaint(SKColors.Blue),
                 .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                 .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
                 .TextSize = 12,
-                .LabelsPaint = New SolidColorPaint(SKColors.Black),
-                .TicksPaint = New SolidColorPaint(SKColors.Black),
-                .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                .LabelsPaint = New SolidColorPaint(SKColors.Blue),
+                .TicksPaint = New SolidColorPaint(SKColors.Blue),
+                .SubticksPaint = New SolidColorPaint(SKColors.Blue),
                 .DrawTicksPath = True
             },
             New LiveChartsCore.SkiaSharpView.Axis() With {
@@ -188,6 +189,20 @@ Public Class FormResultGraph
                 .DrawTicksPath = True,
                 .ShowSeparatorLines = False,
                 .Position = LiveChartsCore.Measure.AxisPosition.End
+            },
+            New LiveChartsCore.SkiaSharpView.Axis() With {
+                .Name = "Inlet/Outlet/Back Pressure (kPa)",
+                .NameTextSize = 14,
+                .NamePaint = New SolidColorPaint(SKColors.Black),
+                .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                .TextSize = 12,
+                .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                .TicksPaint = New SolidColorPaint(SKColors.Black),
+                .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                .DrawTicksPath = True,
+                .ShowSeparatorLines = False,
+                .Position = LiveChartsCore.Measure.AxisPosition.End
             }
         }
 
@@ -217,7 +232,7 @@ Public Class FormResultGraph
                 .GeometryFill = New SolidColorPaint(SKColors.Green),
                 .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                 .GeometrySize = 0,
-                .ScalesYAt = 0,
+                .ScalesYAt = 4,
                 .ScalesXAt = 0
             },
             New LineSeries(Of ObservablePoint)() With {
@@ -231,7 +246,7 @@ Public Class FormResultGraph
                 .GeometryFill = New SolidColorPaint(SKColors.Magenta),
                 .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                 .GeometrySize = 0,
-                .ScalesYAt = 0,
+                .ScalesYAt = 4,
                 .ScalesXAt = 0
             },
             New LineSeries(Of ObservablePoint)() With {
@@ -245,7 +260,7 @@ Public Class FormResultGraph
                 .GeometryFill = New SolidColorPaint(SKColors.DarkOrange),
                 .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                 .GeometrySize = 0,
-                .ScalesYAt = 0,
+                .ScalesYAt = 4,
                 .ScalesXAt = 0
             },
             New LineSeries(Of ObservablePoint)() With {
@@ -602,10 +617,12 @@ Public Class FormResultGraph
 
             With CartesianChart_ResultGraph
                 .Series(1).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_ResultGraph
                 .Series(1).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
         End If
 
@@ -623,21 +640,31 @@ Public Class FormResultGraph
 
             With CartesianChart_ResultGraph
                 .Series(2).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_ResultGraph
                 .Series(2).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
         End If
 
         If checkbx_GraphBP.Checked = True Then
             With CartesianChart_ResultGraph
                 .Series(3).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_ResultGraph
                 .Series(3).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
+        End If
+
+        If checkbx_GraphInletPressure.Checked Or checkbx_GraphOutletPressure.Checked Or checkbx_GraphBP.Checked Then
+            CartesianChart_ResultGraph.YAxes(4).IsVisible = True
+        Else
+            CartesianChart_ResultGraph.YAxes(4).IsVisible = False
         End If
 
         If checkbx_GraphFlowrate.Checked = True Then
@@ -1220,6 +1247,7 @@ Public Class FormResultGraph
         txtbx_GraphPartID.Text = Nothing
         txtbx_GraphConfirmation.Text = Nothing
         txtbx_GraphRecipeID.Text = Nothing
+        txtbx_GraphRecipeIDRev.Text = Nothing
         txtbx_GraphCalOffset.Text = Nothing
         txtbx_GraphTemperature.Text = Nothing
         txtbx_GraphFlowrate.Text = Nothing
@@ -1518,6 +1546,7 @@ Public Class FormResultGraph
 
             txtbx_GraphCalOffset.Text = dtproductiondetail(0)("lotusage_cal_diff_pressure")
             txtbx_GraphRecipeID.Text = dtproductiondetail(0)("lotusage_recipe_id")
+            txtbx_GraphRecipeIDRev.Text = dtproductiondetail(0)("lotusage_recipe_rev")
 
             txtbx_Graphflush1.Text = dtproductiondetail(0)("recipetable_firstflush_circuit").ToUpper
             txtbx_GraphDPTest1.Text = dtproductiondetail(0)("recipetable_firstdp_circuit").ToUpper
@@ -1653,6 +1682,24 @@ Public Class FormResultGraph
                     .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 0), 1)
                 End With
             End If
+        End If
+    End Sub
+
+    Private Sub btn_ResetZoom_Click(sender As Object, e As EventArgs) Handles btn_ResetZoom.Click
+        Dim chart As CartesianChart = CartesianChart_ResultGraph
+
+        If chart.XAxes.Count > 0 Then
+            For i As Integer = 0 To chart.XAxes.Count - 1
+                chart.XAxes(i).MinLimit = 0
+                chart.XAxes(i).MaxLimit = Nothing
+            Next
+        End If
+
+        If chart.YAxes.Count > 0 Then
+            For i As Integer = 0 To chart.YAxes.Count - 1
+                chart.YAxes(i).MinLimit = Nothing
+                chart.YAxes(i).MaxLimit = Nothing
+            Next
         End If
     End Sub
 End Class

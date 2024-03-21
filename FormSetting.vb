@@ -563,6 +563,7 @@ Public Class FormSetting
             Dim directoryExists As Boolean = Directory.Exists(txtbx_BackupPath.Text)
 
             If directoryExists = True Then
+                PublicVariables.AutoBackupSQLPath = txtbx_BackupPath.Text
                 RetainedMemory.Update(23, "AutoBackupSQLPath", txtbx_BackupPath.Text)
 
                 PublicVariables.AutoBackupSQLAtHour = CInt(CStr(ComboBox2.SelectedItem))

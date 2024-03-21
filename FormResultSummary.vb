@@ -36,6 +36,7 @@ Public Class FormResultSummary
         txtbx_ResultPartID.Text = Nothing
         txtbx_ResultConfirmation.Text = Nothing
         txtbx_ResultRecipeID.Text = Nothing
+        txtbx_ResultRecipeIDRev.Text = Nothing
         txtbx_ResultCalOffset.Text = Nothing
         txtbx_ResultTemperature.Text = Nothing
         txtbx_ResultFlowrate.Text = Nothing
@@ -646,6 +647,7 @@ Public Class FormResultSummary
 
             txtbx_ResultCalOffset.Text = dtproductiondetail(0)("lotusage_cal_diff_pressure")
             txtbx_ResultRecipeID.Text = dtproductiondetail(0)("lotusage_recipe_id")
+            txtbx_ResultRecipeIDRev.Text = dtproductiondetail(0)("lotusage_recipe_id")
 
             txtbx_Resultflush1.Text = dtproductiondetail(0)("recipetable_firstflush_circuit").ToUpper
             txtbx_ResultDPTest1.Text = dtproductiondetail(0)("recipetable_firstdp_circuit").ToUpper

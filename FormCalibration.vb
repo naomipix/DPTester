@@ -7,6 +7,7 @@ Imports SkiaSharp
 Imports LiveChartsCore.Defaults
 Imports System.Collections.ObjectModel
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
+Imports LiveChartsCore.SkiaSharpView.WinForms
 
 Public Class FormCalibration
     Dim CurrentTabPage As TabPage
@@ -37,12 +38,14 @@ Public Class FormCalibration
     Public dptest2end As Integer
     Public Cal_avginlet1 As Decimal
     Public Cal_avgoutlet1 As Decimal
+    Public Cal_avgdp1 As Decimal
     Public Cal_offset1 As Decimal
     Public Ver_avginlet1 As Decimal
     Public Ver_avgoutlet1 As Decimal
     Public Ver_avgdp1 As Decimal
     Public Cal_avginlet2 As Decimal
     Public Cal_avgoutlet2 As Decimal
+    Public Cal_avgdp2 As Decimal
     Public Cal_offset2 As Decimal
     Public Ver_avginlet2 As Decimal
     Public Ver_avgoutlet2 As Decimal
@@ -89,6 +92,13 @@ Public Class FormCalibration
     Public Drain2cycletime As Integer
     Public Drain3cycletime As Integer
 
+    ' For Chart XLimit Use
+    Private TotalCycleTime As Integer
+
+    ' For End Sequence Use
+    Dim CalEndTime As DateTime
+    Dim VerEndTime As DateTime
+
 
 
     Private Sub FormCalibration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -110,6 +120,13 @@ Public Class FormCalibration
         ' Load User Details
         lbl_Username.Text = PublicVariables.LoginUserName
         lbl_Category.Text = PublicVariables.LoginUserCategoryName
+        If PublicVariables.LoggedInIsDeveloper Then
+            Panel5.Visible = True
+            Label6.Visible = True
+        Else
+            Panel5.Visible = False
+            Label6.Visible = False
+        End If
 
         ' Initialize Defaults
         txtbx_CalLotID.Text = FormMain.txtbx_LotID.Text
@@ -154,7 +171,7 @@ Public Class FormCalibration
                             {"cal_inlet_pressure", "0"},
                             {"cal_outlet_pressure", "0"},
                             {"cal_diff_pressure", "0"},
-                             {"verify_inlet_pressure", "0"},
+                            {"verify_inlet_pressure", "0"},
                             {"verify_outlet_pressure", "0"},
                             {"verify_diff_pressure", "0"},
                             {"cal_result", "Pass"},
@@ -204,7 +221,29 @@ Public Class FormCalibration
             txtbx_CalDPTestFlowrate.Text = dtrecipetable.Rows(0)("dp_flowrate")
             txtbx_CalDPTesttime.Text = dtrecipetable.Rows(0)("dp_test_time")
             txtbx_CalDPPoints.Text = dtrecipetable.Rows(0)("dp_testpoints")
-            txtbx_CalVertol.Text = dtrecipetable.Rows(0)("verification_tolerance")
+            If True Then
+                Dim dtFilterTypeTbl As DataTable = SQL.ReadRecords($"
+                    SELECT 
+                        PartTable.filter_type_id, 
+                        FilterType.filter_type, 
+                        PartTable.jig_type_id, 
+                        JigType.jig_description 
+                    From PartTable
+                    INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id 
+                    AND PartTable.part_id='{FormMain.txtbx_PartID.Text}' 
+                    INNER JOIN JigType ON PartTable.jig_type_id = JigType.id
+                ")
+
+                If dtFilterTypeTbl.Rows.Count > 0 Then
+                    If dtFilterTypeTbl(0)("filter_type") = "Cal. Master" Then
+                        txtbx_CalVertol.Text = Nothing
+                    Else
+                        txtbx_CalVertol.Text = dtrecipetable.Rows(0)("verification_tolerance")
+                    End If
+                Else
+                    txtbx_CalVertol.Text = dtrecipetable.Rows(0)("verification_tolerance")
+                End If
+            End If
 
             prepcycletime = (dtrecipetable.Rows(0)("prep_fill_time") + dtrecipetable.Rows(0)("prep_bleed_time") + dtrecipetable.Rows(0)("prep_pressure_drop_time"))
 
@@ -294,6 +333,7 @@ Public Class FormCalibration
         '    XLabelArr(i) = i * XScaleSec
         'Next
 
+        TotalCycleTime = XLimit
         For Each LiveGraphChart In {CartesianChart_CalibrationLiveGraph} 'CartesianChartArr
             LiveGraphChart.XAxes = New ICartesianAxis() {
                 New LiveChartsCore.SkiaSharpView.Axis() With {
@@ -322,12 +362,14 @@ Public Class FormCalibration
 
         For Each LiveGraphChart In {CartesianChart_CalibrationLiveGraph} 'CartesianChartArr
             LiveGraphChart.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
-            LiveGraphChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Right
+            LiveGraphChart.TooltipTextSize = 12
+            LiveGraphChart.TooltipBackgroundPaint = New SolidColorPaint(New SKColor(0, 0, 0, 10))
+            LiveGraphChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Top 'Right
             LiveGraphChart.LegendTextSize = 12
             LiveGraphChart.ZoomMode = Measure.ZoomAndPanMode.X
 
+            '.Text = "DP Tester Live Graph",
             LiveGraphChart.Title = New LabelVisual() With {
-                .Text = "DP Tester Live Graph",
                 .TextSize = 14,
                 .Padding = New LiveChartsCore.Drawing.Padding(15),
                 .Paint = New SolidColorPaint(SKColors.Black)
@@ -337,15 +379,15 @@ Public Class FormCalibration
 
             LiveGraphChart.YAxes = New ICartesianAxis() {
                 New LiveChartsCore.SkiaSharpView.Axis() With {
-                    .Name = "Pressure (kPa)",
+                    .Name = "Differential Pressure (kPa)",
                     .NameTextSize = 14,
-                    .NamePaint = New SolidColorPaint(SKColors.Black),
+                    .NamePaint = New SolidColorPaint(SKColors.Blue),
                     .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                     .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
                     .TextSize = 12,
-                    .LabelsPaint = New SolidColorPaint(SKColors.Black),
-                    .TicksPaint = New SolidColorPaint(SKColors.Black),
-                    .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                    .LabelsPaint = New SolidColorPaint(SKColors.Blue),
+                    .TicksPaint = New SolidColorPaint(SKColors.Blue),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Blue),
                     .DrawTicksPath = True
                 },
                 New LiveChartsCore.SkiaSharpView.Axis() With {
@@ -389,6 +431,20 @@ Public Class FormCalibration
                     .DrawTicksPath = True,
                     .ShowSeparatorLines = False,
                     .Position = LiveChartsCore.Measure.AxisPosition.End
+                },
+                New LiveChartsCore.SkiaSharpView.Axis() With {
+                    .Name = "Inlet/Outlet/Back Pressure (kPa)",
+                    .NameTextSize = 14,
+                    .NamePaint = New SolidColorPaint(SKColors.Black),
+                    .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
+                    .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
+                    .TextSize = 12,
+                    .LabelsPaint = New SolidColorPaint(SKColors.Black),
+                    .TicksPaint = New SolidColorPaint(SKColors.Black),
+                    .SubticksPaint = New SolidColorPaint(SKColors.Black),
+                    .DrawTicksPath = True,
+                    .ShowSeparatorLines = False,
+                    .Position = LiveChartsCore.Measure.AxisPosition.End
                 }
             }
 
@@ -418,7 +474,7 @@ Public Class FormCalibration
                     .GeometryFill = New SolidColorPaint(SKColors.Green),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0,
+                    .ScalesYAt = 4,
                     .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
@@ -432,7 +488,7 @@ Public Class FormCalibration
                     .GeometryFill = New SolidColorPaint(SKColors.Magenta),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0,
+                    .ScalesYAt = 4,
                     .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
@@ -446,7 +502,7 @@ Public Class FormCalibration
                     .GeometryFill = New SolidColorPaint(SKColors.DarkOrange),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
-                    .ScalesYAt = 0,
+                    .ScalesYAt = 4,
                     .ScalesXAt = 0
                 },
                 New LineSeries(Of ObservablePoint)() With {
@@ -513,31 +569,43 @@ Public Class FormCalibration
         If checkbx_GraphInletPressure.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(1).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(1).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
         End If
 
         If checkbx_GraphOutletPressure.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(2).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(2).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
         End If
 
         If checkbx_GraphBP.Checked Then
             With CartesianChart_CalibrationLiveGraph
                 .Series(3).IsVisible = True
+                '.YAxes(4).IsVisible = True
             End With
         Else
             With CartesianChart_CalibrationLiveGraph
                 .Series(3).IsVisible = False
+                '.YAxes(4).IsVisible = False
             End With
+        End If
+
+        If checkbx_GraphInletPressure.Checked Or checkbx_GraphOutletPressure.Checked Or checkbx_GraphBP.Checked Then
+            CartesianChart_CalibrationLiveGraph.YAxes(4).IsVisible = True
+        Else
+            CartesianChart_CalibrationLiveGraph.YAxes(4).IsVisible = False
         End If
 
         If checkbx_GraphFlowrate.Checked Then
@@ -629,7 +697,9 @@ Public Class FormCalibration
                 dtVerification.Clear()
             End If
 
-
+            ' Alarm/Warning Counter
+            TextBox1.Text = 0
+            TextBox2.Text = 0
         End If
     End Sub
 
@@ -639,7 +709,7 @@ Public Class FormCalibration
     End Sub
 
     Private Sub tmr_Calibration_Tick(sender As Object, e As EventArgs) Handles tmr_Calibration.Tick
-        PCStatus(1)(2) = False
+        PCStatus(1)(2) = False ' Reset Calibration Start Signal
         If CalrecordValue = True And CommLost = False Then
 
             ' Rolling Average
@@ -666,7 +736,19 @@ Public Class FormCalibration
             Cal_outletpressure = AIn(10)
             Cal_flowrate = FinalFlowrate
             Cal_temperature = AIn(13)
-            Cal_dp = Cal_inletpressure - Cal_outletpressure
+
+            'Cal_dp = Cal_inletpressure - Cal_outletpressure
+            If True Then
+                Dim A As Double = 0.01257187
+                Dim B As Double = -0.005806436
+                Dim C As Double = 0.001130911
+                Dim D As Double = -0.000005723952
+                Dim T2 As Double = (Cal_temperature + 273.15) * (Cal_temperature + 273.15)
+                Dim exp As Double = Math.Exp((1 + (B * (Cal_temperature + 273.15))) / ((C * (Cal_temperature + 273.15)) + (D * T2)))
+                Dim vis As Double = A * exp
+                Cal_dp = Math.Round(CDec((1.002 / vis) * (Cal_inletpressure - Cal_outletpressure)), 2)
+            End If
+
             Cal_backpressure = AIn(1)
             Cal_pumprpm = AIn(2)
             newrw(0) = Cal_samplingtime
@@ -783,39 +865,52 @@ Public Class FormCalibration
 
         txtbx_ActCalCycletime.Text = Cal_samplingtime.ToString
         If Cal_samplingtime = CalCycletime Then
-            Dim A As Double = 0.01257187
-            Dim B As Double = -0.005806436
-            Dim C As Double = 0.001130911
-            Dim D As Double = -0.000005723952
-            Dim T2 As Double
-            Dim exp As Double
+            tmr_Calibration.Enabled = False
+
+            'Dim A As Double = 0.01257187
+            'Dim B As Double = -0.005806436
+            'Dim C As Double = 0.001130911
+            'Dim D As Double = -0.000005723952
+            'Dim T2 As Double
+            'Dim exp As Double
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
+                Dim DataCount1 As Integer = 0
+                Dim DataCount2 As Integer = 0
+
                 For i = Dptest1start To dptest1end - 1
                     Cal_avginlet1 = Cal_avginlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Cal_avgoutlet1 = Cal_avgoutlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Cal_avgdp1 = Cal_avgdp1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Differential Pressure (kPa)")
                     Cal_avgflowrate1 = Cal_avgflowrate1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Cal_avgtemperature1 = Cal_avgtemperature1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (°C)")
                     Cal_avgbackpressure1 = Cal_avgbackpressure1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Back Pressure (kPa)")
+
+                    DataCount1 += 1
                 Next
-                Cal_avginlet1 = Cal_avginlet1 / Cal_dptestpoints
-                Cal_avgoutlet1 = Cal_avgoutlet1 / Cal_dptestpoints
-                Cal_avgflowrate1 = Cal_avgflowrate1 / Cal_dptestpoints
-                Cal_avgtemperature1 = Cal_avgtemperature1 / Cal_dptestpoints
-                Cal_avgbackpressure1 = Cal_avgbackpressure1 / Cal_dptestpoints
+                Cal_avginlet1 = Cal_avginlet1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgoutlet1 = Cal_avgoutlet1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgdp1 = Cal_avgdp1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgflowrate1 = Cal_avgflowrate1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgtemperature1 = Cal_avgtemperature1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgbackpressure1 = Cal_avgbackpressure1 / DataCount1 ' Cal_dptestpoints
                 Cal_offset1 = Cal_avginlet1 - Cal_avgoutlet1
 
                 For i = Dptest2start To dptest2end - 1
                     Cal_avginlet2 = Cal_avginlet2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Cal_avgoutlet2 = Cal_avgoutlet2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Cal_avgdp1 = Cal_avgdp1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Differential Pressure (kPa)")
                     Cal_avgflowrate2 = Cal_avgflowrate2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Cal_avgtemperature2 = Cal_avgtemperature2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (°C)")
                     Cal_avgbackpressure2 = Cal_avgbackpressure2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Back Pressure (kPa)")
+
+                    DataCount2 += 1
                 Next
-                Cal_avginlet2 = Cal_avginlet2 / Cal_dptestpoints
-                Cal_avgoutlet2 = Cal_avgoutlet2 / Cal_dptestpoints
-                Cal_avgflowrate2 = Cal_avgflowrate2 / Cal_dptestpoints
-                Cal_avgtemperature2 = Cal_avgtemperature2 / Cal_dptestpoints
-                Cal_avgbackpressure2 = Cal_avgbackpressure2 / Cal_dptestpoints
+                Cal_avginlet2 = Cal_avginlet2 / DataCount2 ' Cal_dptestpoints
+                Cal_avgoutlet2 = Cal_avgoutlet2 / DataCount2 ' Cal_dptestpoints
+                Cal_avgdp2 = Cal_avgdp2 / DataCount2 ' Cal_dptestpoints
+                Cal_avgflowrate2 = Cal_avgflowrate2 / DataCount2 ' Cal_dptestpoints
+                Cal_avgtemperature2 = Cal_avgtemperature2 / DataCount2 ' Cal_dptestpoints
+                Cal_avgbackpressure2 = Cal_avgbackpressure2 / DataCount2 ' Cal_dptestpoints
                 Cal_offset2 = Cal_avginlet2 - Cal_avgoutlet2
 
                 Cal_finalInlet = ((Cal_avginlet1 + Cal_avginlet2) / 2)
@@ -824,29 +919,37 @@ Public Class FormCalibration
                 Cal_finaltemperature = (((Cal_avgtemperature1 + Cal_avgtemperature2) / 2) + 273.15)
                 Cal_finalbackpressure = ((Cal_avgbackpressure1 + Cal_avgbackpressure2) / 2)
 
-                T2 = Cal_finaltemperature * Cal_finaltemperature
-                exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
-                Viscosity = A * exp
-                Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
+                'T2 = Cal_finaltemperature * Cal_finaltemperature
+                'exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
+                'Viscosity = A * exp
+                'Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
 
+                'Cal_finaloffset = Cal_finalInlet - Cal_finalOutlet
+                Cal_finaloffset = ((Cal_avgdp1 + Cal_avgdp2) / 2)
 
 
 
             End If
 
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And Not dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
+                Dim DataCount1 As Integer = 0
+
                 For i = Dptest1start To dptest1end - 1
                     Cal_avginlet1 = Cal_avginlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Cal_avgoutlet1 = Cal_avgoutlet1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Cal_avgdp1 = Cal_avgdp1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Differential Pressure (kPa)")
                     Cal_avgflowrate1 = Cal_avgflowrate1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Cal_avgtemperature1 = Cal_avgtemperature1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (°C)")
                     Cal_avgbackpressure1 = Cal_avgbackpressure1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Back Pressure (kPa)")
+
+                    DataCount1 += 1
                 Next
-                Cal_avginlet1 = Cal_avginlet1 / Cal_dptestpoints
-                Cal_avgoutlet1 = Cal_avgoutlet1 / Cal_dptestpoints
-                Cal_avgflowrate1 = Cal_avgflowrate1 / Cal_dptestpoints
-                Cal_avgtemperature1 = Cal_avgtemperature1 / Cal_dptestpoints
-                Cal_avgbackpressure1 = Cal_avgbackpressure1 / Cal_dptestpoints
+                Cal_avginlet1 = Cal_avginlet1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgoutlet1 = Cal_avgoutlet1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgdp1 = Cal_avgdp1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgflowrate1 = Cal_avgflowrate1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgtemperature1 = Cal_avgtemperature1 / DataCount1 ' Cal_dptestpoints
+                Cal_avgbackpressure1 = Cal_avgbackpressure1 / DataCount1 ' Cal_dptestpoints
                 Cal_offset1 = Cal_avginlet1 - Cal_avgoutlet1
 
                 Cal_finalInlet = Cal_avginlet1
@@ -855,13 +958,15 @@ Public Class FormCalibration
                 Cal_finaltemperature = (Cal_avgtemperature1 + 273.15)
                 Cal_finalbackpressure = Cal_avgbackpressure1
 
-                T2 = Cal_finaltemperature * Cal_finaltemperature
-                exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
-                Viscosity = A * exp
-                Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
+                'T2 = Cal_finaltemperature * Cal_finaltemperature
+                'exp = Math.Exp((1 + (B * Cal_finaltemperature)) / ((C * Cal_finaltemperature) + (D * T2)))
+                'Viscosity = A * exp
+                'Cal_finaloffset = ((1.002 / Viscosity) * (Cal_finalInlet - Cal_finalOutlet))
 
+                'Cal_finaloffset = Cal_finalInlet - Cal_finalOutlet
+                Cal_finaloffset = Cal_avgdp1
 
-
+                'MsgBox($"Calibration Offset w/o Viscosity: {Cal_finalInlet - Cal_finalOutlet}")
             End If
             'txtbx_CalInletPressure.Text = CType(Cal_finalInlet, String)
             'txtbx_CalOutletPressure.Text = CType(Cal_finalOutlet, String)
@@ -891,8 +996,28 @@ Public Class FormCalibration
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Temperature (C) : {txtbx_CalTemperature.Text}")
 
                 Dim dtTemp As DataTable = GetVisibleColumnsDataTable(dgv_CalibrationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
-                dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
-                Dim dtcalresultexport As DataTable = dtTemp.DefaultView.ToTable
+                'dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
+                Dim dtcalresultexport As New DataTable '= dtTemp.DefaultView.ToTable
+
+                If True Then
+                    With dtTemp
+                        .Columns.Add("newSamplingTime", GetType(Decimal))
+                        .Columns("newSamplingTime").SetOrdinal(dtTemp.Columns.IndexOf("Sampling Time (s)"))
+                    End With
+
+                    For i As Integer = 0 To dtTemp.Rows.Count - 1
+                        dtTemp(i)("newSamplingTime") = CDec(dtTemp(i)("Sampling Time (s)"))
+                    Next
+
+                    With dtTemp
+                        .Columns.Remove("Sampling Time (s)")
+                        .DefaultView.Sort = "newSamplingTime ASC"
+                        .Columns("newSamplingTime").ColumnName = "Sampling Time (s)"
+                    End With
+
+                    dtcalresultexport = dtTemp.DefaultView.ToTable
+                End If
+
                 'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
 
                 ' Get Path
@@ -915,16 +1040,72 @@ Public Class FormCalibration
 
 
             PCStatus(1)(4) = True
-            VerificationRun()
-            tmr_Calibration.Enabled = False
+
+            Dim dtRecipeTbl As DataTable = SQL.ReadRecords($"
+                SELECT 
+                    PartTable.filter_type_id, 
+                    FilterType.filter_type, 
+                    PartTable.jig_type_id, 
+                    JigType.jig_description 
+                From PartTable
+                INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id 
+                AND PartTable.part_id='{FormMain.txtbx_PartID.Text}' 
+                INNER JOIN JigType ON PartTable.jig_type_id = JigType.id
+            ")
+            If dtRecipeTbl.Rows.Count > 0 Then
+                If Not dtRecipeTbl(0)("filter_type") = "Cal. Master" Then
+                    VerificationRun()
+                End If
+            Else
+                VerificationRun()
+            End If
+
+
+
+            'CalEndTime = DateTime.Now
+            'tmr_Calibration_EndSeq.Enabled = True
+            'tmr_Calibration.Enabled = False
         End If
 
     End Sub
 
+    Private Sub tmr_Calibration_EndSeq_Tick(sender As Object, e As EventArgs) Handles tmr_Calibration_EndSeq.Tick
+        Dim CalEndTimeInterval As DateTime = CalEndTime.AddSeconds(10)
+
+        If DateTime.Now > CalEndTimeInterval Then
+            tmr_Calibration_EndSeq.Enabled = False
+
+            VerificationRun()
+        Else
+            If PLCstatus(1)(4) = True Then
+                tmr_Calibration_EndSeq.Enabled = False
+
+                VerificationRun()
+            End If
+        End If
+    End Sub
+
     Private Sub btn_Verify_Click(sender As Object, e As EventArgs) Handles btn_Verify.Click
+        'VerificationRun()
 
-        VerificationRun()
-
+        Dim dtRecipeTbl As DataTable = SQL.ReadRecords($"
+                SELECT 
+                    PartTable.filter_type_id, 
+                    FilterType.filter_type, 
+                    PartTable.jig_type_id, 
+                    JigType.jig_description 
+                From PartTable
+                INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id 
+                AND PartTable.part_id='{FormMain.txtbx_PartID.Text}' 
+                INNER JOIN JigType ON PartTable.jig_type_id = JigType.id
+            ")
+        If dtRecipeTbl.Rows.Count > 0 Then
+            If Not dtRecipeTbl(0)("filter_type") = "Cal. Master" Then
+                VerificationRun()
+            End If
+        Else
+            VerificationRun()
+        End If
     End Sub
 
     Private Sub tmr_Verification_Tick(sender As Object, e As EventArgs) Handles tmr_Verification.Tick
@@ -957,7 +1138,18 @@ Public Class FormCalibration
             Ver_temperature = AIn(13)
             Ver_backpressure = AIn(1)
             Ver_pumprpm = AIn(2)
-            Ver_dp = Ver_inletpressure - Ver_outletpressure
+            'Ver_dp = Ver_inletpressure - Ver_outletpressure
+            If True Then
+                Dim A As Double = 0.01257187
+                Dim B As Double = -0.005806436
+                Dim C As Double = 0.001130911
+                Dim D As Double = -0.000005723952
+                Dim T2 As Double = (Ver_temperature + 273.15) * (Ver_temperature + 273.15)
+                Dim exp As Double = Math.Exp((1 + (B * (Cal_temperature + 273.15))) / ((C * (Cal_temperature + 273.15)) + (D * T2)))
+                Dim vis As Double = A * exp
+                Ver_dp = Math.Round(CDec((1.002 / vis) * (Ver_inletpressure - Ver_outletpressure)), 2) - CType(txtbx_CalOffset.Text, Decimal)
+            End If
+
             newrw(0) = Ver_samplingtime
             newrw(1) = Ver_temperature
             newrw(2) = Ver_flowrate
@@ -1073,16 +1265,19 @@ Public Class FormCalibration
 
         txtbx_ActVerCycletime.Text = Ver_samplingtime.ToString
         If Ver_samplingtime = CalCycletime Then
-            Dim A As Double = 0.01257187
-            Dim B As Double = -0.005806436
-            Dim C As Double = 0.001130911
-            Dim D As Double = -0.000005723952
-            Dim T2 As Double
-            Dim exp As Double
+            tmr_Verification.Enabled = False
+
+            'Dim A As Double = 0.01257187
+            'Dim B As Double = -0.005806436
+            'Dim C As Double = 0.001130911
+            'Dim D As Double = -0.000005723952
+            'Dim T2 As Double
+            'Dim exp As Double
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
                 For i = Dptest1start To dptest1end - 1
                     Ver_avginlet1 = Ver_avginlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Ver_avgoutlet1 = Ver_avgoutlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Ver_avgdp1 = Ver_avgdp1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Differential Pressure (kPa)")
                     Ver_avgflowrate1 = Ver_avgflowrate1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Ver_avgtemperature1 = Ver_avgtemperature1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Temperature (°C)")
                     Ver_avgbackpressure1 = Ver_avgbackpressure1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Back Pressure (kPa)")
@@ -1091,24 +1286,27 @@ Public Class FormCalibration
                 Next
                 Ver_avginlet1 = Ver_avginlet1 / Cal_dptestpoints
                 Ver_avgoutlet1 = Ver_avgoutlet1 / Cal_dptestpoints
+                Ver_avgdp1 = Ver_avgdp1 / Cal_dptestpoints
                 Ver_avgflowrate1 = Ver_avgflowrate1 / Cal_dptestpoints
                 Ver_avgtemperature1 = Ver_avgtemperature1 / Cal_dptestpoints
                 Ver_avgbackpressure1 = Ver_avgbackpressure1 / Cal_dptestpoints
-                Ver_avgdp1 = Ver_avginlet1 - Ver_avgoutlet1
+                'Ver_avgdp1 = Ver_avginlet1 - Ver_avgoutlet1
 
                 For i = Dptest2start To dptest2end - 1
                     Ver_avginlet2 = Ver_avginlet2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Ver_avgoutlet2 = Ver_avgoutlet2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Ver_avgdp2 = Ver_avgdp2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Differential Pressure (kPa)")
                     Ver_avgflowrate2 = Ver_avgflowrate2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Ver_avgtemperature2 = Ver_avgtemperature2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Temperature (°C)")
                     Ver_avgbackpressure2 = Ver_avgbackpressure2 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Back Pressure (kPa)")
                 Next
                 Ver_avginlet2 = Ver_avginlet2 / Cal_dptestpoints
                 Ver_avgoutlet2 = Ver_avgoutlet2 / Cal_dptestpoints
+                Ver_avgdp2 = Ver_avgdp2 / Cal_dptestpoints
                 Ver_avgflowrate2 = Ver_avgflowrate2 / Cal_dptestpoints
                 Ver_avgtemperature2 = Ver_avgtemperature2 / Cal_dptestpoints
                 Ver_avgbackpressure2 = Ver_avgbackpressure2 / Cal_dptestpoints
-                Ver_avgdp2 = Ver_avginlet2 - Ver_avgoutlet2
+                'Ver_avgdp2 = Ver_avginlet2 - Ver_avgoutlet2
 
                 Ver_finalinlet = ((Ver_avginlet1 + Ver_avginlet2) / 2)
                 Ver_finaloutlet = ((Ver_avgoutlet1 + Ver_avgoutlet2) / 2)
@@ -1116,12 +1314,13 @@ Public Class FormCalibration
                 Ver_finaltemperature = (((Ver_avgtemperature1 + Ver_avgtemperature2) / 2) + 273.15)
                 Ver_finalbackpressure = ((Ver_avgbackpressure1 + Ver_avgbackpressure2) / 2)
 
-                T2 = Ver_finaltemperature * Ver_finaltemperature
-                exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
-                Viscosity = A * exp
-                Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet)) - CType(txtbx_CalOffset.Text, Decimal)
+                'T2 = Ver_finaltemperature * Ver_finaltemperature
+                'exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
+                'Viscosity = A * exp
+                'Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet)) - CType(txtbx_CalOffset.Text, Decimal)
 
-
+                'Ver_finaldp = (Ver_finalinlet - Ver_finaloutlet) - CType(txtbx_CalOffset.Text, Decimal)
+                Ver_finaldp = ((Ver_avgdp1 + Ver_avgdp2) / 2) '- CType(txtbx_CalOffset.Text, Decimal)
 
             End If
 
@@ -1129,16 +1328,18 @@ Public Class FormCalibration
                 For i = Dptest1start To dptest1end - 1
                     Ver_avginlet1 = Ver_avginlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Ver_avgoutlet1 = Ver_avgoutlet1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
+                    Ver_avgdp1 = Ver_avgdp1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Differential Pressure (kPa)")
                     Ver_avgflowrate1 = Ver_avgflowrate1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Ver_avgtemperature1 = Ver_avgtemperature1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Temperature (°C)")
                     Ver_avgbackpressure1 = Ver_avgbackpressure1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Back Pressure (kPa)")
                 Next
                 Ver_avginlet1 = Ver_avginlet1 / Cal_dptestpoints
                 Ver_avgoutlet1 = Ver_avgoutlet1 / Cal_dptestpoints
+                Ver_avgdp1 = Ver_avgdp1 / Cal_dptestpoints
                 Ver_avgflowrate1 = Ver_avgflowrate1 / Cal_dptestpoints
                 Ver_avgtemperature1 = Ver_avgtemperature1 / Cal_dptestpoints
                 Ver_avgbackpressure1 = Ver_avgbackpressure1 / Cal_dptestpoints
-                Ver_avgdp1 = Ver_avginlet1 - Ver_avgoutlet1
+                'Ver_avgdp1 = Ver_avginlet1 - Ver_avgoutlet1
 
 
                 Ver_finalinlet = Ver_avginlet1
@@ -1148,12 +1349,13 @@ Public Class FormCalibration
                 Ver_finalflowrate = Ver_avgflowrate1
                 Ver_finaltemperature = (Ver_avgtemperature1 + 273.15)
                 Ver_finalbackpressure = Ver_avgbackpressure1
-                T2 = Ver_finaltemperature * Ver_finaltemperature
-                exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
-                Viscosity = A * exp
-                Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet)) - CType(txtbx_CalOffset.Text, Decimal)
+                'T2 = Ver_finaltemperature * Ver_finaltemperature
+                'exp = Math.Exp((1 + (B * Ver_finaltemperature)) / ((C * Ver_finaltemperature) + (D * T2)))
+                'Viscosity = A * exp
+                'Ver_finaldp = ((1.002 / Viscosity) * (Ver_finalinlet - Ver_finaloutlet)) - CType(txtbx_CalOffset.Text, Decimal)
 
-
+                'Ver_finaldp = (Ver_finalinlet - Ver_finaloutlet) - CType(txtbx_CalOffset.Text, Decimal)
+                Ver_finaldp = Ver_avgdp1 '- CType(txtbx_CalOffset.Text, Decimal)
 
             End If
             'txtbx_VerInletPressure.Text = CType(Ver_finalinlet, String)
@@ -1188,8 +1390,28 @@ Public Class FormCalibration
 
 
                 Dim dtTemp As DataTable = GetVisibleColumnsDataTable(dgv_VerificationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
-                dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
-                Dim dtVerresultexport As DataTable = dtTemp.DefaultView.ToTable
+                'dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
+                Dim dtVerresultexport As New DataTable '= dtTemp.DefaultView.ToTable
+
+                If True Then
+                    With dtTemp
+                        .Columns.Add("newSamplingTime", GetType(Decimal))
+                        .Columns("newSamplingTime").SetOrdinal(dtTemp.Columns.IndexOf("Sampling Time (s)"))
+                    End With
+
+                    For i As Integer = 0 To dtTemp.Rows.Count - 1
+                        dtTemp(i)("newSamplingTime") = CDec(dtTemp(i)("Sampling Time (s)"))
+                    Next
+
+                    With dtTemp
+                        .Columns.Remove("Sampling Time (s)")
+                        .DefaultView.Sort = "newSamplingTime ASC"
+                        .Columns("newSamplingTime").ColumnName = "Sampling Time (s)"
+                    End With
+
+                    dtVerresultexport = dtTemp.DefaultView.ToTable
+                End If
+
                 'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
 
                 ' Get Path
@@ -1218,10 +1440,26 @@ Public Class FormCalibration
         End If
     End Sub
 
+    Private Sub tmr_Verification_EndSeq_Tick(sender As Object, e As EventArgs) Handles tmr_Verification_EndSeq.Tick
+        Dim VerEndTimeInterval As DateTime = VerEndTime.AddSeconds(10)
+
+        If DateTime.Now > VerEndTimeInterval Then
+            tmr_Verification_EndSeq.Enabled = False
+
+            txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+        Else
+            If PLCstatus(1)(5) = True Then
+                tmr_Verification_EndSeq.Enabled = False
+
+                txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+            End If
+        End If
+    End Sub
+
     Private Sub txtbx_VerDP_TextChanged(sender As Object, e As EventArgs) Handles txtbx_VerDP.TextChanged
         Dim CurrentDate As DateTime = DateTime.Now
 
-        tmr_Verification.Enabled = False
+        'tmr_Verification.Enabled = False
         If IsNumeric(txtbx_VerDP.Text) Then
             If IsNumeric(txtbx_CalOffset.Text) Then
                 Dim min As Decimal = 0 ' CType(txtbx_CalOffset.Text, Decimal) - vertol
@@ -1262,7 +1500,7 @@ Public Class FormCalibration
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                         {"recipe_id", txtbx_RecipeID.Text},
                         {"recipe_rev", txtbx_RecipeRev.Text},
-                        {"calibration_time", CurrentDate},
+                        {"calibration_time", txtbx_CalDate.Text},
                         {"cal_inlet_pressure", Cal_finalInlet.ToString},
                         {"cal_outlet_pressure", Cal_finalOutlet.ToString},
                         {"cal_diff_pressure", txtbx_CalOffset.Text},
@@ -1318,8 +1556,8 @@ Public Class FormCalibration
                         PCStatus(1)(6) = True
                         If onContinue = True Then
                             Dim calstatusparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", txtbx_CalResult.Text}
-                        }
+                                {"retained_value", txtbx_CalResult.Text}
+                            }
                             Dim calstatuscondition As String = $"id='30'"
                             If SQL.UpdateRecord($"[0_RetainedMemory]", calstatusparameter, calstatuscondition) = 1 Then
                                 onContinue = True
@@ -1331,8 +1569,8 @@ Public Class FormCalibration
 
                         If onContinue = True Then
                             Dim caloffsetparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", txtbx_CalOffset.Text}
-                        }
+                                {"retained_value", txtbx_CalOffset.Text}
+                            }
                             Dim caloffsetcondition As String = $"id='31'"
                             If SQL.UpdateRecord($"[0_RetainedMemory]", caloffsetparameter, caloffsetcondition) = 1 Then
                                 onContinue = True
@@ -1344,8 +1582,8 @@ Public Class FormCalibration
 
                         If onContinue = True Then
                             Dim caldatetimeparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", CStr(txtbx_CalDate.Text)}
-                        }
+                                {"retained_value", CStr(txtbx_CalDate.Text)}
+                            }
                             Dim caldatetimecondition As String = $"id='32'"
                             If SQL.UpdateRecord($"[0_RetainedMemory]", caldatetimeparameter, caldatetimecondition) = 1 Then
                                 onContinue = True
@@ -1435,9 +1673,11 @@ Public Class FormCalibration
 
                 Cal_avginlet1 = 0
                 Cal_avgoutlet1 = 0
+                Cal_avgdp1 = 0
                 Cal_offset1 = 0
                 Cal_avginlet2 = 0
                 Cal_avgoutlet2 = 0
+                Cal_avgdp2 = 0
                 Cal_offset2 = 0
                 Cal_finalInlet = 0
                 Cal_finalOutlet = 0
@@ -2160,6 +2400,7 @@ Public Class FormCalibration
                 checkbx_GraphRPM.Checked = True
                 'SetVisibleLineSeries()
 
+                tmr_Calibration_EndSeq.Enabled = False
                 tmr_Calibration.Enabled = True
             End If
         Else
@@ -2222,6 +2463,7 @@ Public Class FormCalibration
                 CalibrateChartFLWRValue.Clear()
                 CalibrateChartTempValue.Clear()
 
+                tmr_Verification_EndSeq.Enabled = False
                 tmr_Verification.Enabled = True
             End If
         Else
@@ -2293,6 +2535,24 @@ Public Class FormCalibration
                     .CrosshairPaint = New SolidColorPaint(New SKColor(25, 130, 246, 0), 1)
                 End With
             End If
+        End If
+    End Sub
+
+    Private Sub btn_ResetZoom_Click(sender As Object, e As EventArgs) Handles btn_ResetZoom.Click
+        Dim chart As CartesianChart = CartesianChart_CalibrationLiveGraph
+
+        If chart.XAxes.Count > 0 Then
+            For i As Integer = 0 To chart.XAxes.Count - 1
+                chart.XAxes(i).MinLimit = 0
+                chart.XAxes(i).MaxLimit = TotalCycleTime
+            Next
+        End If
+
+        If chart.YAxes.Count > 0 Then
+            For i As Integer = 0 To chart.YAxes.Count - 1
+                chart.YAxes(i).MinLimit = Nothing
+                chart.YAxes(i).MaxLimit = Nothing
+            Next
         End If
     End Sub
 End Class
