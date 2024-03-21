@@ -24,8 +24,8 @@ Partial Class FormCalibration
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCalibration))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -846,10 +846,11 @@ Partial Class FormCalibration
         'checkbx_GraphRPM
         '
         Me.checkbx_GraphRPM.AutoSize = True
-        Me.checkbx_GraphRPM.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphRPM.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphRPM.ForeColor = System.Drawing.Color.Orange
         Me.checkbx_GraphRPM.Location = New System.Drawing.Point(1102, 22)
         Me.checkbx_GraphRPM.Name = "checkbx_GraphRPM"
-        Me.checkbx_GraphRPM.Size = New System.Drawing.Size(91, 21)
+        Me.checkbx_GraphRPM.Size = New System.Drawing.Size(95, 21)
         Me.checkbx_GraphRPM.TabIndex = 80
         Me.checkbx_GraphRPM.Text = "Pump RPM"
         Me.checkbx_GraphRPM.UseVisualStyleBackColor = True
@@ -857,10 +858,11 @@ Partial Class FormCalibration
         'checkbx_GraphTemperature
         '
         Me.checkbx_GraphTemperature.AutoSize = True
-        Me.checkbx_GraphTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphTemperature.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphTemperature.ForeColor = System.Drawing.Color.Red
         Me.checkbx_GraphTemperature.Location = New System.Drawing.Point(945, 22)
         Me.checkbx_GraphTemperature.Name = "checkbx_GraphTemperature"
-        Me.checkbx_GraphTemperature.Size = New System.Drawing.Size(101, 21)
+        Me.checkbx_GraphTemperature.Size = New System.Drawing.Size(104, 21)
         Me.checkbx_GraphTemperature.TabIndex = 81
         Me.checkbx_GraphTemperature.Text = "Temperature"
         Me.checkbx_GraphTemperature.UseVisualStyleBackColor = True
@@ -868,10 +870,11 @@ Partial Class FormCalibration
         'checkbx_GraphFlowrate
         '
         Me.checkbx_GraphFlowrate.AutoSize = True
-        Me.checkbx_GraphFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphFlowrate.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphFlowrate.ForeColor = System.Drawing.Color.Brown
         Me.checkbx_GraphFlowrate.Location = New System.Drawing.Point(797, 22)
         Me.checkbx_GraphFlowrate.Name = "checkbx_GraphFlowrate"
-        Me.checkbx_GraphFlowrate.Size = New System.Drawing.Size(76, 21)
+        Me.checkbx_GraphFlowrate.Size = New System.Drawing.Size(79, 21)
         Me.checkbx_GraphFlowrate.TabIndex = 79
         Me.checkbx_GraphFlowrate.Text = "Flowrate"
         Me.checkbx_GraphFlowrate.UseVisualStyleBackColor = True
@@ -879,10 +882,11 @@ Partial Class FormCalibration
         'checkbx_GraphBP
         '
         Me.checkbx_GraphBP.AutoSize = True
-        Me.checkbx_GraphBP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphBP.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphBP.ForeColor = System.Drawing.Color.DarkOrange
         Me.checkbx_GraphBP.Location = New System.Drawing.Point(619, 22)
         Me.checkbx_GraphBP.Name = "checkbx_GraphBP"
-        Me.checkbx_GraphBP.Size = New System.Drawing.Size(107, 21)
+        Me.checkbx_GraphBP.Size = New System.Drawing.Size(111, 21)
         Me.checkbx_GraphBP.TabIndex = 77
         Me.checkbx_GraphBP.Text = "Back Pressure"
         Me.checkbx_GraphBP.UseVisualStyleBackColor = True
@@ -890,10 +894,11 @@ Partial Class FormCalibration
         'checkbx_GraphOutletPressure
         '
         Me.checkbx_GraphOutletPressure.AutoSize = True
-        Me.checkbx_GraphOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphOutletPressure.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphOutletPressure.ForeColor = System.Drawing.Color.Magenta
         Me.checkbx_GraphOutletPressure.Location = New System.Drawing.Point(433, 22)
         Me.checkbx_GraphOutletPressure.Name = "checkbx_GraphOutletPressure"
-        Me.checkbx_GraphOutletPressure.Size = New System.Drawing.Size(116, 21)
+        Me.checkbx_GraphOutletPressure.Size = New System.Drawing.Size(121, 21)
         Me.checkbx_GraphOutletPressure.TabIndex = 78
         Me.checkbx_GraphOutletPressure.Text = "Outlet Pressure"
         Me.checkbx_GraphOutletPressure.UseVisualStyleBackColor = True
@@ -901,10 +906,11 @@ Partial Class FormCalibration
         'checkbx_GraphInletPressure
         '
         Me.checkbx_GraphInletPressure.AutoSize = True
-        Me.checkbx_GraphInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphInletPressure.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphInletPressure.ForeColor = System.Drawing.Color.Green
         Me.checkbx_GraphInletPressure.Location = New System.Drawing.Point(257, 22)
         Me.checkbx_GraphInletPressure.Name = "checkbx_GraphInletPressure"
-        Me.checkbx_GraphInletPressure.Size = New System.Drawing.Size(105, 21)
+        Me.checkbx_GraphInletPressure.Size = New System.Drawing.Size(110, 21)
         Me.checkbx_GraphInletPressure.TabIndex = 76
         Me.checkbx_GraphInletPressure.Text = "Inlet Pressure"
         Me.checkbx_GraphInletPressure.UseVisualStyleBackColor = True
@@ -912,10 +918,11 @@ Partial Class FormCalibration
         'checkbx_GraphDP
         '
         Me.checkbx_GraphDP.AutoSize = True
-        Me.checkbx_GraphDP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphDP.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphDP.ForeColor = System.Drawing.Color.Blue
         Me.checkbx_GraphDP.Location = New System.Drawing.Point(47, 22)
         Me.checkbx_GraphDP.Name = "checkbx_GraphDP"
-        Me.checkbx_GraphDP.Size = New System.Drawing.Size(144, 21)
+        Me.checkbx_GraphDP.Size = New System.Drawing.Size(148, 21)
         Me.checkbx_GraphDP.TabIndex = 75
         Me.checkbx_GraphDP.Text = "Differential Pressure"
         Me.checkbx_GraphDP.UseVisualStyleBackColor = True
@@ -923,10 +930,10 @@ Partial Class FormCalibration
         'CartesianChart_CalibrationLiveGraph
         '
         Me.CartesianChart_CalibrationLiveGraph.BackColor = System.Drawing.Color.AliceBlue
-        Me.CartesianChart_CalibrationLiveGraph.Location = New System.Drawing.Point(15, 22)
+        Me.CartesianChart_CalibrationLiveGraph.Location = New System.Drawing.Point(15, 51)
         Me.CartesianChart_CalibrationLiveGraph.Margin = New System.Windows.Forms.Padding(5)
         Me.CartesianChart_CalibrationLiveGraph.Name = "CartesianChart_CalibrationLiveGraph"
-        Me.CartesianChart_CalibrationLiveGraph.Size = New System.Drawing.Size(1206, 560)
+        Me.CartesianChart_CalibrationLiveGraph.Size = New System.Drawing.Size(1206, 531)
         Me.CartesianChart_CalibrationLiveGraph.TabIndex = 12
         '
         'tabpg_TableView
@@ -961,14 +968,14 @@ Partial Class FormCalibration
         Me.dgv_CalibrationResult.AllowUserToDeleteRows = False
         Me.dgv_CalibrationResult.AllowUserToResizeColumns = False
         Me.dgv_CalibrationResult.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle11
         Me.dgv_CalibrationResult.ColumnHeadersHeight = 60
         Me.dgv_CalibrationResult.Location = New System.Drawing.Point(3, 36)
         Me.dgv_CalibrationResult.Name = "dgv_CalibrationResult"
@@ -982,14 +989,14 @@ Partial Class FormCalibration
         Me.dgv_VerificationResult.AllowUserToDeleteRows = False
         Me.dgv_VerificationResult.AllowUserToResizeColumns = False
         Me.dgv_VerificationResult.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.dgv_VerificationResult.ColumnHeadersHeight = 60
         Me.dgv_VerificationResult.Location = New System.Drawing.Point(633, 36)
         Me.dgv_VerificationResult.Name = "dgv_VerificationResult"

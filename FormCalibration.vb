@@ -364,8 +364,8 @@ Public Class FormCalibration
             LiveGraphChart.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
             LiveGraphChart.TooltipTextSize = 12
             LiveGraphChart.TooltipBackgroundPaint = New SolidColorPaint(New SKColor(0, 0, 0, 10))
-            LiveGraphChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Top 'Right
-            LiveGraphChart.LegendTextSize = 12
+            'LiveGraphChart.LegendPosition = LiveChartsCore.Measure.LegendPosition.Top 'Right
+            'LiveGraphChart.LegendTextSize = 12
             LiveGraphChart.ZoomMode = Measure.ZoomAndPanMode.X
 
             '.Text = "DP Tester Live Graph",
@@ -2184,7 +2184,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "Prep - Fill",
+                            .Label = "", ' "Prep - Fill",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2196,7 +2196,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "Bleed",
+                            .Label = "", ' "Bleed",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2208,7 +2208,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "Drop",
+                            .Label = "", ' "Drop",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2230,7 +2230,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "Flush 1 - Stab",
+                            .Label = "", ' "Flush 1 - Stab",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2242,7 +2242,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "Test",
+                            .Label = "", ' "Test",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2264,7 +2264,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "DP 1 - Stab",
+                            .Label = "", ' "DP 1 - Stab",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2276,7 +2276,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "Test",
+                            .Label = "", ' "Test",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2298,7 +2298,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "Flush 2 - Stab",
+                            .Label = "", ' "Flush 2 - Stab",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2310,7 +2310,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "Test",
+                            .Label = "", ' "Test",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2332,7 +2332,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "DP 2 - Stab",
+                            .Label = "", ' "DP 2 - Stab",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2344,7 +2344,7 @@ Public Class FormCalibration
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "Test",
+                            .Label = "", ' "Test",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -2354,7 +2354,7 @@ Public Class FormCalibration
                             .Xi = Drain1Start,
                             .Xj = Drain2Start,
                             .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
-                            .Label = "Drain 1",
+                            .Label = "", ' "Drain 1",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
                             .Stroke = New SolidColorPaint With {
@@ -2367,7 +2367,7 @@ Public Class FormCalibration
                             .Xi = Drain2Start,
                             .Xj = Drain3Start,
                             .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
-                            .Label = "Drain 2",
+                            .Label = "", ' "Drain 2",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
                             .Stroke = New SolidColorPaint With {
@@ -2380,7 +2380,7 @@ Public Class FormCalibration
                             .Xi = Drain3Start,
                             .Xj = CycleTimeTotal,
                             .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
-                            .Label = "Drain 3",
+                            .Label = "", ' "Drain 3",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
                             .Stroke = New SolidColorPaint With {
