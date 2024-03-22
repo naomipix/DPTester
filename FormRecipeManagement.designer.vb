@@ -319,6 +319,8 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -498,7 +500,7 @@ Partial Class FormRecipeManagement
         Me.Panel5.Controls.Add(Me.ComboBox1)
         Me.Panel5.Controls.Add(Me.Label3)
         Me.Panel5.Controls.Add(Me.Label4)
-        Me.Panel5.Location = New System.Drawing.Point(3, 488)
+        Me.Panel5.Location = New System.Drawing.Point(3, 486)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(556, 200)
         Me.Panel5.TabIndex = 4
@@ -582,7 +584,7 @@ Partial Class FormRecipeManagement
         Me.panel_RecipeDeletion.Controls.Add(Me.dsp_RcpDeleteFilterType)
         Me.panel_RecipeDeletion.Location = New System.Drawing.Point(3, 227)
         Me.panel_RecipeDeletion.Name = "panel_RecipeDeletion"
-        Me.panel_RecipeDeletion.Size = New System.Drawing.Size(556, 257)
+        Me.panel_RecipeDeletion.Size = New System.Drawing.Size(556, 255)
         Me.panel_RecipeDeletion.TabIndex = 3
         '
         'dsp_RecipeDeletion
@@ -612,7 +614,7 @@ Partial Class FormRecipeManagement
         Me.btn_RecipeDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_RecipeDelete.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_RecipeDelete.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_RecipeDelete.Location = New System.Drawing.Point(420, 118)
+        Me.btn_RecipeDelete.Location = New System.Drawing.Point(420, 86)
         Me.btn_RecipeDelete.Name = "btn_RecipeDelete"
         Me.btn_RecipeDelete.Size = New System.Drawing.Size(110, 60)
         Me.btn_RecipeDelete.TabIndex = 20
@@ -976,12 +978,12 @@ Partial Class FormRecipeManagement
         'tabpg_Edit
         '
         Me.tabpg_Edit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabpg_Edit.Controls.Add(Me.Panel18)
         Me.tabpg_Edit.Controls.Add(Me.Panel7)
         Me.tabpg_Edit.Controls.Add(Me.Panel2)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDrain3)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDrain2)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditFlush2)
-        Me.tabpg_Edit.Controls.Add(Me.Panel18)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDrain1)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDPTest1)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditFlush1)
@@ -996,6 +998,7 @@ Partial Class FormRecipeManagement
         '
         'Panel7
         '
+        Me.Panel7.BackColor = System.Drawing.Color.AliceBlue
         Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel7.Controls.Add(Me.Label14)
         Me.Panel7.Controls.Add(Me.Label15)
@@ -1004,19 +1007,19 @@ Partial Class FormRecipeManagement
         Me.Panel7.Controls.Add(Me.ComboBox7)
         Me.Panel7.Controls.Add(Me.ComboBox8)
         Me.Panel7.Controls.Add(Me.ComboBox9)
-        Me.Panel7.Location = New System.Drawing.Point(575, 591)
+        Me.Panel7.Location = New System.Drawing.Point(1224, 579)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(307, 170)
+        Me.Panel7.Size = New System.Drawing.Size(631, 170)
         Me.Panel7.TabIndex = 37
         '
         'Label14
         '
         Me.Label14.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.Label14.Location = New System.Drawing.Point(49, 5)
+        Me.Label14.Location = New System.Drawing.Point(3, 5)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(200, 40)
+        Me.Label14.Size = New System.Drawing.Size(623, 40)
         Me.Label14.TabIndex = 34
-        Me.Label14.Text = "Fitting Type"
+        Me.Label14.Text = "Changeover Parts"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label15
@@ -1100,7 +1103,7 @@ Partial Class FormRecipeManagement
         Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepFlow)
         Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepBleed)
         Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepFill)
-        Me.Panel2.Location = New System.Drawing.Point(575, 135)
+        Me.Panel2.Location = New System.Drawing.Point(575, 171)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(307, 450)
         Me.Panel2.TabIndex = 34
@@ -1276,7 +1279,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditDrain3.Controls.Add(Me.txtbx_RcpEditDrain3Pressure)
         Me.panel_RcpEditDrain3.Controls.Add(Me.dsp_RcpEditDrain3Pressure)
         Me.panel_RcpEditDrain3.Controls.Add(Me.checkbx_EditDrain3)
-        Me.panel_RcpEditDrain3.Location = New System.Drawing.Point(1548, 491)
+        Me.panel_RcpEditDrain3.Location = New System.Drawing.Point(1548, 401)
         Me.panel_RcpEditDrain3.Name = "panel_RcpEditDrain3"
         Me.panel_RcpEditDrain3.Size = New System.Drawing.Size(307, 172)
         Me.panel_RcpEditDrain3.TabIndex = 30
@@ -1338,7 +1341,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditDrain2.Controls.Add(Me.txtbx_RcpEditDrain2Pressure)
         Me.panel_RcpEditDrain2.Controls.Add(Me.dsp_RcpEditDrain2Pressure)
         Me.panel_RcpEditDrain2.Controls.Add(Me.checkbx_EditDrain2)
-        Me.panel_RcpEditDrain2.Location = New System.Drawing.Point(1549, 313)
+        Me.panel_RcpEditDrain2.Location = New System.Drawing.Point(1549, 223)
         Me.panel_RcpEditDrain2.Name = "panel_RcpEditDrain2"
         Me.panel_RcpEditDrain2.Size = New System.Drawing.Size(307, 172)
         Me.panel_RcpEditDrain2.TabIndex = 31
@@ -1406,7 +1409,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditFlush2.Controls.Add(Me.dsp_RcpEditFlush2FlowTol)
         Me.panel_RcpEditFlush2.Controls.Add(Me.txtbx_RcpEditFlush2Flow)
         Me.panel_RcpEditFlush2.Controls.Add(Me.dsp_RcpEditFlush2Flow)
-        Me.panel_RcpEditFlush2.Location = New System.Drawing.Point(900, 451)
+        Me.panel_RcpEditFlush2.Location = New System.Drawing.Point(900, 361)
         Me.panel_RcpEditFlush2.Name = "panel_RcpEditFlush2"
         Me.panel_RcpEditFlush2.Size = New System.Drawing.Size(307, 310)
         Me.panel_RcpEditFlush2.TabIndex = 27
@@ -1517,17 +1520,18 @@ Partial Class FormRecipeManagement
         'Panel18
         '
         Me.Panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel18.Controls.Add(Me.Label19)
         Me.Panel18.Controls.Add(Me.txtbx_RcpEditVerTol)
         Me.Panel18.Controls.Add(Me.dsp_RcpEditVerTol)
         Me.Panel18.Location = New System.Drawing.Point(575, 45)
         Me.Panel18.Name = "Panel18"
-        Me.Panel18.Size = New System.Drawing.Size(1280, 80)
+        Me.Panel18.Size = New System.Drawing.Size(307, 120)
         Me.Panel18.TabIndex = 33
         '
         'txtbx_RcpEditVerTol
         '
         Me.txtbx_RcpEditVerTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditVerTol.Location = New System.Drawing.Point(183, 30)
+        Me.txtbx_RcpEditVerTol.Location = New System.Drawing.Point(183, 66)
         Me.txtbx_RcpEditVerTol.MaxLength = 3
         Me.txtbx_RcpEditVerTol.Name = "txtbx_RcpEditVerTol"
         Me.txtbx_RcpEditVerTol.Size = New System.Drawing.Size(100, 25)
@@ -1535,7 +1539,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditVerTol
         '
-        Me.dsp_RcpEditVerTol.Location = New System.Drawing.Point(17, 20)
+        Me.dsp_RcpEditVerTol.Location = New System.Drawing.Point(17, 56)
         Me.dsp_RcpEditVerTol.Name = "dsp_RcpEditVerTol"
         Me.dsp_RcpEditVerTol.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditVerTol.TabIndex = 6
@@ -1550,7 +1554,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditDrain1.Controls.Add(Me.txtbx_RcpEditDrain1Pressure)
         Me.panel_RcpEditDrain1.Controls.Add(Me.dsp_RcpEditDrain1Pressure)
         Me.panel_RcpEditDrain1.Controls.Add(Me.checkbx_EditDrain1)
-        Me.panel_RcpEditDrain1.Location = New System.Drawing.Point(1548, 135)
+        Me.panel_RcpEditDrain1.Location = New System.Drawing.Point(1548, 45)
         Me.panel_RcpEditDrain1.Name = "panel_RcpEditDrain1"
         Me.panel_RcpEditDrain1.Size = New System.Drawing.Size(307, 172)
         Me.panel_RcpEditDrain1.TabIndex = 28
@@ -1625,7 +1629,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPFlowTol)
         Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPFlow)
         Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPFlow)
-        Me.panel_RcpEditDPTest1.Location = New System.Drawing.Point(1224, 135)
+        Me.panel_RcpEditDPTest1.Location = New System.Drawing.Point(1224, 45)
         Me.panel_RcpEditDPTest1.Name = "panel_RcpEditDPTest1"
         Me.panel_RcpEditDPTest1.Size = New System.Drawing.Size(307, 528)
         Me.panel_RcpEditDPTest1.TabIndex = 29
@@ -1814,7 +1818,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditFlush1.Controls.Add(Me.txtbx_RcpEditFlush1Flow)
         Me.panel_RcpEditFlush1.Controls.Add(Me.checkbx_EditFlush1)
         Me.panel_RcpEditFlush1.Controls.Add(Me.dsp_RcpEditFlush1Flow)
-        Me.panel_RcpEditFlush1.Location = New System.Drawing.Point(900, 135)
+        Me.panel_RcpEditFlush1.Location = New System.Drawing.Point(900, 45)
         Me.panel_RcpEditFlush1.Name = "panel_RcpEditFlush1"
         Me.panel_RcpEditFlush1.Size = New System.Drawing.Size(307, 310)
         Me.panel_RcpEditFlush1.TabIndex = 26
@@ -1979,7 +1983,7 @@ Partial Class FormRecipeManagement
         Me.btn_RcpDuplicate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_RcpDuplicate.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_RcpDuplicate.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_RcpDuplicate.Location = New System.Drawing.Point(423, 86)
+        Me.btn_RcpDuplicate.Location = New System.Drawing.Point(420, 86)
         Me.btn_RcpDuplicate.Name = "btn_RcpDuplicate"
         Me.btn_RcpDuplicate.Size = New System.Drawing.Size(110, 60)
         Me.btn_RcpDuplicate.TabIndex = 105
@@ -2089,7 +2093,7 @@ Partial Class FormRecipeManagement
         'Label16
         '
         Me.Label16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(441, 71)
+        Me.Label16.Location = New System.Drawing.Point(435, 72)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(80, 25)
         Me.Label16.TabIndex = 106
@@ -2102,7 +2106,7 @@ Partial Class FormRecipeManagement
         Me.btn_RcpEdit.BackgroundImage = CType(resources.GetObject("btn_RcpEdit.BackgroundImage"), System.Drawing.Image)
         Me.btn_RcpEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_RcpEdit.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_RcpEdit.Location = New System.Drawing.Point(441, 99)
+        Me.btn_RcpEdit.Location = New System.Drawing.Point(435, 100)
         Me.btn_RcpEdit.Name = "btn_RcpEdit"
         Me.btn_RcpEdit.Size = New System.Drawing.Size(80, 80)
         Me.btn_RcpEdit.TabIndex = 14
@@ -2182,12 +2186,12 @@ Partial Class FormRecipeManagement
         'tabpg_Create
         '
         Me.tabpg_Create.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabpg_Create.Controls.Add(Me.Panel8)
         Me.tabpg_Create.Controls.Add(Me.Panel4)
         Me.tabpg_Create.Controls.Add(Me.Panel3)
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateDrain3)
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateDrain2)
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateFlush2)
-        Me.tabpg_Create.Controls.Add(Me.Panel8)
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateDrain1)
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateDPTest1)
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateFlush1)
@@ -2202,6 +2206,7 @@ Partial Class FormRecipeManagement
         '
         'Panel4
         '
+        Me.Panel4.BackColor = System.Drawing.Color.AliceBlue
         Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel4.Controls.Add(Me.Label13)
         Me.Panel4.Controls.Add(Me.Label12)
@@ -2210,19 +2215,19 @@ Partial Class FormRecipeManagement
         Me.Panel4.Controls.Add(Me.ComboBox6)
         Me.Panel4.Controls.Add(Me.ComboBox4)
         Me.Panel4.Controls.Add(Me.ComboBox3)
-        Me.Panel4.Location = New System.Drawing.Point(575, 591)
+        Me.Panel4.Location = New System.Drawing.Point(1224, 579)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(307, 170)
+        Me.Panel4.Size = New System.Drawing.Size(631, 170)
         Me.Panel4.TabIndex = 36
         '
         'Label13
         '
         Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.Label13.Location = New System.Drawing.Point(49, 5)
+        Me.Label13.Location = New System.Drawing.Point(3, 5)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(200, 40)
+        Me.Label13.Size = New System.Drawing.Size(623, 40)
         Me.Label13.TabIndex = 34
-        Me.Label13.Text = "Changeover Part"
+        Me.Label13.Text = "Changeover Parts"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label12
@@ -2306,7 +2311,7 @@ Partial Class FormRecipeManagement
         Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepFlow)
         Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepBleed)
         Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepFill)
-        Me.Panel3.Location = New System.Drawing.Point(575, 135)
+        Me.Panel3.Location = New System.Drawing.Point(575, 171)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(307, 450)
         Me.Panel3.TabIndex = 35
@@ -2363,7 +2368,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpCreatePrepPressureDropTime.Name = "dsp_RcpCreatePrepPressureDropTime"
         Me.dsp_RcpCreatePrepPressureDropTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepPressureDropTime.TabIndex = 25
-        Me.dsp_RcpCreatePrepPressureDropTime.Text = "Pressure Drop Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RcpCreatePrepPressureDropTime.Text = "Back Pressure-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Time (s) :"
         Me.dsp_RcpCreatePrepPressureDropTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpCreatePrepPressureDrop
@@ -2372,7 +2377,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpCreatePrepPressureDrop.Name = "dsp_RcpCreatePrepPressureDrop"
         Me.dsp_RcpCreatePrepPressureDrop.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepPressureDrop.TabIndex = 25
-        Me.dsp_RcpCreatePrepPressureDrop.Text = "Pressure Drop" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpCreatePrepPressureDrop.Text = "Back Pressure-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
         Me.dsp_RcpCreatePrepPressureDrop.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label5
@@ -2390,7 +2395,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpCreatePrepPressure.Name = "dsp_RcpCreatePrepPressure"
         Me.dsp_RcpCreatePrepPressure.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepPressure.TabIndex = 26
-        Me.dsp_RcpCreatePrepPressure.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpCreatePrepPressure.Text = "Back Pressure-1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
         Me.dsp_RcpCreatePrepPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpCreatePrepFlow
@@ -2408,7 +2413,7 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpCreatePrepBleed.Name = "dsp_RcpCreatePrepBleed"
         Me.dsp_RcpCreatePrepBleed.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepBleed.TabIndex = 27
-        Me.dsp_RcpCreatePrepBleed.Text = "Prep Air Bleed Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RcpCreatePrepBleed.Text = "Prep Air Bleed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Time (s) :"
         Me.dsp_RcpCreatePrepBleed.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpCreatePrepFill
@@ -2482,7 +2487,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateDrain3.Controls.Add(Me.txtbx_RcpCreateDrain3Pressure)
         Me.panel_RcpCreateDrain3.Controls.Add(Me.dsp_RcpCreateDrain3Pressure)
         Me.panel_RcpCreateDrain3.Controls.Add(Me.checkbx_CreateDrain3)
-        Me.panel_RcpCreateDrain3.Location = New System.Drawing.Point(1548, 491)
+        Me.panel_RcpCreateDrain3.Location = New System.Drawing.Point(1548, 401)
         Me.panel_RcpCreateDrain3.Name = "panel_RcpCreateDrain3"
         Me.panel_RcpCreateDrain3.Size = New System.Drawing.Size(307, 172)
         Me.panel_RcpCreateDrain3.TabIndex = 18
@@ -2544,7 +2549,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateDrain2.Controls.Add(Me.txtbx_RcpCreateDrain2Pressure)
         Me.panel_RcpCreateDrain2.Controls.Add(Me.dsp_RcpCreateDrain2Pressure)
         Me.panel_RcpCreateDrain2.Controls.Add(Me.checkbx_CreateDrain2)
-        Me.panel_RcpCreateDrain2.Location = New System.Drawing.Point(1549, 313)
+        Me.panel_RcpCreateDrain2.Location = New System.Drawing.Point(1549, 223)
         Me.panel_RcpCreateDrain2.Name = "panel_RcpCreateDrain2"
         Me.panel_RcpCreateDrain2.Size = New System.Drawing.Size(307, 172)
         Me.panel_RcpCreateDrain2.TabIndex = 18
@@ -2612,7 +2617,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateFlush2.Controls.Add(Me.txtbx_RcpCreateFlush2Flow)
         Me.panel_RcpCreateFlush2.Controls.Add(Me.checkbx_CreateFlush2)
         Me.panel_RcpCreateFlush2.Controls.Add(Me.dsp_RcpCreateFlush2Flow)
-        Me.panel_RcpCreateFlush2.Location = New System.Drawing.Point(900, 451)
+        Me.panel_RcpCreateFlush2.Location = New System.Drawing.Point(900, 361)
         Me.panel_RcpCreateFlush2.Name = "panel_RcpCreateFlush2"
         Me.panel_RcpCreateFlush2.Size = New System.Drawing.Size(307, 310)
         Me.panel_RcpCreateFlush2.TabIndex = 17
@@ -2723,17 +2728,18 @@ Partial Class FormRecipeManagement
         'Panel8
         '
         Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel8.Controls.Add(Me.Label20)
         Me.Panel8.Controls.Add(Me.txtbx_RcpCreateVerTol)
         Me.Panel8.Controls.Add(Me.dsp_RcpCreateVerTol)
         Me.Panel8.Location = New System.Drawing.Point(575, 45)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(1280, 80)
+        Me.Panel8.Size = New System.Drawing.Size(307, 120)
         Me.Panel8.TabIndex = 24
         '
         'txtbx_RcpCreateVerTol
         '
         Me.txtbx_RcpCreateVerTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateVerTol.Location = New System.Drawing.Point(183, 30)
+        Me.txtbx_RcpCreateVerTol.Location = New System.Drawing.Point(183, 66)
         Me.txtbx_RcpCreateVerTol.MaxLength = 3
         Me.txtbx_RcpCreateVerTol.Name = "txtbx_RcpCreateVerTol"
         Me.txtbx_RcpCreateVerTol.Size = New System.Drawing.Size(100, 25)
@@ -2741,7 +2747,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreateVerTol
         '
-        Me.dsp_RcpCreateVerTol.Location = New System.Drawing.Point(17, 20)
+        Me.dsp_RcpCreateVerTol.Location = New System.Drawing.Point(17, 56)
         Me.dsp_RcpCreateVerTol.Name = "dsp_RcpCreateVerTol"
         Me.dsp_RcpCreateVerTol.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateVerTol.TabIndex = 6
@@ -2756,7 +2762,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateDrain1.Controls.Add(Me.txtbx_RcpCreateDrain1Pressure)
         Me.panel_RcpCreateDrain1.Controls.Add(Me.dsp_RcpCreateDrain1Pressure)
         Me.panel_RcpCreateDrain1.Controls.Add(Me.checkbx_CreateDrain1)
-        Me.panel_RcpCreateDrain1.Location = New System.Drawing.Point(1548, 135)
+        Me.panel_RcpCreateDrain1.Location = New System.Drawing.Point(1548, 45)
         Me.panel_RcpCreateDrain1.Name = "panel_RcpCreateDrain1"
         Me.panel_RcpCreateDrain1.Size = New System.Drawing.Size(307, 172)
         Me.panel_RcpCreateDrain1.TabIndex = 17
@@ -2831,7 +2837,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPFlowTol)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPFlowTol)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPFlow)
-        Me.panel_RcpCreateDPTest1.Location = New System.Drawing.Point(1224, 135)
+        Me.panel_RcpCreateDPTest1.Location = New System.Drawing.Point(1224, 45)
         Me.panel_RcpCreateDPTest1.Name = "panel_RcpCreateDPTest1"
         Me.panel_RcpCreateDPTest1.Size = New System.Drawing.Size(307, 528)
         Me.panel_RcpCreateDPTest1.TabIndex = 17
@@ -3020,7 +3026,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateFlush1.Controls.Add(Me.txtbx_RcpCreateFlush1Flow)
         Me.panel_RcpCreateFlush1.Controls.Add(Me.checkbx_CreateFlush1)
         Me.panel_RcpCreateFlush1.Controls.Add(Me.dsp_RcpCreateFlush1Flow)
-        Me.panel_RcpCreateFlush1.Location = New System.Drawing.Point(900, 135)
+        Me.panel_RcpCreateFlush1.Location = New System.Drawing.Point(900, 45)
         Me.panel_RcpCreateFlush1.Name = "panel_RcpCreateFlush1"
         Me.panel_RcpCreateFlush1.Size = New System.Drawing.Size(307, 310)
         Me.panel_RcpCreateFlush1.TabIndex = 16
@@ -3282,7 +3288,7 @@ Partial Class FormRecipeManagement
         Me.btn_RecipeIDCreate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_RecipeIDCreate.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_RecipeIDCreate.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_RecipeIDCreate.Location = New System.Drawing.Point(423, 86)
+        Me.btn_RecipeIDCreate.Location = New System.Drawing.Point(420, 86)
         Me.btn_RecipeIDCreate.Name = "btn_RecipeIDCreate"
         Me.btn_RecipeIDCreate.Size = New System.Drawing.Size(110, 60)
         Me.btn_RecipeIDCreate.TabIndex = 22
@@ -3510,6 +3516,26 @@ Partial Class FormRecipeManagement
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label19
+        '
+        Me.Label19.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.Label19.Location = New System.Drawing.Point(49, 14)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(200, 40)
+        Me.Label19.TabIndex = 34
+        Me.Label19.Text = "Verification"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label20
+        '
+        Me.Label20.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.Label20.Location = New System.Drawing.Point(49, 14)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(200, 40)
+        Me.Label20.TabIndex = 34
+        Me.Label20.Text = "Verification"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'FormRecipeManagement
         '
@@ -3892,4 +3918,6 @@ Partial Class FormRecipeManagement
     Friend WithEvents ComboBox7 As ComboBox
     Friend WithEvents ComboBox8 As ComboBox
     Friend WithEvents ComboBox9 As ComboBox
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label20 As Label
 End Class

@@ -898,7 +898,7 @@ Public Class FormCalibration
                 For i = Dptest2start To dptest2end - 1
                     Cal_avginlet2 = Cal_avginlet2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Inlet Pressure (kPa)")
                     Cal_avgoutlet2 = Cal_avgoutlet2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Outlet Pressure (kPa)")
-                    Cal_avgdp1 = Cal_avgdp1 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Differential Pressure (kPa)")
+                    Cal_avgdp2 = Cal_avgdp2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Differential Pressure (kPa)")
                     Cal_avgflowrate2 = Cal_avgflowrate2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Cal_avgtemperature2 = Cal_avgtemperature2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Temperature (°C)")
                     Cal_avgbackpressure2 = Cal_avgbackpressure2 + dtCalibration.Rows(dtCalibration.Rows.Count - 1 - i)("Back Pressure (kPa)")
