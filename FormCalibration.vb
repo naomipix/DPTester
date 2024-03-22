@@ -142,6 +142,14 @@ Public Class FormCalibration
             End If
         End If
 
+        ' DoubleBuffer DataGridView
+        Dim dgvArr() As DataGridView = {
+            dgv_CalibrationResult,
+            dgv_VerificationResult
+        }
+        For Each dgv As DataGridView In dgvArr
+            DoubleBuffer.DoubleBuffered(dgv, True)
+        Next
 
         txtbx_JigType.Text = Jig
         tmr_Calibration.Interval = 500
