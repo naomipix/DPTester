@@ -23,14 +23,14 @@ Partial Class FormResultGraph
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormResultGraph))
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Title2 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series11 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series12 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series13 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series14 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series15 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Title3 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -802,10 +802,11 @@ Partial Class FormResultGraph
         'checkbx_GraphRPM
         '
         Me.checkbx_GraphRPM.AutoSize = True
-        Me.checkbx_GraphRPM.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphRPM.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphRPM.ForeColor = System.Drawing.Color.Orange
         Me.checkbx_GraphRPM.Location = New System.Drawing.Point(1134, 137)
         Me.checkbx_GraphRPM.Name = "checkbx_GraphRPM"
-        Me.checkbx_GraphRPM.Size = New System.Drawing.Size(91, 21)
+        Me.checkbx_GraphRPM.Size = New System.Drawing.Size(95, 21)
         Me.checkbx_GraphRPM.TabIndex = 74
         Me.checkbx_GraphRPM.Text = "Pump RPM"
         Me.checkbx_GraphRPM.UseVisualStyleBackColor = True
@@ -813,10 +814,11 @@ Partial Class FormResultGraph
         'checkbx_GraphTemperature
         '
         Me.checkbx_GraphTemperature.AutoSize = True
-        Me.checkbx_GraphTemperature.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphTemperature.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphTemperature.ForeColor = System.Drawing.Color.Red
         Me.checkbx_GraphTemperature.Location = New System.Drawing.Point(978, 137)
         Me.checkbx_GraphTemperature.Name = "checkbx_GraphTemperature"
-        Me.checkbx_GraphTemperature.Size = New System.Drawing.Size(101, 21)
+        Me.checkbx_GraphTemperature.Size = New System.Drawing.Size(104, 21)
         Me.checkbx_GraphTemperature.TabIndex = 74
         Me.checkbx_GraphTemperature.Text = "Temperature"
         Me.checkbx_GraphTemperature.UseVisualStyleBackColor = True
@@ -824,10 +826,11 @@ Partial Class FormResultGraph
         'checkbx_GraphFlowrate
         '
         Me.checkbx_GraphFlowrate.AutoSize = True
-        Me.checkbx_GraphFlowrate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphFlowrate.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphFlowrate.ForeColor = System.Drawing.Color.Brown
         Me.checkbx_GraphFlowrate.Location = New System.Drawing.Point(830, 137)
         Me.checkbx_GraphFlowrate.Name = "checkbx_GraphFlowrate"
-        Me.checkbx_GraphFlowrate.Size = New System.Drawing.Size(76, 21)
+        Me.checkbx_GraphFlowrate.Size = New System.Drawing.Size(79, 21)
         Me.checkbx_GraphFlowrate.TabIndex = 73
         Me.checkbx_GraphFlowrate.Text = "Flowrate"
         Me.checkbx_GraphFlowrate.UseVisualStyleBackColor = True
@@ -835,10 +838,11 @@ Partial Class FormResultGraph
         'checkbx_GraphBP
         '
         Me.checkbx_GraphBP.AutoSize = True
-        Me.checkbx_GraphBP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphBP.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphBP.ForeColor = System.Drawing.Color.DarkOrange
         Me.checkbx_GraphBP.Location = New System.Drawing.Point(652, 137)
         Me.checkbx_GraphBP.Name = "checkbx_GraphBP"
-        Me.checkbx_GraphBP.Size = New System.Drawing.Size(107, 21)
+        Me.checkbx_GraphBP.Size = New System.Drawing.Size(111, 21)
         Me.checkbx_GraphBP.TabIndex = 72
         Me.checkbx_GraphBP.Text = "Back Pressure"
         Me.checkbx_GraphBP.UseVisualStyleBackColor = True
@@ -846,10 +850,11 @@ Partial Class FormResultGraph
         'checkbx_GraphOutletPressure
         '
         Me.checkbx_GraphOutletPressure.AutoSize = True
-        Me.checkbx_GraphOutletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphOutletPressure.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphOutletPressure.ForeColor = System.Drawing.Color.Magenta
         Me.checkbx_GraphOutletPressure.Location = New System.Drawing.Point(466, 137)
         Me.checkbx_GraphOutletPressure.Name = "checkbx_GraphOutletPressure"
-        Me.checkbx_GraphOutletPressure.Size = New System.Drawing.Size(116, 21)
+        Me.checkbx_GraphOutletPressure.Size = New System.Drawing.Size(121, 21)
         Me.checkbx_GraphOutletPressure.TabIndex = 72
         Me.checkbx_GraphOutletPressure.Text = "Outlet Pressure"
         Me.checkbx_GraphOutletPressure.UseVisualStyleBackColor = True
@@ -857,10 +862,11 @@ Partial Class FormResultGraph
         'checkbx_GraphInletPressure
         '
         Me.checkbx_GraphInletPressure.AutoSize = True
-        Me.checkbx_GraphInletPressure.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphInletPressure.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphInletPressure.ForeColor = System.Drawing.Color.Green
         Me.checkbx_GraphInletPressure.Location = New System.Drawing.Point(290, 137)
         Me.checkbx_GraphInletPressure.Name = "checkbx_GraphInletPressure"
-        Me.checkbx_GraphInletPressure.Size = New System.Drawing.Size(105, 21)
+        Me.checkbx_GraphInletPressure.Size = New System.Drawing.Size(110, 21)
         Me.checkbx_GraphInletPressure.TabIndex = 71
         Me.checkbx_GraphInletPressure.Text = "Inlet Pressure"
         Me.checkbx_GraphInletPressure.UseVisualStyleBackColor = True
@@ -868,10 +874,11 @@ Partial Class FormResultGraph
         'checkbx_GraphDP
         '
         Me.checkbx_GraphDP.AutoSize = True
-        Me.checkbx_GraphDP.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphDP.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_GraphDP.ForeColor = System.Drawing.Color.Blue
         Me.checkbx_GraphDP.Location = New System.Drawing.Point(80, 137)
         Me.checkbx_GraphDP.Name = "checkbx_GraphDP"
-        Me.checkbx_GraphDP.Size = New System.Drawing.Size(144, 21)
+        Me.checkbx_GraphDP.Size = New System.Drawing.Size(148, 21)
         Me.checkbx_GraphDP.TabIndex = 70
         Me.checkbx_GraphDP.Text = "Differential Pressure"
         Me.checkbx_GraphDP.UseVisualStyleBackColor = True
@@ -1049,50 +1056,50 @@ Partial Class FormResultGraph
         '
         Me.ResultChart.BackColor = System.Drawing.Color.LightSkyBlue
         Me.ResultChart.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter
-        ChartArea2.AxisX.MajorGrid.Interval = 0R
-        ChartArea2.AxisX.MajorGrid.IntervalOffset = 0R
-        ChartArea2.AxisX.Title = "Sampling Time (s)"
-        ChartArea2.AxisX.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea2.AxisY.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea2.Name = "ChartArea1"
-        Me.ResultChart.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.ResultChart.Legends.Add(Legend2)
+        ChartArea3.AxisX.MajorGrid.Interval = 0R
+        ChartArea3.AxisX.MajorGrid.IntervalOffset = 0R
+        ChartArea3.AxisX.Title = "Sampling Time (s)"
+        ChartArea3.AxisX.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea3.AxisY.TitleFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea3.Name = "ChartArea1"
+        Me.ResultChart.ChartAreas.Add(ChartArea3)
+        Legend3.Name = "Legend1"
+        Me.ResultChart.Legends.Add(Legend3)
         Me.ResultChart.Location = New System.Drawing.Point(50, 177)
         Me.ResultChart.Name = "ResultChart"
-        Series6.ChartArea = "ChartArea1"
-        Series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Series6.LabelToolTip = "X= #VALX, Y= #VALY"
-        Series6.Legend = "Legend1"
-        Series6.Name = "DP"
-        Series6.ToolTip = "X= #VALX, Y= #VALY"
-        Series7.ChartArea = "ChartArea1"
-        Series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series7.Legend = "Legend1"
-        Series7.Name = "Inlet Pressure"
-        Series8.ChartArea = "ChartArea1"
-        Series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series8.Legend = "Legend1"
-        Series8.Name = "Outlet Pressure"
-        Series9.ChartArea = "ChartArea1"
-        Series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series9.Legend = "Legend1"
-        Series9.Name = "Flowrate"
-        Series10.ChartArea = "ChartArea1"
-        Series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series10.Legend = "Legend1"
-        Series10.Name = "Temperature"
-        Me.ResultChart.Series.Add(Series6)
-        Me.ResultChart.Series.Add(Series7)
-        Me.ResultChart.Series.Add(Series8)
-        Me.ResultChart.Series.Add(Series9)
-        Me.ResultChart.Series.Add(Series10)
+        Series11.ChartArea = "ChartArea1"
+        Series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Series11.LabelToolTip = "X= #VALX, Y= #VALY"
+        Series11.Legend = "Legend1"
+        Series11.Name = "DP"
+        Series11.ToolTip = "X= #VALX, Y= #VALY"
+        Series12.ChartArea = "ChartArea1"
+        Series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series12.Legend = "Legend1"
+        Series12.Name = "Inlet Pressure"
+        Series13.ChartArea = "ChartArea1"
+        Series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series13.Legend = "Legend1"
+        Series13.Name = "Outlet Pressure"
+        Series14.ChartArea = "ChartArea1"
+        Series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series14.Legend = "Legend1"
+        Series14.Name = "Flowrate"
+        Series15.ChartArea = "ChartArea1"
+        Series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series15.Legend = "Legend1"
+        Series15.Name = "Temperature"
+        Me.ResultChart.Series.Add(Series11)
+        Me.ResultChart.Series.Add(Series12)
+        Me.ResultChart.Series.Add(Series13)
+        Me.ResultChart.Series.Add(Series14)
+        Me.ResultChart.Series.Add(Series15)
         Me.ResultChart.Size = New System.Drawing.Size(1210, 600)
         Me.ResultChart.TabIndex = 69
         Me.ResultChart.Text = "ResultChart"
-        Title2.Name = "Result Graph"
-        Me.ResultChart.Titles.Add(Title2)
+        Title3.Name = "Result Graph"
+        Me.ResultChart.Titles.Add(Title3)
         Me.ResultChart.Visible = False
         '
         'dsp_Home
