@@ -128,6 +128,37 @@ Public Class FormCalibration
             Label6.Visible = False
         End If
 
+        ' DoubleBuffer DataGridView
+        Dim dgvArr() As DataGridView = {
+            dgv_CalibrationResult,
+            dgv_VerificationResult
+        }
+        For Each dgv As DataGridView In dgvArr
+            DoubleBuffer.DoubleBuffered(dgv, True)
+        Next
+
+        ' Initialize Defaults
+        InitializeCalForm()
+    End Sub
+
+    Private Sub FormCalibration_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        ' Clear Selection
+        Me.Select()
+
+        ' Display Form Control
+        panel_FormControl.Visible = True
+
+        ' Reset Graph View Selection
+        SetVisibleLineSeries()
+
+        ' Initialize Defaults
+        InitializeCalForm()
+
+        ' Reload Tooltip CheckBox
+        checkbx_ShowTooltip_CheckedChanged(Nothing, Nothing)
+    End Sub
+
+    Private Sub InitializeCalForm()
         ' Initialize Defaults
         txtbx_CalLotID.Text = FormMain.txtbx_LotID.Text
         txtbx_RecipeID.Text = FormMain.cmbx_RecipeID.Text
@@ -141,15 +172,6 @@ Public Class FormCalibration
                 txtbx_RecipeRev.Text = dtRecipe(0)("recipe_rev")
             End If
         End If
-
-        ' DoubleBuffer DataGridView
-        Dim dgvArr() As DataGridView = {
-            dgv_CalibrationResult,
-            dgv_VerificationResult
-        }
-        For Each dgv As DataGridView In dgvArr
-            DoubleBuffer.DoubleBuffered(dgv, True)
-        Next
 
         txtbx_JigType.Text = Jig
         tmr_Calibration.Interval = 500
@@ -169,22 +191,25 @@ Public Class FormCalibration
 
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Disable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Disable" Then
                 FormMain.lbl_CalibrationStatus.Text = "Pass"
-                FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(192, 255, 192)
+                FormMain.lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
+                FormMain.lbl_CalibrationStatus.ForeColor = PublicVariables.StatusGreenT
+
                 FormMain.lbl_BlankDP.Text = "0.0"
                 Dim dtlotusage As DataTable = SQL.ReadRecords($"SELECT id,lot_id,lot_attempt FROM LotUsage where lot_id = '{FormMain.txtbx_LotID.Text}' AND lot_end_time IS NULL")
                 If dtlotusage.Rows.Count > 0 Then
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
-                            {"recipe_id", FormMain.cmbx_RecipeID.Text},
-                            {"calibration_time", lbl_DateTimeClock.Text},
-                            {"cal_inlet_pressure", "0"},
-                            {"cal_outlet_pressure", "0"},
-                            {"cal_diff_pressure", "0"},
-                            {"verify_inlet_pressure", "0"},
-                            {"verify_outlet_pressure", "0"},
-                            {"verify_diff_pressure", "0"},
-                            {"cal_result", "Pass"},
-                            {"cal_cycle_time", "0"}
-                        }
+                        {"recipe_id", FormMain.cmbx_RecipeID.Text},
+                        {"recipe_rev", txtbx_RecipeRev.Text},
+                        {"calibration_time", lbl_DateTimeClock.Text},
+                        {"cal_inlet_pressure", "0"},
+                        {"cal_outlet_pressure", "0"},
+                        {"cal_diff_pressure", "0"},
+                        {"verify_inlet_pressure", "0"},
+                        {"verify_outlet_pressure", "0"},
+                        {"verify_diff_pressure", "0"},
+                        {"cal_result", "Pass"},
+                        {"cal_cycle_time", "0"}
+                    }
                     Dim Condition As String = $"id = '{dtlotusage.Rows(dtlotusage.Rows.Count - 1).Item("id")}'"
 
                     If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
@@ -319,18 +344,6 @@ Public Class FormCalibration
 
 
         End If
-
-    End Sub
-
-    Private Sub FormCalibration_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        ' Clear Selection
-        Me.Select()
-
-        ' Display Form Control
-        panel_FormControl.Visible = True
-
-        ' Reset Graph View Selection
-        SetVisibleLineSeries()
     End Sub
 
     Private Sub InitializeLiveChartXAxes(XLimit As Integer) '(XLimit As Integer, XScaleMSec As Integer)
@@ -1804,7 +1817,7 @@ Public Class FormCalibration
                         Flush1Start = PrepCycletime
 
                         If Flush1Enabled Then
-                            DP1Start = flush1cycletime
+                            DP1Start = Flush1Start + flush1cycletime
                         Else
                             DP1Start = Flush1Start
                         End If
@@ -2497,7 +2510,7 @@ Public Class FormCalibration
     End Sub
 
     Private Sub checkbx_ShowTooltip_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_ShowTooltip.CheckedChanged
-        If CartesianChart_CalibrationLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden Then
+        If checkbx_ShowTooltip.Checked Then 'CartesianChart_CalibrationLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden Then
             CartesianChart_CalibrationLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Top
 
             If CartesianChart_CalibrationLiveGraph.XAxes.Count > 0 Then

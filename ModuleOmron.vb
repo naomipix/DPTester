@@ -2549,7 +2549,11 @@ Module ModuleOmron
         End If
         FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)
         FormMain.lbl_ProductFlowrate.Text = CType(Math.Round(result_finalflowrate, 3), String)
-        FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature - 273.15, 3), String)
+        If result_finaltemperature = 0 Then
+            FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature, 3), String)
+        Else
+            FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature - 273.15, 3), String)
+        End If
         FormMain.lbl_ProductInlet.Text = CType(Math.Round(result_finalinlet, 3), String)
         FormMain.lbl_ProductOutlet.Text = CType(Math.Round(result_finaloutlet, 3), String)
         FormMain.lbl_ProductBackpress.Text = CType(Math.Round(result_finalbackpressure, 3), String)
