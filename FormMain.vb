@@ -4925,7 +4925,7 @@ Public Class FormMain
 
                 If .Items.Count > 1 Then
                 Else
-                    MainMessage(5, PartID)
+                    'MainMessage(5, PartID)
 
                 End If
             End With
