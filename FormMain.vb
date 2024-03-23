@@ -3603,7 +3603,8 @@ Public Class FormMain
 
         End If
 
-
+        ' Force Load Recipe Data In Cal Form
+        FormCalibration.InitializeCalForm()
     End Sub
 
 

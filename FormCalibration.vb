@@ -83,14 +83,14 @@ Public Class FormCalibration
     Public Cal_pumprpm As Decimal
 
 
-    Public prepcycletime As Integer
-    Public flush1cycletime As Integer
-    Public flush2cycletime As Integer
-    Public DPtest1cycletime As Integer
-    Public DPtest2cycletime As Integer
-    Public Drain1cycletime As Integer
-    Public Drain2cycletime As Integer
-    Public Drain3cycletime As Integer
+    'Public prepcycletime As Integer
+    'Public flush1cycletime As Integer
+    'Public flush2cycletime As Integer
+    'Public DPtest1cycletime As Integer
+    'Public DPtest2cycletime As Integer
+    'Public Drain1cycletime As Integer
+    'Public Drain2cycletime As Integer
+    'Public Drain3cycletime As Integer
 
     ' For Chart XLimit Use
     Private TotalCycleTime As Integer
@@ -158,7 +158,16 @@ Public Class FormCalibration
         checkbx_ShowTooltip_CheckedChanged(Nothing, Nothing)
     End Sub
 
-    Private Sub InitializeCalForm()
+    Public Sub InitializeCalForm()
+        Dim prepcycletime As Integer = 0
+        Dim flush1cycletime As Integer = 0
+        Dim flush2cycletime As Integer = 0
+        Dim DPtest1cycletime As Integer = 0
+        Dim DPtest2cycletime As Integer = 0
+        Dim Drain1cycletime As Integer = 0
+        Dim Drain2cycletime As Integer = 0
+        Dim Drain3cycletime As Integer = 0
+
         ' Initialize Defaults
         txtbx_CalLotID.Text = FormMain.txtbx_LotID.Text
         txtbx_RecipeID.Text = FormMain.cmbx_RecipeID.Text
@@ -176,6 +185,16 @@ Public Class FormCalibration
         txtbx_JigType.Text = Jig
         tmr_Calibration.Interval = 500
         tmr_Verification.Interval = 500
+
+        CalCycletime = 0
+        'prepcycletime = 0
+        'flush1cycletime = 0
+        'flush2cycletime = 0
+        'DPtest1cycletime = 0
+        'DPtest2cycletime = 0
+        'Drain1cycletime = 0
+        'Drain2cycletime = 0
+        'Drain3cycletime = 0
 
 
 
@@ -577,93 +596,97 @@ Public Class FormCalibration
     End Sub
 
     Private Sub SetVisibleLineSeries()
-        If checkbx_GraphDP.Checked Then
-            With CartesianChart_CalibrationLiveGraph
-                .Series(0).IsVisible = True
-            End With
-        Else
-            With CartesianChart_CalibrationLiveGraph
-                .Series(0).IsVisible = False
-            End With
-        End If
+        Try
+            If checkbx_GraphDP.Checked Then
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(0).IsVisible = True
+                End With
+            Else
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(0).IsVisible = False
+                End With
+            End If
 
-        If checkbx_GraphInletPressure.Checked Then
-            With CartesianChart_CalibrationLiveGraph
-                .Series(1).IsVisible = True
-                '.YAxes(4).IsVisible = True
-            End With
-        Else
-            With CartesianChart_CalibrationLiveGraph
-                .Series(1).IsVisible = False
-                '.YAxes(4).IsVisible = False
-            End With
-        End If
+            If checkbx_GraphInletPressure.Checked Then
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(1).IsVisible = True
+                    '.YAxes(4).IsVisible = True
+                End With
+            Else
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(1).IsVisible = False
+                    '.YAxes(4).IsVisible = False
+                End With
+            End If
 
-        If checkbx_GraphOutletPressure.Checked Then
-            With CartesianChart_CalibrationLiveGraph
-                .Series(2).IsVisible = True
-                '.YAxes(4).IsVisible = True
-            End With
-        Else
-            With CartesianChart_CalibrationLiveGraph
-                .Series(2).IsVisible = False
-                '.YAxes(4).IsVisible = False
-            End With
-        End If
+            If checkbx_GraphOutletPressure.Checked Then
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(2).IsVisible = True
+                    '.YAxes(4).IsVisible = True
+                End With
+            Else
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(2).IsVisible = False
+                    '.YAxes(4).IsVisible = False
+                End With
+            End If
 
-        If checkbx_GraphBP.Checked Then
-            With CartesianChart_CalibrationLiveGraph
-                .Series(3).IsVisible = True
-                '.YAxes(4).IsVisible = True
-            End With
-        Else
-            With CartesianChart_CalibrationLiveGraph
-                .Series(3).IsVisible = False
-                '.YAxes(4).IsVisible = False
-            End With
-        End If
+            If checkbx_GraphBP.Checked Then
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(3).IsVisible = True
+                    '.YAxes(4).IsVisible = True
+                End With
+            Else
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(3).IsVisible = False
+                    '.YAxes(4).IsVisible = False
+                End With
+            End If
 
-        If checkbx_GraphInletPressure.Checked Or checkbx_GraphOutletPressure.Checked Or checkbx_GraphBP.Checked Then
-            CartesianChart_CalibrationLiveGraph.YAxes(4).IsVisible = True
-        Else
-            CartesianChart_CalibrationLiveGraph.YAxes(4).IsVisible = False
-        End If
+            If checkbx_GraphInletPressure.Checked Or checkbx_GraphOutletPressure.Checked Or checkbx_GraphBP.Checked Then
+                CartesianChart_CalibrationLiveGraph.YAxes(4).IsVisible = True
+            Else
+                CartesianChart_CalibrationLiveGraph.YAxes(4).IsVisible = False
+            End If
 
-        If checkbx_GraphFlowrate.Checked Then
-            With CartesianChart_CalibrationLiveGraph
-                .Series(5).IsVisible = True
-                .YAxes(3).IsVisible = True
-            End With
-        Else
-            With CartesianChart_CalibrationLiveGraph
-                .Series(5).IsVisible = False
-                .YAxes(3).IsVisible = False
-            End With
-        End If
+            If checkbx_GraphFlowrate.Checked Then
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(5).IsVisible = True
+                    .YAxes(3).IsVisible = True
+                End With
+            Else
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(5).IsVisible = False
+                    .YAxes(3).IsVisible = False
+                End With
+            End If
 
-        If checkbx_GraphTemperature.Checked Then
-            With CartesianChart_CalibrationLiveGraph
-                .Series(6).IsVisible = True
-                .YAxes(2).IsVisible = True
-            End With
-        Else
-            With CartesianChart_CalibrationLiveGraph
-                .Series(6).IsVisible = False
-                .YAxes(2).IsVisible = False
-            End With
-        End If
+            If checkbx_GraphTemperature.Checked Then
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(6).IsVisible = True
+                    .YAxes(2).IsVisible = True
+                End With
+            Else
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(6).IsVisible = False
+                    .YAxes(2).IsVisible = False
+                End With
+            End If
 
-        If checkbx_GraphRPM.Checked Then
-            With CartesianChart_CalibrationLiveGraph
-                .Series(4).IsVisible = True
-                .YAxes(1).IsVisible = True
-            End With
-        Else
-            With CartesianChart_CalibrationLiveGraph
-                .Series(4).IsVisible = False
-                .YAxes(1).IsVisible = False
-            End With
-        End If
+            If checkbx_GraphRPM.Checked Then
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(4).IsVisible = True
+                    .YAxes(1).IsVisible = True
+                End With
+            Else
+                With CartesianChart_CalibrationLiveGraph
+                    .Series(4).IsVisible = False
+                    .YAxes(1).IsVisible = False
+                End With
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
@@ -702,13 +725,14 @@ Public Class FormCalibration
             txtbx_CalResult.ForeColor = SystemColors.ControlText
             SetButtonState(btn_Calibrate, False, "Calibrate")
             SetButtonState(btn_Verify, False, "Verify")
-            flush1cycletime = 0
-            flush2cycletime = 0
-            DPtest1cycletime = 0
-            DPtest2cycletime = 0
-            Drain1cycletime = 0
-            Drain2cycletime = 0
-            Drain3cycletime = 0
+            'flush1cycletime = 0
+            'flush2cycletime = 0
+            'DPtest1cycletime = 0
+            'DPtest2cycletime = 0
+            'Drain1cycletime = 0
+            'Drain2cycletime = 0
+            'Drain3cycletime = 0
+            'prepcycletime = 0
             PCStatus(1)(8) = True
 
             If dtCalibration.Rows.Count > 0 Then

@@ -85,7 +85,7 @@ Public Class FormRecipeManagement
     'Private nom_i_flush1filltime As Integer = 5
     'Private nom_i_flush1bleedtime As Integer = 5
     Private nom_d_flush1flow As Decimal = 3.0
-    Private nom_d_flush1flowtol As Decimal = 0.2
+    Private nom_d_flush1flowtol As Decimal = 0.5
     Private nom_d_flush1pressure As Decimal = 5.0
     Private nom_i_flush1stabilize As Integer = 5
     Private nom_i_flush1time As Integer = 60
@@ -100,7 +100,7 @@ Public Class FormRecipeManagement
     Private nom_i_dptesttime As Integer = 60
     Private nom_d_dptestlowlimit As Decimal = 0.0
     Private nom_d_dptestuplimit As Decimal = 10.0
-    Private nom_i_dptestpoints As Integer
+    Private nom_i_dptestpoints As Integer = 20
     Private nom_str_dptest2enable As String = "Disable"
 
     Private nom_str_flush2enable As String = "Disable"
