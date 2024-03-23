@@ -794,7 +794,7 @@ Public Class FormCalibration
                 Cal_dp = Math.Round(CDec((1.002 / vis) * (Cal_inletpressure - Cal_outletpressure)), 2)
             End If
 
-            Cal_backpressure = AIn(1)
+            Cal_backpressure = AIn(11)
             Cal_pumprpm = AIn(2)
             newrw(0) = Cal_samplingtime
             newrw(1) = Cal_temperature
@@ -1181,7 +1181,7 @@ Public Class FormCalibration
             Ver_outletpressure = AIn(10)
             Ver_flowrate = FinalFlowrate
             Ver_temperature = AIn(13)
-            Ver_backpressure = AIn(1)
+            Ver_backpressure = AIn(11)
             Ver_pumprpm = AIn(2)
             'Ver_dp = Ver_inletpressure - Ver_outletpressure
             If True Then

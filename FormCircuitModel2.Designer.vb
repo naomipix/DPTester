@@ -25,6 +25,7 @@ Partial Class FormCircuitModel2
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCircuitModel2))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.lbl_ValveHover = New System.Windows.Forms.Label()
         Me.lbl_FilSensorPushIn = New System.Windows.Forms.Label()
         Me.lbl_JigSensor1 = New System.Windows.Forms.Label()
@@ -411,6 +412,7 @@ Partial Class FormCircuitModel2
         '
         Me.Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), System.Drawing.Image)
         Me.Panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.lbl_ValveHover)
         Me.Panel1.Controls.Add(Me.lbl_FilSensorPushIn)
         Me.Panel1.Controls.Add(Me.lbl_JigSensor1)
@@ -794,6 +796,13 @@ Partial Class FormCircuitModel2
         Me.Panel1.Size = New System.Drawing.Size(950, 450)
         Me.Panel1.TabIndex = 2
         '
+        'Label1
+        '
+        Me.Label1.Location = New System.Drawing.Point(160, 19)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(26, 18)
+        Me.Label1.TabIndex = 795
+        '
         'lbl_ValveHover
         '
         Me.lbl_ValveHover.BackColor = System.Drawing.SystemColors.Window
@@ -1014,12 +1023,12 @@ Partial Class FormCircuitModel2
         'Label6
         '
         Me.Label6.BackColor = System.Drawing.SystemColors.Window
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(242, 6)
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
+        Me.Label6.Location = New System.Drawing.Point(880, 313)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(83, 25)
+        Me.Label6.Size = New System.Drawing.Size(67, 25)
         Me.Label6.TabIndex = 782
-        Me.Label6.Text = "N2 Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P3 (kPa)"
+        Me.Label6.Text = "Back Pressure (kPa)"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label5
@@ -1038,7 +1047,7 @@ Partial Class FormCircuitModel2
         Me.lbl_N2Press.BackColor = System.Drawing.SystemColors.Info
         Me.lbl_N2Press.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lbl_N2Press.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_N2Press.Location = New System.Drawing.Point(186, 6)
+        Me.lbl_N2Press.Location = New System.Drawing.Point(886, 286)
         Me.lbl_N2Press.Name = "lbl_N2Press"
         Me.lbl_N2Press.Size = New System.Drawing.Size(50, 25)
         Me.lbl_N2Press.TabIndex = 780
@@ -4009,7 +4018,7 @@ Partial Class FormCircuitModel2
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.White
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(877, 326)
+        Me.Label3.Location = New System.Drawing.Point(857, 366)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(69, 24)
         Me.Label3.TabIndex = 350
@@ -4046,7 +4055,7 @@ Partial Class FormCircuitModel2
         Me.txtbx_BackPressActual.BackColor = System.Drawing.SystemColors.Info
         Me.txtbx_BackPressActual.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtbx_BackPressActual.Font = New System.Drawing.Font("Segoe UI", 8.25!)
-        Me.txtbx_BackPressActual.Location = New System.Drawing.Point(881, 303)
+        Me.txtbx_BackPressActual.Location = New System.Drawing.Point(861, 343)
         Me.txtbx_BackPressActual.Name = "txtbx_BackPressActual"
         Me.txtbx_BackPressActual.ReadOnly = True
         Me.txtbx_BackPressActual.Size = New System.Drawing.Size(50, 22)
@@ -4723,4 +4732,5 @@ Partial Class FormCircuitModel2
     Friend WithEvents lbl_FilSensorPullOut As Label
     Friend WithEvents tooltip_ValveNumber As ToolTip
     Friend WithEvents lbl_ValveHover As Label
+    Friend WithEvents Label1 As Label
 End Class
