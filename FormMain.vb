@@ -85,7 +85,7 @@ Module FormMainModule
 
                     End If
                 Else
-
+                    FormMain.LoadMainRecipeCombo()
                     FormMain.btn_RecipeSelectionConfirm.Enabled = False
                     FormMain.cmbx_RecipeType.Enabled = False
                     FormMain.cmbx_RecipeID.Enabled = False
