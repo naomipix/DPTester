@@ -85,7 +85,7 @@ Module FormMainModule
 
                     End If
                 Else
-
+                    FormMain.LoadMainRecipeCombo()
                     FormMain.btn_RecipeSelectionConfirm.Enabled = False
                     FormMain.cmbx_RecipeType.Enabled = False
                     FormMain.cmbx_RecipeID.Enabled = False
@@ -1195,7 +1195,7 @@ Public Class FormMain
     End Sub
 
     Private Sub checkbx_ShowTooltip_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_ShowTooltip.CheckedChanged
-        If CartesianChart_MainLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden Then
+        If checkbx_ShowTooltip.Checked Then 'CartesianChart_MainLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden Then
             CartesianChart_MainLiveGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Top
 
             If CartesianChart_MainLiveGraph.XAxes.Count > 0 Then
@@ -3185,6 +3185,11 @@ Public Class FormMain
         ' Check to reuse previous calibration parameters
         If cmbx_RecipeType.Enabled = True Then
             If dtlotusage.Rows.Count > 0 Then
+                'Dim IsAnyReturnNull As Boolean = False
+                'Dim StrToChkArr() As String = {
+                '    "",
+                '    ""
+                '}
                 If Not IsDBNull(dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")) Then
                     If CStr(dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")).ToUpper() = "PASS" Then
                         LastLotCalTime = CDate(dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")).ToString("yyyy-MM-dd HH:mm:ss")
@@ -3598,7 +3603,8 @@ Public Class FormMain
 
         End If
 
-
+        ' Force Load Recipe Data In Cal Form
+        FormCalibration.InitializeCalForm()
     End Sub
 
 
@@ -3888,7 +3894,7 @@ Public Class FormMain
                     Flush1Start = PrepCycletime
 
                     If Flush1Enabled Then
-                        DP1Start = flush1cycletime
+                        DP1Start = Flush1Start + flush1cycletime
                     Else
                         DP1Start = Flush1Start
                     End If
@@ -4919,7 +4925,7 @@ Public Class FormMain
 
                 If .Items.Count > 1 Then
                 Else
-                    MainMessage(5, PartID)
+                    'MainMessage(5, PartID)
 
                 End If
             End With

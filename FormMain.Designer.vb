@@ -473,6 +473,8 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.txtbx_BackpressureSensor = New System.Windows.Forms.TextBox()
         Me.panel_FormControl.SuspendLayout()
         Me.Panel12.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1180,6 +1182,8 @@ Partial Class FormMain
         Me.Panel10.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.Panel10.BackgroundImage = CType(resources.GetObject("Panel10.BackgroundImage"), System.Drawing.Image)
         Me.Panel10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Panel10.Controls.Add(Me.Label26)
+        Me.Panel10.Controls.Add(Me.txtbx_BackpressureSensor)
         Me.Panel10.Controls.Add(Me.Label3)
         Me.Panel10.Controls.Add(Me.txtbx_BackPressActual)
         Me.Panel10.Controls.Add(Me.lbl_Flowmtr)
@@ -5430,6 +5434,28 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.BackColor = System.Drawing.Color.White
+        Me.Label26.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.Location = New System.Drawing.Point(776, 314)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(120, 17)
+        Me.Label26.TabIndex = 354
+        Me.Label26.Text = "Back Pressure (kPa)"
+        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtbx_BackpressureSensor
+        '
+        Me.txtbx_BackpressureSensor.BackColor = System.Drawing.SystemColors.Info
+        Me.txtbx_BackpressureSensor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_BackpressureSensor.Location = New System.Drawing.Point(678, 321)
+        Me.txtbx_BackpressureSensor.Name = "txtbx_BackpressureSensor"
+        Me.txtbx_BackpressureSensor.ReadOnly = True
+        Me.txtbx_BackpressureSensor.Size = New System.Drawing.Size(90, 25)
+        Me.txtbx_BackpressureSensor.TabIndex = 353
+        '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -5946,4 +5972,6 @@ Partial Class FormMain
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents Label24 As Label
     Friend WithEvents Label20 As Label
+    Friend WithEvents Label26 As Label
+    Friend WithEvents txtbx_BackpressureSensor As TextBox
 End Class

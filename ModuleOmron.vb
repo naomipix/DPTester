@@ -1107,7 +1107,7 @@ Module ModuleOmron
                 End If
 
                 FormMain.txtbx_BackPressActual.Text = AIn(1).ToString
-
+                FormMain.txtbx_BackpressureSensor.Text = AIn(11).ToString
                 FormMain.lbl_InletPress.Text = AIn(9).ToString
                 FormMain.lbl_OutletPress.Text = AIn(10).ToString
                 FormMain.lbl_Flowmtr.Text = AIn(12).ToString
@@ -2374,7 +2374,7 @@ Module ModuleOmron
                 Dim vis As Double = A * exp
                 result_dp = Math.Round(CDec((1.002 / vis) * (result_inletpressure - result_outletpressure)), 2) - CType(FormMain.lbl_BlankDP.Text, Decimal)
             End If
-            result_backpressure = AIn(1)
+            result_backpressure = AIn(11)
             result_pumprpm = AIn(2)
             newrw(0) = serialusageid
             newrw(1) = result_samplingtime
@@ -2549,7 +2549,11 @@ Module ModuleOmron
         End If
         FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)
         FormMain.lbl_ProductFlowrate.Text = CType(Math.Round(result_finalflowrate, 3), String)
-        FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature - 273.15, 3), String)
+        If result_finaltemperature = 0 Then
+            FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature, 3), String)
+        Else
+            FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature - 273.15, 3), String)
+        End If
         FormMain.lbl_ProductInlet.Text = CType(Math.Round(result_finalinlet, 3), String)
         FormMain.lbl_ProductOutlet.Text = CType(Math.Round(result_finaloutlet, 3), String)
         FormMain.lbl_ProductBackpress.Text = CType(Math.Round(result_finalbackpressure, 3), String)

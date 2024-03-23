@@ -97,6 +97,8 @@ Public Class FormResultGraph
         ' Display Form Control
         panel_FormControl.Visible = True
 
+        ' Reload Tooltip CheckBox
+        checkbx_ShowTooltip_CheckedChanged(Nothing, Nothing)
     End Sub
 
     Private Sub InitializeResultChartXAxes()
@@ -893,7 +895,7 @@ Public Class FormResultGraph
                 Flush1Start = Prepcycletime
 
                 If Flush1Enabled Then
-                    DP1Start = Flush1cycletime
+                    DP1Start = Flush1Start + Flush1cycletime
                 Else
                     DP1Start = Flush1Start
                 End If
@@ -1054,6 +1056,10 @@ Public Class FormResultGraph
                     .IsVisible = Flush1Enabled,
                     .Xi = Flush1Start,
                     .Xj = DP1Start,
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    },
                     .Fill = New SolidColorPaint With {.Color = SKColors.Yellow.WithAlpha(20)},
                     .Label = "",
                     .LabelSize = 12,
@@ -1636,7 +1642,7 @@ Public Class FormResultGraph
     End Sub
 
     Private Sub checkbx_ShowTooltip_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_ShowTooltip.CheckedChanged
-        If CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden Then
+        If checkbx_ShowTooltip.Checked Then 'CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden Then
             CartesianChart_ResultGraph.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Top
 
             If CartesianChart_ResultGraph.XAxes.Count > 0 Then

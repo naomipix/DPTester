@@ -85,7 +85,7 @@ Public Class FormRecipeManagement
     'Private nom_i_flush1filltime As Integer = 5
     'Private nom_i_flush1bleedtime As Integer = 5
     Private nom_d_flush1flow As Decimal = 3.0
-    Private nom_d_flush1flowtol As Decimal = 0.2
+    Private nom_d_flush1flowtol As Decimal = 0.5
     Private nom_d_flush1pressure As Decimal = 5.0
     Private nom_i_flush1stabilize As Integer = 5
     Private nom_i_flush1time As Integer = 60
@@ -100,7 +100,7 @@ Public Class FormRecipeManagement
     Private nom_i_dptesttime As Integer = 60
     Private nom_d_dptestlowlimit As Decimal = 0.0
     Private nom_d_dptestuplimit As Decimal = 10.0
-    Private nom_i_dptestpoints As Integer
+    Private nom_i_dptestpoints As Integer = 20
     Private nom_str_dptest2enable As String = "Disable"
 
     Private nom_str_flush2enable As String = "Disable"
@@ -6991,6 +6991,9 @@ Public Class FormRecipeManagement
             .Columns("jig_description").HeaderCell.Value = "Jig Type"
             .Columns("recipe_type").HeaderCell.Value = "Recipe Type"
             .Columns("recipe_rev").HeaderCell.Value = "Recipe Rev."
+            .Columns("fitting_inlet").HeaderCell.Value = "Inlet Fitting"
+            .Columns("fitting_outlet").HeaderCell.Value = "Outlet Fitting"
+            .Columns("fitting_blank").HeaderCell.Value = "Blank Fitting"
 
             'Set Column Width
             .Columns("recipe_id").Width = 140
@@ -7050,6 +7053,9 @@ Public Class FormRecipeManagement
             .Columns("jig_description").Width = 60
             .Columns("recipe_type").Width = 90
             .Columns("recipe_rev").Width = 60
+            .Columns("fitting_inlet").Width = 60
+            .Columns("fitting_outlet").Width = 60
+            .Columns("fitting_blank").Width = 60
 
 
             'Header Cell Alignment
@@ -7110,6 +7116,9 @@ Public Class FormRecipeManagement
             .Columns("jig_description").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("recipe_type").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("recipe_rev").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("fitting_inlet").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("fitting_outlet").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns("fitting_blank").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             'Header Cell Font Bold
             .Columns("recipe_id").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
@@ -7169,6 +7178,9 @@ Public Class FormRecipeManagement
             .Columns("jig_description").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("recipe_type").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("recipe_rev").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            .Columns("fitting_inlet").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            .Columns("fitting_outlet").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            .Columns("fitting_blank").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
 
 
             'Order the column as per requirement
@@ -7231,6 +7243,9 @@ Public Class FormRecipeManagement
             .Columns("drain3_circuit").DisplayIndex = 44 + 8
             .Columns("drain3_back_pressure").DisplayIndex = 45 + 8
             .Columns("drain3_time").DisplayIndex = 46 + 8
+            .Columns("fitting_inlet").DisplayIndex = 47 + 8
+            .Columns("fitting_outlet").DisplayIndex = 48 + 8
+            .Columns("fitting_blank").DisplayIndex = 49 + 8
 
 
 
