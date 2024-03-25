@@ -2974,7 +2974,7 @@ Public Class FormMain
                     }
                     If SQL.InsertRecord("WorkOrder", Workorderparameter) = 1 Then
 
-                        LotStartTime = lbl_DateTimeClock.Text
+                        LotStartTime = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
                     Else
                         MainMessage(4, "Insert Work Order details")
                         OnContinue = False
@@ -2996,7 +2996,7 @@ Public Class FormMain
                             dtlotusage = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id ='{LotID}' ORDER BY lot_attempt ASC")
                             If dtlotusage.Rows.Count > 0 Then
                                 LotAttempt = dtlotusage.Rows.Count + 1
-                                LotStartTime = lbl_DateTimeClock.Text
+                                LotStartTime = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
 
                                 ' Check if user want to use back previous calibration
                                 'Dim dtRetainedMemory As DataTable = SQL.ReadRecords("SELECT retained_value FROM [0_RetainedMemory] WHERE id='33'")
@@ -3155,7 +3155,7 @@ Public Class FormMain
                 Dim Lotusageparameter As New Dictionary(Of String, Object) From {
                     {"lot_id", LotID},
                     {"lot_attempt", LotAttempt},
-                    {"lot_start_time", lbl_DateTimeClock.Text}, 'DateTime.Now 'LotStartTime not updated, causing sql insert error
+                    {"lot_start_time", DateTime.Now.ToString("s")},'lbl_DateTimeClock.Text}, 'DateTime.Now 'LotStartTime not updated, causing sql insert error
                     {"run_by", PublicVariables.LoginUserName}
                 }
                 If SQL.InsertRecord("LotUsage", Lotusageparameter) = 1 Then
@@ -3226,7 +3226,7 @@ Public Class FormMain
 
                         If RecipeCheckOK Then
                             Dim restoreCalibrations As Boolean = False
-                            Dim CurrentDateTime As String = lbl_DateTimeClock.Text
+                            Dim CurrentDateTime As String = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
                             Dim CurrentDateTime2 As DateTime = DateTime.Now
                             Dim PrevCalDateTime As DateTime = dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")
 
@@ -3700,12 +3700,13 @@ Public Class FormMain
                 Lotusageid = dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("id")
                 Dim dummyfloat As Decimal = 0
                 Dim dummystring As String = "NA"
+                Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
                 Dim Productionparameter As New Dictionary(Of String, Object) From {
                     {"serial_uid", SerialUid},
                         {"serial_number", txtbx_SerialNumber.Text},
                         {"serial_attempt", SerialAttempt},
                         {"lot_usage_id", Lotusageid},
-                        {"timestamp", lbl_DateTimeClock.Text},
+                        {"timestamp", DateTimeNowInStr},
                         {"temperature", dummyfloat},
                         {"flowrate", dummyfloat},
                         {"inlet_pressure", dummyfloat},
@@ -4549,7 +4550,7 @@ Public Class FormMain
 
 
         If OnContinue = True Then
-            LotEndTime = lbl_DateTimeClock.Text
+            LotEndTime = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
 
             Dim Updateparameter As New Dictionary(Of String, Object) From {
                 {"lot_end_time", LotEndTime}
@@ -4862,6 +4863,16 @@ Public Class FormMain
             PCStatus(0)(10) = True
         End If
 
+        If OnContinue = True Then
+
+            'CalibrateChartDPValue.Clear()
+            'CalibrateChartInletValue.Clear()
+            'CalibrateChartOutletValue.Clear()
+            'CalibrateChartBPValue.Clear()
+            'CalibrateChartRPMValue.Clear()
+            'CalibrateChartFLWRValue.Clear()
+            'CalibrateChartTempValue.Clear()
+        End If
     End Sub
 
     Public Sub LoadMainRecipeCombo()

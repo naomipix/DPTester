@@ -156,6 +156,9 @@ Public Class FormCalibration
 
         ' Reload Tooltip CheckBox
         checkbx_ShowTooltip_CheckedChanged(Nothing, Nothing)
+
+        ' Reset Zoom
+        btn_ResetZoom_Click(Nothing, Nothing)
     End Sub
 
     Public Sub InitializeCalForm()
@@ -219,7 +222,7 @@ Public Class FormCalibration
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                         {"recipe_id", FormMain.cmbx_RecipeID.Text},
                         {"recipe_rev", txtbx_RecipeRev.Text},
-                        {"calibration_time", lbl_DateTimeClock.Text},
+                        {"calibration_time", DateTime.Now.ToString("s")},'lbl_DateTimeClock.Text},
                         {"cal_inlet_pressure", "0"},
                         {"cal_outlet_pressure", "0"},
                         {"cal_diff_pressure", "0"},
@@ -702,6 +705,8 @@ Public Class FormCalibration
             txtbx_ActCalCycletime.Text = "0"
 
             txtbx_ActVerCycletime.Text = "0"
+
+            txtbx_CalDate.Text = Nothing
 
             tmr_Calibration.Enabled = False
             txtbx_CalInletPressure.Text = Nothing

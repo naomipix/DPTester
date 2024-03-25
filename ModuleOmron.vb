@@ -723,10 +723,12 @@ Module ModuleOmron
                     alarmdescription.Append(" ")
                     alarmdescription.Append(dtAlarm.Rows((i * 16) + j).Item("description"))
 
+                    Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
+
                     If Not Currentalarm.ContainsKey(alarmid) Then
                         Dim alarmmessage As DataRow = Mainalarm.NewRow()
                         Dim alarmhistory As New Dictionary(Of String, Object) From {
-                            {"trigger_time", FormMain.lbl_DateTimeClock.Text},
+                            {"trigger_time", DateTimeNowInStr}, 'FormMain.lbl_DateTimeClock.Text},
                             {"alarm_code", alarmcode}
                         }
                         SQL.InsertRecord("AlarmHistory", alarmhistory)
@@ -734,7 +736,7 @@ Module ModuleOmron
 
                         alarmmessage.Item("id") = alarmid
                         alarmmessage.Item("S.No") = Mainalarm.Rows.Count + 1
-                        alarmmessage.Item("Trigger Time") = FormMain.lbl_DateTimeClock.Text
+                        alarmmessage.Item("Trigger Time") = DateTimeNowInStr 'FormMain.lbl_DateTimeClock.Text
                         alarmmessage.Item("Description") = dtAlarm.Rows((i * 16) + j).Item("description")
                         alarmmessage.Item("Alarm Code") = alarmcode
                         Mainalarm.Rows.Add(alarmmessage)
@@ -754,7 +756,7 @@ Module ModuleOmron
                             Dim rows As DataRow()
                             Dim findrow As Integer
                             Dim reset As New Dictionary(Of String, Object) From {
-                                {"reset_time", FormMain.lbl_DateTimeClock.Text}
+                                {"reset_time", DateTime.Now.ToString("s")} ' FormMain.lbl_DateTimeClock.Text}
                             }
                             'Dim Condition As String = $"lot_id ='{LotID}' AND lot_attempt = '{LotAttempt}'"
                             rows = Mainalarm.Select($"id = '{dtAlarm.Rows((i * 16) + j).Item("id")}'")
