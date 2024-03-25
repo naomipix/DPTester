@@ -7281,16 +7281,35 @@ Public Class FormRecipeManagement
     End Sub
 
     Private Sub btn_RcpDetailEdit_Click(sender As Object, e As EventArgs) Handles btn_RcpDetailEdit.Click
-        If dgv_RecipeDetails.SelectedRows.Count > 0 Then
-            Dim row As DataGridViewRow = dgv_RecipeDetails.CurrentRow
-            Dim recipeid As String = row.Cells("recipe_id").Value
-            Dim partid As String = row.Cells("part_id").Value
-            Dim filtertype As String = row.Cells("filter_type").Value
-            tabctrl_RecipeCtrl.SelectedTab = tabpg_Edit
-            cmbx_RcpEditFilterType.Text = filtertype
-            cmbx_RcpEditPartID.Text = partid
-            cmbx_RcpEditRecipeID.Text = recipeid
+        Dim dgv As DataGridView = dgv_RecipeDetails
+
+        If dgv.SelectedCells.Count > 0 Then
+            Dim selectedCell As DataGridViewCell = dgv.SelectedCells(0)
+
+            'Dim columnIndex As Integer = selectedCell.ColumnIndex
+            Dim rowIndex As Integer = selectedCell.RowIndex
+
+            If rowIndex >= 0 Then
+                Dim recipeid As String = dgv.Rows(rowIndex).Cells("recipe_id").Value 'row.Cells("recipe_id").Value
+                Dim partid As String = dgv.Rows(rowIndex).Cells("part_id").Value 'row.Cells("part_id").Value
+                Dim filtertype As String = dgv.Rows(rowIndex).Cells("filter_type").Value 'row.Cells("filter_type").Value
+                tabctrl_RecipeCtrl.SelectedTab = tabpg_Edit
+                cmbx_RcpEditFilterType.Text = filtertype
+                cmbx_RcpEditPartID.Text = partid
+                cmbx_RcpEditRecipeID.Text = recipeid
+            End If
         End If
+
+        'If dgv_RecipeDetails.SelectedRows.Count > 0 Then
+        '    Dim row As DataGridViewRow = dgv_RecipeDetails.CurrentRow
+        '    Dim recipeid As String = row.Cells("recipe_id").Value
+        '    Dim partid As String = row.Cells("part_id").Value
+        '    Dim filtertype As String = row.Cells("filter_type").Value
+        '    tabctrl_RecipeCtrl.SelectedTab = tabpg_Edit
+        '    cmbx_RcpEditFilterType.Text = filtertype
+        '    cmbx_RcpEditPartID.Text = partid
+        '    cmbx_RcpEditRecipeID.Text = recipeid
+        'End If
     End Sub
 
     Private Sub btn_RcpDetailExport_Click(sender As Object, e As EventArgs) Handles btn_RcpDetailExport.Click

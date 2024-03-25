@@ -2828,7 +2828,12 @@ Public Class FormMain
                 MainMessage(1, "Quantity")
                 OnContinue = False
             Else
-                lotquantity = CType(Quantity, Integer)
+                Try
+                    lotquantity = CType(Quantity, Integer)
+                Catch ex As Exception
+                    MsgBox("Quantity Entered Incorrect", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                    OnContinue = False
+                End Try
             End If
         End If
 

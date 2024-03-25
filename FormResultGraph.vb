@@ -1483,7 +1483,7 @@ Public Class FormResultGraph
 
             FROM ProductionDetail 
             LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id
-            LEFT JOIN RecipeTable ON LotUsage.recipe_id=RecipeTable.recipe_id
+            LEFT JOIN RecipeTable ON LotUsage.recipe_id=RecipeTable.recipe_id AND LotUsage.recipe_rev=RecipeTable.recipe_rev
             LEFT JOIN WorkOrder ON LotUsage.lot_id=WorkOrder.lot_id 
             WHERE serial_uid = '{lotid}-{serialnum}' 
             AND serial_attempt ='{attempt}'
