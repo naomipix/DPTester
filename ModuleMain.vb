@@ -6,9 +6,6 @@ Imports System.Net.NetworkInformation
 Imports System.Reflection
 Imports System.Security.Cryptography
 Imports System.Text
-Imports System.Windows.Forms.DataVisualization.Charting
-Imports System.Xml.Schema
-Imports DocumentFormat.OpenXml.Spreadsheet
 Imports LiveChartsCore.Defaults
 Imports LiveChartsCore.SkiaSharpView.WinForms
 
