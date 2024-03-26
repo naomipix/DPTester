@@ -192,6 +192,7 @@ Public Class FormMain
         ' DoubleBuffer DataGridView
         Dim dgvArr() As DataGridView = {
             dgv_ProdDetail,
+            dgv_LotSummary,
             dgv_CurrentAlarm,
             dgv_AlarmHistory,
                              _
