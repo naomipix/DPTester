@@ -151,7 +151,7 @@ Public Class FormMain
     Dim TotalCycleTime As Integer
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Start Clock Timer
+        ' Start Clock Timer 
         TimerModule.clockTimer.Start()
 
         'Create Directories
