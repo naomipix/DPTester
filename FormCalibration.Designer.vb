@@ -24,8 +24,8 @@ Partial Class FormCalibration
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCalibration))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -375,12 +375,12 @@ Partial Class FormCalibration
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.txtbx_CalVertol)
+        Me.Panel2.Controls.Add(Me.dsp_CalVertol)
         Me.Panel2.Controls.Add(Me.dsp_RecipeID)
         Me.Panel2.Controls.Add(Me.txtbx_RecipeID)
         Me.Panel2.Controls.Add(Me.txtbx_CalDate)
-        Me.Panel2.Controls.Add(Me.txtbx_CalVertol)
         Me.Panel2.Controls.Add(Me.dsp_CalDate)
-        Me.Panel2.Controls.Add(Me.dsp_CalVertol)
         Me.Panel2.Controls.Add(Me.Panel4)
         Me.Panel2.Controls.Add(Me.txtbx_CalBackPressure)
         Me.Panel2.Controls.Add(Me.dsp_CalBackPressure)
@@ -435,7 +435,7 @@ Partial Class FormCalibration
         '
         Me.txtbx_CalDate.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalDate.Location = New System.Drawing.Point(166, 608)
+        Me.txtbx_CalDate.Location = New System.Drawing.Point(166, 287)
         Me.txtbx_CalDate.Name = "txtbx_CalDate"
         Me.txtbx_CalDate.ReadOnly = True
         Me.txtbx_CalDate.Size = New System.Drawing.Size(250, 25)
@@ -446,7 +446,7 @@ Partial Class FormCalibration
         '
         Me.txtbx_CalVertol.BackColor = System.Drawing.SystemColors.Window
         Me.txtbx_CalVertol.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_CalVertol.Location = New System.Drawing.Point(166, 562)
+        Me.txtbx_CalVertol.Location = New System.Drawing.Point(166, 241)
         Me.txtbx_CalVertol.Name = "txtbx_CalVertol"
         Me.txtbx_CalVertol.ReadOnly = True
         Me.txtbx_CalVertol.Size = New System.Drawing.Size(250, 25)
@@ -456,17 +456,17 @@ Partial Class FormCalibration
         'dsp_CalDate
         '
         Me.dsp_CalDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalDate.Location = New System.Drawing.Point(-2, 602)
+        Me.dsp_CalDate.Location = New System.Drawing.Point(-2, 281)
         Me.dsp_CalDate.Name = "dsp_CalDate"
         Me.dsp_CalDate.Size = New System.Drawing.Size(162, 35)
         Me.dsp_CalDate.TabIndex = 54
-        Me.dsp_CalDate.Text = "Calibration Date :"
+        Me.dsp_CalDate.Text = "Last Calibrated :"
         Me.dsp_CalDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_CalVertol
         '
         Me.dsp_CalVertol.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_CalVertol.Location = New System.Drawing.Point(10, 557)
+        Me.dsp_CalVertol.Location = New System.Drawing.Point(10, 236)
         Me.dsp_CalVertol.Name = "dsp_CalVertol"
         Me.dsp_CalVertol.Size = New System.Drawing.Size(150, 35)
         Me.dsp_CalVertol.TabIndex = 54
@@ -518,6 +518,7 @@ Partial Class FormCalibration
         Me.txtbx_CalBackPressure.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalBackPressure.TabIndex = 14
         Me.txtbx_CalBackPressure.TabStop = False
+        Me.txtbx_CalBackPressure.Visible = False
         '
         'dsp_CalBackPressure
         '
@@ -528,6 +529,7 @@ Partial Class FormCalibration
         Me.dsp_CalBackPressure.TabIndex = 8
         Me.dsp_CalBackPressure.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
         Me.dsp_CalBackPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_CalBackPressure.Visible = False
         '
         'txtbx_ActCalCycletime
         '
@@ -539,6 +541,7 @@ Partial Class FormCalibration
         Me.txtbx_ActCalCycletime.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_ActCalCycletime.TabIndex = 17
         Me.txtbx_ActCalCycletime.TabStop = False
+        Me.txtbx_ActCalCycletime.Visible = False
         '
         'dsp_ActCalCycletime
         '
@@ -549,6 +552,7 @@ Partial Class FormCalibration
         Me.dsp_ActCalCycletime.TabIndex = 8
         Me.dsp_ActCalCycletime.Text = "Actual Calibration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Cycle Time (s) :"
         Me.dsp_ActCalCycletime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_ActCalCycletime.Visible = False
         '
         'btn_Discard
         '
@@ -556,7 +560,7 @@ Partial Class FormCalibration
         Me.btn_Discard.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Discard.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Discard.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Discard.Location = New System.Drawing.Point(148, 739)
+        Me.btn_Discard.Location = New System.Drawing.Point(148, 724)
         Me.btn_Discard.Name = "btn_Discard"
         Me.btn_Discard.Size = New System.Drawing.Size(150, 60)
         Me.btn_Discard.TabIndex = 52
@@ -569,7 +573,7 @@ Partial Class FormCalibration
         Me.btn_Verify.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Verify.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Verify.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Verify.Location = New System.Drawing.Point(246, 663)
+        Me.btn_Verify.Location = New System.Drawing.Point(246, 638)
         Me.btn_Verify.Name = "btn_Verify"
         Me.btn_Verify.Size = New System.Drawing.Size(150, 60)
         Me.btn_Verify.TabIndex = 51
@@ -582,7 +586,7 @@ Partial Class FormCalibration
         Me.btn_Calibrate.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btn_Calibrate.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_Calibrate.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_Calibrate.Location = New System.Drawing.Point(50, 663)
+        Me.btn_Calibrate.Location = New System.Drawing.Point(50, 638)
         Me.btn_Calibrate.Name = "btn_Calibrate"
         Me.btn_Calibrate.Size = New System.Drawing.Size(150, 60)
         Me.btn_Calibrate.TabIndex = 50
@@ -610,6 +614,7 @@ Partial Class FormCalibration
         Me.txtbx_CalDPPoints.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalDPPoints.TabIndex = 19
         Me.txtbx_CalDPPoints.TabStop = False
+        Me.txtbx_CalDPPoints.Visible = False
         '
         'dsp_EstCalCycletime
         '
@@ -618,7 +623,7 @@ Partial Class FormCalibration
         Me.dsp_EstCalCycletime.Name = "dsp_EstCalCycletime"
         Me.dsp_EstCalCycletime.Size = New System.Drawing.Size(150, 35)
         Me.dsp_EstCalCycletime.TabIndex = 8
-        Me.dsp_EstCalCycletime.Text = "Estimated Calibration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Cycle Time (s) :"
+        Me.dsp_EstCalCycletime.Text = "Calibration/Verification" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Cycle Time (s) :"
         Me.dsp_EstCalCycletime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtbx_CalDPTesttime
@@ -631,6 +636,7 @@ Partial Class FormCalibration
         Me.txtbx_CalDPTesttime.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalDPTesttime.TabIndex = 18
         Me.txtbx_CalDPTesttime.TabStop = False
+        Me.txtbx_CalDPTesttime.Visible = False
         '
         'dsp_CalDPPoints
         '
@@ -641,6 +647,7 @@ Partial Class FormCalibration
         Me.dsp_CalDPPoints.TabIndex = 8
         Me.dsp_CalDPPoints.Text = "DP Test Points :"
         Me.dsp_CalDPPoints.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_CalDPPoints.Visible = False
         '
         'dsp_CalDPTesttime
         '
@@ -651,6 +658,7 @@ Partial Class FormCalibration
         Me.dsp_CalDPTesttime.TabIndex = 8
         Me.dsp_CalDPTesttime.Text = "DP Test Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
         Me.dsp_CalDPTesttime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_CalDPTesttime.Visible = False
         '
         'dsp_CalStabilizeTime
         '
@@ -661,6 +669,7 @@ Partial Class FormCalibration
         Me.dsp_CalStabilizeTime.TabIndex = 8
         Me.dsp_CalStabilizeTime.Text = "DP Test Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min)  :"
         Me.dsp_CalStabilizeTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_CalStabilizeTime.Visible = False
         '
         'dsp_ActVerCycletime
         '
@@ -671,6 +680,7 @@ Partial Class FormCalibration
         Me.dsp_ActVerCycletime.TabIndex = 8
         Me.dsp_ActVerCycletime.Text = "Actual Verification" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Cycle Time (s) :"
         Me.dsp_ActVerCycletime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_ActVerCycletime.Visible = False
         '
         'dsp_EstVerCycletime
         '
@@ -681,6 +691,7 @@ Partial Class FormCalibration
         Me.dsp_EstVerCycletime.TabIndex = 8
         Me.dsp_EstVerCycletime.Text = "Estimated Verification" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Cycle Time (s) :"
         Me.dsp_EstVerCycletime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_EstVerCycletime.Visible = False
         '
         'dsp_OperatorID
         '
@@ -702,6 +713,7 @@ Partial Class FormCalibration
         Me.txtbx_CalDPTestFlowrate.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_CalDPTestFlowrate.TabIndex = 16
         Me.txtbx_CalDPTestFlowrate.TabStop = False
+        Me.txtbx_CalDPTestFlowrate.Visible = False
         '
         'txtbx_ActVerCycletime
         '
@@ -713,6 +725,7 @@ Partial Class FormCalibration
         Me.txtbx_ActVerCycletime.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_ActVerCycletime.TabIndex = 13
         Me.txtbx_ActVerCycletime.TabStop = False
+        Me.txtbx_ActVerCycletime.Visible = False
         '
         'txtbx_EstVerCycletime
         '
@@ -724,6 +737,7 @@ Partial Class FormCalibration
         Me.txtbx_EstVerCycletime.Size = New System.Drawing.Size(250, 25)
         Me.txtbx_EstVerCycletime.TabIndex = 12
         Me.txtbx_EstVerCycletime.TabStop = False
+        Me.txtbx_EstVerCycletime.Visible = False
         '
         'txtbx_JigType
         '
@@ -1068,14 +1082,14 @@ Partial Class FormCalibration
         Me.dgv_CalibrationResult.AllowUserToDeleteRows = False
         Me.dgv_CalibrationResult.AllowUserToResizeColumns = False
         Me.dgv_CalibrationResult.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.dgv_CalibrationResult.ColumnHeadersHeight = 60
         Me.dgv_CalibrationResult.Location = New System.Drawing.Point(3, 36)
         Me.dgv_CalibrationResult.Name = "dgv_CalibrationResult"
@@ -1089,14 +1103,14 @@ Partial Class FormCalibration
         Me.dgv_VerificationResult.AllowUserToDeleteRows = False
         Me.dgv_VerificationResult.AllowUserToResizeColumns = False
         Me.dgv_VerificationResult.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
         Me.dgv_VerificationResult.ColumnHeadersHeight = 60
         Me.dgv_VerificationResult.Location = New System.Drawing.Point(633, 36)
         Me.dgv_VerificationResult.Name = "dgv_VerificationResult"

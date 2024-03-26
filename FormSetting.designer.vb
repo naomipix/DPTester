@@ -2395,7 +2395,7 @@ Partial Class FormSetting
         '
         Me.chklstbx_MainMenu.CheckOnClick = True
         Me.chklstbx_MainMenu.FormattingEnabled = True
-        Me.chklstbx_MainMenu.Items.AddRange(New Object() {"Main", "Production Details", "Status", "Manual Control", "Alarm"})
+        Me.chklstbx_MainMenu.Items.AddRange(New Object() {"Main", "Test Summary", "Status", "Manual Control", "Alarm"})
         Me.chklstbx_MainMenu.Location = New System.Drawing.Point(329, 47)
         Me.chklstbx_MainMenu.Name = "chklstbx_MainMenu"
         Me.chklstbx_MainMenu.Size = New System.Drawing.Size(144, 104)

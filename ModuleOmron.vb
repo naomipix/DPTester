@@ -630,12 +630,12 @@ Module ModuleOmron
             DIn(i) = Int2BoolArr(FINSinput(start + i))
         Next
 
-        For i As Integer = 0 To 13
+        For i As Integer = 0 To 15
             FormMain.dgv_DigitalInput.Rows(i).Cells("value").Value = DIn(0)(i)
         Next
 
-        For i As Integer = 14 To 29
-            FormMain.dgv_DigitalInput.Rows(i).Cells("value").Value = DIn(1)(i - 14)
+        For i As Integer = 16 To 31
+            FormMain.dgv_DigitalInput.Rows(i).Cells("value").Value = DIn(1)(i - 16)
         Next
 
 
@@ -683,7 +683,7 @@ Module ModuleOmron
         For i As Integer = 0 To AOut.Length - 1
             AOut(i) = Int2Float(FINSinput, start + (i * 2))
         Next
-        For i As Integer = 0 To 5
+        For i As Integer = 0 To 3
             FormMain.dgv_AnalogOutput.Rows(i).Cells("value").Value = AOut(i)
         Next
         Return True

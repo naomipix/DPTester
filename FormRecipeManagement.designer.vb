@@ -1050,6 +1050,7 @@ Partial Class FormRecipeManagement
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(631, 170)
         Me.Panel7.TabIndex = 37
+        Me.Panel7.Visible = False
         '
         'Label14
         '
@@ -2268,6 +2269,7 @@ Partial Class FormRecipeManagement
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(631, 170)
         Me.Panel4.TabIndex = 36
+        Me.Panel4.Visible = False
         '
         'Label13
         '

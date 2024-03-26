@@ -588,7 +588,7 @@ Partial Class FormResultSummary
         Me.dsp_ResultTemperature.Name = "dsp_ResultTemperature"
         Me.dsp_ResultTemperature.Size = New System.Drawing.Size(200, 35)
         Me.dsp_ResultTemperature.TabIndex = 8
-        Me.dsp_ResultTemperature.Text = "DP Test Temperature (K) :"
+        Me.dsp_ResultTemperature.Text = "DP Test Temperature (C) :"
         Me.dsp_ResultTemperature.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_ResultCalOffset
@@ -947,7 +947,7 @@ Partial Class FormResultSummary
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(1904, 46)
         Me.Label1.TabIndex = 101
-        Me.Label1.Text = "Individual Result Summary"
+        Me.Label1.Text = "Test Detail"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'FormResultSummary

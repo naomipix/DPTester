@@ -1796,7 +1796,7 @@ Public Class FormMain
         Next
 
         'IO Status [Digital Input]
-        For i As Integer = 0 To 29
+        For i As Integer = 0 To 31
             ' Assign Defaults
             dgv_DigitalInput.Rows.Add(i + 1, $"Digital Input-{i + 1}", $"DIO_IN_{i}", False)
 
@@ -1856,7 +1856,7 @@ Public Class FormMain
         Next
 
         'IO Status [Analog Output]
-        For i As Integer = 0 To 5
+        For i As Integer = 0 To 3
             ' Assign Defaults
             dgv_AnalogOutput.Rows.Add(i + 1, $"Analog Output-{i + 1}", $"AIO_OUT_{i}", "0.0")
 

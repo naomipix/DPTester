@@ -1144,7 +1144,11 @@ Public Class FormSetting
                 dtInsert.Rows.Add(chkbx_MainMenu.Text)
 
                 For i As Integer = 0 To chklstbx_MainMenu.CheckedItems.Count - 1
-                    dtInsert.Rows.Add(chklstbx_MainMenu.CheckedItems(i))
+                    If chklstbx_MainMenu.CheckedItems(i) = "Test Summary" Then
+                        dtInsert.Rows.Add("Production Details")
+                    Else
+                        dtInsert.Rows.Add(chklstbx_MainMenu.CheckedItems(i))
+                    End If
                 Next
             End If
 

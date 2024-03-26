@@ -6936,6 +6936,9 @@ Public Class FormRecipeManagement
             .Columns("user_created1").Visible = False
             .Columns("date_created").Visible = False
             .Columns("created_time").Visible = False
+            .Columns("fitting_inlet").Visible = False
+            .Columns("fitting_outlet").Visible = False
+            .Columns("fitting_blank").Visible = False
 
             'Rename Columns
             .Columns("recipe_id").HeaderCell.Value = "Recipe ID"

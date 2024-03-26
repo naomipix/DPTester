@@ -34,7 +34,7 @@ Public Class FormResultGraph
         lbl_Version.Text = PublicVariables.AppVersion
 
         ' Load Form Title
-        Me.Text = PublicVariables.ProgramTitle & " - " & "Result Graph"
+        Me.Text = PublicVariables.ProgramTitle & " - " & "Test Graph"
         lbl_Title.Text = PublicVariables.ProgramTitle
 
         ' Load User Details
@@ -1543,7 +1543,18 @@ Public Class FormResultGraph
 
         If Oncontinue = True Then
             txtbx_GraphTimestamp.Text = dtproductiondetail(0)("productiondetail_timestamp")
-            txtbx_GraphTemperature.Text = dtproductiondetail(0)("productiondetail_temperature")
+
+            'txtbx_GraphTemperature.Text = dtproductiondetail(0)("productiondetail_temperature")
+            If CStr(dtproductiondetail(0)("productiondetail_temperature")) = "0" Then
+                txtbx_GraphTemperature.Text = "0.0"
+            Else
+                Try
+                    txtbx_GraphTemperature.Text = CDec(dtproductiondetail(0)("productiondetail_temperature")) - 273.15
+                Catch ex As Exception
+                    txtbx_GraphTemperature.Text = "0.0"
+                End Try
+            End If
+
             txtbx_GraphFlowrate.Text = dtproductiondetail(0)("productiondetail_flowrate")
             txtbx_GraphInletPressure.Text = dtproductiondetail(0)("productiondetail_inlet_pressure")
             txtbx_GraphOutletPressure.Text = dtproductiondetail(0)("productiondetail_outlet_pressure")
