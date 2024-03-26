@@ -8,6 +8,7 @@ Imports System.Security.Cryptography
 Imports System.Text
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Xml.Schema
+Imports DocumentFormat.OpenXml.Spreadsheet
 Imports LiveChartsCore.Defaults
 Imports LiveChartsCore.SkiaSharpView.WinForms
 
@@ -544,11 +545,75 @@ Module SQL
 
     Public Function SQLAutoDelete() As String
         Dim dtPastSetDayCount As DataTable = SQL.ReadRecords($"SELECT id FROM ProductionDetail WHERE timestamp < DATEADD(DAY, -{PublicVariables.AutoDeleteDayAfter}, GETDATE())")
+        Dim dtPastSetDayCountEvent As DataTable = SQL.ReadRecords($"SELECT id FROM MessageLog WHERE trigger_time < DATEADD(DAY, -{PublicVariables.AutoDeleteDayAfter}, GETDATE())")
+        Dim dtPastSetDayCountAlarm As DataTable = SQL.ReadRecords($"SELECT id FROM AlarmHistory WHERE trigger_time < DATEADD(DAY, -{PublicVariables.AutoDeleteDayAfter}, GETDATE())")
 
-        For Each row As DataRow In dtPastSetDayCount.Rows
-            SQL.DeleteRecord("ProductionDetail", $"id='{row.Item("id")}'")
-            SQL.DeleteRecord("ProductResult", $"serial_usage_id='{row.Item("id")}'")
-        Next
+        'For Each row As DataRow In dtPastSetDayCount.Rows
+        '    SQL.DeleteRecord("ProductionDetail", $"id='{row.Item("id")}'")
+        '    SQL.DeleteRecord("ProductResult", $"serial_usage_id='{row.Item("id")}'")
+        'Next
+
+        ' Production Detail
+        If True Then
+            Dim ConditionStr1 As String = ""
+            Dim ConditionStr2 As String = ""
+
+            For i As Integer = 0 To dtPastSetDayCount.Rows.Count - 1
+                If i = 0 Then
+                    ConditionStr1 += $"id='{dtPastSetDayCount(i)("id")}'"
+                Else
+                    ConditionStr1 += $" OR id='{dtPastSetDayCount(i)("id")}'"
+                End If
+            Next
+            For i As Integer = 0 To dtPastSetDayCount.Rows.Count - 1
+                If i = 0 Then
+                    ConditionStr2 += $"serial_usage_id='{dtPastSetDayCount(i)("id")}'"
+                Else
+                    ConditionStr2 += $" OR serial_usage_id='{dtPastSetDayCount(i)("id")}'"
+                End If
+            Next
+
+            If ConditionStr1.Length > 0 Then
+                SQL.DeleteRecord("ProductionDetail", ConditionStr1)
+            End If
+            If ConditionStr2.Length > 0 Then
+                SQL.DeleteRecord("ProductResult", ConditionStr2)
+            End If
+        End If
+
+        ' Event Log
+        If True Then
+            Dim ConditionStr As String = ""
+
+            For i As Integer = 0 To dtPastSetDayCountEvent.Rows.Count - 1
+                If i = 0 Then
+                    ConditionStr += $"id='{dtPastSetDayCountEvent(i)("id")}'"
+                Else
+                    ConditionStr += $" OR id='{dtPastSetDayCountEvent(i)("id")}'"
+                End If
+            Next
+
+            If ConditionStr.Length > 0 Then
+                SQL.DeleteRecord("MessageLog", ConditionStr)
+            End If
+        End If
+
+        ' Alarm History
+        If True Then
+            Dim ConditionStr As String = ""
+
+            For i As Integer = 0 To dtPastSetDayCountAlarm.Rows.Count - 1
+                If i = 0 Then
+                    ConditionStr += $"id='{dtPastSetDayCountAlarm(i)("id")}'"
+                Else
+                    ConditionStr += $" OR id='{dtPastSetDayCountAlarm(i)("id")}'"
+                End If
+            Next
+
+            If ConditionStr.Length > 0 Then
+                SQL.DeleteRecord("AlarmHistory", ConditionStr)
+            End If
+        End If
 
         LastSQLAutoDelete = DateTime.Now
 
