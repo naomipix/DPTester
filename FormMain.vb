@@ -4558,8 +4558,8 @@ Public Class FormMain
             Dim Condition As String = $"lot_id ='{txtbx_LotID.Text}' AND lot_attempt = '{dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}'"
 
             If LoggedInIsDeveloper Then
-                MsgBox(Condition)
-                MsgBox($"{txtbx_LotID.Text} | {dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}")
+                'MsgBox(Condition)
+                'MsgBox($"{txtbx_LotID.Text} | {dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}")
             End If
 
             If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then

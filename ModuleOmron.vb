@@ -935,11 +935,11 @@ Module ModuleOmron
                     FormMain.btn_Calibration.Enabled = True
                     FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
                 End If
-                If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
-                    FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
-                Else
-                    FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
-                End If
+                'If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+                '    FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+                'Else
+                '    FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+                'End If
 
             Else
                 ' Manual Mode
@@ -954,11 +954,11 @@ Module ModuleOmron
                 End If
                 FormMain.btn_Calibration.Enabled = False
                 FormMain.btn_Calibration.BackColor = SystemColors.ControlDark
-                FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
-                FormMain.btn_RecipeSelectionConfirm.Enabled = False
+                'FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+                'FormMain.btn_RecipeSelectionConfirm.Enabled = False
             End If
         Else
-            FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+            'FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
 
             FormMain.btn_RecipeManagement.Enabled = True
             FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
