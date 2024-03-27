@@ -3100,11 +3100,14 @@ Public Class FormMain
     Private Sub btn_WrkOrdScnDtConfirm_Click(sender As Object, e As EventArgs) Handles btn_WrkOrdScnDtConfirm.Click
         ' Cleanup unused Lotusage before continue
         If True Then
-            ' Delete LotUsage records that do not have anything in ProductionDetail table
+            ' Delete LotUsage records that do not have corresponding details in ProductionDetail table
             SQL.DeleteRecord("LotUsage", "id NOT IN (SELECT DISTINCT lot_usage_id FROM ProductionDetail)")
 
             ' Delete ProductResult records that do not have corresponding details ProductionDetail table
             SQL.DeleteRecord("ProductResult", "serial_usage_id NOT IN (SELECT DISTINCT id FROM ProductionDetail)")
+
+            ' Delete Calibration Result records that do not have corresponding details in LotUsage table
+            SQL.DeleteRecord("CalibrationResult", "cal_id NOT IN (SELECT DISTINCT cal_result_id FROM LotUsage WHERE NOT cal_result_id IS NULL)")
         End If
 
         'Dim continueLastCal As Boolean = False
@@ -3606,7 +3609,8 @@ Public Class FormMain
                                                 {"verify_outlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_outlet_pressure")},
                                                 {"verify_diff_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_diff_pressure")},
                                                 {"cal_result", dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")},
-                                                {"cal_cycle_time", dtlotusage(dtlotusage.Rows.Count - 1)("cal_cycle_time")}
+                                                {"cal_cycle_time", dtlotusage(dtlotusage.Rows.Count - 1)("cal_cycle_time")},
+                                                {"cal_result_id", dtlotusage(dtlotusage.Rows.Count - 1)("cal_result_id")}
                                             }
                                             Dim Condition As String = $"lot_id='{LotID}' AND lot_attempt='{LotAttempt}'"
 

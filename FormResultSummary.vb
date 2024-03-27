@@ -588,9 +588,13 @@ Public Class FormResultSummary
                 If True Then
                     If dtCalResult.Rows.Count > 0 Then
                         dgv_CalibrationResult.DataSource = dtCalResult
+                    Else
+                        dgv_CalibrationResult.DataSource = Nothing
                     End If
                     If dtVerResult.Rows.Count > 0 Then
                         dgv_VerificationResult.DataSource = dtVerResult
+                    Else
+                        dgv_VerificationResult.DataSource = Nothing
                     End If
                 End If
             Else
