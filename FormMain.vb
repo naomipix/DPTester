@@ -3746,7 +3746,13 @@ Public Class FormMain
                 txtbx_SerialNumber.Enabled = True
                 btn_OprKeyInDtConfirm.Enabled = True
             Else
-                FormCalibration.ShowDialog()
+                If CommLost = False Then
+                    If PLCstatus(0)(3) = True Then
+                        FormCalibration.ShowDialog()
+                    Else
+                        MsgBox($"Switch To Auto Mode & Start Calibration", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
+                    End If
+                End If
             End If
         Else
             OnContinue = False
@@ -5189,14 +5195,21 @@ Public Class FormMain
         End If
 
         If OnContinue = True Then
+            FormCalibration.DiscardCal()
 
-            'CalibrateChartDPValue.Clear()
-            'CalibrateChartInletValue.Clear()
-            'CalibrateChartOutletValue.Clear()
-            'CalibrateChartBPValue.Clear()
-            'CalibrateChartRPMValue.Clear()
-            'CalibrateChartFLWRValue.Clear()
-            'CalibrateChartTempValue.Clear()
+            CalibrateChartDPValue.Clear()
+            CalibrateChartInletValue.Clear()
+            CalibrateChartOutletValue.Clear()
+            CalibrateChartBPValue.Clear()
+            CalibrateChartRPMValue.Clear()
+            CalibrateChartFLWRValue.Clear()
+            CalibrateChartTempValue.Clear()
+
+            For i As Integer = 0 To FormCalibration.CartesianChart_CalibrationLiveGraph.Sections.Count - 1
+                FormCalibration.CartesianChart_CalibrationLiveGraph.Sections(i).IsVisible = False
+            Next
+
+            FormCalibration.InitializeLiveChart()
         End If
     End Sub
 
