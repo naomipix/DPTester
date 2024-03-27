@@ -23,6 +23,7 @@ Partial Class FormResultSummary
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormResultSummary))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
@@ -95,6 +96,13 @@ Partial Class FormResultSummary
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.tabpg_TestResult = New System.Windows.Forms.TabPage()
+        Me.tabpg_CalResult = New System.Windows.Forms.TabPage()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.dgv_CalibrationResult = New System.Windows.Forms.DataGridView()
+        Me.dgv_VerificationResult = New System.Windows.Forms.DataGridView()
+        Me.Label4 = New System.Windows.Forms.Label()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
@@ -104,6 +112,11 @@ Partial Class FormResultSummary
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.dgv_Resultsummary, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl1.SuspendLayout()
+        Me.tabpg_TestResult.SuspendLayout()
+        Me.tabpg_CalResult.SuspendLayout()
+        CType(Me.dgv_CalibrationResult, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgv_VerificationResult, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -714,6 +727,7 @@ Partial Class FormResultSummary
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.TabControl1)
         Me.Panel3.Controls.Add(Me.dsp_ResultDrain3)
         Me.Panel3.Controls.Add(Me.txtbx_ResultDrain3)
         Me.Panel3.Controls.Add(Me.dsp_ResultDrain2)
@@ -728,7 +742,6 @@ Partial Class FormResultSummary
         Me.Panel3.Controls.Add(Me.txtbx_ResultDPTest1)
         Me.Panel3.Controls.Add(Me.dsp_Resultflush1)
         Me.Panel3.Controls.Add(Me.txtbx_Resultflush1)
-        Me.Panel3.Controls.Add(Me.dgv_Resultsummary)
         Me.Panel3.Location = New System.Drawing.Point(566, 3)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1311, 802)
@@ -901,19 +914,11 @@ Partial Class FormResultSummary
         Me.dgv_Resultsummary.AllowUserToDeleteRows = False
         Me.dgv_Resultsummary.AllowUserToResizeColumns = False
         Me.dgv_Resultsummary.AllowUserToResizeRows = False
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_Resultsummary.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.dgv_Resultsummary.ColumnHeadersHeight = 30
-        Me.dgv_Resultsummary.Location = New System.Drawing.Point(50, 125)
+        Me.dgv_Resultsummary.Location = New System.Drawing.Point(3, 3)
         Me.dgv_Resultsummary.Name = "dgv_Resultsummary"
         Me.dgv_Resultsummary.ReadOnly = True
-        Me.dgv_Resultsummary.Size = New System.Drawing.Size(1211, 640)
+        Me.dgv_Resultsummary.Size = New System.Drawing.Size(1211, 631)
         Me.dgv_Resultsummary.TabIndex = 0
         Me.dgv_Resultsummary.TabStop = False
         '
@@ -950,6 +955,110 @@ Partial Class FormResultSummary
         Me.Label1.Text = "Test Detail"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.tabpg_TestResult)
+        Me.TabControl1.Controls.Add(Me.tabpg_CalResult)
+        Me.TabControl1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabControl1.ItemSize = New System.Drawing.Size(150, 30)
+        Me.TabControl1.Location = New System.Drawing.Point(44, 122)
+        Me.TabControl1.Multiline = True
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(1225, 675)
+        Me.TabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
+        Me.TabControl1.TabIndex = 98
+        '
+        'tabpg_TestResult
+        '
+        Me.tabpg_TestResult.BackColor = System.Drawing.Color.Transparent
+        Me.tabpg_TestResult.Controls.Add(Me.dgv_Resultsummary)
+        Me.tabpg_TestResult.Location = New System.Drawing.Point(4, 34)
+        Me.tabpg_TestResult.Name = "tabpg_TestResult"
+        Me.tabpg_TestResult.Size = New System.Drawing.Size(1217, 637)
+        Me.tabpg_TestResult.TabIndex = 2
+        Me.tabpg_TestResult.Text = "Test Result"
+        '
+        'tabpg_CalResult
+        '
+        Me.tabpg_CalResult.Controls.Add(Me.Label2)
+        Me.tabpg_CalResult.Controls.Add(Me.dgv_CalibrationResult)
+        Me.tabpg_CalResult.Controls.Add(Me.dgv_VerificationResult)
+        Me.tabpg_CalResult.Controls.Add(Me.Label4)
+        Me.tabpg_CalResult.Location = New System.Drawing.Point(4, 34)
+        Me.tabpg_CalResult.Name = "tabpg_CalResult"
+        Me.tabpg_CalResult.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabpg_CalResult.Size = New System.Drawing.Size(1217, 637)
+        Me.tabpg_CalResult.TabIndex = 0
+        Me.tabpg_CalResult.Text = "Calibration Result"
+        Me.tabpg_CalResult.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label2.Location = New System.Drawing.Point(3, 3)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(600, 30)
+        Me.Label2.TabIndex = 83
+        Me.Label2.Text = "Calibration"
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dgv_CalibrationResult
+        '
+        Me.dgv_CalibrationResult.AllowUserToAddRows = False
+        Me.dgv_CalibrationResult.AllowUserToDeleteRows = False
+        Me.dgv_CalibrationResult.AllowUserToResizeColumns = False
+        Me.dgv_CalibrationResult.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_CalibrationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgv_CalibrationResult.ColumnHeadersHeight = 60
+        Me.dgv_CalibrationResult.Location = New System.Drawing.Point(3, 36)
+        Me.dgv_CalibrationResult.Name = "dgv_CalibrationResult"
+        Me.dgv_CalibrationResult.ReadOnly = True
+        Me.dgv_CalibrationResult.Size = New System.Drawing.Size(600, 598)
+        Me.dgv_CalibrationResult.TabIndex = 81
+        '
+        'dgv_VerificationResult
+        '
+        Me.dgv_VerificationResult.AllowUserToAddRows = False
+        Me.dgv_VerificationResult.AllowUserToDeleteRows = False
+        Me.dgv_VerificationResult.AllowUserToResizeColumns = False
+        Me.dgv_VerificationResult.AllowUserToResizeRows = False
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_VerificationResult.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.dgv_VerificationResult.ColumnHeadersHeight = 60
+        Me.dgv_VerificationResult.Location = New System.Drawing.Point(614, 36)
+        Me.dgv_VerificationResult.Name = "dgv_VerificationResult"
+        Me.dgv_VerificationResult.ReadOnly = True
+        Me.dgv_VerificationResult.Size = New System.Drawing.Size(600, 598)
+        Me.dgv_VerificationResult.TabIndex = 82
+        '
+        'Label4
+        '
+        Me.Label4.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label4.Location = New System.Drawing.Point(614, 3)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(600, 30)
+        Me.Label4.TabIndex = 84
+        Me.Label4.Text = "Verification"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'FormResultSummary
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -976,6 +1085,11 @@ Partial Class FormResultSummary
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         CType(Me.dgv_Resultsummary, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl1.ResumeLayout(False)
+        Me.tabpg_TestResult.ResumeLayout(False)
+        Me.tabpg_CalResult.ResumeLayout(False)
+        CType(Me.dgv_CalibrationResult, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgv_VerificationResult, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1050,4 +1164,11 @@ Partial Class FormResultSummary
     Friend WithEvents dsp_Resultattempt As Label
     Friend WithEvents txtbx_Resultattempt As TextBox
     Friend WithEvents txtbx_ResultRecipeIDRev As TextBox
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tabpg_TestResult As TabPage
+    Friend WithEvents tabpg_CalResult As TabPage
+    Friend WithEvents Label2 As Label
+    Friend WithEvents dgv_CalibrationResult As DataGridView
+    Friend WithEvents dgv_VerificationResult As DataGridView
+    Friend WithEvents Label4 As Label
 End Class

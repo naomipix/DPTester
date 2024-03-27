@@ -25,6 +25,12 @@ Public Class FormResultGraph
     Dim ResultChartDPBP = New ObservableCollection(Of ObservablePoint)({})
     Dim ResultChartDPFLWR = New ObservableCollection(Of ObservablePoint)({})
 
+
+    Dim DataWasLoadedFrom As String = "" ' Last/Search
+    Dim ResultLotID As String = ""
+    Dim ResultSerialNo As String = ""
+    Dim ResultSerialAttempt As String = ""
+
 #Region "Form Loading"
     Private Sub FormResultGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Always Maximize
@@ -70,6 +76,7 @@ Public Class FormResultGraph
         txtbx_Graphattempt.Text = Nothing
         ResultChart.DataSource = Nothing
         ResultChart.Series.Clear()
+        cmbx_ResultDisplay.SelectedIndex = 0
 
         ' Get User Category Table
         Dim dtdefaultRecord As DataTable = SQL.ReadRecords($"SELECT DISTINCT serial_usage_id FROM ProductResult ORDER BY serial_usage_id DESC")
@@ -82,7 +89,14 @@ Public Class FormResultGraph
             Dim lastrecordlot = dtdefaultdetail.Rows(0)("lot_id")
             Dim Lastrecordserialnum = dtdefaultdetail.Rows(0)("serial_number")
             Dim lastrecordserialattmept = dtdefaultdetail.Rows(0)("serial_attempt")
-            LoadResult(lastrecordlot, Lastrecordserialnum, lastrecordserialattmept)
+
+            If True Then
+                ' Reset Combobox Selection
+                cmbx_ResultDisplay.SelectedIndex = 0
+
+                LoadResult(lastrecordlot, Lastrecordserialnum, lastrecordserialattmept)
+                DataWasLoadedFrom = "Last"
+            End If
         End If
 
 
@@ -153,13 +167,13 @@ Public Class FormResultGraph
             New LiveChartsCore.SkiaSharpView.Axis() With {
                 .Name = "Pump RPM (RPM)",
                 .NameTextSize = 14,
-                .NamePaint = New SolidColorPaint(SKColors.Orange),
+                .NamePaint = New SolidColorPaint(SKColors.DimGray),
                 .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                 .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
                 .TextSize = 12,
-                .LabelsPaint = New SolidColorPaint(SKColors.Orange),
-                .TicksPaint = New SolidColorPaint(SKColors.Orange),
-                .SubticksPaint = New SolidColorPaint(SKColors.Orange),
+                .LabelsPaint = New SolidColorPaint(SKColors.DimGray),
+                .TicksPaint = New SolidColorPaint(SKColors.DimGray),
+                .SubticksPaint = New SolidColorPaint(SKColors.DimGray),
                 .DrawTicksPath = True,
                 .ShowSeparatorLines = False,
                 .Position = LiveChartsCore.Measure.AxisPosition.End
@@ -270,10 +284,10 @@ Public Class FormResultGraph
                 .Values = ResultChartRPMValue,
                 .Fill = Nothing,
                 .Stroke = New SolidColorPaint With {
-                    .Color = SKColors.Orange,
+                    .Color = SKColors.DimGray,
                     .StrokeThickness = 1
                 },
-                .GeometryFill = New SolidColorPaint(SKColors.Orange),
+                .GeometryFill = New SolidColorPaint(SKColors.DimGray),
                 .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                 .GeometrySize = 0,
                 .ScalesYAt = 1,
@@ -540,7 +554,11 @@ Public Class FormResultGraph
 
 
         If Oncontinue = True Then
+            ' Reset Combobox Selection
+            cmbx_ResultDisplay.SelectedIndex = 0
+
             LoadResult(Lotid, serialnum, attempt)
+            DataWasLoadedFrom = "Search"
         End If
 
 
@@ -1383,6 +1401,11 @@ Public Class FormResultGraph
 
 #Region "Result Load"
     Private Sub LoadResult(lotid As String, serialnum As String, attempt As String)
+        ' Update Last record
+        ResultLotID = lotid
+        ResultSerialNo = serialnum
+        ResultSerialAttempt = attempt
+
         Dim Oncontinue As Boolean = True
         Dim resultsummary(90) As String
         Dim dt_Graphsummary As DataTable
@@ -1427,6 +1450,7 @@ Public Class FormResultGraph
             LotUsage.verify_diff_pressure AS lotusage_verify_diff_pressure, 
             LotUsage.cal_result AS lotusage_cal_result, 
             LotUsage.cal_cycle_time AS lotusage_cal_cycle_time, 
+            LotUsage.cal_result_id AS lotusage_cal_result_id, 
 
             RecipeTable.id AS recipetable_id, 
             RecipeTable.recipe_id AS recipetable_recipe_id, 
@@ -1493,6 +1517,15 @@ Public Class FormResultGraph
         '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
         '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
 
+        Dim dtCalResult As New DataTable
+        Dim dtVerResult As New DataTable
+        If dtproductiondetail.Rows.Count > 0 Then
+            If Not IsDBNull(dtproductiondetail(0)("lotusage_cal_result_id")) Then
+                dtCalResult = SQL.ReadRecords($"SELECT * FROM CalibrationResult WHERE cal_type='CALIBRATION' AND cal_id='{dtproductiondetail(0)("lotusage_cal_result_id")}'") 'lotusage_cal_result_id
+                dtVerResult = SQL.ReadRecords($"SELECT * FROM CalibrationResult WHERE cal_type='VERIFICATION' AND cal_id='{dtproductiondetail(0)("lotusage_cal_result_id")}'") 'lotusage_cal_result_id
+            End If
+        End If
+
         If Oncontinue = True Then
             If dtproductiondetail.Rows.Count > 0 Then
                 checkbx_GraphDP.Checked = True
@@ -1516,8 +1549,16 @@ Public Class FormResultGraph
 
                 If dt_Graphsummary.Rows.Count > 0 Then
                     CreateResultGraph()
-                    CreateResultGraphNew(dt_Graphsummary, dtproductiondetail)
+                    'CreateResultGraphNew(dt_Graphsummary, dtproductiondetail)
 
+                    Select Case (cmbx_ResultDisplay.SelectedIndex)
+                        Case 0
+                            CreateResultGraphNew(dt_Graphsummary, dtproductiondetail)
+                        Case 1
+                            CreateResultGraphNew(dtCalResult, dtproductiondetail)
+                        Case 2
+                            CreateResultGraphNew(dtVerResult, dtproductiondetail)
+                    End Select
 
 
                     ResultChart.ChartAreas(0).Axes(0).MajorGrid.Enabled = False  'To Disable the Grid line in the X Axis
@@ -1717,6 +1758,17 @@ Public Class FormResultGraph
                 chart.YAxes(i).MinLimit = Nothing
                 chart.YAxes(i).MaxLimit = Nothing
             Next
+        End If
+    End Sub
+
+    Private Sub cmbx_ResultDisplay_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_ResultDisplay.SelectedIndexChanged
+        If cmbx_ResultDisplay.SelectedIndex >= 0 Then
+            Select Case DataWasLoadedFrom
+                Case "Last"
+                    LoadResult(ResultLotID, ResultSerialNo, ResultSerialAttempt)
+                Case "Search"
+                    LoadResult(ResultLotID, ResultSerialNo, ResultSerialAttempt)
+            End Select
         End If
     End Sub
 End Class

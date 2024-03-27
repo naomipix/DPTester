@@ -568,13 +568,13 @@ Public Class FormMain
                     .IsVisible = False,
                     .Name = "Pump RPM (RPM)",
                     .NameTextSize = 14,
-                    .NamePaint = New SolidColorPaint(SKColors.Orange),
+                    .NamePaint = New SolidColorPaint(SKColors.DimGray),
                     .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                     .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
                     .TextSize = 12,
-                    .LabelsPaint = New SolidColorPaint(SKColors.Orange),
-                    .TicksPaint = New SolidColorPaint(SKColors.Orange),
-                    .SubticksPaint = New SolidColorPaint(SKColors.Orange),
+                    .LabelsPaint = New SolidColorPaint(SKColors.DimGray),
+                    .TicksPaint = New SolidColorPaint(SKColors.DimGray),
+                    .SubticksPaint = New SolidColorPaint(SKColors.DimGray),
                     .DrawTicksPath = True,
                     .ShowSeparatorLines = False
                 },
@@ -706,10 +706,10 @@ Public Class FormMain
                     .Values = LiveChartRPMValue,
                     .Fill = Nothing,
                     .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.Orange,
+                        .Color = SKColors.DimGray,
                         .StrokeThickness = 1
                     },
-                    .GeometryFill = New SolidColorPaint(SKColors.Orange),
+                    .GeometryFill = New SolidColorPaint(SKColors.DimGray),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
                     .ScalesYAt = 1,
@@ -5210,6 +5210,7 @@ Public Class FormMain
             Next
 
             FormCalibration.InitializeLiveChart()
+            FormCalibration.SetVisibleLineSeries()
         End If
     End Sub
 
