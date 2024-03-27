@@ -437,13 +437,13 @@ Public Class FormCalibration
                 New LiveChartsCore.SkiaSharpView.Axis() With {
                     .Name = "Pump RPM (RPM)",
                     .NameTextSize = 14,
-                    .NamePaint = New SolidColorPaint(SKColors.Orange),
+                    .NamePaint = New SolidColorPaint(SKColors.DimGray),
                     .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                     .Padding = New LiveChartsCore.Drawing.Padding(20, 0, 0, 0),
                     .TextSize = 12,
-                    .LabelsPaint = New SolidColorPaint(SKColors.Orange),
-                    .TicksPaint = New SolidColorPaint(SKColors.Orange),
-                    .SubticksPaint = New SolidColorPaint(SKColors.Orange),
+                    .LabelsPaint = New SolidColorPaint(SKColors.DimGray),
+                    .TicksPaint = New SolidColorPaint(SKColors.DimGray),
+                    .SubticksPaint = New SolidColorPaint(SKColors.DimGray),
                     .DrawTicksPath = True,
                     .ShowSeparatorLines = False,
                     .Position = LiveChartsCore.Measure.AxisPosition.End
@@ -554,10 +554,10 @@ Public Class FormCalibration
                     .Values = CalibrateChartRPMValue,
                     .Fill = Nothing,
                     .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.Orange,
+                        .Color = SKColors.DimGray,
                         .StrokeThickness = 1
                     },
-                    .GeometryFill = New SolidColorPaint(SKColors.Orange),
+                    .GeometryFill = New SolidColorPaint(SKColors.DimGray),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
                     .ScalesYAt = 1,
@@ -599,7 +599,7 @@ Public Class FormCalibration
         SetVisibleLineSeries()
     End Sub
 
-    Private Sub SetVisibleLineSeries()
+    Public Sub SetVisibleLineSeries()
         Try
             If checkbx_GraphDP.Checked Then
                 With CartesianChart_CalibrationLiveGraph
@@ -1553,6 +1553,56 @@ Public Class FormCalibration
                     'Dim dtRecipeTable As DataTable = SQL.ReadRecords($"SELECT * FROM RecipeTable WHERE recipe_id='{CStr(txtbx_RecipeID.Text)}'")
                     Dim recipeFound As Boolean = CBool(IIf(dtrecipetable.Rows.Count > 0, True, False))
 
+                    Dim IncrementedCalID As Long = CLng(SQL.ReadRecords("SELECT ISNULL(MAX(cal_id), 0) from CalibrationResult")(0)(0)) + 1
+                    For i As Integer = 0 To 1
+                        Select Case (i)
+                            Case 0
+                                Dim dtGetTempTbl As DataTable = GetVisibleColumnsDataTable(dgv_CalibrationResult)
+                                For i1 As Integer = 0 To dtGetTempTbl.Rows.Count - 1
+                                    Dim param As New Dictionary(Of String, Object) From {
+                                        {"cal_id", IncrementedCalID},
+                                        {"recipe_id", txtbx_RecipeID.Text},
+                                        {"recipe_rev", txtbx_RecipeRev.Text},
+                                        {"cal_type", "CALIBRATION"},
+                                        {"sampling_time", dtGetTempTbl(i1)("Sampling Time (s)")},
+                                        {"temperature", dtGetTempTbl(i1)("Temperature (°C)")},
+                                        {"flowrate", dtGetTempTbl(i1)("Flowrate (l/min)")},
+                                        {"inlet_pressure", dtGetTempTbl(i1)("Inlet Pressure (kPa)")},
+                                        {"outlet_pressure", dtGetTempTbl(i1)("Outlet Pressure (kPa)")},
+                                        {"calculated_dp_pressure", dtGetTempTbl(i1)("Differential Pressure (kPa)")},
+                                        {"back_pressure", dtGetTempTbl(i1)("Back Pressure (kPa)")},
+                                        {"pump_rpm", dtGetTempTbl(i1)("Pump Speed (RPM)")}
+                                    }
+
+                                    If SQL.InsertRecord("CalibrationResult", param) = 1 Then
+
+                                    End If
+                                Next
+                            Case 1
+                                Dim dtGetTempTbl As DataTable = GetVisibleColumnsDataTable(dgv_VerificationResult)
+                                For i1 As Integer = 0 To dtGetTempTbl.Rows.Count - 1
+                                    Dim param As New Dictionary(Of String, Object) From {
+                                        {"cal_id", IncrementedCalID},
+                                        {"recipe_id", txtbx_RecipeID.Text},
+                                        {"recipe_rev", txtbx_RecipeRev.Text},
+                                        {"cal_type", "VERIFICATION"},
+                                        {"sampling_time", dtGetTempTbl(i1)("Sampling Time (s)")},
+                                        {"temperature", dtGetTempTbl(i1)("Temperature (°C)")},
+                                        {"flowrate", dtGetTempTbl(i1)("Flowrate (l/min)")},
+                                        {"inlet_pressure", dtGetTempTbl(i1)("Inlet Pressure (kPa)")},
+                                        {"outlet_pressure", dtGetTempTbl(i1)("Outlet Pressure (kPa)")},
+                                        {"calculated_dp_pressure", dtGetTempTbl(i1)("Differential Pressure (kPa)")},
+                                        {"back_pressure", dtGetTempTbl(i1)("Back Pressure (kPa)")},
+                                        {"pump_rpm", dtGetTempTbl(i1)("Pump Speed (RPM)")}
+                                    }
+
+                                    If SQL.InsertRecord("CalibrationResult", param) = 1 Then
+
+                                    End If
+                                Next
+                        End Select
+                    Next
+
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                         {"recipe_id", txtbx_RecipeID.Text},
                         {"recipe_rev", txtbx_RecipeRev.Text},
@@ -1564,7 +1614,8 @@ Public Class FormCalibration
                         {"verify_outlet_pressure", Ver_finaloutlet.ToString},
                         {"verify_diff_pressure", Ver_finaldp.ToString},
                         {"cal_result", txtbx_CalResult.Text},
-                        {"cal_cycle_time", CalCycletime.ToString}
+                        {"cal_cycle_time", CalCycletime.ToString},
+                        {"cal_result_id", IncrementedCalID}
                     }
                     '{"verification_tolerance", IIf(recipeFound, dtRecipeTable(0)("verification_tolerance"), 0)},
                     '{"firstflush_circuit", IIf(recipeFound, dtRecipeTable(0)("firstflush_circuit"), "")},

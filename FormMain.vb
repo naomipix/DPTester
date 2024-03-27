@@ -568,13 +568,13 @@ Public Class FormMain
                     .IsVisible = False,
                     .Name = "Pump RPM (RPM)",
                     .NameTextSize = 14,
-                    .NamePaint = New SolidColorPaint(SKColors.Orange),
+                    .NamePaint = New SolidColorPaint(SKColors.DimGray),
                     .NamePadding = New LiveChartsCore.Drawing.Padding(0, 20),
                     .Padding = New LiveChartsCore.Drawing.Padding(0, 0, 20, 0),
                     .TextSize = 12,
-                    .LabelsPaint = New SolidColorPaint(SKColors.Orange),
-                    .TicksPaint = New SolidColorPaint(SKColors.Orange),
-                    .SubticksPaint = New SolidColorPaint(SKColors.Orange),
+                    .LabelsPaint = New SolidColorPaint(SKColors.DimGray),
+                    .TicksPaint = New SolidColorPaint(SKColors.DimGray),
+                    .SubticksPaint = New SolidColorPaint(SKColors.DimGray),
                     .DrawTicksPath = True,
                     .ShowSeparatorLines = False
                 },
@@ -706,10 +706,10 @@ Public Class FormMain
                     .Values = LiveChartRPMValue,
                     .Fill = Nothing,
                     .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.Orange,
+                        .Color = SKColors.DimGray,
                         .StrokeThickness = 1
                     },
-                    .GeometryFill = New SolidColorPaint(SKColors.Orange),
+                    .GeometryFill = New SolidColorPaint(SKColors.DimGray),
                     .GeometryStroke = New SolidColorPaint(SKColors.Transparent),
                     .GeometrySize = 0,
                     .ScalesYAt = 1,
@@ -3100,11 +3100,14 @@ Public Class FormMain
     Private Sub btn_WrkOrdScnDtConfirm_Click(sender As Object, e As EventArgs) Handles btn_WrkOrdScnDtConfirm.Click
         ' Cleanup unused Lotusage before continue
         If True Then
-            ' Delete LotUsage records that do not have anything in ProductionDetail table
+            ' Delete LotUsage records that do not have corresponding details in ProductionDetail table
             SQL.DeleteRecord("LotUsage", "id NOT IN (SELECT DISTINCT lot_usage_id FROM ProductionDetail)")
 
             ' Delete ProductResult records that do not have corresponding details ProductionDetail table
             SQL.DeleteRecord("ProductResult", "serial_usage_id NOT IN (SELECT DISTINCT id FROM ProductionDetail)")
+
+            ' Delete Calibration Result records that do not have corresponding details in LotUsage table
+            SQL.DeleteRecord("CalibrationResult", "cal_id NOT IN (SELECT DISTINCT cal_result_id FROM LotUsage WHERE NOT cal_result_id IS NULL)")
         End If
 
         'Dim continueLastCal As Boolean = False
@@ -3606,7 +3609,8 @@ Public Class FormMain
                                                 {"verify_outlet_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_outlet_pressure")},
                                                 {"verify_diff_pressure", dtlotusage(dtlotusage.Rows.Count - 1)("verify_diff_pressure")},
                                                 {"cal_result", dtlotusage(dtlotusage.Rows.Count - 1)("cal_result")},
-                                                {"cal_cycle_time", dtlotusage(dtlotusage.Rows.Count - 1)("cal_cycle_time")}
+                                                {"cal_cycle_time", dtlotusage(dtlotusage.Rows.Count - 1)("cal_cycle_time")},
+                                                {"cal_result_id", dtlotusage(dtlotusage.Rows.Count - 1)("cal_result_id")}
                                             }
                                             Dim Condition As String = $"lot_id='{LotID}' AND lot_attempt='{LotAttempt}'"
 
@@ -5210,6 +5214,7 @@ Public Class FormMain
             Next
 
             FormCalibration.InitializeLiveChart()
+            FormCalibration.SetVisibleLineSeries()
         End If
     End Sub
 

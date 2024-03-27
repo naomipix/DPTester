@@ -22,7 +22,9 @@ Public Class FormResultSummary
 
         ' DoubleBuffer DataGridView
         Dim dgvArr() As DataGridView = {
-            dgv_Resultsummary
+            dgv_Resultsummary,
+            dgv_CalibrationResult,
+            dgv_VerificationResult
         }
         For Each dgv As DataGridView In dgvArr
             DoubleBuffer.DoubleBuffered(dgv, True)
@@ -491,6 +493,7 @@ Public Class FormResultSummary
             LotUsage.verify_diff_pressure AS lotusage_verify_diff_pressure, 
             LotUsage.cal_result AS lotusage_cal_result, 
             LotUsage.cal_cycle_time AS lotusage_cal_cycle_time, 
+            LotUsage.cal_result_id AS lotusage_cal_result_id, 
 
             RecipeTable.id AS recipetable_id, 
             RecipeTable.recipe_id AS recipetable_recipe_id, 
@@ -557,6 +560,15 @@ Public Class FormResultSummary
         '            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id
         '            LEFT JOIN WorkOrder ON Lotusage.lot_id=WorkOrder.lot_id WHERE serial_uid = '{lotid}-{serialnum}' AND serial_attempt ='{attempt}'")
 
+        Dim dtCalResult As New DataTable
+        Dim dtVerResult As New DataTable
+        If dtproductiondetail.Rows.Count > 0 Then
+            If Not IsDBNull(dtproductiondetail(0)("lotusage_cal_result_id")) Then
+                dtCalResult = SQL.ReadRecords($"SELECT * FROM CalibrationResult WHERE cal_type='CALIBRATION' AND cal_id='{dtproductiondetail(0)("lotusage_cal_result_id")}'") 'lotusage_cal_result_id
+                dtVerResult = SQL.ReadRecords($"SELECT * FROM CalibrationResult WHERE cal_type='VERIFICATION' AND cal_id='{dtproductiondetail(0)("lotusage_cal_result_id")}'") 'lotusage_cal_result_id
+            End If
+        End If
+
         If Oncontinue = True Then
 
             If dtproductiondetail.Rows.Count > 0 Then
@@ -571,6 +583,20 @@ Public Class FormResultSummary
 
                 dt_Resultsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{dtproductiondetail(0)("productiondetail_id")}'ORDER BY ProductResult.sampling_time ASC")
                 dgv_Resultsummary.DataSource = dt_Resultsummary
+
+                ' Populate Calibration Results
+                If True Then
+                    If dtCalResult.Rows.Count > 0 Then
+                        dgv_CalibrationResult.DataSource = dtCalResult
+                    Else
+                        dgv_CalibrationResult.DataSource = Nothing
+                    End If
+                    If dtVerResult.Rows.Count > 0 Then
+                        dgv_VerificationResult.DataSource = dtVerResult
+                    Else
+                        dgv_VerificationResult.DataSource = Nothing
+                    End If
+                End If
             Else
                 ResultMessage(6)
                 Oncontinue = False
@@ -634,6 +660,110 @@ Public Class FormResultSummary
 
         End With
 
+        If dtCalResult.Rows.Count > 0 Then
+            With dgv_CalibrationResult
+                .BackgroundColor = SystemColors.Window
+
+                'Hide Unwanted columns
+                .Columns("id").Visible = False
+                .Columns("cal_id").Visible = False
+                .Columns("recipe_id").Visible = False
+                .Columns("recipe_rev").Visible = False
+                .Columns("cal_type").Visible = False
+
+                'Change header name
+                .Columns("sampling_time").HeaderCell.Value = "Sampling Time (s)"
+                .Columns("temperature").HeaderCell.Value = "Temperature (C)"
+                .Columns("flowrate").HeaderCell.Value = "Flowrate (l/min)"
+                .Columns("inlet_pressure").HeaderCell.Value = "Inlet Pressure (kPa)"
+                .Columns("outlet_pressure").HeaderCell.Value = "Outlet Pressure (kPa)"
+                .Columns("calculated_dp_pressure").HeaderCell.Value = "Differential Pressure (kPa)"
+                .Columns("back_pressure").HeaderCell.Value = "Back Pressure (kPa)"
+                .Columns("pump_rpm").HeaderCell.Value = "Pump Speed (RPM)"
+
+                'Set Column Width
+                .Columns("sampling_time").Width = 80
+                .Columns("temperature").Width = 80
+                .Columns("flowrate").Width = 80
+                .Columns("inlet_pressure").Width = 100
+                .Columns("outlet_pressure").Width = 100
+                .Columns("calculated_dp_pressure").Width = 100
+                .Columns("back_pressure").Width = 100
+                .Columns("pump_rpm").Width = 100
+
+                'Header Cell Alignment
+                .Columns("sampling_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("temperature").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("flowrate").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("inlet_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("outlet_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("calculated_dp_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("back_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("pump_rpm").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                'Header Cell Font Bold
+                .Columns("sampling_time").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("temperature").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("flowrate").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("inlet_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("outlet_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("calculated_dp_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("back_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("pump_rpm").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+            End With
+        End If
+        If dtVerResult.Rows.Count > 0 Then
+            With dgv_VerificationResult
+                .BackgroundColor = SystemColors.Window
+
+                'Hide Unwanted columns
+                .Columns("id").Visible = False
+                .Columns("cal_id").Visible = False
+                .Columns("recipe_id").Visible = False
+                .Columns("recipe_rev").Visible = False
+                .Columns("cal_type").Visible = False
+
+                'Change header name
+                .Columns("sampling_time").HeaderCell.Value = "Sampling Time (s)"
+                .Columns("temperature").HeaderCell.Value = "Temperature (C)"
+                .Columns("flowrate").HeaderCell.Value = "Flowrate (l/min)"
+                .Columns("inlet_pressure").HeaderCell.Value = "Inlet Pressure (kPa)"
+                .Columns("outlet_pressure").HeaderCell.Value = "Outlet Pressure (kPa)"
+                .Columns("calculated_dp_pressure").HeaderCell.Value = "Differential Pressure (kPa)"
+                .Columns("back_pressure").HeaderCell.Value = "Back Pressure (kPa)"
+                .Columns("pump_rpm").HeaderCell.Value = "Pump Speed (RPM)"
+
+                'Set Column Width
+                .Columns("sampling_time").Width = 80
+                .Columns("temperature").Width = 80
+                .Columns("flowrate").Width = 80
+                .Columns("inlet_pressure").Width = 100
+                .Columns("outlet_pressure").Width = 100
+                .Columns("calculated_dp_pressure").Width = 100
+                .Columns("back_pressure").Width = 100
+                .Columns("pump_rpm").Width = 100
+
+                'Header Cell Alignment
+                .Columns("sampling_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("temperature").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("flowrate").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("inlet_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("outlet_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("calculated_dp_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("back_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+                .Columns("pump_rpm").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                'Header Cell Font Bold
+                .Columns("sampling_time").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("temperature").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("flowrate").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("inlet_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("outlet_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("calculated_dp_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("back_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+                .Columns("pump_rpm").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
+            End With
+        End If
 
         If Oncontinue = True Then
 
@@ -658,7 +788,7 @@ Public Class FormResultSummary
 
             txtbx_ResultCalOffset.Text = dtproductiondetail(0)("lotusage_cal_diff_pressure")
             txtbx_ResultRecipeID.Text = dtproductiondetail(0)("lotusage_recipe_id")
-            txtbx_ResultRecipeIDRev.Text = dtproductiondetail(0)("lotusage_recipe_id")
+            txtbx_ResultRecipeIDRev.Text = dtproductiondetail(0)("lotusage_recipe_rev")
 
             txtbx_Resultflush1.Text = dtproductiondetail(0)("recipetable_firstflush_circuit").ToUpper
             txtbx_ResultDPTest1.Text = dtproductiondetail(0)("recipetable_firstdp_circuit").ToUpper
