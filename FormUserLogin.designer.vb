@@ -104,7 +104,7 @@ Partial Class FormUserLogin
         Me.btn_LogPwdVisible.Location = New System.Drawing.Point(614, 477)
         Me.btn_LogPwdVisible.Name = "btn_LogPwdVisible"
         Me.btn_LogPwdVisible.Size = New System.Drawing.Size(45, 45)
-        Me.btn_LogPwdVisible.TabIndex = 6
+        Me.btn_LogPwdVisible.TabIndex = 4
         Me.btn_LogPwdVisible.UseVisualStyleBackColor = False
         '
         'FormUserLogin

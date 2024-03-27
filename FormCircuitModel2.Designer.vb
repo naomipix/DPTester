@@ -4046,7 +4046,7 @@ Partial Class FormCircuitModel2
         Me.txtbx_N2PurgeActual.Name = "txtbx_N2PurgeActual"
         Me.txtbx_N2PurgeActual.ReadOnly = True
         Me.txtbx_N2PurgeActual.Size = New System.Drawing.Size(50, 22)
-        Me.txtbx_N2PurgeActual.TabIndex = 348
+        Me.txtbx_N2PurgeActual.TabIndex = 500
         Me.txtbx_N2PurgeActual.Text = "0.0"
         Me.txtbx_N2PurgeActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -4059,7 +4059,7 @@ Partial Class FormCircuitModel2
         Me.txtbx_BackPressActual.Name = "txtbx_BackPressActual"
         Me.txtbx_BackPressActual.ReadOnly = True
         Me.txtbx_BackPressActual.Size = New System.Drawing.Size(50, 22)
-        Me.txtbx_BackPressActual.TabIndex = 347
+        Me.txtbx_BackPressActual.TabIndex = 600
         Me.txtbx_BackPressActual.Text = "0.0"
         Me.txtbx_BackPressActual.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -4094,7 +4094,7 @@ Partial Class FormCircuitModel2
         Me.btn_MVCShowcircuit.Location = New System.Drawing.Point(27, 397)
         Me.btn_MVCShowcircuit.Name = "btn_MVCShowcircuit"
         Me.btn_MVCShowcircuit.Size = New System.Drawing.Size(152, 34)
-        Me.btn_MVCShowcircuit.TabIndex = 182
+        Me.btn_MVCShowcircuit.TabIndex = 1000
         Me.btn_MVCShowcircuit.Text = "Show Circuit Path"
         Me.btn_MVCShowcircuit.UseVisualStyleBackColor = False
         '

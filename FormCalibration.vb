@@ -139,6 +139,7 @@ Public Class FormCalibration
 
         ' Initialize Defaults
         InitializeCalForm()
+        FormCircuitModel2.Circuittimer.Enabled = True
     End Sub
 
     Private Sub FormCalibration_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -156,6 +157,9 @@ Public Class FormCalibration
 
         ' Reload Tooltip CheckBox
         checkbx_ShowTooltip_CheckedChanged(Nothing, Nothing)
+
+        ' Reset Zoom
+        btn_ResetZoom_Click(Nothing, Nothing)
     End Sub
 
     Public Sub InitializeCalForm()
@@ -219,7 +223,7 @@ Public Class FormCalibration
                     Dim Updateparameter As New Dictionary(Of String, Object) From {
                         {"recipe_id", FormMain.cmbx_RecipeID.Text},
                         {"recipe_rev", txtbx_RecipeRev.Text},
-                        {"calibration_time", lbl_DateTimeClock.Text},
+                        {"calibration_time", DateTime.Now.ToString("s")},'lbl_DateTimeClock.Text},
                         {"cal_inlet_pressure", "0"},
                         {"cal_outlet_pressure", "0"},
                         {"cal_diff_pressure", "0"},
@@ -696,56 +700,63 @@ Public Class FormCalibration
 
     Private Sub btn_Discard_Click(sender As Object, e As EventArgs) Handles btn_Discard.Click
         If FormMain.MainMessage(11) = DialogResult.Yes Then
-            PCStatus(1)(2) = False
-            PCStatus(1)(3) = False
-
-            txtbx_ActCalCycletime.Text = "0"
-
-            txtbx_ActVerCycletime.Text = "0"
-
-            tmr_Calibration.Enabled = False
-            txtbx_CalInletPressure.Text = Nothing
-            txtbx_CalOutletPressure.Text = Nothing
-            txtbx_CalFlowrate.Text = Nothing
-            txtbx_CalTemperature.Text = Nothing
-            txtbx_CalBackpress.Text = Nothing
-            txtbx_CalOffset.Text = Nothing
-            tmr_Verification.Enabled = False
-            txtbx_CalResult.Text = Nothing
-            txtbx_VerInletPressure.Text = Nothing
-            txtbx_VerOutletPressure.Text = Nothing
-            txtbx_VerFlowrate.Text = Nothing
-            txtbx_VerTemperature.Text = Nothing
-            txtbx_VerBackpress.Text = Nothing
-            txtbx_VerDP.Text = Nothing
-            txtbx_VerStatus.Text = Nothing
-            txtbx_VerStatus.BackColor = SystemColors.Window
-            txtbx_VerStatus.ForeColor = SystemColors.ControlText
-            txtbx_CalResult.BackColor = SystemColors.Window
-            txtbx_CalResult.ForeColor = SystemColors.ControlText
-            SetButtonState(btn_Calibrate, False, "Calibrate")
-            SetButtonState(btn_Verify, False, "Verify")
-            'flush1cycletime = 0
-            'flush2cycletime = 0
-            'DPtest1cycletime = 0
-            'DPtest2cycletime = 0
-            'Drain1cycletime = 0
-            'Drain2cycletime = 0
-            'Drain3cycletime = 0
-            'prepcycletime = 0
-            PCStatus(1)(8) = True
-
-            If dtCalibration.Rows.Count > 0 Then
-                dtCalibration.Clear()
-            End If
-            If dtVerification.Rows.Count > 0 Then
-                dtVerification.Clear()
-            End If
-
-            ' Alarm/Warning Counter
-            TextBox1.Text = 0
-            TextBox2.Text = 0
+            DiscardCal()
         End If
+    End Sub
+
+    Public Sub DiscardCal()
+
+        PCStatus(1)(2) = False
+        PCStatus(1)(3) = False
+
+        txtbx_ActCalCycletime.Text = "0"
+
+        txtbx_ActVerCycletime.Text = "0"
+
+        txtbx_CalDate.Text = Nothing
+
+        tmr_Calibration.Enabled = False
+        txtbx_CalInletPressure.Text = Nothing
+        txtbx_CalOutletPressure.Text = Nothing
+        txtbx_CalFlowrate.Text = Nothing
+        txtbx_CalTemperature.Text = Nothing
+        txtbx_CalBackpress.Text = Nothing
+        txtbx_CalOffset.Text = Nothing
+        tmr_Verification.Enabled = False
+        txtbx_CalResult.Text = Nothing
+        txtbx_VerInletPressure.Text = Nothing
+        txtbx_VerOutletPressure.Text = Nothing
+        txtbx_VerFlowrate.Text = Nothing
+        txtbx_VerTemperature.Text = Nothing
+        txtbx_VerBackpress.Text = Nothing
+        txtbx_VerDP.Text = Nothing
+        txtbx_VerStatus.Text = Nothing
+        txtbx_VerStatus.BackColor = SystemColors.Window
+        txtbx_VerStatus.ForeColor = SystemColors.ControlText
+        txtbx_CalResult.BackColor = SystemColors.Window
+        txtbx_CalResult.ForeColor = SystemColors.ControlText
+        SetButtonState(btn_Calibrate, False, "Calibrate")
+        SetButtonState(btn_Verify, False, "Verify")
+        'flush1cycletime = 0
+        'flush2cycletime = 0
+        'DPtest1cycletime = 0
+        'DPtest2cycletime = 0
+        'Drain1cycletime = 0
+        'Drain2cycletime = 0
+        'Drain3cycletime = 0
+        'prepcycletime = 0
+        PCStatus(1)(8) = True
+
+        If dtCalibration.Rows.Count > 0 Then
+            dtCalibration.Clear()
+        End If
+        If dtVerification.Rows.Count > 0 Then
+            dtVerification.Clear()
+        End If
+
+        ' Alarm/Warning Counter
+        TextBox1.Text = 0
+        TextBox2.Text = 0
     End Sub
 
     Private Sub btn_Calibrate_Click(sender As Object, e As EventArgs) Handles btn_Calibrate.Click

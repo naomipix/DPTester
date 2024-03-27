@@ -13,7 +13,7 @@ Public Class FormResultSummary
         lbl_Version.Text = PublicVariables.AppVersion
 
         ' Load Form Title
-        Me.Text = PublicVariables.ProgramTitle & " - " & "Individual Result Summary"
+        Me.Text = PublicVariables.ProgramTitle & " - " & "Test Detail"
         lbl_Title.Text = PublicVariables.ProgramTitle
 
         ' Load User Details
@@ -547,7 +547,7 @@ Public Class FormResultSummary
 
             FROM ProductionDetail 
             LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id
-            LEFT JOIN RecipeTable ON LotUsage.recipe_id=RecipeTable.recipe_id
+            LEFT JOIN RecipeTable ON LotUsage.recipe_id=RecipeTable.recipe_id AND LotUsage.recipe_rev=RecipeTable.recipe_rev
             LEFT JOIN WorkOrder ON LotUsage.lot_id=WorkOrder.lot_id 
             WHERE serial_uid = '{lotid}-{serialnum}' 
             AND serial_attempt ='{attempt}'
@@ -638,7 +638,18 @@ Public Class FormResultSummary
         If Oncontinue = True Then
 
             txtbx_ResultTimestamp.Text = dtproductiondetail(0)("productiondetail_timestamp")
-            txtbx_ResultTemperature.Text = dtproductiondetail(0)("productiondetail_temperature")
+
+            'txtbx_ResultTemperature.Text = dtproductiondetail(0)("productiondetail_temperature")
+            If CStr(dtproductiondetail(0)("productiondetail_temperature")) = "0" Then
+                txtbx_ResultTemperature.Text = "0.0"
+            Else
+                Try
+                    txtbx_ResultTemperature.Text = dtproductiondetail(0)("productiondetail_temperature") - 273.15
+                Catch ex As Exception
+                    txtbx_ResultTemperature.Text = "0.0"
+                End Try
+            End If
+
             txtbx_ResultFlowrate.Text = dtproductiondetail(0)("productiondetail_flowrate")
             txtbx_ResultInletPressure.Text = dtproductiondetail(0)("productiondetail_inlet_pressure")
             txtbx_ResultOutletPressure.Text = dtproductiondetail(0)("productiondetail_outlet_pressure")

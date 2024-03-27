@@ -594,6 +594,35 @@
             lbl_N2Press.Text = AIn(11).ToString
             lbl_PumpSpeed.Text = AIn(2).ToString
 
+            ' Update Calibration Form Current values
+            If True Then
+                Dim TempInDec As Decimal = AIn(13)
+                Dim InletInDec As Decimal = AIn(9)
+                Dim OutletInDec As Decimal = AIn(10)
+
+                Dim CalculatedFinalDP As Decimal = InletInDec - OutletInDec
+
+                ' Apply Viscousity To Calculated DP
+                If True Then
+                    Dim A As Double = 0.01257187
+                    Dim B As Double = -0.005806436
+                    Dim C As Double = 0.001130911
+                    Dim D As Double = -0.000005723952
+                    Dim T2 As Double = (TempInDec + 273.15) * (TempInDec + 273.15)
+                    Dim exp As Double = Math.Exp((1 + (B * (TempInDec + 273.15))) / ((C * (TempInDec + 273.15)) + (D * T2)))
+                    Dim vis As Double = A * exp
+                    CalculatedFinalDP = Math.Round(CDec((1.002 / vis) * (InletInDec - OutletInDec)), 2)
+                End If
+
+                FormCalibration.txtbx_CurrDP.Text = CalculatedFinalDP
+                FormCalibration.txtbx_CurrInlet.Text = InletInDec.ToString
+                FormCalibration.txtbx_CurrOutlet.Text = OutletInDec.ToString
+                FormCalibration.txtbx_CurrBP.Text = AIn(11).ToString
+                FormCalibration.txtbx_CurrFlow.Text = AIn(12).ToString
+                FormCalibration.txtbx_CurrTemp.Text = TempInDec.ToString
+                FormCalibration.txtbx_CurrPump.Text = AIn(2).ToString
+            End If
+
             If DOut(2)(5) = False Then
                 lbl_PumpEnable.BackColor = SystemColors.Window
             Else

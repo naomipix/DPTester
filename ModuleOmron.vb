@@ -630,12 +630,12 @@ Module ModuleOmron
             DIn(i) = Int2BoolArr(FINSinput(start + i))
         Next
 
-        For i As Integer = 0 To 13
+        For i As Integer = 0 To 15
             FormMain.dgv_DigitalInput.Rows(i).Cells("value").Value = DIn(0)(i)
         Next
 
-        For i As Integer = 14 To 29
-            FormMain.dgv_DigitalInput.Rows(i).Cells("value").Value = DIn(1)(i - 14)
+        For i As Integer = 16 To 31
+            FormMain.dgv_DigitalInput.Rows(i).Cells("value").Value = DIn(1)(i - 16)
         Next
 
 
@@ -683,7 +683,7 @@ Module ModuleOmron
         For i As Integer = 0 To AOut.Length - 1
             AOut(i) = Int2Float(FINSinput, start + (i * 2))
         Next
-        For i As Integer = 0 To 5
+        For i As Integer = 0 To 3
             FormMain.dgv_AnalogOutput.Rows(i).Cells("value").Value = AOut(i)
         Next
         Return True
@@ -714,6 +714,9 @@ Module ModuleOmron
         'End If
         For i As Integer = 0 To Alarm.Length - 1
             For j As Integer = 0 To 15
+                Dim DateTimeNow As DateTime = DateTime.Now
+                Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
+
                 alarmdescription.Clear()
                 If Alarm(i)(j) = True Then
 
@@ -726,7 +729,7 @@ Module ModuleOmron
                     If Not Currentalarm.ContainsKey(alarmid) Then
                         Dim alarmmessage As DataRow = Mainalarm.NewRow()
                         Dim alarmhistory As New Dictionary(Of String, Object) From {
-                            {"trigger_time", FormMain.lbl_DateTimeClock.Text},
+                            {"trigger_time", DateTimeNowInStr}, 'FormMain.lbl_DateTimeClock.Text},
                             {"alarm_code", alarmcode}
                         }
                         SQL.InsertRecord("AlarmHistory", alarmhistory)
@@ -734,7 +737,7 @@ Module ModuleOmron
 
                         alarmmessage.Item("id") = alarmid
                         alarmmessage.Item("S.No") = Mainalarm.Rows.Count + 1
-                        alarmmessage.Item("Trigger Time") = FormMain.lbl_DateTimeClock.Text
+                        alarmmessage.Item("Trigger Time") = DateTimeNow.ToString("dd-MMM-yyyy HH:mm:ss") 'FormMain.lbl_DateTimeClock.Text
                         alarmmessage.Item("Description") = dtAlarm.Rows((i * 16) + j).Item("description")
                         alarmmessage.Item("Alarm Code") = alarmcode
                         Mainalarm.Rows.Add(alarmmessage)
@@ -754,7 +757,7 @@ Module ModuleOmron
                             Dim rows As DataRow()
                             Dim findrow As Integer
                             Dim reset As New Dictionary(Of String, Object) From {
-                                {"reset_time", FormMain.lbl_DateTimeClock.Text}
+                                {"reset_time", DateTimeNowInStr} ' FormMain.lbl_DateTimeClock.Text}
                             }
                             'Dim Condition As String = $"lot_id ='{LotID}' AND lot_attempt = '{LotAttempt}'"
                             rows = Mainalarm.Select($"id = '{dtAlarm.Rows((i * 16) + j).Item("id")}'")
@@ -933,11 +936,11 @@ Module ModuleOmron
                     FormMain.btn_Calibration.Enabled = True
                     FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
                 End If
-                If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
-                    FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
-                Else
-                    FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
-                End If
+                'If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+                '    FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+                'Else
+                '    FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+                'End If
 
             Else
                 ' Manual Mode
@@ -952,11 +955,11 @@ Module ModuleOmron
                 End If
                 FormMain.btn_Calibration.Enabled = False
                 FormMain.btn_Calibration.BackColor = SystemColors.ControlDark
-                FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
-                FormMain.btn_RecipeSelectionConfirm.Enabled = False
+                'FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
+                'FormMain.btn_RecipeSelectionConfirm.Enabled = False
             End If
         Else
-            FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
+            'FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
 
             FormMain.btn_RecipeManagement.Enabled = True
             FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)

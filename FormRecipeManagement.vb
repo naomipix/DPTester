@@ -278,9 +278,9 @@ Public Class FormRecipeManagement
             Case 14
                 Return MsgBox("Query unsuccessful , Recipe ID Creation Failed ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 15
-                Return MsgBox("Unsaved changes Found in " + field + ", Do you want to clear and Exit", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning")
+                Return MsgBox("Unsaved changes in " + field + ", Discard?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning")
             Case 16
-                Return MsgBox("Characters, Special characters and Spaces not allowed ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                Return Nothing 'MsgBox("Characters, Special characters and Spaces not allowed ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 17
                 Return MsgBox("Current Selection is of Integer type, decimal points are not allowed", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 18
@@ -1009,7 +1009,7 @@ Public Class FormRecipeManagement
                 txtbx_RcpCreatePrepBleed.Enabled = True
                 txtbx_RcpCreatePrepPrefillStartTime.Enabled = True
                 txtbx_RcpCreatePrepPrefillTime.Enabled = True
-                txtbx_RcpCreateVerTol.Text = CType(d_vertol, String)
+                txtbx_RcpCreateVerTol.Text = d_vertol.ToString("N1") 'CType(d_vertol, String)
             End If
 
             i_prepfilltime = nom_i_prepfilltime
@@ -1023,9 +1023,9 @@ Public Class FormRecipeManagement
 
             txtbx_RcpCreatePrepFill.Text = CType(i_prepfilltime, String)
             txtbx_RcpCreatePrepBleed.Text = CType(i_prepbleedtime, String)
-            txtbx_RcpCreatePrepFlow.Text = CType(d_prepflow, String)
-            txtbx_RcpCreatePrepPressure.Text = CType(d_preppressure, String)
-            txtbx_RcpCreatePrepPressureDrop.Text = CType(d_preppressuredrop, String)
+            txtbx_RcpCreatePrepFlow.Text = d_prepflow.ToString("N1") 'CType(d_prepflow, String)
+            txtbx_RcpCreatePrepPressure.Text = d_preppressure.ToString("N1") 'CType(d_preppressure, String)
+            txtbx_RcpCreatePrepPressureDrop.Text = d_preppressuredrop.ToString("N1") 'CType(d_preppressuredrop, String)
             txtbx_RcpCreatePrepPressureDropTime.Text = CType(i_preppressuredroptime, String)
             txtbx_RcpCreatePrepPrefillStartTime.Text = CType(i_prepprefillstarttime, String)
             txtbx_RcpCreatePrepPrefillTime.Text = CType(i_prepprefilltime, String)
@@ -1106,6 +1106,7 @@ Public Class FormRecipeManagement
 
             txtbx_RcpCreatePrepFill.Text = Nothing
             txtbx_RcpCreatePrepBleed.Text = Nothing
+            txtbx_RcpCreatePrepFlow.Text = Nothing
             txtbx_RcpCreatePrepPressureDropTime.Text = Nothing
             txtbx_RcpCreatePrepPressure.Text = Nothing
             txtbx_RcpCreatePrepPressureDrop.Text = Nothing
@@ -1233,9 +1234,9 @@ Public Class FormRecipeManagement
             str_flush1enable = "Enable"
             'txtbx_RcpCreateFlush1Fill.Text = CType(i_flush1filltime, String)
             'txtbx_RcpCreateFlush1Bleed.Text = CType(i_flush1bleedtime, String)
-            txtbx_RcpCreateFlush1Flow.Text = CType(d_flush1flow, String)
-            txtbx_RcpCreateFlush1FlowTol.Text = CType(d_flush1flowtol, String)
-            txtbx_RcpCreateFlush1Pressure.Text = CType(d_flush1pressure, String)
+            txtbx_RcpCreateFlush1Flow.Text = d_flush1flow.ToString("N1") 'CType(d_flush1flow, String)
+            txtbx_RcpCreateFlush1FlowTol.Text = d_flush1flowtol.ToString("N1") 'CType(d_flush1flowtol, String)
+            txtbx_RcpCreateFlush1Pressure.Text = d_flush1pressure.ToString("N1") 'CType(d_flush1pressure, String)
             txtbx_RcpCreateFlush1Stabilize.Text = CType(i_flush1stabilize, String)
             txtbx_RcpCreateFlush1Time.Text = CType(i_flush1time, String)
         Else
@@ -1301,13 +1302,13 @@ Public Class FormRecipeManagement
             str_dptest1enable = "Enable"
             'txtbx_RcpCreateDPFill.Text = CType(i_dptestfilltime, String)
             'txtbx_RcpCreateDPBleed.Text = CType(i_dptestbleedtime, String)
-            txtbx_RcpCreateDPFlow.Text = CType(d_dptestflow, String)
-            txtbx_RcpCreateDPFlowTol.Text = CType(d_dptestflowtol, String)
-            txtbx_RcpCreateDPPressure.Text = CType(d_dptestpressure, String)
+            txtbx_RcpCreateDPFlow.Text = d_dptestflow.ToString("N1") 'CType(d_dptestflow, String)
+            txtbx_RcpCreateDPFlowTol.Text = d_dptestflowtol.ToString("N1") 'CType(d_dptestflowtol, String)
+            txtbx_RcpCreateDPPressure.Text = d_dptestpressure.ToString("N1") 'CType(d_dptestpressure, String)
             txtbx_RcpCreateDPStabilize.Text = CType(i_dpteststabilize, String)
             txtbx_RcpCreateDPTime.Text = CType(i_dptesttime, String)
-            txtbx_RcpCreateDPLowLimit.Text = CType(d_dptestlowlimit, String)
-            txtbx_RcpCreateDPUpLimit.Text = CType(d_dptestuplimit, String)
+            txtbx_RcpCreateDPLowLimit.Text = d_dptestlowlimit.ToString("N1") 'CType(d_dptestlowlimit, String)
+            txtbx_RcpCreateDPUpLimit.Text = d_dptestuplimit.ToString("N1") 'CType(d_dptestuplimit, String)
             txtbx_RcpCreateDPPoints.Text = CType(i_dptestpoints, String)
         Else
             'txtbx_RcpCreateDPFill.Enabled = False
@@ -1370,9 +1371,9 @@ Public Class FormRecipeManagement
             str_flush2enable = "Enable"
             'txtbx_RcpCreateFlush2Fill.Text = CType(i_flush2filltime, String)
             'txtbx_RcpCreateFlush2Bleed.Text = CType(i_flush2bleedtime, String)
-            txtbx_RcpCreateFlush2Flow.Text = CType(d_flush2flow, String)
-            txtbx_RcpCreateFlush2FlowTol.Text = CType(d_flush2flowtol, String)
-            txtbx_RcpCreateFlush2Pressure.Text = CType(d_flush2pressure, String)
+            txtbx_RcpCreateFlush2Flow.Text = d_flush2flow.ToString("N1") 'CType(d_flush2flow, String)
+            txtbx_RcpCreateFlush2FlowTol.Text = d_flush2flowtol.ToString("N1") 'CType(d_flush2flowtol, String)
+            txtbx_RcpCreateFlush2Pressure.Text = d_flush2pressure.ToString("N1") 'CType(d_flush2pressure, String)
             txtbx_RcpCreateFlush2Stabilize.Text = CType(i_flush2stabilize, String)
             txtbx_RcpCreateFlush2Time.Text = CType(i_flush2time, String)
         Else
@@ -1426,7 +1427,7 @@ Public Class FormRecipeManagement
             i_drain1time = nom_i_drain1time
 
             str_drain1enable = "Enable"
-            txtbx_RcpCreateDrain1Pressure.Text = CType(d_drain1pressure, String)
+            txtbx_RcpCreateDrain1Pressure.Text = d_drain1pressure.ToString("N1") 'CType(d_drain1pressure, String)
             txtbx_RcpCreateDrain1Time.Text = CType(i_drain1time, String)
         Else
             txtbx_RcpCreateDrain1Pressure.Enabled = False
@@ -1450,7 +1451,7 @@ Public Class FormRecipeManagement
             i_drain2time = nom_i_drain2time
 
             str_drain2enable = "Enable"
-            txtbx_RcpCreateDrain2Pressure.Text = CType(d_drain2pressure, String)
+            txtbx_RcpCreateDrain2Pressure.Text = d_drain2pressure.ToString("N1") 'CType(d_drain2pressure, String)
             txtbx_RcpCreateDrain2Time.Text = CType(i_drain2time, String)
         Else
             txtbx_RcpCreateDrain2Pressure.Enabled = False
@@ -1474,7 +1475,7 @@ Public Class FormRecipeManagement
             i_drain3time = nom_i_drain3time
 
             str_drain3enable = "Enable"
-            txtbx_RcpCreateDrain3Pressure.Text = CType(d_drain3pressure, String)
+            txtbx_RcpCreateDrain3Pressure.Text = d_drain3pressure.ToString("N1") 'CType(d_drain3pressure, String)
             txtbx_RcpCreateDrain3Time.Text = CType(i_drain3time, String)
         Else
             txtbx_RcpCreateDrain3Pressure.Enabled = False
@@ -3578,6 +3579,7 @@ Public Class FormRecipeManagement
         If onContinue = True Then
             ' Upon all previous conditions are true,
             ' Send the Data to SQL Database
+            Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
             If dtrecipeidcheck.Rows.Count = 0 Then
                 Dim recipeparameter As New Dictionary(Of String, Object) From {
                     {"recipe_id", RecipeID},
@@ -3585,9 +3587,9 @@ Public Class FormRecipeManagement
                     {"part_id", PartID},
                     {"recipe_type_id", TypeID},
                     {"last_modified_by", PublicVariables.LoginUserName},
-                    {"last_modified_time", lbl_DateTimeClock.Text},
+                    {"last_modified_time", DateTimeNowInStr},
                     {"user_created", PublicVariables.LoginUserName},
-                    {"created_time", lbl_DateTimeClock.Text},
+                    {"created_time", DateTimeNowInStr},
                     {"fitting_inlet", IIf(ComboBox3.Items.Count > 0, ComboBox3.SelectedItem, "")},
                     {"fitting_outlet", IIf(ComboBox4.Items.Count > 0, ComboBox4.SelectedItem, "")},
                     {"fitting_blank", IIf(ComboBox6.Items.Count > 0, ComboBox6.SelectedItem, "")},
@@ -4251,6 +4253,7 @@ Public Class FormRecipeManagement
                 txtbx_RcpEditVerTol.Text = Nothing
                 txtbx_RcpEditVerTol.Focus()
             End If
+
         Else
             RecipeMessage(19, "Verification tolerance")
         End If
@@ -5243,9 +5246,9 @@ Public Class FormRecipeManagement
 
         txtbx_RcpEditPrepFill.Text = CType(i_prepfilltime, String)
         txtbx_RcpEditPrepBleed.Text = CType(i_prepbleedtime, String)
-        txtbx_RcpEditPrepFlow.Text = CType(d_prepflow, String)
-        txtbx_RcpEditPrepPressure.Text = CType(d_preppressure, String)
-        txtbx_RcpEditPrepPressureDrop.Text = CType(d_preppressuredrop, String)
+        txtbx_RcpEditPrepFlow.Text = Math.Round(d_prepflow, 1) 'CType(d_prepflow, String)
+        txtbx_RcpEditPrepPressure.Text = Math.Round(d_preppressure, 1) 'CType(d_preppressure, String)
+        txtbx_RcpEditPrepPressureDrop.Text = Math.Round(d_preppressuredrop, 1) 'CType(d_preppressuredrop, String)
         txtbx_RcpEditPrepPressureDropTime.Text = CType(i_preppressuredroptime, String)
         txtbx_RcpEditPrepPrefillStartTime.Text = CType(i_prepprefillstarttime, String)
         txtbx_RcpEditPrepPrefillTime.Text = CType(i_prepprefilltime, String)
@@ -5256,9 +5259,9 @@ Public Class FormRecipeManagement
             checkbx_EditFlush1.Checked = True
             'txtbx_RcpEditFlush1Fill.Text = CType(i_flush1filltime, String)
             'txtbx_RcpEditFlush1Bleed.Text = CType(i_flush1bleedtime, String)
-            txtbx_RcpEditFlush1Flow.Text = CType(d_flush1flow, String)
-            txtbx_RcpEditFlush1FlowTol.Text = CType(d_flush1flowtol, String)
-            txtbx_RcpEditFlush1Pressure.Text = CType(d_flush1pressure, String)
+            txtbx_RcpEditFlush1Flow.Text = Math.Round(d_flush1flow, 1) 'CType(d_flush1flow, String)
+            txtbx_RcpEditFlush1FlowTol.Text = Math.Round(d_flush1flowtol, 1) 'CType(d_flush1flowtol, String)
+            txtbx_RcpEditFlush1Pressure.Text = Math.Round(d_flush1pressure, 1) 'CType(d_flush1pressure, String)
             txtbx_RcpEditFlush1Stabilize.Text = CType(i_flush1stabilize, String)
             txtbx_RcpEditFlush1Time.Text = CType(i_flush1time, String)
         Else
@@ -5269,13 +5272,13 @@ Public Class FormRecipeManagement
             checkbx_EditDPTest1.Checked = True
             'txtbx_RcpEditDPFill.Text = CType(i_dptestfilltime, String)
             'txtbx_RcpEditDPBleed.Text = CType(i_dptestbleedtime, String)
-            txtbx_RcpEditDPFlow.Text = CType(d_dptestflow, String)
-            txtbx_RcpEditDPFlowTol.Text = CType(d_dptestflowtol, String)
-            txtbx_RcpEditDPPressure.Text = CType(d_dptestpressure, String)
+            txtbx_RcpEditDPFlow.Text = Math.Round(d_dptestflow, 1) 'CType(d_dptestflow, String)
+            txtbx_RcpEditDPFlowTol.Text = Math.Round(d_dptestflowtol, 1) 'CType(d_dptestflowtol, String)
+            txtbx_RcpEditDPPressure.Text = Math.Round(d_dptestpressure, 1) 'CType(d_dptestpressure, String)
             txtbx_RcpEditDPStabilize.Text = CType(i_dpteststabilize, String)
             txtbx_RcpEditDPTime.Text = CType(i_dptesttime, String)
-            txtbx_RcpEditDPLowLimit.Text = CType(d_dptestlowlimit, String)
-            txtbx_RcpEditDPUpLimit.Text = CType(d_dptestuplimit, String)
+            txtbx_RcpEditDPLowLimit.Text = Math.Round(d_dptestlowlimit, 1) 'CType(d_dptestlowlimit, String)
+            txtbx_RcpEditDPUpLimit.Text = Math.Round(d_dptestuplimit, 1) 'CType(d_dptestuplimit, String)
             txtbx_RcpEditDPPoints.Text = CType(i_dptestpoints, String)
         Else
             checkbx_EditDPTest1.Checked = False
@@ -5292,9 +5295,9 @@ Public Class FormRecipeManagement
             checkbx_EditFlush2.Checked = True
             'txtbx_RcpEditFlush2Fill.Text = CType(i_flush2filltime, String)
             'txtbx_RcpEditFlush2Bleed.Text = CType(i_flush2bleedtime, String)
-            txtbx_RcpEditFlush2Flow.Text = CType(d_flush2flow, String)
-            txtbx_RcpEditFlush2FlowTol.Text = CType(d_flush2flowtol, String)
-            txtbx_RcpEditFlush2Pressure.Text = CType(d_flush2pressure, String)
+            txtbx_RcpEditFlush2Flow.Text = Math.Round(d_flush2flow, 1) 'CType(d_flush2flow, String)
+            txtbx_RcpEditFlush2FlowTol.Text = Math.Round(d_flush2flowtol, 1) 'CType(d_flush2flowtol, String)
+            txtbx_RcpEditFlush2Pressure.Text = Math.Round(d_flush2pressure, 1) 'CType(d_flush2pressure, String)
             txtbx_RcpEditFlush2Stabilize.Text = CType(i_flush2stabilize, String)
             txtbx_RcpEditFlush2Time.Text = CType(i_flush2time, String)
 
@@ -5306,7 +5309,7 @@ Public Class FormRecipeManagement
 
         If dtRecipe(0)("drain1_circuit") = "Enable" Then
             checkbx_EditDrain1.Checked = True
-            txtbx_RcpEditDrain1Pressure.Text = CType(d_drain1pressure, String)
+            txtbx_RcpEditDrain1Pressure.Text = Math.Round(d_drain1pressure, 1) 'CType(d_drain1pressure, String)
             txtbx_RcpEditDrain1Time.Text = CType(i_drain1time, String)
         Else
             checkbx_EditDrain1.Checked = False
@@ -5314,7 +5317,7 @@ Public Class FormRecipeManagement
 
         If dtRecipe(0)("drain2_circuit") = "Enable" Then
             checkbx_EditDrain2.Checked = True
-            txtbx_RcpEditDrain2Pressure.Text = CType(d_drain2pressure, String)
+            txtbx_RcpEditDrain2Pressure.Text = Math.Round(d_drain2pressure, 1) 'CType(d_drain2pressure, String)
             txtbx_RcpEditDrain2Time.Text = CType(i_drain2time, String)
         Else
             checkbx_EditDrain2.Checked = False
@@ -5322,7 +5325,7 @@ Public Class FormRecipeManagement
 
         If dtRecipe(0)("drain3_circuit") = "Enable" Then
             checkbx_EditDrain3.Checked = True
-            txtbx_RcpEditDrain3Pressure.Text = CType(d_drain3pressure, String)
+            txtbx_RcpEditDrain3Pressure.Text = Math.Round(d_drain3pressure, 1) 'CType(d_drain3pressure, String)
             txtbx_RcpEditDrain3Time.Text = CType(i_drain3time, String)
         Else
             checkbx_EditDrain3.Checked = False
@@ -6463,6 +6466,7 @@ Public Class FormRecipeManagement
         End If
 
         If onContinue = True Then
+            Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
             Dim currentDateTime As String = lbl_DateTimeClock.Text
             Dim currentDateTime2 As DateTime = DateTime.Now
             If dtrecipeidcheck.Rows.Count > 0 Then
@@ -6472,13 +6476,13 @@ Public Class FormRecipeManagement
                     {"part_id", dtrecipeidcheck(0)("part_id")},
                     {"recipe_type_id", dtrecipeidcheck(0)("recipe_type_id")},
                     {"user_created", PublicVariables.LoginUserName},
-                    {"created_time", currentDateTime},
+                    {"created_time", DateTimeNowInStr},
                     {"fitting_inlet", IIf(ComboBox9.Items.Count > 0, ComboBox9.SelectedItem, "")},
                     {"fitting_outlet", IIf(ComboBox8.Items.Count > 0, ComboBox8.SelectedItem, "")},
                     {"fitting_blank", IIf(ComboBox7.Items.Count > 0, ComboBox7.SelectedItem, "")},
                                                                                                   _
                     {"last_modified_by", PublicVariables.LoginUserName},
-                    {"last_modified_time", currentDateTime}, ' lbl_DateTimeClock.Text
+                    {"last_modified_time", DateTimeNowInStr}, ' lbl_DateTimeClock.Text
                     {"verification_tolerance", d_vertol},
                     {"prep_fill_time", i_prepfilltime},
                     {"prep_bleed_time", i_prepbleedtime},
@@ -6932,6 +6936,9 @@ Public Class FormRecipeManagement
             .Columns("user_created1").Visible = False
             .Columns("date_created").Visible = False
             .Columns("created_time").Visible = False
+            .Columns("fitting_inlet").Visible = False
+            .Columns("fitting_outlet").Visible = False
+            .Columns("fitting_blank").Visible = False
 
             'Rename Columns
             .Columns("recipe_id").HeaderCell.Value = "Recipe ID"
@@ -7247,7 +7254,10 @@ Public Class FormRecipeManagement
             .Columns("fitting_outlet").DisplayIndex = 48 + 8
             .Columns("fitting_blank").DisplayIndex = 49 + 8
 
-
+            ' Format Date
+            With .Columns("last_modified_time")
+                .DefaultCellStyle.Format = "dd-MMM-yyyy HH:mm:ss"
+            End With
 
             ''Wrap content
 
@@ -7281,16 +7291,35 @@ Public Class FormRecipeManagement
     End Sub
 
     Private Sub btn_RcpDetailEdit_Click(sender As Object, e As EventArgs) Handles btn_RcpDetailEdit.Click
-        If dgv_RecipeDetails.SelectedRows.Count > 0 Then
-            Dim row As DataGridViewRow = dgv_RecipeDetails.CurrentRow
-            Dim recipeid As String = row.Cells("recipe_id").Value
-            Dim partid As String = row.Cells("part_id").Value
-            Dim filtertype As String = row.Cells("filter_type").Value
-            tabctrl_RecipeCtrl.SelectedTab = tabpg_Edit
-            cmbx_RcpEditFilterType.Text = filtertype
-            cmbx_RcpEditPartID.Text = partid
-            cmbx_RcpEditRecipeID.Text = recipeid
+        Dim dgv As DataGridView = dgv_RecipeDetails
+
+        If dgv.SelectedCells.Count > 0 Then
+            Dim selectedCell As DataGridViewCell = dgv.SelectedCells(0)
+
+            'Dim columnIndex As Integer = selectedCell.ColumnIndex
+            Dim rowIndex As Integer = selectedCell.RowIndex
+
+            If rowIndex >= 0 Then
+                Dim recipeid As String = dgv.Rows(rowIndex).Cells("recipe_id").Value 'row.Cells("recipe_id").Value
+                Dim partid As String = dgv.Rows(rowIndex).Cells("part_id").Value 'row.Cells("part_id").Value
+                Dim filtertype As String = dgv.Rows(rowIndex).Cells("filter_type").Value 'row.Cells("filter_type").Value
+                tabctrl_RecipeCtrl.SelectedTab = tabpg_Edit
+                cmbx_RcpEditFilterType.Text = filtertype
+                cmbx_RcpEditPartID.Text = partid
+                cmbx_RcpEditRecipeID.Text = recipeid
+            End If
         End If
+
+        'If dgv_RecipeDetails.SelectedRows.Count > 0 Then
+        '    Dim row As DataGridViewRow = dgv_RecipeDetails.CurrentRow
+        '    Dim recipeid As String = row.Cells("recipe_id").Value
+        '    Dim partid As String = row.Cells("part_id").Value
+        '    Dim filtertype As String = row.Cells("filter_type").Value
+        '    tabctrl_RecipeCtrl.SelectedTab = tabpg_Edit
+        '    cmbx_RcpEditFilterType.Text = filtertype
+        '    cmbx_RcpEditPartID.Text = partid
+        '    cmbx_RcpEditRecipeID.Text = recipeid
+        'End If
     End Sub
 
     Private Sub btn_RcpDetailExport_Click(sender As Object, e As EventArgs) Handles btn_RcpDetailExport.Click
@@ -7584,7 +7613,7 @@ Public Class FormRecipeManagement
                 {"fitting_type", SelectedType},
                 {"fitting_name", FittingNameInput},
                 {"user_updated", PublicVariables.LoginUserName},
-                {"date_updated", lbl_DateTimeClock.Text}
+                {"date_updated", DateTime.Now.ToString("s")} 'lbl_DateTimeClock.Text}
             }
             Dim InsertRecord As Integer = SQL.InsertRecord("FittingType", parameters)
 
@@ -7620,5 +7649,54 @@ Public Class FormRecipeManagement
                 Label8.Text = "Blank ID :"
         End Select
         TextBox1.Text = ""
+    End Sub
+
+    Private Sub txtbx_Dec_LostFocus(sender As Object, e As EventArgs) Handles _
+        txtbx_RcpCreateVerTol.LostFocus,
+        txtbx_RcpCreatePrepFlow.LostFocus,
+        txtbx_RcpCreatePrepPressure.LostFocus,
+        txtbx_RcpCreatePrepPressureDrop.LostFocus,
+        txtbx_RcpCreateFlush1Flow.LostFocus,
+        txtbx_RcpCreateFlush1FlowTol.LostFocus,
+        txtbx_RcpCreateFlush1Pressure.LostFocus,
+        txtbx_RcpCreateDPFlow.LostFocus,
+        txtbx_RcpCreateDPFlowTol.LostFocus,
+        txtbx_RcpCreateDPPressure.LostFocus,
+        txtbx_RcpCreateDPLowLimit.LostFocus,
+        txtbx_RcpCreateDPUpLimit.LostFocus,
+        txtbx_RcpCreateFlush2Flow.LostFocus,
+        txtbx_RcpCreateFlush2FlowTol.LostFocus,
+        txtbx_RcpCreateFlush2Pressure.LostFocus,
+        txtbx_RcpCreateDrain1Pressure.LostFocus,
+        txtbx_RcpCreateDrain2Pressure.LostFocus,
+        txtbx_RcpCreateDrain3Pressure.LostFocus,
+        txtbx_RcpEditVerTol.LostFocus,
+        txtbx_RcpEditPrepFlow.LostFocus,
+        txtbx_RcpEditPrepPressure.LostFocus,
+        txtbx_RcpEditPrepPressureDrop.LostFocus,
+        txtbx_RcpEditFlush1Flow.LostFocus,
+        txtbx_RcpEditFlush1FlowTol.LostFocus,
+        txtbx_RcpEditFlush1Pressure.LostFocus,
+        txtbx_RcpEditDPFlow.LostFocus,
+        txtbx_RcpEditDPFlowTol.LostFocus,
+        txtbx_RcpEditDPPressure.LostFocus,
+        txtbx_RcpEditDPLowLimit.LostFocus,
+        txtbx_RcpEditDPUpLimit.LostFocus,
+        txtbx_RcpEditFlush2Flow.LostFocus,
+        txtbx_RcpEditFlush2FlowTol.LostFocus,
+        txtbx_RcpEditFlush2Pressure.LostFocus,
+        txtbx_RcpEditDrain1Pressure.LostFocus,
+        txtbx_RcpEditDrain2Pressure.LostFocus,
+        txtbx_RcpEditDrain3Pressure.LostFocus
+
+        Dim txtbxValidate As TextBox = DirectCast(sender, TextBox)
+
+        Dim txtbxInDec As Decimal = 0
+
+        If Decimal.TryParse(txtbxValidate.Text, txtbxInDec) Then
+            txtbxValidate.Text = txtbxInDec.ToString("N1")
+        Else
+            txtbxValidate.Text = "0.0"
+        End If
     End Sub
 End Class

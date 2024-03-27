@@ -98,7 +98,12 @@ Module ModuleSerialComm
         End If
         If str.Length < 4 Then
             If FormMain.txtbx_Quantity.Enabled = True Then
-                FormMain.txtbx_Quantity.Text = str
+                'FormMain.txtbx_Quantity.Text = str
+
+                Dim ParsedInt As Integer = 0
+                If Integer.TryParse(str, ParsedInt) Then
+                    FormMain.txtbx_Quantity.Text = ParsedInt
+                End If
             End If
         End If
         SerialDataReceived = False

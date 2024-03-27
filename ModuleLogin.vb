@@ -218,6 +218,7 @@ Module PermissionModule
 
     Public MainMenu_Main As Boolean = False
     Public MainMenu_ProdDetail As Boolean = False
+    Public MainMenu_LotSummary As Boolean = False
     Public MainMenu_Status As Boolean = False
     Public MainMenu_ManualCtrl As Boolean = False
     Public MainMenu_Alarm As Boolean = False
@@ -247,6 +248,7 @@ Module PermissionModule
 
             MainMenu_Main = False
             MainMenu_ProdDetail = False
+            MainMenu_LotSummary = False
             MainMenu_Status = False
             MainMenu_ManualCtrl = False
             MainMenu_Alarm = False
@@ -287,6 +289,7 @@ Module PermissionModule
 
             dt.Rows.Add("Main")
             dt.Rows.Add("Production Details")
+            dt.Rows.Add("Lot Summary")
             dt.Rows.Add("Status")
             dt.Rows.Add("Manual Control")
             dt.Rows.Add("Alarm")
@@ -339,6 +342,9 @@ Module PermissionModule
                 End If
                 If row.Item("permission") = "Production Details" Then
                     MainMenu_ProdDetail = True
+                End If
+                If row.Item("permission") = "Lot Summary" Then
+                    MainMenu_LotSummary = True
                 End If
                 If row.Item("permission") = "Status" Then
                     MainMenu_Status = True
@@ -474,6 +480,11 @@ Module PermissionModule
             FormMain.tabpg_ProdDetail.Enabled = True
         Else
             FormMain.tabpg_ProdDetail.Enabled = False
+        End If
+        If MainMenu_LotSummary = True Then
+            FormMain.tabpg_LotSummary.Enabled = True
+        Else
+            FormMain.tabpg_LotSummary.Enabled = False
         End If
         If MainMenu_Status = True Then
             FormMain.tabpg_Status.Enabled = True

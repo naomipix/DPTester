@@ -843,7 +843,7 @@ Public Class FormSetting
                     If chklstbxArr(i).Items(item) = "Main" Then
                         chklstbxArr(i).SetItemChecked(item, True)
                     End If
-                    If chklstbxArr(i).Items(item) = "Production Details" Then
+                    If chklstbxArr(i).Items(item) = "Test Summary" Then
                         chklstbxArr(i).SetItemChecked(item, True)
                     End If
                     If chklstbxArr(i).Items(item) = "Status" Then
@@ -1144,7 +1144,11 @@ Public Class FormSetting
                 dtInsert.Rows.Add(chkbx_MainMenu.Text)
 
                 For i As Integer = 0 To chklstbx_MainMenu.CheckedItems.Count - 1
-                    dtInsert.Rows.Add(chklstbx_MainMenu.CheckedItems(i))
+                    If chklstbx_MainMenu.CheckedItems(i) = "Test Summary" Then
+                        dtInsert.Rows.Add("Production Details")
+                    Else
+                        dtInsert.Rows.Add(chklstbx_MainMenu.CheckedItems(i))
+                    End If
                 Next
             End If
 
@@ -1297,7 +1301,14 @@ Public Class FormSetting
                 End If
                 If row.Item("permission") = "Production Details" Then
                     For i As Integer = 0 To chklstbx_MainMenu.Items.Count - 1
-                        If chklstbx_MainMenu.Items(i) = "Production Details" Then
+                        If chklstbx_MainMenu.Items(i) = "Test Summary" Then
+                            chklstbx_MainMenu.SetItemChecked(i, True)
+                        End If
+                    Next
+                End If
+                If row.Item("permission") = "Lot Summary" Then
+                    For i As Integer = 0 To chklstbx_MainMenu.Items.Count - 1
+                        If chklstbx_MainMenu.Items(i) = "Lot Summary" Then
                             chklstbx_MainMenu.SetItemChecked(i, True)
                         End If
                     Next

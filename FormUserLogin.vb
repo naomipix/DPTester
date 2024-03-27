@@ -46,7 +46,7 @@ Public Class FormUserLogin
         If ReturnString = "LoginSuccess" Or ReturnString = "LoginSuccessDeveloper" Then
             Select Case ReturnString
                 Case "LoginSuccess"
-                    LoginMessage.LoginPrompt(5, PublicVariables.LoginUserName, PublicVariables.LoginUserCategoryName)
+                    'LoginMessage.LoginPrompt(5, PublicVariables.LoginUserName, PublicVariables.LoginUserCategoryName)
                 Case "LoginSuccessDeveloper"
                     LoginMessage.LoginPrompt(6, 0, 0)
             End Select

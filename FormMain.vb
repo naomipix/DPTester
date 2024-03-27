@@ -151,7 +151,7 @@ Public Class FormMain
     Dim TotalCycleTime As Integer
 
     Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Start Clock Timer
+        ' Start Clock Timer 
         TimerModule.clockTimer.Start()
 
         'Create Directories
@@ -192,6 +192,7 @@ Public Class FormMain
         ' DoubleBuffer DataGridView
         Dim dgvArr() As DataGridView = {
             dgv_ProdDetail,
+            dgv_LotSummary,
             dgv_CurrentAlarm,
             dgv_AlarmHistory,
                              _
@@ -1051,6 +1052,11 @@ Public Class FormMain
             Dim t1 As Task = LoadProductionDetails()
         End If
 
+        If tabctrl_MainCtrl.SelectedTab Is tabpg_LotSummary Then
+            ' Load Production Details
+            Dim t1 As Task = LoadLotSummary()
+        End If
+
         If tabctrl_MainCtrl.SelectedTab Is tabpg_Status Then
             ' Focus First Tab Page
             tabctrl_SubStatus.SelectedTab = tabpg_StatusIO
@@ -1730,6 +1736,325 @@ Public Class FormMain
     End Sub
 #End Region
 
+
+#Region "Production Details"
+    ' Initialize Production Details Tab
+    Private Async Function LoadLotSummary() As Task
+        ' Load Production Details Filter List
+        Try
+            Await LoadLotSummaryFilterList()
+        Catch ex As Exception
+            MsgBox(ex.Message & ex.StackTrace)
+        End Try
+
+        ' Load Production Details Table
+        LoadLotSummaryTable(False, Nothing, Nothing)
+
+        ' Reset Filters
+        LotSummaryFieldReset()
+    End Function
+
+    ' Load Filter List For ComboBoxes
+    Private Async Function LoadLotSummaryFilterList() As Task
+        ' Lot ID
+        If True Then
+            Dim comboSource As New Dictionary(Of String, String)()
+
+            ' Assign Defaults
+            comboSource.Add("0", "-Not Selected-")
+
+            ' Get Recipe Table
+            'Dim dtRecipeTable As DataTable = SQL.ReadRecords("SELECT lot_id FROM WorkOrder")
+            Dim dvGetRecord As DataView = Await Task.Run(Function() SQL.ReadRecords($"
+                SELECT 
+                    run_by 
+                FROM LotUsage 
+                ORDER BY run_by ASC
+            ").DefaultView)
+
+            ' Get Unique Records
+            Dim dtRecipeTable As DataTable = dvGetRecord.ToTable(True, "run_by")
+
+            ' Insert Available Record Into Dictionary
+            If dtRecipeTable.Rows.Count > 0 Then
+                For i As Integer = 0 To dtRecipeTable.Rows.Count - 1
+                    comboSource.Add(i + 1, dtRecipeTable(i)("run_by"))
+                Next
+            End If
+
+            ' Bind ComboBox To Dictionary
+            For Each cmbx As ComboBox In {cmbx_FilterStartedBy2}
+                With cmbx
+                    .DataSource = New BindingSource(comboSource, Nothing)
+                    .DisplayMember = "Value"
+                    .ValueMember = "Key"
+                    If .Items.Count > 0 Then
+                        .SelectedIndex = 0
+                    End If
+                End With
+            Next
+        End If
+    End Function
+
+    ' Reset Search & Filter Fields
+    Private Sub LotSummaryFieldReset()
+        txtbx_FilterLotID2.Text = ""
+        For Each cmbx As ComboBox In {cmbx_FilterStartedBy2}
+            If cmbx.Items.Count > 0 Then
+                cmbx.SelectedIndex = 0
+            End If
+        Next
+    End Sub
+
+    ' Button Clicked Event [Reset] [Search]
+    Private Sub btnLotSummary_Click(sender As Object, e As EventArgs) Handles btn_LotSummaryReset.Click, btn_LotSummarySearch.Click
+        ' Declare Button Clicked
+        Dim btnClicked As Button = DirectCast(sender, Button)
+
+        ' Remove Selection Highlight
+        lbl_Title.Select()
+
+        ' Button Reset
+        If btnClicked Is btn_LotSummaryReset Then
+            LotSummaryFieldReset()
+            LoadLotSummaryTable(False, Nothing, Nothing)
+        End If
+
+        ' Button Search
+        If btnClicked Is btn_LotSummarySearch Then
+            SearchLotSummary()
+        End If
+    End Sub
+
+    ' Populate DataGridView From SQL Tables
+    Private Async Sub LoadLotSummaryTable(containSearch As Boolean, LotID As String, cmbxArr() As ComboBox)
+        ' Prevent UI Thread Freezing
+        Await Task.Delay(20)
+
+        ' Define SQL String
+        Dim sqlString As String = $"
+        SELECT 
+            LotUsage.id AS lotusage_id,
+            LotUsage.lot_id AS lotusage_lot_id,
+            LotUsage.lot_attempt AS lotusage_lot_attempt,
+            LotUsage.lot_start_time AS lotusage_lot_start_time,
+            LotUsage.lot_end_time AS lotusage_lot_end_time,
+            LotUsage.run_by AS lotusage_run_by,
+            LotUsage.recipe_id AS lotusage_recipe_id,
+            LotUsage.recipe_rev AS lotusage_recipe_rev,
+            (
+	            SELECT COUNT(t1.id) FROM ProductionDetail t1
+	            WHERE lot_usage_id = LotUsage.id
+	            AND result = 'PASS'
+	            AND serial_attempt = (
+		            SELECT MAX(serial_attempt)
+		            FROM ProductionDetail t2
+		            WHERE t1.serial_uid = t2.serial_uid
+		            AND t1.lot_usage_id=t2.lot_usage_id
+	            )
+            ) AS lotqtypassed,
+            (
+	            SELECT COUNT(t1.id) FROM ProductionDetail t1
+	            WHERE lot_usage_id = LotUsage.id
+	            AND serial_attempt = (
+		            SELECT MAX(serial_attempt)
+		            FROM ProductionDetail t2
+		            WHERE t1.serial_uid = t2.serial_uid
+		            AND t1.lot_usage_id=t2.lot_usage_id
+	            )
+            ) AS lotqtyprocessed,
+            LotUsage.calibration_time AS lotusage_calibration_time,
+            LotUsage.cal_result AS lotusage_cal_result,
+            LotUsage.cal_inlet_pressure AS lotusage_cal_inlet_pressure,
+            LotUsage.cal_outlet_pressure AS lotusage_cal_outlet_pressure,
+            LotUsage.cal_diff_pressure AS lotusage_cal_diff_pressure,
+            LotUsage.verify_inlet_pressure AS lotusage_verify_inlet_pressure,
+            LotUsage.verify_outlet_pressure AS lotusage_verify_outlet_pressure,
+            LotUsage.verify_diff_pressure AS lotusage_verify_diff_pressure
+        FROM LotUsage
+        ORDER BY LotUsage.lot_start_time DESC
+        "
+
+        ' Populate Datatable From SQL Query
+        Dim dtLotSummary As DataTable = Await Task.Run(Function() SQL.ReadRecords(sqlString))   'SQL.ReadRecords(sqlString)
+
+        ' Search
+        If containSearch = True Then
+            ' Set DataTable To Case Insensitive
+            dtLotSummary.CaseSensitive = False
+
+            ' Convert To DataView Table
+            Dim dvLotSummary As DataView = dtLotSummary.DefaultView
+
+            ' Declare FilterList Array
+            Dim FilterList As New List(Of String)
+
+            ' Check TextBox String
+            If LotID.Length > 0 Then
+                ' Filter [serial_number]
+                FilterList.Add($"lotusage_lot_id LIKE '%{LotID}%'")
+            End If
+
+            ' Check ComboBox Selection
+            For Each cmbx As ComboBox In cmbxArr
+                If cmbx.Items.Count > 0 AndAlso cmbx.SelectedIndex > 0 Then
+                    Dim selectedValue As String = DirectCast(cmbx.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim cellValue As String = ""
+
+                    If cmbx Is cmbx_FilterStartedBy2 Then
+                        FilterList.Add($"lotusage_run_by='{selectedValue}'")
+                    End If
+                End If
+            Next
+
+            ' Declare FilterString
+            Dim FilterString As String = ""
+
+            ' Concatenate Filter String
+            For i As Integer = 0 To FilterList.Count - 1
+                If i = 0 Then
+                    FilterString += FilterList(i)
+                Else
+                    FilterString += $" And {FilterList(i)}"
+                End If
+            Next
+
+            ' Apply Filter To DataView Table
+            dvLotSummary.RowFilter = FilterString
+
+            ' Convert Into Temp DataTable
+            Dim dtTemp As DataTable = dvLotSummary.ToTable
+
+            ' Set DataTable To Case Sensitive
+            dtTemp.CaseSensitive = True
+
+            ' Bind To DataGridView DataSource
+            dgv_LotSummary.DataSource = dtTemp
+        Else
+            ' Bind To DataGridView DataSource
+            dgv_LotSummary.DataSource = dtLotSummary
+
+            ' Set dtStart [DateTimePicker] To Earliest Record
+            If dtLotSummary.Rows.Count > 0 Then
+                dtpicker_StartDate.Value = dtLotSummary(dtLotSummary.Rows.Count - 1)("lotusage_lot_start_time")
+            Else
+                dtpicker_StartDate.Value = DateTime.Now
+            End If
+        End If
+
+        With dgv_LotSummary
+            ' Set DataGridView Properties
+            .BackgroundColor = SystemColors.Window
+            .RowHeadersVisible = False
+            .SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            .ShowCellToolTips = False
+            .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+
+            ' Hide Unnecessary Columns
+            .Columns("lotusage_id").Visible = False
+
+            ' Rename Columns
+            .Columns("lotusage_lot_id").HeaderCell.Value = "Lot ID"
+            .Columns("lotusage_lot_attempt").HeaderCell.Value = "Attempt No."
+            .Columns("lotusage_lot_start_time").HeaderCell.Value = "Lot Start Time"
+            .Columns("lotusage_lot_end_time").HeaderCell.Value = "Lot End Time"
+            .Columns("lotusage_run_by").HeaderCell.Value = "Lot Started By"
+            .Columns("lotusage_recipe_id").HeaderCell.Value = "Recipe ID"
+            .Columns("lotusage_recipe_rev").HeaderCell.Value = "Recipe Rev"
+            .Columns("lotqtypassed").HeaderCell.Value = "Lot Quantity Passed"
+            .Columns("lotqtyprocessed").HeaderCell.Value = "Lot Quantity Processed"
+            .Columns("lotusage_calibration_time").HeaderCell.Value = "Calibration Time"
+            .Columns("lotusage_cal_result").HeaderCell.Value = "Calibration Result"
+            .Columns("lotusage_cal_inlet_pressure").HeaderCell.Value = "Calibration Inlet Press"
+            .Columns("lotusage_cal_outlet_pressure").HeaderCell.Value = "Calibration Outlet Press"
+            .Columns("lotusage_cal_diff_pressure").HeaderCell.Value = "Calibration Offset"
+            .Columns("lotusage_verify_inlet_pressure").HeaderCell.Value = "Verification Inlet Press"
+            .Columns("lotusage_verify_outlet_pressure").HeaderCell.Value = "Verification Outlet Press"
+            .Columns("lotusage_verify_diff_pressure").HeaderCell.Value = "Verification DP"
+
+            ' Set Column Properties
+            .Columns("lotusage_lot_id").Width = 180
+            .Columns("lotusage_lot_attempt").Width = 90
+            With .Columns("lotusage_lot_start_time")
+                .DefaultCellStyle.Format = "dd-MMM-yyyy HH:mm:ss"
+                .Width = 140
+            End With
+            With .Columns("lotusage_lot_end_time")
+                .DefaultCellStyle.Format = "dd-MMM-yyyy HH:mm:ss"
+                .Width = 140
+            End With
+            .Columns("lotusage_run_by").Width = 90
+            .Columns("lotusage_recipe_id").Width = 180
+            .Columns("lotusage_recipe_rev").Width = 60
+            .Columns("lotqtypassed").Width = 90
+            .Columns("lotqtyprocessed").Width = 90
+            .Columns("lotusage_calibration_time").Width = 90
+            With .Columns("lotusage_calibration_time")
+                .DefaultCellStyle.Format = "dd-MMM-yyyy HH:mm:ss"
+                .Width = 140
+            End With
+            .Columns("lotusage_cal_result").Width = 90
+            .Columns("lotusage_cal_inlet_pressure").Width = 90
+            .Columns("lotusage_cal_outlet_pressure").Width = 90
+            .Columns("lotusage_cal_diff_pressure").Width = 90
+            .Columns("lotusage_verify_inlet_pressure").Width = 90
+            .Columns("lotusage_verify_outlet_pressure").Width = 90
+            .Columns("lotusage_verify_diff_pressure").Width = 90
+
+        End With
+
+        ' Clear Selection
+        dgvClearSelection(dgv_LotSummary)
+
+        ' Prompt When No Result Returns
+        If containSearch = True Then
+            If Not dgv_LotSummary.RowCount > 0 Then
+                MsgBox("Search Result Returned Empty.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
+            End If
+        End If
+    End Sub
+
+    ' Format Cell Color Based On Cell Content
+    Private Sub dgv_LotSummary_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dgv_LotSummary.CellFormatting
+        Dim dgv As DataGridView = dgv_LotSummary
+        Try
+            If dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Value.ToString().ToUpper = CStr("Pass").ToUpper Then
+                dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Style.BackColor = PublicVariables.StatusGreen
+                dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Style.ForeColor = PublicVariables.StatusGreenT
+            End If
+            If dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Value.ToString().ToUpper = CStr("Fail").ToUpper Then
+                dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Style.BackColor = PublicVariables.StatusRed
+                dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Style.ForeColor = PublicVariables.StatusRedT
+            End If
+            If dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Value.ToString().ToUpper = CStr("NA").ToUpper Then
+                dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Style.BackColor = SystemColors.Window
+                dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Style.ForeColor = SystemColors.ControlText
+            End If
+            If dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Value.ToString().Length = 0 Then
+                dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Style.BackColor = SystemColors.Window
+                dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Style.ForeColor = SystemColors.ControlText
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    ' Remove DataGridView Selection When Not In Focus
+    Private Sub dgv_LotSummary_LostFocus(sender As Object, e As EventArgs) Handles dgv_LotSummary.LostFocus
+        dgvClearSelection(dgv_LotSummary)
+    End Sub
+
+    ' Search Lot Summary
+    Private Sub SearchLotSummary()
+        ' Declare Variables
+        Dim LotID As String = txtbx_FilterLotID2.Text
+        Dim cmbxArr() As ComboBox = {cmbx_FilterStartedBy2}
+
+        ' Load Table With Filters
+        LoadLotSummaryTable(True, LotID, cmbxArr)
+    End Sub
+#End Region
+
 #Region "Status"
     Private Async Function LoadStatus() As Task
         Try
@@ -1796,7 +2121,7 @@ Public Class FormMain
         Next
 
         'IO Status [Digital Input]
-        For i As Integer = 0 To 29
+        For i As Integer = 0 To 31
             ' Assign Defaults
             dgv_DigitalInput.Rows.Add(i + 1, $"Digital Input-{i + 1}", $"DIO_IN_{i}", False)
 
@@ -1856,7 +2181,7 @@ Public Class FormMain
         Next
 
         'IO Status [Analog Output]
-        For i As Integer = 0 To 5
+        For i As Integer = 0 To 3
             ' Assign Defaults
             dgv_AnalogOutput.Rows.Add(i + 1, $"Analog Output-{i + 1}", $"AIO_OUT_{i}", "0.0")
 
@@ -2828,7 +3153,12 @@ Public Class FormMain
                 MainMessage(1, "Quantity")
                 OnContinue = False
             Else
-                lotquantity = CType(Quantity, Integer)
+                Try
+                    lotquantity = CType(Quantity, Integer)
+                Catch ex As Exception
+                    MsgBox("Quantity Entered Incorrect", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                    OnContinue = False
+                End Try
             End If
         End If
 
@@ -2969,7 +3299,7 @@ Public Class FormMain
                     }
                     If SQL.InsertRecord("WorkOrder", Workorderparameter) = 1 Then
 
-                        LotStartTime = lbl_DateTimeClock.Text
+                        LotStartTime = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
                     Else
                         MainMessage(4, "Insert Work Order details")
                         OnContinue = False
@@ -2991,7 +3321,7 @@ Public Class FormMain
                             dtlotusage = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id ='{LotID}' ORDER BY lot_attempt ASC")
                             If dtlotusage.Rows.Count > 0 Then
                                 LotAttempt = dtlotusage.Rows.Count + 1
-                                LotStartTime = lbl_DateTimeClock.Text
+                                LotStartTime = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
 
                                 ' Check if user want to use back previous calibration
                                 'Dim dtRetainedMemory As DataTable = SQL.ReadRecords("SELECT retained_value FROM [0_RetainedMemory] WHERE id='33'")
@@ -3150,7 +3480,7 @@ Public Class FormMain
                 Dim Lotusageparameter As New Dictionary(Of String, Object) From {
                     {"lot_id", LotID},
                     {"lot_attempt", LotAttempt},
-                    {"lot_start_time", lbl_DateTimeClock.Text}, 'DateTime.Now 'LotStartTime not updated, causing sql insert error
+                    {"lot_start_time", DateTime.Now.ToString("s")},'lbl_DateTimeClock.Text}, 'DateTime.Now 'LotStartTime not updated, causing sql insert error
                     {"run_by", PublicVariables.LoginUserName}
                 }
                 If SQL.InsertRecord("LotUsage", Lotusageparameter) = 1 Then
@@ -3221,7 +3551,7 @@ Public Class FormMain
 
                         If RecipeCheckOK Then
                             Dim restoreCalibrations As Boolean = False
-                            Dim CurrentDateTime As String = lbl_DateTimeClock.Text
+                            Dim CurrentDateTime As String = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
                             Dim CurrentDateTime2 As DateTime = DateTime.Now
                             Dim PrevCalDateTime As DateTime = dtlotusage(dtlotusage.Rows.Count - 1)("calibration_time")
 
@@ -3416,7 +3746,13 @@ Public Class FormMain
                 txtbx_SerialNumber.Enabled = True
                 btn_OprKeyInDtConfirm.Enabled = True
             Else
-                FormCalibration.ShowDialog()
+                If CommLost = False Then
+                    If PLCstatus(0)(3) = True Then
+                        FormCalibration.ShowDialog()
+                    Else
+                        MsgBox($"Switch To Auto Mode & Start Calibration", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
+                    End If
+                End If
             End If
         Else
             OnContinue = False
@@ -3695,12 +4031,13 @@ Public Class FormMain
                 Lotusageid = dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("id")
                 Dim dummyfloat As Decimal = 0
                 Dim dummystring As String = "NA"
+                Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
                 Dim Productionparameter As New Dictionary(Of String, Object) From {
                     {"serial_uid", SerialUid},
                         {"serial_number", txtbx_SerialNumber.Text},
                         {"serial_attempt", SerialAttempt},
                         {"lot_usage_id", Lotusageid},
-                        {"timestamp", lbl_DateTimeClock.Text},
+                        {"timestamp", DateTimeNowInStr},
                         {"temperature", dummyfloat},
                         {"flowrate", dummyfloat},
                         {"inlet_pressure", dummyfloat},
@@ -4544,7 +4881,7 @@ Public Class FormMain
 
 
         If OnContinue = True Then
-            LotEndTime = lbl_DateTimeClock.Text
+            LotEndTime = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
 
             Dim Updateparameter As New Dictionary(Of String, Object) From {
                 {"lot_end_time", LotEndTime}
@@ -4552,8 +4889,8 @@ Public Class FormMain
             Dim Condition As String = $"lot_id ='{txtbx_LotID.Text}' AND lot_attempt = '{dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}'"
 
             If LoggedInIsDeveloper Then
-                MsgBox(Condition)
-                MsgBox($"{txtbx_LotID.Text} | {dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}")
+                'MsgBox(Condition)
+                'MsgBox($"{txtbx_LotID.Text} | {dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}")
             End If
 
             If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
@@ -4857,6 +5194,23 @@ Public Class FormMain
             PCStatus(0)(10) = True
         End If
 
+        If OnContinue = True Then
+            FormCalibration.DiscardCal()
+
+            CalibrateChartDPValue.Clear()
+            CalibrateChartInletValue.Clear()
+            CalibrateChartOutletValue.Clear()
+            CalibrateChartBPValue.Clear()
+            CalibrateChartRPMValue.Clear()
+            CalibrateChartFLWRValue.Clear()
+            CalibrateChartTempValue.Clear()
+
+            For i As Integer = 0 To FormCalibration.CartesianChart_CalibrationLiveGraph.Sections.Count - 1
+                FormCalibration.CartesianChart_CalibrationLiveGraph.Sections(i).IsVisible = False
+            Next
+
+            FormCalibration.InitializeLiveChart()
+        End If
     End Sub
 
     Public Sub LoadMainRecipeCombo()

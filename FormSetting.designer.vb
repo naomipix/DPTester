@@ -24,8 +24,8 @@ Partial Class FormSetting
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormSetting))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbl_Version = New System.Windows.Forms.Label()
         Me.picbx_Icon = New System.Windows.Forms.PictureBox()
         Me.lbl_DateTimeClock = New System.Windows.Forms.Label()
@@ -401,20 +401,20 @@ Partial Class FormSetting
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.Location = New System.Drawing.Point(3, 58)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.Size = New System.Drawing.Size(548, 694)
-        Me.DataGridView1.TabIndex = 104
+        Me.DataGridView1.TabIndex = 1000
         Me.DataGridView1.TabStop = False
         '
         'Label31
@@ -527,7 +527,7 @@ Partial Class FormSetting
         Me.Button8.Location = New System.Drawing.Point(17, 46)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(215, 40)
-        Me.Button8.TabIndex = 109
+        Me.Button8.TabIndex = 112
         Me.Button8.Text = "ON"
         Me.Button8.UseVisualStyleBackColor = False
         '
@@ -540,7 +540,7 @@ Partial Class FormSetting
         Me.cmbx_ScannerType.Location = New System.Drawing.Point(17, 119)
         Me.cmbx_ScannerType.Name = "cmbx_ScannerType"
         Me.cmbx_ScannerType.Size = New System.Drawing.Size(215, 25)
-        Me.cmbx_ScannerType.TabIndex = 106
+        Me.cmbx_ScannerType.TabIndex = 113
         '
         'dsp_ScannerBypass
         '
@@ -561,7 +561,7 @@ Partial Class FormSetting
         Me.txtbx_ScannerRawData.Name = "txtbx_ScannerRawData"
         Me.txtbx_ScannerRawData.ReadOnly = True
         Me.txtbx_ScannerRawData.Size = New System.Drawing.Size(215, 25)
-        Me.txtbx_ScannerRawData.TabIndex = 2
+        Me.txtbx_ScannerRawData.TabIndex = 114
         '
         'dsp_ScannerRawData
         '
@@ -622,7 +622,7 @@ Partial Class FormSetting
         Me.TextBox10.MaxLength = 3
         Me.TextBox10.Name = "TextBox10"
         Me.TextBox10.Size = New System.Drawing.Size(80, 25)
-        Me.TextBox10.TabIndex = 108
+        Me.TextBox10.TabIndex = 301
         '
         'Button3
         '
@@ -632,7 +632,7 @@ Partial Class FormSetting
         Me.Button3.Location = New System.Drawing.Point(180, 248)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(160, 45)
-        Me.Button3.TabIndex = 106
+        Me.Button3.TabIndex = 302
         Me.Button3.Text = "Apply Changes"
         Me.Button3.UseVisualStyleBackColor = False
         '
@@ -643,7 +643,7 @@ Partial Class FormSetting
         Me.TextBox7.MaxLength = 3
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(80, 25)
-        Me.TextBox7.TabIndex = 108
+        Me.TextBox7.TabIndex = 202
         '
         'TextBox9
         '
@@ -652,14 +652,14 @@ Partial Class FormSetting
         Me.TextBox9.MaxLength = 3
         Me.TextBox9.Name = "TextBox9"
         Me.TextBox9.Size = New System.Drawing.Size(80, 25)
-        Me.TextBox9.TabIndex = 108
+        Me.TextBox9.TabIndex = 208
         '
         'Button7
         '
         Me.Button7.Location = New System.Drawing.Point(323, 205)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(80, 26)
-        Me.Button7.TabIndex = 107
+        Me.Button7.TabIndex = 300
         Me.Button7.Text = "Select"
         Me.Button7.UseVisualStyleBackColor = True
         '
@@ -682,7 +682,7 @@ Partial Class FormSetting
         Me.TextBox2.MaxLength = 256
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(300, 25)
-        Me.TextBox2.TabIndex = 105
+        Me.TextBox2.TabIndex = 200
         '
         'TextBox8
         '
@@ -691,14 +691,14 @@ Partial Class FormSetting
         Me.TextBox8.MaxLength = 3
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(80, 25)
-        Me.TextBox8.TabIndex = 108
+        Me.TextBox8.TabIndex = 205
         '
         'Button5
         '
         Me.Button5.Location = New System.Drawing.Point(323, 99)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(80, 26)
-        Me.Button5.TabIndex = 107
+        Me.Button5.TabIndex = 204
         Me.Button5.Text = "Select"
         Me.Button5.UseVisualStyleBackColor = True
         '
@@ -740,7 +740,7 @@ Partial Class FormSetting
         Me.Button6.Location = New System.Drawing.Point(323, 152)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(80, 26)
-        Me.Button6.TabIndex = 107
+        Me.Button6.TabIndex = 207
         Me.Button6.Text = "Select"
         Me.Button6.UseVisualStyleBackColor = True
         '
@@ -771,7 +771,7 @@ Partial Class FormSetting
         Me.Button4.Location = New System.Drawing.Point(323, 46)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(80, 26)
-        Me.Button4.TabIndex = 107
+        Me.Button4.TabIndex = 201
         Me.Button4.Text = "Select"
         Me.Button4.UseVisualStyleBackColor = True
         '
@@ -783,7 +783,7 @@ Partial Class FormSetting
         Me.TextBox4.MaxLength = 256
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(300, 25)
-        Me.TextBox4.TabIndex = 105
+        Me.TextBox4.TabIndex = 206
         '
         'Label8
         '
@@ -804,7 +804,7 @@ Partial Class FormSetting
         Me.TextBox5.MaxLength = 256
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(300, 25)
-        Me.TextBox5.TabIndex = 105
+        Me.TextBox5.TabIndex = 209
         '
         'Label10
         '
@@ -825,7 +825,7 @@ Partial Class FormSetting
         Me.TextBox3.MaxLength = 256
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(300, 25)
-        Me.TextBox3.TabIndex = 105
+        Me.TextBox3.TabIndex = 203
         '
         'GroupBox5
         '
@@ -854,7 +854,7 @@ Partial Class FormSetting
         Me.Button13.Location = New System.Drawing.Point(342, 77)
         Me.Button13.Name = "Button13"
         Me.Button13.Size = New System.Drawing.Size(160, 45)
-        Me.Button13.TabIndex = 112
+        Me.Button13.TabIndex = 130
         Me.Button13.Text = "Apply Changes"
         Me.Button13.UseVisualStyleBackColor = False
         '
@@ -875,7 +875,7 @@ Partial Class FormSetting
         Me.Button12.Location = New System.Drawing.Point(17, 82)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(180, 40)
-        Me.Button12.TabIndex = 110
+        Me.Button12.TabIndex = 121
         Me.Button12.Text = "Force Backup"
         Me.Button12.UseVisualStyleBackColor = False
         '
@@ -887,7 +887,7 @@ Partial Class FormSetting
         Me.Button11.Location = New System.Drawing.Point(107, 31)
         Me.Button11.Name = "Button11"
         Me.Button11.Size = New System.Drawing.Size(90, 40)
-        Me.Button11.TabIndex = 110
+        Me.Button11.TabIndex = 120
         Me.Button11.Text = "ON"
         Me.Button11.UseVisualStyleBackColor = False
         '
@@ -902,7 +902,7 @@ Partial Class FormSetting
         Me.ComboBox2.MaxDropDownItems = 10
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(60, 25)
-        Me.ComboBox2.TabIndex = 106
+        Me.ComboBox2.TabIndex = 124
         '
         'txtbx_BackupPath
         '
@@ -912,7 +912,7 @@ Partial Class FormSetting
         Me.txtbx_BackupPath.MaxLength = 30
         Me.txtbx_BackupPath.Name = "txtbx_BackupPath"
         Me.txtbx_BackupPath.Size = New System.Drawing.Size(210, 25)
-        Me.txtbx_BackupPath.TabIndex = 2
+        Me.txtbx_BackupPath.TabIndex = 122
         '
         'Label17
         '
@@ -952,7 +952,7 @@ Partial Class FormSetting
         Me.Button10.Location = New System.Drawing.Point(422, 45)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(80, 26)
-        Me.Button10.TabIndex = 107
+        Me.Button10.TabIndex = 123
         Me.Button10.Text = "Select"
         Me.Button10.UseVisualStyleBackColor = True
         '
@@ -999,7 +999,7 @@ Partial Class FormSetting
         Me.TextBox6.MaxLength = 3
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(90, 25)
-        Me.TextBox6.TabIndex = 105
+        Me.TextBox6.TabIndex = 111
         Me.TextBox6.Text = "365"
         Me.TextBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -1127,7 +1127,7 @@ Partial Class FormSetting
         Me.btn_ResetValve11.Location = New System.Drawing.Point(260, 641)
         Me.btn_ResetValve11.Name = "btn_ResetValve11"
         Me.btn_ResetValve11.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve11.TabIndex = 85
+        Me.btn_ResetValve11.TabIndex = 11
         Me.btn_ResetValve11.Text = "Reset"
         Me.btn_ResetValve11.UseVisualStyleBackColor = False
         '
@@ -1139,9 +1139,10 @@ Partial Class FormSetting
         Me.btn_ResetValve21.Location = New System.Drawing.Point(646, 585)
         Me.btn_ResetValve21.Name = "btn_ResetValve21"
         Me.btn_ResetValve21.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve21.TabIndex = 85
+        Me.btn_ResetValve21.TabIndex = 21
         Me.btn_ResetValve21.Text = "Reset"
         Me.btn_ResetValve21.UseVisualStyleBackColor = False
+        Me.btn_ResetValve21.Visible = False
         '
         'btn_ResetValve10
         '
@@ -1151,7 +1152,7 @@ Partial Class FormSetting
         Me.btn_ResetValve10.Location = New System.Drawing.Point(260, 585)
         Me.btn_ResetValve10.Name = "btn_ResetValve10"
         Me.btn_ResetValve10.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve10.TabIndex = 85
+        Me.btn_ResetValve10.TabIndex = 10
         Me.btn_ResetValve10.Text = "Reset"
         Me.btn_ResetValve10.UseVisualStyleBackColor = False
         '
@@ -1163,7 +1164,7 @@ Partial Class FormSetting
         Me.btn_ResetValve16.Location = New System.Drawing.Point(646, 305)
         Me.btn_ResetValve16.Name = "btn_ResetValve16"
         Me.btn_ResetValve16.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve16.TabIndex = 85
+        Me.btn_ResetValve16.TabIndex = 16
         Me.btn_ResetValve16.Text = "Reset"
         Me.btn_ResetValve16.UseVisualStyleBackColor = False
         '
@@ -1175,7 +1176,7 @@ Partial Class FormSetting
         Me.btn_ResetValve5.Location = New System.Drawing.Point(260, 305)
         Me.btn_ResetValve5.Name = "btn_ResetValve5"
         Me.btn_ResetValve5.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve5.TabIndex = 85
+        Me.btn_ResetValve5.TabIndex = 5
         Me.btn_ResetValve5.Text = "Reset"
         Me.btn_ResetValve5.UseVisualStyleBackColor = False
         '
@@ -1187,9 +1188,10 @@ Partial Class FormSetting
         Me.btn_ResetValve20.Location = New System.Drawing.Point(646, 529)
         Me.btn_ResetValve20.Name = "btn_ResetValve20"
         Me.btn_ResetValve20.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve20.TabIndex = 85
+        Me.btn_ResetValve20.TabIndex = 20
         Me.btn_ResetValve20.Text = "Reset"
         Me.btn_ResetValve20.UseVisualStyleBackColor = False
+        Me.btn_ResetValve20.Visible = False
         '
         'btn_ResetValve9
         '
@@ -1199,7 +1201,7 @@ Partial Class FormSetting
         Me.btn_ResetValve9.Location = New System.Drawing.Point(260, 529)
         Me.btn_ResetValve9.Name = "btn_ResetValve9"
         Me.btn_ResetValve9.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve9.TabIndex = 85
+        Me.btn_ResetValve9.TabIndex = 9
         Me.btn_ResetValve9.Text = "Reset"
         Me.btn_ResetValve9.UseVisualStyleBackColor = False
         '
@@ -1211,7 +1213,7 @@ Partial Class FormSetting
         Me.btn_ResetValve15.Location = New System.Drawing.Point(646, 249)
         Me.btn_ResetValve15.Name = "btn_ResetValve15"
         Me.btn_ResetValve15.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve15.TabIndex = 85
+        Me.btn_ResetValve15.TabIndex = 15
         Me.btn_ResetValve15.Text = "Reset"
         Me.btn_ResetValve15.UseVisualStyleBackColor = False
         '
@@ -1223,7 +1225,7 @@ Partial Class FormSetting
         Me.btn_ResetValve4.Location = New System.Drawing.Point(260, 249)
         Me.btn_ResetValve4.Name = "btn_ResetValve4"
         Me.btn_ResetValve4.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve4.TabIndex = 85
+        Me.btn_ResetValve4.TabIndex = 4
         Me.btn_ResetValve4.Text = "Reset"
         Me.btn_ResetValve4.UseVisualStyleBackColor = False
         '
@@ -1235,7 +1237,7 @@ Partial Class FormSetting
         Me.btn_ResetValve19.Location = New System.Drawing.Point(646, 473)
         Me.btn_ResetValve19.Name = "btn_ResetValve19"
         Me.btn_ResetValve19.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve19.TabIndex = 85
+        Me.btn_ResetValve19.TabIndex = 19
         Me.btn_ResetValve19.Text = "Reset"
         Me.btn_ResetValve19.UseVisualStyleBackColor = False
         '
@@ -1247,7 +1249,7 @@ Partial Class FormSetting
         Me.btn_ResetValve8.Location = New System.Drawing.Point(260, 473)
         Me.btn_ResetValve8.Name = "btn_ResetValve8"
         Me.btn_ResetValve8.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve8.TabIndex = 85
+        Me.btn_ResetValve8.TabIndex = 8
         Me.btn_ResetValve8.Text = "Reset"
         Me.btn_ResetValve8.UseVisualStyleBackColor = False
         '
@@ -1259,7 +1261,7 @@ Partial Class FormSetting
         Me.btn_ResetValve14.Location = New System.Drawing.Point(646, 193)
         Me.btn_ResetValve14.Name = "btn_ResetValve14"
         Me.btn_ResetValve14.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve14.TabIndex = 85
+        Me.btn_ResetValve14.TabIndex = 14
         Me.btn_ResetValve14.Text = "Reset"
         Me.btn_ResetValve14.UseVisualStyleBackColor = False
         '
@@ -1271,7 +1273,7 @@ Partial Class FormSetting
         Me.btn_ResetValve3.Location = New System.Drawing.Point(260, 193)
         Me.btn_ResetValve3.Name = "btn_ResetValve3"
         Me.btn_ResetValve3.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve3.TabIndex = 85
+        Me.btn_ResetValve3.TabIndex = 3
         Me.btn_ResetValve3.Text = "Reset"
         Me.btn_ResetValve3.UseVisualStyleBackColor = False
         '
@@ -1283,7 +1285,7 @@ Partial Class FormSetting
         Me.btn_ResetValve18.Location = New System.Drawing.Point(646, 417)
         Me.btn_ResetValve18.Name = "btn_ResetValve18"
         Me.btn_ResetValve18.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve18.TabIndex = 85
+        Me.btn_ResetValve18.TabIndex = 18
         Me.btn_ResetValve18.Text = "Reset"
         Me.btn_ResetValve18.UseVisualStyleBackColor = False
         '
@@ -1295,7 +1297,7 @@ Partial Class FormSetting
         Me.btn_ResetValve7.Location = New System.Drawing.Point(260, 417)
         Me.btn_ResetValve7.Name = "btn_ResetValve7"
         Me.btn_ResetValve7.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve7.TabIndex = 85
+        Me.btn_ResetValve7.TabIndex = 7
         Me.btn_ResetValve7.Text = "Reset"
         Me.btn_ResetValve7.UseVisualStyleBackColor = False
         '
@@ -1307,7 +1309,7 @@ Partial Class FormSetting
         Me.btn_ResetValve13.Location = New System.Drawing.Point(646, 137)
         Me.btn_ResetValve13.Name = "btn_ResetValve13"
         Me.btn_ResetValve13.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve13.TabIndex = 85
+        Me.btn_ResetValve13.TabIndex = 13
         Me.btn_ResetValve13.Text = "Reset"
         Me.btn_ResetValve13.UseVisualStyleBackColor = False
         '
@@ -1319,7 +1321,7 @@ Partial Class FormSetting
         Me.btn_ResetValve2.Location = New System.Drawing.Point(260, 137)
         Me.btn_ResetValve2.Name = "btn_ResetValve2"
         Me.btn_ResetValve2.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve2.TabIndex = 85
+        Me.btn_ResetValve2.TabIndex = 2
         Me.btn_ResetValve2.Text = "Reset"
         Me.btn_ResetValve2.UseVisualStyleBackColor = False
         '
@@ -1331,7 +1333,7 @@ Partial Class FormSetting
         Me.btn_ResetValve17.Location = New System.Drawing.Point(646, 361)
         Me.btn_ResetValve17.Name = "btn_ResetValve17"
         Me.btn_ResetValve17.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve17.TabIndex = 85
+        Me.btn_ResetValve17.TabIndex = 17
         Me.btn_ResetValve17.Text = "Reset"
         Me.btn_ResetValve17.UseVisualStyleBackColor = False
         '
@@ -1343,7 +1345,7 @@ Partial Class FormSetting
         Me.btn_ResetValve6.Location = New System.Drawing.Point(260, 361)
         Me.btn_ResetValve6.Name = "btn_ResetValve6"
         Me.btn_ResetValve6.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve6.TabIndex = 85
+        Me.btn_ResetValve6.TabIndex = 6
         Me.btn_ResetValve6.Text = "Reset"
         Me.btn_ResetValve6.UseVisualStyleBackColor = False
         '
@@ -1355,7 +1357,7 @@ Partial Class FormSetting
         Me.btn_ResetValve12.Location = New System.Drawing.Point(646, 81)
         Me.btn_ResetValve12.Name = "btn_ResetValve12"
         Me.btn_ResetValve12.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve12.TabIndex = 85
+        Me.btn_ResetValve12.TabIndex = 12
         Me.btn_ResetValve12.Text = "Reset"
         Me.btn_ResetValve12.UseVisualStyleBackColor = False
         '
@@ -1367,7 +1369,7 @@ Partial Class FormSetting
         Me.btn_ResetValve1.Location = New System.Drawing.Point(260, 81)
         Me.btn_ResetValve1.Name = "btn_ResetValve1"
         Me.btn_ResetValve1.Size = New System.Drawing.Size(100, 36)
-        Me.btn_ResetValve1.TabIndex = 85
+        Me.btn_ResetValve1.TabIndex = 1
         Me.btn_ResetValve1.Text = "Reset"
         Me.btn_ResetValve1.UseVisualStyleBackColor = False
         '
@@ -1392,6 +1394,7 @@ Partial Class FormSetting
         Me.lbl_Valve21.TabIndex = 84
         Me.lbl_Valve21.Text = "0"
         Me.lbl_Valve21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve21.Visible = False
         '
         'dsp_Valve2
         '
@@ -1414,6 +1417,7 @@ Partial Class FormSetting
         Me.lbl_Valve20.TabIndex = 84
         Me.lbl_Valve20.Text = "0"
         Me.lbl_Valve20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lbl_Valve20.Visible = False
         '
         'dsp_Valve3
         '
@@ -1776,6 +1780,7 @@ Partial Class FormSetting
         Me.dsp_Valve20.TabIndex = 50
         Me.dsp_Valve20.Text = "Valve-20 :"
         Me.dsp_Valve20.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_Valve20.Visible = False
         '
         'lbl_Valve3
         '
@@ -1820,6 +1825,7 @@ Partial Class FormSetting
         Me.dsp_Valve21.TabIndex = 61
         Me.dsp_Valve21.Text = "Valve-21 :"
         Me.dsp_Valve21.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_Valve21.Visible = False
         '
         'lbl_Valve1
         '
@@ -1884,7 +1890,7 @@ Partial Class FormSetting
         Me.cmbx_RunSelection.Location = New System.Drawing.Point(110, 46)
         Me.cmbx_RunSelection.Name = "cmbx_RunSelection"
         Me.cmbx_RunSelection.Size = New System.Drawing.Size(200, 25)
-        Me.cmbx_RunSelection.TabIndex = 113
+        Me.cmbx_RunSelection.TabIndex = 1
         '
         'btn_Clear
         '
@@ -1947,20 +1953,20 @@ Partial Class FormSetting
         Me.dgv_MessageLog.AllowUserToAddRows = False
         Me.dgv_MessageLog.AllowUserToDeleteRows = False
         Me.dgv_MessageLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_MessageLog.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgv_MessageLog.Location = New System.Drawing.Point(346, 44)
         Me.dgv_MessageLog.Name = "dgv_MessageLog"
         Me.dgv_MessageLog.ReadOnly = True
         Me.dgv_MessageLog.Size = New System.Drawing.Size(1440, 626)
-        Me.dgv_MessageLog.TabIndex = 111
+        Me.dgv_MessageLog.TabIndex = 113
         Me.dgv_MessageLog.TabStop = False
         '
         'lbl_Duration
@@ -2005,7 +2011,7 @@ Partial Class FormSetting
         Me.btn_Stop.Location = New System.Drawing.Point(210, 102)
         Me.btn_Stop.Name = "btn_Stop"
         Me.btn_Stop.Size = New System.Drawing.Size(100, 50)
-        Me.btn_Stop.TabIndex = 110
+        Me.btn_Stop.TabIndex = 111
         Me.btn_Stop.Text = "Stop"
         Me.btn_Stop.UseVisualStyleBackColor = False
         '
@@ -2389,7 +2395,7 @@ Partial Class FormSetting
         '
         Me.chklstbx_MainMenu.CheckOnClick = True
         Me.chklstbx_MainMenu.FormattingEnabled = True
-        Me.chklstbx_MainMenu.Items.AddRange(New Object() {"Main", "Production Details", "Status", "Manual Control", "Alarm"})
+        Me.chklstbx_MainMenu.Items.AddRange(New Object() {"Main", "Test Summary", "Lot Summary", "Status", "Manual Control", "Alarm"})
         Me.chklstbx_MainMenu.Location = New System.Drawing.Point(329, 47)
         Me.chklstbx_MainMenu.Name = "chklstbx_MainMenu"
         Me.chklstbx_MainMenu.Size = New System.Drawing.Size(144, 104)
