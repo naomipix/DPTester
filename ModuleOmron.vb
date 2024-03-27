@@ -714,6 +714,9 @@ Module ModuleOmron
         'End If
         For i As Integer = 0 To Alarm.Length - 1
             For j As Integer = 0 To 15
+                Dim DateTimeNow As DateTime = DateTime.Now
+                Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
+
                 alarmdescription.Clear()
                 If Alarm(i)(j) = True Then
 
@@ -722,8 +725,6 @@ Module ModuleOmron
                     alarmdescription.Append(dtAlarm.Rows((i * 16) + j).Item("code"))
                     alarmdescription.Append(" ")
                     alarmdescription.Append(dtAlarm.Rows((i * 16) + j).Item("description"))
-
-                    Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
 
                     If Not Currentalarm.ContainsKey(alarmid) Then
                         Dim alarmmessage As DataRow = Mainalarm.NewRow()
@@ -736,7 +737,7 @@ Module ModuleOmron
 
                         alarmmessage.Item("id") = alarmid
                         alarmmessage.Item("S.No") = Mainalarm.Rows.Count + 1
-                        alarmmessage.Item("Trigger Time") = DateTimeNowInStr 'FormMain.lbl_DateTimeClock.Text
+                        alarmmessage.Item("Trigger Time") = DateTimeNow.ToString("dd-MMM-yyyy HH:mm:ss") 'FormMain.lbl_DateTimeClock.Text
                         alarmmessage.Item("Description") = dtAlarm.Rows((i * 16) + j).Item("description")
                         alarmmessage.Item("Alarm Code") = alarmcode
                         Mainalarm.Rows.Add(alarmmessage)
@@ -756,7 +757,7 @@ Module ModuleOmron
                             Dim rows As DataRow()
                             Dim findrow As Integer
                             Dim reset As New Dictionary(Of String, Object) From {
-                                {"reset_time", DateTime.Now.ToString("s")} ' FormMain.lbl_DateTimeClock.Text}
+                                {"reset_time", DateTimeNowInStr} ' FormMain.lbl_DateTimeClock.Text}
                             }
                             'Dim Condition As String = $"lot_id ='{LotID}' AND lot_attempt = '{LotAttempt}'"
                             rows = Mainalarm.Select($"id = '{dtAlarm.Rows((i * 16) + j).Item("id")}'")
