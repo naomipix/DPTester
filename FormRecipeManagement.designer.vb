@@ -92,6 +92,7 @@ Partial Class FormRecipeManagement
         Me.ComboBox8 = New System.Windows.Forms.ComboBox()
         Me.ComboBox9 = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btn_RcpEditCal = New System.Windows.Forms.Button()
         Me.dsp_RcpEditPrepPumpMode = New System.Windows.Forms.Label()
         Me.dsp_RcpEditPrepRPM2 = New System.Windows.Forms.Label()
         Me.dsp_RcpEditPrepRPM1 = New System.Windows.Forms.Label()
@@ -241,6 +242,7 @@ Partial Class FormRecipeManagement
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btn_RcpCreateCal = New System.Windows.Forms.Button()
         Me.dsp_RcpCreatePrepPumpMode = New System.Windows.Forms.Label()
         Me.dsp_RcpCreatePrepRPM2 = New System.Windows.Forms.Label()
         Me.dsp_RcpCreatePrepRPM1 = New System.Windows.Forms.Label()
@@ -345,8 +347,6 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btn_RcpCreateCal = New System.Windows.Forms.Button()
-        Me.btn_RcpEditCal = New System.Windows.Forms.Button()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -1180,6 +1180,16 @@ Partial Class FormRecipeManagement
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(307, 592)
         Me.Panel2.TabIndex = 34
+        '
+        'btn_RcpEditCal
+        '
+        Me.btn_RcpEditCal.BackgroundImage = CType(resources.GetObject("btn_RcpEditCal.BackgroundImage"), System.Drawing.Image)
+        Me.btn_RcpEditCal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btn_RcpEditCal.Location = New System.Drawing.Point(15, 153)
+        Me.btn_RcpEditCal.Name = "btn_RcpEditCal"
+        Me.btn_RcpEditCal.Size = New System.Drawing.Size(40, 40)
+        Me.btn_RcpEditCal.TabIndex = 78
+        Me.btn_RcpEditCal.UseVisualStyleBackColor = True
         '
         'dsp_RcpEditPrepPumpMode
         '
@@ -2738,6 +2748,16 @@ Partial Class FormRecipeManagement
         Me.Panel3.Size = New System.Drawing.Size(307, 592)
         Me.Panel3.TabIndex = 35
         '
+        'btn_RcpCreateCal
+        '
+        Me.btn_RcpCreateCal.BackgroundImage = CType(resources.GetObject("btn_RcpCreateCal.BackgroundImage"), System.Drawing.Image)
+        Me.btn_RcpCreateCal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.btn_RcpCreateCal.Location = New System.Drawing.Point(15, 153)
+        Me.btn_RcpCreateCal.Name = "btn_RcpCreateCal"
+        Me.btn_RcpCreateCal.Size = New System.Drawing.Size(40, 40)
+        Me.btn_RcpCreateCal.TabIndex = 70
+        Me.btn_RcpCreateCal.UseVisualStyleBackColor = True
+        '
         'dsp_RcpCreatePrepPumpMode
         '
         Me.dsp_RcpCreatePrepPumpMode.Location = New System.Drawing.Point(17, 535)
@@ -3808,24 +3828,6 @@ Partial Class FormRecipeManagement
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'btn_RcpCreateCal
-        '
-        Me.btn_RcpCreateCal.Location = New System.Drawing.Point(18, 159)
-        Me.btn_RcpCreateCal.Name = "btn_RcpCreateCal"
-        Me.btn_RcpCreateCal.Size = New System.Drawing.Size(41, 24)
-        Me.btn_RcpCreateCal.TabIndex = 70
-        Me.btn_RcpCreateCal.Text = "Cal"
-        Me.btn_RcpCreateCal.UseVisualStyleBackColor = True
-        '
-        'btn_RcpEditCal
-        '
-        Me.btn_RcpEditCal.Location = New System.Drawing.Point(18, 159)
-        Me.btn_RcpEditCal.Name = "btn_RcpEditCal"
-        Me.btn_RcpEditCal.Size = New System.Drawing.Size(41, 24)
-        Me.btn_RcpEditCal.TabIndex = 78
-        Me.btn_RcpEditCal.Text = "Cal"
-        Me.btn_RcpEditCal.UseVisualStyleBackColor = True
         '
         'FormRecipeManagement
         '

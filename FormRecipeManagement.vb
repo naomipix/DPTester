@@ -261,7 +261,8 @@ Public Class FormRecipeManagement
     Dim recipeparametertemp(50) As String ' For Event Logging
     Dim dtEditrecipetemp As New DataTable
 
-
+    Dim tooltip1 As New ToolTip
+    Dim tooltip2 As New ToolTip
 #End Region
 
 
@@ -535,7 +536,10 @@ Public Class FormRecipeManagement
         ' Display Form Control
         panel_FormControl.Visible = True
 
-
+        ' Load Tooltip for Calc Button
+        Dim ToolTipStr As String = "Auto-Calculate Estimated RPM"
+        tooltip1.SetToolTip(btn_RcpCreateCal, ToolTipStr)
+        tooltip2.SetToolTip(btn_RcpEditCal, ToolTipStr)
     End Sub
 #End Region
 
@@ -8952,6 +8956,8 @@ Public Class FormRecipeManagement
     End Sub
 
     Private Sub btn_RcpCreateCal_Click(sender As Object, e As EventArgs) Handles btn_RcpCreateCal.Click
+        lbl_Title.Select()
+
         Dim TargetFlowrate As Decimal = 0
         Try
             TargetFlowrate = txtbx_RcpCreatePrepFlow.Text
@@ -9038,6 +9044,8 @@ Public Class FormRecipeManagement
     End Sub
 
     Private Sub btn_RcpEditCal_Click(sender As Object, e As EventArgs) Handles btn_RcpEditCal.Click
+        lbl_Title.Select()
+
         Dim TargetFlowrate As Decimal = 0
         Try
             TargetFlowrate = txtbx_RcpEditPrepFlow.Text
