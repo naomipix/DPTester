@@ -511,8 +511,8 @@ Public Class FormRecipeManagement
 
         ' DoubleBuffer DataGridView
         Dim dgvArr() As DataGridView = {
-            dgv_RecipeDetails
-        }
+                        dgv_RecipeDetails
+                    }
         For Each dgv As DataGridView In dgvArr
             DoubleBuffer.DoubleBuffered(dgv, True)
         Next
@@ -650,13 +650,13 @@ Public Class FormRecipeManagement
         ' Get User Category Table
         'Dim dtRecipeID As DataTable = SQL.ReadRecords("SELECT id, recipe_id FROM RecipeTable")
         Dim dtRecipeID As DataTable = SQL.ReadRecords("
-            SELECT id, recipe_id FROM RecipeTable t1 
-            WHERE recipe_rev = (
-                SELECT MAX(recipe_rev)
-                FROM RecipeTable t2
-                WHERE t1.recipe_id = t2.recipe_id
-            )
-        ")
+                        SELECT id, recipe_id FROM RecipeTable t1 
+                        WHERE recipe_rev = (
+                            SELECT MAX(recipe_rev)
+                            FROM RecipeTable t2
+                            WHERE t1.recipe_id = t2.recipe_id
+                        )
+                    ")
 
         ' Insert Available Record Into Dictionary
         If dtRecipeID.Rows.Count > 0 Then
@@ -681,13 +681,13 @@ Public Class FormRecipeManagement
 
     Private Sub GetRecipedetailsfilter()
         Dim RcpdetailFilter As String = $"SELECT *
-        FROM RecipeTable 
-        LEFT JOIN PartTable ON RecipeTable.part_id=PartTable.part_id 
-        LEFT JOIN FilterType ON PartTable.filter_type_id=FilterType.id 
-        LEFT JOIN JigType ON PartTable.jig_type_id=JigType.id
-        LEFT JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id 
-        ORDER BY RecipeTable.recipe_id ASC
-"
+                    FROM RecipeTable 
+                    LEFT JOIN PartTable ON RecipeTable.part_id=PartTable.part_id 
+                    LEFT JOIN FilterType ON PartTable.filter_type_id=FilterType.id 
+                    LEFT JOIN JigType ON PartTable.jig_type_id=JigType.id
+                    LEFT JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id 
+                    ORDER BY RecipeTable.recipe_id ASC
+            "
         Dim dvGetRcpDetail As DataView = SQL.ReadRecords(RcpdetailFilter).DefaultView
 
         Dim FiltercomboSource As New Dictionary(Of String, String)()
@@ -899,14 +899,14 @@ Public Class FormRecipeManagement
 
         'Dim dtRecipeID As DataTable = SQL.ReadRecords("SELECT * FROM RecipeTable WHERE part_id = '" + cmbxPartSelected.Text + "'")
         Dim dtRecipeID As DataTable = SQL.ReadRecords($"
-            SELECT * FROM RecipeTable t1
-            WHERE recipe_rev = (
-                SELECT MAX(recipe_rev)
-                FROM RecipeTable t2
-                WHERE t1.recipe_id = t2.recipe_id
-            ) 
-            AND part_id='{cmbxPartSelected.Text}'
-        ")
+                        SELECT * FROM RecipeTable t1
+                        WHERE recipe_rev = (
+                            SELECT MAX(recipe_rev)
+                            FROM RecipeTable t2
+                            WHERE t1.recipe_id = t2.recipe_id
+                        ) 
+                        AND part_id='{cmbxPartSelected.Text}'
+                    ")
 
         Dim RecipeIDgcomboSource As New Dictionary(Of String, String)()
         RecipeIDgcomboSource.Add("0", "-Not Selected-")
@@ -1221,11 +1221,11 @@ Public Class FormRecipeManagement
 
             If dtPartIDcheck.Rows.Count = 0 Then
                 Dim partParameter As New Dictionary(Of String, Object) From {
-                        {"part_id", PartID},
-                        {"filter_type_id", FilterTypeID},
-                        {"jig_type_id", JigTypeID},
-                        {"user_created", PublicVariables.LoginUserName}
-                }
+                                    {"part_id", PartID},
+                                    {"filter_type_id", FilterTypeID},
+                                    {"jig_type_id", JigTypeID},
+                                    {"user_created", PublicVariables.LoginUserName}
+                            }
                 If SQL.InsertRecord("PartTable", partParameter) = 1 Then
                     RecipeMessage(9)
 
@@ -1285,7 +1285,7 @@ Public Class FormRecipeManagement
                 Case 1
                     With txtbx_RcpCreateFlush1Flow
                         .Enabled = False
-                        .Text = "0.0"
+                        .Text = d_prepflow.ToString("N1") '"0.0"
                     End With
                     With txtbx_RcpCreateFlush1FlowTol
                         .Enabled = False
@@ -1388,7 +1388,7 @@ Public Class FormRecipeManagement
                 Case 1
                     With txtbx_RcpCreateDPFlow
                         .Enabled = False
-                        .Text = "0.0"
+                        .Text = d_prepflow.ToString("N1") '"0.0"
                     End With
                     With txtbx_RcpCreateDPFlowTol
                         .Enabled = False
@@ -1500,7 +1500,7 @@ Public Class FormRecipeManagement
                 Case 1
                     With txtbx_RcpCreateFlush2Flow
                         .Enabled = False
-                        .Text = "0.0"
+                        .Text = d_prepflow.ToString("N1") '"0.0"
                     End With
                     With txtbx_RcpCreateFlush2FlowTol
                         .Enabled = False
@@ -2115,6 +2115,24 @@ Public Class FormRecipeManagement
         If Not txtbx_RcpCreatePrepFlow.Text = "" And Not txtbx_RcpCreatePrepFlow.Text = "." Then
             'Convert to the required type
             d_prepflow = CType(txtbx_RcpCreatePrepFlow.Text, Decimal)
+
+            ' Set flowrate of other to same as this
+            If cmbx_RcpCreatePrepPumpMode.SelectedIndex = 1 Then
+                d_flush1flow = d_prepflow
+                d_dptestflow = d_prepflow
+                d_flush2flow = d_prepflow
+                dsp_RcpCreateFlush1Flow.Text = d_prepflow.ToString("N1")
+                dsp_RcpCreateDPFlow.Text = d_prepflow.ToString("N1")
+                dsp_RcpCreateFlush2Flow.Text = d_prepflow.ToString("N1")
+
+                d_flush1flowtol = 0
+                d_dptestflowtol = 0
+                d_flush2flowtol = 0
+                dsp_RcpCreateFlush1FlowTol.Text = "0.0"
+                dsp_RcpCreateDPFlowTol.Text = "0.0"
+                dsp_RcpCreateFlush2FlowTol.Text = "0.0"
+            End If
+
             'Check the value within range
             If d_prepflow < min_d_prepflow Or d_prepflow > max_d_prepflow Then
                 RecipeMessage(20, "Preparation Flowrate should be within " + CType(min_d_prepflow, String) + " to " + CType(max_d_prepflow, String))
@@ -3013,7 +3031,7 @@ Public Class FormRecipeManagement
 
         End If
 
-        If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
+        If onContinue = True Then
             'Check for Flowrate
             'Check the text is empty or has only decimal point
             If Not txtbx_RcpCreatePrepFlow.Text = "" And Not txtbx_RcpCreatePrepFlow.Text = "." Then
@@ -3226,41 +3244,49 @@ Public Class FormRecipeManagement
 
             'End If
 
-            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
-                'Check for Flush-1 Flowrate
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpCreateFlush1Flow.Text = "" And Not txtbx_RcpCreateFlush1Flow.Text = "." Then
-                    'Convert to the required type
-                    d_flush1flow = CType(txtbx_RcpCreateFlush1Flow.Text, Decimal)
-                    'Check the value within range
-                    If d_flush1flow < min_d_flush1flow Or d_flush1flow > max_d_flush1flow Then
-                        RecipeMessage(20, "Flush-1 Flowrate should be within " + CType(min_d_flush1flow, String) + " to " + CType(max_d_flush1flow, String))
-                        txtbx_RcpCreateFlush1Flow.Text = Nothing
-                        txtbx_RcpCreateFlush1Flow.Focus()
+            If onContinue = True Then
+                If cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
+                    'Check for Flush-1 Flowrate
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpCreateFlush1Flow.Text = "" And Not txtbx_RcpCreateFlush1Flow.Text = "." Then
+                        'Convert to the required type
+                        d_flush1flow = CType(txtbx_RcpCreateFlush1Flow.Text, Decimal)
+                        'Check the value within range
+                        If d_flush1flow < min_d_flush1flow Or d_flush1flow > max_d_flush1flow Then
+                            RecipeMessage(20, "Flush-1 Flowrate should be within " + CType(min_d_flush1flow, String) + " to " + CType(max_d_flush1flow, String))
+                            txtbx_RcpCreateFlush1Flow.Text = Nothing
+                            txtbx_RcpCreateFlush1Flow.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "Flush-1 Flowrate")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "Flush-1 Flowrate")
-                    onContinue = False
+                    d_flush1flow = d_prepflow
                 End If
             End If
 
-            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
-                'Check for Flush-1 Flow Tolerance
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpCreateFlush1FlowTol.Text = "" And Not txtbx_RcpCreateFlush1FlowTol.Text = "." Then
-                    'Convert to the required type
-                    d_flush1flowtol = CType(txtbx_RcpCreateFlush1FlowTol.Text, Decimal)
-                    'Check the value within range
-                    If d_flush1flowtol < min_d_flush1flowtol Or d_flush1flowtol > max_d_flush1flowtol Then
-                        RecipeMessage(20, "Flush-1 Flow Tolerance should be within " + CType(min_d_flush1flowtol, String) + " to " + CType(max_d_flush1flowtol, String))
-                        txtbx_RcpCreateFlush1FlowTol.Text = Nothing
-                        txtbx_RcpCreateFlush1FlowTol.Focus()
+            If onContinue = True Then
+                If cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
+                    'Check for Flush-1 Flow Tolerance
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpCreateFlush1FlowTol.Text = "" And Not txtbx_RcpCreateFlush1FlowTol.Text = "." Then
+                        'Convert to the required type
+                        d_flush1flowtol = CType(txtbx_RcpCreateFlush1FlowTol.Text, Decimal)
+                        'Check the value within range
+                        If d_flush1flowtol < min_d_flush1flowtol Or d_flush1flowtol > max_d_flush1flowtol Then
+                            RecipeMessage(20, "Flush-1 Flow Tolerance should be within " + CType(min_d_flush1flowtol, String) + " to " + CType(max_d_flush1flowtol, String))
+                            txtbx_RcpCreateFlush1FlowTol.Text = Nothing
+                            txtbx_RcpCreateFlush1FlowTol.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "Flush-1 Flow tolerance")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "Flush-1 Flow tolerance")
-                    onContinue = False
+                    d_flush1flowtol = 0
                 End If
             End If
 
@@ -3387,41 +3413,49 @@ Public Class FormRecipeManagement
 
             'End If
 
-            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
-                'Check for Flush-2 Flowrate
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpCreateFlush2Flow.Text = "" And Not txtbx_RcpCreateFlush2Flow.Text = "." Then
-                    'Convert to the required type
-                    d_flush2flow = CType(txtbx_RcpCreateFlush2Flow.Text, Decimal)
-                    'Check the value within range
-                    If d_flush2flow < min_d_flush2flow Or d_flush2flow > max_d_flush2flow Then
-                        RecipeMessage(20, "Flush-2 Flowrate should be within " + CType(min_d_flush2flow, String) + " to " + CType(max_d_flush2flow, String))
-                        txtbx_RcpCreateFlush2Flow.Text = Nothing
-                        txtbx_RcpCreateFlush2Flow.Focus()
+            If onContinue = True Then
+                If cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
+                    'Check for Flush-2 Flowrate
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpCreateFlush2Flow.Text = "" And Not txtbx_RcpCreateFlush2Flow.Text = "." Then
+                        'Convert to the required type
+                        d_flush2flow = CType(txtbx_RcpCreateFlush2Flow.Text, Decimal)
+                        'Check the value within range
+                        If d_flush2flow < min_d_flush2flow Or d_flush2flow > max_d_flush2flow Then
+                            RecipeMessage(20, "Flush-2 Flowrate should be within " + CType(min_d_flush2flow, String) + " to " + CType(max_d_flush2flow, String))
+                            txtbx_RcpCreateFlush2Flow.Text = Nothing
+                            txtbx_RcpCreateFlush2Flow.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "Flush-2 Flowrate")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "Flush-2 Flowrate")
-                    onContinue = False
+                    d_flush2flow = d_prepflow
                 End If
             End If
 
-            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
-                'Check for Flush-2 Flow Tolerance
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpCreateFlush2FlowTol.Text = "" And Not txtbx_RcpCreateFlush2FlowTol.Text = "." Then
-                    'Convert to the required type
-                    d_flush2flowtol = CType(txtbx_RcpCreateFlush2FlowTol.Text, Decimal)
-                    'Check the value within range
-                    If d_flush2flowtol < min_d_flush2flowtol Or d_flush2flowtol > max_d_flush2flowtol Then
-                        RecipeMessage(20, "Flush-2 Flow Tolerance should be within " + CType(min_d_flush2flowtol, String) + " to " + CType(max_d_flush2flowtol, String))
-                        txtbx_RcpCreateFlush2FlowTol.Text = Nothing
-                        txtbx_RcpCreateFlush2FlowTol.Focus()
+            If onContinue = True Then
+                If cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
+                    'Check for Flush-2 Flow Tolerance
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpCreateFlush2FlowTol.Text = "" And Not txtbx_RcpCreateFlush2FlowTol.Text = "." Then
+                        'Convert to the required type
+                        d_flush2flowtol = CType(txtbx_RcpCreateFlush2FlowTol.Text, Decimal)
+                        'Check the value within range
+                        If d_flush2flowtol < min_d_flush2flowtol Or d_flush2flowtol > max_d_flush2flowtol Then
+                            RecipeMessage(20, "Flush-2 Flow Tolerance should be within " + CType(min_d_flush2flowtol, String) + " to " + CType(max_d_flush2flowtol, String))
+                            txtbx_RcpCreateFlush2FlowTol.Text = Nothing
+                            txtbx_RcpCreateFlush2FlowTol.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "Flush-2 Flow tolerance")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "Flush-2 Flow tolerance")
-                    onContinue = False
+                    d_flush2flowtol = 0
                 End If
             End If
 
@@ -3548,41 +3582,49 @@ Public Class FormRecipeManagement
             'End If
 
 
-            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
-                'Check for DP Test Flowrate
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpCreateDPFlow.Text = "" And Not txtbx_RcpCreateDPFlow.Text = "." Then
-                    'Convert to the required type
-                    d_dptestflow = CType(txtbx_RcpCreateDPFlow.Text, Decimal)
-                    'Check the value within range
-                    If d_dptestflow < min_d_dptestflow Or d_dptestflow > max_d_dptestflow Then
-                        RecipeMessage(20, "DP Test Flowrate should be within " + CType(min_d_dptestflow, String) + " to " + CType(max_d_dptestflow, String))
-                        txtbx_RcpCreateDPFlow.Text = Nothing
-                        txtbx_RcpCreateDPFlow.Focus()
+            If onContinue = True Then
+                If cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
+                    'Check for DP Test Flowrate
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpCreateDPFlow.Text = "" And Not txtbx_RcpCreateDPFlow.Text = "." Then
+                        'Convert to the required type
+                        d_dptestflow = CType(txtbx_RcpCreateDPFlow.Text, Decimal)
+                        'Check the value within range
+                        If d_dptestflow < min_d_dptestflow Or d_dptestflow > max_d_dptestflow Then
+                            RecipeMessage(20, "DP Test Flowrate should be within " + CType(min_d_dptestflow, String) + " to " + CType(max_d_dptestflow, String))
+                            txtbx_RcpCreateDPFlow.Text = Nothing
+                            txtbx_RcpCreateDPFlow.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "DP Test Flowrate")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "DP Test Flowrate")
-                    onContinue = False
+                    d_dptestflow = d_prepflow
                 End If
             End If
 
-            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
-                'Check for DP Test Flow Tolerance
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpCreateDPFlowTol.Text = "" And Not txtbx_RcpCreateDPFlowTol.Text = "." Then
-                    'Convert to the required type
-                    d_dptestflowtol = CType(txtbx_RcpCreateDPFlowTol.Text, Decimal)
-                    'Check the value within range
-                    If d_dptestflowtol < min_d_dptestflowtol Or d_dptestflowtol > max_d_dptestflowtol Then
-                        RecipeMessage(20, "DP Test Flow Tolerance should be within " + CType(min_d_dptestflowtol, String) + " to " + CType(max_d_dptestflowtol, String))
-                        txtbx_RcpCreateDPFlowTol.Text = Nothing
-                        txtbx_RcpCreateDPFlowTol.Focus()
+            If onContinue = True Then
+                If cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
+                    'Check for DP Test Flow Tolerance
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpCreateDPFlowTol.Text = "" And Not txtbx_RcpCreateDPFlowTol.Text = "." Then
+                        'Convert to the required type
+                        d_dptestflowtol = CType(txtbx_RcpCreateDPFlowTol.Text, Decimal)
+                        'Check the value within range
+                        If d_dptestflowtol < min_d_dptestflowtol Or d_dptestflowtol > max_d_dptestflowtol Then
+                            RecipeMessage(20, "DP Test Flow Tolerance should be within " + CType(min_d_dptestflowtol, String) + " to " + CType(max_d_dptestflowtol, String))
+                            txtbx_RcpCreateDPFlowTol.Text = Nothing
+                            txtbx_RcpCreateDPFlowTol.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "DP Test Flow tolerance")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "DP Test Flow tolerance")
-                    onContinue = False
+                    d_dptestflowtol = 0
                 End If
             End If
 
@@ -3961,70 +4003,70 @@ Public Class FormRecipeManagement
             Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
             If dtrecipeidcheck.Rows.Count = 0 Then
                 Dim recipeparameter As New Dictionary(Of String, Object) From {
-                    {"recipe_id", RecipeID},
-                    {"recipe_rev", 0},
-                    {"part_id", PartID},
-                    {"recipe_type_id", TypeID},
-                    {"last_modified_by", PublicVariables.LoginUserName},
-                    {"last_modified_time", DateTimeNowInStr},
-                    {"user_created", PublicVariables.LoginUserName},
-                    {"created_time", DateTimeNowInStr},
-                    {"fitting_inlet", IIf(ComboBox3.Items.Count > 0, ComboBox3.SelectedItem, "")},
-                    {"fitting_outlet", IIf(ComboBox4.Items.Count > 0, ComboBox4.SelectedItem, "")},
-                    {"fitting_blank", IIf(ComboBox6.Items.Count > 0, ComboBox6.SelectedItem, "")},
-                    {"verification_tolerance", d_vertol},
-                    {"prep_fill_time", i_prepfilltime},
-                    {"prep_bleed_time", i_prepbleedtime},
-                    {"prep_flowrate", d_prepflow},
-                    {"prep_back_pressure", d_preppressure},
-                    {"prep_pressure_drop", d_preppressuredrop},
-                    {"prep_pressure_drop_time", i_preppressuredroptime},
-                    {"prep_prefill_start_time", i_prepprefillstarttime},
-                    {"prep_prefill_time", i_prepprefilltime},
-                    {"prep_speed_mode", str_prepspeedenable},
-                    {"prep_rpm1", i_preprpm1},
-                    {"prep_rpm2", i_preprpm2},
-                    {"firstflush_circuit", str_flush1enable},
-                                                             _ '{"firstflush_fill_time", i_flush1filltime},
-                                                             _ '{"firstflush_bleed_time", i_flush1bleedtime},
-                    {"firstflush_flowrate", d_flush1flow},
-                    {"firstflush_flow_tolerance", d_flush1flowtol},
-                    {"firstflush_back_pressure", d_flush1pressure},
-                    {"firstflush_stabilize_time", i_flush1stabilize},
-                    {"firstflush_time", i_flush1time},
-                    {"firstflush_rpm", i_flush1rpm},
-                    {"firstdp_circuit", str_dptest1enable},
-                                                           _ '{"dp_fill_time", i_dptestfilltime},
-                                                           _ '{"dp_bleed_time", i_dptestbleedtime},
-                    {"dp_flowrate", d_dptestflow},
-                    {"dp_flow_tolerance", d_dptestflowtol},
-                    {"dp_back_pressure", d_dptestpressure},
-                    {"dp_stabilize_time", i_dpteststabilize},
-                    {"dp_test_time", i_dptesttime},
-                    {"dp_lowerlimit", d_dptestlowlimit},
-                    {"dp_upperlimit", d_dptestuplimit},
-                    {"dp_testpoints", i_dptestpoints},
-                    {"dp_rpm", i_dptestrpm},
-                    {"seconddp_circuit", str_dptest2enable},
-                    {"secondflush_circuit", str_flush2enable},
-                                                              _ '{"secondflush_fill_time", i_flush2filltime},
-                                                              _ '{"secondflush_bleed_time", i_flush2bleedtime},
-                    {"secondflush_flowrate", d_flush2flow},
-                    {"secondflush_flow_tolerance", d_flush2flowtol},
-                    {"secondflush_back_pressure", d_flush2pressure},
-                    {"secondflush_stabilize_time", i_flush2stabilize},
-                    {"secondflush_time", i_flush2time},
-                    {"secondflush_rpm", i_flush2rpm},
-                    {"drain1_circuit", str_drain1enable},
-                    {"drain1_back_pressure", d_drain1pressure},
-                    {"drain1_time", i_drain1time},
-                    {"drain2_circuit", str_drain2enable},
-                    {"drain2_back_pressure", d_drain2pressure},
-                    {"drain2_time", i_drain2time},
-                    {"drain3_circuit", str_drain3enable},
-                    {"drain3_back_pressure", d_drain3pressure},
-                    {"drain3_time", i_drain3time}
-                }
+                                {"recipe_id", RecipeID},
+                                {"recipe_rev", 0},
+                                {"part_id", PartID},
+                                {"recipe_type_id", TypeID},
+                                {"last_modified_by", PublicVariables.LoginUserName},
+                                {"last_modified_time", DateTimeNowInStr},
+                                {"user_created", PublicVariables.LoginUserName},
+                                {"created_time", DateTimeNowInStr},
+                                {"fitting_inlet", IIf(ComboBox3.Items.Count > 0, ComboBox3.SelectedItem, "")},
+                                {"fitting_outlet", IIf(ComboBox4.Items.Count > 0, ComboBox4.SelectedItem, "")},
+                                {"fitting_blank", IIf(ComboBox6.Items.Count > 0, ComboBox6.SelectedItem, "")},
+                                {"verification_tolerance", d_vertol},
+                                {"prep_fill_time", i_prepfilltime},
+                                {"prep_bleed_time", i_prepbleedtime},
+                                {"prep_flowrate", d_prepflow},
+                                {"prep_back_pressure", d_preppressure},
+                                {"prep_pressure_drop", d_preppressuredrop},
+                                {"prep_pressure_drop_time", i_preppressuredroptime},
+                                {"prep_prefill_start_time", i_prepprefillstarttime},
+                                {"prep_prefill_time", i_prepprefilltime},
+                                {"prep_speed_mode", str_prepspeedenable},
+                                {"prep_rpm1", i_preprpm1},
+                                {"prep_rpm2", i_preprpm2},
+                                {"firstflush_circuit", str_flush1enable},
+                                                                         _ '{"firstflush_fill_time", i_flush1filltime},
+                                                                         _ '{"firstflush_bleed_time", i_flush1bleedtime},
+                                {"firstflush_flowrate", d_flush1flow},
+                                {"firstflush_flow_tolerance", d_flush1flowtol},
+                                {"firstflush_back_pressure", d_flush1pressure},
+                                {"firstflush_stabilize_time", i_flush1stabilize},
+                                {"firstflush_time", i_flush1time},
+                                {"firstflush_rpm", i_flush1rpm},
+                                {"firstdp_circuit", str_dptest1enable},
+                                                                       _ '{"dp_fill_time", i_dptestfilltime},
+                                                                       _ '{"dp_bleed_time", i_dptestbleedtime},
+                                {"dp_flowrate", d_dptestflow},
+                                {"dp_flow_tolerance", d_dptestflowtol},
+                                {"dp_back_pressure", d_dptestpressure},
+                                {"dp_stabilize_time", i_dpteststabilize},
+                                {"dp_test_time", i_dptesttime},
+                                {"dp_lowerlimit", d_dptestlowlimit},
+                                {"dp_upperlimit", d_dptestuplimit},
+                                {"dp_testpoints", i_dptestpoints},
+                                {"dp_rpm", i_dptestrpm},
+                                {"seconddp_circuit", str_dptest2enable},
+                                {"secondflush_circuit", str_flush2enable},
+                                                                          _ '{"secondflush_fill_time", i_flush2filltime},
+                                                                          _ '{"secondflush_bleed_time", i_flush2bleedtime},
+                                {"secondflush_flowrate", d_flush2flow},
+                                {"secondflush_flow_tolerance", d_flush2flowtol},
+                                {"secondflush_back_pressure", d_flush2pressure},
+                                {"secondflush_stabilize_time", i_flush2stabilize},
+                                {"secondflush_time", i_flush2time},
+                                {"secondflush_rpm", i_flush2rpm},
+                                {"drain1_circuit", str_drain1enable},
+                                {"drain1_back_pressure", d_drain1pressure},
+                                {"drain1_time", i_drain1time},
+                                {"drain2_circuit", str_drain2enable},
+                                {"drain2_back_pressure", d_drain2pressure},
+                                {"drain2_time", i_drain2time},
+                                {"drain3_circuit", str_drain3enable},
+                                {"drain3_back_pressure", d_drain3pressure},
+                                {"drain3_time", i_drain3time}
+                            }
                 If SQL.InsertRecord("RecipeTable", recipeparameter) = 1 Then
                     RecipeMessage(10)
 
@@ -4169,72 +4211,72 @@ Public Class FormRecipeManagement
             ' Send the Data to SQL Database
             If dtrecipeidcheck.Rows.Count = 0 Then
                 Dim recipeparameter As New Dictionary(Of String, Object) From {
-                    {"recipe_id", dtDuplicaterecipe(0)("recipe_id")},
-                    {"recipe_rev", 0},
-                    {"part_id", dtDuplicaterecipe(0)("part_id")},
-                    {"recipe_type_id", dtDuplicaterecipe(0)("recipe_type_id")},
-                    {"last_modified_by", dtDuplicaterecipe(0)("last_modified_by")},
-                    {"last_modified_time", dtDuplicaterecipe(0)("last_modified_time")},
-                    {"user_created", dtDuplicaterecipe(0)("user_created")},
-                    {"created_time", dtDuplicaterecipe(0)("created_time")},
-                    {"fitting_inlet", dtDuplicaterecipe(0)("fitting_inlet")},
-                    {"fitting_outlet", dtDuplicaterecipe(0)("fitting_outlet")},
-                    {"fitting_blank", dtDuplicaterecipe(0)("fitting_blank")},
-                    {"verification_tolerance", dtDuplicaterecipe(0)("verification_tolerance")},
-                                                                                               _
-                    {"prep_fill_time", dtDuplicaterecipe(0)("prep_fill_time")},
-                    {"prep_bleed_time", dtDuplicaterecipe(0)("prep_bleed_time")},
-                    {"prep_flowrate", dtDuplicaterecipe(0)("prep_flowrate")},
-                    {"prep_back_pressure", dtDuplicaterecipe(0)("prep_back_pressure")},
-                    {"prep_pressure_drop", dtDuplicaterecipe(0)("prep_pressure_drop")},
-                    {"prep_pressure_drop_time", dtDuplicaterecipe(0)("prep_pressure_drop_time")},
-                    {"prep_prefill_start_time", dtDuplicaterecipe(0)("prep_prefill_start_time")},
-                    {"prep_prefill_time", dtDuplicaterecipe(0)("prep_prefill_time")},
-                    {"prep_speed_mode", dtDuplicaterecipe(0)("prep_speed_mode")},
-                    {"prep_rpm1", dtDuplicaterecipe(0)("prep_rpm1")},
-                    {"prep_rpm2", dtDuplicaterecipe(0)("prep_rpm2")},
-                                                                     _
-                    {"firstflush_circuit", dtDuplicaterecipe(0)("firstflush_circuit")},
-                                                                                       _ '{"firstflush_fill_time", duplicaterecipe(10)},
-                                                                                       _ '{"firstflush_bleed_time", duplicaterecipe(11)},
-                    {"firstflush_flowrate", dtDuplicaterecipe(0)("firstflush_flowrate")},
-                    {"firstflush_flow_tolerance", dtDuplicaterecipe(0)("firstflush_flow_tolerance")},
-                    {"firstflush_back_pressure", dtDuplicaterecipe(0)("firstflush_back_pressure")},
-                    {"firstflush_stabilize_time", dtDuplicaterecipe(0)("firstflush_stabilize_time")},
-                    {"firstflush_time", dtDuplicaterecipe(0)("firstflush_time")},
-                    {"firstflush_rpm", dtDuplicaterecipe(0)("firstflush_rpm")},
-                    {"firstdp_circuit", dtDuplicaterecipe(0)("firstdp_circuit")},
-                                                                                 _ '{"dp_fill_time", duplicaterecipe(18)},
-                                                                                 _ '{"dp_bleed_time", duplicaterecipe(19)},
-                    {"dp_flowrate", dtDuplicaterecipe(0)("dp_flowrate")},
-                    {"dp_flow_tolerance", dtDuplicaterecipe(0)("dp_flow_tolerance")},
-                    {"dp_back_pressure", dtDuplicaterecipe(0)("dp_back_pressure")},
-                    {"dp_stabilize_time", dtDuplicaterecipe(0)("dp_stabilize_time")},
-                    {"dp_test_time", dtDuplicaterecipe(0)("dp_test_time")},
-                    {"dp_lowerlimit", dtDuplicaterecipe(0)("dp_lowerlimit")},
-                    {"dp_upperlimit", dtDuplicaterecipe(0)("dp_upperlimit")},
-                    {"dp_testpoints", dtDuplicaterecipe(0)("dp_testpoints")},
-                    {"dp_rpm", dtDuplicaterecipe(0)("dp_rpm")},
-                    {"seconddp_circuit", dtDuplicaterecipe(0)("seconddp_circuit")},
-                    {"secondflush_circuit", dtDuplicaterecipe(0)("secondflush_circuit")},
-                                                                                         _ '{"secondflush_fill_time", duplicaterecipe(30)},
-                                                                                         _ '{"secondflush_bleed_time", duplicaterecipe(31)},
-                    {"secondflush_flowrate", dtDuplicaterecipe(0)("secondflush_flowrate")},
-                    {"secondflush_flow_tolerance", dtDuplicaterecipe(0)("secondflush_flow_tolerance")},
-                    {"secondflush_back_pressure", dtDuplicaterecipe(0)("secondflush_back_pressure")},
-                    {"secondflush_stabilize_time", dtDuplicaterecipe(0)("secondflush_stabilize_time")},
-                    {"secondflush_time", dtDuplicaterecipe(0)("secondflush_time")},
-                    {"secondflush_rpm", dtDuplicaterecipe(0)("secondflush_rpm")},
-                    {"drain1_circuit", dtDuplicaterecipe(0)("drain1_circuit")},
-                    {"drain1_back_pressure", dtDuplicaterecipe(0)("drain1_back_pressure")},
-                    {"drain1_time", dtDuplicaterecipe(0)("drain1_time")},
-                    {"drain2_circuit", dtDuplicaterecipe(0)("drain2_circuit")},
-                    {"drain2_back_pressure", dtDuplicaterecipe(0)("drain2_back_pressure")},
-                    {"drain2_time", dtDuplicaterecipe(0)("drain2_time")},
-                    {"drain3_circuit", dtDuplicaterecipe(0)("drain3_circuit")},
-                    {"drain3_back_pressure", dtDuplicaterecipe(0)("drain3_back_pressure")},
-                    {"drain3_time", dtDuplicaterecipe(0)("drain3_time")}
-                }
+                                {"recipe_id", dtDuplicaterecipe(0)("recipe_id")},
+                                {"recipe_rev", 0},
+                                {"part_id", dtDuplicaterecipe(0)("part_id")},
+                                {"recipe_type_id", dtDuplicaterecipe(0)("recipe_type_id")},
+                                {"last_modified_by", dtDuplicaterecipe(0)("last_modified_by")},
+                                {"last_modified_time", dtDuplicaterecipe(0)("last_modified_time")},
+                                {"user_created", dtDuplicaterecipe(0)("user_created")},
+                                {"created_time", dtDuplicaterecipe(0)("created_time")},
+                                {"fitting_inlet", dtDuplicaterecipe(0)("fitting_inlet")},
+                                {"fitting_outlet", dtDuplicaterecipe(0)("fitting_outlet")},
+                                {"fitting_blank", dtDuplicaterecipe(0)("fitting_blank")},
+                                {"verification_tolerance", dtDuplicaterecipe(0)("verification_tolerance")},
+                                                                                                           _
+                                {"prep_fill_time", dtDuplicaterecipe(0)("prep_fill_time")},
+                                {"prep_bleed_time", dtDuplicaterecipe(0)("prep_bleed_time")},
+                                {"prep_flowrate", dtDuplicaterecipe(0)("prep_flowrate")},
+                                {"prep_back_pressure", dtDuplicaterecipe(0)("prep_back_pressure")},
+                                {"prep_pressure_drop", dtDuplicaterecipe(0)("prep_pressure_drop")},
+                                {"prep_pressure_drop_time", dtDuplicaterecipe(0)("prep_pressure_drop_time")},
+                                {"prep_prefill_start_time", dtDuplicaterecipe(0)("prep_prefill_start_time")},
+                                {"prep_prefill_time", dtDuplicaterecipe(0)("prep_prefill_time")},
+                                {"prep_speed_mode", dtDuplicaterecipe(0)("prep_speed_mode")},
+                                {"prep_rpm1", dtDuplicaterecipe(0)("prep_rpm1")},
+                                {"prep_rpm2", dtDuplicaterecipe(0)("prep_rpm2")},
+                                                                                 _
+                                {"firstflush_circuit", dtDuplicaterecipe(0)("firstflush_circuit")},
+                                                                                                   _ '{"firstflush_fill_time", duplicaterecipe(10)},
+                                                                                                   _ '{"firstflush_bleed_time", duplicaterecipe(11)},
+                                {"firstflush_flowrate", dtDuplicaterecipe(0)("firstflush_flowrate")},
+                                {"firstflush_flow_tolerance", dtDuplicaterecipe(0)("firstflush_flow_tolerance")},
+                                {"firstflush_back_pressure", dtDuplicaterecipe(0)("firstflush_back_pressure")},
+                                {"firstflush_stabilize_time", dtDuplicaterecipe(0)("firstflush_stabilize_time")},
+                                {"firstflush_time", dtDuplicaterecipe(0)("firstflush_time")},
+                                {"firstflush_rpm", dtDuplicaterecipe(0)("firstflush_rpm")},
+                                {"firstdp_circuit", dtDuplicaterecipe(0)("firstdp_circuit")},
+                                                                                             _ '{"dp_fill_time", duplicaterecipe(18)},
+                                                                                             _ '{"dp_bleed_time", duplicaterecipe(19)},
+                                {"dp_flowrate", dtDuplicaterecipe(0)("dp_flowrate")},
+                                {"dp_flow_tolerance", dtDuplicaterecipe(0)("dp_flow_tolerance")},
+                                {"dp_back_pressure", dtDuplicaterecipe(0)("dp_back_pressure")},
+                                {"dp_stabilize_time", dtDuplicaterecipe(0)("dp_stabilize_time")},
+                                {"dp_test_time", dtDuplicaterecipe(0)("dp_test_time")},
+                                {"dp_lowerlimit", dtDuplicaterecipe(0)("dp_lowerlimit")},
+                                {"dp_upperlimit", dtDuplicaterecipe(0)("dp_upperlimit")},
+                                {"dp_testpoints", dtDuplicaterecipe(0)("dp_testpoints")},
+                                {"dp_rpm", dtDuplicaterecipe(0)("dp_rpm")},
+                                {"seconddp_circuit", dtDuplicaterecipe(0)("seconddp_circuit")},
+                                {"secondflush_circuit", dtDuplicaterecipe(0)("secondflush_circuit")},
+                                                                                                     _ '{"secondflush_fill_time", duplicaterecipe(30)},
+                                                                                                     _ '{"secondflush_bleed_time", duplicaterecipe(31)},
+                                {"secondflush_flowrate", dtDuplicaterecipe(0)("secondflush_flowrate")},
+                                {"secondflush_flow_tolerance", dtDuplicaterecipe(0)("secondflush_flow_tolerance")},
+                                {"secondflush_back_pressure", dtDuplicaterecipe(0)("secondflush_back_pressure")},
+                                {"secondflush_stabilize_time", dtDuplicaterecipe(0)("secondflush_stabilize_time")},
+                                {"secondflush_time", dtDuplicaterecipe(0)("secondflush_time")},
+                                {"secondflush_rpm", dtDuplicaterecipe(0)("secondflush_rpm")},
+                                {"drain1_circuit", dtDuplicaterecipe(0)("drain1_circuit")},
+                                {"drain1_back_pressure", dtDuplicaterecipe(0)("drain1_back_pressure")},
+                                {"drain1_time", dtDuplicaterecipe(0)("drain1_time")},
+                                {"drain2_circuit", dtDuplicaterecipe(0)("drain2_circuit")},
+                                {"drain2_back_pressure", dtDuplicaterecipe(0)("drain2_back_pressure")},
+                                {"drain2_time", dtDuplicaterecipe(0)("drain2_time")},
+                                {"drain3_circuit", dtDuplicaterecipe(0)("drain3_circuit")},
+                                {"drain3_back_pressure", dtDuplicaterecipe(0)("drain3_back_pressure")},
+                                {"drain3_time", dtDuplicaterecipe(0)("drain3_time")}
+                            }
                 If SQL.InsertRecord("RecipeTable", recipeparameter) = 1 Then
                     RecipeMessage(47)
 
@@ -4443,9 +4485,11 @@ Public Class FormRecipeManagement
                     Case 1
                         With txtbx_RcpEditFlush1Flow
                             .Enabled = False
+                            .Text = d_prepflow.ToString("N1") '"0.0"
                         End With
                         With txtbx_RcpEditFlush1FlowTol
                             .Enabled = False
+                            .Text = "0.0"
                         End With
                         With txtbx_RcpEditFlush1RPM
                             .Enabled = True
@@ -4516,9 +4560,11 @@ Public Class FormRecipeManagement
                     Case 1
                         With txtbx_RcpEditDPFlow
                             .Enabled = False
+                            .Text = d_prepflow.ToString("N1") '"0.0"
                         End With
                         With txtbx_RcpEditDPFlowTol
                             .Enabled = False
+                            .Text = "0.0"
                         End With
                         With txtbx_RcpEditDPTestRPM
                             .Enabled = True
@@ -4595,9 +4641,11 @@ Public Class FormRecipeManagement
                     Case 1
                         With txtbx_RcpEditFlush2Flow
                             .Enabled = False
+                            .Text = d_prepflow.ToString("N1") '"0.0"
                         End With
                         With txtbx_RcpEditFlush2FlowTol
                             .Enabled = False
+                            .Text = "0.0"
                         End With
                         With txtbx_RcpEditFlush2RPM
                             .Enabled = True
@@ -4778,6 +4826,24 @@ Public Class FormRecipeManagement
         If Not txtbx_RcpEditPrepFlow.Text = "" And Not txtbx_RcpEditPrepFlow.Text = "." Then
             'Convert to the required type
             d_prepflow = CType(txtbx_RcpEditPrepFlow.Text, Decimal)
+
+            ' Set flowrate of other to same as this
+            If cmbx_RcpEditPrepPumpMode.SelectedIndex = 1 Then
+                d_flush1flow = d_prepflow
+                d_dptestflow = d_prepflow
+                d_flush2flow = d_prepflow
+                dsp_RcpEditFlush1Flow.Text = d_prepflow.ToString("N1")
+                dsp_RcpEditDPFlow.Text = d_prepflow.ToString("N1")
+                dsp_RcpEditFlush2Flow.Text = d_prepflow.ToString("N1")
+
+                d_flush1flowtol = 0
+                d_dptestflowtol = 0
+                d_flush2flowtol = 0
+                dsp_RcpEditFlush1FlowTol.Text = "0.0"
+                dsp_RcpEditDPFlowTol.Text = "0.0"
+                dsp_RcpEditFlush2FlowTol.Text = "0.0"
+            End If
+
             'Check the value within range
             If d_prepflow < min_d_prepflow Or d_prepflow > max_d_prepflow Then
                 RecipeMessage(20, "Preparation Flowrate should be within " + CType(min_d_prepflow, String) + " to " + CType(max_d_prepflow, String))
@@ -6102,6 +6168,14 @@ Public Class FormRecipeManagement
             txtbx_RcpEditDrain3Pressure.Text = Nothing
             txtbx_RcpEditDrain3Time.Text = Nothing
 
+            txtbx_RcpEditPrepFill.Text = Nothing
+            txtbx_RcpEditPrepBleed.Text = Nothing
+            txtbx_RcpEditPrepFlow.Text = Nothing
+            txtbx_RcpEditPrepPressure.Text = Nothing
+            txtbx_RcpEditPrepPressureDrop.Text = Nothing
+            txtbx_RcpEditPrepPressureDropTime.Text = Nothing
+            txtbx_RcpEditPrepPrefillStartTime.Text = Nothing
+            txtbx_RcpEditPrepPrefillTime.Text = Nothing
             cmbx_RcpEditPrepPumpMode.SelectedItem = Nothing
             txtbx_RcpEditPrepRPM1.Text = Nothing
             txtbx_RcpEditPrepRPM2.Text = Nothing
@@ -6214,7 +6288,7 @@ Public Class FormRecipeManagement
 
         End If
 
-        If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
+        If onContinue = True Then
             'Check for Flowrate
             'Check the text is empty or has only decimal point
             If Not txtbx_RcpEditPrepFlow.Text = "" And Not txtbx_RcpEditPrepFlow.Text = "." Then
@@ -6426,41 +6500,49 @@ Public Class FormRecipeManagement
 
             'End If
 
-            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
-                'Check for Flush-1 Flowrate
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpEditFlush1Flow.Text = "" And Not txtbx_RcpEditFlush1Flow.Text = "." Then
-                    'Convert to the required type
-                    d_flush1flow = CType(txtbx_RcpEditFlush1Flow.Text, Decimal)
-                    'Check the value within range
-                    If d_flush1flow < min_d_flush1flow Or d_flush1flow > max_d_flush1flow Then
-                        RecipeMessage(20, "Flush-1 Flowrate should be within " + CType(min_d_flush1flow, String) + " to " + CType(max_d_flush1flow, String))
-                        txtbx_RcpEditFlush1Flow.Text = Nothing
-                        txtbx_RcpEditFlush1Flow.Focus()
+            If onContinue = True Then
+                If cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
+                    'Check for Flush-1 Flowrate
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpEditFlush1Flow.Text = "" And Not txtbx_RcpEditFlush1Flow.Text = "." Then
+                        'Convert to the required type
+                        d_flush1flow = CType(txtbx_RcpEditFlush1Flow.Text, Decimal)
+                        'Check the value within range
+                        If d_flush1flow < min_d_flush1flow Or d_flush1flow > max_d_flush1flow Then
+                            RecipeMessage(20, "Flush-1 Flowrate should be within " + CType(min_d_flush1flow, String) + " to " + CType(max_d_flush1flow, String))
+                            txtbx_RcpEditFlush1Flow.Text = Nothing
+                            txtbx_RcpEditFlush1Flow.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "Flush-1 Flowrate")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "Flush-1 Flowrate")
-                    onContinue = False
+                    d_flush1flow = d_prepflow
                 End If
             End If
 
-            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
-                'Check for Flush-1 Flow Tolerance
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpEditFlush1FlowTol.Text = "" And Not txtbx_RcpEditFlush1FlowTol.Text = "." Then
-                    'Convert to the required type
-                    d_flush1flowtol = CType(txtbx_RcpEditFlush1FlowTol.Text, Decimal)
-                    'Check the value within range
-                    If d_flush1flowtol < min_d_flush1flowtol Or d_flush1flowtol > max_d_flush1flowtol Then
-                        RecipeMessage(20, "Flush-1 Flow Tolerance should be within " + CType(min_d_flush1flowtol, String) + " to " + CType(max_d_flush1flowtol, String))
-                        txtbx_RcpEditFlush1FlowTol.Text = Nothing
-                        txtbx_RcpEditFlush1FlowTol.Focus()
+            If onContinue = True Then
+                If cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
+                    'Check for Flush-1 Flow Tolerance
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpEditFlush1FlowTol.Text = "" And Not txtbx_RcpEditFlush1FlowTol.Text = "." Then
+                        'Convert to the required type
+                        d_flush1flowtol = CType(txtbx_RcpEditFlush1FlowTol.Text, Decimal)
+                        'Check the value within range
+                        If d_flush1flowtol < min_d_flush1flowtol Or d_flush1flowtol > max_d_flush1flowtol Then
+                            RecipeMessage(20, "Flush-1 Flow Tolerance should be within " + CType(min_d_flush1flowtol, String) + " to " + CType(max_d_flush1flowtol, String))
+                            txtbx_RcpEditFlush1FlowTol.Text = Nothing
+                            txtbx_RcpEditFlush1FlowTol.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "Flush-1 Flow tolerance")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "Flush-1 Flow tolerance")
-                    onContinue = False
+                    d_flush1flowtol = 0
                 End If
             End If
 
@@ -6586,41 +6668,49 @@ Public Class FormRecipeManagement
 
             'End If
 
-            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
-                'Check for Flush-2 Flowrate
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpEditFlush2Flow.Text = "" And Not txtbx_RcpEditFlush2Flow.Text = "." Then
-                    'Convert to the required type
-                    d_flush2flow = CType(txtbx_RcpEditFlush2Flow.Text, Decimal)
-                    'Check the value within range
-                    If d_flush2flow < min_d_flush2flow Or d_flush2flow > max_d_flush2flow Then
-                        RecipeMessage(20, "Flush-2 Flowrate should be within " + CType(min_d_flush2flow, String) + " to " + CType(max_d_flush2flow, String))
-                        txtbx_RcpEditFlush2Flow.Text = Nothing
-                        txtbx_RcpEditFlush2Flow.Focus()
+            If onContinue = True Then
+                If cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
+                    'Check for Flush-2 Flowrate
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpEditFlush2Flow.Text = "" And Not txtbx_RcpEditFlush2Flow.Text = "." Then
+                        'Convert to the required type
+                        d_flush2flow = CType(txtbx_RcpEditFlush2Flow.Text, Decimal)
+                        'Check the value within range
+                        If d_flush2flow < min_d_flush2flow Or d_flush2flow > max_d_flush2flow Then
+                            RecipeMessage(20, "Flush-2 Flowrate should be within " + CType(min_d_flush2flow, String) + " to " + CType(max_d_flush2flow, String))
+                            txtbx_RcpEditFlush2Flow.Text = Nothing
+                            txtbx_RcpEditFlush2Flow.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "Flush-2 Flowrate")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "Flush-2 Flowrate")
-                    onContinue = False
+                    d_flush2flow = d_prepflow
                 End If
             End If
 
-            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
-                'Check for Flush-2 Flow Tolerance
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpEditFlush2FlowTol.Text = "" And Not txtbx_RcpEditFlush2FlowTol.Text = "." Then
-                    'Convert to the required type
-                    d_flush2flowtol = CType(txtbx_RcpEditFlush2FlowTol.Text, Decimal)
-                    'Check the value within range
-                    If d_flush2flowtol < min_d_flush2flowtol Or d_flush2flowtol > max_d_flush2flowtol Then
-                        RecipeMessage(20, "Flush-2 Flow Tolerance should be within " + CType(min_d_flush2flowtol, String) + " to " + CType(max_d_flush2flowtol, String))
-                        txtbx_RcpEditFlush2FlowTol.Text = Nothing
-                        txtbx_RcpEditFlush2FlowTol.Focus()
+            If onContinue = True Then
+                If cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
+                    'Check for Flush-2 Flow Tolerance
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpEditFlush2FlowTol.Text = "" And Not txtbx_RcpEditFlush2FlowTol.Text = "." Then
+                        'Convert to the required type
+                        d_flush2flowtol = CType(txtbx_RcpEditFlush2FlowTol.Text, Decimal)
+                        'Check the value within range
+                        If d_flush2flowtol < min_d_flush2flowtol Or d_flush2flowtol > max_d_flush2flowtol Then
+                            RecipeMessage(20, "Flush-2 Flow Tolerance should be within " + CType(min_d_flush2flowtol, String) + " to " + CType(max_d_flush2flowtol, String))
+                            txtbx_RcpEditFlush2FlowTol.Text = Nothing
+                            txtbx_RcpEditFlush2FlowTol.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "Flush-2 Flow tolerance")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "Flush-2 Flow tolerance")
-                    onContinue = False
+                    d_flush2flowtol = 0
                 End If
             End If
 
@@ -6746,41 +6836,49 @@ Public Class FormRecipeManagement
             'End If
 
 
-            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
-                'Check for DP Test Flowrate
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpEditDPFlow.Text = "" And Not txtbx_RcpEditDPFlow.Text = "." Then
-                    'Convert to the required type
-                    d_dptestflow = CType(txtbx_RcpEditDPFlow.Text, Decimal)
-                    'Check the value within range
-                    If d_dptestflow < min_d_dptestflow Or d_dptestflow > max_d_dptestflow Then
-                        RecipeMessage(20, "DP Test Flowrate should be within " + CType(min_d_dptestflow, String) + " to " + CType(max_d_dptestflow, String))
-                        txtbx_RcpEditDPFlow.Text = Nothing
-                        txtbx_RcpEditDPFlow.Focus()
+            If onContinue = True Then
+                If cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
+                    'Check for DP Test Flowrate
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpEditDPFlow.Text = "" And Not txtbx_RcpEditDPFlow.Text = "." Then
+                        'Convert to the required type
+                        d_dptestflow = CType(txtbx_RcpEditDPFlow.Text, Decimal)
+                        'Check the value within range
+                        If d_dptestflow < min_d_dptestflow Or d_dptestflow > max_d_dptestflow Then
+                            RecipeMessage(20, "DP Test Flowrate should be within " + CType(min_d_dptestflow, String) + " to " + CType(max_d_dptestflow, String))
+                            txtbx_RcpEditDPFlow.Text = Nothing
+                            txtbx_RcpEditDPFlow.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "DP Test Flowrate")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "DP Test Flowrate")
-                    onContinue = False
+                    d_dptestflow = d_prepflow
                 End If
             End If
 
-            If onContinue = True  And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
-                'Check for DP Test Flow Tolerance
-                'Check the text is empty or has only decimal point
-                If Not txtbx_RcpEditDPFlowTol.Text = "" And Not txtbx_RcpEditDPFlowTol.Text = "." Then
-                    'Convert to the required type
-                    d_dptestflowtol = CType(txtbx_RcpEditDPFlowTol.Text, Decimal)
-                    'Check the value within range
-                    If d_dptestflowtol < min_d_dptestflowtol Or d_dptestflowtol > max_d_dptestflowtol Then
-                        RecipeMessage(20, "DP Test Flow Tolerance should be within " + CType(min_d_dptestflowtol, String) + " to " + CType(max_d_dptestflowtol, String))
-                        txtbx_RcpEditDPFlowTol.Text = Nothing
-                        txtbx_RcpEditDPFlowTol.Focus()
+            If onContinue = True Then
+                If cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
+                    'Check for DP Test Flow Tolerance
+                    'Check the text is empty or has only decimal point
+                    If Not txtbx_RcpEditDPFlowTol.Text = "" And Not txtbx_RcpEditDPFlowTol.Text = "." Then
+                        'Convert to the required type
+                        d_dptestflowtol = CType(txtbx_RcpEditDPFlowTol.Text, Decimal)
+                        'Check the value within range
+                        If d_dptestflowtol < min_d_dptestflowtol Or d_dptestflowtol > max_d_dptestflowtol Then
+                            RecipeMessage(20, "DP Test Flow Tolerance should be within " + CType(min_d_dptestflowtol, String) + " to " + CType(max_d_dptestflowtol, String))
+                            txtbx_RcpEditDPFlowTol.Text = Nothing
+                            txtbx_RcpEditDPFlowTol.Focus()
+                            onContinue = False
+                        End If
+                    Else
+                        RecipeMessage(19, "DP Test Flow tolerance")
                         onContinue = False
                     End If
                 Else
-                    RecipeMessage(19, "DP Test Flow tolerance")
-                    onContinue = False
+                    d_dptestflowtol = 0
                 End If
             End If
 
@@ -7252,71 +7350,71 @@ Public Class FormRecipeManagement
             Dim currentDateTime2 As DateTime = DateTime.Now
             If dtrecipeidcheck.Rows.Count > 0 Then
                 Dim Updateparameter As New Dictionary(Of String, Object) From {
-                    {"recipe_id", RecipeID},
-                    {"recipe_rev", CInt(dtrecipeidcheck(0)("recipe_rev")) + 1},
-                    {"part_id", dtrecipeidcheck(0)("part_id")},
-                    {"recipe_type_id", dtrecipeidcheck(0)("recipe_type_id")},
-                    {"user_created", PublicVariables.LoginUserName},
-                    {"created_time", DateTimeNowInStr},
-                    {"fitting_inlet", IIf(ComboBox9.Items.Count > 0, ComboBox9.SelectedItem, "")},
-                    {"fitting_outlet", IIf(ComboBox8.Items.Count > 0, ComboBox8.SelectedItem, "")},
-                    {"fitting_blank", IIf(ComboBox7.Items.Count > 0, ComboBox7.SelectedItem, "")},
-                                                                                                  _
-                    {"last_modified_by", PublicVariables.LoginUserName},
-                    {"last_modified_time", DateTimeNowInStr}, ' lbl_DateTimeClock.Text
-                    {"verification_tolerance", d_vertol},
-                    {"prep_fill_time", i_prepfilltime},
-                    {"prep_bleed_time", i_prepbleedtime},
-                    {"prep_flowrate", d_prepflow},
-                    {"prep_back_pressure", d_preppressure},
-                    {"prep_pressure_drop", d_preppressuredrop},
-                    {"prep_pressure_drop_time", i_preppressuredroptime},
-                    {"prep_prefill_start_time", i_prepprefillstarttime},
-                    {"prep_prefill_time", i_prepprefilltime},
-                    {"prep_speed_mode", str_prepspeedenable},
-                    {"prep_rpm1", i_preprpm1},
-                    {"prep_rpm2", i_preprpm2},
-                    {"firstflush_circuit", str_flush1enable},
-                                                             _ '{"firstflush_fill_time", i_flush1filltime},
-                                                             _ '{"firstflush_bleed_time", i_flush1bleedtime},
-                    {"firstflush_flowrate", d_flush1flow},
-                    {"firstflush_flow_tolerance", d_flush1flowtol},
-                    {"firstflush_back_pressure", d_flush1pressure},
-                    {"firstflush_stabilize_time", i_flush1stabilize},
-                    {"firstflush_time", i_flush1time},
-                    {"firstflush_rpm", i_flush1rpm},
-                    {"firstdp_circuit", str_dptest1enable},
-                                                           _ '{"dp_fill_time", i_dptestfilltime},
-                                                           _ '{"dp_bleed_time", i_dptestbleedtime},
-                    {"dp_flowrate", d_dptestflow},
-                    {"dp_flow_tolerance", d_dptestflowtol},
-                    {"dp_back_pressure", d_dptestpressure},
-                    {"dp_stabilize_time", i_dpteststabilize},
-                    {"dp_test_time", i_dptesttime},
-                    {"dp_lowerlimit", d_dptestlowlimit},
-                    {"dp_upperlimit", d_dptestuplimit},
-                    {"dp_testpoints", i_dptestpoints},
-                    {"dp_rpm", i_dptestrpm},
-                    {"seconddp_circuit", str_dptest2enable},
-                    {"secondflush_circuit", str_flush2enable},
-                                                              _ '{"secondflush_fill_time", i_flush2filltime},
-                                                              _ '{"secondflush_bleed_time", i_flush2bleedtime},
-                    {"secondflush_flowrate", d_flush2flow},
-                    {"secondflush_flow_tolerance", d_flush2flowtol},
-                    {"secondflush_back_pressure", d_flush2pressure},
-                    {"secondflush_stabilize_time", i_flush2stabilize},
-                    {"secondflush_time", i_flush2time},
-                    {"secondflush_rpm", i_flush2rpm},
-                    {"drain1_circuit", str_drain1enable},
-                    {"drain1_back_pressure", d_drain1pressure},
-                    {"drain1_time", i_drain1time},
-                    {"drain2_circuit", str_drain2enable},
-                    {"drain2_back_pressure", d_drain2pressure},
-                    {"drain2_time", i_drain2time},
-                    {"drain3_circuit", str_drain3enable},
-                    {"drain3_back_pressure", d_drain3pressure},
-                    {"drain3_time", i_drain3time}
-                }
+                                {"recipe_id", RecipeID},
+                                {"recipe_rev", CInt(dtrecipeidcheck(0)("recipe_rev")) + 1},
+                                {"part_id", dtrecipeidcheck(0)("part_id")},
+                                {"recipe_type_id", dtrecipeidcheck(0)("recipe_type_id")},
+                                {"user_created", PublicVariables.LoginUserName},
+                                {"created_time", DateTimeNowInStr},
+                                {"fitting_inlet", IIf(ComboBox9.Items.Count > 0, ComboBox9.SelectedItem, "")},
+                                {"fitting_outlet", IIf(ComboBox8.Items.Count > 0, ComboBox8.SelectedItem, "")},
+                                {"fitting_blank", IIf(ComboBox7.Items.Count > 0, ComboBox7.SelectedItem, "")},
+                                                                                                              _
+                                {"last_modified_by", PublicVariables.LoginUserName},
+                                {"last_modified_time", DateTimeNowInStr}, ' lbl_DateTimeClock.Text
+                                {"verification_tolerance", d_vertol},
+                                {"prep_fill_time", i_prepfilltime},
+                                {"prep_bleed_time", i_prepbleedtime},
+                                {"prep_flowrate", d_prepflow},
+                                {"prep_back_pressure", d_preppressure},
+                                {"prep_pressure_drop", d_preppressuredrop},
+                                {"prep_pressure_drop_time", i_preppressuredroptime},
+                                {"prep_prefill_start_time", i_prepprefillstarttime},
+                                {"prep_prefill_time", i_prepprefilltime},
+                                {"prep_speed_mode", str_prepspeedenable},
+                                {"prep_rpm1", i_preprpm1},
+                                {"prep_rpm2", i_preprpm2},
+                                {"firstflush_circuit", str_flush1enable},
+                                                                         _ '{"firstflush_fill_time", i_flush1filltime},
+                                                                         _ '{"firstflush_bleed_time", i_flush1bleedtime},
+                                {"firstflush_flowrate", d_flush1flow},
+                                {"firstflush_flow_tolerance", d_flush1flowtol},
+                                {"firstflush_back_pressure", d_flush1pressure},
+                                {"firstflush_stabilize_time", i_flush1stabilize},
+                                {"firstflush_time", i_flush1time},
+                                {"firstflush_rpm", i_flush1rpm},
+                                {"firstdp_circuit", str_dptest1enable},
+                                                                       _ '{"dp_fill_time", i_dptestfilltime},
+                                                                       _ '{"dp_bleed_time", i_dptestbleedtime},
+                                {"dp_flowrate", d_dptestflow},
+                                {"dp_flow_tolerance", d_dptestflowtol},
+                                {"dp_back_pressure", d_dptestpressure},
+                                {"dp_stabilize_time", i_dpteststabilize},
+                                {"dp_test_time", i_dptesttime},
+                                {"dp_lowerlimit", d_dptestlowlimit},
+                                {"dp_upperlimit", d_dptestuplimit},
+                                {"dp_testpoints", i_dptestpoints},
+                                {"dp_rpm", i_dptestrpm},
+                                {"seconddp_circuit", str_dptest2enable},
+                                {"secondflush_circuit", str_flush2enable},
+                                                                          _ '{"secondflush_fill_time", i_flush2filltime},
+                                                                          _ '{"secondflush_bleed_time", i_flush2bleedtime},
+                                {"secondflush_flowrate", d_flush2flow},
+                                {"secondflush_flow_tolerance", d_flush2flowtol},
+                                {"secondflush_back_pressure", d_flush2pressure},
+                                {"secondflush_stabilize_time", i_flush2stabilize},
+                                {"secondflush_time", i_flush2time},
+                                {"secondflush_rpm", i_flush2rpm},
+                                {"drain1_circuit", str_drain1enable},
+                                {"drain1_back_pressure", d_drain1pressure},
+                                {"drain1_time", i_drain1time},
+                                {"drain2_circuit", str_drain2enable},
+                                {"drain2_back_pressure", d_drain2pressure},
+                                {"drain2_time", i_drain2time},
+                                {"drain3_circuit", str_drain3enable},
+                                {"drain3_back_pressure", d_drain3pressure},
+                                {"drain3_time", i_drain3time}
+                            }
                 Dim Condition As String = "recipe_id = '" + RecipeID + "'"
                 If RecipeMessage(36, RecipeID) = DialogResult.Yes Then
                     'If SQL.UpdateRecord("RecipeTable", Updateparameter, Condition) = 1 Then
@@ -7625,20 +7723,20 @@ Public Class FormRecipeManagement
 #Region "Recipe Details"
     Private Sub LoadRecipeDetails(containSearch As Integer, recipeid As ComboBox, filtertype As ComboBox, partid As ComboBox, recipetype As ComboBox)
         Dim strrecipedetails As String = $"
-            SELECT * FROM RecipeTable 
-            LEFT JOIN PartTable ON RecipeTable.part_id=PartTable.part_id 
-            LEFT JOIN FilterType ON PartTable.filter_type_id=FilterType.id 
-            LEFT JOIN JigType ON PartTable.jig_type_id=JigType.id
-            LEFT JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id             
-            {IIf(cmbx_RcpDetailRecipeIDRev.Items.Count > 0, "", "
-                WHERE RecipeTable.recipe_rev = ( 
-                    SELECT MAX(recipe_rev) 
-                    FROM RecipeTable t2 
-                    WHERE RecipeTable.recipe_id = t2.recipe_id 
-                ) 
-            ")}
-            ORDER BY RecipeTable.recipe_id ASC
-        "
+                        SELECT * FROM RecipeTable 
+                        LEFT JOIN PartTable ON RecipeTable.part_id=PartTable.part_id 
+                        LEFT JOIN FilterType ON PartTable.filter_type_id=FilterType.id 
+                        LEFT JOIN JigType ON PartTable.jig_type_id=JigType.id
+                        LEFT JOIN RecipeType ON RecipeTable.recipe_type_id=RecipeType.id             
+                        {IIf(cmbx_RcpDetailRecipeIDRev.Items.Count > 0, "", "
+                            WHERE RecipeTable.recipe_rev = ( 
+                                SELECT MAX(recipe_rev) 
+                                FROM RecipeTable t2 
+                                WHERE RecipeTable.recipe_id = t2.recipe_id 
+                            ) 
+                        ")}
+                        ORDER BY RecipeTable.recipe_id ASC
+                    "
         Dim dtrecipetable As DataTable = SQL.ReadRecords(strrecipedetails)
 
 
@@ -8278,10 +8376,10 @@ Public Class FormRecipeManagement
 
         If cmbx_RcpDetailRecipeID.SelectedIndex > 0 Then
             Dim dtRecipeTbl As DataTable = SQL.ReadRecords($"
-                SELECT DISTINCT recipe_rev FROM RecipeTable 
-                WHERE recipe_id='{DirectCast(cmbx_RcpDetailRecipeID.SelectedItem, KeyValuePair(Of String, String)).Value}' 
-                ORDER BY recipe_rev ASC
-            ")
+                            SELECT DISTINCT recipe_rev FROM RecipeTable 
+                            WHERE recipe_id='{DirectCast(cmbx_RcpDetailRecipeID.SelectedItem, KeyValuePair(Of String, String)).Value}' 
+                            ORDER BY recipe_rev ASC
+                        ")
 
             If dtRecipeTbl.Rows.Count > 0 Then
                 ' Add Revisions To ComboBox List
@@ -8311,16 +8409,16 @@ Public Class FormRecipeManagement
         Dim SelectedType As String = ComboBox1.SelectedItem
 
         Dim dtFittingTbl As DataTable = SQL.ReadRecords($"
-            SELECT * FROM FittingType 
-            WHERE fitting_type='Fittings' 
-            ORDER BY fitting_name ASC
-        ")
+                        SELECT * FROM FittingType 
+                        WHERE fitting_type='Fittings' 
+                        ORDER BY fitting_name ASC
+                    ")
 
         Dim dtBlankTbl As DataTable = SQL.ReadRecords($"
-            SELECT * FROM FittingType 
-            WHERE fitting_type='Blanks' 
-            ORDER BY fitting_name ASC
-        ")
+                        SELECT * FROM FittingType 
+                        WHERE fitting_type='Blanks' 
+                        ORDER BY fitting_name ASC
+                    ")
 
         For Each cmbx As ComboBox In cmbxArr1
             cmbx.Items.Clear()
@@ -8367,10 +8465,10 @@ Public Class FormRecipeManagement
         Dim SelectedType As String = ComboBox1.SelectedItem
 
         Dim dtFittingTbl As DataTable = SQL.ReadRecords($"
-            SELECT * FROM FittingType 
-            WHERE fitting_type='{SelectedType}' 
-            ORDER BY fitting_name ASC
-        ")
+                        SELECT * FROM FittingType 
+                        WHERE fitting_type='{SelectedType}' 
+                        ORDER BY fitting_name ASC
+                    ")
 
         For Each cmbx As ComboBox In cmbxArr
             cmbx.Items.Clear()
@@ -8388,20 +8486,20 @@ Public Class FormRecipeManagement
         Dim FittingNameInput As String = TextBox1.Text.Trim
 
         Dim dtFittingTbl As DataTable = SQL.ReadRecords($"
-            SELECT * FROM FittingType 
-            WHERE fitting_type='{SelectedType}' 
-            AND fitting_name='{FittingNameInput}' 
-        ")
+                        SELECT * FROM FittingType 
+                        WHERE fitting_type='{SelectedType}' 
+                        AND fitting_name='{FittingNameInput}' 
+                    ")
 
         If dtFittingTbl.Rows.Count > 0 Then
             MsgBox("Fitting Creation Failed, Fitting Exists.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
         Else
             Dim parameters As New Dictionary(Of String, Object) From {
-                {"fitting_type", SelectedType},
-                {"fitting_name", FittingNameInput},
-                {"user_updated", PublicVariables.LoginUserName},
-                {"date_updated", DateTime.Now.ToString("s")} 'lbl_DateTimeClock.Text}
-            }
+                            {"fitting_type", SelectedType},
+                            {"fitting_name", FittingNameInput},
+                            {"user_updated", PublicVariables.LoginUserName},
+                            {"date_updated", DateTime.Now.ToString("s")} 'lbl_DateTimeClock.Text}
+                        }
             Dim InsertRecord As Integer = SQL.InsertRecord("FittingType", parameters)
 
             If InsertRecord > 0 Then
@@ -8439,42 +8537,42 @@ Public Class FormRecipeManagement
     End Sub
 
     Private Sub txtbx_Dec_LostFocus(sender As Object, e As EventArgs) Handles _
-        txtbx_RcpCreateVerTol.LostFocus,
-        txtbx_RcpCreatePrepFlow.LostFocus,
-        txtbx_RcpCreatePrepPressure.LostFocus,
-        txtbx_RcpCreatePrepPressureDrop.LostFocus,
-        txtbx_RcpCreateFlush1Flow.LostFocus,
-        txtbx_RcpCreateFlush1FlowTol.LostFocus,
-        txtbx_RcpCreateFlush1Pressure.LostFocus,
-        txtbx_RcpCreateDPFlow.LostFocus,
-        txtbx_RcpCreateDPFlowTol.LostFocus,
-        txtbx_RcpCreateDPPressure.LostFocus,
-        txtbx_RcpCreateDPLowLimit.LostFocus,
-        txtbx_RcpCreateDPUpLimit.LostFocus,
-        txtbx_RcpCreateFlush2Flow.LostFocus,
-        txtbx_RcpCreateFlush2FlowTol.LostFocus,
-        txtbx_RcpCreateFlush2Pressure.LostFocus,
-        txtbx_RcpCreateDrain1Pressure.LostFocus,
-        txtbx_RcpCreateDrain2Pressure.LostFocus,
-        txtbx_RcpCreateDrain3Pressure.LostFocus,
-        txtbx_RcpEditVerTol.LostFocus,
-        txtbx_RcpEditPrepFlow.LostFocus,
-        txtbx_RcpEditPrepPressure.LostFocus,
-        txtbx_RcpEditPrepPressureDrop.LostFocus,
-        txtbx_RcpEditFlush1Flow.LostFocus,
-        txtbx_RcpEditFlush1FlowTol.LostFocus,
-        txtbx_RcpEditFlush1Pressure.LostFocus,
-        txtbx_RcpEditDPFlow.LostFocus,
-        txtbx_RcpEditDPFlowTol.LostFocus,
-        txtbx_RcpEditDPPressure.LostFocus,
-        txtbx_RcpEditDPLowLimit.LostFocus,
-        txtbx_RcpEditDPUpLimit.LostFocus,
-        txtbx_RcpEditFlush2Flow.LostFocus,
-        txtbx_RcpEditFlush2FlowTol.LostFocus,
-        txtbx_RcpEditFlush2Pressure.LostFocus,
-        txtbx_RcpEditDrain1Pressure.LostFocus,
-        txtbx_RcpEditDrain2Pressure.LostFocus,
-        txtbx_RcpEditDrain3Pressure.LostFocus
+                    txtbx_RcpCreateVerTol.LostFocus,
+                    txtbx_RcpCreatePrepFlow.LostFocus,
+                    txtbx_RcpCreatePrepPressure.LostFocus,
+                    txtbx_RcpCreatePrepPressureDrop.LostFocus,
+                    txtbx_RcpCreateFlush1Flow.LostFocus,
+                    txtbx_RcpCreateFlush1FlowTol.LostFocus,
+                    txtbx_RcpCreateFlush1Pressure.LostFocus,
+                    txtbx_RcpCreateDPFlow.LostFocus,
+                    txtbx_RcpCreateDPFlowTol.LostFocus,
+                    txtbx_RcpCreateDPPressure.LostFocus,
+                    txtbx_RcpCreateDPLowLimit.LostFocus,
+                    txtbx_RcpCreateDPUpLimit.LostFocus,
+                    txtbx_RcpCreateFlush2Flow.LostFocus,
+                    txtbx_RcpCreateFlush2FlowTol.LostFocus,
+                    txtbx_RcpCreateFlush2Pressure.LostFocus,
+                    txtbx_RcpCreateDrain1Pressure.LostFocus,
+                    txtbx_RcpCreateDrain2Pressure.LostFocus,
+                    txtbx_RcpCreateDrain3Pressure.LostFocus,
+                    txtbx_RcpEditVerTol.LostFocus,
+                    txtbx_RcpEditPrepFlow.LostFocus,
+                    txtbx_RcpEditPrepPressure.LostFocus,
+                    txtbx_RcpEditPrepPressureDrop.LostFocus,
+                    txtbx_RcpEditFlush1Flow.LostFocus,
+                    txtbx_RcpEditFlush1FlowTol.LostFocus,
+                    txtbx_RcpEditFlush1Pressure.LostFocus,
+                    txtbx_RcpEditDPFlow.LostFocus,
+                    txtbx_RcpEditDPFlowTol.LostFocus,
+                    txtbx_RcpEditDPPressure.LostFocus,
+                    txtbx_RcpEditDPLowLimit.LostFocus,
+                    txtbx_RcpEditDPUpLimit.LostFocus,
+                    txtbx_RcpEditFlush2Flow.LostFocus,
+                    txtbx_RcpEditFlush2FlowTol.LostFocus,
+                    txtbx_RcpEditFlush2Pressure.LostFocus,
+                    txtbx_RcpEditDrain1Pressure.LostFocus,
+                    txtbx_RcpEditDrain2Pressure.LostFocus,
+                    txtbx_RcpEditDrain3Pressure.LostFocus
 
         Dim txtbxValidate As TextBox = DirectCast(sender, TextBox)
 
@@ -8570,29 +8668,29 @@ Public Class FormRecipeManagement
                 Case 1
                     For Each txtbx In txtbxProcessArr
                         If txtbx Is txtbx_RcpCreatePrepFlow Then
-                            txtbx.Enabled = False
-                            txtbx.Text = "0.0"
-                            d_prepflow = 0
+                            'txtbx.Enabled = False
+                            'txtbx.Text = "0.0"
+                            'd_prepflow = 0
                         End If
                         If txtbx Is txtbx_RcpCreateFlush1Flow Then
                             If checkbx_CreateFlush1.Checked Then
                                 txtbx.Enabled = False
-                                txtbx.Text = "0.0"
-                                d_flush1flow = 0
+                                txtbx.Text = d_prepflow.ToString("N1") '"0.0"
+                                d_flush1flow = d_prepflow '0
                             End If
                         End If
                         If txtbx Is txtbx_RcpCreateDPFlow Then
                             If checkbx_CreateDPTest1.Checked Then
                                 txtbx.Enabled = False
-                                txtbx.Text = "0.0"
-                                d_dptestflow = 0
+                                txtbx.Text = d_prepflow.ToString("N1") '"0.0"
+                                d_dptestflow = d_prepflow '0
                             End If
                         End If
                         If txtbx Is txtbx_RcpCreateFlush2Flow Then
                             If checkbx_CreateFlush2.Checked Then
                                 txtbx.Enabled = False
-                                txtbx.Text = "0.0"
-                                d_flush2flow = 0
+                                txtbx.Text = d_prepflow.ToString("N1") '"0.0"
+                                d_flush2flow = d_prepflow '0
                             End If
                         End If
                         If txtbx Is txtbx_RcpCreateFlush1FlowTol Then
@@ -8734,7 +8832,7 @@ Public Class FormRecipeManagement
                 Case 1
                     For Each txtbx In txtbxProcessArr
                         If txtbx Is txtbx_RcpEditPrepFlow Then
-                            txtbx.Enabled = False
+                            'txtbx.Enabled = False
                             'txtbx.Text = "0.0"
                             'd_prepflow = 0
                         End If
