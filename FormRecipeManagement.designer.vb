@@ -345,6 +345,8 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.btn_RcpCreateCal = New System.Windows.Forms.Button()
+        Me.btn_RcpEditCal = New System.Windows.Forms.Button()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -1149,6 +1151,7 @@ Partial Class FormRecipeManagement
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.btn_RcpEditCal)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepPumpMode)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepRPM2)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepRPM1)
@@ -2705,6 +2708,7 @@ Partial Class FormRecipeManagement
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.btn_RcpCreateCal)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepPumpMode)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepRPM2)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepRPM1)
@@ -3805,6 +3809,24 @@ Partial Class FormRecipeManagement
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
+        'btn_RcpCreateCal
+        '
+        Me.btn_RcpCreateCal.Location = New System.Drawing.Point(18, 159)
+        Me.btn_RcpCreateCal.Name = "btn_RcpCreateCal"
+        Me.btn_RcpCreateCal.Size = New System.Drawing.Size(41, 24)
+        Me.btn_RcpCreateCal.TabIndex = 70
+        Me.btn_RcpCreateCal.Text = "Cal"
+        Me.btn_RcpCreateCal.UseVisualStyleBackColor = True
+        '
+        'btn_RcpEditCal
+        '
+        Me.btn_RcpEditCal.Location = New System.Drawing.Point(18, 159)
+        Me.btn_RcpEditCal.Name = "btn_RcpEditCal"
+        Me.btn_RcpEditCal.Size = New System.Drawing.Size(41, 24)
+        Me.btn_RcpEditCal.TabIndex = 78
+        Me.btn_RcpEditCal.Text = "Cal"
+        Me.btn_RcpEditCal.UseVisualStyleBackColor = True
+        '
         'FormRecipeManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4212,4 +4234,6 @@ Partial Class FormRecipeManagement
     Friend WithEvents dsp_RcpEditDPTestRPM As Label
     Friend WithEvents txtbx_RcpEditFlush1RPM As TextBox
     Friend WithEvents dsp_RcpEditFlush1RPM As Label
+    Friend WithEvents btn_RcpCreateCal As Button
+    Friend WithEvents btn_RcpEditCal As Button
 End Class
