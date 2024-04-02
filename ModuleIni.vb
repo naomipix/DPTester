@@ -130,8 +130,8 @@ Module IniFileInitialize
             End If
             PublicVariables.ChartType = IniFileHandler.ReadIniValue(IniFilePath, Section4, "ChartType", "Line")
             PublicVariables.MarkerEnabled = IniFileHandler.ReadIniValue(IniFilePath, Section4, "MarkerEnabled", 0)
-            If CInt(IniFileHandler.ReadIniValue(IniFilePath, Section4, "RollingAvgSize", 3)) > 0 Then
-                PublicVariables.RollingAvgSize = IniFileHandler.ReadIniValue(IniFilePath, Section4, "RollingAvgSize", 3)
+            If CInt(IniFileHandler.ReadIniValue(IniFilePath, Section4, "RollingAvgSize", 1)) > 0 Then
+                PublicVariables.RollingAvgSize = IniFileHandler.ReadIniValue(IniFilePath, Section4, "RollingAvgSize", 1)
             Else
                 PublicVariables.RollingAvgSize = 1
             End If
@@ -173,6 +173,8 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_i_preppressuredroptime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_BackPressureDropTime", "0")
             PublicVariables.Limit_Min_i_prepprefillstarttime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_PrefillStartTime", "0")
             PublicVariables.Limit_Min_i_prepprefilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_PrefillTime", "0")
+            PublicVariables.Limit_Min_i_preprpm1 = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_RPM1", "0")
+            PublicVariables.Limit_Min_i_preprpm2 = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_RPM2", "0")
 
             'PublicVariables.Limit_Min_i_flush1filltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush1_FillTime", "0")
             'PublicVariables.Limit_Min_i_flush1bleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush1_BleedTime", "0")
@@ -181,6 +183,7 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_d_flush1pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush1_BackPressure", "0")
             PublicVariables.Limit_Min_i_flush1stabilize = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush1_StabilizeTime", "0")
             PublicVariables.Limit_Min_i_flush1time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush1_Time", "0")
+            PublicVariables.Limit_Min_i_flush1rpm = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush1_RPM", "0")
             'PublicVariables.Limit_Min_i_dptestfilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDPTest_FillTime", "0")
             'PublicVariables.Limit_Min_i_dptestbleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDPTest_BleedTime", "0")
             PublicVariables.Limit_Min_d_dptestflow = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDPTest_Flowrate", "0")
@@ -191,6 +194,7 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_d_dptestlowlimit = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDPTest_LowLimit", "0")
             PublicVariables.Limit_Min_d_dptestuplimit = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDPTest_HighLimit", "0")
             PublicVariables.Limit_Min_i_dptestpoints = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDPTest_Points", "0")
+            PublicVariables.Limit_Min_i_dptestrpm = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDPTest_RPM", "0")
             'PublicVariables.Limit_Min_i_flush2filltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush2_FillTime", "0")
             'PublicVariables.Limit_Min_i_flush2bleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush2_BleedTime", "0")
             PublicVariables.Limit_Min_d_flush2flow = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush2_Flowrate", "0")
@@ -198,6 +202,7 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_d_flush2pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush2_BackPressure", "0")
             PublicVariables.Limit_Min_i_flush2stabilize = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush2_StabilizeTime", "0")
             PublicVariables.Limit_Min_i_flush2time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush2_Time", "0")
+            PublicVariables.Limit_Min_i_flush2rpm = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinFlush2_RPM", "0")
             PublicVariables.Limit_Min_d_drain1pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain1_Pressure", "0")
             PublicVariables.Limit_Min_i_drain1time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain1_Time", "0")
             PublicVariables.Limit_Min_d_drain2pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain2_Pressure", "0")
@@ -249,6 +254,8 @@ Module IniFileInitialize
             PublicVariables.Limit_Max_i_preppressuredroptime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressureDropTime", "600")
             PublicVariables.Limit_Max_i_prepprefillstarttime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_PrefillStartTime", "600")
             PublicVariables.Limit_Max_i_prepprefilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_PrefillTime", "600")
+            PublicVariables.Limit_Max_i_preprpm1 = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_RPM1", "8500")
+            PublicVariables.Limit_Max_i_preprpm2 = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_RPM2", "8500")
 
             'PublicVariables.Limit_Max_i_flush1filltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_FillTime", "600")
             'PublicVariables.Limit_Max_i_flush1bleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_BleedTime", "600")
@@ -257,6 +264,7 @@ Module IniFileInitialize
             PublicVariables.Limit_Max_d_flush1pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_BackPressure", "500")
             PublicVariables.Limit_Max_i_flush1stabilize = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_StabilizeTime", "600")
             PublicVariables.Limit_Max_i_flush1time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_Time", "600")
+            PublicVariables.Limit_Max_i_flush1rpm = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush1_RPM", "8500")
             'PublicVariables.Limit_Max_i_dptestfilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDPTest_FillTime", "600")
             'PublicVariables.Limit_Max_i_dptestbleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDPTest_BleedTime", "600")
             PublicVariables.Limit_Max_d_dptestflow = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDPTest_Flowrate", "20")
@@ -267,6 +275,7 @@ Module IniFileInitialize
             PublicVariables.Limit_Max_d_dptestlowlimit = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDPTest_LowLimit", "100")
             PublicVariables.Limit_Max_d_dptestuplimit = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDPTest_HighLimit", "500")
             PublicVariables.Limit_Max_i_dptestpoints = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDPTest_Points", "60")
+            PublicVariables.Limit_Max_i_dptestrpm = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDPTest_RPM", "8500")
             'PublicVariables.Limit_Max_i_flush2filltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush2_FillTime", "600")
             'PublicVariables.Limit_Max_i_flush2bleedtime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush2_BleedTime", "600")
             PublicVariables.Limit_Max_d_flush2flow = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush2_Flowrate", "20")
@@ -274,6 +283,7 @@ Module IniFileInitialize
             PublicVariables.Limit_Max_d_flush2pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush2_BackPressure", "500")
             PublicVariables.Limit_Max_i_flush2stabilize = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush2_StabilizeTime", "600")
             PublicVariables.Limit_Max_i_flush2time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush2_Time", "600")
+            PublicVariables.Limit_Max_i_flush2rpm = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxFlush2_RPM", "8500")
             PublicVariables.Limit_Max_d_drain1pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain1_Pressure", "500")
             PublicVariables.Limit_Max_i_drain1time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain1_Time", "600")
             PublicVariables.Limit_Max_d_drain2pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain2_Pressure", "500")

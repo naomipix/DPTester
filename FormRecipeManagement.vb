@@ -21,6 +21,9 @@ Public Class FormRecipeManagement
     Public i_preppressuredroptime As Integer
     Public i_prepprefillstarttime As Integer
     Public i_prepprefilltime As Integer
+    Public i_preprpm1 As Integer
+    Public i_preprpm2 As Integer
+    Public str_prepspeedenable As String
 
     Public str_flush1enable As String
     'Public i_flush1filltime As Integer
@@ -30,6 +33,7 @@ Public Class FormRecipeManagement
     Public d_flush1pressure As Decimal
     Public i_flush1stabilize As Integer
     Public i_flush1time As Integer
+    Public i_flush1rpm As Integer
 
     Public str_dptest1enable As String
     'Public i_dptestfilltime As Integer
@@ -42,6 +46,7 @@ Public Class FormRecipeManagement
     Public d_dptestlowlimit As Decimal
     Public d_dptestuplimit As Decimal
     Public i_dptestpoints As Integer
+    Public i_dptestrpm As Integer
     Public str_dptest2enable As String
 
     Public str_flush2enable As String
@@ -52,6 +57,7 @@ Public Class FormRecipeManagement
     Public d_flush2pressure As Decimal
     Public i_flush2stabilize As Integer
     Public i_flush2time As Integer
+    Public i_flush2rpm As Integer
 
 
     Public str_drain1enable As String
@@ -80,6 +86,9 @@ Public Class FormRecipeManagement
     Private nom_i_preppressuredroptime As Integer = 0
     Private nom_i_prepprefillstarttime As Integer = 0
     Private nom_i_prepprefilltime As Integer = 0
+    Private nom_i_preprpm1 As Integer = 3000
+    Private nom_i_preprpm2 As Integer = 3000
+    Private nom_str_prepspeedenable As String = "Disable"
 
     Private nom_str_flush1enable As String = "Disable"
     'Private nom_i_flush1filltime As Integer = 5
@@ -89,6 +98,7 @@ Public Class FormRecipeManagement
     Private nom_d_flush1pressure As Decimal = 5.0
     Private nom_i_flush1stabilize As Integer = 5
     Private nom_i_flush1time As Integer = 60
+    Private nom_i_flush1rpm As Integer = 3000
 
     Private nom_str_dptest1enable As String = "Disable"
     'Private nom_i_dptestfilltime As Integer = 5
@@ -101,6 +111,7 @@ Public Class FormRecipeManagement
     Private nom_d_dptestlowlimit As Decimal = 0.0
     Private nom_d_dptestuplimit As Decimal = 10.0
     Private nom_i_dptestpoints As Integer = 20
+    Private nom_i_dptestrpm As Integer = 3000
     Private nom_str_dptest2enable As String = "Disable"
 
     Private nom_str_flush2enable As String = "Disable"
@@ -111,6 +122,7 @@ Public Class FormRecipeManagement
     Private nom_d_flush2pressure As Decimal = 5.0
     Private nom_i_flush2stabilize As Integer = 5
     Private nom_i_flush2time As Integer = 60
+    Private nom_i_flush2rpm As Integer = 3000
 
 
     Private nom_str_drain1enable As String = "Disable"
@@ -135,6 +147,8 @@ Public Class FormRecipeManagement
     Private min_i_preppressuredroptime As Integer = PublicVariables.Limit_Min_i_preppressuredroptime
     Private min_i_prepprefillstarttime As Integer = PublicVariables.Limit_Min_i_prepprefillstarttime
     Private min_i_prepprefilltime As Integer = PublicVariables.Limit_Min_i_prepprefilltime
+    Private min_i_preprpm1 As Integer = PublicVariables.Limit_Min_i_preprpm1
+    Private min_i_preprpm2 As Integer = PublicVariables.Limit_Min_i_preprpm2
 
     'Private min_i_flush1filltime As Integer = PublicVariables.Limit_Min_i_flush1filltime
     'Private min_i_flush1bleedtime As Integer = PublicVariables.Limit_Min_i_flush1bleedtime
@@ -143,6 +157,7 @@ Public Class FormRecipeManagement
     Private min_d_flush1pressure As Decimal = PublicVariables.Limit_Min_d_flush1pressure
     Private min_i_flush1stabilize As Integer = PublicVariables.Limit_Min_i_flush1stabilize
     Private min_i_flush1time As Integer = PublicVariables.Limit_Min_i_flush1time
+    Private min_i_flush1rpm As Integer = PublicVariables.Limit_Min_i_flush1rpm
 
 
     'Private min_i_dptestfilltime As Integer = PublicVariables.Limit_Min_i_dptestfilltime
@@ -155,6 +170,7 @@ Public Class FormRecipeManagement
     Private min_d_dptestlowlimit As Decimal = PublicVariables.Limit_Min_d_dptestlowlimit
     Private min_d_dptestuplimit As Decimal = PublicVariables.Limit_Min_d_dptestuplimit
     Private min_i_dptestpoints As Integer = PublicVariables.Limit_Min_i_dptestpoints
+    Private min_i_dptestrpm As Integer = PublicVariables.Limit_Min_i_dptestrpm
 
 
 
@@ -165,6 +181,7 @@ Public Class FormRecipeManagement
     Private min_d_flush2pressure As Decimal = PublicVariables.Limit_Min_d_flush2pressure
     Private min_i_flush2stabilize As Integer = PublicVariables.Limit_Min_i_flush2stabilize
     Private min_i_flush2time As Integer = PublicVariables.Limit_Min_i_flush2time
+    Private min_i_flush2rpm As Integer = PublicVariables.Limit_Min_i_flush2rpm
 
 
 
@@ -191,6 +208,8 @@ Public Class FormRecipeManagement
     Private max_i_preppressuredroptime As Integer = PublicVariables.Limit_Max_i_preppressuredroptime
     Private max_i_prepprefillstarttime As Integer = PublicVariables.Limit_Max_i_prepprefillstarttime
     Private max_i_prepprefilltime As Integer = PublicVariables.Limit_Max_i_prepprefilltime
+    Private max_i_preprpm1 As Integer = PublicVariables.Limit_Max_i_preprpm1
+    Private max_i_preprpm2 As Integer = PublicVariables.Limit_Max_i_preprpm2
 
 
     'Private max_i_flush1filltime As Integer = PublicVariables.Limit_Max_i_flush1filltime
@@ -200,6 +219,7 @@ Public Class FormRecipeManagement
     Private max_d_flush1pressure As Decimal = PublicVariables.Limit_Max_d_flush1pressure
     Private max_i_flush1stabilize As Integer = PublicVariables.Limit_Max_i_flush1stabilize
     Private max_i_flush1time As Integer = PublicVariables.Limit_Max_i_flush1time
+    Private max_i_flush1rpm As Integer = PublicVariables.Limit_Max_i_flush1rpm
 
 
     'Private max_i_dptestfilltime As Integer = PublicVariables.Limit_Max_i_dptestfilltime
@@ -212,6 +232,7 @@ Public Class FormRecipeManagement
     Private max_d_dptestlowlimit As Decimal = PublicVariables.Limit_Max_d_dptestlowlimit
     Private max_d_dptestuplimit As Decimal = PublicVariables.Limit_Max_d_dptestuplimit
     Private max_i_dptestpoints As Integer = PublicVariables.Limit_Max_i_dptestpoints
+    Private max_i_dptestrpm As Integer = PublicVariables.Limit_Max_i_dptestrpm
 
 
 
@@ -222,6 +243,7 @@ Public Class FormRecipeManagement
     Private max_d_flush2pressure As Decimal = PublicVariables.Limit_Max_d_flush2pressure
     Private max_i_flush2stabilize As Integer = PublicVariables.Limit_Max_i_flush2stabilize
     Private max_i_flush2time As Integer = PublicVariables.Limit_Max_i_flush2time
+    Private max_i_flush2rpm As Integer = PublicVariables.Limit_Max_i_flush2rpm
 
 
 
@@ -997,6 +1019,10 @@ Public Class FormRecipeManagement
             txtbx_RcpCreatePrepPressureDropTime.Enabled = True
             'txtbx_RcpCreatePrepPrefillStartTime.Enabled = True
             'txtbx_RcpCreatePrepPrefillTime.Enabled = True
+            cmbx_RcpCreatePrepPumpMode.Enabled = True
+            cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0
+            'txtbx_RcpCreatePrepRPM1.Enabled = True
+            'txtbx_RcpCreatePrepRPM2.Enabled = True
 
             recipeparameterdefaults()
 
@@ -1020,6 +1046,9 @@ Public Class FormRecipeManagement
             i_preppressuredroptime = nom_i_preppressuredroptime
             i_prepprefillstarttime = nom_i_prepprefillstarttime
             i_prepprefilltime = nom_i_prepprefilltime
+            i_preprpm1 = 0
+            i_preprpm2 = 0
+            str_prepspeedenable = "Disable"
 
             txtbx_RcpCreatePrepFill.Text = CType(i_prepfilltime, String)
             txtbx_RcpCreatePrepBleed.Text = CType(i_prepbleedtime, String)
@@ -1062,6 +1091,9 @@ Public Class FormRecipeManagement
             txtbx_RcpCreatePrepPressureDropTime.Enabled = False
             txtbx_RcpCreatePrepPrefillStartTime.Enabled = False
             txtbx_RcpCreatePrepPrefillTime.Enabled = False
+            cmbx_RcpCreatePrepPumpMode.Enabled = False
+            txtbx_RcpCreatePrepRPM1.Enabled = False
+            txtbx_RcpCreatePrepRPM2.Enabled = False
             'txtbx_RcpCreateFlush1Fill.Enabled = False
             'txtbx_RcpCreateFlush1Bleed.Enabled = False
             txtbx_RcpCreateFlush1Flow.Enabled = False
@@ -1069,6 +1101,7 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush1Pressure.Enabled = False
             txtbx_RcpCreateFlush1Stabilize.Enabled = False
             txtbx_RcpCreateFlush1Time.Enabled = False
+            txtbx_RcpCreateFlush1RPM.Enabled = False
             'txtbx_RcpCreateDPFill.Enabled = False
             'txtbx_RcpCreateDPBleed.Enabled = False
             txtbx_RcpCreateDPFlow.Enabled = False
@@ -1079,6 +1112,7 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateDPLowLimit.Enabled = False
             txtbx_RcpCreateDPUpLimit.Enabled = False
             txtbx_RcpCreateDPPoints.Enabled = False
+            txtbx_RcpCreateDPTestRPM.Enabled = False
             'txtbx_RcpCreateFlush2Fill.Enabled = False
             'txtbx_RcpCreateFlush2Bleed.Enabled = False
             txtbx_RcpCreateFlush2Flow.Enabled = False
@@ -1086,6 +1120,7 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush2Pressure.Enabled = False
             txtbx_RcpCreateFlush2Stabilize.Enabled = False
             txtbx_RcpCreateFlush2Time.Enabled = False
+            txtbx_RcpCreateFlush2RPM.Enabled = False
 
             txtbx_RcpCreateDrain1Pressure.Enabled = False
             txtbx_RcpCreateDrain1Time.Enabled = False
@@ -1103,6 +1138,9 @@ Public Class FormRecipeManagement
             i_preppressuredroptime = 0
             i_prepprefillstarttime = 0
             i_prepprefilltime = 0
+            i_preprpm1 = 0
+            i_preprpm2 = 0
+            str_prepspeedenable = "Disable"
 
             txtbx_RcpCreatePrepFill.Text = Nothing
             txtbx_RcpCreatePrepBleed.Text = Nothing
@@ -1113,6 +1151,9 @@ Public Class FormRecipeManagement
             txtbx_RcpCreatePrepPressureDropTime.Text = Nothing
             txtbx_RcpCreatePrepPrefillStartTime.Text = Nothing
             txtbx_RcpCreatePrepPrefillTime.Text = Nothing
+            cmbx_RcpCreatePrepPumpMode.SelectedItem = Nothing
+            txtbx_RcpCreatePrepRPM1.Text = Nothing
+            txtbx_RcpCreatePrepRPM2.Text = Nothing
         End If
     End Sub
 
@@ -1223,10 +1264,45 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush1Stabilize.Enabled = True
             txtbx_RcpCreateFlush1Time.Enabled = True
 
+            Select Case cmbx_RcpCreatePrepPumpMode.SelectedIndex
+                Case 0
+                    With txtbx_RcpCreateFlush1Flow
+                        .Enabled = True
+                        .Text = nom_d_flush1flow.ToString("N1")
+                    End With
+                    With txtbx_RcpCreateFlush1FlowTol
+                        .Enabled = True
+                        .Text = nom_d_flush1flowtol.ToString("N1")
+                    End With
+                    With txtbx_RcpCreateFlush1RPM
+                        .Enabled = False
+                        .Text = 0
+                    End With
+
+                    d_flush1flow = nom_d_flush1flow
+                    d_flush1flowtol = nom_d_flush1flowtol
+                    i_flush1rpm = 0
+                Case 1
+                    With txtbx_RcpCreateFlush1Flow
+                        .Enabled = False
+                        .Text = "0.0"
+                    End With
+                    With txtbx_RcpCreateFlush1FlowTol
+                        .Enabled = False
+                        .Text = "0.0"
+                    End With
+                    With txtbx_RcpCreateFlush1RPM
+                        .Enabled = True
+                        .Text = nom_i_flush1rpm
+                    End With
+
+                    d_flush1flow = 0
+                    d_flush1flowtol = 0
+                    i_flush1rpm = nom_i_flush1rpm
+            End Select
+
             'i_flush1filltime = nom_i_flush1filltime
             'i_flush1bleedtime = nom_i_flush1bleedtime
-            d_flush1flow = nom_d_flush1flow
-            d_flush1flowtol = nom_d_flush1flowtol
             d_flush1pressure = nom_d_flush1pressure
             i_flush1stabilize = nom_i_flush1stabilize
             i_flush1time = nom_i_flush1time
@@ -1234,8 +1310,8 @@ Public Class FormRecipeManagement
             str_flush1enable = "Enable"
             'txtbx_RcpCreateFlush1Fill.Text = CType(i_flush1filltime, String)
             'txtbx_RcpCreateFlush1Bleed.Text = CType(i_flush1bleedtime, String)
-            txtbx_RcpCreateFlush1Flow.Text = d_flush1flow.ToString("N1") 'CType(d_flush1flow, String)
-            txtbx_RcpCreateFlush1FlowTol.Text = d_flush1flowtol.ToString("N1") 'CType(d_flush1flowtol, String)
+            'txtbx_RcpCreateFlush1Flow.Text = d_flush1flow.ToString("N1") 'CType(d_flush1flow, String)
+            'txtbx_RcpCreateFlush1FlowTol.Text = d_flush1flowtol.ToString("N1") 'CType(d_flush1flowtol, String)
             txtbx_RcpCreateFlush1Pressure.Text = d_flush1pressure.ToString("N1") 'CType(d_flush1pressure, String)
             txtbx_RcpCreateFlush1Stabilize.Text = CType(i_flush1stabilize, String)
             txtbx_RcpCreateFlush1Time.Text = CType(i_flush1time, String)
@@ -1247,6 +1323,7 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush1Pressure.Enabled = False
             txtbx_RcpCreateFlush1Stabilize.Enabled = False
             txtbx_RcpCreateFlush1Time.Enabled = False
+            txtbx_RcpCreateFlush1RPM.Enabled = False
 
             'Load Zero if the Flush-1 is not enabled
 
@@ -1257,6 +1334,7 @@ Public Class FormRecipeManagement
             d_flush1pressure = 0.0
             i_flush1stabilize = 0
             i_flush1time = 0
+            i_flush1rpm = 0
 
             str_flush1enable = "Disable"
             'txtbx_RcpCreateFlush1Fill.Text = Nothing
@@ -1266,6 +1344,7 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush1Pressure.Text = Nothing
             txtbx_RcpCreateFlush1Stabilize.Text = Nothing
             txtbx_RcpCreateFlush1Time.Text = Nothing
+            txtbx_RcpCreateFlush1RPM.Text = Nothing
 
         End If
 
@@ -1288,10 +1367,47 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateDPPoints.Enabled = True
             checkbx_CreateDPTest2.Enabled = True
 
+            Select Case cmbx_RcpCreatePrepPumpMode.SelectedIndex
+                Case 0
+                    With txtbx_RcpCreateDPFlow
+                        .Enabled = True
+                        .Text = nom_d_dptestflow.ToString("N1")
+                    End With
+                    With txtbx_RcpCreateDPFlowTol
+                        .Enabled = True
+                        .Text = nom_d_dptestflowtol.ToString("N1")
+                    End With
+                    With txtbx_RcpCreateDPTestRPM
+                        .Enabled = False
+                        .Text = 0
+                    End With
+
+                    d_dptestflow = nom_d_dptestflow
+                    d_dptestflowtol = nom_d_dptestflowtol
+                    i_dptestrpm = 0
+                Case 1
+                    With txtbx_RcpCreateDPFlow
+                        .Enabled = False
+                        .Text = "0.0"
+                    End With
+                    With txtbx_RcpCreateDPFlowTol
+                        .Enabled = False
+                        .Text = "0.0"
+                    End With
+                    With txtbx_RcpCreateDPTestRPM
+                        .Enabled = True
+                        .Text = nom_i_dptestrpm
+                    End With
+
+                    d_dptestflow = 0
+                    d_dptestflowtol = 0
+                    i_dptestrpm = nom_i_dptestrpm
+            End Select
+
             'i_dptestfilltime = nom_i_dptestfilltime
             'i_dptestbleedtime = nom_i_dptestbleedtime
-            d_dptestflow = nom_d_dptestflow
-            d_dptestflowtol = nom_d_dptestflowtol
+            'd_dptestflow = nom_d_dptestflow
+            'd_dptestflowtol = nom_d_dptestflowtol
             d_dptestpressure = nom_d_dptestpressure
             i_dpteststabilize = nom_i_dpteststabilize
             i_dptesttime = nom_i_dptesttime
@@ -1302,8 +1418,8 @@ Public Class FormRecipeManagement
             str_dptest1enable = "Enable"
             'txtbx_RcpCreateDPFill.Text = CType(i_dptestfilltime, String)
             'txtbx_RcpCreateDPBleed.Text = CType(i_dptestbleedtime, String)
-            txtbx_RcpCreateDPFlow.Text = d_dptestflow.ToString("N1") 'CType(d_dptestflow, String)
-            txtbx_RcpCreateDPFlowTol.Text = d_dptestflowtol.ToString("N1") 'CType(d_dptestflowtol, String)
+            'txtbx_RcpCreateDPFlow.Text = d_dptestflow.ToString("N1") 'CType(d_dptestflow, String)
+            'txtbx_RcpCreateDPFlowTol.Text = d_dptestflowtol.ToString("N1") 'CType(d_dptestflowtol, String)
             txtbx_RcpCreateDPPressure.Text = d_dptestpressure.ToString("N1") 'CType(d_dptestpressure, String)
             txtbx_RcpCreateDPStabilize.Text = CType(i_dpteststabilize, String)
             txtbx_RcpCreateDPTime.Text = CType(i_dptesttime, String)
@@ -1322,6 +1438,7 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateDPUpLimit.Enabled = False
             checkbx_CreateDPTest2.Enabled = False
             txtbx_RcpCreateDPPoints.Enabled = False
+            txtbx_RcpCreateDPTestRPM.Enabled = False
 
             'i_dptestfilltime = 0
             'i_dptestbleedtime = 0
@@ -1333,6 +1450,7 @@ Public Class FormRecipeManagement
             d_dptestlowlimit = 0.0
             d_dptestuplimit = 0.0
             i_dptestpoints = 0
+            i_dptestrpm = 0
 
             str_dptest1enable = "Disable"
             'txtbx_RcpCreateDPFill.Text = Nothing
@@ -1345,6 +1463,7 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateDPLowLimit.Text = Nothing
             txtbx_RcpCreateDPUpLimit.Text = Nothing
             txtbx_RcpCreateDPPoints.Text = Nothing
+            txtbx_RcpCreateDPTestRPM.Text = Nothing
         End If
 
     End Sub
@@ -1360,10 +1479,47 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush2Stabilize.Enabled = True
             txtbx_RcpCreateFlush2Time.Enabled = True
 
+            Select Case cmbx_RcpCreatePrepPumpMode.SelectedIndex
+                Case 0
+                    With txtbx_RcpCreateFlush2Flow
+                        .Enabled = True
+                        .Text = nom_d_flush2flow.ToString("N1")
+                    End With
+                    With txtbx_RcpCreateFlush2FlowTol
+                        .Enabled = True
+                        .Text = nom_d_flush2flowtol.ToString("N1")
+                    End With
+                    With txtbx_RcpCreateFlush2RPM
+                        .Enabled = False
+                        .Text = 0
+                    End With
+
+                    d_flush2flow = nom_d_flush2flow
+                    d_flush2flowtol = nom_d_flush2flowtol
+                    i_flush2rpm = 0
+                Case 1
+                    With txtbx_RcpCreateFlush2Flow
+                        .Enabled = False
+                        .Text = "0.0"
+                    End With
+                    With txtbx_RcpCreateFlush2FlowTol
+                        .Enabled = False
+                        .Text = "0.0"
+                    End With
+                    With txtbx_RcpCreateFlush2RPM
+                        .Enabled = True
+                        .Text = nom_i_flush2rpm
+                    End With
+
+                    d_flush2flow = 0
+                    d_flush2flowtol = 0
+                    i_flush2rpm = nom_i_flush2rpm
+            End Select
+
             'i_flush2filltime = nom_i_flush2filltime
             'i_flush2bleedtime = nom_i_flush2bleedtime
-            d_flush2flow = nom_d_flush2flow
-            d_flush2flowtol = nom_d_flush2flowtol
+            'd_flush2flow = nom_d_flush2flow
+            'd_flush2flowtol = nom_d_flush2flowtol
             d_flush2pressure = nom_d_flush2pressure
             i_flush2stabilize = nom_i_flush2stabilize
             i_flush2time = nom_i_flush2time
@@ -1371,8 +1527,8 @@ Public Class FormRecipeManagement
             str_flush2enable = "Enable"
             'txtbx_RcpCreateFlush2Fill.Text = CType(i_flush2filltime, String)
             'txtbx_RcpCreateFlush2Bleed.Text = CType(i_flush2bleedtime, String)
-            txtbx_RcpCreateFlush2Flow.Text = d_flush2flow.ToString("N1") 'CType(d_flush2flow, String)
-            txtbx_RcpCreateFlush2FlowTol.Text = d_flush2flowtol.ToString("N1") 'CType(d_flush2flowtol, String)
+            'txtbx_RcpCreateFlush2Flow.Text = d_flush2flow.ToString("N1") 'CType(d_flush2flow, String)
+            'txtbx_RcpCreateFlush2FlowTol.Text = d_flush2flowtol.ToString("N1") 'CType(d_flush2flowtol, String)
             txtbx_RcpCreateFlush2Pressure.Text = d_flush2pressure.ToString("N1") 'CType(d_flush2pressure, String)
             txtbx_RcpCreateFlush2Stabilize.Text = CType(i_flush2stabilize, String)
             txtbx_RcpCreateFlush2Time.Text = CType(i_flush2time, String)
@@ -1384,6 +1540,7 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush2Pressure.Enabled = False
             txtbx_RcpCreateFlush2Stabilize.Enabled = False
             txtbx_RcpCreateFlush2Time.Enabled = False
+            txtbx_RcpCreateFlush2RPM.Enabled = False
 
             'i_flush2filltime = 0
             'i_flush2bleedtime = 0
@@ -1392,6 +1549,7 @@ Public Class FormRecipeManagement
             d_flush2pressure = 0.0
             i_flush2stabilize = 0
             i_flush2time = 0
+            i_flush2rpm = 0
 
             str_flush2enable = "Disable"
             'txtbx_RcpCreateFlush2Fill.Text = Nothing
@@ -1401,6 +1559,7 @@ Public Class FormRecipeManagement
             txtbx_RcpCreateFlush2Pressure.Text = Nothing
             txtbx_RcpCreateFlush2Stabilize.Text = Nothing
             txtbx_RcpCreateFlush2Time.Text = Nothing
+            txtbx_RcpCreateFlush2RPM.Text = Nothing
         End If
 
     End Sub
@@ -1641,6 +1800,20 @@ Public Class FormRecipeManagement
         End If
         If txtonfocus Is txtbx_RcpEditPrepPrefillTime Then
             focustooltip.SetToolTip(txtbx_RcpEditPrepPrefillTime, $"Enter Value between {min_i_prepprefilltime} to {max_i_prepprefilltime}")
+        End If
+
+        If txtonfocus Is txtbx_RcpCreatePrepRPM1 Then
+            focustooltip.SetToolTip(txtbx_RcpCreatePrepRPM1, $"Enter Value between {min_i_preprpm1} to {max_i_preprpm1}")
+        End If
+        If txtonfocus Is txtbx_RcpEditPrepRPM1 Then
+            focustooltip.SetToolTip(txtbx_RcpEditPrepRPM1, $"Enter Value between {min_i_preprpm1} to {max_i_preprpm1}")
+        End If
+
+        If txtonfocus Is txtbx_RcpCreatePrepRPM2 Then
+            focustooltip.SetToolTip(txtbx_RcpCreatePrepRPM2, $"Enter Value between {min_i_preprpm2} to {max_i_preprpm2}")
+        End If
+        If txtonfocus Is txtbx_RcpEditPrepRPM2 Then
+            focustooltip.SetToolTip(txtbx_RcpEditPrepRPM2, $"Enter Value between {min_i_preprpm2} to {max_i_preprpm2}")
         End If
 
 
@@ -2048,6 +2221,46 @@ Public Class FormRecipeManagement
 
     End Sub
 
+    Private Sub txtbx_RcpCreatePrepRPM1_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpCreatePrepRPM1.Validating
+        'Check rpm
+
+        'Check the text is empty
+        If Not txtbx_RcpCreatePrepRPM1.Text = "" Then
+            'Convert to the required type
+            i_preprpm1 = CType(txtbx_RcpCreatePrepRPM1.Text, Integer)
+            'Check the value within range
+            If i_preprpm1 < min_i_preprpm1 Or i_preprpm1 > max_i_preprpm1 Then
+                RecipeMessage(20, "Preparation RPM-1 should be within " + CType(min_i_preprpm1, String) + " to " + CType(max_i_preprpm1, String))
+                txtbx_RcpCreatePrepRPM1.Text = Nothing
+                txtbx_RcpCreatePrepRPM1.Focus()
+
+            End If
+        Else
+            RecipeMessage(19, "Preparation RPM-1")
+        End If
+
+    End Sub
+
+    Private Sub txtbx_RcpCreatePrepRPM2_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpCreatePrepRPM2.Validating
+        'Check rpm 
+
+        'Check the text is empty
+        If Not txtbx_RcpCreatePrepRPM2.Text = "" Then
+            'Convert to the required type
+            i_preprpm2 = CType(txtbx_RcpCreatePrepRPM2.Text, Integer)
+            'Check the value within range
+            If i_preprpm2 < min_i_preprpm2 Or i_preprpm2 > max_i_preprpm2 Then
+                RecipeMessage(20, "Preparation RPM-2 should be within " + CType(min_i_preprpm2, String) + " to " + CType(max_i_preprpm2, String))
+                txtbx_RcpCreatePrepRPM2.Text = Nothing
+                txtbx_RcpCreatePrepRPM2.Focus()
+
+            End If
+        Else
+            RecipeMessage(19, "Preparation RPM-2")
+        End If
+
+    End Sub
+
     'Private Sub txtbx_RcpCreateFlush1Fill_Validating(sender As Object, e As CancelEventArgs)
     '    'Check fill time 
 
@@ -2175,6 +2388,22 @@ Public Class FormRecipeManagement
         End If
     End Sub
 
+    Private Sub txtbx_RcpCreateFlush1RPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpCreateFlush1RPM.Validating
+        'Check for Flush-1 RPM
+        'Check the text is empty
+        If Not txtbx_RcpCreateFlush1RPM.Text = "" Then
+            'Convert to the required type
+            i_flush1rpm = CType(txtbx_RcpCreateFlush1RPM.Text, Integer)
+            'Check the value within range
+            If i_flush1rpm < min_i_flush1rpm Or i_flush1rpm > max_i_flush1rpm Then
+                RecipeMessage(20, "Flush-1 RPM should be within " + CType(min_i_flush1rpm, String) + " to " + CType(max_i_flush1rpm, String))
+                txtbx_RcpCreateFlush1RPM.Text = Nothing
+                txtbx_RcpCreateFlush1RPM.Focus()
+            End If
+        Else
+            RecipeMessage(19, "Flush-1 RPM")
+        End If
+    End Sub
 
     'Private Sub txtbx_RcpCreateDPFill_Validating(sender As Object, e As CancelEventArgs)
     '    'Check fill time 
@@ -2339,6 +2568,7 @@ Public Class FormRecipeManagement
 
         End If
     End Sub
+
     Private Sub txtbx_RcpCreateDPPoints_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpCreateDPPoints.Validating
         'Check for DP Test points
         'Check the text is empty
@@ -2353,6 +2583,24 @@ Public Class FormRecipeManagement
             End If
         Else
             RecipeMessage(19, "DP Test points")
+
+        End If
+    End Sub
+
+    Private Sub txtbx_RcpCreateDPTestRPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpCreateDPTestRPM.Validating
+        'Check for DP Test RPM
+        'Check the text is empty
+        If Not txtbx_RcpCreateDPTestRPM.Text = "" Then
+            'Convert to the required type
+            i_dptestrpm = CType(txtbx_RcpCreateDPTestRPM.Text, Integer)
+            'Check the value within range
+            If i_dptestrpm < min_i_dptestrpm Or i_dptestrpm > max_i_dptestrpm Then
+                RecipeMessage(20, "DP Test RPM should be within " + CType(min_i_dptestrpm, String) + " to " + CType(max_i_dptestrpm, String))
+                txtbx_RcpCreateDPTestRPM.Text = Nothing
+                txtbx_RcpCreateDPTestRPM.Focus()
+            End If
+        Else
+            RecipeMessage(19, "DP Test RPM")
 
         End If
     End Sub
@@ -2481,6 +2729,23 @@ Public Class FormRecipeManagement
             End If
         Else
             RecipeMessage(19, "Flush-2 Time")
+        End If
+    End Sub
+
+    Private Sub txtbx_RcpCreateFlush2RPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpCreateFlush2RPM.Validating
+        'Check for Flush-2 RPM
+        'Check the text is empty
+        If Not txtbx_RcpCreateFlush2RPM.Text = "" Then
+            'Convert to the required type
+            i_flush2rpm = CType(txtbx_RcpCreateFlush2RPM.Text, Integer)
+            'Check the value within range
+            If i_flush2rpm < min_i_flush2rpm Or i_flush2rpm > max_i_flush2rpm Then
+                RecipeMessage(20, "Flush-2 RPM should be within " + CType(min_i_flush2rpm, String) + " to " + CType(max_i_flush2rpm, String))
+                txtbx_RcpCreateFlush2RPM.Text = Nothing
+                txtbx_RcpCreateFlush2RPM.Focus()
+            End If
+        Else
+            RecipeMessage(19, "Flush-2 RPM")
         End If
     End Sub
 
@@ -2667,6 +2932,20 @@ Public Class FormRecipeManagement
                 onContinue = False
             End If
         End If
+        'Check Pump Mode has something selected
+        If onContinue = True Then
+            If cmbx_RcpCreatePrepPumpMode.SelectedIndex < 0 Then
+                MsgBox("Preparation - No Pump Mode Selected", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                onContinue = False
+            Else
+                Select Case cmbx_RcpCreatePrepPumpMode.SelectedIndex
+                    Case 0
+                        str_prepspeedenable = "Disable"
+                    Case 1
+                        str_prepspeedenable = "Enable"
+                End Select
+            End If
+        End If
 
 
 #Region "Recipe Create Parameter Range Validating Event"
@@ -2734,7 +3013,7 @@ Public Class FormRecipeManagement
 
         End If
 
-        If onContinue = True Then
+        If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
             'Check for Flowrate
             'Check the text is empty or has only decimal point
             If Not txtbx_RcpCreatePrepFlow.Text = "" And Not txtbx_RcpCreatePrepFlow.Text = "." Then
@@ -2857,6 +3136,49 @@ Public Class FormRecipeManagement
 
         End If
 
+        If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 1 Then
+            'Check Pump RPM-1
+
+            'Check the text is empty
+            If Not txtbx_RcpCreatePrepRPM1.Text = "" Then
+                'Convert to the required type
+                i_preprpm1 = CType(txtbx_RcpCreatePrepRPM1.Text, Integer)
+                'Check the value within range
+                If i_preprpm1 < min_i_preprpm1 Or i_preprpm1 > max_i_preprpm1 Then
+                    RecipeMessage(20, "Preparation Pump Speed-1 should be within " + CType(min_i_preprpm1, String) + " to " + CType(max_i_preprpm1, String))
+                    txtbx_RcpCreatePrepRPM1.Text = Nothing
+                    txtbx_RcpCreatePrepRPM1.Focus()
+                    onContinue = False
+
+                End If
+            Else
+                RecipeMessage(19, "Preparation Pump Speed-1")
+                onContinue = False
+            End If
+
+        End If
+
+        If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 1 Then
+            'Check Pump RPM-2
+
+            'Check the text is empty
+            If Not txtbx_RcpCreatePrepRPM2.Text = "" Then
+                'Convert to the required type
+                i_preprpm2 = CType(txtbx_RcpCreatePrepRPM2.Text, Integer)
+                'Check the value within range
+                If i_preprpm2 < min_i_preprpm2 Or i_preprpm2 > max_i_preprpm2 Then
+                    RecipeMessage(20, "Preparation Pump Speed-2 should be within " + CType(min_i_preprpm2, String) + " to " + CType(max_i_preprpm2, String))
+                    txtbx_RcpCreatePrepRPM2.Text = Nothing
+                    txtbx_RcpCreatePrepRPM2.Focus()
+                    onContinue = False
+
+                End If
+            Else
+                RecipeMessage(19, "Preparation Pump Speed-2")
+                onContinue = False
+            End If
+
+        End If
 
         'In Case of Flush-1 Enabled, the Field should not be empty
         If checkbx_CreateFlush1.Checked = True Then
@@ -2904,7 +3226,7 @@ Public Class FormRecipeManagement
 
             'End If
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
                 'Check for Flush-1 Flowrate
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpCreateFlush1Flow.Text = "" And Not txtbx_RcpCreateFlush1Flow.Text = "." Then
@@ -2923,7 +3245,7 @@ Public Class FormRecipeManagement
                 End If
             End If
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
                 'Check for Flush-1 Flow Tolerance
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpCreateFlush1FlowTol.Text = "" And Not txtbx_RcpCreateFlush1FlowTol.Text = "." Then
@@ -2999,6 +3321,25 @@ Public Class FormRecipeManagement
                 End If
             End If
 
+            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 1 Then
+                'Check Flush-1 Pump RPM
+                'Check the text is empty
+                If Not txtbx_RcpCreateFlush1RPM.Text = "" Then
+                    'Convert to the required type
+                    i_flush1rpm = CType(txtbx_RcpCreateFlush1RPM.Text, Integer)
+                    'Check the value within range
+                    If i_flush1rpm < min_i_flush1rpm Or i_flush1rpm > max_i_flush1rpm Then
+                        RecipeMessage(20, "Flush-1 Pump Speed should be within " + CType(min_i_flush1rpm, String) + " to " + CType(max_i_flush1rpm, String))
+                        txtbx_RcpCreateFlush1RPM.Text = Nothing
+                        txtbx_RcpCreateFlush1RPM.Focus()
+                        onContinue = False
+
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-1 Pump Speed")
+                    onContinue = False
+                End If
+            End If
         End If
 
         'In Case of Flush-2 Enabled, the Field should not be empty
@@ -3046,7 +3387,7 @@ Public Class FormRecipeManagement
 
             'End If
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
                 'Check for Flush-2 Flowrate
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpCreateFlush2Flow.Text = "" And Not txtbx_RcpCreateFlush2Flow.Text = "." Then
@@ -3065,7 +3406,7 @@ Public Class FormRecipeManagement
                 End If
             End If
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
                 'Check for Flush-2 Flow Tolerance
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpCreateFlush2FlowTol.Text = "" And Not txtbx_RcpCreateFlush2FlowTol.Text = "." Then
@@ -3141,6 +3482,25 @@ Public Class FormRecipeManagement
                 End If
             End If
 
+            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 1 Then
+                'Check Flush-2 Pump RPM
+                'Check the text is empty
+                If Not txtbx_RcpCreateFlush2RPM.Text = "" Then
+                    'Convert to the required type
+                    i_flush2rpm = CType(txtbx_RcpCreateFlush2RPM.Text, Integer)
+                    'Check the value within range
+                    If i_flush2rpm < min_i_flush2rpm Or i_flush2rpm > max_i_flush2rpm Then
+                        RecipeMessage(20, "Flush-2 Pump Speed should be within " + CType(min_i_flush2rpm, String) + " to " + CType(max_i_flush2rpm, String))
+                        txtbx_RcpCreateFlush2RPM.Text = Nothing
+                        txtbx_RcpCreateFlush2RPM.Focus()
+                        onContinue = False
+
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-2 Pump Speed")
+                    onContinue = False
+                End If
+            End If
         End If
 
         'In Case of DP Test-1 Enabled, the Field should not be empty
@@ -3188,7 +3548,7 @@ Public Class FormRecipeManagement
             'End If
 
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
                 'Check for DP Test Flowrate
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpCreateDPFlow.Text = "" And Not txtbx_RcpCreateDPFlow.Text = "." Then
@@ -3207,7 +3567,7 @@ Public Class FormRecipeManagement
                 End If
             End If
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 0 Then
                 'Check for DP Test Flow Tolerance
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpCreateDPFlowTol.Text = "" And Not txtbx_RcpCreateDPFlowTol.Text = "." Then
@@ -3339,6 +3699,25 @@ Public Class FormRecipeManagement
                 End If
             End If
 
+            If onContinue = True And cmbx_RcpCreatePrepPumpMode.SelectedIndex = 1 Then
+                'Check DP Test Pump RPM
+                'Check the text is empty
+                If Not txtbx_RcpCreateDPTestRPM.Text = "" Then
+                    'Convert to the required type
+                    i_dptestrpm = CType(txtbx_RcpCreateDPTestRPM.Text, Integer)
+                    'Check the value within range
+                    If i_dptestrpm < min_i_dptestrpm Or i_dptestrpm > max_i_dptestrpm Then
+                        RecipeMessage(20, "DP Test Pump Speed should be within " + CType(min_i_dptestrpm, String) + " to " + CType(max_i_dptestrpm, String))
+                        txtbx_RcpCreateDPTestRPM.Text = Nothing
+                        txtbx_RcpCreateDPTestRPM.Focus()
+                        onContinue = False
+
+                    End If
+                Else
+                    RecipeMessage(19, "DP Test Pump Speed")
+                    onContinue = False
+                End If
+            End If
 
         End If
 
@@ -3533,10 +3912,10 @@ Public Class FormRecipeManagement
 
         'Check whether any one drain is selected, if not don't allow recipe creation
         If onContinue = True Then
-            If checkbx_CreateDrain1.Checked = False And checkbx_CreateDrain2.Checked = False And checkbx_CreateDrain3.Checked = False Then
-                RecipeMessage(39)
-                onContinue = False
-            End If
+            'If checkbx_CreateDrain1.Checked = False And checkbx_CreateDrain2.Checked = False And checkbx_CreateDrain3.Checked = False Then
+            '    RecipeMessage(39)
+            '    onContinue = False
+            'End If
         End If
 
         'Check is Fill valid for Prefill
@@ -3602,6 +3981,9 @@ Public Class FormRecipeManagement
                     {"prep_pressure_drop_time", i_preppressuredroptime},
                     {"prep_prefill_start_time", i_prepprefillstarttime},
                     {"prep_prefill_time", i_prepprefilltime},
+                    {"prep_speed_mode", str_prepspeedenable},
+                    {"prep_rpm1", i_preprpm1},
+                    {"prep_rpm2", i_preprpm2},
                     {"firstflush_circuit", str_flush1enable},
                                                              _ '{"firstflush_fill_time", i_flush1filltime},
                                                              _ '{"firstflush_bleed_time", i_flush1bleedtime},
@@ -3610,6 +3992,7 @@ Public Class FormRecipeManagement
                     {"firstflush_back_pressure", d_flush1pressure},
                     {"firstflush_stabilize_time", i_flush1stabilize},
                     {"firstflush_time", i_flush1time},
+                    {"firstflush_rpm", i_flush1rpm},
                     {"firstdp_circuit", str_dptest1enable},
                                                            _ '{"dp_fill_time", i_dptestfilltime},
                                                            _ '{"dp_bleed_time", i_dptestbleedtime},
@@ -3621,6 +4004,7 @@ Public Class FormRecipeManagement
                     {"dp_lowerlimit", d_dptestlowlimit},
                     {"dp_upperlimit", d_dptestuplimit},
                     {"dp_testpoints", i_dptestpoints},
+                    {"dp_rpm", i_dptestrpm},
                     {"seconddp_circuit", str_dptest2enable},
                     {"secondflush_circuit", str_flush2enable},
                                                               _ '{"secondflush_fill_time", i_flush2filltime},
@@ -3630,6 +4014,7 @@ Public Class FormRecipeManagement
                     {"secondflush_back_pressure", d_flush2pressure},
                     {"secondflush_stabilize_time", i_flush2stabilize},
                     {"secondflush_time", i_flush2time},
+                    {"secondflush_rpm", i_flush2rpm},
                     {"drain1_circuit", str_drain1enable},
                     {"drain1_back_pressure", d_drain1pressure},
                     {"drain1_time", i_drain1time},
@@ -3805,7 +4190,10 @@ Public Class FormRecipeManagement
                     {"prep_pressure_drop_time", dtDuplicaterecipe(0)("prep_pressure_drop_time")},
                     {"prep_prefill_start_time", dtDuplicaterecipe(0)("prep_prefill_start_time")},
                     {"prep_prefill_time", dtDuplicaterecipe(0)("prep_prefill_time")},
-                                                                                     _
+                    {"prep_speed_mode", dtDuplicaterecipe(0)("prep_speed_mode")},
+                    {"prep_rpm1", dtDuplicaterecipe(0)("prep_rpm1")},
+                    {"prep_rpm2", dtDuplicaterecipe(0)("prep_rpm2")},
+                                                                     _
                     {"firstflush_circuit", dtDuplicaterecipe(0)("firstflush_circuit")},
                                                                                        _ '{"firstflush_fill_time", duplicaterecipe(10)},
                                                                                        _ '{"firstflush_bleed_time", duplicaterecipe(11)},
@@ -3814,6 +4202,7 @@ Public Class FormRecipeManagement
                     {"firstflush_back_pressure", dtDuplicaterecipe(0)("firstflush_back_pressure")},
                     {"firstflush_stabilize_time", dtDuplicaterecipe(0)("firstflush_stabilize_time")},
                     {"firstflush_time", dtDuplicaterecipe(0)("firstflush_time")},
+                    {"firstflush_rpm", dtDuplicaterecipe(0)("firstflush_rpm")},
                     {"firstdp_circuit", dtDuplicaterecipe(0)("firstdp_circuit")},
                                                                                  _ '{"dp_fill_time", duplicaterecipe(18)},
                                                                                  _ '{"dp_bleed_time", duplicaterecipe(19)},
@@ -3825,6 +4214,7 @@ Public Class FormRecipeManagement
                     {"dp_lowerlimit", dtDuplicaterecipe(0)("dp_lowerlimit")},
                     {"dp_upperlimit", dtDuplicaterecipe(0)("dp_upperlimit")},
                     {"dp_testpoints", dtDuplicaterecipe(0)("dp_testpoints")},
+                    {"dp_rpm", dtDuplicaterecipe(0)("dp_rpm")},
                     {"seconddp_circuit", dtDuplicaterecipe(0)("seconddp_circuit")},
                     {"secondflush_circuit", dtDuplicaterecipe(0)("secondflush_circuit")},
                                                                                          _ '{"secondflush_fill_time", duplicaterecipe(30)},
@@ -3834,6 +4224,7 @@ Public Class FormRecipeManagement
                     {"secondflush_back_pressure", dtDuplicaterecipe(0)("secondflush_back_pressure")},
                     {"secondflush_stabilize_time", dtDuplicaterecipe(0)("secondflush_stabilize_time")},
                     {"secondflush_time", dtDuplicaterecipe(0)("secondflush_time")},
+                    {"secondflush_rpm", dtDuplicaterecipe(0)("secondflush_rpm")},
                     {"drain1_circuit", dtDuplicaterecipe(0)("drain1_circuit")},
                     {"drain1_back_pressure", dtDuplicaterecipe(0)("drain1_back_pressure")},
                     {"drain1_time", dtDuplicaterecipe(0)("drain1_time")},
@@ -4031,11 +4422,35 @@ Public Class FormRecipeManagement
             If checkbx_EditFlush1.Enabled = True Then
                 'txtbx_RcpEditFlush1Fill.Enabled = True
                 'txtbx_RcpEditFlush1Bleed.Enabled = True
-                txtbx_RcpEditFlush1Flow.Enabled = True
-                txtbx_RcpEditFlush1FlowTol.Enabled = True
+                'txtbx_RcpEditFlush1Flow.Enabled = True
+                'txtbx_RcpEditFlush1FlowTol.Enabled = True
                 txtbx_RcpEditFlush1Pressure.Enabled = True
                 txtbx_RcpEditFlush1Stabilize.Enabled = True
                 txtbx_RcpEditFlush1Time.Enabled = True
+                'txtbx_RcpEditFlush1RPM.Enabled = True
+
+                Select Case cmbx_RcpEditPrepPumpMode.SelectedIndex
+                    Case 0
+                        With txtbx_RcpEditFlush1Flow
+                            .Enabled = True
+                        End With
+                        With txtbx_RcpEditFlush1FlowTol
+                            .Enabled = True
+                        End With
+                        With txtbx_RcpEditFlush1RPM
+                            .Enabled = False
+                        End With
+                    Case 1
+                        With txtbx_RcpEditFlush1Flow
+                            .Enabled = False
+                        End With
+                        With txtbx_RcpEditFlush1FlowTol
+                            .Enabled = False
+                        End With
+                        With txtbx_RcpEditFlush1RPM
+                            .Enabled = True
+                        End With
+                End Select
             End If
 
             str_flush1enable = "Enable"
@@ -4046,6 +4461,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush1Pressure.Text = CType(d_flush1pressure, String)
             txtbx_RcpEditFlush1Stabilize.Text = CType(i_flush1stabilize, String)
             txtbx_RcpEditFlush1Time.Text = CType(i_flush1time, String)
+            txtbx_RcpEditFlush1RPM.Text = CType(i_flush1rpm, String)
         Else
             'txtbx_RcpEditFlush1Fill.Enabled = False
             'txtbx_RcpEditFlush1Bleed.Enabled = False
@@ -4054,6 +4470,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush1Pressure.Enabled = False
             txtbx_RcpEditFlush1Stabilize.Enabled = False
             txtbx_RcpEditFlush1Time.Enabled = False
+            txtbx_RcpEditFlush1RPM.Enabled = False
 
             str_flush1enable = "Disable"
             'txtbx_RcpEditFlush1Fill.Text = Nothing
@@ -4063,6 +4480,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush1Pressure.Text = Nothing
             txtbx_RcpEditFlush1Stabilize.Text = Nothing
             txtbx_RcpEditFlush1Time.Text = Nothing
+            txtbx_RcpEditFlush1RPM.Text = Nothing
         End If
 
     End Sub
@@ -4073,8 +4491,8 @@ Public Class FormRecipeManagement
             If checkbx_EditDPTest1.Enabled = True Then
                 'txtbx_RcpEditDPFill.Enabled = True
                 'txtbx_RcpEditDPBleed.Enabled = True
-                txtbx_RcpEditDPFlow.Enabled = True
-                txtbx_RcpEditDPFlowTol.Enabled = True
+                'txtbx_RcpEditDPFlow.Enabled = True
+                'txtbx_RcpEditDPFlowTol.Enabled = True
                 txtbx_RcpEditDPPressure.Enabled = True
                 txtbx_RcpEditDPStabilize.Enabled = True
                 txtbx_RcpEditDPTime.Enabled = True
@@ -4082,6 +4500,30 @@ Public Class FormRecipeManagement
                 txtbx_RcpEditDPUpLimit.Enabled = True
                 txtbx_RcpEditDPPoints.Enabled = True
                 checkbx_EditDPTest2.Enabled = True
+                'txtbx_RcpEditDPTestRPM.Enabled = True
+
+                Select Case cmbx_RcpEditPrepPumpMode.SelectedIndex
+                    Case 0
+                        With txtbx_RcpEditDPFlow
+                            .Enabled = True
+                        End With
+                        With txtbx_RcpEditDPFlowTol
+                            .Enabled = True
+                        End With
+                        With txtbx_RcpEditDPTestRPM
+                            .Enabled = False
+                        End With
+                    Case 1
+                        With txtbx_RcpEditDPFlow
+                            .Enabled = False
+                        End With
+                        With txtbx_RcpEditDPFlowTol
+                            .Enabled = False
+                        End With
+                        With txtbx_RcpEditDPTestRPM
+                            .Enabled = True
+                        End With
+                End Select
             End If
 
             str_dptest1enable = "Enable"
@@ -4095,6 +4537,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditDPLowLimit.Text = CType(d_dptestlowlimit, String)
             txtbx_RcpEditDPUpLimit.Text = CType(d_dptestuplimit, String)
             txtbx_RcpEditDPPoints.Text = CType(i_dptestpoints, String)
+            txtbx_RcpEditDPTestRPM.Text = CType(i_dptestrpm, String)
         Else
             'txtbx_RcpEditDPFill.Enabled = False
             'txtbx_RcpEditDPBleed.Enabled = False
@@ -4107,6 +4550,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditDPUpLimit.Enabled = False
             txtbx_RcpEditDPPoints.Enabled = False
             checkbx_EditDPTest2.Enabled = False
+            txtbx_RcpEditDPTestRPM.Enabled = False
             str_dptest1enable = "Disable"
             'txtbx_RcpEditDPFill.Text = Nothing
             'txtbx_RcpEditDPBleed.Text = Nothing
@@ -4119,6 +4563,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditDPUpLimit.Text = Nothing
             txtbx_RcpEditDPPoints.Text = Nothing
             checkbx_EditDPTest2.Checked = False
+            txtbx_RcpEditDPTestRPM.Text = Nothing
         End If
 
     End Sub
@@ -4129,11 +4574,35 @@ Public Class FormRecipeManagement
             If checkbx_EditFlush2.Enabled = True Then
                 'txtbx_RcpEditFlush2Fill.Enabled = True
                 'txtbx_RcpEditFlush2Bleed.Enabled = True
-                txtbx_RcpEditFlush2Flow.Enabled = True
-                txtbx_RcpEditFlush2FlowTol.Enabled = True
+                'txtbx_RcpEditFlush2Flow.Enabled = True
+                'txtbx_RcpEditFlush2FlowTol.Enabled = True
                 txtbx_RcpEditFlush2Pressure.Enabled = True
                 txtbx_RcpEditFlush2Stabilize.Enabled = True
                 txtbx_RcpEditFlush2Time.Enabled = True
+                'txtbx_RcpEditFlush2RPM.Enabled = True
+
+                Select Case cmbx_RcpEditPrepPumpMode.SelectedIndex
+                    Case 0
+                        With txtbx_RcpEditFlush2Flow
+                            .Enabled = True
+                        End With
+                        With txtbx_RcpEditFlush2FlowTol
+                            .Enabled = True
+                        End With
+                        With txtbx_RcpEditFlush2RPM
+                            .Enabled = False
+                        End With
+                    Case 1
+                        With txtbx_RcpEditFlush2Flow
+                            .Enabled = False
+                        End With
+                        With txtbx_RcpEditFlush2FlowTol
+                            .Enabled = False
+                        End With
+                        With txtbx_RcpEditFlush2RPM
+                            .Enabled = True
+                        End With
+                End Select
             End If
 
             str_flush2enable = "Enable"
@@ -4144,6 +4613,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush2Pressure.Text = CType(d_flush2pressure, String)
             txtbx_RcpEditFlush2Stabilize.Text = CType(i_flush2stabilize, String)
             txtbx_RcpEditFlush2Time.Text = CType(i_flush2time, String)
+            txtbx_RcpEditFlush2RPM.Text = CType(i_flush2rpm, String)
         Else
             'txtbx_RcpEditFlush2Fill.Enabled = False
             'txtbx_RcpEditFlush2Bleed.Enabled = False
@@ -4152,6 +4622,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush2Pressure.Enabled = False
             txtbx_RcpEditFlush2Stabilize.Enabled = False
             txtbx_RcpEditFlush2Time.Enabled = False
+            txtbx_RcpEditFlush2RPM.Enabled = False
 
             str_flush2enable = "Disable"
             'txtbx_RcpEditFlush2Fill.Text = Nothing
@@ -4161,6 +4632,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush2Pressure.Text = Nothing
             txtbx_RcpEditFlush2Stabilize.Text = Nothing
             txtbx_RcpEditFlush2Time.Text = Nothing
+            txtbx_RcpEditFlush2RPM.Text = Nothing
         End If
 
     End Sub
@@ -4412,6 +4884,46 @@ Public Class FormRecipeManagement
 
     End Sub
 
+    Private Sub txtbx_RcpEditPrepRPM1_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpEditPrepRPM1.Validating
+        'Check rpm
+
+        'Check the text is empty
+        If Not txtbx_RcpEditPrepRPM1.Text = "" Then
+            'Convert to the required type
+            i_preprpm1 = CType(txtbx_RcpEditPrepRPM1.Text, Integer)
+            'Check the value within range
+            If i_preprpm1 < min_i_preprpm1 Or i_preprpm1 > max_i_preprpm1 Then
+                RecipeMessage(20, "Preparation RPM-1 should be within " + CType(min_i_preprpm1, String) + " to " + CType(max_i_preprpm1, String))
+                txtbx_RcpEditPrepRPM1.Text = Nothing
+                txtbx_RcpEditPrepRPM1.Focus()
+
+            End If
+        Else
+            RecipeMessage(19, "Preparation RPM-1")
+        End If
+
+    End Sub
+
+    Private Sub txtbx_RcpEditPrepRPM2_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpEditPrepRPM2.Validating
+        'Check rpm 
+
+        'Check the text is empty
+        If Not txtbx_RcpEditPrepRPM2.Text = "" Then
+            'Convert to the required type
+            i_preprpm2 = CType(txtbx_RcpEditPrepRPM2.Text, Integer)
+            'Check the value within range
+            If i_preprpm2 < min_i_preprpm2 Or i_preprpm2 > max_i_preprpm2 Then
+                RecipeMessage(20, "Preparation RPM-2 should be within " + CType(min_i_preprpm2, String) + " to " + CType(max_i_preprpm2, String))
+                txtbx_RcpEditPrepRPM2.Text = Nothing
+                txtbx_RcpEditPrepRPM2.Focus()
+
+            End If
+        Else
+            RecipeMessage(19, "Preparation RPM-2")
+        End If
+
+    End Sub
+
     'Private Sub txtbx_RcpEditFlush1Fill_Validating(sender As Object, e As CancelEventArgs)
     '    'Check fill time 
 
@@ -4539,6 +5051,22 @@ Public Class FormRecipeManagement
         End If
     End Sub
 
+    Private Sub txtbx_RcpEditFlush1RPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpEditFlush1RPM.Validating
+        'Check for Flush-1 RPM
+        'Check the text is empty
+        If Not txtbx_RcpEditFlush1RPM.Text = "" Then
+            'Convert to the required type
+            i_flush1rpm = CType(txtbx_RcpEditFlush1RPM.Text, Integer)
+            'Check the value within range
+            If i_flush1rpm < min_i_flush1rpm Or i_flush1rpm > max_i_flush1rpm Then
+                RecipeMessage(20, "Flush-1 RPM should be within " + CType(min_i_flush1rpm, String) + " to " + CType(max_i_flush1rpm, String))
+                txtbx_RcpEditFlush1RPM.Text = Nothing
+                txtbx_RcpEditFlush1RPM.Focus()
+            End If
+        Else
+            RecipeMessage(19, "Flush-1 RPM")
+        End If
+    End Sub
 
     'Private Sub txtbx_RcpEditDPFill_Validating(sender As Object, e As CancelEventArgs)
     '    'Check fill time 
@@ -4721,6 +5249,24 @@ Public Class FormRecipeManagement
         End If
     End Sub
 
+    Private Sub txtbx_RcpEditDPTestRPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpEditDPTestRPM.Validating
+        'Check for DP Test RPM
+        'Check the text is empty
+        If Not txtbx_RcpEditDPTestRPM.Text = "" Then
+            'Convert to the required type
+            i_dptestrpm = CType(txtbx_RcpEditDPTestRPM.Text, Integer)
+            'Check the value within range
+            If i_dptestrpm < min_i_dptestrpm Or i_dptestrpm > max_i_dptestrpm Then
+                RecipeMessage(20, "DP Test RPM should be within " + CType(min_i_dptestrpm, String) + " to " + CType(max_i_dptestrpm, String))
+                txtbx_RcpEditDPTestRPM.Text = Nothing
+                txtbx_RcpEditDPTestRPM.Focus()
+            End If
+        Else
+            RecipeMessage(19, "DP Test RPM")
+
+        End If
+    End Sub
+
     'Private Sub txtbx_RcpEditflush2Fill_Validating(sender As Object, e As CancelEventArgs)
     '    'Check fill time 
 
@@ -4845,6 +5391,23 @@ Public Class FormRecipeManagement
             End If
         Else
             RecipeMessage(19, "Flush-2 Time")
+        End If
+    End Sub
+
+    Private Sub txtbx_RcpEditFlush2RPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpEditFlush2RPM.Validating
+        'Check for Flush-2 RPM
+        'Check the text is empty
+        If Not txtbx_RcpEditFlush2RPM.Text = "" Then
+            'Convert to the required type
+            i_flush2rpm = CType(txtbx_RcpEditFlush2RPM.Text, Integer)
+            'Check the value within range
+            If i_flush2rpm < min_i_flush2rpm Or i_flush2rpm > max_i_flush2rpm Then
+                RecipeMessage(20, "Flush-2 RPM should be within " + CType(min_i_flush2rpm, String) + " to " + CType(max_i_flush2rpm, String))
+                txtbx_RcpEditFlush2RPM.Text = Nothing
+                txtbx_RcpEditFlush2RPM.Focus()
+            End If
+        Else
+            RecipeMessage(19, "Flush-2 RPM")
         End If
     End Sub
 
@@ -4986,6 +5549,17 @@ Public Class FormRecipeManagement
         txtbx_RcpEditPrepPressureDropTime.Enabled = True
         'txtbx_RcpEditPrepPrefillStartTime.Enabled = True
         'txtbx_RcpEditPrepPrefillTime.Enabled = True
+        cmbx_RcpEditPrepPumpMode.Enabled = True
+        Select Case cmbx_RcpEditPrepPumpMode.SelectedIndex
+            Case 0
+                txtbx_RcpEditPrepRPM1.Enabled = False
+                txtbx_RcpEditPrepRPM2.Enabled = False
+                txtbx_RcpEditPrepFlow.Enabled = True
+            Case 1
+                txtbx_RcpEditPrepRPM1.Enabled = True
+                txtbx_RcpEditPrepRPM2.Enabled = True
+                txtbx_RcpEditPrepFlow.Enabled = False
+        End Select
 
         If Not DirectCast(cmbx_RcpEditFilterType.SelectedItem, KeyValuePair(Of String, String)).Value = "Cal. Master" Then
             checkbx_EditDrain1.Enabled = True
@@ -5003,6 +5577,18 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush1Pressure.Enabled = True
             txtbx_RcpEditFlush1Stabilize.Enabled = True
             txtbx_RcpEditFlush1Time.Enabled = True
+            Select Case cmbx_RcpEditPrepPumpMode.SelectedIndex
+                Case 0
+                    txtbx_RcpEditFlush1RPM.Enabled = False
+                    txtbx_RcpEditFlush1RPM.Enabled = False
+                    txtbx_RcpEditFlush1Flow.Enabled = True
+                    txtbx_RcpEditFlush1FlowTol.Enabled = True
+                Case 1
+                    txtbx_RcpEditFlush1RPM.Enabled = True
+                    txtbx_RcpEditFlush1RPM.Enabled = True
+                    txtbx_RcpEditFlush1Flow.Enabled = False
+                    txtbx_RcpEditFlush1FlowTol.Enabled = False
+            End Select
         End If
 
         If checkbx_EditDPTest1.Checked = True Then
@@ -5017,6 +5603,18 @@ Public Class FormRecipeManagement
             txtbx_RcpEditDPUpLimit.Enabled = True
             txtbx_RcpEditDPPoints.Enabled = True
             checkbx_EditDPTest2.Enabled = True
+            Select Case cmbx_RcpEditPrepPumpMode.SelectedIndex
+                Case 0
+                    txtbx_RcpEditDPTestRPM.Enabled = False
+                    txtbx_RcpEditDPTestRPM.Enabled = False
+                    txtbx_RcpEditDPFlow.Enabled = True
+                    txtbx_RcpEditDPFlowTol.Enabled = True
+                Case 1
+                    txtbx_RcpEditDPTestRPM.Enabled = True
+                    txtbx_RcpEditDPTestRPM.Enabled = True
+                    txtbx_RcpEditDPFlow.Enabled = False
+                    txtbx_RcpEditDPFlowTol.Enabled = False
+            End Select
         End If
 
         If checkbx_EditFlush2.Checked = True Then
@@ -5027,6 +5625,18 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush2Pressure.Enabled = True
             txtbx_RcpEditFlush2Stabilize.Enabled = True
             txtbx_RcpEditFlush2Time.Enabled = True
+            Select Case cmbx_RcpEditPrepPumpMode.SelectedIndex
+                Case 0
+                    txtbx_RcpEditFlush2RPM.Enabled = False
+                    txtbx_RcpEditFlush2RPM.Enabled = False
+                    txtbx_RcpEditFlush2Flow.Enabled = True
+                    txtbx_RcpEditFlush2FlowTol.Enabled = True
+                Case 1
+                    txtbx_RcpEditFlush2RPM.Enabled = True
+                    txtbx_RcpEditFlush2RPM.Enabled = True
+                    txtbx_RcpEditFlush2Flow.Enabled = False
+                    txtbx_RcpEditFlush2FlowTol.Enabled = False
+            End Select
         End If
 
         If checkbx_EditDrain1.Checked = True Then
@@ -5192,6 +5802,16 @@ Public Class FormRecipeManagement
         i_preppressuredroptime = CType(dtRecipe(0)("prep_pressure_drop_time"), Decimal)
         i_prepprefillstarttime = CType(dtRecipe(0)("prep_prefill_start_time"), Decimal)
         i_prepprefilltime = CType(dtRecipe(0)("prep_prefill_time"), Decimal)
+        If Not IsDBNull(dtRecipe(0)("prep_rpm1")) Then
+            i_preprpm1 = CType(dtRecipe(0)("prep_rpm1"), Integer)
+        Else
+            i_preprpm1 = 0
+        End If
+        If Not IsDBNull(dtRecipe(0)("prep_rpm2")) Then
+            i_preprpm2 = CType(dtRecipe(0)("prep_rpm2"), Integer)
+        Else
+            i_preprpm2 = 0
+        End If
 
         'i_flush1filltime = CType(dtRecipe(0)("firstflush_fill_time"), Integer)
         'i_flush1bleedtime = CType(dtRecipe(0)("firstflush_bleed_time"), Integer)
@@ -5200,6 +5820,11 @@ Public Class FormRecipeManagement
         d_flush1pressure = CType(dtRecipe(0)("firstflush_back_pressure"), Decimal)
         i_flush1stabilize = CType(dtRecipe(0)("firstflush_stabilize_time"), Integer)
         i_flush1time = CType(dtRecipe(0)("firstflush_time"), Integer)
+        If Not IsDBNull(dtRecipe(0)("firstflush_rpm")) Then
+            i_flush1rpm = CType(dtRecipe(0)("firstflush_rpm"), Integer)
+        Else
+            i_flush1rpm = 0
+        End If
 
         'i_dptestfilltime = CType(dtRecipe(0)("dp_fill_time"), Integer)
         'i_dptestbleedtime = CType(dtRecipe(0)("dp_bleed_time"), Integer)
@@ -5211,6 +5836,11 @@ Public Class FormRecipeManagement
         d_dptestlowlimit = CType(dtRecipe(0)("dp_lowerlimit"), Decimal)
         d_dptestuplimit = CType(dtRecipe(0)("dp_upperlimit"), Decimal)
         i_dptestpoints = CType(dtRecipe(0)("dp_testpoints"), Integer)
+        If Not IsDBNull(dtRecipe(0)("dp_rpm")) Then
+            i_dptestrpm = CType(dtRecipe(0)("dp_rpm"), Integer)
+        Else
+            i_dptestrpm = 0
+        End If
 
         'i_flush2filltime = CType(dtRecipe(0)("secondflush_fill_time"), Integer)
         'i_flush2bleedtime = CType(dtRecipe(0)("secondflush_bleed_time"), Integer)
@@ -5219,6 +5849,11 @@ Public Class FormRecipeManagement
         d_flush2pressure = CType(dtRecipe(0)("secondflush_back_pressure"), Decimal)
         i_flush2stabilize = CType(dtRecipe(0)("secondflush_stabilize_time"), Integer)
         i_flush2time = CType(dtRecipe(0)("secondflush_time"), Integer)
+        If Not IsDBNull(dtRecipe(0)("secondflush_rpm")) Then
+            i_flush2rpm = CType(dtRecipe(0)("secondflush_rpm"), Integer)
+        Else
+            i_flush2rpm = 0
+        End If
 
 
 
@@ -5233,6 +5868,19 @@ Public Class FormRecipeManagement
 
 
         txtbx_RcpEditVerTol.Text = CType(d_vertol, String)
+
+        If Not IsDBNull(dtRecipe(0)("prep_speed_mode")) Then
+            cmbx_RcpEditPrepPumpMode.SelectedIndex = cmbx_RcpEditPrepPumpMode.FindStringExact(dtRecipe(0)("prep_speed_mode"))
+
+            Select Case CStr(dtRecipe(0)("prep_speed_mode")).ToUpper
+                Case "ENABLE"
+                    cmbx_RcpEditPrepPumpMode.SelectedIndex = 1
+                Case "DISABLE"
+                    cmbx_RcpEditPrepPumpMode.SelectedIndex = 0
+            End Select
+        Else
+            cmbx_RcpEditPrepPumpMode.SelectedIndex = 0
+        End If
 
         If Not IsDBNull(dtRecipe(0)("fitting_inlet")) Then
             ComboBox9.SelectedIndex = ComboBox9.FindStringExact(dtRecipe(0)("fitting_inlet"))
@@ -5252,6 +5900,8 @@ Public Class FormRecipeManagement
         txtbx_RcpEditPrepPressureDropTime.Text = CType(i_preppressuredroptime, String)
         txtbx_RcpEditPrepPrefillStartTime.Text = CType(i_prepprefillstarttime, String)
         txtbx_RcpEditPrepPrefillTime.Text = CType(i_prepprefilltime, String)
+        txtbx_RcpEditPrepRPM1.Text = CType(i_preprpm1, String)
+        txtbx_RcpEditPrepRPM2.Text = CType(i_preprpm2, String)
 
 
 
@@ -5264,6 +5914,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush1Pressure.Text = Math.Round(d_flush1pressure, 1) 'CType(d_flush1pressure, String)
             txtbx_RcpEditFlush1Stabilize.Text = CType(i_flush1stabilize, String)
             txtbx_RcpEditFlush1Time.Text = CType(i_flush1time, String)
+            txtbx_RcpEditFlush1RPM.Text = CType(i_flush1rpm, String)
         Else
             checkbx_EditFlush1.Checked = False
         End If
@@ -5280,6 +5931,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditDPLowLimit.Text = Math.Round(d_dptestlowlimit, 1) 'CType(d_dptestlowlimit, String)
             txtbx_RcpEditDPUpLimit.Text = Math.Round(d_dptestuplimit, 1) 'CType(d_dptestuplimit, String)
             txtbx_RcpEditDPPoints.Text = CType(i_dptestpoints, String)
+            txtbx_RcpEditDPTestRPM.Text = CType(i_dptestrpm, String)
         Else
             checkbx_EditDPTest1.Checked = False
         End If
@@ -5300,6 +5952,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush2Pressure.Text = Math.Round(d_flush2pressure, 1) 'CType(d_flush2pressure, String)
             txtbx_RcpEditFlush2Stabilize.Text = CType(i_flush2stabilize, String)
             txtbx_RcpEditFlush2Time.Text = CType(i_flush2time, String)
+            txtbx_RcpEditFlush2RPM.Text = CType(i_flush2rpm, String)
 
         Else
             checkbx_EditFlush2.Checked = False
@@ -5367,6 +6020,9 @@ Public Class FormRecipeManagement
             txtbx_RcpEditPrepPressureDropTime.Enabled = False
             txtbx_RcpEditPrepPrefillStartTime.Enabled = False
             txtbx_RcpEditPrepPrefillTime.Enabled = False
+            cmbx_RcpEditPrepPumpMode.Enabled = False
+            txtbx_RcpEditPrepRPM1.Enabled = False
+            txtbx_RcpEditPrepRPM2.Enabled = False
 
             'txtbx_RcpEditFlush1Fill.Enabled = False
             'txtbx_RcpEditFlush1Bleed.Enabled = False
@@ -5375,6 +6031,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush1Pressure.Enabled = False
             txtbx_RcpEditFlush1Stabilize.Enabled = False
             txtbx_RcpEditFlush1Time.Enabled = False
+            txtbx_RcpEditFlush1RPM.Enabled = False
 
             'txtbx_RcpEditDPFill.Enabled = False
             'txtbx_RcpEditDPBleed.Enabled = False
@@ -5386,6 +6043,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditDPLowLimit.Enabled = False
             txtbx_RcpEditDPUpLimit.Enabled = False
             txtbx_RcpEditDPPoints.Enabled = False
+            txtbx_RcpEditDPTestRPM.Enabled = False
 
             'txtbx_RcpEditFlush2Fill.Enabled = False
             'txtbx_RcpEditFlush2Bleed.Enabled = False
@@ -5394,6 +6052,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditFlush2Pressure.Enabled = False
             txtbx_RcpEditFlush2Stabilize.Enabled = False
             txtbx_RcpEditFlush2Time.Enabled = False
+            txtbx_RcpEditFlush2RPM.Enabled = False
 
             txtbx_RcpEditDrain1Pressure.Enabled = False
             txtbx_RcpEditDrain1Time.Enabled = False
@@ -5443,6 +6102,10 @@ Public Class FormRecipeManagement
             txtbx_RcpEditDrain3Pressure.Text = Nothing
             txtbx_RcpEditDrain3Time.Text = Nothing
 
+            cmbx_RcpEditPrepPumpMode.SelectedItem = Nothing
+            txtbx_RcpEditPrepRPM1.Text = Nothing
+            txtbx_RcpEditPrepRPM2.Text = Nothing
+
             checkbx_EditFlush1.Checked = False
             checkbx_EditFlush2.Checked = False
             checkbx_EditDPTest1.Checked = False
@@ -5470,6 +6133,21 @@ Public Class FormRecipeManagement
         Dim RecipeID As String = cmbx_RcpEditRecipeID.Text
         Dim onContinue As Boolean = True
         Dim dtrecipeidcheck As DataTable = SQL.ReadRecords("select * from RecipeTable where recipe_id = '" + RecipeID + "' order by recipe_rev desc")
+
+        'Check Pump Mode has something selected
+        If onContinue = True Then
+            If cmbx_RcpEditPrepPumpMode.SelectedIndex < 0 Then
+                MsgBox("Preparation - No Pump Mode Selected", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                onContinue = False
+            Else
+                Select Case cmbx_RcpEditPrepPumpMode.SelectedIndex
+                    Case 0
+                        str_prepspeedenable = "Disable"
+                    Case 1
+                        str_prepspeedenable = "Enable"
+                End Select
+            End If
+        End If
 
 #Region "Recipe Edit Parameter Range Validating Event"
         If onContinue = True Then
@@ -5536,7 +6214,7 @@ Public Class FormRecipeManagement
 
         End If
 
-        If onContinue = True Then
+        If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
             'Check for Flowrate
             'Check the text is empty or has only decimal point
             If Not txtbx_RcpEditPrepFlow.Text = "" And Not txtbx_RcpEditPrepFlow.Text = "." Then
@@ -5659,6 +6337,49 @@ Public Class FormRecipeManagement
 
         End If
 
+        If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 1 Then
+            'Check Pump RPM-1
+
+            'Check the text is empty
+            If Not txtbx_RcpEditPrepRPM1.Text = "" Then
+                'Convert to the required type
+                i_preprpm1 = CType(txtbx_RcpEditPrepRPM1.Text, Integer)
+                'Check the value within range
+                If i_preprpm1 < min_i_preprpm1 Or i_preprpm1 > max_i_preprpm1 Then
+                    RecipeMessage(20, "Preparation Pump Speed-1 should be within " + CType(min_i_preprpm1, String) + " to " + CType(max_i_preprpm1, String))
+                    txtbx_RcpEditPrepRPM1.Text = Nothing
+                    txtbx_RcpEditPrepRPM1.Focus()
+                    onContinue = False
+
+                End If
+            Else
+                RecipeMessage(19, "Preparation Pump Speed-1")
+                onContinue = False
+            End If
+
+        End If
+
+        If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 1 Then
+            'Check Pump RPM-2
+
+            'Check the text is empty
+            If Not txtbx_RcpEditPrepRPM2.Text = "" Then
+                'Convert to the required type
+                i_preprpm2 = CType(txtbx_RcpEditPrepRPM2.Text, Integer)
+                'Check the value within range
+                If i_preprpm2 < min_i_preprpm2 Or i_preprpm2 > max_i_preprpm2 Then
+                    RecipeMessage(20, "Preparation Pump Speed-2 should be within " + CType(min_i_preprpm2, String) + " to " + CType(max_i_preprpm2, String))
+                    txtbx_RcpEditPrepRPM2.Text = Nothing
+                    txtbx_RcpEditPrepRPM2.Focus()
+                    onContinue = False
+
+                End If
+            Else
+                RecipeMessage(19, "Preparation Pump Speed-2")
+                onContinue = False
+            End If
+
+        End If
 
         'In Case of Flush-1 Enabled, the Field should not be empty
         If checkbx_EditFlush1.Checked = True Then
@@ -5705,7 +6426,7 @@ Public Class FormRecipeManagement
 
             'End If
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
                 'Check for Flush-1 Flowrate
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpEditFlush1Flow.Text = "" And Not txtbx_RcpEditFlush1Flow.Text = "." Then
@@ -5724,7 +6445,7 @@ Public Class FormRecipeManagement
                 End If
             End If
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
                 'Check for Flush-1 Flow Tolerance
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpEditFlush1FlowTol.Text = "" And Not txtbx_RcpEditFlush1FlowTol.Text = "." Then
@@ -5799,6 +6520,26 @@ Public Class FormRecipeManagement
                     onContinue = False
                 End If
             End If
+
+            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 1 Then
+                'Check Flush-1 Pump RPM
+                'Check the text is empty
+                If Not txtbx_RcpEditFlush1RPM.Text = "" Then
+                    'Convert to the required type
+                    i_flush1rpm = CType(txtbx_RcpEditFlush1RPM.Text, Integer)
+                    'Check the value within range
+                    If i_flush1rpm < min_i_flush1rpm Or i_flush1rpm > max_i_flush1rpm Then
+                        RecipeMessage(20, "Flush-1 Pump Speed should be within " + CType(min_i_flush1rpm, String) + " to " + CType(max_i_flush1rpm, String))
+                        txtbx_RcpEditFlush1RPM.Text = Nothing
+                        txtbx_RcpEditFlush1RPM.Focus()
+                        onContinue = False
+
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-1 Pump Speed")
+                    onContinue = False
+                End If
+            End If
         End If
 
         'In Case of Flush-2 Enabled, the Field should not be empty
@@ -5845,7 +6586,7 @@ Public Class FormRecipeManagement
 
             'End If
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
                 'Check for Flush-2 Flowrate
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpEditFlush2Flow.Text = "" And Not txtbx_RcpEditFlush2Flow.Text = "." Then
@@ -5864,7 +6605,7 @@ Public Class FormRecipeManagement
                 End If
             End If
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
                 'Check for Flush-2 Flow Tolerance
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpEditFlush2FlowTol.Text = "" And Not txtbx_RcpEditFlush2FlowTol.Text = "." Then
@@ -5939,6 +6680,26 @@ Public Class FormRecipeManagement
                     onContinue = False
                 End If
             End If
+
+            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 1 Then
+                'Check Flush-2 Pump RPM
+                'Check the text is empty
+                If Not txtbx_RcpEditFlush2RPM.Text = "" Then
+                    'Convert to the required type
+                    i_flush2rpm = CType(txtbx_RcpEditFlush2RPM.Text, Integer)
+                    'Check the value within range
+                    If i_flush2rpm < min_i_flush2rpm Or i_flush2rpm > max_i_flush2rpm Then
+                        RecipeMessage(20, "Flush-2 Pump Speed should be within " + CType(min_i_flush2rpm, String) + " to " + CType(max_i_flush2rpm, String))
+                        txtbx_RcpEditFlush2RPM.Text = Nothing
+                        txtbx_RcpEditFlush2RPM.Focus()
+                        onContinue = False
+
+                    End If
+                Else
+                    RecipeMessage(19, "Flush-2 Pump Speed")
+                    onContinue = False
+                End If
+            End If
         End If
 
         'In Case of DP Test-1 Enabled, the Field should not be empty
@@ -5985,7 +6746,7 @@ Public Class FormRecipeManagement
             'End If
 
 
-            If onContinue = True Then
+            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
                 'Check for DP Test Flowrate
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpEditDPFlow.Text = "" And Not txtbx_RcpEditDPFlow.Text = "." Then
@@ -6004,7 +6765,7 @@ Public Class FormRecipeManagement
                 End If
             End If
 
-            If onContinue = True Then
+            If onContinue = True  And cmbx_RcpEditPrepPumpMode.SelectedIndex = 0 Then
                 'Check for DP Test Flow Tolerance
                 'Check the text is empty or has only decimal point
                 If Not txtbx_RcpEditDPFlowTol.Text = "" And Not txtbx_RcpEditDPFlowTol.Text = "." Then
@@ -6133,6 +6894,26 @@ Public Class FormRecipeManagement
                     End If
                 Else
                     RecipeMessage(19, "DP Test points")
+                    onContinue = False
+                End If
+            End If
+
+            If onContinue = True And cmbx_RcpEditPrepPumpMode.SelectedIndex = 1 Then
+                'Check DP Test Pump RPM
+                'Check the text is empty
+                If Not txtbx_RcpEditDPTestRPM.Text = "" Then
+                    'Convert to the required type
+                    i_dptestrpm = CType(txtbx_RcpEditDPTestRPM.Text, Integer)
+                    'Check the value within range
+                    If i_dptestrpm < min_i_dptestrpm Or i_dptestrpm > max_i_dptestrpm Then
+                        RecipeMessage(20, "DP Test Pump Speed should be within " + CType(min_i_dptestrpm, String) + " to " + CType(max_i_dptestrpm, String))
+                        txtbx_RcpEditDPTestRPM.Text = Nothing
+                        txtbx_RcpEditDPTestRPM.Focus()
+                        onContinue = False
+
+                    End If
+                Else
+                    RecipeMessage(19, "DP Test Pump Speed")
                     onContinue = False
                 End If
             End If
@@ -6379,10 +7160,10 @@ Public Class FormRecipeManagement
 
         'Check whether any one drain is selected, if not don't allow recipe creation
         If onContinue = True Then
-            If checkbx_EditDrain1.Checked = False And checkbx_EditDrain2.Checked = False And checkbx_EditDrain3.Checked = False Then
-                RecipeMessage(39)
-                onContinue = False
-            End If
+            'If checkbx_EditDrain1.Checked = False And checkbx_EditDrain2.Checked = False And checkbx_EditDrain3.Checked = False Then
+            '    RecipeMessage(39)
+            '    onContinue = False
+            'End If
         End If
 
         'Check is Fill valid for Prefill
@@ -6492,6 +7273,9 @@ Public Class FormRecipeManagement
                     {"prep_pressure_drop_time", i_preppressuredroptime},
                     {"prep_prefill_start_time", i_prepprefillstarttime},
                     {"prep_prefill_time", i_prepprefilltime},
+                    {"prep_speed_mode", str_prepspeedenable},
+                    {"prep_rpm1", i_preprpm1},
+                    {"prep_rpm2", i_preprpm2},
                     {"firstflush_circuit", str_flush1enable},
                                                              _ '{"firstflush_fill_time", i_flush1filltime},
                                                              _ '{"firstflush_bleed_time", i_flush1bleedtime},
@@ -6500,6 +7284,7 @@ Public Class FormRecipeManagement
                     {"firstflush_back_pressure", d_flush1pressure},
                     {"firstflush_stabilize_time", i_flush1stabilize},
                     {"firstflush_time", i_flush1time},
+                    {"firstflush_rpm", i_flush1rpm},
                     {"firstdp_circuit", str_dptest1enable},
                                                            _ '{"dp_fill_time", i_dptestfilltime},
                                                            _ '{"dp_bleed_time", i_dptestbleedtime},
@@ -6511,6 +7296,7 @@ Public Class FormRecipeManagement
                     {"dp_lowerlimit", d_dptestlowlimit},
                     {"dp_upperlimit", d_dptestuplimit},
                     {"dp_testpoints", i_dptestpoints},
+                    {"dp_rpm", i_dptestrpm},
                     {"seconddp_circuit", str_dptest2enable},
                     {"secondflush_circuit", str_flush2enable},
                                                               _ '{"secondflush_fill_time", i_flush2filltime},
@@ -6520,6 +7306,7 @@ Public Class FormRecipeManagement
                     {"secondflush_back_pressure", d_flush2pressure},
                     {"secondflush_stabilize_time", i_flush2stabilize},
                     {"secondflush_time", i_flush2time},
+                    {"secondflush_rpm", i_flush2rpm},
                     {"drain1_circuit", str_drain1enable},
                     {"drain1_back_pressure", d_drain1pressure},
                     {"drain1_time", i_drain1time},
@@ -7271,7 +8058,7 @@ Public Class FormRecipeManagement
     End Sub
 
     Private Sub btn_Reset_Click(sender As Object, e As EventArgs) Handles btn_Reset.Click
-        cmbx_RcpDetailrecipeid.SelectedIndex = 0
+        cmbx_RcpDetailRecipeID.SelectedIndex = 0
         cmbx_RcpDetailFilter.SelectedIndex = 0
         cmbx_RcpDetailPart.SelectedIndex = 0
         cmbx_RcpDetailType.SelectedIndex = 0
@@ -7697,6 +8484,336 @@ Public Class FormRecipeManagement
             txtbxValidate.Text = txtbxInDec.ToString("N1")
         Else
             txtbxValidate.Text = "0.0"
+        End If
+    End Sub
+
+    Private Sub cmbx_RcpCreatePrepPumpMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RcpCreatePrepPumpMode.SelectedIndexChanged
+        Dim cmbx As ComboBox = cmbx_RcpCreatePrepPumpMode
+
+        Dim txtbxProcessArr() As TextBox = {txtbx_RcpCreatePrepFlow, txtbx_RcpCreateFlush1Flow, txtbx_RcpCreateDPFlow, txtbx_RcpCreateFlush2Flow, txtbx_RcpCreateFlush1FlowTol, txtbx_RcpCreateDPFlowTol, txtbx_RcpCreateFlush2FlowTol}
+        Dim txtbxSpeedArr() As TextBox = {txtbx_RcpCreatePrepRPM1, txtbx_RcpCreatePrepRPM2, txtbx_RcpCreateFlush1RPM, txtbx_RcpCreateFlush2RPM, txtbx_RcpCreateDPTestRPM}
+
+        If cmbx.SelectedIndex >= 0 Then
+            Select Case cmbx.SelectedIndex
+                Case 0
+                    For Each txtbx In txtbxProcessArr
+                        If txtbx Is txtbx_RcpCreatePrepFlow Then
+                            txtbx.Enabled = True
+                            txtbx.Text = nom_d_prepflow.ToString("N1")
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush1Flow Then
+                            If checkbx_CreateFlush1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = nom_d_flush1flow.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateDPFlow Then
+                            If checkbx_CreateDPTest1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = nom_d_dptestflow.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush2Flow Then
+                            If checkbx_CreateFlush2.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = nom_d_flush2flow.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush1FlowTol Then
+                            If checkbx_CreateFlush1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = nom_d_flush1flowtol.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateDPFlowTol Then
+                            If checkbx_CreateDPTest1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = nom_d_dptestflowtol.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush2FlowTol Then
+                            If checkbx_CreateFlush2.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = nom_d_flush2flowtol.ToString("N1")
+                            End If
+                        End If
+                    Next
+                    For Each txtbx In txtbxSpeedArr
+                        If txtbx Is txtbx_RcpCreatePrepRPM1 Or txtbx Is txtbx_RcpCreatePrepRPM2 Then
+                            txtbx.Enabled = False
+                            txtbx.Text = 0
+                            i_preprpm1 = 0
+                            i_preprpm2 = 0
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush1RPM Then
+                            If checkbx_CreateFlush1.Checked Then
+                                txtbx.Enabled = False
+                                txtbx.Text = 0
+                                i_flush1rpm = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateDPTestRPM Then
+                            If checkbx_CreateDPTest1.Checked Then
+                                txtbx.Enabled = False
+                                txtbx.Text = 0
+                                i_dptestrpm = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush2RPM Then
+                            If checkbx_CreateFlush2.Checked Then
+                                txtbx.Enabled = False
+                                txtbx.Text = 0
+                                i_flush1rpm = 0
+                            End If
+                        End If
+                    Next
+                Case 1
+                    For Each txtbx In txtbxProcessArr
+                        If txtbx Is txtbx_RcpCreatePrepFlow Then
+                            txtbx.Enabled = False
+                            txtbx.Text = "0.0"
+                            d_prepflow = 0
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush1Flow Then
+                            If checkbx_CreateFlush1.Checked Then
+                                txtbx.Enabled = False
+                                txtbx.Text = "0.0"
+                                d_flush1flow = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateDPFlow Then
+                            If checkbx_CreateDPTest1.Checked Then
+                                txtbx.Enabled = False
+                                txtbx.Text = "0.0"
+                                d_dptestflow = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush2Flow Then
+                            If checkbx_CreateFlush2.Checked Then
+                                txtbx.Enabled = False
+                                txtbx.Text = "0.0"
+                                d_flush2flow = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush1FlowTol Then
+                            If checkbx_CreateFlush1.Checked Then
+                                txtbx.Enabled = False
+                                txtbx.Text = "0.0"
+                                d_flush1flowtol = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateDPFlowTol Then
+                            If checkbx_CreateDPTest1.Checked Then
+                                txtbx.Enabled = False
+                                txtbx.Text = "0.0"
+                                d_dptestflowtol = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush2FlowTol Then
+                            If checkbx_CreateFlush2.Checked Then
+                                txtbx.Enabled = False
+                                txtbx.Text = "0.0"
+                                d_flush2flowtol = 0
+                            End If
+                        End If
+                    Next
+                    For Each txtbx In txtbxSpeedArr
+                        If txtbx Is txtbx_RcpCreatePrepRPM1 Then
+                            txtbx.Enabled = True
+                            txtbx.Text = nom_i_preprpm1
+                        End If
+                        If txtbx Is txtbx_RcpCreatePrepRPM2 Then
+                            txtbx.Enabled = True
+                            txtbx.Text = nom_i_preprpm2
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush1RPM Then
+                            If checkbx_CreateFlush1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = nom_i_flush1rpm
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateDPTestRPM Then
+                            If checkbx_CreateDPTest1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = nom_i_flush2rpm
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpCreateFlush2RPM Then
+                            If checkbx_CreateFlush2.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = nom_i_dptestrpm
+                            End If
+                        End If
+                    Next
+            End Select
+        End If
+    End Sub
+
+    Private Sub cmbx_RcpEditPrepPumpMode_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RcpEditPrepPumpMode.SelectedIndexChanged
+        Dim cmbx As ComboBox = cmbx_RcpEditPrepPumpMode
+
+        Dim txtbxProcessArr() As TextBox = {txtbx_RcpEditPrepFlow, txtbx_RcpEditFlush1Flow, txtbx_RcpEditDPFlow, txtbx_RcpEditFlush2Flow, txtbx_RcpEditFlush1FlowTol, txtbx_RcpEditDPFlowTol, txtbx_RcpEditFlush2FlowTol}
+        Dim txtbxSpeedArr() As TextBox = {txtbx_RcpEditPrepRPM1, txtbx_RcpEditPrepRPM2, txtbx_RcpEditFlush1RPM, txtbx_RcpEditFlush2RPM, txtbx_RcpEditDPTestRPM}
+
+        If cmbx.SelectedIndex >= 0 Then
+            Select Case cmbx.SelectedIndex
+                Case 0
+                    For Each txtbx In txtbxProcessArr
+                        If txtbx Is txtbx_RcpEditPrepFlow Then
+                            If cmbx.Enabled Then
+                                txtbx.Enabled = True
+                                txtbx.Text = d_prepflow.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush1Flow Then
+                            If checkbx_EditFlush1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = d_flush1flow.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditDPFlow Then
+                            If checkbx_EditDPTest1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = d_dptestflow.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush2Flow Then
+                            If checkbx_EditFlush2.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = d_flush2flow.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush1FlowTol Then
+                            If checkbx_EditFlush1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = d_flush1flowtol.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditDPFlowTol Then
+                            If checkbx_EditDPTest1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = d_dptestflowtol.ToString("N1")
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush2FlowTol Then
+                            If checkbx_EditFlush2.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = d_flush2flowtol.ToString("N1")
+                            End If
+                        End If
+                    Next
+                    For Each txtbx In txtbxSpeedArr
+                        If txtbx Is txtbx_RcpEditPrepRPM1 Or txtbx Is txtbx_RcpEditPrepRPM2 Then
+                            txtbx.Enabled = False
+                            'txtbx.Text = 0
+                            'i_preprpm1 = 0
+                            'i_preprpm2 = 0
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush1RPM Then
+                            If checkbx_EditFlush1.Checked Then
+                                txtbx.Enabled = False
+                                'txtbx.Text = 0
+                                'i_flush1rpm = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditDPTestRPM Then
+                            If checkbx_EditDPTest1.Checked Then
+                                txtbx.Enabled = False
+                                'txtbx.Text = 0
+                                'i_dptestrpm = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush2RPM Then
+                            If checkbx_EditFlush2.Checked Then
+                                txtbx.Enabled = False
+                                'txtbx.Text = 0
+                                'i_flush1rpm = 0
+                            End If
+                        End If
+                    Next
+                Case 1
+                    For Each txtbx In txtbxProcessArr
+                        If txtbx Is txtbx_RcpEditPrepFlow Then
+                            txtbx.Enabled = False
+                            'txtbx.Text = "0.0"
+                            'd_prepflow = 0
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush1Flow Then
+                            If checkbx_EditFlush1.Checked Then
+                                txtbx.Enabled = False
+                                'txtbx.Text = "0.0"
+                                'd_flush1flow = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditDPFlow Then
+                            If checkbx_EditDPTest1.Checked Then
+                                txtbx.Enabled = False
+                                'txtbx.Text = "0.0"
+                                'd_dptestflow = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush2Flow Then
+                            If checkbx_EditFlush2.Checked Then
+                                txtbx.Enabled = False
+                                'txtbx.Text = "0.0"
+                                'd_flush2flow = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush1FlowTol Then
+                            If checkbx_EditFlush1.Checked Then
+                                txtbx.Enabled = False
+                                'txtbx.Text = "0.0"
+                                'd_flush1flowtol = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditDPFlowTol Then
+                            If checkbx_EditDPTest1.Checked Then
+                                txtbx.Enabled = False
+                                'txtbx.Text = "0.0"
+                                'd_dptestflowtol = 0
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush2FlowTol Then
+                            If checkbx_EditFlush2.Checked Then
+                                txtbx.Enabled = False
+                                'txtbx.Text = "0.0"
+                                'd_flush2flowtol = 0
+                            End If
+                        End If
+                    Next
+                    For Each txtbx In txtbxSpeedArr
+                        If txtbx Is txtbx_RcpEditPrepRPM1 Then
+                            If cmbx.Enabled Then
+                                txtbx.Enabled = True
+                                txtbx.Text = i_preprpm1
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditPrepRPM2 Then
+                            If cmbx.Enabled Then
+                                txtbx.Enabled = True
+                                txtbx.Text = i_preprpm2
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush1RPM Then
+                            If checkbx_EditFlush1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = i_flush1rpm
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditDPTestRPM Then
+                            If checkbx_EditDPTest1.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = i_dptestrpm
+                            End If
+                        End If
+                        If txtbx Is txtbx_RcpEditFlush2RPM Then
+                            If checkbx_EditFlush2.Checked Then
+                                txtbx.Enabled = True
+                                txtbx.Text = i_flush2rpm
+                            End If
+                        End If
+                    Next
+            End Select
         End If
     End Sub
 End Class

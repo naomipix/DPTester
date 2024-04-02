@@ -3941,6 +3941,18 @@ Public Class FormMain
 
             DInt2int(142, CType(dtrecipe.Rows(0)("prep_prefill_time"), Integer))
 
+            If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
+                DInt2int(144, 1)
+            Else
+                DInt2int(144, 0)
+            End If
+
+            Float2int(146, CType(dtrecipe.Rows(0)("prep_rpm1"), Double))
+            Float2int(158, CType(dtrecipe.Rows(0)("prep_rpm2"), Double))
+            Float2int(156, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
+            Float2int(154, CType(dtrecipe.Rows(0)("secondflush_rpm"), Double))
+            Float2int(152, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
+
         End If
 
         ' Force Load Recipe Data In Cal Form
