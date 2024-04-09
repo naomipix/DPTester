@@ -760,12 +760,21 @@ Public Class FormCalibration
     End Sub
 
     Private Sub btn_Calibrate_Click(sender As Object, e As EventArgs) Handles btn_Calibrate.Click
+        'Dim chkbxArr() As CheckBox = {checkbx_GraphDP, checkbx_GraphInletPressure, checkbx_GraphOutletPressure, checkbx_GraphBP, checkbx_GraphFlowrate, checkbx_GraphTemperature, checkbx_GraphRPM}
+        'For Each chkbx In chkbxArr
+        '    chkbx.Checked = True
+        'Next
+        'For Each chkbx In chkbxArr
+        '    chkbx.Checked = False
+        'Next
+
         CalibrationRun()
 
     End Sub
 
     Private Sub tmr_Calibration_Tick(sender As Object, e As EventArgs) Handles tmr_Calibration.Tick
         PCStatus(1)(2) = False ' Reset Calibration Start Signal
+        SetVisibleLineSeries() ' Set Line Series On Every Tick
         If CalrecordValue = True And CommLost = False Then
 
             ' Rolling Average
@@ -1166,6 +1175,7 @@ Public Class FormCalibration
 
     Private Sub tmr_Verification_Tick(sender As Object, e As EventArgs) Handles tmr_Verification.Tick
         PCStatus(1)(3) = False
+        SetVisibleLineSeries() ' Set Line Series On Every Tick
         If CalrecordValue = True And CommLost = False Then
 
             ' Rolling Average
