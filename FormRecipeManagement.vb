@@ -4294,6 +4294,7 @@ Public Class FormRecipeManagement
                     cmbx_RcpDupSelRecipe.SelectedIndex = 0
                     LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
                     GetRecipeID()
+
                 Else
                     RecipeMessage(48)
                     Oncontinue = False
@@ -4309,6 +4310,10 @@ Public Class FormRecipeManagement
         If Oncontinue = True Then
             Dim dtfiltertype As DataTable = SQL.ReadRecords($"SELECT Filtertype.id, FilterType.filter_type FROM PartTable INNER JOIN FilterType ON PartTable.filter_type_id=FilterType.id AND PartTable.part_id='{dtDuplicaterecipe(0)("part_id")}'")
             If dtfiltertype.Rows.Count > 0 Then
+                If cmbx_RcpEditPartID.Items.Count > 0 Then
+                    cmbx_RcpEditPartID.SelectedIndex = 0
+                End If
+
                 cmbx_RcpEditFilterType.Text = dtfiltertype.Rows(0).Item("filter_type")
                 cmbx_RcpEditPartID.Text = dtDuplicaterecipe(0)("part_id")
                 cmbx_RcpEditRecipeID.Text = dtDuplicaterecipe(0)("recipe_id")

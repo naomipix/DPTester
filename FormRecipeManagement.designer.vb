@@ -530,6 +530,7 @@ Partial Class FormRecipeManagement
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(556, 200)
         Me.Panel5.TabIndex = 4
+        Me.Panel5.Visible = False
         '
         'ComboBox2
         '
@@ -1190,6 +1191,7 @@ Partial Class FormRecipeManagement
         Me.btn_RcpEditCal.Size = New System.Drawing.Size(40, 40)
         Me.btn_RcpEditCal.TabIndex = 78
         Me.btn_RcpEditCal.UseVisualStyleBackColor = True
+        Me.btn_RcpEditCal.Visible = False
         '
         'dsp_RcpEditPrepPumpMode
         '

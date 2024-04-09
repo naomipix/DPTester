@@ -5361,6 +5361,38 @@ Public Class FormMain
                 chart.YAxes(i).MinLimit = Nothing
                 chart.YAxes(i).MaxLimit = Nothing
             Next
+
+            ' Autoscale YAxis (Temperature)
+            If True Then
+                Dim TempMaxLimit As Decimal = 0
+                Dim TempMinLimit As Decimal = 0
+                Dim TempDifference As Integer = 5
+
+                For i As Integer = 0 To LiveChartTempValue.Count - 1
+                    Dim maxVal As Decimal = 0
+                    Dim minVal As Decimal = 0
+
+                    maxVal = LiveChartTempValue(i).Y + TempDifference
+                    minVal = LiveChartTempValue(i).Y - TempDifference
+
+                    If i = 0 Then
+                        TempMaxLimit = maxVal
+                        TempMinLimit = minVal
+                    Else
+                        If maxVal > TempMaxLimit Then
+                            TempMaxLimit = maxVal
+                        End If
+                        If minVal < TempMinLimit Then
+                            TempMinLimit = minVal
+                        End If
+                    End If
+                Next
+
+                With chart.YAxes(2)
+                    .MaxLimit = Math.Ceiling(TempMaxLimit)
+                    .MinLimit = Math.Floor(TempMinLimit)
+                End With
+            End If
         End If
     End Sub
 
