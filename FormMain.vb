@@ -1460,7 +1460,7 @@ Public Class FormMain
     ' Populate DataGridView From SQL Tables
     Private Async Sub LoadProductionDetailsTable(containSearch As Boolean, SerialNumber As String, cmbxArr() As ComboBox, dtStart As DateTime, dtEnd As DateTime)
         ' Prevent UI Thread Freezing
-        Await Task.Delay(20)
+        Await Task.Delay(50)
 
         ' Define SQL String
         Dim sqlString As String = $"
@@ -4076,7 +4076,11 @@ Public Class FormMain
             End If
 
         Else
-            MsgBox($"S/N Length Mismatch", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            If lbl_CalibrationStatus.Text.ToUpper() = "PASS" Or lbl_CalibrationStatus.Text.ToUpper() = "FAIL" Then
+                MsgBox($"S/N Length Mismatch", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            Else
+                MsgBox($"Calibration Required", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            End If
         End If
     End Sub
 
