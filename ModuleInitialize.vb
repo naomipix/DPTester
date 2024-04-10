@@ -137,6 +137,7 @@ Module ModuleInitialize
                               "MinPrep_FillTime=0" + vbCrLf +
                               "MinPrep_BleedTime=0" + vbCrLf +
                               "MinPrep_Flowrate=0" + vbCrLf +
+                              "MinPrep_FlowTolerance=0" + vbCrLf +
                               "MinPrep_BackPressure=0" + vbCrLf +
                               "MinPrep_BackPressureDrop=0" + vbCrLf +
                               "MinPrep_BackPressureDropTime=0" + vbCrLf +
@@ -182,6 +183,7 @@ Module ModuleInitialize
                               "MaxPrep_FillTime=600" + vbCrLf +
                               "MaxPrep_BleedTime=600" + vbCrLf +
                               "MaxPrep_Flowrate=20" + vbCrLf +
+                              "MaxPrep_FlowTolerance=20" + vbCrLf +
                               "MaxPrep_BackPressure=500" + vbCrLf +
                               "MaxPrep_BackPressureDrop=500" + vbCrLf +
                               "MaxPrep_BackPressureDropTime=600" + vbCrLf +

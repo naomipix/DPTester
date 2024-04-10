@@ -347,6 +347,8 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtbx_RcpEditPrepFlowTol = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpCreatePrepFlowTol = New System.Windows.Forms.TextBox()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -1152,6 +1154,7 @@ Partial Class FormRecipeManagement
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepFlowTol)
         Me.Panel2.Controls.Add(Me.btn_RcpEditCal)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepPumpMode)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepRPM2)
@@ -2720,6 +2723,7 @@ Partial Class FormRecipeManagement
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepFlowTol)
         Me.Panel3.Controls.Add(Me.btn_RcpCreateCal)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepPumpMode)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepRPM2)
@@ -2759,6 +2763,7 @@ Partial Class FormRecipeManagement
         Me.btn_RcpCreateCal.Size = New System.Drawing.Size(40, 40)
         Me.btn_RcpCreateCal.TabIndex = 70
         Me.btn_RcpCreateCal.UseVisualStyleBackColor = True
+        Me.btn_RcpCreateCal.Visible = False
         '
         'dsp_RcpCreatePrepPumpMode
         '
@@ -3831,6 +3836,24 @@ Partial Class FormRecipeManagement
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
+        'txtbx_RcpEditPrepFlowTol
+        '
+        Me.txtbx_RcpEditPrepFlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditPrepFlowTol.Location = New System.Drawing.Point(183, 183)
+        Me.txtbx_RcpEditPrepFlowTol.MaxLength = 6
+        Me.txtbx_RcpEditPrepFlowTol.Name = "txtbx_RcpEditPrepFlowTol"
+        Me.txtbx_RcpEditPrepFlowTol.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditPrepFlowTol.TabIndex = 79
+        '
+        'txtbx_RcpCreatePrepFlowTol
+        '
+        Me.txtbx_RcpCreatePrepFlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreatePrepFlowTol.Location = New System.Drawing.Point(183, 183)
+        Me.txtbx_RcpCreatePrepFlowTol.MaxLength = 6
+        Me.txtbx_RcpCreatePrepFlowTol.Name = "txtbx_RcpCreatePrepFlowTol"
+        Me.txtbx_RcpCreatePrepFlowTol.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreatePrepFlowTol.TabIndex = 80
+        '
         'FormRecipeManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4240,4 +4263,6 @@ Partial Class FormRecipeManagement
     Friend WithEvents dsp_RcpEditFlush1RPM As Label
     Friend WithEvents btn_RcpCreateCal As Button
     Friend WithEvents btn_RcpEditCal As Button
+    Friend WithEvents txtbx_RcpEditPrepFlowTol As TextBox
+    Friend WithEvents txtbx_RcpCreatePrepFlowTol As TextBox
 End Class

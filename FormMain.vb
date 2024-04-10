@@ -3952,6 +3952,7 @@ Public Class FormMain
             Float2int(156, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
             Float2int(154, CType(dtrecipe.Rows(0)("secondflush_rpm"), Double))
             Float2int(152, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
+            Float2int(150, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
 
         End If
 
