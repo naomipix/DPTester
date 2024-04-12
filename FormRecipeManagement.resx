@@ -366,10 +366,10 @@
         1t5rW8IP5IE8kAfyTxIXl/8HlzxbIIDO2IUAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="btn_RcpCreateCal.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_RcpEditCal.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAyAAAAMgCAYAAADbcAZoAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAUFBJREFUeF7t3Qnc9ftc7/8M27S3YSPzlEJKSgkhQ2RsEDqKBipFGigVOkWRJEV0
+        wAAADsABataJCQAAUFBJREFUeF7t3Qnc9ftc7/8M27S3YSPzlEJKSgkhQ2RsEDqKBipFGigVOkWRJEV0
         TEmJOjQcUobqKCVyIp1IhMhMpoRt2vz/7++p62G3+9zXfX3X9Vtrfdd3PZ+Px+txTuzhvtdvXV/X+77W
         Wr/PAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -715,10 +715,10 @@
         +d8AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="btn_RcpEditCal.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btn_RcpCreateCal.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAyAAAAMgCAYAAADbcAZoAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAUFBJREFUeF7t3Qnc9ftc7/8M27S3YSPzlEJKSgkhQ2RsEDqKBipFGigVOkWRJEV0
+        wAAADsABataJCQAAUFBJREFUeF7t3Qnc9ftc7/8M27S3YSPzlEJKSgkhQ2RsEDqKBipFGigVOkWRJEV0
         TEmJOjQcUobqKCVyIp1IhMhMpoRt2vz/7++p62G3+9zXfX3X9Vtrfdd3PZ+Px+txTuzhvtdvXV/X+77W
         Wr/PAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
