@@ -4211,13 +4211,14 @@ Public Class FormRecipeManagement
 
         If Oncontinue = True Then
             Dim CurrentDate As DateTime = DateTime.Now
+            Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
 
             dtDuplicaterecipe(0)("recipe_id") = Newrecipe
             dtDuplicaterecipe(0)("recipe_type_id") = Newtype
             dtDuplicaterecipe(0)("last_modified_by") = PublicVariables.LoginUserName
-            dtDuplicaterecipe(0)("last_modified_time") = CurrentDate 'lbl_DateTimeClock.Text
+            dtDuplicaterecipe(0)("last_modified_time") = DateTimeNowInStr 'lbl_DateTimeClock.Text
             dtDuplicaterecipe(0)("user_created") = PublicVariables.LoginUserName
-            dtDuplicaterecipe(0)("created_time") = CurrentDate 'lbl_DateTimeClock.Text
+            dtDuplicaterecipe(0)("created_time") = DateTimeNowInStr 'lbl_DateTimeClock.Text
 
             ' Upon all previous conditions are true,
             ' Send the Data to SQL Database
