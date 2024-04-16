@@ -1460,7 +1460,7 @@ Public Class FormMain
     ' Populate DataGridView From SQL Tables
     Private Async Sub LoadProductionDetailsTable(containSearch As Boolean, SerialNumber As String, cmbxArr() As ComboBox, dtStart As DateTime, dtEnd As DateTime)
         ' Prevent UI Thread Freezing
-        Await Task.Delay(20)
+        Await Task.Delay(50)
 
         ' Define SQL String
         Dim sqlString As String = $"
@@ -3941,6 +3941,19 @@ Public Class FormMain
 
             DInt2int(142, CType(dtrecipe.Rows(0)("prep_prefill_time"), Integer))
 
+            If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
+                DInt2int(144, 1)
+            Else
+                DInt2int(144, 0)
+            End If
+
+            Float2int(146, CType(dtrecipe.Rows(0)("prep_rpm1"), Double))
+            Float2int(158, CType(dtrecipe.Rows(0)("prep_rpm2"), Double))
+            Float2int(156, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
+            Float2int(154, CType(dtrecipe.Rows(0)("secondflush_rpm"), Double))
+            Float2int(152, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
+            Float2int(150, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
+
         End If
 
         ' Force Load Recipe Data In Cal Form
@@ -4064,7 +4077,11 @@ Public Class FormMain
             End If
 
         Else
-            MsgBox($"S/N Length Mismatch", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            If lbl_CalibrationStatus.Text.ToUpper() = "PASS" Or lbl_CalibrationStatus.Text.ToUpper() = "FAIL" Then
+                MsgBox($"S/N Length Mismatch", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            Else
+                MsgBox($"Calibration Required", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            End If
         End If
     End Sub
 
@@ -5349,6 +5366,38 @@ Public Class FormMain
                 chart.YAxes(i).MinLimit = Nothing
                 chart.YAxes(i).MaxLimit = Nothing
             Next
+
+            ' Autoscale YAxis (Temperature)
+            If True Then
+                Dim TempMaxLimit As Decimal = 0
+                Dim TempMinLimit As Decimal = 0
+                Dim TempDifference As Integer = 5
+
+                For i As Integer = 0 To LiveChartTempValue.Count - 1
+                    Dim maxVal As Decimal = 0
+                    Dim minVal As Decimal = 0
+
+                    maxVal = LiveChartTempValue(i).Y + TempDifference
+                    minVal = LiveChartTempValue(i).Y - TempDifference
+
+                    If i = 0 Then
+                        TempMaxLimit = maxVal
+                        TempMinLimit = minVal
+                    Else
+                        If maxVal > TempMaxLimit Then
+                            TempMaxLimit = maxVal
+                        End If
+                        If minVal < TempMinLimit Then
+                            TempMinLimit = minVal
+                        End If
+                    End If
+                Next
+
+                With chart.YAxes(2)
+                    .MaxLimit = Math.Ceiling(TempMaxLimit)
+                    .MinLimit = Math.Floor(TempMinLimit)
+                End With
+            End If
         End If
     End Sub
 

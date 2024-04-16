@@ -12,7 +12,7 @@ Imports LiveChartsCore.SkiaSharpView.WinForms
 Module PublicVariables
     ' Version
     'Public AppVersion As String = "Ver. " & "1.0.0.1"
-    Public AppVersion As String = "Ver. " & "1.0.7"
+    Public AppVersion As String = "Ver. " & "1.0.8"
 
     ' License Status
     Public LicenseType As String = ""
@@ -138,11 +138,14 @@ Module PublicVariables
     Public Limit_Min_i_prepfilltime As Integer
     Public Limit_Min_i_prepbleedtime As Integer
     Public Limit_Min_d_prepflow As Decimal
+    Public Limit_Min_d_prepflowtol As Decimal
     Public Limit_Min_d_preppressure As Decimal
     Public Limit_Min_d_preppressuredrop As Decimal
     Public Limit_Min_i_preppressuredroptime As Integer
     Public Limit_Min_i_prepprefillstarttime As Integer
     Public Limit_Min_i_prepprefilltime As Integer
+    Public Limit_Min_i_preprpm1 As Integer
+    Public Limit_Min_i_preprpm2 As Integer
 
     'Public Limit_Min_i_flush1filltime As Integer
     'Public Limit_Min_i_flush1bleedtime As Integer
@@ -151,6 +154,7 @@ Module PublicVariables
     Public Limit_Min_d_flush1pressure As Decimal
     Public Limit_Min_i_flush1stabilize As Integer
     Public Limit_Min_i_flush1time As Integer
+    Public Limit_Min_i_flush1rpm As Integer
 
 
     'Public Limit_Min_i_dptestfilltime As Integer
@@ -163,6 +167,7 @@ Module PublicVariables
     Public Limit_Min_d_dptestlowlimit As Decimal
     Public Limit_Min_d_dptestuplimit As Decimal
     Public Limit_Min_i_dptestpoints As Integer
+    Public Limit_Min_i_dptestrpm As Integer
 
 
 
@@ -173,6 +178,7 @@ Module PublicVariables
     Public Limit_Min_d_flush2pressure As Decimal
     Public Limit_Min_i_flush2stabilize As Integer
     Public Limit_Min_i_flush2time As Integer
+    Public Limit_Min_i_flush2rpm As Integer
 
 
 
@@ -191,11 +197,14 @@ Module PublicVariables
     Public Limit_Max_i_prepfilltime As Integer
     Public Limit_Max_i_prepbleedtime As Integer
     Public Limit_Max_d_prepflow As Decimal
+    Public Limit_Max_d_prepflowtol As Decimal
     Public Limit_Max_d_preppressure As Decimal
     Public Limit_Max_d_preppressuredrop As Decimal
     Public Limit_Max_i_preppressuredroptime As Integer
     Public Limit_Max_i_prepprefillstarttime As Integer
     Public Limit_Max_i_prepprefilltime As Integer
+    Public Limit_Max_i_preprpm1 As Integer
+    Public Limit_Max_i_preprpm2 As Integer
 
     'Public Limit_Max_i_flush1filltime As Integer
     'Public Limit_Max_i_flush1bleedtime As Integer
@@ -204,6 +213,7 @@ Module PublicVariables
     Public Limit_Max_d_flush1pressure As Decimal
     Public Limit_Max_i_flush1stabilize As Integer
     Public Limit_Max_i_flush1time As Integer
+    Public Limit_Max_i_flush1rpm As Integer
 
 
     'Public Limit_Max_i_dptestfilltime As Integer
@@ -216,6 +226,7 @@ Module PublicVariables
     Public Limit_Max_d_dptestlowlimit As Decimal
     Public Limit_Max_d_dptestuplimit As Decimal
     Public Limit_Max_i_dptestpoints As Integer
+    Public Limit_Max_i_dptestrpm As Integer
 
 
 
@@ -226,6 +237,7 @@ Module PublicVariables
     Public Limit_Max_d_flush2pressure As Decimal
     Public Limit_Max_i_flush2stabilize As Integer
     Public Limit_Max_i_flush2time As Integer
+    Public Limit_Max_i_flush2rpm As Integer
 
 
 
