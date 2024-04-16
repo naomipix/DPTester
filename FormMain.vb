@@ -4851,6 +4851,7 @@ Public Class FormMain
 
             lbl_EstCycleTime.Text = MainCycletime.ToString
             Resultcapturetimer.Enabled = True
+            ResultCaptureThreadingTmr.Change(Resultcapturetimer.Interval, Resultcapturetimer.Interval)
             'LiveGraph.LiveGraph.ChartPlottingTimer(True)
         End If
 

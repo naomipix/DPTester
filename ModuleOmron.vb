@@ -36,6 +36,9 @@ Module ModuleOmron
 
     Public WithEvents Calseqtimer As New Timer()
     Public WithEvents Resultcapturetimer As New Timer()
+    Public ResultCaptureThreadingTmr As Threading.Timer
+    Public ResultcaptureSamplingTime As String = ""
+    Public ResultcaptureEndCycle As Boolean = False
     Public ResultendtimerStartTime As DateTime
     Public WithEvents Resultendtimer As New Timer()
     Public PLCstatus(2)() As Boolean
@@ -147,6 +150,7 @@ Module ModuleOmron
     Public ResetPCAlarm As Boolean = False
     Public SetEndLot As Boolean = False
     Public ResetEndLot As Boolean = False
+    Public SetMainSeqCompleteAck As Boolean = False
 
 
 #Region "FINS protocol"
@@ -169,6 +173,7 @@ Module ModuleOmron
             PLCtimer.Interval = 100
             PLCtimer.Enabled = True
             PLCThreadingTmr = New Threading.Timer(AddressOf PLCThreadingTimer_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+            ResultCaptureThreadingTmr = New Threading.Timer(AddressOf ResultCaptureThreadingTimer_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
 
             ' Enable Threading Timer
             PLCThreadingTmr.Change(PLCtimer.Interval, PLCtimer.Interval)
@@ -1433,8 +1438,11 @@ Module ModuleOmron
             End If
         Else
             FormCalibration.tmr_Calibration.Enabled = False
+            FormCalibration.CalibrationThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
             FormCalibration.tmr_Verification.Enabled = False
+            FormCalibration.VerificationThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
             Resultcapturetimer.Enabled = False
+            ResultCaptureThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
         End If
     End Sub
 
@@ -1614,6 +1622,10 @@ Module ModuleOmron
                 If ResetEndLot = True Then
                     PCStatus(0)(10) = False
                     ResetEndLot = False
+                End If
+                If SetMainSeqCompleteAck = True Then
+                    PCStatus(1)(11) = True
+                    SetMainSeqCompleteAck = False
                 End If
 #End Region
 
@@ -3040,7 +3052,119 @@ Module ModuleOmron
 
 
 #Region "Main Sequence - Result capture, calculate and Message"
-    Private Sub ResultCapture_Ticks(sender As Object, e As EventArgs) Handles Resultcapturetimer.Tick
+    Private Sub ResultCaptureThreadingTimer_Ticks(ByVal state As Object)
+        Dim serialusageid As Integer
+
+        ' Rolling Average
+        Dim FinalFlowrate As Decimal = 0
+        If True Then
+            RollingAvgArr(RollingAvgCount) = AIn(12)
+
+            If RollingAvgCount = RollingAvgArr.Length - 1 Then
+                RollingAvgCount = 0
+            Else
+                RollingAvgCount += 1
+            End If
+
+            Dim FlwrateTemp As Decimal = 0
+            For i As Integer = 0 To RollingAvgArr.Length - 1
+                FlwrateTemp += RollingAvgArr(i)
+            Next
+            FinalFlowrate = FlwrateTemp / RollingAvgArr.Length
+        End If
+
+        If MainrecordValue = True And CommLost = False Then
+            Dim newrw As DataRow = dtresult.NewRow
+
+            serialusageid = dtserialrecord.Rows(0)("id")
+            result_samplingtime += CType((Resultcapturetimer.Interval / 1000), Decimal)
+            result_inletpressure = AIn(9)
+            result_outletpressure = AIn(10)
+            result_flowrate = FinalFlowrate
+            result_temperature = AIn(13)
+            If True Then
+                Dim A As Double = 0.01257187
+                Dim B As Double = -0.005806436
+                Dim C As Double = 0.001130911
+                Dim D As Double = -0.000005723952
+                Dim T2 As Double = (result_temperature + 273.15) * (result_temperature + 273.15)
+                Dim exp As Double = Math.Exp((1 + (B * (result_temperature + 273.15))) / ((C * (result_temperature + 273.15)) + (D * T2)))
+                Dim vis As Double = A * exp
+                result_dp = Math.Round(CDec((1.002 / vis) * (result_inletpressure - result_outletpressure)), 2) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+            End If
+            result_backpressure = AIn(11)
+            result_pumprpm = AIn(2)
+            newrw(0) = serialusageid
+            newrw(1) = result_samplingtime
+            newrw(2) = result_temperature
+            newrw(3) = result_flowrate
+            newrw(4) = result_inletpressure
+            newrw(5) = result_outletpressure
+            newrw(6) = result_dp
+            newrw(7) = result_backpressure
+            newrw(8) = result_pumprpm
+            dtresult.Rows.Add(newrw)
+
+            LiveChartDPValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_dp
+            })
+            LiveChartInletValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_inletpressure
+            })
+            LiveChartOutletValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_outletpressure
+            })
+            LiveChartBPValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_backpressure
+            })
+            LiveChartRPMValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_pumprpm
+            })
+            LiveChartFLWRValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_flowrate
+            })
+            LiveChartTempValue.Add(New ObservablePoint With {
+                .X = result_samplingtime,
+                .Y = result_temperature
+            })
+        Else
+            ResetMainSeqStart = True
+        End If
+
+        'FormMain.lbl_runcycletime.Text = result_samplingtime.ToString
+        ResultcaptureSamplingTime = result_samplingtime.ToString
+
+        If result_samplingtime = MainCycletime Then
+            'Resultcapturetimer.Enabled = False
+            'PCStatus(1)(11) = True
+            'ResultendtimerStartTime = DateTime.Now
+            'Resultendtimer.Enabled = True
+            ResultcaptureEndCycle = True
+        End If
+    End Sub
+
+    Private Sub ResultCapture1_Ticks(sender As Object, e As EventArgs) Handles Resultcapturetimer.Tick
+        FormMain.lbl_runcycletime.Text = ResultcaptureSamplingTime
+
+        If ResultcaptureEndCycle = True Then
+            Resultcapturetimer.Enabled = False
+            ResultCaptureThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+            'PCStatus(1)(11) = True
+            SetMainSeqCompleteAck = True
+            ResultendtimerStartTime = DateTime.Now
+            Resultendtimer.Enabled = True
+
+            ResultcaptureEndCycle = False
+        End If
+    End Sub
+
+    Private Sub ResultCapture_Ticks(sender As Object, e As EventArgs) 'Handles Resultcapturetimer.Tick
         Dim serialusageid As Integer
 
         ' Rolling Average
