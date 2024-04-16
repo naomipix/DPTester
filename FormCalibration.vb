@@ -1104,7 +1104,8 @@ Public Class FormCalibration
             End If
 
 
-            PCStatus(1)(4) = True
+            'PCStatus(1)(4) = True
+            SetCalSeqStart = True
 
             Dim dtRecipeTbl As DataTable = SQL.ReadRecords($"
                 SELECT 
@@ -1498,7 +1499,8 @@ Public Class FormCalibration
                 End If
             End If
 
-            PCStatus(1)(5) = True
+            'PCStatus(1)(5) = True
+            SetVerSeqStart = True
 
             txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
 
@@ -1670,7 +1672,8 @@ Public Class FormCalibration
 
                     If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
                         Dim onContinue = True
-                        PCStatus(1)(6) = True
+                        'PCStatus(1)(6) = True
+                        SetCalProcessOK = True
                         If onContinue = True Then
                             Dim calstatusparameter As New Dictionary(Of String, Object) From {
                                 {"retained_value", txtbx_CalResult.Text}

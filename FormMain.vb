@@ -3120,7 +3120,8 @@ Public Class FormMain
         ConfirmationID = FormRecipeManagement.Formatstring(txtbx_ConfirmationID.Text)
         Quantity = FormRecipeManagement.Formatstring(txtbx_Quantity.Text)
 
-        PCStatus(0)(10) = False
+        'PCStatus(0)(10) = False
+        ResetEndLot = True
         Lotendsuccess = False
         'Empty box check
         If OnContinue = True Then
@@ -4068,7 +4069,8 @@ Public Class FormMain
 
                     txtbx_SerialNumber.Enabled = False
                     Startresultrecord()
-                    PCStatus(1)(10) = True
+                    'PCStatus(1)(10) = True
+                    SetMainSeqStart = True
                     'btn_OprKeyInDtConfirm.Enabled = False
                 Else
                     MainMessage(4, "Insert Production details")
@@ -5212,7 +5214,8 @@ Public Class FormMain
             FormCalibration.txtbx_CalResult.BackColor = SystemColors.Window
             FormCalibration.dgv_CalibrationResult.DataSource = Nothing
             FormCalibration.dgv_VerificationResult.DataSource = Nothing
-            PCStatus(0)(10) = True
+            'PCStatus(0)(10) = True
+            SetEndLot = True
         End If
 
         If OnContinue = True Then
