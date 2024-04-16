@@ -36,6 +36,10 @@ Partial Class FormTesting
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -151,11 +155,44 @@ Partial Class FormTesting
         Me.TextBox1.Size = New System.Drawing.Size(349, 20)
         Me.TextBox1.TabIndex = 6
         '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(80, 372)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(118, 38)
+        Me.Button6.TabIndex = 7
+        Me.Button6.Text = "ThreadedTmrEnable"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(204, 372)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(118, 38)
+        Me.Button7.TabIndex = 7
+        Me.Button7.Text = "ThreadedTmrDisable"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(183, 335)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(39, 13)
+        Me.Label2.TabIndex = 8
+        Me.Label2.Text = "Label2"
+        '
+        'Timer3
+        '
+        '
         'FormTesting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Button7)
+        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
@@ -185,4 +222,8 @@ Partial Class FormTesting
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Timer3 As Timer
 End Class

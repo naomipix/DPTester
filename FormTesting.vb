@@ -291,4 +291,43 @@ Public Class FormTesting
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         dtAlarmStatus.Rows.Clear()
     End Sub
+
+
+
+
+
+
+
+    Dim TestVal As Integer = 0
+
+    Public PLCThreadingTmr1 As Threading.Timer
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        PLCThreadingTmr1 = New Threading.Timer(AddressOf PLCThreadingTimer1_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+        Timer3.Enabled = True
+
+        ' Enable Threading Timer
+        PLCThreadingTmr1.Change(500, 500)
+
+        ' Disable Threading Timer
+        'PLCThreadingTmr1.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        'Timer3.Enabled = False
+
+        PLCThreadingTmr1.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+    End Sub
+
+    Private Sub PLCThreadingTimer1_Ticks(ByVal state As Object)
+        If TestVal = 1 Then
+            TestVal = 0
+        Else
+            TestVal = 1
+        End If
+    End Sub
+
+    Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
+        Label2.Text = TestVal
+    End Sub
 End Class
