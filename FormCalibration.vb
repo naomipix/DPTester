@@ -148,9 +148,6 @@ Public Class FormCalibration
         InitializeCalForm()
         FormCircuitModel2.Circuittimer.Enabled = True
 
-        ' Initialize Threading Timer
-        CalibrationThreadingTmr = New Threading.Timer(AddressOf CalibrationThreadingTimer_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
-        VerificationThreadingTmr = New Threading.Timer(AddressOf VerificationThreadingTimer_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
     End Sub
 
     Private Sub FormCalibration_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -785,7 +782,7 @@ Public Class FormCalibration
 
     End Sub
 
-    Private Sub CalibrationThreadingTimer_Ticks(ByVal state As Object)
+    Public Sub CalibrationThreadingTimer_Ticks(ByVal state As Object)
         PCStatus(1)(2) = False ' Reset Calibration Start Signal
 
         If CalrecordValue = True And CommLost = False Then
@@ -1508,7 +1505,7 @@ Public Class FormCalibration
         End If
     End Sub
 
-    Private Sub VerificationThreadingTimer_Ticks(ByVal state As Object)
+    Public Sub VerificationThreadingTimer_Ticks(ByVal state As Object)
         PCStatus(1)(3) = False
 
         If CalrecordValue = True And CommLost = False Then

@@ -174,6 +174,8 @@ Module ModuleOmron
             PLCtimer.Enabled = True
             PLCThreadingTmr = New Threading.Timer(AddressOf PLCThreadingTimer_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
             ResultCaptureThreadingTmr = New Threading.Timer(AddressOf ResultCaptureThreadingTimer_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+            FormCalibration.CalibrationThreadingTmr = New Threading.Timer(AddressOf FormCalibration.CalibrationThreadingTimer_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+            FormCalibration.VerificationThreadingTmr = New Threading.Timer(AddressOf FormCalibration.VerificationThreadingTimer_Ticks, Nothing, Threading.Timeout.Infinite, Threading.Timeout.Infinite)
 
             ' Enable Threading Timer
             PLCThreadingTmr.Change(PLCtimer.Interval, PLCtimer.Interval)
