@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports Spire.Xls.Core.Spreadsheet.AutoFilter
 
 Public Class FormRecipeManagement
     Public WithEvents Recipetimer As New Timer()
@@ -7,18 +8,18 @@ Public Class FormRecipeManagement
     Dim CurrentTabPage As TabPage
     Public Recipeexportpath As String = PublicVariables.Recipeexportpath
     Public d_vertol As Decimal
-
-    Public i_prepfilltime As Integer
-    Public i_prepbleedtime As Integer
     Public d_prepflow As Decimal
     Public d_prepflowtol As Decimal
-    Public d_preppressure As Decimal
-    Public d_preppressuredrop As Decimal
-    Public i_preppressuredroptime As Integer
+
+    Public i_prepfilltime As Integer
     Public i_prepprefillstarttime As Integer
     Public i_prepprefilltime As Integer
+    Public i_prepbleedtime As Integer
+    Public d_preppressure As Decimal
+    Public i_preppressuredroptime As Integer
+    Public d_preppressuredrop As Decimal
     Public i_preprpm1 As Integer
-    Public i_preprpm2 As Integer
+    'Public i_preprpm2 As Integer
     Public str_prepspeedenable As String
 
     Public str_flush1enable As String
@@ -26,23 +27,25 @@ Public Class FormRecipeManagement
     'Public i_flush1bleedtime As Integer
     Public d_flush1flow As Decimal
     Public d_flush1flowtol As Decimal
-    Public d_flush1pressure As Decimal
+    'Public d_flush1pressure As Decimal
     Public i_flush1stabilize As Integer
     Public i_flush1time As Integer
     Public i_flush1rpm As Integer
+    Public str_flush1speedenable As String
 
     Public str_dptest1enable As String
     'Public i_dptestfilltime As Integer
     'Public i_dptestbleedtime As Integer
-    Public d_dptestflow As Decimal
-    Public d_dptestflowtol As Decimal
-    Public d_dptestpressure As Decimal
+    'Public d_dptestflow As Decimal
+    'Public d_dptestflowtol As Decimal
+    'Public d_dptestpressure As Decimal
     Public i_dpteststabilize As Integer
     Public i_dptesttime As Integer
     Public d_dptestlowlimit As Decimal
     Public d_dptestuplimit As Decimal
     Public i_dptestpoints As Integer
     Public i_dptestrpm As Integer
+    Public str_dptestspeedenable As String
     Public str_dptest2enable As String
 
     Public str_flush2enable As String
@@ -50,10 +53,11 @@ Public Class FormRecipeManagement
     'Public i_flush2bleedtime As Integer
     Public d_flush2flow As Decimal
     Public d_flush2flowtol As Decimal
-    Public d_flush2pressure As Decimal
+    'Public d_flush2pressure As Decimal
     Public i_flush2stabilize As Integer
     Public i_flush2time As Integer
     Public i_flush2rpm As Integer
+    Public str_flush2speedenable As String
 
 
     Public str_drain1enable As String
@@ -73,18 +77,18 @@ Public Class FormRecipeManagement
     'Declare Recipe Parameter Nominal Value Variables
 
     Private nom_d_vertol As Decimal = 1.0
-
-    Private nom_i_prepfilltime As Integer = 5
-    Private nom_i_prepbleedtime As Integer = 0
     Private nom_d_prepflow As Decimal = 3
     Private nom_d_prepflowtol As Decimal = 0.5
-    Private nom_d_preppressure As Decimal = 5
-    Private nom_d_preppressuredrop As Decimal = 5
-    Private nom_i_preppressuredroptime As Integer = 0
+
+    Private nom_i_prepfilltime As Integer = 5
     Private nom_i_prepprefillstarttime As Integer = 0
     Private nom_i_prepprefilltime As Integer = 0
+    Private nom_i_prepbleedtime As Integer = 0
+    Private nom_d_preppressure As Decimal = 5
+    Private nom_i_preppressuredroptime As Integer = 0
+    Private nom_d_preppressuredrop As Decimal = 5
     Private nom_i_preprpm1 As Integer = 3000
-    Private nom_i_preprpm2 As Integer = 3000
+    'Private nom_i_preprpm2 As Integer = 3000
     Private nom_str_prepspeedenable As String = "Disable"
 
     Private nom_str_flush1enable As String = "Disable"
@@ -92,23 +96,25 @@ Public Class FormRecipeManagement
     'Private nom_i_flush1bleedtime As Integer = 5
     Private nom_d_flush1flow As Decimal = 3.0
     Private nom_d_flush1flowtol As Decimal = 0.5
-    Private nom_d_flush1pressure As Decimal = 5.0
+    'Private nom_d_flush1pressure As Decimal = 5.0
     Private nom_i_flush1stabilize As Integer = 5
     Private nom_i_flush1time As Integer = 60
     Private nom_i_flush1rpm As Integer = 3000
+    Private nom_str_flush1speedenable As String = "Disable"
 
     Private nom_str_dptest1enable As String = "Disable"
     'Private nom_i_dptestfilltime As Integer = 5
     'Private nom_i_dptestbleedtime As Integer = 5
-    Private nom_d_dptestflow As Decimal = 3.0
-    Private nom_d_dptestflowtol As Decimal = 0.2
-    Private nom_d_dptestpressure As Decimal = 5.0
+    'Private nom_d_dptestflow As Decimal = 3.0
+    'Private nom_d_dptestflowtol As Decimal = 0.2
+    'Private nom_d_dptestpressure As Decimal = 5.0
     Private nom_i_dpteststabilize As Integer = 5
     Private nom_i_dptesttime As Integer = 60
     Private nom_d_dptestlowlimit As Decimal = 0.0
     Private nom_d_dptestuplimit As Decimal = 10.0
     Private nom_i_dptestpoints As Integer = 20
     Private nom_i_dptestrpm As Integer = 3000
+    Private nom_str_dptestspeedenable As String = "Disable"
     Private nom_str_dptest2enable As String = "Disable"
 
     Private nom_str_flush2enable As String = "Disable"
@@ -116,10 +122,11 @@ Public Class FormRecipeManagement
     'Private nom_i_flush2bleedtime As Integer = 5
     Private nom_d_flush2flow As Decimal = 3.0
     Private nom_d_flush2flowtol As Decimal = 0.2
-    Private nom_d_flush2pressure As Decimal = 5.0
+    'Private nom_d_flush2pressure As Decimal = 5.0
     Private nom_i_flush2stabilize As Integer = 5
     Private nom_i_flush2time As Integer = 60
     Private nom_i_flush2rpm As Integer = 3000
+    Private nom_str_flush2speedenable As String = "Disable"
 
 
     Private nom_str_drain1enable As String = "Disable"
@@ -146,13 +153,13 @@ Public Class FormRecipeManagement
     Private min_i_prepprefillstarttime As Integer = PublicVariables.Limit_Min_i_prepprefillstarttime
     Private min_i_prepprefilltime As Integer = PublicVariables.Limit_Min_i_prepprefilltime
     Private min_i_preprpm1 As Integer = PublicVariables.Limit_Min_i_preprpm1
-    Private min_i_preprpm2 As Integer = PublicVariables.Limit_Min_i_preprpm2
+    'Private min_i_preprpm2 As Integer = PublicVariables.Limit_Min_i_preprpm2
 
     'Private min_i_flush1filltime As Integer = PublicVariables.Limit_Min_i_flush1filltime
     'Private min_i_flush1bleedtime As Integer = PublicVariables.Limit_Min_i_flush1bleedtime
     Private min_d_flush1flow As Decimal = PublicVariables.Limit_Min_d_flush1flow
     Private min_d_flush1flowtol As Decimal = PublicVariables.Limit_Min_d_flush1flowtol
-    Private min_d_flush1pressure As Decimal = PublicVariables.Limit_Min_d_flush1pressure
+    'Private min_d_flush1pressure As Decimal = PublicVariables.Limit_Min_d_flush1pressure
     Private min_i_flush1stabilize As Integer = PublicVariables.Limit_Min_i_flush1stabilize
     Private min_i_flush1time As Integer = PublicVariables.Limit_Min_i_flush1time
     Private min_i_flush1rpm As Integer = PublicVariables.Limit_Min_i_flush1rpm
@@ -160,9 +167,9 @@ Public Class FormRecipeManagement
 
     'Private min_i_dptestfilltime As Integer = PublicVariables.Limit_Min_i_dptestfilltime
     'Private min_i_dptestbleedtime As Integer = PublicVariables.Limit_Min_i_dptestbleedtime
-    Private min_d_dptestflow As Decimal = PublicVariables.Limit_Min_d_dptestflow
-    Private min_d_dptestflowtol As Decimal = PublicVariables.Limit_Min_d_dptestflowtol
-    Private min_d_dptestpressure As Decimal = PublicVariables.Limit_Min_d_dptestpressure
+    'Private min_d_dptestflow As Decimal = PublicVariables.Limit_Min_d_dptestflow
+    'Private min_d_dptestflowtol As Decimal = PublicVariables.Limit_Min_d_dptestflowtol
+    'Private min_d_dptestpressure As Decimal = PublicVariables.Limit_Min_d_dptestpressure
     Private min_i_dpteststabilize As Integer = PublicVariables.Limit_Min_i_dpteststabilize
     Private min_i_dptesttime As Integer = PublicVariables.Limit_Min_i_dptesttime
     Private min_d_dptestlowlimit As Decimal = PublicVariables.Limit_Min_d_dptestlowlimit
@@ -176,7 +183,7 @@ Public Class FormRecipeManagement
     'Private min_i_flush2bleedtime As Integer = PublicVariables.Limit_Min_i_flush2bleedtime
     Private min_d_flush2flow As Decimal = PublicVariables.Limit_Min_d_flush2flow
     Private min_d_flush2flowtol As Decimal = PublicVariables.Limit_Min_d_flush2flowtol
-    Private min_d_flush2pressure As Decimal = PublicVariables.Limit_Min_d_flush2pressure
+    'Private min_d_flush2pressure As Decimal = PublicVariables.Limit_Min_d_flush2pressure
     Private min_i_flush2stabilize As Integer = PublicVariables.Limit_Min_i_flush2stabilize
     Private min_i_flush2time As Integer = PublicVariables.Limit_Min_i_flush2time
     Private min_i_flush2rpm As Integer = PublicVariables.Limit_Min_i_flush2rpm
@@ -208,14 +215,14 @@ Public Class FormRecipeManagement
     Private max_i_prepprefillstarttime As Integer = PublicVariables.Limit_Max_i_prepprefillstarttime
     Private max_i_prepprefilltime As Integer = PublicVariables.Limit_Max_i_prepprefilltime
     Private max_i_preprpm1 As Integer = PublicVariables.Limit_Max_i_preprpm1
-    Private max_i_preprpm2 As Integer = PublicVariables.Limit_Max_i_preprpm2
+    'Private max_i_preprpm2 As Integer = PublicVariables.Limit_Max_i_preprpm2
 
 
     'Private max_i_flush1filltime As Integer = PublicVariables.Limit_Max_i_flush1filltime
     'Private max_i_flush1bleedtime As Integer = PublicVariables.Limit_Max_i_flush1bleedtime
     Private max_d_flush1flow As Decimal = PublicVariables.Limit_Max_d_flush1flow
     Private max_d_flush1flowtol As Decimal = PublicVariables.Limit_Max_d_flush1flowtol
-    Private max_d_flush1pressure As Decimal = PublicVariables.Limit_Max_d_flush1pressure
+    'Private max_d_flush1pressure As Decimal = PublicVariables.Limit_Max_d_flush1pressure
     Private max_i_flush1stabilize As Integer = PublicVariables.Limit_Max_i_flush1stabilize
     Private max_i_flush1time As Integer = PublicVariables.Limit_Max_i_flush1time
     Private max_i_flush1rpm As Integer = PublicVariables.Limit_Max_i_flush1rpm
@@ -223,9 +230,9 @@ Public Class FormRecipeManagement
 
     'Private max_i_dptestfilltime As Integer = PublicVariables.Limit_Max_i_dptestfilltime
     'Private max_i_dptestbleedtime As Integer = PublicVariables.Limit_Max_i_dptestbleedtime
-    Private max_d_dptestflow As Decimal = PublicVariables.Limit_Max_d_dptestflow
-    Private max_d_dptestflowtol As Decimal = PublicVariables.Limit_Max_d_dptestflowtol
-    Private max_d_dptestpressure As Decimal = PublicVariables.Limit_Max_d_dptestpressure
+    'Private max_d_dptestflow As Decimal = PublicVariables.Limit_Max_d_dptestflow
+    'Private max_d_dptestflowtol As Decimal = PublicVariables.Limit_Max_d_dptestflowtol
+    'Private max_d_dptestpressure As Decimal = PublicVariables.Limit_Max_d_dptestpressure
     Private max_i_dpteststabilize As Integer = PublicVariables.Limit_Max_i_dpteststabilize
     Private max_i_dptesttime As Integer = PublicVariables.Limit_Max_i_dptesttime
     Private max_d_dptestlowlimit As Decimal = PublicVariables.Limit_Max_d_dptestlowlimit
@@ -239,7 +246,7 @@ Public Class FormRecipeManagement
     'Private max_i_flush2bleedtime As Integer = PublicVariables.Limit_Max_i_flush2bleedtime
     Private max_d_flush2flow As Decimal = PublicVariables.Limit_Max_d_flush2flow
     Private max_d_flush2flowtol As Decimal = PublicVariables.Limit_Max_d_flush2flowtol
-    Private max_d_flush2pressure As Decimal = PublicVariables.Limit_Max_d_flush2pressure
+    'Private max_d_flush2pressure As Decimal = PublicVariables.Limit_Max_d_flush2pressure
     Private max_i_flush2stabilize As Integer = PublicVariables.Limit_Max_i_flush2stabilize
     Private max_i_flush2time As Integer = PublicVariables.Limit_Max_i_flush2time
     Private max_i_flush2rpm As Integer = PublicVariables.Limit_Max_i_flush2rpm
@@ -261,10 +268,7 @@ Public Class FormRecipeManagement
     Dim dtEditrecipetemp As New DataTable
 #End Region
 
-
-
 #Region "Message"
-
     Private Function RecipeMessage(a As Integer, Optional field As String = Nothing) As MsgBoxResult
 
         Select Case a
@@ -379,12 +383,7 @@ Public Class FormRecipeManagement
         End Select
         Return 0
     End Function
-
-
-
-
 #End Region
-
 
 #Region "General Formatting and checks"
 
@@ -412,27 +411,33 @@ Public Class FormRecipeManagement
         d_preppressure = 0
         d_preppressuredrop = 0
         i_preppressuredroptime = 0
+        i_preprpm1 = 0
+        str_prepspeedenable = nom_str_prepspeedenable
 
         str_flush1enable = nom_str_flush1enable
         'i_flush1filltime = 0
         'i_flush1bleedtime = 0
         d_flush1flow = 0
         d_flush1flowtol = 0
-        d_flush1pressure = 0
+        'd_flush1pressure = 0
         i_flush1stabilize = 0
         i_flush1time = 0
+        i_flush1rpm = 0
+        str_flush1speedenable = nom_str_flush1speedenable
 
         str_dptest1enable = nom_str_dptest1enable
         'i_dptestfilltime = 0
         'i_dptestbleedtime = 0
-        d_dptestflow = 0
-        d_dptestflowtol = 0
-        d_dptestpressure = 0
+        'd_dptestflow = 0
+        'd_dptestflowtol = 0
+        'd_dptestpressure = 0
         i_dpteststabilize = 0
         i_dptesttime = 0
         d_dptestlowlimit = 0
         d_dptestuplimit = 0
         i_dptestpoints = 0
+        i_dptestrpm = 0
+        str_dptestspeedenable = nom_str_dptestspeedenable
         str_dptest2enable = nom_str_dptest2enable
 
         str_flush2enable = nom_str_flush2enable
@@ -440,9 +445,11 @@ Public Class FormRecipeManagement
         'i_flush2bleedtime = 0
         d_flush2flow = 0
         d_flush2flowtol = 0
-        d_flush2pressure = 0
+        'd_flush2pressure = 0
         i_flush2stabilize = 0
         i_flush2time = 0
+        i_flush2rpm = 0
+        str_flush2speedenable = nom_str_flush2speedenable
 
 
         str_drain1enable = nom_str_drain1enable
@@ -513,7 +520,6 @@ Public Class FormRecipeManagement
         For Each dgv As DataGridView In dgvArr
             DoubleBuffer.DoubleBuffered(dgv, True)
         Next
-
 
         'Load Filter Type
         GetFilterType()
@@ -1043,7 +1049,7 @@ Public Class FormRecipeManagement
             i_prepprefillstarttime = nom_i_prepprefillstarttime
             i_prepprefilltime = nom_i_prepprefilltime
             i_preprpm1 = 0
-            i_preprpm2 = 0
+            'i_preprpm2 = 0
             str_prepspeedenable = "Disable"
 
             txtbx_RcpCreatePrepFill.Text = CType(i_prepfilltime, String)
@@ -1142,7 +1148,7 @@ Public Class FormRecipeManagement
             i_prepprefillstarttime = 0
             i_prepprefilltime = 0
             i_preprpm1 = 0
-            i_preprpm2 = 0
+            'i_preprpm2 = 0
             str_prepspeedenable = "Disable"
 
             txtbx_RcpCreatePrepFill.Text = Nothing
@@ -1323,7 +1329,7 @@ Public Class FormRecipeManagement
             'i_flush1bleedtime = nom_i_flush1bleedtime
             d_flush1flow = nom_d_flush1flow
             d_flush1flowtol = nom_d_flush1flowtol
-            d_flush1pressure = nom_d_flush1pressure
+            'd_flush1pressure = nom_d_flush1pressure
             i_flush1stabilize = nom_i_flush1stabilize
             i_flush1time = nom_i_flush1time
 
@@ -1352,7 +1358,7 @@ Public Class FormRecipeManagement
             'i_flush1bleedtime = 0
             d_flush1flow = 0.0
             d_flush1flowtol = 0.0
-            d_flush1pressure = 0.0
+            'd_flush1pressure = 0.0
             i_flush1stabilize = 0
             i_flush1time = 0
             i_flush1rpm = 0
@@ -1438,7 +1444,7 @@ Public Class FormRecipeManagement
             'i_dptestbleedtime = nom_i_dptestbleedtime
             'd_dptestflow = nom_d_dptestflow
             'd_dptestflowtol = nom_d_dptestflowtol
-            d_dptestpressure = nom_d_dptestpressure
+            'd_dptestpressure = nom_d_dptestpressure
             i_dpteststabilize = nom_i_dpteststabilize
             i_dptesttime = nom_i_dptesttime
             d_dptestlowlimit = nom_d_dptestlowlimit
@@ -1473,9 +1479,9 @@ Public Class FormRecipeManagement
 
             'i_dptestfilltime = 0
             'i_dptestbleedtime = 0
-            d_dptestflow = 0.0
-            d_dptestflowtol = 0.0
-            d_dptestpressure = 0.0
+            'd_dptestflow = 0.0
+            'd_dptestflowtol = 0.0
+            'd_dptestpressure = 0.0
             i_dpteststabilize = 0
             i_dptesttime = 0
             d_dptestlowlimit = 0.0
@@ -1560,7 +1566,7 @@ Public Class FormRecipeManagement
             'i_flush2bleedtime = nom_i_flush2bleedtime
             d_flush2flow = nom_d_flush2flow
             d_flush2flowtol = nom_d_flush2flowtol
-            d_flush2pressure = nom_d_flush2pressure
+            'd_flush2pressure = nom_d_flush2pressure
             i_flush2stabilize = nom_i_flush2stabilize
             i_flush2time = nom_i_flush2time
 
@@ -1587,7 +1593,7 @@ Public Class FormRecipeManagement
             'i_flush2bleedtime = 0
             d_flush2flow = 0.0
             d_flush2flowtol = 0.0
-            d_flush2pressure = 0.0
+            'd_flush2pressure = 0.0
             i_flush2stabilize = 0
             i_flush2time = 0
             i_flush2rpm = 0
@@ -3929,32 +3935,32 @@ Public Class FormRecipeManagement
 
 #End Region
 
-        If onContinue = True Then
-            If checkbx_CreateFlush1.Checked = True Then
-                If Not (i_flush1time > 0 And d_flush1flow > 0 And d_flush1pressure > 0) Then
-                    RecipeMessage(53, "If Flush-1 Enabled, then Flush-1 Time, Flush-1 FLowrate and Flush-1 BackPressure Cannot be Zero")
-                    onContinue = False
-                End If
-            End If
-        End If
+        'If onContinue = True Then
+        '    If checkbx_CreateFlush1.Checked = True Then
+        '        If Not (i_flush1time > 0 And d_flush1flow > 0 And d_flush1pressure > 0) Then
+        '            RecipeMessage(53, "If Flush-1 Enabled, then Flush-1 Time, Flush-1 FLowrate and Flush-1 BackPressure Cannot be Zero")
+        '            onContinue = False
+        '        End If
+        '    End If
+        'End If
 
-        If onContinue = True Then
-            If checkbx_CreateDPTest1.Checked = True Then
-                If Not (i_dptesttime > 0 And i_dptestpoints > 0 And d_dptestflow > 0 And d_dptestpressure > 0) Then
-                    RecipeMessage(53, "If DP Test Enabled, then DPTest Time, DPTest Points, DPTest FLowrate and DPTest BackPressure Cannot be Zero")
-                    onContinue = False
-                End If
-            End If
-        End If
+        'If onContinue = True Then
+        '    If checkbx_CreateDPTest1.Checked = True Then
+        '        If Not (i_dptesttime > 0 And i_dptestpoints > 0 And d_dptestflow > 0 And d_dptestpressure > 0) Then
+        '            RecipeMessage(53, "If DP Test Enabled, then DPTest Time, DPTest Points, DPTest FLowrate and DPTest BackPressure Cannot be Zero")
+        '            onContinue = False
+        '        End If
+        '    End If
+        'End If
 
-        If onContinue = True Then
-            If checkbx_CreateFlush2.Checked = True Then
-                If Not (i_flush2time > 0 And d_flush2flow > 0 And d_flush2pressure > 0) Then
-                    RecipeMessage(53, "If Flush-2 Enabled, then Flush-2 Time, Flush-2 FLowrate and Flush-2 BackPressure Cannot be Zero")
-                    onContinue = False
-                End If
-            End If
-        End If
+        'If onContinue = True Then
+        '    If checkbx_CreateFlush2.Checked = True Then
+        '        If Not (i_flush2time > 0 And d_flush2flow > 0 And d_flush2pressure > 0) Then
+        '            RecipeMessage(53, "If Flush-2 Enabled, then Flush-2 Time, Flush-2 FLowrate and Flush-2 BackPressure Cannot be Zero")
+        '            onContinue = False
+        '        End If
+        '    End If
+        'End If
 
 
         'Check whether Test points is greater than Test time
@@ -4051,22 +4057,22 @@ Public Class FormRecipeManagement
                                 {"prep_prefill_time", i_prepprefilltime},
                                 {"prep_speed_mode", str_prepspeedenable},
                                 {"prep_rpm1", i_preprpm1},
-                                {"prep_rpm2", i_preprpm2},
+                                                          _ '{"prep_rpm2", i_preprpm2},
                                 {"firstflush_circuit", str_flush1enable},
                                                                          _ '{"firstflush_fill_time", i_flush1filltime},
                                                                          _ '{"firstflush_bleed_time", i_flush1bleedtime},
                                 {"firstflush_flowrate", d_flush1flow},
                                 {"firstflush_flow_tolerance", d_flush1flowtol},
-                                {"firstflush_back_pressure", d_flush1pressure},
+                                                                               _ '{"firstflush_back_pressure", d_flush1pressure},
                                 {"firstflush_stabilize_time", i_flush1stabilize},
                                 {"firstflush_time", i_flush1time},
                                 {"firstflush_rpm", i_flush1rpm},
                                 {"firstdp_circuit", str_dptest1enable},
                                                                        _ '{"dp_fill_time", i_dptestfilltime},
                                                                        _ '{"dp_bleed_time", i_dptestbleedtime},
-                                {"dp_flowrate", d_dptestflow},
-                                {"dp_flow_tolerance", d_dptestflowtol},
-                                {"dp_back_pressure", d_dptestpressure},
+                                                                       _ '{"dp_flowrate", d_dptestflow},
+                                                                       _ '{"dp_flow_tolerance", d_dptestflowtol},
+                                                                       _ '{"dp_back_pressure", d_dptestpressure},
                                 {"dp_stabilize_time", i_dpteststabilize},
                                 {"dp_test_time", i_dptesttime},
                                 {"dp_lowerlimit", d_dptestlowlimit},
@@ -4079,7 +4085,7 @@ Public Class FormRecipeManagement
                                                                           _ '{"secondflush_bleed_time", i_flush2bleedtime},
                                 {"secondflush_flowrate", d_flush2flow},
                                 {"secondflush_flow_tolerance", d_flush2flowtol},
-                                {"secondflush_back_pressure", d_flush2pressure},
+                                                                                _ '{"secondflush_back_pressure", d_flush2pressure},
                                 {"secondflush_stabilize_time", i_flush2stabilize},
                                 {"secondflush_time", i_flush2time},
                                 {"secondflush_rpm", i_flush2rpm},
@@ -4262,23 +4268,23 @@ Public Class FormRecipeManagement
                                 {"prep_prefill_time", dtDuplicaterecipe(0)("prep_prefill_time")},
                                 {"prep_speed_mode", dtDuplicaterecipe(0)("prep_speed_mode")},
                                 {"prep_rpm1", dtDuplicaterecipe(0)("prep_rpm1")},
-                                {"prep_rpm2", dtDuplicaterecipe(0)("prep_rpm2")},
+                                                                                 _ '{"prep_rpm2", dtDuplicaterecipe(0)("prep_rpm2")},
                                                                                  _
                                 {"firstflush_circuit", dtDuplicaterecipe(0)("firstflush_circuit")},
                                                                                                    _ '{"firstflush_fill_time", duplicaterecipe(10)},
                                                                                                    _ '{"firstflush_bleed_time", duplicaterecipe(11)},
                                 {"firstflush_flowrate", dtDuplicaterecipe(0)("firstflush_flowrate")},
                                 {"firstflush_flow_tolerance", dtDuplicaterecipe(0)("firstflush_flow_tolerance")},
-                                {"firstflush_back_pressure", dtDuplicaterecipe(0)("firstflush_back_pressure")},
+                                                                                                                 _ '{"firstflush_back_pressure", dtDuplicaterecipe(0)("firstflush_back_pressure")},
                                 {"firstflush_stabilize_time", dtDuplicaterecipe(0)("firstflush_stabilize_time")},
                                 {"firstflush_time", dtDuplicaterecipe(0)("firstflush_time")},
                                 {"firstflush_rpm", dtDuplicaterecipe(0)("firstflush_rpm")},
                                 {"firstdp_circuit", dtDuplicaterecipe(0)("firstdp_circuit")},
                                                                                              _ '{"dp_fill_time", duplicaterecipe(18)},
                                                                                              _ '{"dp_bleed_time", duplicaterecipe(19)},
-                                {"dp_flowrate", dtDuplicaterecipe(0)("dp_flowrate")},
-                                {"dp_flow_tolerance", dtDuplicaterecipe(0)("dp_flow_tolerance")},
-                                {"dp_back_pressure", dtDuplicaterecipe(0)("dp_back_pressure")},
+                                                                                             _ '{"dp_flowrate", dtDuplicaterecipe(0)("dp_flowrate")},
+                                                                                             _ '{"dp_flow_tolerance", dtDuplicaterecipe(0)("dp_flow_tolerance")},
+                                                                                             _ '{"dp_back_pressure", dtDuplicaterecipe(0)("dp_back_pressure")},
                                 {"dp_stabilize_time", dtDuplicaterecipe(0)("dp_stabilize_time")},
                                 {"dp_test_time", dtDuplicaterecipe(0)("dp_test_time")},
                                 {"dp_lowerlimit", dtDuplicaterecipe(0)("dp_lowerlimit")},
@@ -4291,7 +4297,7 @@ Public Class FormRecipeManagement
                                                                                                      _ '{"secondflush_bleed_time", duplicaterecipe(31)},
                                 {"secondflush_flowrate", dtDuplicaterecipe(0)("secondflush_flowrate")},
                                 {"secondflush_flow_tolerance", dtDuplicaterecipe(0)("secondflush_flow_tolerance")},
-                                {"secondflush_back_pressure", dtDuplicaterecipe(0)("secondflush_back_pressure")},
+                                                                                                                   _ '{"secondflush_back_pressure", dtDuplicaterecipe(0)("secondflush_back_pressure")},
                                 {"secondflush_stabilize_time", dtDuplicaterecipe(0)("secondflush_stabilize_time")},
                                 {"secondflush_time", dtDuplicaterecipe(0)("secondflush_time")},
                                 {"secondflush_rpm", dtDuplicaterecipe(0)("secondflush_rpm")},
@@ -5969,17 +5975,17 @@ Public Class FormRecipeManagement
         Else
             i_preprpm1 = 0
         End If
-        If Not IsDBNull(dtRecipe(0)("prep_rpm2")) Then
-            i_preprpm2 = CType(dtRecipe(0)("prep_rpm2"), Integer)
-        Else
-            i_preprpm2 = 0
-        End If
+        'If Not IsDBNull(dtRecipe(0)("prep_rpm2")) Then
+        '    i_preprpm2 = CType(dtRecipe(0)("prep_rpm2"), Integer)
+        'Else
+        '    i_preprpm2 = 0
+        'End If
 
         'i_flush1filltime = CType(dtRecipe(0)("firstflush_fill_time"), Integer)
         'i_flush1bleedtime = CType(dtRecipe(0)("firstflush_bleed_time"), Integer)
         d_flush1flow = CType(dtRecipe(0)("firstflush_flowrate"), Decimal)
         d_flush1flowtol = CType(dtRecipe(0)("firstflush_flow_tolerance"), Decimal)
-        d_flush1pressure = CType(dtRecipe(0)("firstflush_back_pressure"), Decimal)
+        'd_flush1pressure = CType(dtRecipe(0)("firstflush_back_pressure"), Decimal)
         i_flush1stabilize = CType(dtRecipe(0)("firstflush_stabilize_time"), Integer)
         i_flush1time = CType(dtRecipe(0)("firstflush_time"), Integer)
         If Not IsDBNull(dtRecipe(0)("firstflush_rpm")) Then
@@ -5990,9 +5996,9 @@ Public Class FormRecipeManagement
 
         'i_dptestfilltime = CType(dtRecipe(0)("dp_fill_time"), Integer)
         'i_dptestbleedtime = CType(dtRecipe(0)("dp_bleed_time"), Integer)
-        d_dptestflow = CType(dtRecipe(0)("dp_flowrate"), Decimal)
-        d_dptestflowtol = CType(dtRecipe(0)("dp_flow_tolerance"), Decimal)
-        d_dptestpressure = CType(dtRecipe(0)("dp_back_pressure"), Decimal)
+        'd_dptestflow = CType(dtRecipe(0)("dp_flowrate"), Decimal)
+        'd_dptestflowtol = CType(dtRecipe(0)("dp_flow_tolerance"), Decimal)
+        'd_dptestpressure = CType(dtRecipe(0)("dp_back_pressure"), Decimal)
         i_dpteststabilize = CType(dtRecipe(0)("dp_stabilize_time"), Integer)
         i_dptesttime = CType(dtRecipe(0)("dp_test_time"), Integer)
         d_dptestlowlimit = CType(dtRecipe(0)("dp_lowerlimit"), Decimal)
@@ -6008,7 +6014,7 @@ Public Class FormRecipeManagement
         'i_flush2bleedtime = CType(dtRecipe(0)("secondflush_bleed_time"), Integer)
         d_flush2flow = CType(dtRecipe(0)("secondflush_flowrate"), Decimal)
         d_flush2flowtol = CType(dtRecipe(0)("secondflush_flow_tolerance"), Decimal)
-        d_flush2pressure = CType(dtRecipe(0)("secondflush_back_pressure"), Decimal)
+        'd_flush2pressure = CType(dtRecipe(0)("secondflush_back_pressure"), Decimal)
         i_flush2stabilize = CType(dtRecipe(0)("secondflush_stabilize_time"), Integer)
         i_flush2time = CType(dtRecipe(0)("secondflush_time"), Integer)
         If Not IsDBNull(dtRecipe(0)("secondflush_rpm")) Then
@@ -6163,6 +6169,8 @@ Public Class FormRecipeManagement
         If cmbx_RcpEditRecipeID.SelectedIndex > 0 Then
             Dim RecipeID As String = cmbx_RcpEditRecipeID.Text
 
+            cmbx_RcpDupSelRecipe.Text = RecipeID
+
             'Dim dtEditrecipe As DataTable = SQL.ReadRecords("SELECT * FROM RecipeTable WHERE recipe_id = '" + RecipeID + "'")
             Dim dtEditrecipe As DataTable = SQL.ReadRecords("SELECT * FROM RecipeTable WHERE id = '" + DirectCast(cmbx_RcpEditRecipeID.SelectedItem, KeyValuePair(Of String, String)).Key + "'")
 
@@ -6245,7 +6253,7 @@ Public Class FormRecipeManagement
             txtbx_RcpEditPrepPrefillStartTime.Text = Nothing
             txtbx_RcpEditPrepPrefillTime.Text = Nothing
             txtbx_RcpEditPrepBleed.Text = Nothing
-            txtbx_RcpEditPrepPressure.Text =
+            txtbx_RcpEditPrepPressure.Text = Nothing
             txtbx_RcpEditPrepPressureDropTime.Text = Nothing
             txtbx_RcpEditPrepPressureDrop.Text = Nothing
             rdbtn_RcpEditPrepPumpProcess.Checked = True
@@ -6297,7 +6305,11 @@ Public Class FormRecipeManagement
     End Sub
 
     Private Sub btn_EditDiscard_Click(sender As Object, e As EventArgs) Handles btn_EditDiscard.Click
+        Dim RecipeIDTemp As String = cmbx_RcpEditRecipeID.Text
+
         cmbx_RcpEditRecipeID.SelectedIndex = 0
+
+        cmbx_RcpEditRecipeID.Text = RecipeIDTemp
     End Sub
 
 
@@ -6308,6 +6320,13 @@ Public Class FormRecipeManagement
 
     Private Sub btn_RcpEditSave_Click(sender As Object, e As EventArgs) Handles btn_RcpEditSave.Click
         Dim RecipeID As String = cmbx_RcpEditRecipeID.Text
+        Dim PartIDTmp As String = cmbx_RcpEditPartID.Text
+        Dim FilterTypeTmp As String = cmbx_RcpEditFilterType.Text
+
+
+
+
+
         Dim onContinue As Boolean = True
         Dim dtrecipeidcheck As DataTable = SQL.ReadRecords("select * from RecipeTable where recipe_id = '" + RecipeID + "' order by recipe_rev desc")
 
@@ -7259,11 +7278,11 @@ Public Class FormRecipeManagement
                 'i_flush1bleedtime = 0
                 d_flush1flow = 0.0
                 d_flush1flowtol = 0.0
-                d_flush1pressure = 0.0
+                'd_flush1pressure = 0.0
                 i_flush1stabilize = 0
                 i_flush1time = 0
-            ElseIf Not (i_flush1time > 0 And d_flush1flow > 0 And d_flush1pressure > 0) Then
-                RecipeMessage(53, "If Flush-1 Enabled, then Flush-1 Time, Flush-1 FLowrate and Flush-1 BackPressure Cannot be Zero")
+            ElseIf Not (i_flush1time > 0 And d_flush1flow > 0) Then
+                RecipeMessage(53, "If Flush-1 Enabled, then Flush-1 Time & Flush-1 Flowrate Cannot be Zero")
                 onContinue = False
             End If
         End If
@@ -7272,16 +7291,16 @@ Public Class FormRecipeManagement
             If checkbx_EditDPTest1.Checked = False Then
                 'i_dptestfilltime = 0
                 'i_dptestbleedtime = 0
-                d_dptestflow = 0.0
-                d_dptestflowtol = 0.0
-                d_dptestpressure = 0.0
+                'd_dptestflow = 0.0
+                'd_dptestflowtol = 0.0
+                'd_dptestpressure = 0.0
                 i_dpteststabilize = 0
                 i_dptesttime = 0
                 d_dptestlowlimit = 0.0
                 d_dptestuplimit = 0.0
                 i_dptestpoints = 0
-            ElseIf Not (i_dptesttime > 0 And i_dptestpoints > 0 And d_dptestflow > 0 And d_dptestpressure > 0) Then
-                RecipeMessage(53, "If DP Test Enabled, then DPTest Time, DPTest Points, DPTest FLowrate and DPTest BackPressure Cannot be Zero")
+            ElseIf Not (i_dptesttime > 0 And i_dptestpoints > 0) Then
+                RecipeMessage(53, "If DP Test Enabled, then DP Test Time & DP Test Points Cannot be Zero")
                 onContinue = False
             End If
         End If
@@ -7292,11 +7311,11 @@ Public Class FormRecipeManagement
                 'i_flush2bleedtime = 0
                 d_flush2flow = 0.0
                 d_flush2flowtol = 0.0
-                d_flush2pressure = 0.0
+                'd_flush2pressure = 0.0
                 i_flush2stabilize = 0
                 i_flush2time = 0
-            ElseIf Not (i_flush2time > 0 And d_flush2flow > 0 And d_flush2pressure > 0) Then
-                RecipeMessage(53, "If Flush-2 Enabled, then Flush-2 Time, Flush-2 FLowrate and Flush-2 BackPressure Cannot be Zero")
+            ElseIf Not (i_flush2time > 0 And d_flush2flow > 0) Then
+                RecipeMessage(53, "If Flush-2 Enabled, then Flush-2 Time & Flush-2 Flowrate Cannot be Zero")
                 onContinue = False
             End If
         End If
@@ -7461,22 +7480,22 @@ Public Class FormRecipeManagement
                                 {"prep_prefill_time", i_prepprefilltime},
                                 {"prep_speed_mode", str_prepspeedenable},
                                 {"prep_rpm1", i_preprpm1},
-                                {"prep_rpm2", i_preprpm2},
+                                                          _ '{"prep_rpm2", i_preprpm2},
                                 {"firstflush_circuit", str_flush1enable},
                                                                          _ '{"firstflush_fill_time", i_flush1filltime},
                                                                          _ '{"firstflush_bleed_time", i_flush1bleedtime},
                                 {"firstflush_flowrate", d_flush1flow},
                                 {"firstflush_flow_tolerance", d_flush1flowtol},
-                                {"firstflush_back_pressure", d_flush1pressure},
+                                                                               _ '{"firstflush_back_pressure", d_flush1pressure},
                                 {"firstflush_stabilize_time", i_flush1stabilize},
                                 {"firstflush_time", i_flush1time},
                                 {"firstflush_rpm", i_flush1rpm},
                                 {"firstdp_circuit", str_dptest1enable},
                                                                        _ '{"dp_fill_time", i_dptestfilltime},
                                                                        _ '{"dp_bleed_time", i_dptestbleedtime},
-                                {"dp_flowrate", d_dptestflow},
-                                {"dp_flow_tolerance", d_dptestflowtol},
-                                {"dp_back_pressure", d_dptestpressure},
+                                                                       _ '{"dp_flowrate", d_dptestflow},
+                                                                       _ '{"dp_flow_tolerance", d_dptestflowtol},
+                                                                       _ '{"dp_back_pressure", d_dptestpressure},
                                 {"dp_stabilize_time", i_dpteststabilize},
                                 {"dp_test_time", i_dptesttime},
                                 {"dp_lowerlimit", d_dptestlowlimit},
@@ -7489,7 +7508,7 @@ Public Class FormRecipeManagement
                                                                           _ '{"secondflush_bleed_time", i_flush2bleedtime},
                                 {"secondflush_flowrate", d_flush2flow},
                                 {"secondflush_flow_tolerance", d_flush2flowtol},
-                                {"secondflush_back_pressure", d_flush2pressure},
+                                                                                _ '{"secondflush_back_pressure", d_flush2pressure},
                                 {"secondflush_stabilize_time", i_flush2stabilize},
                                 {"secondflush_time", i_flush2time},
                                 {"secondflush_rpm", i_flush2rpm},
@@ -7535,6 +7554,10 @@ Public Class FormRecipeManagement
 
                             cmbx_RcpEditFilterType.SelectedIndex = 0
                             LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
+
+                            cmbx_RcpEditFilterType.Text = FilterTypeTmp
+                            cmbx_RcpEditPartID.Text = PartIDTmp
+                            cmbx_RcpEditRecipeID.Text = RecipeID
                         End If
                     Else
                         RecipeMessage(38)
@@ -7653,9 +7676,9 @@ Public Class FormRecipeManagement
             If Not d_flush1flowtol = Flush1FlowTol Then
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Flowrate Tolerance (l/min) (+/-) Parameter Changed, from {Flush1FlowTol} to {d_flush1flowtol}")
             End If
-            If Not d_flush1pressure = Flush1BPress Then
-                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Back Pressure (kPa) Parameter Changed, from {Flush1BPress} to {d_flush1pressure}")
-            End If
+            'If Not d_flush1pressure = Flush1BPress Then
+            '    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Back Pressure (kPa) Parameter Changed, from {Flush1BPress} to {d_flush1pressure}")
+            'End If
             If Not i_flush1stabilize = Flush1Stabilize Then
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-1) - Flush-1 Stabilize Time (s) Parameter Changed, from {Flush1Stabilize} to {i_flush1stabilize}")
             End If
@@ -7695,15 +7718,15 @@ Public Class FormRecipeManagement
             'If Not i_dptestbleedtime = DPBleed Then
             '    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP-Test Air Bleed Time (s) Parameter Changed, from {DPBleed} to {i_dptestbleedtime}")
             'End If
-            If Not d_dptestflow = DPFlow Then
-                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - Flowrate (l/min) Parameter Changed, from {DPFlow} to {d_dptestflow}")
-            End If
-            If Not d_dptestflowtol = DPFlowTol Then
-                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - Flowrate Tolerance (l/min) (+/-) Parameter Changed, from {DPFlowTol} to {d_dptestflowtol}")
-            End If
-            If Not d_dptestpressure = DPBPress Then
-                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - Back Pressure (kPa) Parameter Changed, from {DPBPress} to {d_dptestpressure}")
-            End If
+            'If Not d_dptestflow = DPFlow Then
+            '    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - Flowrate (l/min) Parameter Changed, from {DPFlow} to {d_dptestflow}")
+            'End If
+            'If Not d_dptestflowtol = DPFlowTol Then
+            '    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - Flowrate Tolerance (l/min) (+/-) Parameter Changed, from {DPFlowTol} to {d_dptestflowtol}")
+            'End If
+            'If Not d_dptestpressure = DPBPress Then
+            '    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - Back Pressure (kPa) Parameter Changed, from {DPBPress} to {d_dptestpressure}")
+            'End If
             If Not i_dpteststabilize = DPStabilize Then
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (DP Test) - DP Stabilize Time (s) Parameter Changed, from {DPStabilize} to {i_dpteststabilize}")
             End If
@@ -7737,9 +7760,9 @@ Public Class FormRecipeManagement
             If Not d_flush2flowtol = Flush2FlowTol Then
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Flowrate Tolerance (l/min) (+/-) Parameter Changed, from {Flush2FlowTol} to {d_flush2flowtol}")
             End If
-            If Not d_flush2pressure = Flush2BPress Then
-                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Back Pressure (kPa) Parameter Changed, from {Flush2BPress} to {d_flush2pressure}")
-            End If
+            'If Not d_flush2pressure = Flush2BPress Then
+            '    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Back Pressure (kPa) Parameter Changed, from {Flush2BPress} to {d_flush2pressure}")
+            'End If
             If Not i_flush2stabilize = Flush2Stabilize Then
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Edit Parameters (Flush-2) - Flush-2 Stabilize Time (s) Parameter Changed, from {Flush2Stabilize} to {i_flush2stabilize}")
             End If
@@ -7800,13 +7823,7 @@ Public Class FormRecipeManagement
             End If
         End If
     End Sub
-
-
-
 #End Region
-
-
-
 
 #Region "Recipe Details"
     Private Sub LoadRecipeDetails(containSearch As Integer, recipeid As ComboBox, filtertype As ComboBox, partid As ComboBox, recipetype As ComboBox)
@@ -7827,12 +7844,9 @@ Public Class FormRecipeManagement
                     "
         Dim dtrecipetable As DataTable = SQL.ReadRecords(strrecipedetails)
 
-
-
         If containSearch = 1 Then
             Dim bstemp As New BindingSource
             bstemp.DataSource = dtrecipetable
-
 
             ' Declare FilterList Array
             Dim FilterList As New List(Of String)
@@ -7880,14 +7894,10 @@ Public Class FormRecipeManagement
             If bstemp.Count = 0 Then
                 RecipeMessage(40)
             End If
-
-
-
         Else
             dgv_RecipeDetails.DataSource = dtrecipetable
-
-
         End If
+
         With dgv_RecipeDetails
             ' Set DataGridView Properties
             .BackgroundColor = SystemColors.Window
@@ -7925,30 +7935,30 @@ Public Class FormRecipeManagement
             .Columns("prep_bleed_time").HeaderCell.Value = "Prep. Bleed Time (s)"
             .Columns("prep_flowrate").HeaderCell.Value = "Prep. Flowrate (l/min)"
             .Columns("prep_flow_tolerance").HeaderCell.Value = "Prep. Flow Tolerance +/-(l/min)"
-            .Columns("prep_back_pressure").HeaderCell.Value = "Prep. Pressure (kPa)"
-            .Columns("prep_pressure_drop").HeaderCell.Value = "Prep. Pressure Drop (kPa)"
-            .Columns("prep_pressure_drop_time").HeaderCell.Value = "Prep. Drop Time (s)"
+            .Columns("prep_back_pressure").HeaderCell.Value = "Prep. Back Pressure 1 (kPa)"
+            .Columns("prep_pressure_drop").HeaderCell.Value = "Prep. Back Pressure 2 (kPa)"
+            .Columns("prep_pressure_drop_time").HeaderCell.Value = "Prep. Back Pressure 1 Time (s)"
             .Columns("prep_prefill_start_time").HeaderCell.Value = "Prefill Start Time (s)"
             .Columns("prep_prefill_time").HeaderCell.Value = "Prefill Duration (s)"
             .Columns("prep_speed_mode").HeaderCell.Value = "Prep. Speed Mode"
             .Columns("prep_rpm1").HeaderCell.Value = "Prep. RPM-1"
-            .Columns("prep_rpm2").HeaderCell.Value = "Prep. RPM-2"
+            '.Columns("prep_rpm2").HeaderCell.Value = "Prep. RPM-2"
 
             .Columns("firstflush_circuit").HeaderCell.Value = "Flush-1 Circuit"
             '.Columns("firstflush_fill_time").HeaderCell.Value = "Flush-1 Fill Time (s)"
             '.Columns("firstflush_bleed_time").HeaderCell.Value = "Flush-1 Bleed Time (s)"
             .Columns("firstflush_flowrate").HeaderCell.Value = "Flush-1 Flowrate (l/min)"
             .Columns("firstflush_flow_tolerance").HeaderCell.Value = "Flush-1 Flow Tolerance +/-(l/min)"
-            .Columns("firstflush_back_pressure").HeaderCell.Value = "Flush-1 Pressure (kPa)"
+            '.Columns("firstflush_back_pressure").HeaderCell.Value = "Flush-1 Pressure (kPa)"
             .Columns("firstflush_stabilize_time").HeaderCell.Value = "Flush-1 Stabilize Time (s)"
             .Columns("firstflush_time").HeaderCell.Value = "Flush-1 Time (s)"
             .Columns("firstflush_rpm").HeaderCell.Value = "Flush-1 RPM"
             .Columns("firstdp_circuit").HeaderCell.Value = "DP Test-1 Circuit"
             '.Columns("dp_fill_time").HeaderCell.Value = "DP Test Fill Time (s)"
             '.Columns("dp_bleed_time").HeaderCell.Value = "DP Test Bleed Time (s)"
-            .Columns("dp_flowrate").HeaderCell.Value = "DP Test Flowrate (l/min)"
-            .Columns("dp_flow_tolerance").HeaderCell.Value = "DP Test Flow Tolerance +/-(l/min)"
-            .Columns("dp_back_pressure").HeaderCell.Value = "DP Test Pressure (kPa)"
+            '.Columns("dp_flowrate").HeaderCell.Value = "DP Test Flowrate (l/min)"
+            '.Columns("dp_flow_tolerance").HeaderCell.Value = "DP Test Flow Tolerance +/-(l/min)"
+            '.Columns("dp_back_pressure").HeaderCell.Value = "DP Test Pressure (kPa)"
             .Columns("dp_stabilize_time").HeaderCell.Value = "DP Test Stabilize Time (s)"
             .Columns("dp_test_time").HeaderCell.Value = "DP Test Time (s)"
             .Columns("dp_lowerlimit").HeaderCell.Value = "DP Test Lower Limit (kPa)"
@@ -7961,7 +7971,7 @@ Public Class FormRecipeManagement
             '.Columns("secondflush_bleed_time").HeaderCell.Value = "Flush-2 Bleed Time (s)"
             .Columns("secondflush_flowrate").HeaderCell.Value = "Flush-2 Flowrate (l/min)"
             .Columns("secondflush_flow_tolerance").HeaderCell.Value = "Flush-2 Flow Tolerance +/-(l/min)"
-            .Columns("secondflush_back_pressure").HeaderCell.Value = "Flush-2 Pressure (kPa)"
+            '.Columns("secondflush_back_pressure").HeaderCell.Value = "Flush-2 Pressure (kPa)"
             .Columns("secondflush_stabilize_time").HeaderCell.Value = "Flush-2 Stabilize Time (s)"
             .Columns("secondflush_time").HeaderCell.Value = "Flush-2 Time (s)"
             .Columns("secondflush_rpm").HeaderCell.Value = "Flush-2 RPM"
@@ -8001,23 +8011,23 @@ Public Class FormRecipeManagement
             .Columns("prep_prefill_time").Width = 60
             .Columns("prep_speed_mode").Width = 60
             .Columns("prep_rpm1").Width = 60
-            .Columns("prep_rpm2").Width = 60
+            '.Columns("prep_rpm2").Width = 60
 
             .Columns("firstflush_circuit").Width = 70
             '.Columns("firstflush_fill_time").Width = 60
             '.Columns("firstflush_bleed_time").Width = 60
             .Columns("firstflush_flowrate").Width = 60
             .Columns("firstflush_flow_tolerance").Width = 70
-            .Columns("firstflush_back_pressure").Width = 60
+            '.Columns("firstflush_back_pressure").Width = 60
             .Columns("firstflush_stabilize_time").Width = 60
             .Columns("firstflush_time").Width = 60
             .Columns("firstflush_rpm").Width = 60
             .Columns("firstdp_circuit").Width = 70
             '.Columns("dp_fill_time").Width = 60
             '.Columns("dp_bleed_time").Width = 60
-            .Columns("dp_flowrate").Width = 70
-            .Columns("dp_flow_tolerance").Width = 70
-            .Columns("dp_back_pressure").Width = 70
+            '.Columns("dp_flowrate").Width = 70
+            '.Columns("dp_flow_tolerance").Width = 70
+            '.Columns("dp_back_pressure").Width = 70
             .Columns("dp_stabilize_time").Width = 70
             .Columns("dp_test_time").Width = 70
             .Columns("dp_lowerlimit").Width = 70
@@ -8030,7 +8040,7 @@ Public Class FormRecipeManagement
             '.Columns("secondflush_bleed_time").Width = 60
             .Columns("secondflush_flowrate").Width = 60
             .Columns("secondflush_flow_tolerance").Width = 70
-            .Columns("secondflush_back_pressure").Width = 60
+            '.Columns("secondflush_back_pressure").Width = 60
             .Columns("secondflush_stabilize_time").Width = 60
             .Columns("secondflush_time").Width = 60
             .Columns("secondflush_rpm").Width = 60
@@ -8071,23 +8081,23 @@ Public Class FormRecipeManagement
             .Columns("prep_prefill_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("prep_speed_mode").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("prep_rpm1").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns("prep_rpm2").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            '.Columns("prep_rpm2").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             .Columns("firstflush_circuit").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             '.Columns("firstflush_fill_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             '.Columns("firstflush_bleed_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("firstflush_flowrate").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("firstflush_flow_tolerance").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns("firstflush_back_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            '.Columns("firstflush_back_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("firstflush_stabilize_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("firstflush_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("firstflush_rpm").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("firstdp_circuit").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             '.Columns("dp_fill_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             '.Columns("dp_bleed_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns("dp_flowrate").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns("dp_flow_tolerance").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns("dp_back_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            '.Columns("dp_flowrate").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            '.Columns("dp_flow_tolerance").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            '.Columns("dp_back_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("dp_stabilize_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("dp_test_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("dp_lowerlimit").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -8100,7 +8110,7 @@ Public Class FormRecipeManagement
             '.Columns("secondflush_bleed_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("secondflush_flowrate").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("secondflush_flow_tolerance").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-            .Columns("secondflush_back_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
+            '.Columns("secondflush_back_pressure").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("secondflush_stabilize_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("secondflush_time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("secondflush_rpm").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -8140,23 +8150,23 @@ Public Class FormRecipeManagement
             .Columns("prep_prefill_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("prep_speed_mode").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("prep_rpm1").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
-            .Columns("prep_rpm2").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            '.Columns("prep_rpm2").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
 
             .Columns("firstflush_circuit").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             '.Columns("firstflush_fill_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             '.Columns("firstflush_bleed_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("firstflush_flowrate").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("firstflush_flow_tolerance").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
-            .Columns("firstflush_back_pressure").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            '.Columns("firstflush_back_pressure").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("firstflush_stabilize_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("firstflush_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("firstflush_rpm").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("firstdp_circuit").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             '.Columns("dp_fill_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             '.Columns("dp_bleed_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
-            .Columns("dp_flowrate").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
-            .Columns("dp_flow_tolerance").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
-            .Columns("dp_back_pressure").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            '.Columns("dp_flowrate").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            '.Columns("dp_flow_tolerance").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            '.Columns("dp_back_pressure").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("dp_stabilize_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("dp_test_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("dp_lowerlimit").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
@@ -8169,7 +8179,7 @@ Public Class FormRecipeManagement
             '.Columns("secondflush_bleed_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("secondflush_flowrate").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("secondflush_flow_tolerance").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
-            .Columns("secondflush_back_pressure").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
+            '.Columns("secondflush_back_pressure").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("secondflush_stabilize_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("secondflush_time").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
             .Columns("secondflush_rpm").HeaderCell.Style.Font = New Font(dgv_RecipeDetails.Font, FontStyle.Bold)
@@ -8216,23 +8226,23 @@ Public Class FormRecipeManagement
             .Columns("prep_prefill_time").DisplayIndex = 17 + 1
             .Columns("prep_speed_mode").DisplayIndex = 18 + 1
             .Columns("prep_rpm1").DisplayIndex = 19 + 1
-            .Columns("prep_rpm2").DisplayIndex = 20 + 1
+            '.Columns("prep_rpm2").DisplayIndex = 20 + 1
 
             .Columns("firstflush_circuit").DisplayIndex = 10 + 12
             '.Columns("firstflush_fill_time").DisplayIndex = 11 + 12
             '.Columns("firstflush_bleed_time").DisplayIndex = 12 + 12
             .Columns("firstflush_flowrate").DisplayIndex = 13 + 12
             .Columns("firstflush_flow_tolerance").DisplayIndex = 14 + 12
-            .Columns("firstflush_back_pressure").DisplayIndex = 15 + 12
+            '.Columns("firstflush_back_pressure").DisplayIndex = 15 + 12
             .Columns("firstflush_stabilize_time").DisplayIndex = 16 + 12
             .Columns("firstflush_time").DisplayIndex = 17 + 12
             .Columns("firstflush_rpm").DisplayIndex = 17 + 13
             .Columns("firstdp_circuit").DisplayIndex = 18 + 13
             '.Columns("dp_fill_time").DisplayIndex = 19 + 13
             '.Columns("dp_bleed_time").DisplayIndex = 20 + 13
-            .Columns("dp_flowrate").DisplayIndex = 21 + 13
-            .Columns("dp_flow_tolerance").DisplayIndex = 22 + 13
-            .Columns("dp_back_pressure").DisplayIndex = 23 + 13
+            '.Columns("dp_flowrate").DisplayIndex = 21 + 13
+            '.Columns("dp_flow_tolerance").DisplayIndex = 22 + 13
+            '.Columns("dp_back_pressure").DisplayIndex = 23 + 13
             .Columns("dp_stabilize_time").DisplayIndex = 24 + 13
             .Columns("dp_test_time").DisplayIndex = 25 + 13
             .Columns("dp_lowerlimit").DisplayIndex = 26 + 13
@@ -8245,7 +8255,7 @@ Public Class FormRecipeManagement
             '.Columns("secondflush_bleed_time").DisplayIndex = 32 + 14
             .Columns("secondflush_flowrate").DisplayIndex = 33 + 14
             .Columns("secondflush_flow_tolerance").DisplayIndex = 34 + 14
-            .Columns("secondflush_back_pressure").DisplayIndex = 35 + 14
+            '.Columns("secondflush_back_pressure").DisplayIndex = 35 + 14
             .Columns("secondflush_stabilize_time").DisplayIndex = 36 + 14
             .Columns("secondflush_time").DisplayIndex = 37 + 14
             .Columns("secondflush_rpm").DisplayIndex = 37 + 15
@@ -8268,13 +8278,9 @@ Public Class FormRecipeManagement
             End With
 
             ''Wrap content
-
-
             dgv_RecipeDetails.ColumnHeadersHeight = 100
-
-
-
         End With
+
         FormMain.dgvClearSelection(dgv_RecipeDetails)
     End Sub
 
@@ -8287,16 +8293,12 @@ Public Class FormRecipeManagement
     End Sub
 
     Private Sub btn_Search_Click(sender As Object, e As EventArgs) Handles btn_Search.Click
-
         LoadRecipeDetails(1, cmbx_RcpDetailRecipeID, cmbx_RcpDetailFilter, cmbx_RcpDetailPart, cmbx_RcpDetailType)
-
-
     End Sub
 
-    Private Sub btn_RcpDetailLoad_Click(sender As Object, e As EventArgs) Handles btn_RcpDetailLoad.Click
+    'Private Sub btn_RcpDetailLoad_Click(sender As Object, e As EventArgs) Handles btn_RcpDetailLoad.Click
 
-
-    End Sub
+    'End Sub
 
     Private Sub btn_RcpDetailEdit_Click(sender As Object, e As EventArgs) Handles btn_RcpDetailEdit.Click
         Dim dgv As DataGridView = dgv_RecipeDetails
@@ -8334,9 +8336,7 @@ Public Class FormRecipeManagement
         ' Convert Visible DataGridView Columns To DataTable
         Dim dt As DataTable = GetVisibleColumnsDataTable(dgv_RecipeDetails)    'GetVisibleColumnsDataTable(dgv_recipedetails)
 
-
         ' Get Path
-
         Dim Filepath As String = $"{PublicVariables.CSVPathToRecipeDetails}RecipeDetails_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
 
         ' Export With Return
@@ -8353,7 +8353,6 @@ Public Class FormRecipeManagement
         End If
     End Sub
 #End Region
-
 
 #Region "Tab Control"
     Private Sub tabctrl_RecipeCtrl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_RecipeCtrl.SelectedIndexChanged
@@ -8483,7 +8482,6 @@ Public Class FormRecipeManagement
     End Sub
 #End Region
 
-
 #Region "Form Closing"
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
         If txtbx_RcpEditVerTol.Enabled = True Or txtbx_RcpCreateVerTol.Enabled = True Then
@@ -8511,10 +8509,10 @@ Public Class FormRecipeManagement
 
         If cmbx_RcpDetailRecipeID.SelectedIndex > 0 Then
             Dim dtRecipeTbl As DataTable = SQL.ReadRecords($"
-                            SELECT DISTINCT recipe_rev FROM RecipeTable 
-                            WHERE recipe_id='{DirectCast(cmbx_RcpDetailRecipeID.SelectedItem, KeyValuePair(Of String, String)).Value}' 
-                            ORDER BY recipe_rev ASC
-                        ")
+                SELECT DISTINCT recipe_rev FROM RecipeTable 
+                WHERE recipe_id='{DirectCast(cmbx_RcpDetailRecipeID.SelectedItem, KeyValuePair(Of String, String)).Value}' 
+                ORDER BY recipe_rev ASC
+            ")
 
             If dtRecipeTbl.Rows.Count > 0 Then
                 ' Add Revisions To ComboBox List
@@ -8544,16 +8542,16 @@ Public Class FormRecipeManagement
         Dim SelectedType As String = ComboBox1.SelectedItem
 
         Dim dtFittingTbl As DataTable = SQL.ReadRecords($"
-                        SELECT * FROM FittingType 
-                        WHERE fitting_type='Fittings' 
-                        ORDER BY fitting_name ASC
-                    ")
+            SELECT * FROM FittingType 
+            WHERE fitting_type='Fittings' 
+            ORDER BY fitting_name ASC
+        ")
 
         Dim dtBlankTbl As DataTable = SQL.ReadRecords($"
-                        SELECT * FROM FittingType 
-                        WHERE fitting_type='Blanks' 
-                        ORDER BY fitting_name ASC
-                    ")
+            SELECT * FROM FittingType 
+            WHERE fitting_type='Blanks' 
+            ORDER BY fitting_name ASC
+        ")
 
         For Each cmbx As ComboBox In cmbxArr1
             cmbx.Items.Clear()
@@ -8600,10 +8598,10 @@ Public Class FormRecipeManagement
         Dim SelectedType As String = ComboBox1.SelectedItem
 
         Dim dtFittingTbl As DataTable = SQL.ReadRecords($"
-                        SELECT * FROM FittingType 
-                        WHERE fitting_type='{SelectedType}' 
-                        ORDER BY fitting_name ASC
-                    ")
+            SELECT * FROM FittingType 
+            WHERE fitting_type='{SelectedType}' 
+            ORDER BY fitting_name ASC
+        ")
 
         For Each cmbx As ComboBox In cmbxArr
             cmbx.Items.Clear()
@@ -8621,20 +8619,20 @@ Public Class FormRecipeManagement
         Dim FittingNameInput As String = TextBox1.Text.Trim
 
         Dim dtFittingTbl As DataTable = SQL.ReadRecords($"
-                        SELECT * FROM FittingType 
-                        WHERE fitting_type='{SelectedType}' 
-                        AND fitting_name='{FittingNameInput}' 
-                    ")
+            SELECT * FROM FittingType 
+            WHERE fitting_type='{SelectedType}' 
+            AND fitting_name='{FittingNameInput}' 
+        ")
 
         If dtFittingTbl.Rows.Count > 0 Then
             MsgBox("Fitting Creation Failed, Fitting Exists.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
         Else
             Dim parameters As New Dictionary(Of String, Object) From {
-                            {"fitting_type", SelectedType},
-                            {"fitting_name", FittingNameInput},
-                            {"user_updated", PublicVariables.LoginUserName},
-                            {"date_updated", DateTime.Now.ToString("s")} 'lbl_DateTimeClock.Text}
-                        }
+                {"fitting_type", SelectedType},
+                {"fitting_name", FittingNameInput},
+                {"user_updated", PublicVariables.LoginUserName},
+                {"date_updated", DateTime.Now.ToString("s")} 'lbl_DateTimeClock.Text}
+            }
             Dim InsertRecord As Integer = SQL.InsertRecord("FittingType", parameters)
 
             If InsertRecord > 0 Then
@@ -8710,179 +8708,111 @@ Public Class FormRecipeManagement
         End If
     End Sub
 
-    'Private Sub cmbx_RcpCreatePrepPumpMode_SelectedIndexChanged(sender As Object, e As EventArgs)
-    '    Dim cmbx As ComboBox = cmbx_RcpCreatePrepPumpMode
+    Private Sub rdbtn_RcpCreatePumpMode_CheckedChanged(sender As Object, e As EventArgs) Handles _
+    rdbtn_RcpCreatePrepPumpProcess.CheckedChanged, rdbtn_RcpCreateFlush1PumpProcess.CheckedChanged, rdbtn_RcpCreateFlush2PumpProcess.CheckedChanged, rdbtn_RcpCreateDPTestPumpProcess.CheckedChanged,
+    rdbtn_RcpCreatePrepPumpSpeed.CheckedChanged, rdbtn_RcpCreateFlush1PumpSpeed.CheckedChanged, rdbtn_RcpCreateFlush2PumpSpeed.CheckedChanged, rdbtn_RcpCreateDPTestPumpSpeed.CheckedChanged
 
-    '    Dim txtbxProcessArr() As TextBox = {txtbx_RcpCreatePrepFlow, txtbx_RcpCreateFlush1Flow, txtbx_RcpCreateDPFlow, txtbx_RcpCreateFlush2Flow, txtbx_RcpCreateFlush1FlowTol, txtbx_RcpCreateDPFlowTol, txtbx_RcpCreateFlush2FlowTol}
-    '    Dim txtbxSpeedArr() As TextBox = {txtbx_RcpCreatePrepFlowTol, txtbx_RcpCreatePrepRPM, txtbx_RcpCreatePrepRPM2, txtbx_RcpCreateFlush1RPM, txtbx_RcpCreateFlush2RPM, txtbx_RcpCreateDPTestRPM}
+        If rdbtn_RcpCreatePrepPumpSpeed.Checked Then
+            i_preprpm1 = nom_i_preprpm1
+            With txtbx_RcpCreatePrepRPM
+                .Enabled = True
+                .Text = i_preprpm1
+            End With
+        Else
+            i_preprpm1 = 0
+            With txtbx_RcpCreatePrepRPM
+                .Enabled = False
+                .Text = Nothing
+            End With
+        End If
+        If rdbtn_RcpCreateFlush1PumpSpeed.Checked Then
+            i_flush1rpm = nom_i_flush1rpm
+            With txtbx_RcpCreateFlush1RPM
+                .Enabled = True
+                .Text = i_flush1rpm
+            End With
+        Else
+            i_flush1rpm = 0
+            With txtbx_RcpCreateFlush1RPM
+                .Enabled = False
+                .Text = Nothing
+            End With
+        End If
+        If rdbtn_RcpCreateFlush2PumpSpeed.Checked Then
+            i_flush2rpm = nom_i_flush2rpm
+            With txtbx_RcpCreateFlush2RPM
+                .Enabled = True
+                .Text = i_flush2rpm
+            End With
+        Else
+            i_flush2rpm = 0
+            With txtbx_RcpCreateFlush2RPM
+                .Enabled = False
+                .Text = Nothing
+            End With
+        End If
+        If rdbtn_RcpCreateDPTestPumpSpeed.Checked Then
+            i_dptestrpm = nom_i_dptestrpm
+            With txtbx_RcpCreateDPTestRPM
+                .Enabled = True
+                .Text = i_dptestrpm
+            End With
+        Else
+            i_dptestrpm = 0
+            With txtbx_RcpCreateDPTestRPM
+                .Enabled = False
+                .Text = Nothing
+            End With
+        End If
+    End Sub
 
-    '    If cmbx.SelectedIndex >= 0 Then
-    '        Select Case cmbx.SelectedIndex
-    '            Case 0
-    '                btn_RcpCreateCal.Enabled = False
-    '                'txtbx_RcpCreatePrepFlowTol.Enabled = False
-    '                For Each txtbx In txtbxProcessArr
-    '                    If txtbx Is txtbx_RcpCreatePrepFlow Then
-    '                        txtbx.Enabled = True
-    '                        txtbx.Text = nom_d_prepflow.ToString("F1")
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush1Flow Then
-    '                        If checkbx_CreateFlush1.Checked Then
-    '                            txtbx.Enabled = True
-    '                            txtbx.Text = nom_d_flush1flow.ToString("F1")
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateDPFlow Then
-    '                        If checkbx_CreateDPTest1.Checked Then
-    '                            txtbx.Enabled = True
-    '                            txtbx.Text = nom_d_dptestflow.ToString("F1")
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush2Flow Then
-    '                        If checkbx_CreateFlush2.Checked Then
-    '                            txtbx.Enabled = True
-    '                            txtbx.Text = nom_d_flush2flow.ToString("F1")
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush1FlowTol Then
-    '                        If checkbx_CreateFlush1.Checked Then
-    '                            txtbx.Enabled = True
-    '                            txtbx.Text = nom_d_flush1flowtol.ToString("F1")
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateDPFlowTol Then
-    '                        If checkbx_CreateDPTest1.Checked Then
-    '                            txtbx.Enabled = True
-    '                            txtbx.Text = nom_d_dptestflowtol.ToString("F1")
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush2FlowTol Then
-    '                        If checkbx_CreateFlush2.Checked Then
-    '                            txtbx.Enabled = True
-    '                            txtbx.Text = nom_d_flush2flowtol.ToString("F1")
-    '                        End If
-    '                    End If
-    '                Next
-    '                For Each txtbx In txtbxSpeedArr
-    '                    If txtbx Is txtbx_RcpCreatePrepFlowTol Then
-    '                        txtbx.Enabled = False
-    '                        txtbx.Text = "0.0"
-    '                        d_prepflowtol = 0
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreatePrepRPM Or txtbx Is txtbx_RcpCreatePrepRPM2 Then
-    '                        txtbx.Enabled = False
-    '                        txtbx.Text = 0
-    '                        i_preprpm1 = 0
-    '                        i_preprpm2 = 0
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush1RPM Then
-    '                        If checkbx_CreateFlush1.Checked Then
-    '                            txtbx.Enabled = False
-    '                            txtbx.Text = 0
-    '                            i_flush1rpm = 0
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateDPTestRPM Then
-    '                        If checkbx_CreateDPTest1.Checked Then
-    '                            txtbx.Enabled = False
-    '                            txtbx.Text = 0
-    '                            i_dptestrpm = 0
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush2RPM Then
-    '                        If checkbx_CreateFlush2.Checked Then
-    '                            txtbx.Enabled = False
-    '                            txtbx.Text = 0
-    '                            i_flush1rpm = 0
-    '                        End If
-    '                    End If
-    '                Next
-    '            Case 1
-    '                btn_RcpCreateCal.Enabled = True
-    '                'txtbx_RcpCreatePrepFlowTol.Enabled = True
-    '                For Each txtbx In txtbxProcessArr
-    '                    If txtbx Is txtbx_RcpCreatePrepFlow Then
-    '                        'txtbx.Enabled = False
-    '                        'txtbx.Text = "0.0"
-    '                        'd_prepflow = 0
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush1Flow Then
-    '                        If checkbx_CreateFlush1.Checked Then
-    '                            txtbx.Enabled = False
-    '                            txtbx.Text = d_prepflow.ToString("F1") '"0.0"
-    '                            d_flush1flow = d_prepflow '0
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateDPFlow Then
-    '                        If checkbx_CreateDPTest1.Checked Then
-    '                            txtbx.Enabled = False
-    '                            txtbx.Text = d_prepflow.ToString("F1") '"0.0"
-    '                            d_dptestflow = d_prepflow '0
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush2Flow Then
-    '                        If checkbx_CreateFlush2.Checked Then
-    '                            txtbx.Enabled = False
-    '                            txtbx.Text = d_prepflow.ToString("F1") '"0.0"
-    '                            d_flush2flow = d_prepflow '0
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush1FlowTol Then
-    '                        If checkbx_CreateFlush1.Checked Then
-    '                            txtbx.Enabled = False
-    '                            txtbx.Text = "0.0"
-    '                            d_flush1flowtol = 0
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateDPFlowTol Then
-    '                        If checkbx_CreateDPTest1.Checked Then
-    '                            txtbx.Enabled = False
-    '                            txtbx.Text = "0.0"
-    '                            d_dptestflowtol = 0
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush2FlowTol Then
-    '                        If checkbx_CreateFlush2.Checked Then
-    '                            txtbx.Enabled = False
-    '                            txtbx.Text = "0.0"
-    '                            d_flush2flowtol = 0
-    '                        End If
-    '                    End If
-    '                Next
-    '                For Each txtbx In txtbxSpeedArr
-    '                    If txtbx Is txtbx_RcpCreatePrepFlowTol Then
-    '                        txtbx.Enabled = True
-    '                        txtbx.Text = nom_d_prepflowtol
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreatePrepRPM Then
-    '                        txtbx.Enabled = True
-    '                        txtbx.Text = nom_i_preprpm1
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreatePrepRPM2 Then
-    '                        txtbx.Enabled = True
-    '                        txtbx.Text = nom_i_preprpm2
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush1RPM Then
-    '                        If checkbx_CreateFlush1.Checked Then
-    '                            txtbx.Enabled = True
-    '                            txtbx.Text = nom_i_flush1rpm
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateDPTestRPM Then
-    '                        If checkbx_CreateDPTest1.Checked Then
-    '                            txtbx.Enabled = True
-    '                            txtbx.Text = nom_i_flush2rpm
-    '                        End If
-    '                    End If
-    '                    If txtbx Is txtbx_RcpCreateFlush2RPM Then
-    '                        If checkbx_CreateFlush2.Checked Then
-    '                            txtbx.Enabled = True
-    '                            txtbx.Text = nom_i_dptestrpm
-    '                        End If
-    '                    End If
-    '                Next
-    '        End Select
-    '    End If
-    'End Sub
+    Private Sub rdbtn_RcpEditPumpMode_CheckedChanged(sender As Object, e As EventArgs) Handles _
+    rdbtn_RcpEditPrepPumpProcess.CheckedChanged, rdbtn_RcpEditFlush1PumpProcess.CheckedChanged, rdbtn_RcpEditFlush2PumpProcess.CheckedChanged, rdbtn_RcpEditDPTestPumpProcess.CheckedChanged,
+    rdbtn_RcpEditPrepPumpSpeed.CheckedChanged, rdbtn_RcpEditFlush1PumpSpeed.CheckedChanged, rdbtn_RcpEditFlush2PumpSpeed.CheckedChanged, rdbtn_RcpEditDPTestPumpSpeed.CheckedChanged
 
+        If rdbtn_RcpEditPrepPumpSpeed.Checked Then
+            With txtbx_RcpEditPrepRPM
+                .Enabled = True
+                .Text = i_preprpm1
+            End With
+        Else
+            With txtbx_RcpEditPrepRPM
+                .Enabled = False
+                .Text = Nothing
+            End With
+        End If
+        If rdbtn_RcpEditFlush1PumpSpeed.Checked Then
+            With txtbx_RcpEditFlush1RPM
+                .Enabled = True
+                .Text = i_flush1rpm
+            End With
+        Else
+            With txtbx_RcpEditFlush1RPM
+                .Enabled = False
+                .Text = Nothing
+            End With
+        End If
+        If rdbtn_RcpEditFlush2PumpSpeed.Checked Then
+            With txtbx_RcpEditFlush2RPM
+                .Enabled = True
+                .Text = i_flush2rpm
+            End With
+        Else
+            With txtbx_RcpEditFlush2RPM
+                .Enabled = False
+                .Text = Nothing
+            End With
+        End If
+        If rdbtn_RcpEditDPTestPumpSpeed.Checked Then
+            With txtbx_RcpEditDPTestRPM
+                .Enabled = True
+                .Text = i_dptestrpm
+            End With
+        Else
+            With txtbx_RcpEditDPTestRPM
+                .Enabled = False
+                .Text = Nothing
+            End With
+        End If
+    End Sub
 End Class

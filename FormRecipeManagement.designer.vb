@@ -642,7 +642,9 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpDeleteRecipeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpDeleteRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpDeleteRecipeID.FormattingEnabled = True
-        Me.cmbx_RcpDeleteRecipeID.Location = New System.Drawing.Point(152, 159)
+        Me.cmbx_RcpDeleteRecipeID.IntegralHeight = False
+        Me.cmbx_RcpDeleteRecipeID.Location = New System.Drawing.Point(152, 147)
+        Me.cmbx_RcpDeleteRecipeID.MaxDropDownItems = 11
         Me.cmbx_RcpDeleteRecipeID.Name = "cmbx_RcpDeleteRecipeID"
         Me.cmbx_RcpDeleteRecipeID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpDeleteRecipeID.TabIndex = 19
@@ -665,7 +667,7 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpDeleteFilterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpDeleteFilterType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpDeleteFilterType.FormattingEnabled = True
-        Me.cmbx_RcpDeleteFilterType.Location = New System.Drawing.Point(152, 69)
+        Me.cmbx_RcpDeleteFilterType.Location = New System.Drawing.Point(152, 57)
         Me.cmbx_RcpDeleteFilterType.Name = "cmbx_RcpDeleteFilterType"
         Me.cmbx_RcpDeleteFilterType.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpDeleteFilterType.TabIndex = 16
@@ -675,7 +677,9 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpDeletePartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpDeletePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpDeletePartID.FormattingEnabled = True
-        Me.cmbx_RcpDeletePartID.Location = New System.Drawing.Point(152, 114)
+        Me.cmbx_RcpDeletePartID.IntegralHeight = False
+        Me.cmbx_RcpDeletePartID.Location = New System.Drawing.Point(152, 102)
+        Me.cmbx_RcpDeletePartID.MaxDropDownItems = 11
         Me.cmbx_RcpDeletePartID.Name = "cmbx_RcpDeletePartID"
         Me.cmbx_RcpDeletePartID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpDeletePartID.TabIndex = 17
@@ -683,7 +687,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpDeletePartID
         '
         Me.dsp_RcpDeletePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpDeletePartID.Location = New System.Drawing.Point(21, 115)
+        Me.dsp_RcpDeletePartID.Location = New System.Drawing.Point(21, 103)
         Me.dsp_RcpDeletePartID.Name = "dsp_RcpDeletePartID"
         Me.dsp_RcpDeletePartID.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpDeletePartID.TabIndex = 104
@@ -693,7 +697,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpDeleteRecipeID
         '
         Me.dsp_RcpDeleteRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpDeleteRecipeID.Location = New System.Drawing.Point(21, 160)
+        Me.dsp_RcpDeleteRecipeID.Location = New System.Drawing.Point(21, 148)
         Me.dsp_RcpDeleteRecipeID.Name = "dsp_RcpDeleteRecipeID"
         Me.dsp_RcpDeleteRecipeID.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpDeleteRecipeID.TabIndex = 104
@@ -703,7 +707,7 @@ Partial Class FormRecipeManagement
         'dsp_RcpDeleteFilterType
         '
         Me.dsp_RcpDeleteFilterType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpDeleteFilterType.Location = New System.Drawing.Point(21, 69)
+        Me.dsp_RcpDeleteFilterType.Location = New System.Drawing.Point(21, 57)
         Me.dsp_RcpDeleteFilterType.Name = "dsp_RcpDeleteFilterType"
         Me.dsp_RcpDeleteFilterType.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpDeleteFilterType.TabIndex = 104
@@ -753,7 +757,9 @@ Partial Class FormRecipeManagement
         Me.cmbx_PartDeletePartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_PartDeletePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_PartDeletePartID.FormattingEnabled = True
+        Me.cmbx_PartDeletePartID.IntegralHeight = False
         Me.cmbx_PartDeletePartID.Location = New System.Drawing.Point(152, 113)
+        Me.cmbx_PartDeletePartID.MaxDropDownItems = 11
         Me.cmbx_PartDeletePartID.Name = "cmbx_PartDeletePartID"
         Me.cmbx_PartDeletePartID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_PartDeletePartID.TabIndex = 14
@@ -2261,7 +2267,9 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpDupSelRecipe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpDupSelRecipe.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpDupSelRecipe.FormattingEnabled = True
+        Me.cmbx_RcpDupSelRecipe.IntegralHeight = False
         Me.cmbx_RcpDupSelRecipe.Location = New System.Drawing.Point(152, 57)
+        Me.cmbx_RcpDupSelRecipe.MaxDropDownItems = 11
         Me.cmbx_RcpDupSelRecipe.Name = "cmbx_RcpDupSelRecipe"
         Me.cmbx_RcpDupSelRecipe.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpDupSelRecipe.TabIndex = 15
@@ -2364,7 +2372,9 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpEditRecipeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpEditRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpEditRecipeID.FormattingEnabled = True
+        Me.cmbx_RcpEditRecipeID.IntegralHeight = False
         Me.cmbx_RcpEditRecipeID.Location = New System.Drawing.Point(152, 158)
+        Me.cmbx_RcpEditRecipeID.MaxDropDownItems = 11
         Me.cmbx_RcpEditRecipeID.Name = "cmbx_RcpEditRecipeID"
         Me.cmbx_RcpEditRecipeID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpEditRecipeID.TabIndex = 13
@@ -2374,7 +2384,9 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpEditPartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpEditPartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpEditPartID.FormattingEnabled = True
+        Me.cmbx_RcpEditPartID.IntegralHeight = False
         Me.cmbx_RcpEditPartID.Location = New System.Drawing.Point(152, 113)
+        Me.cmbx_RcpEditPartID.MaxDropDownItems = 11
         Me.cmbx_RcpEditPartID.Name = "cmbx_RcpEditPartID"
         Me.cmbx_RcpEditPartID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpEditPartID.TabIndex = 12
@@ -3635,7 +3647,9 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpCreatePartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_RcpCreatePartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_RcpCreatePartID.FormattingEnabled = True
+        Me.cmbx_RcpCreatePartID.IntegralHeight = False
         Me.cmbx_RcpCreatePartID.Location = New System.Drawing.Point(152, 102)
+        Me.cmbx_RcpCreatePartID.MaxDropDownItems = 11
         Me.cmbx_RcpCreatePartID.Name = "cmbx_RcpCreatePartID"
         Me.cmbx_RcpCreatePartID.Size = New System.Drawing.Size(250, 29)
         Me.cmbx_RcpCreatePartID.TabIndex = 18

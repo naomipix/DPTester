@@ -134,24 +134,24 @@ Module PublicVariables
 
     'Ini Recipe Parameters Limits
     Public Limit_Min_d_vertol As Decimal
-
-    Public Limit_Min_i_prepfilltime As Integer
-    Public Limit_Min_i_prepbleedtime As Integer
     Public Limit_Min_d_prepflow As Decimal
     Public Limit_Min_d_prepflowtol As Decimal
-    Public Limit_Min_d_preppressure As Decimal
-    Public Limit_Min_d_preppressuredrop As Decimal
-    Public Limit_Min_i_preppressuredroptime As Integer
+
+    Public Limit_Min_i_prepfilltime As Integer
     Public Limit_Min_i_prepprefillstarttime As Integer
     Public Limit_Min_i_prepprefilltime As Integer
+    Public Limit_Min_i_prepbleedtime As Integer
+    Public Limit_Min_d_preppressure As Decimal
+    Public Limit_Min_i_preppressuredroptime As Integer
+    Public Limit_Min_d_preppressuredrop As Decimal
     Public Limit_Min_i_preprpm1 As Integer
-    Public Limit_Min_i_preprpm2 As Integer
+    'Public Limit_Min_i_preprpm2 As Integer
 
     'Public Limit_Min_i_flush1filltime As Integer
     'Public Limit_Min_i_flush1bleedtime As Integer
     Public Limit_Min_d_flush1flow As Decimal
     Public Limit_Min_d_flush1flowtol As Decimal
-    Public Limit_Min_d_flush1pressure As Decimal
+    'Public Limit_Min_d_flush1pressure As Decimal
     Public Limit_Min_i_flush1stabilize As Integer
     Public Limit_Min_i_flush1time As Integer
     Public Limit_Min_i_flush1rpm As Integer
@@ -159,9 +159,9 @@ Module PublicVariables
 
     'Public Limit_Min_i_dptestfilltime As Integer
     'Public Limit_Min_i_dptestbleedtime As Integer
-    Public Limit_Min_d_dptestflow As Decimal
-    Public Limit_Min_d_dptestflowtol As Decimal
-    Public Limit_Min_d_dptestpressure As Decimal
+    'Public Limit_Min_d_dptestflow As Decimal
+    'Public Limit_Min_d_dptestflowtol As Decimal
+    'Public Limit_Min_d_dptestpressure As Decimal
     Public Limit_Min_i_dpteststabilize As Integer
     Public Limit_Min_i_dptesttime As Integer
     Public Limit_Min_d_dptestlowlimit As Decimal
@@ -175,7 +175,7 @@ Module PublicVariables
     'Public Limit_Min_i_flush2bleedtime As Integer
     Public Limit_Min_d_flush2flow As Decimal
     Public Limit_Min_d_flush2flowtol As Decimal
-    Public Limit_Min_d_flush2pressure As Decimal
+    'Public Limit_Min_d_flush2pressure As Decimal
     Public Limit_Min_i_flush2stabilize As Integer
     Public Limit_Min_i_flush2time As Integer
     Public Limit_Min_i_flush2rpm As Integer
@@ -193,24 +193,24 @@ Module PublicVariables
 
 
     Public Limit_Max_d_vertol As Decimal
-
-    Public Limit_Max_i_prepfilltime As Integer
-    Public Limit_Max_i_prepbleedtime As Integer
     Public Limit_Max_d_prepflow As Decimal
     Public Limit_Max_d_prepflowtol As Decimal
-    Public Limit_Max_d_preppressure As Decimal
-    Public Limit_Max_d_preppressuredrop As Decimal
-    Public Limit_Max_i_preppressuredroptime As Integer
+
+    Public Limit_Max_i_prepfilltime As Integer
     Public Limit_Max_i_prepprefillstarttime As Integer
     Public Limit_Max_i_prepprefilltime As Integer
+    Public Limit_Max_i_prepbleedtime As Integer
+    Public Limit_Max_d_preppressure As Decimal
+    Public Limit_Max_i_preppressuredroptime As Integer
+    Public Limit_Max_d_preppressuredrop As Decimal
     Public Limit_Max_i_preprpm1 As Integer
-    Public Limit_Max_i_preprpm2 As Integer
+    'Public Limit_Max_i_preprpm2 As Integer
 
     'Public Limit_Max_i_flush1filltime As Integer
     'Public Limit_Max_i_flush1bleedtime As Integer
     Public Limit_Max_d_flush1flow As Decimal
     Public Limit_Max_d_flush1flowtol As Decimal
-    Public Limit_Max_d_flush1pressure As Decimal
+    'Public Limit_Max_d_flush1pressure As Decimal
     Public Limit_Max_i_flush1stabilize As Integer
     Public Limit_Max_i_flush1time As Integer
     Public Limit_Max_i_flush1rpm As Integer
@@ -218,9 +218,9 @@ Module PublicVariables
 
     'Public Limit_Max_i_dptestfilltime As Integer
     'Public Limit_Max_i_dptestbleedtime As Integer
-    Public Limit_Max_d_dptestflow As Decimal
-    Public Limit_Max_d_dptestflowtol As Decimal
-    Public Limit_Max_d_dptestpressure As Decimal
+    'Public Limit_Max_d_dptestflow As Decimal
+    'Public Limit_Max_d_dptestflowtol As Decimal
+    'Public Limit_Max_d_dptestpressure As Decimal
     Public Limit_Max_i_dpteststabilize As Integer
     Public Limit_Max_i_dptesttime As Integer
     Public Limit_Max_d_dptestlowlimit As Decimal
@@ -234,7 +234,7 @@ Module PublicVariables
     'Public Limit_Max_i_flush2bleedtime As Integer
     Public Limit_Max_d_flush2flow As Decimal
     Public Limit_Max_d_flush2flowtol As Decimal
-    Public Limit_Max_d_flush2pressure As Decimal
+    'Public Limit_Max_d_flush2pressure As Decimal
     Public Limit_Max_i_flush2stabilize As Integer
     Public Limit_Max_i_flush2time As Integer
     Public Limit_Max_i_flush2rpm As Integer
