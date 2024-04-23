@@ -120,6 +120,9 @@ Module IniFileInitialize
             PublicVariables.ConfirmationIdLenHigh = IniFileHandler.ReadIniValue(IniFilePath, Section3, "ConfirmationIdLenHigh", "5")
             PublicVariables.QuantityLenLow = IniFileHandler.ReadIniValue(IniFilePath, Section3, "QuantityLenLow", "1")
             PublicVariables.QuantityLenHigh = IniFileHandler.ReadIniValue(IniFilePath, Section3, "QuantityLenHigh", "1")
+            If PublicVariables.QuantityLenHigh > 3 Then
+                PublicVariables.QuantityLenHigh = 3
+            End If
             PublicVariables.SerialNumLen = IniFileHandler.ReadIniValue(IniFilePath, Section3, "SerialNumLen", "3")
 
             Dim Section4 As String = "Chart"

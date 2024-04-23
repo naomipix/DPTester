@@ -396,7 +396,8 @@ Public Class FormRecipeManagement
 
     ' To Check whether the String has any special Characters other than "-" and "_"
     Public Function Checkspecial(specialstr As String) As Integer
-        Dim specialchar() As Char = New Char() {"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "+", "=", "[", "]", "{", "}", ":", ";", "'", ",", ".", "<", ">", "/", "?", "|", "\", "~", "`", """"}
+        'Dim specialchar() As Char = New Char() {"!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "+", "=", "[", "]", "{", "}", ":", ";", "'", ",", ".", "<", ">", "/", "?", "|", "\", "~", "`", """"}
+        Dim specialchar() As Char = New Char() {"!", "@", "#", "$", "%", "^", "&", "(", ")", "+", "=", "[", "]", "{", "}", ":", ";", "'", ",", ".", "<", ">", "?", "|", "\", "~", "`", """"}
         Return specialstr.IndexOfAny(specialchar)
     End Function
 
@@ -1743,14 +1744,12 @@ Public Class FormRecipeManagement
         If Char.IsWhiteSpace(e.KeyChar) Then
             e.Handled = True ' Suppress the key press
         End If
-        If Not Char.IsLetterOrDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso Not e.KeyChar = "_" Then
+        If Not Char.IsLetterOrDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso Not e.KeyChar = "_" AndAlso Not e.KeyChar = "*" AndAlso Not e.KeyChar = "/" Then
             e.Handled = True ' Suppress the key press
         End If
         If e.KeyChar = "_" AndAlso DirectCast(sender, TextBox).Text.Contains("_") Then
-
-            e.Handled = True ' Suppress the key press
+            'e.Handled = True ' Suppress the key press
         End If
-
     End Sub
 
     Private Sub gotcursor(sender As Object, e As EventArgs) Handles txtbx_PartCreatePartID.GotFocus, txtbx_RcpCreateRecipeID.GotFocus, txtbx_RcpDupNewRecipeID.GotFocus
