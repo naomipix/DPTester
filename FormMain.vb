@@ -3849,11 +3849,11 @@ Public Class FormMain
 
             Float2int(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
             Float2int(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
-            Float2int(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
+            'Float2int(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
 
-            Float2int(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
-            Float2int(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
-            Float2int(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
+            'Float2int(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
+            'Float2int(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
+            'Float2int(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
 
             Float2int(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
             Float2int(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
@@ -3864,7 +3864,7 @@ Public Class FormMain
 
             Float2int(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
             Float2int(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
-            Float2int(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
+            'Float2int(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
 
             Float2int(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
 
@@ -3872,7 +3872,7 @@ Public Class FormMain
 
             Float2int(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
 
-            DInt2int(112, CType(dtrecipe.Rows(0)("prep_fill_time"), Integer))
+            DInt2int(112, CType(dtrecipe.Rows(0)("prep_fill_time"), Integer) - CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
             DInt2int(114, CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
             DInt2int(116, CType(dtrecipe.Rows(0)("prep_pressure_drop_time"), Integer))
 
@@ -3947,13 +3947,28 @@ Public Class FormMain
             Else
                 DInt2int(144, 0)
             End If
+            If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
+                DInt2int(158, 1)
+            Else
+                DInt2int(158, 0)
+            End If
+            If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
+                DInt2int(160, 1)
+            Else
+                DInt2int(160, 0)
+            End If
+            If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
+                DInt2int(162, 1)
+            Else
+                DInt2int(162, 0)
+            End If
 
             Float2int(146, CType(dtrecipe.Rows(0)("prep_rpm1"), Double))
-            Float2int(158, CType(dtrecipe.Rows(0)("prep_rpm2"), Double))
-            Float2int(156, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
-            Float2int(154, CType(dtrecipe.Rows(0)("secondflush_rpm"), Double))
-            Float2int(152, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
-            Float2int(150, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
+            'Float2int(148, CType(dtrecipe.Rows(0)("prep_rpm2"), Double))
+            Float2int(150, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
+            Float2int(152, CType(dtrecipe.Rows(0)("secondflush_rpm"), Double))
+            Float2int(154, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
+            Float2int(156, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
 
         End If
 
