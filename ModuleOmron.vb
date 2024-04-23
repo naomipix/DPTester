@@ -1306,15 +1306,15 @@ Module ModuleOmron
                     SetButtonState(FormCalibration.btn_Calibrate, True, "Calibrate")
                 Else
                     SetButtonState(FormCalibration.btn_Calibrate, False, "Calibrate")
-                    FormCalibration.tmr_Calibration.Enabled = False
-                    FormCalibration.CalibrationThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+                    'FormCalibration.tmr_Calibration.Enabled = False
+                    'FormCalibration.CalibrationThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
                 End If
                 If PLCstatus(1)(3) = True Then
                     SetButtonState(FormCalibration.btn_Verify, True, "Verify")
                 Else
                     SetButtonState(FormCalibration.btn_Verify, False, "Verify")
-                    FormCalibration.tmr_Verification.Enabled = False
-                    FormCalibration.VerificationThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+                    'FormCalibration.tmr_Verification.Enabled = False
+                    'FormCalibration.VerificationThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
                 End If
                 If FINSinput(21) = 0 And FormCalibration.dtCalibration.Rows.Count = 0 And FormCalibration.dtVerification.Rows.Count = 0 Then
                     FormCalibration.btn_Calibrate.Enabled = True
@@ -1326,12 +1326,6 @@ Module ModuleOmron
                     FormCalibration.btn_Verify.Enabled = True
                 Else
                     FormCalibration.btn_Verify.Enabled = False
-                End If
-
-                If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(21) = 1700 Or FINSinput(21) = 1730 Then
-                    CalrecordValue = True
-                Else
-                    CalrecordValue = False
                 End If
 
                 If FINSinput(21) <> Cal_MessageNo Then
@@ -1375,8 +1369,8 @@ Module ModuleOmron
                 FormMain.lbl_TotalProdQty.Text = CInt(FINSinput(40).ToString) + CInt(FINSinput(42).ToString)
 
                 If PLCstatus(1)(10) = False Then
-                    Resultcapturetimer.Enabled = False
-                    ResultCaptureThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+                    'Resultcapturetimer.Enabled = False
+                    'ResultCaptureThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
                 End If
 #End Region
 
@@ -1467,6 +1461,13 @@ Module ModuleOmron
                     SetAbort = False
                 End If
 
+                'If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(21) = 1700 Or FINSinput(21) = 1730 Then
+                If FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(21) = 1700 Or FINSinput(21) = 1730 Then
+                    CalrecordValue = True
+                Else
+                    CalrecordValue = False
+                End If
+
                 ' Reset Part Presense If Cal/Ver Seq Not Running
                 If PLCstatus(1)(2) = False And PLCstatus(1)(3) = False Then
                     PCStatus(1)(7) = False
@@ -1496,7 +1497,8 @@ Module ModuleOmron
                     PCStatus(1)(14) = False
                 End If
 
-                If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(20) = 1700 Then
+                'If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(20) = 1700 Then
+                If FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(20) = 1700 Then
                     MainrecordValue = True
                 Else
                     MainrecordValue = False
