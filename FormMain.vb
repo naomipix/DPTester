@@ -3960,6 +3960,11 @@ Public Class FormMain
             Float2int(154, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
             Float2int(156, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
 
+            If JigType = 1 And JigType = 6 Then
+                DInt2int(164, 1)
+            Else
+                DInt2int(164, 0)
+            End If
         End If
 
         ' Force Load Recipe Data In Cal Form
