@@ -1,15 +1,6 @@
 ﻿Imports PoohPlcLink
-Imports EEIP
 Imports System.Text
-Imports System.ComponentModel
-Imports System.Runtime.InteropServices.ComTypes
-Imports System.Diagnostics.Eventing.Reader
-Imports System.Security.Cryptography
-Imports Microsoft.VisualBasic.ApplicationServices
-Imports DocumentFormat.OpenXml.Drawing
 Imports LiveChartsCore.Defaults
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar
-Imports System.Reflection.Emit
 
 Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
@@ -124,7 +115,6 @@ Module ModuleOmron
     Dim MsgWarningColorT As Color = SystemColors.ControlText
     Dim MsgAlarmColorT As Color = SystemColors.Window
 
-
     ' For PLC Threaded Operations
     Dim PumpCtrlQuery As String = ""
     Dim PumpCtrlResponse As String = ""
@@ -151,7 +141,6 @@ Module ModuleOmron
     Public SetEndLot As Boolean = False
     Public ResetEndLot As Boolean = False
     Public SetMainSeqCompleteAck As Boolean = False
-
 
 #Region "FINS protocol"
     Public Sub FINSInitialise()
@@ -211,9 +200,7 @@ Module ModuleOmron
         For i As Integer = 0 To 1
             ToolCounterreset(i) = {False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False}
         Next
-
     End Sub
-
 
     Public Function RealFromPLC(PLC As PoohFinsETN, Mem As PoohFinsETN.MemoryTypes, Startoffset As Integer) As String
         'This Function convert Hex string given by PLC on reading its Memory into Boolean string, so that it can be used to find the Float/decimal value
@@ -231,7 +218,6 @@ Module ModuleOmron
         secondpart = hexchar.Substring(4, 4)
         modhex = String.Concat(secondpart, firstpart)
 
-
         'Convert the hex char into Decimal equivalent
         For i As Integer = 0 To modhex.Length - 1
             hextoint(i) = Convert.ToInt32(modhex.Substring(i, 1), 16)
@@ -244,7 +230,6 @@ Module ModuleOmron
         Next
 
         Return (Math.Round(DecimalBoolStringtoDecimal(boolstring.ToString), 2)).ToString
-
     End Function
 
 
@@ -287,11 +272,9 @@ Module ModuleOmron
                     result = -((wholeNumber + fractionalnumber) * (2 ^ exponent))
                     Return result
                 End If
-
             Else
                 Return 0.0
             End If
-
         Else
             Return 0.0
         End If
@@ -374,7 +357,6 @@ Module ModuleOmron
         val(0) = HextoDec(hexpart.ToString.Substring(hexpart.ToString.Length - 4, 4))
         val(1) = HextoDec(hexpart.ToString.Substring(0, 4))
 
-
         PLC.WriteMemoryWord(PoohFinsETN.MemoryTypes.DM, Offset, val(0), PoohFinsETN.DataTypes.UnSignBIN)
         PLC.WriteMemoryWord(PoohFinsETN.MemoryTypes.DM, Offset + 1, val(1), PoohFinsETN.DataTypes.UnSignBIN)
         Return True
@@ -398,12 +380,10 @@ Module ModuleOmron
     End Function
 
     Public Function Boolarr2int(boolarr As Boolean()) As UInt16
-
         Dim Value(1) As Byte
         Dim result As UInt16
 
         Dim resultarr(15) As Boolean
-
 
         result = 0
         For i As Integer = 0 To boolarr.Length - 1
@@ -414,7 +394,6 @@ Module ModuleOmron
 
         Return result
     End Function
-
 
     Public Function Float2int(offset As Integer, real As Double) As Boolean
         'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
@@ -512,7 +491,6 @@ Module ModuleOmron
             hexstr = hexpart.ToString
         End If
 
-
         For k As Integer = 0 To 1
             val(k) = HextoDec(hexstr.Substring(k * 4, 4))
             FINSOutput(offset + k) = val(k)
@@ -538,7 +516,6 @@ Module ModuleOmron
         hexchar.Append(Value0(1).ToString("X2"))
         hexchar.Append(Value0(0).ToString("X2"))
 
-
         modhex = hexchar.ToString.Substring(0, 8)
 
         'Convert the hex char into Decimal equivalent
@@ -553,7 +530,6 @@ Module ModuleOmron
         Return (Math.Round(DecimalBoolStringtoDecimal(boolstring.ToString), 2))
     End Function
 
-    '   
     Public Function DInt2int(offset As Integer, Value As Int32) As Boolean
         'OFFSET IN TERMS OF NUMBER OF WORDS, NOT BYTES
         Dim Val As Byte() = BitConverter.GetBytes(Value)
@@ -563,10 +539,7 @@ Module ModuleOmron
         Next
         Return True
     End Function
-
-
 #End Region
-
 
 #Region "General Conversions"
     Public Function BinToHex(BinNum As String) As String
@@ -656,11 +629,8 @@ Module ModuleOmron
 
 #End Region
 
-
-
 #Region "IO Status Fetch"
     Public Function FetchPLC_DIn(start As Integer) As Boolean
-
         For i As Integer = 0 To DIn.Length - 1
             DIn(i) = Int2BoolArr(FINSinput(start + i))
         Next
@@ -673,12 +643,10 @@ Module ModuleOmron
             FormMain.dgv_DigitalInput.Rows(i).Cells("value").Value = DIn(1)(i - 16)
         Next
 
-
         Return True
     End Function
 
     Public Function FetchPLC_DOut(start As Integer) As Boolean
-
         For i As Integer = 0 To DOut.Length - 1
             DOut(i) = Int2BoolArr(FINSinput(start + i))
         Next
@@ -698,10 +666,7 @@ Module ModuleOmron
     End Function
 
     Public Function FetchPLC_Ain(start As Integer) As Boolean
-
         'RealFromPLC(OmronPLC, PoohFinsETN.MemoryTypes.DM, 1)
-
-
 
         For i As Integer = 0 To AIn.Length - 1
 
@@ -714,22 +679,16 @@ Module ModuleOmron
     End Function
 
     Public Function FetchPLC_AOut(start As Integer) As Boolean
-
         For i As Integer = 0 To AOut.Length - 1
             AOut(i) = Int2Float(FINSinput, start + (i * 2))
         Next
         For i As Integer = 0 To 3
             FormMain.dgv_AnalogOutput.Rows(i).Cells("value").Value = AOut(i)
         Next
+
         Return True
     End Function
-
-
-
-
-
 #End Region
-
 
 #Region "Alarm and Warnings Fetch"
     Public Function FetchAlarm(start As Integer) As Boolean
@@ -780,9 +739,6 @@ Module ModuleOmron
                         If FormSetting.lbl_StartTime.Text.Length > 6 And FormSetting.lbl_EndTime.Text.Length < 6 Then
                             FormSetting.dtbuyoffmessage.Rows.Add(FormSetting.dtbuyoffmessage.Rows.Count - 1, FormSetting.dtbuyoffmessage.Rows.Count, alarmcode, DateTime.Now, dtAlarm.Rows((i * 16) + j).Item("description"))
                         End If
-
-
-
                     End If
                 Else
                     If Alarm(i)(j) = False And Currentalarm.ContainsKey(dtAlarm.Rows((i * 16) + j).Item("id")) Then
@@ -803,7 +759,6 @@ Module ModuleOmron
                                     Mainalarm.Rows.RemoveAt(findrow)
                                 Next
                             End If
-
                         End If
 
                         ' Set Alarm Timer If Is First Tick
@@ -833,28 +788,20 @@ Module ModuleOmron
 
         Return True
     End Function
-
-
 #End Region
 
-
-
 #Region "Put PC Manual Control"
-
     Public Function Put_PCManualctrl() As Boolean
-
         For i As Integer = 0 To 5
             FINSOutput(3 + i) = Boolarr2int(ManualCtrl(i))
         Next
         For i As Integer = 0 To 2
             FINSOutput(i) = Boolarr2int(PCStatus(i))
         Next
+
         Return True
     End Function
-
 #End Region
-
-
 
 #Region "PLC Read and Write"
     Public Function FINSInputRead() As Boolean
@@ -876,7 +823,6 @@ Module ModuleOmron
             For b As Integer = 0 To 4
                 pumpcontrolresponse.Append(Fillzerobefore(Conversion.Hex(FINSinput(183 + b)), 4))
             Next
-
 
             'FormMain.txtbx_PumpcontrolQuery.Text = pumpcontrolquery.ToString
             PumpCtrlQuery = pumpcontrolquery.ToString
@@ -919,10 +865,8 @@ Module ModuleOmron
         Return True
     End Function
 
-
     Public Function FINSWrite(offset As Integer, size As Integer) As Boolean
         Try
-
             Dim writetext As New StringBuilder(1500)
             'PLCtimer.Enabled = False
             PLCThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
@@ -964,6 +908,7 @@ Module ModuleOmron
     'Private Sub PLCThreadingTimer_Ticks(ByVal state As Object)
 
     'End Sub
+
     Private Sub PLCTimer1_Ticks(sender As Object, e As EventArgs) Handles PLCtimer.Tick
         FormMain.txtbx_PLCRead.Text = PLCReadStr
         FormMain.txtbx_PumpcontrolQuery.Text = PumpCtrlResponse
@@ -1361,11 +1306,15 @@ Module ModuleOmron
                     SetButtonState(FormCalibration.btn_Calibrate, True, "Calibrate")
                 Else
                     SetButtonState(FormCalibration.btn_Calibrate, False, "Calibrate")
+                    FormCalibration.tmr_Calibration.Enabled = False
+                    FormCalibration.CalibrationThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
                 End If
                 If PLCstatus(1)(3) = True Then
                     SetButtonState(FormCalibration.btn_Verify, True, "Verify")
                 Else
                     SetButtonState(FormCalibration.btn_Verify, False, "Verify")
+                    FormCalibration.tmr_Verification.Enabled = False
+                    FormCalibration.VerificationThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
                 End If
                 If FINSinput(21) = 0 And FormCalibration.dtCalibration.Rows.Count = 0 And FormCalibration.dtVerification.Rows.Count = 0 Then
                     FormCalibration.btn_Calibrate.Enabled = True
@@ -1424,6 +1373,11 @@ Module ModuleOmron
                 FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
                 FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
                 FormMain.lbl_TotalProdQty.Text = CInt(FINSinput(40).ToString) + CInt(FINSinput(42).ToString)
+
+                If PLCstatus(1)(10) = False Then
+                    Resultcapturetimer.Enabled = False
+                    ResultCaptureThreadingTmr.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
+                End If
 #End Region
 
 #Region "Tool Counter"
@@ -2280,7 +2234,6 @@ Module ModuleOmron
 
     End Sub
 
-
     Private Sub PCTimer_Ticks(sender As Object, e As EventArgs) Handles PCtimer.Tick
         'For i As Integer = 0 To 15
         '    If ManualCtrl(2)(i) = True And FormMain.btn_ValveCtrlArr(i).Text = "Close" Then
@@ -2311,8 +2264,6 @@ Module ModuleOmron
 
         'PCtimer.Stop()
     End Sub
-
-
 
 #Region "Top Label Status Update"
     Private Sub LblUpdateTimer_Ticks(sender As Object, e As EventArgs) Handles LblUpdateTimer.Tick
@@ -2954,9 +2905,6 @@ Module ModuleOmron
     End Sub
 #End Region
 
-
-
-
 #Region "Check Jig OK"
     Public Function CheckJigType(id As Integer) As Integer
         Select Case id
@@ -3018,18 +2966,11 @@ Module ModuleOmron
                 Exit Select
             Case Else
                 Return 0
-
-
         End Select
     End Function
-
 #End Region
 
-
-
 #Region "Calibration sequence timer and Message"
-
-
     Public Sub CalibrationMessage(MsgNumber As Integer)
         Dim msg As DataRow() = dtCalibrationmsg.Select($"step_id ='{MsgNumber}'")
         Select Case msg(0).Item("code").ToString
@@ -3047,11 +2988,8 @@ Module ModuleOmron
         End Select
 
         FormCalibration.lbl_CalibrationMsg.Text = msg(0).Item("calibration_message").ToString
-
     End Sub
-
 #End Region
-
 
 #Region "Main Sequence - Result capture, calculate and Message"
     Private Sub ResultCaptureThreadingTimer_Ticks(ByVal state As Object)
@@ -3256,7 +3194,6 @@ Module ModuleOmron
             ResetMainSeqStart = True
         End If
 
-
         'FormMain.lbl_EstCycleTime.Text = MainCycletime.ToString
         FormMain.lbl_runcycletime.Text = result_samplingtime.ToString
 
@@ -3329,7 +3266,6 @@ Module ModuleOmron
             result_avgbackpressure2 = result_avgbackpressure2 / MainDptestpoints
             'result_avgdp2 = result_avginlet2 - result_avgoutlet2
 
-
             result_finalinlet = ((result_avginlet1 + result_avginlet2) / 2)
             result_finaloutlet = ((result_avgoutlet1 + result_avgoutlet2) / 2)
 
@@ -3381,21 +3317,18 @@ Module ModuleOmron
             'result_finaldp = (result_finalinlet - result_finaloutlet) - CType(FormMain.lbl_BlankDP.Text, Decimal)
             result_finaldp = result_avgdp1 '- CType(FormMain.lbl_BlankDP.Text, Decimal)
         End If
-        FormMain.lbl_DiffPressAct.Text = CType(Math.Round(result_finaldp, 2), String)
-        FormMain.lbl_ProductFlowrate.Text = CType(Math.Round(result_finalflowrate, 3), String)
+        FormMain.lbl_DiffPressAct.Text = Math.Round(result_finaldp, 2).ToString("F2") ' CType(Math.Round(result_finaldp, 2), String)
+        FormMain.lbl_ProductFlowrate.Text = Math.Round(result_finalflowrate, 2).ToString("F2") ' CType(Math.Round(result_finalflowrate, 3), String)
         If result_finaltemperature = 0 Then
-            FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature, 3), String)
+            FormMain.lbl_ProductTemperature.Text = Math.Round(result_finaltemperature, 2).ToString("F2") ' CType(Math.Round(result_finaltemperature, 3), String)
         Else
-            FormMain.lbl_ProductTemperature.Text = CType(Math.Round(result_finaltemperature - 273.15, 3), String)
+            FormMain.lbl_ProductTemperature.Text = Math.Round(result_finaltemperature - 273.15, 2).ToString("F2") ' CType(Math.Round(result_finaltemperature - 273.15, 3), String)
         End If
-        FormMain.lbl_ProductInlet.Text = CType(Math.Round(result_finalinlet, 3), String)
-        FormMain.lbl_ProductOutlet.Text = CType(Math.Round(result_finaloutlet, 3), String)
-        FormMain.lbl_ProductBackpress.Text = CType(Math.Round(result_finalbackpressure, 3), String)
-
-
+        FormMain.lbl_ProductInlet.Text = Math.Round(result_finalinlet, 2).ToString("F2") ' CType(Math.Round(result_finalinlet, 3), String)
+        FormMain.lbl_ProductOutlet.Text = Math.Round(result_finaloutlet, 2).ToString("F2") ' CType(Math.Round(result_finaloutlet, 3), String)
+        FormMain.lbl_ProductBackpress.Text = Math.Round(result_finalbackpressure, 2).ToString("F2") ' CType(Math.Round(result_finalbackpressure, 3), String)
 
         If dtresult.Rows.Count = 0 Then
-
         Else
             'Dim dtVerresultexport As DataTable = GetVisibleColumnsDataTable(dgv_VerificationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
             'Dim Filepath As String = $"{Resultsummaryexportpath}ResultSummary_{Lotid}-{serialnum}_{attempt}.csv"
@@ -3409,16 +3342,11 @@ Module ModuleOmron
 
             ' Check Return State
             If ReturnValue = "True" Then
-
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Result Summary] CSV Export Success ""{Filepath}""")
             ElseIf ReturnValue = "Missing" Then
-
             ElseIf ReturnValue = "False" Then
-
             End If
         End If
-
-
 
         If result_finaldp >= dtrecipetable.Rows(0)("dp_lowerlimit") And result_finaldp <= dtrecipetable.Rows(0)("dp_upperlimit") Then
             FormMain.lbl_DPTestResult.Text = "PASS"
@@ -3455,25 +3383,44 @@ Module ModuleOmron
                     SQL.InsertRecord("ProductResult", resultparameter)
                 Next
             Catch ex As Exception
-
             End Try
-
         End If
 
-
-
+        If True Then
+            If result_finaltemperature > 999 Then
+                result_finaltemperature = -1
+            End If
+            If result_finalflowrate > 999 Then
+                result_finalflowrate = -1
+            End If
+            If result_finalinlet > 999 Then
+                result_finalinlet = -1
+            End If
+            If result_finaloutlet > 999 Then
+                result_finaloutlet = -1
+            End If
+            If result_finaldp > 999 Then
+                result_finaldp = -1
+            End If
+            If result_finalbackpressure > 999 Then
+                result_finalbackpressure = -1
+            End If
+            If Viscosity > 99 Then
+                Viscosity = -1
+            End If
+        End If
 
         Dim Updateparameter As New Dictionary(Of String, Object) From {
-                            {"temperature", Math.Round(result_finaltemperature, 1)},
-                            {"flowrate", Math.Round(result_finalflowrate, 1)},
-                            {"inlet_pressure", Math.Round(result_finalinlet, 1)},
-                            {"outlet_pressure", Math.Round(result_finaloutlet, 1)},
-                            {"viscosity", Math.Round(Viscosity, 3)},
-                            {"diff_pressure", Math.Round(result_finaldp, 1)},
-                            {"back_pressure", Math.Round(result_finalbackpressure, 1)},
-                            {"cycle_time", MainCycletime},
-                            {"result", FormMain.lbl_DPTestResult.Text.ToLower}
-                        }
+            {"temperature", Math.Round(result_finaltemperature, 2)},
+            {"flowrate", Math.Round(result_finalflowrate, 2)},
+            {"inlet_pressure", Math.Round(result_finalinlet, 2)},
+            {"outlet_pressure", Math.Round(result_finaloutlet, 2)},
+            {"viscosity", Math.Round(Viscosity, 3)},
+            {"diff_pressure", Math.Round(result_finaldp, 2)},
+            {"back_pressure", Math.Round(result_finalbackpressure, 2)},
+            {"cycle_time", MainCycletime},
+            {"result", FormMain.lbl_DPTestResult.Text.ToLower}
+        }
         Dim Condition As String = $"id = '{dtserialrecord.Rows(0)("id")}'"
         Try
             If SQL.UpdateRecord("ProductionDetail", Updateparameter, Condition) = 1 Then
@@ -3488,15 +3435,7 @@ Module ModuleOmron
         Catch ex As Exception
             MsgBox($" Query to Save Production Detail was not Successful", MsgBoxStyle.OkOnly, "Error")
         End Try
-
-
-
-
-
     End Sub
-
-
-
 
     Public Sub MainMessage(MsgNumber As Integer)
         Dim msg As DataRow() = dtMainmsg.Select($"step_id ='{MsgNumber}'")
@@ -3515,15 +3454,11 @@ Module ModuleOmron
         End Select
 
         FormMain.lbl_StepwiseMessage.Text = msg(0).Item("process_message").ToString
-
     End Sub
-
 
 #End Region
 
-
     Public Sub CreateTable(str As String)
-
         If str = "Calibration" Then
             FormCalibration.dtCalibration.Columns.Add("Sampling Time (s)")
             FormCalibration.dtCalibration.Columns.Add("Temperature (°C)")
@@ -3547,7 +3482,6 @@ Module ModuleOmron
         End If
 
         If str = "Production_Result" Then
-
             dtresult.Columns.Add("Serial Usage id")
             dtresult.Columns.Add("Sampling Time (s)")
             dtresult.Columns.Add("Temperature (°C)")
@@ -3559,9 +3493,4 @@ Module ModuleOmron
             dtresult.Columns.Add("Pump Speed (RPM)")
         End If
     End Sub
-
-
-
 End Module
-
-

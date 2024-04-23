@@ -1,7 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Net.NetworkInformation
-Imports System.Runtime.InteropServices
-Imports System.Threading
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports LiveChartsCore
 Imports LiveChartsCore.Kernel.Sketches
@@ -9,11 +6,9 @@ Imports LiveChartsCore.SkiaSharpView
 Imports LiveChartsCore.SkiaSharpView.Painting
 Imports LiveChartsCore.SkiaSharpView.VisualElements
 Imports SkiaSharp
-Imports PoohPlcLink
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 Imports LiveChartsCore.Defaults
 Imports LiveChartsCore.SkiaSharpView.WinForms
-Imports Microsoft.VisualBasic.ApplicationServices
 
 Module FormMainModule
     Public Workorder As String
@@ -72,31 +67,27 @@ Module FormMainModule
                         Else
                             FormMain.Endlot()
                         End If
-
-
-
                     Else
                         FormMain.LoadMainRecipeCombo()
 
                         FormMain.cmbx_RecipeType.Enabled = True
                         FormMain.cmbx_RecipeID.Enabled = True
                         FormMain.btn_RecipeSelectionConfirm.Enabled = False
-
-
                     End If
                 Else
                     FormMain.LoadMainRecipeCombo()
                     FormMain.btn_RecipeSelectionConfirm.Enabled = False
                     FormMain.cmbx_RecipeType.Enabled = False
                     FormMain.cmbx_RecipeID.Enabled = False
-
                 End If
-
-
 
                 If PublicVariables.RetainedWorkOrder <> "-" And PublicVariables.RetainedRecipeType <> "-" Then
                     If PublicVariables.RetainedCalStatus <> "-" Then
-                        FormMain.lbl_BlankDP.Text = PublicVariables.RetainedCaloffset
+                        Try
+                            FormMain.lbl_BlankDP.Text = CDec(PublicVariables.RetainedCaloffset).ToString("F2")
+                        Catch ex As Exception
+                        End Try
+
                         FormMain.lbl_CalibrationDate.Text = PublicVariables.RetainedCaldate
                         If PublicVariables.RetainedCalStatus = "Pass" Then
                             FormMain.lbl_CalibrationStatus.Text = "Pass"
@@ -110,7 +101,6 @@ Module FormMainModule
                             FormMain.txtbx_SerialNumber.Enabled = False
                             FormMain.btn_OprKeyInDtConfirm.Enabled = False
                         End If
-
                     Else
                         FormMain.lbl_CalibrationStatus.Text = Nothing
                         FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
@@ -119,7 +109,6 @@ Module FormMainModule
                         FormMain.lbl_CalibrationDate.Text = Nothing
                         FormMain.txtbx_SerialNumber.Enabled = False
                         FormMain.btn_OprKeyInDtConfirm.Enabled = False
-
                     End If
                 Else
                     FormMain.lbl_CalibrationStatus.Text = Nothing
@@ -130,6 +119,7 @@ Module FormMainModule
                     FormMain.txtbx_SerialNumber.Enabled = False
                     FormMain.btn_OprKeyInDtConfirm.Enabled = False
                 End If
+
                 ' Apply Permissions
                 PermissionModule.ApplyOnLogon()
                 PermissionModule.ReloadPermission()
@@ -3947,17 +3937,17 @@ Public Class FormMain
             Else
                 DInt2int(144, 0)
             End If
-            If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
+            If dtrecipe.Rows(0)("firstflush_speed_mode") = "Enable" Then
                 DInt2int(158, 1)
             Else
                 DInt2int(158, 0)
             End If
-            If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
+            If dtrecipe.Rows(0)("secondflush_speed_mode") = "Enable" Then
                 DInt2int(160, 1)
             Else
                 DInt2int(160, 0)
             End If
-            If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
+            If dtrecipe.Rows(0)("dp_speed_mode") = "Enable" Then
                 DInt2int(162, 1)
             Else
                 DInt2int(162, 0)
@@ -4128,7 +4118,7 @@ Public Class FormMain
         dtrecipetable = SQL.ReadRecords($"SELECT * FROM RecipeTable WHERE id='{DirectCast(cmbx_RecipeID.SelectedItem, KeyValuePair(Of String, String)).Key}'")
         dtserialrecord = SQL.ReadRecords($"SELECT * FROM ProductionDetail WHERE serial_uid='{SerialUid}' AND serial_attempt='{SerialAttempt}'")
 
-        PrepCycletime = (dtrecipetable.Rows(0)("prep_fill_time") + dtrecipetable.Rows(0)("prep_bleed_time") + dtrecipetable.Rows(0)("prep_pressure_drop_time"))
+        PrepCycletime = (dtrecipetable.Rows(0)("prep_fill_time") + dtrecipetable.Rows(0)("prep_bleed_time")) '+ dtrecipetable.Rows(0)("prep_pressure_drop_time"))
 
         If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
 
@@ -4207,7 +4197,7 @@ Public Class FormMain
             ' Define Values
             Dim PrepFillTime As Integer = dtrecipetable.Rows(0)("prep_fill_time")
             Dim PrepBleedTime As Integer = dtrecipetable.Rows(0)("prep_bleed_time")
-            Dim PrepPressureDropTime As Integer = dtrecipetable.Rows(0)("prep_pressure_drop_time")
+            'Dim PrepPressureDropTime As Integer = dtrecipetable.Rows(0)("prep_pressure_drop_time")
 
             'Dim DPFillTime As Integer = dtrecipetable.Rows(0)("dp_fill_time")
             'Dim DPBleedTime As Integer = dtrecipetable.Rows(0)("dp_bleed_time")
@@ -4664,24 +4654,12 @@ Public Class FormMain
                     New RectangularSection With {
                         .IsVisible = True,
                         .Xi = PrepStart + PrepFillTime,
-                        .Xj = PrepStart + PrepFillTime + PrepBleedTime,
-                        .Stroke = New SolidColorPaint With {
-                            .Color = SKColors.LightGray,
-                            .StrokeThickness = 1
-                        },
-                        .Label = "", ' "Bleed",
-                        .LabelSize = 12,
-                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                    },
-                    New RectangularSection With {
-                        .IsVisible = True,
-                        .Xi = PrepStart + PrepFillTime + PrepBleedTime,
                         .Xj = Flush1Start,
                         .Stroke = New SolidColorPaint With {
                             .Color = SKColors.LightGray,
                             .StrokeThickness = 1
                         },
-                        .Label = "", ' "Drop",
+                        .Label = "", ' "Bleed",
                         .LabelSize = 12,
                         .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                     },

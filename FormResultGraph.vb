@@ -874,9 +874,9 @@ Public Class FormResultGraph
                 End If
             End If
 
-            Dim PrepFillTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_fill_time"), PrepFillTime), PrepFillTime, 0))
             Dim PrepBleedTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_bleed_time"), PrepBleedTime), PrepBleedTime, 0))
-            Dim PrepPressureDropTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_pressure_drop_time"), PrepPressureDropTime), PrepPressureDropTime, 0))
+            Dim PrepFillTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_fill_time"), PrepFillTime), PrepFillTime, 0)) - PrepBleedTime
+            'Dim PrepPressureDropTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_pressure_drop_time"), PrepPressureDropTime), PrepPressureDropTime, 0))
 
             Dim DPStabilizeTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_dp_stabilize_time"), DPStabilizeTime), DPStabilizeTime, 0)) 'CInt(resultsummary(54 - 8))
             Dim DPTestTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_dp_test_time"), DPTestTime), DPTestTime, 0)) 'CInt(resultsummary(55 - 8))
@@ -891,7 +891,7 @@ Public Class FormResultGraph
             Dim Drain2Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain2_time"), Drain2Time), Drain2Time, 0)) 'CInt(resultsummary(73 - 8))
             Dim Drain3Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain3_time"), Drain3Time), Drain3Time, 0)) 'CInt(resultsummary(76 - 8))
 
-            Dim Prepcycletime As Integer = PrepFillTime + PrepBleedTime + PrepPressureDropTime
+            Dim Prepcycletime As Integer = PrepFillTime + PrepBleedTime ' + PrepPressureDropTime
             Dim DPcycletime As Integer = DPStabilizeTime + DPTestTime
             Dim Flush1cycletime As Integer = Flush1StabilizeTime + Flush1TestTime
             Dim Flush2cycletime As Integer = Flush2StabilizeTime + Flush2TestTime
@@ -1048,24 +1048,12 @@ Public Class FormResultGraph
                 New RectangularSection With {
                     .IsVisible = True,
                     .Xi = PrepStart + PrepFillTime,
-                    .Xj = PrepStart + PrepFillTime + PrepBleedTime,
-                    .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.LightGray,
-                        .StrokeThickness = 1
-                    },
-                    .Label = "", ' "Bleed",
-                    .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                },
-                New RectangularSection With {
-                    .IsVisible = True,
-                    .Xi = PrepStart + PrepFillTime + PrepBleedTime,
                     .Xj = Flush1Start,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.LightGray,
                         .StrokeThickness = 1
                     },
-                    .Label = "", ' "Drop",
+                    .Label = "", ' "Bleed",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
@@ -1471,13 +1459,13 @@ Public Class FormResultGraph
             RecipeTable.firstflush_circuit AS recipetable_firstflush_circuit, 
             RecipeTable.firstflush_flowrate AS recipetable_firstflush_flowrate, 
             RecipeTable.firstflush_flow_tolerance AS recipetable_firstflush_flow_tolerance, 
-            RecipeTable.firstflush_back_pressure AS recipetable_firstflush_back_pressure, 
+            --RecipeTable.firstflush_back_pressure AS recipetable_firstflush_back_pressure, 
             RecipeTable.firstflush_stabilize_time AS recipetable_firstflush_stabilize_time, 
             RecipeTable.firstflush_time AS recipetable_firstflush_time, 
             RecipeTable.firstdp_circuit AS recipetable_firstdp_circuit, 
-            RecipeTable.dp_flowrate AS recipetable_dp_flowrate, 
-            RecipeTable.dp_flow_tolerance AS recipetable_dp_flow_tolerance, 
-            RecipeTable.dp_back_pressure AS recipetable_dp_back_pressure, 
+            --RecipeTable.dp_flowrate AS recipetable_dp_flowrate, 
+            --RecipeTable.dp_flow_tolerance AS recipetable_dp_flow_tolerance, 
+            --RecipeTable.dp_back_pressure AS recipetable_dp_back_pressure, 
             RecipeTable.dp_stabilize_time AS recipetable_dp_stabilize_time, 
             RecipeTable.dp_test_time AS recipetable_dp_test_time, 
             RecipeTable.dp_lowerlimit AS recipetable_dp_lowerlimit, 
@@ -1487,7 +1475,7 @@ Public Class FormResultGraph
             RecipeTable.secondflush_circuit AS recipetable_secondflush_circuit, 
             RecipeTable.secondflush_flowrate AS recipetable_secondflush_flowrate, 
             RecipeTable.secondflush_flow_tolerance AS recipetable_secondflush_flow_tolerance, 
-            RecipeTable.secondflush_back_pressure AS recipetable_secondflush_back_pressure, 
+            --RecipeTable.secondflush_back_pressure AS recipetable_secondflush_back_pressure, 
             RecipeTable.secondflush_stabilize_time AS recipetable_secondflush_stabilize_time, 
             RecipeTable.secondflush_time AS recipetable_secondflush_time, 
             RecipeTable.drain1_circuit AS recipetable_drain1_circuit, 

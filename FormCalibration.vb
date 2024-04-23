@@ -5,7 +5,6 @@ Imports LiveChartsCore.SkiaSharpView.Painting
 Imports LiveChartsCore.SkiaSharpView.VisualElements
 Imports SkiaSharp
 Imports LiveChartsCore.Defaults
-Imports System.Collections.ObjectModel
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 Imports LiveChartsCore.SkiaSharpView.WinForms
 
@@ -81,7 +80,6 @@ Public Class FormCalibration
 
     Public Ver_pumprpm As Decimal
     Public Cal_pumprpm As Decimal
-
 
     'Public prepcycletime As Integer
     'Public flush1cycletime As Integer
@@ -208,18 +206,12 @@ Public Class FormCalibration
         'Drain2cycletime = 0
         'Drain3cycletime = 0
 
-
-
         btn_Calibrate.Enabled = True
         btn_Verify.Enabled = True
 
-
-
         dtrecipetable = SQL.ReadRecords($"SELECT * FROM RecipeTable Where recipe_id ='{txtbx_RecipeID.Text}' ORDER BY recipe_rev DESC")
 
-
         If dtrecipetable.Rows.Count > 0 Then
-
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Disable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Disable" Then
                 FormMain.lbl_CalibrationStatus.Text = "Pass"
                 FormMain.lbl_CalibrationStatus.BackColor = PublicVariables.StatusGreen
@@ -279,8 +271,6 @@ Public Class FormCalibration
                 Me.Close()
             End If
 
-
-
             txtbx_CalBackPressure.Text = dtrecipetable.Rows(0)("dp_back_pressure")
             txtbx_CalDPTestFlowrate.Text = dtrecipetable.Rows(0)("dp_flowrate")
             txtbx_CalDPTesttime.Text = dtrecipetable.Rows(0)("dp_test_time")
@@ -309,7 +299,7 @@ Public Class FormCalibration
                 End If
             End If
 
-            prepcycletime = (dtrecipetable.Rows(0)("prep_fill_time") + dtrecipetable.Rows(0)("prep_bleed_time") + dtrecipetable.Rows(0)("prep_pressure_drop_time"))
+            prepcycletime = (dtrecipetable.Rows(0)("prep_fill_time") + dtrecipetable.Rows(0)("prep_bleed_time")) ' + dtrecipetable.Rows(0)("prep_pressure_drop_time"))
 
             If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
                 flush1cycletime = (dtrecipetable.Rows(0)("firstflush_stabilize_time") + dtrecipetable.Rows(0)("firstflush_time"))
@@ -344,7 +334,6 @@ Public Class FormCalibration
             dptest2end = CType((CalCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / tmr_Calibration.Interval), Decimal)
             Dptest2start = dptest2end - Cal_dptestpoints
 
-
             vertol = dtrecipetable.Rows(0)("verification_tolerance")
             txtbx_EstCalCycletime.Text = CalCycletime.ToString
 
@@ -372,8 +361,6 @@ Public Class FormCalibration
             Drain1cycletime = 0
             Drain2cycletime = 0
             Drain3cycletime = 0
-
-
         End If
     End Sub
 
@@ -1026,12 +1013,12 @@ Public Class FormCalibration
                 Cal_finaloffset = Cal_avgdp1
             End If
 
-            txtbx_CalInletPressure.Text = Decimal.Round(Cal_finalInlet, 2)
-            txtbx_CalOutletPressure.Text = Decimal.Round(Cal_finalOutlet, 2)
-            txtbx_CalFlowrate.Text = Decimal.Round(Cal_finalflowrate, 2)
-            txtbx_CalTemperature.Text = Decimal.Round(CDec(Cal_finaltemperature - 273.15), 2)
-            txtbx_CalBackpress.Text = Decimal.Round(Cal_finalbackpressure, 2)
-            txtbx_CalOffset.Text = Decimal.Round(Math.Round(Cal_finaloffset, 2), 2)
+            txtbx_CalInletPressure.Text = Decimal.Round(Cal_finalInlet, 2).ToString("F2")
+            txtbx_CalOutletPressure.Text = Decimal.Round(Cal_finalOutlet, 2).ToString("F2")
+            txtbx_CalFlowrate.Text = Decimal.Round(Cal_finalflowrate, 2).ToString("F2")
+            txtbx_CalTemperature.Text = Decimal.Round(CDec(Cal_finaltemperature - 273.15), 2).ToString("F2")
+            txtbx_CalBackpress.Text = Decimal.Round(Cal_finalbackpressure, 2).ToString("F2")
+            txtbx_CalOffset.Text = Decimal.Round(Cal_finaloffset, 2).ToString("F2")
 
             ' Convert Visible DataGridView Columns To DataTable
             If dgv_CalibrationResult.RowCount = 0 Then
@@ -1738,11 +1725,11 @@ Public Class FormCalibration
 
             End If
 
-            txtbx_VerInletPressure.Text = Decimal.Round(Ver_finalinlet, 2)
-            txtbx_VerOutletPressure.Text = Decimal.Round(Ver_finaloutlet, 2)
-            txtbx_VerFlowrate.Text = Decimal.Round(Ver_finalflowrate, 2)
-            txtbx_VerTemperature.Text = Decimal.Round(CDec(Ver_finaltemperature - 273.15), 2)
-            txtbx_VerBackpress.Text = Decimal.Round(Ver_finalbackpressure, 2)
+            txtbx_VerInletPressure.Text = Decimal.Round(Ver_finalinlet, 2).ToString("F2")
+            txtbx_VerOutletPressure.Text = Decimal.Round(Ver_finaloutlet, 2).ToString("F2")
+            txtbx_VerFlowrate.Text = Decimal.Round(Ver_finalflowrate, 2).ToString("F2")
+            txtbx_VerTemperature.Text = Decimal.Round(CDec(Ver_finaltemperature - 273.15), 2).ToString("F2")
+            txtbx_VerBackpress.Text = Decimal.Round(Ver_finalbackpressure, 2).ToString("F2")
             txtbx_VerStatus.Text = "Completed"
             txtbx_VerStatus.BackColor = PublicVariables.StatusGreen
             txtbx_VerStatus.ForeColor = PublicVariables.StatusGreenT
@@ -1795,7 +1782,7 @@ Public Class FormCalibration
 
             SetVerSeqStart = True
 
-            txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+            txtbx_VerDP.Text = Decimal.Round(Ver_finaldp, 2).ToString("F2") 'CType(Math.Round(Ver_finaldp, 2), String)
         End If
     End Sub
 
@@ -2400,20 +2387,14 @@ Public Class FormCalibration
 
         If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" And Not txtbx_CalDPPoints.Text = "0" Then
             If btn_Calibrate.BackColor = Color.FromArgb(25, 130, 246) Then
-
-
                 PCStatus(1)(2) = True
                 dtCalibration = New DataTable()
                 dgv_CalibrationResult.DataSource = Nothing
                 CreateTable("Calibration")
                 btn_Verify.Enabled = False
 
-
                 With dgv_CalibrationResult
                     .BackgroundColor = SystemColors.Window
-
-
-
                 End With
                 Cal_samplingtime = 0
 
@@ -2441,9 +2422,9 @@ Public Class FormCalibration
                 Cal_finalbackpressure = 0
 
                 ' Define Values
-                Dim PrepFillTime As Integer = dtrecipetable.Rows(0)("prep_fill_time")
+                Dim PrepFillTime As Integer = CInt(dtrecipetable.Rows(0)("prep_fill_time")) - CInt(dtrecipetable.Rows(0)("prep_bleed_time"))
                 Dim PrepBleedTime As Integer = dtrecipetable.Rows(0)("prep_bleed_time")
-                Dim PrepPressureDropTime As Integer = dtrecipetable.Rows(0)("prep_pressure_drop_time")
+                'Dim PrepPressureDropTime As Integer = dtrecipetable.Rows(0)("prep_pressure_drop_time")
 
                 'Dim DPFillTime As Integer = dtrecipetable.Rows(0)("dp_fill_time")
                 ' Dim DPBleedTime As Integer = dtrecipetable.Rows(0)("dp_bleed_time")
@@ -2481,10 +2462,9 @@ Public Class FormCalibration
 
                 ' Get Recipe Details
                 'Dim dtGetRecipe As DataTable = SQL.ReadRecords($"Select * From RecipeTable WHERE recipe_id ='{txtbx_RecipeID.Text}'")
-                PrepCycletime = (dtrecipetable.Rows(0)("prep_fill_time") + dtrecipetable.Rows(0)("prep_bleed_time") + dtrecipetable.Rows(0)("prep_pressure_drop_time"))
+                PrepCycletime = (dtrecipetable.Rows(0)("prep_fill_time") + dtrecipetable.Rows(0)("prep_bleed_time")) '+ dtrecipetable.Rows(0)("prep_pressure_drop_time"))
 
                 If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
-
                     flush1cycletime = (dtrecipetable.Rows(0)("firstflush_stabilize_time") + dtrecipetable.Rows(0)("firstflush_time"))
                     Flush1Enabled = True
                 End If
@@ -2937,24 +2917,12 @@ Public Class FormCalibration
                         New RectangularSection With {
                             .IsVisible = True,
                             .Xi = PrepStart + PrepFillTime,
-                            .Xj = PrepStart + PrepFillTime + PrepBleedTime,
-                            .Stroke = New SolidColorPaint With {
-                                .Color = SKColors.LightGray,
-                                .StrokeThickness = 1
-                            },
-                            .Label = "", ' "Bleed",
-                            .LabelSize = 12,
-                            .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                        },
-                        New RectangularSection With {
-                            .IsVisible = True,
-                            .Xi = PrepStart + PrepFillTime + PrepBleedTime,
                             .Xj = Flush1Start,
                             .Stroke = New SolidColorPaint With {
                                 .Color = SKColors.LightGray,
                                 .StrokeThickness = 1
                             },
-                            .Label = "", ' "Drop",
+                            .Label = "", ' "Bleed",
                             .LabelSize = 12,
                             .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                         },
@@ -3155,7 +3123,6 @@ Public Class FormCalibration
             PCStatus(1)(2) = False
             MsgBox($"No Valid data available to start the Test")
         End If
-
     End Sub
 
     Public Sub VerificationRun()

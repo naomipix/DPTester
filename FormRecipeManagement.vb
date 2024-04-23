@@ -1,5 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports Spire.Xls.Core.Spreadsheet.AutoFilter
 
 Public Class FormRecipeManagement
     Public WithEvents Recipetimer As New Timer()
