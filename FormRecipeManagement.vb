@@ -3994,9 +3994,13 @@ Public Class FormRecipeManagement
             Dim ParseError As Boolean = False
 
             Dim TotalFillTime As Integer
+            Dim TotalBleedTime As Integer
             Dim PrefillStartTime As Integer
             Dim PrefillTime As Integer
             If Not Integer.TryParse(txtbx_RcpCreatePrepFill.Text, TotalFillTime) Then
+                ParseError = True
+            End If
+            If Not Integer.TryParse(txtbx_RcpCreatePrepBleed.Text, TotalBleedTime) Then
                 ParseError = True
             End If
             If Not Integer.TryParse(txtbx_RcpCreatePrepPrefillStartTime.Text, PrefillStartTime) Then
@@ -4007,7 +4011,7 @@ Public Class FormRecipeManagement
             End If
 
             If ParseError = False Then
-                If (PrefillStartTime + PrefillTime) >= TotalFillTime Then
+                If (PrefillStartTime + PrefillTime) >= TotalFillTime - TotalBleedTime Then
                     onContinue = False
                     MsgBox("Prefill Time must be less than Fill Time", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
                 End If
@@ -7412,9 +7416,13 @@ Public Class FormRecipeManagement
             Dim ParseError As Boolean = False
 
             Dim TotalFillTime As Integer
+            Dim TotalBleedTime As Integer
             Dim PrefillStartTime As Integer
             Dim PrefillTime As Integer
             If Not Integer.TryParse(txtbx_RcpEditPrepFill.Text, TotalFillTime) Then
+                ParseError = True
+            End If
+            If Not Integer.TryParse(txtbx_RcpEditPrepBleed.Text, TotalBleedTime) Then
                 ParseError = True
             End If
             If Not Integer.TryParse(txtbx_RcpEditPrepPrefillStartTime.Text, PrefillStartTime) Then
@@ -7425,7 +7433,7 @@ Public Class FormRecipeManagement
             End If
 
             If ParseError = False Then
-                If (PrefillStartTime + PrefillTime) >= TotalFillTime Then
+                If (PrefillStartTime + PrefillTime) >= TotalFillTime - TotalBleedTime Then
                     onContinue = False
                     MsgBox("Prefill Time must be less than Fill Time", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
                 End If
