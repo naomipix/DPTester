@@ -5586,7 +5586,7 @@ Public Class FormMain
         End If
     End Sub
 
-    Private Sub checkbx_RecipeFlush1_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_RecipeFlush1.CheckedChanged
+    Private Sub checkbx_RecipeFlush1_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeFlush1.Click
         checkbx_RecipeFlush1.Checked = Not checkbx_RecipeFlush1.Checked
     End Sub
 
