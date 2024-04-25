@@ -466,10 +466,8 @@ Public Class FormMain
         ' Application Launch Success
         EventLog.EventLogger.Log("-", "[Application] Application Launch")
 
-
-
-        ' Start Activity [TESTING] 
-
+        ' Remove Fitting Types [TESTING] 
+        tabctrl_SubMain.TabPages.RemoveByKey("tabpg_FittingType")
     End Sub
 
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
