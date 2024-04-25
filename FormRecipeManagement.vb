@@ -3997,6 +3997,8 @@ Public Class FormRecipeManagement
             Dim TotalBleedTime As Integer
             Dim PrefillStartTime As Integer
             Dim PrefillTime As Integer
+            Dim BP1Time As Integer
+
             If Not Integer.TryParse(txtbx_RcpCreatePrepFill.Text, TotalFillTime) Then
                 ParseError = True
             End If
@@ -4009,11 +4011,28 @@ Public Class FormRecipeManagement
             If Not Integer.TryParse(txtbx_RcpCreatePrepPrefillTime.Text, PrefillTime) Then
                 ParseError = True
             End If
+            If Not Integer.TryParse(txtbx_RcpCreatePrepPressureDropTime.Text, BP1Time) Then
+                ParseError = True
+            End If
 
             If ParseError = False Then
-                If (PrefillStartTime + PrefillTime) >= TotalFillTime - TotalBleedTime Then
-                    onContinue = False
-                    MsgBox("Prefill Time must be less than Fill Time", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                If onContinue = True Then
+                    If (PrefillStartTime + PrefillTime) >= TotalFillTime - TotalBleedTime Then
+                        onContinue = False
+                        MsgBox("Prefill Time must be less than Fill Time", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                    End If
+                End If
+                If onContinue = True Then
+                    If TotalBleedTime >= TotalFillTime Then
+                        onContinue = False
+                        MsgBox("Bleed Time must be less than Fill Time", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                    End If
+                End If
+                If onContinue = True Then
+                    If BP1Time >= TotalFillTime Then
+                        onContinue = False
+                        MsgBox("Back Pressure-1 Time must be less than Fill Time", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                    End If
                 End If
             Else
                 onContinue = False
@@ -6364,10 +6383,6 @@ Public Class FormRecipeManagement
         Dim PartIDTmp As String = cmbx_RcpEditPartID.Text
         Dim FilterTypeTmp As String = cmbx_RcpEditFilterType.Text
 
-
-
-
-
         Dim onContinue As Boolean = True
         Dim dtrecipeidcheck As DataTable = SQL.ReadRecords("select * from RecipeTable where recipe_id = '" + RecipeID + "' order by recipe_rev desc")
 
@@ -7419,6 +7434,8 @@ Public Class FormRecipeManagement
             Dim TotalBleedTime As Integer
             Dim PrefillStartTime As Integer
             Dim PrefillTime As Integer
+            Dim BP1Time As Integer
+
             If Not Integer.TryParse(txtbx_RcpEditPrepFill.Text, TotalFillTime) Then
                 ParseError = True
             End If
@@ -7431,11 +7448,28 @@ Public Class FormRecipeManagement
             If Not Integer.TryParse(txtbx_RcpEditPrepPrefillTime.Text, PrefillTime) Then
                 ParseError = True
             End If
+            If Not Integer.TryParse(txtbx_RcpEditPrepPressureDropTime.Text, BP1Time) Then
+                ParseError = True
+            End If
 
             If ParseError = False Then
-                If (PrefillStartTime + PrefillTime) >= TotalFillTime - TotalBleedTime Then
-                    onContinue = False
-                    MsgBox("Prefill Time must be less than Fill Time", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                If onContinue = True Then
+                    If (PrefillStartTime + PrefillTime) >= TotalFillTime - TotalBleedTime Then
+                        onContinue = False
+                        MsgBox("Prefill Time must be less than Fill Time", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                    End If
+                End If
+                If onContinue = True Then
+                    If TotalBleedTime >= TotalFillTime Then
+                        onContinue = False
+                        MsgBox("Bleed Time must be less than Fill Time", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                    End If
+                End If
+                If onContinue = True Then
+                    If BP1Time >= TotalFillTime Then
+                        onContinue = False
+                        MsgBox("Back Pressure-1 Time must be less than Fill Time", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                    End If
                 End If
             Else
                 onContinue = False
