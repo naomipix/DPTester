@@ -418,7 +418,6 @@ Public Class FormMain
         lbl_ProductTemperature.Text = Nothing
         lbl_DPTestResult.Text = Nothing
 
-
     End Sub
 
     Private Sub FormMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -3860,7 +3859,7 @@ Public Class FormMain
 
             Float2int(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
 
-            DInt2int(112, CType(dtrecipe.Rows(0)("prep_fill_time"), Integer) - CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
+            DInt2int(112, CType(dtrecipe.Rows(0)("prep_fill_time"), Integer)) '- CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
             DInt2int(114, CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
             DInt2int(116, CType(dtrecipe.Rows(0)("prep_pressure_drop_time"), Integer))
 
@@ -3963,13 +3962,130 @@ Public Class FormMain
             Else
                 DInt2int(164, 0)
             End If
+
+            If dtrecipe.Rows(0)("drain4_circuit") = "Enable" Then
+                DInt2int(166, 1)
+            Else
+                DInt2int(102, 0)
+            End If
+            DInt2int(168, CType(dtrecipe.Rows(0)("drain4_time"), Integer))
+            Float2int(170, CType(dtrecipe.Rows(0)("drain4_back_pressure"), Double))
+
+            ' Load Recipe Details in TabPage
+            LoadRecipeToTabRecipeDetails(dtrecipe)
         End If
 
         ' Force Load Recipe Data In Cal Form
         FormCalibration.InitializeCalForm()
     End Sub
 
+    Private Sub LoadRecipeToTabRecipeDetails(dt As DataTable)
+        txtbx_RecipeVerTol.Text = dt.Rows(0)("verification_tolerance")
+        txtbx_RecipePrepFlow.Text = dt.Rows(0)("prep_flowrate")
+        txtbx_RecipePrepFlowTol.Text = dt.Rows(0)("prep_flow_tolerance")
+        txtbx_RecipePrepPressureDrop.Text = dt.Rows(0)("prep_pressure_drop")
 
+        txtbx_RecipePrepFill.Text = dt.Rows(0)("prep_fill_time")
+        txtbx_RecipePrepPrefillStartTime.Text = dt.Rows(0)("prep_prefill_start_time")
+        txtbx_RecipePrepPrefillTime.Text = dt.Rows(0)("prep_prefill_time")
+        txtbx_RecipePrepBleed.Text = dt.Rows(0)("prep_bleed_time")
+        txtbx_RecipePrepPressure.Text = dt.Rows(0)("prep_back_pressure")
+        txtbx_RecipePrepPressureDropTime.Text = dt.Rows(0)("prep_pressure_drop_time")
+        If dt.Rows(0)("prep_speed_mode").ToString.ToUpper = "ENABLE" Then
+            TextBox1.Text = "Speed"
+        Else
+            TextBox1.Text = "Process"
+        End If
+        txtbx_RecipePrepRPM.Text = dt.Rows(0)("prep_rpm1")
+
+        txtbx_RecipeFlush1Flow.Text = dt.Rows(0)("firstflush_flowrate")
+        txtbx_RecipeFlush1FlowTol.Text = dt.Rows(0)("firstflush_flow_tolerance")
+        txtbx_RecipeFlush1Stabilize.Text = dt.Rows(0)("firstflush_stabilize_time")
+        txtbx_RecipeFlush1Time.Text = dt.Rows(0)("firstflush_time")
+        If dt.Rows(0)("firstflush_speed_mode").ToString.ToUpper = "ENABLE" Then
+            TextBox4.Text = "Speed"
+        Else
+            TextBox4.Text = "Process"
+        End If
+        txtbx_RecipeFlush1RPM.Text = dt.Rows(0)("firstflush_rpm")
+
+        txtbx_RecipeFlush2Flow.Text = dt.Rows(0)("secondflush_flowrate")
+        txtbx_RecipeFlush2FlowTol.Text = dt.Rows(0)("secondflush_flow_tolerance")
+        txtbx_RecipeFlush2Stabilize.Text = dt.Rows(0)("secondflush_stabilize_time")
+        txtbx_RecipeFlush2Time.Text = dt.Rows(0)("secondflush_time")
+        If dt.Rows(0)("secondflush_speed_mode").ToString.ToUpper = "ENABLE" Then
+            TextBox3.Text = "Speed"
+        Else
+            TextBox3.Text = "Process"
+        End If
+        txtbx_RecipeFlush2RPM.Text = dt.Rows(0)("secondflush_rpm")
+
+        txtbx_RecipeDPStabilize.Text = dt.Rows(0)("dp_stabilize_time")
+        txtbx_RecipeDPTime.Text = dt.Rows(0)("dp_test_time")
+        txtbx_RecipeDPLowLimit.Text = dt.Rows(0)("dp_lowerlimit")
+        txtbx_RecipeDPUpLimit.Text = dt.Rows(0)("dp_upperlimit")
+        txtbx_RecipeDPPoints.Text = dt.Rows(0)("dp_testpoints")
+        If dt.Rows(0)("dp_speed_mode").ToString.ToUpper = "ENABLE" Then
+            TextBox2.Text = "Speed"
+        Else
+            TextBox2.Text = "Process"
+        End If
+        txtbx_RecipeDPTestRPM.Text = dt.Rows(0)("dp_rpm")
+
+        txtbx_RecipeDrain1Pressure.Text = dt.Rows(0)("drain1_back_pressure")
+        txtbx_RecipeDrain1Time.Text = dt.Rows(0)("drain1_time")
+
+        txtbx_RecipeDrain2Pressure.Text = dt.Rows(0)("drain2_back_pressure")
+        txtbx_RecipeDrain2Time.Text = dt.Rows(0)("drain2_time")
+
+        txtbx_RecipeDrain3Pressure.Text = dt.Rows(0)("drain3_back_pressure")
+        txtbx_RecipeDrain3Time.Text = dt.Rows(0)("drain3_time")
+
+        txtbx_RecipeDrain4Pressure.Text = dt.Rows(0)("drain4_back_pressure")
+        txtbx_RecipeDrain4Time.Text = dt.Rows(0)("drain4_time")
+
+        If dt.Rows(0)("firstdp_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDPTest1.Checked = True
+        Else
+            checkbx_RecipeDPTest1.Checked = False
+        End If
+        If dt.Rows(0)("seconddp_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDPTest2.Checked = True
+        Else
+            checkbx_RecipeDPTest2.Checked = False
+        End If
+        If dt.Rows(0)("firstflush_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeFlush1.Checked = True
+        Else
+            checkbx_RecipeFlush1.Checked = False
+        End If
+        If dt.Rows(0)("secondflush_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeFlush2.Checked = True
+        Else
+            checkbx_RecipeFlush2.Checked = False
+        End If
+
+        If dt.Rows(0)("drain1_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDrain1.Checked = True
+        Else
+            checkbx_RecipeDrain1.Checked = False
+        End If
+        If dt.Rows(0)("drain2_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDrain2.Checked = True
+        Else
+            checkbx_RecipeDrain2.Checked = False
+        End If
+        If dt.Rows(0)("drain3_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDrain3.Checked = True
+        Else
+            checkbx_RecipeDrain3.Checked = False
+        End If
+        If dt.Rows(0)("drain4_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDrain4.Checked = True
+        Else
+            checkbx_RecipeDrain4.Checked = False
+        End If
+    End Sub
 #End Region
 
 
@@ -5233,6 +5349,69 @@ Public Class FormMain
             FormCalibration.InitializeLiveChart()
             FormCalibration.SetVisibleLineSeries()
         End If
+
+        ' Clear Recipe Details TabPage
+        If OnContinue = True Then
+            txtbx_RecipeVerTol.Text = "-"
+            txtbx_RecipePrepFlow.Text = "-"
+            txtbx_RecipePrepFlowTol.Text = "-"
+            txtbx_RecipePrepPressureDrop.Text = "-"
+
+            txtbx_RecipePrepFill.Text = "-"
+            txtbx_RecipePrepPrefillStartTime.Text = "-"
+            txtbx_RecipePrepPrefillTime.Text = "-"
+            txtbx_RecipePrepBleed.Text = "-"
+            txtbx_RecipePrepPressure.Text = "-"
+            txtbx_RecipePrepPressureDropTime.Text = "-"
+            TextBox1.Text = "-"
+            txtbx_RecipePrepRPM.Text = "-"
+
+            txtbx_RecipeFlush1Flow.Text = "-"
+            txtbx_RecipeFlush1FlowTol.Text = "-"
+            txtbx_RecipeFlush1Stabilize.Text = "-"
+            txtbx_RecipeFlush1Time.Text = "-"
+            txtbx_RecipeFlush1Flow.Text = "-"
+            TextBox4.Text = "-"
+            txtbx_RecipeFlush1RPM.Text = "-"
+
+            txtbx_RecipeFlush2Flow.Text = "-"
+            txtbx_RecipeFlush2FlowTol.Text = "-"
+            txtbx_RecipeFlush2Stabilize.Text = "-"
+            txtbx_RecipeFlush2Time.Text = "-"
+            txtbx_RecipeFlush2Flow.Text = "-"
+            TextBox3.Text = "-"
+            txtbx_RecipeFlush2RPM.Text = "-"
+
+            txtbx_RecipeDPStabilize.Text = "-"
+            txtbx_RecipeDPTime.Text = "-"
+            txtbx_RecipeDPLowLimit.Text = "-"
+            txtbx_RecipeDPUpLimit.Text = "-"
+            txtbx_RecipeDPPoints.Text = "-"
+            TextBox2.Text = "-"
+            txtbx_RecipeDPTestRPM.Text = "-"
+
+            txtbx_RecipeDrain1Pressure.Text = "-"
+            txtbx_RecipeDrain1Time.Text = "-"
+
+            txtbx_RecipeDrain2Pressure.Text = "-"
+            txtbx_RecipeDrain2Time.Text = "-"
+
+            txtbx_RecipeDrain3Pressure.Text = "-"
+            txtbx_RecipeDrain3Time.Text = "-"
+
+            txtbx_RecipeDrain4Pressure.Text = "-"
+            txtbx_RecipeDrain4Time.Text = "-"
+
+            checkbx_RecipeFlush1.Checked = False
+            checkbx_RecipeFlush2.Checked = False
+            checkbx_RecipeDPTest1.Checked = False
+            checkbx_RecipeDPTest2.Checked = False
+
+            checkbx_RecipeDrain1.Checked = False
+            checkbx_RecipeDrain2.Checked = False
+            checkbx_RecipeDrain3.Checked = False
+            checkbx_RecipeDrain4.Checked = False
+        End If
     End Sub
 
     Public Sub LoadMainRecipeCombo()
@@ -5405,6 +5584,38 @@ Public Class FormMain
         If LoggedInIsDeveloper Then
             FormTesting.Show()
         End If
+    End Sub
+
+    Private Sub checkbx_RecipeFlush1_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_RecipeFlush1.CheckedChanged
+        checkbx_RecipeFlush1.Checked = Not checkbx_RecipeFlush1.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeFlush2_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeFlush2.Click
+        checkbx_RecipeFlush2.Checked = Not checkbx_RecipeFlush2.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDPTest2_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDPTest2.Click
+        checkbx_RecipeDPTest2.Checked = Not checkbx_RecipeDPTest2.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDPTest1_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDPTest1.Click
+        checkbx_RecipeDPTest1.Checked = Not checkbx_RecipeDPTest1.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDrain1_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDrain1.Click
+        checkbx_RecipeDrain1.Checked = Not checkbx_RecipeDrain1.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDrain2_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDrain2.Click
+        checkbx_RecipeDrain2.Checked = Not checkbx_RecipeDrain2.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDrain3_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDrain3.Click
+        checkbx_RecipeDrain3.Checked = Not checkbx_RecipeDrain3.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDrain4_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDrain4.Click
+        checkbx_RecipeDrain4.Checked = Not checkbx_RecipeDrain4.Checked
     End Sub
 End Class
 

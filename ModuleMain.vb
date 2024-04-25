@@ -191,6 +191,9 @@ Module PublicVariables
     Public Limit_Min_d_drain3pressure As Decimal
     Public Limit_Min_i_drain3time As Integer
 
+    Public Limit_Min_d_drain4pressure As Decimal
+    Public Limit_Min_i_drain4time As Integer
+
 
     Public Limit_Max_d_vertol As Decimal
 
@@ -249,6 +252,9 @@ Module PublicVariables
 
     Public Limit_Max_d_drain3pressure As Decimal
     Public Limit_Max_i_drain3time As Integer
+
+    Public Limit_Max_d_drain4pressure As Decimal
+    Public Limit_Max_i_drain4time As Integer
 
 
 

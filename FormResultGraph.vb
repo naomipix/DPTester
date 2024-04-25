@@ -874,8 +874,8 @@ Public Class FormResultGraph
                 End If
             End If
 
+            Dim PrepFillTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_fill_time"), PrepFillTime), PrepFillTime, 0))
             Dim PrepBleedTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_bleed_time"), PrepBleedTime), PrepBleedTime, 0))
-            Dim PrepFillTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_fill_time"), PrepFillTime), PrepFillTime, 0)) - PrepBleedTime
             'Dim PrepPressureDropTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_pressure_drop_time"), PrepPressureDropTime), PrepPressureDropTime, 0))
 
             Dim DPStabilizeTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_dp_stabilize_time"), DPStabilizeTime), DPStabilizeTime, 0)) 'CInt(resultsummary(54 - 8))

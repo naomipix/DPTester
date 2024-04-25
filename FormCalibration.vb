@@ -271,8 +271,8 @@ Public Class FormCalibration
                 Me.Close()
             End If
 
-            txtbx_CalBackPressure.Text = dtrecipetable.Rows(0)("dp_back_pressure")
-            txtbx_CalDPTestFlowrate.Text = dtrecipetable.Rows(0)("dp_flowrate")
+            'txtbx_CalBackPressure.Text = dtrecipetable.Rows(0)("dp_back_pressure")
+            'txtbx_CalDPTestFlowrate.Text = dtrecipetable.Rows(0)("dp_flowrate")
             txtbx_CalDPTesttime.Text = dtrecipetable.Rows(0)("dp_test_time")
             txtbx_CalDPPoints.Text = dtrecipetable.Rows(0)("dp_testpoints")
             If True Then
@@ -2422,7 +2422,7 @@ Public Class FormCalibration
                 Cal_finalbackpressure = 0
 
                 ' Define Values
-                Dim PrepFillTime As Integer = CInt(dtrecipetable.Rows(0)("prep_fill_time")) - CInt(dtrecipetable.Rows(0)("prep_bleed_time"))
+                Dim PrepFillTime As Integer = CInt(dtrecipetable.Rows(0)("prep_fill_time")) '- CInt(dtrecipetable.Rows(0)("prep_bleed_time"))
                 Dim PrepBleedTime As Integer = dtrecipetable.Rows(0)("prep_bleed_time")
                 'Dim PrepPressureDropTime As Integer = dtrecipetable.Rows(0)("prep_pressure_drop_time")
 
