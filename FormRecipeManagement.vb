@@ -1077,6 +1077,9 @@ Public Class FormRecipeManagement
             txtbx_RcpCreatePrepPrefillStartTime.Text = CType(i_prepprefillstarttime, String)
             txtbx_RcpCreatePrepPrefillTime.Text = CType(i_prepprefilltime, String)
             rdbtn_RcpCreatePrepPumpProcess.Checked = True
+
+            TextBox2.Enabled = True
+            txtbx_RcpCreateDuration_TextChanged(Nothing, Nothing)
         Else
             txtbx_RcpCreateRecipeID.Text = "--"
             txtbx_RcpCreateRecipeID.Enabled = False
@@ -1189,6 +1192,8 @@ Public Class FormRecipeManagement
             rdbtn_RcpCreateFlush1PumpProcess.Checked = True
             rdbtn_RcpCreateFlush2PumpProcess.Checked = True
             rdbtn_RcpCreateDPTestPumpProcess.Checked = True
+
+            TextBox2.Enabled = False
         End If
     End Sub
 
@@ -2711,7 +2716,7 @@ Public Class FormRecipeManagement
         End If
     End Sub
 
-    Private Sub txtbx_RcpCreateDPTestRPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpCreateDPTestRPM.Validating
+    Private Sub txtbx_RcpCreateDPTestRPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_RcpCreateDPTestRPM.Validating, TextBox2.Validating
         'Check for DP Test RPM
         'Check the text is empty
         If Not txtbx_RcpCreateDPTestRPM.Text = "" Then
@@ -6083,6 +6088,9 @@ Public Class FormRecipeManagement
         checkbx_EditDrain3.Enabled = True
         checkbx_EditDrain4.Enabled = True
         btn_RcpEditSave.Enabled = True
+
+        TextBox3.Enabled = True
+        txtbx_RcpEditDuration_TextChanged(Nothing, Nothing)
     End Sub
 
     'Public Sub LoadRecipeParameters(parameterarr As String())
@@ -6604,6 +6612,8 @@ Public Class FormRecipeManagement
 
             btn_RcpEdit.Enabled = False
             btn_RcpEditSave.Enabled = False
+
+            TextBox3.Enabled = False
         End If
 
     End Sub
@@ -9285,6 +9295,174 @@ Public Class FormRecipeManagement
                 .Enabled = False
                 .Text = Nothing
             End With
+        End If
+    End Sub
+
+    Private Sub txtbx_RcpEditDuration_TextChanged(sender As Object, e As EventArgs) Handles _
+            txtbx_RcpEditPrepFill.TextChanged, txtbx_RcpEditPrepBleed.TextChanged, txtbx_RcpEditFlush1Stabilize.TextChanged, txtbx_RcpEditFlush1Time.TextChanged,
+            txtbx_RcpEditFlush2Stabilize.TextChanged, txtbx_RcpEditFlush2Time.TextChanged, txtbx_RcpEditDPStabilize.TextChanged, txtbx_RcpEditDPTime.TextChanged,
+            txtbx_RcpEditDrain1Time.TextChanged, txtbx_RcpEditDrain2Time.TextChanged, txtbx_RcpEditDrain3Time.TextChanged, txtbx_RcpEditDrain4Time.TextChanged
+
+        Dim TotalCycleTime As Integer = 0
+
+        Dim PrepCycleTime As Integer = 0
+        Dim Flush1CycleTime As Integer = 0
+        Dim Flush2CycleTime As Integer = 0
+        Dim DP1CycleTime As Integer = 0
+        Dim DP2CycleTime As Integer = 0
+        Dim Drain1CycleTime As Integer = 0
+        Dim Drain2CycleTime As Integer = 0
+        Dim Drain3CycleTime As Integer = 0
+        Dim Drain4CycleTime As Integer = 0
+
+        ' Calculate Individual Cycle Time
+        If cmbx_RcpEditRecipeID.SelectedIndex > 0 Then
+            Dim PrepFillTime As Integer = 0
+            Dim PrepBleedTime As Integer = 0
+            Dim Flush1Stabilize As Integer = 0
+            Dim Flush1Time As Integer = 0
+            Dim Flush2Stabilize As Integer = 0
+            Dim Flush2Time As Integer = 0
+            Dim DPStabilizeTime As Integer = 0
+            Dim DPTestTime As Integer = 0
+            Dim Drain1Time As Integer = 0
+            Dim Drain2Time As Integer = 0
+            Dim Drain3Time As Integer = 0
+            Dim Drain4Time As Integer = 0
+
+            Integer.TryParse(txtbx_RcpEditPrepFill.Text, PrepFillTime)
+            Integer.TryParse(txtbx_RcpEditPrepBleed.Text, PrepBleedTime)
+            Integer.TryParse(txtbx_RcpEditFlush1Stabilize.Text, Flush1Stabilize)
+            Integer.TryParse(txtbx_RcpEditFlush1Time.Text, Flush1Time)
+            Integer.TryParse(txtbx_RcpEditFlush2Stabilize.Text, Flush2Stabilize)
+            Integer.TryParse(txtbx_RcpEditFlush2Time.Text, Flush2Time)
+            Integer.TryParse(txtbx_RcpEditDPStabilize.Text, DPStabilizeTime)
+            Integer.TryParse(txtbx_RcpEditDPTime.Text, DPTestTime)
+            Integer.TryParse(txtbx_RcpEditDrain1Time.Text, Drain1Time)
+            Integer.TryParse(txtbx_RcpEditDrain2Time.Text, Drain2Time)
+            Integer.TryParse(txtbx_RcpEditDrain3Time.Text, Drain3Time)
+            Integer.TryParse(txtbx_RcpEditDrain4Time.Text, Drain4Time)
+
+            PrepCycleTime = PrepFillTime + PrepBleedTime
+            If checkbx_EditFlush1.Checked Then
+                Flush1CycleTime = Flush1Stabilize + Flush1Time
+            End If
+            If checkbx_EditFlush2.Checked Then
+                Flush2CycleTime = Flush2Stabilize + Flush2Time
+            End If
+            If checkbx_EditDPTest1.Checked Then
+                DP1CycleTime = DPStabilizeTime + DPTestTime
+            End If
+            If checkbx_EditDPTest2.Checked Then
+                DP2CycleTime = DPStabilizeTime + DPTestTime
+            End If
+            If checkbx_EditDrain1.Checked Then
+                Drain1CycleTime = Drain1Time
+            End If
+            If checkbx_EditDrain2.Checked Then
+                Drain2CycleTime = Drain2Time
+            End If
+            If checkbx_EditDrain3.Checked Then
+                Drain3CycleTime = Drain3Time
+            End If
+            If checkbx_EditDrain4.Checked Then
+                Drain4CycleTime = Drain4Time
+            End If
+        End If
+
+        ' Calculate Total Cycle Time
+        If cmbx_RcpEditRecipeID.SelectedIndex > 0 Then
+            TotalCycleTime =
+                PrepCycleTime + Flush1CycleTime + Flush2CycleTime + DP1CycleTime + DP2CycleTime +
+                Drain1CycleTime + Drain2CycleTime + Drain3CycleTime + Drain4CycleTime
+
+            TextBox3.Text = TotalCycleTime
+        Else
+            TextBox3.Text = Nothing
+        End If
+    End Sub
+
+    Private Sub txtbx_RcpCreateDuration_TextChanged(sender As Object, e As EventArgs) Handles _
+            txtbx_RcpCreatePrepFill.TextChanged, txtbx_RcpCreatePrepBleed.TextChanged, txtbx_RcpCreateFlush1Stabilize.TextChanged, txtbx_RcpCreateFlush1Time.TextChanged,
+            txtbx_RcpCreateFlush2Stabilize.TextChanged, txtbx_RcpCreateFlush2Time.TextChanged, txtbx_RcpCreateDPStabilize.TextChanged, txtbx_RcpCreateDPTime.TextChanged,
+            txtbx_RcpCreateDrain1Time.TextChanged, txtbx_RcpCreateDrain2Time.TextChanged, txtbx_RcpCreateDrain3Time.TextChanged, txtbx_RcpCreateDrain4Time.TextChanged
+
+        Dim TotalCycleTime As Integer = 0
+
+        Dim PrepCycleTime As Integer = 0
+        Dim Flush1CycleTime As Integer = 0
+        Dim Flush2CycleTime As Integer = 0
+        Dim DP1CycleTime As Integer = 0
+        Dim DP2CycleTime As Integer = 0
+        Dim Drain1CycleTime As Integer = 0
+        Dim Drain2CycleTime As Integer = 0
+        Dim Drain3CycleTime As Integer = 0
+        Dim Drain4CycleTime As Integer = 0
+
+        ' Calculate Individual Cycle Time
+        If TextBox2.Enabled Then
+            Dim PrepFillTime As Integer = 0
+            Dim PrepBleedTime As Integer = 0
+            Dim Flush1Stabilize As Integer = 0
+            Dim Flush1Time As Integer = 0
+            Dim Flush2Stabilize As Integer = 0
+            Dim Flush2Time As Integer = 0
+            Dim DPStabilizeTime As Integer = 0
+            Dim DPTestTime As Integer = 0
+            Dim Drain1Time As Integer = 0
+            Dim Drain2Time As Integer = 0
+            Dim Drain3Time As Integer = 0
+            Dim Drain4Time As Integer = 0
+
+            Integer.TryParse(txtbx_RcpCreatePrepFill.Text, PrepFillTime)
+            Integer.TryParse(txtbx_RcpCreatePrepBleed.Text, PrepBleedTime)
+            Integer.TryParse(txtbx_RcpCreateFlush1Stabilize.Text, Flush1Stabilize)
+            Integer.TryParse(txtbx_RcpCreateFlush1Time.Text, Flush1Time)
+            Integer.TryParse(txtbx_RcpCreateFlush2Stabilize.Text, Flush2Stabilize)
+            Integer.TryParse(txtbx_RcpCreateFlush2Time.Text, Flush2Time)
+            Integer.TryParse(txtbx_RcpCreateDPStabilize.Text, DPStabilizeTime)
+            Integer.TryParse(txtbx_RcpCreateDPTime.Text, DPTestTime)
+            Integer.TryParse(txtbx_RcpCreateDrain1Time.Text, Drain1Time)
+            Integer.TryParse(txtbx_RcpCreateDrain2Time.Text, Drain2Time)
+            Integer.TryParse(txtbx_RcpCreateDrain3Time.Text, Drain3Time)
+            Integer.TryParse(txtbx_RcpCreateDrain4Time.Text, Drain4Time)
+
+            PrepCycleTime = PrepFillTime + PrepBleedTime
+            If checkbx_CreateFlush1.Checked Then
+                Flush1CycleTime = Flush1Stabilize + Flush1Time
+            End If
+            If checkbx_CreateFlush2.Checked Then
+                Flush2CycleTime = Flush2Stabilize + Flush2Time
+            End If
+            If checkbx_CreateDPTest1.Checked Then
+                DP1CycleTime = DPStabilizeTime + DPTestTime
+            End If
+            If checkbx_CreateDPTest2.Checked Then
+                DP2CycleTime = DPStabilizeTime + DPTestTime
+            End If
+            If checkbx_CreateDrain1.Checked Then
+                Drain1CycleTime = Drain1Time
+            End If
+            If checkbx_CreateDrain2.Checked Then
+                Drain2CycleTime = Drain2Time
+            End If
+            If checkbx_CreateDrain3.Checked Then
+                Drain3CycleTime = Drain3Time
+            End If
+            If checkbx_CreateDrain4.Checked Then
+                Drain4CycleTime = Drain4Time
+            End If
+        End If
+
+        ' Calculate Total Cycle Time
+        If TextBox2.Enabled Then
+            TotalCycleTime =
+                PrepCycleTime + Flush1CycleTime + Flush2CycleTime + DP1CycleTime + DP2CycleTime +
+                Drain1CycleTime + Drain2CycleTime + Drain3CycleTime + Drain4CycleTime
+
+            TextBox2.Text = TotalCycleTime
+        Else
+            TextBox2.Text = Nothing
         End If
     End Sub
 End Class

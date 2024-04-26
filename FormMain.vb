@@ -4085,6 +4085,78 @@ Public Class FormMain
         Else
             checkbx_RecipeDrain4.Checked = False
         End If
+
+
+        Dim TotalCycleTime As Integer = 0
+
+        Dim PrepCycleTime As Integer = 0
+        Dim Flush1CycleTime As Integer = 0
+        Dim Flush2CycleTime As Integer = 0
+        Dim DP1CycleTime As Integer = 0
+        Dim DP2CycleTime As Integer = 0
+        Dim Drain1CycleTime As Integer = 0
+        Dim Drain2CycleTime As Integer = 0
+        Dim Drain3CycleTime As Integer = 0
+        Dim Drain4CycleTime As Integer = 0
+        If True Then
+            Dim PrepFillTime As Integer = 0
+            Dim PrepBleedTime As Integer = 0
+            Dim Flush1Stabilize As Integer = 0
+            Dim Flush1Time As Integer = 0
+            Dim Flush2Stabilize As Integer = 0
+            Dim Flush2Time As Integer = 0
+            Dim DPStabilizeTime As Integer = 0
+            Dim DPTestTime As Integer = 0
+            Dim Drain1Time As Integer = 0
+            Dim Drain2Time As Integer = 0
+            Dim Drain3Time As Integer = 0
+            Dim Drain4Time As Integer = 0
+
+            Integer.TryParse(txtbx_RecipePrepFill.Text, PrepFillTime)
+            Integer.TryParse(txtbx_RecipePrepBleed.Text, PrepBleedTime)
+            Integer.TryParse(txtbx_RecipeFlush1Stabilize.Text, Flush1Stabilize)
+            Integer.TryParse(txtbx_RecipeFlush1Time.Text, Flush1Time)
+            Integer.TryParse(txtbx_RecipeFlush2Stabilize.Text, Flush2Stabilize)
+            Integer.TryParse(txtbx_RecipeFlush2Time.Text, Flush2Time)
+            Integer.TryParse(txtbx_RecipeDPStabilize.Text, DPStabilizeTime)
+            Integer.TryParse(txtbx_RecipeDPTime.Text, DPTestTime)
+            Integer.TryParse(txtbx_RecipeDrain1Time.Text, Drain1Time)
+            Integer.TryParse(txtbx_RecipeDrain2Time.Text, Drain2Time)
+            Integer.TryParse(txtbx_RecipeDrain3Time.Text, Drain3Time)
+            Integer.TryParse(txtbx_RecipeDrain4Time.Text, Drain4Time)
+
+            PrepCycleTime = PrepFillTime + PrepBleedTime
+            If checkbx_RecipeFlush1.Checked Then
+                Flush1CycleTime = Flush1Stabilize + Flush1Time
+            End If
+            If checkbx_RecipeFlush2.Checked Then
+                Flush2CycleTime = Flush2Stabilize + Flush2Time
+            End If
+            If checkbx_RecipeDPTest1.Checked Then
+                DP1CycleTime = DPStabilizeTime + DPTestTime
+            End If
+            If checkbx_RecipeDPTest2.Checked Then
+                DP2CycleTime = DPStabilizeTime + DPTestTime
+            End If
+            If checkbx_RecipeDrain1.Checked Then
+                Drain1CycleTime = Drain1Time
+            End If
+            If checkbx_RecipeDrain2.Checked Then
+                Drain2CycleTime = Drain2Time
+            End If
+            If checkbx_RecipeDrain3.Checked Then
+                Drain3CycleTime = Drain3Time
+            End If
+            If checkbx_RecipeDrain4.Checked Then
+                Drain4CycleTime = Drain4Time
+            End If
+
+            TotalCycleTime =
+                PrepCycleTime + Flush1CycleTime + Flush2CycleTime + DP1CycleTime + DP2CycleTime +
+                Drain1CycleTime + Drain2CycleTime + Drain3CycleTime + Drain4CycleTime
+
+            txtbx_RecipeTotalCycleTime.Text = TotalCycleTime
+        End If
     End Sub
 #End Region
 
@@ -5411,6 +5483,8 @@ Public Class FormMain
             checkbx_RecipeDrain2.Checked = False
             checkbx_RecipeDrain3.Checked = False
             checkbx_RecipeDrain4.Checked = False
+
+            txtbx_RecipeTotalCycleTime.Text = "-"
         End If
     End Sub
 
