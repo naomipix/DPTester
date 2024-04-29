@@ -40,6 +40,7 @@ Partial Class FormTesting
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -185,11 +186,21 @@ Partial Class FormTesting
         'Timer3
         '
         '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(560, 386)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(75, 23)
+        Me.Button8.TabIndex = 9
+        Me.Button8.Text = "Button8"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
         'FormTesting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button6)
@@ -226,4 +237,5 @@ Partial Class FormTesting
     Friend WithEvents Button7 As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents Timer3 As Timer
+    Friend WithEvents Button8 As Button
 End Class

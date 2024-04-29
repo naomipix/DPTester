@@ -849,6 +849,7 @@ Public Class FormResultGraph
             Dim Drain1Enabled As Boolean = False
             Dim Drain2Enabled As Boolean = False
             Dim Drain3Enabled As Boolean = False
+            Dim Drain4Enabled As Boolean = False
 
             If True Then
                 If dtproductiondetail(0)("recipetable_firstflush_circuit") = "Enable" Then
@@ -872,6 +873,9 @@ Public Class FormResultGraph
                 If dtproductiondetail(0)("recipetable_drain3_circuit") = "Enable" Then
                     Drain3Enabled = True
                 End If
+                If dtproductiondetail(0)("recipetable_drain4_circuit") = "Enable" Then
+                    Drain4Enabled = True
+                End If
             End If
 
             Dim PrepFillTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_fill_time"), PrepFillTime), PrepFillTime, 0))
@@ -890,6 +894,7 @@ Public Class FormResultGraph
             Dim Drain1Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain1_time"), Drain1Time), Drain1Time, 0)) 'CInt(resultsummary(70 - 8))
             Dim Drain2Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain2_time"), Drain2Time), Drain2Time, 0)) 'CInt(resultsummary(73 - 8))
             Dim Drain3Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain3_time"), Drain3Time), Drain3Time, 0)) 'CInt(resultsummary(76 - 8))
+            Dim Drain4Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain4_time"), Drain4Time), Drain4Time, 0))
 
             Dim Prepcycletime As Integer = PrepFillTime + PrepBleedTime ' + PrepPressureDropTime
             Dim DPcycletime As Integer = DPStabilizeTime + DPTestTime
@@ -906,6 +911,7 @@ Public Class FormResultGraph
             Dim Drain1Start As Decimal = 0
             Dim Drain2Start As Decimal = 0
             Dim Drain3Start As Decimal = 0
+            Dim Drain4Start As Decimal = 0
 
             Dim CycleTimeTotal As Decimal = 0
 
@@ -949,9 +955,15 @@ Public Class FormResultGraph
                 End If
 
                 If Drain3Enabled Then
-                    CycleTimeTotal = Drain3Start + Drain3Time
+                    Drain4Start = Drain3Start + Drain3Time
                 Else
-                    CycleTimeTotal = Drain3Start
+                    Drain4Start = Drain3Start
+                End If
+
+                If Drain4Enabled Then
+                    CycleTimeTotal = Drain4Start + Drain4Time
+                Else
+                    CycleTimeTotal = Drain4Start
                 End If
             End If
 
@@ -1227,9 +1239,22 @@ Public Class FormResultGraph
                 New RectangularSection With {
                     .IsVisible = Drain3Enabled,
                     .Xi = Drain3Start,
-                    .Xj = CycleTimeTotal,
+                    .Xj = Drain4Start,
                     .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                     .Label = "", ' "Drain 3",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    }
+                },
+                New RectangularSection With {
+                    .IsVisible = Drain4Enabled,
+                    .Xi = Drain4Start,
+                    .Xj = CycleTimeTotal,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                    .Label = "", ' "Drain 4",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
                     .Stroke = New SolidColorPaint With {
@@ -1487,6 +1512,9 @@ Public Class FormResultGraph
             RecipeTable.drain3_circuit AS recipetable_drain3_circuit, 
             RecipeTable.drain3_back_pressure AS recipetable_drain3_back_pressure, 
             RecipeTable.drain3_time AS recipetable_drain3_time, 
+            RecipeTable.drain4_circuit AS recipetable_drain4_circuit, 
+            RecipeTable.drain4_back_pressure AS recipetable_drain4_back_pressure, 
+            RecipeTable.drain4_time AS recipetable_drain4_time, 
 
             WorkOrder.work_order AS workorder_work_order, 
             WorkOrder.part_id AS workorder_part_id, 

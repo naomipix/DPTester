@@ -223,7 +223,7 @@ Public Class FormMain
         btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
         }
         ' Define Button for Manual Other Control Array
-        btn_Manualothersarr = {btn_PumpReset, btn_PumpMode, btn_PumpEnable, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank, btn_InletConnect,
+        btn_Manualothersarr = {btn_PumpReset, btn_PumpMode, btn_PumpEnable, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_MCN2Purge4, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank, btn_InletConnect,
             btn_OutletConnect, btn_VentConnect, btn_DrainConnect, btn_BackPressureOn, btn_N2PressureOn
             }
 
@@ -2567,7 +2567,7 @@ Public Class FormMain
     ' Manual Drain
 
 
-    Private Sub btn_ManualDrainCtrl_Click(sender As Object, e As EventArgs) Handles btn_MCN2Purge1.Click, btn_MCN2Purge2.Click, btn_MCN2Purge3.Click
+    Private Sub btn_ManualDrainCtrl_Click(sender As Object, e As EventArgs) Handles btn_MCN2Purge1.Click, btn_MCN2Purge2.Click, btn_MCN2Purge3.Click, btn_MCN2Purge4.Click
         Dim btn_ManualDrain As Button = DirectCast(sender, Button)
         If btn_ManualDrain Is btn_MCN2Purge1 Then
             If btn_MCN2Purge1.BackColor = Color.FromArgb(0, 192, 0) Then
@@ -2596,6 +2596,16 @@ Public Class FormMain
             Else
                 ManualCtrl(3)(10) = True
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-3 (ON)")
+            End If
+        End If
+
+        If btn_ManualDrain Is btn_MCN2Purge4 Then
+            If btn_MCN2Purge4.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(6) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-4 (OFF)")
+            Else
+                ManualCtrl(4)(6) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-4 (ON)")
             End If
         End If
         PCtimer.Start()
@@ -3107,8 +3117,8 @@ Public Class FormMain
         ConfirmationID = FormRecipeManagement.Formatstring(txtbx_ConfirmationID.Text)
         Quantity = FormRecipeManagement.Formatstring(txtbx_Quantity.Text)
 
-        'PCStatus(0)(10) = False
-        ResetEndLot = True
+        PCStatus(0)(10) = False
+        'ResetEndLot = True
         Lotendsuccess = False
         'Empty box check
         If OnContinue = True Then
@@ -4265,8 +4275,8 @@ Public Class FormMain
 
                     txtbx_SerialNumber.Enabled = False
                     Startresultrecord()
-                    'PCStatus(1)(10) = True
-                    SetMainSeqStart = True
+                    PCStatus(1)(10) = True
+                    'SetMainSeqStart = True
                     'btn_OprKeyInDtConfirm.Enabled = False
                 Else
                     MainMessage(4, "Insert Production details")
@@ -4295,6 +4305,7 @@ Public Class FormMain
         Dim Drain1cycletime As Integer
         Dim Drain2cycletime As Integer
         Dim Drain3cycletime As Integer
+        Dim Drain4cycletime As Integer
         Dim PrepCycletime As Integer
         Dim Flush1Enabled As Boolean = False
         Dim Flush2Enabled As Boolean = False
@@ -4302,6 +4313,7 @@ Public Class FormMain
         Dim Drain1Enabled As Boolean = False
         Dim Drain2Enabled As Boolean = False
         Dim Drain3Enabled As Boolean = False
+        Dim Drain4Enabled As Boolean = False
 
         dtresult = New DataTable()
         CreateTable("Production_Result")
@@ -4345,13 +4357,17 @@ Public Class FormMain
             Drain3cycletime = (dtrecipetable.Rows(0)("drain3_time"))
             Drain3Enabled = True
         End If
+        If dtrecipetable.Rows(0)("drain4_circuit") = "Enable" Then
+            Drain4cycletime = (dtrecipetable.Rows(0)("drain4_time"))
+            Drain4Enabled = True
+        End If
 
-        MainCycletime = PrepCycletime + flush1cycletime + flush2cycletime + DPtest1cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime
+        MainCycletime = PrepCycletime + flush1cycletime + flush2cycletime + DPtest1cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime + Drain4cycletime
         MainDptestpoints = dtrecipetable.Rows(0)("dp_testpoints")
 
-        MainDptest1end = CType((MainCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime) - 1) * (1000 / Resultcapturetimer.Interval), Decimal)
+        MainDptest1end = CType((MainCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime + Drain4cycletime) - 1) * (1000 / Resultcapturetimer.Interval), Decimal)
         MainDptest1start = MainDptest1end - MainDptestpoints
-        MainDptest2end = CType((MainCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / Resultcapturetimer.Interval), Decimal)
+        MainDptest2end = CType((MainCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime + Drain4cycletime)) * (1000 / Resultcapturetimer.Interval), Decimal)
         MainDptest2start = MainDptest2end - MainDptestpoints
 
 
@@ -4408,6 +4424,7 @@ Public Class FormMain
             Dim Drain1Time As Integer = dtrecipetable.Rows(0)("drain1_time")
             Dim Drain2Time As Integer = dtrecipetable.Rows(0)("drain2_time")
             Dim Drain3Time As Integer = dtrecipetable.Rows(0)("drain3_time")
+            Dim Drain4Time As Integer = dtrecipetable.Rows(0)("drain4_time")
 
             ' Reset Rolling Average
             For i As Integer = 0 To RollingAvgArr.Length - 1
@@ -4443,6 +4460,7 @@ Public Class FormMain
                 Dim Drain1Start As Decimal = 0
                 Dim Drain2Start As Decimal = 0
                 Dim Drain3Start As Decimal = 0
+                Dim Drain4Start As Decimal = 0
 
                 Dim CycleTimeTotal As Decimal = 0
 
@@ -4486,9 +4504,15 @@ Public Class FormMain
                     End If
 
                     If Drain3Enabled Then
-                        CycleTimeTotal = Drain3Start + Drain3cycletime
+                        Drain4Start = Drain3Start + Drain3cycletime
                     Else
-                        CycleTimeTotal = Drain3Start
+                        Drain4Start = Drain3Start
+                    End If
+
+                    If Drain4Enabled Then
+                        CycleTimeTotal = Drain4Start + Drain4cycletime
+                    Else
+                        CycleTimeTotal = Drain4Start
                     End If
                 End If
 
@@ -5020,9 +5044,22 @@ Public Class FormMain
                     New RectangularSection With {
                         .IsVisible = Drain3Enabled,
                         .Xi = Drain3Start,
-                        .Xj = CycleTimeTotal,
+                        .Xj = Drain4Start,
                         .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                         .Label = "", ' "Drain 3",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.LightGray,
+                            .StrokeThickness = 1
+                        }
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Drain4Enabled,
+                        .Xi = Drain4Start,
+                        .Xj = CycleTimeTotal,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                        .Label = "", ' "Drain 4",
                         .LabelSize = 12,
                         .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
                         .Stroke = New SolidColorPaint With {
@@ -5035,7 +5072,7 @@ Public Class FormMain
 
             lbl_EstCycleTime.Text = MainCycletime.ToString
             Resultcapturetimer.Enabled = True
-            ResultCaptureThreadingTmr.Change(Resultcapturetimer.Interval, Resultcapturetimer.Interval)
+            'ResultCaptureThreadingTmr.Change(Resultcapturetimer.Interval, Resultcapturetimer.Interval)
             'LiveGraph.LiveGraph.ChartPlottingTimer(True)
         End If
 
@@ -5399,8 +5436,8 @@ Public Class FormMain
             FormCalibration.txtbx_CalResult.BackColor = SystemColors.Window
             FormCalibration.dgv_CalibrationResult.DataSource = Nothing
             FormCalibration.dgv_VerificationResult.DataSource = Nothing
-            'PCStatus(0)(10) = True
-            SetEndLot = True
+            PCStatus(0)(10) = True
+            'SetEndLot = True
         End If
 
         If OnContinue = True Then

@@ -330,4 +330,8 @@ Public Class FormTesting
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
         Label2.Text = TestVal
     End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        MsgBox($"CommLost='{CommLost}'{vbCrLf}CommLosttimer='{CommLosttimer.Enabled}'")
+    End Sub
 End Class

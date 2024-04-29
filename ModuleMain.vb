@@ -358,8 +358,8 @@ Module SQL
     Public Function InsertRecord(tableName As String, parameters As Dictionary(Of String, Object)) As Integer
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
         Dim ReturnValue As Integer = 0
-        'PCStatus(0)(2) = False
-        ResetPCAlarm = True
+        PCStatus(0)(2) = False
+        'ResetPCAlarm = True
         Try
             Using (connection)
                 Dim command As New SqlCommand()
@@ -404,8 +404,8 @@ Module SQL
                 connection.Close()
             End Using
         Catch ex As Exception
-            'PCStatus(0)(2) = True
-            SetPCAlarm = True
+            PCStatus(0)(2) = True
+            'SetPCAlarm = True
             MsgBox(ex.Message & ex.StackTrace)
         End Try
 
@@ -431,8 +431,8 @@ Module SQL
     Public Function UpdateRecord(tableName As String, parameters As Dictionary(Of String, Object), condition As String) As Integer
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
         Dim ReturnValue As Integer = 0
-        'PCStatus(0)(2) = False
-        ResetPCAlarm = True
+        PCStatus(0)(2) = False
+        'ResetPCAlarm = True
         Try
             'conn.ConnectionString = connStr
             Using (connection)
@@ -471,8 +471,8 @@ Module SQL
                 connection.Close()
             End Using
         Catch ex As Exception
-            'PCStatus(0)(2) = True
-            SetPCAlarm = True
+            PCStatus(0)(2) = True
+            'SetPCAlarm = True
             MsgBox(ex.Message & ex.StackTrace)
         End Try
 
