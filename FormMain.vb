@@ -1,7 +1,4 @@
 ﻿Imports System.ComponentModel
-Imports System.Net.NetworkInformation
-Imports System.Runtime.InteropServices
-Imports System.Threading
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports LiveChartsCore
 Imports LiveChartsCore.Kernel.Sketches
@@ -9,11 +6,9 @@ Imports LiveChartsCore.SkiaSharpView
 Imports LiveChartsCore.SkiaSharpView.Painting
 Imports LiveChartsCore.SkiaSharpView.VisualElements
 Imports SkiaSharp
-Imports PoohPlcLink
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 Imports LiveChartsCore.Defaults
 Imports LiveChartsCore.SkiaSharpView.WinForms
-Imports Microsoft.VisualBasic.ApplicationServices
 
 Module FormMainModule
     Public Workorder As String
@@ -72,31 +67,27 @@ Module FormMainModule
                         Else
                             FormMain.Endlot()
                         End If
-
-
-
                     Else
                         FormMain.LoadMainRecipeCombo()
 
                         FormMain.cmbx_RecipeType.Enabled = True
                         FormMain.cmbx_RecipeID.Enabled = True
                         FormMain.btn_RecipeSelectionConfirm.Enabled = False
-
-
                     End If
                 Else
                     FormMain.LoadMainRecipeCombo()
                     FormMain.btn_RecipeSelectionConfirm.Enabled = False
                     FormMain.cmbx_RecipeType.Enabled = False
                     FormMain.cmbx_RecipeID.Enabled = False
-
                 End If
-
-
 
                 If PublicVariables.RetainedWorkOrder <> "-" And PublicVariables.RetainedRecipeType <> "-" Then
                     If PublicVariables.RetainedCalStatus <> "-" Then
-                        FormMain.lbl_BlankDP.Text = PublicVariables.RetainedCaloffset
+                        Try
+                            FormMain.lbl_BlankDP.Text = CDec(PublicVariables.RetainedCaloffset).ToString("F2")
+                        Catch ex As Exception
+                        End Try
+
                         FormMain.lbl_CalibrationDate.Text = PublicVariables.RetainedCaldate
                         If PublicVariables.RetainedCalStatus = "Pass" Then
                             FormMain.lbl_CalibrationStatus.Text = "Pass"
@@ -110,7 +101,6 @@ Module FormMainModule
                             FormMain.txtbx_SerialNumber.Enabled = False
                             FormMain.btn_OprKeyInDtConfirm.Enabled = False
                         End If
-
                     Else
                         FormMain.lbl_CalibrationStatus.Text = Nothing
                         FormMain.lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
@@ -119,7 +109,6 @@ Module FormMainModule
                         FormMain.lbl_CalibrationDate.Text = Nothing
                         FormMain.txtbx_SerialNumber.Enabled = False
                         FormMain.btn_OprKeyInDtConfirm.Enabled = False
-
                     End If
                 Else
                     FormMain.lbl_CalibrationStatus.Text = Nothing
@@ -130,6 +119,7 @@ Module FormMainModule
                     FormMain.txtbx_SerialNumber.Enabled = False
                     FormMain.btn_OprKeyInDtConfirm.Enabled = False
                 End If
+
                 ' Apply Permissions
                 PermissionModule.ApplyOnLogon()
                 PermissionModule.ReloadPermission()
@@ -233,7 +223,7 @@ Public Class FormMain
         btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
         }
         ' Define Button for Manual Other Control Array
-        btn_Manualothersarr = {btn_PumpReset, btn_PumpMode, btn_PumpEnable, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank, btn_InletConnect,
+        btn_Manualothersarr = {btn_PumpReset, btn_PumpMode, btn_PumpEnable, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_MCN2Purge4, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank, btn_InletConnect,
             btn_OutletConnect, btn_VentConnect, btn_DrainConnect, btn_BackPressureOn, btn_N2PressureOn
             }
 
@@ -428,7 +418,6 @@ Public Class FormMain
         lbl_ProductTemperature.Text = Nothing
         lbl_DPTestResult.Text = Nothing
 
-
     End Sub
 
     Private Sub FormMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -476,10 +465,8 @@ Public Class FormMain
         ' Application Launch Success
         EventLog.EventLogger.Log("-", "[Application] Application Launch")
 
-
-
-        ' Start Activity [TESTING] 
-
+        ' Remove Fitting Types [TESTING] 
+        tabctrl_SubMain.TabPages.RemoveByKey("tabpg_FittingType")
     End Sub
 
     Private Sub FormMain_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -2580,7 +2567,7 @@ Public Class FormMain
     ' Manual Drain
 
 
-    Private Sub btn_ManualDrainCtrl_Click(sender As Object, e As EventArgs) Handles btn_MCN2Purge1.Click, btn_MCN2Purge2.Click, btn_MCN2Purge3.Click
+    Private Sub btn_ManualDrainCtrl_Click(sender As Object, e As EventArgs) Handles btn_MCN2Purge1.Click, btn_MCN2Purge2.Click, btn_MCN2Purge3.Click, btn_MCN2Purge4.Click
         Dim btn_ManualDrain As Button = DirectCast(sender, Button)
         If btn_ManualDrain Is btn_MCN2Purge1 Then
             If btn_MCN2Purge1.BackColor = Color.FromArgb(0, 192, 0) Then
@@ -2609,6 +2596,16 @@ Public Class FormMain
             Else
                 ManualCtrl(3)(10) = True
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-3 (ON)")
+            End If
+        End If
+
+        If btn_ManualDrain Is btn_MCN2Purge4 Then
+            If btn_MCN2Purge4.BackColor = Color.FromArgb(0, 192, 0) Then
+                ManualCtrl(4)(6) = False
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-4 (OFF)")
+            Else
+                ManualCtrl(4)(6) = True
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-4 (ON)")
             End If
         End If
         PCtimer.Start()
@@ -3121,6 +3118,7 @@ Public Class FormMain
         Quantity = FormRecipeManagement.Formatstring(txtbx_Quantity.Text)
 
         PCStatus(0)(10) = False
+        'ResetEndLot = True
         Lotendsuccess = False
         'Empty box check
         If OnContinue = True Then
@@ -3848,11 +3846,11 @@ Public Class FormMain
 
             Float2int(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
             Float2int(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
-            Float2int(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
+            'Float2int(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
 
-            Float2int(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
-            Float2int(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
-            Float2int(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
+            'Float2int(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
+            'Float2int(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
+            'Float2int(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
 
             Float2int(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
             Float2int(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
@@ -3863,7 +3861,7 @@ Public Class FormMain
 
             Float2int(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
             Float2int(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
-            Float2int(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
+            'Float2int(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
 
             Float2int(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
 
@@ -3871,7 +3869,7 @@ Public Class FormMain
 
             Float2int(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
 
-            DInt2int(112, CType(dtrecipe.Rows(0)("prep_fill_time"), Integer))
+            DInt2int(112, CType(dtrecipe.Rows(0)("prep_fill_time"), Integer)) '- CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
             DInt2int(114, CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
             DInt2int(116, CType(dtrecipe.Rows(0)("prep_pressure_drop_time"), Integer))
 
@@ -3946,21 +3944,230 @@ Public Class FormMain
             Else
                 DInt2int(144, 0)
             End If
+            If dtrecipe.Rows(0)("firstflush_speed_mode") = "Enable" Then
+                DInt2int(158, 1)
+            Else
+                DInt2int(158, 0)
+            End If
+            If dtrecipe.Rows(0)("secondflush_speed_mode") = "Enable" Then
+                DInt2int(160, 1)
+            Else
+                DInt2int(160, 0)
+            End If
+            If dtrecipe.Rows(0)("dp_speed_mode") = "Enable" Then
+                DInt2int(162, 1)
+            Else
+                DInt2int(162, 0)
+            End If
 
             Float2int(146, CType(dtrecipe.Rows(0)("prep_rpm1"), Double))
-            Float2int(158, CType(dtrecipe.Rows(0)("prep_rpm2"), Double))
-            Float2int(156, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
-            Float2int(154, CType(dtrecipe.Rows(0)("secondflush_rpm"), Double))
-            Float2int(152, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
-            Float2int(150, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
+            'Float2int(148, CType(dtrecipe.Rows(0)("prep_rpm2"), Double))
+            Float2int(150, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
+            Float2int(152, CType(dtrecipe.Rows(0)("secondflush_rpm"), Double))
+            Float2int(154, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
+            Float2int(156, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
 
+            If JigType = 1 And JigType = 6 Then
+                DInt2int(164, 1)
+            Else
+                DInt2int(164, 0)
+            End If
+
+            If dtrecipe.Rows(0)("drain4_circuit") = "Enable" Then
+                DInt2int(166, 1)
+            Else
+                DInt2int(102, 0)
+            End If
+            DInt2int(168, CType(dtrecipe.Rows(0)("drain4_time"), Integer))
+            Float2int(170, CType(dtrecipe.Rows(0)("drain4_back_pressure"), Double))
+
+            ' Load Recipe Details in TabPage
+            LoadRecipeToTabRecipeDetails(dtrecipe)
         End If
 
         ' Force Load Recipe Data In Cal Form
         FormCalibration.InitializeCalForm()
     End Sub
 
+    Private Sub LoadRecipeToTabRecipeDetails(dt As DataTable)
+        txtbx_RecipeVerTol.Text = dt.Rows(0)("verification_tolerance")
+        txtbx_RecipePrepFlow.Text = dt.Rows(0)("prep_flowrate")
+        txtbx_RecipePrepFlowTol.Text = dt.Rows(0)("prep_flow_tolerance")
+        txtbx_RecipePrepPressureDrop.Text = dt.Rows(0)("prep_pressure_drop")
 
+        txtbx_RecipePrepFill.Text = dt.Rows(0)("prep_fill_time")
+        txtbx_RecipePrepPrefillStartTime.Text = dt.Rows(0)("prep_prefill_start_time")
+        txtbx_RecipePrepPrefillTime.Text = dt.Rows(0)("prep_prefill_time")
+        txtbx_RecipePrepBleed.Text = dt.Rows(0)("prep_bleed_time")
+        txtbx_RecipePrepPressure.Text = dt.Rows(0)("prep_back_pressure")
+        txtbx_RecipePrepPressureDropTime.Text = dt.Rows(0)("prep_pressure_drop_time")
+        If dt.Rows(0)("prep_speed_mode").ToString.ToUpper = "ENABLE" Then
+            TextBox1.Text = "Speed"
+        Else
+            TextBox1.Text = "Process"
+        End If
+        txtbx_RecipePrepRPM.Text = dt.Rows(0)("prep_rpm1")
+
+        txtbx_RecipeFlush1Flow.Text = dt.Rows(0)("firstflush_flowrate")
+        txtbx_RecipeFlush1FlowTol.Text = dt.Rows(0)("firstflush_flow_tolerance")
+        txtbx_RecipeFlush1Stabilize.Text = dt.Rows(0)("firstflush_stabilize_time")
+        txtbx_RecipeFlush1Time.Text = dt.Rows(0)("firstflush_time")
+        If dt.Rows(0)("firstflush_speed_mode").ToString.ToUpper = "ENABLE" Then
+            TextBox4.Text = "Speed"
+        Else
+            TextBox4.Text = "Process"
+        End If
+        txtbx_RecipeFlush1RPM.Text = dt.Rows(0)("firstflush_rpm")
+
+        txtbx_RecipeFlush2Flow.Text = dt.Rows(0)("secondflush_flowrate")
+        txtbx_RecipeFlush2FlowTol.Text = dt.Rows(0)("secondflush_flow_tolerance")
+        txtbx_RecipeFlush2Stabilize.Text = dt.Rows(0)("secondflush_stabilize_time")
+        txtbx_RecipeFlush2Time.Text = dt.Rows(0)("secondflush_time")
+        If dt.Rows(0)("secondflush_speed_mode").ToString.ToUpper = "ENABLE" Then
+            TextBox3.Text = "Speed"
+        Else
+            TextBox3.Text = "Process"
+        End If
+        txtbx_RecipeFlush2RPM.Text = dt.Rows(0)("secondflush_rpm")
+
+        txtbx_RecipeDPStabilize.Text = dt.Rows(0)("dp_stabilize_time")
+        txtbx_RecipeDPTime.Text = dt.Rows(0)("dp_test_time")
+        txtbx_RecipeDPLowLimit.Text = dt.Rows(0)("dp_lowerlimit")
+        txtbx_RecipeDPUpLimit.Text = dt.Rows(0)("dp_upperlimit")
+        txtbx_RecipeDPPoints.Text = dt.Rows(0)("dp_testpoints")
+        If dt.Rows(0)("dp_speed_mode").ToString.ToUpper = "ENABLE" Then
+            TextBox2.Text = "Speed"
+        Else
+            TextBox2.Text = "Process"
+        End If
+        txtbx_RecipeDPTestRPM.Text = dt.Rows(0)("dp_rpm")
+
+        txtbx_RecipeDrain1Pressure.Text = dt.Rows(0)("drain1_back_pressure")
+        txtbx_RecipeDrain1Time.Text = dt.Rows(0)("drain1_time")
+
+        txtbx_RecipeDrain2Pressure.Text = dt.Rows(0)("drain2_back_pressure")
+        txtbx_RecipeDrain2Time.Text = dt.Rows(0)("drain2_time")
+
+        txtbx_RecipeDrain3Pressure.Text = dt.Rows(0)("drain3_back_pressure")
+        txtbx_RecipeDrain3Time.Text = dt.Rows(0)("drain3_time")
+
+        txtbx_RecipeDrain4Pressure.Text = dt.Rows(0)("drain4_back_pressure")
+        txtbx_RecipeDrain4Time.Text = dt.Rows(0)("drain4_time")
+
+        If dt.Rows(0)("firstdp_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDPTest1.Checked = True
+        Else
+            checkbx_RecipeDPTest1.Checked = False
+        End If
+        If dt.Rows(0)("seconddp_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDPTest2.Checked = True
+        Else
+            checkbx_RecipeDPTest2.Checked = False
+        End If
+        If dt.Rows(0)("firstflush_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeFlush1.Checked = True
+        Else
+            checkbx_RecipeFlush1.Checked = False
+        End If
+        If dt.Rows(0)("secondflush_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeFlush2.Checked = True
+        Else
+            checkbx_RecipeFlush2.Checked = False
+        End If
+
+        If dt.Rows(0)("drain1_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDrain1.Checked = True
+        Else
+            checkbx_RecipeDrain1.Checked = False
+        End If
+        If dt.Rows(0)("drain2_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDrain2.Checked = True
+        Else
+            checkbx_RecipeDrain2.Checked = False
+        End If
+        If dt.Rows(0)("drain3_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDrain3.Checked = True
+        Else
+            checkbx_RecipeDrain3.Checked = False
+        End If
+        If dt.Rows(0)("drain4_circuit").ToString.ToUpper = "ENABLE" Then
+            checkbx_RecipeDrain4.Checked = True
+        Else
+            checkbx_RecipeDrain4.Checked = False
+        End If
+
+
+        Dim TotalCycleTime As Integer = 0
+
+        Dim PrepCycleTime As Integer = 0
+        Dim Flush1CycleTime As Integer = 0
+        Dim Flush2CycleTime As Integer = 0
+        Dim DP1CycleTime As Integer = 0
+        Dim DP2CycleTime As Integer = 0
+        Dim Drain1CycleTime As Integer = 0
+        Dim Drain2CycleTime As Integer = 0
+        Dim Drain3CycleTime As Integer = 0
+        Dim Drain4CycleTime As Integer = 0
+        If True Then
+            Dim PrepFillTime As Integer = 0
+            Dim PrepBleedTime As Integer = 0
+            Dim Flush1Stabilize As Integer = 0
+            Dim Flush1Time As Integer = 0
+            Dim Flush2Stabilize As Integer = 0
+            Dim Flush2Time As Integer = 0
+            Dim DPStabilizeTime As Integer = 0
+            Dim DPTestTime As Integer = 0
+            Dim Drain1Time As Integer = 0
+            Dim Drain2Time As Integer = 0
+            Dim Drain3Time As Integer = 0
+            Dim Drain4Time As Integer = 0
+
+            Integer.TryParse(txtbx_RecipePrepFill.Text, PrepFillTime)
+            Integer.TryParse(txtbx_RecipePrepBleed.Text, PrepBleedTime)
+            Integer.TryParse(txtbx_RecipeFlush1Stabilize.Text, Flush1Stabilize)
+            Integer.TryParse(txtbx_RecipeFlush1Time.Text, Flush1Time)
+            Integer.TryParse(txtbx_RecipeFlush2Stabilize.Text, Flush2Stabilize)
+            Integer.TryParse(txtbx_RecipeFlush2Time.Text, Flush2Time)
+            Integer.TryParse(txtbx_RecipeDPStabilize.Text, DPStabilizeTime)
+            Integer.TryParse(txtbx_RecipeDPTime.Text, DPTestTime)
+            Integer.TryParse(txtbx_RecipeDrain1Time.Text, Drain1Time)
+            Integer.TryParse(txtbx_RecipeDrain2Time.Text, Drain2Time)
+            Integer.TryParse(txtbx_RecipeDrain3Time.Text, Drain3Time)
+            Integer.TryParse(txtbx_RecipeDrain4Time.Text, Drain4Time)
+
+            PrepCycleTime = PrepFillTime + PrepBleedTime
+            If checkbx_RecipeFlush1.Checked Then
+                Flush1CycleTime = Flush1Stabilize + Flush1Time
+            End If
+            If checkbx_RecipeFlush2.Checked Then
+                Flush2CycleTime = Flush2Stabilize + Flush2Time
+            End If
+            If checkbx_RecipeDPTest1.Checked Then
+                DP1CycleTime = DPStabilizeTime + DPTestTime
+            End If
+            If checkbx_RecipeDPTest2.Checked Then
+                DP2CycleTime = DPStabilizeTime + DPTestTime
+            End If
+            If checkbx_RecipeDrain1.Checked Then
+                Drain1CycleTime = Drain1Time
+            End If
+            If checkbx_RecipeDrain2.Checked Then
+                Drain2CycleTime = Drain2Time
+            End If
+            If checkbx_RecipeDrain3.Checked Then
+                Drain3CycleTime = Drain3Time
+            End If
+            If checkbx_RecipeDrain4.Checked Then
+                Drain4CycleTime = Drain4Time
+            End If
+
+            TotalCycleTime =
+                PrepCycleTime + Flush1CycleTime + Flush2CycleTime + DP1CycleTime + DP2CycleTime +
+                Drain1CycleTime + Drain2CycleTime + Drain3CycleTime + Drain4CycleTime
+
+            txtbx_RecipeTotalCycleTime.Text = TotalCycleTime
+        End If
+    End Sub
 #End Region
 
 
@@ -4069,6 +4276,7 @@ Public Class FormMain
                     txtbx_SerialNumber.Enabled = False
                     Startresultrecord()
                     PCStatus(1)(10) = True
+                    'SetMainSeqStart = True
                     'btn_OprKeyInDtConfirm.Enabled = False
                 Else
                     MainMessage(4, "Insert Production details")
@@ -4097,6 +4305,7 @@ Public Class FormMain
         Dim Drain1cycletime As Integer
         Dim Drain2cycletime As Integer
         Dim Drain3cycletime As Integer
+        Dim Drain4cycletime As Integer
         Dim PrepCycletime As Integer
         Dim Flush1Enabled As Boolean = False
         Dim Flush2Enabled As Boolean = False
@@ -4104,6 +4313,7 @@ Public Class FormMain
         Dim Drain1Enabled As Boolean = False
         Dim Drain2Enabled As Boolean = False
         Dim Drain3Enabled As Boolean = False
+        Dim Drain4Enabled As Boolean = False
 
         dtresult = New DataTable()
         CreateTable("Production_Result")
@@ -4111,7 +4321,7 @@ Public Class FormMain
         dtrecipetable = SQL.ReadRecords($"SELECT * FROM RecipeTable WHERE id='{DirectCast(cmbx_RecipeID.SelectedItem, KeyValuePair(Of String, String)).Key}'")
         dtserialrecord = SQL.ReadRecords($"SELECT * FROM ProductionDetail WHERE serial_uid='{SerialUid}' AND serial_attempt='{SerialAttempt}'")
 
-        PrepCycletime = (dtrecipetable.Rows(0)("prep_fill_time") + dtrecipetable.Rows(0)("prep_bleed_time") + dtrecipetable.Rows(0)("prep_pressure_drop_time"))
+        PrepCycletime = (dtrecipetable.Rows(0)("prep_fill_time") + dtrecipetable.Rows(0)("prep_bleed_time")) '+ dtrecipetable.Rows(0)("prep_pressure_drop_time"))
 
         If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
 
@@ -4147,13 +4357,17 @@ Public Class FormMain
             Drain3cycletime = (dtrecipetable.Rows(0)("drain3_time"))
             Drain3Enabled = True
         End If
+        If dtrecipetable.Rows(0)("drain4_circuit") = "Enable" Then
+            Drain4cycletime = (dtrecipetable.Rows(0)("drain4_time"))
+            Drain4Enabled = True
+        End If
 
-        MainCycletime = PrepCycletime + flush1cycletime + flush2cycletime + DPtest1cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime
+        MainCycletime = PrepCycletime + flush1cycletime + flush2cycletime + DPtest1cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime + Drain4cycletime
         MainDptestpoints = dtrecipetable.Rows(0)("dp_testpoints")
 
-        MainDptest1end = CType((MainCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime) - 1) * (1000 / Resultcapturetimer.Interval), Decimal)
+        MainDptest1end = CType((MainCycletime - (flush2cycletime + DPtest2cycletime + Drain1cycletime + Drain2cycletime + Drain3cycletime + Drain4cycletime) - 1) * (1000 / Resultcapturetimer.Interval), Decimal)
         MainDptest1start = MainDptest1end - MainDptestpoints
-        MainDptest2end = CType((MainCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime)) * (1000 / Resultcapturetimer.Interval), Decimal)
+        MainDptest2end = CType((MainCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime + Drain4cycletime)) * (1000 / Resultcapturetimer.Interval), Decimal)
         MainDptest2start = MainDptest2end - MainDptestpoints
 
 
@@ -4190,7 +4404,7 @@ Public Class FormMain
             ' Define Values
             Dim PrepFillTime As Integer = dtrecipetable.Rows(0)("prep_fill_time")
             Dim PrepBleedTime As Integer = dtrecipetable.Rows(0)("prep_bleed_time")
-            Dim PrepPressureDropTime As Integer = dtrecipetable.Rows(0)("prep_pressure_drop_time")
+            'Dim PrepPressureDropTime As Integer = dtrecipetable.Rows(0)("prep_pressure_drop_time")
 
             'Dim DPFillTime As Integer = dtrecipetable.Rows(0)("dp_fill_time")
             'Dim DPBleedTime As Integer = dtrecipetable.Rows(0)("dp_bleed_time")
@@ -4210,6 +4424,7 @@ Public Class FormMain
             Dim Drain1Time As Integer = dtrecipetable.Rows(0)("drain1_time")
             Dim Drain2Time As Integer = dtrecipetable.Rows(0)("drain2_time")
             Dim Drain3Time As Integer = dtrecipetable.Rows(0)("drain3_time")
+            Dim Drain4Time As Integer = dtrecipetable.Rows(0)("drain4_time")
 
             ' Reset Rolling Average
             For i As Integer = 0 To RollingAvgArr.Length - 1
@@ -4245,6 +4460,7 @@ Public Class FormMain
                 Dim Drain1Start As Decimal = 0
                 Dim Drain2Start As Decimal = 0
                 Dim Drain3Start As Decimal = 0
+                Dim Drain4Start As Decimal = 0
 
                 Dim CycleTimeTotal As Decimal = 0
 
@@ -4288,9 +4504,15 @@ Public Class FormMain
                     End If
 
                     If Drain3Enabled Then
-                        CycleTimeTotal = Drain3Start + Drain3cycletime
+                        Drain4Start = Drain3Start + Drain3cycletime
                     Else
-                        CycleTimeTotal = Drain3Start
+                        Drain4Start = Drain3Start
+                    End If
+
+                    If Drain4Enabled Then
+                        CycleTimeTotal = Drain4Start + Drain4cycletime
+                    Else
+                        CycleTimeTotal = Drain4Start
                     End If
                 End If
 
@@ -4647,24 +4869,12 @@ Public Class FormMain
                     New RectangularSection With {
                         .IsVisible = True,
                         .Xi = PrepStart + PrepFillTime,
-                        .Xj = PrepStart + PrepFillTime + PrepBleedTime,
-                        .Stroke = New SolidColorPaint With {
-                            .Color = SKColors.LightGray,
-                            .StrokeThickness = 1
-                        },
-                        .Label = "", ' "Bleed",
-                        .LabelSize = 12,
-                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                    },
-                    New RectangularSection With {
-                        .IsVisible = True,
-                        .Xi = PrepStart + PrepFillTime + PrepBleedTime,
                         .Xj = Flush1Start,
                         .Stroke = New SolidColorPaint With {
                             .Color = SKColors.LightGray,
                             .StrokeThickness = 1
                         },
-                        .Label = "", ' "Drop",
+                        .Label = "", ' "Bleed",
                         .LabelSize = 12,
                         .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                     },
@@ -4834,9 +5044,22 @@ Public Class FormMain
                     New RectangularSection With {
                         .IsVisible = Drain3Enabled,
                         .Xi = Drain3Start,
-                        .Xj = CycleTimeTotal,
+                        .Xj = Drain4Start,
                         .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                         .Label = "", ' "Drain 3",
+                        .LabelSize = 12,
+                        .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                        .Stroke = New SolidColorPaint With {
+                            .Color = SKColors.LightGray,
+                            .StrokeThickness = 1
+                        }
+                    },
+                    New RectangularSection With {
+                        .IsVisible = Drain4Enabled,
+                        .Xi = Drain4Start,
+                        .Xj = CycleTimeTotal,
+                        .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                        .Label = "", ' "Drain 4",
                         .LabelSize = 12,
                         .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
                         .Stroke = New SolidColorPaint With {
@@ -4849,6 +5072,7 @@ Public Class FormMain
 
             lbl_EstCycleTime.Text = MainCycletime.ToString
             Resultcapturetimer.Enabled = True
+            'ResultCaptureThreadingTmr.Change(Resultcapturetimer.Interval, Resultcapturetimer.Interval)
             'LiveGraph.LiveGraph.ChartPlottingTimer(True)
         End If
 
@@ -5213,6 +5437,7 @@ Public Class FormMain
             FormCalibration.dgv_CalibrationResult.DataSource = Nothing
             FormCalibration.dgv_VerificationResult.DataSource = Nothing
             PCStatus(0)(10) = True
+            'SetEndLot = True
         End If
 
         If OnContinue = True Then
@@ -5232,6 +5457,71 @@ Public Class FormMain
 
             FormCalibration.InitializeLiveChart()
             FormCalibration.SetVisibleLineSeries()
+        End If
+
+        ' Clear Recipe Details TabPage
+        If OnContinue = True Then
+            txtbx_RecipeVerTol.Text = "-"
+            txtbx_RecipePrepFlow.Text = "-"
+            txtbx_RecipePrepFlowTol.Text = "-"
+            txtbx_RecipePrepPressureDrop.Text = "-"
+
+            txtbx_RecipePrepFill.Text = "-"
+            txtbx_RecipePrepPrefillStartTime.Text = "-"
+            txtbx_RecipePrepPrefillTime.Text = "-"
+            txtbx_RecipePrepBleed.Text = "-"
+            txtbx_RecipePrepPressure.Text = "-"
+            txtbx_RecipePrepPressureDropTime.Text = "-"
+            TextBox1.Text = "-"
+            txtbx_RecipePrepRPM.Text = "-"
+
+            txtbx_RecipeFlush1Flow.Text = "-"
+            txtbx_RecipeFlush1FlowTol.Text = "-"
+            txtbx_RecipeFlush1Stabilize.Text = "-"
+            txtbx_RecipeFlush1Time.Text = "-"
+            txtbx_RecipeFlush1Flow.Text = "-"
+            TextBox4.Text = "-"
+            txtbx_RecipeFlush1RPM.Text = "-"
+
+            txtbx_RecipeFlush2Flow.Text = "-"
+            txtbx_RecipeFlush2FlowTol.Text = "-"
+            txtbx_RecipeFlush2Stabilize.Text = "-"
+            txtbx_RecipeFlush2Time.Text = "-"
+            txtbx_RecipeFlush2Flow.Text = "-"
+            TextBox3.Text = "-"
+            txtbx_RecipeFlush2RPM.Text = "-"
+
+            txtbx_RecipeDPStabilize.Text = "-"
+            txtbx_RecipeDPTime.Text = "-"
+            txtbx_RecipeDPLowLimit.Text = "-"
+            txtbx_RecipeDPUpLimit.Text = "-"
+            txtbx_RecipeDPPoints.Text = "-"
+            TextBox2.Text = "-"
+            txtbx_RecipeDPTestRPM.Text = "-"
+
+            txtbx_RecipeDrain1Pressure.Text = "-"
+            txtbx_RecipeDrain1Time.Text = "-"
+
+            txtbx_RecipeDrain2Pressure.Text = "-"
+            txtbx_RecipeDrain2Time.Text = "-"
+
+            txtbx_RecipeDrain3Pressure.Text = "-"
+            txtbx_RecipeDrain3Time.Text = "-"
+
+            txtbx_RecipeDrain4Pressure.Text = "-"
+            txtbx_RecipeDrain4Time.Text = "-"
+
+            checkbx_RecipeFlush1.Checked = False
+            checkbx_RecipeFlush2.Checked = False
+            checkbx_RecipeDPTest1.Checked = False
+            checkbx_RecipeDPTest2.Checked = False
+
+            checkbx_RecipeDrain1.Checked = False
+            checkbx_RecipeDrain2.Checked = False
+            checkbx_RecipeDrain3.Checked = False
+            checkbx_RecipeDrain4.Checked = False
+
+            txtbx_RecipeTotalCycleTime.Text = "-"
         End If
     End Sub
 
@@ -5405,6 +5695,38 @@ Public Class FormMain
         If LoggedInIsDeveloper Then
             FormTesting.Show()
         End If
+    End Sub
+
+    Private Sub checkbx_RecipeFlush1_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeFlush1.Click
+        checkbx_RecipeFlush1.Checked = Not checkbx_RecipeFlush1.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeFlush2_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeFlush2.Click
+        checkbx_RecipeFlush2.Checked = Not checkbx_RecipeFlush2.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDPTest2_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDPTest2.Click
+        checkbx_RecipeDPTest2.Checked = Not checkbx_RecipeDPTest2.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDPTest1_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDPTest1.Click
+        checkbx_RecipeDPTest1.Checked = Not checkbx_RecipeDPTest1.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDrain1_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDrain1.Click
+        checkbx_RecipeDrain1.Checked = Not checkbx_RecipeDrain1.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDrain2_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDrain2.Click
+        checkbx_RecipeDrain2.Checked = Not checkbx_RecipeDrain2.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDrain3_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDrain3.Click
+        checkbx_RecipeDrain3.Checked = Not checkbx_RecipeDrain3.Checked
+    End Sub
+
+    Private Sub checkbx_RecipeDrain4_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDrain4.Click
+        checkbx_RecipeDrain4.Checked = Not checkbx_RecipeDrain4.Checked
     End Sub
 End Class
 

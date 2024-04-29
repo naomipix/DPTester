@@ -178,6 +178,8 @@ Module ModuleInitialize
                               "MinDrain2_Time=0" + vbCrLf +
                               "MinDrain3_Pressure=0" + vbCrLf +
                               "MinDrain3_Time=0" + vbCrLf +
+                              "MinDrain4_Pressure=0" + vbCrLf +
+                              "MinDrain4_Time=0" + vbCrLf +
                               vbCrLf +
                               "MaxVerificationTolerance=50" + vbCrLf +
                               "MaxPrep_FillTime=600" + vbCrLf +
@@ -223,7 +225,9 @@ Module ModuleInitialize
                               "MaxDrain2_Pressure=500" + vbCrLf +
                               "MaxDrain2_Time=600" + vbCrLf +
                               "MaxDrain3_Pressure=500" + vbCrLf +
-                              "MaxDrain3_Time=600"
+                              "MaxDrain3_Time=600" + vbCrLf +
+                              "MaxDrain4_Pressure=500" + vbCrLf +
+                              "MaxDrain4_Time=600"
 
 
 

@@ -849,6 +849,7 @@ Public Class FormResultGraph
             Dim Drain1Enabled As Boolean = False
             Dim Drain2Enabled As Boolean = False
             Dim Drain3Enabled As Boolean = False
+            Dim Drain4Enabled As Boolean = False
 
             If True Then
                 If dtproductiondetail(0)("recipetable_firstflush_circuit") = "Enable" Then
@@ -872,11 +873,14 @@ Public Class FormResultGraph
                 If dtproductiondetail(0)("recipetable_drain3_circuit") = "Enable" Then
                     Drain3Enabled = True
                 End If
+                If dtproductiondetail(0)("recipetable_drain4_circuit") = "Enable" Then
+                    Drain4Enabled = True
+                End If
             End If
 
             Dim PrepFillTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_fill_time"), PrepFillTime), PrepFillTime, 0))
             Dim PrepBleedTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_bleed_time"), PrepBleedTime), PrepBleedTime, 0))
-            Dim PrepPressureDropTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_pressure_drop_time"), PrepPressureDropTime), PrepPressureDropTime, 0))
+            'Dim PrepPressureDropTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_prep_pressure_drop_time"), PrepPressureDropTime), PrepPressureDropTime, 0))
 
             Dim DPStabilizeTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_dp_stabilize_time"), DPStabilizeTime), DPStabilizeTime, 0)) 'CInt(resultsummary(54 - 8))
             Dim DPTestTime As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_dp_test_time"), DPTestTime), DPTestTime, 0)) 'CInt(resultsummary(55 - 8))
@@ -890,8 +894,9 @@ Public Class FormResultGraph
             Dim Drain1Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain1_time"), Drain1Time), Drain1Time, 0)) 'CInt(resultsummary(70 - 8))
             Dim Drain2Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain2_time"), Drain2Time), Drain2Time, 0)) 'CInt(resultsummary(73 - 8))
             Dim Drain3Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain3_time"), Drain3Time), Drain3Time, 0)) 'CInt(resultsummary(76 - 8))
+            Dim Drain4Time As Integer = CInt(IIf(Integer.TryParse(dtproductiondetail(0)("recipetable_drain4_time"), Drain4Time), Drain4Time, 0))
 
-            Dim Prepcycletime As Integer = PrepFillTime + PrepBleedTime + PrepPressureDropTime
+            Dim Prepcycletime As Integer = PrepFillTime + PrepBleedTime ' + PrepPressureDropTime
             Dim DPcycletime As Integer = DPStabilizeTime + DPTestTime
             Dim Flush1cycletime As Integer = Flush1StabilizeTime + Flush1TestTime
             Dim Flush2cycletime As Integer = Flush2StabilizeTime + Flush2TestTime
@@ -906,6 +911,7 @@ Public Class FormResultGraph
             Dim Drain1Start As Decimal = 0
             Dim Drain2Start As Decimal = 0
             Dim Drain3Start As Decimal = 0
+            Dim Drain4Start As Decimal = 0
 
             Dim CycleTimeTotal As Decimal = 0
 
@@ -949,9 +955,15 @@ Public Class FormResultGraph
                 End If
 
                 If Drain3Enabled Then
-                    CycleTimeTotal = Drain3Start + Drain3Time
+                    Drain4Start = Drain3Start + Drain3Time
                 Else
-                    CycleTimeTotal = Drain3Start
+                    Drain4Start = Drain3Start
+                End If
+
+                If Drain4Enabled Then
+                    CycleTimeTotal = Drain4Start + Drain4Time
+                Else
+                    CycleTimeTotal = Drain4Start
                 End If
             End If
 
@@ -1048,24 +1060,12 @@ Public Class FormResultGraph
                 New RectangularSection With {
                     .IsVisible = True,
                     .Xi = PrepStart + PrepFillTime,
-                    .Xj = PrepStart + PrepFillTime + PrepBleedTime,
-                    .Stroke = New SolidColorPaint With {
-                        .Color = SKColors.LightGray,
-                        .StrokeThickness = 1
-                    },
-                    .Label = "", ' "Bleed",
-                    .LabelSize = 12,
-                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
-                },
-                New RectangularSection With {
-                    .IsVisible = True,
-                    .Xi = PrepStart + PrepFillTime + PrepBleedTime,
                     .Xj = Flush1Start,
                     .Stroke = New SolidColorPaint With {
                         .Color = SKColors.LightGray,
                         .StrokeThickness = 1
                     },
-                    .Label = "", ' "Drop",
+                    .Label = "", ' "Bleed",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black}
                 },
@@ -1239,9 +1239,22 @@ Public Class FormResultGraph
                 New RectangularSection With {
                     .IsVisible = Drain3Enabled,
                     .Xi = Drain3Start,
-                    .Xj = CycleTimeTotal,
+                    .Xj = Drain4Start,
                     .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
                     .Label = "", ' "Drain 3",
+                    .LabelSize = 12,
+                    .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
+                    .Stroke = New SolidColorPaint With {
+                        .Color = SKColors.LightGray,
+                        .StrokeThickness = 1
+                    }
+                },
+                New RectangularSection With {
+                    .IsVisible = Drain4Enabled,
+                    .Xi = Drain4Start,
+                    .Xj = CycleTimeTotal,
+                    .Fill = New SolidColorPaint With {.Color = SKColors.Gray.WithAlpha(20)},
+                    .Label = "", ' "Drain 4",
                     .LabelSize = 12,
                     .LabelPaint = New SolidColorPaint With {.Color = SKColors.Black},
                     .Stroke = New SolidColorPaint With {
@@ -1471,13 +1484,13 @@ Public Class FormResultGraph
             RecipeTable.firstflush_circuit AS recipetable_firstflush_circuit, 
             RecipeTable.firstflush_flowrate AS recipetable_firstflush_flowrate, 
             RecipeTable.firstflush_flow_tolerance AS recipetable_firstflush_flow_tolerance, 
-            RecipeTable.firstflush_back_pressure AS recipetable_firstflush_back_pressure, 
+            --RecipeTable.firstflush_back_pressure AS recipetable_firstflush_back_pressure, 
             RecipeTable.firstflush_stabilize_time AS recipetable_firstflush_stabilize_time, 
             RecipeTable.firstflush_time AS recipetable_firstflush_time, 
             RecipeTable.firstdp_circuit AS recipetable_firstdp_circuit, 
-            RecipeTable.dp_flowrate AS recipetable_dp_flowrate, 
-            RecipeTable.dp_flow_tolerance AS recipetable_dp_flow_tolerance, 
-            RecipeTable.dp_back_pressure AS recipetable_dp_back_pressure, 
+            --RecipeTable.dp_flowrate AS recipetable_dp_flowrate, 
+            --RecipeTable.dp_flow_tolerance AS recipetable_dp_flow_tolerance, 
+            --RecipeTable.dp_back_pressure AS recipetable_dp_back_pressure, 
             RecipeTable.dp_stabilize_time AS recipetable_dp_stabilize_time, 
             RecipeTable.dp_test_time AS recipetable_dp_test_time, 
             RecipeTable.dp_lowerlimit AS recipetable_dp_lowerlimit, 
@@ -1487,7 +1500,7 @@ Public Class FormResultGraph
             RecipeTable.secondflush_circuit AS recipetable_secondflush_circuit, 
             RecipeTable.secondflush_flowrate AS recipetable_secondflush_flowrate, 
             RecipeTable.secondflush_flow_tolerance AS recipetable_secondflush_flow_tolerance, 
-            RecipeTable.secondflush_back_pressure AS recipetable_secondflush_back_pressure, 
+            --RecipeTable.secondflush_back_pressure AS recipetable_secondflush_back_pressure, 
             RecipeTable.secondflush_stabilize_time AS recipetable_secondflush_stabilize_time, 
             RecipeTable.secondflush_time AS recipetable_secondflush_time, 
             RecipeTable.drain1_circuit AS recipetable_drain1_circuit, 
@@ -1499,6 +1512,9 @@ Public Class FormResultGraph
             RecipeTable.drain3_circuit AS recipetable_drain3_circuit, 
             RecipeTable.drain3_back_pressure AS recipetable_drain3_back_pressure, 
             RecipeTable.drain3_time AS recipetable_drain3_time, 
+            RecipeTable.drain4_circuit AS recipetable_drain4_circuit, 
+            RecipeTable.drain4_back_pressure AS recipetable_drain4_back_pressure, 
+            RecipeTable.drain4_time AS recipetable_drain4_time, 
 
             WorkOrder.work_order AS workorder_work_order, 
             WorkOrder.part_id AS workorder_part_id, 

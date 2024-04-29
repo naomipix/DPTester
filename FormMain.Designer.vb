@@ -23,50 +23,50 @@ Partial Class FormMain
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim DataPoint31 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 1.0R)
-        Dim DataPoint32 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 3.0R)
-        Dim DataPoint33 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 7.0R)
-        Dim DataPoint34 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint35 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint36 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint37 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint38 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint39 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
-        Dim DataPoint40 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint41 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint42 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint43 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint44 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint45 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint46 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint47 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint48 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint49 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint50 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint51 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint52 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint53 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint54 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint55 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint56 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint57 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint58 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint59 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim DataPoint60 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
-        Dim Title2 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataPoint1 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 1.0R)
+        Dim DataPoint2 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 3.0R)
+        Dim DataPoint3 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 7.0R)
+        Dim DataPoint4 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint5 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint6 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint7 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint8 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint9 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 9.0R)
+        Dim DataPoint10 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint11 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint12 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint13 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint14 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint15 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint16 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint17 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint18 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint19 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint20 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint21 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint22 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint23 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint24 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint25 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint26 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint27 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint28 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint29 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim DataPoint30 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(0R, 10.0R)
+        Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
         Me.Panel12 = New System.Windows.Forms.Panel()
         Me.lbl_CommOpen = New System.Windows.Forms.Label()
@@ -248,8 +248,113 @@ Partial Class FormMain
         Me.btn_LotSummarySearch = New System.Windows.Forms.Button()
         Me.btn_LotSummaryReset = New System.Windows.Forms.Button()
         Me.grpbx_SearchFilter2 = New System.Windows.Forms.GroupBox()
+        Me.dsp_FilterStartedBy2 = New System.Windows.Forms.Label()
+        Me.txtbx_FilterLotID2 = New System.Windows.Forms.TextBox()
         Me.dsp_FilterLotID2 = New System.Windows.Forms.Label()
+        Me.cmbx_FilterStartedBy2 = New System.Windows.Forms.ComboBox()
         Me.dgv_LotSummary = New System.Windows.Forms.DataGridView()
+        Me.tabpg_RecipeDetail = New System.Windows.Forms.TabPage()
+        Me.Panel14 = New System.Windows.Forms.Panel()
+        Me.Panel15 = New System.Windows.Forms.Panel()
+        Me.txtbx_RecipeTotalCycleTime = New System.Windows.Forms.TextBox()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.Panel18 = New System.Windows.Forms.Panel()
+        Me.txtbx_RecipeVerTol = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeVerTol = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.txtbx_RecipePrepFlow = New System.Windows.Forms.TextBox()
+        Me.txtbx_RecipePrepFlowTol = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipePrepFlow = New System.Windows.Forms.Label()
+        Me.dsp_RecipePrepFlowTol = New System.Windows.Forms.Label()
+        Me.txtbx_RecipePrepPressureDrop = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipePressureDrop = New System.Windows.Forms.Label()
+        Me.panel_RecipeDrain4 = New System.Windows.Forms.Panel()
+        Me.txtbx_RecipeDrain4Time = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDrain4Time = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeDrain4Pressure = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDrain4Pressure = New System.Windows.Forms.Label()
+        Me.checkbx_RecipeDrain4 = New System.Windows.Forms.CheckBox()
+        Me.panel_RecipeFlush1 = New System.Windows.Forms.Panel()
+        Me.dsp_RecipeFlush1PumpMode = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeFlush1RPM = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeFlush1RPM = New System.Windows.Forms.Label()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.txtbx_RecipeFlush1Time = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeFlush1Time = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeFlush1Stabilize = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeFlush1Stabilize = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeFlush1FlowTol = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeFlush1FlowTol = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeFlush1Flow = New System.Windows.Forms.TextBox()
+        Me.checkbx_RecipeFlush1 = New System.Windows.Forms.CheckBox()
+        Me.dsp_RecipeFlush1Flow = New System.Windows.Forms.Label()
+        Me.Panel13 = New System.Windows.Forms.Panel()
+        Me.dsp_RecipePrepPumpMode = New System.Windows.Forms.Label()
+        Me.dsp_RecipePrepRPM = New System.Windows.Forms.Label()
+        Me.txtbx_RecipePrepRPM = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipePrepPrefillTime = New System.Windows.Forms.Label()
+        Me.dsp_RecipePrepPrefillStartTime = New System.Windows.Forms.Label()
+        Me.txtbx_RecipePrepPrefillTime = New System.Windows.Forms.TextBox()
+        Me.txtbx_RecipePrepPrefillStartTime = New System.Windows.Forms.TextBox()
+        Me.dsp_EditPreparation = New System.Windows.Forms.Label()
+        Me.dsp_RecipePressureDropTime = New System.Windows.Forms.Label()
+        Me.dsp_RecipePrepPressure = New System.Windows.Forms.Label()
+        Me.dsp_RecipePrepBleed = New System.Windows.Forms.Label()
+        Me.dsp_RecipePrepFill = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtbx_RecipePrepPressureDropTime = New System.Windows.Forms.TextBox()
+        Me.txtbx_RecipePrepPressure = New System.Windows.Forms.TextBox()
+        Me.txtbx_RecipePrepBleed = New System.Windows.Forms.TextBox()
+        Me.txtbx_RecipePrepFill = New System.Windows.Forms.TextBox()
+        Me.panel_RecipeDPTest1 = New System.Windows.Forms.Panel()
+        Me.dsp_RecipeDPTestPumpMode = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeDPTestRPM = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDPTestRPM = New System.Windows.Forms.Label()
+        Me.checkbx_RecipeDPTest2 = New System.Windows.Forms.CheckBox()
+        Me.checkbx_RecipeDPTest1 = New System.Windows.Forms.CheckBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtbx_RecipeDPPoints = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDPPoints = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeDPUpLimit = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDPUpLimit = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeDPLowLimit = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDPLowLimit = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeDPTime = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDPTime = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeDPStabilize = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDPStabilize = New System.Windows.Forms.Label()
+        Me.panel_RecipeDrain1 = New System.Windows.Forms.Panel()
+        Me.txtbx_RecipeDrain1Time = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDrain1Time = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeDrain1Pressure = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDrain1Pressure = New System.Windows.Forms.Label()
+        Me.checkbx_RecipeDrain1 = New System.Windows.Forms.CheckBox()
+        Me.panel_RecipeDrain3 = New System.Windows.Forms.Panel()
+        Me.txtbx_RecipeDrain3Time = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDrain3Time = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeDrain3Pressure = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDrain3Pressure = New System.Windows.Forms.Label()
+        Me.checkbx_RecipeDrain3 = New System.Windows.Forms.CheckBox()
+        Me.panel_RecipeFlush2 = New System.Windows.Forms.Panel()
+        Me.dsp_RecipeFlush2PumpMode = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeFlush2RPM = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeFlush2RPM = New System.Windows.Forms.Label()
+        Me.checkbx_RecipeFlush2 = New System.Windows.Forms.CheckBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtbx_RecipeFlush2Time = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeFlush2Time = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeFlush2Stabilize = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeFlush2Stabilize = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeFlush2FlowTol = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeFlush2FlowTol = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeFlush2Flow = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeFlush2Flow = New System.Windows.Forms.Label()
+        Me.panel_RecipeDrain2 = New System.Windows.Forms.Panel()
+        Me.txtbx_RecipeDrain2Time = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDrain2Time = New System.Windows.Forms.Label()
+        Me.txtbx_RecipeDrain2Pressure = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipeDrain2Pressure = New System.Windows.Forms.Label()
+        Me.checkbx_RecipeDrain2 = New System.Windows.Forms.CheckBox()
         Me.tabpg_Status = New System.Windows.Forms.TabPage()
         Me.tabctrl_SubStatus = New System.Windows.Forms.TabControl()
         Me.tabpg_StatusIO = New System.Windows.Forms.TabPage()
@@ -491,89 +596,100 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
-        Me.txtbx_FilterLotID2 = New System.Windows.Forms.TextBox()
-        Me.dsp_FilterStartedBy2 = New System.Windows.Forms.Label()
-        Me.cmbx_FilterStartedBy2 = New System.Windows.Forms.ComboBox()
-        Me.panel_FormControl.SuspendLayout()
-        Me.Panel12.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.panel_UserCategory.SuspendLayout()
-        Me.tabctrl_MainCtrl.SuspendLayout()
-        Me.tabpg_Main.SuspendLayout()
-        Me.panel_MainRight.SuspendLayout()
-        Me.tabctrl_SubMain.SuspendLayout()
-        Me.tabpg_MainLiveGraph.SuspendLayout()
-        Me.Panel11.SuspendLayout()
-        CType(Me.chart_MainLiveGraph, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabpg_MainOverview.SuspendLayout()
-        Me.tabpg_MainProdZone.SuspendLayout()
-        Me.Panel10.SuspendLayout()
-        Me.tabpg_MainPumpZone.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        Me.Panel5.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabpg_FittingType.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.panel_MainLeft.SuspendLayout()
-        Me.panel_OprKeyInDt.SuspendLayout()
-        Me.panel_ProductionDetails.SuspendLayout()
-        Me.panel_DPTestResult.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.panel_CalibrateStatus.SuspendLayout()
-        Me.panel_WrkOrdScnDt.SuspendLayout()
-        Me.tabpg_ProdDetail.SuspendLayout()
-        Me.grpbx_SearchFilter.SuspendLayout()
-        CType(Me.dgv_ProdDetail, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabpg_LotSummary.SuspendLayout()
-        Me.grpbx_SearchFilter2.SuspendLayout()
-        CType(Me.dgv_LotSummary, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabpg_Status.SuspendLayout()
-        Me.tabctrl_SubStatus.SuspendLayout()
-        Me.tabpg_StatusIO.SuspendLayout()
-        CType(Me.dgv_AnalogOutput, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dgv_DigitalOutput, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dgv_AnalogInput, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dgv_DigitalInput, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabpg_StatusDevice.SuspendLayout()
-        Me.panel_GenCondStatus.SuspendLayout()
-        Me.panel_FlwTempCtrlIO.SuspendLayout()
-        Me.panel_PumpIOLeft.SuspendLayout()
-        Me.tabpg_ManualCtrl.SuspendLayout()
-        Me.tabctrl_SubManualCtrl.SuspendLayout()
-        Me.tabpg_ManualControlValve.SuspendLayout()
-        Me.panel_ValveControl.SuspendLayout()
-        Me.Panel9.SuspendLayout()
-        Me.tabpg_ManualControlPump.SuspendLayout()
-        Me.Panel4.SuspendLayout()
-        Me.Panel8.SuspendLayout()
-        Me.panel_PumpControl.SuspendLayout()
-        Me.panel_SubPumpCtrl.SuspendLayout()
-        Me.panel_SpeedModeControl.SuspendLayout()
-        Me.panel_ProcessModeCtrl.SuspendLayout()
-        Me.tabpg_ManualControlTank.SuspendLayout()
-        Me.Panel6.SuspendLayout()
-        Me.Panel7.SuspendLayout()
-        Me.panel_TankControl.SuspendLayout()
-        Me.panel_SubTankControl.SuspendLayout()
-        Me.tabpg_ManualControlDrain.SuspendLayout()
-        Me.panel_ManualDrain.SuspendLayout()
-        Me.panel_SubRegulatorControl.SuspendLayout()
-        Me.panel_SubManualDrain.SuspendLayout()
-        Me.tabpg_ManualControlMaintenance.SuspendLayout()
-        Me.panel_Maintenance.SuspendLayout()
-        Me.panel_subMain.SuspendLayout()
-        Me.panel_SubMaintenance.SuspendLayout()
-        Me.tabpg_Alarm.SuspendLayout()
-        Me.tabctrl_SubAlarm.SuspendLayout()
-        Me.tabpg_AlarmCurrent.SuspendLayout()
-        CType(Me.dgv_CurrentAlarm, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabpg_AlarmHistory.SuspendLayout()
-        CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.panel_PLCHeartBeat.SuspendLayout()
-        Me.panel_SelectLoadRecipe.SuspendLayout()
-        Me.SuspendLayout()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.btn_MCN2Purge4 = New System.Windows.Forms.Button()
+        Me.panel_FormControl.SuspendLayout
+        Me.Panel12.SuspendLayout
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.panel_UserCategory.SuspendLayout
+        Me.tabctrl_MainCtrl.SuspendLayout
+        Me.tabpg_Main.SuspendLayout
+        Me.panel_MainRight.SuspendLayout
+        Me.tabctrl_SubMain.SuspendLayout
+        Me.tabpg_MainLiveGraph.SuspendLayout
+        Me.Panel11.SuspendLayout
+        CType(Me.chart_MainLiveGraph, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabpg_MainOverview.SuspendLayout
+        Me.tabpg_MainProdZone.SuspendLayout
+        Me.Panel10.SuspendLayout
+        Me.tabpg_MainPumpZone.SuspendLayout
+        Me.Panel2.SuspendLayout
+        Me.Panel5.SuspendLayout
+        Me.Panel3.SuspendLayout
+        CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabpg_FittingType.SuspendLayout
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.panel_MainLeft.SuspendLayout
+        Me.panel_OprKeyInDt.SuspendLayout
+        Me.panel_ProductionDetails.SuspendLayout
+        Me.panel_DPTestResult.SuspendLayout
+        Me.Panel1.SuspendLayout
+        Me.panel_CalibrateStatus.SuspendLayout
+        Me.panel_WrkOrdScnDt.SuspendLayout
+        Me.tabpg_ProdDetail.SuspendLayout
+        Me.grpbx_SearchFilter.SuspendLayout
+        CType(Me.dgv_ProdDetail, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabpg_LotSummary.SuspendLayout
+        Me.grpbx_SearchFilter2.SuspendLayout
+        CType(Me.dgv_LotSummary, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabpg_RecipeDetail.SuspendLayout
+        Me.Panel14.SuspendLayout
+        Me.Panel15.SuspendLayout
+        Me.Panel18.SuspendLayout
+        Me.panel_RecipeDrain4.SuspendLayout
+        Me.panel_RecipeFlush1.SuspendLayout
+        Me.Panel13.SuspendLayout
+        Me.panel_RecipeDPTest1.SuspendLayout
+        Me.panel_RecipeDrain1.SuspendLayout
+        Me.panel_RecipeDrain3.SuspendLayout
+        Me.panel_RecipeFlush2.SuspendLayout
+        Me.panel_RecipeDrain2.SuspendLayout
+        Me.tabpg_Status.SuspendLayout
+        Me.tabctrl_SubStatus.SuspendLayout
+        Me.tabpg_StatusIO.SuspendLayout
+        CType(Me.dgv_AnalogOutput, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.dgv_DigitalOutput, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.dgv_AnalogInput, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.dgv_DigitalInput, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabpg_StatusDevice.SuspendLayout
+        Me.panel_GenCondStatus.SuspendLayout
+        Me.panel_FlwTempCtrlIO.SuspendLayout
+        Me.panel_PumpIOLeft.SuspendLayout
+        Me.tabpg_ManualCtrl.SuspendLayout
+        Me.tabctrl_SubManualCtrl.SuspendLayout
+        Me.tabpg_ManualControlValve.SuspendLayout
+        Me.panel_ValveControl.SuspendLayout
+        Me.Panel9.SuspendLayout
+        Me.tabpg_ManualControlPump.SuspendLayout
+        Me.Panel4.SuspendLayout
+        Me.Panel8.SuspendLayout
+        Me.panel_PumpControl.SuspendLayout
+        Me.panel_SubPumpCtrl.SuspendLayout
+        Me.panel_SpeedModeControl.SuspendLayout
+        Me.panel_ProcessModeCtrl.SuspendLayout
+        Me.tabpg_ManualControlTank.SuspendLayout
+        Me.Panel6.SuspendLayout
+        Me.Panel7.SuspendLayout
+        Me.panel_TankControl.SuspendLayout
+        Me.panel_SubTankControl.SuspendLayout
+        Me.tabpg_ManualControlDrain.SuspendLayout
+        Me.panel_ManualDrain.SuspendLayout
+        Me.panel_SubRegulatorControl.SuspendLayout
+        Me.panel_SubManualDrain.SuspendLayout
+        Me.tabpg_ManualControlMaintenance.SuspendLayout
+        Me.panel_Maintenance.SuspendLayout
+        Me.panel_subMain.SuspendLayout
+        Me.panel_SubMaintenance.SuspendLayout
+        Me.tabpg_Alarm.SuspendLayout
+        Me.tabctrl_SubAlarm.SuspendLayout
+        Me.tabpg_AlarmCurrent.SuspendLayout
+        CType(Me.dgv_CurrentAlarm, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tabpg_AlarmHistory.SuspendLayout
+        CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.panel_PLCHeartBeat.SuspendLayout
+        Me.panel_SelectLoadRecipe.SuspendLayout
+        Me.SuspendLayout
         '
         'panel_FormControl
         '
@@ -835,6 +951,7 @@ Partial Class FormMain
         Me.tabctrl_MainCtrl.Controls.Add(Me.tabpg_Main)
         Me.tabctrl_MainCtrl.Controls.Add(Me.tabpg_ProdDetail)
         Me.tabctrl_MainCtrl.Controls.Add(Me.tabpg_LotSummary)
+        Me.tabctrl_MainCtrl.Controls.Add(Me.tabpg_RecipeDetail)
         Me.tabctrl_MainCtrl.Controls.Add(Me.tabpg_Status)
         Me.tabctrl_MainCtrl.Controls.Add(Me.tabpg_ManualCtrl)
         Me.tabctrl_MainCtrl.Controls.Add(Me.tabpg_Alarm)
@@ -1117,133 +1234,133 @@ Partial Class FormMain
         '
         Me.chart_MainLiveGraph.BackColor = System.Drawing.Color.LightSkyBlue
         Me.chart_MainLiveGraph.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter
-        ChartArea2.AxisX.IsLabelAutoFit = False
-        ChartArea2.AxisX.LabelStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea2.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
-        ChartArea2.AxisX.MinorGrid.Enabled = True
-        ChartArea2.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightSkyBlue
-        ChartArea2.AxisX.Title = "Time (s)"
-        ChartArea2.AxisX.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea2.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
-        ChartArea2.AxisY.Title = "Inlet/Outlet Pressure (kPa)"
-        ChartArea2.AxisY.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        ChartArea2.AxisY2.MajorGrid.LineColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
-        ChartArea2.AxisY2.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold)
-        ChartArea2.Name = "ChartArea1"
-        Me.chart_MainLiveGraph.ChartAreas.Add(ChartArea2)
-        Legend2.Alignment = System.Drawing.StringAlignment.Center
-        Legend2.DockedToChartArea = "ChartArea1"
-        Legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom
-        Legend2.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row
-        Legend2.Name = "Legend1"
-        Me.chart_MainLiveGraph.Legends.Add(Legend2)
+        ChartArea1.AxisX.IsLabelAutoFit = False
+        ChartArea1.AxisX.LabelStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
+        ChartArea1.AxisX.MinorGrid.Enabled = True
+        ChartArea1.AxisX.MinorGrid.LineColor = System.Drawing.Color.LightSkyBlue
+        ChartArea1.AxisX.Title = "Time (s)"
+        ChartArea1.AxisX.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.LightSkyBlue
+        ChartArea1.AxisY.Title = "Inlet/Outlet Pressure (kPa)"
+        ChartArea1.AxisY.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        ChartArea1.AxisY2.MajorGrid.LineColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(128, Byte), Integer))
+        ChartArea1.AxisY2.TitleFont = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold)
+        ChartArea1.Name = "ChartArea1"
+        Me.chart_MainLiveGraph.ChartAreas.Add(ChartArea1)
+        Legend1.Alignment = System.Drawing.StringAlignment.Center
+        Legend1.DockedToChartArea = "ChartArea1"
+        Legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom
+        Legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row
+        Legend1.Name = "Legend1"
+        Me.chart_MainLiveGraph.Legends.Add(Legend1)
         Me.chart_MainLiveGraph.Location = New System.Drawing.Point(0, 0)
         Me.chart_MainLiveGraph.Name = "chart_MainLiveGraph"
-        Series2.BorderWidth = 2
-        Series2.ChartArea = "ChartArea1"
-        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Series2.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        DataPoint31.MarkerSize = 5
-        DataPoint31.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint32.MarkerSize = 5
-        DataPoint32.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint33.MarkerSize = 5
-        DataPoint33.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint34.MarkerSize = 5
-        DataPoint34.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint35.MarkerSize = 5
-        DataPoint35.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint36.MarkerSize = 5
-        DataPoint36.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint37.MarkerSize = 5
-        DataPoint37.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint38.MarkerSize = 5
-        DataPoint38.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint39.MarkerSize = 5
-        DataPoint39.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint40.MarkerSize = 5
-        DataPoint40.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint41.MarkerSize = 5
-        DataPoint41.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint42.MarkerSize = 5
-        DataPoint42.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint43.MarkerSize = 5
-        DataPoint43.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint44.MarkerSize = 5
-        DataPoint44.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint45.MarkerSize = 5
-        DataPoint45.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint46.MarkerSize = 5
-        DataPoint46.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint47.MarkerSize = 5
-        DataPoint47.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint48.MarkerSize = 5
-        DataPoint48.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint49.MarkerSize = 5
-        DataPoint49.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint50.MarkerSize = 5
-        DataPoint50.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint51.MarkerSize = 5
-        DataPoint51.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint52.MarkerSize = 5
-        DataPoint52.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint53.MarkerSize = 5
-        DataPoint53.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint54.MarkerSize = 5
-        DataPoint54.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint55.MarkerSize = 5
-        DataPoint55.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint56.MarkerSize = 5
-        DataPoint56.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint57.MarkerSize = 5
-        DataPoint57.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint58.MarkerSize = 5
-        DataPoint58.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint59.MarkerSize = 5
-        DataPoint59.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        DataPoint60.MarkerSize = 5
-        DataPoint60.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
-        Series2.Points.Add(DataPoint31)
-        Series2.Points.Add(DataPoint32)
-        Series2.Points.Add(DataPoint33)
-        Series2.Points.Add(DataPoint34)
-        Series2.Points.Add(DataPoint35)
-        Series2.Points.Add(DataPoint36)
-        Series2.Points.Add(DataPoint37)
-        Series2.Points.Add(DataPoint38)
-        Series2.Points.Add(DataPoint39)
-        Series2.Points.Add(DataPoint40)
-        Series2.Points.Add(DataPoint41)
-        Series2.Points.Add(DataPoint42)
-        Series2.Points.Add(DataPoint43)
-        Series2.Points.Add(DataPoint44)
-        Series2.Points.Add(DataPoint45)
-        Series2.Points.Add(DataPoint46)
-        Series2.Points.Add(DataPoint47)
-        Series2.Points.Add(DataPoint48)
-        Series2.Points.Add(DataPoint49)
-        Series2.Points.Add(DataPoint50)
-        Series2.Points.Add(DataPoint51)
-        Series2.Points.Add(DataPoint52)
-        Series2.Points.Add(DataPoint53)
-        Series2.Points.Add(DataPoint54)
-        Series2.Points.Add(DataPoint55)
-        Series2.Points.Add(DataPoint56)
-        Series2.Points.Add(DataPoint57)
-        Series2.Points.Add(DataPoint58)
-        Series2.Points.Add(DataPoint59)
-        Series2.Points.Add(DataPoint60)
-        Me.chart_MainLiveGraph.Series.Add(Series2)
+        Series1.BorderWidth = 2
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Series1.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        DataPoint1.MarkerSize = 5
+        DataPoint1.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint2.MarkerSize = 5
+        DataPoint2.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint3.MarkerSize = 5
+        DataPoint3.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint4.MarkerSize = 5
+        DataPoint4.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint5.MarkerSize = 5
+        DataPoint5.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint6.MarkerSize = 5
+        DataPoint6.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint7.MarkerSize = 5
+        DataPoint7.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint8.MarkerSize = 5
+        DataPoint8.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint9.MarkerSize = 5
+        DataPoint9.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint10.MarkerSize = 5
+        DataPoint10.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint11.MarkerSize = 5
+        DataPoint11.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint12.MarkerSize = 5
+        DataPoint12.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint13.MarkerSize = 5
+        DataPoint13.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint14.MarkerSize = 5
+        DataPoint14.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint15.MarkerSize = 5
+        DataPoint15.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint16.MarkerSize = 5
+        DataPoint16.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint17.MarkerSize = 5
+        DataPoint17.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint18.MarkerSize = 5
+        DataPoint18.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint19.MarkerSize = 5
+        DataPoint19.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint20.MarkerSize = 5
+        DataPoint20.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint21.MarkerSize = 5
+        DataPoint21.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint22.MarkerSize = 5
+        DataPoint22.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint23.MarkerSize = 5
+        DataPoint23.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint24.MarkerSize = 5
+        DataPoint24.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint25.MarkerSize = 5
+        DataPoint25.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint26.MarkerSize = 5
+        DataPoint26.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint27.MarkerSize = 5
+        DataPoint27.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint28.MarkerSize = 5
+        DataPoint28.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint29.MarkerSize = 5
+        DataPoint29.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        DataPoint30.MarkerSize = 5
+        DataPoint30.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Circle
+        Series1.Points.Add(DataPoint1)
+        Series1.Points.Add(DataPoint2)
+        Series1.Points.Add(DataPoint3)
+        Series1.Points.Add(DataPoint4)
+        Series1.Points.Add(DataPoint5)
+        Series1.Points.Add(DataPoint6)
+        Series1.Points.Add(DataPoint7)
+        Series1.Points.Add(DataPoint8)
+        Series1.Points.Add(DataPoint9)
+        Series1.Points.Add(DataPoint10)
+        Series1.Points.Add(DataPoint11)
+        Series1.Points.Add(DataPoint12)
+        Series1.Points.Add(DataPoint13)
+        Series1.Points.Add(DataPoint14)
+        Series1.Points.Add(DataPoint15)
+        Series1.Points.Add(DataPoint16)
+        Series1.Points.Add(DataPoint17)
+        Series1.Points.Add(DataPoint18)
+        Series1.Points.Add(DataPoint19)
+        Series1.Points.Add(DataPoint20)
+        Series1.Points.Add(DataPoint21)
+        Series1.Points.Add(DataPoint22)
+        Series1.Points.Add(DataPoint23)
+        Series1.Points.Add(DataPoint24)
+        Series1.Points.Add(DataPoint25)
+        Series1.Points.Add(DataPoint26)
+        Series1.Points.Add(DataPoint27)
+        Series1.Points.Add(DataPoint28)
+        Series1.Points.Add(DataPoint29)
+        Series1.Points.Add(DataPoint30)
+        Me.chart_MainLiveGraph.Series.Add(Series1)
         Me.chart_MainLiveGraph.Size = New System.Drawing.Size(300, 200)
         Me.chart_MainLiveGraph.TabIndex = 0
         Me.chart_MainLiveGraph.Text = "Chart1"
-        Title2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Title2.Name = "Title1"
-        Title2.Text = "Recipe Details"
-        Me.chart_MainLiveGraph.Titles.Add(Title2)
+        Title1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Title1.Name = "Title1"
+        Title1.Text = "Recipe Details"
+        Me.chart_MainLiveGraph.Titles.Add(Title1)
         Me.chart_MainLiveGraph.Visible = False
         '
         'tabpg_MainOverview
@@ -2388,7 +2505,7 @@ Partial Class FormMain
         '
         Me.txtbx_Quantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_Quantity.Location = New System.Drawing.Point(156, 208)
-        Me.txtbx_Quantity.MaxLength = 2
+        Me.txtbx_Quantity.MaxLength = 3
         Me.txtbx_Quantity.Name = "txtbx_Quantity"
         Me.txtbx_Quantity.Size = New System.Drawing.Size(280, 29)
         Me.txtbx_Quantity.TabIndex = 25
@@ -2397,7 +2514,7 @@ Partial Class FormMain
         '
         Me.txtbx_ConfirmationID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_ConfirmationID.Location = New System.Drawing.Point(156, 173)
-        Me.txtbx_ConfirmationID.MaxLength = 10
+        Me.txtbx_ConfirmationID.MaxLength = 30
         Me.txtbx_ConfirmationID.Name = "txtbx_ConfirmationID"
         Me.txtbx_ConfirmationID.Size = New System.Drawing.Size(280, 29)
         Me.txtbx_ConfirmationID.TabIndex = 24
@@ -2406,7 +2523,7 @@ Partial Class FormMain
         '
         Me.txtbx_PartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_PartID.Location = New System.Drawing.Point(156, 138)
-        Me.txtbx_PartID.MaxLength = 20
+        Me.txtbx_PartID.MaxLength = 30
         Me.txtbx_PartID.Name = "txtbx_PartID"
         Me.txtbx_PartID.Size = New System.Drawing.Size(280, 29)
         Me.txtbx_PartID.TabIndex = 23
@@ -2415,7 +2532,7 @@ Partial Class FormMain
         '
         Me.txtbx_LotID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_LotID.Location = New System.Drawing.Point(156, 103)
-        Me.txtbx_LotID.MaxLength = 10
+        Me.txtbx_LotID.MaxLength = 30
         Me.txtbx_LotID.Name = "txtbx_LotID"
         Me.txtbx_LotID.Size = New System.Drawing.Size(280, 29)
         Me.txtbx_LotID.TabIndex = 22
@@ -2424,7 +2541,7 @@ Partial Class FormMain
         '
         Me.txtbx_WorkOrderNumber.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtbx_WorkOrderNumber.Location = New System.Drawing.Point(156, 68)
-        Me.txtbx_WorkOrderNumber.MaxLength = 9
+        Me.txtbx_WorkOrderNumber.MaxLength = 30
         Me.txtbx_WorkOrderNumber.Name = "txtbx_WorkOrderNumber"
         Me.txtbx_WorkOrderNumber.Size = New System.Drawing.Size(280, 29)
         Me.txtbx_WorkOrderNumber.TabIndex = 21
@@ -2726,15 +2843,15 @@ Partial Class FormMain
         Me.dgv_ProdDetail.AllowUserToAddRows = False
         Me.dgv_ProdDetail.AllowUserToDeleteRows = False
         Me.dgv_ProdDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle12.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_ProdDetail.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_ProdDetail.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgv_ProdDetail.Location = New System.Drawing.Point(3, 92)
         Me.dgv_ProdDetail.Name = "dgv_ProdDetail"
         Me.dgv_ProdDetail.ReadOnly = True
@@ -2789,6 +2906,25 @@ Partial Class FormMain
         Me.grpbx_SearchFilter2.TabStop = False
         Me.grpbx_SearchFilter2.Text = "Search && Filter"
         '
+        'dsp_FilterStartedBy2
+        '
+        Me.dsp_FilterStartedBy2.AutoSize = True
+        Me.dsp_FilterStartedBy2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dsp_FilterStartedBy2.Location = New System.Drawing.Point(228, 21)
+        Me.dsp_FilterStartedBy2.Name = "dsp_FilterStartedBy2"
+        Me.dsp_FilterStartedBy2.Size = New System.Drawing.Size(74, 17)
+        Me.dsp_FilterStartedBy2.TabIndex = 9
+        Me.dsp_FilterStartedBy2.Text = "Started By :"
+        '
+        'txtbx_FilterLotID2
+        '
+        Me.txtbx_FilterLotID2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtbx_FilterLotID2.Location = New System.Drawing.Point(15, 41)
+        Me.txtbx_FilterLotID2.MaxLength = 30
+        Me.txtbx_FilterLotID2.Name = "txtbx_FilterLotID2"
+        Me.txtbx_FilterLotID2.Size = New System.Drawing.Size(200, 25)
+        Me.txtbx_FilterLotID2.TabIndex = 22
+        '
         'dsp_FilterLotID2
         '
         Me.dsp_FilterLotID2.AutoSize = True
@@ -2799,26 +2935,1202 @@ Partial Class FormMain
         Me.dsp_FilterLotID2.TabIndex = 9
         Me.dsp_FilterLotID2.Text = "Lot ID :"
         '
+        'cmbx_FilterStartedBy2
+        '
+        Me.cmbx_FilterStartedBy2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbx_FilterStartedBy2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbx_FilterStartedBy2.FormattingEnabled = True
+        Me.cmbx_FilterStartedBy2.Location = New System.Drawing.Point(231, 41)
+        Me.cmbx_FilterStartedBy2.Name = "cmbx_FilterStartedBy2"
+        Me.cmbx_FilterStartedBy2.Size = New System.Drawing.Size(200, 25)
+        Me.cmbx_FilterStartedBy2.TabIndex = 26
+        '
         'dgv_LotSummary
         '
         Me.dgv_LotSummary.AllowUserToAddRows = False
         Me.dgv_LotSummary.AllowUserToDeleteRows = False
         Me.dgv_LotSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_LotSummary.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_LotSummary.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgv_LotSummary.Location = New System.Drawing.Point(3, 92)
         Me.dgv_LotSummary.Name = "dgv_LotSummary"
         Me.dgv_LotSummary.ReadOnly = True
         Me.dgv_LotSummary.Size = New System.Drawing.Size(1865, 582)
         Me.dgv_LotSummary.TabIndex = 31
         Me.dgv_LotSummary.TabStop = False
+        '
+        'tabpg_RecipeDetail
+        '
+        Me.tabpg_RecipeDetail.Controls.Add(Me.Panel14)
+        Me.tabpg_RecipeDetail.Location = New System.Drawing.Point(4, 44)
+        Me.tabpg_RecipeDetail.Name = "tabpg_RecipeDetail"
+        Me.tabpg_RecipeDetail.Size = New System.Drawing.Size(1872, 677)
+        Me.tabpg_RecipeDetail.TabIndex = 6
+        Me.tabpg_RecipeDetail.Text = "Recipe Details"
+        Me.tabpg_RecipeDetail.UseVisualStyleBackColor = True
+        '
+        'Panel14
+        '
+        Me.Panel14.AutoScroll = True
+        Me.Panel14.Controls.Add(Me.Panel15)
+        Me.Panel14.Controls.Add(Me.Panel18)
+        Me.Panel14.Controls.Add(Me.panel_RecipeDrain4)
+        Me.Panel14.Controls.Add(Me.panel_RecipeFlush1)
+        Me.Panel14.Controls.Add(Me.Panel13)
+        Me.Panel14.Controls.Add(Me.panel_RecipeDPTest1)
+        Me.Panel14.Controls.Add(Me.panel_RecipeDrain1)
+        Me.Panel14.Controls.Add(Me.panel_RecipeDrain3)
+        Me.Panel14.Controls.Add(Me.panel_RecipeFlush2)
+        Me.Panel14.Controls.Add(Me.panel_RecipeDrain2)
+        Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel14.Location = New System.Drawing.Point(0, 0)
+        Me.Panel14.Name = "Panel14"
+        Me.Panel14.Size = New System.Drawing.Size(1872, 677)
+        Me.Panel14.TabIndex = 48
+        '
+        'Panel15
+        '
+        Me.Panel15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel15.Controls.Add(Me.txtbx_RecipeTotalCycleTime)
+        Me.Panel15.Controls.Add(Me.Label39)
+        Me.Panel15.Location = New System.Drawing.Point(1255, 3)
+        Me.Panel15.Name = "Panel15"
+        Me.Panel15.Size = New System.Drawing.Size(307, 102)
+        Me.Panel15.TabIndex = 48
+        '
+        'txtbx_RecipeTotalCycleTime
+        '
+        Me.txtbx_RecipeTotalCycleTime.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeTotalCycleTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeTotalCycleTime.Location = New System.Drawing.Point(183, 35)
+        Me.txtbx_RecipeTotalCycleTime.MaxLength = 6
+        Me.txtbx_RecipeTotalCycleTime.Name = "txtbx_RecipeTotalCycleTime"
+        Me.txtbx_RecipeTotalCycleTime.ReadOnly = True
+        Me.txtbx_RecipeTotalCycleTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeTotalCycleTime.TabIndex = 81
+        Me.txtbx_RecipeTotalCycleTime.Text = "-"
+        '
+        'Label39
+        '
+        Me.Label39.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label39.Location = New System.Drawing.Point(17, 27)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(150, 40)
+        Me.Label39.TabIndex = 82
+        Me.Label39.Text = "Total Cycle Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.Label39.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Panel18
+        '
+        Me.Panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel18.Controls.Add(Me.txtbx_RecipeVerTol)
+        Me.Panel18.Controls.Add(Me.dsp_RecipeVerTol)
+        Me.Panel18.Controls.Add(Me.Label38)
+        Me.Panel18.Controls.Add(Me.txtbx_RecipePrepFlow)
+        Me.Panel18.Controls.Add(Me.txtbx_RecipePrepFlowTol)
+        Me.Panel18.Controls.Add(Me.dsp_RecipePrepFlow)
+        Me.Panel18.Controls.Add(Me.dsp_RecipePrepFlowTol)
+        Me.Panel18.Controls.Add(Me.txtbx_RecipePrepPressureDrop)
+        Me.Panel18.Controls.Add(Me.dsp_RecipePressureDrop)
+        Me.Panel18.Location = New System.Drawing.Point(3, 3)
+        Me.Panel18.Name = "Panel18"
+        Me.Panel18.Size = New System.Drawing.Size(307, 240)
+        Me.Panel18.TabIndex = 45
+        '
+        'txtbx_RecipeVerTol
+        '
+        Me.txtbx_RecipeVerTol.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeVerTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeVerTol.Location = New System.Drawing.Point(183, 63)
+        Me.txtbx_RecipeVerTol.MaxLength = 6
+        Me.txtbx_RecipeVerTol.Name = "txtbx_RecipeVerTol"
+        Me.txtbx_RecipeVerTol.ReadOnly = True
+        Me.txtbx_RecipeVerTol.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeVerTol.TabIndex = 19
+        Me.txtbx_RecipeVerTol.Text = "-"
+        '
+        'dsp_RecipeVerTol
+        '
+        Me.dsp_RecipeVerTol.Location = New System.Drawing.Point(17, 53)
+        Me.dsp_RecipeVerTol.Name = "dsp_RecipeVerTol"
+        Me.dsp_RecipeVerTol.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeVerTol.TabIndex = 6
+        Me.dsp_RecipeVerTol.Text = "Verification Tolerance (kPa) (+/-) :"
+        Me.dsp_RecipeVerTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label38
+        '
+        Me.Label38.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.Label38.Location = New System.Drawing.Point(49, 8)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(200, 40)
+        Me.Label38.TabIndex = 34
+        Me.Label38.Text = "Common"
+        Me.Label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtbx_RecipePrepFlow
+        '
+        Me.txtbx_RecipePrepFlow.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepFlow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepFlow.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RecipePrepFlow.MaxLength = 6
+        Me.txtbx_RecipePrepFlow.Name = "txtbx_RecipePrepFlow"
+        Me.txtbx_RecipePrepFlow.ReadOnly = True
+        Me.txtbx_RecipePrepFlow.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepFlow.TabIndex = 22
+        Me.txtbx_RecipePrepFlow.Text = "-"
+        '
+        'txtbx_RecipePrepFlowTol
+        '
+        Me.txtbx_RecipePrepFlowTol.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepFlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepFlowTol.Location = New System.Drawing.Point(183, 145)
+        Me.txtbx_RecipePrepFlowTol.MaxLength = 6
+        Me.txtbx_RecipePrepFlowTol.Name = "txtbx_RecipePrepFlowTol"
+        Me.txtbx_RecipePrepFlowTol.ReadOnly = True
+        Me.txtbx_RecipePrepFlowTol.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepFlowTol.TabIndex = 79
+        Me.txtbx_RecipePrepFlowTol.Text = "-"
+        '
+        'dsp_RecipePrepFlow
+        '
+        Me.dsp_RecipePrepFlow.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RecipePrepFlow.Name = "dsp_RecipePrepFlow"
+        Me.dsp_RecipePrepFlow.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepFlow.TabIndex = 26
+        Me.dsp_RecipePrepFlow.Text = "Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min) :"
+        Me.dsp_RecipePrepFlow.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RecipePrepFlowTol
+        '
+        Me.dsp_RecipePrepFlowTol.Location = New System.Drawing.Point(17, 135)
+        Me.dsp_RecipePrepFlowTol.Name = "dsp_RecipePrepFlowTol"
+        Me.dsp_RecipePrepFlowTol.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepFlowTol.TabIndex = 26
+        Me.dsp_RecipePrepFlowTol.Text = "Flowrate Tolerance (l/min) (+/-) :"
+        Me.dsp_RecipePrepFlowTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipePrepPressureDrop
+        '
+        Me.txtbx_RecipePrepPressureDrop.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepPressureDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepPressureDrop.Location = New System.Drawing.Point(183, 186)
+        Me.txtbx_RecipePrepPressureDrop.MaxLength = 6
+        Me.txtbx_RecipePrepPressureDrop.Name = "txtbx_RecipePrepPressureDrop"
+        Me.txtbx_RecipePrepPressureDrop.ReadOnly = True
+        Me.txtbx_RecipePrepPressureDrop.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepPressureDrop.TabIndex = 24
+        Me.txtbx_RecipePrepPressureDrop.Text = "-"
+        '
+        'dsp_RecipePressureDrop
+        '
+        Me.dsp_RecipePressureDrop.Location = New System.Drawing.Point(17, 178)
+        Me.dsp_RecipePressureDrop.Name = "dsp_RecipePressureDrop"
+        Me.dsp_RecipePressureDrop.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePressureDrop.TabIndex = 25
+        Me.dsp_RecipePressureDrop.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RecipePressureDrop.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'panel_RecipeDrain4
+        '
+        Me.panel_RecipeDrain4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RecipeDrain4.Controls.Add(Me.txtbx_RecipeDrain4Time)
+        Me.panel_RecipeDrain4.Controls.Add(Me.dsp_RecipeDrain4Time)
+        Me.panel_RecipeDrain4.Controls.Add(Me.txtbx_RecipeDrain4Pressure)
+        Me.panel_RecipeDrain4.Controls.Add(Me.dsp_RecipeDrain4Pressure)
+        Me.panel_RecipeDrain4.Controls.Add(Me.checkbx_RecipeDrain4)
+        Me.panel_RecipeDrain4.Location = New System.Drawing.Point(942, 471)
+        Me.panel_RecipeDrain4.Name = "panel_RecipeDrain4"
+        Me.panel_RecipeDrain4.Size = New System.Drawing.Size(307, 150)
+        Me.panel_RecipeDrain4.TabIndex = 47
+        '
+        'txtbx_RecipeDrain4Time
+        '
+        Me.txtbx_RecipeDrain4Time.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDrain4Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDrain4Time.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RecipeDrain4Time.MaxLength = 6
+        Me.txtbx_RecipeDrain4Time.Name = "txtbx_RecipeDrain4Time"
+        Me.txtbx_RecipeDrain4Time.ReadOnly = True
+        Me.txtbx_RecipeDrain4Time.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDrain4Time.TabIndex = 89
+        Me.txtbx_RecipeDrain4Time.Text = "-"
+        '
+        'dsp_RecipeDrain4Time
+        '
+        Me.dsp_RecipeDrain4Time.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RecipeDrain4Time.Name = "dsp_RecipeDrain4Time"
+        Me.dsp_RecipeDrain4Time.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDrain4Time.TabIndex = 14
+        Me.dsp_RecipeDrain4Time.Text = "Drain Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipeDrain4Time.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeDrain4Pressure
+        '
+        Me.txtbx_RecipeDrain4Pressure.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDrain4Pressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDrain4Pressure.Location = New System.Drawing.Point(183, 63)
+        Me.txtbx_RecipeDrain4Pressure.MaxLength = 6
+        Me.txtbx_RecipeDrain4Pressure.Name = "txtbx_RecipeDrain4Pressure"
+        Me.txtbx_RecipeDrain4Pressure.ReadOnly = True
+        Me.txtbx_RecipeDrain4Pressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDrain4Pressure.TabIndex = 88
+        Me.txtbx_RecipeDrain4Pressure.Text = "-"
+        '
+        'dsp_RecipeDrain4Pressure
+        '
+        Me.dsp_RecipeDrain4Pressure.Location = New System.Drawing.Point(17, 55)
+        Me.dsp_RecipeDrain4Pressure.Name = "dsp_RecipeDrain4Pressure"
+        Me.dsp_RecipeDrain4Pressure.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDrain4Pressure.TabIndex = 10
+        Me.dsp_RecipeDrain4Pressure.Text = "N2 Purge Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RecipeDrain4Pressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'checkbx_RecipeDrain4
+        '
+        Me.checkbx_RecipeDrain4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.checkbx_RecipeDrain4.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.checkbx_RecipeDrain4.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.checkbx_RecipeDrain4.Location = New System.Drawing.Point(49, 10)
+        Me.checkbx_RecipeDrain4.Name = "checkbx_RecipeDrain4"
+        Me.checkbx_RecipeDrain4.Size = New System.Drawing.Size(200, 40)
+        Me.checkbx_RecipeDrain4.TabIndex = 87
+        Me.checkbx_RecipeDrain4.Text = "Drain-4 Enable"
+        Me.checkbx_RecipeDrain4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.checkbx_RecipeDrain4.UseVisualStyleBackColor = True
+        '
+        'panel_RecipeFlush1
+        '
+        Me.panel_RecipeFlush1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RecipeFlush1.Controls.Add(Me.dsp_RecipeFlush1PumpMode)
+        Me.panel_RecipeFlush1.Controls.Add(Me.txtbx_RecipeFlush1RPM)
+        Me.panel_RecipeFlush1.Controls.Add(Me.dsp_RecipeFlush1RPM)
+        Me.panel_RecipeFlush1.Controls.Add(Me.TextBox4)
+        Me.panel_RecipeFlush1.Controls.Add(Me.txtbx_RecipeFlush1Time)
+        Me.panel_RecipeFlush1.Controls.Add(Me.dsp_RecipeFlush1Time)
+        Me.panel_RecipeFlush1.Controls.Add(Me.txtbx_RecipeFlush1Stabilize)
+        Me.panel_RecipeFlush1.Controls.Add(Me.dsp_RecipeFlush1Stabilize)
+        Me.panel_RecipeFlush1.Controls.Add(Me.txtbx_RecipeFlush1FlowTol)
+        Me.panel_RecipeFlush1.Controls.Add(Me.dsp_RecipeFlush1FlowTol)
+        Me.panel_RecipeFlush1.Controls.Add(Me.txtbx_RecipeFlush1Flow)
+        Me.panel_RecipeFlush1.Controls.Add(Me.checkbx_RecipeFlush1)
+        Me.panel_RecipeFlush1.Controls.Add(Me.dsp_RecipeFlush1Flow)
+        Me.panel_RecipeFlush1.Location = New System.Drawing.Point(316, 3)
+        Me.panel_RecipeFlush1.Name = "panel_RecipeFlush1"
+        Me.panel_RecipeFlush1.Size = New System.Drawing.Size(307, 320)
+        Me.panel_RecipeFlush1.TabIndex = 39
+        '
+        'dsp_RecipeFlush1PumpMode
+        '
+        Me.dsp_RecipeFlush1PumpMode.Location = New System.Drawing.Point(17, 219)
+        Me.dsp_RecipeFlush1PumpMode.Name = "dsp_RecipeFlush1PumpMode"
+        Me.dsp_RecipeFlush1PumpMode.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush1PumpMode.TabIndex = 84
+        Me.dsp_RecipeFlush1PumpMode.Text = "Pump Mode" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selection :"
+        Me.dsp_RecipeFlush1PumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeFlush1RPM
+        '
+        Me.txtbx_RecipeFlush1RPM.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeFlush1RPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeFlush1RPM.Location = New System.Drawing.Point(183, 270)
+        Me.txtbx_RecipeFlush1RPM.MaxLength = 6
+        Me.txtbx_RecipeFlush1RPM.Name = "txtbx_RecipeFlush1RPM"
+        Me.txtbx_RecipeFlush1RPM.ReadOnly = True
+        Me.txtbx_RecipeFlush1RPM.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeFlush1RPM.TabIndex = 75
+        Me.txtbx_RecipeFlush1RPM.Text = "-"
+        '
+        'dsp_RecipeFlush1RPM
+        '
+        Me.dsp_RecipeFlush1RPM.Location = New System.Drawing.Point(17, 262)
+        Me.dsp_RecipeFlush1RPM.Name = "dsp_RecipeFlush1RPM"
+        Me.dsp_RecipeFlush1RPM.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush1RPM.TabIndex = 76
+        Me.dsp_RecipeFlush1RPM.Text = "Pump Speed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(RPM) :"
+        Me.dsp_RecipeFlush1RPM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TextBox4
+        '
+        Me.TextBox4.BackColor = System.Drawing.SystemColors.Window
+        Me.TextBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox4.Location = New System.Drawing.Point(183, 229)
+        Me.TextBox4.MaxLength = 6
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.ReadOnly = True
+        Me.TextBox4.Size = New System.Drawing.Size(100, 25)
+        Me.TextBox4.TabIndex = 33
+        Me.TextBox4.Text = "-"
+        '
+        'txtbx_RecipeFlush1Time
+        '
+        Me.txtbx_RecipeFlush1Time.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeFlush1Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeFlush1Time.Location = New System.Drawing.Point(183, 186)
+        Me.txtbx_RecipeFlush1Time.MaxLength = 6
+        Me.txtbx_RecipeFlush1Time.Name = "txtbx_RecipeFlush1Time"
+        Me.txtbx_RecipeFlush1Time.ReadOnly = True
+        Me.txtbx_RecipeFlush1Time.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeFlush1Time.TabIndex = 33
+        Me.txtbx_RecipeFlush1Time.Text = "-"
+        '
+        'dsp_RecipeFlush1Time
+        '
+        Me.dsp_RecipeFlush1Time.Location = New System.Drawing.Point(17, 178)
+        Me.dsp_RecipeFlush1Time.Name = "dsp_RecipeFlush1Time"
+        Me.dsp_RecipeFlush1Time.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush1Time.TabIndex = 14
+        Me.dsp_RecipeFlush1Time.Text = "Flush Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipeFlush1Time.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeFlush1Stabilize
+        '
+        Me.txtbx_RecipeFlush1Stabilize.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeFlush1Stabilize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeFlush1Stabilize.Location = New System.Drawing.Point(183, 145)
+        Me.txtbx_RecipeFlush1Stabilize.MaxLength = 6
+        Me.txtbx_RecipeFlush1Stabilize.Name = "txtbx_RecipeFlush1Stabilize"
+        Me.txtbx_RecipeFlush1Stabilize.ReadOnly = True
+        Me.txtbx_RecipeFlush1Stabilize.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeFlush1Stabilize.TabIndex = 32
+        Me.txtbx_RecipeFlush1Stabilize.Text = "-"
+        '
+        'dsp_RecipeFlush1Stabilize
+        '
+        Me.dsp_RecipeFlush1Stabilize.Location = New System.Drawing.Point(17, 137)
+        Me.dsp_RecipeFlush1Stabilize.Name = "dsp_RecipeFlush1Stabilize"
+        Me.dsp_RecipeFlush1Stabilize.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush1Stabilize.TabIndex = 12
+        Me.dsp_RecipeFlush1Stabilize.Text = "Stabilize Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipeFlush1Stabilize.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeFlush1FlowTol
+        '
+        Me.txtbx_RecipeFlush1FlowTol.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeFlush1FlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeFlush1FlowTol.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RecipeFlush1FlowTol.MaxLength = 6
+        Me.txtbx_RecipeFlush1FlowTol.Name = "txtbx_RecipeFlush1FlowTol"
+        Me.txtbx_RecipeFlush1FlowTol.ReadOnly = True
+        Me.txtbx_RecipeFlush1FlowTol.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeFlush1FlowTol.TabIndex = 30
+        Me.txtbx_RecipeFlush1FlowTol.Text = "-"
+        '
+        'dsp_RecipeFlush1FlowTol
+        '
+        Me.dsp_RecipeFlush1FlowTol.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RecipeFlush1FlowTol.Name = "dsp_RecipeFlush1FlowTol"
+        Me.dsp_RecipeFlush1FlowTol.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush1FlowTol.TabIndex = 8
+        Me.dsp_RecipeFlush1FlowTol.Text = "Flowrate Tolerance (l/min) (+/-) :"
+        Me.dsp_RecipeFlush1FlowTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeFlush1Flow
+        '
+        Me.txtbx_RecipeFlush1Flow.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeFlush1Flow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeFlush1Flow.Location = New System.Drawing.Point(183, 63)
+        Me.txtbx_RecipeFlush1Flow.MaxLength = 6
+        Me.txtbx_RecipeFlush1Flow.Name = "txtbx_RecipeFlush1Flow"
+        Me.txtbx_RecipeFlush1Flow.ReadOnly = True
+        Me.txtbx_RecipeFlush1Flow.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeFlush1Flow.TabIndex = 29
+        Me.txtbx_RecipeFlush1Flow.Text = "-"
+        '
+        'checkbx_RecipeFlush1
+        '
+        Me.checkbx_RecipeFlush1.BackColor = System.Drawing.Color.Transparent
+        Me.checkbx_RecipeFlush1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.checkbx_RecipeFlush1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.checkbx_RecipeFlush1.FlatAppearance.CheckedBackColor = System.Drawing.Color.RoyalBlue
+        Me.checkbx_RecipeFlush1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_RecipeFlush1.Location = New System.Drawing.Point(49, 10)
+        Me.checkbx_RecipeFlush1.Name = "checkbx_RecipeFlush1"
+        Me.checkbx_RecipeFlush1.Size = New System.Drawing.Size(200, 40)
+        Me.checkbx_RecipeFlush1.TabIndex = 28
+        Me.checkbx_RecipeFlush1.Text = "Flush-1 Enable"
+        Me.checkbx_RecipeFlush1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.checkbx_RecipeFlush1.UseVisualStyleBackColor = False
+        '
+        'dsp_RecipeFlush1Flow
+        '
+        Me.dsp_RecipeFlush1Flow.Location = New System.Drawing.Point(17, 55)
+        Me.dsp_RecipeFlush1Flow.Name = "dsp_RecipeFlush1Flow"
+        Me.dsp_RecipeFlush1Flow.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush1Flow.TabIndex = 6
+        Me.dsp_RecipeFlush1Flow.Text = "Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min) :"
+        Me.dsp_RecipeFlush1Flow.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Panel13
+        '
+        Me.Panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel13.Controls.Add(Me.dsp_RecipePrepPumpMode)
+        Me.Panel13.Controls.Add(Me.dsp_RecipePrepRPM)
+        Me.Panel13.Controls.Add(Me.txtbx_RecipePrepRPM)
+        Me.Panel13.Controls.Add(Me.dsp_RecipePrepPrefillTime)
+        Me.Panel13.Controls.Add(Me.dsp_RecipePrepPrefillStartTime)
+        Me.Panel13.Controls.Add(Me.txtbx_RecipePrepPrefillTime)
+        Me.Panel13.Controls.Add(Me.txtbx_RecipePrepPrefillStartTime)
+        Me.Panel13.Controls.Add(Me.dsp_EditPreparation)
+        Me.Panel13.Controls.Add(Me.dsp_RecipePressureDropTime)
+        Me.Panel13.Controls.Add(Me.dsp_RecipePrepPressure)
+        Me.Panel13.Controls.Add(Me.dsp_RecipePrepBleed)
+        Me.Panel13.Controls.Add(Me.dsp_RecipePrepFill)
+        Me.Panel13.Controls.Add(Me.TextBox1)
+        Me.Panel13.Controls.Add(Me.txtbx_RecipePrepPressureDropTime)
+        Me.Panel13.Controls.Add(Me.txtbx_RecipePrepPressure)
+        Me.Panel13.Controls.Add(Me.txtbx_RecipePrepBleed)
+        Me.Panel13.Controls.Add(Me.txtbx_RecipePrepFill)
+        Me.Panel13.Location = New System.Drawing.Point(3, 249)
+        Me.Panel13.Name = "Panel13"
+        Me.Panel13.Size = New System.Drawing.Size(307, 400)
+        Me.Panel13.TabIndex = 46
+        '
+        'dsp_RecipePrepPumpMode
+        '
+        Me.dsp_RecipePrepPumpMode.Location = New System.Drawing.Point(17, 301)
+        Me.dsp_RecipePrepPumpMode.Name = "dsp_RecipePrepPumpMode"
+        Me.dsp_RecipePrepPumpMode.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepPumpMode.TabIndex = 84
+        Me.dsp_RecipePrepPumpMode.Text = "Pump Mode" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selection :"
+        Me.dsp_RecipePrepPumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RecipePrepRPM
+        '
+        Me.dsp_RecipePrepRPM.Location = New System.Drawing.Point(17, 344)
+        Me.dsp_RecipePrepRPM.Name = "dsp_RecipePrepRPM"
+        Me.dsp_RecipePrepRPM.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepRPM.TabIndex = 73
+        Me.dsp_RecipePrepRPM.Text = "Pump Speed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(RPM) :"
+        Me.dsp_RecipePrepRPM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipePrepRPM
+        '
+        Me.txtbx_RecipePrepRPM.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepRPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepRPM.Location = New System.Drawing.Point(183, 352)
+        Me.txtbx_RecipePrepRPM.MaxLength = 6
+        Me.txtbx_RecipePrepRPM.Name = "txtbx_RecipePrepRPM"
+        Me.txtbx_RecipePrepRPM.ReadOnly = True
+        Me.txtbx_RecipePrepRPM.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepRPM.TabIndex = 74
+        Me.txtbx_RecipePrepRPM.Text = "-"
+        '
+        'dsp_RecipePrepPrefillTime
+        '
+        Me.dsp_RecipePrepPrefillTime.Location = New System.Drawing.Point(17, 137)
+        Me.dsp_RecipePrepPrefillTime.Name = "dsp_RecipePrepPrefillTime"
+        Me.dsp_RecipePrepPrefillTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepPrefillTime.TabIndex = 34
+        Me.dsp_RecipePrepPrefillTime.Text = "Vent Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipePrepPrefillTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RecipePrepPrefillStartTime
+        '
+        Me.dsp_RecipePrepPrefillStartTime.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RecipePrepPrefillStartTime.Name = "dsp_RecipePrepPrefillStartTime"
+        Me.dsp_RecipePrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepPrefillStartTime.TabIndex = 35
+        Me.dsp_RecipePrepPrefillStartTime.Text = "Vent Start Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipePrepPrefillStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipePrepPrefillTime
+        '
+        Me.txtbx_RecipePrepPrefillTime.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepPrefillTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepPrefillTime.Location = New System.Drawing.Point(183, 145)
+        Me.txtbx_RecipePrepPrefillTime.MaxLength = 6
+        Me.txtbx_RecipePrepPrefillTime.Name = "txtbx_RecipePrepPrefillTime"
+        Me.txtbx_RecipePrepPrefillTime.ReadOnly = True
+        Me.txtbx_RecipePrepPrefillTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepPrefillTime.TabIndex = 27
+        Me.txtbx_RecipePrepPrefillTime.Text = "-"
+        '
+        'txtbx_RecipePrepPrefillStartTime
+        '
+        Me.txtbx_RecipePrepPrefillStartTime.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepPrefillStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepPrefillStartTime.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RecipePrepPrefillStartTime.MaxLength = 6
+        Me.txtbx_RecipePrepPrefillStartTime.Name = "txtbx_RecipePrepPrefillStartTime"
+        Me.txtbx_RecipePrepPrefillStartTime.ReadOnly = True
+        Me.txtbx_RecipePrepPrefillStartTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepPrefillStartTime.TabIndex = 26
+        Me.txtbx_RecipePrepPrefillStartTime.Text = "-"
+        '
+        'dsp_EditPreparation
+        '
+        Me.dsp_EditPreparation.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.dsp_EditPreparation.Location = New System.Drawing.Point(49, 8)
+        Me.dsp_EditPreparation.Name = "dsp_EditPreparation"
+        Me.dsp_EditPreparation.Size = New System.Drawing.Size(200, 40)
+        Me.dsp_EditPreparation.TabIndex = 33
+        Me.dsp_EditPreparation.Text = "Preparation"
+        Me.dsp_EditPreparation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'dsp_RecipePressureDropTime
+        '
+        Me.dsp_RecipePressureDropTime.Location = New System.Drawing.Point(17, 260)
+        Me.dsp_RecipePressureDropTime.Name = "dsp_RecipePressureDropTime"
+        Me.dsp_RecipePressureDropTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePressureDropTime.TabIndex = 25
+        Me.dsp_RecipePressureDropTime.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Duration (s) :"
+        Me.dsp_RecipePressureDropTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RecipePrepPressure
+        '
+        Me.dsp_RecipePrepPressure.Location = New System.Drawing.Point(17, 219)
+        Me.dsp_RecipePrepPressure.Name = "dsp_RecipePrepPressure"
+        Me.dsp_RecipePrepPressure.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepPressure.TabIndex = 26
+        Me.dsp_RecipePrepPressure.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RecipePrepPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RecipePrepBleed
+        '
+        Me.dsp_RecipePrepBleed.Location = New System.Drawing.Point(17, 178)
+        Me.dsp_RecipePrepBleed.Name = "dsp_RecipePrepBleed"
+        Me.dsp_RecipePrepBleed.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepBleed.TabIndex = 27
+        Me.dsp_RecipePrepBleed.Text = "Air Bleed Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipePrepBleed.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RecipePrepFill
+        '
+        Me.dsp_RecipePrepFill.Location = New System.Drawing.Point(17, 55)
+        Me.dsp_RecipePrepFill.Name = "dsp_RecipePrepFill"
+        Me.dsp_RecipePrepFill.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepFill.TabIndex = 28
+        Me.dsp_RecipePrepFill.Text = "Fill Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipePrepFill.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BackColor = System.Drawing.SystemColors.Window
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox1.Location = New System.Drawing.Point(183, 311)
+        Me.TextBox1.MaxLength = 6
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(100, 25)
+        Me.TextBox1.TabIndex = 25
+        Me.TextBox1.Text = "-"
+        '
+        'txtbx_RecipePrepPressureDropTime
+        '
+        Me.txtbx_RecipePrepPressureDropTime.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepPressureDropTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepPressureDropTime.Location = New System.Drawing.Point(183, 268)
+        Me.txtbx_RecipePrepPressureDropTime.MaxLength = 6
+        Me.txtbx_RecipePrepPressureDropTime.Name = "txtbx_RecipePrepPressureDropTime"
+        Me.txtbx_RecipePrepPressureDropTime.ReadOnly = True
+        Me.txtbx_RecipePrepPressureDropTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepPressureDropTime.TabIndex = 25
+        Me.txtbx_RecipePrepPressureDropTime.Text = "-"
+        '
+        'txtbx_RecipePrepPressure
+        '
+        Me.txtbx_RecipePrepPressure.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepPressure.Location = New System.Drawing.Point(183, 227)
+        Me.txtbx_RecipePrepPressure.MaxLength = 6
+        Me.txtbx_RecipePrepPressure.Name = "txtbx_RecipePrepPressure"
+        Me.txtbx_RecipePrepPressure.ReadOnly = True
+        Me.txtbx_RecipePrepPressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepPressure.TabIndex = 23
+        Me.txtbx_RecipePrepPressure.Text = "-"
+        '
+        'txtbx_RecipePrepBleed
+        '
+        Me.txtbx_RecipePrepBleed.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepBleed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepBleed.Location = New System.Drawing.Point(183, 186)
+        Me.txtbx_RecipePrepBleed.MaxLength = 6
+        Me.txtbx_RecipePrepBleed.Name = "txtbx_RecipePrepBleed"
+        Me.txtbx_RecipePrepBleed.ReadOnly = True
+        Me.txtbx_RecipePrepBleed.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepBleed.TabIndex = 2
+        Me.txtbx_RecipePrepBleed.Text = "-"
+        '
+        'txtbx_RecipePrepFill
+        '
+        Me.txtbx_RecipePrepFill.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepFill.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepFill.Location = New System.Drawing.Point(183, 63)
+        Me.txtbx_RecipePrepFill.MaxLength = 6
+        Me.txtbx_RecipePrepFill.Name = "txtbx_RecipePrepFill"
+        Me.txtbx_RecipePrepFill.ReadOnly = True
+        Me.txtbx_RecipePrepFill.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepFill.TabIndex = 20
+        Me.txtbx_RecipePrepFill.Text = "-"
+        '
+        'panel_RecipeDPTest1
+        '
+        Me.panel_RecipeDPTest1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RecipeDPTest1.Controls.Add(Me.dsp_RecipeDPTestPumpMode)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.txtbx_RecipeDPTestRPM)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.dsp_RecipeDPTestRPM)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.checkbx_RecipeDPTest2)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.checkbx_RecipeDPTest1)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.TextBox2)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.txtbx_RecipeDPPoints)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.dsp_RecipeDPPoints)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.txtbx_RecipeDPUpLimit)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.dsp_RecipeDPUpLimit)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.txtbx_RecipeDPLowLimit)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.dsp_RecipeDPLowLimit)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.txtbx_RecipeDPTime)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.dsp_RecipeDPTime)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.txtbx_RecipeDPStabilize)
+        Me.panel_RecipeDPTest1.Controls.Add(Me.dsp_RecipeDPStabilize)
+        Me.panel_RecipeDPTest1.Location = New System.Drawing.Point(629, 3)
+        Me.panel_RecipeDPTest1.Name = "panel_RecipeDPTest1"
+        Me.panel_RecipeDPTest1.Size = New System.Drawing.Size(307, 462)
+        Me.panel_RecipeDPTest1.TabIndex = 42
+        '
+        'dsp_RecipeDPTestPumpMode
+        '
+        Me.dsp_RecipeDPTestPumpMode.Location = New System.Drawing.Point(17, 303)
+        Me.dsp_RecipeDPTestPumpMode.Name = "dsp_RecipeDPTestPumpMode"
+        Me.dsp_RecipeDPTestPumpMode.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDPTestPumpMode.TabIndex = 84
+        Me.dsp_RecipeDPTestPumpMode.Text = "Pump Mode" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selection :"
+        Me.dsp_RecipeDPTestPumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeDPTestRPM
+        '
+        Me.txtbx_RecipeDPTestRPM.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDPTestRPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDPTestRPM.Location = New System.Drawing.Point(183, 350)
+        Me.txtbx_RecipeDPTestRPM.MaxLength = 6
+        Me.txtbx_RecipeDPTestRPM.Name = "txtbx_RecipeDPTestRPM"
+        Me.txtbx_RecipeDPTestRPM.ReadOnly = True
+        Me.txtbx_RecipeDPTestRPM.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDPTestRPM.TabIndex = 75
+        Me.txtbx_RecipeDPTestRPM.Text = "-"
+        '
+        'dsp_RecipeDPTestRPM
+        '
+        Me.dsp_RecipeDPTestRPM.Location = New System.Drawing.Point(17, 342)
+        Me.dsp_RecipeDPTestRPM.Name = "dsp_RecipeDPTestRPM"
+        Me.dsp_RecipeDPTestRPM.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDPTestRPM.TabIndex = 76
+        Me.dsp_RecipeDPTestRPM.Text = "Pump Speed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(RPM) :"
+        Me.dsp_RecipeDPTestRPM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'checkbx_RecipeDPTest2
+        '
+        Me.checkbx_RecipeDPTest2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.checkbx_RecipeDPTest2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.checkbx_RecipeDPTest2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_RecipeDPTest2.Location = New System.Drawing.Point(49, 53)
+        Me.checkbx_RecipeDPTest2.Name = "checkbx_RecipeDPTest2"
+        Me.checkbx_RecipeDPTest2.Size = New System.Drawing.Size(200, 40)
+        Me.checkbx_RecipeDPTest2.TabIndex = 41
+        Me.checkbx_RecipeDPTest2.Text = "DP Test-2 Enable"
+        Me.checkbx_RecipeDPTest2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.checkbx_RecipeDPTest2.UseVisualStyleBackColor = True
+        '
+        'checkbx_RecipeDPTest1
+        '
+        Me.checkbx_RecipeDPTest1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.checkbx_RecipeDPTest1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.checkbx_RecipeDPTest1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_RecipeDPTest1.Location = New System.Drawing.Point(49, 10)
+        Me.checkbx_RecipeDPTest1.Name = "checkbx_RecipeDPTest1"
+        Me.checkbx_RecipeDPTest1.Size = New System.Drawing.Size(200, 40)
+        Me.checkbx_RecipeDPTest1.TabIndex = 40
+        Me.checkbx_RecipeDPTest1.Text = "DP Test-1 Enable"
+        Me.checkbx_RecipeDPTest1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.checkbx_RecipeDPTest1.UseVisualStyleBackColor = True
+        '
+        'TextBox2
+        '
+        Me.TextBox2.BackColor = System.Drawing.SystemColors.Window
+        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox2.Location = New System.Drawing.Point(183, 309)
+        Me.TextBox2.MaxLength = 6
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.Size = New System.Drawing.Size(100, 25)
+        Me.TextBox2.TabIndex = 49
+        Me.TextBox2.Text = "-"
+        '
+        'txtbx_RecipeDPPoints
+        '
+        Me.txtbx_RecipeDPPoints.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDPPoints.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDPPoints.Location = New System.Drawing.Point(183, 270)
+        Me.txtbx_RecipeDPPoints.MaxLength = 6
+        Me.txtbx_RecipeDPPoints.Name = "txtbx_RecipeDPPoints"
+        Me.txtbx_RecipeDPPoints.ReadOnly = True
+        Me.txtbx_RecipeDPPoints.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDPPoints.TabIndex = 49
+        Me.txtbx_RecipeDPPoints.Text = "-"
+        '
+        'dsp_RecipeDPPoints
+        '
+        Me.dsp_RecipeDPPoints.Location = New System.Drawing.Point(17, 262)
+        Me.dsp_RecipeDPPoints.Name = "dsp_RecipeDPPoints"
+        Me.dsp_RecipeDPPoints.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDPPoints.TabIndex = 20
+        Me.dsp_RecipeDPPoints.Text = "Test Points" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Count) :"
+        Me.dsp_RecipeDPPoints.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeDPUpLimit
+        '
+        Me.txtbx_RecipeDPUpLimit.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDPUpLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDPUpLimit.Location = New System.Drawing.Point(183, 229)
+        Me.txtbx_RecipeDPUpLimit.MaxLength = 6
+        Me.txtbx_RecipeDPUpLimit.Name = "txtbx_RecipeDPUpLimit"
+        Me.txtbx_RecipeDPUpLimit.ReadOnly = True
+        Me.txtbx_RecipeDPUpLimit.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDPUpLimit.TabIndex = 48
+        Me.txtbx_RecipeDPUpLimit.Text = "-"
+        '
+        'dsp_RecipeDPUpLimit
+        '
+        Me.dsp_RecipeDPUpLimit.Location = New System.Drawing.Point(17, 221)
+        Me.dsp_RecipeDPUpLimit.Name = "dsp_RecipeDPUpLimit"
+        Me.dsp_RecipeDPUpLimit.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDPUpLimit.TabIndex = 18
+        Me.dsp_RecipeDPUpLimit.Text = "DP Upper Limit" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RecipeDPUpLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeDPLowLimit
+        '
+        Me.txtbx_RecipeDPLowLimit.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDPLowLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDPLowLimit.Location = New System.Drawing.Point(183, 188)
+        Me.txtbx_RecipeDPLowLimit.MaxLength = 6
+        Me.txtbx_RecipeDPLowLimit.Name = "txtbx_RecipeDPLowLimit"
+        Me.txtbx_RecipeDPLowLimit.ReadOnly = True
+        Me.txtbx_RecipeDPLowLimit.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDPLowLimit.TabIndex = 47
+        Me.txtbx_RecipeDPLowLimit.Text = "-"
+        '
+        'dsp_RecipeDPLowLimit
+        '
+        Me.dsp_RecipeDPLowLimit.Location = New System.Drawing.Point(17, 180)
+        Me.dsp_RecipeDPLowLimit.Name = "dsp_RecipeDPLowLimit"
+        Me.dsp_RecipeDPLowLimit.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDPLowLimit.TabIndex = 16
+        Me.dsp_RecipeDPLowLimit.Text = "DP Lower Limit" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)  :"
+        Me.dsp_RecipeDPLowLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeDPTime
+        '
+        Me.txtbx_RecipeDPTime.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDPTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDPTime.Location = New System.Drawing.Point(183, 147)
+        Me.txtbx_RecipeDPTime.MaxLength = 6
+        Me.txtbx_RecipeDPTime.Name = "txtbx_RecipeDPTime"
+        Me.txtbx_RecipeDPTime.ReadOnly = True
+        Me.txtbx_RecipeDPTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDPTime.TabIndex = 46
+        Me.txtbx_RecipeDPTime.Text = "-"
+        '
+        'dsp_RecipeDPTime
+        '
+        Me.dsp_RecipeDPTime.Location = New System.Drawing.Point(17, 139)
+        Me.dsp_RecipeDPTime.Name = "dsp_RecipeDPTime"
+        Me.dsp_RecipeDPTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDPTime.TabIndex = 14
+        Me.dsp_RecipeDPTime.Text = "DP Test Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipeDPTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeDPStabilize
+        '
+        Me.txtbx_RecipeDPStabilize.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDPStabilize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDPStabilize.Location = New System.Drawing.Point(183, 106)
+        Me.txtbx_RecipeDPStabilize.MaxLength = 6
+        Me.txtbx_RecipeDPStabilize.Name = "txtbx_RecipeDPStabilize"
+        Me.txtbx_RecipeDPStabilize.ReadOnly = True
+        Me.txtbx_RecipeDPStabilize.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDPStabilize.TabIndex = 45
+        Me.txtbx_RecipeDPStabilize.Text = "-"
+        '
+        'dsp_RecipeDPStabilize
+        '
+        Me.dsp_RecipeDPStabilize.Location = New System.Drawing.Point(17, 98)
+        Me.dsp_RecipeDPStabilize.Name = "dsp_RecipeDPStabilize"
+        Me.dsp_RecipeDPStabilize.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDPStabilize.TabIndex = 12
+        Me.dsp_RecipeDPStabilize.Text = "Stabilize Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipeDPStabilize.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'panel_RecipeDrain1
+        '
+        Me.panel_RecipeDrain1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RecipeDrain1.Controls.Add(Me.txtbx_RecipeDrain1Time)
+        Me.panel_RecipeDrain1.Controls.Add(Me.dsp_RecipeDrain1Time)
+        Me.panel_RecipeDrain1.Controls.Add(Me.txtbx_RecipeDrain1Pressure)
+        Me.panel_RecipeDrain1.Controls.Add(Me.dsp_RecipeDrain1Pressure)
+        Me.panel_RecipeDrain1.Controls.Add(Me.checkbx_RecipeDrain1)
+        Me.panel_RecipeDrain1.Location = New System.Drawing.Point(942, 3)
+        Me.panel_RecipeDrain1.Name = "panel_RecipeDrain1"
+        Me.panel_RecipeDrain1.Size = New System.Drawing.Size(307, 150)
+        Me.panel_RecipeDrain1.TabIndex = 41
+        '
+        'txtbx_RecipeDrain1Time
+        '
+        Me.txtbx_RecipeDrain1Time.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDrain1Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDrain1Time.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RecipeDrain1Time.MaxLength = 6
+        Me.txtbx_RecipeDrain1Time.Name = "txtbx_RecipeDrain1Time"
+        Me.txtbx_RecipeDrain1Time.ReadOnly = True
+        Me.txtbx_RecipeDrain1Time.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDrain1Time.TabIndex = 52
+        Me.txtbx_RecipeDrain1Time.Text = "-"
+        '
+        'dsp_RecipeDrain1Time
+        '
+        Me.dsp_RecipeDrain1Time.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RecipeDrain1Time.Name = "dsp_RecipeDrain1Time"
+        Me.dsp_RecipeDrain1Time.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDrain1Time.TabIndex = 14
+        Me.dsp_RecipeDrain1Time.Text = "Drain Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipeDrain1Time.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeDrain1Pressure
+        '
+        Me.txtbx_RecipeDrain1Pressure.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDrain1Pressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDrain1Pressure.Location = New System.Drawing.Point(183, 63)
+        Me.txtbx_RecipeDrain1Pressure.MaxLength = 6
+        Me.txtbx_RecipeDrain1Pressure.Name = "txtbx_RecipeDrain1Pressure"
+        Me.txtbx_RecipeDrain1Pressure.ReadOnly = True
+        Me.txtbx_RecipeDrain1Pressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDrain1Pressure.TabIndex = 51
+        Me.txtbx_RecipeDrain1Pressure.Text = "-"
+        '
+        'dsp_RecipeDrain1Pressure
+        '
+        Me.dsp_RecipeDrain1Pressure.Location = New System.Drawing.Point(17, 55)
+        Me.dsp_RecipeDrain1Pressure.Name = "dsp_RecipeDrain1Pressure"
+        Me.dsp_RecipeDrain1Pressure.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDrain1Pressure.TabIndex = 10
+        Me.dsp_RecipeDrain1Pressure.Text = "N2 Purge Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RecipeDrain1Pressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'checkbx_RecipeDrain1
+        '
+        Me.checkbx_RecipeDrain1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.checkbx_RecipeDrain1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.checkbx_RecipeDrain1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_RecipeDrain1.Location = New System.Drawing.Point(49, 10)
+        Me.checkbx_RecipeDrain1.Name = "checkbx_RecipeDrain1"
+        Me.checkbx_RecipeDrain1.Size = New System.Drawing.Size(200, 40)
+        Me.checkbx_RecipeDrain1.TabIndex = 50
+        Me.checkbx_RecipeDrain1.Text = "Drain-1 Enable"
+        Me.checkbx_RecipeDrain1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.checkbx_RecipeDrain1.UseVisualStyleBackColor = True
+        '
+        'panel_RecipeDrain3
+        '
+        Me.panel_RecipeDrain3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RecipeDrain3.Controls.Add(Me.txtbx_RecipeDrain3Time)
+        Me.panel_RecipeDrain3.Controls.Add(Me.dsp_RecipeDrain3Time)
+        Me.panel_RecipeDrain3.Controls.Add(Me.txtbx_RecipeDrain3Pressure)
+        Me.panel_RecipeDrain3.Controls.Add(Me.dsp_RecipeDrain3Pressure)
+        Me.panel_RecipeDrain3.Controls.Add(Me.checkbx_RecipeDrain3)
+        Me.panel_RecipeDrain3.Location = New System.Drawing.Point(942, 315)
+        Me.panel_RecipeDrain3.Name = "panel_RecipeDrain3"
+        Me.panel_RecipeDrain3.Size = New System.Drawing.Size(307, 150)
+        Me.panel_RecipeDrain3.TabIndex = 43
+        '
+        'txtbx_RecipeDrain3Time
+        '
+        Me.txtbx_RecipeDrain3Time.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDrain3Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDrain3Time.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RecipeDrain3Time.MaxLength = 6
+        Me.txtbx_RecipeDrain3Time.Name = "txtbx_RecipeDrain3Time"
+        Me.txtbx_RecipeDrain3Time.ReadOnly = True
+        Me.txtbx_RecipeDrain3Time.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDrain3Time.TabIndex = 58
+        Me.txtbx_RecipeDrain3Time.Text = "-"
+        '
+        'dsp_RecipeDrain3Time
+        '
+        Me.dsp_RecipeDrain3Time.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RecipeDrain3Time.Name = "dsp_RecipeDrain3Time"
+        Me.dsp_RecipeDrain3Time.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDrain3Time.TabIndex = 14
+        Me.dsp_RecipeDrain3Time.Text = "Drain Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipeDrain3Time.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeDrain3Pressure
+        '
+        Me.txtbx_RecipeDrain3Pressure.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDrain3Pressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDrain3Pressure.Location = New System.Drawing.Point(183, 63)
+        Me.txtbx_RecipeDrain3Pressure.MaxLength = 6
+        Me.txtbx_RecipeDrain3Pressure.Name = "txtbx_RecipeDrain3Pressure"
+        Me.txtbx_RecipeDrain3Pressure.ReadOnly = True
+        Me.txtbx_RecipeDrain3Pressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDrain3Pressure.TabIndex = 57
+        Me.txtbx_RecipeDrain3Pressure.Text = "-"
+        '
+        'dsp_RecipeDrain3Pressure
+        '
+        Me.dsp_RecipeDrain3Pressure.Location = New System.Drawing.Point(17, 55)
+        Me.dsp_RecipeDrain3Pressure.Name = "dsp_RecipeDrain3Pressure"
+        Me.dsp_RecipeDrain3Pressure.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDrain3Pressure.TabIndex = 10
+        Me.dsp_RecipeDrain3Pressure.Text = "N2 Purge Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RecipeDrain3Pressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'checkbx_RecipeDrain3
+        '
+        Me.checkbx_RecipeDrain3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.checkbx_RecipeDrain3.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.checkbx_RecipeDrain3.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_RecipeDrain3.Location = New System.Drawing.Point(49, 10)
+        Me.checkbx_RecipeDrain3.Name = "checkbx_RecipeDrain3"
+        Me.checkbx_RecipeDrain3.Size = New System.Drawing.Size(200, 40)
+        Me.checkbx_RecipeDrain3.TabIndex = 56
+        Me.checkbx_RecipeDrain3.Text = "Drain-3 Enable"
+        Me.checkbx_RecipeDrain3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.checkbx_RecipeDrain3.UseVisualStyleBackColor = True
+        '
+        'panel_RecipeFlush2
+        '
+        Me.panel_RecipeFlush2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RecipeFlush2.Controls.Add(Me.dsp_RecipeFlush2PumpMode)
+        Me.panel_RecipeFlush2.Controls.Add(Me.txtbx_RecipeFlush2RPM)
+        Me.panel_RecipeFlush2.Controls.Add(Me.dsp_RecipeFlush2RPM)
+        Me.panel_RecipeFlush2.Controls.Add(Me.checkbx_RecipeFlush2)
+        Me.panel_RecipeFlush2.Controls.Add(Me.TextBox3)
+        Me.panel_RecipeFlush2.Controls.Add(Me.txtbx_RecipeFlush2Time)
+        Me.panel_RecipeFlush2.Controls.Add(Me.dsp_RecipeFlush2Time)
+        Me.panel_RecipeFlush2.Controls.Add(Me.txtbx_RecipeFlush2Stabilize)
+        Me.panel_RecipeFlush2.Controls.Add(Me.dsp_RecipeFlush2Stabilize)
+        Me.panel_RecipeFlush2.Controls.Add(Me.txtbx_RecipeFlush2FlowTol)
+        Me.panel_RecipeFlush2.Controls.Add(Me.dsp_RecipeFlush2FlowTol)
+        Me.panel_RecipeFlush2.Controls.Add(Me.txtbx_RecipeFlush2Flow)
+        Me.panel_RecipeFlush2.Controls.Add(Me.dsp_RecipeFlush2Flow)
+        Me.panel_RecipeFlush2.Location = New System.Drawing.Point(316, 329)
+        Me.panel_RecipeFlush2.Name = "panel_RecipeFlush2"
+        Me.panel_RecipeFlush2.Size = New System.Drawing.Size(307, 320)
+        Me.panel_RecipeFlush2.TabIndex = 40
+        '
+        'dsp_RecipeFlush2PumpMode
+        '
+        Me.dsp_RecipeFlush2PumpMode.Location = New System.Drawing.Point(17, 219)
+        Me.dsp_RecipeFlush2PumpMode.Name = "dsp_RecipeFlush2PumpMode"
+        Me.dsp_RecipeFlush2PumpMode.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush2PumpMode.TabIndex = 84
+        Me.dsp_RecipeFlush2PumpMode.Text = "Pump Mode" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selection :"
+        Me.dsp_RecipeFlush2PumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeFlush2RPM
+        '
+        Me.txtbx_RecipeFlush2RPM.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeFlush2RPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeFlush2RPM.Location = New System.Drawing.Point(183, 270)
+        Me.txtbx_RecipeFlush2RPM.MaxLength = 6
+        Me.txtbx_RecipeFlush2RPM.Name = "txtbx_RecipeFlush2RPM"
+        Me.txtbx_RecipeFlush2RPM.ReadOnly = True
+        Me.txtbx_RecipeFlush2RPM.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeFlush2RPM.TabIndex = 75
+        Me.txtbx_RecipeFlush2RPM.Text = "-"
+        '
+        'dsp_RecipeFlush2RPM
+        '
+        Me.dsp_RecipeFlush2RPM.Location = New System.Drawing.Point(17, 262)
+        Me.dsp_RecipeFlush2RPM.Name = "dsp_RecipeFlush2RPM"
+        Me.dsp_RecipeFlush2RPM.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush2RPM.TabIndex = 76
+        Me.dsp_RecipeFlush2RPM.Text = "Pump Speed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(RPM) :"
+        Me.dsp_RecipeFlush2RPM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'checkbx_RecipeFlush2
+        '
+        Me.checkbx_RecipeFlush2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.checkbx_RecipeFlush2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.checkbx_RecipeFlush2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_RecipeFlush2.Location = New System.Drawing.Point(49, 10)
+        Me.checkbx_RecipeFlush2.Name = "checkbx_RecipeFlush2"
+        Me.checkbx_RecipeFlush2.Size = New System.Drawing.Size(200, 40)
+        Me.checkbx_RecipeFlush2.TabIndex = 34
+        Me.checkbx_RecipeFlush2.Text = "Flush-2 Enable"
+        Me.checkbx_RecipeFlush2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.checkbx_RecipeFlush2.UseVisualStyleBackColor = True
+        '
+        'TextBox3
+        '
+        Me.TextBox3.BackColor = System.Drawing.SystemColors.Window
+        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox3.Location = New System.Drawing.Point(183, 229)
+        Me.TextBox3.MaxLength = 6
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
+        Me.TextBox3.Size = New System.Drawing.Size(100, 25)
+        Me.TextBox3.TabIndex = 39
+        Me.TextBox3.Text = "-"
+        '
+        'txtbx_RecipeFlush2Time
+        '
+        Me.txtbx_RecipeFlush2Time.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeFlush2Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeFlush2Time.Location = New System.Drawing.Point(183, 186)
+        Me.txtbx_RecipeFlush2Time.MaxLength = 6
+        Me.txtbx_RecipeFlush2Time.Name = "txtbx_RecipeFlush2Time"
+        Me.txtbx_RecipeFlush2Time.ReadOnly = True
+        Me.txtbx_RecipeFlush2Time.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeFlush2Time.TabIndex = 39
+        Me.txtbx_RecipeFlush2Time.Text = "-"
+        '
+        'dsp_RecipeFlush2Time
+        '
+        Me.dsp_RecipeFlush2Time.Location = New System.Drawing.Point(17, 178)
+        Me.dsp_RecipeFlush2Time.Name = "dsp_RecipeFlush2Time"
+        Me.dsp_RecipeFlush2Time.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush2Time.TabIndex = 14
+        Me.dsp_RecipeFlush2Time.Text = "Flush Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipeFlush2Time.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeFlush2Stabilize
+        '
+        Me.txtbx_RecipeFlush2Stabilize.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeFlush2Stabilize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeFlush2Stabilize.Location = New System.Drawing.Point(183, 145)
+        Me.txtbx_RecipeFlush2Stabilize.MaxLength = 6
+        Me.txtbx_RecipeFlush2Stabilize.Name = "txtbx_RecipeFlush2Stabilize"
+        Me.txtbx_RecipeFlush2Stabilize.ReadOnly = True
+        Me.txtbx_RecipeFlush2Stabilize.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeFlush2Stabilize.TabIndex = 38
+        Me.txtbx_RecipeFlush2Stabilize.Text = "-"
+        '
+        'dsp_RecipeFlush2Stabilize
+        '
+        Me.dsp_RecipeFlush2Stabilize.Location = New System.Drawing.Point(17, 137)
+        Me.dsp_RecipeFlush2Stabilize.Name = "dsp_RecipeFlush2Stabilize"
+        Me.dsp_RecipeFlush2Stabilize.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush2Stabilize.TabIndex = 12
+        Me.dsp_RecipeFlush2Stabilize.Text = "Stabilize Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipeFlush2Stabilize.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeFlush2FlowTol
+        '
+        Me.txtbx_RecipeFlush2FlowTol.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeFlush2FlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeFlush2FlowTol.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RecipeFlush2FlowTol.MaxLength = 6
+        Me.txtbx_RecipeFlush2FlowTol.Name = "txtbx_RecipeFlush2FlowTol"
+        Me.txtbx_RecipeFlush2FlowTol.ReadOnly = True
+        Me.txtbx_RecipeFlush2FlowTol.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeFlush2FlowTol.TabIndex = 36
+        Me.txtbx_RecipeFlush2FlowTol.Text = "-"
+        '
+        'dsp_RecipeFlush2FlowTol
+        '
+        Me.dsp_RecipeFlush2FlowTol.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RecipeFlush2FlowTol.Name = "dsp_RecipeFlush2FlowTol"
+        Me.dsp_RecipeFlush2FlowTol.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush2FlowTol.TabIndex = 8
+        Me.dsp_RecipeFlush2FlowTol.Text = "Flowrate Tolerance (l/min) (+/-) :"
+        Me.dsp_RecipeFlush2FlowTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeFlush2Flow
+        '
+        Me.txtbx_RecipeFlush2Flow.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeFlush2Flow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeFlush2Flow.Location = New System.Drawing.Point(183, 63)
+        Me.txtbx_RecipeFlush2Flow.MaxLength = 6
+        Me.txtbx_RecipeFlush2Flow.Name = "txtbx_RecipeFlush2Flow"
+        Me.txtbx_RecipeFlush2Flow.ReadOnly = True
+        Me.txtbx_RecipeFlush2Flow.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeFlush2Flow.TabIndex = 35
+        Me.txtbx_RecipeFlush2Flow.Text = "-"
+        '
+        'dsp_RecipeFlush2Flow
+        '
+        Me.dsp_RecipeFlush2Flow.Location = New System.Drawing.Point(17, 55)
+        Me.dsp_RecipeFlush2Flow.Name = "dsp_RecipeFlush2Flow"
+        Me.dsp_RecipeFlush2Flow.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeFlush2Flow.TabIndex = 6
+        Me.dsp_RecipeFlush2Flow.Text = "Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min) :"
+        Me.dsp_RecipeFlush2Flow.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'panel_RecipeDrain2
+        '
+        Me.panel_RecipeDrain2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RecipeDrain2.Controls.Add(Me.txtbx_RecipeDrain2Time)
+        Me.panel_RecipeDrain2.Controls.Add(Me.dsp_RecipeDrain2Time)
+        Me.panel_RecipeDrain2.Controls.Add(Me.txtbx_RecipeDrain2Pressure)
+        Me.panel_RecipeDrain2.Controls.Add(Me.dsp_RecipeDrain2Pressure)
+        Me.panel_RecipeDrain2.Controls.Add(Me.checkbx_RecipeDrain2)
+        Me.panel_RecipeDrain2.Location = New System.Drawing.Point(942, 159)
+        Me.panel_RecipeDrain2.Name = "panel_RecipeDrain2"
+        Me.panel_RecipeDrain2.Size = New System.Drawing.Size(307, 150)
+        Me.panel_RecipeDrain2.TabIndex = 44
+        '
+        'txtbx_RecipeDrain2Time
+        '
+        Me.txtbx_RecipeDrain2Time.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDrain2Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDrain2Time.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RecipeDrain2Time.MaxLength = 6
+        Me.txtbx_RecipeDrain2Time.Name = "txtbx_RecipeDrain2Time"
+        Me.txtbx_RecipeDrain2Time.ReadOnly = True
+        Me.txtbx_RecipeDrain2Time.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDrain2Time.TabIndex = 55
+        Me.txtbx_RecipeDrain2Time.Text = "-"
+        '
+        'dsp_RecipeDrain2Time
+        '
+        Me.dsp_RecipeDrain2Time.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RecipeDrain2Time.Name = "dsp_RecipeDrain2Time"
+        Me.dsp_RecipeDrain2Time.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDrain2Time.TabIndex = 14
+        Me.dsp_RecipeDrain2Time.Text = "Drain Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RecipeDrain2Time.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipeDrain2Pressure
+        '
+        Me.txtbx_RecipeDrain2Pressure.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipeDrain2Pressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipeDrain2Pressure.Location = New System.Drawing.Point(183, 63)
+        Me.txtbx_RecipeDrain2Pressure.MaxLength = 6
+        Me.txtbx_RecipeDrain2Pressure.Name = "txtbx_RecipeDrain2Pressure"
+        Me.txtbx_RecipeDrain2Pressure.ReadOnly = True
+        Me.txtbx_RecipeDrain2Pressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipeDrain2Pressure.TabIndex = 54
+        Me.txtbx_RecipeDrain2Pressure.Text = "-"
+        '
+        'dsp_RecipeDrain2Pressure
+        '
+        Me.dsp_RecipeDrain2Pressure.Location = New System.Drawing.Point(17, 55)
+        Me.dsp_RecipeDrain2Pressure.Name = "dsp_RecipeDrain2Pressure"
+        Me.dsp_RecipeDrain2Pressure.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipeDrain2Pressure.TabIndex = 10
+        Me.dsp_RecipeDrain2Pressure.Text = "N2 Purge Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RecipeDrain2Pressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'checkbx_RecipeDrain2
+        '
+        Me.checkbx_RecipeDrain2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.checkbx_RecipeDrain2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.checkbx_RecipeDrain2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_RecipeDrain2.Location = New System.Drawing.Point(49, 10)
+        Me.checkbx_RecipeDrain2.Name = "checkbx_RecipeDrain2"
+        Me.checkbx_RecipeDrain2.Size = New System.Drawing.Size(200, 40)
+        Me.checkbx_RecipeDrain2.TabIndex = 53
+        Me.checkbx_RecipeDrain2.Text = "Drain-2 Enable"
+        Me.checkbx_RecipeDrain2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.checkbx_RecipeDrain2.UseVisualStyleBackColor = True
         '
         'tabpg_Status
         '
@@ -2868,15 +4180,15 @@ Partial Class FormMain
         Me.dgv_AnalogOutput.AllowUserToDeleteRows = False
         Me.dgv_AnalogOutput.AllowUserToResizeColumns = False
         Me.dgv_AnalogOutput.AllowUserToResizeRows = False
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle13.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_AnalogOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_AnalogOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.dgv_AnalogOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_AnalogOutput.Location = New System.Drawing.Point(1383, 56)
         Me.dgv_AnalogOutput.Name = "dgv_AnalogOutput"
@@ -2891,15 +4203,15 @@ Partial Class FormMain
         Me.dgv_DigitalOutput.AllowUserToDeleteRows = False
         Me.dgv_DigitalOutput.AllowUserToResizeColumns = False
         Me.dgv_DigitalOutput.AllowUserToResizeRows = False
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle14.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_DigitalOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_DigitalOutput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.dgv_DigitalOutput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_DigitalOutput.Location = New System.Drawing.Point(471, 56)
         Me.dgv_DigitalOutput.Name = "dgv_DigitalOutput"
@@ -2914,15 +4226,15 @@ Partial Class FormMain
         Me.dgv_AnalogInput.AllowUserToDeleteRows = False
         Me.dgv_AnalogInput.AllowUserToResizeColumns = False
         Me.dgv_AnalogInput.AllowUserToResizeRows = False
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle15.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_AnalogInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_AnalogInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.dgv_AnalogInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_AnalogInput.Location = New System.Drawing.Point(927, 56)
         Me.dgv_AnalogInput.Name = "dgv_AnalogInput"
@@ -2937,15 +4249,15 @@ Partial Class FormMain
         Me.dgv_DigitalInput.AllowUserToDeleteRows = False
         Me.dgv_DigitalInput.AllowUserToResizeColumns = False
         Me.dgv_DigitalInput.AllowUserToResizeRows = False
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle16.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_DigitalInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_DigitalInput.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.dgv_DigitalInput.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgv_DigitalInput.Location = New System.Drawing.Point(15, 56)
         Me.dgv_DigitalInput.Name = "dgv_DigitalInput"
@@ -4749,7 +6061,9 @@ Partial Class FormMain
         'panel_SubManualDrain
         '
         Me.panel_SubManualDrain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_SubManualDrain.Controls.Add(Me.btn_MCN2Purge4)
         Me.panel_SubManualDrain.Controls.Add(Me.btn_MCN2Purge3)
+        Me.panel_SubManualDrain.Controls.Add(Me.Label40)
         Me.panel_SubManualDrain.Controls.Add(Me.btn_MCN2Purge2)
         Me.panel_SubManualDrain.Controls.Add(Me.dsp_N2PurgeCircuit3)
         Me.panel_SubManualDrain.Controls.Add(Me.btn_MCN2Purge1)
@@ -4758,7 +6072,7 @@ Partial Class FormMain
         Me.panel_SubManualDrain.Controls.Add(Me.dsp_ManualDrain)
         Me.panel_SubManualDrain.Location = New System.Drawing.Point(80, 228)
         Me.panel_SubManualDrain.Name = "panel_SubManualDrain"
-        Me.panel_SubManualDrain.Size = New System.Drawing.Size(500, 200)
+        Me.panel_SubManualDrain.Size = New System.Drawing.Size(500, 247)
         Me.panel_SubManualDrain.TabIndex = 5
         '
         'btn_MCN2Purge3
@@ -5157,36 +6471,36 @@ Partial Class FormMain
         Me.dgv_CurrentAlarm.AllowUserToResizeColumns = False
         Me.dgv_CurrentAlarm.AllowUserToResizeRows = False
         Me.dgv_CurrentAlarm.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle17.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_CurrentAlarm.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_CurrentAlarm.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.dgv_CurrentAlarm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle18.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgv_CurrentAlarm.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgv_CurrentAlarm.DefaultCellStyle = DataGridViewCellStyle8
         Me.dgv_CurrentAlarm.Location = New System.Drawing.Point(106, 25)
         Me.dgv_CurrentAlarm.Name = "dgv_CurrentAlarm"
         Me.dgv_CurrentAlarm.ReadOnly = True
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle19.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_CurrentAlarm.RowHeadersDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_CurrentAlarm.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.dgv_CurrentAlarm.RowHeadersVisible = False
         Me.dgv_CurrentAlarm.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgv_CurrentAlarm.Size = New System.Drawing.Size(1606, 537)
@@ -5243,15 +6557,15 @@ Partial Class FormMain
         Me.dgv_AlarmHistory.AllowUserToAddRows = False
         Me.dgv_AlarmHistory.AllowUserToDeleteRows = False
         Me.dgv_AlarmHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle20.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
-        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv_AlarmHistory.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle10.Padding = New System.Windows.Forms.Padding(0, 3, 0, 3)
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv_AlarmHistory.DefaultCellStyle = DataGridViewCellStyle10
         Me.dgv_AlarmHistory.Location = New System.Drawing.Point(106, 92)
         Me.dgv_AlarmHistory.Name = "dgv_AlarmHistory"
         Me.dgv_AlarmHistory.ReadOnly = True
@@ -5648,34 +6962,26 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'txtbx_FilterLotID2
+        'Label40
         '
-        Me.txtbx_FilterLotID2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_FilterLotID2.Location = New System.Drawing.Point(15, 41)
-        Me.txtbx_FilterLotID2.MaxLength = 30
-        Me.txtbx_FilterLotID2.Name = "txtbx_FilterLotID2"
-        Me.txtbx_FilterLotID2.Size = New System.Drawing.Size(200, 25)
-        Me.txtbx_FilterLotID2.TabIndex = 22
+        Me.Label40.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label40.Location = New System.Drawing.Point(122, 201)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(130, 17)
+        Me.Label40.TabIndex = 11
+        Me.Label40.Text = "N2 Purge Circuit-4 :"
+        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'dsp_FilterStartedBy2
+        'btn_MCN2Purge4
         '
-        Me.dsp_FilterStartedBy2.AutoSize = True
-        Me.dsp_FilterStartedBy2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_FilterStartedBy2.Location = New System.Drawing.Point(228, 21)
-        Me.dsp_FilterStartedBy2.Name = "dsp_FilterStartedBy2"
-        Me.dsp_FilterStartedBy2.Size = New System.Drawing.Size(74, 17)
-        Me.dsp_FilterStartedBy2.TabIndex = 9
-        Me.dsp_FilterStartedBy2.Text = "Started By :"
-        '
-        'cmbx_FilterStartedBy2
-        '
-        Me.cmbx_FilterStartedBy2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbx_FilterStartedBy2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbx_FilterStartedBy2.FormattingEnabled = True
-        Me.cmbx_FilterStartedBy2.Location = New System.Drawing.Point(231, 41)
-        Me.cmbx_FilterStartedBy2.Name = "cmbx_FilterStartedBy2"
-        Me.cmbx_FilterStartedBy2.Size = New System.Drawing.Size(200, 25)
-        Me.cmbx_FilterStartedBy2.TabIndex = 26
+        Me.btn_MCN2Purge4.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_MCN2Purge4.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_MCN2Purge4.Location = New System.Drawing.Point(273, 189)
+        Me.btn_MCN2Purge4.Name = "btn_MCN2Purge4"
+        Me.btn_MCN2Purge4.Size = New System.Drawing.Size(100, 40)
+        Me.btn_MCN2Purge4.TabIndex = 53
+        Me.btn_MCN2Purge4.Text = "OFF"
+        Me.btn_MCN2Purge4.UseVisualStyleBackColor = False
         '
         'FormMain
         '
@@ -5692,59 +6998,81 @@ Partial Class FormMain
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.panel_FormControl.ResumeLayout(False)
         Me.Panel12.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).EndInit
         Me.panel_UserCategory.ResumeLayout(False)
-        Me.panel_UserCategory.PerformLayout()
+        Me.panel_UserCategory.PerformLayout
         Me.tabctrl_MainCtrl.ResumeLayout(False)
         Me.tabpg_Main.ResumeLayout(False)
         Me.panel_MainRight.ResumeLayout(False)
         Me.tabctrl_SubMain.ResumeLayout(False)
         Me.tabpg_MainLiveGraph.ResumeLayout(False)
-        Me.tabpg_MainLiveGraph.PerformLayout()
+        Me.tabpg_MainLiveGraph.PerformLayout
         Me.Panel11.ResumeLayout(False)
-        Me.Panel11.PerformLayout()
-        CType(Me.chart_MainLiveGraph, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel11.PerformLayout
+        CType(Me.chart_MainLiveGraph, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabpg_MainOverview.ResumeLayout(False)
         Me.tabpg_MainProdZone.ResumeLayout(False)
         Me.Panel10.ResumeLayout(False)
-        Me.Panel10.PerformLayout()
+        Me.Panel10.PerformLayout
         Me.tabpg_MainPumpZone.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
-        CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picbx_MainPumpZone, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabpg_FittingType.ResumeLayout(False)
-        Me.tabpg_FittingType.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabpg_FittingType.PerformLayout
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit
         Me.panel_MainLeft.ResumeLayout(False)
         Me.panel_OprKeyInDt.ResumeLayout(False)
-        Me.panel_OprKeyInDt.PerformLayout()
+        Me.panel_OprKeyInDt.PerformLayout
         Me.panel_ProductionDetails.ResumeLayout(False)
-        Me.panel_ProductionDetails.PerformLayout()
+        Me.panel_ProductionDetails.PerformLayout
         Me.panel_DPTestResult.ResumeLayout(False)
-        Me.panel_DPTestResult.PerformLayout()
+        Me.panel_DPTestResult.PerformLayout
         Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
+        Me.Panel1.PerformLayout
         Me.panel_CalibrateStatus.ResumeLayout(False)
-        Me.panel_CalibrateStatus.PerformLayout()
+        Me.panel_CalibrateStatus.PerformLayout
         Me.panel_WrkOrdScnDt.ResumeLayout(False)
-        Me.panel_WrkOrdScnDt.PerformLayout()
+        Me.panel_WrkOrdScnDt.PerformLayout
         Me.tabpg_ProdDetail.ResumeLayout(False)
         Me.grpbx_SearchFilter.ResumeLayout(False)
-        Me.grpbx_SearchFilter.PerformLayout()
-        CType(Me.dgv_ProdDetail, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpbx_SearchFilter.PerformLayout
+        CType(Me.dgv_ProdDetail, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabpg_LotSummary.ResumeLayout(False)
         Me.grpbx_SearchFilter2.ResumeLayout(False)
-        Me.grpbx_SearchFilter2.PerformLayout()
-        CType(Me.dgv_LotSummary, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.grpbx_SearchFilter2.PerformLayout
+        CType(Me.dgv_LotSummary, System.ComponentModel.ISupportInitialize).EndInit
+        Me.tabpg_RecipeDetail.ResumeLayout(False)
+        Me.Panel14.ResumeLayout(False)
+        Me.Panel15.ResumeLayout(False)
+        Me.Panel15.PerformLayout
+        Me.Panel18.ResumeLayout(False)
+        Me.Panel18.PerformLayout
+        Me.panel_RecipeDrain4.ResumeLayout(False)
+        Me.panel_RecipeDrain4.PerformLayout
+        Me.panel_RecipeFlush1.ResumeLayout(False)
+        Me.panel_RecipeFlush1.PerformLayout
+        Me.Panel13.ResumeLayout(False)
+        Me.Panel13.PerformLayout
+        Me.panel_RecipeDPTest1.ResumeLayout(False)
+        Me.panel_RecipeDPTest1.PerformLayout
+        Me.panel_RecipeDrain1.ResumeLayout(False)
+        Me.panel_RecipeDrain1.PerformLayout
+        Me.panel_RecipeDrain3.ResumeLayout(False)
+        Me.panel_RecipeDrain3.PerformLayout
+        Me.panel_RecipeFlush2.ResumeLayout(False)
+        Me.panel_RecipeFlush2.PerformLayout
+        Me.panel_RecipeDrain2.ResumeLayout(False)
+        Me.panel_RecipeDrain2.PerformLayout
         Me.tabpg_Status.ResumeLayout(False)
         Me.tabctrl_SubStatus.ResumeLayout(False)
         Me.tabpg_StatusIO.ResumeLayout(False)
-        CType(Me.dgv_AnalogOutput, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dgv_DigitalOutput, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dgv_AnalogInput, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.dgv_DigitalInput, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgv_AnalogOutput, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dgv_DigitalOutput, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dgv_AnalogInput, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.dgv_DigitalInput, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabpg_StatusDevice.ResumeLayout(False)
         Me.panel_GenCondStatus.ResumeLayout(False)
         Me.panel_FlwTempCtrlIO.ResumeLayout(False)
@@ -5760,9 +7088,9 @@ Partial Class FormMain
         Me.panel_PumpControl.ResumeLayout(False)
         Me.panel_SubPumpCtrl.ResumeLayout(False)
         Me.panel_SpeedModeControl.ResumeLayout(False)
-        Me.panel_SpeedModeControl.PerformLayout()
+        Me.panel_SpeedModeControl.PerformLayout
         Me.panel_ProcessModeCtrl.ResumeLayout(False)
-        Me.panel_ProcessModeCtrl.PerformLayout()
+        Me.panel_ProcessModeCtrl.PerformLayout
         Me.tabpg_ManualControlTank.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
@@ -5771,7 +7099,7 @@ Partial Class FormMain
         Me.tabpg_ManualControlDrain.ResumeLayout(False)
         Me.panel_ManualDrain.ResumeLayout(False)
         Me.panel_SubRegulatorControl.ResumeLayout(False)
-        Me.panel_SubRegulatorControl.PerformLayout()
+        Me.panel_SubRegulatorControl.PerformLayout
         Me.panel_SubManualDrain.ResumeLayout(False)
         Me.tabpg_ManualControlMaintenance.ResumeLayout(False)
         Me.panel_Maintenance.ResumeLayout(False)
@@ -5780,13 +7108,13 @@ Partial Class FormMain
         Me.tabpg_Alarm.ResumeLayout(False)
         Me.tabctrl_SubAlarm.ResumeLayout(False)
         Me.tabpg_AlarmCurrent.ResumeLayout(False)
-        CType(Me.dgv_CurrentAlarm, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgv_CurrentAlarm, System.ComponentModel.ISupportInitialize).EndInit
         Me.tabpg_AlarmHistory.ResumeLayout(False)
-        Me.tabpg_AlarmHistory.PerformLayout()
-        CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabpg_AlarmHistory.PerformLayout
+        CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).EndInit
         Me.panel_PLCHeartBeat.ResumeLayout(False)
         Me.panel_SelectLoadRecipe.ResumeLayout(False)
-        Me.panel_SelectLoadRecipe.PerformLayout()
+        Me.panel_SelectLoadRecipe.PerformLayout
         Me.ResumeLayout(False)
 
     End Sub
@@ -6219,4 +7547,108 @@ Partial Class FormMain
     Friend WithEvents dsp_FilterStartedBy2 As Label
     Friend WithEvents txtbx_FilterLotID2 As TextBox
     Friend WithEvents cmbx_FilterStartedBy2 As ComboBox
+    Friend WithEvents tabpg_RecipeDetail As TabPage
+    Friend WithEvents Panel14 As Panel
+    Friend WithEvents Panel18 As Panel
+    Friend WithEvents txtbx_RecipeVerTol As TextBox
+    Friend WithEvents dsp_RecipeVerTol As Label
+    Friend WithEvents Label38 As Label
+    Friend WithEvents txtbx_RecipePrepFlow As TextBox
+    Friend WithEvents txtbx_RecipePrepFlowTol As TextBox
+    Friend WithEvents dsp_RecipePrepFlow As Label
+    Friend WithEvents dsp_RecipePrepFlowTol As Label
+    Friend WithEvents txtbx_RecipePrepPressureDrop As TextBox
+    Friend WithEvents dsp_RecipePressureDrop As Label
+    Friend WithEvents panel_RecipeDrain4 As Panel
+    Friend WithEvents txtbx_RecipeDrain4Time As TextBox
+    Friend WithEvents dsp_RecipeDrain4Time As Label
+    Friend WithEvents txtbx_RecipeDrain4Pressure As TextBox
+    Friend WithEvents dsp_RecipeDrain4Pressure As Label
+    Friend WithEvents checkbx_RecipeDrain4 As CheckBox
+    Friend WithEvents panel_RecipeFlush1 As Panel
+    Friend WithEvents dsp_RecipeFlush1PumpMode As Label
+    Friend WithEvents txtbx_RecipeFlush1RPM As TextBox
+    Friend WithEvents dsp_RecipeFlush1RPM As Label
+    Friend WithEvents txtbx_RecipeFlush1Time As TextBox
+    Friend WithEvents dsp_RecipeFlush1Time As Label
+    Friend WithEvents txtbx_RecipeFlush1Stabilize As TextBox
+    Friend WithEvents dsp_RecipeFlush1Stabilize As Label
+    Friend WithEvents txtbx_RecipeFlush1FlowTol As TextBox
+    Friend WithEvents dsp_RecipeFlush1FlowTol As Label
+    Friend WithEvents txtbx_RecipeFlush1Flow As TextBox
+    Friend WithEvents checkbx_RecipeFlush1 As CheckBox
+    Friend WithEvents dsp_RecipeFlush1Flow As Label
+    Friend WithEvents Panel13 As Panel
+    Friend WithEvents dsp_RecipePrepPumpMode As Label
+    Friend WithEvents dsp_RecipePrepRPM As Label
+    Friend WithEvents txtbx_RecipePrepRPM As TextBox
+    Friend WithEvents dsp_RecipePrepPrefillTime As Label
+    Friend WithEvents dsp_RecipePrepPrefillStartTime As Label
+    Friend WithEvents txtbx_RecipePrepPrefillTime As TextBox
+    Friend WithEvents txtbx_RecipePrepPrefillStartTime As TextBox
+    Friend WithEvents dsp_EditPreparation As Label
+    Friend WithEvents dsp_RecipePressureDropTime As Label
+    Friend WithEvents dsp_RecipePrepPressure As Label
+    Friend WithEvents dsp_RecipePrepBleed As Label
+    Friend WithEvents dsp_RecipePrepFill As Label
+    Friend WithEvents txtbx_RecipePrepPressureDropTime As TextBox
+    Friend WithEvents txtbx_RecipePrepPressure As TextBox
+    Friend WithEvents txtbx_RecipePrepBleed As TextBox
+    Friend WithEvents txtbx_RecipePrepFill As TextBox
+    Friend WithEvents panel_RecipeDPTest1 As Panel
+    Friend WithEvents dsp_RecipeDPTestPumpMode As Label
+    Friend WithEvents txtbx_RecipeDPTestRPM As TextBox
+    Friend WithEvents dsp_RecipeDPTestRPM As Label
+    Friend WithEvents checkbx_RecipeDPTest2 As CheckBox
+    Friend WithEvents checkbx_RecipeDPTest1 As CheckBox
+    Friend WithEvents txtbx_RecipeDPPoints As TextBox
+    Friend WithEvents dsp_RecipeDPPoints As Label
+    Friend WithEvents txtbx_RecipeDPUpLimit As TextBox
+    Friend WithEvents dsp_RecipeDPUpLimit As Label
+    Friend WithEvents txtbx_RecipeDPLowLimit As TextBox
+    Friend WithEvents dsp_RecipeDPLowLimit As Label
+    Friend WithEvents txtbx_RecipeDPTime As TextBox
+    Friend WithEvents dsp_RecipeDPTime As Label
+    Friend WithEvents txtbx_RecipeDPStabilize As TextBox
+    Friend WithEvents dsp_RecipeDPStabilize As Label
+    Friend WithEvents panel_RecipeDrain1 As Panel
+    Friend WithEvents txtbx_RecipeDrain1Time As TextBox
+    Friend WithEvents dsp_RecipeDrain1Time As Label
+    Friend WithEvents txtbx_RecipeDrain1Pressure As TextBox
+    Friend WithEvents dsp_RecipeDrain1Pressure As Label
+    Friend WithEvents checkbx_RecipeDrain1 As CheckBox
+    Friend WithEvents panel_RecipeDrain3 As Panel
+    Friend WithEvents txtbx_RecipeDrain3Time As TextBox
+    Friend WithEvents dsp_RecipeDrain3Time As Label
+    Friend WithEvents txtbx_RecipeDrain3Pressure As TextBox
+    Friend WithEvents dsp_RecipeDrain3Pressure As Label
+    Friend WithEvents checkbx_RecipeDrain3 As CheckBox
+    Friend WithEvents panel_RecipeFlush2 As Panel
+    Friend WithEvents dsp_RecipeFlush2PumpMode As Label
+    Friend WithEvents txtbx_RecipeFlush2RPM As TextBox
+    Friend WithEvents dsp_RecipeFlush2RPM As Label
+    Friend WithEvents checkbx_RecipeFlush2 As CheckBox
+    Friend WithEvents txtbx_RecipeFlush2Time As TextBox
+    Friend WithEvents dsp_RecipeFlush2Time As Label
+    Friend WithEvents txtbx_RecipeFlush2Stabilize As TextBox
+    Friend WithEvents dsp_RecipeFlush2Stabilize As Label
+    Friend WithEvents txtbx_RecipeFlush2FlowTol As TextBox
+    Friend WithEvents dsp_RecipeFlush2FlowTol As Label
+    Friend WithEvents txtbx_RecipeFlush2Flow As TextBox
+    Friend WithEvents dsp_RecipeFlush2Flow As Label
+    Friend WithEvents panel_RecipeDrain2 As Panel
+    Friend WithEvents txtbx_RecipeDrain2Time As TextBox
+    Friend WithEvents dsp_RecipeDrain2Time As Label
+    Friend WithEvents txtbx_RecipeDrain2Pressure As TextBox
+    Friend WithEvents dsp_RecipeDrain2Pressure As Label
+    Friend WithEvents checkbx_RecipeDrain2 As CheckBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents Panel15 As Panel
+    Friend WithEvents txtbx_RecipeTotalCycleTime As TextBox
+    Friend WithEvents Label39 As Label
+    Friend WithEvents btn_MCN2Purge4 As Button
+    Friend WithEvents Label40 As Label
 End Class

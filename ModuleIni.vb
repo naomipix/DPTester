@@ -120,6 +120,9 @@ Module IniFileInitialize
             PublicVariables.ConfirmationIdLenHigh = IniFileHandler.ReadIniValue(IniFilePath, Section3, "ConfirmationIdLenHigh", "5")
             PublicVariables.QuantityLenLow = IniFileHandler.ReadIniValue(IniFilePath, Section3, "QuantityLenLow", "1")
             PublicVariables.QuantityLenHigh = IniFileHandler.ReadIniValue(IniFilePath, Section3, "QuantityLenHigh", "1")
+            If PublicVariables.QuantityLenHigh > 3 Then
+                PublicVariables.QuantityLenHigh = 3
+            End If
             PublicVariables.SerialNumLen = IniFileHandler.ReadIniValue(IniFilePath, Section3, "SerialNumLen", "3")
 
             Dim Section4 As String = "Chart"
@@ -210,6 +213,8 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_i_drain2time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain2_Time", "0")
             PublicVariables.Limit_Min_d_drain3pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain3_Pressure", "0")
             PublicVariables.Limit_Min_i_drain3time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain3_Time", "0")
+            PublicVariables.Limit_Min_d_drain4pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain4_Pressure", "0")
+            PublicVariables.Limit_Min_i_drain4time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinDrain4_Time", "0")
 
             ' Hard Limit (BP/N2 Reg)
             If True Then
@@ -292,6 +297,8 @@ Module IniFileInitialize
             PublicVariables.Limit_Max_i_drain2time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain2_Time", "600")
             PublicVariables.Limit_Max_d_drain3pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain3_Pressure", "500")
             PublicVariables.Limit_Max_i_drain3time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain3_Time", "600")
+            PublicVariables.Limit_Max_d_drain4pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain4_Pressure", "500")
+            PublicVariables.Limit_Max_i_drain4time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain4_Time", "600")
 
 
 

@@ -12,7 +12,7 @@ Imports LiveChartsCore.SkiaSharpView.WinForms
 Module PublicVariables
     ' Version
     'Public AppVersion As String = "Ver. " & "1.0.0.1"
-    Public AppVersion As String = "Ver. " & "1.0.8"
+    Public AppVersion As String = "Ver. " & "1.0.10"
 
     ' License Status
     Public LicenseType As String = ""
@@ -191,6 +191,9 @@ Module PublicVariables
     Public Limit_Min_d_drain3pressure As Decimal
     Public Limit_Min_i_drain3time As Integer
 
+    Public Limit_Min_d_drain4pressure As Decimal
+    Public Limit_Min_i_drain4time As Integer
+
 
     Public Limit_Max_d_vertol As Decimal
 
@@ -249,6 +252,9 @@ Module PublicVariables
 
     Public Limit_Max_d_drain3pressure As Decimal
     Public Limit_Max_i_drain3time As Integer
+
+    Public Limit_Max_d_drain4pressure As Decimal
+    Public Limit_Max_i_drain4time As Integer
 
 
 
@@ -353,6 +359,7 @@ Module SQL
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
         Dim ReturnValue As Integer = 0
         PCStatus(0)(2) = False
+        'ResetPCAlarm = True
         Try
             Using (connection)
                 Dim command As New SqlCommand()
@@ -398,6 +405,7 @@ Module SQL
             End Using
         Catch ex As Exception
             PCStatus(0)(2) = True
+            'SetPCAlarm = True
             MsgBox(ex.Message & ex.StackTrace)
         End Try
 
@@ -424,6 +432,7 @@ Module SQL
         Dim connection As SqlConnection = DatabaseModule.GetConnection()
         Dim ReturnValue As Integer = 0
         PCStatus(0)(2) = False
+        'ResetPCAlarm = True
         Try
             'conn.ConnectionString = connStr
             Using (connection)
@@ -463,6 +472,7 @@ Module SQL
             End Using
         Catch ex As Exception
             PCStatus(0)(2) = True
+            'SetPCAlarm = True
             MsgBox(ex.Message & ex.StackTrace)
         End Try
 

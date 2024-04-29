@@ -298,7 +298,7 @@ Public Class FormTesting
 
 
 
-    Dim TestVal As Integer = 0
+    Dim TestVal As String = 0
 
     Public PLCThreadingTmr1 As Threading.Timer
 
@@ -307,7 +307,7 @@ Public Class FormTesting
         Timer3.Enabled = True
 
         ' Enable Threading Timer
-        PLCThreadingTmr1.Change(500, 500)
+        PLCThreadingTmr1.Change(100, 100)
 
         ' Disable Threading Timer
         'PLCThreadingTmr1.Change(Threading.Timeout.Infinite, Threading.Timeout.Infinite)
@@ -320,7 +320,7 @@ Public Class FormTesting
     End Sub
 
     Private Sub PLCThreadingTimer1_Ticks(ByVal state As Object)
-        If TestVal = 1 Then
+        If Label2.Text = "1" Then
             TestVal = 0
         Else
             TestVal = 1
@@ -329,5 +329,9 @@ Public Class FormTesting
 
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
         Label2.Text = TestVal
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        MsgBox($"CommLost='{CommLost}'{vbCrLf}CommLosttimer='{CommLosttimer.Enabled}'")
     End Sub
 End Class
