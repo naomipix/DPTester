@@ -1404,6 +1404,30 @@ Public Class FormResultGraph
                 chkbx.Checked = False
             Next
         End If
+
+        ' Limit Max 3 CheckBox Checked
+        If True Then
+            Dim chkbxArr() As CheckBox = {checkbx_GraphDP, checkbx_GraphInletPressure, checkbx_GraphOutletPressure, checkbx_GraphBP, checkbx_GraphFlowrate, checkbx_GraphTemperature, checkbx_GraphRPM}
+
+            Dim chkbxCount As Integer = 0
+            For Each chkbx In chkbxArr
+                If chkbx.Checked Then
+                    chkbxCount += 1
+                End If
+            Next
+
+            If chkbxCount >= 3 Then
+                For Each chkbx In chkbxArr
+                    If Not chkbx.Checked Then
+                        chkbx.Enabled = False
+                    End If
+                Next
+            Else
+                For Each chkbx In chkbxArr
+                    chkbx.Enabled = True
+                Next
+            End If
+        End If
     End Sub
 
 
@@ -1545,9 +1569,11 @@ Public Class FormResultGraph
         If Oncontinue = True Then
             If dtproductiondetail.Rows.Count > 0 Then
                 checkbx_GraphDP.Checked = True
-                checkbx_GraphInletPressure.Checked = True
-                checkbx_GraphOutletPressure.Checked = True
-                checkbx_GraphBP.Checked = True
+                'checkbx_GraphInletPressure.Checked = True
+                'checkbx_GraphOutletPressure.Checked = True
+                'checkbx_GraphBP.Checked = True
+                checkbx_GraphFlowrate.Checked = True
+                checkbx_GraphRPM.Checked = True
 
                 For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
                     If Not dtproductiondetail.Rows(0).IsNull(i) Then
@@ -1583,9 +1609,11 @@ Public Class FormResultGraph
                     ResultChart.DataSource = dt_Graphsummary
                 Else
                     checkbx_GraphDP.Checked = False
-                    checkbx_GraphInletPressure.Checked = False
-                    checkbx_GraphOutletPressure.Checked = False
-                    checkbx_GraphBP.Checked = False
+                    'checkbx_GraphInletPressure.Checked = False
+                    'checkbx_GraphOutletPressure.Checked = False
+                    'checkbx_GraphBP.Checked = False
+                    checkbx_GraphFlowrate.Checked = False
+                    checkbx_GraphRPM.Checked = False
                     ResultMessage(6)
                     Oncontinue = False
                 End If

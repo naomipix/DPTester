@@ -596,6 +596,30 @@ Public Class FormCalibration
 
     Private Sub checkbx_Graph_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_GraphDP.CheckedChanged, checkbx_GraphInletPressure.CheckedChanged, checkbx_GraphOutletPressure.CheckedChanged, checkbx_GraphBP.CheckedChanged, checkbx_GraphFlowrate.CheckedChanged, checkbx_GraphTemperature.CheckedChanged, checkbx_GraphRPM.CheckedChanged
         SetVisibleLineSeries()
+
+        ' Limit Max 3 CheckBox Checked
+        If True Then
+            Dim chkbxArr() As CheckBox = {checkbx_GraphDP, checkbx_GraphInletPressure, checkbx_GraphOutletPressure, checkbx_GraphBP, checkbx_GraphFlowrate, checkbx_GraphTemperature, checkbx_GraphRPM}
+
+            Dim chkbxCount As Integer = 0
+            For Each chkbx In chkbxArr
+                If chkbx.Checked Then
+                    chkbxCount += 1
+                End If
+            Next
+
+            If chkbxCount >= 3 Then
+                For Each chkbx In chkbxArr
+                    If Not chkbx.Checked Then
+                        chkbx.Enabled = False
+                    End If
+                Next
+            Else
+                For Each chkbx In chkbxArr
+                    chkbx.Enabled = True
+                Next
+            End If
+        End If
     End Sub
 
     Public Sub SetVisibleLineSeries()
