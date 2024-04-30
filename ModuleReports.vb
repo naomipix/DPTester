@@ -1,13 +1,11 @@
 ﻿Imports System.IO
 Imports DocumentFormat.OpenXml.Packaging
-Imports System.Reflection.Emit
 Imports DocumentFormat.OpenXml.Spreadsheet
 Imports System.Text.RegularExpressions
 Imports DocumentFormat.OpenXml
 
 Module ModuleReports
     Public Function GenerateLotReport(dt As DataTable) As String
-
         Try
             Dim TemplatePath As String = "C:\DPTester\Template\EndLotReportTemplate.xlsx"
 
@@ -16,7 +14,6 @@ Module ModuleReports
             Dim OutputDate As DateTime = DateTime.Now
             Dim Templaterowcountmax As Integer = 36
             Dim Reportpages = System.Math.Ceiling(dt.Rows.Count / Templaterowcountmax)
-
 
             ' Generate Path
             If Not Directory.Exists(OutputFolderTemp) Then
@@ -56,7 +53,6 @@ Module ModuleReports
                         ' Access the worksheet data.
                         Dim sheetData As SheetData = worksheetPart.Worksheet.Elements(Of SheetData)().FirstOrDefault()
 
-
                         ' Populate header data
                         If True Then
                             ' Find or create the cell C4. (Work Order)
@@ -95,8 +91,8 @@ Module ModuleReports
                                 .DataType = CellValues.String
                                 .CellValue = New CellValue(FormMain.lbl_BlankDP.Text)
                             End With
-
                         End If
+
                         For j As Integer = i * Templaterowcountmax To ((i + 1) * Templaterowcountmax) - 1
                             Dim CurrentRow As Integer = j - (i * Templaterowcountmax)
 
@@ -137,7 +133,6 @@ Module ModuleReports
                                         Else
                                             .CellValue = New CellValue(CStr(dt(j)("temperature")))
                                         End If
-
                                     End With
                                     ' Find or create the cell F. (flowrate)
                                     Dim cellF As Cell = GetOrCreateCell(sheetData, "F" & onRow)
@@ -148,7 +143,6 @@ Module ModuleReports
                                         Else
                                             .CellValue = New CellValue(CStr(dt(j)("flowrate")))
                                         End If
-
                                     End With
                                     ' Find or create the cell G. (Inlet Pressure)
                                     Dim cellG As Cell = GetOrCreateCell(sheetData, "G" & onRow)
@@ -159,7 +153,6 @@ Module ModuleReports
                                         Else
                                             .CellValue = New CellValue(CStr(dt(j)("inlet_pressure")))
                                         End If
-
                                     End With
                                     ' Find or create the cell H. (Outlet Pressure)
                                     Dim cellH As Cell = GetOrCreateCell(sheetData, "H" & onRow)
@@ -170,7 +163,6 @@ Module ModuleReports
                                         Else
                                             .CellValue = New CellValue(CStr(dt(j)("outlet_pressure")))
                                         End If
-
                                     End With
                                     ' Find or create the cell I. (Viscosity)
                                     Dim cellI As Cell = GetOrCreateCell(sheetData, "I" & onRow)
@@ -181,7 +173,6 @@ Module ModuleReports
                                         Else
                                             .CellValue = New CellValue(CStr(dt(j)("viscosity")))
                                         End If
-
                                     End With
                                     ' Find or create the cell J. (Diff Pressure)
                                     Dim cellJ As Cell = GetOrCreateCell(sheetData, "J" & onRow)
@@ -192,7 +183,6 @@ Module ModuleReports
                                         Else
                                             .CellValue = New CellValue(CStr(dt(j)("diff_pressure")))
                                         End If
-
                                     End With
                                     ' Find or create the cell K. (Cycle Time)
                                     Dim cellK As Cell = GetOrCreateCell(sheetData, "K" & onRow)
@@ -203,7 +193,6 @@ Module ModuleReports
                                         Else
                                             .CellValue = New CellValue(CStr(dt(j)("cycle_time")))
                                         End If
-
                                     End With
                                     ' Find or create the cell L. (Result)
                                     Dim cellL As Cell = GetOrCreateCell(sheetData, "L" & onRow)
@@ -214,11 +203,7 @@ Module ModuleReports
                                         Else
                                             .CellValue = New CellValue(CStr(dt(j)("result")))
                                         End If
-
                                     End With
-
-
-
                                 End If
                             Else
                                 Exit For
@@ -227,19 +212,14 @@ Module ModuleReports
 
                         ' Save the changes to the output document.
                         outputDocument.Save()
-
-
                     End Using
+
                     ' Output As PDF
                     If True Then
-
-
                         Dim workbook As Spire.Xls.Workbook = New Spire.Xls.Workbook 'Workbook = New Workbook
                         workbook.LoadFromFile(OutputPath, Spire.Xls.ExcelVersion.Version2010)
                         workbook.SaveToFile($"{Path.GetDirectoryName(OutputPath)}\{Path.GetFileNameWithoutExtension(OutputPath)}.pdf", Spire.Xls.FileFormat.PDF)
-
                     End If
-
                 Next
             Else
                 MsgBox($"Report Template Not Found, Kindly place Report template in {TemplateFolder}")
@@ -247,11 +227,9 @@ Module ModuleReports
             End If
 
             Return "True"
-
         Catch ex As Exception
             MsgBox($"End Lot Report Generation Failed")
         End Try
-
     End Function
 
     Private Function GetOrCreateCell(sheetData As SheetData, cellReference As String) As Cell
@@ -293,7 +271,6 @@ Module ModuleReports
         Return cell
     End Function
 
-
     Private Function GetColumnIndexFromCellReference(cellReference As String) As Integer
         Dim match As Match = Regex.Match(cellReference, "([A-Za-z]+)(\d+)")
         If match.Success Then
@@ -319,7 +296,6 @@ Module ModuleReports
         Return insertIndex
     End Function
 
-
     Private Sub MergeCells(worksheetPart As WorksheetPart, cellRange As String)
         Dim mergeCells As MergeCells = worksheetPart.Worksheet.Elements(Of MergeCells).FirstOrDefault()
 
@@ -334,7 +310,6 @@ Module ModuleReports
 
         mergeCells.Append(New MergeCell() With {.Reference = New StringValue(cellRange)})
     End Sub
-
 
     Private Sub SetPrintArea(workbookPart As WorkbookPart, sheetName As String, cellRange As String)
         Dim definedNames As DefinedNames = workbookPart.Workbook.Descendants(Of DefinedNames)().FirstOrDefault()
@@ -355,7 +330,6 @@ Module ModuleReports
         definedName.Text = sheetName & "!" & cellRange
     End Sub
 
-
     Private Sub SetCustomRowHeight(worksheetPart As WorksheetPart, rowIndex As UInteger, heightInPoints As Double)
         Dim sheetData As SheetData = worksheetPart.Worksheet.Elements(Of SheetData)().FirstOrDefault()
 
@@ -372,5 +346,4 @@ Module ModuleReports
         row.CustomHeight = True
         row.Height = heightInPoints
     End Sub
-
 End Module

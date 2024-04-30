@@ -74,7 +74,6 @@
             ' Handle exceptions here
         End Try
     End Sub
-
 End Module
 
 Module IniFileDefaults
@@ -249,7 +248,6 @@ Module IniFileInitialize
                 Next
             End If
 
-
             PublicVariables.Limit_Max_d_vertol = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxVerificationTolerance", "10")
 
             PublicVariables.Limit_Max_i_prepfilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_FillTime", "600")
@@ -299,9 +297,6 @@ Module IniFileInitialize
             PublicVariables.Limit_Max_i_drain3time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain3_Time", "600")
             PublicVariables.Limit_Max_d_drain4pressure = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain4_Pressure", "500")
             PublicVariables.Limit_Max_i_drain4time = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxDrain4_Time", "600")
-
-
-
 
         Catch ex As Exception
             MsgBox($"Incorrect Parameters Detected.{vbCrLf}Application Will Now Close.", MsgBoxStyle.Critical Or MsgBoxStyle.OkOnly, $"Configuration Error - {IniFilePath}")

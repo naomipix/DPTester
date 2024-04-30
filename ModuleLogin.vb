@@ -147,8 +147,6 @@ Module LoginModule
                     ' Convert To DataTable
                     Dim dtUserAccount As DataTable = dvUserAccount.ToTable
 
-
-
                     If dtUserAccount.Rows.Count > 0 Then
                         If dtUserAccount.Rows.Count = 1 Then
                             ' User Found
@@ -168,8 +166,6 @@ Module LoginModule
                                     }
                                     SQL.InsertRecord("UserLogin", parameters)
                                 End If
-
-
 
                                 ReturnValue = "LoginSuccess"
                             Else
@@ -549,7 +545,6 @@ Module PermissionModule
         Else
             FormSetting.tabpg_BuyOff.Enabled = False
         End If
-
     End Sub
 End Module
 

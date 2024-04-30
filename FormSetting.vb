@@ -54,9 +54,6 @@ Public Class FormSetting
         dtbuyoffmessage.Columns.Add("trigger_time")
         dtbuyoffmessage.Columns.Add("event_log")
 
-
-
-
         ' Hide dgv_LoginTable
         DataGridView1.Visible = False
 
@@ -503,10 +500,8 @@ Public Class FormSetting
                     End If
 
                 Next
+
                 MsgBox("Changes Updated Sucessfully.Kindly restart the application to make changes effective. ", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
-
-
-
             Else
                 MsgBox($"Invalid Path ""{directoryInvalid}""", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             End If
@@ -579,7 +574,6 @@ Public Class FormSetting
 #End Region
 
 #Region "Tool Counter"
-
     Private Sub btn_ResetValves_Click(sender As Object, e As EventArgs) Handles _
         btn_ResetValve1.Click, btn_ResetValve2.Click, btn_ResetValve3.Click, btn_ResetValve4.Click, btn_ResetValve5.Click, btn_ResetValve6.Click,
         btn_ResetValve7.Click, btn_ResetValve8.Click, btn_ResetValve9.Click, btn_ResetValve10.Click, btn_ResetValve11.Click, btn_ResetValve12.Click,
@@ -618,17 +612,10 @@ Public Class FormSetting
             End If
         Next
     End Sub
-
-
-
-
 #End Region
 
 #Region "Buyoff Run"
-    'Private WithEvents bindingSource As New BindingSource()
-
     Private Sub LoadBuyoff()
-        'dgv_MessageLog.DataSource = bindingSource
         LoadMessageLog()
     End Sub
 
@@ -643,11 +630,8 @@ Public Class FormSetting
         ' Special Filter
         Dim FilterStr As String = ""
 
-
-
         ' Bind To DataGridView DataSource
         dgv_MessageLog.DataSource = dtbuyoffmessage
-
 
         With dgv_MessageLog
             ' Set DataGridView Properties
@@ -679,25 +663,18 @@ Public Class FormSetting
         FormMain.dgvClearSelection(dgv_MessageLog)
     End Sub
 
-
-
     Private Sub cmbx_RunSelection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RunSelection.SelectedIndexChanged
         If cmbx_RunSelection.SelectedItem = "DRY RUN" Then
             RetainedMemory.Update(4, "DryRunEnabled", "1")
-
         Else
             RetainedMemory.Update(4, "DryRunEnabled", "0")
-
         End If
 
         If cmbx_RunSelection.SelectedItem = "BUY OFF RUN" Then
-
             RetainedMemory.Update(5, "BuyOffEnabled", "1")
         Else
-
             RetainedMemory.Update(5, "BuyOffEnabled", "0")
         End If
-
     End Sub
 
     Private Sub btn_StartStop_Click(sender As Object, e As EventArgs) Handles btn_Start.Click, btn_Stop.Click
@@ -710,20 +687,18 @@ Public Class FormSetting
         ' Button Start
         If btn Is btn_Start Then
             ' Check State
-
             If (cmbx_RunSelection.SelectedItem = "DRY RUN" Or cmbx_RunSelection.SelectedItem = "BUY OFF RUN") Then
-                    ' Set Start Time
-                    lbl_StartTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+                ' Set Start Time
+                lbl_StartTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
-                    ' Format Label [lbl_Duration.Text]
-                    lbl_Duration.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", 0, 0, 0)
+                ' Format Label [lbl_Duration.Text]
+                lbl_Duration.Text = String.Format("{0:D2}:{1:D2}:{2:D2}", 0, 0, 0)
 
-                    ' Clear End Time
-                    lbl_EndTime.Text = "-N/A-"
-
-
+                ' Clear End Time
+                lbl_EndTime.Text = "-N/A-"
 
                 cmbx_RunSelection.Enabled = False
+
                 ' Start Timer
                 timer_Buyoff.Start()
 
@@ -732,13 +707,11 @@ Public Class FormSetting
                     EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Dry-Run Started")
                 Else
                     EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Settings] Dry-Run/Buy-Off Run - Buy-Off Run Started")
-                    End If
                 End If
-            Else
+            End If
+        Else
             cmbx_RunSelection.SelectedItem = "NO SELECTION"
-
         End If
-
 
         ' Button Stop
         If btn Is btn_Stop Then
@@ -746,8 +719,6 @@ Public Class FormSetting
             If timer_Buyoff.Enabled = True Then
                 ' Set End Time
                 lbl_EndTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-
-
 
                 cmbx_RunSelection.Enabled = True
 
@@ -886,8 +857,6 @@ Public Class FormSetting
                 Next
             End If
 
-
-
             If chklstbxArr(i) Is chklstbx_Settings Then
                 For item As Integer = 0 To chklstbxArr(i).Items.Count - 1
                     If chklstbxArr(i).Items(item) = "Main Settings" Then
@@ -901,8 +870,6 @@ Public Class FormSetting
                     End If
                 Next
             End If
-
-
         Next
     End Sub
 
@@ -1290,7 +1257,6 @@ Public Class FormSetting
                 Next
             Next
 
-
             For Each row As DataRow In dt.Rows
                 If row.Item("permission") = "Main" Then
                     For i As Integer = 0 To chklstbx_MainMenu.Items.Count - 1
@@ -1416,14 +1382,7 @@ Public Class FormSetting
             Next
         End If
     End Sub
-
-
-
-
-
 #End Region
-
-
 
     Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
         FormPixel.Show()
@@ -1435,6 +1394,4 @@ Public Class FormSetting
         lbl_Duration.Text = "-N/A-"
         dtbuyoffmessage.Clear()
     End Sub
-
-
 End Class

@@ -186,15 +186,11 @@ Module ModuleOmron
         Resultendtimer.Interval = 100
 
         For i As Integer = 0 To 2
-
             PCStatus(i) = {False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False}
-
         Next
 
         For i As Integer = 0 To 2
-
             PLCstatus(i) = {False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False}
-
         Next
 
         For i As Integer = 0 To 1
@@ -210,6 +206,7 @@ Module ModuleOmron
         Dim modhex As String
         Dim boolstring As New StringBuilder
         Dim hextoint(7) As Integer
+
         'On reading the PLC Memory it will give the string of Hex Character
         hexchar = (PLC.ReadMemory(Mem, Startoffset, 2))
 
@@ -221,7 +218,6 @@ Module ModuleOmron
         'Convert the hex char into Decimal equivalent
         For i As Integer = 0 To modhex.Length - 1
             hextoint(i) = Convert.ToInt32(modhex.Substring(i, 1), 16)
-
         Next
 
         'Convert the Decimal equivalent into Boolean String
@@ -231,9 +227,6 @@ Module ModuleOmron
 
         Return (Math.Round(DecimalBoolStringtoDecimal(boolstring.ToString), 2)).ToString
     End Function
-
-
-
 
     Public Function DecimalBoolStringtoDecimal(str As String) As Decimal
         ' This Function Converts Decimal Boolstring into Decimal value
@@ -309,17 +302,18 @@ Module ModuleOmron
                 Absreal = Absreal / 2
                 exponent = exponent + 1
             End While
-
         Else
             While Absreal < 1
                 Absreal = Absreal * 2
                 exponent = exponent - 1
             End While
         End If
+
         ' To Convert Signed exponent into unsigned bin
         If exponent >= -127 And exponent <= 127 Then
             exponent = 127 + exponent
         End If
+
         'Add binary of exponent to the binary text
         Binarypart.Append(DecToBin(exponent, 8))
 
@@ -342,6 +336,7 @@ Module ModuleOmron
                 j = j + 1
             End While
         End If
+
         'If the Mantessa part length is less than 23, add zero to the right
         If (fractionpart.ToString).Length <= 23 Then
             fractionfinal = fractionpart.ToString.PadRight(23, "0"c)
@@ -353,12 +348,14 @@ Module ModuleOmron
         If Binarypart.ToString.Length = 32 Then
             hexpart.Append(BinToHex(Binarypart.ToString))
         End If
+
         'Convert binary to hex and then to Decimal
         val(0) = HextoDec(hexpart.ToString.Substring(hexpart.ToString.Length - 4, 4))
         val(1) = HextoDec(hexpart.ToString.Substring(0, 4))
 
         PLC.WriteMemoryWord(PoohFinsETN.MemoryTypes.DM, Offset, val(0), PoohFinsETN.DataTypes.UnSignBIN)
         PLC.WriteMemoryWord(PoohFinsETN.MemoryTypes.DM, Offset + 1, val(1), PoohFinsETN.DataTypes.UnSignBIN)
+
         Return True
     End Function
 
@@ -376,6 +373,7 @@ Module ModuleOmron
             result(i) = ((Value(0) And 2 ^ i) / 2 ^ i)
             result(i + 8) = ((Value(1) And 2 ^ i) / 2 ^ i)
         Next
+
         Return result
     End Function
 
@@ -425,7 +423,6 @@ Module ModuleOmron
                 exponent = exponent + 1
                 Absreal = Absreal / 2
             End While
-
         Else
             If Absreal < 2 And Absreal >= 1 Then
                 Absreal = Absreal
@@ -446,8 +443,8 @@ Module ModuleOmron
         ' To Convert Signed exponent into unsigned bin
         If exponent >= -127 And exponent <= 127 And Absreal <> 0 Then
             exponent = 127 + exponent
-
         End If
+
         'Add binary of exponent to the binary text
         Binarypart.Append(DecToBin(exponent, 8))
 
@@ -469,8 +466,8 @@ Module ModuleOmron
                 End If
                 j = j + 1
             End While
-
         End If
+
         'If the Mantessa part length is less than 23, add zero to the right
         If (fractionpart.ToString).Length <= 23 Then
             fractionfinal = fractionpart.ToString.PadRight(23, "0"c)
@@ -482,10 +479,10 @@ Module ModuleOmron
         If Binarypart.ToString.Length = 32 Then
             hexpart.Append(BinToHex(Binarypart.ToString))
         End If
+
         If hexpart.ToString.Length = 8 Then
             hexpart.Insert(0, hexpart.ToString.Substring(4, 4))
             hexstr = hexpart.ToString.Remove(8, 4)
-
         Else
             hexpart.Insert(0, "0000")
             hexstr = hexpart.ToString
@@ -527,6 +524,7 @@ Module ModuleOmron
         For j As Integer = 0 To hexchar.Length - 1
             boolstring.Append(Convert.ToString(hextoint(j), 2).PadLeft(4, "0"c))
         Next
+
         Return (Math.Round(DecimalBoolStringtoDecimal(boolstring.ToString), 2))
     End Function
 
@@ -537,6 +535,7 @@ Module ModuleOmron
         For i As Integer = 0 To 1
             FINSOutput(offset + i) = BitConverter.ToUInt16(Val, (i * 2))
         Next
+
         Return True
     End Function
 #End Region
@@ -624,9 +623,6 @@ Module ModuleOmron
         End While
         Return text
     End Function
-
-
-
 #End Region
 
 #Region "IO Status Fetch"
@@ -853,7 +849,6 @@ Module ModuleOmron
             For i As Integer = 0 To 2
                 PCStatus(i) = Int2BoolArr(FINSOutput(i))
             Next
-
         Catch ex As Exception
             If CommLosttimer.Enabled = False Then
                 CommLostTime = DateTime.Now
@@ -1656,9 +1651,7 @@ Module ModuleOmron
     '    End Sub
 
     Private Sub PLCTimer_Ticks(sender As Object, e As EventArgs) Handles PLCtimer.Tick
-
 #Region "Auto Mode restrictions"
-
         If Not PublicVariables.LoggedInIsDeveloper Then
             If PLCstatus(0)(3) = True Then
                 ' Auto Mode
@@ -1673,7 +1666,6 @@ Module ModuleOmron
                 'Else
                 '    FormMain.btn_WrkOrdScnDtConfirm.Enabled = False
                 'End If
-
             Else
                 ' Manual Mode
                 If MainMenu_BtnRecipe = True Then
@@ -1696,11 +1688,9 @@ Module ModuleOmron
             FormMain.btn_RecipeManagement.Enabled = True
             FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
         End If
-
 #End Region
 
 #Region "Manual Control Page Enable"
-
         If PLCstatus(0)(2) = True Then
             FormMain.tabpg_ManualControlValve.Enabled = True
             FormMain.tabpg_ManualControlPump.Enabled = True
@@ -1714,34 +1704,27 @@ Module ModuleOmron
             FormMain.tabpg_ManualControlDrain.Enabled = False
             FormMain.tabpg_ManualControlMaintenance.Enabled = False
         End If
-
 #End Region
 
 #Region "PLC-PC Heartbeat handshake"
-
         'PLC -PC HeartBeat indication label backcolor control 
         If PLCstatus(0)(0) = True Then
             PCStatus(0)(0) = False
             FormMain.lbl_B0.BackColor = PublicVariables.StatusGreen
             FormMain.lbl_B1.BackColor = SystemColors.Window
-
         Else
             PCStatus(0)(0) = True
             FormMain.lbl_B0.BackColor = SystemColors.Window
             FormMain.lbl_B1.BackColor = PublicVariables.StatusGreen
-
         End If
-
 #End Region
 
 #Region "HandHeld Scanner"
-
         If ComPort1Connected = False Then
             PCStatus(0)(6) = True
         Else
             PCStatus(0)(6) = False
         End If
-
 #End Region
 
         If CommLost = False Then
@@ -1755,9 +1738,6 @@ Module ModuleOmron
                 FetchAlarm(200)
 
                 'Spiltting the Input into Boolean Array for Processing
-
-
-
                 For i As Integer = 0 To 2
                     PLCstatus(i) = Int2BoolArr(FINSinput(i))
                 Next
@@ -1848,13 +1828,7 @@ Module ModuleOmron
                 FormMain.lbl_Flowmtr.Text = AIn(12).ToString
                 FormMain.lbl_Temp.Text = AIn(13).ToString
                 FormMain.lbl_PumpSpeed.Text = AIn(2).ToString
-
-
-
-
 #End Region
-
-
 
 #Region "Manual Control-Valve Screen Button state update"
                 'Manual valve Control Button Color change on Output on
@@ -1874,13 +1848,10 @@ Module ModuleOmron
                         SetButtonState(FormMain.btn_ValveCtrlArr(i + 16), True, "Open")
                     End If
                 Next
-
-
-
 #End Region
+
 #Region "Manual Control- Pump Control page Button"
                 'Manual Pump Control Button Color change on Output on
-
                 If DOut(2)(3) = False Then
                     SetButtonState(FormMain.btn_PumpReset, False, "OFF")
                 Else
@@ -1897,13 +1868,9 @@ Module ModuleOmron
                 Else
                     SetButtonState(FormMain.btn_PumpEnable, True, "ON")
                 End If
-
-
-
-
 #End Region
-#Region "Manual Control- Tank Control page Button"
 
+#Region "Manual Control- Tank Control page Button"
                 'Manual Tank Valve Label Color Change based on output
                 If DOut(1)(3) = True Then
                     FormMain.lbl_TankValve4.BackColor = PublicVariables.StatusGreen
@@ -1937,12 +1904,9 @@ Module ModuleOmron
                 Else
                     SetButtonState(FormMain.btn_TankDrain, True, "ON")
                 End If
-
-
-
 #End Region
-#Region "Manual Control - Manual Drain page Button"
 
+#Region "Manual Control - Manual Drain page Button"
                 ' Current Value update in the Pressure regulator control label  field
                 FormMain.lbl_BackPressCurrent.Text = Int2Float(FINSOutput, 124).ToString
                 FormMain.lbl_N2PurgeCurrent.Text = Int2Float(FINSOutput, 126).ToString
@@ -1958,7 +1922,6 @@ Module ModuleOmron
                 Else
                     SetButtonState(FormMain.btn_N2PressureOn, True, "ON")
                 End If
-
 
                 If PLCstatus(2)(0) = False And PLCstatus(2)(1) = False And PLCstatus(2)(2) = False And PLCstatus(2)(14) = False Then
                     FormMain.btn_MCN2Purge1.Enabled = True
@@ -1990,13 +1953,7 @@ Module ModuleOmron
                     FormMain.btn_MCN2Purge3.Enabled = False
                     SetButtonState(FormMain.btn_MCN2Purge4, True, "ON")
                 End If
-
-
-
-
-
 #End Region
-
 
 #Region "Manual Control - Maintenance page Button"
                 'Maintenance Label Color Change based on PLC status
@@ -2053,8 +2010,8 @@ Module ModuleOmron
                 Else
                     SetButtonState(FormMain.btn_DrainConnect, True, "ON")
                 End If
-
 #End Region
+
                 '#Region "Mimic Panel Circuit Model 1"
 
                 '            FormCircuitModel2.txtbx_BackPressActual.Text = AIn(1).ToString
@@ -2065,10 +2022,9 @@ Module ModuleOmron
                 '            FormCircuitModel2.lbl_Temp.Text = AIn(13).ToString
 
                 '#End Region
+
 #Region "Device status screen status update"
                 'Device status screen status update
-
-
                 If DIn(1)(11) = True Then
                     FormMain.lbl_FlwAlarm.BackColor = PublicVariables.StatusRed
                     FormMain.lbl_FlwAlarm.ForeColor = PublicVariables.StatusRedT
@@ -2134,12 +2090,9 @@ Module ModuleOmron
                     FormMain.lbl_JigSelect_ok.ForeColor = SystemColors.ControlText
                     FormMain.lbl_JigSelect_ok.Text = "OFF"
                 End If
-
-
-
 #End Region
-#Region "Recipe Selection Confirmation"
 
+#Region "Recipe Selection Confirmation"
                 'Recipe Selection
                 If FormMain.txtbx_TitleRecipeID.Text.Length > 3 Then
                     FINSOutput(20) = 1
@@ -2148,8 +2101,8 @@ Module ModuleOmron
                     FINSOutput(20) = 0
                     FINSOutput(21) = 0
                 End If
-
 #End Region
+
 #Region "Calibration and verification"
                 If PLCstatus(1)(2) = True Then
                     SetButtonState(FormCalibration.btn_Calibrate, True, "Calibrate")
@@ -2161,7 +2114,6 @@ Module ModuleOmron
 
                 Else
                     SetButtonState(FormCalibration.btn_Verify, False, "Verify")
-
                 End If
                 If FINSinput(21) = 0 And FormCalibration.dtCalibration.Rows.Count = 0 And FormCalibration.dtVerification.Rows.Count = 0 Then
                     ' FormCalibration.btn_Verify.Enabled = True
@@ -2176,8 +2128,6 @@ Module ModuleOmron
                 Else
                     FormCalibration.btn_Verify.Enabled = False
                 End If
-
-
 
                 If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(22) = 405 Or FINSinput(22) = 406 Or FINSinput(21) = 1700 Or FINSinput(21) = 1730 Then
                     CalrecordValue = True
@@ -2199,11 +2149,8 @@ Module ModuleOmron
                     End If
                 End If
 
-
-
                 If PLCstatus(1)(2) = False And PLCstatus(1)(3) = False Then
                     PCStatus(1)(7) = False
-
                 End If
 
                 'Auto Running is False, Reset PC Acknowledge of Calibration and Verification reset
@@ -2211,7 +2158,6 @@ Module ModuleOmron
                     PCStatus(1)(4) = False
                     PCStatus(1)(5) = False
                 End If
-
 
                 If FormCalibration.btn_Calibrate.Enabled = True Or FormCalibration.btn_Verify.Enabled = True Then
                     PCStatus(1)(8) = False
@@ -2222,8 +2168,8 @@ Module ModuleOmron
                 Else
                     FormCalibration.btn_Home.Enabled = True
                 End If
-
 #End Region
+
 #Region "Main Sequence"
                 If FINSinput(20) >= 10 And PLCstatus(1)(10) = True Then
                     PCStatus(1)(10) = False
@@ -2234,7 +2180,6 @@ Module ModuleOmron
                     FormMain.btn_OprKeyInDtConfirm.Enabled = True
                     FormMain.txtbx_SerialNumber.Enabled = True
                 End If
-
 
                 If PLCstatus(0)(1) = False Then
                     PCStatus(1)(11) = False
@@ -2254,9 +2199,8 @@ Module ModuleOmron
                 End If
                 FormMain.lbl_PassProdQty.Text = FINSinput(40).ToString
                 FormMain.lbl_FailProdQty.Text = FINSinput(42).ToString
-
-
 #End Region
+
 #Region "Tool Counter"
                 FormSetting.lblArray = {
                                                         FormSetting.lbl_Valve1, FormSetting.lbl_Valve2, FormSetting.lbl_Valve3, FormSetting.lbl_Valve4, FormSetting.lbl_Valve5, FormSetting.lbl_Valve6, FormSetting.lbl_Valve7, FormSetting.lbl_Valve8, FormSetting.lbl_Valve9, FormSetting.lbl_Valve10, FormSetting.lbl_Valve11,
@@ -2298,10 +2242,7 @@ Module ModuleOmron
             Resultcapturetimer.Enabled = False
             'LabelStatusupdate()
             'Alarmtimer.Enabled = True
-
         End If
-
-
     End Sub
 
     Private Sub PCTimer_Ticks(sender As Object, e As EventArgs) Handles PCtimer.Tick
@@ -2552,7 +2493,6 @@ Module ModuleOmron
                     FormResultSummary.lbl_OperationMode.ForeColor = SystemColors.Window
 
                     FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
-
                 End If
 
                 ' Machine in Auto Mode
@@ -2591,7 +2531,6 @@ Module ModuleOmron
                     FormResultSummary.lbl_OperationMode.ForeColor = SystemColors.Window
 
                     FormSetting.lbl_OperationMode.ForeColor = SystemColors.Window
-
                 End If
 
                 ' Machine Not Running
@@ -2737,8 +2676,6 @@ Module ModuleOmron
                 'End If
             End If
         End If
-
-
     End Sub
 
     Private Sub AlarmTimer_Ticks(sender As Object, e As EventArgs) Handles Alarmtimer.Tick
@@ -2854,7 +2791,6 @@ Module ModuleOmron
 
             ' Prevent Updating Too Quickly
             If DateTime.Now >= MsgAlarmShownTime.AddMilliseconds(Alarmtimer.Interval) Then
-
                 If statusIndex < 0 Then
                     For i As Integer = 0 To lblStatusArr.Count - 1
                         lblStatusArr(i).Text = currentStatus
@@ -2908,7 +2844,6 @@ Module ModuleOmron
         Dim bgcolor As Color
         Dim frcolor As Color
 
-
         Value = Currentalarm.ElementAt(startindex - Currentindex)
         If PLCstatus(0)(4) = True Then
             FormCalibration.tmr_Calibration.Enabled = False
@@ -2952,9 +2887,6 @@ Module ModuleOmron
         FormSetting.lbl_OperationMode.Text = Value.Value.ToString
         FormSetting.lbl_OperationMode.BackColor = bgcolor
         FormSetting.lbl_OperationMode.ForeColor = frcolor
-
-
-
 
         If Currentindex >= startindex Then
             Currentindex = 0

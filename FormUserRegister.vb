@@ -1,11 +1,4 @@
-﻿''To use SQL commands the System.Data and System.Data.sqlclient need to be imported into the project
-'Imports System.ComponentModel
-'Imports System.Data
-'Imports System.Data.SqlClient
-
-Imports System.ComponentModel
-Public Class FormUserRegister
-
+﻿Public Class FormUserRegister
     Private Sub FormUserRegister_Load(sender As Object, e As EventArgs) Handles Me.Load
         Initialize()
     End Sub
@@ -24,7 +17,6 @@ Public Class FormUserRegister
         txtbox_RegPassword.PasswordChar = "*"
         btn_RegPwdVisible.BackColor = Color.FromArgb(25, 130, 246)
 
-
         ' Load Category List
         GetUserCategory()
 
@@ -42,9 +34,6 @@ Public Class FormUserRegister
 
     Private Sub GetUserCategory()
         Dim comboSource As New Dictionary(Of String, String)()
-
-        ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
 
         ' Assign Defaults
         comboSource.Add("0", "-Not Selected-")
@@ -79,9 +68,6 @@ Public Class FormUserRegister
 
     Private Sub GetUserName(Init As Boolean)
         Dim comboSource As New Dictionary(Of String, String)()
-
-        ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
 
         ' Assign Defaults
         comboSource.Add("0", "-Not Selected-")
@@ -160,7 +146,6 @@ Public Class FormUserRegister
         End Select
     End Sub
 
-
     Private Sub btn_Delete_Click(sender As Object, e As EventArgs) Handles btn_Delete.Click
         Me.Select()
 
@@ -185,7 +170,6 @@ Public Class FormUserRegister
                 LoginMessage.RegistrationPrompt(11, 0, 0)
         End Select
     End Sub
-
 
     Private Sub btn_RegPwdVisible_Click(sender As Object, e As EventArgs) Handles btn_RegPwdVisible.Click
         'The Below code is to toggle the password character on event of clicking the visible icon
@@ -235,7 +219,4 @@ Public Class FormUserRegister
         txtbox_RegUserName.Text = cleanedText
         txtbox_RegUserName.SelectionStart = Math.Min(selectionStart, txtbox_RegUserName.TextLength - selectionOffset)
     End Sub
-
-
-
 End Class

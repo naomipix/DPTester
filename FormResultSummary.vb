@@ -1,7 +1,4 @@
-﻿Imports System.ComponentModel
-Imports System.Media
-
-Public Class FormResultSummary
+﻿Public Class FormResultSummary
     Public Resultsummaryexportpath As String = PublicVariables.Resultexportpath
 
 #Region "Form Loading"
@@ -59,9 +56,11 @@ Public Class FormResultSummary
         ' Get User Category Table
         Dim dtdefaultRecord As DataTable = SQL.ReadRecords($"SELECT DISTINCT serial_usage_id FROM ProductResult ORDER BY serial_usage_id DESC")
         Dim lastrecord As String = dtdefaultRecord.Rows(0)("serial_usage_id").ToString
-        Dim dtdefaultdetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
-                  LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id = Lotusage.id
-                  WHERE ProductionDetail.id ='{lastrecord}' ")
+        Dim dtdefaultdetail As DataTable = SQL.ReadRecords($"
+            SELECT * FROM ProductionDetail 
+            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id = Lotusage.id 
+            WHERE ProductionDetail.id ='{lastrecord}' 
+        ")
 
         If dtdefaultdetail.Rows.Count > 0 Then
             Dim lastrecordlot = dtdefaultdetail.Rows(0)("lot_id")
@@ -70,14 +69,8 @@ Public Class FormResultSummary
             LoadResult(lastrecordlot, Lastrecordserialnum, lastrecordserialattmept)
         End If
 
-
-
-
-
         GetLotid()
         btn_ResultExport.Enabled = True
-
-
     End Sub
 
     Private Sub FormResultSummary_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -89,20 +82,16 @@ Public Class FormResultSummary
     End Sub
 #End Region
 
-
 #Region "Combobox Data"
     Private Sub GetLotid()
         Dim LotcomboSource As New Dictionary(Of String, String)()
 
-        ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
-
         ' Assign Defaults
         LotcomboSource.Add("0", "-Not Selected-")
         Dim dvGetRecord As DataView = SQL.ReadRecords($"SELECT DISTINCT ProductResult.serial_usage_id,Lotusage.lot_id FROM ProductResult INNER JOIN ProductionDetail ON ProductionDetail.id = ProductResult.serial_usage_id INNER JOIN LotUsage ON Lotusage.id=ProductionDetail.lot_usage_id").DefaultView
+
         ' Sort Recipe Table
         dvGetRecord.Sort = "serial_usage_id " & "DESC"
-
 
         ' Get User Category Table
         Dim dtLotid As DataTable = dvGetRecord.ToTable(True, "lot_id")
@@ -250,8 +239,6 @@ Public Class FormResultSummary
 
 #End Region
 
-
-
 #Region " Result Message"
     Private Function ResultMessage(a As Integer) As MsgBoxResult
         Select Case a
@@ -276,12 +263,10 @@ Public Class FormResultSummary
             Case Else
                 Exit Select
         End Select
+
         Return 0
     End Function
 #End Region
-
-
-
 
 #Region "Form Closing"
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
@@ -289,18 +274,11 @@ Public Class FormResultSummary
     End Sub
 #End Region
 
-
 #Region "Result Search"
     Private Sub btn_ResultSearch_Click(sender As Object, e As EventArgs) Handles btn_ResultSearch.Click
         Dim Lotid As String = cmbx_ResultSearchLot.Text
         Dim serialnum As String = cmbx_ResultSearchSerial.Text
         Dim attempt As String = cmbx_ResultSearchAttempt.Text
-
-
-
-
-
-
 
         Dim Oncontinue As Boolean = True
         If Oncontinue = True Then
@@ -327,13 +305,8 @@ Public Class FormResultSummary
         If Oncontinue = True Then
             LoadResult(Lotid, serialnum, attempt)
         End If
-
-
-
     End Sub
 #End Region
-
-
 
 #Region "Result Export"
     Private Sub btn_ResultExport_Click(sender As Object, e As EventArgs) Handles btn_ResultExport.Click
@@ -366,7 +339,6 @@ Public Class FormResultSummary
         End If
     End Sub
 #End Region
-
 
 #Region "Text Formatting"
     Private Sub txtbx_ResultTest_TextChanged(sender As Object, e As EventArgs) Handles txtbx_ResultTest.TextChanged
@@ -570,7 +542,6 @@ Public Class FormResultSummary
         End If
 
         If Oncontinue = True Then
-
             If dtproductiondetail.Rows.Count > 0 Then
                 'For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
                 '    If Not dtproductiondetail.Rows(0).IsNull(i) Then
@@ -601,7 +572,6 @@ Public Class FormResultSummary
                 ResultMessage(6)
                 Oncontinue = False
             End If
-
         End If
 
         If Oncontinue = True Then
@@ -657,7 +627,6 @@ Public Class FormResultSummary
             .Columns("calculated_dp_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
             .Columns("back_pressure").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
             .Columns("pump_rpm").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
-
         End With
 
         If dtCalResult.Rows.Count > 0 Then
@@ -712,6 +681,7 @@ Public Class FormResultSummary
                 .Columns("pump_rpm").HeaderCell.Style.Font = New Font(dgv_Resultsummary.Font, FontStyle.Bold)
             End With
         End If
+
         If dtVerResult.Rows.Count > 0 Then
             With dgv_VerificationResult
                 .BackgroundColor = SystemColors.Window
@@ -766,7 +736,6 @@ Public Class FormResultSummary
         End If
 
         If Oncontinue = True Then
-
             txtbx_ResultTimestamp.Text = dtproductiondetail(0)("productiondetail_timestamp")
 
             'txtbx_ResultTemperature.Text = dtproductiondetail(0)("productiondetail_temperature")
@@ -798,7 +767,6 @@ Public Class FormResultSummary
             txtbx_ResultDrain2.Text = dtproductiondetail(0)("recipetable_drain2_circuit").ToUpper
             txtbx_ResultDrain3.Text = dtproductiondetail(0)("recipetable_drain3_circuit").ToUpper
 
-
             txtbx_ResultWorkOrder.Text = dtproductiondetail(0)("workorder_work_order")
             txtbx_ResultPartID.Text = dtproductiondetail(0)("workorder_part_id")
             txtbx_ResultConfirmation.Text = dtproductiondetail(0)("workorder_confirmation_id")
@@ -806,14 +774,9 @@ Public Class FormResultSummary
             txtbx_Resultattempt.Text = dtproductiondetail(0)("productiondetail_serial_attempt")
         End If
     End Sub
-
-
 #End Region
+
     Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
-
         FormPixel.Show()
-
     End Sub
-
-
 End Class

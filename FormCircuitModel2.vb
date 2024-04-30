@@ -1,14 +1,10 @@
 ﻿Public Class FormCircuitModel2
     Private Sub btn_MVCShowcircuit_Click(sender As Object, e As EventArgs) Handles btn_MVCShowcircuit.Click
         If btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
-
             SetButtonState(btn_MVCShowcircuit, True, "Hide Circuit Path")
-
-
         Else
             SetButtonState(btn_MVCShowcircuit, False, "Show Circuit Path")
             'Circuittimer.Enabled = False
-
         End If
     End Sub
 
@@ -44,37 +40,44 @@
     Public CircuitInitalised As Boolean
     Public Sub InitialiseCircuit()
         'Define Label Array
-        Lbl_ValvestatusArr = {lbl_Valve1, lbl_Valve2, lbl_Valve3, lbl_Valve4,
-                  lbl_Valve5, lbl_Valve6, lbl_Valve7, lbl_Valve8, lbl_Valve9,
-                  lbl_Valve10, lbl_Valve11, lbl_Valve12, lbl_Valve13, lbl_Valve14,
-                  lbl_Valve15, lbl_Valve16, lbl_Valve17, lbl_Valve18, lbl_Valve19
-              }
+        Lbl_ValvestatusArr = {
+            lbl_Valve1, lbl_Valve2, lbl_Valve3, lbl_Valve4,
+            lbl_Valve5, lbl_Valve6, lbl_Valve7, lbl_Valve8, lbl_Valve9,
+            lbl_Valve10, lbl_Valve11, lbl_Valve12, lbl_Valve13, lbl_Valve14,
+            lbl_Valve15, lbl_Valve16, lbl_Valve17, lbl_Valve18, lbl_Valve19
+        }
 
         'Define Valve path
-        Lbl_Valvepath(1) = {lbl_V1_P1, lbl_V1_P2, lbl_V1_P3, lbl_V1_P4, lbl_V1_P5,
-                lbl_V1_P6, lbl_V1_P7, lbl_V1_P8, lbl_V1_P9, lbl_V1_P10
-            }
+        Lbl_Valvepath(1) = {
+            lbl_V1_P1, lbl_V1_P2, lbl_V1_P3, lbl_V1_P4, lbl_V1_P5,
+            lbl_V1_P6, lbl_V1_P7, lbl_V1_P8, lbl_V1_P9, lbl_V1_P10
+        }
 
-        Lbl_Valvepath(2) = {lbl_V2_P1, lbl_V2_P2, lbl_V2_P3, lbl_V2_P4, lbl_V2_P5,
-                lbl_V2_P6, lbl_V2_P7, lbl_V2_P8, lbl_V2_P9, lbl_V2_P10
-            }
+        Lbl_Valvepath(2) = {
+            lbl_V2_P1, lbl_V2_P2, lbl_V2_P3, lbl_V2_P4, lbl_V2_P5,
+            lbl_V2_P6, lbl_V2_P7, lbl_V2_P8, lbl_V2_P9, lbl_V2_P10
+        }
 
-        Lbl_Valvepath(3) = {lbl_V3_P1, lbl_V3_P2, lbl_V3_P3, lbl_V3_P4, lbl_V3_P5,
-               lbl_V3_P6, lbl_V3_P7, lbl_V3_P8, lbl_V3_P9, lbl_V3_P10
-           }
+        Lbl_Valvepath(3) = {
+            lbl_V3_P1, lbl_V3_P2, lbl_V3_P3, lbl_V3_P4, lbl_V3_P5,
+            lbl_V3_P6, lbl_V3_P7, lbl_V3_P8, lbl_V3_P9, lbl_V3_P10
+        }
 
-        Lbl_Valvepath(4) = {lbl_V4_P1, lbl_V4_P2, lbl_V4_P3, lbl_V4_P4, lbl_V4_P5,
-                lbl_V4_P6, lbl_V4_P7, lbl_V4_P8, lbl_V4_P9, lbl_V4_P10,
-                lbl_V4_P11, lbl_V4_P12, lbl_V4_P13
-            }
+        Lbl_Valvepath(4) = {
+            lbl_V4_P1, lbl_V4_P2, lbl_V4_P3, lbl_V4_P4, lbl_V4_P5,
+            lbl_V4_P6, lbl_V4_P7, lbl_V4_P8, lbl_V4_P9, lbl_V4_P10,
+            lbl_V4_P11, lbl_V4_P12, lbl_V4_P13
+        }
 
-        Lbl_Valvepath(5) = {lbl_V5_P1, lbl_V5_P2, lbl_V5_P3, lbl_V5_P4, lbl_V5_P5,
-              lbl_V5_P6, lbl_V5_P7, lbl_V5_P8, lbl_V5_P9, lbl_V5_P10
-          }
+        Lbl_Valvepath(5) = {
+            lbl_V5_P1, lbl_V5_P2, lbl_V5_P3, lbl_V5_P4, lbl_V5_P5,
+            lbl_V5_P6, lbl_V5_P7, lbl_V5_P8, lbl_V5_P9, lbl_V5_P10
+        }
 
-        Lbl_Valvepath(6) = {lbl_V6_P1, lbl_V6_P2, lbl_V6_P3, lbl_V6_P4, lbl_V6_P5,
-              lbl_V6_P6, lbl_V6_P7, lbl_V6_P8, lbl_V6_P9
-          }
+        Lbl_Valvepath(6) = {
+            lbl_V6_P1, lbl_V6_P2, lbl_V6_P3, lbl_V6_P4, lbl_V6_P5,
+            lbl_V6_P6, lbl_V6_P7, lbl_V6_P8, lbl_V6_P9
+        }
 
         Lbl_Valvepath(7) = {lbl_V7_P1, lbl_V7_P2, lbl_V7_P3, lbl_V7_P4}
 
@@ -97,29 +100,32 @@
         Lbl_Valvepath(16) = {lbl_V16_P1, lbl_V16_P2, lbl_V16_P3, lbl_V16_P4}
 
         Lbl_Valvepath(17) = {lbl_V17_P1, lbl_V17_P2, lbl_V17_P3, lbl_V17_P4, lbl_V17_P5,
-              lbl_V17_P6, lbl_V17_P7, lbl_V17_P8
-          }
+            lbl_V17_P6, lbl_V17_P7, lbl_V17_P8
+        }
 
         Lbl_Valvepath(18) = {lbl_V18_P1, lbl_V18_P2, lbl_V18_P3}
 
-        Lbl_Valvepath(19) = {lbl_V19_P1, lbl_V19_P2, lbl_V19_P3, lbl_V19_P4, lbl_V19_P5
-         }
+        Lbl_Valvepath(19) = {lbl_V19_P1, lbl_V19_P2, lbl_V19_P3, lbl_V19_P4, lbl_V19_P5}
 
-        Lbl_Income(0) = {lbl_Income_P1, lbl_Income_P2, lbl_Income_P3, lbl_Income_P4, lbl_Income_P5,
-                lbl_Income_P6, lbl_Income_P7, lbl_Income_P8, lbl_Income_P9, lbl_Income_P10,
-                lbl_Income_P11}
+        Lbl_Income(0) = {
+            lbl_Income_P1, lbl_Income_P2, lbl_Income_P3, lbl_Income_P4, lbl_Income_P5,
+            lbl_Income_P6, lbl_Income_P7, lbl_Income_P8, lbl_Income_P9, lbl_Income_P10,
+            lbl_Income_P11
+        }
 
-        Lbl_Income(1) = {lbl_Income_P12, lbl_Income_P13, lbl_Income_P14, lbl_Income_P15,
-                lbl_Income_P16, lbl_Income_P17, lbl_Income_P18, lbl_Income_P19,
-                lbl_Income_P20, lbl_Income_P21, lbl_Income_P22, lbl_Income_P23,
-                lbl_Income_P24
-            }
+        Lbl_Income(1) = {
+            lbl_Income_P12, lbl_Income_P13, lbl_Income_P14, lbl_Income_P15,
+            lbl_Income_P16, lbl_Income_P17, lbl_Income_P18, lbl_Income_P19,
+            lbl_Income_P20, lbl_Income_P21, lbl_Income_P22, lbl_Income_P23,
+            lbl_Income_P24
+        }
 
         Lbl_Income(2) = {lbl_Income_P25, lbl_Income_P26, lbl_Income_P27}
 
         Lbl_Income(3) = {lbl_Income_P28, lbl_Income_P29}
 
-        Lbl_NPDrain = {lbl_NPDrain_P1, lbl_NPDrain_P2, lbl_NPDrain_P3, lbl_NPDrain_P4,
+        Lbl_NPDrain = {
+            lbl_NPDrain_P1, lbl_NPDrain_P2, lbl_NPDrain_P3, lbl_NPDrain_P4,
             lbl_NPDrain_P5, lbl_NPDrain_P6, lbl_NPDrain_P7, lbl_NPDrain_P8,
             lbl_NPDrain_P9, lbl_NPDrain_P10, lbl_NPDrain_P11, lbl_NPDrain_P12,
             lbl_NPDrain_P13, lbl_NPDrain_P14, lbl_NPDrain_P15, lbl_NPDrain_P16,
@@ -127,59 +133,67 @@
             lbl_NPDrain_P21, lbl_NPDrain_P22, lbl_NPDrain_P23, lbl_NPDrain_P24,
             lbl_NPDrain_P25, lbl_NPDrain_P26, lbl_NPDrain_P27, lbl_NPDrain_P28,
             lbl_NPDrain_P29, lbl_NPDrain_P30, lbl_NPDrain_P31, lbl_NPDrain_P32
-            }
+        }
 
-        Lbl_PDrain(0) = {lbl_PDrain_P1, lbl_PDrain_P2, lbl_PDrain_P3, lbl_PDrain_P4,
+        Lbl_PDrain(0) = {
+            lbl_PDrain_P1, lbl_PDrain_P2, lbl_PDrain_P3, lbl_PDrain_P4,
             lbl_PDrain_P5, lbl_PDrain_P6, lbl_PDrain_P7, lbl_PDrain_P8,
-            lbl_PDrain_P9}
+            lbl_PDrain_P9
+        }
 
         Lbl_PDrain(1) = {lbl_PDrain_P12, lbl_PDrain_P11, lbl_PDrain_P10}
 
         Lbl_PDrain(2) = {lbl_PDrain_P13, lbl_PDrain_P14, lbl_PDrain_P15}
 
-
-        Lbl_Junction(0) = {lbl_Junction_P1, lbl_Junction_P2, lbl_Junction_P3, lbl_Junction_P4,
+        Lbl_Junction(0) = {
+            lbl_Junction_P1, lbl_Junction_P2, lbl_Junction_P3, lbl_Junction_P4,
             lbl_Junction_P5, lbl_Junction_P6, lbl_Junction_P7, lbl_Junction_P8,
             lbl_Junction_P9, lbl_Junction_P10
-            }
+        }
 
-        Lbl_Junction(1) = {lbl_Junction_P11, lbl_Junction_P12,
+        Lbl_Junction(1) = {
+            lbl_Junction_P11, lbl_Junction_P12,
             lbl_Junction_P13, lbl_Junction_P14, lbl_Junction_P15, lbl_Junction_P16,
             lbl_Junction_P17, lbl_Junction_P18, lbl_Junction_P19, lbl_Junction_P20,
             lbl_Junction_P21
-                }
+        }
 
-        Lbl_Product(0) = {lbl_Product_P1, lbl_Product_P2, lbl_Product_P3, lbl_Product_P4
-            }
+        Lbl_Product(0) = {lbl_Product_P1, lbl_Product_P2, lbl_Product_P3, lbl_Product_P4}
 
-        Lbl_Product(1) = {lbl_Product_P5, lbl_Product_P6, lbl_Product_P7, lbl_Product_P8,
+        Lbl_Product(1) = {
+            lbl_Product_P5, lbl_Product_P6, lbl_Product_P7, lbl_Product_P8,
             lbl_Product_P9, lbl_Product_P10, lbl_Product_P11, lbl_Product_P12,
-            lbl_Product_P13}
+            lbl_Product_P13
+        }
 
         Lbl_Product(2) = {lbl_Product_P14, lbl_Product_P15, lbl_Product_P16}
 
-        Lbl_Product(3) = {lbl_Product_P17, lbl_Product_P18, lbl_Product_P19, lbl_Product_P20,
-            lbl_Product_P21, lbl_Product_P22, lbl_Product_P23}
+        Lbl_Product(3) = {
+            lbl_Product_P17, lbl_Product_P18, lbl_Product_P19, lbl_Product_P20,
+            lbl_Product_P21, lbl_Product_P22, lbl_Product_P23
+        }
 
-
-        Lbl_Bleed(0) = {lbl_Bleed_P1, lbl_Bleed_P2, lbl_Bleed_P3, lbl_Bleed_P4,
+        Lbl_Bleed(0) = {
+            lbl_Bleed_P1, lbl_Bleed_P2, lbl_Bleed_P3, lbl_Bleed_P4,
             lbl_Bleed_P5, lbl_Bleed_P6, lbl_Bleed_P7, lbl_Bleed_P8
-           }
+        }
 
         Lbl_Bleed(1) = {lbl_Bleed_P9, lbl_Bleed_P10, lbl_Bleed_P11, lbl_Bleed_P12}
 
-
-
-        Lbl_Pump(0) = {lbl_Pump_P1, lbl_Pump_P2, lbl_Pump_P3, lbl_Pump_P4,
+        Lbl_Pump(0) = {
+            lbl_Pump_P1, lbl_Pump_P2, lbl_Pump_P3, lbl_Pump_P4,
             lbl_Pump_P5, lbl_Pump_P6, lbl_Pump_P7, lbl_Pump_P8,
-            lbl_Pump_P9, lbl_Pump_P10}
+            lbl_Pump_P9, lbl_Pump_P10
+        }
 
-        Lbl_Pump(1) = {lbl_Pump_P11, lbl_Pump_P12,
+        Lbl_Pump(1) = {
+            lbl_Pump_P11, lbl_Pump_P12,
             lbl_Pump_P13, lbl_Pump_P14, lbl_Pump_P15, lbl_Pump_P16,
-            lbl_Pump_P17, lbl_Pump_P18}
+            lbl_Pump_P17, lbl_Pump_P18
+        }
 
-
-        Lbl_N2Purge = {lbl_N2Purge_P1, lbl_N2Purge_P2, lbl_N2Purge_P3, lbl_N2Purge_P4,
+        Lbl_N2Purge = {
+            lbl_N2Purge_P1, lbl_N2Purge_P2, lbl_N2Purge_P3, lbl_N2Purge_P4,
             lbl_N2Purge_P5, lbl_N2Purge_P6, lbl_N2Purge_P7, lbl_N2Purge_P8,
             lbl_N2Purge_P9, lbl_N2Purge_P10, lbl_N2Purge_P11, lbl_N2Purge_P12,
             lbl_N2Purge_P13, lbl_N2Purge_P14, lbl_N2Purge_P15, lbl_N2Purge_P16,
@@ -194,16 +208,13 @@
             lbl_N2Purge_P49, lbl_N2Purge_P50, lbl_N2Purge_P51, lbl_N2Purge_P52,
             lbl_N2Purge_P53, lbl_N2Purge_P54, lbl_N2Purge_P55, lbl_N2Purge_P56,
             lbl_N2Purge_P57, lbl_N2Purge_P58
-            }
+        }
 
         CircuitInitalised = True
-
-
     End Sub
 
     ' Circuit Control logic
     Private Sub CircuitTimer_Ticks(sender As Object, e As EventArgs) Handles Circuittimer.Tick
-
         If CommLost = False Then
             If CircuitInitalised = True Then
                 ' For Output of Valve 1 to Valve 16
@@ -228,14 +239,12 @@
                     End If
                 Next
 
-
                 ' Colour selection based on N2 Purge valve Output
                 If Lbl_ValvestatusArr(10).BackColor = PublicVariables.StatusGreen Or Lbl_ValvestatusArr(17).BackColor = PublicVariables.StatusGreen Then
                     bgcolor = Color.Yellow
                 Else
                     bgcolor = Color.FromArgb(25, 130, 246)
                 End If
-
 
                 'Based on Output setting Path for Valve-1 to Valve 19
                 If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
@@ -278,7 +287,6 @@
                     Next
                 End If
 
-
                 'For Income Line Path
                 'pathfwdack -0,1,2,3
                 If Not btn_MVCShowcircuit.BackColor = Color.FromArgb(25, 130, 246) Then
@@ -297,7 +305,6 @@
                             Circuitforward(Lbl_Income(i), i, 200, Color.FromArgb(25, 130, 246))
                         End If
                     Next
-
                 Else
                     For i As Integer = 0 To Lbl_Income.Length - 1
 
@@ -322,7 +329,6 @@
                         Next
                         Circuitforward(Lbl_N2Purge, 4, 50, Color.Yellow)
                     End If
-
                 Else
 
                     For i As Integer = 0 To Lbl_N2Purge.Length - 1
@@ -349,8 +355,6 @@
                                     Circuitforward(Lbl_Junction(i), i + 5, 500, Color.Yellow)
                                 End If
                             Else
-
-
                                 If i = 0 Then
                                     If pathrevack(i + 5) = False Then
                                         For j As Integer = 0 To Lbl_Junction(i).Length - 1
@@ -359,7 +363,6 @@
                                         Next
                                         Circuitreverse(Lbl_Junction(i), i + 5, 500, Color.FromArgb(25, 130, 246))
                                     End If
-
                                 Else
                                     If pathfwdack(i + 5) = False Then
                                         For j As Integer = 0 To Lbl_Junction(i).Length - 1
@@ -368,12 +371,8 @@
                                         Next
                                         Circuitforward(Lbl_Junction(i), i + 5, 500, Color.FromArgb(25, 130, 246))
                                     End If
-
                                 End If
-
-
                             End If
-
                         Next
                     Else
                         For i As Integer = 0 To Lbl_Junction.Length - 1
@@ -382,17 +381,14 @@
                                 Lbl_Junction(i)(j).BackColor = Color.Transparent
                                 Lbl_Junction(i)(j).Visible = False
                             Next
-
                         Next
                     End If
                 Else
                     For i As Integer = 0 To Lbl_Junction.Length - 1
-
                         For j As Integer = 0 To Lbl_Junction(i).Length - 1
                             Lbl_Junction(i)(j).BackColor = Color.Transparent
                             Lbl_Junction(i)(j).Visible = False
                         Next
-
                     Next
                 End If
 
@@ -416,22 +412,18 @@
                         Next
                     Else
                         For i As Integer = 0 To Lbl_Product.Length - 1
-
                             For j As Integer = 0 To Lbl_Product(i).Length - 1
                                 Lbl_Product(i)(j).BackColor = Color.Transparent
                                 Lbl_Product(i)(j).Visible = False
                             Next
-
                         Next
                     End If
                 Else
                     For i As Integer = 0 To Lbl_Product.Length - 1
-
                         For j As Integer = 0 To Lbl_Product(i).Length - 1
                             Lbl_Product(i)(j).BackColor = Color.Transparent
                             Lbl_Product(i)(j).Visible = False
                         Next
-
                     Next
                 End If
 
@@ -455,26 +447,20 @@
                         Next
                     Else
                         For i As Integer = 0 To Lbl_Bleed.Length - 1
-
                             For j As Integer = 0 To Lbl_Bleed(i).Length - 1
                                 Lbl_Bleed(i)(j).BackColor = Color.Transparent
                                 Lbl_Bleed(i)(j).Visible = False
                             Next
-
                         Next
                     End If
                 Else
                     For i As Integer = 0 To Lbl_Bleed.Length - 1
-
                         For j As Integer = 0 To Lbl_Bleed(i).Length - 1
                             Lbl_Bleed(i)(j).BackColor = Color.Transparent
                             Lbl_Bleed(i)(j).Visible = False
                         Next
-
                     Next
                 End If
-
-
 
                 'For Pump Path
                 'pathfwdack -14,15
@@ -496,25 +482,20 @@
                         Next
                     Else
                         For i As Integer = 0 To Lbl_Pump.Length - 1
-
                             For j As Integer = 0 To Lbl_Pump(i).Length - 1
                                 Lbl_Pump(i)(j).BackColor = Color.Transparent
                                 Lbl_Pump(i)(j).Visible = False
                             Next
-
                         Next
                     End If
                 Else
                     For i As Integer = 0 To Lbl_Pump.Length - 1
-
                         For j As Integer = 0 To Lbl_Pump(i).Length - 1
                             Lbl_Pump(i)(j).BackColor = Color.Transparent
                             Lbl_Pump(i)(j).Visible = False
                         Next
-
                     Next
                 End If
-
 
                 'For Non Pressurised Drain Path
                 'pathfwdack -16
@@ -528,9 +509,7 @@
                             Next
                             Circuitforward(Lbl_NPDrain, 16, 100, Color.FromArgb(25, 130, 246))
                         End If
-
                     Else
-
                         For i As Integer = 0 To Lbl_NPDrain.Length - 1
                             Lbl_NPDrain(i).BackColor = Color.Transparent
                             Lbl_NPDrain(i).Visible = False
@@ -563,27 +542,23 @@
                         Next
                     Else
                         For i As Integer = 0 To Lbl_PDrain.Length - 1
-
                             For j As Integer = 0 To Lbl_PDrain(i).Length - 1
                                 Lbl_PDrain(i)(j).BackColor = Color.Transparent
                                 Lbl_PDrain(i)(j).Visible = False
                             Next
-
                         Next
                     End If
                 Else
                     For i As Integer = 0 To Lbl_PDrain.Length - 1
-
                         For j As Integer = 0 To Lbl_PDrain(i).Length - 1
                             Lbl_PDrain(i)(j).BackColor = Color.Transparent
                             Lbl_PDrain(i)(j).Visible = False
                         Next
-
                     Next
                 End If
             End If
-#Region "Mimic Panel Circuit Model 1"
 
+#Region "Mimic Panel Circuit Model 1"
             txtbx_BackPressActual.Text = AIn(1).ToString
             txtbx_N2PurgeActual.Text = AIn(0).ToString
             lbl_InletPress.Text = AIn(9).ToString
@@ -709,10 +684,7 @@
 #End Region
 
         End If
-
-
     End Sub
-
 
     Public Async Function CircuitMimic(Valve As Integer) As Task
         Dim delay As Integer
@@ -760,7 +732,6 @@
                 Exit Select
         End Select
 
-
         While Lbl_ValvestatusArr(Valve - 1).BackColor = PublicVariables.StatusGreen
             pathtask(Valve) = True
             Dim size As Integer
@@ -777,24 +748,14 @@
                     Lbl_Valvepath(Valve)(size).BackColor = bgcolor
                 End If
 
-
                 size = size + 1
             End While
         End While
 
         pathtask(Valve) = False
-
-
-
-
-
     End Function
 
-
-
     Public Async Function Circuitforward(lblarr As Label(), index As Integer, delay As Integer, bg As Color) As Task
-
-
         While lblarr(0).Visible = True
             pathrevack(index) = False
             pathfwdack(index) = True
@@ -814,19 +775,14 @@
                     lblarr(size).BackColor = bg
                 End If
 
-
                 size = size + 1
             End While
-
         End While
 
         pathfwdack(index) = False
     End Function
 
-
     Public Async Function Circuitreverse(lblarr As Label(), index As Integer, delay As Integer, bg As Color) As Task
-
-
         While lblarr(0).Visible = True
             pathfwdack(index) = False
             pathrevack(index) = True
@@ -846,19 +802,14 @@
                     lblarr(size).BackColor = bg
                 End If
 
-
                 size = size - 1
             End While
-
         End While
 
         pathrevack(index) = False
     End Function
 
-
-
     Public Sub ChildformOverview(Childform As Form)
-
         Childform.TopLevel = False
         While FormMain.panel_ManualValve_Circuit.Controls.Count > 0
             FormMain.panel_ManualValve_Circuit.Controls(0).Dispose()
@@ -898,6 +849,4 @@
         ' Hide Label 
         lbl_ValveHover.Visible = False
     End Sub
-
-
 End Class

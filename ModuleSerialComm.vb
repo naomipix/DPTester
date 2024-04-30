@@ -35,18 +35,13 @@ Module ModuleSerialComm
                 'Scannertimer.Enabled = False
                 FormMain.lbl_CommOpen.BackColor = SystemColors.Window
             End If
-
         Catch ex As Exception
-
             ComPort1Connected = False
 
             FormMain.lbl_CommOpen.BackColor = SystemColors.Window
             'MsgBox($"Scanner Disconnected or COM3 Does not exists")
             'Scannertimer.Enabled = False
-
-
         End Try
-
     End Sub
 
     Private Sub SerialComDataReceivedHandler1(sender As Object, e As SerialDataReceivedEventArgs)
@@ -64,18 +59,15 @@ Module ModuleSerialComm
             If Scannertimer.Enabled = False Then
                 Scannertimer.Enabled = True
             End If
-
         Catch ex As Exception
             MsgBox("Scan Failed, Please Try Again!")
         End Try
-
     End Sub
 
     Public Sub PlaceData(str As String)
         If str.Length = 9 Then
             If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
                 FormMain.txtbx_WorkOrderNumber.Text = str
-
             End If
         End If
 
@@ -110,15 +102,12 @@ Module ModuleSerialComm
     End Sub
 
     Private Sub ScannerTimer_Ticks(sender As Object, e As EventArgs) Handles Scannertimer.Tick
-
         If SerialDataReceived = True Then
             PlaceData(HandheldScandata)
             FormSetting.txtbx_ScannerRawData.Text = HandheldScanraw
             FormMain.txtbx_HandScanner.Text = rcv
             SerialDataReceived = False
         End If
-
-
 
         If My.Computer.Ports.SerialPortNames.Contains("COM3") = True Then
             If ComPort1Connected = False Then
@@ -130,5 +119,4 @@ Module ModuleSerialComm
             FormMain.lbl_CommOpen.BackColor = SystemColors.Window
         End If
     End Sub
-
 End Module

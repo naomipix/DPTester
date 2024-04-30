@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports DocumentFormat.OpenXml.Packaging
 
 Module ModuleInitialize
     Public iniFolderLocation As String = "C:\DPTester\Ini File"
@@ -65,12 +64,9 @@ Module ModuleInitialize
             If Not File.Exists(CdriveTemplate) Then
                 MoveFile()
             End If
-
-
         Catch ex As Exception
             MsgBox("Folder Creation Failed, check for Access Level")
         End Try
-
     End Sub
 
     Public Sub Inifilegenerate()
@@ -229,31 +225,20 @@ Module ModuleInitialize
                               "MaxDrain4_Pressure=500" + vbCrLf +
                               "MaxDrain4_Time=600"
 
-
-
-
                 System.IO.File.WriteAllLines(iniFileLocation, Inilines)
-
             End If
         Catch ex As Exception
             MsgBox("Ini File Creation Failed")
         End Try
-
     End Sub
 
     Public Sub MoveFile()
         Try
-
             If System.IO.File.Exists(TemplateFile) Then
-
                 File.Copy(TemplateFile, "C:\DPTester\Template\EndLotReportTemplate.xlsx", True)
-
             End If
         Catch ex As Exception
             MsgBox(ex)
         End Try
-
     End Sub
-
-
 End Module

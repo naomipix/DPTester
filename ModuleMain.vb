@@ -68,8 +68,6 @@ Module PublicVariables
     Public RetainedCaloffset As String
     Public RetainedCaldate As String
 
-
-
     ' Retained Memory - User Login Table Settings
     Public UserLoginHistoryTopCount As Integer = 100
 
@@ -120,7 +118,6 @@ Module PublicVariables
     ' Ini - Production Details
     Public ProdDetailsDisplayedTableCount As Integer = 10000
 
-
     'Ini - Limits
     Public BPRegulatorLowLimit As Single
     Public BPRegulatorHighLimit As Single
@@ -130,7 +127,6 @@ Module PublicVariables
     Public PumpSpeedHighLimit As Integer
     Public PumpFlowrateLowLimit As Single
     Public PumpFlowrateHighLimit As Single
-
 
     'Ini Recipe Parameters Limits
     Public Limit_Min_d_vertol As Decimal
@@ -156,7 +152,6 @@ Module PublicVariables
     Public Limit_Min_i_flush1time As Integer
     Public Limit_Min_i_flush1rpm As Integer
 
-
     'Public Limit_Min_i_dptestfilltime As Integer
     'Public Limit_Min_i_dptestbleedtime As Integer
     Public Limit_Min_d_dptestflow As Decimal
@@ -169,8 +164,6 @@ Module PublicVariables
     Public Limit_Min_i_dptestpoints As Integer
     Public Limit_Min_i_dptestrpm As Integer
 
-
-
     'Public Limit_Min_i_flush2filltime As Integer
     'Public Limit_Min_i_flush2bleedtime As Integer
     Public Limit_Min_d_flush2flow As Decimal
@@ -179,8 +172,6 @@ Module PublicVariables
     Public Limit_Min_i_flush2stabilize As Integer
     Public Limit_Min_i_flush2time As Integer
     Public Limit_Min_i_flush2rpm As Integer
-
-
 
     Public Limit_Min_d_drain1pressure As Decimal
     Public Limit_Min_i_drain1time As Integer
@@ -193,7 +184,6 @@ Module PublicVariables
 
     Public Limit_Min_d_drain4pressure As Decimal
     Public Limit_Min_i_drain4time As Integer
-
 
     Public Limit_Max_d_vertol As Decimal
 
@@ -218,7 +208,6 @@ Module PublicVariables
     Public Limit_Max_i_flush1time As Integer
     Public Limit_Max_i_flush1rpm As Integer
 
-
     'Public Limit_Max_i_dptestfilltime As Integer
     'Public Limit_Max_i_dptestbleedtime As Integer
     Public Limit_Max_d_dptestflow As Decimal
@@ -231,8 +220,6 @@ Module PublicVariables
     Public Limit_Max_i_dptestpoints As Integer
     Public Limit_Max_i_dptestrpm As Integer
 
-
-
     'Public Limit_Max_i_flush2filltime As Integer
     'Public Limit_Max_i_flush2bleedtime As Integer
     Public Limit_Max_d_flush2flow As Decimal
@@ -241,8 +228,6 @@ Module PublicVariables
     Public Limit_Max_i_flush2stabilize As Integer
     Public Limit_Max_i_flush2time As Integer
     Public Limit_Max_i_flush2rpm As Integer
-
-
 
     Public Limit_Max_d_drain1pressure As Decimal
     Public Limit_Max_i_drain1time As Integer
@@ -255,8 +240,6 @@ Module PublicVariables
 
     Public Limit_Max_d_drain4pressure As Decimal
     Public Limit_Max_i_drain4time As Integer
-
-
 
     ' Login
     Public LoggedIn As Boolean = False
@@ -649,8 +632,6 @@ Module SQL
 End Module
 
 Module CsvExportModule
-
-
     Function ExportDataTableToCsv(dataTable As DataTable, filePath As String, Optional delimiter As String = ",") As String
         Dim ReturnState As String = ""
         Try
@@ -707,8 +688,6 @@ End Module
 
 Namespace RetainedMemory
     Module RetainedMemory
-
-
         Public Sub LoadAndApply()
             Dim dt As New DataTable
             Try
@@ -922,8 +901,6 @@ Namespace RetainedMemory
                     If dt(i)("id") = 32 Then
                         PublicVariables.RetainedCaldate = dt(i)("retained_value")
                     End If
-
-
                 Next
             End If
         End Sub
@@ -940,7 +917,6 @@ Namespace RetainedMemory
 End Namespace
 
 Module DataGridViewDragScroll
-
     Private WithEvents dgv As DataGridView
     Private isDragging As Boolean = False
     Private initialMouseLocation As Point
@@ -1003,7 +979,6 @@ Module DataGridViewDragScroll
             initialMouseLocation = e.Location
         End If
     End Sub
-
 End Module
 
 Module CustomButtonModule
@@ -1058,7 +1033,6 @@ Namespace LicensingModule
         Dim LicMsgTrialRemain As String = "Trial Remaining: "
 
         ' License Encryption Keys
-
 
         ' TEMP Path
         'Dim tempPath As String = Environment.GetEnvironmentVariable("TEMP")
@@ -1449,23 +1423,22 @@ Namespace EventLog ' EventLog.EventLogger.Log( ,)
             }
             SQL.InsertRecord("MessageLog", parameters)
 
-            Dim dttodayevent As DataTable = SQL.ReadRecords($"SELECT row_number() OVER (ORDER BY MessageLog.trigger_time DESC) AS no,
-            MessageLog.id, 
-            MessageLog.user_name, 
-            MessageLog.trigger_time, 
-            MessageLog.event_log 
-        FROM MessageLog WHERE MessageLog.trigger_time Between CONVERT(datetime,'{Date.Today}',105) AND CONVERT(datetime,'{Date.Today.AddDays(1)}',105) 
-        ORDER BY MessageLog.trigger_time DESC
-        ")
+            Dim dttodayevent As DataTable = SQL.ReadRecords($"
+                SELECT 
+                row_number() OVER (ORDER BY MessageLog.trigger_time DESC) AS no, 
+                MessageLog.id, 
+                MessageLog.user_name, 
+                MessageLog.trigger_time, 
+                MessageLog.event_log 
+                FROM MessageLog 
+                WHERE MessageLog.trigger_time Between CONVERT(datetime,'{Date.Today}',105) AND CONVERT(datetime,'{Date.Today.AddDays(1)}',105) 
+                ORDER BY MessageLog.trigger_time DESC
+            ")
             Dim ReturnValue As String = ExportDataTableToCsv(dttodayevent, EventFolder & $"\EventLog_{System.DateTime.Now.ToString("yyyyMMdd")}.csv", vbTab)
-
-
-
 
             If FormSetting.lbl_StartTime.Text.Length > 6 Then
                 FormSetting.dtbuyoffmessage.Rows.Add(FormSetting.dtbuyoffmessage.Rows.Count - 1, FormSetting.dtbuyoffmessage.Rows.Count, user, DateTime.Now, eventmsg)
             End If
-
         End Sub
     End Module
 End Namespace
@@ -1480,15 +1453,11 @@ Namespace LiveGraph
         Public WithEvents graphPlottingTimer As New Timer()
 
         ' Declare Parameter
-
         Dim dtRunningResult As New DataTable
         Dim dtRunningResultCopy As New DataTable
         Dim dtScaledResult As New DataTable
 
-
         Private Sub graphPlottingTimer_Tick(sender As Object, e As EventArgs) Handles graphPlottingTimer.Tick
-
-
             dtRunningResultCopy = FormMainModule.dtresult.Copy
 
             If dtRunningResultCopy.Rows.Count > 0 Then
@@ -1501,14 +1470,14 @@ Namespace LiveGraph
                 For i As Integer = 0 To dtRunningResultCopy.Rows.Count - 2 Step stepSize
                     With dtScaledResult
                         .Rows.Add(
-                                    $"{dtRunningResultCopy(i)(0)}",
-                                    $"{dtRunningResultCopy(i)(1)}",
-                                    $"{dtRunningResultCopy(i)(2)}",
-                                    $"{dtRunningResultCopy(i)(3)}",
-                                    $"{dtRunningResultCopy(i)(4)}",
-                                    $"{dtRunningResultCopy(i)(5)}",
-                                    $"{dtRunningResultCopy(i)(6)}"
-                                )
+                            $"{dtRunningResultCopy(i)(0)}",
+                            $"{dtRunningResultCopy(i)(1)}",
+                            $"{dtRunningResultCopy(i)(2)}",
+                            $"{dtRunningResultCopy(i)(3)}",
+                            $"{dtRunningResultCopy(i)(4)}",
+                            $"{dtRunningResultCopy(i)(5)}",
+                            $"{dtRunningResultCopy(i)(6)}"
+                        )
                     End With
                 Next
 
@@ -1563,8 +1532,6 @@ Namespace LiveGraph
             End If
         End Sub
 
-
-
         Public Sub ChartPlottingTimer(timerEnable As Boolean)
             If timerEnable = True Then
                 dtScaledResult.Rows.Clear()
@@ -1583,7 +1550,5 @@ Namespace LiveGraph
                 graphPlottingTimer.Enabled = False
             End If
         End Sub
-
-
     End Module
 End Namespace
