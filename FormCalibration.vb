@@ -604,7 +604,7 @@ Public Class FormCalibration
                 End If
             Next
 
-            If chkbxCount >= 3 Then
+            If chkbxCount >= 4 Then
                 For Each chkbx In chkbxArr
                     If Not chkbx.Checked Then
                         chkbx.Enabled = False
