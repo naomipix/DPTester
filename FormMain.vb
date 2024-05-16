@@ -3794,7 +3794,7 @@ Public Class FormMain
             If dtrecipe.Rows(0)("drain4_circuit") = "Enable" Then
                 DInt2int(166, 1)
             Else
-                DInt2int(102, 0)
+                DInt2int(166, 0)
             End If
             DInt2int(168, CType(dtrecipe.Rows(0)("drain4_time"), Integer))
             Float2int(170, CType(dtrecipe.Rows(0)("drain4_back_pressure"), Double))
