@@ -22,6 +22,7 @@ Partial Class FormMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
@@ -522,7 +523,9 @@ Partial Class FormMain
         Me.dsp_BackPressReg = New System.Windows.Forms.Label()
         Me.dsp_ElecRegCtrl = New System.Windows.Forms.Label()
         Me.panel_SubManualDrain = New System.Windows.Forms.Panel()
+        Me.btn_MCN2Purge4 = New System.Windows.Forms.Button()
         Me.btn_MCN2Purge3 = New System.Windows.Forms.Button()
+        Me.Label40 = New System.Windows.Forms.Label()
         Me.btn_MCN2Purge2 = New System.Windows.Forms.Button()
         Me.dsp_N2PurgeCircuit3 = New System.Windows.Forms.Label()
         Me.btn_MCN2Purge1 = New System.Windows.Forms.Button()
@@ -596,8 +599,10 @@ Partial Class FormMain
         Me.btn_LogInOut = New System.Windows.Forms.Button()
         Me.lbl_Title = New System.Windows.Forms.Label()
         Me.lbl_OperationMode = New System.Windows.Forms.Label()
-        Me.Label40 = New System.Windows.Forms.Label()
-        Me.btn_MCN2Purge4 = New System.Windows.Forms.Button()
+        Me.cms_dgv_ProdDetail = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cms_dgv_LotSummary = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DeleteLotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.panel_FormControl.SuspendLayout
         Me.Panel12.SuspendLayout
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
@@ -689,6 +694,8 @@ Partial Class FormMain
         CType(Me.dgv_AlarmHistory, System.ComponentModel.ISupportInitialize).BeginInit
         Me.panel_PLCHeartBeat.SuspendLayout
         Me.panel_SelectLoadRecipe.SuspendLayout
+        Me.cms_dgv_ProdDetail.SuspendLayout
+        Me.cms_dgv_LotSummary.SuspendLayout
         Me.SuspendLayout
         '
         'panel_FormControl
@@ -6075,6 +6082,17 @@ Partial Class FormMain
         Me.panel_SubManualDrain.Size = New System.Drawing.Size(500, 247)
         Me.panel_SubManualDrain.TabIndex = 5
         '
+        'btn_MCN2Purge4
+        '
+        Me.btn_MCN2Purge4.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_MCN2Purge4.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_MCN2Purge4.Location = New System.Drawing.Point(273, 189)
+        Me.btn_MCN2Purge4.Name = "btn_MCN2Purge4"
+        Me.btn_MCN2Purge4.Size = New System.Drawing.Size(100, 40)
+        Me.btn_MCN2Purge4.TabIndex = 53
+        Me.btn_MCN2Purge4.Text = "OFF"
+        Me.btn_MCN2Purge4.UseVisualStyleBackColor = False
+        '
         'btn_MCN2Purge3
         '
         Me.btn_MCN2Purge3.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
@@ -6085,6 +6103,16 @@ Partial Class FormMain
         Me.btn_MCN2Purge3.TabIndex = 53
         Me.btn_MCN2Purge3.Text = "OFF"
         Me.btn_MCN2Purge3.UseVisualStyleBackColor = False
+        '
+        'Label40
+        '
+        Me.Label40.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label40.Location = New System.Drawing.Point(122, 201)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(130, 17)
+        Me.Label40.TabIndex = 11
+        Me.Label40.Text = "N2 Purge Circuit-4 :"
+        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'btn_MCN2Purge2
         '
@@ -6962,26 +6990,33 @@ Partial Class FormMain
         Me.lbl_OperationMode.Text = "Auto Mode"
         Me.lbl_OperationMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label40
+        'cms_dgv_ProdDetail
         '
-        Me.Label40.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label40.Location = New System.Drawing.Point(122, 201)
-        Me.Label40.Name = "Label40"
-        Me.Label40.Size = New System.Drawing.Size(130, 17)
-        Me.Label40.TabIndex = 11
-        Me.Label40.Text = "N2 Purge Circuit-4 :"
-        Me.Label40.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.cms_dgv_ProdDetail.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.cms_dgv_ProdDetail.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteToolStripMenuItem})
+        Me.cms_dgv_ProdDetail.Name = "ContextMenuStrip1"
+        Me.cms_dgv_ProdDetail.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.cms_dgv_ProdDetail.Size = New System.Drawing.Size(181, 48)
         '
-        'btn_MCN2Purge4
+        'DeleteToolStripMenuItem
         '
-        Me.btn_MCN2Purge4.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.btn_MCN2Purge4.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_MCN2Purge4.Location = New System.Drawing.Point(273, 189)
-        Me.btn_MCN2Purge4.Name = "btn_MCN2Purge4"
-        Me.btn_MCN2Purge4.Size = New System.Drawing.Size(100, 40)
-        Me.btn_MCN2Purge4.TabIndex = 53
-        Me.btn_MCN2Purge4.Text = "OFF"
-        Me.btn_MCN2Purge4.UseVisualStyleBackColor = False
+        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DeleteToolStripMenuItem.Text = "Delete Record"
+        '
+        'cms_dgv_LotSummary
+        '
+        Me.cms_dgv_LotSummary.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.cms_dgv_LotSummary.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteLotToolStripMenuItem})
+        Me.cms_dgv_LotSummary.Name = "cms_dgv_LotSummary"
+        Me.cms_dgv_LotSummary.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.cms_dgv_LotSummary.Size = New System.Drawing.Size(136, 26)
+        '
+        'DeleteLotToolStripMenuItem
+        '
+        Me.DeleteLotToolStripMenuItem.Name = "DeleteLotToolStripMenuItem"
+        Me.DeleteLotToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
+        Me.DeleteLotToolStripMenuItem.Text = "Delete Lot"
         '
         'FormMain
         '
@@ -7115,6 +7150,8 @@ Partial Class FormMain
         Me.panel_PLCHeartBeat.ResumeLayout(False)
         Me.panel_SelectLoadRecipe.ResumeLayout(False)
         Me.panel_SelectLoadRecipe.PerformLayout
+        Me.cms_dgv_ProdDetail.ResumeLayout(False)
+        Me.cms_dgv_LotSummary.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -7651,4 +7688,8 @@ Partial Class FormMain
     Friend WithEvents Label39 As Label
     Friend WithEvents btn_MCN2Purge4 As Button
     Friend WithEvents Label40 As Label
+    Friend WithEvents cms_dgv_ProdDetail As ContextMenuStrip
+    Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents cms_dgv_LotSummary As ContextMenuStrip
+    Friend WithEvents DeleteLotToolStripMenuItem As ToolStripMenuItem
 End Class

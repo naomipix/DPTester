@@ -786,7 +786,9 @@ Public Class FormCalibration
         '    chkbx.Checked = False
         'Next
 
-        CalibrationRun()
+        If MsgBox("Are you sure to start Calibration?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Information") = MsgBoxResult.Yes Then
+            CalibrationRun()
+        End If
     End Sub
 
     'Public Sub CalibrationThreadingTimer_Ticks(ByVal state As Object)

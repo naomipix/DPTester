@@ -1413,7 +1413,8 @@ Public Class FormMain
             ProductionDetail.serial_attempt, 
             LotUsage.recipe_id, 
             LotUsage.recipe_rev, 
-            LotUsage.cal_diff_pressure, 
+            --LotUsage.cal_diff_pressure, 
+            CONVERT(DECIMAL(10,2), LotUsage.cal_diff_pressure) AS cal_diff_pressure,
             ProductionDetail.flowrate, 
             ProductionDetail.diff_pressure, 
             UPPER(ProductionDetail.result) AS result, 
@@ -1421,7 +1422,8 @@ Public Class FormMain
                 WHEN ProductionDetail.temperature - 273.15 <= -273.15 THEN 0
                 ELSE ProductionDetail.temperature - 273.15
             END AS temperature, 
-            ProductionDetail.viscosity, 
+            --ProductionDetail.viscosity, 
+            CONVERT(DECIMAL(10,2), ProductionDetail.viscosity) AS viscosity,
             ProductionDetail.inlet_pressure, 
             ProductionDetail.outlet_pressure, 
             ProductionDetail.back_pressure, 
@@ -1672,9 +1674,45 @@ Public Class FormMain
             dtpicker_EndDate.Value = dtpicker_StartDate.Value
         End If
     End Sub
+
+    ' Open Context Menu
+    Dim dgvProdDetailRowIndex As Integer = -1
+    Private Sub dgv_ProdDetail_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgv_ProdDetail.CellMouseUp
+        Dim dgv As DataGridView = dgv_ProdDetail
+
+        If e.Button = MouseButtons.Right Then
+            dgv.Rows(e.RowIndex).Selected = True
+            dgvProdDetailRowIndex = e.RowIndex
+
+            With cms_dgv_ProdDetail
+                .Show(dgv, e.Location)
+                .Show(Cursor.Position)
+            End With
+        End If
+    End Sub
+
+    ' Click Context Menu
+    Private Async Sub cms_dgv_ProdDetail_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles cms_dgv_ProdDetail.ItemClicked
+        Await Task.Delay(50)
+
+        If e.ClickedItem.ToString.ToUpper.Contains("DELETE") Then
+            If dgvProdDetailRowIndex >= 0 Then
+                Dim dgv As DataGridView = dgv_ProdDetail
+
+                Dim msgStr As String = $"Are You sure to Delete Test Record?{vbCrLf}[UID: {dgv.Rows(dgvProdDetailRowIndex).Cells("serial_uid").Value} / Attempt: {dgv.Rows(dgvProdDetailRowIndex).Cells("serial_attempt").Value}]"
+                If MsgBox(msgStr, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                    Await Task.Run(Sub()
+                                       SQL.DeleteRecord("ProductionDetail", $"id='{dgv.Rows(dgvProdDetailRowIndex).Cells("id").Value}'")
+                                       SQL.DeleteRecord("ProductResult", "serial_usage_id NOT IN (SELECT DISTINCT id FROM ProductionDetail)")
+                                   End Sub)
+                    SearchProductionDetails()
+                End If
+            End If
+        End If
+    End Sub
 #End Region
 
-#Region "Production Details"
+#Region "Lot Summary"
     ' Initialize Production Details Tab
     Private Async Function LoadLotSummary() As Task
         ' Load Production Details Filter List
@@ -1987,6 +2025,54 @@ Public Class FormMain
 
         ' Load Table With Filters
         LoadLotSummaryTable(True, LotID, cmbxArr)
+    End Sub
+
+    ' Open Context Menu
+    Dim dgvLotSummaryRowIndex As Integer = -1
+    Private Sub dgv_LotSummary_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgv_LotSummary.CellMouseUp
+        Dim dgv As DataGridView = dgv_LotSummary
+
+        If e.Button = MouseButtons.Right Then
+            dgv.Rows(e.RowIndex).Selected = True
+            dgvLotSummaryRowIndex = e.RowIndex
+
+            With cms_dgv_LotSummary
+                .Show(dgv, e.Location)
+                .Show(Cursor.Position)
+            End With
+        End If
+    End Sub
+
+    ' Click Context Menu
+    Private Async Sub cms_dgv_LotSummary_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles cms_dgv_LotSummary.ItemClicked
+        Await Task.Delay(50)
+
+        If e.ClickedItem.ToString.ToUpper.Contains("DELETE") Then
+            If dgvLotSummaryRowIndex >= 0 Then
+                Dim dgv As DataGridView = dgv_LotSummary
+
+                Dim msgStr As String = $"Are You sure to Delete Lot?{vbCrLf}[Lot ID: {dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_lot_id").Value} / Attempt: {dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_lot_attempt").Value}]{vbCrLf}**ALL Related Historical Data will be Deleted & NOT Recoverable!"
+                If MsgBox(msgStr, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                    Await Task.Run(Sub()
+                                       SQL.DeleteRecord("LotUsage", $"id='{dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_id").Value}'")
+                                       SQL.DeleteRecord("ProductionDetail", $"lot_usage_id='{dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_id").Value}'")
+                                       SQL.DeleteRecord("ProductResult", "serial_usage_id NOT IN (SELECT DISTINCT id FROM ProductionDetail)")
+
+                                       Dim dt As DataTable = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE id='{dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_id").Value}'")
+                                       If dt.Rows.Count = 0 Then
+                                           If txtbx_LotID.Enabled = False Then
+                                               If txtbx_LotID.Text.Trim = CStr(dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_lot_id").Value).Trim Then
+                                                   Endlot()
+                                               End If
+                                           End If
+
+                                           SQL.DeleteRecord("WorkOrder", $"lot_id='{dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_lot_id").Value}'")
+                                       End If
+                                   End Sub)
+                    SearchLotSummary()
+                End If
+            End If
+        End If
     End Sub
 #End Region
 
@@ -4917,25 +5003,27 @@ Public Class FormMain
         End If
 
         If OnContinue = True Then
-            LotEndTime = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
+            If dtlotrecord.Rows.Count > 0 Then
+                LotEndTime = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
 
-            Dim Updateparameter As New Dictionary(Of String, Object) From {
-                {"lot_end_time", LotEndTime}
-            }
-            Dim Condition As String = $"lot_id ='{txtbx_LotID.Text}' AND lot_attempt = '{dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}'"
+                Dim Updateparameter As New Dictionary(Of String, Object) From {
+                    {"lot_end_time", LotEndTime}
+                }
+                Dim Condition As String = $"lot_id ='{txtbx_LotID.Text}' AND lot_attempt = '{dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}'"
 
-            If LoggedInIsDeveloper Then
-                'MsgBox(Condition)
-                'MsgBox($"{txtbx_LotID.Text} | {dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}")
-            End If
+                If LoggedInIsDeveloper Then
+                    'MsgBox(Condition)
+                    'MsgBox($"{txtbx_LotID.Text} | {dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}")
+                End If
 
-            If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
-                Lotendsuccess = True
-                'MainMessage(9, LotID)
-            Else
-                Lotendsuccess = False
-                'MainMessage(10)
-                OnContinue = False
+                If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
+                    Lotendsuccess = True
+                    'MainMessage(9, LotID)
+                Else
+                    Lotendsuccess = False
+                    'MainMessage(10)
+                    OnContinue = False
+                End If
             End If
         End If
 

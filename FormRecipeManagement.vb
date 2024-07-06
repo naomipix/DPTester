@@ -325,7 +325,7 @@ Public Class FormRecipeManagement
             Case 32
                 Return MsgBox("Part ID Deletion Aborted as per user request", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
             Case 33
-                Return MsgBox("Are you sure, Do you want to Delete Recipe ID " + field + " ?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning")
+                Return MsgBox($"Are you sure to Delete Recipe ID [{field}] ?{vbCrLf}**ALL Related Lot & Historical Data will be Deleted & NOT Recoverable!", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning")
             Case 34
                 Return MsgBox("Recipe ID Deletion Aborted as per user request", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
             Case 35
@@ -4423,13 +4423,13 @@ Public Class FormRecipeManagement
         End If
 
         ' Need to check production details contain this part id or not
-        If onContinue = True Then
-            Dim dtProdDetail As DataTable = SQL.ReadRecords($"SELECT Lotusage.recipe_id FROM ProductionDetail LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id WHERE Lotusage.recipe_id='{RecipeID}'")
-            If dtProdDetail.Rows.Count > 0 Then
-                MsgBox("Unable To Delete, Production Details With Current Recipe Exists", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
-                onContinue = False
-            End If
-        End If
+        'If onContinue = True Then
+        '    Dim dtProdDetail As DataTable = SQL.ReadRecords($"SELECT Lotusage.recipe_id FROM ProductionDetail LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id WHERE Lotusage.recipe_id='{RecipeID}'")
+        '    If dtProdDetail.Rows.Count > 0 Then
+        '        MsgBox("Unable To Delete, Production Details With Current Recipe Exists", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+        '        onContinue = False
+        '    End If
+        'End If
 
         If onContinue = True Then
             If RecipeMessage(33, RecipeID) = DialogResult.Yes Then
