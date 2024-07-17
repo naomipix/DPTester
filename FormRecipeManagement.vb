@@ -366,6 +366,18 @@ Public Class FormRecipeManagement
                 Return MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
             Case 53
                 Return MsgBox($"{field}", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            Case 54
+                Return MsgBox($"{field} Recipe ID's Product Result Data Deletion Failed ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            Case 55
+                Return MsgBox($"{field} Recipe ID's Production Details Data Deletion Failed ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            Case 56
+                Return MsgBox($"{field} Recipe ID's Calibration Data Deletion Failed ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            Case 57
+                Return MsgBox($"{field} Recipe ID's Work Order Data Deletion Failed ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+            Case 58
+                Return MsgBox($"{field} Recipe ID's Lot Usage Data Deletion Failed ", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+
+
             Case Else
                 Exit Select
         End Select
@@ -4433,28 +4445,94 @@ Public Class FormRecipeManagement
 
         If onContinue = True Then
             If RecipeMessage(33, RecipeID) = DialogResult.Yes Then
+                Dim Condition1 As String = "serial_usage_id in (SELECT ProductionDetail.id FROM ProductionDetail LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id WHERE Lotusage.recipe_id = '" + RecipeID + "')"
+                Dim Condition2 As String = "id in (SELECT ProductionDetail.id FROM ProductionDetail LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id=Lotusage.id WHERE Lotusage.recipe_id = '" + RecipeID + "')"
+                Dim Condition3 As String = "lot_id in (SELECT lot_id FROM Lotusage WHERE Lotusage.recipe_id='" + RecipeID + "')"
                 Dim condition As String = "recipe_id = '" + RecipeID + "'"
 
-                If SQL.DeleteRecord("RecipeTable", condition) = 1 Then
-                    RecipeMessage(28)
-
-                    ' Event Log
-                    Dim FilterTypeValue As String = DirectCast(cmbx_RcpCreateFilterType.SelectedItem, KeyValuePair(Of String, String)).Value
-                    Dim PartIDValue As String = DirectCast(cmbx_RcpCreatePartID.SelectedItem, KeyValuePair(Of String, String)).Value
-                    Dim RecipeIDValue As String = txtbx_RcpCreateRecipeID.Text
-                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Deletion - Recipe ID ({FilterTypeValue}/{PartIDValue}/{RecipeIDValue}) Deleted")
-
-                    cmbx_RcpDeleteFilterType.SelectedIndex = 0
-                    LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
-                    GetRecipeID()
-                Else
-                    RecipeMessage(29)
-                    onContinue = False
+                'Delete Data from Product Result Table
+                If onContinue = True Then
+                    Try
+                        SQL.DeleteRecord("ProductResult", Condition1)
+                        onContinue = True
+                    Catch
+                        RecipeMessage(54, RecipeID)
+                        onContinue = False
+                    End Try
                 End If
-            Else
-                RecipeMessage(34)
+
+                'Delete Data from Production Details Table
+                If onContinue = True Then
+                    Try
+                        SQL.DeleteRecord("ProductionDetail", Condition2)
+                        onContinue = True
+                    Catch
+                        RecipeMessage(55, RecipeID)
+                        onContinue = False
+                    End Try
+                End If
+
+                'Delete Data from Calibration Result Table
+                If onContinue = True Then
+                    Try
+                        SQL.DeleteRecord("CalibrationResult", condition)
+                        onContinue = True
+                    Catch
+                        RecipeMessage(56, RecipeID)
+                        onContinue = False
+                    End Try
+                End If
+
+
+                'Delete Data from Work Order Table
+                If onContinue = True Then
+                    Try
+                        SQL.DeleteRecord("WorkOrder", Condition3)
+                        onContinue = True
+                    Catch
+                        RecipeMessage(57, RecipeID)
+                        onContinue = False
+                    End Try
+                End If
+
+
+                'Delete Data from LotUsage Table
+                If onContinue = True Then
+                    Try
+                        SQL.DeleteRecord("LotUsage", condition)
+                        onContinue = True
+                    Catch
+                        RecipeMessage(58, RecipeID)
+                        onContinue = False
+                    End Try
+                End If
+
+
+                If onContinue = True Then
+                        If SQL.DeleteRecord("RecipeTable", condition) = 1 Then
+                            RecipeMessage(28)
+
+                            ' Event Log
+                            Dim FilterTypeValue As String = DirectCast(cmbx_RcpCreateFilterType.SelectedItem, KeyValuePair(Of String, String)).Value
+                            Dim PartIDValue As String = DirectCast(cmbx_RcpCreatePartID.SelectedItem, KeyValuePair(Of String, String)).Value
+                            Dim RecipeIDValue As String = txtbx_RcpCreateRecipeID.Text
+                            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Recipe Deletion - Recipe ID ({FilterTypeValue}/{PartIDValue}/{RecipeIDValue}) Deleted")
+
+                            cmbx_RcpDeleteFilterType.SelectedIndex = 0
+                            LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
+                        GetRecipeID()
+
+                    Else
+                            RecipeMessage(29)
+                            onContinue = False
+                        End If
+                    End If
+                Else
+                    RecipeMessage(34)
+
             End If
         End If
+
     End Sub
 #End Region
 

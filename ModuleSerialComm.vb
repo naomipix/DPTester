@@ -65,30 +65,30 @@ Module ModuleSerialComm
     End Sub
 
     Public Sub PlaceData(str As String)
-        If str.Length = 9 Then
+        If str.Length >= PublicVariables.WorkOrderLenLow And str.Length < PublicVariables.WorkOrderLenHigh Then
             If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
                 FormMain.txtbx_WorkOrderNumber.Text = str
             End If
         End If
 
-        If str.Length >= 11 Then
+        If str.Length >= PublicVariables.PartIdLenLow And str.Length < PublicVariables.PartIdLenHigh Then
             If FormMain.txtbx_PartID.Enabled = True Then
                 FormMain.txtbx_PartID.Text = str
             End If
         End If
 
-        If str.Length = 10 And Char.IsLetter(str.Substring(0, 1)) = True Then
+        If str.Length >= PublicVariables.LotIdLenLow And str.Length < PublicVariables.LotIdLenHigh And Char.IsLetter(str.Substring(0, 1)) = True Then
             If FormMain.txtbx_LotID.Enabled = True Then
                 FormMain.txtbx_LotID.Text = str
             End If
         End If
 
-        If str.Length = 10 And Char.IsLetter(str.Substring(0, 1)) = False Then
+        If str.Length >= PublicVariables.ConfirmationIdLenLow And str.Length < PublicVariables.ConfirmationIdLenHigh And Char.IsLetter(str.Substring(0, 1)) = False Then
             If FormMain.txtbx_ConfirmationID.Enabled = True Then
                 FormMain.txtbx_ConfirmationID.Text = str
             End If
         End If
-        If str.Length < 4 Then
+        If str.Length >= PublicVariables.QuantityLenLow And str.Length < PublicVariables.QuantityLenHigh Then
             If FormMain.txtbx_Quantity.Enabled = True Then
                 'FormMain.txtbx_Quantity.Text = str
 
