@@ -1657,7 +1657,7 @@ Module ModuleOmron
                 ' Auto Mode
                 FormMain.btn_RecipeManagement.Enabled = False
                 FormMain.btn_RecipeManagement.BackColor = SystemColors.ControlDark
-                If MainMenu_BtnCalibrate = True Then
+                If MainMenu_BtnCalibrate = True And FormMain.cmbx_RecipeID.SelectedIndex > 0 And FormMain.cmbx_RecipeID.Enabled = False And FormMain.btn_RecipeSelectionConfirm.Enabled = False Then
                     FormMain.btn_Calibration.Enabled = True
                     FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
                 End If
@@ -1687,6 +1687,8 @@ Module ModuleOmron
 
             FormMain.btn_RecipeManagement.Enabled = True
             FormMain.btn_RecipeManagement.BackColor = Color.FromArgb(25, 130, 246)
+            FormMain.btn_Calibration.Enabled = True
+            FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
         End If
 #End Region
 
