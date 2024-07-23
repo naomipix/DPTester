@@ -1018,8 +1018,8 @@ Public Class FormRecipeManagement
             txtbx_RcpCreatePrepPressureDropTime.Text = CType(i_preppressuredroptime, String)
             txtbx_RcpCreatePrepPrefillStartTime.Text = CType(i_prepprefillstarttime, String)
             txtbx_RcpCreatePrepPrefillTime.Text = CType(i_prepprefilltime, String)
-            rdbtn_RcpCreatePrepPumpProcess.Checked = True
-
+            rdbtn_RcpCreatePrepPumpSpeed.Checked = True
+            rdbtn_RcpCreatePrepPumpProcess.Checked = False
             TextBox2.Enabled = True
             txtbx_RcpCreateDuration_TextChanged(Nothing, Nothing)
         Else
@@ -9287,4 +9287,6 @@ Public Class FormRecipeManagement
             TextBox2.Text = Nothing
         End If
     End Sub
+
+
 End Class
