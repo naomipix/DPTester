@@ -176,6 +176,8 @@ Module IniFileInitialize
             PublicVariables.Limit_Min_i_preppressuredroptime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_BackPressureDropTime", "0")
             PublicVariables.Limit_Min_i_prepprefillstarttime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_PrefillStartTime", "0")
             PublicVariables.Limit_Min_i_prepprefilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_PrefillTime", "0")
+            PublicVariables.Limit_Min_i_prepdrainstarttime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_DrainStartTime", "0")
+            PublicVariables.Limit_Min_i_prepdraintime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_DrainTime", "0")
             PublicVariables.Limit_Min_i_preprpm1 = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_RPM1", "0")
             PublicVariables.Limit_Min_i_preprpm2 = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MinPrep_RPM2", "0")
 
@@ -259,6 +261,8 @@ Module IniFileInitialize
             PublicVariables.Limit_Max_i_preppressuredroptime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_BackPressureDropTime", "600")
             PublicVariables.Limit_Max_i_prepprefillstarttime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_PrefillStartTime", "600")
             PublicVariables.Limit_Max_i_prepprefilltime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_PrefillTime", "600")
+            PublicVariables.Limit_Max_i_prepdrainstarttime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_DrainStartTime", "600")
+            PublicVariables.Limit_Max_i_prepdraintime = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_DrainTime", "600")
             PublicVariables.Limit_Max_i_preprpm1 = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_RPM1", "8500")
             PublicVariables.Limit_Max_i_preprpm2 = IniFileHandler.ReadIniValue(IniFilePath, Section8, "MaxPrep_RPM2", "8500")
 

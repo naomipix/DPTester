@@ -989,7 +989,7 @@ Public Class FormMain
     ' End   - [Debugging & Testing]
 
     ' Perform Action According To TabSelected
-    Private Sub tabctrl_MainCtrl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_MainCtrl.SelectedIndexChanged
+    Private Async Sub tabctrl_MainCtrl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_MainCtrl.SelectedIndexChanged
         If tabctrl_MainCtrl.SelectedTab Is tabpg_Main Then
             ' Focus First Tab Page
             tabctrl_SubMain.SelectedTab = tabpg_MainLiveGraph
@@ -3886,7 +3886,7 @@ Public Class FormMain
             Float2int(170, CType(dtrecipe.Rows(0)("drain4_back_pressure"), Double))
 
             ' Load Recipe Details in TabPage
-            LoadRecipeToTabRecipeDetails(dtrecipe)
+            'LoadRecipeToTabRecipeDetails(dtrecipe)
         End If
 
         ' Force Load Recipe Data In Cal Form

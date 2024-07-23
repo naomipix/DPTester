@@ -133,6 +133,8 @@ Module PublicVariables
 
     Public Limit_Min_i_prepfilltime As Integer
     Public Limit_Min_i_prepbleedtime As Integer
+    Public Limit_Min_i_prepdrainstarttime As Integer
+    Public Limit_Min_i_prepdraintime As Integer
     Public Limit_Min_d_prepflow As Decimal
     Public Limit_Min_d_prepflowtol As Decimal
     Public Limit_Min_d_preppressure As Decimal
@@ -189,6 +191,8 @@ Module PublicVariables
 
     Public Limit_Max_i_prepfilltime As Integer
     Public Limit_Max_i_prepbleedtime As Integer
+    Public Limit_Max_i_prepdrainstarttime As Integer
+    Public Limit_Max_i_prepdraintime As Integer
     Public Limit_Max_d_prepflow As Decimal
     Public Limit_Max_d_prepflowtol As Decimal
     Public Limit_Max_d_preppressure As Decimal

@@ -724,7 +724,6 @@ C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.vbproj.GenerateResou
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.vbproj.CoreCompileInputs.cache
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.exe.manifest
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.application
-C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.vbproj.CopyComplete
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.exe
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.xml
 C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTesterApp.pdb
@@ -844,3 +843,4 @@ C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPT
 C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\user\Desktop\Vijay\PX1529\PC Program\Software backup\Git repository\DPTester\obj\Debug\DPTesterApp.FormTesting.resources
+C:\Users\HP\Documents\GitHub\DPTester\obj\Debug\DPTester.1A6B7481.Up2Date

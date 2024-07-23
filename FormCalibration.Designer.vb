@@ -1663,6 +1663,7 @@ Partial Class FormCalibration
         Me.Label6.TabIndex = 103
         Me.Label6.Text = "Alarm/Warn Counter"
         Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label6.Visible = False
         '
         'dsp_Home
         '
