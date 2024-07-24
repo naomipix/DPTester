@@ -786,7 +786,8 @@ Public Class FormCalibration
         '    chkbx.Checked = False
         'Next
 
-        If MsgBox("Are you sure to start Calibration?", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Information") = MsgBoxResult.Yes Then
+        If MsgBox($"Are you sure to start Calibration?{vbCrLf}**This will reset current calibration data!", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Information") = MsgBoxResult.Yes Then
+            DiscardCal()
             CalibrationRun()
         End If
     End Sub
@@ -1259,6 +1260,11 @@ Public Class FormCalibration
                 .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(6).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(7).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+
+                'DataRow Format 2 Decimal
+                For i As Integer = 1 To 6
+                    .Columns(i).DefaultCellStyle.Format = "F"
+                Next
             End With
         Else
             PCStatus(1)(2) = False
@@ -1932,14 +1938,19 @@ Public Class FormCalibration
                 .Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
                 'Header Cell Font Bold
-                .Columns(0).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(1).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(2).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(3).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(4).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(6).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(7).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(0).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(1).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(2).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(3).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(4).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(5).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(6).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(7).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+
+                'DataRow Format 2 Decimal
+                For i As Integer = 1 To 6
+                    .Columns(i).DefaultCellStyle.Format = "F"
+                Next
             End With
         Else
             PCStatus(1)(3) = False

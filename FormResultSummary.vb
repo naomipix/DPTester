@@ -743,19 +743,19 @@
                 txtbx_ResultTemperature.Text = "0.0"
             Else
                 Try
-                    txtbx_ResultTemperature.Text = dtproductiondetail(0)("productiondetail_temperature") - 273.15
+                    txtbx_ResultTemperature.Text = (CDec(dtproductiondetail(0)("productiondetail_temperature")) - 273.15).ToString("F")
                 Catch ex As Exception
                     txtbx_ResultTemperature.Text = "0.0"
                 End Try
             End If
 
-            txtbx_ResultFlowrate.Text = dtproductiondetail(0)("productiondetail_flowrate")
-            txtbx_ResultInletPressure.Text = dtproductiondetail(0)("productiondetail_inlet_pressure")
-            txtbx_ResultOutletPressure.Text = dtproductiondetail(0)("productiondetail_outlet_pressure")
-            txtbx_ResultDiffPressure.Text = dtproductiondetail(0)("productiondetail_diff_pressure")
+            txtbx_ResultFlowrate.Text = CDec(dtproductiondetail(0)("productiondetail_flowrate")).ToString("F")
+            txtbx_ResultInletPressure.Text = CDec(dtproductiondetail(0)("productiondetail_inlet_pressure")).ToString("F")
+            txtbx_ResultOutletPressure.Text = CDec(dtproductiondetail(0)("productiondetail_outlet_pressure")).ToString("F")
+            txtbx_ResultDiffPressure.Text = CDec(dtproductiondetail(0)("productiondetail_diff_pressure")).ToString("F")
             txtbx_ResultTest.Text = dtproductiondetail(0)("productiondetail_result").ToUpper
 
-            txtbx_ResultCalOffset.Text = dtproductiondetail(0)("lotusage_cal_diff_pressure")
+            txtbx_ResultCalOffset.Text = CDec(dtproductiondetail(0)("lotusage_cal_diff_pressure")).ToString("F")
             txtbx_ResultRecipeID.Text = dtproductiondetail(0)("lotusage_recipe_id")
             txtbx_ResultRecipeIDRev.Text = dtproductiondetail(0)("lotusage_recipe_rev")
 

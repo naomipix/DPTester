@@ -9,6 +9,7 @@ Imports SkiaSharp
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 Imports LiveChartsCore.Defaults
 Imports LiveChartsCore.SkiaSharpView.WinForms
+Imports System.Threading
 
 Module FormMainModule
     Public Workorder As String
@@ -3666,11 +3667,31 @@ Public Class FormMain
                 txtbx_SerialNumber.Enabled = True
                 btn_OprKeyInDtConfirm.Enabled = True
             Else
+                'If CommLost = False Then
+                '    If PLCstatus(0)(3) = True Then
+                '        FormCalibration.ShowDialog()
+                '    Else
+                '        MsgBox($"Switch To Auto Mode & Start Calibration", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
+                '    End If
+                'End If
+
                 If CommLost = False Then
                     If PLCstatus(0)(3) = True Then
                         FormCalibration.ShowDialog()
                     Else
-                        MsgBox($"Switch To Auto Mode & Start Calibration", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
+                        Do While Not CommLost
+                            Thread.Sleep(10)
+                            If MsgBox($"Switch To Auto Mode & Start Calibration", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information") = MsgBoxResult.Ok Then
+                                If CommLost = False Then
+                                    If PLCstatus(0)(3) = True Then
+                                        FormCalibration.ShowDialog()
+                                        Exit Do
+                                    End If
+                                Else
+                                    Exit Do
+                                End If
+                            End If
+                        Loop
                     End If
                 End If
             End If

@@ -4198,15 +4198,37 @@ Public Class FormRecipeManagement
 
 #Region "Recipe Duplicate"
     Private Sub cmbx_RcpDupSelRecipe_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RcpDupSelRecipe.SelectedIndexChanged
+        Dim dtPartID As DataTable = SQL.ReadRecords("SELECT * FROM PartTable")
+        Dim PartIDgcomboSource As New Dictionary(Of String, String)()
+        PartIDgcomboSource.Add("0", "-Not Selected-")
+        If dtPartID.Rows.Count > 0 Then
+            For i As Integer = 0 To dtPartID.Rows.Count - 1
+                PartIDgcomboSource.Add(dtPartID(i)("id"), dtPartID(i)("part_id"))
+            Next
+        End If
+
+        With Cmbx_RcpDupNewPartID
+            .DataSource = New BindingSource(PartIDgcomboSource, Nothing)
+            .DisplayMember = "Value"
+            .ValueMember = "Key"
+            If .Items.Count > 0 Then
+                .SelectedIndex = 0
+                .Enabled = False
+            End If
+        End With
+
         If cmbx_RcpDupSelRecipe.SelectedIndex > 0 Then
+            Cmbx_RcpDupNewPartID.Enabled = True
             Cmbx_RcpDupNewType.Enabled = True
         Else
+            Cmbx_RcpDupNewPartID.SelectedIndex = 0
+            Cmbx_RcpDupNewPartID.Enabled = False
             Cmbx_RcpDupNewType.SelectedIndex = 0
             Cmbx_RcpDupNewType.Enabled = False
         End If
     End Sub
 
-    Private Sub Cmbx_RcpDupNewType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Cmbx_RcpDupNewType.SelectedIndexChanged
+    Private Sub Cmbx_RcpDupNewType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles Cmbx_RcpDupNewType.SelectedIndexChanged, Cmbx_RcpDupNewPartID.SelectedIndexChanged
         If Cmbx_RcpDupNewType.SelectedIndex > 0 Then
             txtbx_RcpDupNewRecipeID.Text = ""
             txtbx_RcpDupNewRecipeID.Enabled = True
@@ -4221,6 +4243,7 @@ Public Class FormRecipeManagement
     Private Sub btn_RcpDuplicate_Click(sender As Object, e As EventArgs) Handles btn_RcpDuplicate.Click
         Dim Newtype As Integer = Cmbx_RcpDupNewType.SelectedIndex
         Dim Newrecipe As String = txtbx_RcpDupNewRecipeID.Text
+        Dim Newpartid As String = Cmbx_RcpDupNewPartID.Text
         Dim selrecipeid As Integer = cmbx_RcpDupSelRecipe.SelectedIndex
         Dim selrecipe As String = cmbx_RcpDupSelRecipe.Text
         'Dim duplicaterecipe(50) As String
@@ -4314,7 +4337,8 @@ Public Class FormRecipeManagement
                 Dim recipeparameter As New Dictionary(Of String, Object) From {
                     {"recipe_id", dtDuplicaterecipe(0)("recipe_id")},
                     {"recipe_rev", 0},
-                    {"part_id", dtDuplicaterecipe(0)("part_id")},
+                                      _ '{"part_id", dtDuplicaterecipe(0)("part_id")},
+                    {"part_id", Newpartid},
                     {"recipe_type_id", dtDuplicaterecipe(0)("recipe_type_id")},
                     {"last_modified_by", dtDuplicaterecipe(0)("last_modified_by")},
                     {"last_modified_time", dtDuplicaterecipe(0)("last_modified_time")},
@@ -6505,8 +6529,10 @@ Public Class FormRecipeManagement
     Private Sub cmbx_RcpEditRecipeID_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RcpEditRecipeID.SelectedIndexChanged
         If cmbx_RcpEditRecipeID.SelectedIndex > 0 Then
             Dim RecipeID As String = cmbx_RcpEditRecipeID.Text
+            Dim PartID As String = cmbx_RcpEditPartID.Text
 
             cmbx_RcpDupSelRecipe.Text = RecipeID
+            Cmbx_RcpDupNewPartID.Text = PartID
 
             'Dim dtEditrecipe As DataTable = SQL.ReadRecords("SELECT * FROM RecipeTable WHERE recipe_id = '" + RecipeID + "'")
             Dim dtEditrecipe As DataTable = SQL.ReadRecords("SELECT * FROM RecipeTable WHERE id = '" + DirectCast(cmbx_RcpEditRecipeID.SelectedItem, KeyValuePair(Of String, String)).Key + "'")

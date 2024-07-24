@@ -1578,19 +1578,19 @@ Public Class FormResultGraph
                 txtbx_GraphTemperature.Text = "0.0"
             Else
                 Try
-                    txtbx_GraphTemperature.Text = CDec(dtproductiondetail(0)("productiondetail_temperature")) - 273.15
+                    txtbx_GraphTemperature.Text = (CDec(dtproductiondetail(0)("productiondetail_temperature")) - 273.15).ToString("F")
                 Catch ex As Exception
-                    txtbx_GraphTemperature.Text = "0.0"
+                    txtbx_GraphTemperature.Text = "0.00"
                 End Try
             End If
 
-            txtbx_GraphFlowrate.Text = dtproductiondetail(0)("productiondetail_flowrate")
-            txtbx_GraphInletPressure.Text = dtproductiondetail(0)("productiondetail_inlet_pressure")
-            txtbx_GraphOutletPressure.Text = dtproductiondetail(0)("productiondetail_outlet_pressure")
-            txtbx_GraphDiffPressure.Text = dtproductiondetail(0)("productiondetail_diff_pressure")
+            txtbx_GraphFlowrate.Text = CDec(dtproductiondetail(0)("productiondetail_flowrate")).ToString("F")
+            txtbx_GraphInletPressure.Text = CDec(dtproductiondetail(0)("productiondetail_inlet_pressure")).ToString("F")
+            txtbx_GraphOutletPressure.Text = CDec(dtproductiondetail(0)("productiondetail_outlet_pressure")).ToString("F")
+            txtbx_GraphDiffPressure.Text = CDec(dtproductiondetail(0)("productiondetail_diff_pressure")).ToString("F")
             txtbx_GraphTest.Text = dtproductiondetail(0)("productiondetail_result").ToUpper
 
-            txtbx_GraphCalOffset.Text = dtproductiondetail(0)("lotusage_cal_diff_pressure")
+            txtbx_GraphCalOffset.Text = CDec(dtproductiondetail(0)("lotusage_cal_diff_pressure")).ToString("F")
             txtbx_GraphRecipeID.Text = dtproductiondetail(0)("lotusage_recipe_id")
             txtbx_GraphRecipeIDRev.Text = dtproductiondetail(0)("lotusage_recipe_rev")
 

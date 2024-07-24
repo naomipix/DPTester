@@ -3343,7 +3343,20 @@ Module ModuleOmron
             Dim Filepath As String = $"{PublicVariables.CSVPathToResultSummary}ResultSummary_{FormMainModule.SerialUid}_{FormMainModule.SerialAttempt}_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv"
 
             ' Export With Return
-            Dim ReturnValue As String = ExportDataTableToCsv(dtresult, Filepath, PublicVariables.CSVDelimiterResultSummary)
+            Dim ReturnValue As String = ""
+            If True Then
+                Dim dtTemp As DataTable = dtresult.Copy
+                For i As Integer = 0 To dtTemp.Rows.Count - 1
+                    dtTemp(i)("Inlet Pressure (kPa)") = Math.Round(dtTemp(i)("Inlet Pressure (kPa)"), 2)
+                    dtTemp(i)("Outlet Pressure (kPa)") = Math.Round(dtTemp(i)("Outlet Pressure (kPa)"), 2)
+                    dtTemp(i)("Differential Pressure (kPa)") = Math.Round(dtTemp(i)("Differential Pressure (kPa)"), 2)
+                    dtTemp(i)("Flowrate (l/min)") = Math.Round(dtTemp(i)("Flowrate (l/min)"), 2)
+                    dtTemp(i)("Temperature (°C)") = Math.Round(dtTemp(i)("Temperature (°C)"), 2)
+                    dtTemp(i)("Back Pressure (kPa)") = Math.Round(dtTemp(i)("Back Pressure (kPa)"), 2)
+                Next
+
+                ReturnValue = ExportDataTableToCsv(dtresult, Filepath, PublicVariables.CSVDelimiterResultSummary)
+            End If
 
             ' Check Return State
             If ReturnValue = "True" Then
