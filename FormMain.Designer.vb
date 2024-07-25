@@ -263,18 +263,13 @@ Partial Class FormMain
         Me.txtbx_RecipeVerTol = New System.Windows.Forms.TextBox()
         Me.dsp_RecipeVerTol = New System.Windows.Forms.Label()
         Me.Label38 = New System.Windows.Forms.Label()
-        Me.txtbx_RecipePrepFlow = New System.Windows.Forms.TextBox()
-        Me.txtbx_RecipePrepFlowTol = New System.Windows.Forms.TextBox()
-        Me.dsp_RecipePrepFlow = New System.Windows.Forms.Label()
-        Me.dsp_RecipePrepFlowTol = New System.Windows.Forms.Label()
-        Me.txtbx_RecipePrepPressureDrop = New System.Windows.Forms.TextBox()
-        Me.dsp_RecipePressureDrop = New System.Windows.Forms.Label()
         Me.panel_RecipeDrain4 = New System.Windows.Forms.Panel()
         Me.txtbx_RecipeDrain4Time = New System.Windows.Forms.TextBox()
         Me.dsp_RecipeDrain4Time = New System.Windows.Forms.Label()
         Me.txtbx_RecipeDrain4Pressure = New System.Windows.Forms.TextBox()
         Me.dsp_RecipeDrain4Pressure = New System.Windows.Forms.Label()
         Me.checkbx_RecipeDrain4 = New System.Windows.Forms.CheckBox()
+        Me.txtbx_RecipePrepFlow = New System.Windows.Forms.TextBox()
         Me.panel_RecipeFlush1 = New System.Windows.Forms.Panel()
         Me.dsp_RecipeFlush1PumpMode = New System.Windows.Forms.Label()
         Me.txtbx_RecipeFlush1RPM = New System.Windows.Forms.TextBox()
@@ -289,7 +284,12 @@ Partial Class FormMain
         Me.txtbx_RecipeFlush1Flow = New System.Windows.Forms.TextBox()
         Me.checkbx_RecipeFlush1 = New System.Windows.Forms.CheckBox()
         Me.dsp_RecipeFlush1Flow = New System.Windows.Forms.Label()
+        Me.txtbx_RecipePrepFlowTol = New System.Windows.Forms.TextBox()
         Me.Panel13 = New System.Windows.Forms.Panel()
+        Me.dsp_RecipePressure2DropTime = New System.Windows.Forms.Label()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.txtbx_RecipePressure2DropTime = New System.Windows.Forms.TextBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.dsp_RecipePrepPumpMode = New System.Windows.Forms.Label()
         Me.dsp_RecipePrepRPM = New System.Windows.Forms.Label()
         Me.txtbx_RecipePrepRPM = New System.Windows.Forms.TextBox()
@@ -307,6 +307,8 @@ Partial Class FormMain
         Me.txtbx_RecipePrepPressure = New System.Windows.Forms.TextBox()
         Me.txtbx_RecipePrepBleed = New System.Windows.Forms.TextBox()
         Me.txtbx_RecipePrepFill = New System.Windows.Forms.TextBox()
+        Me.dsp_RecipePrepFlow = New System.Windows.Forms.Label()
+        Me.dsp_RecipePrepFlowTol = New System.Windows.Forms.Label()
         Me.panel_RecipeDPTest1 = New System.Windows.Forms.Panel()
         Me.dsp_RecipeDPTestPumpMode = New System.Windows.Forms.Label()
         Me.txtbx_RecipeDPTestRPM = New System.Windows.Forms.TextBox()
@@ -324,12 +326,14 @@ Partial Class FormMain
         Me.dsp_RecipeDPTime = New System.Windows.Forms.Label()
         Me.txtbx_RecipeDPStabilize = New System.Windows.Forms.TextBox()
         Me.dsp_RecipeDPStabilize = New System.Windows.Forms.Label()
+        Me.txtbx_RecipePrepPressureDrop = New System.Windows.Forms.TextBox()
         Me.panel_RecipeDrain1 = New System.Windows.Forms.Panel()
         Me.txtbx_RecipeDrain1Time = New System.Windows.Forms.TextBox()
         Me.dsp_RecipeDrain1Time = New System.Windows.Forms.Label()
         Me.txtbx_RecipeDrain1Pressure = New System.Windows.Forms.TextBox()
         Me.dsp_RecipeDrain1Pressure = New System.Windows.Forms.Label()
         Me.checkbx_RecipeDrain1 = New System.Windows.Forms.CheckBox()
+        Me.dsp_RecipePressureDrop = New System.Windows.Forms.Label()
         Me.panel_RecipeDrain3 = New System.Windows.Forms.Panel()
         Me.txtbx_RecipeDrain3Time = New System.Windows.Forms.TextBox()
         Me.dsp_RecipeDrain3Time = New System.Windows.Forms.Label()
@@ -603,10 +607,8 @@ Partial Class FormMain
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cms_dgv_LotSummary = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DeleteLotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.dsp_RecipePressure2DropTime = New System.Windows.Forms.Label()
-        Me.Label42 = New System.Windows.Forms.Label()
-        Me.txtbx_RecipePressure2DropTime = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.btn_JigBypass = New System.Windows.Forms.Button()
+        Me.btn_Depressurize = New System.Windows.Forms.Button()
         Me.panel_FormControl.SuspendLayout
         Me.Panel12.SuspendLayout
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
@@ -991,6 +993,8 @@ Partial Class FormMain
         '
         'panel_MainRight
         '
+        Me.panel_MainRight.Controls.Add(Me.btn_Depressurize)
+        Me.panel_MainRight.Controls.Add(Me.btn_JigBypass)
         Me.panel_MainRight.Controls.Add(Me.lbl_runcycletime)
         Me.panel_MainRight.Controls.Add(Me.lbl_EstCycleTime)
         Me.panel_MainRight.Controls.Add(Me.Label5)
@@ -1008,7 +1012,7 @@ Partial Class FormMain
         'lbl_runcycletime
         '
         Me.lbl_runcycletime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_runcycletime.Location = New System.Drawing.Point(755, 634)
+        Me.lbl_runcycletime.Location = New System.Drawing.Point(827, 634)
         Me.lbl_runcycletime.Name = "lbl_runcycletime"
         Me.lbl_runcycletime.Size = New System.Drawing.Size(100, 25)
         Me.lbl_runcycletime.TabIndex = 16
@@ -1016,28 +1020,28 @@ Partial Class FormMain
         'lbl_EstCycleTime
         '
         Me.lbl_EstCycleTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lbl_EstCycleTime.Location = New System.Drawing.Point(234, 634)
+        Me.lbl_EstCycleTime.Location = New System.Drawing.Point(567, 634)
         Me.lbl_EstCycleTime.Name = "lbl_EstCycleTime"
         Me.lbl_EstCycleTime.Size = New System.Drawing.Size(100, 25)
         Me.lbl_EstCycleTime.TabIndex = 15
         '
         'Label5
         '
-        Me.Label5.Location = New System.Drawing.Point(598, 634)
+        Me.Label5.Location = New System.Drawing.Point(688, 625)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(160, 25)
+        Me.Label5.Size = New System.Drawing.Size(133, 40)
         Me.Label5.TabIndex = 14
         Me.Label5.Text = "Actual Cycle Time (s):"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Label2
         '
-        Me.Label2.Location = New System.Drawing.Point(68, 634)
+        Me.Label2.Location = New System.Drawing.Point(401, 625)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(160, 25)
+        Me.Label2.Size = New System.Drawing.Size(160, 40)
         Me.Label2.TabIndex = 13
         Me.Label2.Text = "Estimated Cycle Time (s):"
-        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'cmbx_GraphSelection
         '
@@ -3086,69 +3090,6 @@ Partial Class FormMain
         Me.Label38.Text = "Common"
         Me.Label38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'txtbx_RecipePrepFlow
-        '
-        Me.txtbx_RecipePrepFlow.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_RecipePrepFlow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RecipePrepFlow.Location = New System.Drawing.Point(824, 500)
-        Me.txtbx_RecipePrepFlow.MaxLength = 6
-        Me.txtbx_RecipePrepFlow.Name = "txtbx_RecipePrepFlow"
-        Me.txtbx_RecipePrepFlow.ReadOnly = True
-        Me.txtbx_RecipePrepFlow.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RecipePrepFlow.TabIndex = 22
-        Me.txtbx_RecipePrepFlow.Text = "-"
-        '
-        'txtbx_RecipePrepFlowTol
-        '
-        Me.txtbx_RecipePrepFlowTol.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_RecipePrepFlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RecipePrepFlowTol.Location = New System.Drawing.Point(824, 541)
-        Me.txtbx_RecipePrepFlowTol.MaxLength = 6
-        Me.txtbx_RecipePrepFlowTol.Name = "txtbx_RecipePrepFlowTol"
-        Me.txtbx_RecipePrepFlowTol.ReadOnly = True
-        Me.txtbx_RecipePrepFlowTol.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RecipePrepFlowTol.TabIndex = 79
-        Me.txtbx_RecipePrepFlowTol.Text = "-"
-        '
-        'dsp_RecipePrepFlow
-        '
-        Me.dsp_RecipePrepFlow.Location = New System.Drawing.Point(658, 492)
-        Me.dsp_RecipePrepFlow.Name = "dsp_RecipePrepFlow"
-        Me.dsp_RecipePrepFlow.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RecipePrepFlow.TabIndex = 26
-        Me.dsp_RecipePrepFlow.Text = "Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min) :"
-        Me.dsp_RecipePrepFlow.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'dsp_RecipePrepFlowTol
-        '
-        Me.dsp_RecipePrepFlowTol.Location = New System.Drawing.Point(658, 531)
-        Me.dsp_RecipePrepFlowTol.Name = "dsp_RecipePrepFlowTol"
-        Me.dsp_RecipePrepFlowTol.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RecipePrepFlowTol.TabIndex = 26
-        Me.dsp_RecipePrepFlowTol.Text = "Flowrate Tolerance (l/min) (+/-) :"
-        Me.dsp_RecipePrepFlowTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RecipePrepPressureDrop
-        '
-        Me.txtbx_RecipePrepPressureDrop.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_RecipePrepPressureDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RecipePrepPressureDrop.Location = New System.Drawing.Point(824, 582)
-        Me.txtbx_RecipePrepPressureDrop.MaxLength = 6
-        Me.txtbx_RecipePrepPressureDrop.Name = "txtbx_RecipePrepPressureDrop"
-        Me.txtbx_RecipePrepPressureDrop.ReadOnly = True
-        Me.txtbx_RecipePrepPressureDrop.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RecipePrepPressureDrop.TabIndex = 24
-        Me.txtbx_RecipePrepPressureDrop.Text = "-"
-        '
-        'dsp_RecipePressureDrop
-        '
-        Me.dsp_RecipePressureDrop.Location = New System.Drawing.Point(658, 574)
-        Me.dsp_RecipePressureDrop.Name = "dsp_RecipePressureDrop"
-        Me.dsp_RecipePressureDrop.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RecipePressureDrop.TabIndex = 25
-        Me.dsp_RecipePressureDrop.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
-        Me.dsp_RecipePressureDrop.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'panel_RecipeDrain4
         '
         Me.panel_RecipeDrain4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -3216,6 +3157,18 @@ Partial Class FormMain
         Me.checkbx_RecipeDrain4.Text = "Drain-4 Enable"
         Me.checkbx_RecipeDrain4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.checkbx_RecipeDrain4.UseVisualStyleBackColor = True
+        '
+        'txtbx_RecipePrepFlow
+        '
+        Me.txtbx_RecipePrepFlow.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepFlow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepFlow.Location = New System.Drawing.Point(824, 500)
+        Me.txtbx_RecipePrepFlow.MaxLength = 6
+        Me.txtbx_RecipePrepFlow.Name = "txtbx_RecipePrepFlow"
+        Me.txtbx_RecipePrepFlow.ReadOnly = True
+        Me.txtbx_RecipePrepFlow.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepFlow.TabIndex = 22
+        Me.txtbx_RecipePrepFlow.Text = "-"
         '
         'panel_RecipeFlush1
         '
@@ -3379,6 +3332,18 @@ Partial Class FormMain
         Me.dsp_RecipeFlush1Flow.Text = "Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min) :"
         Me.dsp_RecipeFlush1Flow.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtbx_RecipePrepFlowTol
+        '
+        Me.txtbx_RecipePrepFlowTol.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepFlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepFlowTol.Location = New System.Drawing.Point(824, 541)
+        Me.txtbx_RecipePrepFlowTol.MaxLength = 6
+        Me.txtbx_RecipePrepFlowTol.Name = "txtbx_RecipePrepFlowTol"
+        Me.txtbx_RecipePrepFlowTol.ReadOnly = True
+        Me.txtbx_RecipePrepFlowTol.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepFlowTol.TabIndex = 79
+        Me.txtbx_RecipePrepFlowTol.Text = "-"
+        '
         'Panel13
         '
         Me.Panel13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -3407,6 +3372,48 @@ Partial Class FormMain
         Me.Panel13.Name = "Panel13"
         Me.Panel13.Size = New System.Drawing.Size(307, 527)
         Me.Panel13.TabIndex = 46
+        '
+        'dsp_RecipePressure2DropTime
+        '
+        Me.dsp_RecipePressure2DropTime.Location = New System.Drawing.Point(17, 395)
+        Me.dsp_RecipePressure2DropTime.Name = "dsp_RecipePressure2DropTime"
+        Me.dsp_RecipePressure2DropTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePressure2DropTime.TabIndex = 86
+        Me.dsp_RecipePressure2DropTime.Text = "Back Pressure-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Duration (s) :"
+        Me.dsp_RecipePressure2DropTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label42
+        '
+        Me.Label42.Location = New System.Drawing.Point(17, 355)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(150, 40)
+        Me.Label42.TabIndex = 88
+        Me.Label42.Text = "Back Pressure-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.Label42.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RecipePressure2DropTime
+        '
+        Me.txtbx_RecipePressure2DropTime.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePressure2DropTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePressure2DropTime.Location = New System.Drawing.Point(183, 403)
+        Me.txtbx_RecipePressure2DropTime.MaxLength = 6
+        Me.txtbx_RecipePressure2DropTime.Name = "txtbx_RecipePressure2DropTime"
+        Me.txtbx_RecipePressure2DropTime.ReadOnly = True
+        Me.txtbx_RecipePressure2DropTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePressure2DropTime.TabIndex = 87
+        Me.txtbx_RecipePressure2DropTime.Text = "-"
+        '
+        'TextBox6
+        '
+        Me.TextBox6.BackColor = System.Drawing.SystemColors.Window
+        Me.TextBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox6.Location = New System.Drawing.Point(183, 363)
+        Me.TextBox6.MaxLength = 6
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.ReadOnly = True
+        Me.TextBox6.Size = New System.Drawing.Size(100, 25)
+        Me.TextBox6.TabIndex = 85
+        Me.TextBox6.Text = "-"
         '
         'dsp_RecipePrepPumpMode
         '
@@ -3585,6 +3592,24 @@ Partial Class FormMain
         Me.txtbx_RecipePrepFill.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_RecipePrepFill.TabIndex = 20
         Me.txtbx_RecipePrepFill.Text = "-"
+        '
+        'dsp_RecipePrepFlow
+        '
+        Me.dsp_RecipePrepFlow.Location = New System.Drawing.Point(658, 492)
+        Me.dsp_RecipePrepFlow.Name = "dsp_RecipePrepFlow"
+        Me.dsp_RecipePrepFlow.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepFlow.TabIndex = 26
+        Me.dsp_RecipePrepFlow.Text = "Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min) :"
+        Me.dsp_RecipePrepFlow.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RecipePrepFlowTol
+        '
+        Me.dsp_RecipePrepFlowTol.Location = New System.Drawing.Point(658, 531)
+        Me.dsp_RecipePrepFlowTol.Name = "dsp_RecipePrepFlowTol"
+        Me.dsp_RecipePrepFlowTol.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePrepFlowTol.TabIndex = 26
+        Me.dsp_RecipePrepFlowTol.Text = "Flowrate Tolerance (l/min) (+/-) :"
+        Me.dsp_RecipePrepFlowTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'panel_RecipeDPTest1
         '
@@ -3783,6 +3808,18 @@ Partial Class FormMain
         Me.dsp_RecipeDPStabilize.Text = "Stabilize Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
         Me.dsp_RecipeDPStabilize.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtbx_RecipePrepPressureDrop
+        '
+        Me.txtbx_RecipePrepPressureDrop.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RecipePrepPressureDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RecipePrepPressureDrop.Location = New System.Drawing.Point(824, 582)
+        Me.txtbx_RecipePrepPressureDrop.MaxLength = 6
+        Me.txtbx_RecipePrepPressureDrop.Name = "txtbx_RecipePrepPressureDrop"
+        Me.txtbx_RecipePrepPressureDrop.ReadOnly = True
+        Me.txtbx_RecipePrepPressureDrop.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RecipePrepPressureDrop.TabIndex = 24
+        Me.txtbx_RecipePrepPressureDrop.Text = "-"
+        '
         'panel_RecipeDrain1
         '
         Me.panel_RecipeDrain1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -3850,6 +3887,15 @@ Partial Class FormMain
         Me.checkbx_RecipeDrain1.Text = "Drain-1 Enable"
         Me.checkbx_RecipeDrain1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.checkbx_RecipeDrain1.UseVisualStyleBackColor = True
+        '
+        'dsp_RecipePressureDrop
+        '
+        Me.dsp_RecipePressureDrop.Location = New System.Drawing.Point(658, 574)
+        Me.dsp_RecipePressureDrop.Name = "dsp_RecipePressureDrop"
+        Me.dsp_RecipePressureDrop.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RecipePressureDrop.TabIndex = 25
+        Me.dsp_RecipePressureDrop.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RecipePressureDrop.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'panel_RecipeDrain3
         '
@@ -7026,47 +7072,31 @@ Partial Class FormMain
         Me.DeleteLotToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.DeleteLotToolStripMenuItem.Text = "Delete Lot"
         '
-        'dsp_RecipePressure2DropTime
+        'btn_JigBypass
         '
-        Me.dsp_RecipePressure2DropTime.Location = New System.Drawing.Point(17, 395)
-        Me.dsp_RecipePressure2DropTime.Name = "dsp_RecipePressure2DropTime"
-        Me.dsp_RecipePressure2DropTime.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RecipePressure2DropTime.TabIndex = 86
-        Me.dsp_RecipePressure2DropTime.Text = "Back Pressure-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Duration (s) :"
-        Me.dsp_RecipePressure2DropTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btn_JigBypass.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_JigBypass.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.btn_JigBypass.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_JigBypass.Location = New System.Drawing.Point(136, 625)
+        Me.btn_JigBypass.Name = "btn_JigBypass"
+        Me.btn_JigBypass.Size = New System.Drawing.Size(125, 40)
+        Me.btn_JigBypass.TabIndex = 36
+        Me.btn_JigBypass.Text = "Jig Bypass"
+        Me.btn_JigBypass.UseVisualStyleBackColor = False
+        Me.btn_JigBypass.Visible = False
         '
-        'Label42
+        'btn_Depressurize
         '
-        Me.Label42.Location = New System.Drawing.Point(17, 355)
-        Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(150, 40)
-        Me.Label42.TabIndex = 88
-        Me.Label42.Text = "Back Pressure-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
-        Me.Label42.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RecipePressure2DropTime
-        '
-        Me.txtbx_RecipePressure2DropTime.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_RecipePressure2DropTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RecipePressure2DropTime.Location = New System.Drawing.Point(183, 403)
-        Me.txtbx_RecipePressure2DropTime.MaxLength = 6
-        Me.txtbx_RecipePressure2DropTime.Name = "txtbx_RecipePressure2DropTime"
-        Me.txtbx_RecipePressure2DropTime.ReadOnly = True
-        Me.txtbx_RecipePressure2DropTime.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RecipePressure2DropTime.TabIndex = 87
-        Me.txtbx_RecipePressure2DropTime.Text = "-"
-        '
-        'TextBox6
-        '
-        Me.TextBox6.BackColor = System.Drawing.SystemColors.Window
-        Me.TextBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox6.Location = New System.Drawing.Point(183, 363)
-        Me.TextBox6.MaxLength = 6
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.ReadOnly = True
-        Me.TextBox6.Size = New System.Drawing.Size(100, 25)
-        Me.TextBox6.TabIndex = 85
-        Me.TextBox6.Text = "-"
+        Me.btn_Depressurize.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.btn_Depressurize.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.btn_Depressurize.ForeColor = System.Drawing.SystemColors.Window
+        Me.btn_Depressurize.Location = New System.Drawing.Point(5, 625)
+        Me.btn_Depressurize.Name = "btn_Depressurize"
+        Me.btn_Depressurize.Size = New System.Drawing.Size(125, 40)
+        Me.btn_Depressurize.TabIndex = 36
+        Me.btn_Depressurize.Text = "Depressurize"
+        Me.btn_Depressurize.UseVisualStyleBackColor = False
+        Me.btn_Depressurize.Visible = False
         '
         'FormMain
         '
@@ -7747,4 +7777,6 @@ Partial Class FormMain
     Friend WithEvents Label42 As Label
     Friend WithEvents txtbx_RecipePressure2DropTime As TextBox
     Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents btn_Depressurize As Button
+    Friend WithEvents btn_JigBypass As Button
 End Class

@@ -67,6 +67,7 @@ Module PublicVariables
     Public RetainedCalStatus As String
     Public RetainedCaloffset As String
     Public RetainedCaldate As String
+    Public RetainedJigBypass As Boolean
 
     ' Retained Memory - User Login Table Settings
     Public UserLoginHistoryTopCount As Integer = 100
@@ -904,6 +905,14 @@ Namespace RetainedMemory
 
                     If dt(i)("id") = 32 Then
                         PublicVariables.RetainedCaldate = dt(i)("retained_value")
+                    End If
+
+                    If dt(i)("id") = 33 Then
+
+                    End If
+
+                    If dt(i)("id") = 34 Then
+                        PublicVariables.RetainedJigBypass = dt(i)("retained_value")
                     End If
                 Next
             End If

@@ -2098,7 +2098,16 @@ Module ModuleOmron
                 'Recipe Selection
                 If FormMain.txtbx_TitleRecipeID.Text.Length > 3 Then
                     FINSOutput(20) = 1
-                    FINSOutput(21) = CheckJigType(JigType)
+
+                    Try
+                        If PublicVariables.RetainedJigBypass Then
+                            FINSOutput(21) = 1
+                        Else
+                            FINSOutput(21) = CheckJigType(JigType)
+                        End If
+                    Catch ex As Exception
+                        FINSOutput(21) = CheckJigType(JigType)
+                    End Try
                 Else
                     FINSOutput(20) = 0
                     FINSOutput(21) = 0
@@ -3214,17 +3223,59 @@ Module ModuleOmron
     End Sub
 
     Private Sub Resultendtimer_Ticks(sender As Object, e As EventArgs) Handles Resultendtimer.Tick
-        Dim ResultEndTime As DateTime = ResultendtimerStartTime.AddSeconds(10)
+        'If True Then
+        '    Dim ResultEndTime As DateTime = ResultendtimerStartTime.AddSeconds(10)
 
-        If DateTime.Now > ResultEndTime Then
-            Resultendtimer.Enabled = False
+        '    If DateTime.Now > ResultEndTime Then
+        '        Resultendtimer.Enabled = False
 
-            Calculatefinalresult()
-        Else
-            If PLCstatus(1)(11) = True Then
+        '        Calculatefinalresult()
+        '    Else
+        '        If PLCstatus(1)(11) = True Then
+        '            Resultendtimer.Enabled = False
+
+        '            Calculatefinalresult()
+        '        End If
+        '    End If
+        'End If
+
+        If True Then
+            ' PLCstatus(2)(15) Depressurize Running
+
+            Dim ResultEndTime As DateTime = ResultendtimerStartTime.AddSeconds(65)
+
+            If DateTime.Now > ResultEndTime Then
                 Resultendtimer.Enabled = False
-
                 Calculatefinalresult()
+            Else
+                Dim toContinue = True
+
+                If toContinue Then
+                    ' Depressurize Complete ACK
+                    If PLCstatus(1)(14) Then
+                        Resultendtimer.Enabled = False
+                        Calculatefinalresult()
+                        toContinue = False
+                    End If
+                End If
+
+                If toContinue Then
+                    ' Machine In Alarm FB
+                    If PLCstatus(0)(4) Then
+                        Resultendtimer.Enabled = False
+                        Calculatefinalresult()
+                        toContinue = False
+                    End If
+                End If
+
+                If toContinue Then
+                    ' Machine In Auto Running
+                    If Not PLCstatus(0)(1) Then
+                        Resultendtimer.Enabled = False
+                        Calculatefinalresult()
+                        toContinue = False
+                    End If
+                End If
             End If
         End If
     End Sub

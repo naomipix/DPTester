@@ -2121,17 +2121,59 @@ Public Class FormCalibration
     End Sub
 
     Private Sub tmr_Verification_EndSeq_Tick(sender As Object, e As EventArgs) Handles tmr_Verification_EndSeq.Tick
-        Dim VerEndTimeInterval As DateTime = VerEndTime.AddSeconds(10)
+        'If True Then
+        '    Dim VerEndTimeInterval As DateTime = VerEndTime.AddSeconds(10)
 
-        If DateTime.Now > VerEndTimeInterval Then
-            tmr_Verification_EndSeq.Enabled = False
+        '    If DateTime.Now > VerEndTimeInterval Then
+        '        tmr_Verification_EndSeq.Enabled = False
 
-            txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
-        Else
-            If PLCstatus(1)(5) = True Then
+        '        txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+        '    Else
+        '        If PLCstatus(1)(5) = True Then
+        '            tmr_Verification_EndSeq.Enabled = False
+
+        '            txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+        '        End If
+        '    End If
+        'End If
+
+        If True Then
+            ' PLCstatus(2)(15) Depressurize Running
+
+            Dim VerEndTimeInterval As DateTime = VerEndTime.AddSeconds(65)
+
+            If DateTime.Now > VerEndTimeInterval Then
                 tmr_Verification_EndSeq.Enabled = False
-
                 txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+            Else
+                Dim toContinue = True
+
+                If toContinue Then
+                    ' Depressurize Complete ACK
+                    If PLCstatus(1)(14) Then
+                        tmr_Verification_EndSeq.Enabled = False
+                        txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+                        toContinue = False
+                    End If
+                End If
+
+                If toContinue Then
+                    ' Machine In Alarm FB
+                    If PLCstatus(0)(4) Then
+                        tmr_Verification_EndSeq.Enabled = False
+                        txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+                        toContinue = False
+                    End If
+                End If
+
+                If toContinue Then
+                    ' Machine In Auto Running
+                    If Not PLCstatus(0)(1) Then
+                        tmr_Verification_EndSeq.Enabled = False
+                        txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+                        toContinue = False
+                    End If
+                End If
             End If
         End If
     End Sub

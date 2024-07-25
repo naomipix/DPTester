@@ -1272,6 +1272,15 @@ Public Class FormMain
             ' Get Unique Records
             Dim dtRecipeTable As DataTable = dvGetRecord.ToTable(True, "part_id")
 
+            ' Replace All Nulls w/0s
+            For Each row As DataRow In dtRecipeTable.Rows
+                For Each col As DataColumn In dtRecipeTable.Columns
+                    If row.IsNull(col) Then
+                        row(col) = 0
+                    End If
+                Next
+            Next
+
             ' Insert Available Record Into Dictionary
             If dtRecipeTable.Rows.Count > 0 Then
                 For i As Integer = 0 To dtRecipeTable.Rows.Count - 1
@@ -1679,17 +1688,20 @@ Public Class FormMain
     ' Open Context Menu
     Dim dgvProdDetailRowIndex As Integer = -1
     Private Sub dgv_ProdDetail_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgv_ProdDetail.CellMouseUp
-        Dim dgv As DataGridView = dgv_ProdDetail
+        Try
+            Dim dgv As DataGridView = dgv_ProdDetail
 
-        If e.Button = MouseButtons.Right Then
-            dgv.Rows(e.RowIndex).Selected = True
-            dgvProdDetailRowIndex = e.RowIndex
+            If e.Button = MouseButtons.Right Then
+                dgv.Rows(e.RowIndex).Selected = True
+                dgvProdDetailRowIndex = e.RowIndex
 
-            With cms_dgv_ProdDetail
-                .Show(dgv, e.Location)
-                .Show(Cursor.Position)
-            End With
-        End If
+                With cms_dgv_ProdDetail
+                    .Show(dgv, e.Location)
+                    .Show(Cursor.Position)
+                End With
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     ' Click Context Menu
@@ -2031,17 +2043,20 @@ Public Class FormMain
     ' Open Context Menu
     Dim dgvLotSummaryRowIndex As Integer = -1
     Private Sub dgv_LotSummary_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgv_LotSummary.CellMouseUp
-        Dim dgv As DataGridView = dgv_LotSummary
+        Try
+            Dim dgv As DataGridView = dgv_LotSummary
 
-        If e.Button = MouseButtons.Right Then
-            dgv.Rows(e.RowIndex).Selected = True
-            dgvLotSummaryRowIndex = e.RowIndex
+            If e.Button = MouseButtons.Right Then
+                dgv.Rows(e.RowIndex).Selected = True
+                dgvLotSummaryRowIndex = e.RowIndex
 
-            With cms_dgv_LotSummary
-                .Show(dgv, e.Location)
-                .Show(Cursor.Position)
-            End With
-        End If
+                With cms_dgv_LotSummary
+                    .Show(dgv, e.Location)
+                    .Show(Cursor.Position)
+                End With
+            End If
+        Catch ex As Exception
+        End Try
     End Sub
 
     ' Click Context Menu
@@ -3737,6 +3752,15 @@ Public Class FormMain
 
         Dim dtrecipe As DataTable = SQL.ReadRecords($"SELECT * From RecipeTable WHERE recipe_id ='{Recipe}' ORDER BY recipe_rev DESC")
 
+        ' Replace All Nulls w/0s
+        For Each row As DataRow In dtrecipe.Rows
+            For Each col As DataColumn In dtrecipe.Columns
+                If row.IsNull(col) Then
+                    row(col) = 0
+                End If
+            Next
+        Next
+
         ' Load Fitting Type
         If True Then
             If Not IsDBNull(dtrecipe(0)("fitting_inlet")) Then
@@ -3757,147 +3781,132 @@ Public Class FormMain
         End If
 
         If dtrecipe.Rows.Count > 0 Then
-            Dim VerEnable As Boolean = True
-            Select Case txtbx_TitleFilterType.Text
-                Case "Cal. Master"
-                    VerEnable = False
-            End Select
-            If VerEnable Then
-                DInt2int(118, 1)
-            Else
-                DInt2int(118, 0)
+            ' Calibration Master
+            If True Then
+                Dim VerEnable As Boolean = True
+                Select Case txtbx_TitleFilterType.Text
+                    Case "Cal. Master"
+                        VerEnable = False
+                End Select
+                If VerEnable Then
+                    DInt2int(118, 1)
+                Else
+                    DInt2int(118, 0)
+                End If
             End If
 
+            ' Common
             Float2int(30, CType(dtrecipe.Rows(0)("verification_tolerance"), Double))
-            Float2int(106, CType(dtrecipe.Rows(0)("prep_flowrate"), Double))
-            Float2int(108, CType(dtrecipe.Rows(0)("prep_back_pressure"), Double))
-            Float2int(110, CType(dtrecipe.Rows(0)("prep_pressure_drop"), Double))
 
-            Float2int(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
-            Float2int(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
-            'Float2int(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
-
-            'Float2int(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
-            'Float2int(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
-            'Float2int(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
-
-            Float2int(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
-            Float2int(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
-
-            lbl_DiffPressMin.Text = dtrecipe.Rows(0)("dp_lowerlimit").ToString
-            lbl_DiffPressMax.Text = dtrecipe.Rows(0)("dp_upperlimit").ToString
-
-            Float2int(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
-            Float2int(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
-            'Float2int(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
-
-            Float2int(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
-
-            Float2int(56, CType(dtrecipe.Rows(0)("drain2_back_pressure"), Double))
-
-            Float2int(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
-
+            ' Preparation
             DInt2int(112, CType(dtrecipe.Rows(0)("prep_fill_time"), Integer)) '- CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
+            DInt2int(140, CType(dtrecipe.Rows(0)("prep_prefill_start_time"), Integer))
+            DInt2int(142, CType(dtrecipe.Rows(0)("prep_prefill_time"), Integer))
+            DInt2int(172, CType(dtrecipe.Rows(0)("prep_drain_start_time"), Integer))
+            DInt2int(174, CType(dtrecipe.Rows(0)("prep_drain_time"), Integer))
             DInt2int(114, CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
+            Float2int(110, CType(dtrecipe.Rows(0)("prep_pressure_drop"), Double))
             DInt2int(116, CType(dtrecipe.Rows(0)("prep_pressure_drop_time"), Integer))
+            Float2int(108, CType(dtrecipe.Rows(0)("prep_back_pressure"), Double))
+            'If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
+            '    DInt2int(144, 1)
+            'Else
+            '    DInt2int(144, 0)
+            'End If
+            DInt2int(144, 1)
+            Float2int(146, CType(dtrecipe.Rows(0)("prep_rpm1"), Double))
 
+            ' Flush-1
             If dtrecipe.Rows(0)("firstflush_circuit") = "Enable" Then
                 DInt2int(60, 1)
             Else
                 DInt2int(60, 0)
             End If
-            ' DInt2int(62, CType(dtrecipe.Rows(0)("firstflush_fill_time"), Integer))
-            'DInt2int(64, CType(dtrecipe.Rows(0)("firstflush_bleed_time"), Integer))
+            Float2int(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
+            Float2int(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
             DInt2int(66, CType(dtrecipe.Rows(0)("firstflush_stabilize_time"), Integer))
             DInt2int(68, CType(dtrecipe.Rows(0)("firstflush_time"), Integer))
-
-            If dtrecipe.Rows(0)("firstdp_circuit") = "Enable" Then
-                DInt2int(70, 1)
-            Else
-                DInt2int(70, 0)
-            End If
-
-            If dtrecipe.Rows(0)("seconddp_circuit") = "Enable" Then
-                DInt2int(72, 1)
-            Else
-                DInt2int(72, 0)
-            End If
-            'DInt2int(74, CType(dtrecipe.Rows(0)("dp_fill_time"), Integer))
-            'DInt2int(76, CType(dtrecipe.Rows(0)("dp_bleed_time"), Integer))
-            DInt2int(78, CType(dtrecipe.Rows(0)("dp_stabilize_time"), Integer))
-            DInt2int(80, CType(dtrecipe.Rows(0)("dp_test_time"), Integer))
-            DInt2int(82, CType(dtrecipe.Rows(0)("dp_testpoints"), Integer))
-
-            If dtrecipe.Rows(0)("secondflush_circuit") = "Enable" Then
-                DInt2int(84, 1)
-            Else
-                DInt2int(84, 0)
-            End If
-            'DInt2int(86, CType(dtrecipe.Rows(0)("secondflush_fill_time"), Integer))
-            'DInt2int(88, CType(dtrecipe.Rows(0)("secondflush_bleed_time"), Integer))
-
-            DInt2int(90, CType(dtrecipe.Rows(0)("secondflush_stabilize_time"), Integer))
-            DInt2int(92, CType(dtrecipe.Rows(0)("secondflush_time"), Integer))
-
-            If dtrecipe.Rows(0)("drain1_circuit") = "Enable" Then
-                DInt2int(94, 1)
-            Else
-                DInt2int(94, 0)
-            End If
-            DInt2int(96, CType(dtrecipe.Rows(0)("drain1_time"), Integer))
-
-            If dtrecipe.Rows(0)("drain2_circuit") = "Enable" Then
-                DInt2int(98, 1)
-            Else
-                DInt2int(98, 0)
-            End If
-            DInt2int(100, CType(dtrecipe.Rows(0)("drain2_time"), Integer))
-
-            If dtrecipe.Rows(0)("drain3_circuit") = "Enable" Then
-                DInt2int(102, 1)
-            Else
-                DInt2int(102, 0)
-            End If
-            DInt2int(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
-
-            DInt2int(140, CType(dtrecipe.Rows(0)("prep_prefill_start_time"), Integer))
-
-            DInt2int(142, CType(dtrecipe.Rows(0)("prep_prefill_time"), Integer))
-
-            If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
-                DInt2int(144, 1)
-            Else
-                DInt2int(144, 0)
-            End If
+            Float2int(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
             If dtrecipe.Rows(0)("firstflush_speed_mode") = "Enable" Then
                 DInt2int(158, 1)
             Else
                 DInt2int(158, 0)
             End If
+            Float2int(150, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
+
+            ' Flush-2
+            If dtrecipe.Rows(0)("secondflush_circuit") = "Enable" Then
+                DInt2int(84, 1)
+            Else
+                DInt2int(84, 0)
+            End If
+            Float2int(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
+            Float2int(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
+            DInt2int(90, CType(dtrecipe.Rows(0)("secondflush_stabilize_time"), Integer))
+            DInt2int(92, CType(dtrecipe.Rows(0)("secondflush_time"), Integer))
+            Float2int(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
             If dtrecipe.Rows(0)("secondflush_speed_mode") = "Enable" Then
                 DInt2int(160, 1)
             Else
                 DInt2int(160, 0)
             End If
-            If dtrecipe.Rows(0)("dp_speed_mode") = "Enable" Then
-                DInt2int(162, 1)
-            Else
-                DInt2int(162, 0)
-            End If
-
-            Float2int(146, CType(dtrecipe.Rows(0)("prep_rpm1"), Double))
-            'Float2int(148, CType(dtrecipe.Rows(0)("prep_rpm2"), Double))
-            Float2int(150, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
             Float2int(152, CType(dtrecipe.Rows(0)("secondflush_rpm"), Double))
-            Float2int(154, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
-            Float2int(156, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
 
-            If JigType = 1 And JigType = 6 Then
-                DInt2int(164, 1)
+            ' DP Test
+            If dtrecipe.Rows(0)("firstdp_circuit") = "Enable" Then
+                DInt2int(70, 1)
             Else
-                DInt2int(164, 0)
+                DInt2int(70, 0)
             End If
+            If dtrecipe.Rows(0)("seconddp_circuit") = "Enable" Then
+                DInt2int(72, 1)
+            Else
+                DInt2int(72, 0)
+            End If
+            DInt2int(78, CType(dtrecipe.Rows(0)("dp_stabilize_time"), Integer))
+            DInt2int(80, CType(dtrecipe.Rows(0)("dp_test_time"), Integer))
+            Float2int(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
+            Float2int(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
+            Float2int(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
+            Float2int(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
+            Float2int(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
+            DInt2int(82, CType(dtrecipe.Rows(0)("dp_testpoints"), Integer))
+            'If dtrecipe.Rows(0)("dp_speed_mode") = "Enable" Then
+            '    DInt2int(162, 1)
+            'Else
+            '    DInt2int(162, 0)
+            'End If
+            DInt2int(162, 0)
+            Float2int(154, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
 
+            ' Drain-1
+            If dtrecipe.Rows(0)("drain1_circuit") = "Enable" Then
+                DInt2int(94, 1)
+            Else
+                DInt2int(94, 0)
+            End If
+            Float2int(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
+            DInt2int(96, CType(dtrecipe.Rows(0)("drain1_time"), Integer))
+
+            ' Drain-2
+            If dtrecipe.Rows(0)("drain2_circuit") = "Enable" Then
+                DInt2int(98, 1)
+            Else
+                DInt2int(98, 0)
+            End If
+            Float2int(56, CType(dtrecipe.Rows(0)("drain2_back_pressure"), Double))
+            DInt2int(100, CType(dtrecipe.Rows(0)("drain2_time"), Integer))
+
+            ' Drain-3
+            If dtrecipe.Rows(0)("drain3_circuit") = "Enable" Then
+                DInt2int(102, 1)
+            Else
+                DInt2int(102, 0)
+            End If
+            Float2int(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
+            DInt2int(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
+
+            ' Drain-4
             If dtrecipe.Rows(0)("drain4_circuit") = "Enable" Then
                 DInt2int(166, 1)
             Else
@@ -3905,6 +3914,33 @@ Public Class FormMain
             End If
             DInt2int(168, CType(dtrecipe.Rows(0)("drain4_time"), Integer))
             Float2int(170, CType(dtrecipe.Rows(0)("drain4_back_pressure"), Double))
+
+            lbl_DiffPressMin.Text = dtrecipe.Rows(0)("dp_lowerlimit").ToString
+            lbl_DiffPressMax.Text = dtrecipe.Rows(0)("dp_upperlimit").ToString
+
+            ' Unused DM Address
+            If True Then
+                'Float2int(106, CType(dtrecipe.Rows(0)("prep_flowrate"), Double))
+                'Float2int(156, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
+
+                'DInt2int(62, CType(dtrecipe.Rows(0)("firstflush_fill_time"), Integer))
+                'DInt2int(64, CType(dtrecipe.Rows(0)("firstflush_bleed_time"), Integer))
+
+                'DInt2int(74, CType(dtrecipe.Rows(0)("dp_fill_time"), Integer))
+                'DInt2int(76, CType(dtrecipe.Rows(0)("dp_bleed_time"), Integer))
+
+                'DInt2int(86, CType(dtrecipe.Rows(0)("secondflush_fill_time"), Integer))
+                'DInt2int(88, CType(dtrecipe.Rows(0)("secondflush_bleed_time"), Integer))
+
+                'Float2int(148, CType(dtrecipe.Rows(0)("prep_rpm2"), Double))
+
+                ' Set Bleed Off
+                'If JigType = 1 And JigType = 6 Then
+                '    DInt2int(164, 1)
+                'Else
+                '    DInt2int(164, 0)
+                'End If
+            End If
 
             ' Load Recipe Details in TabPage
             'LoadRecipeToTabRecipeDetails(dtrecipe)
@@ -5585,5 +5621,80 @@ Public Class FormMain
 
     Private Sub checkbx_RecipeDrain4_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDrain4.Click
         checkbx_RecipeDrain4.Checked = Not checkbx_RecipeDrain4.Checked
+    End Sub
+
+    Private Sub btn_Depressurize_Click(sender As Object, e As EventArgs) Handles btn_Depressurize.Click
+        'Float2int(110, CType(dtrecipe.Rows(0)("prep_pressure_drop"), Double))
+        'DInt2int(116, CType(dtrecipe.Rows(0)("prep_pressure_drop_time"), Integer))
+
+        If True Then
+            Dim conditionOK As Boolean = True
+
+            ' Machine In Auto Mode
+            If Not PLCstatus(0)(3) Then
+                conditionOK = False
+            End If
+
+            ' Machine In Auto Running
+            If PLCstatus(0)(1) Then
+                conditionOK = False
+            End If
+
+            ' Machine In Alarm
+            If PLCstatus(0)(4) Then
+                conditionOK = False
+            End If
+
+            ' Machine Depressurize Running
+            If PLCstatus(2)(15) Then
+                conditionOK = False
+            End If
+
+            ' Condition Fulfill
+            If conditionOK Then
+                PCStatus(7)(7) = True
+            End If
+        End If
+    End Sub
+
+    Private Sub btn_JigBypass_Click(sender As Object, e As EventArgs) Handles btn_JigBypass.Click
+        ' Declare Button Clicked
+        Dim btnClicked As Button = DirectCast(sender, Button)
+
+        ' Define Button State
+        Dim btnState As Boolean = False
+
+        ' Reset Button State
+        Dim btnReset As Boolean = False
+
+        If btn_WrkOrdScnDtEndLot.Enabled Then
+            If Not btnClicked.BackColor = Color.FromArgb(25, 130, 246) Then
+                btnState = True
+            Else
+                btnState = False
+            End If
+
+            ' Execute Action
+            If btnState = False Then
+                btnReset = True
+            Else
+                SetButtonState(btnClicked, btnState, "Jig Bypass")
+                PublicVariables.RetainedJigBypass = btnState
+                RetainedMemory.Update(34, "JigBypass", 1)
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (ON)")
+            End If
+
+            ' Clear Selection
+            lbl_Title.Select()
+        Else
+            btnReset = True
+        End If
+
+        If btnReset Then
+            SetButtonState(btnClicked, btnState, "Jig Bypass")
+            PublicVariables.RetainedJigBypass = btnState
+            RetainedMemory.Update(34, "JigBypass", 0)
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
+        End If
     End Sub
 End Class
