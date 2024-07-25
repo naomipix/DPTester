@@ -912,7 +912,14 @@ Namespace RetainedMemory
                     End If
 
                     If dt(i)("id") = 34 Then
-                        PublicVariables.RetainedJigBypass = dt(i)("retained_value")
+                        Try
+                            If dt(i)("retained_value") = 1 Then
+                                PublicVariables.RetainedJigBypass = True
+                            Else
+                                PublicVariables.RetainedJigBypass = False
+                            End If
+                        Catch ex As Exception
+                        End Try
                     End If
                 Next
             End If

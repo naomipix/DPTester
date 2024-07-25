@@ -3943,36 +3943,49 @@ Public Class FormMain
             End If
 
             ' Load Recipe Details in TabPage
-            'LoadRecipeToTabRecipeDetails(dtrecipe)
+            LoadRecipeToTabRecipeDetails(dtrecipe)
         End If
 
         ' Force Load Recipe Data In Cal Form
         FormCalibration.InitializeCalForm()
     End Sub
 
-    Private Sub LoadRecipeToTabRecipeDetails(dt As DataTable)
+    Private Sub LoadRecipeToTabRecipeDetails(dtRecipe As DataTable)
+        Dim dt As DataTable = dtRecipe.Copy
+
+        ' Replace All Nulls w/0s
+        For Each row As DataRow In dt.Rows
+            For Each col As DataColumn In dt.Columns
+                If row.IsNull(col) Then
+                    row(col) = 0
+                End If
+            Next
+        Next
+
         txtbx_RecipeVerTol.Text = dt.Rows(0)("verification_tolerance")
-        txtbx_RecipePrepFlow.Text = dt.Rows(0)("prep_flowrate")
-        txtbx_RecipePrepFlowTol.Text = dt.Rows(0)("prep_flow_tolerance")
-        txtbx_RecipePrepPressureDrop.Text = dt.Rows(0)("prep_pressure_drop")
 
         txtbx_RecipePrepFill.Text = dt.Rows(0)("prep_fill_time")
         txtbx_RecipePrepPrefillStartTime.Text = dt.Rows(0)("prep_prefill_start_time")
         txtbx_RecipePrepPrefillTime.Text = dt.Rows(0)("prep_prefill_time")
+        TextBox5.Text = dt.Rows(0)("prep_drain_start_time")
+        TextBox6.Text = dt.Rows(0)("prep_drain_time")
         txtbx_RecipePrepBleed.Text = dt.Rows(0)("prep_bleed_time")
-        txtbx_RecipePrepPressure.Text = dt.Rows(0)("prep_back_pressure")
+        txtbx_RecipePrepPressureDrop.Text = dt.Rows(0)("prep_pressure_drop")
         txtbx_RecipePrepPressureDropTime.Text = dt.Rows(0)("prep_pressure_drop_time")
-        If dt.Rows(0)("prep_speed_mode").ToString.ToUpper = "ENABLE" Then
-            TextBox1.Text = "Speed"
-        Else
-            TextBox1.Text = "Process"
-        End If
+        txtbx_RecipePrepPressure.Text = dt.Rows(0)("prep_back_pressure")
+        'If dt.Rows(0)("prep_speed_mode").ToString.ToUpper = "ENABLE" Then
+        '    TextBox1.Text = "Speed"
+        'Else
+        '    TextBox1.Text = "Process"
+        'End If
+        TextBox1.Text = "Speed"
         txtbx_RecipePrepRPM.Text = dt.Rows(0)("prep_rpm1")
 
         txtbx_RecipeFlush1Flow.Text = dt.Rows(0)("firstflush_flowrate")
         txtbx_RecipeFlush1FlowTol.Text = dt.Rows(0)("firstflush_flow_tolerance")
         txtbx_RecipeFlush1Stabilize.Text = dt.Rows(0)("firstflush_stabilize_time")
         txtbx_RecipeFlush1Time.Text = dt.Rows(0)("firstflush_time")
+        TextBox7.Text = dt.Rows(0)("firstflush_back_pressure")
         If dt.Rows(0)("firstflush_speed_mode").ToString.ToUpper = "ENABLE" Then
             TextBox4.Text = "Speed"
         Else
@@ -3984,6 +3997,7 @@ Public Class FormMain
         txtbx_RecipeFlush2FlowTol.Text = dt.Rows(0)("secondflush_flow_tolerance")
         txtbx_RecipeFlush2Stabilize.Text = dt.Rows(0)("secondflush_stabilize_time")
         txtbx_RecipeFlush2Time.Text = dt.Rows(0)("secondflush_time")
+        TextBox8.Text = dt.Rows(0)("secondflush_back_pressure")
         If dt.Rows(0)("secondflush_speed_mode").ToString.ToUpper = "ENABLE" Then
             TextBox3.Text = "Speed"
         Else
@@ -3993,14 +4007,18 @@ Public Class FormMain
 
         txtbx_RecipeDPStabilize.Text = dt.Rows(0)("dp_stabilize_time")
         txtbx_RecipeDPTime.Text = dt.Rows(0)("dp_test_time")
+        txtbx_RecipePrepFlow.Text = dt.Rows(0)("dp_flowrate")
+        txtbx_RecipePrepFlowTol.Text = dt.Rows(0)("dp_flow_tolerance")
+        txtbx_RecipePrepPressureDropa.Text = dt.Rows(0)("dp_back_pressure")
         txtbx_RecipeDPLowLimit.Text = dt.Rows(0)("dp_lowerlimit")
         txtbx_RecipeDPUpLimit.Text = dt.Rows(0)("dp_upperlimit")
         txtbx_RecipeDPPoints.Text = dt.Rows(0)("dp_testpoints")
-        If dt.Rows(0)("dp_speed_mode").ToString.ToUpper = "ENABLE" Then
-            TextBox2.Text = "Speed"
-        Else
-            TextBox2.Text = "Process"
-        End If
+        'If dt.Rows(0)("dp_speed_mode").ToString.ToUpper = "ENABLE" Then
+        '    TextBox2.Text = "Speed"
+        'Else
+        '    TextBox2.Text = "Process"
+        'End If
+        TextBox2.Text = "Process"
         txtbx_RecipeDPTestRPM.Text = dt.Rows(0)("dp_rpm")
 
         txtbx_RecipeDrain1Pressure.Text = dt.Rows(0)("drain1_back_pressure")
@@ -5371,13 +5389,13 @@ Public Class FormMain
             txtbx_RecipeVerTol.Text = "-"
             txtbx_RecipePrepFlow.Text = "-"
             txtbx_RecipePrepFlowTol.Text = "-"
-            txtbx_RecipePrepPressureDrop.Text = "-"
+            txtbx_RecipePrepPressureDropa.Text = "-"
 
             txtbx_RecipePrepFill.Text = "-"
             txtbx_RecipePrepPrefillStartTime.Text = "-"
             txtbx_RecipePrepPrefillTime.Text = "-"
             txtbx_RecipePrepBleed.Text = "-"
-            txtbx_RecipePrepPressure.Text = "-"
+            txtbx_RecipePrepPressureDrop.Text = "-"
             txtbx_RecipePrepPressureDropTime.Text = "-"
             TextBox1.Text = "-"
             txtbx_RecipePrepRPM.Text = "-"
