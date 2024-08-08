@@ -1300,6 +1300,20 @@ Public Class FormSetting
                         End If
                     Next
                 End If
+                If row.Item("permission") = "Delete Test" Then
+                    For i As Integer = 0 To chklstbx_MainMenu.Items.Count - 1
+                        If chklstbx_MainMenu.Items(i) = "Delete Test" Then
+                            chklstbx_MainMenu.SetItemChecked(i, True)
+                        End If
+                    Next
+                End If
+                If row.Item("permission") = "Delete Lot" Then
+                    For i As Integer = 0 To chklstbx_MainMenu.Items.Count - 1
+                        If chklstbx_MainMenu.Items(i) = "Delete Lot" Then
+                            chklstbx_MainMenu.SetItemChecked(i, True)
+                        End If
+                    Next
+                End If
 
                 If row.Item("permission") = "User Registration" Then
                     For i As Integer = 0 To chklstbx_Registration.Items.Count - 1

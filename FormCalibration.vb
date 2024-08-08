@@ -718,6 +718,15 @@ Public Class FormCalibration
     Private Sub btn_Discard_Click(sender As Object, e As EventArgs) Handles btn_Discard.Click
         If FormMain.MainMessage(11) = DialogResult.Yes Then
             DiscardCal()
+
+            ' Clear Live Graph Value
+            CalibrateChartDPValue.Clear()
+            CalibrateChartInletValue.Clear()
+            CalibrateChartOutletValue.Clear()
+            CalibrateChartBPValue.Clear()
+            CalibrateChartRPMValue.Clear()
+            CalibrateChartFLWRValue.Clear()
+            CalibrateChartTempValue.Clear()
         End If
     End Sub
 
@@ -1380,12 +1389,12 @@ Public Class FormCalibration
             'txtbx_CalBackpress.Text = CType(Cal_finalbackpressure, String)
             'txtbx_CalOffset.Text = CType(Math.Round(Cal_finaloffset, 2), String)
 
-            txtbx_CalInletPressure.Text = Decimal.Round(Cal_finalInlet, 2)
-            txtbx_CalOutletPressure.Text = Decimal.Round(Cal_finalOutlet, 2)
-            txtbx_CalFlowrate.Text = Decimal.Round(Cal_finalflowrate, 2)
-            txtbx_CalTemperature.Text = Decimal.Round(CDec(Cal_finaltemperature - 273.15), 2)
-            txtbx_CalBackpress.Text = Decimal.Round(Cal_finalbackpressure, 2)
-            txtbx_CalOffset.Text = Decimal.Round(Math.Round(Cal_finaloffset, 2), 2)
+            txtbx_CalInletPressure.Text = Decimal.Round(Cal_finalInlet, 2).ToString("F2")
+            txtbx_CalOutletPressure.Text = Decimal.Round(Cal_finalOutlet, 2).ToString("F2")
+            txtbx_CalFlowrate.Text = Decimal.Round(Cal_finalflowrate, 2).ToString("F2")
+            txtbx_CalTemperature.Text = Decimal.Round(CDec(Cal_finaltemperature - 273.15), 2).ToString("F2")
+            txtbx_CalBackpress.Text = Decimal.Round(Cal_finalbackpressure, 2).ToString("F2")
+            txtbx_CalOffset.Text = Decimal.Round(Math.Round(Cal_finaloffset, 2), 2).ToString("F2")
 
             ' Convert Visible DataGridView Columns To DataTable
 
@@ -2054,11 +2063,11 @@ Public Class FormCalibration
             'txtbx_VerStatus.Text = "Completed"
             'txtbx_VerStatus.BackColor = Color.FromArgb(192, 255, 192)
 
-            txtbx_VerInletPressure.Text = Decimal.Round(Ver_finalinlet, 2)
-            txtbx_VerOutletPressure.Text = Decimal.Round(Ver_finaloutlet, 2)
-            txtbx_VerFlowrate.Text = Decimal.Round(Ver_finalflowrate, 2)
-            txtbx_VerTemperature.Text = Decimal.Round(CDec(Ver_finaltemperature - 273.15), 2)
-            txtbx_VerBackpress.Text = Decimal.Round(Ver_finalbackpressure, 2)
+            txtbx_VerInletPressure.Text = Decimal.Round(Ver_finalinlet, 2).ToString("F2")
+            txtbx_VerOutletPressure.Text = Decimal.Round(Ver_finaloutlet, 2).ToString("F2")
+            txtbx_VerFlowrate.Text = Decimal.Round(Ver_finalflowrate, 2).ToString("F2")
+            txtbx_VerTemperature.Text = Decimal.Round(CDec(Ver_finaltemperature - 273.15), 2).ToString("F2")
+            txtbx_VerBackpress.Text = Decimal.Round(Ver_finalbackpressure, 2).ToString("F2")
             txtbx_VerStatus.Text = "Completed"
             txtbx_VerStatus.BackColor = PublicVariables.StatusGreen
             txtbx_VerStatus.ForeColor = PublicVariables.StatusGreenT

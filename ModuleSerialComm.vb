@@ -65,36 +65,88 @@ Module ModuleSerialComm
     End Sub
 
     Public Sub PlaceData(str As String)
-        If str.Length >= PublicVariables.WorkOrderLenLow And str.Length < PublicVariables.WorkOrderLenHigh Then
-            If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
-                FormMain.txtbx_WorkOrderNumber.Text = str
-            End If
-        End If
+        'If True Then
+        '    If str.Length >= PublicVariables.WorkOrderLenLow And str.Length <= PublicVariables.WorkOrderLenHigh Then
+        '        If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+        '            FormMain.txtbx_WorkOrderNumber.Text = str
+        '        End If
+        '    End If
 
-        If str.Length >= PublicVariables.PartIdLenLow And str.Length < PublicVariables.PartIdLenHigh Then
-            If FormMain.txtbx_PartID.Enabled = True Then
-                FormMain.txtbx_PartID.Text = str
-            End If
-        End If
+        '    If str.Length >= PublicVariables.ConfirmationIdLenLow And str.Length <= PublicVariables.ConfirmationIdLenHigh And Char.IsLetter(str.Substring(0, 1)) = False Then
+        '        If FormMain.txtbx_ConfirmationID.Enabled = True Then
+        '            FormMain.txtbx_ConfirmationID.Text = str
+        '        End If
+        '    End If
 
-        If str.Length >= PublicVariables.LotIdLenLow And str.Length < PublicVariables.LotIdLenHigh And Char.IsLetter(str.Substring(0, 1)) = True Then
-            If FormMain.txtbx_LotID.Enabled = True Then
-                FormMain.txtbx_LotID.Text = str
-            End If
-        End If
+        '    If str.Length >= PublicVariables.PartIdLenLow And str.Length <= PublicVariables.PartIdLenHigh Then
+        '        If FormMain.txtbx_PartID.Enabled = True Then
+        '            FormMain.txtbx_PartID.Text = str
+        '        End If
+        '    End If
 
-        If str.Length >= PublicVariables.ConfirmationIdLenLow And str.Length < PublicVariables.ConfirmationIdLenHigh And Char.IsLetter(str.Substring(0, 1)) = False Then
-            If FormMain.txtbx_ConfirmationID.Enabled = True Then
-                FormMain.txtbx_ConfirmationID.Text = str
-            End If
-        End If
-        If str.Length >= PublicVariables.QuantityLenLow And str.Length < PublicVariables.QuantityLenHigh Then
-            If FormMain.txtbx_Quantity.Enabled = True Then
-                'FormMain.txtbx_Quantity.Text = str
+        '    If str.Length >= PublicVariables.LotIdLenLow And str.Length <= PublicVariables.LotIdLenHigh And Char.IsLetter(str.Substring(0, 1)) = True Then
+        '        If FormMain.txtbx_LotID.Enabled = True Then
+        '            FormMain.txtbx_LotID.Text = str
+        '        End If
+        '    End If
 
-                Dim ParsedInt As Integer = 0
-                If Integer.TryParse(str, ParsedInt) Then
-                    FormMain.txtbx_Quantity.Text = ParsedInt
+        '    If str.Length >= PublicVariables.QuantityLenLow And str.Length <= PublicVariables.QuantityLenHigh Then
+        '        If FormMain.txtbx_Quantity.Enabled = True Then
+        '            'FormMain.txtbx_Quantity.Text = str
+
+        '            Dim ParsedInt As Integer = 0
+        '            If Integer.TryParse(str, ParsedInt) Then
+        '                FormMain.txtbx_Quantity.Text = ParsedInt
+        '            End If
+        '        End If
+        '    End If
+        'End If
+        If True Then
+            Dim onContinue = True
+
+            If onContinue Then ' Lot ID
+                If str.Length >= PublicVariables.LotIdLenLow And str.Length <= PublicVariables.LotIdLenHigh And Char.IsLetter(str.Substring(0, 1)) = True Then
+                    If FormMain.txtbx_LotID.Enabled = True Then
+                        FormMain.txtbx_LotID.Text = str
+                        onContinue = False
+                    End If
+                End If
+            End If
+            If onContinue Then ' Work Order ID
+                If str.Length >= PublicVariables.WorkOrderLenLow And str.Length <= PublicVariables.WorkOrderLenHigh Then
+                    If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+                        FormMain.txtbx_WorkOrderNumber.Text = str
+                        onContinue = False
+                    End If
+                End If
+            End If
+            If onContinue Then  ' Quantity
+                If str.Length >= PublicVariables.QuantityLenLow And str.Length <= PublicVariables.QuantityLenHigh Then
+                    If FormMain.txtbx_Quantity.Enabled = True Then
+                        Dim ParsedInt As Integer = 0
+                        If Integer.TryParse(str, ParsedInt) Then
+                            FormMain.txtbx_Quantity.Text = ParsedInt
+                            onContinue = False
+                        End If
+                    End If
+                End If
+            End If
+            If onContinue Then ' Confirmation
+                If str.Length >= PublicVariables.ConfirmationIdLenLow And str.Length <= PublicVariables.ConfirmationIdLenHigh Then
+                    If FormMain.txtbx_ConfirmationID.Enabled = True Then
+                        Dim ParsedInt As Integer = 0
+                        If Integer.TryParse(str, ParsedInt) Then
+                            FormMain.txtbx_ConfirmationID.Text = str
+                            onContinue = False
+                        End If
+                    End If
+                End If
+            End If
+            If onContinue Then ' Part ID
+                If str.Length >= PublicVariables.PartIdLenLow And str.Length <= PublicVariables.PartIdLenHigh Then
+                    If FormMain.txtbx_PartID.Enabled = True Then
+                        FormMain.txtbx_PartID.Text = str
+                    End If
                 End If
             End If
         End If

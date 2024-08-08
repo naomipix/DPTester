@@ -218,6 +218,8 @@ Module PermissionModule
     Public MainMenu_Status As Boolean = False
     Public MainMenu_ManualCtrl As Boolean = False
     Public MainMenu_Alarm As Boolean = False
+    Public MainMenu_DeleteTest As Boolean = False
+    Public MainMenu_DeleteLot As Boolean = False
 
     Public UserRegister_Registration As Boolean = False
     Public UserRegister_Deletion As Boolean = False
@@ -248,6 +250,8 @@ Module PermissionModule
             MainMenu_Status = False
             MainMenu_ManualCtrl = False
             MainMenu_Alarm = False
+            MainMenu_DeleteTest = False
+            MainMenu_DeleteLot = False
 
             UserRegister_Registration = False
             UserRegister_Deletion = False
@@ -289,6 +293,8 @@ Module PermissionModule
             dt.Rows.Add("Status")
             dt.Rows.Add("Manual Control")
             dt.Rows.Add("Alarm")
+            dt.Rows.Add("Delete Test")
+            dt.Rows.Add("Delete Lot")
 
             dt.Rows.Add("User Registration")
             dt.Rows.Add("User Deletion")
@@ -350,6 +356,12 @@ Module PermissionModule
                 End If
                 If row.Item("permission") = "Alarm" Then
                     MainMenu_Alarm = True
+                End If
+                If row.Item("permission") = "Delete Test" Then
+                    MainMenu_DeleteTest = True
+                End If
+                If row.Item("permission") = "Delete Lot" Then
+                    MainMenu_DeleteLot = True
                 End If
 
                 If row.Item("permission") = "User Registration" Then

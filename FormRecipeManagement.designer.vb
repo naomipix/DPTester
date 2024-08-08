@@ -212,9 +212,11 @@ Partial Class FormRecipeManagement
         Me.btn_RcpDuplicate = New System.Windows.Forms.Button()
         Me.txtbx_RcpDupNewRecipeID = New System.Windows.Forms.TextBox()
         Me.dsp_RcpDupNewRecipeID = New System.Windows.Forms.Label()
-        Me.dsp_RcpDupNewType = New System.Windows.Forms.Label()
-        Me.dsp_RcpDupSelRecipe = New System.Windows.Forms.Label()
         Me.Cmbx_RcpDupNewType = New System.Windows.Forms.ComboBox()
+        Me.dsp_RcpDupNewType = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.dsp_RcpDupSelRecipe = New System.Windows.Forms.Label()
+        Me.Cmbx_RcpDupNewPartID = New System.Windows.Forms.ComboBox()
         Me.cmbx_RcpDupSelRecipe = New System.Windows.Forms.ComboBox()
         Me.btn_EditDiscard = New System.Windows.Forms.Button()
         Me.btn_RcpEditSave = New System.Windows.Forms.Button()
@@ -389,8 +391,6 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Cmbx_RcpDupNewPartID = New System.Windows.Forms.ComboBox()
-        Me.Label21 = New System.Windows.Forms.Label()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -557,7 +557,7 @@ Partial Class FormRecipeManagement
         Me.tabpg_Delete.Controls.Add(Me.panel_Delete)
         Me.tabpg_Delete.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_Delete.Name = "tabpg_Delete"
-        Me.tabpg_Delete.Size = New System.Drawing.Size(1872, 789)
+        Me.tabpg_Delete.Size = New System.Drawing.Size(1872, 802)
         Me.tabpg_Delete.TabIndex = 2
         Me.tabpg_Delete.Text = "Delete"
         Me.tabpg_Delete.UseVisualStyleBackColor = True
@@ -570,7 +570,7 @@ Partial Class FormRecipeManagement
         Me.panel_Delete.Dock = System.Windows.Forms.DockStyle.Left
         Me.panel_Delete.Location = New System.Drawing.Point(0, 0)
         Me.panel_Delete.Name = "panel_Delete"
-        Me.panel_Delete.Size = New System.Drawing.Size(562, 787)
+        Me.panel_Delete.Size = New System.Drawing.Size(562, 800)
         Me.panel_Delete.TabIndex = 2
         '
         'Panel5
@@ -846,11 +846,11 @@ Partial Class FormRecipeManagement
         Me.tabctrl_RecipeCtrl.Controls.Add(Me.tabpg_Delete)
         Me.tabctrl_RecipeCtrl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabctrl_RecipeCtrl.ItemSize = New System.Drawing.Size(150, 40)
-        Me.tabctrl_RecipeCtrl.Location = New System.Drawing.Point(12, 161)
+        Me.tabctrl_RecipeCtrl.Location = New System.Drawing.Point(12, 149)
         Me.tabctrl_RecipeCtrl.Multiline = True
         Me.tabctrl_RecipeCtrl.Name = "tabctrl_RecipeCtrl"
         Me.tabctrl_RecipeCtrl.SelectedIndex = 0
-        Me.tabctrl_RecipeCtrl.Size = New System.Drawing.Size(1880, 837)
+        Me.tabctrl_RecipeCtrl.Size = New System.Drawing.Size(1880, 850)
         Me.tabctrl_RecipeCtrl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabctrl_RecipeCtrl.TabIndex = 1
         Me.tabctrl_RecipeCtrl.TabStop = False
@@ -869,7 +869,7 @@ Partial Class FormRecipeManagement
         Me.tabpg_RecipeDetails.Controls.Add(Me.dgv_RecipeDetails)
         Me.tabpg_RecipeDetails.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_RecipeDetails.Name = "tabpg_RecipeDetails"
-        Me.tabpg_RecipeDetails.Size = New System.Drawing.Size(1872, 789)
+        Me.tabpg_RecipeDetails.Size = New System.Drawing.Size(1872, 802)
         Me.tabpg_RecipeDetails.TabIndex = 3
         Me.tabpg_RecipeDetails.Text = "Recipe Details"
         Me.tabpg_RecipeDetails.UseVisualStyleBackColor = True
@@ -1082,7 +1082,7 @@ Partial Class FormRecipeManagement
         Me.tabpg_Edit.Controls.Add(Me.panel_Edit)
         Me.tabpg_Edit.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_Edit.Name = "tabpg_Edit"
-        Me.tabpg_Edit.Size = New System.Drawing.Size(1872, 789)
+        Me.tabpg_Edit.Size = New System.Drawing.Size(1872, 802)
         Me.tabpg_Edit.TabIndex = 4
         Me.tabpg_Edit.Text = "Edit"
         Me.tabpg_Edit.UseVisualStyleBackColor = True
@@ -1742,7 +1742,7 @@ Partial Class FormRecipeManagement
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(200, 40)
         Me.Label19.TabIndex = 34
-        Me.Label19.Text = "Common"
+        Me.Label19.Text = "Calibration"
         Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Panel7
@@ -2412,7 +2412,7 @@ Partial Class FormRecipeManagement
         Me.panel_Edit.Dock = System.Windows.Forms.DockStyle.Left
         Me.panel_Edit.Location = New System.Drawing.Point(0, 0)
         Me.panel_Edit.Name = "panel_Edit"
-        Me.panel_Edit.Size = New System.Drawing.Size(562, 787)
+        Me.panel_Edit.Size = New System.Drawing.Size(562, 800)
         Me.panel_Edit.TabIndex = 3
         '
         'Panel1
@@ -2475,6 +2475,16 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpDupNewRecipeID.Text = "New Recipe ID :"
         Me.dsp_RcpDupNewRecipeID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'Cmbx_RcpDupNewType
+        '
+        Me.Cmbx_RcpDupNewType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.Cmbx_RcpDupNewType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cmbx_RcpDupNewType.FormattingEnabled = True
+        Me.Cmbx_RcpDupNewType.Location = New System.Drawing.Point(152, 147)
+        Me.Cmbx_RcpDupNewType.Name = "Cmbx_RcpDupNewType"
+        Me.Cmbx_RcpDupNewType.Size = New System.Drawing.Size(250, 29)
+        Me.Cmbx_RcpDupNewType.TabIndex = 16
+        '
         'dsp_RcpDupNewType
         '
         Me.dsp_RcpDupNewType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2484,6 +2494,16 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpDupNewType.TabIndex = 104
         Me.dsp_RcpDupNewType.Text = "New Type :"
         Me.dsp_RcpDupNewType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label21
+        '
+        Me.Label21.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(21, 103)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(125, 25)
+        Me.Label21.TabIndex = 104
+        Me.Label21.Text = "New Part ID :"
+        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpDupSelRecipe
         '
@@ -2495,15 +2515,17 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpDupSelRecipe.Text = "Recipe ID :"
         Me.dsp_RcpDupSelRecipe.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Cmbx_RcpDupNewType
+        'Cmbx_RcpDupNewPartID
         '
-        Me.Cmbx_RcpDupNewType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.Cmbx_RcpDupNewType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Cmbx_RcpDupNewType.FormattingEnabled = True
-        Me.Cmbx_RcpDupNewType.Location = New System.Drawing.Point(152, 147)
-        Me.Cmbx_RcpDupNewType.Name = "Cmbx_RcpDupNewType"
-        Me.Cmbx_RcpDupNewType.Size = New System.Drawing.Size(250, 29)
-        Me.Cmbx_RcpDupNewType.TabIndex = 16
+        Me.Cmbx_RcpDupNewPartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.Cmbx_RcpDupNewPartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cmbx_RcpDupNewPartID.FormattingEnabled = True
+        Me.Cmbx_RcpDupNewPartID.IntegralHeight = False
+        Me.Cmbx_RcpDupNewPartID.Location = New System.Drawing.Point(152, 102)
+        Me.Cmbx_RcpDupNewPartID.MaxDropDownItems = 11
+        Me.Cmbx_RcpDupNewPartID.Name = "Cmbx_RcpDupNewPartID"
+        Me.Cmbx_RcpDupNewPartID.Size = New System.Drawing.Size(250, 29)
+        Me.Cmbx_RcpDupNewPartID.TabIndex = 16
         '
         'cmbx_RcpDupSelRecipe
         '
@@ -2673,7 +2695,7 @@ Partial Class FormRecipeManagement
         Me.tabpg_Create.Controls.Add(Me.panel_Create)
         Me.tabpg_Create.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_Create.Name = "tabpg_Create"
-        Me.tabpg_Create.Size = New System.Drawing.Size(1872, 789)
+        Me.tabpg_Create.Size = New System.Drawing.Size(1872, 802)
         Me.tabpg_Create.TabIndex = 5
         Me.tabpg_Create.Text = "Create"
         Me.tabpg_Create.UseVisualStyleBackColor = True
@@ -2696,7 +2718,7 @@ Partial Class FormRecipeManagement
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(200, 40)
         Me.Label20.TabIndex = 34
-        Me.Label20.Text = "Common"
+        Me.Label20.Text = "Calibration"
         Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtbx_RcpCreateVerTol
@@ -4000,7 +4022,7 @@ Partial Class FormRecipeManagement
         Me.panel_Create.Dock = System.Windows.Forms.DockStyle.Left
         Me.panel_Create.Location = New System.Drawing.Point(0, 0)
         Me.panel_Create.Name = "panel_Create"
-        Me.panel_Create.Size = New System.Drawing.Size(562, 787)
+        Me.panel_Create.Size = New System.Drawing.Size(562, 800)
         Me.panel_Create.TabIndex = 3
         '
         'Panel6
@@ -4365,28 +4387,6 @@ Partial Class FormRecipeManagement
         Me.Label1.TabIndex = 101
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'Cmbx_RcpDupNewPartID
-        '
-        Me.Cmbx_RcpDupNewPartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.Cmbx_RcpDupNewPartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Cmbx_RcpDupNewPartID.FormattingEnabled = True
-        Me.Cmbx_RcpDupNewPartID.IntegralHeight = False
-        Me.Cmbx_RcpDupNewPartID.Location = New System.Drawing.Point(152, 102)
-        Me.Cmbx_RcpDupNewPartID.MaxDropDownItems = 11
-        Me.Cmbx_RcpDupNewPartID.Name = "Cmbx_RcpDupNewPartID"
-        Me.Cmbx_RcpDupNewPartID.Size = New System.Drawing.Size(250, 29)
-        Me.Cmbx_RcpDupNewPartID.TabIndex = 16
-        '
-        'Label21
-        '
-        Me.Label21.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(21, 103)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(125, 25)
-        Me.Label21.TabIndex = 104
-        Me.Label21.Text = "New Part ID :"
-        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'FormRecipeManagement
         '

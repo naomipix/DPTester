@@ -1688,20 +1688,22 @@ Public Class FormMain
     ' Open Context Menu
     Dim dgvProdDetailRowIndex As Integer = -1
     Private Sub dgv_ProdDetail_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgv_ProdDetail.CellMouseUp
-        Try
-            Dim dgv As DataGridView = dgv_ProdDetail
+        If MainMenu_DeleteTest Then
+            Try
+                Dim dgv As DataGridView = dgv_ProdDetail
 
-            If e.Button = MouseButtons.Right Then
-                dgv.Rows(e.RowIndex).Selected = True
-                dgvProdDetailRowIndex = e.RowIndex
+                If e.Button = MouseButtons.Right Then
+                    dgv.Rows(e.RowIndex).Selected = True
+                    dgvProdDetailRowIndex = e.RowIndex
 
-                With cms_dgv_ProdDetail
-                    .Show(dgv, e.Location)
-                    .Show(Cursor.Position)
-                End With
-            End If
-        Catch ex As Exception
-        End Try
+                    With cms_dgv_ProdDetail
+                        .Show(dgv, e.Location)
+                        .Show(Cursor.Position)
+                    End With
+                End If
+            Catch ex As Exception
+            End Try
+        End If
     End Sub
 
     ' Click Context Menu
@@ -2043,20 +2045,22 @@ Public Class FormMain
     ' Open Context Menu
     Dim dgvLotSummaryRowIndex As Integer = -1
     Private Sub dgv_LotSummary_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgv_LotSummary.CellMouseUp
-        Try
-            Dim dgv As DataGridView = dgv_LotSummary
+        If MainMenu_DeleteLot Then
+            Try
+                Dim dgv As DataGridView = dgv_LotSummary
 
-            If e.Button = MouseButtons.Right Then
-                dgv.Rows(e.RowIndex).Selected = True
-                dgvLotSummaryRowIndex = e.RowIndex
+                If e.Button = MouseButtons.Right Then
+                    dgv.Rows(e.RowIndex).Selected = True
+                    dgvLotSummaryRowIndex = e.RowIndex
 
-                With cms_dgv_LotSummary
-                    .Show(dgv, e.Location)
-                    .Show(Cursor.Position)
-                End With
-            End If
-        Catch ex As Exception
-        End Try
+                    With cms_dgv_LotSummary
+                        .Show(dgv, e.Location)
+                        .Show(Cursor.Position)
+                    End With
+                End If
+            Catch ex As Exception
+            End Try
+        End If
     End Sub
 
     ' Click Context Menu
@@ -3024,7 +3028,8 @@ Public Class FormMain
             Case 6
                 Return MsgBox($"Special Characters not allowed in {str}, Scan and Try Again", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 7
-                Return MsgBox($"Lot ID found with different data {str}, Check and Try Again", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                'Return MsgBox($"Lot ID found with different data {str}, Check and Try Again", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                Return MsgBox($"Part ID Mismatch with previous Lot ID{vbCrLf}Part ID: [{str}]", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 8
                 Return MsgBox($"Are You sure to End Lot {str}?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning")
             Case 9
@@ -3274,7 +3279,8 @@ Public Class FormMain
             If OnContinue = True Then
                 If dtlot.Rows.Count > 0 Then
 
-                    If dtlot.Rows(0)("part_id") = PartID And dtlot.Rows(0)("confirmation_id") = ConfirmationID And dtlot.Rows(0)("work_order") = Workorder Then
+                    'If dtlot.Rows(0)("part_id") = PartID And dtlot.Rows(0)("confirmation_id") = ConfirmationID And dtlot.Rows(0)("work_order") = Workorder Then
+                    If dtlot.Rows(0)("part_id") = PartID Then
                         If MsgBox($"This Lot {LotID} has already been processed, Continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
                             'dtlotusage = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id ='{LotID}' AND NOT calibration_time IS NULL ORDER BY lot_attempt ASC")
                             dtlotusage = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id ='{LotID}' ORDER BY lot_attempt ASC")
@@ -3355,7 +3361,8 @@ Public Class FormMain
                             OnContinue = False
                         End If
                     Else
-                        MainMessage(7, $" {dtlot.Rows(0)("work_order")}, {dtlot.Rows(0)("part_id")}, {dtlot.Rows(0)("confirmation_id")} ")
+                        'MainMessage(7, $" {dtlot.Rows(0)("work_order")}, {dtlot.Rows(0)("part_id")}, {dtlot.Rows(0)("confirmation_id")} ")
+                        MainMessage(7, $"{dtlot.Rows(0)("part_id")}/{PartID}")
                         OnContinue = False
                     End If
                 Else
@@ -3621,6 +3628,7 @@ Public Class FormMain
         End If
 
         If continueEndLot = True Then
+            Resultcapturetimer.Enabled = False
             Endlot()
 
             If Lotendsuccess = True Then
@@ -5043,6 +5051,13 @@ Public Class FormMain
         Dim OnContinue As Boolean = True
         Dim dtlotrecord As DataTable = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id = '{txtbx_LotID.Text}'")
 
+        If True Then
+            SetButtonState(btn_JigBypass, False, "Jig Bypass")
+            PublicVariables.RetainedJigBypass = False
+            RetainedMemory.Update(34, "JigBypass", 0)
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
+        End If
+
         'Generate csv for the lot id
         If OnContinue = True Then
             Dim dtlotreport As DataTable = SQL.ReadRecords($"SELECT * FROM (SELECT *, ROW_NUMBER() OVER (PARTITION BY serial_uid ORDER BY serial_attempt DESC) AS ROW FROM ProductionDetail WHERE serial_uid LIKE 'SG23000011%') AS tbl WHERE ROW = 1")
@@ -5239,7 +5254,7 @@ Public Class FormMain
             End If
         End If
 
-        If OnContinue = True Then
+        If OnContinue = True Or Lotendsuccess = False Then
             txtbx_WorkOrderNumber.Enabled = True
             txtbx_LotID.Enabled = True
             txtbx_PartID.Enabled = True
@@ -5670,7 +5685,9 @@ Public Class FormMain
 
             ' Condition Fulfill
             If conditionOK Then
-                PCStatus(7)(7) = True
+                'PCStatus(7)(7) = True
+                'ManualCtrl(5)(7) = True
+                PCStatus(1)(15) = True
             End If
         End If
     End Sub
@@ -5686,24 +5703,28 @@ Public Class FormMain
         Dim btnReset As Boolean = False
 
         If btn_WrkOrdScnDtEndLot.Enabled Then
-            If Not btnClicked.BackColor = Color.FromArgb(25, 130, 246) Then
-                btnState = True
-            Else
-                btnState = False
-            End If
+            If Not btn_RecipeSelectionConfirm.Enabled Then
+                If Not btnClicked.BackColor = Color.FromArgb(25, 130, 246) Then
+                    btnState = True
+                Else
+                    btnState = False
+                End If
 
-            ' Execute Action
-            If btnState = False Then
+                ' Execute Action
+                If btnState = False Then
+                    btnReset = True
+                Else
+                    SetButtonState(btnClicked, btnState, "Jig Bypass")
+                    PublicVariables.RetainedJigBypass = btnState
+                    RetainedMemory.Update(34, "JigBypass", 1)
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (ON)")
+                End If
+
+                ' Clear Selection
+                lbl_Title.Select()
+            Else
                 btnReset = True
-            Else
-                SetButtonState(btnClicked, btnState, "Jig Bypass")
-                PublicVariables.RetainedJigBypass = btnState
-                RetainedMemory.Update(34, "JigBypass", 1)
-                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (ON)")
             End If
-
-            ' Clear Selection
-            lbl_Title.Select()
         Else
             btnReset = True
         End If

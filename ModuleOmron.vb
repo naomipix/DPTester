@@ -1660,6 +1660,9 @@ Module ModuleOmron
                 If MainMenu_BtnCalibrate = True And FormMain.cmbx_RecipeID.SelectedIndex > 0 And FormMain.cmbx_RecipeID.Enabled = False And FormMain.btn_RecipeSelectionConfirm.Enabled = False Then
                     FormMain.btn_Calibration.Enabled = True
                     FormMain.btn_Calibration.BackColor = Color.FromArgb(25, 130, 246)
+                Else
+                    FormMain.btn_Calibration.Enabled = False
+                    FormMain.btn_Calibration.BackColor = SystemColors.ControlDark
                 End If
                 'If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
                 '    FormMain.btn_WrkOrdScnDtConfirm.Enabled = True
@@ -2140,7 +2143,7 @@ Module ModuleOmron
                     FormCalibration.btn_Verify.Enabled = False
                 End If
 
-                If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(22) = 405 Or FINSinput(22) = 406 Or FINSinput(21) = 1700 Or FINSinput(21) = 1730 Then
+                If FINSinput(22) = 15 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(22) = 405 Or FINSinput(22) = 406 Or FINSinput(21) = 1700 Or FINSinput(21) = 1730 Then
                     CalrecordValue = True
                 Else
                     CalrecordValue = False
@@ -2203,7 +2206,7 @@ Module ModuleOmron
                     MainMessage(Main_MessageNo)
                 End If
 
-                If FINSinput(22) = 10 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(22) = 405 Or FINSinput(22) = 406 Or FINSinput(20) = 1700 Then
+                If FINSinput(22) = 15 Or FINSinput(22) = 20 Or FINSinput(22) = 30 Or FINSinput(22) = 100 Or FINSinput(22) = 110 Or FINSinput(22) = 150 Or FINSinput(22) = 160 Or FINSinput(22) = 200 Or FINSinput(22) = 210 Or FINSinput(22) = 250 Or FINSinput(22) = 260 Or FINSinput(22) = 300 Or FINSinput(22) = 350 Or FINSinput(22) = 400 Or FINSinput(22) = 405 Or FINSinput(22) = 406 Or FINSinput(20) = 1700 Then
                     MainrecordValue = True
                 Else
                     MainrecordValue = False
@@ -3398,12 +3401,12 @@ Module ModuleOmron
             If True Then
                 Dim dtTemp As DataTable = dtresult.Copy
                 For i As Integer = 0 To dtTemp.Rows.Count - 1
-                    dtTemp(i)("Inlet Pressure (kPa)") = Math.Round(dtTemp(i)("Inlet Pressure (kPa)"), 2)
-                    dtTemp(i)("Outlet Pressure (kPa)") = Math.Round(dtTemp(i)("Outlet Pressure (kPa)"), 2)
-                    dtTemp(i)("Differential Pressure (kPa)") = Math.Round(dtTemp(i)("Differential Pressure (kPa)"), 2)
-                    dtTemp(i)("Flowrate (l/min)") = Math.Round(dtTemp(i)("Flowrate (l/min)"), 2)
-                    dtTemp(i)("Temperature (°C)") = Math.Round(dtTemp(i)("Temperature (°C)"), 2)
-                    dtTemp(i)("Back Pressure (kPa)") = Math.Round(dtTemp(i)("Back Pressure (kPa)"), 2)
+                    dtTemp(i)("Inlet Pressure (kPa)") = Math.Round(CDec(dtTemp(i)("Inlet Pressure (kPa)")), 2)
+                    dtTemp(i)("Outlet Pressure (kPa)") = Math.Round(CDec(dtTemp(i)("Outlet Pressure (kPa)")), 2)
+                    dtTemp(i)("Differential Pressure (kPa)") = Math.Round(CDec(dtTemp(i)("Differential Pressure (kPa)")), 2)
+                    dtTemp(i)("Flowrate (l/min)") = Math.Round(CDec(dtTemp(i)("Flowrate (l/min)")), 2)
+                    dtTemp(i)("Temperature (°C)") = Math.Round(CDec(dtTemp(i)("Temperature (°C)")), 2)
+                    dtTemp(i)("Back Pressure (kPa)") = Math.Round(CDec(dtTemp(i)("Back Pressure (kPa)")), 2)
                 Next
 
                 ReturnValue = ExportDataTableToCsv(dtresult, Filepath, PublicVariables.CSVDelimiterResultSummary)
@@ -3417,7 +3420,7 @@ Module ModuleOmron
             End If
         End If
 
-        If result_finaldp >= dtrecipetable.Rows(0)("dp_lowerlimit") And result_finaldp <= dtrecipetable.Rows(0)("dp_upperlimit") Then
+        If result_finaldp >= CDec(dtrecipetable.Rows(0)("dp_lowerlimit")) And result_finaldp <= CDec(dtrecipetable.Rows(0)("dp_upperlimit")) Then
             FormMain.lbl_DPTestResult.Text = "PASS"
             FormMain.lbl_DPTestResult.BackColor = PublicVariables.StatusGreen
             FormMain.lbl_DPTestResult.ForeColor = PublicVariables.StatusGreenT
