@@ -3092,6 +3092,14 @@ Public Class FormMain
             SQL.DeleteRecord("CalibrationResult", "cal_id NOT IN (SELECT DISTINCT cal_result_id FROM LotUsage WHERE NOT cal_result_id IS NULL)")
         End If
 
+        ' Set Jig Bypass
+        If True Then
+            SetButtonState(btn_JigBypass, False, "Jig Bypass")
+            PublicVariables.RetainedJigBypass = False
+            RetainedMemory.Update(34, "JigBypass", 0)
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
+        End If
+
         'Dim continueLastCal As Boolean = False
         Dim dtlotusage As New DataTable
 
@@ -3640,6 +3648,14 @@ Public Class FormMain
         End If
 
         If continueEndLot = True Then
+            ' Set Jig Bypass
+            If True Then
+                SetButtonState(btn_JigBypass, False, "Jig Bypass")
+                PublicVariables.RetainedJigBypass = False
+                RetainedMemory.Update(34, "JigBypass", 0)
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
+            End If
+
             Resultcapturetimer.Enabled = False
             Endlot()
 
@@ -5693,6 +5709,7 @@ Public Class FormMain
             ' Machine Depressurize Running
             If PLCstatus(2)(15) Then
                 conditionOK = False
+                'PCStatus(1)(15) = False
             End If
 
             ' Condition Fulfill
@@ -5714,36 +5731,51 @@ Public Class FormMain
         ' Reset Button State
         Dim btnReset As Boolean = False
 
-        If btn_WrkOrdScnDtEndLot.Enabled Then
-            If Not btn_RecipeSelectionConfirm.Enabled Then
-                If Not btnClicked.BackColor = Color.FromArgb(25, 130, 246) Then
-                    btnState = True
-                Else
-                    btnState = False
-                End If
+        'If btn_WrkOrdScnDtEndLot.Enabled Then
+        '    If Not btn_RecipeSelectionConfirm.Enabled Then
+        '        If Not btnClicked.BackColor = Color.FromArgb(25, 130, 246) Then
+        '            btnState = True
+        '        Else
+        '            btnState = False
+        '        End If
 
-                ' Execute Action
-                If btnState = False Then
-                    btnReset = True
-                Else
-                    SetButtonState(btnClicked, btnState, "Jig Bypass")
-                    PublicVariables.RetainedJigBypass = btnState
-                    RetainedMemory.Update(34, "JigBypass", 1)
-                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (ON)")
-                End If
+        '        ' Execute Action
+        '        If btnState = False Then
+        '            btnReset = True
+        '        Else
+        '            SetButtonState(btnClicked, btnState, "Jig Bypass")
+        '            PublicVariables.RetainedJigBypass = btnState
+        '            RetainedMemory.Update(34, "JigBypass", 1)
+        '            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (ON)")
+        '        End If
 
-                ' Clear Selection
-                lbl_Title.Select()
-            Else
-                btnReset = True
-            End If
+        '        ' Clear Selection
+        '        lbl_Title.Select()
+        '    Else
+        '        btnReset = True
+        '    End If
+        'Else
+        '    btnReset = True
+        'End If
+
+        'If btnReset Then
+        '    SetButtonState(btnClicked, btnState, "Jig Bypass")
+        '    PublicVariables.RetainedJigBypass = btnState
+        '    RetainedMemory.Update(34, "JigBypass", 0)
+        '    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
+        'End If
+
+        If btnClicked.BackColor = Color.FromArgb(25, 130, 246) Then
+            SetButtonState(btnClicked, True, "Jig Bypass")
+            PublicVariables.RetainedJigBypass = True
+            RetainedMemory.Update(34, "JigBypass", 1)
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (ON)")
+
+            ' Clear Selection
+            lbl_Title.Select()
         Else
-            btnReset = True
-        End If
-
-        If btnReset Then
-            SetButtonState(btnClicked, btnState, "Jig Bypass")
-            PublicVariables.RetainedJigBypass = btnState
+            SetButtonState(btnClicked, False, "Jig Bypass")
+            PublicVariables.RetainedJigBypass = False
             RetainedMemory.Update(34, "JigBypass", 0)
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
         End If

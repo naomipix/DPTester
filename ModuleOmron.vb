@@ -1,6 +1,7 @@
 ﻿Imports PoohPlcLink
 Imports System.Text
 Imports LiveChartsCore.Defaults
+Imports DocumentFormat.OpenXml.Presentation
 
 Module ModuleOmron
     ' This Module consists of the some data conversions needed for reading and writing values to the PLC
@@ -1746,6 +1747,11 @@ Module ModuleOmron
                 For i As Integer = 0 To 2
                     PLCstatus(i) = Int2BoolArr(FINSinput(i))
                 Next
+
+                ' Machine Depressurize Running
+                If PLCstatus(2)(15) Then
+                    PCStatus(1)(15) = False
+                End If
 
 #Region "Pump and tank status update on all page in main form"
                 'Manual Pump Control label based on controller feedback
