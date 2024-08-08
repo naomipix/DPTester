@@ -48,6 +48,11 @@ Module FormMainModule
                 ' Apply Permissions
                 PermissionModule.ClearPermissions()
                 PermissionModule.ReloadPermission()
+
+                ' Jig Bypass Interlock
+                If True Then
+                    FormMain.btn_JigBypass.Visible = False
+                End If
             Case 1  ' Logged In
                 ' Enable Tab Control
                 FormMain.tabctrl_MainCtrl.Enabled = True
@@ -124,6 +129,13 @@ Module FormMainModule
                 ' Apply Permissions
                 PermissionModule.ApplyOnLogon()
                 PermissionModule.ReloadPermission()
+
+                ' Jig Bypass Interlock
+                If LoginUserCategoryID = 0 Or LoginUserCategoryID = 1 Or LoginUserCategoryID = 2 Then
+                    FormMain.btn_JigBypass.Visible = True
+                Else
+                    FormMain.btn_JigBypass.Visible = False
+                End If
         End Select
     End Sub
 End Module
