@@ -533,6 +533,7 @@ Public Class FormRecipeManagement
         LoadRecipeDetails(0, Nothing, Nothing, Nothing, Nothing)
         GetRecipedetailsfilter()
         GetRecipeID()
+        GetPartID()
 
         ' Load Fitting Type
         GetFittingType()
@@ -565,7 +566,7 @@ Public Class FormRecipeManagement
         End If
 
         ' Bind ComboBox To Dictionary
-        For Each Filtercmbx As ComboBox In {cmbx_RcpEditFilterType, cmbx_PartCreateFilterType, cmbx_RcpCreateFilterType, cmbx_PartDeleteFilterType, cmbx_RcpDeleteFilterType}
+        For Each Filtercmbx As ComboBox In {cmbx_RcpEditFilterType, cmbx_PartCreateFilterType, cmbx_RcpCreateFilterType, cmbx_PartDeleteFilterType, cmbx_RcpDeleteFilterType, ComboBox11}
             With Filtercmbx
                 .DataSource = New BindingSource(FiltercomboSource, Nothing)
                 .DisplayMember = "Value"
@@ -9562,5 +9563,194 @@ Public Class FormRecipeManagement
         End If
     End Sub
 
+    Private Sub ComboBox10_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox10.SelectedIndexChanged
+        ' Part ID
+        If ComboBox10.SelectedIndex > 0 Then
+            ComboBox11.Enabled = True
 
+            If True Then
+                'Dim RecipeID As String = cmbx_RcpEditRecipeID.Text
+                'Dim PartID As String = cmbx_RcpEditPartID.Text
+
+                'cmbx_RcpDupSelRecipe.Text = RecipeID
+                'Cmbx_RcpDupNewPartID.Text = PartID
+
+                'MsgBox(ComboBox10.Text)
+
+                Dim PartID As String = ComboBox10.Text
+
+                Dim dt As DataTable = SQL.ReadRecords($"SELECT * FROM PartTable WHERE part_id='{PartID}'")
+
+                If dt.Rows.Count > 0 Then
+                    Dim JigType As Integer = dt(0)("jig_type_id")
+                    Dim FilterType As Integer = dt(0)("filter_type_id")
+
+                    If ComboBox11.Items.Count >= FilterType - 1 Then
+                        ComboBox11.SelectedIndex = FilterType
+                    End If
+                    If ComboBox12.Items.Count >= JigType - 1 Then
+                        ComboBox12.SelectedIndex = JigType
+                    End If
+                End If
+
+            End If
+        Else
+            With ComboBox11
+                .Enabled = False
+                If .Items.Count > 0 Then
+                    .SelectedIndex = 0
+                End If
+            End With
+        End If
+    End Sub
+
+    Private Sub ComboBox11_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox11.SelectedIndexChanged
+        ' Filter Type
+        If ComboBox11.SelectedIndex > 0 Then
+            ComboBox12.Enabled = True
+
+            If True Then
+                Dim JigcomboSource As New Dictionary(Of String, String)()
+
+                ' Assign Defaults
+                JigcomboSource.Add("0", "-Not Selected-")
+
+                ' Get User Category Table
+                Dim dtJigType As DataTable = SQL.ReadRecords("SELECT id, jig_description FROM JigType")
+
+                ' Insert Available Record Into Dictionary
+                If dtJigType.Rows.Count > 0 Then
+                    For i As Integer = 0 To dtJigType.Rows.Count - 1
+                        JigcomboSource.Add(dtJigType(i)("id"), dtJigType(i)("jig_description"))
+                    Next
+                End If
+
+                ' Bind ComboBox To Dictionary
+                For Each Jigcmbx As ComboBox In {ComboBox12}
+                    With Jigcmbx
+                        .DataSource = New BindingSource(JigcomboSource, Nothing)
+                        .DisplayMember = "Value"
+                        .ValueMember = "Key"
+                        If .Items.Count > 0 Then
+                            .SelectedIndex = 0
+                        End If
+                    End With
+                Next
+            End If
+        Else
+            With ComboBox12
+                .Enabled = False
+                If .Items.Count > 0 Then
+                    .SelectedIndex = 0
+                End If
+            End With
+
+            If True Then
+                Dim JigcomboSource As New Dictionary(Of String, String)()
+
+                ' Assign Defaults
+                JigcomboSource.Add("0", "-Not Selected-")
+
+                ' Bind ComboBox To Dictionary
+                For Each Jigcmbx As ComboBox In {ComboBox12}
+                    With Jigcmbx
+                        .DataSource = New BindingSource(JigcomboSource, Nothing)
+                        .DisplayMember = "Value"
+                        .ValueMember = "Key"
+                        If .Items.Count > 0 Then
+                            .SelectedIndex = 0
+                        End If
+                    End With
+                Next
+            End If
+        End If
+    End Sub
+
+    'Private Sub ComboBox12_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox12.SelectedIndexChanged
+    '    ' Jig Type
+
+    'End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        ' Update Part ID
+        ' Declare Parameters
+        'Dim cmbxFilterType As ComboBox = cmbx_PartCreateFilterType
+        'Dim cmbxJigType As ComboBox = cmbx_PartCreateJigType
+
+        Dim FilterTypeID As Integer = ComboBox11.SelectedIndex
+        Dim JigTypeID As Integer = ComboBox12.SelectedIndex
+        Dim PartID As String = ComboBox10.Text
+        Dim onContinue As Boolean = True
+
+        'Check Empty fields
+        If onContinue = True Then
+            If Not ComboBox11.SelectedIndex > 0 And Not ComboBox12.SelectedIndex > 0 Then
+                MsgBox("Please ensure fields are selected.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                onContinue = False
+            End If
+        End If
+
+        If onContinue = True Then
+            If True Then
+                Dim partParameter As New Dictionary(Of String, Object) From {
+                    {"filter_type_id", ComboBox11.SelectedIndex},
+                    {"jig_type_id", ComboBox12.SelectedIndex},
+                    {"user_created", PublicVariables.LoginUserName}
+                }
+                If SQL.UpdateRecord("PartTable", partParameter, $"part_id='{PartID}'") = 1 Then
+                    MsgBox("Part ID Update Success.", MsgBoxStyle.Information Or MsgBoxStyle.OkOnly, "Information")
+
+                    ' Event Log
+                    Dim FilterTypeValue As String = DirectCast(ComboBox11.SelectedItem, KeyValuePair(Of String, String)).Value
+                    Dim JigTypeValue As String = DirectCast(ComboBox12.SelectedItem, KeyValuePair(Of String, String)).Value
+                    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Recipe Management] Part ID Creation - Part ID ({FilterTypeValue}/{JigTypeValue}/{PartID}) Updated")
+
+                    If ComboBox10.Items.Count > 0 Then
+                        ComboBox10.SelectedIndex = 0
+                    End If
+                    If cmbx_RcpEditFilterType.Items.Count > 0 Then
+                        cmbx_RcpEditFilterType.SelectedIndex = 0
+                    End If
+                    If cmbx_RcpDupSelRecipe.Items.Count > 0 Then
+                        cmbx_RcpDupSelRecipe.SelectedIndex = 0
+                    End If
+                    If cmbx_PartCreateFilterType.Items.Count > 0 Then
+                        cmbx_PartCreateFilterType.SelectedIndex = 0
+                    End If
+                    If cmbx_RcpCreateFilterType.Items.Count > 0 Then
+                        cmbx_RcpCreateFilterType.SelectedIndex = 0
+                    End If
+                    If cmbx_PartDeleteFilterType.Items.Count > 0 Then
+                        cmbx_PartDeleteFilterType.SelectedIndex = 0
+                    End If
+                    If cmbx_RcpDeleteFilterType.Items.Count > 0 Then
+                        cmbx_RcpDeleteFilterType.SelectedIndex = 0
+                    End If
+                Else
+                    MsgBox("Part ID Update Failed. Please Try Again.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub GetPartID()
+        Dim dtPartID As DataTable = SQL.ReadRecords("SELECT * FROM PartTable")
+        Dim PartIDgcomboSource As New Dictionary(Of String, String)()
+        PartIDgcomboSource.Add("0", "-Not Selected-")
+        If dtPartID.Rows.Count > 0 Then
+            For i As Integer = 0 To dtPartID.Rows.Count - 1
+                PartIDgcomboSource.Add(dtPartID(i)("id"), dtPartID(i)("part_id"))
+            Next
+        End If
+
+        With ComboBox10
+            .DataSource = New BindingSource(PartIDgcomboSource, Nothing)
+            .DisplayMember = "Value"
+            .ValueMember = "Key"
+            If .Items.Count > 0 Then
+                .SelectedIndex = 0
+                '.Enabled = False
+            End If
+        End With
+    End Sub
 End Class
