@@ -1,10 +1,4 @@
-﻿'To use SQL commands the System.Data and System.Data.sqlclient need to be imported into the project
-Imports System.ComponentModel
-'Imports System.Data
-'Imports System.Data.SqlClient
-
-Public Class FormUserLogin
-
+﻿Public Class FormUserLogin
     Private Sub UserLogin_Load(sender As Object, e As EventArgs) Handles Me.Load
         ' Initialize Defaults
         txtbox_LogUserName.Text = ""
@@ -21,23 +15,18 @@ Public Class FormUserLogin
         txtbox_LogUserName.Select()
     End Sub
 
-
     Private Sub btn_LogPwdVisible_Click(sender As Object, e As EventArgs) Handles btn_LogPwdVisible.Click
         'The Below code is to toggle the password character on event of clicking the visible icon
-
         If btn_LogPwdVisible.BackColor = Color.FromArgb(25, 130, 246) Then
             btn_LogPwdVisible.BackColor = Color.FromArgb(0, 192, 0)
             txtbox_LogPassword.PasswordChar = Nothing
             txtbox_LogPassword.Focus()
         ElseIf btn_LogPwdVisible.BackColor = Color.FromArgb(0, 192, 0) Then
-
             btn_LogPwdVisible.BackColor = Color.FromArgb(25, 130, 246)
             txtbox_LogPassword.PasswordChar = "*"
             txtbox_LogPassword.Focus()
         End If
     End Sub
-
-
 
     Private Sub btn_Login1_Click(sender As Object, e As EventArgs) Handles btn_Login.Click
         picbox_UserLogin.Select()

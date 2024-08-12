@@ -67,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DPTesterApp.exe" size="4939224">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="DPTesterApp.exe" size="5126616">
       <assemblyIdentity name="DPTesterApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>prwLD9hIEZhh9blmdrznF6xMZc78pXfMYqXnAJY0UhY=</dsig:DigestValue>
+        <dsig:DigestValue>5aPncqXeijYCKcls23oJ4jHysYYyWJmdZvDr8VLHw+A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -139,14 +139,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.mshtml.dll" size="8027720">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.mshtml.dll" size="8027616">
       <assemblyIdentity name="Microsoft.mshtml" version="7.0.3300.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>3HNTFd4pFJcavyse0nYGUjKtZ3dln6OJVA1LUa8WgeY=</dsig:DigestValue>
+        <dsig:DigestValue>UHX8fXB5vSiWEyPTxTrWsX2OLFUee//CJkd3o5vJFHo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

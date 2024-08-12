@@ -1,5 +1,4 @@
 ﻿Imports System.Collections.ObjectModel
-Imports System.Media
 Imports System.Windows.Forms.DataVisualization.Charting
 Imports LiveChartsCore
 Imports LiveChartsCore.Defaults
@@ -24,7 +23,6 @@ Public Class FormResultGraph
 
     Dim ResultChartDPBP = New ObservableCollection(Of ObservablePoint)({})
     Dim ResultChartDPFLWR = New ObservableCollection(Of ObservablePoint)({})
-
 
     Dim DataWasLoadedFrom As String = "" ' Last/Search
     Dim ResultLotID As String = ""
@@ -81,9 +79,11 @@ Public Class FormResultGraph
         ' Get User Category Table
         Dim dtdefaultRecord As DataTable = SQL.ReadRecords($"SELECT DISTINCT serial_usage_id FROM ProductResult ORDER BY serial_usage_id DESC")
         Dim lastrecord As String = dtdefaultRecord.Rows(0)("serial_usage_id").ToString
-        Dim dtdefaultdetail As DataTable = SQL.ReadRecords($"SELECT * FROM ProductionDetail 
-                  LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id = Lotusage.id
-                  WHERE ProductionDetail.id ='{lastrecord}' ")
+        Dim dtdefaultdetail As DataTable = SQL.ReadRecords($"
+            SELECT * FROM ProductionDetail 
+            LEFT JOIN Lotusage ON ProductionDetail.lot_usage_id = Lotusage.id 
+            WHERE ProductionDetail.id ='{lastrecord}' 
+        ")
 
         If dtdefaultdetail.Rows.Count > 0 Then
             Dim lastrecordlot = dtdefaultdetail.Rows(0)("lot_id")
@@ -99,9 +99,7 @@ Public Class FormResultGraph
             End If
         End If
 
-
         GetLotid()
-
     End Sub
 
     Private Sub FormResultGraph_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -325,9 +323,7 @@ Public Class FormResultGraph
     End Sub
 #End Region
 
-
 #Region "Combobox Data"
-
     Private Sub GetLotid()
         Dim LotcomboSource As New Dictionary(Of String, String)()
 
@@ -364,18 +360,12 @@ Public Class FormResultGraph
         Next
     End Sub
 
-
-
     Private Sub cmbx_GraphSearchLot_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_GraphSearchLot.SelectedIndexChanged
         Dim SerialcomboSource As New Dictionary(Of String, String)()
         Dim Lotid As String = cmbx_GraphSearchLot.Text
 
-        ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
-
         ' Assign Defaults
         SerialcomboSource.Add("0", "-Not Selected-")
-
 
         ' Get Production Detail Table
         Dim dvGetRecord As DataView = SQL.ReadRecords($"SELECT serial_number, lot_usage_id FROM ProductionDetail LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=Lotusage.id Where lot_id = '{Lotid} '").DefaultView
@@ -392,7 +382,6 @@ Public Class FormResultGraph
                 SerialcomboSource.Add(i + 1, dtSerialid(i)("serial_number"))
             Next
         End If
-
 
         ' Bind ComboBox To Dictionary
         For Each Serialcmbx As ComboBox In {cmbx_GraphSearchSerial}
@@ -416,20 +405,14 @@ Public Class FormResultGraph
         End If
     End Sub
 
-
-
     Private Sub cmbx_GraphSearchSerial_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_GraphSearchSerial.SelectedIndexChanged
         Dim AttemptcomboSource As New Dictionary(Of String, String)()
         Dim Lotid As String = cmbx_GraphSearchLot.Text
         Dim Lotusageid As Integer = cmbx_GraphSearchLot.SelectedIndex
         Dim serialnum As String = cmbx_GraphSearchSerial.Text
 
-        ' To Get Values From Dictionary (Example)
-        'DirectCast(ComboBox1.SelectedItem, KeyValuePair(Of String, String)).Key | Value
-
         ' Assign Defaults
         AttemptcomboSource.Add("0", "-Not Selected-")
-
 
         ' Get Production Detail Table
         Dim dvGetRecord As DataView = SQL.ReadRecords($"SELECT id, serial_attempt FROM ProductionDetail Where serial_uid = '{Lotid}-{serialnum}'").DefaultView
@@ -446,7 +429,6 @@ Public Class FormResultGraph
                 AttemptcomboSource.Add(i + 1, dtAttemptid(i)("serial_attempt"))
             Next
         End If
-
 
         ' Bind ComboBox To Dictionary
         For Each Attemptcmbx As ComboBox In {cmbx_GraphSearchAttempt}
@@ -468,7 +450,6 @@ Public Class FormResultGraph
         Else
             cmbx_GraphSearchAttempt.Enabled = False
         End If
-
     End Sub
 
     Private Sub cmbx_GraphSearchAttempt_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_GraphSearchAttempt.SelectedIndexChanged
@@ -478,10 +459,7 @@ Public Class FormResultGraph
             btn_GraphSearch.Enabled = False
         End If
     End Sub
-
 #End Region
-
-
 
 #Region " Result Message"
     Private Function ResultMessage(a As Integer) As MsgBoxResult
@@ -502,32 +480,25 @@ Public Class FormResultGraph
                 Return MsgBox("Data not found in Product Result Table for Particular Serial Number", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 8
                 Return MsgBox("Data not found in Product Result Table for Particular Lot ID", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
-
             Case Else
                 Exit Select
         End Select
+
         Return 0
     End Function
 #End Region
 
-
-
-
 #Region "Form Closing"
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
-
         Me.Close()
     End Sub
 #End Region
-
 
 #Region "Result Search"
     Private Sub btn_GraphSearch_Click(sender As Object, e As EventArgs) Handles btn_GraphSearch.Click
         Dim Lotid As String = cmbx_GraphSearchLot.Text
         Dim serialnum As String = cmbx_GraphSearchSerial.Text
         Dim attempt As String = cmbx_GraphSearchAttempt.Text
-
-
 
         Dim Oncontinue As Boolean = True
         If Oncontinue = True Then
@@ -551,8 +522,6 @@ Public Class FormResultGraph
             End If
         End If
 
-
-
         If Oncontinue = True Then
             ' Reset Combobox Selection
             cmbx_ResultDisplay.SelectedIndex = 0
@@ -560,11 +529,8 @@ Public Class FormResultGraph
             LoadResult(Lotid, serialnum, attempt)
             DataWasLoadedFrom = "Search"
         End If
-
-
     End Sub
 #End Region
-
 
 #Region "Graph Creation"
     Public Sub CreateResultGraph()
@@ -600,7 +566,6 @@ Public Class FormResultGraph
         SeriesTemperature.Color = Color.Red
         SeriesTemperature.LegendText = "Temperature (K)"
 
-
         If checkbx_GraphDP.Checked = True Then
             ResultChart.Series.Add(SeriesDP)
 
@@ -611,7 +576,6 @@ Public Class FormResultGraph
                 ' .IsValueShownAsLabel = True (To Show Data Points label with X and Y Coordinate)
                 '.LabelToolTip = "X= #VALX, Y= #VALY" (To Show X and Y value when clicking on the datapoint label)
                 .ToolTip = "X= #VALX, Y= #VALY"   '(To Show X and Y value when clicking on the datapoint itself)
-
             End With
 
             With CartesianChart_ResultGraph
@@ -744,8 +708,6 @@ Public Class FormResultGraph
                 .YAxes(1).IsVisible = False
             End With
         End If
-
-
     End Sub
 
     Public Sub CreateResultGraphNew(dtResult As DataTable, dtproductiondetail As DataTable)
@@ -831,11 +793,6 @@ Public Class FormResultGraph
                 .MaxLimit = Math.Ceiling(TempMaxLimit)
                 .MinLimit = Math.Floor(TempMinLimit)
             End With
-        End If
-
-        ' Read from LotUsageTable
-        If True Then
-
         End If
 
         ' Set Result Graph Sections
@@ -1272,7 +1229,6 @@ Public Class FormResultGraph
     End Sub
 #End Region
 
-
 #Region "Graph Clear"
     Private Sub btn_GraphClear_Click(sender As Object, e As EventArgs) Handles btn_GraphClear.Click
         checkbx_GraphDP.Checked = False
@@ -1303,10 +1259,8 @@ Public Class FormResultGraph
         ResultChart.DataSource = Nothing
         ResultChart.Series.Clear()
         cmbx_GraphSearchLot.SelectedIndex = 0
-
     End Sub
 #End Region
-
 
 #Region "Text Formatting"
     Private Sub txtbx_GraphTest_TextChanged(sender As Object, e As EventArgs) Handles txtbx_GraphTest.TextChanged
@@ -1388,11 +1342,7 @@ Public Class FormResultGraph
             txtbx_GraphDrain3.ForeColor = SystemColors.ControlText
         End If
     End Sub
-
-
-
 #End Region
-
 
 #Region "Checkbox checked"
     Private Sub checkbx_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_GraphDP.CheckedChanged, checkbx_GraphInletPressure.CheckedChanged, checkbx_GraphOutletPressure.CheckedChanged, checkbx_GraphTemperature.CheckedChanged, checkbx_GraphFlowrate.CheckedChanged, checkbx_GraphBP.CheckedChanged, checkbx_GraphRPM.CheckedChanged
@@ -1403,6 +1353,30 @@ Public Class FormResultGraph
             For Each chkbx In chkbxArr
                 chkbx.Checked = False
             Next
+        End If
+
+        ' Limit Max 3 CheckBox Checked
+        If True Then
+            Dim chkbxArr() As CheckBox = {checkbx_GraphDP, checkbx_GraphInletPressure, checkbx_GraphOutletPressure, checkbx_GraphBP, checkbx_GraphFlowrate, checkbx_GraphTemperature, checkbx_GraphRPM}
+
+            Dim chkbxCount As Integer = 0
+            For Each chkbx In chkbxArr
+                If chkbx.Checked Then
+                    chkbxCount += 1
+                End If
+            Next
+
+            If chkbxCount >= 4 Then
+                For Each chkbx In chkbxArr
+                    If Not chkbx.Checked Then
+                        chkbx.Enabled = False
+                    End If
+                Next
+            Else
+                For Each chkbx In chkbxArr
+                    chkbx.Enabled = True
+                Next
+            End If
         End If
     End Sub
 
@@ -1545,9 +1519,11 @@ Public Class FormResultGraph
         If Oncontinue = True Then
             If dtproductiondetail.Rows.Count > 0 Then
                 checkbx_GraphDP.Checked = True
-                checkbx_GraphInletPressure.Checked = True
-                checkbx_GraphOutletPressure.Checked = True
-                checkbx_GraphBP.Checked = True
+                'checkbx_GraphInletPressure.Checked = True
+                'checkbx_GraphOutletPressure.Checked = True
+                'checkbx_GraphBP.Checked = True
+                checkbx_GraphFlowrate.Checked = True
+                checkbx_GraphRPM.Checked = True
 
                 For i As Integer = 0 To dtproductiondetail.Columns.Count - 1
                     If Not dtproductiondetail.Rows(0).IsNull(i) Then
@@ -1555,13 +1531,10 @@ Public Class FormResultGraph
                     Else
                         resultsummary(i) = String.Empty
                     End If
-
                 Next
 
                 dt_Graphsummary = SQL.ReadRecords($"SELECT * FROM ProductResult WHERE serial_usage_id = '{resultsummary(0)}'ORDER BY ProductResult.sampling_time ASC")
                 'dgv_Graphsummary.DataSource = dt_Graphsummary
-
-
 
                 If dt_Graphsummary.Rows.Count > 0 Then
                     CreateResultGraph()
@@ -1583,9 +1556,11 @@ Public Class FormResultGraph
                     ResultChart.DataSource = dt_Graphsummary
                 Else
                     checkbx_GraphDP.Checked = False
-                    checkbx_GraphInletPressure.Checked = False
-                    checkbx_GraphOutletPressure.Checked = False
-                    checkbx_GraphBP.Checked = False
+                    'checkbx_GraphInletPressure.Checked = False
+                    'checkbx_GraphOutletPressure.Checked = False
+                    'checkbx_GraphBP.Checked = False
+                    checkbx_GraphFlowrate.Checked = False
+                    checkbx_GraphRPM.Checked = False
                     ResultMessage(6)
                     Oncontinue = False
                 End If
@@ -1595,9 +1570,6 @@ Public Class FormResultGraph
             End If
         End If
 
-
-
-
         If Oncontinue = True Then
             txtbx_GraphTimestamp.Text = dtproductiondetail(0)("productiondetail_timestamp")
 
@@ -1606,19 +1578,19 @@ Public Class FormResultGraph
                 txtbx_GraphTemperature.Text = "0.0"
             Else
                 Try
-                    txtbx_GraphTemperature.Text = CDec(dtproductiondetail(0)("productiondetail_temperature")) - 273.15
+                    txtbx_GraphTemperature.Text = (CDec(dtproductiondetail(0)("productiondetail_temperature")) - 273.15).ToString("F")
                 Catch ex As Exception
-                    txtbx_GraphTemperature.Text = "0.0"
+                    txtbx_GraphTemperature.Text = "0.00"
                 End Try
             End If
 
-            txtbx_GraphFlowrate.Text = dtproductiondetail(0)("productiondetail_flowrate")
-            txtbx_GraphInletPressure.Text = dtproductiondetail(0)("productiondetail_inlet_pressure")
-            txtbx_GraphOutletPressure.Text = dtproductiondetail(0)("productiondetail_outlet_pressure")
-            txtbx_GraphDiffPressure.Text = dtproductiondetail(0)("productiondetail_diff_pressure")
+            txtbx_GraphFlowrate.Text = CDec(dtproductiondetail(0)("productiondetail_flowrate")).ToString("F")
+            txtbx_GraphInletPressure.Text = CDec(dtproductiondetail(0)("productiondetail_inlet_pressure")).ToString("F")
+            txtbx_GraphOutletPressure.Text = CDec(dtproductiondetail(0)("productiondetail_outlet_pressure")).ToString("F")
+            txtbx_GraphDiffPressure.Text = CDec(dtproductiondetail(0)("productiondetail_diff_pressure")).ToString("F")
             txtbx_GraphTest.Text = dtproductiondetail(0)("productiondetail_result").ToUpper
 
-            txtbx_GraphCalOffset.Text = dtproductiondetail(0)("lotusage_cal_diff_pressure")
+            txtbx_GraphCalOffset.Text = CDec(dtproductiondetail(0)("lotusage_cal_diff_pressure")).ToString("F")
             txtbx_GraphRecipeID.Text = dtproductiondetail(0)("lotusage_recipe_id")
             txtbx_GraphRecipeIDRev.Text = dtproductiondetail(0)("lotusage_recipe_rev")
 
@@ -1630,7 +1602,6 @@ Public Class FormResultGraph
             txtbx_GraphDrain2.Text = dtproductiondetail(0)("recipetable_drain2_circuit").ToUpper
             txtbx_GraphDrain3.Text = dtproductiondetail(0)("recipetable_drain3_circuit").ToUpper
 
-
             txtbx_GraphWorkOrder.Text = dtproductiondetail(0)("workorder_work_order")
             txtbx_GraphPartID.Text = dtproductiondetail(0)("workorder_part_id")
             txtbx_GraphConfirmation.Text = dtproductiondetail(0)("workorder_confirmation_id")
@@ -1639,10 +1610,6 @@ Public Class FormResultGraph
         End If
     End Sub
 #End Region
-
-
-
-
 
     Private Sub picbx_Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click
         FormPixel.Show()

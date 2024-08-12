@@ -9,6 +9,7 @@ Imports SkiaSharp
 Imports LiveChartsCore.SkiaSharpView.Painting.Effects
 Imports LiveChartsCore.Defaults
 Imports LiveChartsCore.SkiaSharpView.WinForms
+Imports System.Threading
 
 Module FormMainModule
     Public Workorder As String
@@ -47,6 +48,11 @@ Module FormMainModule
                 ' Apply Permissions
                 PermissionModule.ClearPermissions()
                 PermissionModule.ReloadPermission()
+
+                ' Jig Bypass Interlock
+                If True Then
+                    FormMain.btn_JigBypass.Visible = False
+                End If
             Case 1  ' Logged In
                 ' Enable Tab Control
                 FormMain.tabctrl_MainCtrl.Enabled = True
@@ -123,13 +129,19 @@ Module FormMainModule
                 ' Apply Permissions
                 PermissionModule.ApplyOnLogon()
                 PermissionModule.ReloadPermission()
+
+                ' Jig Bypass Interlock
+                If LoginUserCategoryID = 0 Or LoginUserCategoryID = 1 Or LoginUserCategoryID = 2 Then
+                    FormMain.btn_JigBypass.Visible = True
+                Else
+                    FormMain.btn_JigBypass.Visible = False
+                End If
         End Select
     End Sub
 End Module
 
 Public Class FormMain
 #Region "Form Properties [ Load | Shown | Closing ]"
-
     Public btn_ValveCtrlArr(18) As Button
     Public btn_Manualothersarr(20) As Button
 
@@ -146,7 +158,6 @@ Public Class FormMain
 
         'Create Directories
         ModuleInitialize.CreateFolders()
-
 
         ' Load Ini file
         IniFileInitialize.ReadConfig()
@@ -215,24 +226,20 @@ Public Class FormMain
             chart_MainLiveGraph.Series(0).MarkerStyle = MarkerStyle.None
         End If
 
-
-
         ' Define Button for Manual Valve Control Array
         btn_ValveCtrlArr = {
             btn_Valve1, btn_Valve2, btn_Valve3, btn_Valve4, btn_Valve5, btn_Valve6, btn_Valve7, btn_Valve8, btn_Valve9, btn_Valve10, btn_Valve11, btn_Valve12,
-        btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
+            btn_Valve13, btn_Valve14, btn_Valve15, btn_Valve16, btn_Valve17, btn_Valve18, btn_Valve19
         }
         ' Define Button for Manual Other Control Array
-        btn_Manualothersarr = {btn_PumpReset, btn_PumpMode, btn_PumpEnable, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_MCN2Purge4, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank, btn_InletConnect,
+        btn_Manualothersarr = {
+            btn_PumpReset, btn_PumpMode, btn_PumpEnable, btn_TankFill, btn_TankDrain, btn_MCN2Purge1, btn_MCN2Purge2, btn_MCN2Purge3, btn_MCN2Purge4, btn_InFiltrDrain, btn_InFiltrVent, btn_PumpFiltrDrain, btn_PumpFiltrVent, btn_EmptyTank, btn_InletConnect,
             btn_OutletConnect, btn_VentConnect, btn_DrainConnect, btn_BackPressureOn, btn_N2PressureOn
-            }
-
+        }
 
         'Handheld Scanner Initalise
         Scannertimer.Interval = 1000
         Scannertimer.Enabled = True
-
-
 
         'PLC Impicit Cyclic Messaging via Ethernet IP
         FINSInitialise()
@@ -337,8 +344,6 @@ Public Class FormMain
             txtbx_Operatorlotid.Text = Nothing
         End If
 
-
-
         If PublicVariables.RetainedWorkOrder <> "-" Then
             If PublicVariables.RetainedRecipeType <> "-" Then
                 LoadMainRecipeCombo()
@@ -351,27 +356,17 @@ Public Class FormMain
                     cmbx_RecipeID.SelectedIndex = cmbx_RecipeID.FindStringExact(PublicVariables.RetainedRecipeID)
                 End If
 
-
-
                 LoadrecipeParameters(PublicVariables.RetainedRecipeID)
-
-
             Else
-
                 btn_RecipeSelectionConfirm.Enabled = True
                 cmbx_RecipeType.Enabled = True
                 cmbx_RecipeID.Enabled = True
-
             End If
         Else
-
             btn_RecipeSelectionConfirm.Enabled = False
             cmbx_RecipeType.Enabled = False
             cmbx_RecipeID.Enabled = False
-
         End If
-
-
 
         If PublicVariables.RetainedWorkOrder <> "-" And PublicVariables.RetainedRecipeType <> "-" Then
             If PublicVariables.RetainedCalStatus <> "-" Then
@@ -388,7 +383,6 @@ Public Class FormMain
                     txtbx_SerialNumber.Enabled = False
                     btn_OprKeyInDtConfirm.Enabled = False
                 End If
-
             Else
                 lbl_CalibrationStatus.Text = Nothing
                 lbl_CalibrationStatus.BackColor = Color.FromArgb(224, 224, 224)
@@ -396,7 +390,6 @@ Public Class FormMain
                 lbl_CalibrationDate.Text = Nothing
                 txtbx_SerialNumber.Enabled = False
                 btn_OprKeyInDtConfirm.Enabled = False
-
             End If
         Else
             lbl_CalibrationStatus.Text = Nothing
@@ -417,7 +410,6 @@ Public Class FormMain
         lbl_ProductBackpress.Text = Nothing
         lbl_ProductTemperature.Text = Nothing
         lbl_DPTestResult.Text = Nothing
-
     End Sub
 
     Private Sub FormMain_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -519,11 +511,9 @@ Public Class FormMain
                 }
             }
         Next
-
     End Sub
 
     Private Sub InitializeLiveChart()
-
         For Each LiveGraphChart In {CartesianChart_MainLiveGraph} 'CartesianChartArr
             LiveGraphChart.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
             LiveGraphChart.ZoomMode = Measure.ZoomAndPanMode.X
@@ -733,11 +723,6 @@ Public Class FormMain
             }
         Next
     End Sub
-
-
-
-
-
 #End Region
 
 #Region "Main Menu Buttons"
@@ -762,10 +747,6 @@ Public Class FormMain
                     FormMainModule.ControlState(0)
                     lbl_Username.Text = "-"
                     lbl_Category.Text = "-"
-
-
-
-
                 End If
             End If
         End If
@@ -777,16 +758,12 @@ Public Class FormMain
 
         ' Button Recipe Management
         If btnClicked Is btn_RecipeManagement Then
-
             FormRecipeManagement.ShowDialog()
-
         End If
 
         ' Button Calibration
         If btnClicked Is btn_Calibration Then
-
             FormCalibration.ShowDialog()
-
         End If
 
         ' Button Setting
@@ -802,16 +779,13 @@ Public Class FormMain
         ' Button Result Summary
         If btnClicked Is btn_ResultSummary Then
             FormResultSummary.ShowDialog()
-
         End If
 
         ' Button Result Graph
         If btnClicked Is btn_ResultGraph Then
             FormResultGraph.ShowDialog()
-
         End If
     End Sub
-
 #End Region
 
 #Region "Main Menu"
@@ -1028,7 +1002,7 @@ Public Class FormMain
     ' End   - [Debugging & Testing]
 
     ' Perform Action According To TabSelected
-    Private Sub tabctrl_MainCtrl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_MainCtrl.SelectedIndexChanged
+    Private Async Sub tabctrl_MainCtrl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabctrl_MainCtrl.SelectedIndexChanged
         If tabctrl_MainCtrl.SelectedTab Is tabpg_Main Then
             ' Focus First Tab Page
             tabctrl_SubMain.SelectedTab = tabpg_MainLiveGraph
@@ -1047,25 +1021,23 @@ Public Class FormMain
         If tabctrl_MainCtrl.SelectedTab Is tabpg_Status Then
             ' Focus First Tab Page
             tabctrl_SubStatus.SelectedTab = tabpg_StatusIO
-
         End If
 
         If tabctrl_MainCtrl.SelectedTab Is tabpg_ManualCtrl Then
             ' Focus First Tab Page
             tabctrl_SubManualCtrl.SelectedTab = tabpg_ManualControlValve
         End If
+
         If tabctrl_MainCtrl.SelectedTab Is tabpg_Alarm Then
             ' Focus First Tab Page
             tabctrl_SubAlarm.SelectedTab = tabpg_AlarmCurrent
-            LoadCurrentalarmtable()
-            ' Initialize Current Alarm
 
+            ' Initialize Current Alarm
+            LoadCurrentalarmtable()
 
             ' Load Alarm History
             Dim t2 As Task = LoadAlarm()
         End If
-
-
     End Sub
 
     ' Clear Selection
@@ -1089,25 +1061,19 @@ Public Class FormMain
         'End If
 
         If tabctrl_SubMain.SelectedIndex = 1 Then
-
-
         End If
     End Sub
 
     Private Sub CheckForCurrentWork()
-
     End Sub
 
     Private Sub CheckForCurrentRecipe()
-
     End Sub
 
     Private Sub CheckForCalibrationStatus()
-
     End Sub
 
     Private Sub CheckForProductionCount()
-
     End Sub
 
     Private Sub cmbx_LiveGraphSelection_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_LiveGraphSelection.SelectedIndexChanged
@@ -1257,7 +1223,6 @@ Public Class FormMain
 
     ' Load Filter List For ComboBoxes
     Private Async Function LoadProductionDetailsFilterList() As Task
-
         ' Lot ID
         If True Then
             Dim comboSource As New Dictionary(Of String, String)()
@@ -1269,9 +1234,9 @@ Public Class FormMain
             'Dim dtRecipeTable As DataTable = SQL.ReadRecords("SELECT lot_id FROM WorkOrder")
             Dim dvGetRecord As DataView = Await Task.Run(Function() SQL.ReadRecords($"
                 SELECT TOP {PublicVariables.ProdDetailsDisplayedTableCount} 
-                    LotUsage.lot_id 
+                LotUsage.lot_id 
                 FROM ProductionDetail 
-                    LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id 
+                LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id 
                 ORDER BY ProductionDetail.timestamp DESC
             ").DefaultView)
 
@@ -1318,6 +1283,15 @@ Public Class FormMain
 
             ' Get Unique Records
             Dim dtRecipeTable As DataTable = dvGetRecord.ToTable(True, "part_id")
+
+            ' Replace All Nulls w/0s
+            For Each row As DataRow In dtRecipeTable.Rows
+                For Each col As DataColumn In dtRecipeTable.Columns
+                    If row.IsNull(col) Then
+                        row(col) = 0
+                    End If
+                Next
+            Next
 
             ' Insert Available Record Into Dictionary
             If dtRecipeTable.Rows.Count > 0 Then
@@ -1461,7 +1435,8 @@ Public Class FormMain
             ProductionDetail.serial_attempt, 
             LotUsage.recipe_id, 
             LotUsage.recipe_rev, 
-            LotUsage.cal_diff_pressure, 
+            --LotUsage.cal_diff_pressure, 
+            CONVERT(DECIMAL(10,2), LotUsage.cal_diff_pressure) AS cal_diff_pressure,
             ProductionDetail.flowrate, 
             ProductionDetail.diff_pressure, 
             UPPER(ProductionDetail.result) AS result, 
@@ -1469,7 +1444,8 @@ Public Class FormMain
                 WHEN ProductionDetail.temperature - 273.15 <= -273.15 THEN 0
                 ELSE ProductionDetail.temperature - 273.15
             END AS temperature, 
-            ProductionDetail.viscosity, 
+            --ProductionDetail.viscosity, 
+            CONVERT(DECIMAL(10,2), ProductionDetail.viscosity) AS viscosity,
             ProductionDetail.inlet_pressure, 
             ProductionDetail.outlet_pressure, 
             ProductionDetail.back_pressure, 
@@ -1672,7 +1648,6 @@ Public Class FormMain
                 dgv.Rows(e.RowIndex).Cells("result").Style.ForeColor = SystemColors.ControlText
             End If
         Catch ex As Exception
-
         End Try
     End Sub
 
@@ -1721,10 +1696,50 @@ Public Class FormMain
             dtpicker_EndDate.Value = dtpicker_StartDate.Value
         End If
     End Sub
+
+    ' Open Context Menu
+    Dim dgvProdDetailRowIndex As Integer = -1
+    Private Sub dgv_ProdDetail_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgv_ProdDetail.CellMouseUp
+        If MainMenu_DeleteTest Then
+            Try
+                Dim dgv As DataGridView = dgv_ProdDetail
+
+                If e.Button = MouseButtons.Right Then
+                    dgv.Rows(e.RowIndex).Selected = True
+                    dgvProdDetailRowIndex = e.RowIndex
+
+                    With cms_dgv_ProdDetail
+                        .Show(dgv, e.Location)
+                        .Show(Cursor.Position)
+                    End With
+                End If
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+    ' Click Context Menu
+    Private Async Sub cms_dgv_ProdDetail_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles cms_dgv_ProdDetail.ItemClicked
+        Await Task.Delay(50)
+
+        If e.ClickedItem.ToString.ToUpper.Contains("DELETE") Then
+            If dgvProdDetailRowIndex >= 0 Then
+                Dim dgv As DataGridView = dgv_ProdDetail
+
+                Dim msgStr As String = $"Are You sure to Delete Test Record?{vbCrLf}[UID: {dgv.Rows(dgvProdDetailRowIndex).Cells("serial_uid").Value} / Attempt: {dgv.Rows(dgvProdDetailRowIndex).Cells("serial_attempt").Value}]"
+                If MsgBox(msgStr, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                    Await Task.Run(Sub()
+                                       SQL.DeleteRecord("ProductionDetail", $"id='{dgv.Rows(dgvProdDetailRowIndex).Cells("id").Value}'")
+                                       SQL.DeleteRecord("ProductResult", "serial_usage_id NOT IN (SELECT DISTINCT id FROM ProductionDetail)")
+                                   End Sub)
+                    SearchProductionDetails()
+                End If
+            End If
+        End If
+    End Sub
 #End Region
 
-
-#Region "Production Details"
+#Region "Lot Summary"
     ' Initialize Production Details Tab
     Private Async Function LoadLotSummary() As Task
         ' Load Production Details Filter List
@@ -1987,7 +2002,6 @@ Public Class FormMain
             .Columns("lotusage_verify_inlet_pressure").Width = 90
             .Columns("lotusage_verify_outlet_pressure").Width = 90
             .Columns("lotusage_verify_diff_pressure").Width = 90
-
         End With
 
         ' Clear Selection
@@ -2022,7 +2036,6 @@ Public Class FormMain
                 dgv.Rows(e.RowIndex).Cells("lotusage_cal_result").Style.ForeColor = SystemColors.ControlText
             End If
         Catch ex As Exception
-
         End Try
     End Sub
 
@@ -2040,13 +2053,65 @@ Public Class FormMain
         ' Load Table With Filters
         LoadLotSummaryTable(True, LotID, cmbxArr)
     End Sub
+
+    ' Open Context Menu
+    Dim dgvLotSummaryRowIndex As Integer = -1
+    Private Sub dgv_LotSummary_CellMouseUp(sender As Object, e As DataGridViewCellMouseEventArgs) Handles dgv_LotSummary.CellMouseUp
+        If MainMenu_DeleteLot Then
+            Try
+                Dim dgv As DataGridView = dgv_LotSummary
+
+                If e.Button = MouseButtons.Right Then
+                    dgv.Rows(e.RowIndex).Selected = True
+                    dgvLotSummaryRowIndex = e.RowIndex
+
+                    With cms_dgv_LotSummary
+                        .Show(dgv, e.Location)
+                        .Show(Cursor.Position)
+                    End With
+                End If
+            Catch ex As Exception
+            End Try
+        End If
+    End Sub
+
+    ' Click Context Menu
+    Private Async Sub cms_dgv_LotSummary_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles cms_dgv_LotSummary.ItemClicked
+        Await Task.Delay(50)
+
+        If e.ClickedItem.ToString.ToUpper.Contains("DELETE") Then
+            If dgvLotSummaryRowIndex >= 0 Then
+                Dim dgv As DataGridView = dgv_LotSummary
+
+                Dim msgStr As String = $"Are You sure to Delete Lot?{vbCrLf}[Lot ID: {dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_lot_id").Value} / Attempt: {dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_lot_attempt").Value}]{vbCrLf}**ALL Related Historical Data will be Deleted & NOT Recoverable!"
+                If MsgBox(msgStr, MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
+                    Await Task.Run(Sub()
+                                       SQL.DeleteRecord("LotUsage", $"id='{dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_id").Value}'")
+                                       SQL.DeleteRecord("ProductionDetail", $"lot_usage_id='{dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_id").Value}'")
+                                       SQL.DeleteRecord("ProductResult", "serial_usage_id NOT IN (SELECT DISTINCT id FROM ProductionDetail)")
+
+                                       Dim dt As DataTable = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE id='{dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_id").Value}'")
+                                       If dt.Rows.Count = 0 Then
+                                           If txtbx_LotID.Enabled = False Then
+                                               If txtbx_LotID.Text.Trim = CStr(dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_lot_id").Value).Trim Then
+                                                   Endlot()
+                                               End If
+                                           End If
+
+                                           SQL.DeleteRecord("WorkOrder", $"lot_id='{dgv.Rows(dgvLotSummaryRowIndex).Cells("lotusage_lot_id").Value}'")
+                                       End If
+                                   End Sub)
+                    SearchLotSummary()
+                End If
+            End If
+        End If
+    End Sub
 #End Region
 
 #Region "Status"
     Private Async Function LoadStatus() As Task
         Try
             Await InitializeIOStatus()
-
         Catch ex As Exception
             MsgBox(ex.Message & ex.StackTrace)
         End Try
@@ -2238,20 +2303,18 @@ Public Class FormMain
     Private Async Function InitializeDeviceStatus() As Task
         ' Remove This On Implementation
         Await Task.Delay(50)
-
     End Function
 #End Region
-#End Region
 
+#End Region
 
 #Region "Manual Control"
     ' Valve Control
-
-
-
-    Private Sub btn_ValveCtrl_Click(sender As Object, e As EventArgs) Handles btn_Valve1.Click, btn_Valve2.Click, btn_Valve3.Click, btn_Valve4.Click, btn_Valve5.Click,
-        btn_Valve6.Click, btn_Valve7.Click, btn_Valve8.Click, btn_Valve9.Click, btn_Valve10.Click, btn_Valve11.Click, btn_Valve12.Click,
-        btn_Valve13.Click, btn_Valve14.Click, btn_Valve15.Click, btn_Valve16.Click, btn_Valve17.Click, btn_Valve18.Click, btn_Valve19.Click
+    Private Sub btn_ValveCtrl_Click(sender As Object, e As EventArgs) Handles _
+        btn_Valve1.Click, btn_Valve2.Click, btn_Valve3.Click, btn_Valve4.Click, btn_Valve5.Click,
+        btn_Valve6.Click, btn_Valve7.Click, btn_Valve8.Click, btn_Valve9.Click, btn_Valve10.Click,
+        btn_Valve11.Click, btn_Valve12.Click, btn_Valve13.Click, btn_Valve14.Click, btn_Valve15.Click,
+        btn_Valve16.Click, btn_Valve17.Click, btn_Valve18.Click, btn_Valve19.Click
 
         Dim btn_Valve As Button = DirectCast(sender, Button)
 
@@ -2279,21 +2342,10 @@ Public Class FormMain
             End If
         Next
 
-
         PCtimer.Start()
-
-
     End Sub
 
-
-
-
-
-
-
-
     ' Pump & Tank Control
-
     Private Sub btn_PumpCtrl_Click(sender As Object, e As EventArgs) Handles btn_PumpMode.Click, btn_PumpEnable.Click, btn_PumpReset.Click
         Dim btn_Pump As Button = DirectCast(sender, Button)
         If btn_Pump Is btn_PumpMode Then
@@ -2325,12 +2377,13 @@ Public Class FormMain
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Pump Enable (ON)")
             End If
         End If
+
         PCtimer.Start()
     End Sub
 
-
     Private Sub txtbx_NewLPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_NewLPM.Validating
         Dim newLPM As Decimal
+
         If txtbx_NewLPM.Text.Length > 0 Then
             newLPM = CType(txtbx_NewLPM.Text, Decimal)
             If newLPM < PublicVariables.PumpFlowrateLowLimit Or newLPM > PublicVariables.PumpFlowrateHighLimit Then
@@ -2339,11 +2392,11 @@ Public Class FormMain
                 txtbx_NewLPM.Focus()
             End If
         End If
-
     End Sub
 
     Private Sub txtbx_NewRPM_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_NewRPM.Validating
         Dim newRPM As Decimal
+
         If txtbx_NewRPM.Text.Length > 0 Then
             newRPM = CType(txtbx_NewRPM.Text, Integer)
             If newRPM < PublicVariables.PumpSpeedLowLimit Or newRPM > PublicVariables.PumpSpeedHighLimit Then
@@ -2352,7 +2405,6 @@ Public Class FormMain
                 txtbx_NewRPM.Focus()
             End If
         End If
-
     End Sub
 
     Private Sub txtbx_NewLPM_GotFocus(sender As Object, e As EventArgs) Handles txtbx_NewLPM.GotFocus
@@ -2367,18 +2419,15 @@ Public Class FormMain
         focustooltip.SetToolTip(txtbx_NewRPM, $"Enter Value between {PublicVariables.PumpSpeedLowLimit} to {PublicVariables.PumpSpeedHighLimit} ")
     End Sub
 
-
     Private Sub txtbx_NewLPM_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbx_NewLPM.KeyPress
         If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> "." AndAlso Not Char.IsControl(e.KeyChar) Then
-
             e.Handled = True ' Suppress the key press
         End If
+
         ' Check for multiple decimal points
         If e.KeyChar = "." AndAlso DirectCast(sender, TextBox).Text.Contains(".") Then
-
             e.Handled = True ' Suppress the key press
         End If
-
     End Sub
 
     Private Sub txtbx_NewRPM_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbx_NewRPM.KeyPress
@@ -2387,38 +2436,27 @@ Public Class FormMain
         End If
     End Sub
 
-
-
-
-
-
-
-
     Private Sub btn_UpdateRPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateRPM.Click
         Dim RPMTemp As String = lbl_ReqRPM.Text
+
         If txtbx_NewRPM.Text.Length > 0 Then
             Float2int(120, CType(txtbx_NewRPM.Text, Decimal))
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Pump Speed (RPM) set to {txtbx_NewRPM.Text} from {RPMTemp}")
             txtbx_NewRPM.Text = Nothing
         End If
-
     End Sub
 
     Private Sub btn_UpdateLPM_Click(sender As Object, e As EventArgs) Handles btn_UpdateLPM.Click
         Dim LPMTemp As String = lbl_ReqLPM.Text
+
         If txtbx_NewLPM.Text.Length > 0 Then
             Float2int(122, CType(txtbx_NewLPM.Text, Decimal))
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pump Control - Required Flowrate (LPM) set to {txtbx_NewLPM.Text} from {LPMTemp}")
             txtbx_NewLPM.Text = Nothing
         End If
-
     End Sub
 
     'Tank Controls
-
-
-
-
     Private Sub btn_tankCtrl_Click(sender As Object, e As EventArgs) Handles btn_TankFill.Click, btn_TankDrain.Click
         Dim btn_tank As Button = DirectCast(sender, Button)
         If btn_tank Is btn_TankFill Then
@@ -2440,37 +2478,35 @@ Public Class FormMain
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Tank Control - Tank Drain (ON)")
             End If
         End If
-
-
     End Sub
 
-
     ' Regulator Controls
-
     Private Sub txtbx_BackPressRequired_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_BackPressRequired.Validating
         Dim backpressure As Decimal
+
         If txtbx_BackPressRequired.Text.Length > 0 Then
             backpressure = CType(txtbx_BackPressRequired.Text, Decimal)
+
             If backpressure < PublicVariables.BPRegulatorLowLimit Or backpressure > PublicVariables.BPRegulatorHighLimit Then
                 MsgBox($"Invalid data, Enter Value between {PublicVariables.BPRegulatorLowLimit} to {PublicVariables.BPRegulatorHighLimit}")
                 txtbx_BackPressRequired.Text = Nothing
                 txtbx_BackPressRequired.Focus()
             End If
         End If
-
     End Sub
 
     Private Sub txtbx_N2PurgeRequired_Validating(sender As Object, e As CancelEventArgs) Handles txtbx_N2PurgeRequired.Validating
         Dim N2pressure As Decimal
+
         If txtbx_N2PurgeRequired.Text.Length > 0 Then
             N2pressure = CType(txtbx_N2PurgeRequired.Text, Decimal)
+
             If N2pressure < PublicVariables.N2RegulatorLowLimit Or N2pressure > PublicVariables.N2RegulatorHighLimit Then
                 MsgBox($"Invalid data, Enter Value between {PublicVariables.N2RegulatorLowLimit} to {PublicVariables.N2RegulatorHighLimit}")
                 txtbx_N2PurgeRequired.Text = Nothing
                 txtbx_N2PurgeRequired.Focus()
             End If
         End If
-
     End Sub
 
     Private Sub txtbx_BackPressRequired_GotFocus(sender As Object, e As EventArgs) Handles txtbx_BackPressRequired.GotFocus
@@ -2485,35 +2521,25 @@ Public Class FormMain
         focustooltip.SetToolTip(txtbx_N2PurgeRequired, $"Enter Value between  {PublicVariables.N2RegulatorLowLimit} to {PublicVariables.N2RegulatorHighLimit}")
     End Sub
 
-
-
-
-
     Private Sub txtbx_BackPressRequired_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbx_BackPressRequired.KeyPress
         If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> "." AndAlso Not Char.IsControl(e.KeyChar) Then
-
             e.Handled = True ' Suppress the key press
         End If
         ' Check for multiple decimal points
         If e.KeyChar = "." AndAlso DirectCast(sender, TextBox).Text.Contains(".") Then
-
             e.Handled = True ' Suppress the key press
         End If
     End Sub
 
     Private Sub txtbx_N2PurgeRequired_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbx_N2PurgeRequired.KeyPress
         If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> "." AndAlso Not Char.IsControl(e.KeyChar) Then
-
             e.Handled = True ' Suppress the key press
         End If
         ' Check for multiple decimal points
         If e.KeyChar = "." AndAlso DirectCast(sender, TextBox).Text.Contains(".") Then
-
             e.Handled = True ' Suppress the key press
         End If
     End Sub
-
-
 
     Private Sub btn_BckPressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_BckPressureUpdate.Click
         Dim BackPressTemp As String = lbl_BackPressCurrent.Text
@@ -2522,7 +2548,6 @@ Public Class FormMain
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of Back Pressure Regulator (kPa) set to {txtbx_BackPressRequired.Text} from {BackPressTemp}")
             txtbx_BackPressRequired.Text = Nothing
         End If
-
     End Sub
 
     Private Sub btn_N2PressureUpdate_Click(sender As Object, e As EventArgs) Handles btn_N2PressureUpdate.Click
@@ -2532,9 +2557,7 @@ Public Class FormMain
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Electronic Regulator Control - Required Value of N2 Purge Regulator (kPa) set to {txtbx_N2PurgeRequired.Text} from {N2PurgeTemp}")
             txtbx_N2PurgeRequired.Text = Nothing
         End If
-
     End Sub
-
 
     Private Sub btn_PressureRegulator_Click(sender As Object, e As EventArgs) Handles btn_BackPressureOn.Click, btn_N2PressureOn.Click
         Dim btn_PressureRegualtor As Button = DirectCast(sender, Button)
@@ -2557,16 +2580,9 @@ Public Class FormMain
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Pressure Regulator Control - N2 Pressure (ON)")
             End If
         End If
-
-
     End Sub
 
-
-
-
     ' Manual Drain
-
-
     Private Sub btn_ManualDrainCtrl_Click(sender As Object, e As EventArgs) Handles btn_MCN2Purge1.Click, btn_MCN2Purge2.Click, btn_MCN2Purge3.Click, btn_MCN2Purge4.Click
         Dim btn_ManualDrain As Button = DirectCast(sender, Button)
         If btn_ManualDrain Is btn_MCN2Purge1 Then
@@ -2608,17 +2624,11 @@ Public Class FormMain
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Manual Control] Manual Drain - N2 Purge Circuit-4 (ON)")
             End If
         End If
+
         PCtimer.Start()
     End Sub
 
-
-
-
-
-
-
     ' Maintenance
-
     Private Sub btn_MaintenanceCtrl_Click(sender As Object, e As EventArgs) Handles btn_InFiltrDrain.Click, btn_InFiltrVent.Click, btn_PumpFiltrDrain.Click, btn_PumpFiltrVent.Click, btn_EmptyTank.Click, btn_InletConnect.Click, btn_OutletConnect.Click, btn_VentConnect.Click, btn_DrainConnect.Click
         Dim btn_Maintenance As Button = DirectCast(sender, Button)
 
@@ -2714,13 +2724,7 @@ Public Class FormMain
 
         PCtimer.Start()
     End Sub
-
-
-
-
-
 #End Region
-
 
 #Region "Alarm"
     ' Initialize Alarm History Tab
@@ -2748,12 +2752,11 @@ Public Class FormMain
     End Sub
 
 #Region "Current Alarm"
-
     Private Sub LoadCurrentalarmtable()
         dgvClearSelection(dgv_CurrentAlarm)
         dgv_CurrentAlarm.DataSource = Mainalarm
-        With dgv_CurrentAlarm
 
+        With dgv_CurrentAlarm
             .Columns("id").Visible = False
 
             .Columns("S.No").Width = 100
@@ -2770,12 +2773,8 @@ Public Class FormMain
             .Columns("Trigger Time").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("Description").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns("Alarm Code").HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-
         End With
-
     End Sub
-
 #End Region
 
 #Region "Alarm History"
@@ -2998,7 +2997,6 @@ Public Class FormMain
         Dim dt As DataTable = Await Task.Run(Function() GetVisibleColumnsDataTable(dgv_AlarmHistory))   'GetVisibleColumnsDataTable(dgv_AlarmHistory)
 
         ' Get Path
-
         Dim ExportPath As String = PublicVariables.CSVPathToAlarmHistory 'dtGetPath(0)("retained_value")
 
         ' Export With Return
@@ -3022,12 +3020,9 @@ Public Class FormMain
             dtpicker_AlarmEndDate.Value = dtpicker_AlarmStartDate.Value
         End If
     End Sub
-
 #End Region
 
-
 #End Region
-
 
 #Region "Main Message"
     Public Function MainMessage(a As Integer, Optional str As String = "") As MsgBoxResult
@@ -3045,7 +3040,8 @@ Public Class FormMain
             Case 6
                 Return MsgBox($"Special Characters not allowed in {str}, Scan and Try Again", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 7
-                Return MsgBox($"Lot ID found with different data {str}, Check and Try Again", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                'Return MsgBox($"Lot ID found with different data {str}, Check and Try Again", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
+                Return MsgBox($"Part ID Mismatch with previous Lot ID{vbCrLf}Part ID: [{str}]", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
             Case 8
                 Return MsgBox($"Are You sure to End Lot {str}?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning")
             Case 9
@@ -3056,43 +3052,32 @@ Public Class FormMain
                 Return MsgBox($"Are You Sure to Abort/Discard Calibration?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning")
             Case Else
                 Exit Select
-
         End Select
+
         Return 0
     End Function
-
 #End Region
-
 
 #Region "Main Menu Content"
     ' To restrict any special character or character key or decimal point press inside Integer type box other than Numeric value
-
     Private Sub ScanData_GotFocus(sender As Object, e As EventArgs) Handles txtbx_WorkOrderNumber.GotFocus, txtbx_PartID.GotFocus, txtbx_LotID.GotFocus, txtbx_ConfirmationID.GotFocus, txtbx_Quantity.GotFocus
         Dim focustextbox As TextBox = DirectCast(sender, TextBox)
         focustextbox.Text = Nothing
     End Sub
 
-
-
     Private Sub ScanDataKeypress(sender As Object, e As KeyPressEventArgs) Handles txtbx_WorkOrderNumber.KeyPress, txtbx_PartID.KeyPress, txtbx_LotID.KeyPress, txtbx_ConfirmationID.KeyPress
         Dim checktextbox As TextBox = DirectCast(sender, TextBox)
 
         If Not Char.IsLetterOrDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
-
             e.Handled = True ' Suppress the key press
         End If
-
-
     End Sub
 
     Private Sub txtbx_Quantity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbx_Quantity.KeyPress
         If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
-
             e.Handled = True ' Suppress the key press
         End If
-
     End Sub
-
 
     Private Sub btn_WrkOrdScnDtConfirm_Click(sender As Object, e As EventArgs) Handles btn_WrkOrdScnDtConfirm.Click
         ' Cleanup unused Lotusage before continue
@@ -3105,6 +3090,14 @@ Public Class FormMain
 
             ' Delete Calibration Result records that do not have corresponding details in LotUsage table
             SQL.DeleteRecord("CalibrationResult", "cal_id NOT IN (SELECT DISTINCT cal_result_id FROM LotUsage WHERE NOT cal_result_id IS NULL)")
+        End If
+
+        ' Set Jig Bypass
+        If True Then
+            SetButtonState(btn_JigBypass, False, "Jig Bypass")
+            PublicVariables.RetainedJigBypass = False
+            RetainedMemory.Update(34, "JigBypass", 0)
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
         End If
 
         'Dim continueLastCal As Boolean = False
@@ -3228,15 +3221,12 @@ Public Class FormMain
             End If
         End If
 
-
         If OnContinue = True Then
             If FormRecipeManagement.Checkspecial(Quantity) <> -1 Then
                 MainMessage(6, $"Quantity")
                 OnContinue = False
             End If
         End If
-
-
 
         If OnContinue = True Then
             If IsNumeric(Quantity) = False Then
@@ -3249,9 +3239,6 @@ Public Class FormMain
                 End If
             End If
         End If
-
-
-
 
         'Insert New record into the Work Order Table
         If OnContinue = True Then
@@ -3308,15 +3295,12 @@ Public Class FormMain
                 End If
             End If
 
-
-
-
-
             'Insert New record into the Lot Usage Table
             If OnContinue = True Then
                 If dtlot.Rows.Count > 0 Then
 
-                    If dtlot.Rows(0)("part_id") = PartID And dtlot.Rows(0)("confirmation_id") = ConfirmationID And dtlot.Rows(0)("work_order") = Workorder Then
+                    'If dtlot.Rows(0)("part_id") = PartID And dtlot.Rows(0)("confirmation_id") = ConfirmationID And dtlot.Rows(0)("work_order") = Workorder Then
+                    If dtlot.Rows(0)("part_id") = PartID Then
                         If MsgBox($"This Lot {LotID} has already been processed, Continue?", MsgBoxStyle.Exclamation Or MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
                             'dtlotusage = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id ='{LotID}' AND NOT calibration_time IS NULL ORDER BY lot_attempt ASC")
                             dtlotusage = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id ='{LotID}' ORDER BY lot_attempt ASC")
@@ -3394,88 +3378,77 @@ Public Class FormMain
                                 LotAttempt = 1
                             End If
                         Else
-
                             OnContinue = False
                         End If
                     Else
-                        MainMessage(7, $" {dtlot.Rows(0)("work_order")}, {dtlot.Rows(0)("part_id")}, {dtlot.Rows(0)("confirmation_id")} ")
+                        'MainMessage(7, $" {dtlot.Rows(0)("work_order")}, {dtlot.Rows(0)("part_id")}, {dtlot.Rows(0)("confirmation_id")} ")
+                        MainMessage(7, $"{dtlot.Rows(0)("part_id")}/{PartID}")
                         OnContinue = False
                     End If
-
                 Else
                     LotAttempt = 1
                 End If
             End If
+
             'Update Retained Memory record 
-
             If OnContinue = True Then
-
                 Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", Workorder}
-                        }
+                    {"retained_value", Workorder}
+                }
                 Dim condition As String = $"id='25'"
                 If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                     OnContinue = True
                 Else
                     OnContinue = False
                 End If
-
             End If
 
             If OnContinue = True Then
-
                 Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", PartID}
-                        }
+                    {"retained_value", PartID}
+                }
                 Dim condition As String = $"id='26'"
                 If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                     OnContinue = True
                 Else
                     OnContinue = False
                 End If
-
             End If
 
             If OnContinue = True Then
-
                 Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", LotID}
-                        }
+                    {"retained_value", LotID}
+                }
                 Dim condition As String = $"id='27'"
                 If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                     OnContinue = True
                 Else
                     OnContinue = False
                 End If
-
             End If
 
             If OnContinue = True Then
-
                 Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", ConfirmationID}
-                        }
+                    {"retained_value", ConfirmationID}
+                }
                 Dim condition As String = $"id='28'"
                 If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                     OnContinue = True
                 Else
                     OnContinue = False
                 End If
-
             End If
 
             If OnContinue = True Then
-
                 Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", Quantity}
-                        }
+                    {"retained_value", Quantity}
+                }
                 Dim condition As String = $"id='29'"
                 If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                     OnContinue = True
                 Else
                     OnContinue = False
                 End If
-
             End If
             If OnContinue = True Then
                 Dim Lotusageparameter As New Dictionary(Of String, Object) From {
@@ -3505,12 +3478,8 @@ Public Class FormMain
             End If
 
             If OnContinue = True Then
-
                 cmbx_RecipeType.Enabled = True
-
             End If
-
-
         End If
 
         ' Check to reuse previous calibration parameters
@@ -3646,7 +3615,6 @@ Public Class FormMain
         End If
     End Sub
 
-
     Private Sub btn_WrkOrdScnDtEndLot_Click(sender As Object, e As EventArgs) Handles btn_WrkOrdScnDtEndLot.Click
         Dim continueEndLot As Boolean = False
 
@@ -3655,15 +3623,15 @@ Public Class FormMain
                 Dim TxtbxQty As Integer = 0
 
                 Dim dtProdDetailTbl As DataTable = SQL.ReadRecords($"
-                SELECT DISTINCT ProductionDetail.serial_uid FROM ProductionDetail 
-                LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id 
-                WHERE ProductionDetail.serial_attempt = (
-                    SELECT MAX(serial_attempt)
-                    FROM ProductionDetail t2
-                    WHERE ProductionDetail.lot_usage_id = t2.lot_usage_id
-                )
-                AND LotUsage.lot_id='{LotID}'
-            ")
+                    SELECT DISTINCT ProductionDetail.serial_uid FROM ProductionDetail 
+                    LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id 
+                    WHERE ProductionDetail.serial_attempt = (
+                        SELECT MAX(serial_attempt)
+                        FROM ProductionDetail t2
+                        WHERE ProductionDetail.lot_usage_id = t2.lot_usage_id
+                    )
+                    AND LotUsage.lot_id='{LotID}'
+                ")
 
                 Integer.TryParse(txtbx_Quantity.Text, TxtbxQty)
 
@@ -3680,6 +3648,15 @@ Public Class FormMain
         End If
 
         If continueEndLot = True Then
+            ' Set Jig Bypass
+            If True Then
+                SetButtonState(btn_JigBypass, False, "Jig Bypass")
+                PublicVariables.RetainedJigBypass = False
+                RetainedMemory.Update(34, "JigBypass", 0)
+                EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
+            End If
+
+            Resultcapturetimer.Enabled = False
             Endlot()
 
             If Lotendsuccess = True Then
@@ -3688,7 +3665,6 @@ Public Class FormMain
                 MainMessage(10)
             End If
         End If
-
     End Sub
 
     Private Sub cmbx_RecipeType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbx_RecipeType.SelectedIndexChanged
@@ -3703,8 +3679,6 @@ Public Class FormMain
         End If
     End Sub
 
-
-
     Private Sub btn_RecipeSelectionConfirm_Click(sender As Object, e As EventArgs) Handles btn_RecipeSelectionConfirm.Click
         RecipeSelectionConfirmClicked(False)
     End Sub
@@ -3714,31 +3688,27 @@ Public Class FormMain
         RecipeID = cmbx_RecipeID.Text
 
         If OnContinue = True Then
-
             Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", cmbx_RecipeType.Text}
-                        }
+                {"retained_value", cmbx_RecipeType.Text}
+            }
             Dim condition As String = $"id='14'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                 OnContinue = True
             Else
                 OnContinue = False
             End If
-
         End If
 
         If OnContinue = True Then
-
             Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", RecipeID}
-                        }
+                {"retained_value", RecipeID}
+            }
             Dim condition As String = $"id='15'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                 OnContinue = True
             Else
                 OnContinue = False
             End If
-
         End If
 
         If OnContinue = True Then
@@ -3748,11 +3718,31 @@ Public Class FormMain
                 txtbx_SerialNumber.Enabled = True
                 btn_OprKeyInDtConfirm.Enabled = True
             Else
+                'If CommLost = False Then
+                '    If PLCstatus(0)(3) = True Then
+                '        FormCalibration.ShowDialog()
+                '    Else
+                '        MsgBox($"Switch To Auto Mode & Start Calibration", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
+                '    End If
+                'End If
+
                 If CommLost = False Then
                     If PLCstatus(0)(3) = True Then
                         FormCalibration.ShowDialog()
                     Else
-                        MsgBox($"Switch To Auto Mode & Start Calibration", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information")
+                        Do While Not CommLost
+                            Thread.Sleep(10)
+                            If MsgBox($"Switch To Auto Mode & Start Calibration", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Information") = MsgBoxResult.Ok Then
+                                If CommLost = False Then
+                                    If PLCstatus(0)(3) = True Then
+                                        FormCalibration.ShowDialog()
+                                        Exit Do
+                                    End If
+                                Else
+                                    Exit Do
+                                End If
+                            End If
+                        Loop
                     End If
                 End If
             End If
@@ -3761,24 +3751,14 @@ Public Class FormMain
         End If
     End Sub
 
-
-
-
-
     Private Sub txtbx_SerialNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtbx_SerialNumber.KeyPress
         If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) Then
-
             e.Handled = True ' Suppress the key press
         End If
     End Sub
-
-
-
 #End Region
 
-
 #Region "Load Recipe Data to PLC"
-
     Public Sub LoadrecipeParameters(Recipe As String)
         cmbx_RecipeID.Enabled = False
         cmbx_RecipeType.Enabled = False
@@ -3808,6 +3788,15 @@ Public Class FormMain
 
         Dim dtrecipe As DataTable = SQL.ReadRecords($"SELECT * From RecipeTable WHERE recipe_id ='{Recipe}' ORDER BY recipe_rev DESC")
 
+        ' Replace All Nulls w/0s
+        For Each row As DataRow In dtrecipe.Rows
+            For Each col As DataColumn In dtrecipe.Columns
+                If row.IsNull(col) Then
+                    row(col) = 0
+                End If
+            Next
+        Next
+
         ' Load Fitting Type
         If True Then
             If Not IsDBNull(dtrecipe(0)("fitting_inlet")) Then
@@ -3828,158 +3817,166 @@ Public Class FormMain
         End If
 
         If dtrecipe.Rows.Count > 0 Then
-            Dim VerEnable As Boolean = True
-            Select Case txtbx_TitleFilterType.Text
-                Case "Cal. Master"
-                    VerEnable = False
-            End Select
-            If VerEnable Then
-                DInt2int(118, 1)
-            Else
-                DInt2int(118, 0)
+            ' Calibration Master
+            If True Then
+                Dim VerEnable As Boolean = True
+                Select Case txtbx_TitleFilterType.Text
+                    Case "Cal. Master"
+                        VerEnable = False
+                End Select
+                If VerEnable Then
+                    DInt2int(118, 1)
+                Else
+                    DInt2int(118, 0)
+                End If
             End If
 
+            ' Common
             Float2int(30, CType(dtrecipe.Rows(0)("verification_tolerance"), Double))
-            Float2int(106, CType(dtrecipe.Rows(0)("prep_flowrate"), Double))
-            Float2int(108, CType(dtrecipe.Rows(0)("prep_back_pressure"), Double))
-            Float2int(110, CType(dtrecipe.Rows(0)("prep_pressure_drop"), Double))
 
-            Float2int(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
-            Float2int(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
-            'Float2int(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
-
-            'Float2int(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
-            'Float2int(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
-            'Float2int(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
-
-            Float2int(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
-            Float2int(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
-
-            lbl_DiffPressMin.Text = dtrecipe.Rows(0)("dp_lowerlimit").ToString
-            lbl_DiffPressMax.Text = dtrecipe.Rows(0)("dp_upperlimit").ToString
-
-
-            Float2int(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
-            Float2int(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
-            'Float2int(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
-
-            Float2int(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
-
-            Float2int(56, CType(dtrecipe.Rows(0)("drain2_back_pressure"), Double))
-
-            Float2int(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
-
+            ' Preparation
             DInt2int(112, CType(dtrecipe.Rows(0)("prep_fill_time"), Integer)) '- CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
+            DInt2int(140, CType(dtrecipe.Rows(0)("prep_prefill_start_time"), Integer))
+            DInt2int(142, CType(dtrecipe.Rows(0)("prep_prefill_time"), Integer))
+            DInt2int(172, CType(dtrecipe.Rows(0)("prep_drain_start_time"), Integer))
+            DInt2int(174, CType(dtrecipe.Rows(0)("prep_drain_time"), Integer))
             DInt2int(114, CType(dtrecipe.Rows(0)("prep_bleed_time"), Integer))
+            Float2int(110, CType(dtrecipe.Rows(0)("prep_pressure_drop"), Double))
             DInt2int(116, CType(dtrecipe.Rows(0)("prep_pressure_drop_time"), Integer))
+            Float2int(108, CType(dtrecipe.Rows(0)("prep_back_pressure"), Double))
+            'If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
+            '    DInt2int(144, 1)
+            'Else
+            '    DInt2int(144, 0)
+            'End If
+            DInt2int(144, 1)
+            Float2int(146, CType(dtrecipe.Rows(0)("prep_rpm1"), Double))
 
+            ' Flush-1
             If dtrecipe.Rows(0)("firstflush_circuit") = "Enable" Then
                 DInt2int(60, 1)
             Else
                 DInt2int(60, 0)
             End If
-            ' DInt2int(62, CType(dtrecipe.Rows(0)("firstflush_fill_time"), Integer))
-            'DInt2int(64, CType(dtrecipe.Rows(0)("firstflush_bleed_time"), Integer))
+            Float2int(32, CType(dtrecipe.Rows(0)("firstflush_flowrate"), Double))
+            Float2int(34, CType(dtrecipe.Rows(0)("firstflush_flow_tolerance"), Double))
             DInt2int(66, CType(dtrecipe.Rows(0)("firstflush_stabilize_time"), Integer))
             DInt2int(68, CType(dtrecipe.Rows(0)("firstflush_time"), Integer))
-
-            If dtrecipe.Rows(0)("firstdp_circuit") = "Enable" Then
-                DInt2int(70, 1)
-            Else
-                DInt2int(70, 0)
-            End If
-
-            If dtrecipe.Rows(0)("seconddp_circuit") = "Enable" Then
-                DInt2int(72, 1)
-            Else
-                DInt2int(72, 0)
-            End If
-            'DInt2int(74, CType(dtrecipe.Rows(0)("dp_fill_time"), Integer))
-            'DInt2int(76, CType(dtrecipe.Rows(0)("dp_bleed_time"), Integer))
-            DInt2int(78, CType(dtrecipe.Rows(0)("dp_stabilize_time"), Integer))
-            DInt2int(80, CType(dtrecipe.Rows(0)("dp_test_time"), Integer))
-            DInt2int(82, CType(dtrecipe.Rows(0)("dp_testpoints"), Integer))
-
-            If dtrecipe.Rows(0)("secondflush_circuit") = "Enable" Then
-                DInt2int(84, 1)
-            Else
-                DInt2int(84, 0)
-            End If
-            'DInt2int(86, CType(dtrecipe.Rows(0)("secondflush_fill_time"), Integer))
-            'DInt2int(88, CType(dtrecipe.Rows(0)("secondflush_bleed_time"), Integer))
-
-            DInt2int(90, CType(dtrecipe.Rows(0)("secondflush_stabilize_time"), Integer))
-            DInt2int(92, CType(dtrecipe.Rows(0)("secondflush_time"), Integer))
-
-
-            If dtrecipe.Rows(0)("drain1_circuit") = "Enable" Then
-                DInt2int(94, 1)
-            Else
-                DInt2int(94, 0)
-            End If
-            DInt2int(96, CType(dtrecipe.Rows(0)("drain1_time"), Integer))
-
-            If dtrecipe.Rows(0)("drain2_circuit") = "Enable" Then
-                DInt2int(98, 1)
-            Else
-                DInt2int(98, 0)
-            End If
-            DInt2int(100, CType(dtrecipe.Rows(0)("drain2_time"), Integer))
-
-
-            If dtrecipe.Rows(0)("drain3_circuit") = "Enable" Then
-                DInt2int(102, 1)
-            Else
-                DInt2int(102, 0)
-            End If
-            DInt2int(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
-
-
-            DInt2int(140, CType(dtrecipe.Rows(0)("prep_prefill_start_time"), Integer))
-
-            DInt2int(142, CType(dtrecipe.Rows(0)("prep_prefill_time"), Integer))
-
-            If dtrecipe.Rows(0)("prep_speed_mode") = "Enable" Then
-                DInt2int(144, 1)
-            Else
-                DInt2int(144, 0)
-            End If
+            Float2int(36, CType(dtrecipe.Rows(0)("firstflush_back_pressure"), Double))
             If dtrecipe.Rows(0)("firstflush_speed_mode") = "Enable" Then
                 DInt2int(158, 1)
             Else
                 DInt2int(158, 0)
             End If
+            Float2int(150, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
+
+            ' Flush-2
+            If dtrecipe.Rows(0)("secondflush_circuit") = "Enable" Then
+                DInt2int(84, 1)
+            Else
+                DInt2int(84, 0)
+            End If
+            Float2int(48, CType(dtrecipe.Rows(0)("secondflush_flowrate"), Double))
+            Float2int(50, CType(dtrecipe.Rows(0)("secondflush_flow_tolerance"), Double))
+            DInt2int(90, CType(dtrecipe.Rows(0)("secondflush_stabilize_time"), Integer))
+            DInt2int(92, CType(dtrecipe.Rows(0)("secondflush_time"), Integer))
+            Float2int(52, CType(dtrecipe.Rows(0)("secondflush_back_pressure"), Double))
             If dtrecipe.Rows(0)("secondflush_speed_mode") = "Enable" Then
                 DInt2int(160, 1)
             Else
                 DInt2int(160, 0)
             End If
-            If dtrecipe.Rows(0)("dp_speed_mode") = "Enable" Then
-                DInt2int(162, 1)
-            Else
-                DInt2int(162, 0)
-            End If
-
-            Float2int(146, CType(dtrecipe.Rows(0)("prep_rpm1"), Double))
-            'Float2int(148, CType(dtrecipe.Rows(0)("prep_rpm2"), Double))
-            Float2int(150, CType(dtrecipe.Rows(0)("firstflush_rpm"), Double))
             Float2int(152, CType(dtrecipe.Rows(0)("secondflush_rpm"), Double))
-            Float2int(154, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
-            Float2int(156, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
 
-            If JigType = 1 And JigType = 6 Then
-                DInt2int(164, 1)
+            ' DP Test
+            If dtrecipe.Rows(0)("firstdp_circuit") = "Enable" Then
+                DInt2int(70, 1)
             Else
-                DInt2int(164, 0)
+                DInt2int(70, 0)
             End If
+            If dtrecipe.Rows(0)("seconddp_circuit") = "Enable" Then
+                DInt2int(72, 1)
+            Else
+                DInt2int(72, 0)
+            End If
+            DInt2int(78, CType(dtrecipe.Rows(0)("dp_stabilize_time"), Integer))
+            DInt2int(80, CType(dtrecipe.Rows(0)("dp_test_time"), Integer))
+            Float2int(38, CType(dtrecipe.Rows(0)("dp_flowrate"), Double))
+            Float2int(40, CType(dtrecipe.Rows(0)("dp_flow_tolerance"), Double))
+            Float2int(42, CType(dtrecipe.Rows(0)("dp_back_pressure"), Double))
+            Float2int(44, CType(dtrecipe.Rows(0)("dp_lowerlimit"), Double))
+            Float2int(46, CType(dtrecipe.Rows(0)("dp_upperlimit"), Double))
+            DInt2int(82, CType(dtrecipe.Rows(0)("dp_testpoints"), Integer))
+            'If dtrecipe.Rows(0)("dp_speed_mode") = "Enable" Then
+            '    DInt2int(162, 1)
+            'Else
+            '    DInt2int(162, 0)
+            'End If
+            DInt2int(162, 0)
+            Float2int(154, CType(dtrecipe.Rows(0)("dp_rpm"), Double))
 
-            If dtrecipe.Rows(0)("drain4_circuit") = "Enable" Then
-                DInt2int(166, 1)
+            ' Drain-1
+            If dtrecipe.Rows(0)("drain1_circuit") = "Enable" Then
+                DInt2int(94, 1)
+            Else
+                DInt2int(94, 0)
+            End If
+            Float2int(54, CType(dtrecipe.Rows(0)("drain1_back_pressure"), Double))
+            DInt2int(96, CType(dtrecipe.Rows(0)("drain1_time"), Integer))
+
+            ' Drain-2
+            If dtrecipe.Rows(0)("drain2_circuit") = "Enable" Then
+                DInt2int(98, 1)
+            Else
+                DInt2int(98, 0)
+            End If
+            Float2int(56, CType(dtrecipe.Rows(0)("drain2_back_pressure"), Double))
+            DInt2int(100, CType(dtrecipe.Rows(0)("drain2_time"), Integer))
+
+            ' Drain-3
+            If dtrecipe.Rows(0)("drain3_circuit") = "Enable" Then
+                DInt2int(102, 1)
             Else
                 DInt2int(102, 0)
             End If
+            Float2int(58, CType(dtrecipe.Rows(0)("drain3_back_pressure"), Double))
+            DInt2int(104, CType(dtrecipe.Rows(0)("drain3_time"), Integer))
+
+            ' Drain-4
+            If dtrecipe.Rows(0)("drain4_circuit") = "Enable" Then
+                DInt2int(166, 1)
+            Else
+                DInt2int(166, 0)
+            End If
             DInt2int(168, CType(dtrecipe.Rows(0)("drain4_time"), Integer))
             Float2int(170, CType(dtrecipe.Rows(0)("drain4_back_pressure"), Double))
+
+            lbl_DiffPressMin.Text = dtrecipe.Rows(0)("dp_lowerlimit").ToString
+            lbl_DiffPressMax.Text = dtrecipe.Rows(0)("dp_upperlimit").ToString
+
+            ' Unused DM Address
+            If True Then
+                'Float2int(106, CType(dtrecipe.Rows(0)("prep_flowrate"), Double))
+                'Float2int(156, CType(dtrecipe.Rows(0)("prep_flow_tolerance"), Double))
+
+                'DInt2int(62, CType(dtrecipe.Rows(0)("firstflush_fill_time"), Integer))
+                'DInt2int(64, CType(dtrecipe.Rows(0)("firstflush_bleed_time"), Integer))
+
+                'DInt2int(74, CType(dtrecipe.Rows(0)("dp_fill_time"), Integer))
+                'DInt2int(76, CType(dtrecipe.Rows(0)("dp_bleed_time"), Integer))
+
+                'DInt2int(86, CType(dtrecipe.Rows(0)("secondflush_fill_time"), Integer))
+                'DInt2int(88, CType(dtrecipe.Rows(0)("secondflush_bleed_time"), Integer))
+
+                'Float2int(148, CType(dtrecipe.Rows(0)("prep_rpm2"), Double))
+
+                ' Set Bleed Off
+                'If JigType = 1 And JigType = 6 Then
+                '    DInt2int(164, 1)
+                'Else
+                '    DInt2int(164, 0)
+                'End If
+            End If
 
             ' Load Recipe Details in TabPage
             LoadRecipeToTabRecipeDetails(dtrecipe)
@@ -3989,29 +3986,42 @@ Public Class FormMain
         FormCalibration.InitializeCalForm()
     End Sub
 
-    Private Sub LoadRecipeToTabRecipeDetails(dt As DataTable)
+    Private Sub LoadRecipeToTabRecipeDetails(dtRecipe As DataTable)
+        Dim dt As DataTable = dtRecipe.Copy
+
+        ' Replace All Nulls w/0s
+        For Each row As DataRow In dt.Rows
+            For Each col As DataColumn In dt.Columns
+                If row.IsNull(col) Then
+                    row(col) = 0
+                End If
+            Next
+        Next
+
         txtbx_RecipeVerTol.Text = dt.Rows(0)("verification_tolerance")
-        txtbx_RecipePrepFlow.Text = dt.Rows(0)("prep_flowrate")
-        txtbx_RecipePrepFlowTol.Text = dt.Rows(0)("prep_flow_tolerance")
-        txtbx_RecipePrepPressureDrop.Text = dt.Rows(0)("prep_pressure_drop")
 
         txtbx_RecipePrepFill.Text = dt.Rows(0)("prep_fill_time")
         txtbx_RecipePrepPrefillStartTime.Text = dt.Rows(0)("prep_prefill_start_time")
         txtbx_RecipePrepPrefillTime.Text = dt.Rows(0)("prep_prefill_time")
+        TextBox5.Text = dt.Rows(0)("prep_drain_start_time")
+        TextBox6.Text = dt.Rows(0)("prep_drain_time")
         txtbx_RecipePrepBleed.Text = dt.Rows(0)("prep_bleed_time")
-        txtbx_RecipePrepPressure.Text = dt.Rows(0)("prep_back_pressure")
+        txtbx_RecipePrepPressureDrop.Text = dt.Rows(0)("prep_pressure_drop")
         txtbx_RecipePrepPressureDropTime.Text = dt.Rows(0)("prep_pressure_drop_time")
-        If dt.Rows(0)("prep_speed_mode").ToString.ToUpper = "ENABLE" Then
-            TextBox1.Text = "Speed"
-        Else
-            TextBox1.Text = "Process"
-        End If
+        txtbx_RecipePrepPressure.Text = dt.Rows(0)("prep_back_pressure")
+        'If dt.Rows(0)("prep_speed_mode").ToString.ToUpper = "ENABLE" Then
+        '    TextBox1.Text = "Speed"
+        'Else
+        '    TextBox1.Text = "Process"
+        'End If
+        TextBox1.Text = "Speed"
         txtbx_RecipePrepRPM.Text = dt.Rows(0)("prep_rpm1")
 
         txtbx_RecipeFlush1Flow.Text = dt.Rows(0)("firstflush_flowrate")
         txtbx_RecipeFlush1FlowTol.Text = dt.Rows(0)("firstflush_flow_tolerance")
         txtbx_RecipeFlush1Stabilize.Text = dt.Rows(0)("firstflush_stabilize_time")
         txtbx_RecipeFlush1Time.Text = dt.Rows(0)("firstflush_time")
+        TextBox7.Text = dt.Rows(0)("firstflush_back_pressure")
         If dt.Rows(0)("firstflush_speed_mode").ToString.ToUpper = "ENABLE" Then
             TextBox4.Text = "Speed"
         Else
@@ -4023,6 +4033,7 @@ Public Class FormMain
         txtbx_RecipeFlush2FlowTol.Text = dt.Rows(0)("secondflush_flow_tolerance")
         txtbx_RecipeFlush2Stabilize.Text = dt.Rows(0)("secondflush_stabilize_time")
         txtbx_RecipeFlush2Time.Text = dt.Rows(0)("secondflush_time")
+        TextBox8.Text = dt.Rows(0)("secondflush_back_pressure")
         If dt.Rows(0)("secondflush_speed_mode").ToString.ToUpper = "ENABLE" Then
             TextBox3.Text = "Speed"
         Else
@@ -4032,14 +4043,18 @@ Public Class FormMain
 
         txtbx_RecipeDPStabilize.Text = dt.Rows(0)("dp_stabilize_time")
         txtbx_RecipeDPTime.Text = dt.Rows(0)("dp_test_time")
+        txtbx_RecipePrepFlow.Text = dt.Rows(0)("dp_flowrate")
+        txtbx_RecipePrepFlowTol.Text = dt.Rows(0)("dp_flow_tolerance")
+        txtbx_RecipePrepPressureDropa.Text = dt.Rows(0)("dp_back_pressure")
         txtbx_RecipeDPLowLimit.Text = dt.Rows(0)("dp_lowerlimit")
         txtbx_RecipeDPUpLimit.Text = dt.Rows(0)("dp_upperlimit")
         txtbx_RecipeDPPoints.Text = dt.Rows(0)("dp_testpoints")
-        If dt.Rows(0)("dp_speed_mode").ToString.ToUpper = "ENABLE" Then
-            TextBox2.Text = "Speed"
-        Else
-            TextBox2.Text = "Process"
-        End If
+        'If dt.Rows(0)("dp_speed_mode").ToString.ToUpper = "ENABLE" Then
+        '    TextBox2.Text = "Speed"
+        'Else
+        '    TextBox2.Text = "Process"
+        'End If
+        TextBox2.Text = "Process"
         txtbx_RecipeDPTestRPM.Text = dt.Rows(0)("dp_rpm")
 
         txtbx_RecipeDrain1Pressure.Text = dt.Rows(0)("drain1_back_pressure")
@@ -4170,10 +4185,7 @@ Public Class FormMain
     End Sub
 #End Region
 
-
-
 #Region "Operator Key in Serial Number"
-
     Private Sub btn_OprKeyInDtConfirm_Click(sender As Object, e As EventArgs) Handles btn_OprKeyInDtConfirm.Click
         If txtbx_SerialNumber.TextLength = 3 Then
             lbl_DPTestResult.Text = Nothing
@@ -4198,13 +4210,10 @@ Public Class FormMain
                 Else
                     SerialPrevResult = String.Empty
                 End If
-
             Else
                 SerialAttempt = 1
                 SerialPrevResult = String.Empty
             End If
-
-
 
             If dtlotrecord.Rows.Count <= 0 Then
                 Oncontinue = False
@@ -4250,7 +4259,6 @@ Public Class FormMain
                 End If
             End If
 
-
             If Oncontinue = True Then
                 Lotusageid = dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("id")
                 Dim dummyfloat As Decimal = 0
@@ -4258,21 +4266,20 @@ Public Class FormMain
                 Dim DateTimeNowInStr As String = DateTime.Now.ToString("s")
                 Dim Productionparameter As New Dictionary(Of String, Object) From {
                     {"serial_uid", SerialUid},
-                        {"serial_number", txtbx_SerialNumber.Text},
-                        {"serial_attempt", SerialAttempt},
-                        {"lot_usage_id", Lotusageid},
-                        {"timestamp", DateTimeNowInStr},
-                        {"temperature", dummyfloat},
-                        {"flowrate", dummyfloat},
-                        {"inlet_pressure", dummyfloat},
-                        {"outlet_pressure", dummyfloat},
-                        {"viscosity", dummyfloat},
-                        {"diff_pressure", dummyfloat},
-                        {"cycle_time", dummyfloat},
-                        {"result", dummystring}
-                    }
+                    {"serial_number", txtbx_SerialNumber.Text},
+                    {"serial_attempt", SerialAttempt},
+                    {"lot_usage_id", Lotusageid},
+                    {"timestamp", DateTimeNowInStr},
+                    {"temperature", dummyfloat},
+                    {"flowrate", dummyfloat},
+                    {"inlet_pressure", dummyfloat},
+                    {"outlet_pressure", dummyfloat},
+                    {"viscosity", dummyfloat},
+                    {"diff_pressure", dummyfloat},
+                    {"cycle_time", dummyfloat},
+                    {"result", dummystring}
+                }
                 If SQL.InsertRecord("ProductionDetail", Productionparameter) = 1 Then
-
                     txtbx_SerialNumber.Enabled = False
                     Startresultrecord()
                     PCStatus(1)(10) = True
@@ -4283,7 +4290,6 @@ Public Class FormMain
                     Oncontinue = False
                 End If
             End If
-
         Else
             If lbl_CalibrationStatus.Text.ToUpper() = "PASS" Or lbl_CalibrationStatus.Text.ToUpper() = "FAIL" Then
                 MsgBox($"S/N Length Mismatch", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Warning")
@@ -4292,10 +4298,7 @@ Public Class FormMain
             End If
         End If
     End Sub
-
 #End Region
-
-
 
     Public Sub Startresultrecord()
         Dim flush1cycletime As Integer
@@ -4324,7 +4327,6 @@ Public Class FormMain
         PrepCycletime = (dtrecipetable.Rows(0)("prep_fill_time") + dtrecipetable.Rows(0)("prep_bleed_time")) '+ dtrecipetable.Rows(0)("prep_pressure_drop_time"))
 
         If dtrecipetable.Rows(0)("firstflush_circuit") = "Enable" Then
-
             flush1cycletime = (dtrecipetable.Rows(0)("firstflush_stabilize_time") + dtrecipetable.Rows(0)("firstflush_time"))
             Flush1Enabled = True
         End If
@@ -4333,7 +4335,6 @@ Public Class FormMain
             flush2cycletime = (dtrecipetable.Rows(0)("secondflush_stabilize_time") + dtrecipetable.Rows(0)("secondflush_time"))
             Flush2Enabled = True
         End If
-
 
         If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" Then
             DPtest1cycletime = (dtrecipetable.Rows(0)("dp_stabilize_time") + dtrecipetable.Rows(0)("dp_test_time"))
@@ -4370,10 +4371,7 @@ Public Class FormMain
         MainDptest2end = CType((MainCycletime - (Drain1cycletime + Drain2cycletime + Drain3cycletime + Drain4cycletime)) * (1000 / Resultcapturetimer.Interval), Decimal)
         MainDptest2start = MainDptest2end - MainDptestpoints
 
-
-
         If dtserialrecord.Rows.Count > 0 Then
-
             result_samplingtime = 0
             result_temperature = 0.0
             result_flowrate = 0.0
@@ -5075,18 +5073,18 @@ Public Class FormMain
             'ResultCaptureThreadingTmr.Change(Resultcapturetimer.Interval, Resultcapturetimer.Interval)
             'LiveGraph.LiveGraph.ChartPlottingTimer(True)
         End If
-
-
     End Sub
 
-
-
     Public Sub Endlot()
-
         Dim OnContinue As Boolean = True
         Dim dtlotrecord As DataTable = SQL.ReadRecords($"SELECT * FROM LotUsage WHERE lot_id = '{txtbx_LotID.Text}'")
 
-
+        If True Then
+            SetButtonState(btn_JigBypass, False, "Jig Bypass")
+            PublicVariables.RetainedJigBypass = False
+            RetainedMemory.Update(34, "JigBypass", 0)
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
+        End If
 
         'Generate csv for the lot id
         If OnContinue = True Then
@@ -5102,7 +5100,6 @@ Public Class FormMain
                         OnContinue = False
                     End If
                 End If
-
 
                 Dim ExportPath As String = PublicVariables.CSVPathToProductionDetails 'dtGetPath(0)("retained_value")
 
@@ -5123,143 +5120,120 @@ Public Class FormMain
             End If
         End If
 
-
-
         If OnContinue = True Then
-            LotEndTime = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
+            If dtlotrecord.Rows.Count > 0 Then
+                LotEndTime = DateTime.Now.ToString("s") 'lbl_DateTimeClock.Text
 
-            Dim Updateparameter As New Dictionary(Of String, Object) From {
-                {"lot_end_time", LotEndTime}
+                Dim Updateparameter As New Dictionary(Of String, Object) From {
+                    {"lot_end_time", LotEndTime}
                 }
-            Dim Condition As String = $"lot_id ='{txtbx_LotID.Text}' AND lot_attempt = '{dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}'"
+                Dim Condition As String = $"lot_id ='{txtbx_LotID.Text}' AND lot_attempt = '{dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}'"
 
-            If LoggedInIsDeveloper Then
-                'MsgBox(Condition)
-                'MsgBox($"{txtbx_LotID.Text} | {dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}")
+                If LoggedInIsDeveloper Then
+                    'MsgBox(Condition)
+                    'MsgBox($"{txtbx_LotID.Text} | {dtlotrecord.Rows(dtlotrecord.Rows.Count - 1)("lot_attempt")}")
+                End If
+
+                If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
+                    Lotendsuccess = True
+                    'MainMessage(9, LotID)
+                Else
+                    Lotendsuccess = False
+                    'MainMessage(10)
+                    OnContinue = False
+                End If
             End If
-
-            If SQL.UpdateRecord("LotUsage", Updateparameter, Condition) = 1 Then
-                Lotendsuccess = True
-                'MainMessage(9, LotID)
-            Else
-                Lotendsuccess = False
-                'MainMessage(10)
-                OnContinue = False
-            End If
-
         End If
 
-
-
-
-
-
-
-
         'Update Retained Memory record 
-
         If OnContinue = True Then
-
             Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim condition As String = $"id='25'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                 OnContinue = True
             Else
                 OnContinue = False
             End If
-
         End If
 
         If OnContinue = True Then
-
             Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim condition As String = $"id='26'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                 OnContinue = True
             Else
                 OnContinue = False
             End If
-
         End If
 
         If OnContinue = True Then
-
             Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim condition As String = $"id='27'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                 OnContinue = True
             Else
                 OnContinue = False
             End If
-
         End If
 
         If OnContinue = True Then
-
             Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim condition As String = $"id='28'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                 OnContinue = True
             Else
                 OnContinue = False
             End If
-
         End If
 
         If OnContinue = True Then
-
             Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim condition As String = $"id='29'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                 OnContinue = True
             Else
                 OnContinue = False
             End If
-
         End If
 
         If OnContinue = True Then
-
             Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim condition As String = $"id='14'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                 OnContinue = True
             Else
                 OnContinue = False
             End If
-
         End If
 
         If OnContinue = True Then
-
             Dim updateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim condition As String = $"id='15'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", updateparameter, condition) = 1 Then
                 OnContinue = True
             Else
                 OnContinue = False
             End If
-
         End If
 
         If OnContinue = True Then
             Dim calstatusparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim calstatuscondition As String = $"id='30'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", calstatusparameter, calstatuscondition) = 1 Then
                 OnContinue = True
@@ -5271,8 +5245,8 @@ Public Class FormMain
 
         If OnContinue = True Then
             Dim caloffsetparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim caloffsetcondition As String = $"id='31'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", caloffsetparameter, caloffsetcondition) = 1 Then
                 OnContinue = True
@@ -5284,8 +5258,8 @@ Public Class FormMain
 
         If OnContinue = True Then
             Dim caldateparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim caldatecondition As String = $"id='32'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", caldateparameter, caldatecondition) = 1 Then
                 OnContinue = True
@@ -5297,8 +5271,8 @@ Public Class FormMain
 
         If OnContinue = True Then
             Dim caloldlotidparameter As New Dictionary(Of String, Object) From {
-                        {"retained_value", "-"}
-                        }
+                {"retained_value", "-"}
+            }
             Dim caloldlotidcondition As String = $"id='33'"
             If SQL.UpdateRecord($"[0_RetainedMemory]", caloldlotidparameter, caloldlotidcondition) = 1 Then
                 OnContinue = True
@@ -5308,12 +5282,7 @@ Public Class FormMain
             End If
         End If
 
-
-
-
-
-        If OnContinue = True Then
-
+        If OnContinue = True Or Lotendsuccess = False Then
             txtbx_WorkOrderNumber.Enabled = True
             txtbx_LotID.Enabled = True
             txtbx_PartID.Enabled = True
@@ -5369,7 +5338,6 @@ Public Class FormMain
         End If
 
         If OnContinue = True Then
-
             Workorder = Nothing
             LotID = Nothing
             PartID = Nothing
@@ -5464,13 +5432,13 @@ Public Class FormMain
             txtbx_RecipeVerTol.Text = "-"
             txtbx_RecipePrepFlow.Text = "-"
             txtbx_RecipePrepFlowTol.Text = "-"
-            txtbx_RecipePrepPressureDrop.Text = "-"
+            txtbx_RecipePrepPressureDropa.Text = "-"
 
             txtbx_RecipePrepFill.Text = "-"
             txtbx_RecipePrepPrefillStartTime.Text = "-"
             txtbx_RecipePrepPrefillTime.Text = "-"
             txtbx_RecipePrepBleed.Text = "-"
-            txtbx_RecipePrepPressure.Text = "-"
+            txtbx_RecipePrepPressureDrop.Text = "-"
             txtbx_RecipePrepPressureDropTime.Text = "-"
             TextBox1.Text = "-"
             txtbx_RecipePrepRPM.Text = "-"
@@ -5527,11 +5495,7 @@ Public Class FormMain
 
     Public Sub LoadMainRecipeCombo()
         'Check whether the Part ID has Production Recipe and load Type combobox
-
         Dim TypecomboSource As New Dictionary(Of String, String)()
-
-        ' To Get Values From Dictionary (Example)
-
 
         'Assign Defaults
         TypecomboSource.Add("0", "-Not Selected-")
@@ -5552,6 +5516,7 @@ Public Class FormMain
             )
         ")
         dtRecipeID = dtRecipeTable
+
         ' Insert Available Record Into Dictionary
         If dtRecipeTable.Rows.Count > 0 Then
             Dim type As DataTable = dtRecipeTable.DefaultView.ToTable(True, "recipe_type")
@@ -5571,12 +5536,8 @@ Public Class FormMain
                     If type(i)("recipe_type") <> "Production" And type(i)("recipe_type") <> "Rework" And type(i)("recipe_type") <> "QC-Return" Then
                         TypecomboSource.Add(i + 1, type(i)("recipe_type"))
                     End If
-
-
-
                 End If
             Next
-
         End If
 
         ' Bind ComboBox To Dictionary
@@ -5592,19 +5553,14 @@ Public Class FormMain
                 If .Items.Count > 1 Then
                 Else
                     'MainMessage(5, PartID)
-
                 End If
             End With
         Next
-
     End Sub
-
 
     Public Sub LoadRecipeIDCombo()
         Dim Type As String = cmbx_RecipeType.Text
         Dim RecipecomboSource As New Dictionary(Of String, String)()
-
-        ' To Get Values From Dictionary (Example)
 
         'Assign Defaults
         RecipecomboSource.Add("0", "-Not Selected-")
@@ -5635,7 +5591,6 @@ Public Class FormMain
             cmbx_RecipeID.Enabled = False
         End If
     End Sub
-
 
     Private Sub Icon_Click(sender As Object, e As EventArgs) Handles picbx_Icon.Click, PictureBox1.Click
         FormPixel.ShowDialog()
@@ -5728,8 +5683,101 @@ Public Class FormMain
     Private Sub checkbx_RecipeDrain4_Click(sender As Object, e As EventArgs) Handles checkbx_RecipeDrain4.Click
         checkbx_RecipeDrain4.Checked = Not checkbx_RecipeDrain4.Checked
     End Sub
+
+    Private Sub btn_Depressurize_Click(sender As Object, e As EventArgs) Handles btn_Depressurize.Click
+        'Float2int(110, CType(dtrecipe.Rows(0)("prep_pressure_drop"), Double))
+        'DInt2int(116, CType(dtrecipe.Rows(0)("prep_pressure_drop_time"), Integer))
+
+        If True Then
+            Dim conditionOK As Boolean = True
+
+            ' Machine In Auto Mode
+            If Not PLCstatus(0)(3) Then
+                conditionOK = False
+            End If
+
+            ' Machine In Auto Running
+            If PLCstatus(0)(1) Then
+                conditionOK = False
+            End If
+
+            ' Machine In Alarm
+            If PLCstatus(0)(4) Then
+                conditionOK = False
+            End If
+
+            ' Machine Depressurize Running
+            If PLCstatus(2)(15) Then
+                conditionOK = False
+                'PCStatus(1)(15) = False
+            End If
+
+            ' Condition Fulfill
+            If conditionOK Then
+                'PCStatus(7)(7) = True
+                'ManualCtrl(5)(7) = True
+                PCStatus(1)(15) = True
+            End If
+        End If
+    End Sub
+
+    Private Sub btn_JigBypass_Click(sender As Object, e As EventArgs) Handles btn_JigBypass.Click
+        ' Declare Button Clicked
+        Dim btnClicked As Button = DirectCast(sender, Button)
+
+        ' Define Button State
+        Dim btnState As Boolean = False
+
+        ' Reset Button State
+        Dim btnReset As Boolean = False
+
+        'If btn_WrkOrdScnDtEndLot.Enabled Then
+        '    If Not btn_RecipeSelectionConfirm.Enabled Then
+        '        If Not btnClicked.BackColor = Color.FromArgb(25, 130, 246) Then
+        '            btnState = True
+        '        Else
+        '            btnState = False
+        '        End If
+
+        '        ' Execute Action
+        '        If btnState = False Then
+        '            btnReset = True
+        '        Else
+        '            SetButtonState(btnClicked, btnState, "Jig Bypass")
+        '            PublicVariables.RetainedJigBypass = btnState
+        '            RetainedMemory.Update(34, "JigBypass", 1)
+        '            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (ON)")
+        '        End If
+
+        '        ' Clear Selection
+        '        lbl_Title.Select()
+        '    Else
+        '        btnReset = True
+        '    End If
+        'Else
+        '    btnReset = True
+        'End If
+
+        'If btnReset Then
+        '    SetButtonState(btnClicked, btnState, "Jig Bypass")
+        '    PublicVariables.RetainedJigBypass = btnState
+        '    RetainedMemory.Update(34, "JigBypass", 0)
+        '    EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
+        'End If
+
+        If btnClicked.BackColor = Color.FromArgb(25, 130, 246) Then
+            SetButtonState(btnClicked, True, "Jig Bypass")
+            PublicVariables.RetainedJigBypass = True
+            RetainedMemory.Update(34, "JigBypass", 1)
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (ON)")
+
+            ' Clear Selection
+            lbl_Title.Select()
+        Else
+            SetButtonState(btnClicked, False, "Jig Bypass")
+            PublicVariables.RetainedJigBypass = False
+            RetainedMemory.Update(34, "JigBypass", 0)
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
+        End If
+    End Sub
 End Class
-
-
-
-

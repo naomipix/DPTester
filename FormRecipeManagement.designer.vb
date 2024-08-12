@@ -79,6 +79,34 @@ Partial Class FormRecipeManagement
         Me.dsp_SearchRecipeID = New System.Windows.Forms.Label()
         Me.dgv_RecipeDetails = New System.Windows.Forms.DataGridView()
         Me.tabpg_Edit = New System.Windows.Forms.TabPage()
+        Me.panel_RcpEditDPTest1 = New System.Windows.Forms.Panel()
+        Me.txtbx_RcpEditDPPressure = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpEditDPTestRPM = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpEditDPTestPumpMode = New System.Windows.Forms.Label()
+        Me.dsp_RcpEditDPTestRPM = New System.Windows.Forms.Label()
+        Me.dsp_RcpEditDPBP = New System.Windows.Forms.Label()
+        Me.panel_RcpEditDPTestPumpMode = New System.Windows.Forms.Panel()
+        Me.rdbtn_RcpEditDPTestPumpSpeed = New System.Windows.Forms.RadioButton()
+        Me.rdbtn_RcpEditDPTestPumpProcess = New System.Windows.Forms.RadioButton()
+        Me.checkbx_EditDPTest2 = New System.Windows.Forms.CheckBox()
+        Me.txtbx_RcpEditDPFlow = New System.Windows.Forms.TextBox()
+        Me.checkbx_EditDPTest1 = New System.Windows.Forms.CheckBox()
+        Me.txtbx_RcpEditDPFlowTol = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpEditDPPoints = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpEditPrepFlow = New System.Windows.Forms.Label()
+        Me.dsp_RcpEditPrepFlowTol = New System.Windows.Forms.Label()
+        Me.dsp_RcpEditDPPoints = New System.Windows.Forms.Label()
+        Me.txtbx_RcpEditDPUpLimit = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpEditDPUpLimit = New System.Windows.Forms.Label()
+        Me.txtbx_RcpEditDPLowLimit = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpEditDPLowLimit = New System.Windows.Forms.Label()
+        Me.txtbx_RcpEditDPTime = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpEditDPTime = New System.Windows.Forms.Label()
+        Me.txtbx_RcpEditDPStabilize = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpEditDPStabilize = New System.Windows.Forms.Label()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.panel_RcpEditDrain4 = New System.Windows.Forms.Panel()
         Me.txtbx_RcpEditDrain4Time = New System.Windows.Forms.TextBox()
         Me.dsp_RcpEditDrain4Time = New System.Windows.Forms.Label()
@@ -86,6 +114,12 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpEditDrain4Pressure = New System.Windows.Forms.Label()
         Me.checkbx_EditDrain4 = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.dsp_RcpEditPrepDrainTime = New System.Windows.Forms.Label()
+        Me.dsp_RcpEditPrepDrainStartTime = New System.Windows.Forms.Label()
+        Me.txtbx_RcpEditPrepDrainTime = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpEditPrepDrainStartTime = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpEditPrepPressure = New System.Windows.Forms.Label()
+        Me.txtbx_RcpEditPrepPressure = New System.Windows.Forms.TextBox()
         Me.dsp_RcpEditPrepPumpMode = New System.Windows.Forms.Label()
         Me.dsp_RcpEditPrepRPM = New System.Windows.Forms.Label()
         Me.panel_RcpEditPrepPumpMode = New System.Windows.Forms.Panel()
@@ -98,23 +132,17 @@ Partial Class FormRecipeManagement
         Me.txtbx_RcpEditPrepPrefillStartTime = New System.Windows.Forms.TextBox()
         Me.dsp_EditPreparation = New System.Windows.Forms.Label()
         Me.dsp_RcpEditPressureDropTime = New System.Windows.Forms.Label()
-        Me.dsp_RcpEditPrepPressure = New System.Windows.Forms.Label()
+        Me.dsp_RcpEditPrepPressureDrop = New System.Windows.Forms.Label()
         Me.dsp_RcpEditPrepBleed = New System.Windows.Forms.Label()
         Me.dsp_RcpEditPrepFill = New System.Windows.Forms.Label()
         Me.txtbx_RcpEditPrepPressureDropTime = New System.Windows.Forms.TextBox()
-        Me.txtbx_RcpEditPrepPressure = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpEditPrepPressureDrop = New System.Windows.Forms.TextBox()
         Me.txtbx_RcpEditPrepBleed = New System.Windows.Forms.TextBox()
         Me.txtbx_RcpEditPrepFill = New System.Windows.Forms.TextBox()
         Me.Panel18 = New System.Windows.Forms.Panel()
         Me.txtbx_RcpEditVerTol = New System.Windows.Forms.TextBox()
         Me.dsp_RcpEditVerTol = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.txtbx_RcpEditPrepFlow = New System.Windows.Forms.TextBox()
-        Me.txtbx_RcpEditPrepFlowTol = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpEditPrepFlow = New System.Windows.Forms.Label()
-        Me.dsp_RcpEditPrepFlowTol = New System.Windows.Forms.Label()
-        Me.txtbx_RcpEditPrepPressureDrop = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpEditPressureDrop = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -136,7 +164,9 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpEditDrain2Pressure = New System.Windows.Forms.Label()
         Me.checkbx_EditDrain2 = New System.Windows.Forms.CheckBox()
         Me.panel_RcpEditFlush2 = New System.Windows.Forms.Panel()
+        Me.txtbx_RcpEditFlush2Pressure = New System.Windows.Forms.TextBox()
         Me.dsp_RcpEditFlush2PumpMode = New System.Windows.Forms.Label()
+        Me.dsp_RcpEditFlush2BP = New System.Windows.Forms.Label()
         Me.panel_RcpEditFlush2PumpMode = New System.Windows.Forms.Panel()
         Me.rdbtn_RcpEditFlush2PumpSpeed = New System.Windows.Forms.RadioButton()
         Me.rdbtn_RcpEditFlush2PumpProcess = New System.Windows.Forms.RadioButton()
@@ -157,27 +187,10 @@ Partial Class FormRecipeManagement
         Me.txtbx_RcpEditDrain1Pressure = New System.Windows.Forms.TextBox()
         Me.dsp_RcpEditDrain1Pressure = New System.Windows.Forms.Label()
         Me.checkbx_EditDrain1 = New System.Windows.Forms.CheckBox()
-        Me.panel_RcpEditDPTest1 = New System.Windows.Forms.Panel()
-        Me.dsp_RcpEditDPTestPumpMode = New System.Windows.Forms.Label()
-        Me.panel_RcpEditDPTestPumpMode = New System.Windows.Forms.Panel()
-        Me.rdbtn_RcpEditDPTestPumpSpeed = New System.Windows.Forms.RadioButton()
-        Me.rdbtn_RcpEditDPTestPumpProcess = New System.Windows.Forms.RadioButton()
-        Me.txtbx_RcpEditDPTestRPM = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpEditDPTestRPM = New System.Windows.Forms.Label()
-        Me.checkbx_EditDPTest2 = New System.Windows.Forms.CheckBox()
-        Me.checkbx_EditDPTest1 = New System.Windows.Forms.CheckBox()
-        Me.txtbx_RcpEditDPPoints = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpEditDPPoints = New System.Windows.Forms.Label()
-        Me.txtbx_RcpEditDPUpLimit = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpEditDPUpLimit = New System.Windows.Forms.Label()
-        Me.txtbx_RcpEditDPLowLimit = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpEditDPLowLimit = New System.Windows.Forms.Label()
-        Me.txtbx_RcpEditDPTime = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpEditDPTime = New System.Windows.Forms.Label()
-        Me.txtbx_RcpEditDPStabilize = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpEditDPStabilize = New System.Windows.Forms.Label()
         Me.panel_RcpEditFlush1 = New System.Windows.Forms.Panel()
+        Me.txtbx_RcpEditFlush1Pressure = New System.Windows.Forms.TextBox()
         Me.dsp_RcpEditFlush1PumpMode = New System.Windows.Forms.Label()
+        Me.dsp_RcpEditFlush1BP = New System.Windows.Forms.Label()
         Me.panel_RcpEditFlush1PumpMode = New System.Windows.Forms.Panel()
         Me.rdbtn_RcpEditFlush1PumpSpeed = New System.Windows.Forms.RadioButton()
         Me.rdbtn_RcpEditFlush1PumpProcess = New System.Windows.Forms.RadioButton()
@@ -199,9 +212,11 @@ Partial Class FormRecipeManagement
         Me.btn_RcpDuplicate = New System.Windows.Forms.Button()
         Me.txtbx_RcpDupNewRecipeID = New System.Windows.Forms.TextBox()
         Me.dsp_RcpDupNewRecipeID = New System.Windows.Forms.Label()
-        Me.dsp_RcpDupNewType = New System.Windows.Forms.Label()
-        Me.dsp_RcpDupSelRecipe = New System.Windows.Forms.Label()
         Me.Cmbx_RcpDupNewType = New System.Windows.Forms.ComboBox()
+        Me.dsp_RcpDupNewType = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.dsp_RcpDupSelRecipe = New System.Windows.Forms.Label()
+        Me.Cmbx_RcpDupNewPartID = New System.Windows.Forms.ComboBox()
         Me.cmbx_RcpDupSelRecipe = New System.Windows.Forms.ComboBox()
         Me.btn_EditDiscard = New System.Windows.Forms.Button()
         Me.btn_RcpEditSave = New System.Windows.Forms.Button()
@@ -216,6 +231,13 @@ Partial Class FormRecipeManagement
         Me.cmbx_RcpEditFilterType = New System.Windows.Forms.ComboBox()
         Me.dsp_RcpEditRcpSelection = New System.Windows.Forms.Label()
         Me.tabpg_Create = New System.Windows.Forms.TabPage()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreateVerTol = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpCreateVerTol = New System.Windows.Forms.Label()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.panel_RcpCreateDrain4 = New System.Windows.Forms.Panel()
         Me.txtbx_RcpCreateDrain4Time = New System.Windows.Forms.TextBox()
         Me.dsp_RcpCreateDrain4Time = New System.Windows.Forms.Label()
@@ -227,7 +249,9 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpCreateFlush1PumpMode = New System.Windows.Forms.Label()
         Me.dsp_RcpCreateFlush1Time = New System.Windows.Forms.Label()
         Me.txtbx_RcpCreateFlush1Stabilize = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpCreateFlush1BP = New System.Windows.Forms.Label()
         Me.dsp_RcpCreateFlush1Stabilize = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreateFlush1Pressure = New System.Windows.Forms.TextBox()
         Me.txtbx_RcpCreateFlush1FlowTol = New System.Windows.Forms.TextBox()
         Me.dsp_RcpCreateFlush1FlowTol = New System.Windows.Forms.Label()
         Me.txtbx_RcpCreateFlush1Flow = New System.Windows.Forms.TextBox()
@@ -239,24 +263,30 @@ Partial Class FormRecipeManagement
         Me.txtbx_RcpCreateFlush1RPM = New System.Windows.Forms.TextBox()
         Me.dsp_RcpCreateFlush1RPM = New System.Windows.Forms.Label()
         Me.panel_RcpCreateDPTest1 = New System.Windows.Forms.Panel()
+        Me.dsp_RcpCreateDPBP = New System.Windows.Forms.Label()
         Me.txtbx_RcpCreateDPStabilize = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpCreateDPTestRPM = New System.Windows.Forms.Label()
-        Me.txtbx_RcpCreateDPTestRPM = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpCreateDPTestPumpMode = New System.Windows.Forms.Label()
-        Me.txtbx_RcpCreateDPPoints = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpCreateDPPoints = New System.Windows.Forms.Label()
-        Me.txtbx_RcpCreateDPUpLimit = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpCreateDPUpLimit = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreateDPPressure = New System.Windows.Forms.TextBox()
         Me.txtbx_RcpCreateDPLowLimit = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpCreatePrepFlowTol = New System.Windows.Forms.Label()
+        Me.dsp_RcpCreateDPTestRPM = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreateDPPoints = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpCreateDPTestPumpMode = New System.Windows.Forms.Label()
         Me.dsp_RcpCreateDPLowLimit = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreateDPTestRPM = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpCreateDPUpLimit = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreateDPFlowTol = New System.Windows.Forms.TextBox()
+        Me.dsp_RcpCreateDPPoints = New System.Windows.Forms.Label()
         Me.txtbx_RcpCreateDPTime = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpCreateDPUpLimit = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpCreateDPFlow = New System.Windows.Forms.TextBox()
         Me.dsp_RcpCreateDPTime = New System.Windows.Forms.Label()
+        Me.dsp_RcpCreatePrepFlow = New System.Windows.Forms.Label()
         Me.dsp_RcpCreateDPStabilize = New System.Windows.Forms.Label()
         Me.checkbx_CreateDPTest2 = New System.Windows.Forms.CheckBox()
         Me.checkbx_CreateDPTest1 = New System.Windows.Forms.CheckBox()
         Me.panel_RcpCreateDPTestPumpMode = New System.Windows.Forms.Panel()
-        Me.rdbtn_RcpCreateDPTestPumpSpeed = New System.Windows.Forms.RadioButton()
         Me.rdbtn_RcpCreateDPTestPumpProcess = New System.Windows.Forms.RadioButton()
+        Me.rdbtn_RcpCreateDPTestPumpSpeed = New System.Windows.Forms.RadioButton()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -266,11 +296,17 @@ Partial Class FormRecipeManagement
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.dsp_CreatePreparation = New System.Windows.Forms.Label()
+        Me.dsp_RcpCreateDrainTime = New System.Windows.Forms.Label()
+        Me.dsp_RcpCreateDrainStartTime = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreatePrepDrainTime = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpCreatePrepDrainStartTime = New System.Windows.Forms.TextBox()
         Me.dsp_RcpCreatePrepPressure = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreatePrepPressure = New System.Windows.Forms.TextBox()
+        Me.dsp_CreatePreparation = New System.Windows.Forms.Label()
+        Me.dsp_RcpCreatePrepPressureDrop = New System.Windows.Forms.Label()
         Me.dsp_RcpCreatePrepBleed = New System.Windows.Forms.Label()
         Me.dsp_RcpCreatePrepFill = New System.Windows.Forms.Label()
-        Me.txtbx_RcpCreatePrepPressure = New System.Windows.Forms.TextBox()
+        Me.txtbx_RcpCreatePrepPressureDrop = New System.Windows.Forms.TextBox()
         Me.txtbx_RcpCreatePrepBleed = New System.Windows.Forms.TextBox()
         Me.txtbx_RcpCreatePrepFill = New System.Windows.Forms.TextBox()
         Me.dsp_RcpCreatePrepPumpMode = New System.Windows.Forms.Label()
@@ -300,6 +336,8 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateFlush2 = New System.Windows.Forms.Panel()
         Me.txtbx_RcpCreateFlush2RPM = New System.Windows.Forms.TextBox()
         Me.dsp_RcpCreateFlush2RPM = New System.Windows.Forms.Label()
+        Me.dsp_RcpCreateFlush2BP = New System.Windows.Forms.Label()
+        Me.txtbx_RcpCreateFlush2Pressure = New System.Windows.Forms.TextBox()
         Me.txtbx_RcpCreateFlush2Time = New System.Windows.Forms.TextBox()
         Me.dsp_RcpCreateFlush2Time = New System.Windows.Forms.Label()
         Me.txtbx_RcpCreateFlush2Stabilize = New System.Windows.Forms.TextBox()
@@ -348,27 +386,20 @@ Partial Class FormRecipeManagement
         Me.dsp_PartCreatePartID = New System.Windows.Forms.Label()
         Me.dsp_PartCreateFiltertype = New System.Windows.Forms.Label()
         Me.dsp_PartCreateJigType = New System.Windows.Forms.Label()
-        Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.dsp_RcpCreatePrepPressureDrop = New System.Windows.Forms.Label()
-        Me.txtbx_RcpCreateVerTol = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpCreateVerTol = New System.Windows.Forms.Label()
-        Me.dsp_RcpCreatePrepFlowTol = New System.Windows.Forms.Label()
-        Me.txtbx_RcpCreatePrepFlowTol = New System.Windows.Forms.TextBox()
-        Me.txtbx_RcpCreatePrepPressureDrop = New System.Windows.Forms.TextBox()
-        Me.txtbx_RcpCreatePrepFlow = New System.Windows.Forms.TextBox()
-        Me.dsp_RcpCreatePrepFlow = New System.Windows.Forms.Label()
         Me.panel_FormControl = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel10 = New System.Windows.Forms.Panel()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.ComboBox11 = New System.Windows.Forms.ComboBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.ComboBox12 = New System.Windows.Forms.ComboBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -382,6 +413,9 @@ Partial Class FormRecipeManagement
         Me.grpbx_Search.SuspendLayout()
         CType(Me.dgv_RecipeDetails, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabpg_Edit.SuspendLayout()
+        Me.panel_RcpEditDPTest1.SuspendLayout()
+        Me.panel_RcpEditDPTestPumpMode.SuspendLayout()
+        Me.Panel9.SuspendLayout()
         Me.panel_RcpEditDrain4.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.panel_RcpEditPrepPumpMode.SuspendLayout()
@@ -392,14 +426,14 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditFlush2.SuspendLayout()
         Me.panel_RcpEditFlush2PumpMode.SuspendLayout()
         Me.panel_RcpEditDrain1.SuspendLayout()
-        Me.panel_RcpEditDPTest1.SuspendLayout()
-        Me.panel_RcpEditDPTestPumpMode.SuspendLayout()
         Me.panel_RcpEditFlush1.SuspendLayout()
         Me.panel_RcpEditFlush1PumpMode.SuspendLayout()
         Me.panel_Edit.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.panel_RecipeManagement.SuspendLayout()
         Me.tabpg_Create.SuspendLayout()
+        Me.Panel8.SuspendLayout()
+        Me.Panel10.SuspendLayout()
         Me.panel_RcpCreateDrain4.SuspendLayout()
         Me.panel_RcpCreateFlush1.SuspendLayout()
         Me.panel_RcpCreateFlush1PumpMode.SuspendLayout()
@@ -417,11 +451,9 @@ Partial Class FormRecipeManagement
         Me.Panel6.SuspendLayout()
         Me.panel_RecipeGeneration.SuspendLayout()
         Me.panel_ProdSKUCreation.SuspendLayout()
-        Me.Panel8.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel10.SuspendLayout()
-        Me.Panel9.SuspendLayout()
+        Me.Panel11.SuspendLayout()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -535,7 +567,7 @@ Partial Class FormRecipeManagement
         Me.tabpg_Delete.Controls.Add(Me.panel_Delete)
         Me.tabpg_Delete.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_Delete.Name = "tabpg_Delete"
-        Me.tabpg_Delete.Size = New System.Drawing.Size(1872, 789)
+        Me.tabpg_Delete.Size = New System.Drawing.Size(1872, 802)
         Me.tabpg_Delete.TabIndex = 2
         Me.tabpg_Delete.Text = "Delete"
         Me.tabpg_Delete.UseVisualStyleBackColor = True
@@ -548,7 +580,7 @@ Partial Class FormRecipeManagement
         Me.panel_Delete.Dock = System.Windows.Forms.DockStyle.Left
         Me.panel_Delete.Location = New System.Drawing.Point(0, 0)
         Me.panel_Delete.Name = "panel_Delete"
-        Me.panel_Delete.Size = New System.Drawing.Size(562, 787)
+        Me.panel_Delete.Size = New System.Drawing.Size(562, 800)
         Me.panel_Delete.TabIndex = 2
         '
         'Panel5
@@ -824,11 +856,11 @@ Partial Class FormRecipeManagement
         Me.tabctrl_RecipeCtrl.Controls.Add(Me.tabpg_Delete)
         Me.tabctrl_RecipeCtrl.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabctrl_RecipeCtrl.ItemSize = New System.Drawing.Size(150, 40)
-        Me.tabctrl_RecipeCtrl.Location = New System.Drawing.Point(12, 161)
+        Me.tabctrl_RecipeCtrl.Location = New System.Drawing.Point(12, 149)
         Me.tabctrl_RecipeCtrl.Multiline = True
         Me.tabctrl_RecipeCtrl.Name = "tabctrl_RecipeCtrl"
         Me.tabctrl_RecipeCtrl.SelectedIndex = 0
-        Me.tabctrl_RecipeCtrl.Size = New System.Drawing.Size(1880, 837)
+        Me.tabctrl_RecipeCtrl.Size = New System.Drawing.Size(1880, 850)
         Me.tabctrl_RecipeCtrl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
         Me.tabctrl_RecipeCtrl.TabIndex = 1
         Me.tabctrl_RecipeCtrl.TabStop = False
@@ -847,7 +879,7 @@ Partial Class FormRecipeManagement
         Me.tabpg_RecipeDetails.Controls.Add(Me.dgv_RecipeDetails)
         Me.tabpg_RecipeDetails.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_RecipeDetails.Name = "tabpg_RecipeDetails"
-        Me.tabpg_RecipeDetails.Size = New System.Drawing.Size(1872, 789)
+        Me.tabpg_RecipeDetails.Size = New System.Drawing.Size(1872, 802)
         Me.tabpg_RecipeDetails.TabIndex = 3
         Me.tabpg_RecipeDetails.Text = "Recipe Details"
         Me.tabpg_RecipeDetails.UseVisualStyleBackColor = True
@@ -1045,6 +1077,7 @@ Partial Class FormRecipeManagement
         'tabpg_Edit
         '
         Me.tabpg_Edit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDPTest1)
         Me.tabpg_Edit.Controls.Add(Me.Panel9)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDrain4)
         Me.tabpg_Edit.Controls.Add(Me.Panel2)
@@ -1054,16 +1087,307 @@ Partial Class FormRecipeManagement
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDrain2)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditFlush2)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDrain1)
-        Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditDPTest1)
         Me.tabpg_Edit.Controls.Add(Me.panel_RcpEditFlush1)
         Me.tabpg_Edit.Controls.Add(Me.dsp_RcpEditRcpParameters)
         Me.tabpg_Edit.Controls.Add(Me.panel_Edit)
         Me.tabpg_Edit.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_Edit.Name = "tabpg_Edit"
-        Me.tabpg_Edit.Size = New System.Drawing.Size(1872, 789)
+        Me.tabpg_Edit.Size = New System.Drawing.Size(1872, 802)
         Me.tabpg_Edit.TabIndex = 4
         Me.tabpg_Edit.Text = "Edit"
         Me.tabpg_Edit.UseVisualStyleBackColor = True
+        '
+        'panel_RcpEditDPTest1
+        '
+        Me.panel_RcpEditDPTest1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPPressure)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPTestRPM)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPTestPumpMode)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPTestRPM)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPBP)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.panel_RcpEditDPTestPumpMode)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.checkbx_EditDPTest2)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPFlow)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.checkbx_EditDPTest1)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPFlowTol)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPPoints)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditPrepFlow)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditPrepFlowTol)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPPoints)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPUpLimit)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPUpLimit)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPLowLimit)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPLowLimit)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPTime)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPTime)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPStabilize)
+        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPStabilize)
+        Me.panel_RcpEditDPTest1.Location = New System.Drawing.Point(1224, 45)
+        Me.panel_RcpEditDPTest1.Name = "panel_RcpEditDPTest1"
+        Me.panel_RcpEditDPTest1.Size = New System.Drawing.Size(307, 618)
+        Me.panel_RcpEditDPTest1.TabIndex = 29
+        '
+        'txtbx_RcpEditDPPressure
+        '
+        Me.txtbx_RcpEditDPPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditDPPressure.Location = New System.Drawing.Point(183, 263)
+        Me.txtbx_RcpEditDPPressure.MaxLength = 6
+        Me.txtbx_RcpEditDPPressure.Name = "txtbx_RcpEditDPPressure"
+        Me.txtbx_RcpEditDPPressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditDPPressure.TabIndex = 77
+        '
+        'txtbx_RcpEditDPTestRPM
+        '
+        Me.txtbx_RcpEditDPTestRPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditDPTestRPM.Location = New System.Drawing.Point(183, 503)
+        Me.txtbx_RcpEditDPTestRPM.MaxLength = 6
+        Me.txtbx_RcpEditDPTestRPM.Name = "txtbx_RcpEditDPTestRPM"
+        Me.txtbx_RcpEditDPTestRPM.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditDPTestRPM.TabIndex = 75
+        Me.txtbx_RcpEditDPTestRPM.Visible = False
+        '
+        'dsp_RcpEditDPTestPumpMode
+        '
+        Me.dsp_RcpEditDPTestPumpMode.Location = New System.Drawing.Point(17, 415)
+        Me.dsp_RcpEditDPTestPumpMode.Name = "dsp_RcpEditDPTestPumpMode"
+        Me.dsp_RcpEditDPTestPumpMode.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditDPTestPumpMode.TabIndex = 84
+        Me.dsp_RcpEditDPTestPumpMode.Text = "Pump Mode" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selection :"
+        Me.dsp_RcpEditDPTestPumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpEditDPTestRPM
+        '
+        Me.dsp_RcpEditDPTestRPM.Location = New System.Drawing.Point(17, 495)
+        Me.dsp_RcpEditDPTestRPM.Name = "dsp_RcpEditDPTestRPM"
+        Me.dsp_RcpEditDPTestRPM.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditDPTestRPM.TabIndex = 76
+        Me.dsp_RcpEditDPTestRPM.Text = "Pump Speed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(RPM) :"
+        Me.dsp_RcpEditDPTestRPM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_RcpEditDPTestRPM.Visible = False
+        '
+        'dsp_RcpEditDPBP
+        '
+        Me.dsp_RcpEditDPBP.Location = New System.Drawing.Point(17, 255)
+        Me.dsp_RcpEditDPBP.Name = "dsp_RcpEditDPBP"
+        Me.dsp_RcpEditDPBP.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditDPBP.TabIndex = 78
+        Me.dsp_RcpEditDPBP.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpEditDPBP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'panel_RcpEditDPTestPumpMode
+        '
+        Me.panel_RcpEditDPTestPumpMode.BackColor = System.Drawing.SystemColors.Window
+        Me.panel_RcpEditDPTestPumpMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RcpEditDPTestPumpMode.Controls.Add(Me.rdbtn_RcpEditDPTestPumpSpeed)
+        Me.panel_RcpEditDPTestPumpMode.Controls.Add(Me.rdbtn_RcpEditDPTestPumpProcess)
+        Me.panel_RcpEditDPTestPumpMode.Location = New System.Drawing.Point(183, 423)
+        Me.panel_RcpEditDPTestPumpMode.Name = "panel_RcpEditDPTestPumpMode"
+        Me.panel_RcpEditDPTestPumpMode.Size = New System.Drawing.Size(100, 25)
+        Me.panel_RcpEditDPTestPumpMode.TabIndex = 85
+        '
+        'rdbtn_RcpEditDPTestPumpSpeed
+        '
+        Me.rdbtn_RcpEditDPTestPumpSpeed.AutoSize = True
+        Me.rdbtn_RcpEditDPTestPumpSpeed.Location = New System.Drawing.Point(6, 29)
+        Me.rdbtn_RcpEditDPTestPumpSpeed.Name = "rdbtn_RcpEditDPTestPumpSpeed"
+        Me.rdbtn_RcpEditDPTestPumpSpeed.Size = New System.Drawing.Size(63, 21)
+        Me.rdbtn_RcpEditDPTestPumpSpeed.TabIndex = 0
+        Me.rdbtn_RcpEditDPTestPumpSpeed.TabStop = True
+        Me.rdbtn_RcpEditDPTestPumpSpeed.Text = "Speed"
+        Me.rdbtn_RcpEditDPTestPumpSpeed.UseVisualStyleBackColor = True
+        Me.rdbtn_RcpEditDPTestPumpSpeed.Visible = False
+        '
+        'rdbtn_RcpEditDPTestPumpProcess
+        '
+        Me.rdbtn_RcpEditDPTestPumpProcess.AutoSize = True
+        Me.rdbtn_RcpEditDPTestPumpProcess.Location = New System.Drawing.Point(6, 1)
+        Me.rdbtn_RcpEditDPTestPumpProcess.Name = "rdbtn_RcpEditDPTestPumpProcess"
+        Me.rdbtn_RcpEditDPTestPumpProcess.Size = New System.Drawing.Size(71, 21)
+        Me.rdbtn_RcpEditDPTestPumpProcess.TabIndex = 0
+        Me.rdbtn_RcpEditDPTestPumpProcess.TabStop = True
+        Me.rdbtn_RcpEditDPTestPumpProcess.Text = "Process"
+        Me.rdbtn_RcpEditDPTestPumpProcess.UseVisualStyleBackColor = True
+        '
+        'checkbx_EditDPTest2
+        '
+        Me.checkbx_EditDPTest2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.checkbx_EditDPTest2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.checkbx_EditDPTest2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_EditDPTest2.Location = New System.Drawing.Point(49, 53)
+        Me.checkbx_EditDPTest2.Name = "checkbx_EditDPTest2"
+        Me.checkbx_EditDPTest2.Size = New System.Drawing.Size(200, 40)
+        Me.checkbx_EditDPTest2.TabIndex = 41
+        Me.checkbx_EditDPTest2.Text = "DP Test-2 Enable"
+        Me.checkbx_EditDPTest2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.checkbx_EditDPTest2.UseVisualStyleBackColor = True
+        '
+        'txtbx_RcpEditDPFlow
+        '
+        Me.txtbx_RcpEditDPFlow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditDPFlow.Location = New System.Drawing.Point(183, 183)
+        Me.txtbx_RcpEditDPFlow.MaxLength = 6
+        Me.txtbx_RcpEditDPFlow.Name = "txtbx_RcpEditDPFlow"
+        Me.txtbx_RcpEditDPFlow.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditDPFlow.TabIndex = 22
+        '
+        'checkbx_EditDPTest1
+        '
+        Me.checkbx_EditDPTest1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.checkbx_EditDPTest1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.checkbx_EditDPTest1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.checkbx_EditDPTest1.Location = New System.Drawing.Point(49, 10)
+        Me.checkbx_EditDPTest1.Name = "checkbx_EditDPTest1"
+        Me.checkbx_EditDPTest1.Size = New System.Drawing.Size(200, 40)
+        Me.checkbx_EditDPTest1.TabIndex = 40
+        Me.checkbx_EditDPTest1.Text = "DP Test-1 Enable"
+        Me.checkbx_EditDPTest1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.checkbx_EditDPTest1.UseVisualStyleBackColor = True
+        '
+        'txtbx_RcpEditDPFlowTol
+        '
+        Me.txtbx_RcpEditDPFlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditDPFlowTol.Location = New System.Drawing.Point(183, 223)
+        Me.txtbx_RcpEditDPFlowTol.MaxLength = 6
+        Me.txtbx_RcpEditDPFlowTol.Name = "txtbx_RcpEditDPFlowTol"
+        Me.txtbx_RcpEditDPFlowTol.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditDPFlowTol.TabIndex = 79
+        '
+        'txtbx_RcpEditDPPoints
+        '
+        Me.txtbx_RcpEditDPPoints.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditDPPoints.Location = New System.Drawing.Point(183, 383)
+        Me.txtbx_RcpEditDPPoints.MaxLength = 6
+        Me.txtbx_RcpEditDPPoints.Name = "txtbx_RcpEditDPPoints"
+        Me.txtbx_RcpEditDPPoints.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditDPPoints.TabIndex = 49
+        '
+        'dsp_RcpEditPrepFlow
+        '
+        Me.dsp_RcpEditPrepFlow.Location = New System.Drawing.Point(17, 175)
+        Me.dsp_RcpEditPrepFlow.Name = "dsp_RcpEditPrepFlow"
+        Me.dsp_RcpEditPrepFlow.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditPrepFlow.TabIndex = 26
+        Me.dsp_RcpEditPrepFlow.Text = "Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min) :"
+        Me.dsp_RcpEditPrepFlow.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpEditPrepFlowTol
+        '
+        Me.dsp_RcpEditPrepFlowTol.Location = New System.Drawing.Point(17, 215)
+        Me.dsp_RcpEditPrepFlowTol.Name = "dsp_RcpEditPrepFlowTol"
+        Me.dsp_RcpEditPrepFlowTol.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditPrepFlowTol.TabIndex = 26
+        Me.dsp_RcpEditPrepFlowTol.Text = "Flowrate Tolerance (l/min) (+/-) :"
+        Me.dsp_RcpEditPrepFlowTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpEditDPPoints
+        '
+        Me.dsp_RcpEditDPPoints.Location = New System.Drawing.Point(17, 375)
+        Me.dsp_RcpEditDPPoints.Name = "dsp_RcpEditDPPoints"
+        Me.dsp_RcpEditDPPoints.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditDPPoints.TabIndex = 20
+        Me.dsp_RcpEditDPPoints.Text = "Test Points" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Count) :"
+        Me.dsp_RcpEditDPPoints.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpEditDPUpLimit
+        '
+        Me.txtbx_RcpEditDPUpLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditDPUpLimit.Location = New System.Drawing.Point(183, 343)
+        Me.txtbx_RcpEditDPUpLimit.MaxLength = 6
+        Me.txtbx_RcpEditDPUpLimit.Name = "txtbx_RcpEditDPUpLimit"
+        Me.txtbx_RcpEditDPUpLimit.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditDPUpLimit.TabIndex = 48
+        '
+        'dsp_RcpEditDPUpLimit
+        '
+        Me.dsp_RcpEditDPUpLimit.Location = New System.Drawing.Point(17, 335)
+        Me.dsp_RcpEditDPUpLimit.Name = "dsp_RcpEditDPUpLimit"
+        Me.dsp_RcpEditDPUpLimit.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditDPUpLimit.TabIndex = 18
+        Me.dsp_RcpEditDPUpLimit.Text = "DP Upper Limit" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpEditDPUpLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpEditDPLowLimit
+        '
+        Me.txtbx_RcpEditDPLowLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditDPLowLimit.Location = New System.Drawing.Point(183, 303)
+        Me.txtbx_RcpEditDPLowLimit.MaxLength = 6
+        Me.txtbx_RcpEditDPLowLimit.Name = "txtbx_RcpEditDPLowLimit"
+        Me.txtbx_RcpEditDPLowLimit.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditDPLowLimit.TabIndex = 47
+        '
+        'dsp_RcpEditDPLowLimit
+        '
+        Me.dsp_RcpEditDPLowLimit.Location = New System.Drawing.Point(17, 295)
+        Me.dsp_RcpEditDPLowLimit.Name = "dsp_RcpEditDPLowLimit"
+        Me.dsp_RcpEditDPLowLimit.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditDPLowLimit.TabIndex = 16
+        Me.dsp_RcpEditDPLowLimit.Text = "DP Lower Limit" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)  :"
+        Me.dsp_RcpEditDPLowLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpEditDPTime
+        '
+        Me.txtbx_RcpEditDPTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditDPTime.Location = New System.Drawing.Point(183, 143)
+        Me.txtbx_RcpEditDPTime.MaxLength = 6
+        Me.txtbx_RcpEditDPTime.Name = "txtbx_RcpEditDPTime"
+        Me.txtbx_RcpEditDPTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditDPTime.TabIndex = 46
+        '
+        'dsp_RcpEditDPTime
+        '
+        Me.dsp_RcpEditDPTime.Location = New System.Drawing.Point(17, 135)
+        Me.dsp_RcpEditDPTime.Name = "dsp_RcpEditDPTime"
+        Me.dsp_RcpEditDPTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditDPTime.TabIndex = 14
+        Me.dsp_RcpEditDPTime.Text = "DP Test Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RcpEditDPTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpEditDPStabilize
+        '
+        Me.txtbx_RcpEditDPStabilize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditDPStabilize.Location = New System.Drawing.Point(183, 103)
+        Me.txtbx_RcpEditDPStabilize.MaxLength = 6
+        Me.txtbx_RcpEditDPStabilize.Name = "txtbx_RcpEditDPStabilize"
+        Me.txtbx_RcpEditDPStabilize.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditDPStabilize.TabIndex = 45
+        '
+        'dsp_RcpEditDPStabilize
+        '
+        Me.dsp_RcpEditDPStabilize.Location = New System.Drawing.Point(17, 95)
+        Me.dsp_RcpEditDPStabilize.Name = "dsp_RcpEditDPStabilize"
+        Me.dsp_RcpEditDPStabilize.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditDPStabilize.TabIndex = 12
+        Me.dsp_RcpEditDPStabilize.Text = "Stabilize Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RcpEditDPStabilize.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Panel9
+        '
+        Me.Panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel9.Controls.Add(Me.TextBox3)
+        Me.Panel9.Controls.Add(Me.Label11)
+        Me.Panel9.Location = New System.Drawing.Point(1548, 669)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(307, 112)
+        Me.Panel9.TabIndex = 40
+        '
+        'TextBox3
+        '
+        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox3.Location = New System.Drawing.Point(183, 35)
+        Me.TextBox3.MaxLength = 6
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(100, 25)
+        Me.TextBox3.TabIndex = 81
+        '
+        'Label11
+        '
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(17, 27)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(150, 40)
+        Me.Label11.TabIndex = 82
+        Me.Label11.Text = "Total Cycle Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'panel_RcpEditDrain4
         '
@@ -1130,6 +1454,12 @@ Partial Class FormRecipeManagement
         'Panel2
         '
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepDrainTime)
+        Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepDrainStartTime)
+        Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepDrainTime)
+        Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepDrainStartTime)
+        Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepPressure)
+        Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepPressure)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepPumpMode)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepRPM)
         Me.Panel2.Controls.Add(Me.panel_RcpEditPrepPumpMode)
@@ -1140,21 +1470,75 @@ Partial Class FormRecipeManagement
         Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepPrefillStartTime)
         Me.Panel2.Controls.Add(Me.dsp_EditPreparation)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPressureDropTime)
-        Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepPressure)
+        Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepPressureDrop)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepBleed)
         Me.Panel2.Controls.Add(Me.dsp_RcpEditPrepFill)
         Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepPressureDropTime)
-        Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepPressure)
+        Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepPressureDrop)
         Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepBleed)
         Me.Panel2.Controls.Add(Me.txtbx_RcpEditPrepFill)
-        Me.Panel2.Location = New System.Drawing.Point(575, 291)
+        Me.Panel2.Location = New System.Drawing.Point(575, 176)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(307, 480)
+        Me.Panel2.Size = New System.Drawing.Size(307, 605)
         Me.Panel2.TabIndex = 34
+        '
+        'dsp_RcpEditPrepDrainTime
+        '
+        Me.dsp_RcpEditPrepDrainTime.Location = New System.Drawing.Point(17, 215)
+        Me.dsp_RcpEditPrepDrainTime.Name = "dsp_RcpEditPrepDrainTime"
+        Me.dsp_RcpEditPrepDrainTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditPrepDrainTime.TabIndex = 92
+        Me.dsp_RcpEditPrepDrainTime.Text = "Drain Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RcpEditPrepDrainTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpEditPrepDrainStartTime
+        '
+        Me.dsp_RcpEditPrepDrainStartTime.Location = New System.Drawing.Point(17, 175)
+        Me.dsp_RcpEditPrepDrainStartTime.Name = "dsp_RcpEditPrepDrainStartTime"
+        Me.dsp_RcpEditPrepDrainStartTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditPrepDrainStartTime.TabIndex = 93
+        Me.dsp_RcpEditPrepDrainStartTime.Text = "Drain Start Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RcpEditPrepDrainStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpEditPrepDrainTime
+        '
+        Me.txtbx_RcpEditPrepDrainTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditPrepDrainTime.Location = New System.Drawing.Point(183, 223)
+        Me.txtbx_RcpEditPrepDrainTime.MaxLength = 6
+        Me.txtbx_RcpEditPrepDrainTime.Name = "txtbx_RcpEditPrepDrainTime"
+        Me.txtbx_RcpEditPrepDrainTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditPrepDrainTime.TabIndex = 91
+        '
+        'txtbx_RcpEditPrepDrainStartTime
+        '
+        Me.txtbx_RcpEditPrepDrainStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditPrepDrainStartTime.Location = New System.Drawing.Point(183, 183)
+        Me.txtbx_RcpEditPrepDrainStartTime.MaxLength = 6
+        Me.txtbx_RcpEditPrepDrainStartTime.Name = "txtbx_RcpEditPrepDrainStartTime"
+        Me.txtbx_RcpEditPrepDrainStartTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditPrepDrainStartTime.TabIndex = 90
+        '
+        'dsp_RcpEditPrepPressure
+        '
+        Me.dsp_RcpEditPrepPressure.Location = New System.Drawing.Point(17, 375)
+        Me.dsp_RcpEditPrepPressure.Name = "dsp_RcpEditPrepPressure"
+        Me.dsp_RcpEditPrepPressure.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditPrepPressure.TabIndex = 89
+        Me.dsp_RcpEditPrepPressure.Text = "Back Pressure-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpEditPrepPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpEditPrepPressure
+        '
+        Me.txtbx_RcpEditPrepPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditPrepPressure.Location = New System.Drawing.Point(183, 383)
+        Me.txtbx_RcpEditPrepPressure.MaxLength = 6
+        Me.txtbx_RcpEditPrepPressure.Name = "txtbx_RcpEditPrepPressure"
+        Me.txtbx_RcpEditPrepPressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditPrepPressure.TabIndex = 86
         '
         'dsp_RcpEditPrepPumpMode
         '
-        Me.dsp_RcpEditPrepPumpMode.Location = New System.Drawing.Point(17, 301)
+        Me.dsp_RcpEditPrepPumpMode.Location = New System.Drawing.Point(17, 415)
         Me.dsp_RcpEditPrepPumpMode.Name = "dsp_RcpEditPrepPumpMode"
         Me.dsp_RcpEditPrepPumpMode.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPrepPumpMode.TabIndex = 84
@@ -1163,7 +1547,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditPrepRPM
         '
-        Me.dsp_RcpEditPrepRPM.Location = New System.Drawing.Point(17, 372)
+        Me.dsp_RcpEditPrepRPM.Location = New System.Drawing.Point(17, 455)
         Me.dsp_RcpEditPrepRPM.Name = "dsp_RcpEditPrepRPM"
         Me.dsp_RcpEditPrepRPM.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPrepRPM.TabIndex = 73
@@ -1176,15 +1560,15 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditPrepPumpMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panel_RcpEditPrepPumpMode.Controls.Add(Me.rdbtn_RcpEditPrepPumpSpeed)
         Me.panel_RcpEditPrepPumpMode.Controls.Add(Me.rdbtn_RcpEditPrepPumpProcess)
-        Me.panel_RcpEditPrepPumpMode.Location = New System.Drawing.Point(183, 309)
+        Me.panel_RcpEditPrepPumpMode.Location = New System.Drawing.Point(183, 423)
         Me.panel_RcpEditPrepPumpMode.Name = "panel_RcpEditPrepPumpMode"
-        Me.panel_RcpEditPrepPumpMode.Size = New System.Drawing.Size(100, 55)
+        Me.panel_RcpEditPrepPumpMode.Size = New System.Drawing.Size(100, 25)
         Me.panel_RcpEditPrepPumpMode.TabIndex = 85
         '
         'rdbtn_RcpEditPrepPumpSpeed
         '
         Me.rdbtn_RcpEditPrepPumpSpeed.AutoSize = True
-        Me.rdbtn_RcpEditPrepPumpSpeed.Location = New System.Drawing.Point(6, 29)
+        Me.rdbtn_RcpEditPrepPumpSpeed.Location = New System.Drawing.Point(6, 1)
         Me.rdbtn_RcpEditPrepPumpSpeed.Name = "rdbtn_RcpEditPrepPumpSpeed"
         Me.rdbtn_RcpEditPrepPumpSpeed.Size = New System.Drawing.Size(63, 21)
         Me.rdbtn_RcpEditPrepPumpSpeed.TabIndex = 0
@@ -1195,18 +1579,19 @@ Partial Class FormRecipeManagement
         'rdbtn_RcpEditPrepPumpProcess
         '
         Me.rdbtn_RcpEditPrepPumpProcess.AutoSize = True
-        Me.rdbtn_RcpEditPrepPumpProcess.Location = New System.Drawing.Point(6, 3)
+        Me.rdbtn_RcpEditPrepPumpProcess.Location = New System.Drawing.Point(6, 29)
         Me.rdbtn_RcpEditPrepPumpProcess.Name = "rdbtn_RcpEditPrepPumpProcess"
         Me.rdbtn_RcpEditPrepPumpProcess.Size = New System.Drawing.Size(71, 21)
         Me.rdbtn_RcpEditPrepPumpProcess.TabIndex = 0
         Me.rdbtn_RcpEditPrepPumpProcess.TabStop = True
         Me.rdbtn_RcpEditPrepPumpProcess.Text = "Process"
         Me.rdbtn_RcpEditPrepPumpProcess.UseVisualStyleBackColor = True
+        Me.rdbtn_RcpEditPrepPumpProcess.Visible = False
         '
         'txtbx_RcpEditPrepRPM
         '
         Me.txtbx_RcpEditPrepRPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepRPM.Location = New System.Drawing.Point(183, 380)
+        Me.txtbx_RcpEditPrepRPM.Location = New System.Drawing.Point(183, 463)
         Me.txtbx_RcpEditPrepRPM.MaxLength = 6
         Me.txtbx_RcpEditPrepRPM.Name = "txtbx_RcpEditPrepRPM"
         Me.txtbx_RcpEditPrepRPM.Size = New System.Drawing.Size(100, 25)
@@ -1214,7 +1599,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditPrepPrefillTime
         '
-        Me.dsp_RcpEditPrepPrefillTime.Location = New System.Drawing.Point(17, 137)
+        Me.dsp_RcpEditPrepPrefillTime.Location = New System.Drawing.Point(17, 135)
         Me.dsp_RcpEditPrepPrefillTime.Name = "dsp_RcpEditPrepPrefillTime"
         Me.dsp_RcpEditPrepPrefillTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPrepPrefillTime.TabIndex = 34
@@ -1223,7 +1608,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditPrepPrefillStartTime
         '
-        Me.dsp_RcpEditPrepPrefillStartTime.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RcpEditPrepPrefillStartTime.Location = New System.Drawing.Point(17, 95)
         Me.dsp_RcpEditPrepPrefillStartTime.Name = "dsp_RcpEditPrepPrefillStartTime"
         Me.dsp_RcpEditPrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPrepPrefillStartTime.TabIndex = 35
@@ -1233,7 +1618,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditPrepPrefillTime
         '
         Me.txtbx_RcpEditPrepPrefillTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepPrefillTime.Location = New System.Drawing.Point(183, 145)
+        Me.txtbx_RcpEditPrepPrefillTime.Location = New System.Drawing.Point(183, 143)
         Me.txtbx_RcpEditPrepPrefillTime.MaxLength = 6
         Me.txtbx_RcpEditPrepPrefillTime.Name = "txtbx_RcpEditPrepPrefillTime"
         Me.txtbx_RcpEditPrepPrefillTime.Size = New System.Drawing.Size(100, 25)
@@ -1242,7 +1627,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditPrepPrefillStartTime
         '
         Me.txtbx_RcpEditPrepPrefillStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepPrefillStartTime.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RcpEditPrepPrefillStartTime.Location = New System.Drawing.Point(183, 103)
         Me.txtbx_RcpEditPrepPrefillStartTime.MaxLength = 6
         Me.txtbx_RcpEditPrepPrefillStartTime.Name = "txtbx_RcpEditPrepPrefillStartTime"
         Me.txtbx_RcpEditPrepPrefillStartTime.Size = New System.Drawing.Size(100, 25)
@@ -1260,25 +1645,25 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditPressureDropTime
         '
-        Me.dsp_RcpEditPressureDropTime.Location = New System.Drawing.Point(17, 260)
+        Me.dsp_RcpEditPressureDropTime.Location = New System.Drawing.Point(17, 335)
         Me.dsp_RcpEditPressureDropTime.Name = "dsp_RcpEditPressureDropTime"
         Me.dsp_RcpEditPressureDropTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPressureDropTime.TabIndex = 25
-        Me.dsp_RcpEditPressureDropTime.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Duration (s) :"
+        Me.dsp_RcpEditPressureDropTime.Text = "Back Pressure-1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Duration (s) :"
         Me.dsp_RcpEditPressureDropTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'dsp_RcpEditPrepPressure
+        'dsp_RcpEditPrepPressureDrop
         '
-        Me.dsp_RcpEditPrepPressure.Location = New System.Drawing.Point(17, 219)
-        Me.dsp_RcpEditPrepPressure.Name = "dsp_RcpEditPrepPressure"
-        Me.dsp_RcpEditPrepPressure.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditPrepPressure.TabIndex = 26
-        Me.dsp_RcpEditPrepPressure.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
-        Me.dsp_RcpEditPrepPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_RcpEditPrepPressureDrop.Location = New System.Drawing.Point(17, 295)
+        Me.dsp_RcpEditPrepPressureDrop.Name = "dsp_RcpEditPrepPressureDrop"
+        Me.dsp_RcpEditPrepPressureDrop.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditPrepPressureDrop.TabIndex = 26
+        Me.dsp_RcpEditPrepPressureDrop.Text = "Back Pressure-1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpEditPrepPressureDrop.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpEditPrepBleed
         '
-        Me.dsp_RcpEditPrepBleed.Location = New System.Drawing.Point(17, 178)
+        Me.dsp_RcpEditPrepBleed.Location = New System.Drawing.Point(17, 255)
         Me.dsp_RcpEditPrepBleed.Name = "dsp_RcpEditPrepBleed"
         Me.dsp_RcpEditPrepBleed.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditPrepBleed.TabIndex = 27
@@ -1297,25 +1682,25 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditPrepPressureDropTime
         '
         Me.txtbx_RcpEditPrepPressureDropTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepPressureDropTime.Location = New System.Drawing.Point(183, 268)
+        Me.txtbx_RcpEditPrepPressureDropTime.Location = New System.Drawing.Point(183, 343)
         Me.txtbx_RcpEditPrepPressureDropTime.MaxLength = 6
         Me.txtbx_RcpEditPrepPressureDropTime.Name = "txtbx_RcpEditPrepPressureDropTime"
         Me.txtbx_RcpEditPrepPressureDropTime.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_RcpEditPrepPressureDropTime.TabIndex = 25
         '
-        'txtbx_RcpEditPrepPressure
+        'txtbx_RcpEditPrepPressureDrop
         '
-        Me.txtbx_RcpEditPrepPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepPressure.Location = New System.Drawing.Point(183, 227)
-        Me.txtbx_RcpEditPrepPressure.MaxLength = 6
-        Me.txtbx_RcpEditPrepPressure.Name = "txtbx_RcpEditPrepPressure"
-        Me.txtbx_RcpEditPrepPressure.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditPrepPressure.TabIndex = 23
+        Me.txtbx_RcpEditPrepPressureDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditPrepPressureDrop.Location = New System.Drawing.Point(183, 303)
+        Me.txtbx_RcpEditPrepPressureDrop.MaxLength = 6
+        Me.txtbx_RcpEditPrepPressureDrop.Name = "txtbx_RcpEditPrepPressureDrop"
+        Me.txtbx_RcpEditPrepPressureDrop.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditPrepPressureDrop.TabIndex = 23
         '
         'txtbx_RcpEditPrepBleed
         '
         Me.txtbx_RcpEditPrepBleed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepBleed.Location = New System.Drawing.Point(183, 186)
+        Me.txtbx_RcpEditPrepBleed.Location = New System.Drawing.Point(183, 263)
         Me.txtbx_RcpEditPrepBleed.MaxLength = 6
         Me.txtbx_RcpEditPrepBleed.Name = "txtbx_RcpEditPrepBleed"
         Me.txtbx_RcpEditPrepBleed.Size = New System.Drawing.Size(100, 25)
@@ -1336,15 +1721,9 @@ Partial Class FormRecipeManagement
         Me.Panel18.Controls.Add(Me.txtbx_RcpEditVerTol)
         Me.Panel18.Controls.Add(Me.dsp_RcpEditVerTol)
         Me.Panel18.Controls.Add(Me.Label19)
-        Me.Panel18.Controls.Add(Me.txtbx_RcpEditPrepFlow)
-        Me.Panel18.Controls.Add(Me.txtbx_RcpEditPrepFlowTol)
-        Me.Panel18.Controls.Add(Me.dsp_RcpEditPrepFlow)
-        Me.Panel18.Controls.Add(Me.dsp_RcpEditPrepFlowTol)
-        Me.Panel18.Controls.Add(Me.txtbx_RcpEditPrepPressureDrop)
-        Me.Panel18.Controls.Add(Me.dsp_RcpEditPressureDrop)
         Me.Panel18.Location = New System.Drawing.Point(575, 45)
         Me.Panel18.Name = "Panel18"
-        Me.Panel18.Size = New System.Drawing.Size(307, 240)
+        Me.Panel18.Size = New System.Drawing.Size(307, 125)
         Me.Panel18.TabIndex = 33
         '
         'txtbx_RcpEditVerTol
@@ -1359,7 +1738,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditVerTol
         '
-        Me.dsp_RcpEditVerTol.Location = New System.Drawing.Point(17, 53)
+        Me.dsp_RcpEditVerTol.Location = New System.Drawing.Point(17, 55)
         Me.dsp_RcpEditVerTol.Name = "dsp_RcpEditVerTol"
         Me.dsp_RcpEditVerTol.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditVerTol.TabIndex = 6
@@ -1373,62 +1752,8 @@ Partial Class FormRecipeManagement
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(200, 40)
         Me.Label19.TabIndex = 34
-        Me.Label19.Text = "Common"
+        Me.Label19.Text = "Calibration"
         Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'txtbx_RcpEditPrepFlow
-        '
-        Me.txtbx_RcpEditPrepFlow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepFlow.Location = New System.Drawing.Point(183, 104)
-        Me.txtbx_RcpEditPrepFlow.MaxLength = 6
-        Me.txtbx_RcpEditPrepFlow.Name = "txtbx_RcpEditPrepFlow"
-        Me.txtbx_RcpEditPrepFlow.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditPrepFlow.TabIndex = 22
-        '
-        'txtbx_RcpEditPrepFlowTol
-        '
-        Me.txtbx_RcpEditPrepFlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepFlowTol.Location = New System.Drawing.Point(183, 145)
-        Me.txtbx_RcpEditPrepFlowTol.MaxLength = 6
-        Me.txtbx_RcpEditPrepFlowTol.Name = "txtbx_RcpEditPrepFlowTol"
-        Me.txtbx_RcpEditPrepFlowTol.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditPrepFlowTol.TabIndex = 79
-        '
-        'dsp_RcpEditPrepFlow
-        '
-        Me.dsp_RcpEditPrepFlow.Location = New System.Drawing.Point(17, 96)
-        Me.dsp_RcpEditPrepFlow.Name = "dsp_RcpEditPrepFlow"
-        Me.dsp_RcpEditPrepFlow.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditPrepFlow.TabIndex = 26
-        Me.dsp_RcpEditPrepFlow.Text = "Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min) :"
-        Me.dsp_RcpEditPrepFlow.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'dsp_RcpEditPrepFlowTol
-        '
-        Me.dsp_RcpEditPrepFlowTol.Location = New System.Drawing.Point(17, 135)
-        Me.dsp_RcpEditPrepFlowTol.Name = "dsp_RcpEditPrepFlowTol"
-        Me.dsp_RcpEditPrepFlowTol.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditPrepFlowTol.TabIndex = 26
-        Me.dsp_RcpEditPrepFlowTol.Text = "Flowrate Tolerance (l/min) (+/-) :"
-        Me.dsp_RcpEditPrepFlowTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RcpEditPrepPressureDrop
-        '
-        Me.txtbx_RcpEditPrepPressureDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditPrepPressureDrop.Location = New System.Drawing.Point(183, 186)
-        Me.txtbx_RcpEditPrepPressureDrop.MaxLength = 6
-        Me.txtbx_RcpEditPrepPressureDrop.Name = "txtbx_RcpEditPrepPressureDrop"
-        Me.txtbx_RcpEditPrepPressureDrop.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditPrepPressureDrop.TabIndex = 24
-        '
-        'dsp_RcpEditPressureDrop
-        '
-        Me.dsp_RcpEditPressureDrop.Location = New System.Drawing.Point(17, 178)
-        Me.dsp_RcpEditPressureDrop.Name = "dsp_RcpEditPressureDrop"
-        Me.dsp_RcpEditPressureDrop.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditPressureDrop.TabIndex = 25
-        Me.dsp_RcpEditPressureDrop.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
-        Me.dsp_RcpEditPressureDrop.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'Panel7
         '
@@ -1644,7 +1969,9 @@ Partial Class FormRecipeManagement
         'panel_RcpEditFlush2
         '
         Me.panel_RcpEditFlush2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RcpEditFlush2.Controls.Add(Me.txtbx_RcpEditFlush2Pressure)
         Me.panel_RcpEditFlush2.Controls.Add(Me.dsp_RcpEditFlush2PumpMode)
+        Me.panel_RcpEditFlush2.Controls.Add(Me.dsp_RcpEditFlush2BP)
         Me.panel_RcpEditFlush2.Controls.Add(Me.panel_RcpEditFlush2PumpMode)
         Me.panel_RcpEditFlush2.Controls.Add(Me.txtbx_RcpEditFlush2RPM)
         Me.panel_RcpEditFlush2.Controls.Add(Me.dsp_RcpEditFlush2RPM)
@@ -1657,19 +1984,37 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditFlush2.Controls.Add(Me.dsp_RcpEditFlush2FlowTol)
         Me.panel_RcpEditFlush2.Controls.Add(Me.txtbx_RcpEditFlush2Flow)
         Me.panel_RcpEditFlush2.Controls.Add(Me.dsp_RcpEditFlush2Flow)
-        Me.panel_RcpEditFlush2.Location = New System.Drawing.Point(900, 411)
+        Me.panel_RcpEditFlush2.Location = New System.Drawing.Point(900, 416)
         Me.panel_RcpEditFlush2.Name = "panel_RcpEditFlush2"
-        Me.panel_RcpEditFlush2.Size = New System.Drawing.Size(307, 360)
+        Me.panel_RcpEditFlush2.Size = New System.Drawing.Size(307, 365)
         Me.panel_RcpEditFlush2.TabIndex = 27
+        '
+        'txtbx_RcpEditFlush2Pressure
+        '
+        Me.txtbx_RcpEditFlush2Pressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditFlush2Pressure.Location = New System.Drawing.Point(183, 223)
+        Me.txtbx_RcpEditFlush2Pressure.MaxLength = 6
+        Me.txtbx_RcpEditFlush2Pressure.Name = "txtbx_RcpEditFlush2Pressure"
+        Me.txtbx_RcpEditFlush2Pressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditFlush2Pressure.TabIndex = 86
         '
         'dsp_RcpEditFlush2PumpMode
         '
-        Me.dsp_RcpEditFlush2PumpMode.Location = New System.Drawing.Point(17, 219)
+        Me.dsp_RcpEditFlush2PumpMode.Location = New System.Drawing.Point(17, 265)
         Me.dsp_RcpEditFlush2PumpMode.Name = "dsp_RcpEditFlush2PumpMode"
         Me.dsp_RcpEditFlush2PumpMode.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditFlush2PumpMode.TabIndex = 84
         Me.dsp_RcpEditFlush2PumpMode.Text = "Pump Mode" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selection :"
         Me.dsp_RcpEditFlush2PumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpEditFlush2BP
+        '
+        Me.dsp_RcpEditFlush2BP.Location = New System.Drawing.Point(17, 215)
+        Me.dsp_RcpEditFlush2BP.Name = "dsp_RcpEditFlush2BP"
+        Me.dsp_RcpEditFlush2BP.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditFlush2BP.TabIndex = 87
+        Me.dsp_RcpEditFlush2BP.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpEditFlush2BP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'panel_RcpEditFlush2PumpMode
         '
@@ -1677,7 +2022,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditFlush2PumpMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panel_RcpEditFlush2PumpMode.Controls.Add(Me.rdbtn_RcpEditFlush2PumpSpeed)
         Me.panel_RcpEditFlush2PumpMode.Controls.Add(Me.rdbtn_RcpEditFlush2PumpProcess)
-        Me.panel_RcpEditFlush2PumpMode.Location = New System.Drawing.Point(183, 227)
+        Me.panel_RcpEditFlush2PumpMode.Location = New System.Drawing.Point(183, 258)
         Me.panel_RcpEditFlush2PumpMode.Name = "panel_RcpEditFlush2PumpMode"
         Me.panel_RcpEditFlush2PumpMode.Size = New System.Drawing.Size(100, 55)
         Me.panel_RcpEditFlush2PumpMode.TabIndex = 85
@@ -1707,7 +2052,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditFlush2RPM
         '
         Me.txtbx_RcpEditFlush2RPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditFlush2RPM.Location = New System.Drawing.Point(183, 298)
+        Me.txtbx_RcpEditFlush2RPM.Location = New System.Drawing.Point(183, 323)
         Me.txtbx_RcpEditFlush2RPM.MaxLength = 6
         Me.txtbx_RcpEditFlush2RPM.Name = "txtbx_RcpEditFlush2RPM"
         Me.txtbx_RcpEditFlush2RPM.Size = New System.Drawing.Size(100, 25)
@@ -1715,7 +2060,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditFlush2RPM
         '
-        Me.dsp_RcpEditFlush2RPM.Location = New System.Drawing.Point(17, 290)
+        Me.dsp_RcpEditFlush2RPM.Location = New System.Drawing.Point(17, 315)
         Me.dsp_RcpEditFlush2RPM.Name = "dsp_RcpEditFlush2RPM"
         Me.dsp_RcpEditFlush2RPM.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditFlush2RPM.TabIndex = 76
@@ -1738,7 +2083,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditFlush2Time
         '
         Me.txtbx_RcpEditFlush2Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditFlush2Time.Location = New System.Drawing.Point(183, 186)
+        Me.txtbx_RcpEditFlush2Time.Location = New System.Drawing.Point(183, 183)
         Me.txtbx_RcpEditFlush2Time.MaxLength = 6
         Me.txtbx_RcpEditFlush2Time.Name = "txtbx_RcpEditFlush2Time"
         Me.txtbx_RcpEditFlush2Time.Size = New System.Drawing.Size(100, 25)
@@ -1746,7 +2091,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditFlush2Time
         '
-        Me.dsp_RcpEditFlush2Time.Location = New System.Drawing.Point(17, 178)
+        Me.dsp_RcpEditFlush2Time.Location = New System.Drawing.Point(17, 175)
         Me.dsp_RcpEditFlush2Time.Name = "dsp_RcpEditFlush2Time"
         Me.dsp_RcpEditFlush2Time.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditFlush2Time.TabIndex = 14
@@ -1756,7 +2101,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditFlush2Stabilize
         '
         Me.txtbx_RcpEditFlush2Stabilize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditFlush2Stabilize.Location = New System.Drawing.Point(183, 145)
+        Me.txtbx_RcpEditFlush2Stabilize.Location = New System.Drawing.Point(183, 143)
         Me.txtbx_RcpEditFlush2Stabilize.MaxLength = 6
         Me.txtbx_RcpEditFlush2Stabilize.Name = "txtbx_RcpEditFlush2Stabilize"
         Me.txtbx_RcpEditFlush2Stabilize.Size = New System.Drawing.Size(100, 25)
@@ -1764,7 +2109,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditFlush2Stabilize
         '
-        Me.dsp_RcpEditFlush2Stabilize.Location = New System.Drawing.Point(17, 137)
+        Me.dsp_RcpEditFlush2Stabilize.Location = New System.Drawing.Point(17, 135)
         Me.dsp_RcpEditFlush2Stabilize.Name = "dsp_RcpEditFlush2Stabilize"
         Me.dsp_RcpEditFlush2Stabilize.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditFlush2Stabilize.TabIndex = 12
@@ -1774,7 +2119,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditFlush2FlowTol
         '
         Me.txtbx_RcpEditFlush2FlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditFlush2FlowTol.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RcpEditFlush2FlowTol.Location = New System.Drawing.Point(183, 103)
         Me.txtbx_RcpEditFlush2FlowTol.MaxLength = 6
         Me.txtbx_RcpEditFlush2FlowTol.Name = "txtbx_RcpEditFlush2FlowTol"
         Me.txtbx_RcpEditFlush2FlowTol.Size = New System.Drawing.Size(100, 25)
@@ -1782,7 +2127,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditFlush2FlowTol
         '
-        Me.dsp_RcpEditFlush2FlowTol.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RcpEditFlush2FlowTol.Location = New System.Drawing.Point(17, 95)
         Me.dsp_RcpEditFlush2FlowTol.Name = "dsp_RcpEditFlush2FlowTol"
         Me.dsp_RcpEditFlush2FlowTol.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditFlush2FlowTol.TabIndex = 8
@@ -1869,210 +2214,12 @@ Partial Class FormRecipeManagement
         Me.checkbx_EditDrain1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.checkbx_EditDrain1.UseVisualStyleBackColor = True
         '
-        'panel_RcpEditDPTest1
-        '
-        Me.panel_RcpEditDPTest1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPTestPumpMode)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.panel_RcpEditDPTestPumpMode)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPTestRPM)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPTestRPM)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.checkbx_EditDPTest2)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.checkbx_EditDPTest1)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPPoints)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPPoints)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPUpLimit)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPUpLimit)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPLowLimit)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPLowLimit)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPTime)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPTime)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.txtbx_RcpEditDPStabilize)
-        Me.panel_RcpEditDPTest1.Controls.Add(Me.dsp_RcpEditDPStabilize)
-        Me.panel_RcpEditDPTest1.Location = New System.Drawing.Point(1224, 45)
-        Me.panel_RcpEditDPTest1.Name = "panel_RcpEditDPTest1"
-        Me.panel_RcpEditDPTest1.Size = New System.Drawing.Size(307, 462)
-        Me.panel_RcpEditDPTest1.TabIndex = 29
-        '
-        'dsp_RcpEditDPTestPumpMode
-        '
-        Me.dsp_RcpEditDPTestPumpMode.Location = New System.Drawing.Point(17, 303)
-        Me.dsp_RcpEditDPTestPumpMode.Name = "dsp_RcpEditDPTestPumpMode"
-        Me.dsp_RcpEditDPTestPumpMode.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditDPTestPumpMode.TabIndex = 84
-        Me.dsp_RcpEditDPTestPumpMode.Text = "Pump Mode" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selection :"
-        Me.dsp_RcpEditDPTestPumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'panel_RcpEditDPTestPumpMode
-        '
-        Me.panel_RcpEditDPTestPumpMode.BackColor = System.Drawing.SystemColors.Window
-        Me.panel_RcpEditDPTestPumpMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panel_RcpEditDPTestPumpMode.Controls.Add(Me.rdbtn_RcpEditDPTestPumpSpeed)
-        Me.panel_RcpEditDPTestPumpMode.Controls.Add(Me.rdbtn_RcpEditDPTestPumpProcess)
-        Me.panel_RcpEditDPTestPumpMode.Location = New System.Drawing.Point(183, 311)
-        Me.panel_RcpEditDPTestPumpMode.Name = "panel_RcpEditDPTestPumpMode"
-        Me.panel_RcpEditDPTestPumpMode.Size = New System.Drawing.Size(100, 55)
-        Me.panel_RcpEditDPTestPumpMode.TabIndex = 85
-        '
-        'rdbtn_RcpEditDPTestPumpSpeed
-        '
-        Me.rdbtn_RcpEditDPTestPumpSpeed.AutoSize = True
-        Me.rdbtn_RcpEditDPTestPumpSpeed.Location = New System.Drawing.Point(6, 29)
-        Me.rdbtn_RcpEditDPTestPumpSpeed.Name = "rdbtn_RcpEditDPTestPumpSpeed"
-        Me.rdbtn_RcpEditDPTestPumpSpeed.Size = New System.Drawing.Size(63, 21)
-        Me.rdbtn_RcpEditDPTestPumpSpeed.TabIndex = 0
-        Me.rdbtn_RcpEditDPTestPumpSpeed.TabStop = True
-        Me.rdbtn_RcpEditDPTestPumpSpeed.Text = "Speed"
-        Me.rdbtn_RcpEditDPTestPumpSpeed.UseVisualStyleBackColor = True
-        '
-        'rdbtn_RcpEditDPTestPumpProcess
-        '
-        Me.rdbtn_RcpEditDPTestPumpProcess.AutoSize = True
-        Me.rdbtn_RcpEditDPTestPumpProcess.Location = New System.Drawing.Point(6, 3)
-        Me.rdbtn_RcpEditDPTestPumpProcess.Name = "rdbtn_RcpEditDPTestPumpProcess"
-        Me.rdbtn_RcpEditDPTestPumpProcess.Size = New System.Drawing.Size(71, 21)
-        Me.rdbtn_RcpEditDPTestPumpProcess.TabIndex = 0
-        Me.rdbtn_RcpEditDPTestPumpProcess.TabStop = True
-        Me.rdbtn_RcpEditDPTestPumpProcess.Text = "Process"
-        Me.rdbtn_RcpEditDPTestPumpProcess.UseVisualStyleBackColor = True
-        '
-        'txtbx_RcpEditDPTestRPM
-        '
-        Me.txtbx_RcpEditDPTestRPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditDPTestRPM.Location = New System.Drawing.Point(183, 382)
-        Me.txtbx_RcpEditDPTestRPM.MaxLength = 6
-        Me.txtbx_RcpEditDPTestRPM.Name = "txtbx_RcpEditDPTestRPM"
-        Me.txtbx_RcpEditDPTestRPM.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditDPTestRPM.TabIndex = 75
-        '
-        'dsp_RcpEditDPTestRPM
-        '
-        Me.dsp_RcpEditDPTestRPM.Location = New System.Drawing.Point(17, 374)
-        Me.dsp_RcpEditDPTestRPM.Name = "dsp_RcpEditDPTestRPM"
-        Me.dsp_RcpEditDPTestRPM.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditDPTestRPM.TabIndex = 76
-        Me.dsp_RcpEditDPTestRPM.Text = "Pump Speed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(RPM) :"
-        Me.dsp_RcpEditDPTestRPM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'checkbx_EditDPTest2
-        '
-        Me.checkbx_EditDPTest2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.checkbx_EditDPTest2.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.checkbx_EditDPTest2.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_EditDPTest2.Location = New System.Drawing.Point(49, 53)
-        Me.checkbx_EditDPTest2.Name = "checkbx_EditDPTest2"
-        Me.checkbx_EditDPTest2.Size = New System.Drawing.Size(200, 40)
-        Me.checkbx_EditDPTest2.TabIndex = 41
-        Me.checkbx_EditDPTest2.Text = "DP Test-2 Enable"
-        Me.checkbx_EditDPTest2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.checkbx_EditDPTest2.UseVisualStyleBackColor = True
-        '
-        'checkbx_EditDPTest1
-        '
-        Me.checkbx_EditDPTest1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.checkbx_EditDPTest1.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.checkbx_EditDPTest1.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.checkbx_EditDPTest1.Location = New System.Drawing.Point(49, 10)
-        Me.checkbx_EditDPTest1.Name = "checkbx_EditDPTest1"
-        Me.checkbx_EditDPTest1.Size = New System.Drawing.Size(200, 40)
-        Me.checkbx_EditDPTest1.TabIndex = 40
-        Me.checkbx_EditDPTest1.Text = "DP Test-1 Enable"
-        Me.checkbx_EditDPTest1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.checkbx_EditDPTest1.UseVisualStyleBackColor = True
-        '
-        'txtbx_RcpEditDPPoints
-        '
-        Me.txtbx_RcpEditDPPoints.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditDPPoints.Location = New System.Drawing.Point(183, 270)
-        Me.txtbx_RcpEditDPPoints.MaxLength = 6
-        Me.txtbx_RcpEditDPPoints.Name = "txtbx_RcpEditDPPoints"
-        Me.txtbx_RcpEditDPPoints.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditDPPoints.TabIndex = 49
-        '
-        'dsp_RcpEditDPPoints
-        '
-        Me.dsp_RcpEditDPPoints.Location = New System.Drawing.Point(17, 262)
-        Me.dsp_RcpEditDPPoints.Name = "dsp_RcpEditDPPoints"
-        Me.dsp_RcpEditDPPoints.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditDPPoints.TabIndex = 20
-        Me.dsp_RcpEditDPPoints.Text = "Test Points" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Count) :"
-        Me.dsp_RcpEditDPPoints.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RcpEditDPUpLimit
-        '
-        Me.txtbx_RcpEditDPUpLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditDPUpLimit.Location = New System.Drawing.Point(183, 229)
-        Me.txtbx_RcpEditDPUpLimit.MaxLength = 6
-        Me.txtbx_RcpEditDPUpLimit.Name = "txtbx_RcpEditDPUpLimit"
-        Me.txtbx_RcpEditDPUpLimit.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditDPUpLimit.TabIndex = 48
-        '
-        'dsp_RcpEditDPUpLimit
-        '
-        Me.dsp_RcpEditDPUpLimit.Location = New System.Drawing.Point(17, 221)
-        Me.dsp_RcpEditDPUpLimit.Name = "dsp_RcpEditDPUpLimit"
-        Me.dsp_RcpEditDPUpLimit.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditDPUpLimit.TabIndex = 18
-        Me.dsp_RcpEditDPUpLimit.Text = "DP Upper Limit" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
-        Me.dsp_RcpEditDPUpLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RcpEditDPLowLimit
-        '
-        Me.txtbx_RcpEditDPLowLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditDPLowLimit.Location = New System.Drawing.Point(183, 188)
-        Me.txtbx_RcpEditDPLowLimit.MaxLength = 6
-        Me.txtbx_RcpEditDPLowLimit.Name = "txtbx_RcpEditDPLowLimit"
-        Me.txtbx_RcpEditDPLowLimit.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditDPLowLimit.TabIndex = 47
-        '
-        'dsp_RcpEditDPLowLimit
-        '
-        Me.dsp_RcpEditDPLowLimit.Location = New System.Drawing.Point(17, 180)
-        Me.dsp_RcpEditDPLowLimit.Name = "dsp_RcpEditDPLowLimit"
-        Me.dsp_RcpEditDPLowLimit.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditDPLowLimit.TabIndex = 16
-        Me.dsp_RcpEditDPLowLimit.Text = "DP Lower Limit" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)  :"
-        Me.dsp_RcpEditDPLowLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RcpEditDPTime
-        '
-        Me.txtbx_RcpEditDPTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditDPTime.Location = New System.Drawing.Point(183, 147)
-        Me.txtbx_RcpEditDPTime.MaxLength = 6
-        Me.txtbx_RcpEditDPTime.Name = "txtbx_RcpEditDPTime"
-        Me.txtbx_RcpEditDPTime.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditDPTime.TabIndex = 46
-        '
-        'dsp_RcpEditDPTime
-        '
-        Me.dsp_RcpEditDPTime.Location = New System.Drawing.Point(17, 139)
-        Me.dsp_RcpEditDPTime.Name = "dsp_RcpEditDPTime"
-        Me.dsp_RcpEditDPTime.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditDPTime.TabIndex = 14
-        Me.dsp_RcpEditDPTime.Text = "DP Test Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
-        Me.dsp_RcpEditDPTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RcpEditDPStabilize
-        '
-        Me.txtbx_RcpEditDPStabilize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditDPStabilize.Location = New System.Drawing.Point(183, 106)
-        Me.txtbx_RcpEditDPStabilize.MaxLength = 6
-        Me.txtbx_RcpEditDPStabilize.Name = "txtbx_RcpEditDPStabilize"
-        Me.txtbx_RcpEditDPStabilize.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpEditDPStabilize.TabIndex = 45
-        '
-        'dsp_RcpEditDPStabilize
-        '
-        Me.dsp_RcpEditDPStabilize.Location = New System.Drawing.Point(17, 98)
-        Me.dsp_RcpEditDPStabilize.Name = "dsp_RcpEditDPStabilize"
-        Me.dsp_RcpEditDPStabilize.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpEditDPStabilize.TabIndex = 12
-        Me.dsp_RcpEditDPStabilize.Text = "Stabilize Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
-        Me.dsp_RcpEditDPStabilize.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'panel_RcpEditFlush1
         '
         Me.panel_RcpEditFlush1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RcpEditFlush1.Controls.Add(Me.txtbx_RcpEditFlush1Pressure)
         Me.panel_RcpEditFlush1.Controls.Add(Me.dsp_RcpEditFlush1PumpMode)
+        Me.panel_RcpEditFlush1.Controls.Add(Me.dsp_RcpEditFlush1BP)
         Me.panel_RcpEditFlush1.Controls.Add(Me.panel_RcpEditFlush1PumpMode)
         Me.panel_RcpEditFlush1.Controls.Add(Me.txtbx_RcpEditFlush1RPM)
         Me.panel_RcpEditFlush1.Controls.Add(Me.dsp_RcpEditFlush1RPM)
@@ -2087,17 +2234,35 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditFlush1.Controls.Add(Me.dsp_RcpEditFlush1Flow)
         Me.panel_RcpEditFlush1.Location = New System.Drawing.Point(900, 45)
         Me.panel_RcpEditFlush1.Name = "panel_RcpEditFlush1"
-        Me.panel_RcpEditFlush1.Size = New System.Drawing.Size(307, 360)
+        Me.panel_RcpEditFlush1.Size = New System.Drawing.Size(307, 365)
         Me.panel_RcpEditFlush1.TabIndex = 26
+        '
+        'txtbx_RcpEditFlush1Pressure
+        '
+        Me.txtbx_RcpEditFlush1Pressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpEditFlush1Pressure.Location = New System.Drawing.Point(183, 223)
+        Me.txtbx_RcpEditFlush1Pressure.MaxLength = 6
+        Me.txtbx_RcpEditFlush1Pressure.Name = "txtbx_RcpEditFlush1Pressure"
+        Me.txtbx_RcpEditFlush1Pressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpEditFlush1Pressure.TabIndex = 77
         '
         'dsp_RcpEditFlush1PumpMode
         '
-        Me.dsp_RcpEditFlush1PumpMode.Location = New System.Drawing.Point(17, 219)
+        Me.dsp_RcpEditFlush1PumpMode.Location = New System.Drawing.Point(17, 265)
         Me.dsp_RcpEditFlush1PumpMode.Name = "dsp_RcpEditFlush1PumpMode"
         Me.dsp_RcpEditFlush1PumpMode.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditFlush1PumpMode.TabIndex = 84
         Me.dsp_RcpEditFlush1PumpMode.Text = "Pump Mode" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selection :"
         Me.dsp_RcpEditFlush1PumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpEditFlush1BP
+        '
+        Me.dsp_RcpEditFlush1BP.Location = New System.Drawing.Point(17, 215)
+        Me.dsp_RcpEditFlush1BP.Name = "dsp_RcpEditFlush1BP"
+        Me.dsp_RcpEditFlush1BP.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpEditFlush1BP.TabIndex = 78
+        Me.dsp_RcpEditFlush1BP.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpEditFlush1BP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'panel_RcpEditFlush1PumpMode
         '
@@ -2105,7 +2270,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditFlush1PumpMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panel_RcpEditFlush1PumpMode.Controls.Add(Me.rdbtn_RcpEditFlush1PumpSpeed)
         Me.panel_RcpEditFlush1PumpMode.Controls.Add(Me.rdbtn_RcpEditFlush1PumpProcess)
-        Me.panel_RcpEditFlush1PumpMode.Location = New System.Drawing.Point(183, 227)
+        Me.panel_RcpEditFlush1PumpMode.Location = New System.Drawing.Point(183, 258)
         Me.panel_RcpEditFlush1PumpMode.Name = "panel_RcpEditFlush1PumpMode"
         Me.panel_RcpEditFlush1PumpMode.Size = New System.Drawing.Size(100, 55)
         Me.panel_RcpEditFlush1PumpMode.TabIndex = 85
@@ -2135,7 +2300,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditFlush1RPM
         '
         Me.txtbx_RcpEditFlush1RPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditFlush1RPM.Location = New System.Drawing.Point(183, 298)
+        Me.txtbx_RcpEditFlush1RPM.Location = New System.Drawing.Point(183, 323)
         Me.txtbx_RcpEditFlush1RPM.MaxLength = 6
         Me.txtbx_RcpEditFlush1RPM.Name = "txtbx_RcpEditFlush1RPM"
         Me.txtbx_RcpEditFlush1RPM.Size = New System.Drawing.Size(100, 25)
@@ -2143,7 +2308,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditFlush1RPM
         '
-        Me.dsp_RcpEditFlush1RPM.Location = New System.Drawing.Point(17, 290)
+        Me.dsp_RcpEditFlush1RPM.Location = New System.Drawing.Point(17, 315)
         Me.dsp_RcpEditFlush1RPM.Name = "dsp_RcpEditFlush1RPM"
         Me.dsp_RcpEditFlush1RPM.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditFlush1RPM.TabIndex = 76
@@ -2153,7 +2318,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditFlush1Time
         '
         Me.txtbx_RcpEditFlush1Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditFlush1Time.Location = New System.Drawing.Point(183, 186)
+        Me.txtbx_RcpEditFlush1Time.Location = New System.Drawing.Point(183, 183)
         Me.txtbx_RcpEditFlush1Time.MaxLength = 6
         Me.txtbx_RcpEditFlush1Time.Name = "txtbx_RcpEditFlush1Time"
         Me.txtbx_RcpEditFlush1Time.Size = New System.Drawing.Size(100, 25)
@@ -2161,7 +2326,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditFlush1Time
         '
-        Me.dsp_RcpEditFlush1Time.Location = New System.Drawing.Point(17, 178)
+        Me.dsp_RcpEditFlush1Time.Location = New System.Drawing.Point(17, 175)
         Me.dsp_RcpEditFlush1Time.Name = "dsp_RcpEditFlush1Time"
         Me.dsp_RcpEditFlush1Time.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditFlush1Time.TabIndex = 14
@@ -2171,7 +2336,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditFlush1Stabilize
         '
         Me.txtbx_RcpEditFlush1Stabilize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditFlush1Stabilize.Location = New System.Drawing.Point(183, 145)
+        Me.txtbx_RcpEditFlush1Stabilize.Location = New System.Drawing.Point(183, 143)
         Me.txtbx_RcpEditFlush1Stabilize.MaxLength = 6
         Me.txtbx_RcpEditFlush1Stabilize.Name = "txtbx_RcpEditFlush1Stabilize"
         Me.txtbx_RcpEditFlush1Stabilize.Size = New System.Drawing.Size(100, 25)
@@ -2179,7 +2344,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditFlush1Stabilize
         '
-        Me.dsp_RcpEditFlush1Stabilize.Location = New System.Drawing.Point(17, 137)
+        Me.dsp_RcpEditFlush1Stabilize.Location = New System.Drawing.Point(17, 135)
         Me.dsp_RcpEditFlush1Stabilize.Name = "dsp_RcpEditFlush1Stabilize"
         Me.dsp_RcpEditFlush1Stabilize.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditFlush1Stabilize.TabIndex = 12
@@ -2189,7 +2354,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpEditFlush1FlowTol
         '
         Me.txtbx_RcpEditFlush1FlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpEditFlush1FlowTol.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RcpEditFlush1FlowTol.Location = New System.Drawing.Point(183, 103)
         Me.txtbx_RcpEditFlush1FlowTol.MaxLength = 6
         Me.txtbx_RcpEditFlush1FlowTol.Name = "txtbx_RcpEditFlush1FlowTol"
         Me.txtbx_RcpEditFlush1FlowTol.Size = New System.Drawing.Size(100, 25)
@@ -2197,7 +2362,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpEditFlush1FlowTol
         '
-        Me.dsp_RcpEditFlush1FlowTol.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RcpEditFlush1FlowTol.Location = New System.Drawing.Point(17, 95)
         Me.dsp_RcpEditFlush1FlowTol.Name = "dsp_RcpEditFlush1FlowTol"
         Me.dsp_RcpEditFlush1FlowTol.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpEditFlush1FlowTol.TabIndex = 8
@@ -2250,6 +2415,7 @@ Partial Class FormRecipeManagement
         '
         'panel_Edit
         '
+        Me.panel_Edit.Controls.Add(Me.Panel11)
         Me.panel_Edit.Controls.Add(Me.Panel1)
         Me.panel_Edit.Controls.Add(Me.btn_EditDiscard)
         Me.panel_Edit.Controls.Add(Me.btn_RcpEditSave)
@@ -2257,7 +2423,7 @@ Partial Class FormRecipeManagement
         Me.panel_Edit.Dock = System.Windows.Forms.DockStyle.Left
         Me.panel_Edit.Location = New System.Drawing.Point(0, 0)
         Me.panel_Edit.Name = "panel_Edit"
-        Me.panel_Edit.Size = New System.Drawing.Size(562, 787)
+        Me.panel_Edit.Size = New System.Drawing.Size(562, 800)
         Me.panel_Edit.TabIndex = 3
         '
         'Panel1
@@ -2267,9 +2433,11 @@ Partial Class FormRecipeManagement
         Me.Panel1.Controls.Add(Me.btn_RcpDuplicate)
         Me.Panel1.Controls.Add(Me.txtbx_RcpDupNewRecipeID)
         Me.Panel1.Controls.Add(Me.dsp_RcpDupNewRecipeID)
-        Me.Panel1.Controls.Add(Me.dsp_RcpDupNewType)
-        Me.Panel1.Controls.Add(Me.dsp_RcpDupSelRecipe)
         Me.Panel1.Controls.Add(Me.Cmbx_RcpDupNewType)
+        Me.Panel1.Controls.Add(Me.dsp_RcpDupNewType)
+        Me.Panel1.Controls.Add(Me.Label21)
+        Me.Panel1.Controls.Add(Me.dsp_RcpDupSelRecipe)
+        Me.Panel1.Controls.Add(Me.Cmbx_RcpDupNewPartID)
         Me.Panel1.Controls.Add(Me.cmbx_RcpDupSelRecipe)
         Me.Panel1.Location = New System.Drawing.Point(3, 227)
         Me.Panel1.Name = "Panel1"
@@ -2302,7 +2470,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpDupNewRecipeID
         '
         Me.txtbx_RcpDupNewRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_RcpDupNewRecipeID.Location = New System.Drawing.Point(152, 147)
+        Me.txtbx_RcpDupNewRecipeID.Location = New System.Drawing.Point(152, 192)
         Me.txtbx_RcpDupNewRecipeID.MaxLength = 20
         Me.txtbx_RcpDupNewRecipeID.Name = "txtbx_RcpDupNewRecipeID"
         Me.txtbx_RcpDupNewRecipeID.Size = New System.Drawing.Size(250, 29)
@@ -2311,22 +2479,42 @@ Partial Class FormRecipeManagement
         'dsp_RcpDupNewRecipeID
         '
         Me.dsp_RcpDupNewRecipeID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpDupNewRecipeID.Location = New System.Drawing.Point(21, 148)
+        Me.dsp_RcpDupNewRecipeID.Location = New System.Drawing.Point(21, 193)
         Me.dsp_RcpDupNewRecipeID.Name = "dsp_RcpDupNewRecipeID"
         Me.dsp_RcpDupNewRecipeID.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpDupNewRecipeID.TabIndex = 104
         Me.dsp_RcpDupNewRecipeID.Text = "New Recipe ID :"
         Me.dsp_RcpDupNewRecipeID.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'Cmbx_RcpDupNewType
+        '
+        Me.Cmbx_RcpDupNewType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.Cmbx_RcpDupNewType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cmbx_RcpDupNewType.FormattingEnabled = True
+        Me.Cmbx_RcpDupNewType.Location = New System.Drawing.Point(152, 147)
+        Me.Cmbx_RcpDupNewType.Name = "Cmbx_RcpDupNewType"
+        Me.Cmbx_RcpDupNewType.Size = New System.Drawing.Size(250, 29)
+        Me.Cmbx_RcpDupNewType.TabIndex = 16
+        '
         'dsp_RcpDupNewType
         '
         Me.dsp_RcpDupNewType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_RcpDupNewType.Location = New System.Drawing.Point(21, 103)
+        Me.dsp_RcpDupNewType.Location = New System.Drawing.Point(21, 148)
         Me.dsp_RcpDupNewType.Name = "dsp_RcpDupNewType"
         Me.dsp_RcpDupNewType.Size = New System.Drawing.Size(125, 25)
         Me.dsp_RcpDupNewType.TabIndex = 104
         Me.dsp_RcpDupNewType.Text = "New Type :"
         Me.dsp_RcpDupNewType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label21
+        '
+        Me.Label21.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(21, 103)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(125, 25)
+        Me.Label21.TabIndex = 104
+        Me.Label21.Text = "New Part ID :"
+        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpDupSelRecipe
         '
@@ -2338,15 +2526,17 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpDupSelRecipe.Text = "Recipe ID :"
         Me.dsp_RcpDupSelRecipe.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Cmbx_RcpDupNewType
+        'Cmbx_RcpDupNewPartID
         '
-        Me.Cmbx_RcpDupNewType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.Cmbx_RcpDupNewType.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Cmbx_RcpDupNewType.FormattingEnabled = True
-        Me.Cmbx_RcpDupNewType.Location = New System.Drawing.Point(152, 102)
-        Me.Cmbx_RcpDupNewType.Name = "Cmbx_RcpDupNewType"
-        Me.Cmbx_RcpDupNewType.Size = New System.Drawing.Size(250, 29)
-        Me.Cmbx_RcpDupNewType.TabIndex = 16
+        Me.Cmbx_RcpDupNewPartID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.Cmbx_RcpDupNewPartID.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Cmbx_RcpDupNewPartID.FormattingEnabled = True
+        Me.Cmbx_RcpDupNewPartID.IntegralHeight = False
+        Me.Cmbx_RcpDupNewPartID.Location = New System.Drawing.Point(152, 102)
+        Me.Cmbx_RcpDupNewPartID.MaxDropDownItems = 11
+        Me.Cmbx_RcpDupNewPartID.Name = "Cmbx_RcpDupNewPartID"
+        Me.Cmbx_RcpDupNewPartID.Size = New System.Drawing.Size(250, 29)
+        Me.Cmbx_RcpDupNewPartID.TabIndex = 16
         '
         'cmbx_RcpDupSelRecipe
         '
@@ -2365,7 +2555,7 @@ Partial Class FormRecipeManagement
         Me.btn_EditDiscard.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.btn_EditDiscard.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_EditDiscard.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_EditDiscard.Location = New System.Drawing.Point(304, 675)
+        Me.btn_EditDiscard.Location = New System.Drawing.Point(304, 719)
         Me.btn_EditDiscard.Name = "btn_EditDiscard"
         Me.btn_EditDiscard.Size = New System.Drawing.Size(200, 60)
         Me.btn_EditDiscard.TabIndex = 101
@@ -2377,7 +2567,7 @@ Partial Class FormRecipeManagement
         Me.btn_RcpEditSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
         Me.btn_RcpEditSave.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_RcpEditSave.ForeColor = System.Drawing.SystemColors.Window
-        Me.btn_RcpEditSave.Location = New System.Drawing.Point(63, 675)
+        Me.btn_RcpEditSave.Location = New System.Drawing.Point(63, 719)
         Me.btn_RcpEditSave.Name = "btn_RcpEditSave"
         Me.btn_RcpEditSave.Size = New System.Drawing.Size(200, 60)
         Me.btn_RcpEditSave.TabIndex = 100
@@ -2501,6 +2691,7 @@ Partial Class FormRecipeManagement
         'tabpg_Create
         '
         Me.tabpg_Create.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabpg_Create.Controls.Add(Me.Panel8)
         Me.tabpg_Create.Controls.Add(Me.Panel10)
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateDrain4)
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateFlush1)
@@ -2513,13 +2704,81 @@ Partial Class FormRecipeManagement
         Me.tabpg_Create.Controls.Add(Me.panel_RcpCreateDrain1)
         Me.tabpg_Create.Controls.Add(Me.dsp_RcpCreateRcpParameters)
         Me.tabpg_Create.Controls.Add(Me.panel_Create)
-        Me.tabpg_Create.Controls.Add(Me.Panel8)
         Me.tabpg_Create.Location = New System.Drawing.Point(4, 44)
         Me.tabpg_Create.Name = "tabpg_Create"
-        Me.tabpg_Create.Size = New System.Drawing.Size(1872, 789)
+        Me.tabpg_Create.Size = New System.Drawing.Size(1872, 802)
         Me.tabpg_Create.TabIndex = 5
         Me.tabpg_Create.Text = "Create"
         Me.tabpg_Create.UseVisualStyleBackColor = True
+        '
+        'Panel8
+        '
+        Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel8.Controls.Add(Me.Label20)
+        Me.Panel8.Controls.Add(Me.txtbx_RcpCreateVerTol)
+        Me.Panel8.Controls.Add(Me.dsp_RcpCreateVerTol)
+        Me.Panel8.Location = New System.Drawing.Point(575, 45)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(307, 125)
+        Me.Panel8.TabIndex = 24
+        '
+        'Label20
+        '
+        Me.Label20.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
+        Me.Label20.Location = New System.Drawing.Point(49, 8)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(200, 40)
+        Me.Label20.TabIndex = 34
+        Me.Label20.Text = "Calibration"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txtbx_RcpCreateVerTol
+        '
+        Me.txtbx_RcpCreateVerTol.BackColor = System.Drawing.SystemColors.Window
+        Me.txtbx_RcpCreateVerTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreateVerTol.Location = New System.Drawing.Point(183, 63)
+        Me.txtbx_RcpCreateVerTol.MaxLength = 6
+        Me.txtbx_RcpCreateVerTol.Name = "txtbx_RcpCreateVerTol"
+        Me.txtbx_RcpCreateVerTol.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreateVerTol.TabIndex = 40
+        '
+        'dsp_RcpCreateVerTol
+        '
+        Me.dsp_RcpCreateVerTol.Location = New System.Drawing.Point(17, 55)
+        Me.dsp_RcpCreateVerTol.Name = "dsp_RcpCreateVerTol"
+        Me.dsp_RcpCreateVerTol.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreateVerTol.TabIndex = 6
+        Me.dsp_RcpCreateVerTol.Text = "Verification Tolerance (kPa) (+/-) :"
+        Me.dsp_RcpCreateVerTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Panel10
+        '
+        Me.Panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel10.Controls.Add(Me.TextBox2)
+        Me.Panel10.Controls.Add(Me.Label5)
+        Me.Panel10.Location = New System.Drawing.Point(1548, 669)
+        Me.Panel10.Name = "Panel10"
+        Me.Panel10.Size = New System.Drawing.Size(307, 112)
+        Me.Panel10.TabIndex = 39
+        '
+        'TextBox2
+        '
+        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox2.Location = New System.Drawing.Point(183, 35)
+        Me.TextBox2.MaxLength = 6
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(100, 25)
+        Me.TextBox2.TabIndex = 81
+        '
+        'Label5
+        '
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(17, 27)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(150, 40)
+        Me.Label5.TabIndex = 82
+        Me.Label5.Text = "Total Cycle Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'panel_RcpCreateDrain4
         '
@@ -2590,7 +2849,9 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateFlush1.Controls.Add(Me.dsp_RcpCreateFlush1PumpMode)
         Me.panel_RcpCreateFlush1.Controls.Add(Me.dsp_RcpCreateFlush1Time)
         Me.panel_RcpCreateFlush1.Controls.Add(Me.txtbx_RcpCreateFlush1Stabilize)
+        Me.panel_RcpCreateFlush1.Controls.Add(Me.dsp_RcpCreateFlush1BP)
         Me.panel_RcpCreateFlush1.Controls.Add(Me.dsp_RcpCreateFlush1Stabilize)
+        Me.panel_RcpCreateFlush1.Controls.Add(Me.txtbx_RcpCreateFlush1Pressure)
         Me.panel_RcpCreateFlush1.Controls.Add(Me.txtbx_RcpCreateFlush1FlowTol)
         Me.panel_RcpCreateFlush1.Controls.Add(Me.dsp_RcpCreateFlush1FlowTol)
         Me.panel_RcpCreateFlush1.Controls.Add(Me.txtbx_RcpCreateFlush1Flow)
@@ -2601,13 +2862,13 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateFlush1.Controls.Add(Me.dsp_RcpCreateFlush1RPM)
         Me.panel_RcpCreateFlush1.Location = New System.Drawing.Point(900, 45)
         Me.panel_RcpCreateFlush1.Name = "panel_RcpCreateFlush1"
-        Me.panel_RcpCreateFlush1.Size = New System.Drawing.Size(307, 360)
+        Me.panel_RcpCreateFlush1.Size = New System.Drawing.Size(307, 365)
         Me.panel_RcpCreateFlush1.TabIndex = 16
         '
         'txtbx_RcpCreateFlush1Time
         '
         Me.txtbx_RcpCreateFlush1Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateFlush1Time.Location = New System.Drawing.Point(183, 186)
+        Me.txtbx_RcpCreateFlush1Time.Location = New System.Drawing.Point(183, 183)
         Me.txtbx_RcpCreateFlush1Time.MaxLength = 6
         Me.txtbx_RcpCreateFlush1Time.Name = "txtbx_RcpCreateFlush1Time"
         Me.txtbx_RcpCreateFlush1Time.Size = New System.Drawing.Size(100, 25)
@@ -2615,7 +2876,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreateFlush1PumpMode
         '
-        Me.dsp_RcpCreateFlush1PumpMode.Location = New System.Drawing.Point(17, 219)
+        Me.dsp_RcpCreateFlush1PumpMode.Location = New System.Drawing.Point(17, 265)
         Me.dsp_RcpCreateFlush1PumpMode.Name = "dsp_RcpCreateFlush1PumpMode"
         Me.dsp_RcpCreateFlush1PumpMode.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateFlush1PumpMode.TabIndex = 82
@@ -2624,7 +2885,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreateFlush1Time
         '
-        Me.dsp_RcpCreateFlush1Time.Location = New System.Drawing.Point(17, 178)
+        Me.dsp_RcpCreateFlush1Time.Location = New System.Drawing.Point(17, 175)
         Me.dsp_RcpCreateFlush1Time.Name = "dsp_RcpCreateFlush1Time"
         Me.dsp_RcpCreateFlush1Time.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateFlush1Time.TabIndex = 14
@@ -2634,25 +2895,43 @@ Partial Class FormRecipeManagement
         'txtbx_RcpCreateFlush1Stabilize
         '
         Me.txtbx_RcpCreateFlush1Stabilize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateFlush1Stabilize.Location = New System.Drawing.Point(183, 145)
+        Me.txtbx_RcpCreateFlush1Stabilize.Location = New System.Drawing.Point(183, 143)
         Me.txtbx_RcpCreateFlush1Stabilize.MaxLength = 6
         Me.txtbx_RcpCreateFlush1Stabilize.Name = "txtbx_RcpCreateFlush1Stabilize"
         Me.txtbx_RcpCreateFlush1Stabilize.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_RcpCreateFlush1Stabilize.TabIndex = 6
         '
+        'dsp_RcpCreateFlush1BP
+        '
+        Me.dsp_RcpCreateFlush1BP.Location = New System.Drawing.Point(17, 215)
+        Me.dsp_RcpCreateFlush1BP.Name = "dsp_RcpCreateFlush1BP"
+        Me.dsp_RcpCreateFlush1BP.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreateFlush1BP.TabIndex = 82
+        Me.dsp_RcpCreateFlush1BP.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpCreateFlush1BP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'dsp_RcpCreateFlush1Stabilize
         '
-        Me.dsp_RcpCreateFlush1Stabilize.Location = New System.Drawing.Point(17, 137)
+        Me.dsp_RcpCreateFlush1Stabilize.Location = New System.Drawing.Point(17, 135)
         Me.dsp_RcpCreateFlush1Stabilize.Name = "dsp_RcpCreateFlush1Stabilize"
         Me.dsp_RcpCreateFlush1Stabilize.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateFlush1Stabilize.TabIndex = 12
         Me.dsp_RcpCreateFlush1Stabilize.Text = "Stabilize Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
         Me.dsp_RcpCreateFlush1Stabilize.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtbx_RcpCreateFlush1Pressure
+        '
+        Me.txtbx_RcpCreateFlush1Pressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreateFlush1Pressure.Location = New System.Drawing.Point(183, 223)
+        Me.txtbx_RcpCreateFlush1Pressure.MaxLength = 6
+        Me.txtbx_RcpCreateFlush1Pressure.Name = "txtbx_RcpCreateFlush1Pressure"
+        Me.txtbx_RcpCreateFlush1Pressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreateFlush1Pressure.TabIndex = 83
+        '
         'txtbx_RcpCreateFlush1FlowTol
         '
         Me.txtbx_RcpCreateFlush1FlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateFlush1FlowTol.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RcpCreateFlush1FlowTol.Location = New System.Drawing.Point(183, 103)
         Me.txtbx_RcpCreateFlush1FlowTol.MaxLength = 6
         Me.txtbx_RcpCreateFlush1FlowTol.Name = "txtbx_RcpCreateFlush1FlowTol"
         Me.txtbx_RcpCreateFlush1FlowTol.Size = New System.Drawing.Size(100, 25)
@@ -2660,7 +2939,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreateFlush1FlowTol
         '
-        Me.dsp_RcpCreateFlush1FlowTol.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RcpCreateFlush1FlowTol.Location = New System.Drawing.Point(17, 95)
         Me.dsp_RcpCreateFlush1FlowTol.Name = "dsp_RcpCreateFlush1FlowTol"
         Me.dsp_RcpCreateFlush1FlowTol.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateFlush1FlowTol.TabIndex = 8
@@ -2704,7 +2983,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateFlush1PumpMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panel_RcpCreateFlush1PumpMode.Controls.Add(Me.rdbtn_RcpCreateFlush1PumpSpeed)
         Me.panel_RcpCreateFlush1PumpMode.Controls.Add(Me.rdbtn_RcpCreateFlush1PumpProcess)
-        Me.panel_RcpCreateFlush1PumpMode.Location = New System.Drawing.Point(183, 227)
+        Me.panel_RcpCreateFlush1PumpMode.Location = New System.Drawing.Point(183, 258)
         Me.panel_RcpCreateFlush1PumpMode.Name = "panel_RcpCreateFlush1PumpMode"
         Me.panel_RcpCreateFlush1PumpMode.Size = New System.Drawing.Size(100, 55)
         Me.panel_RcpCreateFlush1PumpMode.TabIndex = 83
@@ -2734,7 +3013,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpCreateFlush1RPM
         '
         Me.txtbx_RcpCreateFlush1RPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateFlush1RPM.Location = New System.Drawing.Point(183, 298)
+        Me.txtbx_RcpCreateFlush1RPM.Location = New System.Drawing.Point(183, 323)
         Me.txtbx_RcpCreateFlush1RPM.MaxLength = 6
         Me.txtbx_RcpCreateFlush1RPM.Name = "txtbx_RcpCreateFlush1RPM"
         Me.txtbx_RcpCreateFlush1RPM.Size = New System.Drawing.Size(100, 25)
@@ -2742,7 +3021,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreateFlush1RPM
         '
-        Me.dsp_RcpCreateFlush1RPM.Location = New System.Drawing.Point(17, 290)
+        Me.dsp_RcpCreateFlush1RPM.Location = New System.Drawing.Point(17, 315)
         Me.dsp_RcpCreateFlush1RPM.Name = "dsp_RcpCreateFlush1RPM"
         Me.dsp_RcpCreateFlush1RPM.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateFlush1RPM.TabIndex = 66
@@ -2752,138 +3031,200 @@ Partial Class FormRecipeManagement
         'panel_RcpCreateDPTest1
         '
         Me.panel_RcpCreateDPTest1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPBP)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPStabilize)
-        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPTestRPM)
-        Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPTestRPM)
-        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPTestPumpMode)
-        Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPPoints)
-        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPPoints)
-        Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPUpLimit)
-        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPUpLimit)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPPressure)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPLowLimit)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreatePrepFlowTol)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPTestRPM)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPPoints)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPTestPumpMode)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPLowLimit)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPTestRPM)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPUpLimit)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPFlowTol)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPPoints)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPTime)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPUpLimit)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.txtbx_RcpCreateDPFlow)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPTime)
+        Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreatePrepFlow)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.dsp_RcpCreateDPStabilize)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.checkbx_CreateDPTest2)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.checkbx_CreateDPTest1)
         Me.panel_RcpCreateDPTest1.Controls.Add(Me.panel_RcpCreateDPTestPumpMode)
         Me.panel_RcpCreateDPTest1.Location = New System.Drawing.Point(1224, 45)
         Me.panel_RcpCreateDPTest1.Name = "panel_RcpCreateDPTest1"
-        Me.panel_RcpCreateDPTest1.Size = New System.Drawing.Size(307, 462)
+        Me.panel_RcpCreateDPTest1.Size = New System.Drawing.Size(307, 618)
         Me.panel_RcpCreateDPTest1.TabIndex = 17
+        '
+        'dsp_RcpCreateDPBP
+        '
+        Me.dsp_RcpCreateDPBP.Location = New System.Drawing.Point(17, 255)
+        Me.dsp_RcpCreateDPBP.Name = "dsp_RcpCreateDPBP"
+        Me.dsp_RcpCreateDPBP.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreateDPBP.TabIndex = 86
+        Me.dsp_RcpCreateDPBP.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpCreateDPBP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtbx_RcpCreateDPStabilize
         '
         Me.txtbx_RcpCreateDPStabilize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateDPStabilize.Location = New System.Drawing.Point(183, 106)
+        Me.txtbx_RcpCreateDPStabilize.Location = New System.Drawing.Point(183, 103)
         Me.txtbx_RcpCreateDPStabilize.MaxLength = 6
         Me.txtbx_RcpCreateDPStabilize.Name = "txtbx_RcpCreateDPStabilize"
         Me.txtbx_RcpCreateDPStabilize.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_RcpCreateDPStabilize.TabIndex = 76
         '
+        'txtbx_RcpCreateDPPressure
+        '
+        Me.txtbx_RcpCreateDPPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreateDPPressure.Location = New System.Drawing.Point(183, 263)
+        Me.txtbx_RcpCreateDPPressure.MaxLength = 6
+        Me.txtbx_RcpCreateDPPressure.Name = "txtbx_RcpCreateDPPressure"
+        Me.txtbx_RcpCreateDPPressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreateDPPressure.TabIndex = 87
+        '
+        'txtbx_RcpCreateDPLowLimit
+        '
+        Me.txtbx_RcpCreateDPLowLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreateDPLowLimit.Location = New System.Drawing.Point(183, 303)
+        Me.txtbx_RcpCreateDPLowLimit.MaxLength = 6
+        Me.txtbx_RcpCreateDPLowLimit.Name = "txtbx_RcpCreateDPLowLimit"
+        Me.txtbx_RcpCreateDPLowLimit.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreateDPLowLimit.TabIndex = 78
+        '
+        'dsp_RcpCreatePrepFlowTol
+        '
+        Me.dsp_RcpCreatePrepFlowTol.Location = New System.Drawing.Point(17, 215)
+        Me.dsp_RcpCreatePrepFlowTol.Name = "dsp_RcpCreatePrepFlowTol"
+        Me.dsp_RcpCreatePrepFlowTol.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreatePrepFlowTol.TabIndex = 81
+        Me.dsp_RcpCreatePrepFlowTol.Text = "Flowrate Tolerance (l/min) (+/-) :"
+        Me.dsp_RcpCreatePrepFlowTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'dsp_RcpCreateDPTestRPM
         '
-        Me.dsp_RcpCreateDPTestRPM.Location = New System.Drawing.Point(17, 374)
+        Me.dsp_RcpCreateDPTestRPM.Location = New System.Drawing.Point(17, 495)
         Me.dsp_RcpCreateDPTestRPM.Name = "dsp_RcpCreateDPTestRPM"
         Me.dsp_RcpCreateDPTestRPM.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateDPTestRPM.TabIndex = 82
         Me.dsp_RcpCreateDPTestRPM.Text = "Pump Speed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(RPM) :"
         Me.dsp_RcpCreateDPTestRPM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_RcpCreateDPTestRPM.Visible = False
         '
-        'txtbx_RcpCreateDPTestRPM
+        'txtbx_RcpCreateDPPoints
         '
-        Me.txtbx_RcpCreateDPTestRPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateDPTestRPM.Location = New System.Drawing.Point(183, 382)
-        Me.txtbx_RcpCreateDPTestRPM.MaxLength = 6
-        Me.txtbx_RcpCreateDPTestRPM.Name = "txtbx_RcpCreateDPTestRPM"
-        Me.txtbx_RcpCreateDPTestRPM.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreateDPTestRPM.TabIndex = 81
+        Me.txtbx_RcpCreateDPPoints.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreateDPPoints.Location = New System.Drawing.Point(183, 383)
+        Me.txtbx_RcpCreateDPPoints.MaxLength = 6
+        Me.txtbx_RcpCreateDPPoints.Name = "txtbx_RcpCreateDPPoints"
+        Me.txtbx_RcpCreateDPPoints.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreateDPPoints.TabIndex = 80
         '
         'dsp_RcpCreateDPTestPumpMode
         '
-        Me.dsp_RcpCreateDPTestPumpMode.Location = New System.Drawing.Point(17, 303)
+        Me.dsp_RcpCreateDPTestPumpMode.Location = New System.Drawing.Point(17, 415)
         Me.dsp_RcpCreateDPTestPumpMode.Name = "dsp_RcpCreateDPTestPumpMode"
         Me.dsp_RcpCreateDPTestPumpMode.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateDPTestPumpMode.TabIndex = 82
         Me.dsp_RcpCreateDPTestPumpMode.Text = "Pump Mode" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Selection :"
         Me.dsp_RcpCreateDPTestPumpMode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtbx_RcpCreateDPPoints
-        '
-        Me.txtbx_RcpCreateDPPoints.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateDPPoints.Location = New System.Drawing.Point(183, 270)
-        Me.txtbx_RcpCreateDPPoints.MaxLength = 6
-        Me.txtbx_RcpCreateDPPoints.Name = "txtbx_RcpCreateDPPoints"
-        Me.txtbx_RcpCreateDPPoints.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreateDPPoints.TabIndex = 80
-        '
-        'dsp_RcpCreateDPPoints
-        '
-        Me.dsp_RcpCreateDPPoints.Location = New System.Drawing.Point(17, 262)
-        Me.dsp_RcpCreateDPPoints.Name = "dsp_RcpCreateDPPoints"
-        Me.dsp_RcpCreateDPPoints.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpCreateDPPoints.TabIndex = 20
-        Me.dsp_RcpCreateDPPoints.Text = "Test Points" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Count) :"
-        Me.dsp_RcpCreateDPPoints.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RcpCreateDPUpLimit
-        '
-        Me.txtbx_RcpCreateDPUpLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateDPUpLimit.Location = New System.Drawing.Point(183, 229)
-        Me.txtbx_RcpCreateDPUpLimit.MaxLength = 6
-        Me.txtbx_RcpCreateDPUpLimit.Name = "txtbx_RcpCreateDPUpLimit"
-        Me.txtbx_RcpCreateDPUpLimit.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreateDPUpLimit.TabIndex = 79
-        '
-        'dsp_RcpCreateDPUpLimit
-        '
-        Me.dsp_RcpCreateDPUpLimit.Location = New System.Drawing.Point(17, 221)
-        Me.dsp_RcpCreateDPUpLimit.Name = "dsp_RcpCreateDPUpLimit"
-        Me.dsp_RcpCreateDPUpLimit.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpCreateDPUpLimit.TabIndex = 18
-        Me.dsp_RcpCreateDPUpLimit.Text = "DP Upper Limit" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
-        Me.dsp_RcpCreateDPUpLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RcpCreateDPLowLimit
-        '
-        Me.txtbx_RcpCreateDPLowLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateDPLowLimit.Location = New System.Drawing.Point(183, 188)
-        Me.txtbx_RcpCreateDPLowLimit.MaxLength = 6
-        Me.txtbx_RcpCreateDPLowLimit.Name = "txtbx_RcpCreateDPLowLimit"
-        Me.txtbx_RcpCreateDPLowLimit.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreateDPLowLimit.TabIndex = 78
-        '
         'dsp_RcpCreateDPLowLimit
         '
-        Me.dsp_RcpCreateDPLowLimit.Location = New System.Drawing.Point(17, 180)
+        Me.dsp_RcpCreateDPLowLimit.Location = New System.Drawing.Point(17, 295)
         Me.dsp_RcpCreateDPLowLimit.Name = "dsp_RcpCreateDPLowLimit"
         Me.dsp_RcpCreateDPLowLimit.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateDPLowLimit.TabIndex = 16
         Me.dsp_RcpCreateDPLowLimit.Text = "DP Lower Limit" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa)  :"
         Me.dsp_RcpCreateDPLowLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'txtbx_RcpCreateDPTestRPM
+        '
+        Me.txtbx_RcpCreateDPTestRPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreateDPTestRPM.Location = New System.Drawing.Point(183, 503)
+        Me.txtbx_RcpCreateDPTestRPM.MaxLength = 6
+        Me.txtbx_RcpCreateDPTestRPM.Name = "txtbx_RcpCreateDPTestRPM"
+        Me.txtbx_RcpCreateDPTestRPM.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreateDPTestRPM.TabIndex = 81
+        Me.txtbx_RcpCreateDPTestRPM.Visible = False
+        '
+        'dsp_RcpCreateDPUpLimit
+        '
+        Me.dsp_RcpCreateDPUpLimit.Location = New System.Drawing.Point(17, 335)
+        Me.dsp_RcpCreateDPUpLimit.Name = "dsp_RcpCreateDPUpLimit"
+        Me.dsp_RcpCreateDPUpLimit.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreateDPUpLimit.TabIndex = 18
+        Me.dsp_RcpCreateDPUpLimit.Text = "DP Upper Limit" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpCreateDPUpLimit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpCreateDPFlowTol
+        '
+        Me.txtbx_RcpCreateDPFlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreateDPFlowTol.Location = New System.Drawing.Point(183, 223)
+        Me.txtbx_RcpCreateDPFlowTol.MaxLength = 6
+        Me.txtbx_RcpCreateDPFlowTol.Name = "txtbx_RcpCreateDPFlowTol"
+        Me.txtbx_RcpCreateDPFlowTol.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreateDPFlowTol.TabIndex = 80
+        '
+        'dsp_RcpCreateDPPoints
+        '
+        Me.dsp_RcpCreateDPPoints.Location = New System.Drawing.Point(17, 375)
+        Me.dsp_RcpCreateDPPoints.Name = "dsp_RcpCreateDPPoints"
+        Me.dsp_RcpCreateDPPoints.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreateDPPoints.TabIndex = 20
+        Me.dsp_RcpCreateDPPoints.Text = "Test Points" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Count) :"
+        Me.dsp_RcpCreateDPPoints.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'txtbx_RcpCreateDPTime
         '
         Me.txtbx_RcpCreateDPTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateDPTime.Location = New System.Drawing.Point(183, 147)
+        Me.txtbx_RcpCreateDPTime.Location = New System.Drawing.Point(183, 143)
         Me.txtbx_RcpCreateDPTime.MaxLength = 6
         Me.txtbx_RcpCreateDPTime.Name = "txtbx_RcpCreateDPTime"
         Me.txtbx_RcpCreateDPTime.Size = New System.Drawing.Size(100, 25)
         Me.txtbx_RcpCreateDPTime.TabIndex = 77
         '
+        'txtbx_RcpCreateDPUpLimit
+        '
+        Me.txtbx_RcpCreateDPUpLimit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreateDPUpLimit.Location = New System.Drawing.Point(183, 343)
+        Me.txtbx_RcpCreateDPUpLimit.MaxLength = 6
+        Me.txtbx_RcpCreateDPUpLimit.Name = "txtbx_RcpCreateDPUpLimit"
+        Me.txtbx_RcpCreateDPUpLimit.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreateDPUpLimit.TabIndex = 79
+        '
+        'txtbx_RcpCreateDPFlow
+        '
+        Me.txtbx_RcpCreateDPFlow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreateDPFlow.Location = New System.Drawing.Point(183, 183)
+        Me.txtbx_RcpCreateDPFlow.MaxLength = 6
+        Me.txtbx_RcpCreateDPFlow.Name = "txtbx_RcpCreateDPFlow"
+        Me.txtbx_RcpCreateDPFlow.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreateDPFlow.TabIndex = 53
+        '
         'dsp_RcpCreateDPTime
         '
-        Me.dsp_RcpCreateDPTime.Location = New System.Drawing.Point(17, 139)
+        Me.dsp_RcpCreateDPTime.Location = New System.Drawing.Point(17, 135)
         Me.dsp_RcpCreateDPTime.Name = "dsp_RcpCreateDPTime"
         Me.dsp_RcpCreateDPTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateDPTime.TabIndex = 14
         Me.dsp_RcpCreateDPTime.Text = "DP Test Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
         Me.dsp_RcpCreateDPTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'dsp_RcpCreatePrepFlow
+        '
+        Me.dsp_RcpCreatePrepFlow.Location = New System.Drawing.Point(17, 175)
+        Me.dsp_RcpCreatePrepFlow.Name = "dsp_RcpCreatePrepFlow"
+        Me.dsp_RcpCreatePrepFlow.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreatePrepFlow.TabIndex = 26
+        Me.dsp_RcpCreatePrepFlow.Text = "Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min) :"
+        Me.dsp_RcpCreatePrepFlow.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'dsp_RcpCreateDPStabilize
         '
-        Me.dsp_RcpCreateDPStabilize.Location = New System.Drawing.Point(17, 98)
+        Me.dsp_RcpCreateDPStabilize.Location = New System.Drawing.Point(17, 95)
         Me.dsp_RcpCreateDPStabilize.Name = "dsp_RcpCreateDPStabilize"
         Me.dsp_RcpCreateDPStabilize.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateDPStabilize.TabIndex = 12
@@ -2920,12 +3261,23 @@ Partial Class FormRecipeManagement
         '
         Me.panel_RcpCreateDPTestPumpMode.BackColor = System.Drawing.SystemColors.Window
         Me.panel_RcpCreateDPTestPumpMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.panel_RcpCreateDPTestPumpMode.Controls.Add(Me.rdbtn_RcpCreateDPTestPumpSpeed)
         Me.panel_RcpCreateDPTestPumpMode.Controls.Add(Me.rdbtn_RcpCreateDPTestPumpProcess)
-        Me.panel_RcpCreateDPTestPumpMode.Location = New System.Drawing.Point(183, 311)
+        Me.panel_RcpCreateDPTestPumpMode.Controls.Add(Me.rdbtn_RcpCreateDPTestPumpSpeed)
+        Me.panel_RcpCreateDPTestPumpMode.Location = New System.Drawing.Point(183, 423)
         Me.panel_RcpCreateDPTestPumpMode.Name = "panel_RcpCreateDPTestPumpMode"
-        Me.panel_RcpCreateDPTestPumpMode.Size = New System.Drawing.Size(100, 55)
+        Me.panel_RcpCreateDPTestPumpMode.Size = New System.Drawing.Size(100, 25)
         Me.panel_RcpCreateDPTestPumpMode.TabIndex = 83
+        '
+        'rdbtn_RcpCreateDPTestPumpProcess
+        '
+        Me.rdbtn_RcpCreateDPTestPumpProcess.AutoSize = True
+        Me.rdbtn_RcpCreateDPTestPumpProcess.Location = New System.Drawing.Point(6, 1)
+        Me.rdbtn_RcpCreateDPTestPumpProcess.Name = "rdbtn_RcpCreateDPTestPumpProcess"
+        Me.rdbtn_RcpCreateDPTestPumpProcess.Size = New System.Drawing.Size(71, 21)
+        Me.rdbtn_RcpCreateDPTestPumpProcess.TabIndex = 0
+        Me.rdbtn_RcpCreateDPTestPumpProcess.TabStop = True
+        Me.rdbtn_RcpCreateDPTestPumpProcess.Text = "Process"
+        Me.rdbtn_RcpCreateDPTestPumpProcess.UseVisualStyleBackColor = True
         '
         'rdbtn_RcpCreateDPTestPumpSpeed
         '
@@ -2937,17 +3289,7 @@ Partial Class FormRecipeManagement
         Me.rdbtn_RcpCreateDPTestPumpSpeed.TabStop = True
         Me.rdbtn_RcpCreateDPTestPumpSpeed.Text = "Speed"
         Me.rdbtn_RcpCreateDPTestPumpSpeed.UseVisualStyleBackColor = True
-        '
-        'rdbtn_RcpCreateDPTestPumpProcess
-        '
-        Me.rdbtn_RcpCreateDPTestPumpProcess.AutoSize = True
-        Me.rdbtn_RcpCreateDPTestPumpProcess.Location = New System.Drawing.Point(6, 3)
-        Me.rdbtn_RcpCreateDPTestPumpProcess.Name = "rdbtn_RcpCreateDPTestPumpProcess"
-        Me.rdbtn_RcpCreateDPTestPumpProcess.Size = New System.Drawing.Size(71, 21)
-        Me.rdbtn_RcpCreateDPTestPumpProcess.TabIndex = 0
-        Me.rdbtn_RcpCreateDPTestPumpProcess.TabStop = True
-        Me.rdbtn_RcpCreateDPTestPumpProcess.Text = "Process"
-        Me.rdbtn_RcpCreateDPTestPumpProcess.UseVisualStyleBackColor = True
+        Me.rdbtn_RcpCreateDPTestPumpSpeed.Visible = False
         '
         'Panel4
         '
@@ -2960,7 +3302,7 @@ Partial Class FormRecipeManagement
         Me.Panel4.Controls.Add(Me.ComboBox6)
         Me.Panel4.Controls.Add(Me.ComboBox4)
         Me.Panel4.Controls.Add(Me.ComboBox3)
-        Me.Panel4.Location = New System.Drawing.Point(1224, 593)
+        Me.Panel4.Location = New System.Drawing.Point(1434, 601)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(631, 170)
         Me.Panel4.TabIndex = 36
@@ -3039,11 +3381,17 @@ Partial Class FormRecipeManagement
         'Panel3
         '
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.dsp_CreatePreparation)
+        Me.Panel3.Controls.Add(Me.dsp_RcpCreateDrainTime)
+        Me.Panel3.Controls.Add(Me.dsp_RcpCreateDrainStartTime)
+        Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepDrainTime)
+        Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepDrainStartTime)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepPressure)
+        Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepPressure)
+        Me.Panel3.Controls.Add(Me.dsp_CreatePreparation)
+        Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepPressureDrop)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepBleed)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepFill)
-        Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepPressure)
+        Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepPressureDrop)
         Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepBleed)
         Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepFill)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepPumpMode)
@@ -3056,10 +3404,64 @@ Partial Class FormRecipeManagement
         Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepPrefillStartTime)
         Me.Panel3.Controls.Add(Me.dsp_RcpCreatePrepRPM)
         Me.Panel3.Controls.Add(Me.txtbx_RcpCreatePrepRPM)
-        Me.Panel3.Location = New System.Drawing.Point(575, 291)
+        Me.Panel3.Location = New System.Drawing.Point(575, 176)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(307, 480)
+        Me.Panel3.Size = New System.Drawing.Size(307, 605)
         Me.Panel3.TabIndex = 35
+        '
+        'dsp_RcpCreateDrainTime
+        '
+        Me.dsp_RcpCreateDrainTime.Location = New System.Drawing.Point(17, 215)
+        Me.dsp_RcpCreateDrainTime.Name = "dsp_RcpCreateDrainTime"
+        Me.dsp_RcpCreateDrainTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreateDrainTime.TabIndex = 92
+        Me.dsp_RcpCreateDrainTime.Text = "Drain Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RcpCreateDrainTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'dsp_RcpCreateDrainStartTime
+        '
+        Me.dsp_RcpCreateDrainStartTime.Location = New System.Drawing.Point(17, 175)
+        Me.dsp_RcpCreateDrainStartTime.Name = "dsp_RcpCreateDrainStartTime"
+        Me.dsp_RcpCreateDrainStartTime.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreateDrainStartTime.TabIndex = 93
+        Me.dsp_RcpCreateDrainStartTime.Text = "Drain Start Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
+        Me.dsp_RcpCreateDrainStartTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpCreatePrepDrainTime
+        '
+        Me.txtbx_RcpCreatePrepDrainTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreatePrepDrainTime.Location = New System.Drawing.Point(183, 223)
+        Me.txtbx_RcpCreatePrepDrainTime.MaxLength = 6
+        Me.txtbx_RcpCreatePrepDrainTime.Name = "txtbx_RcpCreatePrepDrainTime"
+        Me.txtbx_RcpCreatePrepDrainTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreatePrepDrainTime.TabIndex = 95
+        '
+        'txtbx_RcpCreatePrepDrainStartTime
+        '
+        Me.txtbx_RcpCreatePrepDrainStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreatePrepDrainStartTime.Location = New System.Drawing.Point(183, 183)
+        Me.txtbx_RcpCreatePrepDrainStartTime.MaxLength = 6
+        Me.txtbx_RcpCreatePrepDrainStartTime.Name = "txtbx_RcpCreatePrepDrainStartTime"
+        Me.txtbx_RcpCreatePrepDrainStartTime.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreatePrepDrainStartTime.TabIndex = 94
+        '
+        'dsp_RcpCreatePrepPressure
+        '
+        Me.dsp_RcpCreatePrepPressure.Location = New System.Drawing.Point(17, 375)
+        Me.dsp_RcpCreatePrepPressure.Name = "dsp_RcpCreatePrepPressure"
+        Me.dsp_RcpCreatePrepPressure.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreatePrepPressure.TabIndex = 89
+        Me.dsp_RcpCreatePrepPressure.Text = "Back Pressure-2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpCreatePrepPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpCreatePrepPressure
+        '
+        Me.txtbx_RcpCreatePrepPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreatePrepPressure.Location = New System.Drawing.Point(183, 383)
+        Me.txtbx_RcpCreatePrepPressure.MaxLength = 6
+        Me.txtbx_RcpCreatePrepPressure.Name = "txtbx_RcpCreatePrepPressure"
+        Me.txtbx_RcpCreatePrepPressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreatePrepPressure.TabIndex = 90
         '
         'dsp_CreatePreparation
         '
@@ -3071,18 +3473,18 @@ Partial Class FormRecipeManagement
         Me.dsp_CreatePreparation.Text = "Preparation"
         Me.dsp_CreatePreparation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'dsp_RcpCreatePrepPressure
+        'dsp_RcpCreatePrepPressureDrop
         '
-        Me.dsp_RcpCreatePrepPressure.Location = New System.Drawing.Point(17, 219)
-        Me.dsp_RcpCreatePrepPressure.Name = "dsp_RcpCreatePrepPressure"
-        Me.dsp_RcpCreatePrepPressure.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpCreatePrepPressure.TabIndex = 26
-        Me.dsp_RcpCreatePrepPressure.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
-        Me.dsp_RcpCreatePrepPressure.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.dsp_RcpCreatePrepPressureDrop.Location = New System.Drawing.Point(17, 295)
+        Me.dsp_RcpCreatePrepPressureDrop.Name = "dsp_RcpCreatePrepPressureDrop"
+        Me.dsp_RcpCreatePrepPressureDrop.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreatePrepPressureDrop.TabIndex = 26
+        Me.dsp_RcpCreatePrepPressureDrop.Text = "Back Pressure-1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpCreatePrepPressureDrop.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'dsp_RcpCreatePrepBleed
         '
-        Me.dsp_RcpCreatePrepBleed.Location = New System.Drawing.Point(17, 178)
+        Me.dsp_RcpCreatePrepBleed.Location = New System.Drawing.Point(17, 255)
         Me.dsp_RcpCreatePrepBleed.Name = "dsp_RcpCreatePrepBleed"
         Me.dsp_RcpCreatePrepBleed.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepBleed.TabIndex = 27
@@ -3098,19 +3500,19 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpCreatePrepFill.Text = "Fill Duration" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
         Me.dsp_RcpCreatePrepFill.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtbx_RcpCreatePrepPressure
+        'txtbx_RcpCreatePrepPressureDrop
         '
-        Me.txtbx_RcpCreatePrepPressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepPressure.Location = New System.Drawing.Point(183, 227)
-        Me.txtbx_RcpCreatePrepPressure.MaxLength = 6
-        Me.txtbx_RcpCreatePrepPressure.Name = "txtbx_RcpCreatePrepPressure"
-        Me.txtbx_RcpCreatePrepPressure.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreatePrepPressure.TabIndex = 54
+        Me.txtbx_RcpCreatePrepPressureDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreatePrepPressureDrop.Location = New System.Drawing.Point(183, 303)
+        Me.txtbx_RcpCreatePrepPressureDrop.MaxLength = 6
+        Me.txtbx_RcpCreatePrepPressureDrop.Name = "txtbx_RcpCreatePrepPressureDrop"
+        Me.txtbx_RcpCreatePrepPressureDrop.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreatePrepPressureDrop.TabIndex = 54
         '
         'txtbx_RcpCreatePrepBleed
         '
         Me.txtbx_RcpCreatePrepBleed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepBleed.Location = New System.Drawing.Point(183, 186)
+        Me.txtbx_RcpCreatePrepBleed.Location = New System.Drawing.Point(183, 263)
         Me.txtbx_RcpCreatePrepBleed.MaxLength = 6
         Me.txtbx_RcpCreatePrepBleed.Name = "txtbx_RcpCreatePrepBleed"
         Me.txtbx_RcpCreatePrepBleed.Size = New System.Drawing.Size(100, 25)
@@ -3127,7 +3529,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreatePrepPumpMode
         '
-        Me.dsp_RcpCreatePrepPumpMode.Location = New System.Drawing.Point(17, 301)
+        Me.dsp_RcpCreatePrepPumpMode.Location = New System.Drawing.Point(17, 415)
         Me.dsp_RcpCreatePrepPumpMode.Name = "dsp_RcpCreatePrepPumpMode"
         Me.dsp_RcpCreatePrepPumpMode.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepPumpMode.TabIndex = 86
@@ -3136,11 +3538,11 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreatePrepPressureDropTime
         '
-        Me.dsp_RcpCreatePrepPressureDropTime.Location = New System.Drawing.Point(17, 260)
+        Me.dsp_RcpCreatePrepPressureDropTime.Location = New System.Drawing.Point(17, 335)
         Me.dsp_RcpCreatePrepPressureDropTime.Name = "dsp_RcpCreatePrepPressureDropTime"
         Me.dsp_RcpCreatePrepPressureDropTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepPressureDropTime.TabIndex = 25
-        Me.dsp_RcpCreatePrepPressureDropTime.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Duration (s) :"
+        Me.dsp_RcpCreatePrepPressureDropTime.Text = "Back Pressure-1 Duration (s) :"
         Me.dsp_RcpCreatePrepPressureDropTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'panel_RcpCreatePrepPumpMode
@@ -3149,15 +3551,15 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreatePrepPumpMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panel_RcpCreatePrepPumpMode.Controls.Add(Me.rdbtn_RcpCreatePrepPumpSpeed)
         Me.panel_RcpCreatePrepPumpMode.Controls.Add(Me.rdbtn_RcpCreatePrepPumpProcess)
-        Me.panel_RcpCreatePrepPumpMode.Location = New System.Drawing.Point(183, 309)
+        Me.panel_RcpCreatePrepPumpMode.Location = New System.Drawing.Point(183, 423)
         Me.panel_RcpCreatePrepPumpMode.Name = "panel_RcpCreatePrepPumpMode"
-        Me.panel_RcpCreatePrepPumpMode.Size = New System.Drawing.Size(100, 55)
+        Me.panel_RcpCreatePrepPumpMode.Size = New System.Drawing.Size(100, 25)
         Me.panel_RcpCreatePrepPumpMode.TabIndex = 87
         '
         'rdbtn_RcpCreatePrepPumpSpeed
         '
         Me.rdbtn_RcpCreatePrepPumpSpeed.AutoSize = True
-        Me.rdbtn_RcpCreatePrepPumpSpeed.Location = New System.Drawing.Point(6, 29)
+        Me.rdbtn_RcpCreatePrepPumpSpeed.Location = New System.Drawing.Point(6, 1)
         Me.rdbtn_RcpCreatePrepPumpSpeed.Name = "rdbtn_RcpCreatePrepPumpSpeed"
         Me.rdbtn_RcpCreatePrepPumpSpeed.Size = New System.Drawing.Size(63, 21)
         Me.rdbtn_RcpCreatePrepPumpSpeed.TabIndex = 0
@@ -3168,18 +3570,19 @@ Partial Class FormRecipeManagement
         'rdbtn_RcpCreatePrepPumpProcess
         '
         Me.rdbtn_RcpCreatePrepPumpProcess.AutoSize = True
-        Me.rdbtn_RcpCreatePrepPumpProcess.Location = New System.Drawing.Point(6, 3)
+        Me.rdbtn_RcpCreatePrepPumpProcess.Location = New System.Drawing.Point(6, 29)
         Me.rdbtn_RcpCreatePrepPumpProcess.Name = "rdbtn_RcpCreatePrepPumpProcess"
         Me.rdbtn_RcpCreatePrepPumpProcess.Size = New System.Drawing.Size(71, 21)
         Me.rdbtn_RcpCreatePrepPumpProcess.TabIndex = 0
         Me.rdbtn_RcpCreatePrepPumpProcess.TabStop = True
         Me.rdbtn_RcpCreatePrepPumpProcess.Text = "Process"
         Me.rdbtn_RcpCreatePrepPumpProcess.UseVisualStyleBackColor = True
+        Me.rdbtn_RcpCreatePrepPumpProcess.Visible = False
         '
         'txtbx_RcpCreatePrepPressureDropTime
         '
         Me.txtbx_RcpCreatePrepPressureDropTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepPressureDropTime.Location = New System.Drawing.Point(183, 268)
+        Me.txtbx_RcpCreatePrepPressureDropTime.Location = New System.Drawing.Point(183, 343)
         Me.txtbx_RcpCreatePrepPressureDropTime.MaxLength = 6
         Me.txtbx_RcpCreatePrepPressureDropTime.Name = "txtbx_RcpCreatePrepPressureDropTime"
         Me.txtbx_RcpCreatePrepPressureDropTime.Size = New System.Drawing.Size(100, 25)
@@ -3187,7 +3590,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreatePrepPrefillTime
         '
-        Me.dsp_RcpCreatePrepPrefillTime.Location = New System.Drawing.Point(17, 137)
+        Me.dsp_RcpCreatePrepPrefillTime.Location = New System.Drawing.Point(17, 135)
         Me.dsp_RcpCreatePrepPrefillTime.Name = "dsp_RcpCreatePrepPrefillTime"
         Me.dsp_RcpCreatePrepPrefillTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepPrefillTime.TabIndex = 39
@@ -3196,7 +3599,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreatePrepPrefillStartTime
         '
-        Me.dsp_RcpCreatePrepPrefillStartTime.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RcpCreatePrepPrefillStartTime.Location = New System.Drawing.Point(17, 95)
         Me.dsp_RcpCreatePrepPrefillStartTime.Name = "dsp_RcpCreatePrepPrefillStartTime"
         Me.dsp_RcpCreatePrepPrefillStartTime.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepPrefillStartTime.TabIndex = 40
@@ -3206,7 +3609,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpCreatePrepPrefillTime
         '
         Me.txtbx_RcpCreatePrepPrefillTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepPrefillTime.Location = New System.Drawing.Point(183, 145)
+        Me.txtbx_RcpCreatePrepPrefillTime.Location = New System.Drawing.Point(183, 143)
         Me.txtbx_RcpCreatePrepPrefillTime.MaxLength = 6
         Me.txtbx_RcpCreatePrepPrefillTime.Name = "txtbx_RcpCreatePrepPrefillTime"
         Me.txtbx_RcpCreatePrepPrefillTime.Size = New System.Drawing.Size(100, 25)
@@ -3215,7 +3618,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpCreatePrepPrefillStartTime
         '
         Me.txtbx_RcpCreatePrepPrefillStartTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepPrefillStartTime.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RcpCreatePrepPrefillStartTime.Location = New System.Drawing.Point(183, 103)
         Me.txtbx_RcpCreatePrepPrefillStartTime.MaxLength = 6
         Me.txtbx_RcpCreatePrepPrefillStartTime.Name = "txtbx_RcpCreatePrepPrefillStartTime"
         Me.txtbx_RcpCreatePrepPrefillStartTime.Size = New System.Drawing.Size(100, 25)
@@ -3223,7 +3626,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreatePrepRPM
         '
-        Me.dsp_RcpCreatePrepRPM.Location = New System.Drawing.Point(17, 372)
+        Me.dsp_RcpCreatePrepRPM.Location = New System.Drawing.Point(17, 455)
         Me.dsp_RcpCreatePrepRPM.Name = "dsp_RcpCreatePrepRPM"
         Me.dsp_RcpCreatePrepRPM.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreatePrepRPM.TabIndex = 61
@@ -3233,7 +3636,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpCreatePrepRPM
         '
         Me.txtbx_RcpCreatePrepRPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepRPM.Location = New System.Drawing.Point(183, 380)
+        Me.txtbx_RcpCreatePrepRPM.Location = New System.Drawing.Point(183, 463)
         Me.txtbx_RcpCreatePrepRPM.MaxLength = 6
         Me.txtbx_RcpCreatePrepRPM.Name = "txtbx_RcpCreatePrepRPM"
         Me.txtbx_RcpCreatePrepRPM.Size = New System.Drawing.Size(100, 25)
@@ -3368,6 +3771,8 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateFlush2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panel_RcpCreateFlush2.Controls.Add(Me.txtbx_RcpCreateFlush2RPM)
         Me.panel_RcpCreateFlush2.Controls.Add(Me.dsp_RcpCreateFlush2RPM)
+        Me.panel_RcpCreateFlush2.Controls.Add(Me.dsp_RcpCreateFlush2BP)
+        Me.panel_RcpCreateFlush2.Controls.Add(Me.txtbx_RcpCreateFlush2Pressure)
         Me.panel_RcpCreateFlush2.Controls.Add(Me.txtbx_RcpCreateFlush2Time)
         Me.panel_RcpCreateFlush2.Controls.Add(Me.dsp_RcpCreateFlush2Time)
         Me.panel_RcpCreateFlush2.Controls.Add(Me.txtbx_RcpCreateFlush2Stabilize)
@@ -3379,15 +3784,15 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateFlush2.Controls.Add(Me.dsp_RcpCreateFlush2Flow)
         Me.panel_RcpCreateFlush2.Controls.Add(Me.dsp_RcpCreateFlush2PumpMode)
         Me.panel_RcpCreateFlush2.Controls.Add(Me.panel_RcpCreateFlush2PumpMode)
-        Me.panel_RcpCreateFlush2.Location = New System.Drawing.Point(900, 411)
+        Me.panel_RcpCreateFlush2.Location = New System.Drawing.Point(900, 416)
         Me.panel_RcpCreateFlush2.Name = "panel_RcpCreateFlush2"
-        Me.panel_RcpCreateFlush2.Size = New System.Drawing.Size(307, 360)
+        Me.panel_RcpCreateFlush2.Size = New System.Drawing.Size(307, 365)
         Me.panel_RcpCreateFlush2.TabIndex = 17
         '
         'txtbx_RcpCreateFlush2RPM
         '
         Me.txtbx_RcpCreateFlush2RPM.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateFlush2RPM.Location = New System.Drawing.Point(183, 298)
+        Me.txtbx_RcpCreateFlush2RPM.Location = New System.Drawing.Point(183, 323)
         Me.txtbx_RcpCreateFlush2RPM.MaxLength = 6
         Me.txtbx_RcpCreateFlush2RPM.Name = "txtbx_RcpCreateFlush2RPM"
         Me.txtbx_RcpCreateFlush2RPM.Size = New System.Drawing.Size(100, 25)
@@ -3395,17 +3800,35 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreateFlush2RPM
         '
-        Me.dsp_RcpCreateFlush2RPM.Location = New System.Drawing.Point(17, 290)
+        Me.dsp_RcpCreateFlush2RPM.Location = New System.Drawing.Point(17, 315)
         Me.dsp_RcpCreateFlush2RPM.Name = "dsp_RcpCreateFlush2RPM"
         Me.dsp_RcpCreateFlush2RPM.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateFlush2RPM.TabIndex = 72
         Me.dsp_RcpCreateFlush2RPM.Text = "Pump Speed" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(RPM) :"
         Me.dsp_RcpCreateFlush2RPM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
+        'dsp_RcpCreateFlush2BP
+        '
+        Me.dsp_RcpCreateFlush2BP.Location = New System.Drawing.Point(17, 215)
+        Me.dsp_RcpCreateFlush2BP.Name = "dsp_RcpCreateFlush2BP"
+        Me.dsp_RcpCreateFlush2BP.Size = New System.Drawing.Size(150, 40)
+        Me.dsp_RcpCreateFlush2BP.TabIndex = 84
+        Me.dsp_RcpCreateFlush2BP.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
+        Me.dsp_RcpCreateFlush2BP.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtbx_RcpCreateFlush2Pressure
+        '
+        Me.txtbx_RcpCreateFlush2Pressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtbx_RcpCreateFlush2Pressure.Location = New System.Drawing.Point(183, 223)
+        Me.txtbx_RcpCreateFlush2Pressure.MaxLength = 6
+        Me.txtbx_RcpCreateFlush2Pressure.Name = "txtbx_RcpCreateFlush2Pressure"
+        Me.txtbx_RcpCreateFlush2Pressure.Size = New System.Drawing.Size(100, 25)
+        Me.txtbx_RcpCreateFlush2Pressure.TabIndex = 85
+        '
         'txtbx_RcpCreateFlush2Time
         '
         Me.txtbx_RcpCreateFlush2Time.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateFlush2Time.Location = New System.Drawing.Point(183, 186)
+        Me.txtbx_RcpCreateFlush2Time.Location = New System.Drawing.Point(183, 183)
         Me.txtbx_RcpCreateFlush2Time.MaxLength = 6
         Me.txtbx_RcpCreateFlush2Time.Name = "txtbx_RcpCreateFlush2Time"
         Me.txtbx_RcpCreateFlush2Time.Size = New System.Drawing.Size(100, 25)
@@ -3413,7 +3836,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreateFlush2Time
         '
-        Me.dsp_RcpCreateFlush2Time.Location = New System.Drawing.Point(17, 178)
+        Me.dsp_RcpCreateFlush2Time.Location = New System.Drawing.Point(17, 175)
         Me.dsp_RcpCreateFlush2Time.Name = "dsp_RcpCreateFlush2Time"
         Me.dsp_RcpCreateFlush2Time.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateFlush2Time.TabIndex = 14
@@ -3423,7 +3846,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpCreateFlush2Stabilize
         '
         Me.txtbx_RcpCreateFlush2Stabilize.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateFlush2Stabilize.Location = New System.Drawing.Point(183, 145)
+        Me.txtbx_RcpCreateFlush2Stabilize.Location = New System.Drawing.Point(183, 143)
         Me.txtbx_RcpCreateFlush2Stabilize.MaxLength = 6
         Me.txtbx_RcpCreateFlush2Stabilize.Name = "txtbx_RcpCreateFlush2Stabilize"
         Me.txtbx_RcpCreateFlush2Stabilize.Size = New System.Drawing.Size(100, 25)
@@ -3431,7 +3854,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreateFlush2Stabilize
         '
-        Me.dsp_RcpCreateFlush2Stabilize.Location = New System.Drawing.Point(17, 137)
+        Me.dsp_RcpCreateFlush2Stabilize.Location = New System.Drawing.Point(17, 135)
         Me.dsp_RcpCreateFlush2Stabilize.Name = "dsp_RcpCreateFlush2Stabilize"
         Me.dsp_RcpCreateFlush2Stabilize.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateFlush2Stabilize.TabIndex = 12
@@ -3441,7 +3864,7 @@ Partial Class FormRecipeManagement
         'txtbx_RcpCreateFlush2FlowTol
         '
         Me.txtbx_RcpCreateFlush2FlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateFlush2FlowTol.Location = New System.Drawing.Point(183, 104)
+        Me.txtbx_RcpCreateFlush2FlowTol.Location = New System.Drawing.Point(183, 103)
         Me.txtbx_RcpCreateFlush2FlowTol.MaxLength = 6
         Me.txtbx_RcpCreateFlush2FlowTol.Name = "txtbx_RcpCreateFlush2FlowTol"
         Me.txtbx_RcpCreateFlush2FlowTol.Size = New System.Drawing.Size(100, 25)
@@ -3449,7 +3872,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreateFlush2FlowTol
         '
-        Me.dsp_RcpCreateFlush2FlowTol.Location = New System.Drawing.Point(17, 96)
+        Me.dsp_RcpCreateFlush2FlowTol.Location = New System.Drawing.Point(17, 95)
         Me.dsp_RcpCreateFlush2FlowTol.Name = "dsp_RcpCreateFlush2FlowTol"
         Me.dsp_RcpCreateFlush2FlowTol.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateFlush2FlowTol.TabIndex = 8
@@ -3489,7 +3912,7 @@ Partial Class FormRecipeManagement
         '
         'dsp_RcpCreateFlush2PumpMode
         '
-        Me.dsp_RcpCreateFlush2PumpMode.Location = New System.Drawing.Point(17, 219)
+        Me.dsp_RcpCreateFlush2PumpMode.Location = New System.Drawing.Point(17, 265)
         Me.dsp_RcpCreateFlush2PumpMode.Name = "dsp_RcpCreateFlush2PumpMode"
         Me.dsp_RcpCreateFlush2PumpMode.Size = New System.Drawing.Size(150, 40)
         Me.dsp_RcpCreateFlush2PumpMode.TabIndex = 86
@@ -3502,7 +3925,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpCreateFlush2PumpMode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panel_RcpCreateFlush2PumpMode.Controls.Add(Me.rdbtn_RcpCreateFlush2PumpSpeed)
         Me.panel_RcpCreateFlush2PumpMode.Controls.Add(Me.rdbtn_RcpCreateFlush2PumpProcess)
-        Me.panel_RcpCreateFlush2PumpMode.Location = New System.Drawing.Point(183, 227)
+        Me.panel_RcpCreateFlush2PumpMode.Location = New System.Drawing.Point(183, 258)
         Me.panel_RcpCreateFlush2PumpMode.Name = "panel_RcpCreateFlush2PumpMode"
         Me.panel_RcpCreateFlush2PumpMode.Size = New System.Drawing.Size(100, 55)
         Me.panel_RcpCreateFlush2PumpMode.TabIndex = 87
@@ -3610,7 +4033,7 @@ Partial Class FormRecipeManagement
         Me.panel_Create.Dock = System.Windows.Forms.DockStyle.Left
         Me.panel_Create.Location = New System.Drawing.Point(0, 0)
         Me.panel_Create.Name = "panel_Create"
-        Me.panel_Create.Size = New System.Drawing.Size(562, 787)
+        Me.panel_Create.Size = New System.Drawing.Size(562, 800)
         Me.panel_Create.TabIndex = 3
         '
         'Panel6
@@ -3913,106 +4336,6 @@ Partial Class FormRecipeManagement
         Me.dsp_PartCreateJigType.Text = "Jig Type :"
         Me.dsp_PartCreateJigType.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'Panel8
-        '
-        Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel8.Controls.Add(Me.Label20)
-        Me.Panel8.Controls.Add(Me.dsp_RcpCreatePrepPressureDrop)
-        Me.Panel8.Controls.Add(Me.txtbx_RcpCreateVerTol)
-        Me.Panel8.Controls.Add(Me.dsp_RcpCreateVerTol)
-        Me.Panel8.Controls.Add(Me.dsp_RcpCreatePrepFlowTol)
-        Me.Panel8.Controls.Add(Me.txtbx_RcpCreatePrepFlowTol)
-        Me.Panel8.Controls.Add(Me.txtbx_RcpCreatePrepPressureDrop)
-        Me.Panel8.Controls.Add(Me.txtbx_RcpCreatePrepFlow)
-        Me.Panel8.Controls.Add(Me.dsp_RcpCreatePrepFlow)
-        Me.Panel8.Location = New System.Drawing.Point(575, 45)
-        Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(307, 240)
-        Me.Panel8.TabIndex = 24
-        '
-        'Label20
-        '
-        Me.Label20.Font = New System.Drawing.Font("Segoe UI Semibold", 14.25!, System.Drawing.FontStyle.Bold)
-        Me.Label20.Location = New System.Drawing.Point(49, 8)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(200, 40)
-        Me.Label20.TabIndex = 34
-        Me.Label20.Text = "Common"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'dsp_RcpCreatePrepPressureDrop
-        '
-        Me.dsp_RcpCreatePrepPressureDrop.Location = New System.Drawing.Point(17, 178)
-        Me.dsp_RcpCreatePrepPressureDrop.Name = "dsp_RcpCreatePrepPressureDrop"
-        Me.dsp_RcpCreatePrepPressureDrop.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpCreatePrepPressureDrop.TabIndex = 25
-        Me.dsp_RcpCreatePrepPressureDrop.Text = "Back Pressure" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(kPa) :"
-        Me.dsp_RcpCreatePrepPressureDrop.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RcpCreateVerTol
-        '
-        Me.txtbx_RcpCreateVerTol.BackColor = System.Drawing.SystemColors.Window
-        Me.txtbx_RcpCreateVerTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreateVerTol.Location = New System.Drawing.Point(183, 63)
-        Me.txtbx_RcpCreateVerTol.MaxLength = 6
-        Me.txtbx_RcpCreateVerTol.Name = "txtbx_RcpCreateVerTol"
-        Me.txtbx_RcpCreateVerTol.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreateVerTol.TabIndex = 40
-        '
-        'dsp_RcpCreateVerTol
-        '
-        Me.dsp_RcpCreateVerTol.Location = New System.Drawing.Point(17, 53)
-        Me.dsp_RcpCreateVerTol.Name = "dsp_RcpCreateVerTol"
-        Me.dsp_RcpCreateVerTol.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpCreateVerTol.TabIndex = 6
-        Me.dsp_RcpCreateVerTol.Text = "Verification Tolerance (kPa) (+/-) :"
-        Me.dsp_RcpCreateVerTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'dsp_RcpCreatePrepFlowTol
-        '
-        Me.dsp_RcpCreatePrepFlowTol.Location = New System.Drawing.Point(17, 135)
-        Me.dsp_RcpCreatePrepFlowTol.Name = "dsp_RcpCreatePrepFlowTol"
-        Me.dsp_RcpCreatePrepFlowTol.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpCreatePrepFlowTol.TabIndex = 81
-        Me.dsp_RcpCreatePrepFlowTol.Text = "Flowrate Tolerance (l/min) (+/-) :"
-        Me.dsp_RcpCreatePrepFlowTol.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtbx_RcpCreatePrepFlowTol
-        '
-        Me.txtbx_RcpCreatePrepFlowTol.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepFlowTol.Location = New System.Drawing.Point(183, 145)
-        Me.txtbx_RcpCreatePrepFlowTol.MaxLength = 6
-        Me.txtbx_RcpCreatePrepFlowTol.Name = "txtbx_RcpCreatePrepFlowTol"
-        Me.txtbx_RcpCreatePrepFlowTol.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreatePrepFlowTol.TabIndex = 80
-        '
-        'txtbx_RcpCreatePrepPressureDrop
-        '
-        Me.txtbx_RcpCreatePrepPressureDrop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepPressureDrop.Location = New System.Drawing.Point(183, 186)
-        Me.txtbx_RcpCreatePrepPressureDrop.MaxLength = 6
-        Me.txtbx_RcpCreatePrepPressureDrop.Name = "txtbx_RcpCreatePrepPressureDrop"
-        Me.txtbx_RcpCreatePrepPressureDrop.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreatePrepPressureDrop.TabIndex = 55
-        '
-        'txtbx_RcpCreatePrepFlow
-        '
-        Me.txtbx_RcpCreatePrepFlow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtbx_RcpCreatePrepFlow.Location = New System.Drawing.Point(183, 104)
-        Me.txtbx_RcpCreatePrepFlow.MaxLength = 6
-        Me.txtbx_RcpCreatePrepFlow.Name = "txtbx_RcpCreatePrepFlow"
-        Me.txtbx_RcpCreatePrepFlow.Size = New System.Drawing.Size(100, 25)
-        Me.txtbx_RcpCreatePrepFlow.TabIndex = 53
-        '
-        'dsp_RcpCreatePrepFlow
-        '
-        Me.dsp_RcpCreatePrepFlow.Location = New System.Drawing.Point(17, 96)
-        Me.dsp_RcpCreatePrepFlow.Name = "dsp_RcpCreatePrepFlow"
-        Me.dsp_RcpCreatePrepFlow.Size = New System.Drawing.Size(150, 40)
-        Me.dsp_RcpCreatePrepFlow.TabIndex = 26
-        Me.dsp_RcpCreatePrepFlow.Text = "Flowrate" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(l/min) :"
-        Me.dsp_RcpCreatePrepFlow.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
         'panel_FormControl
         '
         Me.panel_FormControl.Controls.Add(Me.PictureBox1)
@@ -4076,63 +4399,110 @@ Partial Class FormRecipeManagement
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'Panel10
+        'Panel11
         '
-        Me.Panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel10.Controls.Add(Me.TextBox2)
-        Me.Panel10.Controls.Add(Me.Label5)
-        Me.Panel10.Location = New System.Drawing.Point(1548, 669)
-        Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(307, 102)
-        Me.Panel10.TabIndex = 39
+        Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel11.Controls.Add(Me.Button3)
+        Me.Panel11.Controls.Add(Me.Label25)
+        Me.Panel11.Controls.Add(Me.Label24)
+        Me.Panel11.Controls.Add(Me.Label23)
+        Me.Panel11.Controls.Add(Me.ComboBox12)
+        Me.Panel11.Controls.Add(Me.ComboBox11)
+        Me.Panel11.Controls.Add(Me.ComboBox10)
+        Me.Panel11.Controls.Add(Me.Label22)
+        Me.Panel11.Location = New System.Drawing.Point(3, 486)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(556, 220)
+        Me.Panel11.TabIndex = 110
         '
-        'TextBox2
+        'Label22
         '
-        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox2.Location = New System.Drawing.Point(183, 35)
-        Me.TextBox2.MaxLength = 6
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 25)
-        Me.TextBox2.TabIndex = 81
+        Me.Label22.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(0, 0)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(554, 50)
+        Me.Label22.TabIndex = 107
+        Me.Label22.Text = "Part ID Update"
+        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label5
+        'ComboBox10
         '
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(17, 27)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(150, 40)
-        Me.Label5.TabIndex = 82
-        Me.Label5.Text = "Total Cycle Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox10.FormattingEnabled = True
+        Me.ComboBox10.IntegralHeight = False
+        Me.ComboBox10.Location = New System.Drawing.Point(152, 57)
+        Me.ComboBox10.MaxDropDownItems = 11
+        Me.ComboBox10.Name = "ComboBox10"
+        Me.ComboBox10.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox10.TabIndex = 108
         '
-        'Panel9
+        'Label23
         '
-        Me.Panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel9.Controls.Add(Me.TextBox3)
-        Me.Panel9.Controls.Add(Me.Label11)
-        Me.Panel9.Location = New System.Drawing.Point(1548, 669)
-        Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(307, 102)
-        Me.Panel9.TabIndex = 40
+        Me.Label23.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(21, 58)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(125, 25)
+        Me.Label23.TabIndex = 109
+        Me.Label23.Text = "Part ID :"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'TextBox3
+        'ComboBox11
         '
-        Me.TextBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox3.Location = New System.Drawing.Point(183, 35)
-        Me.TextBox3.MaxLength = 6
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(100, 25)
-        Me.TextBox3.TabIndex = 81
+        Me.ComboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox11.FormattingEnabled = True
+        Me.ComboBox11.IntegralHeight = False
+        Me.ComboBox11.Location = New System.Drawing.Point(152, 102)
+        Me.ComboBox11.MaxDropDownItems = 11
+        Me.ComboBox11.Name = "ComboBox11"
+        Me.ComboBox11.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox11.TabIndex = 108
         '
-        'Label11
+        'Label24
         '
-        Me.Label11.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(17, 27)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(150, 40)
-        Me.Label11.TabIndex = 82
-        Me.Label11.Text = "Total Cycle Time" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(s) :"
-        Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(21, 103)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(125, 25)
+        Me.Label24.TabIndex = 109
+        Me.Label24.Text = "Filter Type :"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'ComboBox12
+        '
+        Me.ComboBox12.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox12.FormattingEnabled = True
+        Me.ComboBox12.IntegralHeight = False
+        Me.ComboBox12.Location = New System.Drawing.Point(152, 147)
+        Me.ComboBox12.MaxDropDownItems = 11
+        Me.ComboBox12.Name = "ComboBox12"
+        Me.ComboBox12.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox12.TabIndex = 108
+        '
+        'Label25
+        '
+        Me.Label25.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.Location = New System.Drawing.Point(21, 148)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(125, 25)
+        Me.Label25.TabIndex = 109
+        Me.Label25.Text = "Jig Type :"
+        Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button3.Location = New System.Drawing.Point(420, 86)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(110, 60)
+        Me.Button3.TabIndex = 110
+        Me.Button3.Text = "Update"
+        Me.Button3.UseVisualStyleBackColor = False
         '
         'FormRecipeManagement
         '
@@ -4165,6 +4535,12 @@ Partial Class FormRecipeManagement
         CType(Me.dgv_RecipeDetails, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabpg_Edit.ResumeLayout(False)
         Me.tabpg_Edit.PerformLayout()
+        Me.panel_RcpEditDPTest1.ResumeLayout(False)
+        Me.panel_RcpEditDPTest1.PerformLayout()
+        Me.panel_RcpEditDPTestPumpMode.ResumeLayout(False)
+        Me.panel_RcpEditDPTestPumpMode.PerformLayout()
+        Me.Panel9.ResumeLayout(False)
+        Me.Panel9.PerformLayout()
         Me.panel_RcpEditDrain4.ResumeLayout(False)
         Me.panel_RcpEditDrain4.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -4185,10 +4561,6 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditFlush2PumpMode.PerformLayout()
         Me.panel_RcpEditDrain1.ResumeLayout(False)
         Me.panel_RcpEditDrain1.PerformLayout()
-        Me.panel_RcpEditDPTest1.ResumeLayout(False)
-        Me.panel_RcpEditDPTest1.PerformLayout()
-        Me.panel_RcpEditDPTestPumpMode.ResumeLayout(False)
-        Me.panel_RcpEditDPTestPumpMode.PerformLayout()
         Me.panel_RcpEditFlush1.ResumeLayout(False)
         Me.panel_RcpEditFlush1.PerformLayout()
         Me.panel_RcpEditFlush1PumpMode.ResumeLayout(False)
@@ -4199,6 +4571,10 @@ Partial Class FormRecipeManagement
         Me.panel_RecipeManagement.ResumeLayout(False)
         Me.tabpg_Create.ResumeLayout(False)
         Me.tabpg_Create.PerformLayout()
+        Me.Panel8.ResumeLayout(False)
+        Me.Panel8.PerformLayout()
+        Me.Panel10.ResumeLayout(False)
+        Me.Panel10.PerformLayout()
         Me.panel_RcpCreateDrain4.ResumeLayout(False)
         Me.panel_RcpCreateDrain4.PerformLayout()
         Me.panel_RcpCreateFlush1.ResumeLayout(False)
@@ -4232,14 +4608,9 @@ Partial Class FormRecipeManagement
         Me.panel_RecipeGeneration.PerformLayout()
         Me.panel_ProdSKUCreation.ResumeLayout(False)
         Me.panel_ProdSKUCreation.PerformLayout()
-        Me.Panel8.ResumeLayout(False)
-        Me.Panel8.PerformLayout()
         Me.panel_FormControl.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel10.ResumeLayout(False)
-        Me.Panel10.PerformLayout()
-        Me.Panel9.ResumeLayout(False)
-        Me.Panel9.PerformLayout()
+        Me.Panel11.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -4457,25 +4828,21 @@ Partial Class FormRecipeManagement
     Friend WithEvents txtbx_RcpEditPrepBleed As TextBox
     Friend WithEvents txtbx_RcpEditPrepFill As TextBox
     Friend WithEvents dsp_RcpEditPressureDropTime As Label
-    Friend WithEvents dsp_RcpEditPressureDrop As Label
-    Friend WithEvents dsp_RcpEditPrepPressure As Label
+    Friend WithEvents dsp_RcpEditPrepPressureDrop As Label
     Friend WithEvents dsp_RcpEditPrepFlow As Label
     Friend WithEvents txtbx_RcpEditPrepPressureDropTime As TextBox
     Friend WithEvents txtbx_RcpEditPrepPressureDrop As TextBox
-    Friend WithEvents txtbx_RcpEditPrepPressure As TextBox
-    Friend WithEvents txtbx_RcpEditPrepFlow As TextBox
+    Friend WithEvents txtbx_RcpEditDPFlow As TextBox
     Friend WithEvents Panel3 As Panel
     Friend WithEvents dsp_CreatePreparation As Label
     Friend WithEvents dsp_RcpCreatePrepPressureDropTime As Label
     Friend WithEvents dsp_RcpCreatePrepPressureDrop As Label
-    Friend WithEvents dsp_RcpCreatePrepPressure As Label
     Friend WithEvents dsp_RcpCreatePrepFlow As Label
     Friend WithEvents dsp_RcpCreatePrepBleed As Label
     Friend WithEvents dsp_RcpCreatePrepFill As Label
     Friend WithEvents txtbx_RcpCreatePrepPressureDropTime As TextBox
     Friend WithEvents txtbx_RcpCreatePrepPressureDrop As TextBox
-    Friend WithEvents txtbx_RcpCreatePrepPressure As TextBox
-    Friend WithEvents txtbx_RcpCreatePrepFlow As TextBox
+    Friend WithEvents txtbx_RcpCreateDPFlow As TextBox
     Friend WithEvents txtbx_RcpCreatePrepBleed As TextBox
     Friend WithEvents txtbx_RcpCreatePrepFill As TextBox
     Friend WithEvents cmbx_RcpDetailRecipeIDRev As ComboBox
@@ -4534,8 +4901,8 @@ Partial Class FormRecipeManagement
     Friend WithEvents dsp_RcpEditDPTestRPM As Label
     Friend WithEvents txtbx_RcpEditFlush1RPM As TextBox
     Friend WithEvents dsp_RcpEditFlush1RPM As Label
-    Friend WithEvents txtbx_RcpEditPrepFlowTol As TextBox
-    Friend WithEvents txtbx_RcpCreatePrepFlowTol As TextBox
+    Friend WithEvents txtbx_RcpEditDPFlowTol As TextBox
+    Friend WithEvents txtbx_RcpCreateDPFlowTol As TextBox
     Friend WithEvents dsp_RcpEditPrepFlowTol As Label
     Friend WithEvents dsp_RcpCreatePrepFlowTol As Label
     Friend WithEvents panel_RcpCreateDPTestPumpMode As Panel
@@ -4589,4 +4956,39 @@ Partial Class FormRecipeManagement
     Friend WithEvents Panel9 As Panel
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents Label11 As Label
+    Friend WithEvents dsp_RcpCreateDPBP As Label
+    Friend WithEvents txtbx_RcpCreateDPPressure As TextBox
+    Friend WithEvents dsp_RcpCreateFlush2BP As Label
+    Friend WithEvents txtbx_RcpCreateFlush2Pressure As TextBox
+    Friend WithEvents dsp_RcpCreateFlush1BP As Label
+    Friend WithEvents txtbx_RcpCreateFlush1Pressure As TextBox
+    Friend WithEvents dsp_RcpCreatePrepPressure As Label
+    Friend WithEvents txtbx_RcpCreatePrepPressure As TextBox
+    Friend WithEvents dsp_RcpCreateDrainTime As Label
+    Friend WithEvents dsp_RcpCreateDrainStartTime As Label
+    Friend WithEvents txtbx_RcpCreatePrepDrainTime As TextBox
+    Friend WithEvents txtbx_RcpCreatePrepDrainStartTime As TextBox
+    Friend WithEvents dsp_RcpEditPrepDrainTime As Label
+    Friend WithEvents dsp_RcpEditPrepDrainStartTime As Label
+    Friend WithEvents txtbx_RcpEditPrepDrainTime As TextBox
+    Friend WithEvents txtbx_RcpEditPrepDrainStartTime As TextBox
+    Friend WithEvents dsp_RcpEditPrepPressure As Label
+    Friend WithEvents txtbx_RcpEditPrepPressure As TextBox
+    Friend WithEvents txtbx_RcpEditFlush2Pressure As TextBox
+    Friend WithEvents dsp_RcpEditFlush2BP As Label
+    Friend WithEvents txtbx_RcpEditFlush1Pressure As TextBox
+    Friend WithEvents dsp_RcpEditFlush1BP As Label
+    Friend WithEvents txtbx_RcpEditDPPressure As TextBox
+    Friend WithEvents dsp_RcpEditDPBP As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Cmbx_RcpDupNewPartID As ComboBox
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents Label25 As Label
+    Friend WithEvents Label24 As Label
+    Friend WithEvents Label23 As Label
+    Friend WithEvents ComboBox12 As ComboBox
+    Friend WithEvents ComboBox11 As ComboBox
+    Friend WithEvents ComboBox10 As ComboBox
+    Friend WithEvents Label22 As Label
+    Friend WithEvents Button3 As Button
 End Class

@@ -68,7 +68,6 @@
         LoadMessageLogTable(False, Nothing, DateTime.Now.AddDays(-1), DateTime.Now)
     End Function
 
-
     ' Reset Search & Filter Fields
     Private Sub MessageLogFieldReset()
         txtbx_Search.Text = PlaceHolderText

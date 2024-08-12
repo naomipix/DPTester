@@ -11,7 +11,6 @@ Imports LiveChartsCore.SkiaSharpView.WinForms
 Public Class FormCalibration
     Dim CurrentTabPage As TabPage
 
-
     Public Cal_samplingtime As Decimal
     Public Cal_temperature As Decimal
     Public Cal_flowrate As Decimal
@@ -105,7 +104,6 @@ Public Class FormCalibration
     'Public VerificationSamplingTime As String = ""
     'Public VerificationEndCycle As Boolean = False
 
-
     Private Sub FormCalibration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Always Maximize
         Me.WindowState = FormWindowState.Maximized
@@ -145,7 +143,6 @@ Public Class FormCalibration
         ' Initialize Defaults
         InitializeCalForm()
         FormCircuitModel2.Circuittimer.Enabled = True
-
     End Sub
 
     Private Sub FormCalibration_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -402,7 +399,6 @@ Public Class FormCalibration
     End Sub
 
     Public Sub InitializeLiveChart()
-
         For Each LiveGraphChart In {CartesianChart_CalibrationLiveGraph} 'CartesianChartArr
             LiveGraphChart.TooltipPosition = LiveChartsCore.Measure.TooltipPosition.Hidden
             LiveGraphChart.TooltipTextSize = 12
@@ -596,6 +592,30 @@ Public Class FormCalibration
 
     Private Sub checkbx_Graph_CheckedChanged(sender As Object, e As EventArgs) Handles checkbx_GraphDP.CheckedChanged, checkbx_GraphInletPressure.CheckedChanged, checkbx_GraphOutletPressure.CheckedChanged, checkbx_GraphBP.CheckedChanged, checkbx_GraphFlowrate.CheckedChanged, checkbx_GraphTemperature.CheckedChanged, checkbx_GraphRPM.CheckedChanged
         SetVisibleLineSeries()
+
+        ' Limit Max 3 CheckBox Checked
+        If True Then
+            Dim chkbxArr() As CheckBox = {checkbx_GraphDP, checkbx_GraphInletPressure, checkbx_GraphOutletPressure, checkbx_GraphBP, checkbx_GraphFlowrate, checkbx_GraphTemperature, checkbx_GraphRPM}
+
+            Dim chkbxCount As Integer = 0
+            For Each chkbx In chkbxArr
+                If chkbx.Checked Then
+                    chkbxCount += 1
+                End If
+            Next
+
+            If chkbxCount >= 4 Then
+                For Each chkbx In chkbxArr
+                    If Not chkbx.Checked Then
+                        chkbx.Enabled = False
+                    End If
+                Next
+            Else
+                For Each chkbx In chkbxArr
+                    chkbx.Enabled = True
+                Next
+            End If
+        End If
     End Sub
 
     Public Sub SetVisibleLineSeries()
@@ -688,23 +708,29 @@ Public Class FormCalibration
                 End With
             End If
         Catch ex As Exception
-
         End Try
     End Sub
 
     Private Sub btn_Home_Click(sender As Object, e As EventArgs) Handles btn_Home.Click
-
         Me.Close()
     End Sub
 
     Private Sub btn_Discard_Click(sender As Object, e As EventArgs) Handles btn_Discard.Click
         If FormMain.MainMessage(11) = DialogResult.Yes Then
             DiscardCal()
+
+            ' Clear Live Graph Value
+            CalibrateChartDPValue.Clear()
+            CalibrateChartInletValue.Clear()
+            CalibrateChartOutletValue.Clear()
+            CalibrateChartBPValue.Clear()
+            CalibrateChartRPMValue.Clear()
+            CalibrateChartFLWRValue.Clear()
+            CalibrateChartTempValue.Clear()
         End If
     End Sub
 
     Public Sub DiscardCal()
-
         PCStatus(1)(2) = False
         PCStatus(1)(3) = False
 
@@ -769,8 +795,10 @@ Public Class FormCalibration
         '    chkbx.Checked = False
         'Next
 
-        CalibrationRun()
-
+        If MsgBox($"Are you sure to start Calibration?{vbCrLf}**This will reset current calibration data!", MsgBoxStyle.Question Or MsgBoxStyle.YesNo, "Information") = MsgBoxResult.Yes Then
+            DiscardCal()
+            CalibrationRun()
+        End If
     End Sub
 
     'Public Sub CalibrationThreadingTimer_Ticks(ByVal state As Object)
@@ -1096,8 +1124,8 @@ Public Class FormCalibration
     Private Sub tmr_Calibration_Tick(sender As Object, e As EventArgs) Handles tmr_Calibration.Tick
         PCStatus(1)(2) = False ' Reset Calibration Start Signal
         SetVisibleLineSeries() ' Set Line Series On Every Tick
-        If CalrecordValue = True And CommLost = False Then
 
+        If CalrecordValue = True And CommLost = False Then
             ' Rolling Average
             Dim FinalFlowrate As Decimal = AIn(12) '0
             'If True Then
@@ -1242,9 +1270,11 @@ Public Class FormCalibration
                 .Columns(6).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
                 .Columns(7).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
 
+                'DataRow Format 2 Decimal
+                For i As Integer = 1 To 6
+                    .Columns(i).DefaultCellStyle.Format = "F"
+                Next
             End With
-
-
         Else
             PCStatus(1)(2) = False
         End If
@@ -1313,9 +1343,6 @@ Public Class FormCalibration
 
                 'Cal_finaloffset = Cal_finalInlet - Cal_finalOutlet
                 Cal_finaloffset = ((Cal_avgdp1 + Cal_avgdp2) / 2)
-
-
-
             End If
 
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And Not dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
@@ -1362,19 +1389,17 @@ Public Class FormCalibration
             'txtbx_CalBackpress.Text = CType(Cal_finalbackpressure, String)
             'txtbx_CalOffset.Text = CType(Math.Round(Cal_finaloffset, 2), String)
 
-            txtbx_CalInletPressure.Text = Decimal.Round(Cal_finalInlet, 2)
-            txtbx_CalOutletPressure.Text = Decimal.Round(Cal_finalOutlet, 2)
-            txtbx_CalFlowrate.Text = Decimal.Round(Cal_finalflowrate, 2)
-            txtbx_CalTemperature.Text = Decimal.Round(CDec(Cal_finaltemperature - 273.15), 2)
-            txtbx_CalBackpress.Text = Decimal.Round(Cal_finalbackpressure, 2)
-            txtbx_CalOffset.Text = Decimal.Round(Math.Round(Cal_finaloffset, 2), 2)
+            txtbx_CalInletPressure.Text = Decimal.Round(Cal_finalInlet, 2).ToString("F2")
+            txtbx_CalOutletPressure.Text = Decimal.Round(Cal_finalOutlet, 2).ToString("F2")
+            txtbx_CalFlowrate.Text = Decimal.Round(Cal_finalflowrate, 2).ToString("F2")
+            txtbx_CalTemperature.Text = Decimal.Round(CDec(Cal_finaltemperature - 273.15), 2).ToString("F2")
+            txtbx_CalBackpress.Text = Decimal.Round(Cal_finalbackpressure, 2).ToString("F2")
+            txtbx_CalOffset.Text = Decimal.Round(Math.Round(Cal_finaloffset, 2), 2).ToString("F2")
 
             ' Convert Visible DataGridView Columns To DataTable
 
             If dgv_CalibrationResult.RowCount = 0 Then
-
             Else
-
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Inlet Pressure (kPa) : {txtbx_CalInletPressure.Text}")
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Outlet Pressure (kPa) : {txtbx_CalOutletPressure.Text}")
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result for {txtbx_CalLotID.Text}] Back Pressure (kPa) : {txtbx_CalBackpress.Text}")
@@ -1416,15 +1441,11 @@ Public Class FormCalibration
 
                 ' Check Return State
                 If ReturnValue = "True" Then
-
                     EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Calibration Result Summary] CSV Export Success ""{Filepath}""")
                 ElseIf ReturnValue = "Missing" Then
-
                 ElseIf ReturnValue = "False" Then
-
                 End If
             End If
-
 
             PCStatus(1)(4) = True
             'SetCalSeqStart = True
@@ -1448,13 +1469,10 @@ Public Class FormCalibration
                 VerificationRun()
             End If
 
-
-
             'CalEndTime = DateTime.Now
             'tmr_Calibration_EndSeq.Enabled = True
             'tmr_Calibration.Enabled = False
         End If
-
     End Sub
 
     Private Sub tmr_Calibration_EndSeq_Tick(sender As Object, e As EventArgs) Handles tmr_Calibration_EndSeq.Tick
@@ -1477,16 +1495,16 @@ Public Class FormCalibration
         'VerificationRun()
 
         Dim dtRecipeTbl As DataTable = SQL.ReadRecords($"
-                SELECT 
-                    PartTable.filter_type_id, 
-                    FilterType.filter_type, 
-                    PartTable.jig_type_id, 
-                    JigType.jig_description 
-                From PartTable
-                INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id 
-                AND PartTable.part_id='{FormMain.txtbx_PartID.Text}' 
-                INNER JOIN JigType ON PartTable.jig_type_id = JigType.id
-            ")
+            SELECT 
+                PartTable.filter_type_id, 
+                FilterType.filter_type, 
+                PartTable.jig_type_id, 
+                JigType.jig_description 
+            FROM PartTable
+            INNER JOIN FilterType ON PartTable.filter_type_id = FilterType.id 
+            AND PartTable.part_id='{FormMain.txtbx_PartID.Text}' 
+            INNER JOIN JigType ON PartTable.jig_type_id = JigType.id
+        ")
         If dtRecipeTbl.Rows.Count > 0 Then
             If Not dtRecipeTbl(0)("filter_type") = "Cal. Master" Then
                 VerificationRun()
@@ -1793,8 +1811,8 @@ Public Class FormCalibration
     Private Sub tmr_Verification_Tick(sender As Object, e As EventArgs) Handles tmr_Verification.Tick
         PCStatus(1)(3) = False
         SetVisibleLineSeries() ' Set Line Series On Every Tick
-        If CalrecordValue = True And CommLost = False Then
 
+        If CalrecordValue = True And CommLost = False Then
             ' Rolling Average
             Dim FinalFlowrate As Decimal = AIn(12) '0
             'If True Then
@@ -1907,8 +1925,6 @@ Public Class FormCalibration
             With dgv_VerificationResult
                 .BackgroundColor = SystemColors.Window
 
-
-
                 dgv_VerificationResult.DataSource = dtVerification
                 'Set Column Width
                 .Columns(0).Width = 80
@@ -1931,17 +1947,20 @@ Public Class FormCalibration
                 .Columns(7).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
 
                 'Header Cell Font Bold
-                .Columns(0).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(1).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(2).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(3).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(4).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(5).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(6).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
-                .Columns(7).HeaderCell.Style.Font = New Font(dgv_CalibrationResult.Font, FontStyle.Bold)
+                .Columns(0).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(1).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(2).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(3).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(4).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(5).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(6).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
+                .Columns(7).HeaderCell.Style.Font = New Font(dgv_VerificationResult.Font, FontStyle.Bold)
 
+                'DataRow Format 2 Decimal
+                For i As Integer = 1 To 6
+                    .Columns(i).DefaultCellStyle.Format = "F"
+                Next
             End With
-
         Else
             PCStatus(1)(3) = False
         End If
@@ -1965,8 +1984,6 @@ Public Class FormCalibration
                     Ver_avgflowrate1 = Ver_avgflowrate1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Flowrate (l/min)")
                     Ver_avgtemperature1 = Ver_avgtemperature1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Temperature (°C)")
                     Ver_avgbackpressure1 = Ver_avgbackpressure1 + dtVerification.Rows(dtVerification.Rows.Count - 1 - i)("Back Pressure (kPa)")
-
-
                 Next
                 Ver_avginlet1 = Ver_avginlet1 / Cal_dptestpoints
                 Ver_avgoutlet1 = Ver_avgoutlet1 / Cal_dptestpoints
@@ -2005,7 +2022,6 @@ Public Class FormCalibration
 
                 'Ver_finaldp = (Ver_finalinlet - Ver_finaloutlet) - CType(txtbx_CalOffset.Text, Decimal)
                 Ver_finaldp = ((Ver_avgdp1 + Ver_avgdp2) / 2) '- CType(txtbx_CalOffset.Text, Decimal)
-
             End If
 
             If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And Not dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
@@ -2025,10 +2041,8 @@ Public Class FormCalibration
                 Ver_avgbackpressure1 = Ver_avgbackpressure1 / Cal_dptestpoints
                 'Ver_avgdp1 = Ver_avginlet1 - Ver_avgoutlet1
 
-
                 Ver_finalinlet = Ver_avginlet1
                 Ver_finaloutlet = Ver_avgoutlet1
-
 
                 Ver_finalflowrate = Ver_avgflowrate1
                 Ver_finaltemperature = (Ver_avgtemperature1 + 273.15)
@@ -2040,7 +2054,6 @@ Public Class FormCalibration
 
                 'Ver_finaldp = (Ver_finalinlet - Ver_finaloutlet) - CType(txtbx_CalOffset.Text, Decimal)
                 Ver_finaldp = Ver_avgdp1 '- CType(txtbx_CalOffset.Text, Decimal)
-
             End If
             'txtbx_VerInletPressure.Text = CType(Ver_finalinlet, String)
             'txtbx_VerOutletPressure.Text = CType(Ver_finaloutlet, String)
@@ -2050,19 +2063,17 @@ Public Class FormCalibration
             'txtbx_VerStatus.Text = "Completed"
             'txtbx_VerStatus.BackColor = Color.FromArgb(192, 255, 192)
 
-            txtbx_VerInletPressure.Text = Decimal.Round(Ver_finalinlet, 2)
-            txtbx_VerOutletPressure.Text = Decimal.Round(Ver_finaloutlet, 2)
-            txtbx_VerFlowrate.Text = Decimal.Round(Ver_finalflowrate, 2)
-            txtbx_VerTemperature.Text = Decimal.Round(CDec(Ver_finaltemperature - 273.15), 2)
-            txtbx_VerBackpress.Text = Decimal.Round(Ver_finalbackpressure, 2)
+            txtbx_VerInletPressure.Text = Decimal.Round(Ver_finalinlet, 2).ToString("F2")
+            txtbx_VerOutletPressure.Text = Decimal.Round(Ver_finaloutlet, 2).ToString("F2")
+            txtbx_VerFlowrate.Text = Decimal.Round(Ver_finalflowrate, 2).ToString("F2")
+            txtbx_VerTemperature.Text = Decimal.Round(CDec(Ver_finaltemperature - 273.15), 2).ToString("F2")
+            txtbx_VerBackpress.Text = Decimal.Round(Ver_finalbackpressure, 2).ToString("F2")
             txtbx_VerStatus.Text = "Completed"
             txtbx_VerStatus.BackColor = PublicVariables.StatusGreen
             txtbx_VerStatus.ForeColor = PublicVariables.StatusGreenT
 
             ' Convert Visible DataGridView Columns To DataTable
-
             If dgv_VerificationResult.RowCount = 0 Then
-
             Else
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] Inlet Pressure (kPa) : {txtbx_VerInletPressure.Text}")
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] Outlet Pressure (kPa) : {txtbx_VerOutletPressure.Text}")
@@ -2070,8 +2081,6 @@ Public Class FormCalibration
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] DP Pressure (kPa) : {Ver_finaldp}")
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] Flowrate (l/min) : {txtbx_VerFlowrate.Text}")
                 EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result for {txtbx_CalLotID.Text}] Temperature (C) : {txtbx_VerTemperature.Text}")
-
-
 
                 Dim dtTemp As DataTable = GetVisibleColumnsDataTable(dgv_VerificationResult)    'GetVisibleColumnsDataTable(dgv_recipedetails)
                 'dtTemp.DefaultView.Sort = "[Sampling Time (s)] ASC"
@@ -2107,12 +2116,9 @@ Public Class FormCalibration
 
                 ' Check Return State
                 If ReturnValue = "True" Then
-
                     EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Verification Result Summary] CSV Export Success ""{Filepath}""")
                 ElseIf ReturnValue = "Missing" Then
-
                 ElseIf ReturnValue = "False" Then
-
                 End If
             End If
 
@@ -2120,23 +2126,63 @@ Public Class FormCalibration
             'SetVerSeqStart = True
 
             txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
-
-
         End If
     End Sub
 
     Private Sub tmr_Verification_EndSeq_Tick(sender As Object, e As EventArgs) Handles tmr_Verification_EndSeq.Tick
-        Dim VerEndTimeInterval As DateTime = VerEndTime.AddSeconds(10)
+        'If True Then
+        '    Dim VerEndTimeInterval As DateTime = VerEndTime.AddSeconds(10)
 
-        If DateTime.Now > VerEndTimeInterval Then
-            tmr_Verification_EndSeq.Enabled = False
+        '    If DateTime.Now > VerEndTimeInterval Then
+        '        tmr_Verification_EndSeq.Enabled = False
 
-            txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
-        Else
-            If PLCstatus(1)(5) = True Then
+        '        txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+        '    Else
+        '        If PLCstatus(1)(5) = True Then
+        '            tmr_Verification_EndSeq.Enabled = False
+
+        '            txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+        '        End If
+        '    End If
+        'End If
+
+        If True Then
+            ' PLCstatus(2)(15) Depressurize Running
+
+            Dim VerEndTimeInterval As DateTime = VerEndTime.AddSeconds(65)
+
+            If DateTime.Now > VerEndTimeInterval Then
                 tmr_Verification_EndSeq.Enabled = False
-
                 txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+            Else
+                Dim toContinue = True
+
+                If toContinue Then
+                    ' Depressurize Complete ACK
+                    If PLCstatus(1)(14) Then
+                        tmr_Verification_EndSeq.Enabled = False
+                        txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+                        toContinue = False
+                    End If
+                End If
+
+                If toContinue Then
+                    ' Machine In Alarm FB
+                    If PLCstatus(0)(4) Then
+                        tmr_Verification_EndSeq.Enabled = False
+                        txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+                        toContinue = False
+                    End If
+                End If
+
+                If toContinue Then
+                    ' Machine In Auto Running
+                    If Not PLCstatus(0)(1) Then
+                        tmr_Verification_EndSeq.Enabled = False
+                        txtbx_VerDP.Text = CType(Math.Round(Ver_finaldp, 2), String)
+                        toContinue = False
+                    End If
+                End If
             End If
         End If
     End Sub
@@ -2204,7 +2250,6 @@ Public Class FormCalibration
                                     }
 
                                     If SQL.InsertRecord("CalibrationResult", param) = 1 Then
-
                                     End If
                                 Next
                             Case 1
@@ -2226,7 +2271,6 @@ Public Class FormCalibration
                                     }
 
                                     If SQL.InsertRecord("CalibrationResult", param) = 1 Then
-
                                     End If
                                 Next
                         End Select
@@ -2333,26 +2377,18 @@ Public Class FormCalibration
                         If onContinue = True Then
                             If txtbx_CalResult.Text = "Fail" Then
                                 If MsgBox($"Calibration/Blank Test Results as {txtbx_CalResult.Text}, Do you Want to Reset and Re-calibrate?", MsgBoxStyle.YesNo, "Calibration Result") = DialogResult.No Then
-
                                     Me.Close()
                                 Else
                                     btn_Discard.PerformClick()
                                 End If
                             ElseIf txtbx_CalResult.Text = "Pass" Then
-
                                 If MsgBox($"Calibration/Blank Test Completed with Result as {txtbx_CalResult.Text} and Calibration offset as {txtbx_CalOffset.Text}", MsgBoxStyle.OkOnly, "Calibration Result") = DialogResult.OK Then
-
                                     Me.Close()
                                 End If
                             End If
-
-
                         Else
                             MsgBox($"Error in Result capture")
                         End If
-
-
-
                     Else
                         MsgBox($"Query to Update Calibration Result Failed")
                     End If
@@ -2362,11 +2398,8 @@ Public Class FormCalibration
             Else
                 MsgBox($"Numeric Data not found in Calibration offset")
             End If
-
         End If
     End Sub
-
-
 
     Public Sub CalibrationRun()
         Dim dptestpoints As Integer
@@ -2887,7 +2920,6 @@ Public Class FormCalibration
                     '}
                     '}
 
-
                     CartesianChart_CalibrationLiveGraph.Sections = New RectangularSection() {
                         New RectangularSection With {
                             .IsVisible = DP1Enabled,
@@ -3158,7 +3190,6 @@ Public Class FormCalibration
     Public Sub VerificationRun()
         If Not txtbx_CalDPTesttime.Text = Nothing And Not txtbx_CalDPTesttime.Text = "" And Not txtbx_CalDPTesttime.Text = "0" And Not txtbx_CalDPPoints.Text = "0" Then
             If btn_Verify.BackColor = Color.FromArgb(25, 130, 246) Then
-
                 PCStatus(1)(3) = True
                 btn_Calibrate.Enabled = False
                 dtVerification = New DataTable()
@@ -3167,7 +3198,6 @@ Public Class FormCalibration
                 CreateTable("Verification")
                 With dgv_CalibrationResult
                     .BackgroundColor = SystemColors.Window
-
                 End With
                 Ver_samplingtime = 0
 
@@ -3223,7 +3253,6 @@ Public Class FormCalibration
     End Sub
 
     Private Sub btn_CircuitView_Click(sender As Object, e As EventArgs) Handles btn_CircuitView.Click
-
         If btn_CircuitView.BackColor = Color.FromArgb(25, 130, 246) Then
             Panel_Calibration_Circuit.Visible = True
             btn_CircuitView.BackColor = Color.FromArgb(0, 192, 0)
