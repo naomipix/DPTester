@@ -4848,9 +4848,9 @@ Public Class FormRecipeManagement
             If checkbx_EditDPTest1.Enabled = True Then
                 'txtbx_RcpEditDPFill.Enabled = True
                 'txtbx_RcpEditDPBleed.Enabled = True
-                'txtbx_RcpEditDPFlow.Enabled = True
-                'txtbx_RcpEditDPFlowTol.Enabled = True
-                'txtbx_RcpEditDPPressure.Enabled = True
+                txtbx_RcpEditDPFlow.Enabled = True
+                txtbx_RcpEditDPFlowTol.Enabled = True
+                txtbx_RcpEditDPPressure.Enabled = True
                 txtbx_RcpEditDPStabilize.Enabled = True
                 txtbx_RcpEditDPTime.Enabled = True
                 txtbx_RcpEditDPLowLimit.Enabled = True
@@ -4895,9 +4895,9 @@ Public Class FormRecipeManagement
             str_dptest1enable = "Enable"
             'txtbx_RcpEditDPFill.Text = CType(i_dptestfilltime, String)
             'txtbx_RcpEditDPBleed.Text = CType(i_dptestbleedtime, String)
-            'txtbx_RcpEditDPFlow.Text = CType(d_dptestflow, String)
-            'txtbx_RcpEditDPFlowTol.Text = CType(d_dptestflowtol, String)
-            'txtbx_RcpEditDPPressure.Text = CType(d_dptestpressure, String)
+            txtbx_RcpEditDPFlow.Text = CType(d_dptestflow, String)
+            txtbx_RcpEditDPFlowTol.Text = CType(d_dptestflowtol, String)
+            txtbx_RcpEditDPPressure.Text = CType(d_dptestpressure, String)
             txtbx_RcpEditDPStabilize.Text = CType(i_dpteststabilize, String)
             txtbx_RcpEditDPTime.Text = CType(i_dptesttime, String)
             txtbx_RcpEditDPLowLimit.Text = CType(d_dptestlowlimit, String)
@@ -4910,9 +4910,9 @@ Public Class FormRecipeManagement
         Else
             'txtbx_RcpEditDPFill.Enabled = False
             'txtbx_RcpEditDPBleed.Enabled = False
-            'txtbx_RcpEditDPFlow.Enabled = False
-            'txtbx_RcpEditDPFlowTol.Enabled = False
-            'txtbx_RcpEditDPPressure.Enabled = False
+            txtbx_RcpEditDPFlow.Enabled = False
+            txtbx_RcpEditDPFlowTol.Enabled = False
+            txtbx_RcpEditDPPressure.Enabled = False
             txtbx_RcpEditDPStabilize.Enabled = False
             txtbx_RcpEditDPTime.Enabled = False
             txtbx_RcpEditDPLowLimit.Enabled = False
@@ -4924,9 +4924,9 @@ Public Class FormRecipeManagement
             str_dptest1enable = "Disable"
             'txtbx_RcpEditDPFill.Text = Nothing
             'txtbx_RcpEditDPBleed.Text = Nothing
-            'txtbx_RcpEditDPFlow.Text = Nothing
-            'txtbx_RcpEditDPFlowTol.Text = Nothing
-            'txtbx_RcpEditDPPressure.Text = Nothing
+            txtbx_RcpEditDPFlow.Text = Nothing
+            txtbx_RcpEditDPFlowTol.Text = Nothing
+            txtbx_RcpEditDPPressure.Text = Nothing
             txtbx_RcpEditDPStabilize.Text = Nothing
             txtbx_RcpEditDPTime.Text = Nothing
             txtbx_RcpEditDPLowLimit.Text = Nothing

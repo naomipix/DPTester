@@ -207,6 +207,15 @@ Partial Class FormRecipeManagement
         Me.dsp_RcpEditFlush1Flow = New System.Windows.Forms.Label()
         Me.dsp_RcpEditRcpParameters = New System.Windows.Forms.Label()
         Me.panel_Edit = New System.Windows.Forms.Panel()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.ComboBox12 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox11 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.dsp_RcpDuplication = New System.Windows.Forms.Label()
         Me.btn_RcpDuplicate = New System.Windows.Forms.Button()
@@ -391,15 +400,6 @@ Partial Class FormRecipeManagement
         Me.dsp_Home = New System.Windows.Forms.Label()
         Me.btn_Home = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.ComboBox10 = New System.Windows.Forms.ComboBox()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.ComboBox11 = New System.Windows.Forms.ComboBox()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.ComboBox12 = New System.Windows.Forms.ComboBox()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.picbx_Icon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel_UserCategory.SuspendLayout()
         Me.tabpg_Delete.SuspendLayout()
@@ -429,6 +429,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditFlush1.SuspendLayout()
         Me.panel_RcpEditFlush1PumpMode.SuspendLayout()
         Me.panel_Edit.SuspendLayout()
+        Me.Panel11.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.panel_RecipeManagement.SuspendLayout()
         Me.tabpg_Create.SuspendLayout()
@@ -453,7 +454,6 @@ Partial Class FormRecipeManagement
         Me.panel_ProdSKUCreation.SuspendLayout()
         Me.panel_FormControl.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel11.SuspendLayout()
         Me.SuspendLayout()
         '
         'lbl_Version
@@ -2425,6 +2425,111 @@ Partial Class FormRecipeManagement
         Me.panel_Edit.Name = "panel_Edit"
         Me.panel_Edit.Size = New System.Drawing.Size(562, 800)
         Me.panel_Edit.TabIndex = 3
+        '
+        'Panel11
+        '
+        Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel11.Controls.Add(Me.Button3)
+        Me.Panel11.Controls.Add(Me.Label25)
+        Me.Panel11.Controls.Add(Me.Label24)
+        Me.Panel11.Controls.Add(Me.Label23)
+        Me.Panel11.Controls.Add(Me.ComboBox12)
+        Me.Panel11.Controls.Add(Me.ComboBox11)
+        Me.Panel11.Controls.Add(Me.ComboBox10)
+        Me.Panel11.Controls.Add(Me.Label22)
+        Me.Panel11.Location = New System.Drawing.Point(3, 486)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(556, 220)
+        Me.Panel11.TabIndex = 110
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.SystemColors.Window
+        Me.Button3.Location = New System.Drawing.Point(420, 86)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(110, 60)
+        Me.Button3.TabIndex = 110
+        Me.Button3.Text = "Update"
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'Label25
+        '
+        Me.Label25.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.Location = New System.Drawing.Point(21, 148)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(125, 25)
+        Me.Label25.TabIndex = 109
+        Me.Label25.Text = "Jig Type :"
+        Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label24
+        '
+        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(21, 103)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(125, 25)
+        Me.Label24.TabIndex = 109
+        Me.Label24.Text = "Filter Type :"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label23
+        '
+        Me.Label23.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(21, 58)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(125, 25)
+        Me.Label23.TabIndex = 109
+        Me.Label23.Text = "Part ID :"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'ComboBox12
+        '
+        Me.ComboBox12.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox12.FormattingEnabled = True
+        Me.ComboBox12.IntegralHeight = False
+        Me.ComboBox12.Location = New System.Drawing.Point(152, 147)
+        Me.ComboBox12.MaxDropDownItems = 11
+        Me.ComboBox12.Name = "ComboBox12"
+        Me.ComboBox12.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox12.TabIndex = 108
+        '
+        'ComboBox11
+        '
+        Me.ComboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox11.FormattingEnabled = True
+        Me.ComboBox11.IntegralHeight = False
+        Me.ComboBox11.Location = New System.Drawing.Point(152, 102)
+        Me.ComboBox11.MaxDropDownItems = 11
+        Me.ComboBox11.Name = "ComboBox11"
+        Me.ComboBox11.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox11.TabIndex = 108
+        '
+        'ComboBox10
+        '
+        Me.ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox10.FormattingEnabled = True
+        Me.ComboBox10.IntegralHeight = False
+        Me.ComboBox10.Location = New System.Drawing.Point(152, 57)
+        Me.ComboBox10.MaxDropDownItems = 11
+        Me.ComboBox10.Name = "ComboBox10"
+        Me.ComboBox10.Size = New System.Drawing.Size(250, 29)
+        Me.ComboBox10.TabIndex = 108
+        '
+        'Label22
+        '
+        Me.Label22.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(0, 0)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(554, 50)
+        Me.Label22.TabIndex = 107
+        Me.Label22.Text = "Part ID Update"
+        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Panel1
         '
@@ -4399,116 +4504,11 @@ Partial Class FormRecipeManagement
         Me.Label1.Text = "Recipe Management"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
-        'Panel11
-        '
-        Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel11.Controls.Add(Me.Button3)
-        Me.Panel11.Controls.Add(Me.Label25)
-        Me.Panel11.Controls.Add(Me.Label24)
-        Me.Panel11.Controls.Add(Me.Label23)
-        Me.Panel11.Controls.Add(Me.ComboBox12)
-        Me.Panel11.Controls.Add(Me.ComboBox11)
-        Me.Panel11.Controls.Add(Me.ComboBox10)
-        Me.Panel11.Controls.Add(Me.Label22)
-        Me.Panel11.Location = New System.Drawing.Point(3, 486)
-        Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(556, 220)
-        Me.Panel11.TabIndex = 110
-        '
-        'Label22
-        '
-        Me.Label22.Font = New System.Drawing.Font("Segoe UI Semibold", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(0, 0)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(554, 50)
-        Me.Label22.TabIndex = 107
-        Me.Label22.Text = "Part ID Update"
-        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ComboBox10
-        '
-        Me.ComboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox10.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox10.FormattingEnabled = True
-        Me.ComboBox10.IntegralHeight = False
-        Me.ComboBox10.Location = New System.Drawing.Point(152, 57)
-        Me.ComboBox10.MaxDropDownItems = 11
-        Me.ComboBox10.Name = "ComboBox10"
-        Me.ComboBox10.Size = New System.Drawing.Size(250, 29)
-        Me.ComboBox10.TabIndex = 108
-        '
-        'Label23
-        '
-        Me.Label23.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.Location = New System.Drawing.Point(21, 58)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(125, 25)
-        Me.Label23.TabIndex = 109
-        Me.Label23.Text = "Part ID :"
-        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'ComboBox11
-        '
-        Me.ComboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox11.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox11.FormattingEnabled = True
-        Me.ComboBox11.IntegralHeight = False
-        Me.ComboBox11.Location = New System.Drawing.Point(152, 102)
-        Me.ComboBox11.MaxDropDownItems = 11
-        Me.ComboBox11.Name = "ComboBox11"
-        Me.ComboBox11.Size = New System.Drawing.Size(250, 29)
-        Me.ComboBox11.TabIndex = 108
-        '
-        'Label24
-        '
-        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(21, 103)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(125, 25)
-        Me.Label24.TabIndex = 109
-        Me.Label24.Text = "Filter Type :"
-        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'ComboBox12
-        '
-        Me.ComboBox12.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox12.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox12.FormattingEnabled = True
-        Me.ComboBox12.IntegralHeight = False
-        Me.ComboBox12.Location = New System.Drawing.Point(152, 147)
-        Me.ComboBox12.MaxDropDownItems = 11
-        Me.ComboBox12.Name = "ComboBox12"
-        Me.ComboBox12.Size = New System.Drawing.Size(250, 29)
-        Me.ComboBox12.TabIndex = 108
-        '
-        'Label25
-        '
-        Me.Label25.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(21, 148)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(125, 25)
-        Me.Label25.TabIndex = 109
-        Me.Label25.Text = "Jig Type :"
-        Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(25, Byte), Integer), CType(CType(130, Byte), Integer), CType(CType(246, Byte), Integer))
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.SystemColors.Window
-        Me.Button3.Location = New System.Drawing.Point(420, 86)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(110, 60)
-        Me.Button3.TabIndex = 110
-        Me.Button3.Text = "Update"
-        Me.Button3.UseVisualStyleBackColor = False
-        '
         'FormRecipeManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1904, 1001)
+        Me.ClientSize = New System.Drawing.Size(2380, 1251)
         Me.Controls.Add(Me.panel_FormControl)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximumSize = New System.Drawing.Size(1920, 1040)
@@ -4566,6 +4566,7 @@ Partial Class FormRecipeManagement
         Me.panel_RcpEditFlush1PumpMode.ResumeLayout(False)
         Me.panel_RcpEditFlush1PumpMode.PerformLayout()
         Me.panel_Edit.ResumeLayout(False)
+        Me.Panel11.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.panel_RecipeManagement.ResumeLayout(False)
@@ -4610,7 +4611,6 @@ Partial Class FormRecipeManagement
         Me.panel_ProdSKUCreation.PerformLayout()
         Me.panel_FormControl.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel11.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
