@@ -4733,7 +4733,7 @@ Public Class FormRecipeManagement
 
 
                 If onContinue = True Then
-                    If SQL.DeleteRecord("RecipeTable", condition) = 1 Then
+                    If SQL.DeleteRecord("RecipeTable", condition) >= 1 Then
                         RecipeMessage(28)
 
                         ' Event Log

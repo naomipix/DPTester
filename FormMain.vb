@@ -1418,6 +1418,119 @@ Public Class FormMain
         End If
     End Sub
 
+    Private Async Sub btn_ProdDetailExportFull_Click(sender As Object, e As EventArgs) Handles btn_ProdDetailExportFull.Click
+        Dim SerialNumber As String = txtbx_SearchSerialNumber.Text
+        Dim cmbxArr() As ComboBox = {cmbx_FilterLotID, cmbx_FilterPartID, cmbx_FilterRecipeID, cmbx_FilterResult}
+        Dim dtStart As DateTime = dtpicker_StartDate.Value
+        Dim dtEnd As DateTime = dtpicker_EndDate.Value
+        Dim containSearch As Boolean = True
+
+        Dim dtResult As New DataTable
+
+        ' Define SQL String
+        Dim sqlString As String = $"
+        SELECT
+            ProductionDetail.id, 
+            --CONCAT(LotUsage.lot_id, '-', ProductionDetail.serial_number) AS serial_uid, 
+            LotUsage.lot_id AS serial_uid, 
+            ProductionDetail.serial_number, 
+            ProductionDetail.lot_usage_id, 
+            LotUsage.lot_id, 
+            ProductionDetail.timestamp, 
+            ProductionDetail.serial_attempt, 
+            LotUsage.recipe_id, 
+            LotUsage.recipe_rev, 
+            --LotUsage.cal_diff_pressure, 
+            CONVERT(DECIMAL(10,2), LotUsage.cal_diff_pressure) AS cal_diff_pressure,
+            ProductionDetail.flowrate, 
+            ProductionDetail.diff_pressure, 
+            UPPER(ProductionDetail.result) AS result, 
+            CASE 
+                WHEN ProductionDetail.temperature - 273.15 <= -273.15 THEN 0
+                ELSE ProductionDetail.temperature - 273.15
+            END AS temperature, 
+            --ProductionDetail.viscosity, 
+            CONVERT(DECIMAL(10,2), ProductionDetail.viscosity) AS viscosity,
+            ProductionDetail.inlet_pressure, 
+            ProductionDetail.outlet_pressure, 
+            ProductionDetail.back_pressure, 
+            ProductionDetail.cycle_time, 
+            WorkOrder.work_order, 
+            WorkOrder.part_id, 
+            WorkOrder.confirmation_id, 
+            LotUsage.run_by 
+        FROM ProductionDetail 
+        LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id 
+        LEFT JOIN WorkOrder ON LotUsage.lot_id=WorkOrder.lot_id 
+        ORDER BY ProductionDetail.timestamp DESC
+        "
+
+        ' Populate Datatable From SQL Query
+        Dim dtProdDetail As DataTable = Await Task.Run(Function() SQL.ReadRecords(sqlString))   'SQL.ReadRecords(sqlString)
+
+        ' Convert Visible DataGridView Columns To DataTable
+        Dim dt As DataTable = dtProdDetail.Copy
+        If True Then
+            'dt.Columns("serial_uid").ColumnName = "Unique ID"
+            dt.Columns("serial_uid").ColumnName = "Lot ID"
+            dt.Columns("serial_number").ColumnName = "S/N"
+            dt.Columns("timestamp").ColumnName = "Timestamp_tmp" '"dd-MMM-yyyy HH:mm:ss"
+            dt.Columns("serial_attempt").ColumnName = "Number of Attempt"
+            dt.Columns("recipe_id").ColumnName = "Recipe ID"
+            dt.Columns("recipe_rev").ColumnName = "Recipe Rev."
+            dt.Columns("cal_diff_pressure").ColumnName = "Calibration Offset (kPa)"
+            dt.Columns("flowrate").ColumnName = "Flowrate (l/min)"
+            dt.Columns("diff_pressure").ColumnName = "Calculated DP (kPa)"
+            dt.Columns("result").ColumnName = "DP test Result"
+            dt.Columns("temperature").ColumnName = "Temperature (C)"
+            dt.Columns("viscosity").ColumnName = "Viscosity (mPa.s)"
+            dt.Columns("inlet_pressure").ColumnName = "Inlet Pressure (kPa)"
+            dt.Columns("outlet_pressure").ColumnName = "Outlet Pressure (kPa)"
+            dt.Columns("back_pressure").ColumnName = "Back Pressure (kPa)"
+            dt.Columns("cycle_time").ColumnName = "Cycle Time (s)"
+            dt.Columns("work_order").ColumnName = "Work Order Number"
+            dt.Columns("part_id").ColumnName = "Part ID"
+            dt.Columns("confirmation_id").ColumnName = "Confirmation ID"
+            dt.Columns("run_by").ColumnName = "Operator ID"
+
+            dt.Columns.Remove("id")
+            dt.Columns.Remove("lot_usage_id")
+            dt.Columns.Remove("lot_id")
+
+            dt.Columns.Add("Timestamp", GetType(String)).SetOrdinal(3)
+
+            dt.AcceptChanges()
+
+            For Each row As DataRow In dt.Rows
+                Try
+                    Dim datetmp As DateTime = CDate(row("Timestamp_tmp"))
+                    'row("Timestamp") = datetmp.ToString("dd-MMM-yyyy HH:mm:ss")
+                    row("Timestamp") = datetmp.ToString("d/MM/yyyy hh:mm:ss t")
+                Catch ex As Exception
+                End Try
+            Next
+
+            dt.Columns.Remove("Timestamp_tmp")
+            dt.AcceptChanges()
+        End If
+
+        ' Get Path
+        Dim ExportPath As String = PublicVariables.CSVPathToProductionDetails 'dtGetPath(0)("retained_value")
+
+        ' Export With Return
+        Dim ReturnValue As String = ExportDataTableToCsv(dt, ExportPath & $"ProductionDetails_FULL_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv", PublicVariables.CSVDelimiterProductionDetails)
+
+        ' Check Return State
+        If ReturnValue = "True" Then
+            MsgBox("FULL CSV File Exported Successfully.", MsgBoxStyle.Information Or MsgBoxStyle.OkCancel, "Export - Success")
+            EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", $"[Production Details] FULL CSV Export Success ""{ExportPath}ProductionDetails_FULL_{System.DateTime.Now.ToString("yyyyMMdd_HHmmss")}.csv""")
+        ElseIf ReturnValue = "Missing" Then
+            MsgBox("Invalid File Path Specified.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Path Error")
+        ElseIf ReturnValue = "False" Then
+            MsgBox("Unable To Export FULL CSV File, Please Try Again.", MsgBoxStyle.Exclamation Or MsgBoxStyle.OkOnly, "Export - Failed")
+        End If
+    End Sub
+
     ' Populate DataGridView From SQL Tables
     Private Async Sub LoadProductionDetailsTable(containSearch As Boolean, SerialNumber As String, cmbxArr() As ComboBox, dtStart As DateTime, dtEnd As DateTime)
         ' Prevent UI Thread Freezing
@@ -1427,7 +1540,8 @@ Public Class FormMain
         Dim sqlString As String = $"
         SELECT TOP {PublicVariables.ProdDetailsDisplayedTableCount} 
             ProductionDetail.id, 
-            CONCAT(LotUsage.lot_id, '-', ProductionDetail.serial_number) AS serial_uid, 
+            --CONCAT(LotUsage.lot_id, '-', ProductionDetail.serial_number) AS serial_uid, 
+            LotUsage.lot_id AS serial_uid, 
             ProductionDetail.serial_number, 
             ProductionDetail.lot_usage_id, 
             LotUsage.lot_id, 
@@ -1564,7 +1678,8 @@ Public Class FormMain
             '.Columns("cycle_time").Visible = False
 
             ' Rename Columns
-            .Columns("serial_uid").HeaderCell.Value = "Unique ID"
+            '.Columns("serial_uid").HeaderCell.Value = "Unique ID"
+            .Columns("serial_uid").HeaderCell.Value = "Lot ID"
             .Columns("serial_number").HeaderCell.Value = "S/N"
             .Columns("timestamp").HeaderCell.Value = "Timestamp"
             .Columns("serial_attempt").HeaderCell.Value = "Number of Attempt"
@@ -1831,11 +1946,11 @@ Public Class FormMain
     ' Populate DataGridView From SQL Tables
     Private Async Sub LoadLotSummaryTable(containSearch As Boolean, LotID As String, cmbxArr() As ComboBox)
         ' Prevent UI Thread Freezing
-        Await Task.Delay(20)
+        Await Task.Delay(50)
 
         ' Define SQL String
         Dim sqlString As String = $"
-        SELECT 
+        SELECT TOP {PublicVariables.ProdDetailsDisplayedTableCount} 
             LotUsage.id AS lotusage_id,
             LotUsage.lot_id AS lotusage_lot_id,
             LotUsage.lot_attempt AS lotusage_lot_attempt,
