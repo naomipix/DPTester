@@ -76,10 +76,10 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>B8AFB54D2B45BFAE1601CFA16B60909AD9763348</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>F98798DC863CD873A1AED6F33A7BAF7320F67FEB</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>DPTesterApp_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>DPTesterApp_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -329,6 +329,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="DPTesterApp_1_TemporaryKey.pfx" />
     <None Include="DPTesterApp_TemporaryKey.pfx" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\appconfig.ini" />
