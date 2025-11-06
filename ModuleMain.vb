@@ -12,7 +12,7 @@ Imports LiveChartsCore.SkiaSharpView.WinForms
 Module PublicVariables
     ' Version
     'Public AppVersion As String = "Ver. " & "1.0.0.1"
-    Public AppVersion As String = "Ver. " & "1.2"
+    Public AppVersion As String = "Ver. " & "1.2.1b"
 
     ' License Status
     Public LicenseType As String = ""

@@ -65,6 +65,70 @@ Module ModuleSerialComm
     End Sub
 
     Public Sub PlaceData(str As String)
+        If True Then
+            Dim onContinue = True
+
+            If onContinue Then ' Work Order ID 
+                If str.Length >= PublicVariables.WorkOrderLenLow And str.Length <= PublicVariables.WorkOrderLenHigh Then
+                    Dim numericValue As Long
+
+                    ' Check if string is numeric and within the allowed ranges
+                    If Long.TryParse(str, numericValue) AndAlso ((numericValue >= 6000000 AndAlso numericValue <= 6999999) OrElse (numericValue >= 100000000 AndAlso numericValue <= 199999999)) Then
+
+                        If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+                            FormMain.txtbx_WorkOrderNumber.Text = str
+                            onContinue = False
+                        End If
+                    End If
+                End If
+            End If
+            If onContinue Then ' Lot ID 
+                If str.Length >= PublicVariables.LotIdLenLow AndAlso str.Length <= PublicVariables.LotIdLenHigh Then
+                    Dim prefix As String = str.Substring(0, 2) '.ToUpper() 
+
+                    If (prefix = "TK" OrElse prefix = "SG") Then
+
+                        If FormMain.txtbx_LotID.Enabled = True Then
+                            FormMain.txtbx_LotID.Text = str
+                            onContinue = False
+                        End If
+                    End If
+                End If
+            End If
+            If onContinue Then ' Confirmation
+                If str.Length >= PublicVariables.ConfirmationIdLenLow And str.Length <= PublicVariables.ConfirmationIdLenHigh Then
+                    If FormMain.txtbx_ConfirmationID.Enabled = True Then
+                        Dim ParsedInt As Integer = 0
+                        If Integer.TryParse(str, ParsedInt) Then
+                            FormMain.txtbx_ConfirmationID.Text = str
+                            onContinue = False
+                        End If
+                    End If
+                End If
+            End If
+            If onContinue Then  ' Quantity
+                If str.Length >= PublicVariables.QuantityLenLow And str.Length <= PublicVariables.QuantityLenHigh Then
+                    If FormMain.txtbx_Quantity.Enabled = True Then
+                        Dim ParsedInt As Integer = 0
+                        If Integer.TryParse(str, ParsedInt) AndAlso ParsedInt > 0 Then
+                            FormMain.txtbx_Quantity.Text = ParsedInt
+                            onContinue = False
+                        End If
+                    End If
+                End If
+            End If
+            If onContinue Then ' Part ID
+                If str.Length >= PublicVariables.PartIdLenLow And str.Length <= PublicVariables.PartIdLenHigh Then
+                    If FormMain.txtbx_PartID.Enabled = True Then
+                        FormMain.txtbx_PartID.Text = str
+                    End If
+                End If
+            End If
+        End If
+        SerialDataReceived = False
+    End Sub
+
+    Public Sub PlaceDataOld(str As String)
         'If True Then
         '    If str.Length >= PublicVariables.WorkOrderLenLow And str.Length <= PublicVariables.WorkOrderLenHigh Then
         '        If FormMain.txtbx_WorkOrderNumber.Enabled = True Then

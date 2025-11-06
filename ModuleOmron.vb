@@ -2344,7 +2344,7 @@ Module ModuleOmron
         }
 
         If dtAlarmStatus.Rows.Count = 0 Then
-            ' Reset Status Index
+            ' Reset Status Index 
             statusIndex = -1
 
             ' Set Alarm Shown
