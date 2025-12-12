@@ -165,55 +165,69 @@ Module ModuleSerialComm
         '        End If
         '    End If
         'End If
-        If True Then
-            Dim onContinue = True
 
-            If onContinue Then ' Lot ID
-                If str.Length >= PublicVariables.LotIdLenLow And str.Length <= PublicVariables.LotIdLenHigh And Char.IsLetter(str.Substring(0, 1)) = True Then
-                    If FormMain.txtbx_LotID.Enabled = True Then
+        If True Then
+            Dim onContinue As Boolean = True
+
+            ' Lot ID
+            If onContinue Then
+                Dim maxLength As Integer = Math.Min(PublicVariables.LotIdLenHigh, 15)
+                If str.Length >= PublicVariables.LotIdLenLow AndAlso str.Length <= maxLength AndAlso (str.StartsWith("TK") OrElse str.StartsWith("SG")) Then
+                    If FormMain.txtbx_LotID.Enabled Then
                         FormMain.txtbx_LotID.Text = str
                         onContinue = False
                     End If
                 End If
             End If
-            If onContinue Then ' Work Order ID
-                If str.Length >= PublicVariables.WorkOrderLenLow And str.Length <= PublicVariables.WorkOrderLenHigh Then
-                    If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
+
+            ' Work Order ID
+            If onContinue Then
+                Dim allowedLengths() As Integer = {7, 9, 12}
+                Dim minLength As Integer = PublicVariables.WorkOrderLenLow
+                Dim maxLength As Integer = PublicVariables.WorkOrderLenHigh
+
+                If IsNumeric(str) AndAlso str.Length >= minLength AndAlso str.Length <= maxLength AndAlso allowedLengths.Contains(str.Length) Then
+                    If FormMain.txtbx_WorkOrderNumber.Enabled Then
                         FormMain.txtbx_WorkOrderNumber.Text = str
                         onContinue = False
                     End If
                 End If
             End If
-            If onContinue Then  ' Quantity
-                If str.Length >= PublicVariables.QuantityLenLow And str.Length <= PublicVariables.QuantityLenHigh Then
-                    If FormMain.txtbx_Quantity.Enabled = True Then
-                        Dim ParsedInt As Integer = 0
-                        If Integer.TryParse(str, ParsedInt) Then
-                            FormMain.txtbx_Quantity.Text = ParsedInt
+
+            ' Quantity
+            If onContinue Then
+                If str.Length >= PublicVariables.QuantityLenLow AndAlso str.Length <= PublicVariables.QuantityLenHigh Then
+                    If FormMain.txtbx_Quantity.Enabled Then
+                        Dim parsedInt As Integer = 0
+                        If Integer.TryParse(str, parsedInt) AndAlso parsedInt >= 1 AndAlso parsedInt <= 999 Then
+                            FormMain.txtbx_Quantity.Text = parsedInt
                             onContinue = False
                         End If
                     End If
                 End If
             End If
-            If onContinue Then ' Confirmation
-                If str.Length >= PublicVariables.ConfirmationIdLenLow And str.Length <= PublicVariables.ConfirmationIdLenHigh Then
-                    If FormMain.txtbx_ConfirmationID.Enabled = True Then
-                        Dim ParsedInt As Integer = 0
-                        If Integer.TryParse(str, ParsedInt) Then
-                            FormMain.txtbx_ConfirmationID.Text = str
-                            onContinue = False
-                        End If
+
+            ' Confirmation ID
+            If onContinue Then
+                If str.Length >= PublicVariables.ConfirmationIdLenLow AndAlso str.Length <= PublicVariables.ConfirmationIdLenHigh AndAlso str.Length = 10 AndAlso IsNumeric(str) Then
+                    If FormMain.txtbx_ConfirmationID.Enabled Then
+                        FormMain.txtbx_ConfirmationID.Text = str
+                        onContinue = False
                     End If
                 End If
             End If
-            If onContinue Then ' Part ID
-                If str.Length >= PublicVariables.PartIdLenLow And str.Length <= PublicVariables.PartIdLenHigh Then
-                    If FormMain.txtbx_PartID.Enabled = True Then
+
+            ' Part ID
+            If onContinue Then
+                If str.Length >= PublicVariables.PartIdLenLow AndAlso str.Length <= PublicVariables.PartIdLenHigh AndAlso str.Any(Function(c) Char.IsLetter(c)) Then
+                    If FormMain.txtbx_PartID.Enabled Then
                         FormMain.txtbx_PartID.Text = str
+                        onContinue = False
                     End If
                 End If
             End If
         End If
+
         SerialDataReceived = False
     End Sub
 
