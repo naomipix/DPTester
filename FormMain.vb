@@ -3375,7 +3375,7 @@ Public Class FormMain
             End If
         End If
 
-        If OnContinue = True AndAlso LoginUserCategoryID > 2 AndAlso LoginUserCategoryID < 2 Then ' NEWLY ADDED
+        If OnContinue = True AndAlso LoginUserCategoryID > 2 Then ' NEWLY ADDED
             If Not (LotID.StartsWith("TK") OrElse LotID.StartsWith("SG")) Then
                 MainMessage(2, $"Lot ID must start with TK or SG")
                 OnContinue = False
@@ -6013,5 +6013,36 @@ Public Class FormMain
             RetainedMemory.Update(34, "JigBypass", 0)
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
         End If
+    End Sub
+
+    Private Sub tmr_Login_Tick(sender As Object, e As EventArgs) Handles tmr_Login.Tick
+
+        'txtbx_WorkOrderNumber.Text = PublicVariables.RetainedWorkOrder
+        'txtbx_LotID.Text = PublicVariables.RetainedLotID
+        'txtbx_PartID.Text = PublicVariables.RetainedPartID
+        'txtbx_ConfirmationID.Text = PublicVariables.RetainedConfirmationID
+        'txtbx_Quantity.Text = PublicVariables.RetainedQuantity
+
+
+        If PublicVariables.LoginUserCategoryID > 3 Then
+            txtbx_WorkOrderNumber.ReadOnly = True
+            txtbx_LotID.ReadOnly = True
+            txtbx_PartID.ReadOnly = True
+            txtbx_ConfirmationID.ReadOnly = True
+            txtbx_Quantity.ReadOnly = True
+
+            txtbx_WorkOrderNumber.BackColor = SystemColors.Window
+            txtbx_LotID.BackColor = SystemColors.Window
+            txtbx_PartID.BackColor = SystemColors.Window
+            txtbx_ConfirmationID.BackColor = SystemColors.Window
+            txtbx_Quantity.BackColor = SystemColors.Window
+        Else
+            txtbx_WorkOrderNumber.ReadOnly = False
+            txtbx_LotID.ReadOnly = False
+            txtbx_PartID.ReadOnly = False
+            txtbx_ConfirmationID.ReadOnly = False
+            txtbx_Quantity.ReadOnly = False
+        End If
+
     End Sub
 End Class
