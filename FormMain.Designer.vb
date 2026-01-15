@@ -228,10 +228,15 @@ Partial Class FormMain
         Me.btn_WrkOrdScnDtEndLot = New System.Windows.Forms.Button()
         Me.btn_WrkOrdScnDtConfirm = New System.Windows.Forms.Button()
         Me.tabpg_ProdDetail = New System.Windows.Forms.TabPage()
+        Me.btn_ProdDetailExportFull = New System.Windows.Forms.Button()
         Me.btn_ProdDetailExport = New System.Windows.Forms.Button()
         Me.btn_ProdDetailSearch = New System.Windows.Forms.Button()
         Me.btn_ProdDetailReset = New System.Windows.Forms.Button()
         Me.grpbx_SearchFilter = New System.Windows.Forms.GroupBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label46 = New System.Windows.Forms.Label()
         Me.dsp_SearchSerialNumber = New System.Windows.Forms.Label()
         Me.cmbx_FilterResult = New System.Windows.Forms.ComboBox()
         Me.cmbx_FilterRecipeID = New System.Windows.Forms.ComboBox()
@@ -615,7 +620,7 @@ Partial Class FormMain
         Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.cms_dgv_LotSummary = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DeleteLotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btn_ProdDetailExportFull = New System.Windows.Forms.Button()
+        Me.tmr_Login = New System.Windows.Forms.Timer(Me.components)
         Me.panel_FormControl.SuspendLayout
         Me.Panel12.SuspendLayout
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
@@ -2681,13 +2686,23 @@ Partial Class FormMain
         Me.tabpg_ProdDetail.Text = "Test Summary"
         Me.tabpg_ProdDetail.UseVisualStyleBackColor = True
         '
+        'btn_ProdDetailExportFull
+        '
+        Me.btn_ProdDetailExportFull.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_ProdDetailExportFull.Location = New System.Drawing.Point(1759, 27)
+        Me.btn_ProdDetailExportFull.Name = "btn_ProdDetailExportFull"
+        Me.btn_ProdDetailExportFull.Size = New System.Drawing.Size(90, 45)
+        Me.btn_ProdDetailExportFull.TabIndex = 33
+        Me.btn_ProdDetailExportFull.Text = "Export" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FULL"
+        Me.btn_ProdDetailExportFull.UseVisualStyleBackColor = True
+        '
         'btn_ProdDetailExport
         '
         Me.btn_ProdDetailExport.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn_ProdDetailExport.Location = New System.Drawing.Point(1658, 27)
         Me.btn_ProdDetailExport.Name = "btn_ProdDetailExport"
         Me.btn_ProdDetailExport.Size = New System.Drawing.Size(90, 45)
-        Me.btn_ProdDetailExport.TabIndex = 30
+        Me.btn_ProdDetailExport.TabIndex = 32
         Me.btn_ProdDetailExport.Text = "Export" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "View"
         Me.btn_ProdDetailExport.UseVisualStyleBackColor = True
         '
@@ -2697,7 +2712,7 @@ Partial Class FormMain
         Me.btn_ProdDetailSearch.Location = New System.Drawing.Point(1543, 27)
         Me.btn_ProdDetailSearch.Name = "btn_ProdDetailSearch"
         Me.btn_ProdDetailSearch.Size = New System.Drawing.Size(90, 45)
-        Me.btn_ProdDetailSearch.TabIndex = 29
+        Me.btn_ProdDetailSearch.TabIndex = 31
         Me.btn_ProdDetailSearch.Text = "Search"
         Me.btn_ProdDetailSearch.UseVisualStyleBackColor = True
         '
@@ -2707,12 +2722,16 @@ Partial Class FormMain
         Me.btn_ProdDetailReset.Location = New System.Drawing.Point(1442, 27)
         Me.btn_ProdDetailReset.Name = "btn_ProdDetailReset"
         Me.btn_ProdDetailReset.Size = New System.Drawing.Size(90, 45)
-        Me.btn_ProdDetailReset.TabIndex = 28
+        Me.btn_ProdDetailReset.TabIndex = 30
         Me.btn_ProdDetailReset.Text = "Reset"
         Me.btn_ProdDetailReset.UseVisualStyleBackColor = True
         '
         'grpbx_SearchFilter
         '
+        Me.grpbx_SearchFilter.Controls.Add(Me.ComboBox2)
+        Me.grpbx_SearchFilter.Controls.Add(Me.Label47)
+        Me.grpbx_SearchFilter.Controls.Add(Me.ComboBox1)
+        Me.grpbx_SearchFilter.Controls.Add(Me.Label46)
         Me.grpbx_SearchFilter.Controls.Add(Me.dsp_SearchSerialNumber)
         Me.grpbx_SearchFilter.Controls.Add(Me.cmbx_FilterResult)
         Me.grpbx_SearchFilter.Controls.Add(Me.cmbx_FilterRecipeID)
@@ -2735,11 +2754,59 @@ Partial Class FormMain
         Me.grpbx_SearchFilter.TabStop = False
         Me.grpbx_SearchFilter.Text = "Search && Filter"
         '
+        'ComboBox2
+        '
+        Me.ComboBox2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.ComboBox2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.ComboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.IntegralHeight = False
+        Me.ComboBox2.Location = New System.Drawing.Point(895, 41)
+        Me.ComboBox2.MaxDropDownItems = 11
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(100, 25)
+        Me.ComboBox2.TabIndex = 26
+        '
+        'Label47
+        '
+        Me.Label47.AutoSize = True
+        Me.Label47.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label47.Location = New System.Drawing.Point(892, 21)
+        Me.Label47.Name = "Label47"
+        Me.Label47.Size = New System.Drawing.Size(99, 17)
+        Me.Label47.TabIndex = 30
+        Me.Label47.Text = "User Category :"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append
+        Me.ComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.IntegralHeight = False
+        Me.ComboBox1.Location = New System.Drawing.Point(779, 41)
+        Me.ComboBox1.MaxDropDownItems = 11
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(100, 25)
+        Me.ComboBox1.TabIndex = 25
+        '
+        'Label46
+        '
+        Me.Label46.AutoSize = True
+        Me.Label46.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label46.Location = New System.Drawing.Point(776, 21)
+        Me.Label46.Name = "Label46"
+        Me.Label46.Size = New System.Drawing.Size(85, 17)
+        Me.Label46.TabIndex = 28
+        Me.Label46.Text = "Recipe Type :"
+        '
         'dsp_SearchSerialNumber
         '
         Me.dsp_SearchSerialNumber.AutoSize = True
         Me.dsp_SearchSerialNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_SearchSerialNumber.Location = New System.Drawing.Point(228, 21)
+        Me.dsp_SearchSerialNumber.Location = New System.Drawing.Point(178, 21)
         Me.dsp_SearchSerialNumber.Name = "dsp_SearchSerialNumber"
         Me.dsp_SearchSerialNumber.Size = New System.Drawing.Size(99, 17)
         Me.dsp_SearchSerialNumber.TabIndex = 9
@@ -2750,10 +2817,10 @@ Partial Class FormMain
         Me.cmbx_FilterResult.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbx_FilterResult.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_FilterResult.FormattingEnabled = True
-        Me.cmbx_FilterResult.Location = New System.Drawing.Point(879, 41)
+        Me.cmbx_FilterResult.Location = New System.Drawing.Point(1011, 41)
         Me.cmbx_FilterResult.Name = "cmbx_FilterResult"
-        Me.cmbx_FilterResult.Size = New System.Drawing.Size(125, 25)
-        Me.cmbx_FilterResult.TabIndex = 25
+        Me.cmbx_FilterResult.Size = New System.Drawing.Size(100, 25)
+        Me.cmbx_FilterResult.TabIndex = 27
         '
         'cmbx_FilterRecipeID
         '
@@ -2763,7 +2830,7 @@ Partial Class FormMain
         Me.cmbx_FilterRecipeID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_FilterRecipeID.FormattingEnabled = True
         Me.cmbx_FilterRecipeID.IntegralHeight = False
-        Me.cmbx_FilterRecipeID.Location = New System.Drawing.Point(663, 41)
+        Me.cmbx_FilterRecipeID.Location = New System.Drawing.Point(563, 41)
         Me.cmbx_FilterRecipeID.MaxDropDownItems = 11
         Me.cmbx_FilterRecipeID.Name = "cmbx_FilterRecipeID"
         Me.cmbx_FilterRecipeID.Size = New System.Drawing.Size(200, 25)
@@ -2772,10 +2839,10 @@ Partial Class FormMain
         'txtbx_SearchSerialNumber
         '
         Me.txtbx_SearchSerialNumber.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtbx_SearchSerialNumber.Location = New System.Drawing.Point(231, 41)
+        Me.txtbx_SearchSerialNumber.Location = New System.Drawing.Point(181, 41)
         Me.txtbx_SearchSerialNumber.MaxLength = 30
         Me.txtbx_SearchSerialNumber.Name = "txtbx_SearchSerialNumber"
-        Me.txtbx_SearchSerialNumber.Size = New System.Drawing.Size(200, 25)
+        Me.txtbx_SearchSerialNumber.Size = New System.Drawing.Size(150, 25)
         Me.txtbx_SearchSerialNumber.TabIndex = 22
         '
         'cmbx_FilterPartID
@@ -2786,7 +2853,7 @@ Partial Class FormMain
         Me.cmbx_FilterPartID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbx_FilterPartID.FormattingEnabled = True
         Me.cmbx_FilterPartID.IntegralHeight = False
-        Me.cmbx_FilterPartID.Location = New System.Drawing.Point(447, 41)
+        Me.cmbx_FilterPartID.Location = New System.Drawing.Point(347, 41)
         Me.cmbx_FilterPartID.MaxDropDownItems = 11
         Me.cmbx_FilterPartID.Name = "cmbx_FilterPartID"
         Me.cmbx_FilterPartID.Size = New System.Drawing.Size(200, 25)
@@ -2803,18 +2870,18 @@ Partial Class FormMain
         Me.cmbx_FilterLotID.Location = New System.Drawing.Point(15, 41)
         Me.cmbx_FilterLotID.MaxDropDownItems = 11
         Me.cmbx_FilterLotID.Name = "cmbx_FilterLotID"
-        Me.cmbx_FilterLotID.Size = New System.Drawing.Size(200, 25)
+        Me.cmbx_FilterLotID.Size = New System.Drawing.Size(150, 25)
         Me.cmbx_FilterLotID.TabIndex = 21
         '
         'dtpicker_EndDate
         '
-        Me.dtpicker_EndDate.CustomFormat = " dd MMMM yyyy"
+        Me.dtpicker_EndDate.CustomFormat = " dd MMM yyyy"
         Me.dtpicker_EndDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpicker_EndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpicker_EndDate.Location = New System.Drawing.Point(1236, 41)
+        Me.dtpicker_EndDate.Location = New System.Drawing.Point(1263, 41)
         Me.dtpicker_EndDate.Name = "dtpicker_EndDate"
-        Me.dtpicker_EndDate.Size = New System.Drawing.Size(160, 25)
-        Me.dtpicker_EndDate.TabIndex = 27
+        Me.dtpicker_EndDate.Size = New System.Drawing.Size(120, 25)
+        Me.dtpicker_EndDate.TabIndex = 29
         '
         'dsp_FilterLotID
         '
@@ -2828,19 +2895,19 @@ Partial Class FormMain
         '
         'dtpicker_StartDate
         '
-        Me.dtpicker_StartDate.CustomFormat = " dd MMMM yyyy"
+        Me.dtpicker_StartDate.CustomFormat = " dd MMM yyyy"
         Me.dtpicker_StartDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpicker_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpicker_StartDate.Location = New System.Drawing.Point(1055, 41)
+        Me.dtpicker_StartDate.Location = New System.Drawing.Point(1127, 41)
         Me.dtpicker_StartDate.Name = "dtpicker_StartDate"
-        Me.dtpicker_StartDate.Size = New System.Drawing.Size(160, 25)
-        Me.dtpicker_StartDate.TabIndex = 26
+        Me.dtpicker_StartDate.Size = New System.Drawing.Size(120, 25)
+        Me.dtpicker_StartDate.TabIndex = 28
         '
         'dsp_FilterPartID
         '
         Me.dsp_FilterPartID.AutoSize = True
         Me.dsp_FilterPartID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_FilterPartID.Location = New System.Drawing.Point(444, 21)
+        Me.dsp_FilterPartID.Location = New System.Drawing.Point(344, 21)
         Me.dsp_FilterPartID.Name = "dsp_FilterPartID"
         Me.dsp_FilterPartID.Size = New System.Drawing.Size(54, 17)
         Me.dsp_FilterPartID.TabIndex = 9
@@ -2850,7 +2917,7 @@ Partial Class FormMain
         '
         Me.dsp_FilterStartDate.AutoSize = True
         Me.dsp_FilterStartDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_FilterStartDate.Location = New System.Drawing.Point(1052, 21)
+        Me.dsp_FilterStartDate.Location = New System.Drawing.Point(1124, 21)
         Me.dsp_FilterStartDate.Name = "dsp_FilterStartDate"
         Me.dsp_FilterStartDate.Size = New System.Drawing.Size(73, 17)
         Me.dsp_FilterStartDate.TabIndex = 9
@@ -2860,7 +2927,7 @@ Partial Class FormMain
         '
         Me.dsp_FilterEndDate.AutoSize = True
         Me.dsp_FilterEndDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_FilterEndDate.Location = New System.Drawing.Point(1233, 21)
+        Me.dsp_FilterEndDate.Location = New System.Drawing.Point(1260, 21)
         Me.dsp_FilterEndDate.Name = "dsp_FilterEndDate"
         Me.dsp_FilterEndDate.Size = New System.Drawing.Size(68, 17)
         Me.dsp_FilterEndDate.TabIndex = 9
@@ -2870,7 +2937,7 @@ Partial Class FormMain
         '
         Me.dsp_FilterRecipeID.AutoSize = True
         Me.dsp_FilterRecipeID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_FilterRecipeID.Location = New System.Drawing.Point(660, 21)
+        Me.dsp_FilterRecipeID.Location = New System.Drawing.Point(560, 21)
         Me.dsp_FilterRecipeID.Name = "dsp_FilterRecipeID"
         Me.dsp_FilterRecipeID.Size = New System.Drawing.Size(70, 17)
         Me.dsp_FilterRecipeID.TabIndex = 9
@@ -2880,7 +2947,7 @@ Partial Class FormMain
         '
         Me.dsp_FilterResult.AutoSize = True
         Me.dsp_FilterResult.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dsp_FilterResult.Location = New System.Drawing.Point(876, 21)
+        Me.dsp_FilterResult.Location = New System.Drawing.Point(1008, 21)
         Me.dsp_FilterResult.Name = "dsp_FilterResult"
         Me.dsp_FilterResult.Size = New System.Drawing.Size(50, 17)
         Me.dsp_FilterResult.TabIndex = 9
@@ -7174,15 +7241,9 @@ Partial Class FormMain
         Me.DeleteLotToolStripMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.DeleteLotToolStripMenuItem.Text = "Delete Lot"
         '
-        'btn_ProdDetailExportFull
+        'tmr_Login
         '
-        Me.btn_ProdDetailExportFull.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_ProdDetailExportFull.Location = New System.Drawing.Point(1759, 27)
-        Me.btn_ProdDetailExportFull.Name = "btn_ProdDetailExportFull"
-        Me.btn_ProdDetailExportFull.Size = New System.Drawing.Size(90, 45)
-        Me.btn_ProdDetailExportFull.TabIndex = 30
-        Me.btn_ProdDetailExportFull.Text = "Export" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "FULL"
-        Me.btn_ProdDetailExportFull.UseVisualStyleBackColor = True
+        Me.tmr_Login.Enabled = True
         '
         'FormMain
         '
@@ -7871,4 +7932,9 @@ Partial Class FormMain
     Friend WithEvents TextBox8 As TextBox
     Friend WithEvents Label45 As Label
     Friend WithEvents btn_ProdDetailExportFull As Button
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents Label47 As Label
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Label46 As Label
+    Friend WithEvents tmr_Login As Timer
 End Class

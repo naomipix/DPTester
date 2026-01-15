@@ -747,6 +747,15 @@ Public Class FormMain
                     FormMainModule.ControlState(0)
                     lbl_Username.Text = "-"
                     lbl_Category.Text = "-"
+
+                    ' Clear Work Order Data
+                    If Not txtbx_Operatorlotid.Text.Length > 0 Then
+                        txtbx_WorkOrderNumber.Text = ""
+                        txtbx_LotID.Text = ""
+                        txtbx_PartID.Text = ""
+                        txtbx_ConfirmationID.Text = ""
+                        txtbx_Quantity.Text = ""
+                    End If
                 End If
             End If
         End If
@@ -1362,7 +1371,7 @@ Public Class FormMain
             Dim comboSource As New Dictionary(Of String, String)()
 
             ' Assign Defaults
-            comboSource.Add("0", "-Not Selected-")
+            comboSource.Add("0", "-N/A-")
             comboSource.Add("1", "Pass")
             comboSource.Add("2", "Fail")
 
@@ -1378,12 +1387,60 @@ Public Class FormMain
                 End With
             Next
         End If
+
+        ' Recipe Type
+        If True Then
+            Dim comboSource As New Dictionary(Of String, String)()
+
+            ' Assign Defaults
+            comboSource.Add("0", "-N/A-")
+            comboSource.Add("1", "Production")
+            'comboSource.Add("2", "Rework")
+            'comboSource.Add("3", "QC Return")
+            'comboSource.Add("4", "Evaluation")
+            comboSource.Add("5", "Engineering")
+
+            ' Bind ComboBox To Dictionary
+            For Each cmbx As ComboBox In {ComboBox1}
+                With cmbx
+                    .DataSource = New BindingSource(comboSource, Nothing)
+                    .DisplayMember = "Value"
+                    .ValueMember = "Key"
+                    If .Items.Count > 0 Then
+                        .SelectedIndex = 0
+                    End If
+                End With
+            Next
+        End If
+
+        ' User Category
+        If True Then
+            Dim comboSource As New Dictionary(Of String, String)()
+
+            ' Assign Defaults
+            comboSource.Add("0", "-N/A-")
+            comboSource.Add("1", "Production")
+            comboSource.Add("2", "Technician")
+            comboSource.Add("3", "Engineer")
+
+            ' Bind ComboBox To Dictionary
+            For Each cmbx As ComboBox In {ComboBox2}
+                With cmbx
+                    .DataSource = New BindingSource(comboSource, Nothing)
+                    .DisplayMember = "Value"
+                    .ValueMember = "Key"
+                    If .Items.Count > 0 Then
+                        .SelectedIndex = 0
+                    End If
+                End With
+            Next
+        End If
     End Function
 
     ' Reset Search & Filter Fields
     Private Sub ProdDetailFieldReset()
         txtbx_SearchSerialNumber.Text = ""
-        For Each cmbx As ComboBox In {cmbx_FilterLotID, cmbx_FilterPartID, cmbx_FilterRecipeID, cmbx_FilterResult}
+        For Each cmbx As ComboBox In {cmbx_FilterLotID, cmbx_FilterPartID, cmbx_FilterRecipeID, cmbx_FilterResult, ComboBox1, ComboBox2}
             If cmbx.Items.Count > 0 Then
                 cmbx.SelectedIndex = 0
             End If
@@ -1420,7 +1477,7 @@ Public Class FormMain
 
     Private Async Sub btn_ProdDetailExportFull_Click(sender As Object, e As EventArgs) Handles btn_ProdDetailExportFull.Click
         Dim SerialNumber As String = txtbx_SearchSerialNumber.Text
-        Dim cmbxArr() As ComboBox = {cmbx_FilterLotID, cmbx_FilterPartID, cmbx_FilterRecipeID, cmbx_FilterResult}
+        'Dim cmbxArr() As ComboBox = {cmbx_FilterLotID, cmbx_FilterPartID, cmbx_FilterRecipeID, cmbx_FilterResult}
         Dim dtStart As DateTime = dtpicker_StartDate.Value
         Dim dtEnd As DateTime = dtpicker_EndDate.Value
         Dim containSearch As Boolean = True
@@ -1539,16 +1596,18 @@ Public Class FormMain
         ' Define SQL String
         Dim sqlString As String = $"
         SELECT TOP {PublicVariables.ProdDetailsDisplayedTableCount} 
-            ProductionDetail.id, 
+            ProductionDetail.id,  
+            WorkOrder.work_order, 
             --CONCAT(LotUsage.lot_id, '-', ProductionDetail.serial_number) AS serial_uid, 
             LotUsage.lot_id AS serial_uid, 
             ProductionDetail.serial_number, 
+            ProductionDetail.timestamp,
             ProductionDetail.lot_usage_id, 
             LotUsage.lot_id, 
-            ProductionDetail.timestamp, 
             ProductionDetail.serial_attempt, 
             LotUsage.recipe_id, 
             LotUsage.recipe_rev, 
+			ISNULL(ProductionDetail.recipe_type, '') AS recipe_type,
             --LotUsage.cal_diff_pressure, 
             CONVERT(DECIMAL(10,2), LotUsage.cal_diff_pressure) AS cal_diff_pressure,
             ProductionDetail.flowrate, 
@@ -1559,15 +1618,15 @@ Public Class FormMain
                 ELSE ProductionDetail.temperature - 273.15
             END AS temperature, 
             --ProductionDetail.viscosity, 
-            CONVERT(DECIMAL(10,2), ProductionDetail.viscosity) AS viscosity,
+            CONVERT(DECIMAL(10,3), ProductionDetail.viscosity) AS viscosity,
             ProductionDetail.inlet_pressure, 
             ProductionDetail.outlet_pressure, 
-            ProductionDetail.back_pressure, 
+            ISNULL(ProductionDetail.back_pressure, 0) AS back_pressure, 
             ProductionDetail.cycle_time, 
-            WorkOrder.work_order, 
             WorkOrder.part_id, 
             WorkOrder.confirmation_id, 
-            LotUsage.run_by 
+            LotUsage.run_by,
+			ISNULL(ProductionDetail.user_category, '') AS user_category
         FROM ProductionDetail 
         LEFT JOIN LotUsage ON ProductionDetail.lot_usage_id=LotUsage.id 
         LEFT JOIN WorkOrder ON LotUsage.lot_id=WorkOrder.lot_id 
@@ -1614,6 +1673,12 @@ Public Class FormMain
                     End If
                     If cmbx Is cmbx_FilterResult Then
                         FilterList.Add($"result='{selectedValue}'")
+                    End If
+                    If cmbx Is ComboBox1 Then
+                        FilterList.Add($"recipe_type='{selectedValue}'")
+                    End If
+                    If cmbx Is ComboBox2 Then
+                        FilterList.Add($"user_category='{selectedValue}'")
                     End If
                 End If
             Next
@@ -1685,6 +1750,7 @@ Public Class FormMain
             .Columns("serial_attempt").HeaderCell.Value = "Number of Attempt"
             .Columns("recipe_id").HeaderCell.Value = "Recipe ID"
             .Columns("recipe_rev").HeaderCell.Value = "Recipe Rev."
+            .Columns("recipe_type").HeaderCell.Value = "Recipe Type"
             .Columns("cal_diff_pressure").HeaderCell.Value = "Calibration Offset (kPa)"
             .Columns("flowrate").HeaderCell.Value = "Flowrate (l/min)"
             .Columns("diff_pressure").HeaderCell.Value = "Calculated DP (kPa)"
@@ -1695,13 +1761,14 @@ Public Class FormMain
             .Columns("outlet_pressure").HeaderCell.Value = "Outlet Pressure (kPa)"
             .Columns("back_pressure").HeaderCell.Value = "Back Pressure (kPa)"
             .Columns("cycle_time").HeaderCell.Value = "Cycle Time (s)"
-            .Columns("work_order").HeaderCell.Value = "Work Order Number"
+            .Columns("work_order").HeaderCell.Value = "Work Order No."
             .Columns("part_id").HeaderCell.Value = "Part ID"
             .Columns("confirmation_id").HeaderCell.Value = "Confirmation ID"
             .Columns("run_by").HeaderCell.Value = "Operator ID"
+            .Columns("user_category").HeaderCell.Value = "User Category"
 
             ' Set Column Properties
-            .Columns("serial_uid").Width = 150
+            .Columns("serial_uid").Width = 100
             With .Columns("timestamp")
                 .DefaultCellStyle.Format = "dd-MMM-yyyy HH:mm:ss"
                 .Width = 140
@@ -1720,10 +1787,12 @@ Public Class FormMain
             .Columns("outlet_pressure").Width = 90
             .Columns("back_pressure").Width = 90
             .Columns("cycle_time").Width = 90
-            .Columns("work_order").Width = 90
+            .Columns("work_order").Width = 100
             .Columns("part_id").Width = 145
             .Columns("confirmation_id").Width = 95
             .Columns("run_by").Width = 90
+            .Columns("recipe_type").Width = 90
+            .Columns("user_category").Width = 90
 
             '.Columns("serial_uid").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
             '.Columns("part_id").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
@@ -1775,7 +1844,7 @@ Public Class FormMain
     Private Sub SearchProductionDetails()
         ' Declare Variables
         Dim SerialNumber As String = txtbx_SearchSerialNumber.Text
-        Dim cmbxArr() As ComboBox = {cmbx_FilterLotID, cmbx_FilterPartID, cmbx_FilterRecipeID, cmbx_FilterResult}
+        Dim cmbxArr() As ComboBox = {cmbx_FilterLotID, cmbx_FilterPartID, cmbx_FilterRecipeID, cmbx_FilterResult, ComboBox1, ComboBox2}
 
         ' Load Table With Filters
         LoadProductionDetailsTable(True, SerialNumber, cmbxArr, dtpicker_StartDate.Value, dtpicker_EndDate.Value)
@@ -3287,6 +3356,20 @@ Public Class FormMain
             End If
         End If
 
+        If OnContinue = True AndAlso LoginUserCategoryID > 2 Then ' NEWLY ADDED
+            If IsNumeric(Workorder) = False Then
+                MainMessage(2, $"Work Order as Numeric")
+                OnContinue = False
+            Else
+                Dim allowedLengths() As Integer = {7, 9, 12}
+
+                If Not allowedLengths.Contains(Workorder.Length) Then
+                    MainMessage(2, $"Work Order must be 7 / 9 / 12 Characters")
+                    OnContinue = False
+                End If
+            End If
+        End If
+
         If OnContinue = True Then
             If LotID.Length < PublicVariables.LotIdLenLow And LotID.Length > PublicVariables.LotIdLenHigh Then
                 MainMessage(2, $"Character(s) length for Lot ID is within {PublicVariables.LotIdLenLow} - {PublicVariables.LotIdLenHigh} ")
@@ -3298,6 +3381,18 @@ Public Class FormMain
             If FormRecipeManagement.Checkspecial(LotID) <> -1 Then
                 MainMessage(6, $"Lot ID")
                 OnContinue = False
+            End If
+        End If
+
+        If OnContinue = True AndAlso LoginUserCategoryID > 2 Then ' NEWLY ADDED
+            If Not (LotID.StartsWith("TK") OrElse LotID.StartsWith("SG")) Then
+                MainMessage(2, $"Lot ID must start with TK or SG")
+                OnContinue = False
+            Else
+                If Not LotID.Length < 16 Then
+                    MainMessage(2, $"Lot ID must be < 16 Characters")
+                    OnContinue = False
+                End If
             End If
         End If
 
@@ -3315,6 +3410,18 @@ Public Class FormMain
             End If
         End If
 
+        If OnContinue = True Then ' NEWLY ADDED
+            If (PartID.StartsWith("TK") OrElse PartID.StartsWith("SG")) Then
+                MainMessage(2, $"Part ID must NOT start with TK or SG")
+                OnContinue = False
+            Else
+                If Not PartID.Any(Function(c) Char.IsLetter(c)) Then
+                    MainMessage(2, $"Part ID must contain at least 1 Alphabetical Character")
+                    OnContinue = False
+                End If
+            End If
+        End If
+
         If OnContinue = True Then
             If ConfirmationID.Length < PublicVariables.ConfirmationIdLenLow And ConfirmationID.Length > PublicVariables.ConfirmationIdLenHigh Then
                 MainMessage(2, $"Character(s) length for Confirmation ID is within {PublicVariables.ConfirmationIdLenLow} - {PublicVariables.ConfirmationIdLenHigh} ")
@@ -3326,6 +3433,18 @@ Public Class FormMain
             If FormRecipeManagement.Checkspecial(ConfirmationID) <> -1 Then
                 MainMessage(6, $"Confirmation ID")
                 OnContinue = False
+            End If
+        End If
+
+        If OnContinue = True AndAlso LoginUserCategoryID > 2 Then ' NEWLY ADDED
+            If IsNumeric(ConfirmationID) = False Then
+                MainMessage(2, $"Confirmation ID as Numeric")
+                OnContinue = False
+            Else
+                If ConfirmationID.Length <> 10 Then
+                    MainMessage(2, $"Confirmation ID length must be 10 Characters")
+                    OnContinue = False
+                End If
             End If
         End If
 
@@ -3352,6 +3471,13 @@ Public Class FormMain
                     MainMessage(2, $"Quantity Value greater than Zero")
                     OnContinue = False
                 End If
+            End If
+        End If
+
+        If OnContinue = True AndAlso LoginUserCategoryID > 2 Then ' NEWLY ADDED
+            If Not (CType(Quantity, Integer) > 0 AndAlso CType(Quantity, Integer) <= 999) Then
+                MainMessage(2, $"Quantity Value must be within 1-999")
+                OnContinue = False
             End If
         End If
 
@@ -4392,7 +4518,10 @@ Public Class FormMain
                     {"viscosity", dummyfloat},
                     {"diff_pressure", dummyfloat},
                     {"cycle_time", dummyfloat},
-                    {"result", dummystring}
+                    {"result", dummystring},
+                    {"back_pressure", dummyfloat},
+                    {"recipe_type", DirectCast(cmbx_RecipeType.SelectedItem, KeyValuePair(Of String, String)).Value},
+                    {"user_category", PublicVariables.LoginUserCategoryName}
                 }
                 If SQL.InsertRecord("ProductionDetail", Productionparameter) = 1 Then
                     txtbx_SerialNumber.Enabled = False
@@ -5894,5 +6023,36 @@ Public Class FormMain
             RetainedMemory.Update(34, "JigBypass", 0)
             EventLog.EventLogger.Log($"{PublicVariables.LoginUserName}", "[Main] Jig Bypass (OFF)")
         End If
+    End Sub
+
+    Private Sub tmr_Login_Tick(sender As Object, e As EventArgs) Handles tmr_Login.Tick
+
+        'txtbx_WorkOrderNumber.Text = PublicVariables.RetainedWorkOrder
+        'txtbx_LotID.Text = PublicVariables.RetainedLotID
+        'txtbx_PartID.Text = PublicVariables.RetainedPartID
+        'txtbx_ConfirmationID.Text = PublicVariables.RetainedConfirmationID
+        'txtbx_Quantity.Text = PublicVariables.RetainedQuantity
+
+
+        If PublicVariables.LoginUserCategoryID > 3 Then
+            txtbx_WorkOrderNumber.ReadOnly = True
+            txtbx_LotID.ReadOnly = True
+            txtbx_PartID.ReadOnly = True
+            txtbx_ConfirmationID.ReadOnly = True
+            txtbx_Quantity.ReadOnly = True
+
+            txtbx_WorkOrderNumber.BackColor = SystemColors.Window
+            txtbx_LotID.BackColor = SystemColors.Window
+            txtbx_PartID.BackColor = SystemColors.Window
+            txtbx_ConfirmationID.BackColor = SystemColors.Window
+            txtbx_Quantity.BackColor = SystemColors.Window
+        Else
+            txtbx_WorkOrderNumber.ReadOnly = False
+            txtbx_LotID.ReadOnly = False
+            txtbx_PartID.ReadOnly = False
+            txtbx_ConfirmationID.ReadOnly = False
+            txtbx_Quantity.ReadOnly = False
+        End If
+
     End Sub
 End Class
