@@ -747,6 +747,15 @@ Public Class FormMain
                     FormMainModule.ControlState(0)
                     lbl_Username.Text = "-"
                     lbl_Category.Text = "-"
+
+                    ' Clear Work Order Data
+                    If Not txtbx_Operatorlotid.Text.Length > 0 Then
+                        txtbx_WorkOrderNumber.Text = ""
+                        txtbx_LotID.Text = ""
+                        txtbx_PartID.Text = ""
+                        txtbx_ConfirmationID.Text = ""
+                        txtbx_Quantity.Text = ""
+                    End If
                 End If
             End If
         End If
@@ -1386,9 +1395,9 @@ Public Class FormMain
             ' Assign Defaults
             comboSource.Add("0", "-N/A-")
             comboSource.Add("1", "Production")
-            comboSource.Add("2", "Rework")
-            comboSource.Add("3", "QC Return")
-            comboSource.Add("4", "Evaluation")
+            'comboSource.Add("2", "Rework")
+            'comboSource.Add("3", "QC Return")
+            'comboSource.Add("4", "Evaluation")
             comboSource.Add("5", "Engineering")
 
             ' Bind ComboBox To Dictionary
@@ -1587,13 +1596,14 @@ Public Class FormMain
         ' Define SQL String
         Dim sqlString As String = $"
         SELECT TOP {PublicVariables.ProdDetailsDisplayedTableCount} 
-            ProductionDetail.id, 
+            ProductionDetail.id,  
+            WorkOrder.work_order, 
             --CONCAT(LotUsage.lot_id, '-', ProductionDetail.serial_number) AS serial_uid, 
             LotUsage.lot_id AS serial_uid, 
             ProductionDetail.serial_number, 
+            ProductionDetail.timestamp,
             ProductionDetail.lot_usage_id, 
             LotUsage.lot_id, 
-            ProductionDetail.timestamp, 
             ProductionDetail.serial_attempt, 
             LotUsage.recipe_id, 
             LotUsage.recipe_rev, 
@@ -1608,12 +1618,11 @@ Public Class FormMain
                 ELSE ProductionDetail.temperature - 273.15
             END AS temperature, 
             --ProductionDetail.viscosity, 
-            CONVERT(DECIMAL(10,2), ProductionDetail.viscosity) AS viscosity,
+            CONVERT(DECIMAL(10,3), ProductionDetail.viscosity) AS viscosity,
             ProductionDetail.inlet_pressure, 
             ProductionDetail.outlet_pressure, 
             ISNULL(ProductionDetail.back_pressure, 0) AS back_pressure, 
             ProductionDetail.cycle_time, 
-            WorkOrder.work_order, 
             WorkOrder.part_id, 
             WorkOrder.confirmation_id, 
             LotUsage.run_by,
@@ -1752,14 +1761,14 @@ Public Class FormMain
             .Columns("outlet_pressure").HeaderCell.Value = "Outlet Pressure (kPa)"
             .Columns("back_pressure").HeaderCell.Value = "Back Pressure (kPa)"
             .Columns("cycle_time").HeaderCell.Value = "Cycle Time (s)"
-            .Columns("work_order").HeaderCell.Value = "Work Order Number"
+            .Columns("work_order").HeaderCell.Value = "Work Order No."
             .Columns("part_id").HeaderCell.Value = "Part ID"
             .Columns("confirmation_id").HeaderCell.Value = "Confirmation ID"
             .Columns("run_by").HeaderCell.Value = "Operator ID"
             .Columns("user_category").HeaderCell.Value = "User Category"
 
             ' Set Column Properties
-            .Columns("serial_uid").Width = 150
+            .Columns("serial_uid").Width = 100
             With .Columns("timestamp")
                 .DefaultCellStyle.Format = "dd-MMM-yyyy HH:mm:ss"
                 .Width = 140
@@ -1778,7 +1787,7 @@ Public Class FormMain
             .Columns("outlet_pressure").Width = 90
             .Columns("back_pressure").Width = 90
             .Columns("cycle_time").Width = 90
-            .Columns("work_order").Width = 90
+            .Columns("work_order").Width = 100
             .Columns("part_id").Width = 145
             .Columns("confirmation_id").Width = 95
             .Columns("run_by").Width = 90
@@ -3354,7 +3363,7 @@ Public Class FormMain
             Else
                 Dim allowedLengths() As Integer = {7, 9, 12}
 
-                If allowedLengths.Contains(Workorder.Length) Then
+                If Not allowedLengths.Contains(Workorder.Length) Then
                     MainMessage(2, $"Work Order must be 7 / 9 / 12 Characters")
                     OnContinue = False
                 End If
@@ -3380,7 +3389,7 @@ Public Class FormMain
                 MainMessage(2, $"Lot ID must start with TK or SG")
                 OnContinue = False
             Else
-                If LotID.Length < 16 Then
+                If Not LotID.Length < 16 Then
                     MainMessage(2, $"Lot ID must be < 16 Characters")
                     OnContinue = False
                 End If
@@ -3406,7 +3415,7 @@ Public Class FormMain
                 MainMessage(2, $"Part ID must NOT start with TK or SG")
                 OnContinue = False
             Else
-                If PartID.Any(Function(c) Char.IsLetter(c)) Then
+                If Not PartID.Any(Function(c) Char.IsLetter(c)) Then
                     MainMessage(2, $"Part ID must contain at least 1 Alphabetical Character")
                     OnContinue = False
                 End If
@@ -4510,6 +4519,7 @@ Public Class FormMain
                     {"diff_pressure", dummyfloat},
                     {"cycle_time", dummyfloat},
                     {"result", dummystring},
+                    {"back_pressure", dummyfloat},
                     {"recipe_type", DirectCast(cmbx_RecipeType.SelectedItem, KeyValuePair(Of String, String)).Value},
                     {"user_category", PublicVariables.LoginUserCategoryName}
                 }

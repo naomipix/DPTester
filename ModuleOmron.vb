@@ -3065,6 +3065,7 @@ Module ModuleOmron
             newrw(6) = result_dp
             newrw(7) = result_backpressure
             newrw(8) = result_pumprpm
+            newrw(9) = 0 ' Viscosity (mPa·s)
             dtresult.Rows.Add(newrw)
 
             LiveChartDPValue.Add(New ObservablePoint With {
@@ -3157,6 +3158,7 @@ Module ModuleOmron
             result_outletpressure = AIn(10)
             result_flowrate = FinalFlowrate
             result_temperature = AIn(13)
+            Dim result_viscosity As Decimal = 0
             'result_dp = result_inletpressure - result_outletpressure
             If True Then
                 Dim A As Double = 0.01257187
@@ -3167,6 +3169,7 @@ Module ModuleOmron
                 Dim exp As Double = Math.Exp((1 + (B * (result_temperature + 273.15))) / ((C * (result_temperature + 273.15)) + (D * T2)))
                 Dim vis As Double = A * exp
                 result_dp = Math.Round(CDec((1.002 / vis) * (result_inletpressure - result_outletpressure)), 2) - CType(FormMain.lbl_BlankDP.Text, Decimal)
+                result_viscosity = Math.Round(CDec((1.002 * vis)), 3)
             End If
             result_backpressure = AIn(11)
             result_pumprpm = AIn(2)
@@ -3179,6 +3182,7 @@ Module ModuleOmron
             newrw(6) = result_dp
             newrw(7) = result_backpressure
             newrw(8) = result_pumprpm
+            newrw(9) = result_viscosity ' Viscosity (mPa·s)
             dtresult.Rows.Add(newrw)
 
             'LiveChartDPValue.Add(result_dp)
@@ -3298,6 +3302,12 @@ Module ModuleOmron
         'Dim D As Double = -0.000005723952
         'Dim T2 As Double
         'Dim exp As Double
+
+        ' New Viscosity (mPa·s)
+        Dim result_avgviscosity1 As Decimal = 0
+        Dim result_avgviscosity2 As Decimal = 0
+        Dim result_finalviscosity As Decimal = 0
+
         If dtrecipetable.Rows(0)("firstdp_circuit") = "Enable" And dtrecipetable.Rows(0)("seconddp_circuit") = "Enable" Then
             For i = MainDptest1start To MainDptest1end - 1
                 result_avginlet1 = result_avginlet1 + dtresult.Rows(i)("Inlet Pressure (kPa)")
@@ -3306,6 +3316,7 @@ Module ModuleOmron
                 result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (°C)")
                 result_avgbackpressure1 = result_avgbackpressure1 + dtresult.Rows(i)("Back Pressure (kPa)")
+                result_avgviscosity1 = result_avgviscosity1 + dtresult.Rows(i)("Viscosity (mPa·s)")
             Next
             result_avginlet1 = result_avginlet1 / MainDptestpoints
             result_avgoutlet1 = result_avgoutlet1 / MainDptestpoints
@@ -3313,6 +3324,7 @@ Module ModuleOmron
             result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
             result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
             result_avgbackpressure1 = result_avgbackpressure1 / MainDptestpoints
+            result_avgviscosity1 = result_avgviscosity1 / MainDptestpoints
             'result_avgdp1 = result_avginlet1 - result_avgoutlet1
 
             For i = MainDptest2start To MainDptest2end - 1
@@ -3322,6 +3334,7 @@ Module ModuleOmron
                 result_avgflowrate2 = result_avgflowrate2 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature2 = result_avgtemperature2 + dtresult.Rows(i)("Temperature (°C)")
                 result_avgbackpressure2 = result_avgbackpressure2 + dtresult.Rows(i)("Back Pressure (kPa)")
+                result_avgviscosity2 = result_avgviscosity2 + dtresult.Rows(i)("Viscosity (mPa·s)")
             Next
             result_avginlet2 = result_avginlet2 / MainDptestpoints
             result_avgoutlet2 = result_avgoutlet2 / MainDptestpoints
@@ -3329,6 +3342,7 @@ Module ModuleOmron
             result_avgflowrate2 = result_avgflowrate2 / MainDptestpoints
             result_avgtemperature2 = result_avgtemperature2 / MainDptestpoints
             result_avgbackpressure2 = result_avgbackpressure2 / MainDptestpoints
+            result_avgviscosity2 = result_avgviscosity2 / MainDptestpoints
             'result_avgdp2 = result_avginlet2 - result_avgoutlet2
 
             result_finalinlet = ((result_avginlet1 + result_avginlet2) / 2)
@@ -3338,6 +3352,8 @@ Module ModuleOmron
             result_finaltemperature = (((result_avgtemperature1 + result_avgtemperature2) / 2) + 273.15)
 
             result_finalbackpressure = ((result_avgbackpressure1 + result_avgbackpressure2) / 2)
+
+            result_finalviscosity = ((result_avgviscosity1 + result_avgviscosity2) / 2)
 
             'T2 = result_finaltemperature * result_finaltemperature
             'exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
@@ -3356,6 +3372,7 @@ Module ModuleOmron
                 result_avgflowrate1 = result_avgflowrate1 + dtresult.Rows(i)("Flowrate (l/min)")
                 result_avgtemperature1 = result_avgtemperature1 + dtresult.Rows(i)("Temperature (°C)")
                 result_avgbackpressure1 = result_avgbackpressure1 + dtresult.Rows(i)("Back Pressure (kPa)")
+                result_avgviscosity1 = result_avgviscosity1 + dtresult.Rows(i)("Viscosity (mPa·s)")
             Next
 
             result_avginlet1 = result_avginlet1 / MainDptestpoints
@@ -3365,6 +3382,7 @@ Module ModuleOmron
             result_avgflowrate1 = result_avgflowrate1 / MainDptestpoints
             result_avgtemperature1 = result_avgtemperature1 / MainDptestpoints
             result_avgbackpressure1 = result_avgbackpressure1 / MainDptestpoints
+            result_avgviscosity1 = result_avgviscosity1 / MainDptestpoints
 
             result_finalinlet = result_avginlet1
             result_finaloutlet = result_avgoutlet1
@@ -3373,6 +3391,8 @@ Module ModuleOmron
             result_finaltemperature = (result_avgtemperature1 + 273.15)
 
             result_finalbackpressure = result_avgbackpressure1
+
+            result_finalviscosity = result_avgviscosity1
 
             'T2 = result_finaltemperature * result_finaltemperature
             'exp = Math.Exp((1 + (B * result_finaltemperature)) / ((C * result_finaltemperature) + (D * T2)))
@@ -3486,6 +3506,9 @@ Module ModuleOmron
             If Viscosity > 99 Then
                 Viscosity = -1
             End If
+            If result_finalviscosity > 99 Then
+                result_finalviscosity = -1
+            End If
         End If
 
         Dim Updateparameter As New Dictionary(Of String, Object) From {
@@ -3493,7 +3516,8 @@ Module ModuleOmron
             {"flowrate", Math.Round(result_finalflowrate, 2)},
             {"inlet_pressure", Math.Round(result_finalinlet, 2)},
             {"outlet_pressure", Math.Round(result_finaloutlet, 2)},
-            {"viscosity", Math.Round(Viscosity, 3)},
+                                                                   _ '{"viscosity", Math.Round(Viscosity, 3)},
+            {"viscosity", Math.Round(result_finalviscosity, 3)},
             {"diff_pressure", Math.Round(result_finaldp, 2)},
             {"back_pressure", Math.Round(result_finalbackpressure, 2)},
             {"cycle_time", MainCycletime},
@@ -3569,6 +3593,9 @@ Module ModuleOmron
             dtresult.Columns.Add("Differential Pressure (kPa)")
             dtresult.Columns.Add("Back Pressure (kPa)")
             dtresult.Columns.Add("Pump Speed (RPM)")
+
+            ' New
+            dtresult.Columns.Add("Viscosity (mPa·s)")
         End If
     End Sub
 End Module

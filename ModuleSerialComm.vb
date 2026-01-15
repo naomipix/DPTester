@@ -1,4 +1,5 @@
 ﻿Imports System.IO.Ports
+Imports DocumentFormat.OpenXml.Office.PowerPoint.Y2021.M06.Main
 
 Module ModuleSerialComm
     Public mySerialPort1 As SerialPort
@@ -64,7 +65,7 @@ Module ModuleSerialComm
         End Try
     End Sub
 
-    Public Sub PlaceData(str As String)
+    Public Sub PlaceDataOld(str As String)
         If True Then
             Dim onContinue = True
 
@@ -128,7 +129,7 @@ Module ModuleSerialComm
         SerialDataReceived = False
     End Sub
 
-    Public Sub PlaceDataOld(str As String)
+    Public Sub PlaceData(str As String)
         'If True Then
         '    If str.Length >= PublicVariables.WorkOrderLenLow And str.Length <= PublicVariables.WorkOrderLenHigh Then
         '        If FormMain.txtbx_WorkOrderNumber.Enabled = True Then
@@ -165,7 +166,6 @@ Module ModuleSerialComm
         '        End If
         '    End If
         'End If
-
         If True Then
             Dim onContinue As Boolean = True
 
